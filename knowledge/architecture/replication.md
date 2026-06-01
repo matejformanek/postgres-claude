@@ -20,8 +20,30 @@ PostgreSQL ships five intertwined replication facilities, all built on top of WA
 
 This document covers the conceptual model, the IPC, and the v18-era additions
 (failover slots, automatic conflict logging, two-phase decoding, parallel apply,
-sequence sync). For knob references and source-file pointers, see the skill
+sequence sync, dynamic logical-decoding promotion). For knob references and
+source-file pointers, see the skill
 `.claude/skills/replication-overview/SKILL.md`.
+
+### `effective_wal_level` — dynamic promotion (v18+)
+
+Prior to v18, enabling logical decoding meant restarting with
+`wal_level=logical`, paying the `XLOG_HEAP2_NEW_CID` and extra-invalidation
+overhead even when no logical slot existed. PG 18 splits "write logical info
+into WAL" from "use logical decoding": with `wal_level=replica`, the moment
+the first logical slot is created the cluster's read-only `effective_wal_level`
+promotes to logical. Activation is synchronous (right after slot creation);
+deactivation is deferred to the checkpointer to avoid an end-of-recovery race
+and to dampen slot-churn thrash.
+[from-comment `source/src/backend/replication/logical/logicalctl.c:1-54`]
+
+The transition is broadcast to standbys via the WAL record
+`XLOG_LOGICAL_DECODING_STATUS_CHANGE`; standbys mirror the primary's
+`effective_wal_level` and ignore their local `wal_level` GUC until promotion,
+at which point status is recomputed against local conditions. Public surface
+is in `replication/logicalctl.h` (`IsLogicalDecodingEnabled`,
+`LogicalDecodingActivate`, `LogicalDecodingDeactivate`,
+`UpdateLogicalDecodingStatusEndOfRecovery`).
+[from-comment `source/src/backend/replication/logical/logicalctl.c:1-54`]
 
 ---
 
@@ -175,11 +197,38 @@ from-comment `source/src/backend/replication/slot.c:29-33`]
 ### Failover / sync slots (v17+)
 
 A logical slot on the primary with `failover=true` is replicated to physical
-standbys via the slotsync worker (`logical/slotsync.c`). After a failover,
-subscribers can repoint at the promoted standby without re-snapshotting.
-`synchronized_standby_slots` on the primary lists which physical slots must
-have caught up before a logical slot advances `confirmed_flush` — preventing
-the logical consumer from getting ahead of the would-be successor.
+standbys by the slot-sync worker (driven either automatically when
+`sync_replication_slots=on` or on-demand via `pg_sync_replication_slots()`).
+Local mirror slots on the standby live as `RS_TEMPORARY` until they're
+"sync-ready" — three conditions: standby has flushed WAL past the remote
+slot's `confirmed_flush_lsn`; standby's catalog xmin is not behind the
+remote's needs; and a consistent snapshot can be built at `restart_lsn`
+before reaching `confirmed_flush_lsn` (otherwise post-promotion decoding
+could silently lose changes). Once sync-ready, the slot flips to
+`RS_PERSISTENT` and the `synced` flag is set. After a failover, subscribers
+repoint at the promoted standby without re-snapshotting.
+[from-comment `source/src/backend/replication/logical/slotsync.c:11-35`]
+
+`synchronized_standby_slots` (a GUC, parsed into `SyncStandbySlotsConfigData`)
+on the primary lists which physical slots must have caught up before a
+logical-failover slot may advance `confirmed_flush`. The gate is implemented
+in `StandbySlotsHaveCaughtup` and `WaitForStandbyConfirmation`.
+[from-code `source/src/backend/replication/slot.c:95-104,3107,3255`]
+
+The wakeup chain across walsenders is non-obvious. A logical walsender
+holding a failover slot calls `WalSndWaitForWal`, whose gating predicates
+(`NeedToWaitForStandbys`, `NeedToWaitForWal`) consult the
+`synchronized_standby_slots` list. When a physical walsender receives a
+standby reply confirming a new flush LSN, it calls
+`PhysicalWakeupLogicalWalSnd`, which signals the condition variable
+`WalSndCtl->wal_confirm_rcv_cv` to release any logical walsenders blocked
+on the gate. So a logical consumer is held behind a physical-standby ACK
+chain even though the two sides never talk directly.
+[from-code `source/src/backend/replication/walsender.c:1801-1886`]
+
+Synced slots are treated as inactive for idle-timeout purposes (they don't
+decode locally).
+[verified-by-code `source/src/backend/replication/slot.c:1860-1872`]
 
 ---
 
@@ -346,7 +395,31 @@ on a given table; the state machine handles either direction.
 
 `sequencesync.c` does for sequences what tablesync does for tables —
 necessary because sequences advance via `nextval()`, not via WAL change
-records that the apply worker would otherwise apply.
+records that the apply worker would otherwise apply. It is a **distinct
+worker class** (`SEQUENCESYNC` in `LogicalRepWorker.type`), not folded
+into tablesync, and the differences are material:
+
+- **One worker per subscription, not per relation.** A single sequencesync
+  worker handles every INIT-state sequence for the subscription, batching
+  up to `MAX_SEQUENCES_SYNC_PER_BATCH` sequences per transaction so locks
+  on sequence relations are released between batches.
+- **Trivial state machine.** Just `INIT → READY` in `pg_subscription_rel`
+  — no `DATASYNC`/`FINISHEDCOPY`/`SYNCWAIT`/`CATCHUP`/`SYNCDONE` hand-off,
+  because there is no streaming-LSN coordination to perform: the worker
+  copies the publisher's current value + `log_cnt` (REMOTE_SEQ_COL_COUNT
+  = 10 columns including `is_called`) and is done.
+- **Spawned by the apply worker, not the launcher.** The launcher has no
+  DB connection, so it cannot query `pg_subscription_rel` to find INIT
+  sequences; the apply worker periodically scans and calls
+  `ProcessSequencesForSync`, which spawns a sequencesync worker iff none
+  is already running.
+- **`CopySeqResult` outcomes:** SUCCESS, MISMATCH (e.g. type differs on
+  publisher), INSUFFICIENT_PERM, SKIPPED.
+
+INIT state is (re)set by `CREATE SUBSCRIPTION`,
+`ALTER SUBSCRIPTION ... REFRESH PUBLICATION`, or
+`ALTER SUBSCRIPTION ... REFRESH SEQUENCES`.
+[from-comment `source/src/backend/replication/logical/sequencesync.c:1-96`]
 
 ### Replication origins
 
@@ -375,10 +448,33 @@ CT_MULTIPLE_UNIQUE_CONFLICTS  INSERT/UPDATE conflicts on more than one unique in
 
 The default resolution remains "last writer wins on the subscriber, apply
 worker logs the conflict and continues." There is no automatic merge
-resolver in core PG yet — but the logging is now structured. Setting up a
-`pg_conflict_detection` slot (see `slot.h:24-28`) keeps dead tuples around
-long enough that `update_deleted` can be distinguished from
-`update_missing`.
+resolver in core PG yet — but the logging is now structured.
+
+### The `pg_conflict_detection` reserved slot (v18+)
+
+To distinguish `update_deleted` from `update_missing`, the subscriber has
+to keep dead tuples around long enough to see that the target row *was*
+deleted by a concurrent (or earlier) local transaction. v18 introduces an
+internal **reserved** logical slot named `pg_conflict_detection`, owned
+by the launcher and shared across all subscriptions on the cluster with
+`retain_dead_tuples=true`. It exists solely to pin a `catalog_xmin` that
+holds back VACUUM's removal of recently-dead tuples; it never streams
+changes anywhere. `pg_conflict_detection` is the only reserved slot name
+today, and `ReplicationSlotAcquire` refuses to hand it out to user code.
+[from-code `source/src/backend/replication/slot.c:659-663`;
+from-comment `source/src/include/replication/slot.h:24-28`]
+
+The aggregation discipline is what makes it correct. Each apply worker
+tracks its own `oldest_nonremovable_xid` (the oldest xid whose deletion
+the worker might still need to detect). The launcher's
+`compute_min_nonremovable_xid` reduces these across all
+`retain_dead_tuples` subscriptions, and `update_conflict_slot_xmin` pushes
+the result into the slot. Without this aggregation the slot's xmin would
+either drift forward and lose tuples (if it tracked a single subscription)
+or stay pinned forever (if no one advanced it). `CreateConflictDetectionSlot`
+in the launcher creates the slot lazily the first time a
+`retain_dead_tuples` subscription appears.
+[from-code `source/src/backend/replication/logical/launcher.c:1448,1500,1569`]
 
 ---
 
@@ -445,8 +541,10 @@ make a standby synchronous — it has to also be current.
 - `[unverified]` Whether `RS_INVAL_IDLE_TIMEOUT` invalidates a slot that is
   active-but-idle (consumer connected, no traffic) or only an unacquired one.
   `slot.h:67` comment is terse.
-- `[unverified]` Conflict-detection slot `pg_conflict_detection` interaction
-  with VACUUM horizons across multiple subscriptions in v18.
+- ~~`[unverified]` Conflict-detection slot `pg_conflict_detection` interaction
+  with VACUUM horizons across multiple subscriptions in v18.~~ Resolved §4:
+  launcher aggregates `oldest_nonremovable_xid` across all
+  `retain_dead_tuples` subscriptions into a single slot xmin.
 
 ---
 
@@ -469,8 +567,14 @@ make a standby synchronous — it has to also be current.
 | `source/src/backend/replication/logical/launcher.c` | 1-60 | header | §4 |
 | `source/src/backend/replication/logical/conflict.c` | 1-60 | header | §4 |
 | `source/src/include/replication/output_plugin.h` | grep | partial | §3 |
+| `source/src/backend/replication/logical/logicalctl.c` | 1-54 | header | §intro |
+| `source/src/backend/replication/logical/sequencesync.c` | 1-96 | header | §4 |
+| `source/src/backend/replication/logical/slotsync.c` | 11-35 | header | §2 |
+| `source/src/backend/replication/logical/launcher.c` | 1448-1569 | grep | §4 |
+| `source/src/backend/replication/walsender.c` | 1801-1886 | grep | §2 |
 
-Confidence tally: from-README=8, from-comment=23, from-code=10, unverified=4.
+Confidence tally: from-README=8, from-comment=27, from-code=14, unverified=3,
+verified-by-code=2.
 
 ## 9. External references
 

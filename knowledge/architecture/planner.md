@@ -68,9 +68,9 @@ planner / standard_planner                    planner.c:333 / 351
   setup PlannerGlobal
   └─ subquery_planner (top-level Query)       planner.c:775
        preprocess: pull-up subqueries, expand inheritance, simplify
-                   quals, deconstruct jointree (initsplan.c)
+                   quals (see §3.1 for the four-phase join simplification)
        └─ grouping_planner                    planner.c:1775
-            ├─ query_planner (planmain.c)
+            ├─ query_planner (planmain.c:53)  ← authoritative phase ordering
             │     └─ make_one_rel (allpaths.c)
             │           ├─ set_base_rel_sizes      (rowcount estimates)
             │           ├─ set_base_rel_pathlists  → set_rel_pathlist
@@ -82,11 +82,69 @@ planner / standard_planner                    planner.c:333 / 351
             │   create_distinct_paths / create_ordered_paths
             └─ create_limit_path
   └─ create_plan(best_path)                   createplan.c:339
-  └─ set_plan_references (setrefs.c)
+  └─ set_plan_references (setrefs.c:227)      ← see §10 for its 9-item contract
   return PlannedStmt
 ```
 
 [from-code `planner.c:333-855, 1775+`; `allpaths.c:3902-3950`]
+
+**Authoritative ordering spec.** `query_planner` (`planmain.c:53-305`) is the
+canonical phase ordering for the planner's internal passes — many ordering
+invariants are stated *only* in its comments ("must be done before join
+removal", "delay this to the end"). Anyone adding a new pass must slot it
+into that list. See `knowledge/files/src/backend/optimizer/plan/planmain.c.md`
+for the per-step enumeration. [from-comment `planmain.c:53-305`]
+
+### 3.1 Join simplification is four distinct phases
+
+"Simplify the joins" is not one pass but four, run at different points in
+the pipeline:
+
+1. **`prepjointree.c`** — subquery pull-up (`pull_up_sublinks`,
+   `pull_up_subqueries`), UNION-ALL flattening, and `reduce_outer_joins`
+   (demote OJ → inner/anti when a strict qual above the nullable side
+   proves no NULL-extension is observable). Runs in `subquery_planner`
+   *before* `query_planner`. [from-comment `prepjointree.c:6-15, 3245-3253`]
+2. **`reduce_outer_joins`** (within prepjointree, but a distinct phase) —
+   must run after expression preprocessing (qual canonicalization + JOIN
+   alias expansion). [from-comment `prepjointree.c:3245-3253`]
+3. **`analyzejoins.c` join removal + self-join elimination** — runs late,
+   inside `query_planner` after ECs are frozen: `remove_useless_joins`
+   (drop provably-redundant LEFT JOINs), `reduce_unique_semijoins`
+   (SEMI → INNER when inner is unique for the clauses), then
+   `remove_useless_self_joins` (SJE, gated by
+   `enable_self_join_elimination`). [verified-by-code `analyzejoins.c:92-130,
+   874-895, 2539-2553`; `planmain.c:218-243`]
+4. **EC-driven SemiJoin reduction** — `reduce_unique_semijoins` rides on
+   the EquivalenceClass machinery built by `deconstruct_jointree`; it
+   deletes the SpecialJoinInfo entry rather than mutating jointree
+   jointype. [from-comment `analyzejoins.c:862-873`]
+
+Conceptually they're all "make the join graph smaller / simpler", but they
+live in two different source files, run at two different pipeline points,
+and depend on different upstream invariants.
+
+### 3.2 PlaceHolderInfo freeze invariant
+
+PlaceHolderVars (PHVs) wrap subquery-output expressions that need to keep
+their identity across the join level where they're evaluated, so an outer
+join above doesn't NULL-extend them prematurely. Each distinct PHV gets a
+`PlaceHolderInfo` (PHI) tracking its eval level and required relids.
+
+**The lifecycle window for PHI creation is narrow and load-bearing.** PHIs
+may be created only between `find_placeholders_in_jointree` (the
+pre-deconstruct walk) and `deconstruct_jointree`. After
+`deconstruct_jointree` begins, *no new PHIs may be made* — downstream
+phases (`fix_placeholder_input_needed_levels`, `add_placeholders_to_base_rels`,
+join search, costing) all assume the PHI set is frozen.
+[from-comment `placeholder.c` invariant; `initsplan.c:1090-1092, 1521-1530`]
+
+The freeze is why `find_lateral_references` must run *before*
+`deconstruct_jointree` (LATERAL discovery can create PHIs), and why the
+prepjointree / initsplan ordering in `query_planner` is rigid. This
+invariant is spread across `initsplan.c`, `prepjointree.c`, and
+`placeholder.c`; breaking it produces "PlaceHolderVar found where not
+expected" failures deep in path generation.
 
 ## 4. Stage 1: base-rel paths (`set_rel_pathlist`)
 
@@ -149,6 +207,18 @@ The reason for the threshold: standard DP is O(3^N) in the join-tree
 explored space (every base rel is either in the outer, in the inner, or
 not yet), which blows up around N=12 even with bitmap pruning. GEQO trades
 optimality for tractable planning time.
+
+**GEQO is a registered planner extension.** As of recent PG, GEQO is not
+hard-wired; it registers itself via
+`Geqo_planner_extension_id = GetPlannerExtensionId("geqo")`
+(`geqo_main.c:104-105`) and stashes per-call state in a `GeqoPrivateData`
+hung off `PlannerInfo` through that extension id. This is the same hook
+mechanism third-party plug-ins use: a planner extension gets an integer
+slot, can attach opaque private data to `PlannerInfo`, and can be invoked
+where the core planner has wired in a call site. GEQO is the in-core
+reference user of the pattern. [verified-by-code `geqo_main.c:104-112`]
+GEQO also sets `root->assumeReplanning = true` to signal that intermediate
+Path lists may be discarded between candidate join orders.
 
 ## 6. Cost model
 
@@ -291,10 +361,35 @@ that calls the matching `create_foo_plan`. For `T_SeqScan` →
 3. Calls `make_seqscan` to allocate the `SeqScan` Plan node.
 4. Copies cost numbers from Path to Plan.
 
-After all `create_plan` recursion, `set_plan_references` (`setrefs.c`) walks
-the entire Plan tree and renumbers Vars from per-subquery RTE numbering to
-executor-global slot conventions (`INNER_VAR`, `OUTER_VAR`, scan
-attribute numbers) — this is the final, executor-ready form.
+After all `create_plan` recursion, `set_plan_references`
+(`setrefs.c:227-272`) makes one final pass over the finished Plan tree. It
+does *not* change join order or cost — it adjusts representational details
+the executor depends on. The top-of-file comment enumerates a 9-item
+contract:
+
+1. **Flatten subquery rangetables** into a single list; null out RTE fields
+   the executor doesn't need.
+2. **Rewrite Vars in scan nodes** to match the flat rangetable (varno fixup).
+3. **Rewrite Vars in upper plan nodes** to reference subplan outputs
+   (`varno = OUTER_VAR / INNER_VAR / INDEX_VAR`, `varattno` = subplan tlist
+   position).
+4. **Adjust Aggrefs** (partial aggregation, minmax replacement).
+5. **`PARAM_MULTIEXPR` → `PARAM_EXEC`**.
+6. **`AlternativeSubPlan`** — pick one alternative based on estimated calls.
+7. **Compute regproc OIDs** for operators.
+8. **Build plan dependency lists**: `relationOids` (relations) +
+   `invalItems` (functions/domains) — fed to plancache for invalidation.
+9. **Assign every plan node a unique `plan_node_id`**.
+
+Plus an extra "final optimization", documented as a closing step in the
+same comment: **delete useless `SubqueryScan` / `Append` / `MergeAppend`
+nodes**. This must happen here, not earlier, because earlier removal would
+break `set_upper_references` — the Var-numbering rewrite in step 3 relies
+on the buffer those nodes provide. [from-comment `setrefs.c:231-272`]
+
+The Var-renumbering in steps 2-3 is the most visible change: per-subquery
+RTE indexes get replaced by executor-global slot conventions, which is the
+final, executor-ready form.
 
 ## 11. Why this design
 

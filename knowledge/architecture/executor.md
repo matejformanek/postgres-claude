@@ -30,6 +30,19 @@ flattened during `ExecInitExpr` into a single `ExprState` with a linear
 `steps[]` array for cache-friendly interpretation (and as the substrate JIT
 compiles against) [from-README `executor/README:81-114`].
 
+The load-bearing detail behind why expression interpretation is competitive
+with JIT on many real workloads: each step carries explicit `resvalue`/
+`resnull` pointers, and during compilation the result pointer of a
+subexpression step is set to land **directly inside the next step's
+`FunctionCallInfo->args[i]`**. There is no per-step "push the result onto an
+operand stack, then pop into the consumer's argument slot" — the consumer
+already sees the value where it needs it [from-comment
+`execExpr.c:3-15`, from-README `executor/README:81-160`]. Combined with the
+direct-threaded dispatch in the interpreter (computed gotos on gcc/clang;
+`EEO_DISPATCH` rewrites each step's opcode to a label address) this makes
+the interpreter loop roughly a sequence of pointer-load / function-call /
+indirect-jump triples [verified-by-code `execExprInterp.c:90-93, 273-279`].
+
 The read-only Plan tree is what makes plan caching work: a `PlannedStmt` can
 sit in the plan cache and be executed many times concurrently from different
 backends, because none of them mutate it [from-README
@@ -93,6 +106,16 @@ Nodes that don't produce one-tuple-at-a-time results (Hash building, Bitmap
 construction) go through `MultiExecProcNode` (`execProcnode.c:488`) instead;
 this is a smaller switch, and the per-node MultiExec function returns a
 hashtable or bitmap as a `Node *`.
+
+A second, separate mini-dispatch table lives in `execAmi.c`: `ExecReScan`,
+`ExecMarkPos`, `ExecRestrPos`, plus the planner-time predicates
+`ExecSupportsMarkRestore` / `ExecSupportsBackwardScan` /
+`ExecMaterializesOutput`. These are PlanState-level "executor access
+method" ops and are **distinct from table AMs** (`TableAmRoutine`,
+`tableam.h`) — same word, different layer. The execAmi big-switch is what
+MergeJoin uses to mark/restore the inner side and what the planner consults
+to decide whether a Material wrapper is needed under MergeJoin / Append
+[verified-by-code `execAmi.c:78, 328, 377, 419, 512, 636`].
 
 ## 4. EState, ExprContext, and memory
 
@@ -196,6 +219,32 @@ The per-relation scans get tweaked to return the EPQ tuple via a special
 `estate->es_epq_active` and installs a separate `ExecSeqScanEPQ` variant
 when EPQ is active [verified-by-code `nodeSeqscan.c:276-277, 206`].
 
+## 7a. Parallel pipelines: workers send MinimalTuples
+
+Worker → leader tuple transport in a parallel plan goes through `tqueue.c`
+over a `shm_mq`. The receiver side (`TQueueDestReceiver`) **always** calls
+`ExecFetchSlotMinimalTuple` before `shm_mq_send`, so what arrives on the
+leader is by construction a `MinimalTuple` — no header, no system columns,
+no OID, no `tts_tid` [verified-by-code `tqueue.c:3-12` and the file as a
+whole]. Any consumer above a Gather/GatherMerge that needs `ctid` or
+`tableoid` must therefore carry those as **junk columns** in the row body;
+the planner is responsible for adding the resjunk TLEs when the parent of
+the Gather (e.g. ModifyTable, LockRows, sort-with-tie-break-by-ctid) needs
+them.
+
+## 7b. HashAgg / shared TupleHashTable: `additionalsize`
+
+HashAgg, Hashjoin, hashed Subplan IN, SetOp(hash), Memoize, and Recursive
+Union all share the simplehash-based `TupleHashTable` in `execGrouping.c`.
+The trick that makes HashAgg fast: `BuildTupleHashTable` takes an
+`additionalsize` argument, and the hash table allocates that many pad
+bytes immediately after each `TupleHashEntryData` so HashAgg's per-group
+**transition values live inline in the hash entry** rather than being
+reached via a pointer to a separately palloc'd struct [verified-by-code
+`execGrouping.c:184, 502`]. One cache line, one allocation per group, and
+`((char*)entry) + MAXALIGN(sizeof(TupleHashEntryData))` recovers the
+per-group state.
+
 ## 8. Async execution (Append over ForeignScan)
 
 A modern wrinkle in the otherwise pull-only model: an Append node sitting
@@ -205,6 +254,35 @@ collect results via the children's `ExecAsyncResponse` callback
 [from-README `executor/README:412-449`]. Only `Append` is an async consumer
 today, and only `ForeignScan` is async-capable. The `PlanState.async_capable`
 flag marks the latter.
+
+## 8a. ModifyTable: Prologue / Act / Epilogue
+
+`nodeModifyTable.c` is no longer a monolithic per-operation switch. Since
+PG 15 (introduced with MERGE), each DML primitive — INSERT / UPDATE /
+DELETE — is split into a **Prologue / Act / Epilogue** triplet
+[verified-by-code `nodeModifyTable.c:2383, 2461, 2614` for UPDATE;
+`:1739, 1771, 1798` for DELETE]:
+
+- **Prologue** — BEFORE ROW triggers, generated-column / RLS / FK pre-checks.
+- **Act** — the single `table_tuple_insert` / `table_tuple_update` /
+  `table_tuple_delete` call and its tuple-method result handling
+  (`TM_Ok | TM_Updated | TM_Deleted | TM_SelfModified`).
+- **Epilogue** — index update (`ExecInsertIndexTuples` /
+  `ExecUpdateIndexTuples`), AFTER ROW triggers, RETURNING projection queue.
+
+This factoring exists so `ExecMerge` (`:3394`) can drive any of the three
+actions per WHEN clause without re-implementing trigger + index logic. The
+shared bottom layer is also what lets MERGE retry a `WHEN MATCHED` clause
+via EvalPlanQual on `TM_Updated`/`TM_Deleted` without losing trigger
+semantics.
+
+**Cross-partition UPDATE** is the other subtle case: when the new
+partition-key value would route the row to a different partition,
+`ExecCrossPartitionUpdate` (`:2218`) turns the UPDATE into a `DELETE`
+against the old partition followed by an `INSERT` into the new one. Trigger
+firing rules for this rewrite are not symmetric with a plain UPDATE — see
+the long comment at `nodeModifyTable.c:2218+`. `ExecCrossPartitionUpdateForeignKey`
+(`:2669`) handles the FK-action side of the same rewrite.
 
 ## 9. Worked example: `SELECT … FROM dept, emp WHERE …`
 

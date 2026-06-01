@@ -108,6 +108,21 @@ logger has no shmem and no `PGPROC`.
 ### Shared memory (allocated by postmaster, attached by every child whose
 `shmem_attach == true`)
 
+The canonical inventory of what lives in shared memory — and the *order* in
+which each subsystem is initialized — is `subsystemlist.h`, an X-macro list
+of `PG_SHMEM_SUBSYSTEM(x)` entries expanded once by
+`RegisterBuiltinShmemCallbacks` (`ipci.c:167`). Ordering is encoded as
+comments at the top of the header: LWLocks first (so other init callbacks may
+safely `LWLockAcquire`), then DSM/DSMRegistry, then xlog/clog/buffers, then
+lock manager, then proc/sinval, etc. The historic giant `XXXShmemInit()`
+chain in `ipci.c` has been replaced by this callback-table mechanism; new
+subsystems register via `ShmemCallbacks` rather than editing a central list.
+[verified-by-code] `source/src/include/storage/subsystemlist.h:18-90`,
+`source/src/backend/storage/ipc/ipci.c:119-167`.
+[from-comment] `subsystemlist.h:18-26` (ordering rationale).
+
+Major shmem residents (per `subsystemlist.h` order):
+
 - `shared_buffers` — the page cache (buffer manager).
 - WAL buffers.
 - `PGPROC` array — one slot per backend/aux process; carries xid, vxid, latch,
@@ -125,13 +140,60 @@ The logger (and only the logger) skips shmem attach:
 [verified-by-code] `launch_backend.c:243-248` (the `dsm_detach_all()` /
 `PGSharedMemoryDetach()` for non-attaching children).
 
+#### Startup process and sinval
+
+The startup process is registered on the sinval queue with the `sendOnly`
+flag set: during recovery it *ships* catalog invalidations to hot-standby
+readers but has no catalog cache of its own (it isn't running queries), so
+it never *receives* messages and `SICleanupQueue` ignores its slot when
+computing `minMsgNum`. [verified-by-code] `sinvaladt.c:148-154` (ProcState
+`sendOnly` field), `:584-590` (cleanup skips `sendOnly`).
+
 ### Latches and signals
 
 - Each `PGPROC` carries a `Latch`. Waking a process = `SetLatch` on its proc's
-  latch. Signals are used sparingly (mostly `SIGUSR1` for procsignal multiplex,
-  `SIGHUP` for config reload, `SIGTERM`/`SIGINT` for cancel/terminate).
-- `ProcSignal` is the multiplexed signal mechanism (catchup, recovery conflicts,
-  parallel-message, barriers, …).
+  latch.
+- **Latch wakes use `SIGURG`, *not* `SIGUSR1`.** SIGURG is otherwise unused by
+  PG and carries no procsignal payload — it's a pure wake-only signal.
+  `WakeupOtherProc(pid)` ultimately calls `kill(pid, SIGURG)`.
+  [verified-by-code] `latch.c:289-330` (`SetLatch` + `WakeupOtherProc`),
+  `waiteventset.c:30-33` (epoll path docs).
+- On Linux (`WAIT_USE_EPOLL`) there is **no SIGURG signal handler** installed;
+  SIGURG stays blocked and a `signalfd` is added to the `WaitEventSet`, so the
+  kernel delivers wakes directly into the wait loop.
+  [verified-by-code] `waiteventset.c:30-33`.
+- `SIGUSR1` is the **`ProcSignal` multiplex** signal — backend ↔ backend
+  asks-target-to-do-N-things mechanism. The handler walks
+  `pss_signalFlags[]` and dispatches (catchup, recovery conflict,
+  parallel-message, barriers, log memory context, log backtrace, …).
+  [verified-by-code] `procsignal.c:295-313` (`SendProcSignal`),
+  `tcop/postgres.c::procsignal_sigusr1_handler`.
+- Other signals: `SIGHUP` for config reload, `SIGTERM`/`SIGINT` for
+  terminate/cancel, `SIGCHLD` to the postmaster.
+
+### ProcSignalBarrier — cluster-wide quiesce-and-confirm
+
+When a global state change needs every backend to *observe* it before
+proceeding (online checksum toggling, dropping a database, smgr release on
+tablespace removal, etc.), `EmitProcSignalBarrier(type)` is used:
+
+1. The initiator sets a bit in every backend's `pss_barrierCheckMask` and
+   bumps the global `psh_barrierGeneration` counter.
+2. It then raises `PROCSIG_BARRIER` (a `SendProcSignal` reason) on every
+   active slot.
+3. Each backend, on its next `CHECK_FOR_INTERRUPTS` →
+   `ProcessProcSignalBarrier`, atomically swaps its mask, runs the
+   `Process*Barrier` handler for each set bit, then bumps its own
+   `pss_barrierGeneration` to the shared value and broadcasts a CV.
+4. The initiator calls `WaitForProcSignalBarrier(generation)` which sleeps
+   on each slot's CV until every `pss_barrierGeneration >= generation` —
+   at which point every backend has definitely absorbed every bit-handler.
+
+[verified-by-code] `procsignal.c:368` (`EmitProcSignalBarrier`),
+`:439-490` (`WaitForProcSignalBarrier` ordering — checks generation only,
+not mask).
+[from-comment] `procsignal.c:451-455` (the
+"mask-cleared-before-absorb / generation-bumped-after-absorb" ordering rule).
 
 ### On-disk channels
 
