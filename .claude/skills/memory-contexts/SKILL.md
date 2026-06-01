@@ -1,0 +1,142 @@
+---
+name: memory-contexts
+description: PostgreSQL palloc / MemoryContext idioms — lifetime selection, MemoryContextSwitchTo, OOM behavior, context types (AllocSet/Slab/Generation/Bump). Use whenever writing or editing C code in source/src/backend/ that allocates memory, creates contexts, or worries about leaks.
+---
+
+# Memory contexts — actionable rules
+
+Reference doc: `knowledge/idioms/memory-contexts.md`.
+
+## Allocation cheat sheet
+
+- `palloc(n)` — allocate in `CurrentMemoryContext`. **Never returns NULL** — it
+  calls `ereport(ERROR)` on OOM. Don't test for NULL.
+- `palloc0(n)` — like palloc plus zero-fill.
+- `pstrdup(s)` / `pnstrdup(s, n)` / `psprintf(fmt, ...)` — string variants.
+- `palloc_object(T)`, `palloc_array(T, count)`, `palloc0_array(T, count)`
+  — type-safe macros. Prefer these over raw size calculations.
+- `palloc_extended(n, MCXT_ALLOC_NO_OOM)` — opt out of the OOM-throws contract
+  (returns NULL on failure). Use only when you specifically can recover.
+- `palloc_extended(n, MCXT_ALLOC_HUGE)` / `MemoryContextAllocHuge` — past the
+  `MaxAllocSize` (≈1 GB) limit; capped at `MaxAllocHugeSize` (SIZE_MAX/2).
+- `MemoryContextAlloc(ctx, n)` — allocate in a specific context without
+  switching `CurrentMemoryContext`.
+- `repalloc(p, n)` — grow/shrink. Goes to p's original context, not current.
+- `pfree(p)` — free a chunk. Goes to its original context.
+
+### Hard rules
+
+- **`pfree(NULL)` is undefined** — always check first if pointer may be NULL.
+- **`repalloc(NULL, n)` is undefined** — first allocation must be `palloc`.
+- **`palloc(0)` is legal** — returns a usable chunk.
+- **Do not test palloc's return for NULL** unless you used `MCXT_ALLOC_NO_OOM`.
+- **Single-allocation cap is `MaxAllocSize` (1 GB - 1)** for regular palloc.
+
+## Picking the right context
+
+Default rule: **`CurrentMemoryContext` should be the shortest-lived context
+that still outlives the data you're allocating.**
+
+| You need data to live until... | Allocate in / switch to |
+|---|---|
+| End of one tuple cycle | the executor's per-tuple ExprContext (usually already `CurrentMemoryContext` in expression eval) |
+| End of one statement | per-query context (executor sets this up; `estate->es_query_cxt`) or `MessageContext` |
+| End of current (sub)transaction | `CurTransactionContext` |
+| End of top-level transaction | `TopTransactionContext` |
+| Lifetime of one portal | the portal's private context (`PortalContext` when active) |
+| Lifetime of a cache entry | a child of `CacheMemoryContext` you control |
+| Backend lifetime / forever | `TopMemoryContext` — but only if truly forever |
+
+**Avoid making `TopMemoryContext` or `CacheMemoryContext` `CurrentMemoryContext`.**
+Allocating into them by accident is the classic permanent-leak bug.
+
+## The switch idiom
+
+```c
+MemoryContext oldcxt = MemoryContextSwitchTo(target_cxt);
+result = build_something();          /* allocs land in target_cxt */
+MemoryContextSwitchTo(oldcxt);
+return result;
+```
+
+You do NOT need to restore on error paths in normal code — transaction abort
+will fix `CurrentMemoryContext`. If you use `PG_TRY`, declare `oldcxt`
+`volatile` if you read it in `PG_CATCH`.
+
+## Creating a context
+
+```c
+MemoryContext cxt = AllocSetContextCreate(parent,
+                                          "my purpose",          /* MUST be a literal */
+                                          ALLOCSET_DEFAULT_SIZES);
+MemoryContextSetIdentifier(cxt, dynamic_name);  /* if you need a runtime label */
+```
+
+Sizing presets:
+- `ALLOCSET_DEFAULT_SIZES` — 0 / 8KB / 8MB. Use when the context may hold a lot.
+- `ALLOCSET_SMALL_SIZES` — 0 / 1KB / 8KB. Use for many small contexts (per
+  relcache entry, per query plan).
+- `ALLOCSET_START_SMALL_SIZES` — small init, default max.
+
+Pick a non-default context type when the allocation pattern fits:
+- **Slab** (`SlabContextCreate(parent, name, blockSize, chunkSize)`) — all
+  chunks are the same size. Good for reorder buffer txns, fixed-shape structs.
+- **Generation** (`GenerationContextCreate(parent, name, min, init, max)`) —
+  FIFO-ish allocation/free pattern. Good for queue-like buffering.
+- **Bump** (`BumpContextCreate(...)`) — write-once, never pfree'd. Densest
+  packing. **`pfree`/`repalloc`/`GetMemoryChunkContext` will NOT work** on
+  bump chunks — only context reset/delete frees them.
+
+## Cleanup
+
+- `MemoryContextReset(cxt)` — frees all chunks AND deletes all child contexts.
+- `MemoryContextResetOnly(cxt)` — only frees chunks; children remain.
+- `MemoryContextDelete(cxt)` — frees everything including the context itself
+  and all descendants.
+- `MemoryContextDeleteChildren(cxt)` — keep cxt, delete its subtree.
+- `MemoryContextRegisterResetCallback(cxt, cb)` — fire a callback the next
+  time cxt is reset or deleted. Use for closing file handles, releasing
+  refcounts, tearing down non-PG-owned resources.
+
+## Common mistakes to avoid
+
+1. **Testing `palloc(...)` for NULL.** It cannot return NULL. Delete the test.
+2. **`pfree(p)` where p might be NULL.** Guard explicitly.
+3. **Allocating in `CacheMemoryContext` while building cache entries** without
+   switching — permanent leak per entry. Switch in, switch out.
+4. **Returning per-tuple-context memory across the boundary.** The next tuple
+   cycle resets that context. Either palloc into the caller's context or
+   `datumCopy` / `pstrdup` / explicit copy.
+5. **Non-constant string passed as `AllocSetContextCreate` name** — fails
+   `StaticAssertExpr`. Use `MemoryContextSetIdentifier` for the dynamic part.
+6. **Calling `pfree` / `repalloc` on a bump-context chunk** — undefined.
+7. **`palloc` inside a critical section** — the context must have
+   `allowInCritSection = true` (`MemoryContextAllowInCriticalSection`).
+   Default contexts forbid it; the assertion fires only in assert builds.
+8. **Using a saved `MemoryContext` after the context was deleted.** Especially
+   common with `PortalContext` — a portal drop invalidates it.
+
+## Checklist before committing
+
+- [ ] No `NULL` checks on `palloc`/`palloc0`/`pstrdup`/`psprintf`.
+- [ ] `pfree(p)` callers ensure `p != NULL`.
+- [ ] Long-lived allocations explicitly switch into the right context.
+- [ ] New `AllocSetContextCreate` uses string-literal name + appropriate size
+      preset.
+- [ ] If you stored a pointer somewhere persistent, you allocated it in a
+      context that outlives the storing struct.
+- [ ] For non-PG resource attached to a context lifetime, you registered a
+      reset callback (don't rely on destructors or explicit cleanup paths).
+- [ ] `volatile` qualifier on any `oldcxt` / pointer used across `PG_TRY` /
+      `PG_CATCH`.
+- [ ] If you used Slab/Generation/Bump, you understand which ops are unsupported
+      (bump in particular).
+
+## When in doubt, cite
+
+- `src/backend/executor/execMain.c` — canonical `MemoryContextSwitchTo` pattern
+  around `es_query_cxt`.
+- `src/backend/utils/cache/relcache.c` — per-relation child contexts under
+  `CacheMemoryContext`.
+- `src/backend/utils/mmgr/mcxt.c` — type-independent operations.
+- `src/backend/utils/mmgr/README` — the canonical design discussion.
