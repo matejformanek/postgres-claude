@@ -1,7 +1,7 @@
 # pg-claude — current state
 
-**Phase:** Synthesis pass over the file-by-file corpus — spine complete.
-**Last activity:** 2026-06-01 — completed the remaining 4 spine subsystem syntheses (utils/mmgr ~287 lines, utils/cache ~382 lines, executor ~1092 lines, optimizer ~1034 lines). All 8 spine subsystem synthesis docs now exist (access/heap, access/transam, storage/lmgr, storage/ipc, utils/mmgr, utils/cache, executor, optimizer). Prior batch this same date: 4 architecture corrections + 4 data-structures docs + `/refresh-upstream` + skill-description optimization.
+**Phase:** Per-file backfill for synthesis-flagged gaps — done. Cross-reference pass next.
+**Last activity:** 2026-06-01 — backfilled 13 per-file docs flagged by the spine syntheses: 4 mmgr headers (`memutils.h`, `palloc.h`, `memutils_internal.h`, `memutils_memorychunk.h`), 5 optimizer files (`planner.c`, `createplan.c`, `allpaths.c`, `costsize.c`, `pathnode.c`), 4 executor files (`execMain.c`, `execProcnode.c`, `spi.c`, `nodeNestloop.c`). Total +2522 lines, registry rows appended. Earlier same date: completed the remaining 4 spine syntheses (mmgr, cache, executor, optimizer) — all 8 spine subsystem syntheses now exist; 4 architecture corrections + 4 data-structures docs + `/refresh-upstream` + skill-description optimization.
 **Source commit at last verification:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3`
 
 ## Done
@@ -34,15 +34,14 @@
 ## Next
 
 1. Cross-reference pass: link `knowledge/files/` docs back from `knowledge/architecture/`, `knowledge/idioms/`, and the new `knowledge/subsystems/` syntheses. Currently the cite-direction is mostly one-way (files cite source; long-form docs cite files; nothing in files points back to the long-form docs that synthesize them).
-2. Backfill per-file docs flagged as missing during the spine syntheses: `memutils.h`, `palloc.h`, `memutils_internal.h`, `memutils_memorychunk.h` (mmgr); `plan/planner.c`, `plan/createplan.c`, `path/allpaths.c`, `path/costsize.c`, `util/pathnode.c` (optimizer); `execMain.c`, `execProcnode.c`, `spi.c`, `nodeNestloop.c` (executor).
-3. `/refresh-upstream` shakedown: pull both clones, generate the first refresh report, see how much of the corpus has rotted since `ef6a95c7c64`.
-4. Validation run: pick an actual PG hacking task and run it through the system (the "Phase D" from the master plan) — tests whether the corpus + skills + commands compose into something useful.
-5. Workflow agents (Phase 2 from the master plan): `code-explorer`, `patch-reviewer`, `feature-planner`, `doc-verifier`.
+2. `/refresh-upstream` shakedown: pull both clones, generate the first refresh report, see how much of the corpus has rotted since `ef6a95c7c64`.
+3. Validation run: pick an actual PG hacking task and run it through the system (the "Phase D" from the master plan) — tests whether the corpus + skills + commands compose into something useful.
+4. Workflow agents (Phase 2 from the master plan): `code-explorer`, `patch-reviewer`, `feature-planner`, `doc-verifier`.
 
 ## Coverage snapshot
 
 - Registry rows in `progress/files-examined.md`: **1021**.
-- Per-file docs under `knowledge/files/`: **902**.
+- Per-file docs under `knowledge/files/`: **915** (+13 this batch).
 - Subsystem + data-structures docs: **20** (16 subsystem + 4 data-structures).
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.

@@ -1093,3 +1093,22 @@ grep '| deep-read |' progress/files-examined.md
 | src/include/access/spgist.h | 2026-06-01 | ef6a95c7c64 | read | index-ams-rerun | knowledge/files/src/include/access/spgist.h.md | SP-GiST public API |
 | src/include/access/spgist_private.h | 2026-06-01 | ef6a95c7c64 | read | index-ams-rerun | knowledge/files/src/include/access/spgist_private.h.md | SP-GiST private types |
 | src/include/access/spgxlog.h | 2026-06-01 | ef6a95c7c64 | read | index-ams-rerun | knowledge/files/src/include/access/spgxlog.h.md | SP-GiST WAL record formats |
+
+<!-- utils/mmgr headers — per-file deep docs (file-by-file phase rerun) -->
+| src/include/utils/memutils.h | 2026-06-01 | ef6a95c7c64 | deep-read | mmgr-headers-rerun | knowledge/files/src/include/utils/memutils.h.md | Size limits, top-level context pointers, ALLOCSET_*_SIZES, pg_memory_is_all_zeros |
+| src/include/utils/palloc.h | 2026-06-01 | ef6a95c7c64 | deep-read | mmgr-headers-rerun | knowledge/files/src/include/utils/palloc.h.md | Universal palloc API + MemoryContextSwitchTo inline + reset callbacks |
+| src/include/utils/memutils_internal.h | 2026-06-01 | ef6a95c7c64 | deep-read | mmgr-headers-rerun | knowledge/files/src/include/utils/memutils_internal.h.md | Per-impl callback prototypes + MemoryContextMethodID enum (16-slot dispatch table) |
+| src/include/utils/memutils_memorychunk.h | 2026-06-01 | ef6a95c7c64 | deep-read | mmgr-headers-rerun | knowledge/files/src/include/utils/memutils_memorychunk.h.md | MemoryChunk hdrmask layout: 4+1+30+30 bits with shared bit; magic for external chunks |
+
+<!-- executor per-file deep docs (file-by-file phase, exec lifecycle + SPI + canonical join) -->
+| src/backend/executor/execMain.c | 2026-06-01 | ef6a95c7c64 | deep-read | file-by-file-executor | knowledge/files/src/backend/executor/execMain.c.md | ExecutorStart/Run/Finish/End + InitPlan + ExecEndPlan + ExecutePlan + EvalPlanQual entry surface |
+| src/backend/executor/execProcnode.c | 2026-06-01 | ef6a95c7c64 | deep-read | file-by-file-executor | knowledge/files/src/backend/executor/execProcnode.c.md | ExecInitNode/MultiExecProcNode/ExecEndNode dispatch tables + ExecProcNodeFirst first-call trick + ExecShutdownNode + ExecSetTupleBound |
+| src/backend/executor/spi.c | 2026-06-01 | ef6a95c7c64 | deep-read | file-by-file-executor | knowledge/files/src/backend/executor/spi.c.md | SPI stack + connect/finish + four-way snapshot policy in _SPI_execute_plan + cursor wrappers + atomic vs non-atomic mem-context choice |
+| src/backend/executor/nodeNestloop.c | 2026-06-01 | ef6a95c7c64 | deep-read | file-by-file-executor | knowledge/files/src/backend/executor/nodeNestloop.c.md | Full 401-line state machine; nestParams push-down + REWIND eflags rule + inner-not-rescanned-in-ReScan invariant |
+
+<!-- optimizer per-file deep docs (file-by-file phase, planner+createplan+allpaths+costsize+pathnode) -->
+| src/backend/optimizer/plan/planner.c | 2026-06-01 | ef6a95c7c64 | deep-read | file-by-file-optimizer | knowledge/files/src/backend/optimizer/plan/planner.c.md | standard_planner + subquery_planner + grouping_planner upper-rel chain; create_grouping/window/distinct/ordered paths; planner_hook + create_upper_paths_hook |
+| src/backend/optimizer/plan/createplan.c | 2026-06-01 | ef6a95c7c64 | read | file-by-file-optimizer | knowledge/files/src/backend/optimizer/plan/createplan.c.md | Path→Plan recursion + CP_EXACT/SMALL/LABEL/IGNORE tlist flags + full create_*_plan dispatch + NestLoopParam handover via curOuterRels/curOuterParams |
+| src/backend/optimizer/path/allpaths.c | 2026-06-01 | ef6a95c7c64 | read | file-by-file-optimizer | knowledge/files/src/backend/optimizer/path/allpaths.c.md | make_one_rel pipeline + per-RTE set_rel_size/pathlist dispatch + standard_join_search DP loop + partition-wise join + subquery pushdown safety |
+| src/backend/optimizer/path/costsize.c | 2026-06-01 | ef6a95c7c64 | read | file-by-file-optimizer | knowledge/files/src/backend/optimizer/path/costsize.c.md | All cost_* + set_*_size_estimates; disabled_nodes lex-order replaces old disable_cost hack; FK-join selectivity shortcut; initial/final cost split for joins |
+| src/backend/optimizer/util/pathnode.c | 2026-06-01 | ef6a95c7c64 | deep-read | file-by-file-optimizer | knowledge/files/src/backend/optimizer/util/pathnode.c.md | add_path dominance pruning (STD_FUZZ_FACTOR=1.01) + IndexPath pfree exception + add_partial_path differences + every create_*_path constructor + reparameterize_path family |
