@@ -1,6 +1,6 @@
 ---
 name: review-checklist
-description: Mandatory passes when reviewing a PostgreSQL patch — either someone else's on pgsql-hackers/CommitFest, or our own change before submission. Use when the user says "review this patch", "is this ready to send", "do a pre-submission review", "I'm reviewing CF entry X", or asks for a CommitFest-style review.
+description: The seven-phase PostgreSQL patch review checklist from the wiki — applies to reviewing someone else's pgsql-hackers/CommitFest submission OR self-reviewing your own patch before mailing it. Covers apply/build, regress + check-world, pgindent, design fit, docs, comments, and committer-readiness. Use proactively whenever the user says "review this patch", "is it ready to send to hackers", "CF entry NNNN review", or "pre-submission review". Do NOT trigger for generic GitHub PR review, Terraform/Python/Rust code review, or app security review.
 ---
 
 # Review Checklist Skill

@@ -1,6 +1,6 @@
 ---
 name: commit-message-style
-description: How to write a commit message that matches upstream PostgreSQL house style — imperative single-line title (no conventional-commits prefix), paragraph-form body wrapped near 76 chars, the Author / Reviewed-by / Reported-by / Discussion / Backpatch-through trailer block, and what is conspicuously absent (no Co-Authored-By, no emoji, no ticket numbers, no bullet-heavy bodies). Use whenever drafting a commit for any patch intended to look like upstream PG.
+description: Write a commit message in upstream PostgreSQL house style — imperative single-line title (NO conventional-commits feat:/fix: prefix), paragraph body wrapped near 76 chars, Author / Reviewed-by / Reported-by / Discussion / Backpatch-through trailer block; explicitly NO Co-authored-by, NO emoji, NO ticket numbers, NO bullet lists, NO Signed-off-by. Use proactively when drafting a commit log for a PG patch destined for master. Do NOT trigger for conventional-commits messages, Linux kernel Signed-off-by commits, Rust/JS/Go project commits, or GitHub PR descriptions.
 ---
 
 # commit-message-style

@@ -1,6 +1,6 @@
 ---
 name: wal-and-xlog
-description: Operational checklist for adding or modifying a WAL record type — when to use a custom resource manager vs Generic WAL, the XLogInsert idiom, how to write a correct redo function, hint-bit rules, and what to update in rmgrdesc / pg_waldump. Use when touching anything that emits XLogInsert calls, when adding a new access method or extension that needs durability, or when reviewing patches that change WAL record formats. Conceptual reference: `knowledge/architecture/wal.md`.
+description: PostgreSQL WAL/XLOG checklist for adding or modifying a WAL record — choosing builtin rmgr vs Generic WAL (generic_xlog.c) vs custom rmgr (RegisterCustomRmgr), XLogInsert + XLogRegisterBuffer idiom, writing a correct redo function, FPI/hint-bit (MarkBufferDirtyHint) rules, updating rmgrdesc and pg_waldump. Use when editing C that emits XLogInsert, adding an access method needing durability, or reviewing patches that change WAL record formats. Do NOT trigger on MySQL binlog, SQLite WAL mode, Kafka logs, pgbackrest/wal_level config, or generic write-ahead-logging theory questions.
 ---
 
 # WAL & XLOG — operational skill

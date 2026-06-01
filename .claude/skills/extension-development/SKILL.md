@@ -1,6 +1,6 @@
 ---
 name: extension-development
-description: Operational checklist for building a PostgreSQL loadable extension — control file + SQL scripts + .so build (PGXS or meson), `_PG_init` entry point, custom GUCs, hook installation (chain-of-responsibility), upgrade scripts, trusted vs untrusted. Use whenever the task is "write an extension", "add a contrib module", "expose a C function as SQL", "install a planner/executor/utility hook", or modifying anything under `source/contrib/*/`.
+description: Operational checklist for building a PostgreSQL backend loadable extension (.so / contrib module) — .control file, foo--1.0.sql install + foo--1.0--1.1.sql upgrade scripts, PGXS vs meson build, `_PG_init`, shared_preload_libraries, chained hook installation (ProcessUtility_hook, planner_hook, ExecutorStart_hook), trusted vs untrusted, CREATE EXTENSION. Use whenever the user is writing a Postgres extension, adding a contrib module, exposing a C function as SQL, or installing a backend hook. Do NOT trigger for VS Code / Chrome / Firefox / browser extensions.
 ---
 
 # Building a PostgreSQL extension

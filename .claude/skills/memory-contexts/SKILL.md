@@ -1,6 +1,6 @@
 ---
 name: memory-contexts
-description: PostgreSQL palloc / MemoryContext idioms — lifetime selection, MemoryContextSwitchTo, OOM behavior, context types (AllocSet/Slab/Generation/Bump). Use whenever writing or editing C code in source/src/backend/ that allocates memory, creates contexts, or worries about leaks.
+description: PostgreSQL backend palloc / MemoryContext idioms — picking the right context (CurrentMemoryContext, TopMemoryContext, per-query, per-tuple, ExecutorState), MemoryContextSwitchTo discipline, palloc/palloc0/pstrdup/psprintf, OOM-throws-ereport contract, pfree vs MemoryContextReset, AllocSet vs Slab vs Generation vs Bump context types, leak scoping in long-running backends. Use when writing or editing C in src/backend that allocates memory or creates contexts. Do NOT trigger on plain malloc/jemalloc, JVM/Go GC tuning, Rust Box/Rc, shared_buffers tuning, or valgrind on non-PG programs.
 ---
 
 # Memory contexts — actionable rules

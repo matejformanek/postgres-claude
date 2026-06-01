@@ -1,6 +1,6 @@
 ---
 name: catalog-conventions
-description: Operational checklist for modifying a PostgreSQL system catalog — adding a builtin function, new catalog column, new opclass, etc. Use whenever you edit anything under src/include/catalog/ or add a pg_proc.dat entry.
+description: PostgreSQL system-catalog modification checklist — adding a pg_proc.dat builtin, pg_operator.dat operator, pg_type.dat type, pg_cast.dat cast, pg_opclass.dat opclass, new column on pg_class/pg_aggregate/etc., BKI bootstrap entries, OID assignment policy, catversion bump, regenerating postgres.bki. Use whenever editing anything under src/include/catalog/ (.h or .dat) or adding builtin SQL-visible objects. Do NOT trigger on user-level information_schema queries, Django/Alembic migrations, Oracle/MySQL catalog equivalents, schema design/normalization, or adding constraints to user tables.
 ---
 
 # Catalog modification checklist

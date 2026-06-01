@@ -1,6 +1,6 @@
 ---
 name: memory-keeping
-description: Keeps progress/STATE.md, progress/coverage.md, and the sessions/ log in sync after any session that produced durable output (a new knowledge doc, a verified fact, a discovered gotcha, a decision). Use at the end of every session that touched knowledge/ or that locked a deferred decision from pg-claude-plan.md §14.
+description: End-of-session bookkeeping for the pg-claude meta repo — sync progress/STATE.md, progress/coverage.md, and append a sessions/ log entry whenever a session produced durable output (new knowledge/idioms or knowledge/subsystems doc, verified-by-code fact, discovered gotcha, or a locked decision from pg-claude-plan.md §14). Use proactively when the user says "wrap up", "close out", "sync memory files", "record this gotcha", or "we're done for the day". Do NOT trigger for PG MemoryContext/palloc questions, LangChain agent memory, app memory leaks, or finding old Claude sessions.
 ---
 
 # memory-keeping

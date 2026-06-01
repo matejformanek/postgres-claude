@@ -1,6 +1,6 @@
 ---
 name: coding-style
-description: PostgreSQL C coding-style rulebook — apply whenever editing, adding, or reviewing C code under source/src/**/*.{c,h}. Covers tabs/braces/line-length, include ordering (postgres.h first!), C99 subset (no //, no VLA, no mid-block decls), naming, ereport vs elog and the error-message style guide, palloc vs malloc, Assert hygiene, PG_TRY rules, and what pgindent will rewrite if you don't.
+description: PostgreSQL C coding-style rulebook for src/backend and src/include — hard tabs width 4, BSD braces, postgres.h-first include order, C99 subset (no //, no VLA, no mid-block decls), naming conventions, function-header comment format, line-length, pgindent expectations. Use whenever editing, adding, or reviewing .c/.h under source/src/ or dev/src/, or when a reviewer flags pgindent churn on a PG patch. Do NOT trigger on Linux-kernel style, clang-format/rustfmt/prettier/black configs, or non-PG C/C++/Java/JS style questions.
 ---
 
 # PostgreSQL coding-style — operational rules

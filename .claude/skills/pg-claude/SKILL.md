@@ -1,6 +1,6 @@
 ---
 name: pg-claude
-description: Master index for working on PostgreSQL internals via the pg-claude meta repo. Use whenever the task involves PostgreSQL — building, running, debugging, testing, reading source, writing C code, documenting a subsystem, preparing a patch, reviewing code, or extending PG. This skill catalogues every other pg-claude skill, every slash command, and the structure of the knowledge corpus, so you know which surface to reach for without grepping. Auto-load proactively on any PG-related work.
+description: Master index for hacking on PostgreSQL internals in the pg-claude meta repo — catalogues every pg-claude skill, slash command, and the knowledge/ corpus layout (subsystems, idioms, data-structures). Use proactively whenever the task is PG backend work: building from source, debugging a backend, writing C in src/backend, adding a GUC/index AM/access method, preparing a pgsql-hackers patch, or reviewing a CommitFest entry. Do NOT trigger on user-level SQL, DBA tuning (autovacuum, shared_buffers), client libraries/ORMs, or installing/comparing PG distros.
 ---
 
 # pg-claude — the master navigator

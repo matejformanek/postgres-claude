@@ -1,6 +1,6 @@
 ---
 name: build-and-run
-description: How to configure, build, and run PostgreSQL from `dev/` (the mutable test clone) for development. Covers the meson primary toolchain (PG ≥ 16 default), the autoconf fallback, debug build flags, `initdb` + start/stop, single-user mode, and the per-connection fork-model gotcha. Use whenever the task involves actually building, running, or debugging a backend.
+description: How to configure, build, and run PostgreSQL from source in the `dev/` clone for backend hacking — meson setup (PG >= 16 default) with cassert and debug flags, autoconf ./configure fallback, ninja install, initdb + pg_ctl start/stop, PGDATA/PATH wiring, single-user mode for startup debugging, attaching gdb/lldb under the per-connection fork model, -O0 -g3 builds. Use whenever the task involves actually compiling, installing, initdb-ing, starting, or attaching a debugger to a Postgres backend built from source. Skip brew/apt/Docker install, generic CMake, or kernel builds.
 ---
 
 # build-and-run

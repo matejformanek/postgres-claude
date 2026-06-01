@@ -1,6 +1,6 @@
 ---
 name: debugging
-description: How to debug a running PostgreSQL backend — debugger attach against the per-connection fork model, single-user mode for startup paths, useful breakpoints, in-source instrumentation with elog, core dumps on macOS, and the SQL-level inspection extensions (pg_buffercache / pageinspect / pg_visibility). Use whenever the task involves stepping through backend code, reading shared state at runtime, or chasing a crash.
+description: Debug a running PostgreSQL backend — lldb/gdb attach to the right forked backend via pg_backend_pid, single-user mode for postmaster/InitPostgres startup paths, breakpoints in ExecInitNode/heap_update/LWLockAcquire, elog(LOG,...) instrumentation, macOS core dumps, and SQL-level inspection via pg_buffercache / pageinspect / pg_visibility. Use proactively whenever the user wants to step through backend C code, attach to a backend, chase a SIGSEGV/hang in PG, or inspect shared state at runtime. Do NOT trigger for app-level debugging in Node/Python/Go or for tuning a production PG instance.
 ---
 
 # debugging

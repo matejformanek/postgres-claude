@@ -1,6 +1,6 @@
 ---
 name: error-handling
-description: PostgreSQL error reporting idioms — ereport vs elog, SQLSTATE, message style, PG_TRY/CATCH. Use whenever writing or editing C code in source/src/backend/ that reports errors, logs messages, or needs longjmp-safe cleanup.
+description: PostgreSQL backend error-reporting idioms — ereport vs elog, picking SQLSTATE from errcodes.txt, errcode_for_file_access, errmsg/errdetail/errhint capitalisation rules, soft errors via escontext, PG_TRY/PG_CATCH longjmp-safe cleanup, DEBUG/LOG/NOTICE/WARNING/ERROR/FATAL/PANIC levels. Use whenever writing, editing, or reviewing C in source/src/backend that reports errors or logs messages. Do NOT trigger on Python try/except, Go error returns, Rust Result, C++ exceptions, Java checked exceptions, Sentry/pino logging, or Oracle/MySQL error codes.
 ---
 
 # Error handling — actionable rules

@@ -1,6 +1,6 @@
 ---
 name: locking
-description: Operational decision tree for adding code that touches shared state in PostgreSQL — which lock primitive to use, what ordering rules apply, what to document.
+description: PostgreSQL backend locking decision tree for code touching shared state — picking among atomics (pg_atomic_u32), spinlocks (SpinLockAcquire), LWLocks (LWLockAcquire LW_SHARED/LW_EXCLUSIVE), heavyweight locks, predicate (SSI) locks, and buffer pin/content locks; lock ordering to avoid deadlocks; what protects PGPROC/BufferDesc/shmem fields. Use whenever writing or reviewing C in src/backend that touches shared memory, MainLWLockArray, procArray, or adds shmem state. Do NOT trigger on pthread/Java/Go/Rust mutex questions, Redis/ZooKeeper distributed locks, ORM optimistic locking, or user-level SELECT FOR UPDATE.
 ---
 
 # Locking — operational checklist

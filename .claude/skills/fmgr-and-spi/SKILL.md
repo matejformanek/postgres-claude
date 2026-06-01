@@ -1,6 +1,6 @@
 ---
 name: fmgr-and-spi
-description: PostgreSQL fmgr (function manager) and SPI (Server Programming Interface) calling conventions — how to write a SQL-callable C function (PG_FUNCTION_INFO_V1, PG_GETARG_*, PG_RETURN_*, PG_ARGISNULL, SRF_* and Materialize mode, composite/polymorphic types) and how to run SQL from inside one (SPI_connect → SPI_execute → SPI_finish, plan caching, cursors, the subxact / aborted-subxact rule, common return codes). Use whenever editing or adding C code that defines a `Datum foo(PG_FUNCTION_ARGS)` entry point, calls another fmgr function (`OidFunctionCall*`, `DirectFunctionCall*`, `FunctionCall*Coll`), or runs SQL queries via `SPI_*` from a backend extension, trigger, or PL handler.
+description: PostgreSQL backend fmgr (function manager) and SPI calling conventions for hacking SQL-callable C functions — PG_FUNCTION_INFO_V1, PG_GETARG_*/PG_RETURN_*, PG_ARGISNULL, SRF_* ValuePerCall and Materialize mode, composite/polymorphic returns, DirectFunctionCall*/OidFunctionCall*, plus SPI_connect/SPI_execute/SPI_prepare/SPI_finish, plan caching, cursors, subxact rollback, return codes. Use whenever editing C with a `Datum foo(PG_FUNCTION_ARGS)` entry point, calling fmgr from C, or running SQL via SPI_* in a backend, trigger, or PL handler. Skip for plpgsql, libpq/JDBC client code, or generic executor questions.
 ---
 
 # fmgr and SPI — operational playbook

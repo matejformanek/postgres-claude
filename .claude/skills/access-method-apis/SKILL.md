@@ -1,6 +1,6 @@
 ---
 name: access-method-apis
-description: PostgreSQL pluggable access method APIs — IndexAmRoutine (index AMs like btree/brin/gin) and TableAmRoutine (table AMs; heap is the default). Use whenever editing or reviewing C code that implements a new index AM, a new table AM, or that touches the executor-facing wrappers (`genam.c`, `tableam.h` inline wrappers). Covers what callbacks are mandatory vs optional, the opclass/strategy/support-function model, the slot-based tuple interface, TID semantics, and the `CREATE ACCESS METHOD` catalog registration path.
+description: PostgreSQL pluggable access method internals for hackers implementing an index or table AM — IndexAmRoutine callbacks (ambuild, aminsert, amgettuple, amgetbitmap, ambulkdelete, amvacuumcleanup), TableAmRoutine callbacks (scan_begin, scan_getnextslot, tuple_insert, tuple_insert_speculative, slot_callbacks), opclass/strategy numbers and support functions, TID semantics for non-heap stores, genam.c and tableam.h wrappers, CREATE ACCESS METHOD + pg_am/pg_opclass registration. Use whenever a patch implements or modifies an index AM or table AM. Skip user-facing "which index should I use" or query-tuning questions.
 ---
 
 # Access-method APIs — operational guide

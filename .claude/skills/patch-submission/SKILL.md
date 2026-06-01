@@ -1,6 +1,6 @@
 ---
 name: patch-submission
-description: Prepare a change for upstream submission to pgsql-hackers. Use whenever the user says "let's send this upstream", "prepare for pgsql-hackers", "format-patch this", "submit to CommitFest", or otherwise signals they want a local change to become a real PG community patch.
+description: Prepare a PostgreSQL change for upstream submission to pgsql-hackers — git format-patch the series, write the cover letter, register a CommitFest (CF) entry, run pgindent / check-world / docs build, and stage the v1 patchset for mailing. Use proactively whenever the user wants to send a PG patch upstream, format-patch for pgsql-hackers, land a change on master, or register a CF entry. Do NOT trigger for GitHub PRs, npm/crate releases, LKML kernel patches, or generic "open source contribution" questions.
 ---
 
 # Patch Submission Skill

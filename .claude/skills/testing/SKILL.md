@@ -1,6 +1,6 @@
 ---
 name: testing
-description: Pick the right PostgreSQL test flavor (regress / isolation / TAP / module) for a feature or bug fix, where to put it, and how to run only that test fast. Use when adding tests to PostgreSQL itself, reviewing test coverage on a patch, or asked "what kind of test should I write for X".
+description: Pick the right PostgreSQL test flavor for a core/contrib patch — pg_regress .sql/.out pairs, isolationtester specs and permutations for concurrency/deadlock races, TAP (PostgreSQL::Test::Cluster) for multi-node and pg_basebackup/replication scenarios, and src/test/modules for in-tree C test modules. Covers where files live and how to run a single test fast. Use whenever adding or reviewing tests on a PG patch, or asked "regress vs isolation vs TAP" for a feature or bug. Skip pytest/Jest/Go testing/RSpec and pgbench benchmarking questions.
 ---
 
 # Testing PostgreSQL — decision tree

@@ -1,6 +1,6 @@
 ---
 name: replication-overview
-description: Operational orientation for PostgreSQL replication — physical streaming vs archive vs logical decoding vs logical replication (PUB/SUB) vs synchronous commit. Names the GUC knobs (wal_level, max_wal_senders, max_replication_slots, max_logical_replication_workers, primary_conninfo, synchronous_standby_names) and points at the source files behind each flavor. Use whenever the user mentions replication, walsender, walreceiver, replication slot, logical decoding, output plugin, publication/subscription, conflict detection, sync replication, failover slots, or `pg_basebackup`. Conceptual reference: `knowledge/architecture/replication.md`.
+description: Operational orientation for PostgreSQL replication internals — physical streaming, archive, logical decoding, logical replication PUB/SUB, synchronous commit. Names walsender / walreceiver / replication slot / output plugin callbacks plus GUCs (wal_level, max_wal_senders, max_replication_slots, max_logical_replication_workers, primary_conninfo, primary_slot_name, synchronous_standby_names) and the source files behind each flavor. Use whenever the user mentions PG walsender, walreceiver, replication slot, logical decoding, output plugin, publication/subscription, conflict detection, sync replication, failover slots, pg_basebackup, or pg_receivewal. Skip MySQL/Mongo/Cassandra/Kafka/Debezium replication.
 ---
 
 # Replication — operational orientation

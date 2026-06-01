@@ -1,6 +1,6 @@
 ---
 name: executor-and-planner
-description: Operational checklist for working in the PostgreSQL executor (`src/backend/executor/`) or planner/optimizer (`src/backend/optimizer/`). Covers adding a new executor node (Init/Proc/End/ReScan + dispatch wiring + EXPLAIN), and adding/modifying a Path candidate in the planner (Path → Plan, RelOptInfo lifecycle, cost units, add_path pruning). Use whenever a change touches plan-node execution or path enumeration / costing.
+description: Operational checklist for hacking the PostgreSQL executor (src/backend/executor/, nodeXxx.c, ExecInitNode/ExecProcNode/ExecEndNode/ExecReScan dispatch, PlanState lifecycle, EXPLAIN wiring) and planner/optimizer (src/backend/optimizer/, Path → Plan via createplan.c, RelOptInfo lifecycle, add_path cost-dominance pruning, cost_* units in cost.h). Use proactively when editing plan-node execution, path enumeration, costing, or join paths. Do NOT trigger for end-user query tuning, EXPLAIN ANALYZE of a prod query, work_mem/shared_buffers tuning, or non-PG query engines (MySQL/Mongo/BigQuery).
 ---
 
 # Executor & Planner — operational

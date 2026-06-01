@@ -1,6 +1,6 @@
 ---
 name: gucs-bgworker-parallel
-description: Operational checklist for adding GUC configuration variables, background workers, and parallel-query worker code in PostgreSQL. Use whenever you add a custom GUC (`DefineCustom*Variable`), register a background worker (`RegisterBackgroundWorker` / `RegisterDynamicBackgroundWorker`), or build code that runs under a parallel `ParallelContext`. Conceptual references: `knowledge/idioms/guc-variables.md` and `knowledge/idioms/bgworker-and-parallel.md`.
+description: Operational checklist for PostgreSQL backend hacking on custom GUCs, background workers, and parallel-query workers — DefineCustomBoolVariable/IntVariable/StringVariable with check/assign hooks, PGC_SIGHUP/GUC_UNIT_MS flags, RegisterBackgroundWorker vs RegisterDynamicBackgroundWorker, BackgroundWorkerInitializeConnection, BGWORKER_SHMEM_ACCESS / BGWORKER_BACKEND_DATABASE_CONNECTION, bgw_restart_time, ParallelContext + DSM segments, parallel-safe/restricted labeling. Use whenever a patch or extension adds a custom GUC, registers a bgworker, or runs code under parallel query. Skip generic tuning questions (shared_buffers, max_connections) and non-PG worker pools.
 ---
 
 # GUCs, Background Workers, Parallel Query — operational skill
