@@ -1,7 +1,7 @@
 # pg-claude — current state
 
-**Phase:** Per-file backfill for synthesis-flagged gaps — done. Cross-reference pass next.
-**Last activity:** 2026-06-01 — backfilled 13 per-file docs flagged by the spine syntheses: 4 mmgr headers (`memutils.h`, `palloc.h`, `memutils_internal.h`, `memutils_memorychunk.h`), 5 optimizer files (`planner.c`, `createplan.c`, `allpaths.c`, `costsize.c`, `pathnode.c`), 4 executor files (`execMain.c`, `execProcnode.c`, `spi.c`, `nodeNestloop.c`). Total +2522 lines, registry rows appended. Earlier same date: completed the remaining 4 spine syntheses (mmgr, cache, executor, optimizer) — all 8 spine subsystem syntheses now exist; 4 architecture corrections + 4 data-structures docs + `/refresh-upstream` + skill-description optimization.
+**Phase:** Cross-reference pass + correctness fixes — done. `/refresh-upstream` shakedown next.
+**Last activity:** 2026-06-01 — cross-reference pass added upward backlinks from 633 per-file docs to the long-form synthesizers that reference them (specific cites + directory-scope globs from optimizer.md / executor.md). Idempotent regenerator at `/tmp/build_backlinks.py`. Also: backfilled `buf_internals.h.md` + `bufmgr.c.md` per-file docs (broken-cite gap surfaced by the cross-ref pass); refreshed stale `data-structures/bufferdesc-state.md` to match current source (state word is now `pg_atomic_uint64` with content lock encoded in-word, not a separate LWLock). Earlier same date: 13 per-file backfills for spine-synthesis gaps; 4 remaining spine syntheses completed (all 8 now exist).
 **Source commit at last verification:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3`
 
 ## Done
@@ -33,15 +33,16 @@
 
 ## Next
 
-1. Cross-reference pass: link `knowledge/files/` docs back from `knowledge/architecture/`, `knowledge/idioms/`, and the new `knowledge/subsystems/` syntheses. Currently the cite-direction is mostly one-way (files cite source; long-form docs cite files; nothing in files points back to the long-form docs that synthesize them).
-2. `/refresh-upstream` shakedown: pull both clones, generate the first refresh report, see how much of the corpus has rotted since `ef6a95c7c64`.
-3. Validation run: pick an actual PG hacking task and run it through the system (the "Phase D" from the master plan) — tests whether the corpus + skills + commands compose into something useful.
-4. Workflow agents (Phase 2 from the master plan): `code-explorer`, `patch-reviewer`, `feature-planner`, `doc-verifier`.
+1. `/refresh-upstream` shakedown: pull both clones, generate the first refresh report, see how much of the corpus has rotted since `ef6a95c7c64`. The bufferdesc-state staleness this batch suggests other PG18 changes may have invalidated claims elsewhere.
+2. Validation run: pick an actual PG hacking task and run it through the system (the "Phase D" from the master plan) — tests whether the corpus + skills + commands compose into something useful.
+3. Workflow agents (Phase 2 from the master plan): `code-explorer`, `patch-reviewer`, `feature-planner`, `doc-verifier`.
+4. Stretch: filename-form backlink pass — syntheses also mention files by short name (`aset.c`, `heapam.c`) in prose without the `knowledge/files/` prefix. Could widen backlinks beyond the current 633 but carries false-positive risk for common names.
 
 ## Coverage snapshot
 
 - Registry rows in `progress/files-examined.md`: **1021**.
-- Per-file docs under `knowledge/files/`: **915** (+13 this batch).
+- Per-file docs under `knowledge/files/`: **917** (+15 this session — 13 synthesis-gap backfills + 2 buffer backfills).
+- Per-file docs with upward backlinks: **633** (cross-reference pass).
 - Subsystem + data-structures docs: **20** (16 subsystem + 4 data-structures).
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.
