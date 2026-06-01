@@ -101,3 +101,7 @@ the wait function — caller never sees the bit.
 3. The `wait_event_info` reporting (visible in `pg_stat_activity.wait_event`)
    uses `pgstat_report_wait_start(wait_event_info)` /
    `_end` around the OS sleep. `[verified-by-code]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

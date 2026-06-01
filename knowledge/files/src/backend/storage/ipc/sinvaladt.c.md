@@ -200,3 +200,7 @@ risk vxid reuse). `[from-comment] :689-700`.
 3. **`nextThreshold` heuristic** `:656-660` — the formula rounds up
    to next `CLEANUP_QUANTUM` multiple. Reasonable but not commented
    beyond "should be a power of 2 for speed".
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

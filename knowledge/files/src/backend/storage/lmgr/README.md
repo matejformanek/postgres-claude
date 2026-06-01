@@ -41,3 +41,7 @@ These are the lines other code points back to. Cite the README at these line num
 | path | depth | date | commit | doc |
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/README | full-read | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/README.md |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

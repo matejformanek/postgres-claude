@@ -75,3 +75,7 @@ Implements heap page pruning and HOT-chain management: on-access pruning (`heap_
 
 ## Confidence tag tally
 `[verified-by-code]=18 [from-comment]=4 [from-readme]=4 [inferred]=0 [unverified]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

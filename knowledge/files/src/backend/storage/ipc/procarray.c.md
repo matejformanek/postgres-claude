@@ -204,3 +204,8 @@ that makes back-to-back `GetSnapshotData` calls O(1) on an idle system.
    two procs leave concurrently under EX lock the ordering is
    serialized, but I did not verify there are no stale pointers in
    `ProcGlobal->xids[]` for the duration of a remove. `[unverified]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/pgproc-fields.md](../../../../../data-structures/pgproc-fields.md)
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

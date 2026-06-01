@@ -156,3 +156,7 @@ Allocations are MAXALIGNed.
 - `[verified-by-code]` × ~10
 - `[from-comment]` × ~5
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

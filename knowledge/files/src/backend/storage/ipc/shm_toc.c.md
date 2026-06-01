@@ -69,3 +69,7 @@ The `shm_toc_lookup` linear scan is O(nentries) per call. For typical
 parallel-query TOCs (≤ 20 entries) this is fine, but a hash variant
 would be needed for high entry counts. `[inferred]` — no comment in
 the file justifies the design choice explicitly.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

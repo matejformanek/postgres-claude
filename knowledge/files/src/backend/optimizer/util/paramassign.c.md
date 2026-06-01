@@ -23,3 +23,7 @@ needed.
 
 ## Tags
 `[verified-by-code]` ×2, `[from-comment]` ×3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

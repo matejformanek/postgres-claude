@@ -155,3 +155,7 @@ form one great big range of free pages.
 - `[verified-by-code]` × ~5
 - `[from-comment]` × ~6
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

@@ -158,3 +158,8 @@ PID-revalidation interlock for parallel-worker group join: take leader's partiti
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/proc.c | deep (selected functions) | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/proc.c.md |
 | source/src/include/storage/proc.h | partial (PGPROC struct + extern protos) | 2026-06-01 | ef6a95c | (this doc) |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/pgproc-fields.md](../../../../../data-structures/pgproc-fields.md)
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

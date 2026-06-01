@@ -78,3 +78,7 @@ Everything else in this file is `static` and slotted into `heapam_methods` by fu
 
 ## Confidence tag tally
 `[verified-by-code]=15 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

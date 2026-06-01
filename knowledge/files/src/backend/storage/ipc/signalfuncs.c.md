@@ -81,3 +81,7 @@ theoretical race exists.
   with `bgw_type` set by parallel.c) gives the expected behavior.
   Reading the code, it does: the worker's PGPROC has the leader's
   roleId, so the privilege check accepts the same role. `[inferred]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

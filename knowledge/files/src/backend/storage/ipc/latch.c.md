@@ -147,3 +147,7 @@ to wake them.
    "effective range fits in 32 bits, so atomic on real platforms" —
    on 64-bit Linux pid_t is `int` (32-bit), so this is fine.
    `[verified-by-headers]` (Linux), `[unverified]` (Windows).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

@@ -38,3 +38,7 @@ underlying heap scan. [inferred from include set + standard PG architecture]
 
 ## 5. Tags
 `[verified-by-code]` ×3, `[from-comment]` ×6, `[inferred]` ×1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

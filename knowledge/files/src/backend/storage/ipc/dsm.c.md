@@ -189,3 +189,7 @@ a system reboot). `:319-366`.
    reserves odd for main-region slots. `[from-comment] :220, :1270`.
    Backend code must use `is_main_region_dsm_handle(h)` rather than
    testing the low bit directly — this is the only canonical check.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

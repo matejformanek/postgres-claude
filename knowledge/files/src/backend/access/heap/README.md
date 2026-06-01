@@ -47,3 +47,7 @@ Two design documents that explain non-obvious heap-AM mechanisms:
 ## Confidence tag tally
 
 `[verified-by-code]=2 [from-comment]=1 [from-readme]=8 [inferred]=1 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

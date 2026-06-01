@@ -13,3 +13,7 @@ quals. Helps when the OR is selective enough to enable index scans.
 
 Called by `query_planner` after EC and join-removal passes
 (planmain.c:269).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

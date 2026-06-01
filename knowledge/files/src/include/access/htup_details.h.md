@@ -75,3 +75,8 @@ Defines the on-disk layout of a heap tuple's fixed header (`HeapTupleHeaderData`
 
 ## Confidence tag tally
 `[verified-by-code]=18 [from-comment]=11 [from-readme]=0 [inferred]=0 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/heap-tuple-layout.md](../../../../data-structures/heap-tuple-layout.md)
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

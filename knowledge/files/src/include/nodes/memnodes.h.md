@@ -60,3 +60,7 @@ Reset → reclaim everything but the context struct itself.
 - Implementation: `src/backend/utils/mmgr/{aset.c,slab.c,generation.c,bump.c,mcxt.c}`.
 - Idiom: `knowledge/idioms/memory-contexts.md`
   (or `.claude/skills/memory-contexts/`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

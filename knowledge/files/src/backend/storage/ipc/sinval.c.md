@@ -87,3 +87,7 @@ recursive call site (e.g. a `RelationCacheInvalidateEntry` that itself
 triggers more invalidations). The static buffer makes the recursion
 safe by construction. `[unverified]` whether unbounded recursion
 depth is theoretically possible.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

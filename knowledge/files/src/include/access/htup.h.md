@@ -45,3 +45,8 @@ None.
 
 ## Confidence tag tally
 `[verified-by-code]=6 [from-comment]=4 [from-readme]=0 [inferred]=1 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/heap-tuple-layout.md](../../../../data-structures/heap-tuple-layout.md)
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

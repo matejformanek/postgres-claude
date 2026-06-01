@@ -81,3 +81,7 @@ Sets `dynamic_shared_memory_type` (POSIX / SYSV / WINDOWS / MMAP).
    destroy leftovers. If postmaster crashes between creating a
    segment and writing the new control-segment handle to
    `postmaster.pid`, the segment leaks. `[inferred]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

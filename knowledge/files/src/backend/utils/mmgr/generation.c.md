@@ -142,3 +142,7 @@ by another free block we simply return the newly empty block to malloc.
 - `[from-comment]` × ~4
 - `[inferred]` × 1
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

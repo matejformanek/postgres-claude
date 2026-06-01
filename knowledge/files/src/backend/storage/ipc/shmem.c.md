@@ -148,3 +148,7 @@ already-initialized entry; mismatch → `ERROR`.
   a duplicate in the index ERROR's out. So the collision *is* caught,
   but only when the second registrant tries to `ShmemInitRequested`,
   which is late in startup.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

@@ -189,3 +189,7 @@ System view:
 - `[verified-by-code]` × ~10
 - `[from-comment]` × ~8
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

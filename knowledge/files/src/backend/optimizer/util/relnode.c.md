@@ -38,3 +38,7 @@ and lookup (`find_base_rel`, `find_join_rel`) lives here. This is the
 
 ## 4. Tags
 `[verified-by-code]` ×4, `[from-comment]` ×5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

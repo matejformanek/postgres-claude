@@ -243,3 +243,7 @@ headers.
 - `[from-comment]` × ~10
 - `[from-readme]` × 1
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

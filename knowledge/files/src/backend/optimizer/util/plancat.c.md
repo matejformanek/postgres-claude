@@ -44,3 +44,7 @@ controls aggression of `relation_excluded_by_constraints`. [verified-by-code]
 
 ## 5. Tags
 `[verified-by-code]` ×5, `[from-comment]` ×9
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -59,3 +59,7 @@ across the buffer those nodes provide). [from-comment:260-272]
 
 ## 6. Tags
 `[verified-by-code]` ×3, `[from-comment]` ×10
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

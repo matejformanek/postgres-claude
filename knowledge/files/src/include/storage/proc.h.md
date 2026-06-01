@@ -53,3 +53,7 @@ Defines `PGPROC` (the per-process shared-memory state) and `PROC_HDR` (the globa
 - `[verified-by-code]`: 6
 - `[from-README]`: 2
 - `[from-comment]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/pgproc-fields.md](../../../../data-structures/pgproc-fields.md)

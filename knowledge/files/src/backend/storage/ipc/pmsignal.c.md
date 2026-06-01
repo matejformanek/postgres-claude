@@ -95,3 +95,7 @@ shut down"). [from-comment] `:62-65`.
   no crash-restart would happen). Reading the code path:
   `launch_backend.c` invokes the child main_fn after the attach
   in non-EXEC_BACKEND mode — `[unverified]` for the precise ordering.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

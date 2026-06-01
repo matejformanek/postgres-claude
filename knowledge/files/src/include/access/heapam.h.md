@@ -81,3 +81,7 @@ Public API of the heap table access method: scan descriptors, insert/update/dele
 
 ## Confidence tag tally
 `[verified-by-code]=14 [from-comment]=7 [from-readme]=1 [inferred]=1 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

@@ -59,3 +59,7 @@ None defined here; consumes structs from `heapam_xlog.h`.
 
 ## Confidence tag tally
 `[verified-by-code]=12 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

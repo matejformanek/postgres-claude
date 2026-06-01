@@ -65,3 +65,8 @@ adding a new pass needs to slot it into this list. [inferred]
 
 ## 4. Tags
 `[verified-by-code]` ×10, `[from-comment]` ×7
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/planner.md](../../../../../architecture/planner.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

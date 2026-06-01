@@ -85,3 +85,7 @@ None defined here; consumes `HeapTupleData`, `Snapshot`, `Buffer`. The `TM_Resul
 
 ## Confidence tag tally
 `[verified-by-code]=14 [from-comment]=10 [from-readme]=0 [inferred]=0 [unverified]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

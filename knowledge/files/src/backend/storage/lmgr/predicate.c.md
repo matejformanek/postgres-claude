@@ -161,3 +161,7 @@ Releases the per-sxact local hash; moves the SERIALIZABLEXACT to the finished li
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/predicate.c | partial-deep (top comment + key entry points) | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/predicate.c.md |
 | source/src/include/storage/predicate.h | skim | 2026-06-01 | ef6a95c | (this doc) |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

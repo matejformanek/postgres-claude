@@ -109,3 +109,7 @@ private to the handle.
    stores". On platforms where `pg_atomic_uint64` falls back to a
    spinlock-emulation, this is still "atomic" but performance-different.
    `[from-comment]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

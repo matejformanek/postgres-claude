@@ -72,3 +72,7 @@ canonical EC pointer are equal — that's the only allowed equality test.
 
 ## 4. Tags
 `[verified-by-code]` ×4, `[from-comment]` ×12
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

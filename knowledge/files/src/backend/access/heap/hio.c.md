@@ -54,3 +54,7 @@ None defined here; uses `BulkInsertStateData` from `hio.h`. [verified-by-code]
 
 ## Confidence tag tally
 `[verified-by-code]=11 [from-comment]=2 [from-readme]=0 [inferred]=1 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

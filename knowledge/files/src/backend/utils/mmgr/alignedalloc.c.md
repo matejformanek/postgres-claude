@@ -131,3 +131,7 @@ of this type exists).
 - `[verified-by-code]` × ~6
 - `[from-comment]` × 2
 - `[unverified]` × 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

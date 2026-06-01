@@ -65,3 +65,7 @@ The low-level system-catalog tuple cache. Each `CatCache` indexes one system tab
 ## Confidence tag tally
 
 verified-by-code: 10 — from-comment: 10 — from-readme: 0 — inferred: 0 — unverified: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

@@ -136,3 +136,7 @@ functions (each just sets a flag + sets MyLatch).
    releases the lock and *then* calls `kill`, and target dies first,
    we'd `kill` a dead pid (harmless `ESRCH`). `[verified-by-code]
    :305-313`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

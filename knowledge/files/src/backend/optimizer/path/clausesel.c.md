@@ -42,3 +42,7 @@ tighter one. [from-comment:93-95]
 
 ## 5. Tags
 `[verified-by-code]` ×2, `[from-comment]` ×8
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -239,3 +239,7 @@ Method-table entries (declared in `memutils_internal.h`, wired in
 - `[from-comment]` × ~8
 - `[inferred]` × 1
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

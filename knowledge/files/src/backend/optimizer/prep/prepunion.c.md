@@ -33,3 +33,7 @@ inputs.
 
 ## Tags
 `[verified-by-code]` ×1, `[from-comment]` ×4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

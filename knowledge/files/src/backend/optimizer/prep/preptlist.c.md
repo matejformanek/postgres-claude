@@ -29,3 +29,7 @@ Build the post-rewrite Query's planner-side targetlist:
 
 ## Tags
 `[verified-by-code]` ×1, `[from-comment]` ×5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

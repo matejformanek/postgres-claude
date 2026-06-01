@@ -168,3 +168,7 @@ unused chunks there are.
 - `[from-comment]` × ~5
 - `[inferred]` × 1
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

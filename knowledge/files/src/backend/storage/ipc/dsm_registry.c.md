@@ -77,3 +77,7 @@ sizes.
 2. **`pg_dsm_registry_allocations` race** with concurrent
    creation/destroy — the SRF holds the partition lock during the
    walk, so reads are consistent. `[inferred]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

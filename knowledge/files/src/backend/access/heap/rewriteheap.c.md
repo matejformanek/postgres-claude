@@ -67,3 +67,7 @@ Support routines for completely rewriting a heap relation while **preserving vis
 
 ## Confidence tag tally
 `[verified-by-code]=11 [from-comment]=8 [from-readme]=0 [inferred]=0 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

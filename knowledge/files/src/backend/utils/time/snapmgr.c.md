@@ -96,3 +96,7 @@ Five overlapping sets of snapshots a backend may hold; each has a different free
 ## Confidence tag tally
 
 `[verified-by-code]=14 [from-comment]=8 [from-readme]=0 [inferred]=0 [unverified]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/snapshot-lifecycle.md](../../../../../data-structures/snapshot-lifecycle.md)

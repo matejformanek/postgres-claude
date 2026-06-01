@@ -30,3 +30,7 @@ outer joins) that pure permutation cannot. [from-comment:341, verified-by-code]
 
 Each `geqo_eval` call resets a temp context (`mycontext`), so a million bad
 chromosomes don't leak the planner's heap. [verified-by-code]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

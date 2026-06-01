@@ -101,3 +101,7 @@ None — file is small and documentation-heavy.
 
 - `[verified-by-code]` × 3
 - `[from-comment]` × 5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

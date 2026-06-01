@@ -54,3 +54,7 @@ The "elected participant" semantic (`BarrierArriveAndWait` returning
 true to exactly one caller) — verifies the typical pattern of "one
 worker finalizes" but I did not trace which executor nodes rely on
 that election. `[unverified]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

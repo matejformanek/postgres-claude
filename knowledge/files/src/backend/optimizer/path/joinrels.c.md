@@ -46,3 +46,7 @@ context. The code picks the rel's own context. [from-comment:1495-1505]
 
 ## 5. Tags
 `[verified-by-code]` ×4, `[from-comment]` ×6
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

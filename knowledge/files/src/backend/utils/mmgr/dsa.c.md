@@ -257,3 +257,7 @@ pre-existing superblocks uses one LWLock per pool.
 - `[verified-by-code]` × ~14
 - `[from-comment]` × ~10
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

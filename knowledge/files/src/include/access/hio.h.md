@@ -45,3 +45,7 @@ None — interface is small.
 
 ## Confidence tag tally
 `[verified-by-code]=4 [from-comment]=4 [from-readme]=0 [inferred]=1 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

@@ -100,3 +100,8 @@ This file does not define many top-level structs (the scan descs live in heapam.
 
 ## Confidence tag tally
 `[verified-by-code]=22 [from-comment]=6 [from-readme]=4 [inferred]=1 [unverified]=5`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/heap-tuple-layout.md](../../../../../data-structures/heap-tuple-layout.md)
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

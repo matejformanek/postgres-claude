@@ -80,3 +80,7 @@ with the code as of the last-verified commit.
 
 - `[from-readme]` × ~15
 - `[verified-by-code]` × 0 (this is a meta-doc *about* the README)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

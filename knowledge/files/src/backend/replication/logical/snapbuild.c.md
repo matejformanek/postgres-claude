@@ -71,3 +71,7 @@ checks consult that map instead of the tuple. (`:40-53`) [from-comment]
 - The `two_phase_at` LSN was added to delay decoding of 2PC PREPAREs
   until catalogs caught up. Exact semantics in failover-slot edge cases
   not verified here. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/snapshot-lifecycle.md](../../../../../data-structures/snapshot-lifecycle.md)

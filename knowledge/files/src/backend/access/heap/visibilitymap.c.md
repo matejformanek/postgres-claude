@@ -53,3 +53,7 @@ None defined here; the bit constants `VISIBILITYMAP_ALL_VISIBLE = 0x01` / `VISIB
 
 ## Confidence tag tally
 `[verified-by-code]=8 [from-comment]=5 [from-readme]=0 [inferred]=1 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

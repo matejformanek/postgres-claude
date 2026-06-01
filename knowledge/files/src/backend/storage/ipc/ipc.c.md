@@ -97,3 +97,7 @@ Debug check that no shmem-exit callbacks were registered prematurely
 ## Open questions
 
 None — this file is small and self-contained.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

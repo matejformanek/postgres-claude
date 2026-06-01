@@ -154,3 +154,7 @@ Used by CREATE INDEX CONCURRENTLY and similar to enumerate `VirtualTransactionId
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/lock.c | deep (selected functions + structures) | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/lock.c.md |
 | source/src/include/storage/lock.h | full-read | 2026-06-01 | ef6a95c | (this doc + lock.h.md) |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

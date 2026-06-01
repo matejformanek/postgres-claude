@@ -100,3 +100,7 @@ record.
 2. **`max_standby_streaming_delay` measurement** — is it from "WAL
    record was received" or "replay started"? Not chased.
    `[unverified]`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

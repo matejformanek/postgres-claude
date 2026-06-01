@@ -26,3 +26,7 @@ why `find_lateral_references` must run before it (it can create PHIs).
 [from-comment in initsplan.c:1090-1092]
 
 Tag tally: `[verified-by-code]` ×3, `[from-comment]` ×1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

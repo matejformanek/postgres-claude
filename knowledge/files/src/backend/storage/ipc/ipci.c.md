@@ -104,3 +104,7 @@ LogicalDecodingCtl, DataChecksums, Aio. `[verified-by-code]`.
 - `knowledge/architecture/process-model.md` §"What they share" — list
   of major shmem residents.
 - `knowledge/files/src/backend/storage/ipc/shmem.c.md`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

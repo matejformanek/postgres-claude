@@ -57,3 +57,7 @@ break invariants other modules rely on.
 
 ## 5. Tags
 `[verified-by-code]` ×4, `[from-comment]` ×11
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

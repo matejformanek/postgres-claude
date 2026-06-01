@@ -68,3 +68,7 @@ See "WAL record structs" above. Notable shapes:
 
 ## Confidence tag tally
 `[verified-by-code]=13 [from-comment]=10 [from-readme]=0 [inferred]=1 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

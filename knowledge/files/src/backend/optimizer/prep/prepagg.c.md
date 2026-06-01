@@ -37,3 +37,7 @@ startup duplicates some of these lookups. Acknowledged by a comment as
 
 ## Tags
 `[verified-by-code]` ×1, `[from-comment]` ×6
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
