@@ -53,3 +53,9 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# Reverse symlink to upstream postgresql clone — never commit
+source
+
+# Reverse symlink to the mutable dev clone — also never commit
+dev
