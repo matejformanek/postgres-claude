@@ -67,3 +67,7 @@
 
 - The XXX at nbtree.c:1310-1312 ("now that new pages are locked with RBM_ZERO_AND_LOCK, I don't think the use of the extension lock is still required"). Whether the extension lock can in fact be removed is unverified. [unverified]
 - `btestimateparallelscan` sizing for skip arrays (the second flex tail) depends on `BTArrayKeyInfo` totals computed in `_bt_preprocess_keys`; this code path was not traced end-to-end. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

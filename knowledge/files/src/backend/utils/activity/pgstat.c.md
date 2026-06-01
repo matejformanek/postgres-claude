@@ -115,3 +115,7 @@ Each `PgStat_KindInfo`:
 ## Tag tally
 
 `[verified-by-code]` 4 / `[from-comment]` 14
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

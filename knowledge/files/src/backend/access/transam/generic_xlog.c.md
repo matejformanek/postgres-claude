@@ -119,3 +119,7 @@ For `wal_consistency_checking`: masks volatile parts of the page
 - `[from-comment]`: 3
 - `[from-README]`: 1
 - `[unverified]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

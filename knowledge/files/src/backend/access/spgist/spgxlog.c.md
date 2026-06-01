@@ -61,3 +61,7 @@ If the primary moved the inner tuple to a new inner page (because the extended-s
 ## Open questions
 
 - Whether the absence of conflict emission on `VACUUM_LEAF`/`VACUUM_ROOT` is fully correct when a TID being removed in the leaf is one a standby query had cached. The general PG invariant (heap pruning published the conflict) should cover it, but is not asserted in code. [inferred]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

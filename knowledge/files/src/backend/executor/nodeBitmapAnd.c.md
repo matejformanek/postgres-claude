@@ -23,3 +23,8 @@ heap scan. [from-comment]
 
 - [verified-by-code] tbm_intersect loop.
 - [from-comment] interface comment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

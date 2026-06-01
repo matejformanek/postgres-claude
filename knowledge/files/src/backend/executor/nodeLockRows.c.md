@@ -36,3 +36,8 @@ If the rowmark's relation is foreign, calls `RefetchForeignRow` /
 
 - [verified-by-code] table_tuple_lock contract + EPQ trigger.
 - [from-README] EvalPlanQual integration narrative.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

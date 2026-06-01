@@ -129,3 +129,7 @@ or page is new. Holds interrupts across the compute.
 
 `[verified-by-code]` 6 / `[from-comment]` 5 / `[from-README]` 1 /
 `[unverified]` 0.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

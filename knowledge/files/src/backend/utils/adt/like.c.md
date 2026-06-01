@@ -114,3 +114,7 @@ O(n*m) in worst case but typically much better.
 
 - `[verified-by-code]` × ~5
 - `[from-comment]` × ~3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

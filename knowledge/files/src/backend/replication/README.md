@@ -42,3 +42,7 @@ loaded as a dynamic module so the main server binary stays libpq-free), and
 - walreceiver impl: `src/backend/replication/walreceiver.c`
 - walsender impl: `src/backend/replication/walsender.c`
 - shared-mem ctl: `WalRcvData` and `WalSndCtl` (`walsender_private.h`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

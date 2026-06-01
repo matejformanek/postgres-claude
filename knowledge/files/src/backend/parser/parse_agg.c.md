@@ -45,3 +45,7 @@ spec compliance matrix.
   the planner knows.
 - `Query.groupingSets` is non-NIL only when the user wrote GROUPING
   SETS/ROLLUP/CUBE; otherwise `Query.groupClause` carries plain GROUP BY.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

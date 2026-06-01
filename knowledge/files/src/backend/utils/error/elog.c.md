@@ -106,3 +106,7 @@ This ordering is asymmetric: a FATAL inside a CRIT becomes PANIC; an ERROR with 
 ## Confidence tag tally
 
 `[verified-by-code]=18 [from-comment]=11 [from-readme]=0 [inferred]=0 [unverified]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -25,3 +25,7 @@ Bounds the inner-tuple prefix to keep tuples on-page. Long common prefixes get b
 - `spg_text_inner_consistent`, `spg_text_leaf_consistent` — strategy-specific (`=`, `<`, `<=`, `>=`, `>`, prefix-match).
 
 Tags: [from-comment]; [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

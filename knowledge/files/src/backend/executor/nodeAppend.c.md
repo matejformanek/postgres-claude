@@ -53,3 +53,8 @@ it); some pruning can shed children entirely.
 - [verified-by-code] coordination structures + variants.
 - [from-comment] interface routines at top.
 - [from-README] async-exec protocol.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

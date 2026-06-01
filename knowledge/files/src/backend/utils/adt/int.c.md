@@ -113,3 +113,7 @@ function for `generate_series(int4, int4)`.
 - `[from-comment]` × 1
 - `[inferred]` × 2
 - `[unverified]` × 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -12,3 +12,7 @@ color, follow all matching NFA arcs, mark all reachable NFA states,
 and intern the resulting bitmap as a new sset (or reuse if cached).
 The cache is a hash table sized by `re->nstates`; on full cache, the
 oldest unused sset is recycled. [from-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

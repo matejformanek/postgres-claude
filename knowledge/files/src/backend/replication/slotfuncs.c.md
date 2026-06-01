@@ -30,3 +30,7 @@ exposes the slot-sync skip-reason enum mapping (`SlotSyncSkipReasonNames`,
 - All real work happens in `slot.c`. This file is a thin permissions /
   argument-parsing layer.
 - `pg_sync_replication_slots()` delegates to `slotsync.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -84,3 +84,7 @@ call sites is a real readability cost. `[from-README:99-100]`
 - Related: `value.c` for value-wrapper makers (`makeInteger`,
   `makeString`, ...).
 - Most call sites: `src/backend/parser/`, `src/backend/optimizer/`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

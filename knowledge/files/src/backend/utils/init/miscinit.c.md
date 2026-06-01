@@ -81,3 +81,7 @@ Also houses `ProcessingMode`, `MyBackendType` storage, `IgnoreSystemIndexes`, an
 ## Confidence tag tally
 
 `[verified-by-code]=11 [from-comment]=8 [from-readme]=0 [inferred]=0 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

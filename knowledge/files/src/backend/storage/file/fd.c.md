@@ -164,3 +164,7 @@ callback. `[verified-by-code]` (`fd.c:1284`)
 ## Tag tally
 
 `[verified-by-code]` 8 / `[from-comment]` 7 / `[unverified]` 2.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

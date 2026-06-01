@@ -54,3 +54,7 @@ Comments at lines 117 ("XXX no FSM updates here") and 201 explicitly note that F
 
 - `XLOG_BRIN_INSERT` and `_UPDATE` do not emit a recovery conflict, even though they may delete the old summary. This is correct because BRIN summaries are lossy and not visibility-bearing — but the absence is not justified by a comment. [unverified]
 - Whether `brin_xlog_revmap_extend`'s assertion `metadata->lastRevmapPage == xlrec->targetBlk - 1` is safe under partial WAL replay (e.g. after a crash mid-recovery) is not analyzed. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

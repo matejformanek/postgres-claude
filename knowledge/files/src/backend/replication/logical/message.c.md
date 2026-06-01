@@ -29,3 +29,7 @@ flag, prefix_size (incl trailing NUL), message_size, then prefix||message.
 
 `logicalmsg_decode` (declared in `decode.h`) — calls into reorderbuffer
 either immediately (non-transactional) or via the txn's change queue.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

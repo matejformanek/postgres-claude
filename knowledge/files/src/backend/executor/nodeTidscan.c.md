@@ -27,3 +27,8 @@ reads. Caller must not assume rows arrive in any particular logical order.
 
 - [verified-by-code] qunique deduplication usage.
 - [from-comment] INTERFACE list.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

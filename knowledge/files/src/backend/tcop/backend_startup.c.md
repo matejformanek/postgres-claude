@@ -85,3 +85,7 @@ target backend's main process never sees the cancel-channel socket.
 
 - `tcop/backend_startup.h` — `BackendStartupData`, `ConnectionTiming`,
   `BackendMain`, `BackendInitialize` prototypes (some via tcopprot.h).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

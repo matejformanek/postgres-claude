@@ -47,3 +47,7 @@ right edge of a level (lines 36–55).
 ## Tag tally
 
 `[from-comment]` 3 / `[from-README]` 2 / `[verified-by-code]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

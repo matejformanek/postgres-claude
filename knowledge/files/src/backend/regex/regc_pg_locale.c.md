@@ -15,3 +15,7 @@ locale — to avoid per-character collation calls in tight loops.
 regexec) chooses the `pg_locale_t` for this match. The README calls
 out the static-state coupling as design debt to be eliminated.
 [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

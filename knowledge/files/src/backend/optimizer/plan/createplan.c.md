@@ -194,3 +194,7 @@ at 6328, `materialize_finished_plan` at 6509) are public.
 
 ## 14. Tags
 `[verified-by-code]` ×17, `[from-comment]` ×6
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

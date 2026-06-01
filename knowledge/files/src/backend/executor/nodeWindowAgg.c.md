@@ -56,3 +56,8 @@ from transitions, again via inverse-transition when available.
 - [from-comment] purpose statement + plain-agg-as-window note.
 - [inferred] inverse-transition is what makes sliding-window aggregates fast
   (consistent with code; the alternative is re-aggregating per output row).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

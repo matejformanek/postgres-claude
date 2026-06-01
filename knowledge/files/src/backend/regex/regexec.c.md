@@ -72,3 +72,7 @@ arcs see the right collation. The collation is captured in the
 ## Tag tally
 
 `[verified-by-code]` 2 / `[from-README]` 4 / `[from-comment]` 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

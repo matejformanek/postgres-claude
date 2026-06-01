@@ -34,3 +34,8 @@ partial subplans instead.
 
 - [verified-by-code] heap interface usage.
 - [from-comment] purpose statement.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

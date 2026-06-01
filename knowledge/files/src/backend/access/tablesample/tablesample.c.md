@@ -29,3 +29,7 @@ One function: `GetTsmRoutine(tsmhandler)`. Calls the tablesample method's handle
 
 ## Confidence tag tally
 `[verified-by-code]=2 [from-comment]=1 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

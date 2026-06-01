@@ -48,3 +48,7 @@ The TOAST storage layer: compress, save and delete out-of-line values in a TOAST
 
 ## Confidence tag tally
 `[verified-by-code]=10 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

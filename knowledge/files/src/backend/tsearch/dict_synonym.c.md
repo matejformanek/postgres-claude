@@ -9,3 +9,7 @@ two-column file (`old new`). Loaded once at dict init into a sorted
 array, then bsearch on lexize. Supports asterisk (`*`) suffix marking
 the synonym as having phrase variants; `CaseSensitive = true|false`
 option. `dsynonym_init` / `dsynonym_lexize`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

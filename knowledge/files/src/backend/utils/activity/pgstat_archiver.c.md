@@ -13,3 +13,7 @@ Counters incremented by the archiver process (`postmaster/pgarch.c`):
 
 Kind callbacks: `init_shmem_cb`, `reset_all_cb`, `snapshot_cb`. The
 shared entry sits at `PgStat_ShmemControl.archiver`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

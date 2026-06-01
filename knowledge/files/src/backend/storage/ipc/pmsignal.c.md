@@ -98,4 +98,5 @@ shut down"). [from-comment] `:62-65`.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

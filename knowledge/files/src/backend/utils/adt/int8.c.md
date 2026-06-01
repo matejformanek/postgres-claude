@@ -92,3 +92,7 @@ hot paths leaner.
 - `[verified-by-code]` × 1
 - `[from-comment]` × 1
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

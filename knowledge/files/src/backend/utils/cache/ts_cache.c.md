@@ -57,3 +57,8 @@ Three parallel caches for tsearch objects: TS parsers, TS dictionaries, TS confi
 ## Confidence tag tally
 
 verified-by-code: 4 — from-comment: 5 — from-readme: 0 — inferred: 0 — unverified: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

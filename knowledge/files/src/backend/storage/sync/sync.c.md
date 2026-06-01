@@ -138,3 +138,7 @@ Periodically re-absorbs in case backends are filling the queue.
 ## Tag tally
 
 `[verified-by-code]` 4 / `[from-comment]` 6 / `[unverified]` 2.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -31,3 +31,7 @@ A `bbsink` chain is essentially a Unix pipeline. The top of the chain
 ## Tag tally
 
 `[verified-by-code]` 1 / `[from-comment]` 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

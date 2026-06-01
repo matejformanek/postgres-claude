@@ -12,3 +12,7 @@ override `begin_archive` (init z_stream + write gz header), `archive_contents`
 + deflateEnd). Whole-file enabled only when built `--with-zlib`
 (`#ifdef HAVE_LIBZ`); otherwise `bbsink_gzip_new` ereports
 `"gzip compression is not supported by this build"`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

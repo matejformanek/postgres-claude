@@ -51,3 +51,8 @@ apply the INSERT/UPDATE/DELETE. [from-comment] `:3-9`
 
 - [verified-by-code] entry points + signatures.
 - [from-comment] purpose statement.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

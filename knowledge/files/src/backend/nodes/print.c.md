@@ -42,3 +42,7 @@ structures that don't have great `_OUT` forms.
 - Companion underlying machinery: `outfuncs.c` (`nodeToStringWithLocations`).
 - Heavy users: planner debug builds (`debug_print_plan`,
   `debug_print_parse`, `debug_print_rewritten` GUCs).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

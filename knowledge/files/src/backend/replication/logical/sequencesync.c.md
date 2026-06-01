@@ -40,3 +40,7 @@ INSUFFICIENT_PERM, SKIPPED.
 Top-of-file XXX: the launcher doesn't have a DB connection so can't
 query `pg_subscription_rel`. Hence the apply worker triggers spawning.
 (`:46-49`) [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

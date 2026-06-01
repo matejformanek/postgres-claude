@@ -10,3 +10,7 @@ anchors — none of the heavyweight features of `backend/regex`. Reason
 to exist: affix rules apply per-word during ts_lexize, where the full
 regex compile cost would dominate. Functions: `RS_compile`,
 `RS_execute`, `RS_free`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

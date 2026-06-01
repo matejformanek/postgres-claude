@@ -44,3 +44,7 @@ Symmetric story for DROP: the queued entry has `atCommit=true`, and commit proce
 ## Confidence tag tally
 
 `[verified-by-code]=8 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -59,3 +59,7 @@ The top-of-file comment is the authoritative description (repack.c:7-22): [from-
 ## Confidence tag tally
 
 `[verified-by-code]=8 [from-comment]=2 [unverified]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -60,3 +60,7 @@ The only public symbol is `base_yyparse(yyscanner)`, called by
 - `gramparse.h` — `base_yy_extra_type`, `core_yyalloc`, etc., shared
   between scanner and parser.
 - `knowledge/idioms/parser-pipeline.md` — for the design framing.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -22,3 +22,7 @@ host relation's relcache entry so other backends pick up the change.
 - Removes `pg_depend` entries.
 - Does NOT undo the relkind change made by `DefineQueryRewrite` — dropping
   a view's `_RETURN` rule is rejected separately by view-drop code.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

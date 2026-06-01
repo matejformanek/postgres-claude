@@ -36,3 +36,7 @@ condition, and a list of `MergeAction` nodes — one per `WHEN` branch.
   partitioning logic, but the rewriter (in `rewriteHandler.c`) has
   special handling for views — updatable views via MERGE were added in
   PG 17.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

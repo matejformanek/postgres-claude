@@ -49,3 +49,7 @@ ambiguous production. The filter is the third option.
 - `analyze.c` — first consumer of `raw_parser`'s output, via
   `parse_analyze_*`.
 - `gramparse.h` — declarations shared between flex and bison sides.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

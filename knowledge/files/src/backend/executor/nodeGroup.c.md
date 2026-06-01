@@ -26,3 +26,8 @@ row and start a new group.
 
 - [verified-by-code] equality ExprState use.
 - [from-comment] interface comment at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

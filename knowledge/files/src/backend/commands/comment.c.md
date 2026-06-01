@@ -21,3 +21,7 @@ A comment on an object lives in pg_description keyed by (classoid, objoid, objsu
 ## Confidence tag tally
 
 `[verified-by-code]=3 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

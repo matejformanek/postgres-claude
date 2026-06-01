@@ -27,3 +27,8 @@ restricted to the (mintid, maxtid) block range.
 
 - [verified-by-code] IsCTIDVar test + table_relation_scan_tid_range usage.
 - [from-comment] interface comment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

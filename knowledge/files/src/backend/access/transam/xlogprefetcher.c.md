@@ -129,3 +129,7 @@ Exposes counters: `prefetch`, `hit`, `skip_init`, `skip_new`,
 - `[verified-by-code]`: 17
 - `[from-comment]`: 1
 - `[unverified]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

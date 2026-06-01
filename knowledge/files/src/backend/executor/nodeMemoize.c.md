@@ -56,3 +56,8 @@ diagnoses bad planning choices.
 
 - [verified-by-code] LRU mechanism, eq-ExprState integration with execExpr.c.
 - [from-comment] file header explanation of semi-join early-exit.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

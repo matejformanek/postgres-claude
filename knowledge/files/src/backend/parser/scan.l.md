@@ -40,3 +40,7 @@ when `IDENT` matches).
   `pg_strtoint*`-friendly trim helpers).
 - `kwlookup.c` (in `src/common/`) — keyword table binary search.
 - `scanner.h` — public scanner API.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -38,3 +38,7 @@ The lowest-level "open any relation by OID" helpers, shared by tables, indexes, 
 
 ## Confidence tag tally
 `[verified-by-code]=4 [from-comment]=3 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

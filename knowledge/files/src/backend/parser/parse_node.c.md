@@ -54,3 +54,7 @@ A scratchpad threaded through every helper in `parser/`:
   `Var.varlevelsup`).
 - Closing the target relation happens in `free_parsestate`; forgetting
   to free can leak a relcache pin.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

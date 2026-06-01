@@ -26,3 +26,8 @@ than Unique.
 
 - [verified-by-code] equality probe + interface.
 - [from-comment] NOTES section at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

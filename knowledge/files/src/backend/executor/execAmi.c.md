@@ -46,3 +46,8 @@ on `nodeTag(node)` calling the right `ExecReScan<NodeType>` etc.
 
 - [verified-by-code] entry-point line numbers and dispatch structure.
 - [inferred] role of ExecMaterializesOutput in the planner's Material decisions.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

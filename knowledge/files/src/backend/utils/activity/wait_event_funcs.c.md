@@ -12,3 +12,7 @@ this file `#include`s inline.
 
 Custom (extension) wait events under the `Extension` class are
 appended dynamically at the end of the iteration. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

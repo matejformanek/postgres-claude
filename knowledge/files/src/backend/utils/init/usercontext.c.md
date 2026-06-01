@@ -44,3 +44,7 @@ Two-function helper for "do something briefly as another user". Used by VACUUM/A
 ## Confidence tag tally
 
 `[verified-by-code]=4 [from-comment]=3 [from-readme]=0 [inferred]=1 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

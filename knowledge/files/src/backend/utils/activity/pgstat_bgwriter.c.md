@@ -10,3 +10,7 @@ fixed-amount stats. The bgwriter process flushes locally-accumulated
 `pgstat_report_bgwriter()`. Counters tracked: `buffers_clean`,
 `maxwritten_clean`, `buffers_alloc` (since PG17 some moved to
 `pg_stat_io`). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

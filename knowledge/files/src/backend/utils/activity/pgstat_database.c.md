@@ -37,3 +37,7 @@ db A can see counters for db B.
 
 `pgstat_database_flush_cb` merges `PgStat_StatDBEntry` pending → shared
 under the shared entry's LWLock, additively. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

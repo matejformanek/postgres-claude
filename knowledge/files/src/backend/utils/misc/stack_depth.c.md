@@ -19,3 +19,7 @@ recursion crashing the postmaster.
 - GUC check/assign hooks for `max_stack_depth` clamp against
   `getrlimit(RLIMIT_STACK)` minus a safety margin so the SIGSEGV from a
   real stack overflow never beats `check_stack_depth`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -96,3 +96,7 @@ tables are fixed-directory at creation. [from-comment] (`dynahash.c:3-29`)
 ## Tag tally
 
 `[verified-by-code]` 4 / `[from-comment]` 10
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

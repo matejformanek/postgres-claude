@@ -318,3 +318,7 @@ records.
 - `[from-README]`: 0 (deferred to README doc)
 - `[inferred]`: 0
 - `[unverified]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

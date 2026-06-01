@@ -52,3 +52,7 @@ Unix vs. `fork()+exec()` on Windows / `EXEC_BACKEND`. Holds the
   `::StartChildProcess` (aux singletons), `::StartAutovacuumWorker`,
   `::StartBackgroundWorker`.
 - `proctypelist.h` (header) is the canonical registry of what types exist.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

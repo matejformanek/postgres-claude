@@ -10,3 +10,7 @@ Exports `ts_parse(parser_name, text)`, `ts_token_type(parser_name)`,
 function pointers via `pg_ts_parser`, calls them in sequence: `start
 → repeated getlexeme → end`, yielding (token_type, lexeme) tuples.
 [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

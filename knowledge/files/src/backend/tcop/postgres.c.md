@@ -136,3 +136,7 @@ recovery via the sigsetjmp landing.
 - Detailed walk of the bind+describe extended-query path (params/format
   codes) deferred to a future query-lifecycle doc.
 - Walsender variant signal setup (`WalSndSignals`) is in `replication/walsender.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

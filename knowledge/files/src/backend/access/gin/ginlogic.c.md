@@ -17,3 +17,7 @@ Bridge between **boolean** and **ternary** consistent functions exposed by GIN o
 A boolean consistent is enough for correctness, but a ternary one lets the scan engine prove "this item matches regardless of unknown keys" or "cannot possibly match" without fetching every key. This is the core optimization that makes GIN fast for FTS where most keys are sparse. [from-comment, ginlogic.c:20-25]
 
 Tags: [from-comment, ginlogic.c:1-30].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

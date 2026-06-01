@@ -56,3 +56,7 @@ The bigger-than-inline parts of the table-AM dispatch layer. Provides slot-callb
 
 ## Confidence tag tally
 `[verified-by-code]=9 [from-comment]=3 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -191,3 +191,7 @@ the Datum (pass-by-value) or the palloc'd buffer pointed to by `tuple`
 - `[verified-by-code]` × ~12
 - `[from-comment]` × ~6
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

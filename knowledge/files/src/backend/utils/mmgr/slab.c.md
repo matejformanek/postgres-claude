@@ -171,4 +171,5 @@ unused chunks there are.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

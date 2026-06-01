@@ -80,3 +80,7 @@ specific statement, for pg_stat_statements display.
 - Header: `source/src/include/nodes/queryjumble.h`
 - Top consumer: `contrib/pg_stat_statements/pg_stat_statements.c`
 - Generator: `gen_node_support.pl` emits the `_jumbleFoo` family.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

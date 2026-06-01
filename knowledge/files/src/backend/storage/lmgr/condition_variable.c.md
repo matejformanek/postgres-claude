@@ -110,3 +110,8 @@ Pop all entries into a local list under the mutex; set each latch outside.
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/condition_variable.c | full-read | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/condition_variable.c.md |
 | source/src/include/storage/condition_variable.h | not opened in detail | 2026-06-01 | ef6a95c | (this doc) |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

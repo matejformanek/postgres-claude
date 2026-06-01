@@ -45,3 +45,7 @@ ON EMPTY / ON ERROR behaviors resolved.
 - Errors during evaluation can be suppressed via the ON ERROR clause —
   the parser stores the policy; the executor (`executor/execJsonExpr.c`)
   enforces it.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -33,3 +33,7 @@ The dev-only `allow_in_place_tablespaces` GUC (PG 15+) creates a tablespace as a
 ## Confidence tag tally
 
 `[verified-by-code]=4 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

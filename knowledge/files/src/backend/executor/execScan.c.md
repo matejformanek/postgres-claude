@@ -40,3 +40,8 @@ scan/result slots via `ExecInitScanTupleSlot` and `ExecAssignScanProjectionInfo`
 
 - [verified-by-code] role of ExecScan + the access/recheck callback contract.
 - [from-comment] top-of-file purpose statement.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

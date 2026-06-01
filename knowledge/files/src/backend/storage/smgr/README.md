@@ -40,3 +40,7 @@ between higher-level relation access and the kernel filesystem.
 ## Tag tally
 
 `[from-README]` 9 / `[unverified]` 0.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

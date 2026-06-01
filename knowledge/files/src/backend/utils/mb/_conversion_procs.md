@@ -42,3 +42,7 @@ Edits should re-run the scripts, not hand-edit the generated files.
 - Conversion procs are bog-standard fmgr V1 functions of the shape
   `(integer, integer, cstring, internal, integer, boolean) → integer`
   returning the number of input bytes consumed.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

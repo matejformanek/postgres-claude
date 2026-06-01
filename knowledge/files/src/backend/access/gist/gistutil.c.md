@@ -22,3 +22,7 @@ Grab-bag of utilities: page init (`GISTInitBuffer`), `gistfillbuffer`, NSN/follo
 ## Tags
 
 [from-comment, gistutil.c:1-15]; behavior [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

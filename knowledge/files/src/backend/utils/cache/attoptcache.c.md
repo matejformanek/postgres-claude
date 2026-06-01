@@ -48,3 +48,8 @@ None of note — file is small and self-contained.
 ## Confidence tag tally
 
 verified-by-code: 4 — from-comment: 3 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

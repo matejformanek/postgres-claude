@@ -86,3 +86,7 @@ A `per-range` AllocSet (`perRangeCxt`) is reset each iteration to bound memory. 
 
 - Whether the `brin_can_do_samepage_update` window is closed correctly when *another* concurrent updater performs a cross-page update is asserted to be safe by the `brin_doupdate` re-check; the README does not formalize this. [unverified]
 - Parallel build determinism: when two workers produce overlapping summaries for the same range, the merge in `_brin_parallel_merge` must combine via the opclass `union`. The exact code path was scanned but not deeply traced. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -52,3 +52,7 @@ Final step: clear `H_BUCKET_BEING_SPLIT` on old, `H_BUCKET_BEING_POPULATED` on n
 - **Calls into:** `hashovfl.c` (overflow allocation), `hashutil.c` (`_hash_finish_split`), `hash_xlog.c` (WAL).
 
 Tags: [from-README, README:338-383]; [verified-by-code for `_hash_splitbucket` mechanics].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

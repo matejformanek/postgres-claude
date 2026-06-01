@@ -67,3 +67,7 @@ information_schema.sql             → create information_schema views
 ## Confidence tag tally
 
 `[verified-by-code]=2 [from-comment]=3 [inferred]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -25,3 +25,7 @@ Tiny set of scanner-support helpers used by both the backend lexer
 The actual escape handling for E'...' and U&'...' strings was moved long
 ago into `scan.l` and `parser.c` (`check_uescapechar`, `str_udeescape`).
 What remains here is the identifier-folding contract.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

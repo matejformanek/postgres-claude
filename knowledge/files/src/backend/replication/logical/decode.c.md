@@ -49,3 +49,7 @@ The whole module supports a `fast_forward` mode (set on
 `LogicalDecodingContext`) where decoding only advances LSN/xmin
 bookkeeping without invoking the output plugin — used by slot advance.
 [from-comment] (`:84-87`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

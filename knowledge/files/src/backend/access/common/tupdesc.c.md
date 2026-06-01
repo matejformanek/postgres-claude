@@ -53,3 +53,7 @@ Build, copy, compare, ref-count and free `TupleDesc` objects. A `TupleDesc` is t
 
 ## Confidence tag tally
 `[verified-by-code]=9 [from-comment]=3 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

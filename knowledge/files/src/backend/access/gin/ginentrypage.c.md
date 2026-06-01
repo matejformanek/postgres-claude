@@ -34,3 +34,7 @@ Entry-tree splits compute a split point that approximately balances bytes. `entr
 All driven by `ginbtree.c`; this file's logic runs inside CRIT.
 
 Tags: [from-comment, ginentrypage.c:1-50]; structure cross-confirmed against README §"Index structure".
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

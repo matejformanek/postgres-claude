@@ -21,3 +21,8 @@ trivial heap scan via BitmapHeapScan above.
 
 - [verified-by-code] tbm_union loop.
 - [from-comment] interface comment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

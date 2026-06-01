@@ -14,3 +14,7 @@ relation for this user right now?":
   the `relrowsecurity`/`relforcerowsecurity` columns of `pg_class`.
 - `row_security_active(text|oid)` SQL functions: tells policies (and
   user code) whether RLS is currently engaged on a relation. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

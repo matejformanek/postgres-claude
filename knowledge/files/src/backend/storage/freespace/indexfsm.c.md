@@ -35,3 +35,7 @@ vs free).
 ## Tag tally
 
 `[from-comment]` 1 / `[verified-by-code]` 2.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

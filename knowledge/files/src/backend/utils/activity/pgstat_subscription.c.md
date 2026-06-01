@@ -12,3 +12,7 @@ reasons added in PG18). Updated by subscription apply workers
 `pgstat_report_subscription_error` and `pgstat_report_subscription_conflict`.
 
 `accessed_across_databases=true`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

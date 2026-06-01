@@ -73,3 +73,7 @@ Inside `PortalRun`:
   PortalDrop).
 - Snapshots: `utils/time/snapmgr.c`.
 - Header: `tcop/pquery.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

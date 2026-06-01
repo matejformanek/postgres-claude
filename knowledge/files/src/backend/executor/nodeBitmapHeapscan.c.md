@@ -39,3 +39,8 @@ across workers via DSA — see PG 12+ parallel-aware BitmapIndexScan).
 
 - [verified-by-code] iterator model + lossy path.
 - [from-comment] INTERFACE list.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

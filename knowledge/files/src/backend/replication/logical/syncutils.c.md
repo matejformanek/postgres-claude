@@ -22,3 +22,7 @@ under concurrent invalidations.
 Commits any open xact, flushes WAL, logs the per-type "has finished"
 message (`am_sequencesync_worker()` vs `am_tablesync_worker()` branch),
 resets `last_seqsync_start_time` for the launcher, exits. (`:49-...`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

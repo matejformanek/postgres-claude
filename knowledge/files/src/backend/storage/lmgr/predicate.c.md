@@ -164,4 +164,5 @@ Releases the per-sxact local hash; moves the SERIALIZABLEXACT to the finished li
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

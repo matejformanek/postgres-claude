@@ -9,3 +9,7 @@ used during bracket-expression parsing. A cvec holds three arrays:
 single chars, char ranges `[lo..hi]`, and named character-class
 references. Built incrementally as `regc_lex.c` walks `[...]` and
 then fed to `subcolor` to add to the colormap. [from-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

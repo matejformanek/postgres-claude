@@ -41,3 +41,8 @@ needs no coordination.
 
 - [verified-by-code] visibility-map check + fallback path.
 - [from-comment] INTERFACE list at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

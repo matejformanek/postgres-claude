@@ -28,3 +28,7 @@ SQL surface for GUCs: `SET`/`SET LOCAL`/`SET SESSION`, `RESET`, `SHOW`,
 ## Tag tally
 
 `[from-comment]` 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

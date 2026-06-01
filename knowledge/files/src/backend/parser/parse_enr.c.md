@@ -29,3 +29,7 @@ in `src/backend/utils/misc/queryenvironment.c`.
   pstate (e.g. when re-running parse analysis on a stored rule action),
   trigger transition tables become invisible and parse analysis errors
   with "relation does not exist".
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

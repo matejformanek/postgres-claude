@@ -46,3 +46,7 @@ Stored in metapage. Updated in-memory by `SpGistNewBuffer` results; flushed to m
 - **Calls into:** `storage/bufmgr.c`, `storage/indexfsm.c`, fmgr for opclass procs.
 
 Tags: [from-comment, spgutils.c:1-13]; [from-README, README:234-244, 376-383].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

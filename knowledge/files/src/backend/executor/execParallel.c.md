@@ -90,3 +90,8 @@ DSM area.
 - [from-comment] file header; README.parallel referenced for protocol.
 - [inferred] the "do not launch until Gather pulls first row" detail
   (consistent with code, but worth a re-read of nodeGather to confirm timing).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

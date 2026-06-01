@@ -75,3 +75,7 @@ FROM` on rows.
 - Many JSON transformers (`transformJsonFuncExpr` family) are recent (PG 15+)
   and share `transformJsonPassingArgs` `:96` and `transformJsonBehavior`
   `:99` helpers.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

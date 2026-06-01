@@ -21,3 +21,7 @@ via walsender's `BASE_BACKUP` command (`walsender.c:2217 → SendBaseBackup`).
   block-tracking infra (uses summarizer WAL data) to ship only changed
   blocks. Largest of the bunch and a candidate for its own deep read in
   the wal-summarizer pass.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

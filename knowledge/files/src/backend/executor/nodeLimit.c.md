@@ -44,3 +44,8 @@ workers use it to stop fetching early.
 
 - [verified-by-code] state machine constants + WITH TIES handling.
 - [from-comment] interface comment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

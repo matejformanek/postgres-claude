@@ -56,3 +56,7 @@ columns (`readBoolCols`, `readIntCols`, `readOidCols`,
 - Generator: `source/src/backend/nodes/gen_node_support.pl`
 - Companion: `outfuncs.c`.
 - Lexer / dispatcher: `source/src/backend/nodes/read.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

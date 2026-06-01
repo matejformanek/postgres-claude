@@ -63,3 +63,4 @@ None defined here; consumes structs from `heapam_xlog.h`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

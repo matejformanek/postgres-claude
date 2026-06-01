@@ -156,3 +156,7 @@ process uses different callbacks in `xlogrecovery.c`.
 - `[from-comment]`: 1
 - `[from-README]`: 1
 - `[unverified]`: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

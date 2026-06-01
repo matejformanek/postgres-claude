@@ -92,3 +92,7 @@ FKs are stored as `pg_constraint` rows with a paired trigger pair (one on each s
 ## Confidence tag tally
 
 `[verified-by-code]=10 [from-comment]=2 [unverified]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

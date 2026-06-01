@@ -46,3 +46,7 @@ different or odd. No locks involved. [from-comment]
   `pgstat_clip_activity` to UTF-validate (or replace with `?`).
 - After backend exit, slot is cleared by atexit hook
   `pgstat_beshutdown_hook`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

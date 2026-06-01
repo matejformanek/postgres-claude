@@ -43,3 +43,7 @@ no unique IDs needed. [from-comment] `:14-17`
 The actual PID and ACTIVE/ASSIGNED/etc. state lives in a shmem array
 managed by `pmsignal.c` — `pmchild.c` is the postmaster-private view.
 [from-comment] `:18-21`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

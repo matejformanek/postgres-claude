@@ -17,3 +17,7 @@ many "Unicode ↔ legacy encoding" mapping tables that ship with PG:
 - `pg_verify_mbstr_len` plumbing.
 
 All these procs are SQL-callable via `pg_conversion` rows. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -19,3 +19,7 @@ whole compound and its parts so the dictionary chain can choose.
 
 Exports: `prsd_start`, `prsd_nexttoken`, `prsd_end`, `prsd_lextype`
 (registered as `pg_ts_parser` row "default"). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

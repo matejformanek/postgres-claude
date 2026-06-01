@@ -51,3 +51,8 @@ for workers to exit, accumulate their BufferUsage/WalUsage/instr.
 - [verified-by-code] funnel and waitset structure.
 - [from-comment] purpose statement + single-copy.
 - [inferred] parallel_leader_participation GUC link (consistent with code).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

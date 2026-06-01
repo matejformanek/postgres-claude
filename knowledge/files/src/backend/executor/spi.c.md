@@ -185,3 +185,8 @@ nested SPI use).
 - [from-comment] the four-way snapshot policy at `:2435-2454`, the
   "horrible API choice" admission at `:39-44`, atomic-vs-non-atomic
   context choice at `:149-160`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

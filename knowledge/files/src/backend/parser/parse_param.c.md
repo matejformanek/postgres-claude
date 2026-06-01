@@ -38,3 +38,7 @@ producing a `Param` node with the resolved type.
 
 The same hook surface is what PL/pgSQL uses (with a different
 implementation) to resolve `$N`-style references to PL/pgSQL variables.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

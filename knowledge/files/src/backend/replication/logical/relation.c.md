@@ -41,3 +41,7 @@ Invalidation hook: relcache invalidations set `localrelvalid = false`.
 
 Used by `worker.c` (`apply_handle_*`), `tablesync.c` (during catchup),
 and `conflict.c` (to identify arbiter indexes).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

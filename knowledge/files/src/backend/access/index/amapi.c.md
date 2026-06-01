@@ -36,3 +36,7 @@ Index-AM-API plumbing: call an AM's handler function to fetch the `IndexAmRoutin
 
 ## Confidence tag tally
 `[verified-by-code]=6 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

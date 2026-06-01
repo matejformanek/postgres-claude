@@ -62,3 +62,7 @@ tablespaces streamed" while WAL is streaming.
 ## Tag tally
 
 `[verified-by-code]` 4 / `[from-comment]` 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

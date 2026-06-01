@@ -84,4 +84,5 @@ Sets `dynamic_shared_memory_type` (POSIX / SYSV / WINDOWS / MMAP).
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

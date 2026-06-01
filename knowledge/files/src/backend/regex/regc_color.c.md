@@ -11,3 +11,7 @@ low-codepoint range (fast inline) plus a hash table for hi codepoints.
 Each new bracket-expression or character class triggers `subcolor` to
 split colors as needed. Result: NFA arc count is bounded by
 distinguishable color classes, not by alphabet size. [from-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -18,3 +18,7 @@
 ## Confidence tag tally
 
 `[verified-by-code]=2 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

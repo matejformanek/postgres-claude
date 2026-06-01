@@ -64,3 +64,7 @@ concurrent syncs), `last_start_time` (restart throttle).
 - Race on promotion: `stopSignaled` documented as not reset because we
   don't support demotion. If demotion ever lands this becomes a hazard.
   [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -55,3 +55,7 @@ When a partitioned/inherited table is analysed, the parent's `pg_statistic` rows
 ## Confidence tag tally
 
 `[verified-by-code]=10 [from-comment]=3 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

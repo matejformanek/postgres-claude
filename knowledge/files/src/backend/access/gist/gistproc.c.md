@@ -31,3 +31,7 @@ For `box_ops`, `poly_ops`, `circle_ops`, `point_ops` — each gets its own `cons
 Time: O(n²) in entries-per-page (n ≤ a few hundred). Quality: good enough for low-dim R-tree; less good for high-dim, hence the alternative "double sorting" split in `gist_box_double_sorting_split` (more recent addition).
 
 Tags: [from-comment]; [verified-by-code for function-list mapping].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

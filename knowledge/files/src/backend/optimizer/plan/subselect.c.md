@@ -55,3 +55,7 @@ go through `subquery_planner` recursion in planner.c). [from-comment:6-8]
 
 ## 5. Tags
 `[verified-by-code]` ×4, `[from-comment]` ×10
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

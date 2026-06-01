@@ -35,3 +35,7 @@ The high-level entry-tree insert called by `gininsert.c`:
 Many sites; this is the file other GIN code includes via `gin_private.h`.
 
 Tags: [from-comment, ginutil.c:1-15]; AM vtable [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

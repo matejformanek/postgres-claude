@@ -17,3 +17,7 @@ Sampling primitives shared by ANALYZE and `TABLESAMPLE`:
 
 Used by ANALYZE (`commands/analyze.c`) and the four `tablesample`
 methods in `access/tablesample/`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

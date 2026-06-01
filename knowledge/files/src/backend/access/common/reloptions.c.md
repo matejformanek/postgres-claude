@@ -50,3 +50,7 @@ Core support for `pg_class.reloptions` and `pg_tablespace.spcoptions`: a typed-o
 
 ## Confidence tag tally
 `[verified-by-code]=8 [from-comment]=5 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

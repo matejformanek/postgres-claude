@@ -18,3 +18,8 @@ can hang RTE info on it; the subplan itself does all the work.
 
 - [verified-by-code] dispatch to subplanstate.
 - [from-comment] interface list at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

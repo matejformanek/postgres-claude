@@ -9,3 +9,7 @@ options; calls into `tsearch/dicts/spell.c` (which actually loads and
 indexes the Ispell/Hunspell rule files). Exports
 `dispell_init(internal)` and `dispell_lexize(internal,...)` —
 referenced via `pg_ts_template.tmplinit`/`tmpllexize`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -30,3 +30,7 @@ The opportunistic LP_DEAD cleanup analog. Removes items marked `LP_DEAD` by prev
 - LP_DEAD scans set bits without a content lock (hint), but `_hash_vacuum_one_page` requires exclusive lock to actually clear them.
 
 Tags: [from-README]; [verified-by-code at function structure].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

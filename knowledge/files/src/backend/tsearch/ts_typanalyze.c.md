@@ -16,3 +16,7 @@ increment, then periodically prune entries whose count has fallen
 below the current "bucket epoch". Final pass selects the top N
 lexemes (sized from `default_statistics_target`) for storage. This
 makes `ts_selfuncs.c` cheap and accurate. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

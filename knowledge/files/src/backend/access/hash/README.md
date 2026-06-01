@@ -62,3 +62,7 @@ Canonical narrative for **hash indexing** — Seltzer/Yigit "New Hashing Package
 1. **"Cleanup lock on primary bucket = right to reorganize"** — verified everywhere by `LockBufferForCleanup` calls in `hashpage.c::_hash_splitbucket`, `hash.c::hashbulkdelete`. [verified-by-code]
 2. **"Bucket lock order: lower first, metapage last"** — followed by every two-bucket path (split). [from-README, README:162-165; verified-by-code]
 3. **"hashm_firstfree may underestimate, never overestimate"** — see `hashovfl.c::_hash_freeovflpage` careful sequencing. [from-README, README:550-556]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

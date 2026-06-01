@@ -39,3 +39,7 @@ stretch that bound. The comment explicitly warns against it.
 
 - Calls into `xlog.c::XLogBackgroundFlush`.
 - Header: `postmaster/walwriter.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

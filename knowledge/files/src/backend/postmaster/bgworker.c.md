@@ -54,3 +54,7 @@ the postmaster's no-shmem-lock rule)
 - `postmaster/bgworker.h` — public API for extensions.
 - `postmaster/bgworker_internals.h` — `BackgroundWorkerSlot`,
   `RegisteredBgWorker`, internal helpers.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

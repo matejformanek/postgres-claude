@@ -158,3 +158,7 @@ is int64 microseconds since 2000-01-01.
 - `[from-comment]` × 3
 - `[inferred]` × 2
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -121,3 +121,7 @@ There is also `foreach_ptr`, `foreach_int`, `foreach_oid`,
 
 - Header: `source/src/include/nodes/pg_list.h`
 - Idiom: `knowledge/idioms/node-types-and-lists.md`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

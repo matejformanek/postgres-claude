@@ -11,3 +11,7 @@ char" arcs (single-color arcs whose color contains exactly one chr,
 with no alternative path out). Stops at the first branch/option point.
 Used by the planner to convert `col ~ '^foo'` (and similar) into
 `col >= 'foo' AND col < 'fop'` for B-tree index acceleration. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

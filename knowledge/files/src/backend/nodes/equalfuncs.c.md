@@ -59,3 +59,7 @@ no-op) — they're cosmetic display info, not semantically meaningful.
 
 - Generator: `source/src/backend/nodes/gen_node_support.pl`
 - Companions: `copyfuncs.c`, `outfuncs.c`, `readfuncs.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

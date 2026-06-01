@@ -118,3 +118,7 @@ five parallel switch-statements stacked end to end.
 - `set_opfuncid` is called from planner before plan finalization so
   the executor doesn't have to resolve operator → function lookup at
   exec time.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

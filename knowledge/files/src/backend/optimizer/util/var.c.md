@@ -27,3 +27,7 @@ module for the purpose of "contains variables" questions. [from-comment:6-9]
 
 ## Tag tally
 `[verified-by-code]` ×4, `[from-comment]` ×7
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

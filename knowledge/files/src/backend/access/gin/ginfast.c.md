@@ -31,3 +31,7 @@ The **fastupdate pending-list** mechanism: with `fastupdate=on`, new entries are
 - `XLOG_GIN_DELETE_LISTPAGE` — drop N head listpages after merge.
 
 Tags: [from-comment, ginfast.c:1-15], [from-README, README:97-105, 501-508]; specifics [verified-by-code via record-emitter sites].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

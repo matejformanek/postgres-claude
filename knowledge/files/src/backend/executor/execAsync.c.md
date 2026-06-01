@@ -37,3 +37,8 @@ Only Append on the leader side, only ForeignScan on the child side, today.
 
 - [verified-by-code] all 6 functions in this file.
 - [from-README] role and protocol order.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

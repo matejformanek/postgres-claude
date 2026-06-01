@@ -13,3 +13,7 @@ N AppendRelInfos. Called by `add_other_rels_to_query` in initsplan.c.
   down onto a child, with Var translation via AppendRelInfo.
 
 Tag tally: `[verified-by-code]` ×2.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

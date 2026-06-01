@@ -22,3 +22,7 @@
 The validator walks the opfamily's procs and ops, checks signatures, warns on missing strategies.
 
 Tags: [from-comment].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

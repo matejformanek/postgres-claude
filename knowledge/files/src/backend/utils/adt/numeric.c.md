@@ -204,3 +204,7 @@ arithmetic kernels short-circuit on special inputs.
 - `[verified-by-code]` × ~12
 - `[from-comment]` × ~12
 - `[unverified]` × 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

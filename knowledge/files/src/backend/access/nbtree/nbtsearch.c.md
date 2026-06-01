@@ -43,3 +43,7 @@ Tree-descent code for nbtree: `_bt_search` (the recursive descent from root to l
 
 - The interaction between `_bt_moveright(forupdate=true)` finishing a split and a concurrent inserter that is *also* in `_bt_finish_split` is documented as safe (idempotent under buffer-lock serialization) but not formally argued in code. [unverified]
 - `_bt_compare` rules around backward scans with truncated -inf attributes are subtle (see comment at lines 437-446: "during backward scans `_bt_compare()` interprets omitted scan key attributes as == corresponding truncated -inf attributes instead"). The cited claim that VACUUM relies on this guarantee when re-finding a page undergoing deletion was not traced. [unverified — but it is the citation for `_bt_lock_subtree_parent`'s downlink lookup, see nbtpage.c]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -95,3 +95,8 @@ performs dispatch. [from-README] / `:206-215`
 - [verified-by-code] dispatch model, ExecJust pattern matching, hash specialization.
 - [from-comment] file header about JIT-shared helpers and direct-threading.
 - [from-README] expression-evaluation invariants.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

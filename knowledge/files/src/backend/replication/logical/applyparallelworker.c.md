@@ -66,3 +66,7 @@ that would be invisible to deadlock detection. See `pa_send_data` and
 Even when LA spills the rest of a txn to a file, it still must wait for
 PA to commit before LA itself commits the next txn (to preserve order).
 The transaction lock ensures that wait is visible.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -31,3 +31,7 @@ goes through this module.
 
 ## Tags
 `[verified-by-code]` ×2, `[from-comment]` ×4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

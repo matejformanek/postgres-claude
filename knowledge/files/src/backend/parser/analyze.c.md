@@ -104,3 +104,7 @@ Each lives further down in the file:
   `Caution` comment `:363-367` is load-bearing.
 - `analyze_requires_snapshot` is *not* a free function: callers must take
   the snapshot before calling `parse_analyze_*` if it returns true.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

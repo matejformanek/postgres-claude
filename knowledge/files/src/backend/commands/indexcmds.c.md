@@ -60,3 +60,7 @@ Partitioned indexes recurse: each leaf partition's index is reindexed independen
 ## Confidence tag tally
 
 `[verified-by-code]=6 [from-comment]=1 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

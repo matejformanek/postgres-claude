@@ -81,3 +81,8 @@ materialize/copyslot/get_heap_tuple/get_minimal_tuple/copy_heap_tuple/copy_minim
 
 - [verified-by-code] vtable declarations + slot_deform_heap_tuple decl.
 - [from-comment] header explanation of the per-attribute fast-path.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

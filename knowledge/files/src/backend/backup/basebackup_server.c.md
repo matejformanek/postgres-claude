@@ -27,3 +27,7 @@ replication connection. Used by `pg_basebackup --target=server:/path`.
   `WAIT_EVENT_BASEBACKUP_SYNC`), then close.
 - `cleanup` removes any partially-written file on backup failure (via
   the bbsink_state's tracking of the currently-open file). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -149,3 +149,8 @@ file is the runtime mechanism.
   narratives, both quoted from the top-of-file and the function-prologue
   comments.
 - [from-README] the conceptual framing for EvalPlanQual.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

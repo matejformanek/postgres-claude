@@ -218,3 +218,4 @@ behavior contract for these:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -82,3 +82,4 @@ The lazy ("concurrent", non-blocking) VACUUM driver for heap relations. Drives t
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

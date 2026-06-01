@@ -242,4 +242,5 @@ Method-table entries (declared in `memutils_internal.h`, wired in
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

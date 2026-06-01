@@ -27,3 +27,8 @@ NESTED / PLAN clauses to produce hierarchical row patterns.
 
 - [verified-by-code] TableFuncRoutine dispatch.
 - [from-comment] interface list at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

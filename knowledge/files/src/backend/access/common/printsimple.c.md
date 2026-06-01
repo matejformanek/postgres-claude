@@ -29,3 +29,7 @@ A no-catalog-access DestReceiver. Used by walsender / WAL receivers that aren't 
 
 ## Confidence tag tally
 `[verified-by-code]=3 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

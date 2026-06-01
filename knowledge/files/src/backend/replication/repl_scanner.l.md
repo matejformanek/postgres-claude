@@ -18,3 +18,7 @@ SQL execution path. (`walsender.c:2133`) [verified-by-code]
 
 `fprintf` is redefined to call `fprintf_to_ereport` (`:30-39`) so flex's
 fatal-error path doesn't actually `exit()` the backend.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

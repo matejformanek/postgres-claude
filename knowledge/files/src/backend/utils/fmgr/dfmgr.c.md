@@ -68,3 +68,7 @@ many extensions. Backs `LOAD`, `CREATE EXTENSION` C-language functions,
 ## Tag tally
 
 `[verified-by-code]` 1 / `[from-comment]` 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

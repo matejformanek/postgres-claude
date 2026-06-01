@@ -22,3 +22,7 @@ A view is **automatically updatable** if it's a simple SELECT from one table wit
 ## Confidence tag tally
 
 `[verified-by-code]=3 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

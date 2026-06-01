@@ -35,3 +35,7 @@ Tags: [from-comment, brin_minmax_multi.c:9-40], [verified-by-code for struct sha
 
 - The serialization format's exact bytes vs. cross-version stability not traced.
 - Whether the collapse is deterministic enough that two backends building the same range produce the same serialized output (matters for parallel build merge). [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

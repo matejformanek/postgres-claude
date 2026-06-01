@@ -120,3 +120,7 @@ crash-recovery need).
 - `[from-comment]`: 2
 - `[from-README]`: 2
 - `[unverified]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

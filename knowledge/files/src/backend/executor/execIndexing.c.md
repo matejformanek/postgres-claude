@@ -80,3 +80,8 @@ machinery.
 
 - [verified-by-code] entry points, IndexUniqueCheck values, waitMode enum.
 - [from-comment] speculative-insert protocol narrative (file header).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

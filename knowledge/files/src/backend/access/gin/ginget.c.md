@@ -32,3 +32,7 @@ The scan iteration engine: drives entry-tree lookups, posting-list/tree traversa
 - SSI: each entry leaf page or posting-tree-root scanned receives a `PredicateLockPage`; the metapage receives one as the fastupdate-interlock. [from-README, README:476-509]
 
 Tags: [from-comment, ginget.c:1-13]; [from-README] for locking pattern.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

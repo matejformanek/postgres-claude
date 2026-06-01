@@ -26,3 +26,7 @@ Low-level catalog access for pg_constraint — the catalog that stores CHECK, NO
 ## Confidence tag tally
 
 `[verified-by-code]=4 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

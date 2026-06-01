@@ -30,3 +30,7 @@ That's why it lives in `src/backend/parser/`, not in `src/include/parser/`.
 
 Includes `gram.h` (generated from `gram.y`) AFTER `scanner.h`, because
 `scanner.h` provides `YYLTYPE`. `:26-29`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

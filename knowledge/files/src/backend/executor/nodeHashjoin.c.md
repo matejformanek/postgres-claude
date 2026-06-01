@@ -78,3 +78,8 @@ unset. In parallel, this is done by one elected backend per batch (the
 - [verified-by-code] state-machine constants, the impl-inline trick, entry points.
 - [from-comment] the complete parallel barrier-phase narrative.
 - [from-comment] the deadlock-avoidance reasoning.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

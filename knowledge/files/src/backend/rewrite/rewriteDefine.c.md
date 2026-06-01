@@ -51,3 +51,7 @@ nodeToString'd). `RewriteRule` (the in-memory form, in
 - `rewriteSupport.c` — small shared helpers (`IsDefinedRewriteRule`,
   `SetRelationRuleStatus`).
 - `commands/view.c` — wrapper for view creation.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -90,3 +90,8 @@ that survive pruning.
 - [from-comment] lazy-partition-open rationale (file header + per-function).
 - [inferred] interpretation vs compilation of pruning steps (consistent with
   partprune.c code but not re-verified here).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

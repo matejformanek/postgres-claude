@@ -42,3 +42,7 @@ expressions (`ReplaceVarsFromTargetList`).
   `expression_tree_walker` idiom from `nodeFuncs.c`; bugs here often
   manifest as "node type T_X not supported" failures after a parsenode
   is added without updating the walkers.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

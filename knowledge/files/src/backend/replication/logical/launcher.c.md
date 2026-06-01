@@ -59,3 +59,7 @@ subscription change `ApplyLauncherWakeup` (`:1195`) sets the latch.
 ## SQL surface
 
 `pg_stat_get_subscription` (`:1625`) — SRF for `pg_stat_subscription`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

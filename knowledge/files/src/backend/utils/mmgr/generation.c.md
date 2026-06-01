@@ -145,4 +145,5 @@ by another free block we simply return the newly empty block to malloc.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

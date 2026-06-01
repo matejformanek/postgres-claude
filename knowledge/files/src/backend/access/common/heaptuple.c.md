@@ -54,3 +54,7 @@ Heap-tuple format helpers used by every table AM, not just heap/. Builds, deform
 
 ## Confidence tag tally
 `[verified-by-code]=8 [from-comment]=4 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

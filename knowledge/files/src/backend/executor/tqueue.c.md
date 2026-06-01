@@ -43,3 +43,8 @@ are projected away or carried as junk columns of the regular tuple body.
 
 - [verified-by-code] every function in the file.
 - [from-comment] purpose statement.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

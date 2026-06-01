@@ -73,3 +73,8 @@ MinimalTuple. [from-comment] `:3-15`
   isolation behavior.
 - [from-comment] file header purpose.
 - [inferred] rationale for separate input/table/hash slots.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

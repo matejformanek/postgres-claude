@@ -111,3 +111,7 @@ fallback loop, so the corrected value is not double-counted. [verified-by-code]
 ## Tag tally
 
 `[verified-by-code]` 4 / `[from-comment]` 5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

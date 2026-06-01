@@ -48,3 +48,8 @@ per-worker stats from the array filled in by `ExecParallelFinish`.
 
 - [verified-by-code] global names + the snapshot-diff pattern.
 - [inferred] use by explain.c (consistent with how EXPLAIN ANALYZE works).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

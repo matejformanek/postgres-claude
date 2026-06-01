@@ -13,3 +13,7 @@ per-joinrel intermediate results across calls. [from-comment:7-15]
 
 Used by core: GEQO itself registers under the name `"geqo"`.
 [verified-by-code, geqo_main.c:104-105]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

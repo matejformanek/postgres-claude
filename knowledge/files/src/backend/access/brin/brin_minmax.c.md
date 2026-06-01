@@ -24,3 +24,7 @@ Uses a small `MinmaxOpaque` per-attribute cache of fmgr lookups keyed by `(subty
 - Stored types are exact copies of the input type (procnum 1 returns `BrinOpcInfo` with `oi_typcache[i] = lookup_type_cache(...)`).
 
 Tags: [from-comment, brin_minmax.c:1-10], [verified-by-code, brin_minmax.c:22-30].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

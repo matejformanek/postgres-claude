@@ -17,3 +17,7 @@ dictionary mappings:
 
 Caches the configured dictionary list per token type per config in
 `tsearch_cache`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

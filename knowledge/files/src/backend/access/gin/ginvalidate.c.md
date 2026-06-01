@@ -26,3 +26,7 @@ The validator allows procs 4 OR 6 (must have at least one). Signature checks ver
 Returns true if valid; ereports WARNINGs but does not throw. The validation logic walks the opfamily's procs and ops, sanity-checks each, and warns on missing strategies. [verified-by-code: ereport(WARNING) throughout]
 
 Tags: [from-comment, ginvalidate.c:1-12].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

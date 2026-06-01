@@ -6,3 +6,7 @@
 toward better individuals using `Geqo_selection_bias`
 (range 1.5–2.0, default 2.0). The sorted pool means index 0 is the fittest.
 [verified-by-code]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

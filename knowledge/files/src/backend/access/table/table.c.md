@@ -34,3 +34,7 @@ Thin wrappers over `relation_open*` that ALSO enforce "this must be something yo
 
 ## Confidence tag tally
 `[verified-by-code]=4 [from-comment]=2 [from-readme]=0 [inferred]=1 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

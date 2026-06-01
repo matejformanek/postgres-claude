@@ -36,3 +36,7 @@ Choose the split point during a leaf or internal page split. The decision is a m
 
 - **Called by:** `nbtinsert.c:_bt_split` (line 1567 of that file).
 - **Calls into:** `nbtutils.c:_bt_keep_natts_fast` (scoring the truncation depth at each candidate).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

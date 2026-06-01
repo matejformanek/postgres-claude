@@ -111,3 +111,7 @@ Toggle `XLogRecoveryCtl->recoveryPauseState` via
 - `[verified-by-code]`: 22
 - `[from-comment]`: 1
 - `[unverified]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

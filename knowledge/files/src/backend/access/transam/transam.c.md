@@ -108,3 +108,7 @@ compute `latestXid` for `ProcArrayEndTransaction`.
 
 - `[verified-by-code]`: 14
 - `[from-comment]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -150,3 +150,8 @@ combine input rows" blocks propagation. [from-comment] `:962-967`
 - [from-comment] "one file to keep dispatch in sync" rationale; the
   worked Nest Loop walkthrough at `:25-72`; the ExecShutdownNode
   instrumentation comment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -25,3 +25,7 @@ For each cell: count + accumulated time (when `track_io_timing` on).
   bgwriter writing temp_relation in bulkread context) ERROR if updated.
 
 Flushed via `pgstat_io_flush_cb` (fixed-amount). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

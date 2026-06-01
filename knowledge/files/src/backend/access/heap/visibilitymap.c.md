@@ -57,3 +57,4 @@ None defined here; the bit constants `VISIBILITYMAP_ALL_VISIBLE = 0x01` / `VISIB
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

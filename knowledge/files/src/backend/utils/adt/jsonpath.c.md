@@ -131,3 +131,7 @@ result depends on variables/locale/timezone.
 - `[verified-by-code]` × 1
 - `[from-comment]` × 5
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

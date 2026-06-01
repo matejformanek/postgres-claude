@@ -121,3 +121,7 @@ Plus the standard NULL-fraction and tuple-count fields populated by
 
 - `[verified-by-code]` × ~5
 - `[from-comment]` × ~3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

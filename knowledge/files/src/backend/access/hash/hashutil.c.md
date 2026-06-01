@@ -16,3 +16,7 @@ Misc utilities: `_hash_checkqual` (does this index tuple match the scan conditio
 - `_hash_finish_split` — restart logic for crashed splits: scan new bucket (build hash table of TIDs), conditional cleanup-lock both, run split-completion. [from-README, README:292-300]
 
 Tags: [from-comment, hashutil.c:1-13]; [verified-by-code for `CALC_NEW_BUCKET`].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

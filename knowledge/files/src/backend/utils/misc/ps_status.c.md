@@ -17,3 +17,7 @@ API: `init_ps_display(activity)`, `set_ps_display(activity)`,
 `get_ps_display(&displen)`. `update_process_title` GUC gates whether
 `set_ps_display` actually writes — on by default. [from-comment]
 (`ps_status.c:1-9`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

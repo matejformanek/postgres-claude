@@ -19,3 +19,7 @@ sleep until enough wall time has elapsed to match the target rate.
 - The throttle sink usually sits **before** compression in the chain so
   the rate applies to raw bytes (the user usually wants to bound disk
   I/O, not network bandwidth). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

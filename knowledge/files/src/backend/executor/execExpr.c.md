@@ -116,3 +116,8 @@ decides so, swaps `state->evalfunc` for compiled native code.
 - [from-README] the executor README "Expression Initialization" section is the
   authoritative narrative; code matches it.
 - [inferred] performance rationale for the FETCHSOME-once design.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

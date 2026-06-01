@@ -51,3 +51,7 @@ The DestReceiver implementation that converts query result tuples into the Postg
 
 ## Confidence tag tally
 `[verified-by-code]=8 [from-comment]=3 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -11,3 +11,7 @@ rather than literal. Builds a trie over the sub-dict'd phrase tokens;
 lexize walks the trie to find the longest match starting at the
 current position. Critical for phrase tokenization in scientific
 texts (e.g., "supernova explosion" → "stellar collapse"). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

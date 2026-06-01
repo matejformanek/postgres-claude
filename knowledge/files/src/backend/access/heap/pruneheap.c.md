@@ -79,3 +79,4 @@ Implements heap page pruning and HOT-chain management: on-access pruning (`heap_
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

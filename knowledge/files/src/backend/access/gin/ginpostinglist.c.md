@@ -30,3 +30,7 @@ Small deltas (consecutive heap blocks) encode in 1-2 bytes; large jumps in 4-6 b
 Under `USE_ASSERT_CHECKING`, `CHECK_ENCODING_ROUNDTRIP` is defined and the compress→decode roundtrip is asserted to recover the original.
 
 Tags: [from-comment, ginpostinglist.c:1-44]; structure [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

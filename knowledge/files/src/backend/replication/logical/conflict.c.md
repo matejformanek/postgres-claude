@@ -41,3 +41,7 @@ enum. (`conflict.h:25-30`)
   `track_commit_timestamp=on` to be meaningful.
 - For `update_deleted`, the "retain dead tuples" mechanism in
   `worker.c`/`launcher.c` keeps the relevant dead heaps around.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

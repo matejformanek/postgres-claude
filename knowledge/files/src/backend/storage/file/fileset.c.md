@@ -51,3 +51,7 @@ Callers are responsible for explicit `FileSetDelete` /
 ## Tag tally
 
 `[from-comment]` 3 / `[verified-by-code]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

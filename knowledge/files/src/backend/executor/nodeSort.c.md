@@ -47,3 +47,8 @@ the top-k rows, dramatically reducing work for `LIMIT k`.
 
 - [verified-by-code] datum vs tuple branch + DSM hooks.
 - [from-comment] purpose + datum-sort rationale at file head.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

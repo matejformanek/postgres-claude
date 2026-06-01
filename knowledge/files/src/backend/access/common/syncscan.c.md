@@ -57,3 +57,7 @@ Cross-backend synchronization of sequential scans on the same table. Maintains a
 
 ## Confidence tag tally
 `[verified-by-code]=6 [from-comment]=4 [from-readme]=0 [inferred]=2 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -83,3 +83,8 @@ The transactional **dispatcher** that sits between local catalog DML and other b
 ## Confidence tag tally
 
 verified-by-code: 12 — from-comment: 14 — from-readme: 0 — inferred: 0 — unverified: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

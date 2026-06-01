@@ -15,3 +15,7 @@ Common helper procedures shared across SP-GiST opclasses (point/quad/kd opclasse
 Tiny file; pulled out of the opclass files to dedup.
 
 Tags: [from-comment].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

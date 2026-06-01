@@ -43,3 +43,8 @@ The README-SSI is itself the authoritative source for the **lock-acquisition ord
 | path | depth | date | commit | doc |
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/README-SSI | full-read | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/README-SSI.md |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

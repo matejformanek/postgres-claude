@@ -46,3 +46,7 @@ tree only `pgarch.c` exists, and it is what implements `B_ARCHIVER`
 ## Header
 
 `postmaster/pgarch.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

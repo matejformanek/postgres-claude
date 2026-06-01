@@ -37,3 +37,7 @@ lookarounds, it falls back to NFA-style backtracking just for that
 sub-pattern. The two exported globals leaking out of regcomp →
 regexec are `pg_set_regex_collation` and `pg_reg_getcolor` (the README
 flags both as design debt).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

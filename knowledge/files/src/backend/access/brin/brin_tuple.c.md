@@ -30,3 +30,7 @@ On-disk encoding / decoding of BRIN summary tuples. **Outside callers deal only 
 - Placeholder tuples are written under exclusive lock on the regular page while the summarizer runs an opclass `addValue` loop over heap rows; they're recognized by a flag and replaced atomically when summarization finishes.
 
 Tags: [from-comment, brin_tuple.c:1-23]; functions enumerated [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

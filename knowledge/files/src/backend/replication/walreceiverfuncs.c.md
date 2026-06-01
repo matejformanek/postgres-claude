@@ -40,3 +40,7 @@ sets `walRcvState = WALRCV_STOPPED`, inits the condition variable
 ## Constants
 
 `WALRCV_STARTUP_TIMEOUT = 10` seconds (`:50`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

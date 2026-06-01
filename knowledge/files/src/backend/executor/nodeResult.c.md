@@ -30,3 +30,8 @@ Three distinct uses:
 
 - [verified-by-code] resconstantqual one-time eval flow.
 - [from-comment] file head describing the three use cases.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

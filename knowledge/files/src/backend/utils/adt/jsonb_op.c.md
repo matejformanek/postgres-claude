@@ -65,3 +65,7 @@ function here, not scattered across the I/O file.
 
 - `[verified-by-code]` × 3
 - `[from-comment]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

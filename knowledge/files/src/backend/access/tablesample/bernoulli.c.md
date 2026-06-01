@@ -31,3 +31,7 @@ The `BERNOULLI` TABLESAMPLE method: per-tuple sampling. Implements `TsmRoutine` 
 
 ## Confidence tag tally
 `[verified-by-code]=4 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

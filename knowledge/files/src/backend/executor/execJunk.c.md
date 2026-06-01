@@ -47,3 +47,8 @@ TIDs, MERGE source markers) but must not appear in client output.
 
 - [verified-by-code] API names.
 - [from-comment] purpose statement at top of file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

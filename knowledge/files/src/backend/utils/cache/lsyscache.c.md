@@ -56,3 +56,8 @@ Defines no new types. Operates on syscache tuples, returning C scalars or palloc
 ## Confidence tag tally
 
 verified-by-code: 5 — from-comment: 2 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

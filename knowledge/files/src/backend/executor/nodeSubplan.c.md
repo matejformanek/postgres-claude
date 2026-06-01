@@ -52,3 +52,8 @@ serve many sibling expressions.
 
 - [verified-by-code] all SubLinkType handlers + InitPlan caching.
 - [from-comment] file header dispatches.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

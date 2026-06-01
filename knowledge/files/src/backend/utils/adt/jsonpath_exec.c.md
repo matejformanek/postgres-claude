@@ -144,3 +144,7 @@ authoritative architectural overview; read it before diving in.
 - `[verified-by-code]` × 0
 - `[from-comment]` × 5
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

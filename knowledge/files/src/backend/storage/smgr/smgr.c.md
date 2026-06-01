@@ -89,3 +89,7 @@ processed mid-operation cannot tear down state being mutated.
 ## Tag tally
 
 `[verified-by-code]` 4 / `[from-comment]` 6 / `[unverified]` 2.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

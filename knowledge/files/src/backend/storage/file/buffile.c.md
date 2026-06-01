@@ -72,3 +72,7 @@ Key design choices stated there:
 ## Tag tally
 
 `[from-comment]` 4 / `[verified-by-code]` 1 / `[unverified]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

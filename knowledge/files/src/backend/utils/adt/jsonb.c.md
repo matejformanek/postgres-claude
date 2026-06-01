@@ -139,3 +139,7 @@ comment is just `"I/O routines for jsonb type"` (`jsonb.c:3-4`
 - `[verified-by-code]` × 6
 - `[from-comment]` × 4
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

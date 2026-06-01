@@ -112,3 +112,7 @@ to validate that an LSN+TLI combination is legal.
 - `[verified-by-code]`: 13
 - `[from-comment]`: 2
 - `[unverified]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

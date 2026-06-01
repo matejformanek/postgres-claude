@@ -91,3 +91,7 @@ The comment at line 712 says: *"Be very careful with the order of calls in the I
 ## Confidence tag tally
 
 `[verified-by-code]=14 [from-comment]=9 [from-readme]=0 [inferred]=0 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -103,3 +103,7 @@ on release/crash), `RS_TEMPORARY` (session-bound). (`slot.h:43-48`)
   alongside `invalidated`. [from-comment]
 - Reserved-slot list isn't exhaustive in this file: the only reserved
   name today is `pg_conflict_detection`. (`slot.h:28`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

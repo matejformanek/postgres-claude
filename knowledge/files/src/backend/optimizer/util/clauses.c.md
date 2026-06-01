@@ -42,3 +42,7 @@ cardinality of a SRF-bearing expression.
 
 ## Tags
 `[verified-by-code]` ×6, `[from-comment]` ×1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

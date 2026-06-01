@@ -68,3 +68,7 @@ escapes, recognizes the SQL/JSON keyword set (`true`, `false`, `null`,
 - `[from-comment]` × 1
 - `[inferred]` × 1
 - `[unverified]` × 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

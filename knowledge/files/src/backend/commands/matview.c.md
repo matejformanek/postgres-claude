@@ -21,3 +21,7 @@ Materialised view support — `REFRESH MATERIALIZED VIEW [CONCURRENTLY]`, plus t
 ## Confidence tag tally
 
 `[verified-by-code]=3 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

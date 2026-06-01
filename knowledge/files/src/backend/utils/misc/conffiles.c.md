@@ -14,3 +14,7 @@ across all PG conf files (`postgresql.conf`, `pg_hba.conf`,
 - `ParseConfigDirectory(dir, ..., head_p, tail_p)` — read all `*.conf` in
   a directory in sorted order, recursing through nested includes.
   Skips dotfiles. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

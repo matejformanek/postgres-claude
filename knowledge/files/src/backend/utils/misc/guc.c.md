@@ -134,3 +134,7 @@ and stack/restore every PG run-time setting. SQL-level entry points
 ## Tag tally
 
 `[verified-by-code]` 2 / `[from-comment]` 5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

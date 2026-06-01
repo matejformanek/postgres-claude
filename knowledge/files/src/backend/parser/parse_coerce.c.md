@@ -53,3 +53,7 @@ late-binding happens; that's why `select 'foo'` returns `text` but
 - `pg_cast` catalog — where casts are registered.
 - `parse_type.c` — produces the `Oid` that this file's machinery routes
   through.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -100,3 +100,4 @@ Five overlapping sets of snapshots a backend may hold; each has a different free
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/snapshot-lifecycle.md](../../../../../data-structures/snapshot-lifecycle.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

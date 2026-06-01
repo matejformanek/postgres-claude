@@ -114,3 +114,8 @@ Takes `LOCKTAG_RELATION_EXTEND`. `lock.c:LockAcquireExtended` knows this tag is 
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/lmgr.c | medium (function index + key entries) | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/lmgr.c.md |
 | source/src/include/storage/lmgr.h | not opened in detail | 2026-06-01 | ef6a95c | (this doc) |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

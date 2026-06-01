@@ -158,3 +158,7 @@ outlive the columns they refer to. `:103-146`
   confirm by case analysis that this composes correctly when both a
   user-defined INSTEAD rule and an RLS policy exist on the same table.
   [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

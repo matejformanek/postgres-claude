@@ -54,3 +54,7 @@ Must hold bucket cleanup-lock (caller's responsibility; held by VACUUM/squeeze).
 - **Called from:** `hashinsert.c::_hash_doinsert`, `hashpage.c::_hash_splitbucket`, `hash.c::hashbulkdelete`.
 
 Tags: [from-README, README:454-560]; [verified-by-code for sequencing].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

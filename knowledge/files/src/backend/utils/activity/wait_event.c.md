@@ -30,3 +30,7 @@ extensions don't need to claim a static slot. Names live in shmem.
 - `pgstat_report_wait_end(void)`
 - `pgstat_get_wait_event(uint32 wait_event_info)` →
   `(WaitEventClass, name)` for display.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -88,3 +88,7 @@ Tree depth:
 
 `[from-comment]` 2 / `[from-README]` 4 / `[verified-by-code]` 2 /
 `[unverified]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

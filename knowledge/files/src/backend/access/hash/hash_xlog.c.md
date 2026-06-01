@@ -62,3 +62,7 @@ Move tuples from one overflow page to an earlier page in the bucket chain. Per R
 ## Open questions
 
 - Whether a standby that replayed `SPLIT_ALLOCATE_PAGE` but not `SPLIT_COMPLETE` exposes correct read semantics to a Hot Standby query. The reader algorithm's "scan both old and new with moved-by-split filter" should handle it, but no test specifically exercises this. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

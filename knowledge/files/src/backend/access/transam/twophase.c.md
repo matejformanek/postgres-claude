@@ -173,3 +173,7 @@ state, restores the dummy PGPROC so post-recovery
 - `[verified-by-code]`: 27
 - `[from-comment]`: 7
 - `[unverified]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

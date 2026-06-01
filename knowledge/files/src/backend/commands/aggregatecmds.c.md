@@ -19,3 +19,7 @@ CREATE AGGREGATE entry; the DefineAggregate routine "takes the parse tree and pi
 ## Confidence tag tally
 
 `[verified-by-code]=2 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

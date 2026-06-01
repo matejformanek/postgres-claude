@@ -54,3 +54,7 @@ None — this file is essentially self-contained.
 ## Tag tally
 
 `[verified-by-code]` 2 / `[from-comment]` 1 / `[unverified]` 0.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

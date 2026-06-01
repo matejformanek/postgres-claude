@@ -55,3 +55,7 @@ PG 9.2 it does **not** handle checkpoints (that's `checkpointer.c`).
 - Calls `LogStandbySnapshot` (`storage/ipc/standby.c`).
 - Consumed by: `pg_stat_bgwriter` reads the same stats this process writes.
 - Header: `postmaster/bgwriter.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

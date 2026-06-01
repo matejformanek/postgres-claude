@@ -101,3 +101,7 @@ children to postmaster goes through:
 - Detailed `pmState` table with every transition arrow — useful future doc.
 - Exact ordering of aux-singleton startup vs `B_STARTUP` exit transition
   during recovery (cross-ref with `xlogrecovery.c`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

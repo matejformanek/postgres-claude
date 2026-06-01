@@ -141,3 +141,7 @@ leader if any worker reported an error.
 - `[from-comment]`: 1
 - `[from-README]`: 1
 - `[unverified]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

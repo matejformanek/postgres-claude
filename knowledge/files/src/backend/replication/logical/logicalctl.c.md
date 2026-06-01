@@ -40,3 +40,7 @@ Functions like `IsLogicalDecodingEnabled`, `LogicalDecodingActivate`,
 
 Top comment notes that automatic `minimal ↔ logical` transitions would
 need more coordination (terminate walsenders, archivers). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

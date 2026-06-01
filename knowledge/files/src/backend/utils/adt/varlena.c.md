@@ -176,3 +176,7 @@ This file is the busiest non-toast-mgmt consumer of TOAST helpers:
 - `[verified-by-code]` × ~10
 - `[from-comment]` × ~10
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

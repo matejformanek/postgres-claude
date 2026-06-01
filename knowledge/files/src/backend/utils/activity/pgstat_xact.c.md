@@ -35,3 +35,7 @@ Registered as RMID `TWOPHASE_RM_PGSTAT_ID`: `pgstat_twophase_postcommit`
 and `pgstat_twophase_postabort` apply the captured tuple deltas to the
 permanent stats after a `COMMIT PREPARED` / `ROLLBACK PREPARED`.
 [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

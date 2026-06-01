@@ -59,3 +59,7 @@ independently of the main apply origin. [verified-by-code]
   this worker (`worker_internal.h`).
 - `am_tablesync_worker()` — runtime predicate based on the worker-type
   field.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

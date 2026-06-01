@@ -70,3 +70,7 @@ This single-pass design means after any one page write the tree is self-consiste
 
 - The exact interaction between `gistFindCorrectParent`'s rightlink-walk and a *concurrent* parent split (both can be walking rightlinks at the parent level). Comment in `gistFindCorrectParent` says safe-by-pin-of-parent + retry. [verified-by-code; the README is brief]
 - KNN ordering's interaction with parallel scan was added later; whether some KNN paths still serialize is not analyzed. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

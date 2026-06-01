@@ -35,3 +35,7 @@ the event-trigger code, and the rewriter. [from-comment] `:3-5`
 
 - `tcop/cmdtag.h` — `CommandTag`, `QueryCompletion`.
 - `tcop/cmdtaglist.h` — the canonical PG_CMDTAG list, edit here to add a tag.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

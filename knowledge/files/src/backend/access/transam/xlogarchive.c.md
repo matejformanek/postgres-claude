@@ -96,3 +96,7 @@ marker, segment is older than required, or archiving is disabled.
 - `[verified-by-code]`: 14
 - `[from-comment]`: 2
 - `[unverified]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

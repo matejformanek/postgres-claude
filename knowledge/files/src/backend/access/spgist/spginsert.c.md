@@ -19,3 +19,7 @@ Externally-visible build + insert wrappers. **All actual insertion logic lives i
 Unlike GIN/GIST which have sorted-build or buffering-build paths, SP-GiST simply calls `spgdoinsert` for every heap row. Reason: SP-GiST inserts touch random pages by design (space partitioning has no natural sort order across all opclasses), so pre-sorting wouldn't help. [inferred; no buffering build path in source]
 
 Tags: [from-comment, spginsert.c:1-15].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

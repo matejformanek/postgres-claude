@@ -55,3 +55,7 @@ to write `(Foo *) copyObjectImpl(...)`.
 - Companion: `equalfuncs.c`, `outfuncs.c`, `readfuncs.c`,
   `queryjumblefuncs.c` — all follow the same hand-written-macros +
   generated-bodies + dispatcher pattern.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

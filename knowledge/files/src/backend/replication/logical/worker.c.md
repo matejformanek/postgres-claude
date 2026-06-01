@@ -108,3 +108,7 @@ their progress can be tracked individually.
 - Calls into `tablesync.c` for initial copy + state transitions.
 - Calls into `conflict.c` to report conflicts and set up arbiter indexes.
 - Talks libpqwalreceiver (loaded module) for the network side.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

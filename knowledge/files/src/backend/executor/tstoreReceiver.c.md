@@ -42,3 +42,8 @@ external storage). Only EXTERNAL on-disk TOAST pointers are dangerous.
 
 - [verified-by-code] API + the detoast/conversion options.
 - [from-comment] purpose statement.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -43,3 +43,7 @@ Canonical narrative for **SP-GiST (Space-Partitioned GiST)**: generalized framew
 1. **"Conditional locking + restart"** in insert — see `spgdoinsert.c` calls to `ConditionalLockBuffer` and the "restart" `goto`s. [from-README, README:228-232]
 2. **"REDIRECT tuple → eventually PLACEHOLDER → reusable"** chain managed by VACUUM via XID horizon. [from-README, README:273-289; verified-by-code in spgvacuum.c]
 3. **"Triple-parity invariant is best-effort, not strict"** — README admits "it's impractical to preserve this invariant in every case". So deadlocks are still possible; restart is the safety net. [from-README, README:242-244]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

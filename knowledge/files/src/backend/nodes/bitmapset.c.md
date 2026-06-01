@@ -116,3 +116,7 @@ parents, …).
   `updatedCols`), `optimizer/path/*`, basically all of planner.
 - `tidbitmap.c` borrows `bitmapword` / `BITS_PER_BITMAPWORD` from this
   header for its per-page bitmaps. `tidbitmap.c:68` `[verified-by-code]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

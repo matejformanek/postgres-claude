@@ -48,3 +48,7 @@ streaming and/or two_phase.
 - Calls into `proto.c` to format wire bytes.
 - Honors origin filter (`publish_no_origin` blocks anything tagged with
   an origin id) via `filter_by_origin_cb`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

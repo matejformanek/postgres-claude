@@ -47,3 +47,7 @@ Canonical narrative for the nbtree access method. It is the spec the C files imp
 1. **Page-split locking order** — see `nbtinsert.c.md` §locking. The README does not state the order in one place; it is reconstructed from `_bt_split` source and the comment at `nbtinsert.c:1908-1910` ("we couple the locks in the standard order: left to right"). [from-comment]
 2. **`BTPageOpaque.btpo_cycleid` semantics for recovery-conflict** — actually used only by VACUUM to detect splits; **not** the recovery-conflict gate. The conflict gate is `BTDeletedPageData.safexid` written into the page contents at delete time, replayed via `XLOG_BTREE_REUSE_PAGE` carrying `snapshotConflictHorizon`. [verified-by-code, nbtxlog.c:967-1001, nbtree.h:232-318]
 3. **"never delete rightmost"** — enforced both in primary `_bt_pagedel` (`nbtpage.c:1926`) and in `_bt_mark_page_halfdead`. [verified-by-code]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

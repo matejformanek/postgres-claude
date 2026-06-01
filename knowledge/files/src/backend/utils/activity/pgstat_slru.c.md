@@ -14,3 +14,7 @@ Updated inline by `access/transam/slru.c` via
 `pgstat_count_slru_truncate`. Pending state in `PendingSLRUStats[]`
 (one per pool slot) is flushed by `pgstat_slru_flush_cb` (fixed
 `flush_static_cb`). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

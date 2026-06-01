@@ -69,3 +69,7 @@ Each TLE carries:
   (`rewriteTargetListIU` in `rewriteHandler.c`) to fill in missing columns
   with defaults / nulls — `parse_target.c` only builds what the SQL text
   spelled out.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

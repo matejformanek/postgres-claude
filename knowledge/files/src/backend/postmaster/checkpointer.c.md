@@ -52,3 +52,7 @@ their request. [from-comment] `:74-92`
 - Header: `postmaster/bgwriter.h` historically held some checkpointer
   prototypes too — modern code lives in `postmaster/bgwriter.h` and
   `storage/checkpointer.h` (or inline in `xlog.h`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

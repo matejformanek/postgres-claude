@@ -30,3 +30,8 @@ side and pulls from the subplan, others reuse those rows.
 
 - [verified-by-code] shared-tuplestore mechanism.
 - [from-comment] CteScanNext docstring.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

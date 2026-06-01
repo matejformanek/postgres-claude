@@ -38,3 +38,7 @@ The fast path is **bypassed** when any of: (a) the relation has a BEFORE ROW or 
 ## Confidence tag tally
 
 `[verified-by-code]=5 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

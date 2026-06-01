@@ -16,3 +16,7 @@
 Returns true if valid; ereports WARNINGs but does not throw, matching the other AM validators. [verified-by-code: ereport(WARNING) calls throughout]
 
 Tags: [from-comment, brin_validate.c:1-12]; behavior [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

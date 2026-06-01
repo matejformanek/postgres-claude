@@ -61,3 +61,7 @@ postmaster-death poll (rate-limited on systems lacking
 - `access/transam/xlogrecovery.c::StartupXLOG` (the actual recovery driver).
 - `storage/ipc/standby.c` (deadlock + lock-timeout handlers).
 - Header: `postmaster/startup.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

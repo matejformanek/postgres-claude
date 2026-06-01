@@ -24,3 +24,7 @@ Scan setup and rescan housekeeping. Maintains `GinScanOpaque` (search state) and
 Predicate-locking for SSI: scan keys' entry-locating reads call `CheckForSerializableConflictIn` against the leaf page or posting-tree root, per the README §"Predicate Locking" rules. [from-README, README:476-509]
 
 Tags: [from-comment]; specifics [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

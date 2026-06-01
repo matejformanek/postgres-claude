@@ -30,3 +30,7 @@ Two-function file: `sequence_open` and `sequence_close`. These are the SEQUENCE 
 
 ## Confidence tag tally
 `[verified-by-code]=2 [from-comment]=1 [from-readme]=0 [inferred]=1 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

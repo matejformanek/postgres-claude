@@ -162,4 +162,5 @@ PID-revalidation interlock for parallel-worker group join: take leader's partiti
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/pgproc-fields.md](../../../../../data-structures/pgproc-fields.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

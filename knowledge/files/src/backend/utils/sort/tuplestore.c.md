@@ -133,3 +133,7 @@ Read (against the active read pointer):
 - `[verified-by-code]` × ~7
 - `[from-comment]` × ~6
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

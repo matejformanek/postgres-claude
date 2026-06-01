@@ -15,3 +15,7 @@ input to `pg_basebackup --incremental` /
 Streams JSON via repeated `AppendStringToManifest` (`:24`). Uses
 `utils/json.h` for escaping. Manifest is itself fed through the bbsink
 chain.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

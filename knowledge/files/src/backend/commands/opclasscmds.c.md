@@ -23,3 +23,7 @@ Each AM defines (in its `IndexAmRoutine`) a set of "strategy numbers" (e.g. btre
 ## Confidence tag tally
 
 `[verified-by-code]=3 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

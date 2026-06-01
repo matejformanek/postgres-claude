@@ -40,3 +40,8 @@ GatherMerge generally rescans by tearing down and re-launching workers
 
 - [verified-by-code] heap + per-reader buffer arrays.
 - [from-comment] purpose + MAX_TUPLE_STORE constant.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

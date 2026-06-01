@@ -215,3 +215,7 @@ the redo result, panic on mismatch. The masking is per-rmgr.
 - `[verified-by-code]`: 32
 - `[from-comment]`: 5
 - `[unverified]`: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

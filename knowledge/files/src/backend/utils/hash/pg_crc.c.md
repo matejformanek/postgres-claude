@@ -17,3 +17,7 @@ table data — the actual CRC loop is in `port/pg_crc32c_*.c` (with SSE4.2
 The hot path code (`pg_comp_crc32c`) lives in `src/port/`; the table
 arrays here are linked into the backend so SW-fallback `pg_comp_crc32c_sb8`
 can find them. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

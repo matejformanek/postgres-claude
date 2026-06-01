@@ -35,3 +35,7 @@ Tags: [from-comment, brin_bloom.c:1-50]; reloption defaults [verified-by-code].
 
 - The exact hash family used (`k` independent hashes derived from one 32-bit base via double-hashing?) — visible in the bit-setting loop but not deeply traced here.
 - Whether `false_positive_rate=0` is treated specially (would imply infinite size). [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

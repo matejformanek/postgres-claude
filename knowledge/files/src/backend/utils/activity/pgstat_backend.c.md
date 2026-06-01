@@ -19,3 +19,7 @@ generic pending-list code path. [from-comment] (`pgstat_backend.c:11-15`)
 
 Counters: per-backend I/O matrix (mirrors `pg_stat_io` per process),
 plus xact_commit/rollback, last activity timestamp.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -50,3 +50,7 @@ clean up the read/write functions. `value.h:24-26` `[from-comment]`
 - Header: `source/src/include/nodes/value.h`
 - Used by: `src/backend/parser/scan.l` (lexer literal output),
   `parsenodes.h` `A_Const`, anywhere a SQL literal flows in a List.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

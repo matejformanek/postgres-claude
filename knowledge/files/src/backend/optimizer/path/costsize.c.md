@@ -242,3 +242,7 @@ is applied. Significantly fixes the n-way join blowup for star schemas.
 
 ## 11. Tags
 `[verified-by-code]` ×13, `[from-comment]` ×13
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

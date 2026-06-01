@@ -44,3 +44,8 @@ name comes from a Param (e.g. SQL functions and plpgsql).
 
 - [verified-by-code] entry-point signatures + walking strategy.
 - [from-comment] purpose statement at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

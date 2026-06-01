@@ -62,3 +62,7 @@ empty/NULL.
 - Consumers: `src/backend/utils/cache/plancache.c`,
   `src/backend/rewrite/rewriteSupport.c`,
   `src/backend/access/transam/parallel.c` (PlannedStmt over DSM).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

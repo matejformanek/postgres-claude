@@ -11,3 +11,7 @@ Backs `pg_stat_checkpointer`: fixed-amount, written to file. Split from
 `pgstat_report_checkpointer()`. Pending updates live in
 `PendingCheckpointerStats` and are accumulated per-checkpoint, flushed
 to shmem at end. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

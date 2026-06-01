@@ -29,3 +29,8 @@ once exhausted; output length = max() of cardinalities.
 
 - [verified-by-code] per-function tuplestore + zipping.
 - [from-comment] interface list at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

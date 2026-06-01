@@ -37,3 +37,7 @@ Scan may set `LP_DEAD` on items it determined are dead (heap row gone). These bi
 `PredicateLockPage` on primary bucket page at scan start.
 
 Tags: [from-README, README:248-285]; [verified-by-code at function structure].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

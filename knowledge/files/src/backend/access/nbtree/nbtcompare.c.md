@@ -17,3 +17,7 @@ Built-in BTORDER_PROC comparison functions for "trivial" datatypes that nbtree's
 
 - Registered in catalog data: `src/include/catalog/pg_amproc.dat`.
 - **Called from**: every `_bt_compare` invocation that lands on a column with a built-in integer/bool/char/oid opclass.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

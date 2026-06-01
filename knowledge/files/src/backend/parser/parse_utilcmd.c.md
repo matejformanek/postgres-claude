@@ -71,3 +71,7 @@ etc.
   wrap-only in analyze.c (handled by the default branch), then add a
   `transformFooStmt` here that's called from
   `tcop/utility.c:ProcessUtility`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

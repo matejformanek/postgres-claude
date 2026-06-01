@@ -25,3 +25,7 @@
 ## Confidence tag tally
 
 `[verified-by-code]=3 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

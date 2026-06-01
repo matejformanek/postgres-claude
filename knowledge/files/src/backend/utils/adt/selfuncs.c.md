@@ -226,3 +226,7 @@ catalog)
 - `[verified-by-code]` × 8
 - `[from-comment]` × 7
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

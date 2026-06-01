@@ -43,3 +43,7 @@ Critical only on error exit.
 Every aux Main function (BackgroundWriterMain, WalWriterMain,
 CheckpointerMain, PgArchiverMain, WalSummarizerMain, StartupProcessMain) calls
 `AuxiliaryProcessMainCommon()` as its first non-Assert action.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

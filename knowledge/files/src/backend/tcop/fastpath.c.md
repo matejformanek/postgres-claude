@@ -49,3 +49,7 @@ the path for security-restricted contexts where appropriate.
 ## Header
 
 `tcop/fastpath.h` (very small — just `HandleFunctionRequest` prototype).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

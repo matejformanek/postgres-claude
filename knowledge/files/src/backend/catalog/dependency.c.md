@@ -48,3 +48,7 @@ The actual *write* of a pg_depend row is `recordDependencyOn(depender, reference
 ## Confidence tag tally
 
 `[verified-by-code]=7 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

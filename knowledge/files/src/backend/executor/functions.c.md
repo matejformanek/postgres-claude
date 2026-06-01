@@ -82,3 +82,8 @@ around the last query.
 - [from-comment] file header + per-function docs.
 - [inferred] inlining bypass detail (clear from optimizer code; here only
   for reader orientation).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

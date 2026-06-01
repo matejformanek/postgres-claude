@@ -36,3 +36,7 @@ Driven by `gistbuildbuffers.c`. See that file's doc.
 `gistbuild` uses `RelationNeedsWAL` checks; in the sorted path each finished page is logged via `log_newpage_buffer`. In the buffering/insert path, normal `XLOG_GIST_PAGE_*` records are emitted by `gistplacetopage`.
 
 Tags: [from-comment, gistbuild.c:1-25]; [from-README, README:297-438].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

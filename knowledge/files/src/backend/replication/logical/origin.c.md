@@ -60,3 +60,7 @@ suppresses re-replication of changes originating from elsewhere.
 ## GUC
 
 `max_active_replication_origins = 10` (`:106`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -36,3 +36,8 @@ EvalPlanQual.
 
 - [verified-by-code] FdwRoutine callbacks used by the shim.
 - [from-comment] interface list.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

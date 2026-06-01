@@ -69,3 +69,7 @@ WAL: `XLOG_BTREE_SPLIT_L` if `newitemonleft`, else `_R`. Block 0 = original/left
 
 - **Lock-ordering proof for `_bt_insert_parent` re-finding a stale stack.** When `_bt_getstackbuf` walks right past several split parents, it acquires/releases the parent lock between pages; this is documented as safe but the formal argument (no deadlock with another inserter ascending) is in the README, not in the code comments. [from-README, README:139-156] **Highest-risk locking claim.**
 - **Speculative insertion path** (`UNIQUE_CHECK_INSERT_INPROGRESS`) interacts with `_bt_check_unique` via `speculativeToken`; the heap-side handshake was not traced. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -73,3 +73,8 @@ The hashtable owns:
 - [from-comment] file header notes about parallelism.
 - [inferred] skew bucket cache-locality rationale (consistent with original
   patch commit message).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

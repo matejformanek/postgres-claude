@@ -64,3 +64,7 @@ default is FIRST. (`syncrep.c:32-64`) [from-comment]
   WAIT_COMPLETE. (`syncrep.h:29-32`)
 - **SYNC_STANDBY_{INIT,DEFINED}** — bits in `WalSndCtl->sync_standbys_status`
   letting backends fast-path without `SyncRepLock`. (`walsender_private.h:119-132`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

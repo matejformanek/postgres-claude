@@ -109,3 +109,7 @@ Redo handler for `RM_COMMIT_TS_ID`: zero-page and truncate records.
 - `[verified-by-code]`: 20
 - `[from-comment]`: 3
 - `[unverified]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

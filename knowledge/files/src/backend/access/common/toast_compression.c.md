@@ -40,3 +40,7 @@ The compression algorithms supported for TOAST: PGLZ (always built in) and LZ4 (
 
 ## Confidence tag tally
 `[verified-by-code]=6 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

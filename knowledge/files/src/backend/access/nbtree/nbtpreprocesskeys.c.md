@@ -28,3 +28,7 @@ Preprocess the user-visible scan keys (a `ScanKey[]` of comparison-operator scan
 
 - **Called by:** `nbtsearch.c:_bt_first` (indirectly via the scan state being already preprocessed at rescan time).
 - **Calls into:** opclass `BTORDER_PROC` and `BTSKIPSUPPORT_PROC`, `access/skey.c` for `ScanKey` manipulation, `utils/array.c` to expand SAOP arrays.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

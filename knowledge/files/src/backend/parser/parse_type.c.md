@@ -40,3 +40,7 @@ The resolver expands `%TYPE` to the underlying column's type and pushes
 - Typmod processing goes via the type's `typmodin` function (e.g.
   `numerictypmodin`) — that's where `numeric(10,2)` becomes a packed
   int32 typmod.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

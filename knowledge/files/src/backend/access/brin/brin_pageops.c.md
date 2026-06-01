@@ -58,3 +58,7 @@ Both `brin_doupdate` and `brin_doinsert` `ereport(ERROR)` if `itemsz > BrinMaxIt
 ## Open questions
 
 - The `BRIN_EVACUATE_PAGE` flag is dirty-hint only (not WAL-logged). On crash it may be lost on the primary, causing a now-evacuating page to receive a fresh insert. Comment says "except accidentally" via FPI. Whether replicas can durably diverge is unclear. [unverified, brin_pageops.c:544-545]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

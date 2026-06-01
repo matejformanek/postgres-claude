@@ -111,3 +111,8 @@ Standalone test harness — not compiled into the backend. Builds a test binary 
 | source/src/backend/storage/lmgr/s_lock.c | full-read | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/s_lock.c.md |
 | source/src/include/storage/spin.h | quick-skim (citing comments only) | 2026-06-01 | ef6a95c | (this doc) |
 | source/src/include/storage/s_lock.h | not opened (per-arch macros) | 2026-06-01 | ef6a95c | (this doc) |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

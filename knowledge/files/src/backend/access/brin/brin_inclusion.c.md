@@ -34,3 +34,7 @@ Tags: [from-comment, brin_inclusion.c:1-23]; procnum semantics [inferred from BR
 ## Open questions
 
 - The exact storage layout for "empty seen" / "unmergeable" flags inside the BrinTuple null bitmap was not traced. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

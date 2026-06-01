@@ -28,3 +28,7 @@ Per-page share lock during scan; release before queueing children to honor READM
 ## SSI
 
 `PredicateLockPage` is taken on each scanned leaf (and on internal pages for KNN range coverage). [verified-by-code at `gistgetbitmap` predicate-lock calls]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

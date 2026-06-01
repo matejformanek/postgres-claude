@@ -11,3 +11,7 @@ lexemes + their frequencies. The estimator walks the tsquery's AND/OR
 tree, for each leaf looks up the lexeme in the MCV array, applies
 Jensen-like combination for AND, sum for OR, and falls back to a
 default selectivity when the lexeme isn't in the MCV. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

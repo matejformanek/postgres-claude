@@ -82,3 +82,7 @@ for them.
 - `[verified-by-code]` × 2
 - `[from-comment]` × 1
 - `[inferred]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

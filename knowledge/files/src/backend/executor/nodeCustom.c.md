@@ -31,3 +31,8 @@ ShutdownCustomScan, ExplainCustomScan.
 
 - [verified-by-code] CustomExecMethods dispatch + provider hooks.
 - [from-comment] node-level header.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

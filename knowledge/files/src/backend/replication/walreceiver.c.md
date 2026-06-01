@@ -59,3 +59,7 @@ write / flush events; loop selects on a latch with multiple deadlines.
   the connection stays up (the README mentions WAITING state but the
   state-machine details want a closer read of `WalReceiverMain`).
   [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

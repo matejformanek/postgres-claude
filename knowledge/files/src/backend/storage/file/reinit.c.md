@@ -43,3 +43,7 @@ Both phases happen at startup, in that order.
 ## Tag tally
 
 `[from-comment]` 3 / `[verified-by-code]` 0 / `[unverified]` 0.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

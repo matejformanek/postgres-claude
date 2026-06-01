@@ -42,3 +42,7 @@ CTE node and later expanded by `rewriteSearchCycle.c` during
 `MATERIALIZED` / `NOT MATERIALIZED` is recorded on the `CommonTableExpr`
 and consulted by the planner — it controls whether the CTE gets inlined
 into the outer query or always materialized as a separate plan node.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

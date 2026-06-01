@@ -60,3 +60,7 @@ will be added on demand. `:16-19` `[from-comment]`
 - Built on: `bitmapset.c`, `list.c`.
 - Callers: planner code dealing with `(varno, attno)` sets, e.g.
   `optimizer/util/var.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

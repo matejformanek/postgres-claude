@@ -9,3 +9,7 @@ bbsink wrapping `lz4frame` (frame format, not raw block). Gated by
 compression on `archive_contents` (using `LZ4F_compressUpdate`), trailer
 on `end_archive`. `compresslevel` taken from `pg_compress_specification`.
 Falls back to ereport on build without LZ4. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

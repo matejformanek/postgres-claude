@@ -74,3 +74,7 @@ Requires `ShareUpdateExclusiveLock` on index (so no concurrent summarization). L
 
 - The `*off > PageGetMaxOffsetNumber(page)` path at line 285 silently returns NULL on "page was desummarized concurrently". This is correct only because `brininsert` re-reads the revmap on its next call. Whether a parallel `bringetbitmap` could miss a tuple in this window is not formally argued; the lossy semantics make it acceptable in principle. [inferred]
 - The `previptr` corruption-loop check (line 256) ERRORs on a legitimate-looking double-read; whether an adversarial concurrent updater could trigger it spuriously is not analyzed by the code comments. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

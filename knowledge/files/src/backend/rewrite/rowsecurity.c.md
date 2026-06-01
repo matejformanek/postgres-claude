@@ -64,3 +64,7 @@ remapped through the view's targetlist. This helper does the bitmap remap.
   re-check after the row was already locked.
 - INSERT WITH CHECK is enforced AFTER BEFORE INSERT triggers fire, so a
   trigger that mutates the row may flip whether the policy admits it.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

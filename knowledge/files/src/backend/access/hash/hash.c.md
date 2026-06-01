@@ -26,3 +26,7 @@ The public interface module: `hashhandler` (`IndexAmRoutine`), build paths (`has
 - `hashvacuumcleanup` updates the metapage tuple count (`XLOG_HASH_UPDATE_META_PAGE`) and reports stats. Carefully handles concurrent splits/inserts by re-checking bucket count.
 
 Tags: [from-comment]; [from-README, README:385-453].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

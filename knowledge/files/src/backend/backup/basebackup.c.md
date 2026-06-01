@@ -60,3 +60,7 @@ compression / throttling / progress / target stages.
 ## Tag tally
 
 `[verified-by-code]` 2 / `[from-comment]` 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

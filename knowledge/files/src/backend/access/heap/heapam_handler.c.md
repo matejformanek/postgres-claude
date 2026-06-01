@@ -82,3 +82,4 @@ Everything else in this file is `static` and slotted into `heapam_methods` by fu
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -29,3 +29,7 @@ emits a 'd' (archive data) type byte; `manifest_contents` emits 'm'.
 ## Tag tally
 
 `[from-comment]` 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

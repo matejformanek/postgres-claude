@@ -49,3 +49,8 @@ into the ScanKey array. If only the snapshot or position changed, just
 
 - [verified-by-code] entry-point names + kNN reorder mechanism.
 - [from-comment] INTERFACE ROUTINES list at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

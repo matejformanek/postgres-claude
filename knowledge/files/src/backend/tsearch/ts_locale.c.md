@@ -10,3 +10,7 @@ and the default parser: `t_isalpha`, `t_isalnum`, `t_isspace`,
 DB encoding and respect the per-config collation passed to lexize.
 Also `tsearch_readline`-family routines for safely reading dict/affix
 files (with EOF/encoding error handling). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

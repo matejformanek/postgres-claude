@@ -65,3 +65,7 @@ The reuse record does **not** register a buffer — see explanatory comment at `
 
 - **Is replay ever allowed to observe an INCOMPLETE_SPLIT flag that won't be cleared until a much later WAL record?** Yes, by design — the parent insertion is a separate WAL record. The README §"Scans during Recovery" addresses this: readers don't care about the flag, and replay does not hold per-level write locks the way the primary does. [from-README, README:702-734]
 - **Does `btree_xlog_reuse_page` correctly handle the case where the standby has not yet replayed the corresponding `XLOG_BTREE_UNLINK_PAGE`?** The page being reused is still pulled from the *primary*'s FSM, and the standby simply applies the snapshot-conflict resolution; the page itself will be initialised by the next split's WAL. [inferred] but the exact ordering guarantee was not traced.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

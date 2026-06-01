@@ -24,3 +24,7 @@ A prepared statement starts with custom plans (replan with the actual parameter 
 ## Confidence tag tally
 
 `[verified-by-code]=3 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

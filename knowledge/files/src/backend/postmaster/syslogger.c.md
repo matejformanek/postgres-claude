@@ -46,3 +46,7 @@ sized to twice a chunk so a partial trailing chunk can be moved forward.
 
 `Logging_collector` cannot be changed after postmaster start; others are
 SIGHUP-reloadable. [from-comment] `:67-70`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

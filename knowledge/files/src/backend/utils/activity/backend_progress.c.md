@@ -20,3 +20,7 @@ API for command implementations:
 Parallel-worker side: `pgstat_progress_parallel_incr_param` writes to
 the leader's BEEntry via a shared spinlocked counter so the leader's
 view of "tuples scanned by all workers" is consistent. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

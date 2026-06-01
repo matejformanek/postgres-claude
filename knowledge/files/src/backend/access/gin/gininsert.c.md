@@ -34,3 +34,7 @@ Heavy: uses `Tuplesort` over `(key, category, heap_tid)` tuples (the `gin_tuple.
 - **Called by:** `IndexAmRoutine` slots via `index_insert` and `index_build`.
 
 Tags: [from-comment, gininsert.c:1-12]; structure derived from function signatures + AM slots in `ginutil.c::ginhandler`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

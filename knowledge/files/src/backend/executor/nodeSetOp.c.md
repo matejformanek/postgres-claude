@@ -41,3 +41,8 @@ flag column is stripped via JunkFilter in the enclosing plan.
 
 - [verified-by-code] both strategies.
 - [from-comment] file-level semantics explanation.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

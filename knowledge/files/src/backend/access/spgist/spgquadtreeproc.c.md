@@ -16,3 +16,7 @@ Built-in **quadtree** opclass over `point`: `quad_point_ops`. Each inner tuple's
 - `spg_quad_leaf_consistent` — point comparison.
 
 Tags: [from-comment].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

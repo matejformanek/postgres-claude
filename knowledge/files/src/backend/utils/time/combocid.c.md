@@ -57,3 +57,7 @@ Backend-private mapping that lets a single 32-bit field in the tuple header (`t_
 ## Confidence tag tally
 
 `[verified-by-code]=7 [from-comment]=6 [from-readme]=0 [inferred]=3 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

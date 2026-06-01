@@ -24,3 +24,7 @@ Toast creation runs inside the parent's CREATE TABLE (or ALTER TABLE ADD COLUMN)
 ## Confidence tag tally
 
 `[verified-by-code]=3 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -77,3 +77,7 @@ Crucially **the child remains exclusive-locked while the parent is locked** (lin
 
 - Whether the comment at line 772 ("Upgrading the lock momentarily releases it. Doing that in a scan would not be OK") is enforced by an assertion or only by code review. [unverified]
 - The interaction of `ginFindParents` with concurrent `ginPlaceToPage` re-parenting (both can call into the vtable's `findChildPtr` against the same parent) is asserted-safe by VACUUM's root cleanup lock. [from-comment, ginbtree.c:213-216, 232-234]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

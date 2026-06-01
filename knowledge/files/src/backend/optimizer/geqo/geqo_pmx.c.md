@@ -4,3 +4,7 @@
 
 PMX (Goldberg & Lingle). Only compiled when `#define PMX` in geqo.h; not the
 default. [verified-by-code]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

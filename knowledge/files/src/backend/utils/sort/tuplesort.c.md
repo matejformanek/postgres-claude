@@ -276,3 +276,7 @@ quicksort on tiebreaks (`:2618-2976`). Adapted from Malte Skarupke's
 - `[verified-by-code]` × ~22
 - `[from-comment]` × ~14
 - `[unverified]` × 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

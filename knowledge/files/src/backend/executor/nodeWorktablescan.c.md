@@ -24,3 +24,8 @@ just resets+swaps the working table and the scan re-reads from start.
 
 - [verified-by-code] linkage through PARAM_EXEC slot.
 - [from-comment] WorkTableScanNext docstring.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

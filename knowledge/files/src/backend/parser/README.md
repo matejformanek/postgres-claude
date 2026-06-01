@@ -58,3 +58,7 @@ can use the same table. [from-README] `:33-35`
 
 See `knowledge/idioms/parser-pipeline.md` for the end-to-end walk-through of
 how raw text becomes a `Query` becomes a rewritten `List<Query>`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

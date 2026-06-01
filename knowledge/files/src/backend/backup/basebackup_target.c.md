@@ -63,3 +63,7 @@ ones — e.g. an S3 or HSM target. [from-comment] (`basebackup_target.c:3-7`)
 ## Tag tally
 
 `[verified-by-code]` 5 / `[from-comment]` 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -35,3 +35,7 @@ fmgr-callable C functions. Already covered in part by other docs.
   parameter column names.
 - Heavy use by `pg_stat_*` functions, `pg_ls_*`, `unnest`,
   `generate_series` — anything returning SETOF or composite. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

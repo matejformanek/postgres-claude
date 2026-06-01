@@ -27,3 +27,8 @@ SYSTEM, SYSTEM_ROWS, SYSTEM_TIME via `tsm_system_*` extensions).
 
 - [verified-by-code] TsmRoutine callback usage.
 - [from-comment] file-level intent (extension-pluggable sampling methods).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

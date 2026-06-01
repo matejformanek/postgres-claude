@@ -65,3 +65,8 @@ Thin, named-cache-table layer over catcache. Defines a static array `SysCache[Sy
 ## Confidence tag tally
 
 verified-by-code: 7 — from-comment: 8 — from-readme: 0 — inferred: 0 — unverified: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

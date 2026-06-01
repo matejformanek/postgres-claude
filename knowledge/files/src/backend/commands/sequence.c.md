@@ -24,3 +24,7 @@ A sequence's heap is one 8 KB page with one tuple of type `pg_sequence_data` (`l
 ## Confidence tag tally
 
 `[verified-by-code]=4 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

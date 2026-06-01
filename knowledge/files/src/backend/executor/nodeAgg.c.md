@@ -94,3 +94,8 @@ table per set in parallel.
 - [verified-by-code] entry points + the build/retrieve split.
 - [from-comment] the aggsplit modes + spilling rationale.
 - [inferred] perf rationale for shared PerTrans.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

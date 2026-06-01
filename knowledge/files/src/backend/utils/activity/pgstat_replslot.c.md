@@ -18,3 +18,7 @@ On restart, if a serialized slot name doesn't resolve to a current slot
 Counters: `spill_txns`, `spill_count`, `spill_bytes`, `stream_txns`,
 `stream_count`, `stream_bytes`, `total_txns`, `total_bytes`, also
 `stats_reset`. Updated by the logical-decoding ReorderBuffer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

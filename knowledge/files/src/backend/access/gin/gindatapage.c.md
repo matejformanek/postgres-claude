@@ -49,3 +49,7 @@ Tags: [from-comment, gindatapage.c:1-37], [verified-by-code for WAL action mappi
 ## Open questions
 
 - The exact split policy (target vs. max) at line ~25-37 is the heuristic; whether it interacts adversely with very long posting lists is not analyzed in code comments. [unverified]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

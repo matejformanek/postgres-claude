@@ -26,3 +26,7 @@ PG GiST allows variable-length keys, so `picksplit`'s halves cannot be guarantee
 Called from `gist.c::gistplacetopage`. Calls into opclass `picksplit`, `union`, `penalty`, `same` via fmgr.
 
 Tags: [from-comment, gistsplit.c:1-15]; [from-README, README:236-256].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

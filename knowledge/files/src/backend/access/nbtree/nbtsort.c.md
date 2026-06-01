@@ -55,3 +55,7 @@ Build a btree index from scratch by **sorting input tuples then sequentially loa
 
 - **Called by:** `commands/indexcmds.c` via `index_build` (which calls `IndexAmRoutine.ambuild`).
 - **Calls into:** `utils/sort/tuplesort.c` (entire sort lifecycle), `storage/bulk_write.c` (`smgr_bulk_*`), `access/table/tableam.c` (`table_index_build_scan`), `access/parallel.c` (parallel infrastructure), `nbtutils.c` (`_bt_truncate`, `_bt_check_third_page`, `_bt_allequalimage`), `nbtdedup.c` (build-time dedup via `_bt_dedup_start_pending`/`_bt_dedup_save_htid`/`_bt_dedup_finish_pending`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

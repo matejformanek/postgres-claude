@@ -65,3 +65,7 @@ FSM skip WAL entirely.
 ## Tag tally
 
 `[from-README]` 15.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

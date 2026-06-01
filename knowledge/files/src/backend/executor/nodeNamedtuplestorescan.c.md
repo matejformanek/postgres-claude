@@ -22,3 +22,8 @@ can read it via `NamedTuplestoreScan`.
 
 - [verified-by-code] queryEnvironment lookup + read pointer.
 - [from-comment] NamedTuplestoreScanNext docstring.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

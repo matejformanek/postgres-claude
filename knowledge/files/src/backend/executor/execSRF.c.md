@@ -60,3 +60,8 @@ execSRF handles both.
 - [verified-by-code] entry points + the two-mode protocol.
 - [from-comment] file purpose.
 - [from-comment] ValuePerCall / Materialize semantics (funcapi.h).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

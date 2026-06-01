@@ -27,3 +27,7 @@ a child. Unix only — EXEC_BACKEND has its own path in `launch_backend.c`.
 
 - This file is `#ifndef WIN32` only. [from-comment] `:25`
 - Header: `postmaster/fork_process.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

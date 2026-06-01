@@ -233,3 +233,7 @@ common parameterization:
 
 ## 10. Tags
 `[verified-by-code]` ×20, `[from-comment]` ×15
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

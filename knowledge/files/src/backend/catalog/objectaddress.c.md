@@ -35,3 +35,7 @@ The huge static array `ObjectProperty[]` at the top of this file is the **single
 ## Confidence tag tally
 
 `[verified-by-code]=4 [inferred]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

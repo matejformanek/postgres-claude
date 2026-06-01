@@ -44,4 +44,5 @@ These are the lines other code points back to. Cite the README at these line num
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

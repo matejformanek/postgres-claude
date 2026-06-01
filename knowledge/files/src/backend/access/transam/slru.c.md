@@ -169,3 +169,7 @@ optional `io_error_detail` callback.
 - `[verified-by-code]`: 22
 - `[from-comment]`: 10
 - `[unverified]`: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

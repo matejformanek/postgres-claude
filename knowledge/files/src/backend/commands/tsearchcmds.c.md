@@ -22,3 +22,7 @@ A configuration says: "for token type X (e.g. asciiword, hword, numword), apply 
 ## Confidence tag tally
 
 `[verified-by-code]=3 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

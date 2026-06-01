@@ -111,3 +111,8 @@ transition tables.
 - [verified-by-code] all entry points + the Prologue/Act/Epilogue pattern.
 - [from-comment] top-of-file narrative + MERGE specifics.
 - [from-README] EvalPlanQual interaction for UPDATE/DELETE/MERGE.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -78,3 +78,7 @@ smallest LSN in each substream. [from-comment] (`reorderbuffer.c:13-31`)
 - The eviction policy is "largest only", but the top comment notes that
   age (LSN) might be a better heuristic, especially given the generation
   allocator's freeing pattern. (`:64-68`) [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

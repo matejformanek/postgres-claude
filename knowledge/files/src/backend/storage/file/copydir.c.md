@@ -36,3 +36,7 @@ to `FILE_COPY_METHOD_CLONE` which uses platform-specific reflinks
 ## Tag tally
 
 `[from-comment]` 2 / `[verified-by-code]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

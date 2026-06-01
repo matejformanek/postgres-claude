@@ -87,3 +87,7 @@ just streams chunks. So the format is naturally compact for both
 ## Tag tally
 
 `[verified-by-code]` 5 / `[from-comment]` 5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -84,3 +84,7 @@ context so workers can `tbm_attach_shared_iterate`.
   `executor/nodeBitmapHeapscan.c`, and BRIN.
 - Cousins: `nodes/bitmapset.c` (the small-int set; this file uses its
   word type but otherwise unrelated).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -37,3 +37,7 @@ removed. [from-comment] `:12-15`
 
 Detailed walk of the summarization algorithm and LSN-range bookkeeping is
 deferred to a dedicated backup/walsummary subsystem doc.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

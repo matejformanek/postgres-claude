@@ -61,3 +61,7 @@ decision). [from-comment] `:5-13`
   `postmaster_child_launch(B_AUTOVAC_WORKER, ...)`.
 - Stats: reads `pg_stat_*` tables to decide what to vacuum.
 - Header: `postmaster/autovacuum.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -37,3 +37,7 @@ Recycled only after `deleteXid` is globally invisible. When recycled, the alloca
 - **Calls into:** `read_stream.c` (sequential scan), `xloginsert.c`, `lib/integerset.c` (internal-page-block list).
 
 Tags: [from-README, README:443-486]; behavior [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

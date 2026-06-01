@@ -76,3 +76,7 @@ User-visible array support functions — the SQL-callable layer over
 
 - `[verified-by-code]` × ~4
 - `[from-comment]` × ~2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

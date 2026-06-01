@@ -104,3 +104,7 @@ standby's flushes. (`:3070-3077`) [verified-by-code]
 - The `cmd_context` reuse trick (`:2073-2126`) — why a single long-lived
   context rather than per-command. Comment explains, but verifying the
   cross-xact lifetime is non-obvious. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

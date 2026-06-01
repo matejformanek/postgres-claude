@@ -15,3 +15,7 @@ on (dboid, funcid). Gated by `track_functions` GUC = `none|pl|all`.
   `self_time`), increments `f_numcalls`.
 - `pgstat_create_function` / `pgstat_drop_function` — invalidate stats
   entry on DDL via syscache callback on `PROCOID`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -149,3 +149,7 @@ From `sortsupport.h:109-192` [from-comment]:
 - `[verified-by-code]` × ~10
 - `[from-comment]` × ~6
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -68,4 +68,5 @@ verified-by-code: 10 — from-comment: 10 — from-readme: 0 — inferred: 0 —
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

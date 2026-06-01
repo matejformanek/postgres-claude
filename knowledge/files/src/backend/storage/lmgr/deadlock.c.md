@@ -142,3 +142,8 @@ Fast-path "two procs, same object, mutually conflicting" deadlock detected insid
 | path | depth | date | commit | doc |
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/deadlock.c | deep (full algorithm trace) | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/deadlock.c.md |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

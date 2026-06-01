@@ -18,3 +18,7 @@ from `regcomp.c`:
 
 The NFA is the source of truth; the DFA in `regexec.c` is derived from
 the CNFA on demand. [from-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

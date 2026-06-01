@@ -42,3 +42,7 @@ Holds index, callback (heap-row-still-live test), per-vacuum tmpCxt, ginstate, b
 - Whether the "first stage detects empty" optimization (delay calling `ginScanPostingTreeToDelete` unless stage 1 cleared a whole leaf) is correctness-required or just performance. The README presents it as performance. [inferred]
 
 Tags: [from-README, README:389-470 — extensively cited]; behavior [verified-by-code at function dispatch sites].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

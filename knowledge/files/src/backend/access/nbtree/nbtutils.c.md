@@ -31,3 +31,7 @@ The "miscellaneous utilities" file for nbtree. Builds insertion scankeys (`_bt_m
 
 - **Called by:** every file in nbtree (this is the "everyone's helpers" module).
 - **Calls into:** `access/skey.c` (ScanKey initialization), `storage/lwlock.c` (`BtreeVacuumLock`), `storage/shmem.c` (shared-memory cycle-ID table init).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

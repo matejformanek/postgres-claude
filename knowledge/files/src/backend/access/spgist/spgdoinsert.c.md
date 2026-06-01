@@ -58,3 +58,7 @@ The restart is `goto`-driven: a label at the top of the descent loop. Comments w
 
 - The restart-from-root mechanism in the presence of *very* frequent conflicts could in principle livelock; backoff is implicit (other backends complete their inserts and free pages). Whether there's a hard livelock guard is not clear. [unverified]
 - `doPickSplit` interaction with concurrent VACUUM's pending-list mechanism: pickSplit may create REDIRECTs that VACUUM must then chase. Comments at top of spgvacuum.c reference this. [from-README, README:347-368]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

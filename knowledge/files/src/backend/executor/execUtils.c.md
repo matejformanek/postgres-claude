@@ -84,3 +84,8 @@ registration on ExprContext shutdown. [from-comment] `:14-50`
 - [verified-by-code] entry-point names; lock acquisition rule
   (ExecGetRangeTableRelation is the single point of relation open).
 - [from-comment] interface listing at top of file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

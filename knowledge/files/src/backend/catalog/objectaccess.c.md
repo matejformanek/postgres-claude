@@ -27,3 +27,7 @@ Per-event hooks come in pairs: an OID variant and a `_Str` variant for objects i
 ## Confidence tag tally
 
 `[verified-by-code]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

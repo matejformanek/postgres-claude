@@ -228,3 +228,7 @@ Line 644-832 walks every RTE type and disqualifies it if any of:
 
 ## 14. Tags
 `[verified-by-code]` ×13, `[from-comment]` ×7, `[inferred]` ×1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -10,3 +10,7 @@ collating elements (`[.ch.]`). For Unicode-aware classes, defers to
 `regc_pg_locale.c` which queries the active collation/ctype provider
 (libc / ICU / built-in). Returns `cvec`s the parser then folds into
 the colormap. [from-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

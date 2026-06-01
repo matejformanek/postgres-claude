@@ -26,3 +26,7 @@
 Validator walks the opfamily's procs and amops, checks each against the opclass's `opcintype`/`opckeytype`. Returns true if valid; ereports WARNINGs otherwise.
 
 Tags: [from-comment, gistvalidate.c:1-12].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

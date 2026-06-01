@@ -34,3 +34,7 @@ are filled later. [from-comment:42-48]
 
 ## Tags
 `[verified-by-code]` ×3, `[from-comment]` ×6
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

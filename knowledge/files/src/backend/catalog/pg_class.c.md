@@ -11,3 +11,7 @@ Tiny stub. Just defines the `pg_class_aclmask` callback and friends here for lay
 ## Confidence tag tally
 
 `[inferred]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

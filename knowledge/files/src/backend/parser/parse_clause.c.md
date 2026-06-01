@@ -100,3 +100,7 @@ adjustments when expanding USING joins).
   `setNamespaceLateralState` should mutate it.
 - `checkExprIsVarFree` `:87` enforces that LIMIT/OFFSET can't reference any
   Var — a frequent newbie patch failure point.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

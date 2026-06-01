@@ -49,3 +49,7 @@ standard wrapper pattern is `if (converted != original) pfree(converted)`.
   skip fmgr.
 - Conversions are pluggable: `pg_conversion` catalog rows + the
   conversion procs in `conversion_procs/`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

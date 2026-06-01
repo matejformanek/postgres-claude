@@ -45,3 +45,7 @@ When `RelnameGetRelid("foo")` is called (or any other `*IsVisible` walk):
 ## Confidence tag tally
 
 `[verified-by-code]=6 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

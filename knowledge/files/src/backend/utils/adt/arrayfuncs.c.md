@@ -125,3 +125,7 @@ needs to scan the bitmap, not the data.
 
 - `[verified-by-code]` × ~5
 - `[from-comment]` × ~5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -28,3 +28,8 @@ the ModifyTable to deliver rows. Same code path applies.
 
 - [verified-by-code] per-row eager-vs-lazy compilation logic.
 - [from-comment] interface list at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

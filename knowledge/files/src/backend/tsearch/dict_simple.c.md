@@ -9,3 +9,7 @@ against a stopword list, return as-is (no stemming). Options:
 `STOPWORDS = filename`, `ACCEPT = true|false` (the latter controls
 whether non-stopwords are accepted as their own lexeme or passed
 through). Exports `dsimple_init` / `dsimple_lexize`. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

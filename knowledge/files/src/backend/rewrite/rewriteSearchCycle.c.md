@@ -36,3 +36,7 @@ analysis because:
 - SQL spec ISO/IEC 9075-2 §7.16 — SEARCH and CYCLE clause semantics.
 - `parse_cte.c` — leaves the SEARCH/CYCLE clauses untransformed on the
   `CommonTableExpr` for this file to consume.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -34,3 +34,8 @@ allocate the shared dsa-backed TBM.
 
 - [verified-by-code] MultiExec interface contract.
 - [from-comment] INTERFACE list at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

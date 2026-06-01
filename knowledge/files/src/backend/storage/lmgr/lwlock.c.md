@@ -133,3 +133,8 @@ Initialises a fresh `LWLock`: `state = LW_FLAG_RELEASE_OK` (no — actually just
 |---|---|---|---|---|
 | source/src/backend/storage/lmgr/lwlock.c | deep (selected functions + state-word layout) | 2026-06-01 | ef6a95c | knowledge/files/src/backend/storage/lmgr/lwlock.c.md |
 | source/src/include/storage/lwlock.h | full-read | 2026-06-01 | ef6a95c | (this doc) |
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

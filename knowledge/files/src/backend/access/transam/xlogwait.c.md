@@ -132,3 +132,7 @@ advances past the heap's min. Pops all waiters at LSNs ≤
 - `[from-comment]`: 4
 - `[inferred]`: 1
 - `[unverified]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

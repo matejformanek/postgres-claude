@@ -24,3 +24,7 @@ A procedure called via `CALL` can issue COMMIT or ROLLBACK, which ends the calli
 ## Confidence tag tally
 
 `[verified-by-code]=4 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

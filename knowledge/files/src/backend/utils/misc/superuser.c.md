@@ -18,3 +18,7 @@ The single-user/`InitPostgres` escape hatch: during bootstrap and in
 initialization can proceed before `pg_authid` is queryable. **All
 superuser checks must go through this file** — never read `rolsuper`
 directly. [from-comment] (`superuser.c:1-10`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

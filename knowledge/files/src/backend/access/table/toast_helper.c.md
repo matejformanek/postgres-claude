@@ -47,3 +47,7 @@ Reusable helpers for table-AM implementations that need to TOAST varlena attribu
 
 ## Confidence tag tally
 `[verified-by-code]=7 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

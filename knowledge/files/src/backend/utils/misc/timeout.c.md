@@ -36,3 +36,7 @@ module schedules N timeouts on top of it. [from-comment] (`timeout.c:1-7`)
 ## Tag tally
 
 `[from-comment]` 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

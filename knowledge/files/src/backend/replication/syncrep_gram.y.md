@@ -12,3 +12,7 @@ flat `SyncRepConfigData` (`syncrep.h:63-72`). Supports `FIRST n (a,b,c)`
 and `ANY n (a,b,c)` plus bare `n (...)` (FIRST by default) and a plain
 name list. Output is a single `palloc`'d blob suitable as GUC `extra`
 data. [from-comment] (`syncrep_gram.y:25-32`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

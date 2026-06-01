@@ -33,3 +33,7 @@ human accidentally SIGQUIT-ed a random backend.
 
 bgwriter, walwriter, checkpointer, archiver, walsummarizer, startup, syslogger,
 many bgworkers. Almost every aux loop has a `ProcessMainLoopInterrupts()` call.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

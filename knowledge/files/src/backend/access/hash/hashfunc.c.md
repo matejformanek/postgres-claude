@@ -17,3 +17,7 @@ Built-in hash-opclass support functions: `hashint2`, `hashint4`, `hashint8`, `ha
 - For floats: `+0.0` and `-0.0` hash to the same value; NaN normalizes to a single canonical NaN.
 
 Tags: [from-comment, hashfunc.c:1-25].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

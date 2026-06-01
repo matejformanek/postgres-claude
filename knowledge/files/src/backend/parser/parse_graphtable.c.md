@@ -25,3 +25,7 @@ GRAPH_TABLE is a newer feature (PG 18); the lowering happens in
 `rewrite/rewriteGraphTable.c` during `fireRIRrules` (see
 `rewriteHandler.c:2088`). At parse-analyze time we only build the
 syntactic + catalog-resolved description.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

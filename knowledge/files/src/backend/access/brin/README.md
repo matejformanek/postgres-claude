@@ -38,3 +38,7 @@ Canonical narrative for the **Block Range Index (BRIN)** access method. Establis
 1. **"No heap TIDs in BRIN index"** → confirmed by absence of `amgettuple` in `brinhandler` (`brin.c:300`) and by revmap entry being a *page-range → index-tuple-TID* mapping, not a heap-TID list. [verified-by-code, brin.c:254-313]
 2. **"Range map page 0 = metapage; subsequent N blocks = revmap"** → metapage at `BRIN_METAPAGE_BLKNO = 0` (`brin_page.h:75`), revmap extension is `revmap_physical_extend` in `brin_revmap.c`, evacuating any regular tuples that already sat on the target block. [verified-by-code, brin_revmap.c:60-63]
 3. **Autosummarize trigger** is per-`brininsert` call when the first row lands on the first block of a fresh page range, via `AutoVacuumRequestWork(AVW_BRINSummarizeRange, ...)`. [verified-by-code, brin.c:398-422]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

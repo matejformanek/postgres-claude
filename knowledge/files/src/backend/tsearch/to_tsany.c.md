@@ -15,3 +15,7 @@ into a sorted+deduplicated `TSVector` with per-lexeme position arrays.
 JSON variants walk only string fields (skipping keys/numbers/booleans
 by default — `to_tsvector(jsonb)` has settings to change this).
 [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

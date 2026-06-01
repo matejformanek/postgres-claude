@@ -54,3 +54,7 @@ qualification, joininfo initialization routines". [from-comment:3-4]
 
 ## 4. Tags
 `[verified-by-code]` ×7, `[from-comment]` ×9
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -69,3 +69,7 @@ Recursion-heavy paths (parse, NFA optimization) call
 ## Tag tally
 
 `[verified-by-code]` 2 / `[from-README]` 6
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

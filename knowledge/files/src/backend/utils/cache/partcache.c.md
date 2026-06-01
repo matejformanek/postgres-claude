@@ -52,3 +52,8 @@ Helpers for partition-related info attached to a relcache entry: partition key (
 ## Confidence tag tally
 
 verified-by-code: 3 — from-comment: 4 — from-readme: 0 — inferred: 0 — unverified: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

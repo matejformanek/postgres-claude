@@ -132,3 +132,7 @@ parsing/formatting).
 - `[from-comment]` × 3
 - `[inferred]` × 1
 - `[unverified]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

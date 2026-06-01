@@ -21,3 +21,7 @@ the requested LSN. Output is materialized into a `Tuplestore` via
 - Uses `logical_read_local_xlog_page` from xlogutils — busy-polls a local
   flush LSN; the walsender variant in `walsender.c:logical_read_xlog_page`
   is more efficient.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

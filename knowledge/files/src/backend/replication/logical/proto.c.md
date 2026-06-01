@@ -34,3 +34,7 @@ streamed-xact messages). Pgoutput on the publisher writes via
 - v4 — parallel streaming apply (PG 16)
 
 Constants in `logicalproto.h:40-45`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

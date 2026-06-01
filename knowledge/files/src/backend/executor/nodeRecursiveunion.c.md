@@ -37,3 +37,8 @@ otherwise constrain iteration count (no `max_recursion` GUC like SQL Server).
 
 - [verified-by-code] semi-naive loop structure + dedup.
 - [from-comment] file-level intent.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

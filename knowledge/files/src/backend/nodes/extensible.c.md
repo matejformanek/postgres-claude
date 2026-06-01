@@ -74,3 +74,7 @@ can re-find the methods after `stringToNode`.
 - Example consumers: `contrib/postgres_fdw` (uses ForeignScan, not
   CustomScan, but same registration pattern via `fdwapi.h`),
   TimescaleDB, Citus.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

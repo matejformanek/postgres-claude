@@ -27,3 +27,7 @@ Opclass validator for btree (`amvalidate` implementation). Called from `commands
 
 - **Called by:** `catalog/opclasscmds.c` via the `IndexAmRoutine.amvalidate`/`amadjustmembers` slots.
 - **Calls into:** `access/amvalidate.c` (`check_amproc_signature`, `check_amop_signature`, opfamily-completeness helpers).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

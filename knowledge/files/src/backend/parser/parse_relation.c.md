@@ -89,3 +89,7 @@ enough variation to merit dedicated routines.
   bug pattern that leaks column-level privilege checking.
 - The fuzzy match is purely UX — it never affects which column the query
   actually resolves to.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

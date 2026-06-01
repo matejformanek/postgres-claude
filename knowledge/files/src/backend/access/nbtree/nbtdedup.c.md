@@ -34,3 +34,7 @@ Two related last-line-of-defense mechanisms before a leaf page split, both imple
 
 - **Called by:** `nbtinsert.c` (`_bt_delete_or_dedup_one_page`), `nbtsort.c` (build-time dedup), `nbtpage.c` (`_bt_delitems_*` via `_bt_update_posting`), `nbtxlog.c` (`_bt_swap_posting` during REDO).
 - **Calls into:** `access/tableam.h` callbacks (heap_index_delete_tuples), `storage/predicate.c` for SSI, `access/xloginsert.c` for WAL.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

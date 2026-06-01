@@ -10,3 +10,7 @@ SQL surface for inspecting `$PGDATA/global/pg_control`:
 `get_controlfile()` (under `ControlFileLock`) and returns a row-shaped
 record. Used by monitoring tools to read DB system identifier,
 last-checkpoint LSN, oldest xid, WAL block size, etc. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

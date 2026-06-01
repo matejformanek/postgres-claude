@@ -145,3 +145,7 @@ re-derived).
 - `[verified-by-code]`: 16
 - `[from-comment]`: 6
 - `[unverified]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

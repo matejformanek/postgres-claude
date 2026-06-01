@@ -175,3 +175,7 @@ the page) and `CLOG_TRUNCATE` (re-execute the truncation).
 - `[from-comment]`: 6
 - `[from-README]`: 1
 - `[unverified]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

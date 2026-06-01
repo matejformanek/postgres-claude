@@ -204,3 +204,7 @@ it re-registers; on commit/abort it cleans up.
 - `[verified-by-code]`: 32
 - `[from-comment]`: 8
 - `[unverified]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

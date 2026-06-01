@@ -57,3 +57,8 @@ provided `mergeStrategies` and `mergeNullsFirst` arrays.
 
 - [verified-by-code] state machine constants + entry points.
 - [from-comment] the worked example at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

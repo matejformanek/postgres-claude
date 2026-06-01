@@ -63,3 +63,7 @@ caller patches in extra params via direct setter calls (e.g.
 `include/tcop/dest.h` — see the long top comment for the receiver contract,
 especially the rule that `receiveSlot` must be called with the same TupleDesc
 that was given to `rStartup`. [from-comment `dest.h:107-111`]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

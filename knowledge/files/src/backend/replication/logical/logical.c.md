@@ -58,3 +58,7 @@ fills in the `OutputPluginCallbacks` vtable.
 `twophase_opt_given` (set when client requested 2PC in
 START_REPLICATION). Both must be true to actually do 2PC decoding.
 (`logical.h:88-101`) [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -166,3 +166,7 @@ doesn't survive crash anyway).
 - `[from-comment]`: 2
 - `[from-README]`: 2
 - `[unverified]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

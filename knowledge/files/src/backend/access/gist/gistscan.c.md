@@ -19,3 +19,7 @@ Scan setup / rescan / endscan. Allocates `GISTScanOpaque`, initializes the pairi
 `GISTScanOpaque` carries: pairing heap queue, opclass info per column, `killedItems[]` array for `gistkillitems`, `markPos` for mark/restore (not all paths supported).
 
 Tags: [from-comment].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

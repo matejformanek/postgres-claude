@@ -22,3 +22,7 @@ A single `CREATE STATISTICS` can request multiple kinds at once (`(ndistinct, de
 ## Confidence tag tally
 
 `[verified-by-code]=3 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

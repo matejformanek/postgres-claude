@@ -11,3 +11,7 @@ basic, extended/POSIX, advanced — controlled by `REG_BASIC` /
 `(?xms)`, escape sequences (`\d`, `\s`, `\b`...), and bracket-expression
 parsing. Maintains `v->next`/`v->save` for one-token lookahead and a
 push-back slot. [from-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

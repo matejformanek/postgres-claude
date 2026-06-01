@@ -36,3 +36,8 @@ and tagged so by warning in some cases.)
 
 - [verified-by-code] dispatch through SetExprState.
 - [from-comment] file-level intent.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

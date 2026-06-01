@@ -24,3 +24,7 @@ Catalog-level support helpers shared by `rewriteDefine.c` and
 `relhasrules` toggling and rulename lookup are the only two operations
 that both Define and Remove paths need; collecting them here keeps the
 catalog-touch logic in one place.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

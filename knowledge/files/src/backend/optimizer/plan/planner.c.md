@@ -194,3 +194,7 @@ SRF-free targets and SRF-bearing levels. The `targets` /
 
 ## 11. Tags
 `[verified-by-code]` ×19, `[from-comment]` ×10
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

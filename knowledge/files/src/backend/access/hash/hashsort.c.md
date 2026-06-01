@@ -18,3 +18,7 @@ Build-time tuplesort by `(bucket, hashcode, heap_tid)` for locality. Tuples are 
 If row estimate was too low, splits may occur during the build. The bucket-comparator is based on the *initial* mask values, so split tuples may be slightly out-of-order with respect to the current bucket layout. Not a correctness issue — `_hash_doinsert` always re-hashes — just a locality hit. [from-comment, hashsort.c:9-15]
 
 Tags: [from-comment].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

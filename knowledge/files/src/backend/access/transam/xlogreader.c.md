@@ -173,3 +173,7 @@ Low-level read into the reader's segment file via the
 - `[verified-by-code]`: 33
 - `[from-comment]`: 2
 - `[unverified]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

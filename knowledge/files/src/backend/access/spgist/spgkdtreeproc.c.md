@@ -20,3 +20,7 @@ Built-in **k-d tree** opclass over `point` for SP-GiST: `kd_point_ops`. [from-co
 K-d trees alternate the dimension by tree level: even-level nodes split by X, odd-level by Y. The prefix stores the split coordinate; the level (parity) is implicit in the descent depth. [from-comment + verified-by-code]
 
 Tags: [from-comment].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

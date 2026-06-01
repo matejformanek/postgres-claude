@@ -40,3 +40,7 @@ Triggered when a top-level buffer becomes ½ full. Continues until ½ of the buf
 When a buffered internal page is split (by an incoming downlink insert), the buffer must split too. All tuples are scanned through and pushed to whichever child has lower `penalty` — exactly the same selection rule used at descent time.
 
 Tags: [from-comment]; [from-README, README:297-423 — extensively cited].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

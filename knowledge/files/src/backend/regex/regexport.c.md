@@ -16,3 +16,7 @@ match the NFA without matching the full regex (because back-refs and
 lookarounds are dropped). This is OK for trigram indexing because the
 trigram set is also a necessary-but-not-sufficient filter; false
 positives are caught by the recheck. [from-comment] (`regexport.c:6-10`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

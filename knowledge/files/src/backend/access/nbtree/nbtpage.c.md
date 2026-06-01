@@ -92,3 +92,7 @@ The outer loop iterates: phase 1 → repeated phase 2 until the leaf is fully de
 
 - **`_bt_lock_subtree_parent` recursion depth** — bounded by tree height, but the failure mode if the stack and the actual ancestor chain diverge (concurrent split *and* concurrent recycle of the original ancestor) is not exhaustively documented. The code defensively re-checks downlinks at each level. [unverified — page-deletion code is the second-most-fragile area in nbtree, after split locking]
 - **Interaction between `_bt_pendingfsm_finalize` and Hot Standby**: the WAL replay side does not emit `XLOG_BTREE_REUSE_PAGE` until the *next* `_bt_allocbuf` actually pulls a page from the FSM. The replay-side conflict horizon is only at recycle, not at delete. Whether this is intentional vs. relies on the standby's `BTPageIsRecyclable` running on every getroot-side path was not verified. [unverified, but see nbtxlog.c:967-1001 explanatory comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -27,3 +27,7 @@ in `walsender.c`. [from-comment]
 
 `%name-prefix="replication_yy"`; parser uses palloc so a parse error leaks
 no memory. (`:33-43`) [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -41,3 +41,7 @@ Canonical narrative for **GiST (Generalized Search Tree)**. Hellerstein/Naughton
 1. **"NSN comparison correctly catches the search-vs-split race"** — implemented in `gistget.c`'s scan iteration plus `gistutil.c::gistcheckpage`/`gistScanPage`. NSN is set inside the **parent** insert WAL emission, so the standby sees it at replay too. [from-README, README:268-284; verified-by-code in gistxlog.c handling]
 2. **"Single-pass insert with on-the-way downlink adjustment"** — see `gist.c::gistdoinsert` and the stack-of-frames it maintains. Concretely: at each non-leaf step, if downlink doesn't cover new key, call `Union`, replace downlink, possibly split internal page. [from-README, README:127-144]
 3. **"Split recursively if pickSplit halves don't fit"** — verified in `gistsplit.c::gistSplitByKey` recursion. [verified-by-code]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

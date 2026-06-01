@@ -14,3 +14,7 @@ of join clauses that mention this rel. Tiny file.
   for join removal / EC-derived rebuild.
 
 Tag tally: `[verified-by-code]` ×3.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

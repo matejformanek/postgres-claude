@@ -10,3 +10,7 @@ Gated by `#ifdef USE_ZSTD`. Supports compression `level`, `workers`
 window). All options come from `pg_compress_specification`. Ops follow
 the same gzip/lz4 pattern (header / contents / end_archive flush).
 ereports on build without zstd. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

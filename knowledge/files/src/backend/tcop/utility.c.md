@@ -68,3 +68,7 @@ is the canonical map from `Stmt` node to handler. Examples:
 
 Called from `tcop/pquery.c::PortalRunUtility` and `::PortalRunMulti`.
 Calls every `commands/*` module. Header: `tcop/utility.h`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

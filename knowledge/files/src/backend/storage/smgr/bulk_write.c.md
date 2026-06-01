@@ -92,3 +92,7 @@ pass `skipFsync=true` to avoid hammering the sync queue.
 ## Tag tally
 
 `[verified-by-code]` 4 / `[from-comment]` 2 / `[unverified]` 2.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -20,3 +20,7 @@
 The validator walks opfamily procs/amops, checks signatures, and warns on missing strategies or wrong arg types.
 
 Tags: [from-comment].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

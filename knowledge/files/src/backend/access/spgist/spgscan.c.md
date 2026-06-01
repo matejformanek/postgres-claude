@@ -31,3 +31,7 @@ For order-by-op queries, an additional `distances[]` array per queue entry store
 `PredicateLockPage` on each leaf page visited.
 
 Tags: [from-README, README:252-289]; [verified-by-code at function structure].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

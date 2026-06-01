@@ -31,3 +31,7 @@ The Custom Copy Format API (`copyapi.h`) lets extensions register a format other
 ## Confidence tag tally
 
 `[verified-by-code]=4 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

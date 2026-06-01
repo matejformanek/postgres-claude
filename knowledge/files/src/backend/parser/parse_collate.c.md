@@ -51,3 +51,7 @@ enum to record which side of that distinction we're on.
 - `parse_type.c` — produces the column collations the walker consumes.
 - `Query.collations` and the per-node `*collid` fields in
   `primnodes.h` — the storage targets.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

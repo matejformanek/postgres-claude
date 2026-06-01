@@ -155,3 +155,8 @@ Reset `NeedNewOuter=true, MatchedOuter=false` and return.
 - [from-comment] the "old comments" specification at `:33-58`, the
   EXEC_FLAG_REWIND comment at `:291-296`, and the ReScan
   inner-not-rescanned comment at `:393-397`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

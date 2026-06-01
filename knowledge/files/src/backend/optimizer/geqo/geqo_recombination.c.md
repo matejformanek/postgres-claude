@@ -4,3 +4,7 @@
 
 `init_tour` (random legal TSP permutation of genes 1..num_gene); shared
 helpers used by the per-operator files. [verified-by-code]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

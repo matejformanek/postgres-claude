@@ -43,3 +43,7 @@ Per-rel local state `PgStat_TableStatus`:
 `pgstat_relation_flush_cb` merges shared counters under the per-entry
 LWLock; `pgstat_relation_delete_pending_cb` handles relation drop while
 pending exists. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

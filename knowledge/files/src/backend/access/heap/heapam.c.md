@@ -105,3 +105,4 @@ This file does not define many top-level structs (the scan descs live in heapam.
 <!-- backlinks:auto -->
 - [data-structures/heap-tuple-layout.md](../../../../../data-structures/heap-tuple-layout.md)
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

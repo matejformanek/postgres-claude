@@ -39,3 +39,7 @@ matches, then by implicit-coercion matches. SQL spec §9.5 priority.
   filtered.
 - `parse_func.c` — sibling resolution logic for named function calls.
 - `pg_operator` system catalog — backing store.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

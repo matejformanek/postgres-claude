@@ -47,3 +47,7 @@ the refcount and deletes the directory when it hits zero.
 ## Tag tally
 
 `[from-comment]` 3 / `[verified-by-code]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

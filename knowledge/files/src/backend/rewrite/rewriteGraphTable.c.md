@@ -37,3 +37,7 @@ already visits every RTE.
 
 - `parse_graphtable.c` — produces the input.
 - `pg_propgraph_*` system catalogs.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

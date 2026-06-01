@@ -31,3 +31,7 @@ pg_shdepend rows: `(dbid, classid, objid, objsubid, refclassid, refobjid, deptyp
 ## Confidence tag tally
 
 `[verified-by-code]=4 [inferred]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

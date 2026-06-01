@@ -64,3 +64,7 @@ the result is wrapped in a `CallStmt` by `transformCallStmt` in
 - `parse_coerce.c` — argument-type coercion machinery used by
   `make_fn_arguments`.
 - `parse_agg.c` — aggregate/window-specific validation.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

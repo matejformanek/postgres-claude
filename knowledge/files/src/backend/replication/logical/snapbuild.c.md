@@ -75,3 +75,4 @@ checks consult that map instead of the tuple. (`:40-53`) [from-comment]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/snapshot-lifecycle.md](../../../../../data-structures/snapshot-lifecycle.md)
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

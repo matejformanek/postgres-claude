@@ -64,3 +64,8 @@ Type cache. Memoizes things that pg_type alone doesn't give you: default btree/h
 ## Confidence tag tally
 
 verified-by-code: 9 — from-comment: 7 — from-readme: 0 — inferred: 0 — unverified: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

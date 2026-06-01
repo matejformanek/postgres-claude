@@ -8,3 +8,7 @@
 expansion. Pulls the canonical message from `regex/regerrs.h` (a list of
 `REG_*` constants paired with their human messages). Used by SQL-level
 regex functions to populate ereport detail. [from-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

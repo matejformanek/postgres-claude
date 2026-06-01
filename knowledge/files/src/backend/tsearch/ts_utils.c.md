@@ -10,3 +10,7 @@ into a full path with the given extension. Used by every dictionary
 template when loading external files (`.dict`, `.affix`, `.stop`,
 `.syn`, `.ths`). Validates that the resulting path stays under the
 share dir — no `..` escape. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

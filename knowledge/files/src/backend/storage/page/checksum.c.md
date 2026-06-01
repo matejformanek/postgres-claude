@@ -57,3 +57,7 @@ form.
 ## Tag tally
 
 `[verified-by-code]` 1 / `[from-comment]` 2 / `[unverified]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

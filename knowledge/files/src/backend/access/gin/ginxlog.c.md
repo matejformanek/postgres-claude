@@ -71,3 +71,7 @@ The detailed implementation of posting-list-segment redo. Handles four action ty
 
 - The `data->prevTail != InvalidBlockNumber` else-branch in `ginRedoUpdateMetapage` (line 596) suggests a third metapage-update sub-case ("new tail"); the corresponding primary path is `ginfast.c::ginEntryInsert` writing into a new fastupdate-list tail. Whether the LSN-comparison skip is correct for *that* sub-case is asserted by the same "metapage is FPI-equivalent" comment but not verified for the tail-page block. [unverified]
 - Whether `XLOG_GIN_DELETE_PAGE` could ever observe a leaf page (the asserts at lines 492/501/511 require `GinPageIsData`); the README says only posting trees support page deletion, not entry tree. [verified-by-README]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -10,3 +10,7 @@ progress reporting and `EXPLAIN (BUFFERS)`-adjacent logging:
 - `pg_rusage_show(const PGRUsage *ru0)` returns a `psprintf`'d string of
   the form `"CPU: user: X.YYs system: X.YYs elapsed: X.YYs"`. Used by
   `VERBOSE` flavors of maintenance commands. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

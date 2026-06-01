@@ -44,3 +44,7 @@ The `snapshotConflictHorizon` in `XLOG_SPGIST_VACUUM_REDIRECT` is the **newest**
 - **Calls into:** `read_stream.c`, `spgutils.c` (placeholder helpers), `xloginsert.c`.
 
 Tags: [from-README, README:321-368]; [verified-by-code at function structure].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

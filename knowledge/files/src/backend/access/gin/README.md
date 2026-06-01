@@ -47,3 +47,7 @@ Canonical narrative for the **Generalized Inverted Index (GIN)** access method. 
 1. **"During step-right we hold both pin+lock"** — verified by source comment at `ginbtree.c` step-right loop. [from-README, README:341-345; verified-by-code]
 2. **"Insert holds parent pin (not lock) during descent, but during split holds parent exclusive before releasing child"** — see `ginbtree.c::ginInsertValue` + `ginPlaceToPage`. Subtle: this is *different* from nbtree's "split as a separate WAL record" pattern; GIN's split + parent-insert is **atomic in one WAL record** (or several records emitted under all locks held). [from-README, README:355-387; verified-by-code, ginxlog.c]
 3. **"Fastupdate interlock = metapage S-lock during scan"** — yes; `ginScanBeginning` takes share lock on metapage and the cleanup process takes exclusive. [from-README, README:501-508; verified-by-code]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

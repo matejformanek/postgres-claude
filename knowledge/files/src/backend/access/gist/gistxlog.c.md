@@ -74,3 +74,7 @@ The top-level redo dispatcher's comment (lines 400-404) says: "GiST indexes do n
 
 - The "first page held lock throughout" rule (line 256) appears to NOT match nbtree's split-replay pattern (which unlocks each block as it's written). The justification is that GIST's split atomically registers all new pages in a single record, so unlocking first would let a concurrent standby query reach a half-written sibling. **Whether this differs from nbtree because of WAL-record granularity, or because of a fundamental search-path difference, is not documented in code.** [unverified]
 - `gistRedoClearFollowRight` only updates F_FOLLOW_RIGHT on the *child* indicated in block 1 of an update or block 0 of a split — i.e. exactly the page whose split is being finished. The standby never sees a stray F_FOLLOW_RIGHT outside the replay path, because if the standby crashes mid-replay, the recovery restart will re-apply this update. [inferred]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

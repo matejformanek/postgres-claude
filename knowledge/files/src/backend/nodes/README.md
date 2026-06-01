@@ -104,3 +104,7 @@ Hand-written:
 - The generator: `source/src/backend/nodes/gen_node_support.pl`
   (34 KB Perl script — scans `@all_input_files`, emits `nodetags.h` plus
   the `.funcs.c` / `.switch.c` files).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
