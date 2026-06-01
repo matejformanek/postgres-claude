@@ -1,7 +1,7 @@
 # pg-claude — current state
 
-**Phase:** Synthesis pass over the file-by-file corpus.
-**Last activity:** 2026-06-01 — wrote 4 spine subsystem docs (access/heap, access/transam, storage/lmgr, storage/ipc) by synthesis over the per-file corpus; corrected 4 architecture docs (process-model, replication, executor, planner) from later-pass findings; added `/refresh-upstream` slash command and 4 focused `data-structures/` docs (HeapTuple, Snapshot, BufferDesc, PGPROC); ran a skill-description optimization pass over all 21 skills.
+**Phase:** Synthesis pass over the file-by-file corpus — spine complete.
+**Last activity:** 2026-06-01 — completed the remaining 4 spine subsystem syntheses (utils/mmgr ~287 lines, utils/cache ~382 lines, executor ~1092 lines, optimizer ~1034 lines). All 8 spine subsystem synthesis docs now exist (access/heap, access/transam, storage/lmgr, storage/ipc, utils/mmgr, utils/cache, executor, optimizer). Prior batch this same date: 4 architecture corrections + 4 data-structures docs + `/refresh-upstream` + skill-description optimization.
 **Source commit at last verification:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3`
 
 ## Done
@@ -15,7 +15,7 @@
 ### Knowledge corpus
 
 - **Architecture** (9 docs): `overview`, `process-model`, `query-lifecycle`, `executor`, `planner`, `wal`, `mvcc`, `replication`, `access-methods`. The 4 long-form docs flagged by file-level passes (`process-model`, `replication`, `executor`, `planner`) have been corrected in this session with file:line cites for the new findings (SIGURG vs SIGUSR1, `subsystemlist.h`, ProcSignalBarrier, PG18 `effective_wal_level`, sequence sync, `pg_conflict_detection`, failover slots, `resvalue`/`resnull` direct-write, `execAmi.c` mini-dispatch, MinimalTuple loss in tqueue, `additionalsize` HashAgg, ModifyTable Prologue/Act/Epilogue refactor, 9-item `set_plan_references` contract, four-phase join simplification, GEQO as planner extension, PHI freeze invariant).
-- **Subsystems** (12 docs): `storage-buffer` (calibration anchor) + this-session adds `access-heap`, `access-transam`, `storage-lmgr`, `storage-ipc` (synthesized over the per-file corpus, ~330–695 lines each, ~80–150 citations each, all cross-referenced via `[via knowledge/files/...]`). Plus 7 leaf subsystem docs from wave 3 (`libpq-backend`, `port`, `main`, `foreign`, `jit`, `partitioning`, `headers-wave3`).
+- **Subsystems** (16 docs): `storage-buffer` (calibration anchor) + 8 spine syntheses `access-heap`, `access-transam`, `storage-lmgr`, `storage-ipc`, `utils-mmgr`, `utils-cache`, `executor`, `optimizer` (synthesized over the per-file corpus, ~287–1092 lines each, ~80–120 citations each, all cross-referenced via `[via knowledge/files/...]`). Plus 7 leaf subsystem docs from wave 3 (`libpq-backend`, `port`, `main`, `foreign`, `jit`, `partitioning`, `headers-wave3`).
 - **Idioms** (10 docs): `error-handling`, `memory-contexts`, `locking-overview`, `catalog-conventions`, `fmgr`, `spi`, `node-types-and-lists`, `parser-pipeline`, `guc-variables`, `bgworker-and-parallel`.
 - **Data-structures** (4 docs): `heap-tuple-layout`, `snapshot-lifecycle`, `bufferdesc-state`, `pgproc-fields`. New this session — focused notes between the idiom level and the per-file level.
 - **Conventions** (3): `coding-style`, `testing`, `extension-layout`.
@@ -33,8 +33,8 @@
 
 ## Next
 
-1. Cross-reference pass: link `knowledge/files/` docs back from `knowledge/architecture/` and `knowledge/idioms/`. Currently the cite-direction is mostly one-way (files cite source; long-form docs cite files; nothing in files points back to the long-form docs that synthesize them).
-2. Synthesize the remaining 4 spine subsystem docs from the file corpus: `utils/mmgr`, `utils/cache`, `executor`, `optimizer`. Same shape as today's 4.
+1. Cross-reference pass: link `knowledge/files/` docs back from `knowledge/architecture/`, `knowledge/idioms/`, and the new `knowledge/subsystems/` syntheses. Currently the cite-direction is mostly one-way (files cite source; long-form docs cite files; nothing in files points back to the long-form docs that synthesize them).
+2. Backfill per-file docs flagged as missing during the spine syntheses: `memutils.h`, `palloc.h`, `memutils_internal.h`, `memutils_memorychunk.h` (mmgr); `plan/planner.c`, `plan/createplan.c`, `path/allpaths.c`, `path/costsize.c`, `util/pathnode.c` (optimizer); `execMain.c`, `execProcnode.c`, `spi.c`, `nodeNestloop.c` (executor).
 3. `/refresh-upstream` shakedown: pull both clones, generate the first refresh report, see how much of the corpus has rotted since `ef6a95c7c64`.
 4. Validation run: pick an actual PG hacking task and run it through the system (the "Phase D" from the master plan) — tests whether the corpus + skills + commands compose into something useful.
 5. Workflow agents (Phase 2 from the master plan): `code-explorer`, `patch-reviewer`, `feature-planner`, `doc-verifier`.
@@ -43,7 +43,7 @@
 
 - Registry rows in `progress/files-examined.md`: **1021**.
 - Per-file docs under `knowledge/files/`: **902**.
-- Subsystem + data-structures docs: **16**.
+- Subsystem + data-structures docs: **20** (16 subsystem + 4 data-structures).
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.
 - Top directories by registry rows: `executor/` (80+), `access/transam` (47), `catalog/` (50), `commands/` (78), `replication/` (56), `optimizer/` (75), `parser/+rewrite/` (57), `storage/ipc` (35), `access/{brin,gin,gist,hash,spgist}` (~80), `nodes/` (33), `utils/cache` (25), `utils/mmgr` (11).
