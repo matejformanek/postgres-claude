@@ -1,0 +1,185 @@
+# _loader — the shared cloud-routine workflow
+
+**This file is the single source of truth for HOW every cloud routine runs.**
+The claude.ai `RemoteTrigger` for each routine is a thin bootstrap that does only
+two things:
+
+```
+You are the `<routine>` cloud routine for the postgres-claude meta repo.
+1. git pull --ff-only origin main
+2. Read .claude/cloud/_loader.md and follow it exactly, with routine = <routine>.
+```
+
+Everything else — the workflow below — lives here, in the repo, on `main`. That
+means any fix to how routines behave (not just what a single recipe does) is a
+normal commit to this file and takes effect on the **next** night's run, with no
+need to touch the 10 triggers. The only thing permanently baked into a trigger is
+the two-line bootstrap above, which never needs to change.
+
+> **Precedence:** if a routine's own recipe (`.claude/cloud/<routine>.md`)
+> specifies something that conflicts with a step here, **the recipe wins** for
+> that routine's domain-specific work (which sources to fetch, what to produce,
+> its token budget, its failure modes). This loader governs the envelope around
+> that work (pull, skip-gate, run log, PR shape, exit discipline).
+
+---
+
+## The workflow (every routine, every night)
+
+You are running as the `<routine>` daily cloud routine. Working dir: the
+`postgres-claude` repo, checked out at `main`. Today's date is injected by
+claude.ai at run time.
+
+### 1. Sync to latest main
+
+```bash
+git pull --ff-only origin main
+```
+
+If this fails (diverged, conflict), STOP: write a failure run log (step 6 form)
+on a fresh branch, push it, exit non-zero. Do NOT proceed against a stale tree.
+
+### 2. Skip gate
+
+If `.cloud-skip-<routine>` exists at repo root:
+
+```bash
+test -f .cloud-skip-<routine> && echo "skipped via lockfile"
+```
+
+Write a one-line run log with `exit_reason: skipped` (step 6 form) and exit 0.
+No branch, no PR.
+
+### 3. Read the recipe + load the standing skills
+
+1. Read `.claude/cloud/<routine>.md` **end-to-end**. It is the single source of
+   truth for this routine's domain work: which skills to load, which queues to
+   pop, which URLs to fetch, the token budget, the per-section outputs, and the
+   recipe-specific failure modes.
+2. Always also load, regardless of recipe:
+   - `.claude/skills/pg-claude/SKILL.md` (master navigator)
+   - `.claude/skills/memory-keeping/SKILL.md` (ledger discipline)
+3. Load any additional skills the recipe's `skills_required` frontmatter names.
+
+### 4. Create the run branch
+
+```bash
+git checkout -b cloud/<routine>/<YYYY-MM-DD>
+```
+
+All file changes for this run live on this branch. One branch per run.
+
+### 5. Do the recipe's work
+
+Follow `.claude/cloud/<routine>.md`'s "Per-run recipe" exactly. Respect:
+
+- **Source fetch via URL only** (no clone of upstream postgres). The anchor SHA
+  lives in `progress/STATE.md`; read it before fetching pinned files. URL forms
+  are listed in `README.md` §Conventions item 7.
+- **Token budget** from the recipe frontmatter (`max_input_tokens` /
+  `max_output_tokens`). Self-cap; if you approach the ceiling, stop early and
+  record `exit_reason: rate-limited` or `budget-capped`.
+- **Work queues** at `progress/_queues/<routine>.md` are append-only with
+  `[pending]` / `[in-progress:<branch>]` / `[done:<merged-sha>]` markers.
+
+### 6. Write the daily run log
+
+Always, even on failure or skip. Path:
+
+```
+progress/cloud-routines/<routine>/<YYYY-MM-DD>.md
+```
+
+Template:
+
+```markdown
+# <routine> — <YYYY-MM-DD>
+
+- tried: <what the routine attempted>
+- found: <file paths + line counts>
+- skipped: <queue items bypassed and why>
+- sources:
+  - <url> @ <iso-timestamp> → <http-status>
+- cost:
+  - input_tokens: <n>
+  - output_tokens: <n>
+  - total_tokens: <n>
+- exit_reason: <ok | skipped | queue-empty | rate-limited | budget-capped | error: ...>
+```
+
+Commit it on the run branch in the same PR as the work.
+
+### 7. Self-review + open the PR
+
+1. Self-review the diff against `.claude/skills/review-checklist/SKILL.md`.
+2. Open the PR:
+   - **Title:** `[cloud:<routine>] <one-line summary>`
+   - **Body**, containing:
+     - (a) the recipe path (`.claude/cloud/<routine>.md`)
+     - (b) sources fetched: each as URL + ISO timestamp + HTTP status
+     - (c) the self-review result against `review-checklist`
+     - (d) the queue items popped (with their new `[in-progress:<branch>]` marker)
+
+### Environment / tooling notes (cloud CCR specifics)
+
+- **`gh` CLI may be absent.** If `gh --version` fails, use the **GitHub MCP
+  tools** instead for all repo write operations (create branch, write/commit
+  files, open PR, merge PR) — they work through the same auth.
+- **`GH_TOKEN` is set** in the cloud environment for authenticated
+  `api.github.com` access (5000 req/hr). Never print its value. Use it for
+  raw/API fetches that would otherwise hit the 60/hr unauthenticated limit.
+- **Sources are fetched, not cloned.** Don't `git clone` upstream postgres;
+  fetch by URL (forms in `README.md` §Conventions).
+
+### 8. Failure discipline
+
+If anything blocks at any step:
+
+1. Write a clear failure run log at the step-6 path, with a specific
+   `exit_reason: error: <what>`.
+2. Commit it on the run branch and push.
+3. Exit **non-zero, with no PR** — so `pg-state-keeper` classifies the run
+   `FAILED` (log present, non-ok exit) rather than `SILENT` (no log at all).
+
+The one outcome to avoid is dying before writing ANY log: that's the `SILENT`
+state the watchdog most wants to catch, and it's the least diagnosable. Whenever
+possible, write the log first, then do the risky thing.
+
+---
+
+## Why this indirection exists
+
+Before this file, the 7-step workflow was duplicated in two places that could
+drift: the baked `message.content` of each of the 10 `RemoteTrigger`s, and a
+prose copy in `README.md`. A fix to the workflow itself meant re-issuing all 10
+triggers; the README copy could silently fall out of sync with the baked copy.
+
+With the bootstrap-only trigger + this loader:
+
+- **One operative copy** of the workflow, versioned on `main`.
+- **Fixable in time:** edit this file, commit, and the next run uses it — no
+  trigger touches.
+- **README** stops duplicating; it points here.
+
+The only thing a trigger still bakes in is "pull main + read this file", which is
+irreducible (you need at least that to know where to look) and effectively never
+changes.
+
+## For maintainers wiring or re-wiring a trigger
+
+The `RemoteTrigger` `message.content` for routine `<routine>` should be exactly:
+
+```
+You are the `<routine>` daily cloud routine for the postgres-claude meta repo
+(github.com/matejformanek/postgres-claude). Working dir: the repo at main.
+Today's date is injected below.
+
+1. git pull --ff-only origin main
+2. Read .claude/cloud/_loader.md end-to-end and follow it exactly, treating
+   `<routine>` as your routine name. The loader (and the recipe it points you
+   to) is the single source of truth; if anything here disagrees with it, the
+   repo wins.
+```
+
+Keep it that short. Resist re-inlining workflow steps into the trigger — that
+re-introduces the drift this file exists to remove.
