@@ -38,6 +38,7 @@ correct `dev/...` paths, and macOS gotchas.
 | Brainstorm a PG feature (Phase 1 of planner) | `/pg-brainstorm <idea>` |
 | Heavy plan for a brainstormed feature (Phase 2) | `/pg-plan <slug>` |
 | Execute a plan phase-by-phase (Phase 3, plan-linked commits) | `/pg-implement <slug>` |
+| Multi-agent comprehensive patch review (CF# / PR# / .patch) | `/pg-review <ref>` |
 
 **Be proactive.** If the user says "let's build", "start the server", "run tests",
 "debug this backend", "let me query that", etc., invoke the command — don't ask
@@ -80,7 +81,8 @@ didn't trigger.
 | Topic | Skill | Trigger |
 |---|---|---|
 | Format-patch + CF registration + email etiquette | `patch-submission` | "let's send this upstream" |
-| Pre-submission self-review checklist | `review-checklist` | "review my patch" or pre-mailing pass |
+| Pre-submission self-review checklist (seven-phase scaffold) | `review-checklist` | "review my patch" or pre-mailing pass |
+| Multi-agent deep review of someone else's CF patch | `pg-patch-review` | "/pg-review <CF#>", "deep-review this patch" |
 | PG-style commit messages (no Co-Authored-By!) | `commit-message-style` | drafting commits in `dev/` intended for upstream |
 | Parser, Node taxonomy, gen_node_support.pl | `parser-and-nodes` | grammar/Node changes, new SQL statement |
 | Executor + planner integration | `executor-and-planner` | new node type, new path, planner change |
@@ -190,6 +192,7 @@ User asks for...                              You reach for...
                         + edit dev/src/backend/utils/adt/, then
                           /setup-pg → /pg-restart → /pg-psql → /pg-test
 "send upstream"       → patch-submission + review-checklist + commit-message-style
+"review a CF patch"   → /pg-review <CF#|PR#|file>   (multi-agent, 4 critics + synthesizer)
 "document subsystem"  → /document-subsystem <path>
 "brainstorm a feature"→ /pg-brainstorm <idea>  (Phase 1; ~150-300 line sketch)
 "plan that feature"   → /pg-plan <slug>        (Phase 2; heavy implementable plan)
