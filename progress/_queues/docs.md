@@ -8,7 +8,7 @@ table of contents, exclude chapters whose slug already exists under
 ## Entries (internals-heavy chapters first)
 
 [done:a49dd51] storage https://www.postgresql.org/docs/current/storage.html
-[pending] mvcc https://www.postgresql.org/docs/current/mvcc.html
+[done:pending-merge] mvcc https://www.postgresql.org/docs/current/mvcc.html
 [pending] wal https://www.postgresql.org/docs/current/wal.html
 [pending] indexes-types https://www.postgresql.org/docs/current/indexes-types.html
 [pending] gist https://www.postgresql.org/docs/current/gist.html

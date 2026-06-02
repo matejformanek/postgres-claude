@@ -169,6 +169,15 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   Note: page is from 2015 — the distilled doc supplements the missing
   `SetHintBits`/`MarkBufferDirtyHint`/WAL-flush machinery from the corpus.
 
+- **Hot_Standby** — https://wiki.postgresql.org/wiki/Hot_Standby
+  *(distilled 2026-06-02 → `knowledge/wiki-distilled/Hot_Standby.md`)*
+  PG 9.0/9.1-era quick-start for running read-only queries on a replaying
+  standby [from-wiki](https://wiki.postgresql.org/wiki/Hot_Standby).
+  Note: page is dated (2016) — uses retired `recovery.conf`/`standby_mode`
+  spellings and barely covers the replay-vs-query conflict knobs
+  (`max_standby_*_delay`, `hot_standby_feedback`); the distilled doc
+  supplements those plus the lock-manager recovery clamp from the corpus.
+
 - **MVCC** — https://wiki.postgresql.org/wiki/MVCC
   **Stale stub** (last meaningful update May 2012). Just a pointer to
   the official docs and Bruce Momjian talks. Don't use as a learning
