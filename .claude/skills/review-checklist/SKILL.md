@@ -10,6 +10,22 @@ Run them in order — the cheap checks first, the deep ones last. The same
 checklist applies pre-submission (review our own work) and post-submission
 (review someone else's CF entry).
 
+## Companion skills
+
+This skill is the **orchestration layer**. When a phase points into a
+specialist domain, hand off to the corresponding skill instead of
+re-deriving the deep rules here:
+
+- `wal-and-xlog` — WAL records, redo functions, RM registration, hint bits
+- `locking` — lock primitive choice and acquisition order
+- `error-handling` — `ereport`/`elog`/SQLSTATE/message-style choices
+- `memory-contexts` — `palloc` placement, context lifetimes
+- `coding-style` — pgindent survival, include order, C99 subset
+- `catalog-conventions` — `pg_proc`/catalog column/OID assignment work
+- `testing` — picking regress vs isolation vs TAP vs module
+- `commit-message-style` — judging committer-readiness of the message
+- `patch-submission` — pre-submission of our own change
+
 ## Phase 1 — Submission review (5 minutes)
 
 Cheap, mechanical checks. If any fail, kick back to author immediately
@@ -65,6 +81,9 @@ meson test
       + new build comparison for any hot-path change.)
 - [ ] If the patch claims a speedup, does it deliver? Reproduce.
 - [ ] Any new O(N²) or unbounded loops? Acceptable only with rationale.
+- [ ] Hot-loop micro-optimization? Re-run at significantly larger N than
+      the author's benchmark — a faster constant factor that conceals a
+      quadratic term is a footgun.
 - [ ] Memory: any new per-tuple / per-row allocation? Should it use a
       short-lived MemoryContext?
 
@@ -91,12 +110,17 @@ The harder one — does this fit?
 - [ ] Concurrency: signal-handler safety, `PG_TRY`/`PG_CATCH` resource
       cleanup, reentrancy.
 - [ ] Storage / WAL: backwards-compatibility of any on-disk or WAL
-      format change. New WAL records → `XLOG_PAGE_MAGIC` bump.
+      format change. New WAL records → `XLOG_PAGE_MAGIC` bump. Deep
+      checklist: hand off to the `wal-and-xlog` skill.
+- [ ] Hint-bit handling in redo: `MarkBufferDirtyHint` vs
+      `MarkBufferDirty` — using the wrong one corrupts recovery.
 - [ ] Catalog change → `CATALOG_VERSION_NO` bumped, OIDs assigned, and
       this is master-only (never backpatchable).
 - [ ] If touching `src/include/` structs in back branches: ABI rules —
       new members at end, no signature changes on exported functions,
-      new enum values at end.
+      new enum values at end. Inline functions and macros in
+      `src/include/` are also part of the extension-visible ABI; treat
+      them with the same back-branch caution.
 - [ ] Does it foreclose obvious future extensions? Flag if yes.
 
 ## Phase 7 — Review review
@@ -123,6 +147,9 @@ Before posting:
   - `Waiting on Author` if you raised blocking issues
   - `Ready for Committer` if you're satisfied (committer will still
     re-review)
+- For **performance reviews**, include a small table: master tps,
+  patched tps, run count, hardware, build flags, exact repro recipe.
+  Numerical claims without a recipe get bounced.
 
 ## Pre-submission self-review
 

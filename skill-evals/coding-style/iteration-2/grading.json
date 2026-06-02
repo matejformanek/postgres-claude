@@ -1,0 +1,62 @@
+{
+  "skill": "coding-style",
+  "iteration": 2,
+  "scale": "Each assertion graded baseline (no skill) and with-skill: 1 = clearly stated, 0.5 = partial/vague, 0 = missed or wrong.",
+  "evals": [
+    {
+      "id": "eval-1-includes-and-decls",
+      "assertions": [
+        {"text": "States postgres.h must be the FIRST include, before any system header", "baseline": 1, "with_skill": 1},
+        {"text": "Says NO to sprinkling <stdio.h> with project headers; system headers form their own group between postgres.h and project headers", "baseline": 1, "with_skill": 1},
+        {"text": "Mentions blank line between the three include groups", "baseline": 1, "with_skill": 1},
+        {"text": "Says static-helper prototypes go in a forward-declaration block after the includes, before function definitions", "baseline": 1, "with_skill": 1},
+        {"text": "Explicitly rejects mid-block declarations as banned in PG (even though C99 allows them)", "baseline": 1, "with_skill": 1},
+        {"text": "Explicitly rejects `for (int i = …)` as a mid-block decl variant", "baseline": 1, "with_skill": 1},
+        {"text": "Mentions the mandatory file-header block with both copyright lines and the /*------- bracket form", "baseline": 0.5, "with_skill": 1},
+        {"text": "Notes headerscheck / cpluspluscheck requirements for headers under src/include/", "baseline": 0, "with_skill": 1}
+      ],
+      "baseline_total": 6.5,
+      "with_skill_total": 8.0,
+      "max": 8
+    },
+    {
+      "id": "eval-2-pgindent-typedef-churn",
+      "assertions": [
+        {"text": "Diagnoses missing entry in src/tools/pgindent/typedefs.list as the cause", "baseline": 1, "with_skill": 1},
+        {"text": "Explains pgindent needs the list to space `Type *var` correctly", "baseline": 1, "with_skill": 1},
+        {"text": "Warns: don't name a function the same as a typedef (pgindent mangles both)", "baseline": 1, "with_skill": 1},
+        {"text": "Mentions the third escape: mismatched braces inside #if blocks → restructure", "baseline": 0.5, "with_skill": 1},
+        {"text": "Notes the typedef list is regenerated per release from the buildfarm", "baseline": 1, "with_skill": 0.5},
+        {"text": "Recommends running pgindent locally before commit to catch this early", "baseline": 1, "with_skill": 1}
+      ],
+      "baseline_total": 5.5,
+      "with_skill_total": 5.5,
+      "max": 6
+    },
+    {
+      "id": "eval-3-ereport-message-style",
+      "assertions": [
+        {"text": "Flags 'Unable' → use 'could not' (recoverable) / 'cannot' (permanent)", "baseline": 1, "with_skill": 1},
+        {"text": "Flags capital first letter in errmsg → should be lower-case", "baseline": 1, "with_skill": 1},
+        {"text": "Flags trailing period in errmsg → should have none", "baseline": 1, "with_skill": 1},
+        {"text": "Flags unquoted %s for filename → should be \"%s\"", "baseline": 1, "with_skill": 1},
+        {"text": "Flags function-name leakage ('open() failed') and recommends %m", "baseline": 1, "with_skill": 1},
+        {"text": "States ereport(ERROR, …) does not return → pfree(buf) is unreachable, delete it", "baseline": 1, "with_skill": 1},
+        {"text": "Notes memory-context cleanup makes the explicit pfree unnecessary anyway", "baseline": 1, "with_skill": 1},
+        {"text": "Suggests errcode_for_file_access() or a more appropriate SQLSTATE family", "baseline": 1, "with_skill": 1}
+      ],
+      "baseline_total": 8.0,
+      "with_skill_total": 8.0,
+      "max": 8
+    }
+  ],
+  "totals": {
+    "baseline": 20.0,
+    "with_skill": 21.5,
+    "max": 22,
+    "baseline_pct": 90.9,
+    "with_skill_pct": 97.7,
+    "delta_pct": 6.8
+  },
+  "notes": "Iter-2 added the errcode_for_file_access bullet to the error-message section, which closed the eval-3 with_skill gaps (memory-context cleanup + appropriate SQLSTATE family both now 1.0). Eval-1 with_skill reached 8/8 thanks to the explicit `for (int i = …)` ban that landed in hard rule #3. Baseline also drifted up vs iter-1 — same model, same prompts, so this is normal sampling variance (notably eval-2 baseline volunteered the buildfarm-regeneration point and eval-1 baseline volunteered the for-loop ban). The with_skill answers are now at ceiling on every assertion except one — eval-2 with_skill didn't explicitly mention buildfarm regeneration (the SKILL.md doesn't include it, only baseline knowledge does). Net: with_skill ↑1.0 vs iter-1, baseline ↑2.0 vs iter-1, delta narrowed to 6.8pp because the skill is now near ceiling and baseline is strong on this topic. Skill still beats baseline on every eval individually."
+}

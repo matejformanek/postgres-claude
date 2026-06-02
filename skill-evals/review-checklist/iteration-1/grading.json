@@ -1,0 +1,61 @@
+{
+  "skill": "review-checklist",
+  "iteration": 1,
+  "results": [
+    {
+      "id": "eval-1-guc-inline-func",
+      "assertions": [
+        {"a": "Mentions seven-phase structure or explicitly walks phases in order", "with_skill": true, "baseline": false},
+        {"a": "Phase 1 cheap-check first triage (kick back as Waiting on Author before deep review)", "with_skill": true, "baseline": false},
+        {"a": "Calls out doc update under doc/src/sgml/config.sgml", "with_skill": true, "baseline": true},
+        {"a": "Flags ABI implications of an inline function exposed in src/include/ (header is part of ABI surface)", "with_skill": true, "baseline": false},
+        {"a": "Names sanity test: revert just the code and confirm the new test fails", "with_skill": true, "baseline": false},
+        {"a": "Recommends concrete reviewer asks over vague ones (\"add test for SET LOCAL inside subxact\" vs \"more tests\")", "with_skill": true, "baseline": false},
+        {"a": "Mentions CF state transition (Waiting on Author / Ready for Committer)", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "1/7"
+    },
+    {
+      "id": "eval-2-wal-xlog",
+      "assertions": [
+        {"a": "Requires XLOG_PAGE_MAGIC bump", "with_skill": true, "baseline": true},
+        {"a": "Names rmgrlist.h registration with the full callback set (rm_redo, rm_desc, rm_identify, rm_startup, rm_cleanup, rm_mask)", "with_skill": true, "baseline": false},
+        {"a": "Requires crash-recovery TAP test under src/test/recovery/", "with_skill": true, "baseline": true},
+        {"a": "Calls out lock-acquisition order in redo must match normal write path", "with_skill": true, "baseline": true},
+        {"a": "Flags master-only / not backpatchable explicitly", "with_skill": true, "baseline": true},
+        {"a": "Calls out no palloc inside critical section + XLogReadBufferForRedo idiom", "with_skill": true, "baseline": true},
+        {"a": "Points to wal-and-xlog skill or knowledge/architecture/wal.md as the deep reference", "with_skill": true, "baseline": false},
+        {"a": "Mentions hint-bit rules / MarkBufferDirtyHint vs MarkBufferDirty", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "8/8",
+      "baseline_score": "5/8"
+    },
+    {
+      "id": "eval-3-perf-claim",
+      "assertions": [
+        {"a": "Build in release mode (no cassert/debug) for benchmarking", "with_skill": true, "baseline": true},
+        {"a": "Multiple runs + median + same hardware/flags discipline", "with_skill": true, "baseline": true},
+        {"a": "Regression hunt on unrelated workloads (pgbench tpc-b + neighbors)", "with_skill": true, "baseline": true},
+        {"a": "Microbenchmark vs end-to-end honesty — 30% hot loop != 30% real workload", "with_skill": true, "baseline": true},
+        {"a": "Pre-submission self-review specifics: commit split into logical units, no leftover debug elog, no commented-out code", "with_skill": true, "baseline": false},
+        {"a": "Calls out the assertion-build test pass separately from the perf run", "with_skill": true, "baseline": true},
+        {"a": "Requires posting numbers + exact recipe in the cover letter as a table", "with_skill": true, "baseline": true},
+        {"a": "Flags O(N^2) / scaling at larger N as a footgun for hot-loop optimizations", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "8/8",
+      "baseline_score": "6/8"
+    }
+  ],
+  "totals": {
+    "with_skill": "23/23",
+    "baseline": "12/23",
+    "delta": "+11"
+  },
+  "notes": [
+    "Skill clearly wins on E1 (structured seven-phase coverage + ABI catch + CF state + concrete-asks discipline) — baseline misses 6/7.",
+    "E2: baseline knows the headline WAL items because they are mechanical and well-known; skill adds rm_mask completeness, hint-bit rules, and the pointer to wal-and-xlog deep skill.",
+    "E3: baseline does well on the perf mechanics; skill adds the self-review discipline (commit split, debug-elog hunt) and the O(N^2)-at-larger-N reminder.",
+    "Gap: SKILL.md does not explicitly cross-reference the sibling skills (wal-and-xlog, error-handling, coding-style, testing). A reviewer hitting WAL/lock/coding topics should be pointed at the specialist skill instead of duplicating its content here."
+  ]
+}

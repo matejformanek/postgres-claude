@@ -1,0 +1,59 @@
+{
+  "iteration": 1,
+  "scoring": "Each assertion = 1 pt if satisfied, 0 if not, 0.5 if partial. Per-eval score = sum / total.",
+  "results": [
+    {
+      "id": "ev1-deep-read-ledger",
+      "assertions": [
+        {"a": "mentions appending 5 rows to progress/files-examined.md", "with_skill": 1, "baseline": 0},
+        {"a": "specifies depth=deep-read and last-verified-commit columns", "with_skill": 1, "baseline": 0},
+        {"a": "mentions adding a row to progress/coverage.md with the 5-column shape", "with_skill": 1, "baseline": 0},
+        {"a": "says STATE.md is edited in place (not appended)", "with_skill": 1, "baseline": 0},
+        {"a": "names the four session-log headings", "with_skill": 1, "baseline": 0},
+        {"a": "filename pattern sessions/YYYY-MM-DD-<topic>.md with today's date", "with_skill": 1, "baseline": 0},
+        {"a": "explicitly says do NOT edit old session logs", "with_skill": 1, "baseline": 0}
+      ],
+      "with_skill_score": "7/7 = 1.00",
+      "baseline_score": "0/7 = 0.00"
+    },
+    {
+      "id": "ev2-when-session-log",
+      "assertions": [
+        {"a": "lists the four 'durable output' triggers (new doc / verified fact / gotcha / locked decision)", "with_skill": 1, "baseline": 0},
+        {"a": "pure exploration → optional, only if worth re-finding", "with_skill": 1, "baseline": 0.5},
+        {"a": "distinguishes sessions/ (act of producing) vs knowledge/ (artifact)", "with_skill": 1, "baseline": 0},
+        {"a": "mentions user-side trigger phrases (wrap up / close out / etc.)", "with_skill": 1, "baseline": 0},
+        {"a": "concrete recommendation for the user's case (skip the log)", "with_skill": 1, "baseline": 0.5},
+        {"a": "no hallucinated requirements (e.g., does not invent a 'daily log' rule)", "with_skill": 1, "baseline": 1}
+      ],
+      "with_skill_score": "6/6 = 1.00",
+      "baseline_score": "2/6 = 0.33"
+    },
+    {
+      "id": "ev3-correction-to-old-doc",
+      "assertions": [
+        {"a": "explicit: do NOT edit old session log (append-only)", "with_skill": 1, "baseline": 0},
+        {"a": "write a NEW session log noting supersession", "with_skill": 1, "baseline": 0.5},
+        {"a": "update STATE.md to point at the newer log", "with_skill": 1, "baseline": 0},
+        {"a": "adjust confidence-summary in coverage.md row", "with_skill": 1, "baseline": 0},
+        {"a": "fix the actual claim in knowledge/subsystems/storage-buffer.md", "with_skill": 1, "baseline": 1},
+        {"a": "if re-verified, bump last-verified-commit and append to files-examined.md", "with_skill": 1, "baseline": 0},
+        {"a": "no advice to delete or rewrite history", "with_skill": 1, "baseline": 0.5}
+      ],
+      "with_skill_score": "7/7 = 1.00",
+      "baseline_score": "2/7 = 0.29"
+    }
+  ],
+  "totals": {
+    "with_skill": "20/20 = 1.00",
+    "baseline": "4.0/20 = 0.20",
+    "delta": "+0.80"
+  },
+  "observations": [
+    "Baseline ~0.20 as expected — this is project-specific bookkeeping that a generic Claude cannot infer.",
+    "With-skill answers are strong on the explicit invariants (append-only sessions, edit STATE in place, 4 headings, coverage table shape).",
+    "Gap noticed: SKILL.md does NOT mention progress/files-examined.md at all — yet it is listed in CLAUDE.md as a load-bearing ledger and ev1/ev3 both require updates to it. The with-skill answer covered it from CLAUDE.md context, not the skill. A future invocation without that context would miss it.",
+    "Gap noticed: SKILL.md trigger table doesn't have a row for 'files deep-read but no new doc' (a frequent case — common with the file-by-file phase).",
+    "Gap noticed: no explicit mention that today's date should be used in the session-log filename (LLM might use a stale date)."
+  ]
+}

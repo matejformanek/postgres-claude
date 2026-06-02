@@ -1,0 +1,62 @@
+{
+  "skill": "review-checklist",
+  "iteration": 2,
+  "results": [
+    {
+      "id": "eval-1-guc-inline-func",
+      "assertions": [
+        {"a": "Walks seven phases in order", "with_skill": true},
+        {"a": "Phase 1 cheap-check triage (Waiting on Author before deep review)", "with_skill": true},
+        {"a": "Doc update under doc/src/sgml/config.sgml", "with_skill": true},
+        {"a": "Flags ABI implications of inline functions/macros in src/include/", "with_skill": true},
+        {"a": "Revert-just-the-code sanity test for the new test", "with_skill": true},
+        {"a": "Concrete-asks discipline", "with_skill": true},
+        {"a": "CF state transition", "with_skill": true},
+        {"a": "Cross-references sibling skills (locking, error-handling, memory-contexts, coding-style, catalog-conventions)", "with_skill": true}
+      ],
+      "with_skill_score": "8/8"
+    },
+    {
+      "id": "eval-2-wal-xlog",
+      "assertions": [
+        {"a": "XLOG_PAGE_MAGIC bump", "with_skill": true},
+        {"a": "rmgrlist.h registration with full callback set", "with_skill": true},
+        {"a": "crash-recovery TAP test under src/test/recovery/", "with_skill": true},
+        {"a": "Lock order in redo matches write path", "with_skill": true},
+        {"a": "Master-only / not backpatchable", "with_skill": true},
+        {"a": "No palloc in critical section + XLogReadBufferForRedo", "with_skill": true},
+        {"a": "Hands off to wal-and-xlog deep skill", "with_skill": true},
+        {"a": "Hint-bit MarkBufferDirtyHint vs MarkBufferDirty correctness", "with_skill": true},
+        {"a": "Cross-references locking + catalog-conventions + testing skills", "with_skill": true}
+      ],
+      "with_skill_score": "9/9"
+    },
+    {
+      "id": "eval-3-perf-claim",
+      "assertions": [
+        {"a": "Release-mode build for benchmarking", "with_skill": true},
+        {"a": "Multiple runs + median + same hardware/flags", "with_skill": true},
+        {"a": "Regression hunt on unrelated workloads", "with_skill": true},
+        {"a": "Microbenchmark vs end-to-end honesty", "with_skill": true},
+        {"a": "Self-review specifics (commit split, no debug elog, no commented-out code)", "with_skill": true},
+        {"a": "Assertion-build test pass separately from perf run", "with_skill": true},
+        {"a": "Post numbers as a table + exact recipe", "with_skill": true},
+        {"a": "O(N^2) / scaling at larger N footgun reminder", "with_skill": true},
+        {"a": "Hands off to patch-submission + commit-message-style for final mailing", "with_skill": true}
+      ],
+      "with_skill_score": "9/9"
+    }
+  ],
+  "totals": {
+    "with_skill_iter1": "23/23",
+    "with_skill_iter2": "26/26",
+    "new_assertions_added_iter2": 3,
+    "delta_vs_baseline_iter1": "+11",
+    "regression": "none"
+  },
+  "notes": [
+    "Iter-2 adds 3 new assertions specifically targeting the gap proposed-edits.md flagged (sibling-skill cross-references). All three pass.",
+    "All iter-1 assertions still pass; no regression.",
+    "Skill now does what an orchestration skill should: triage + handoff. Specialist depth lives in the named sibling skills."
+  ]
+}

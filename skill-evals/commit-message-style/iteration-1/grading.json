@@ -1,0 +1,58 @@
+{
+  "skill": "commit-message-style",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "E1",
+      "assertions": [
+        {"id": "A1", "text": "Subject uses 'pg_dump:' lowercase prefix + colon", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "Subject is imperative mood with no trailing period and capitalized first word after the prefix", "with_skill": true, "baseline": true},
+        {"id": "A3", "text": "No conventional-commits prefix (fix:/feat:/chore:)", "with_skill": true, "baseline": false},
+        {"id": "A4", "text": "Body is paragraph prose (not bullet diff-recap)", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Discussion: uses postgr.es/m/ shortener (not www.postgresql.org/message-id)", "with_skill": true, "baseline": false},
+        {"id": "A6", "text": "No Co-Authored-By: Claude trailer", "with_skill": true, "baseline": false},
+        {"id": "A7", "text": "No Signed-off-by trailer", "with_skill": true, "baseline": false},
+        {"id": "A8", "text": "No Backpatch-through line (master-only commit)", "with_skill": true, "baseline": true}
+      ],
+      "with_skill_score": "8/8",
+      "baseline_score": "3/8"
+    },
+    {
+      "id": "E2",
+      "assertions": [
+        {"id": "A1", "text": "Explicitly rejects Co-Authored-By: Claude for upstream PG", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "Distinguishes lowercase Co-authored-by: (PG) from uppercase Co-Authored-By: (GitHub)", "with_skill": true, "baseline": false},
+        {"id": "A3", "text": "States attribution credits humans only, not AI tooling", "with_skill": true, "baseline": false},
+        {"id": "A4", "text": "Points to Author:/Reviewed-by:/Reported-by: as correct trailers", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Notes names/emails are verbatim from From: header", "with_skill": true, "baseline": false},
+        {"id": "A6", "text": "States PG is NOT a DCO project / no Signed-off-by", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "6/6",
+      "baseline_score": "0/6"
+    },
+    {
+      "id": "E3",
+      "assertions": [
+        {"id": "A1", "text": "Backpatch-through value is the OLDEST branch (16), not a range and not master", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "Format is bare major version number (e.g. '16'), not '16-18' or 'REL_16_STABLE'", "with_skill": true, "baseline": false},
+        {"id": "A3", "text": "Commit message is IDENTICAL across master and back branches", "with_skill": true, "baseline": false},
+        {"id": "A4", "text": "Mentions release-note tooling rationale for identical messages", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Diagnosed-by is named as a real PG trailer", "with_skill": true, "baseline": true},
+        {"id": "A6", "text": "Reviewers are one-per-line, NOT comma-separated", "with_skill": true, "baseline": false},
+        {"id": "A7", "text": "Backpatch-through line goes last in trailer block", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "1/7"
+    }
+  ],
+  "totals": {
+    "with_skill": "21/21",
+    "baseline": "4/21",
+    "uplift": "+17 assertions"
+  },
+  "notes": [
+    "with_skill answers are strong across all 3 evals — SKILL.md as written already covers every assertion.",
+    "Baseline fails on PG-specific points: conventional-commits prefix, archives URL form, Claude trailer, Signed-off-by, range Backpatch format, comma-separated reviewers.",
+    "Minor gaps in SKILL.md (improvement candidates for iter-2): does not call out that Discussion: also appears in the wild with http:// (saw 'http://postgr.es/m/' in b1901e2895e); does not explicitly say what to do when committer IS sole author (omit Author: line — currently only implied in the table); Author: example placeholder is awkward — could include 'omit if you are sole author' guidance inline; no explicit reminder that two spaces follow a sentence-ending period in body (PG convention visible in db5ed03217b 'assumed.  However,')."
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: memory-keeping
-description: End-of-session bookkeeping for the pg-claude meta repo — sync progress/STATE.md, progress/coverage.md, and append a sessions/ log entry whenever a session produced durable output (new knowledge/idioms or knowledge/subsystems doc, verified-by-code fact, discovered gotcha, or a locked decision from pg-claude-plan.md §14). Use proactively when the user says "wrap up", "close out", "sync memory files", "record this gotcha", or "we're done for the day". Do NOT trigger for PG MemoryContext/palloc questions, LangChain agent memory, app memory leaks, or finding old Claude sessions.
+description: End-of-session bookkeeping for the pg-claude meta repo — sync progress/STATE.md, progress/coverage.md, progress/files-examined.md, and append a sessions/ log entry whenever a session produced durable output (new knowledge/idioms or knowledge/subsystems doc, verified-by-code fact, discovered gotcha, file-by-file deep read, or a locked decision from pg-claude-plan.md §14). Use proactively when the user says "wrap up", "close out", "sync memory files", "record this gotcha", or "we're done for the day". Do NOT trigger for PG MemoryContext/palloc questions, LangChain agent memory, app memory leaks, or finding old Claude sessions.
 ---
 
 # memory-keeping
@@ -17,19 +17,32 @@ re-reading the whole repo.
 2. **coverage.md is a table.** One row per documented artifact (subsystem,
    idiom, data-structure). Columns: `name | path | last-verified-commit | confidence-summary | open-questions`.
 3. **sessions/ is append-only.** One file per significant session,
-   `YYYY-MM-DD-<topic>.md`. Never edit old session logs; if a later session
-   invalidates a claim, write a new session log that supersedes it and update
-   STATE.md to point at the newer one.
+   `YYYY-MM-DD-<topic>.md` (use **today's** date, the day you're writing —
+   not the date of the work if it spanned multiple days). Never edit old
+   session logs; if a later session invalidates a claim, write a new session
+   log that supersedes it and update STATE.md to point at the newer one.
+4. **files-examined.md is the per-file ledger.** Append-only. One row per
+   source file read in non-trivial depth, columns:
+   `path | depth (skim/read/deep-read) | date | last-verified-commit | produced-doc`.
+   Append whenever a file becomes load-bearing for any claim in `knowledge/`,
+   including pure file-by-file deep reads that don't yet have a synthesis doc.
+   (See CLAUDE.md rule 6: "Track what you read.")
 
 ## When to update what
 
-| Trigger | STATE.md | coverage.md | sessions/ |
-|---|---|---|---|
-| New subsystem doc landed | yes (move forward) | new row | new file |
-| Existing doc re-verified at a newer commit | bump phase if relevant | update `last-verified-commit` | new file |
-| Decision from `pg-claude-plan.md §14` locked | record decision + date | — | new file noting rationale |
-| Discovered a wrong claim in an existing doc | note correction in STATE | adjust `confidence-summary` | new file describing the discovery |
-| Pure exploration with no durable output | — | — | optional, only if worth re-finding |
+| Trigger | STATE.md | coverage.md | files-examined.md | sessions/ |
+|---|---|---|---|---|
+| New subsystem doc landed | yes (move forward) | new row | append one row per file cited | new file |
+| Existing doc re-verified at a newer commit | bump phase if relevant | update `last-verified-commit` | append re-verify rows for re-read files | new file |
+| Decision from `pg-claude-plan.md §14` locked | record decision + date | — | — | new file noting rationale |
+| Discovered a wrong claim in an existing doc | note correction in STATE | adjust `confidence-summary` | append re-verify row for the file you re-read | new file describing the discovery |
+| File-by-file deep read with no new synthesis | — | — | append rows | optional |
+| Pure exploration with no durable output | — | — | — | optional, only if worth re-finding |
+
+When you discover a wrong claim, **fix the claim in the knowledge/ doc itself**
+(the artifact) in the same session. The session log records the discovery; the
+coverage.md row gets its confidence-summary adjusted; STATE.md gets a one-line
+note pointing at the new session log. The old session log is never touched.
 
 ## How to write a session log
 

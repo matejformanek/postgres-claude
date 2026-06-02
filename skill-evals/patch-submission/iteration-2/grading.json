@@ -1,0 +1,50 @@
+{
+  "iteration": 2,
+  "evals": [
+    {
+      "eval_id": 1,
+      "assertions": [
+        {"text": "Recommends posting a design email to pgsql-hackers first for a non-trivial GUC (not skipping to v1)", "with_skill": true, "baseline": true},
+        {"text": "Names exact target list: pgsql-hackers@lists.postgresql.org", "with_skill": true, "baseline": true},
+        {"text": "Specifies plain text only, patch as attachment (not inline)", "with_skill": true, "baseline": true},
+        {"text": "Gives exact git format-patch -v1 master..HEAD command", "with_skill": true, "baseline": true},
+        {"text": "Mentions git diff --check master..HEAD for whitespace", "with_skill": true, "baseline": false},
+        {"text": "Names the current open CommitFest (PG20-1) explicitly", "with_skill": true, "baseline": false},
+        {"text": "States the review-bartering norm: review at least one other patch in the same CF", "with_skill": true, "baseline": false},
+        {"text": "Names the SGML doc location for a GUC (doc/src/sgml/config.sgml)", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "assertions": [
+        {"text": "Tells user to reply on the existing thread, NOT start a new one", "with_skill": true, "baseline": true},
+        {"text": "Bumps version with git format-patch -v2 master..HEAD", "with_skill": true, "baseline": true},
+        {"text": "Says to flip CF entry from Waiting on Author back to Needs Review", "with_skill": true, "baseline": true},
+        {"text": "Advises folding fixes into logical commits via rebase -i (not adding 'fix review' commit on top)", "with_skill": true, "baseline": true},
+        {"text": "Mentions disagreements should be answered inline rather than silently ignored", "with_skill": true, "baseline": true},
+        {"text": "Specifies plain text email, attachment not inline, no top-posting", "with_skill": true, "baseline": false},
+        {"text": "Warns that stalled patches get Returned with Feedback or Moved to next CF", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "assertions": [
+        {"text": "Confirms a small bug fix STILL goes via pgsql-hackers + CommitFest (no shortcut)", "with_skill": true, "baseline": true},
+        {"text": "Says you can skip the design-thread step for an obvious bug fix", "with_skill": true, "baseline": true},
+        {"text": "Says to develop the fix against master, not back branches (backpatch is committer's job)", "with_skill": true, "baseline": true},
+        {"text": "Lists the four backpatch criteria (frequently-encountered / low-risk / security / data-corruption)", "with_skill": true, "baseline": false},
+        {"text": "Names the current open CommitFest (PG20-1)", "with_skill": true, "baseline": false},
+        {"text": "Mentions reviewing one other patch in the CF (bartering norm) still applies", "with_skill": true, "baseline": false},
+        {"text": "Lists at least three anti-checklist items (no HTML, attachment not inline, no top-posting, no corp footer, whitespace clean)", "with_skill": true, "baseline": true}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 22,
+    "with_skill_total": 22,
+    "with_skill_pass_rate": 1.0,
+    "baseline_passed": 13,
+    "baseline_total": 22,
+    "baseline_pass_rate": 0.591
+  }
+}

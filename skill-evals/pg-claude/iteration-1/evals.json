@@ -1,0 +1,18 @@
+{
+  "skill": "pg-claude",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "orient-new-sql-fn",
+      "prompt": "I want to add a new built-in SQL function to PostgreSQL. Help me get oriented — where do I start, which skills/docs apply?"
+    },
+    {
+      "id": "debug-deadlock",
+      "prompt": "I'm debugging a deadlock in a running backend. Where do I look first in this repo, and how do I attach to the process?"
+    },
+    {
+      "id": "learn-mvcc",
+      "prompt": "I want to understand PostgreSQL MVCC from scratch. What's the reading order in this repo?"
+    }
+  ]
+}

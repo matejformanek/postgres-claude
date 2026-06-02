@@ -155,6 +155,9 @@ preconditions. They are anchored in column 1 and not reflowed.
 - Wrap user-visible literal strings in `_("…")` so `xgettext` extracts
   them. `errmsg` already does this internally; `errmsg_internal` does
   not.
+- For file/socket failures, prefer `errcode_for_file_access()` /
+  `errcode_for_socket_access()` — they pick the right `ERRCODE_*` from
+  `errno` so you don't have to.
 
 ## `PG_TRY` / `PG_CATCH` rules
 

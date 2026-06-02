@@ -1,0 +1,39 @@
+{
+  "skill": "memory-keeping",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "ev1-deep-read-ledger",
+      "prompt": "I just deep-read 5 new files under src/backend/access/gin/ and produced one new subsystem doc knowledge/subsystems/access-gin.md. Walk me through every memory-keeping update I need to make before closing out the session.",
+      "expected_topics": [
+        "append 5 rows to progress/files-examined.md (one per file, depth=deep-read, anchor commit, produced-doc link)",
+        "add one new row to progress/coverage.md (subsystems table) with name/path/last-verified-commit/confidence-summary/open-questions",
+        "edit (not append) STATE.md — bump phase if relevant, update Last activity, refresh source commit, add bullet under Done, prune Recent session logs to ~5",
+        "write a new sessions/YYYY-MM-DD-<topic>.md (today is 2026-06-02) following the 4-heading template (What I did / What I learned / What I'm unsure about / Pointers left for next time), ~50 lines",
+        "session log is append-only — never edit old ones"
+      ]
+    },
+    {
+      "id": "ev2-when-session-log",
+      "prompt": "When does a session actually warrant a sessions/ log file? I spent two hours today just exploring the planner and didn't produce any new docs. Do I log it?",
+      "expected_topics": [
+        "session log written when session produced durable output: new knowledge/idioms or subsystems doc, verified-by-code fact, discovered gotcha, or a locked decision from pg-claude-plan.md §14",
+        "pure exploration with no durable output: log is optional, only if worth re-finding",
+        "trigger list explicitly in skill (wrap up, close out, sync memory files, record this gotcha, we're done for the day)",
+        "session log is the record of the act of producing, knowledge/ is the artifact — don't conflate"
+      ]
+    },
+    {
+      "id": "ev3-correction-to-old-doc",
+      "prompt": "I just discovered that a claim in knowledge/subsystems/storage-buffer.md is wrong — the BufMappingLock ordering rule I documented last week doesn't match what bufmgr.c actually does. Where do I record the correction? Do I edit the old session log that produced that doc?",
+      "expected_topics": [
+        "never edit old session logs — they are append-only audit trail",
+        "write a NEW session log describing the discovery (today's date, supersedes-style)",
+        "update STATE.md to note the correction and point at the newer session log",
+        "adjust the row in progress/coverage.md (confidence-summary column for that doc)",
+        "fix the actual claim inside knowledge/subsystems/storage-buffer.md itself (the artifact)",
+        "if you re-verified the file, bump last-verified-commit on the row and append a re-verify entry to files-examined.md"
+      ]
+    }
+  ]
+}

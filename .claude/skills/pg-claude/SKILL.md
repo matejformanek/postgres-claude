@@ -153,6 +153,11 @@ User asks for...                              You reach for...
 "start" / "psql"      → /pg-start then /pg-psql
 "test"                → /pg-test
 "debug"               → /pg-attach + debugging skill
+"debug a deadlock"    → /pg-attach + /pg-tail-log + locking skill
+                        + knowledge/subsystems/storage-lmgr.md
+                        + knowledge/idioms/locking-overview.md
+                        (per-connection fork model — attach AFTER the psql
+                         connect; the backend pid is fresh per session)
 "reset"               → /pg-fresh (data only)  or  /pg-reclone-dev (whole tree)
 "how does X work"     → knowledge/architecture/X.md or knowledge/subsystems/X.md
 "what file does Y"    → knowledge/files/src/backend/<...>.md
@@ -161,10 +166,34 @@ User asks for...                              You reach for...
 "add a feature"       → relevant subsystem skill (catalog-conventions /
                         wal-and-xlog / access-method-apis /
                         extension-development / ...)
+"add a built-in SQL fn" → catalog-conventions skill (pg_proc.dat, catversion)
+                        + fmgr-and-spi skill (PG_FUNCTION_INFO_V1)
+                        + knowledge/idioms/fmgr.md
+                        + knowledge/idioms/catalog-conventions.md
+                        + edit dev/src/backend/utils/adt/, then
+                          /setup-pg → /pg-restart → /pg-psql → /pg-test
 "send upstream"       → patch-submission + review-checklist + commit-message-style
 "document subsystem"  → /document-subsystem <path>
 "what was done"       → progress/STATE.md + progress/coverage.md
 ```
+
+## Suggested reading orders for "explain how X works"
+
+For broad concept questions, propose an ordered reading list rather than dumping a folder:
+
+- MVCC:        `architecture/overview.md` → `architecture/mvcc.md` → `architecture/wal.md`
+               → `subsystems/access-heap.md` → `subsystems/access-transam.md`
+- WAL / crash: `architecture/overview.md` → `architecture/wal.md`
+               → `subsystems/access-transam.md` (use `wal-and-xlog` skill for code edits)
+- Planner:     `architecture/overview.md` → `architecture/query-lifecycle.md`
+               → `architecture/planner.md` → `subsystems/optimizer.md`
+- Executor:    `architecture/overview.md` → `architecture/query-lifecycle.md`
+               → `architecture/executor.md` → `subsystems/executor.md`
+- Buffer mgr:  `architecture/overview.md` → `subsystems/storage-buffer.md`
+- Replication: `architecture/overview.md` → `architecture/replication.md`
+               (use `replication-overview` skill for code-level)
+
+All cites inside those docs use `source/...` so file:line refs stay stable across upstream pulls.
 
 ## After-action follow-up
 

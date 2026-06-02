@@ -1,0 +1,51 @@
+{
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "orient-new-sql-fn",
+      "assertions": [
+        {"text": "names catalog-conventions skill", "with_skill": true, "baseline": false},
+        {"text": "names fmgr-and-spi skill", "with_skill": true, "baseline": false},
+        {"text": "names coding-style skill", "with_skill": true, "baseline": false},
+        {"text": "mentions /setup-pg or /pg-restart command", "with_skill": true, "baseline": false},
+        {"text": "points at knowledge/idioms/fmgr.md or catalog-conventions.md", "with_skill": true, "baseline": false},
+        {"text": "mentions patch-submission / review-checklist for upstream path", "with_skill": true, "baseline": false},
+        {"text": "directs edits into dev/ not source/", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "0/7"
+    },
+    {
+      "id": "debug-deadlock",
+      "assertions": [
+        {"text": "names /pg-attach command", "with_skill": true, "baseline": false},
+        {"text": "names debugging skill", "with_skill": true, "baseline": false},
+        {"text": "names locking skill", "with_skill": true, "baseline": false},
+        {"text": "points at knowledge/idioms/locking-overview.md", "with_skill": true, "baseline": false},
+        {"text": "points at knowledge/subsystems/storage-lmgr.md", "with_skill": true, "baseline": false},
+        {"text": "mentions per-connection fork-model gotcha", "with_skill": true, "baseline": false},
+        {"text": "mentions /pg-tail-log", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "0/7"
+    },
+    {
+      "id": "learn-mvcc",
+      "assertions": [
+        {"text": "points at knowledge/architecture/mvcc.md", "with_skill": true, "baseline": false},
+        {"text": "points at knowledge/architecture/overview.md as starting point", "with_skill": true, "baseline": false},
+        {"text": "points at knowledge/architecture/wal.md as related", "with_skill": true, "baseline": false},
+        {"text": "points at knowledge/subsystems/access-heap.md", "with_skill": true, "baseline": false},
+        {"text": "points at knowledge/subsystems/access-transam.md", "with_skill": true, "baseline": false},
+        {"text": "gives ordered reading list, not a dump", "with_skill": true, "baseline": false},
+        {"text": "mentions cites use source/ paths so refs stay stable", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "0/7"
+    }
+  ],
+  "totals": {
+    "with_skill": "21/21",
+    "baseline": "0/21"
+  }
+}

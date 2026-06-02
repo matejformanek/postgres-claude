@@ -1,0 +1,19 @@
+{
+  "skill": "extension-development",
+  "iteration": 1,
+  "date": "2026-06-02",
+  "evals": [
+    {
+      "id": "e1-planner-hook-scaffold",
+      "prompt": "I'm starting a new extension that installs a planner_hook to log query plans. What's the minimal file scaffold and which files need to exist? Should it be loaded via shared_preload_libraries or lazily?"
+    },
+    {
+      "id": "e2-create-extension-finds-sql",
+      "prompt": "How does CREATE EXTENSION find and run my SQL upgrade scripts? If a user is on version 1.0 and I ship 1.3, does PG run each step?"
+    },
+    {
+      "id": "e3-extension-vs-contrib",
+      "prompt": "What's the difference between a PostgreSQL extension and a contrib module? Are all contrib modules extensions? Do I need to put my extension in contrib/ to use meson?"
+    }
+  ]
+}

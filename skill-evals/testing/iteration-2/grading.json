@@ -1,0 +1,56 @@
+{
+  "iteration": 2,
+  "skill": ".claude/skills/testing/SKILL.md",
+  "methodology_note": "Iter-1 ran two attempts both *with* the skill loaded (A vs B), which measured intra-skill variance, not skill value. Iter-2 corrects this: one attempt with the full edited SKILL.md available, one baseline attempt simulating a Claude session with no testing skill loaded (general PG-internals knowledge only, no access to the decision tree / wiring table / fast-loop commands).",
+  "evals": [
+    {
+      "id": "eval-1-regress-new-builtin",
+      "assertions": [
+        {"id": "a1", "text": "Picks regress (not TAP / isolation / module) as the flavor.", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a2", "text": "Names the three required files: sql/<name>.sql, expected/<name>.out, parallel_schedule.", "with_skill": "pass", "baseline": "partial", "baseline_note": "Names sql/ and expected/ correctly but hedges on schedule file ('serial_schedule or parallel_schedule')."},
+        {"id": "a3", "text": "Tells the user to GENERATE expected/.out by running and copying from results/, not type by hand.", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a4", "text": "Mentions the max-20-per-group rule in parallel_schedule.", "with_skill": "pass", "baseline": "fail", "baseline_note": "Baseline has no awareness of this house rule without the skill."},
+        {"id": "a5", "text": "Warns about volatile output (OIDs, timestamps, row order) before committing.", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a6", "text": "Provides a single-test fast-loop command (pg_regress or meson).", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a7", "text": "Points to regression.diffs as first stop on failure.", "with_skill": "pass", "baseline": "pass"}
+      ],
+      "score_with_skill": "7/7",
+      "score_baseline": "5.5/7"
+    },
+    {
+      "id": "eval-2-tap-stream-rep-wal-record",
+      "assertions": [
+        {"id": "a1", "text": "Picks TAP and places it under source/src/test/recovery/t/NNN_name.pl.", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a2", "text": "Mentions appending NNN (don't renumber existing tests) for backport safety.", "with_skill": "pass", "baseline": "partial", "baseline_note": "Mentions NNN ordering but not the don't-renumber / backport rationale."},
+        {"id": "a3", "text": "Mentions wiring into recovery/meson.build.", "with_skill": "pass", "baseline": "partial", "baseline_note": "Hand-waves: 'make sure the meson build / Makefile picks it up' — doesn't name recovery/meson.build."},
+        {"id": "a4", "text": "Provides a working skeleton with PostgreSQL::Test::Cluster, init(allows_streaming=>1), init_from_backup, start.", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a5", "text": "Mentions wait_for_replay_catchup (or equivalent sync) as the way to wait for the standby.", "with_skill": "pass", "baseline": "pass", "baseline_note": "Names it but hedges ('I'd check Cluster.pm for the exact name')."},
+        {"id": "a6", "text": "Gives the one-line single-TAP-test runner (meson test --suite recovery NNN_name or PROVE_TESTS=).", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a7", "text": "Points to build/testrun/<suite>/<test>/log/regress_log_* as first place to look on failure.", "with_skill": "pass", "baseline": "partial", "baseline_note": "Vague: 'tmp_check/testrun tree' with no concrete path."},
+        {"id": "a8", "text": "Honestly notes that there is no direct 'assert WAL record of type X applied' API — verify via observable state/LSN.", "with_skill": "pass", "baseline": "pass"}
+      ],
+      "score_with_skill": "8/8",
+      "score_baseline": "6.5/8"
+    },
+    {
+      "id": "eval-3-isolation-new-locking-path",
+      "assertions": [
+        {"id": "a1", "text": "Picks isolation spec, not TAP, for two-session heavyweight-lock contention.", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a2", "text": "Names the three files: specs/<name>.spec, expected/<name>.out, isolation_schedule.", "with_skill": "pass", "baseline": "partial", "baseline_note": "Names specs/ and expected/ but hedges on schedule ('I believe')."},
+        {"id": "a3", "text": "Calls out that explicit permutation lines are MANDATORY when steps block (else auto-permutations hang).", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a4", "text": "Mentions isolationtester only detects heavyweight locks via pg_locks (LWLock/buffer pin invisible → injection points).", "with_skill": "pass", "baseline": "fail", "baseline_note": "Baseline mentions pg_locks polling but misses the LWLock/buffer-pin invisibility and the injection_points escape hatch."},
+        {"id": "a5", "text": "Provides at least a sketch of session/step/permutation grammar.", "with_skill": "pass", "baseline": "pass"},
+        {"id": "a6", "text": "Discourages _1.out variants; recommends markers (s1(*), s1(s2), s1(s2 notices N)) for stabilization.", "with_skill": "pass", "baseline": "fail", "baseline_note": "Baseline has no awareness of markers vs _1.out variants — this is PG-house-rule knowledge."},
+        {"id": "a7", "text": "Provides the single-spec runner command (pg_isolation_regress) and points to output_iso/regression.diffs on failure.", "with_skill": "pass", "baseline": "partial", "baseline_note": "Names pg_isolation_regress but missing --temp-instance / --top-builddir flags; on-failure note is vague ('probably under output_iso/')."}
+      ],
+      "score_with_skill": "7/7",
+      "score_baseline": "4/7"
+    }
+  ],
+  "totals": {
+    "with_skill": "22/22",
+    "baseline": "16/22",
+    "delta": "+6 absolute (+27 percentage points)"
+  },
+  "notes": "Skill provides a real, measurable lift of 6 assertions across the 3 evals. Where the skill wins are exactly the PG-specific house rules a generalist would not know: max-20-per-parallel_schedule-group (eval 1), explicit recovery/meson.build wiring + concrete log path (eval 2), and the LWLock/injection-points caveat plus markers-vs-_1.out idiom (eval 3). The grammar skeleton and LSN-sync recipe added in iter-2 edits both fire in the with_skill answers (eval 3 reproduces the full spec verbatim, eval 2 inlines the LSN poll_query_until form). The 6-point baseline gap is honestly graded — baseline answers are still mostly correct because PG testing patterns are well-known, but the skill consistently sharpens precision (exact file paths, exact flags, exact log location) and surfaces non-obvious gotchas."
+}

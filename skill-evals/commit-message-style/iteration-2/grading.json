@@ -1,0 +1,62 @@
+{
+  "skill": "commit-message-style",
+  "iteration": 2,
+  "evals": [
+    {
+      "id": "E1",
+      "assertions": [
+        {"id": "A1", "text": "Subject uses 'pg_dump:' lowercase prefix + colon", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "Subject is imperative mood, no trailing period, capitalized", "with_skill": true, "baseline": true},
+        {"id": "A3", "text": "No conventional-commits prefix", "with_skill": true, "baseline": false},
+        {"id": "A4", "text": "Body is paragraph prose (not bullet diff-recap)", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Discussion: uses postgr.es/m/ shortener (not www.postgresql.org/message-id)", "with_skill": true, "baseline": false},
+        {"id": "A6", "text": "No Co-Authored-By: Claude trailer", "with_skill": true, "baseline": false},
+        {"id": "A7", "text": "No Signed-off-by trailer", "with_skill": true, "baseline": false},
+        {"id": "A8", "text": "No Backpatch-through line (master-only)", "with_skill": true, "baseline": true},
+        {"id": "A9", "text": "Author: line OMITTED when committer is sole author (new in iter-2)", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "9/9",
+      "baseline_score": "3/9"
+    },
+    {
+      "id": "E2",
+      "assertions": [
+        {"id": "A1", "text": "Explicitly rejects Co-Authored-By: Claude for upstream PG", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "Distinguishes lowercase Co-authored-by: vs uppercase Co-Authored-By:", "with_skill": true, "baseline": false},
+        {"id": "A3", "text": "States attribution credits humans only", "with_skill": true, "baseline": false},
+        {"id": "A4", "text": "Points to Author:/Reviewed-by:/Reported-by: as correct trailers", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Notes names/emails are verbatim from From: header", "with_skill": true, "baseline": false},
+        {"id": "A6", "text": "States PG is NOT a DCO project / no Signed-off-by", "with_skill": true, "baseline": false},
+        {"id": "A7", "text": "Mentions omit Author: when committer is sole author (new in iter-2)", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "0/7"
+    },
+    {
+      "id": "E3",
+      "assertions": [
+        {"id": "A1", "text": "Backpatch-through value is the OLDEST branch (16)", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "Format is bare major version number (16), not '16-18' or 'REL_16_STABLE'", "with_skill": true, "baseline": false},
+        {"id": "A3", "text": "Commit message is IDENTICAL across all branches", "with_skill": true, "baseline": false},
+        {"id": "A4", "text": "Mentions release-note tooling rationale", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Diagnosed-by named as real PG trailer", "with_skill": true, "baseline": true},
+        {"id": "A6", "text": "Reviewers one-per-line, NOT comma-separated", "with_skill": true, "baseline": false},
+        {"id": "A7", "text": "Backpatch-through goes last in trailer block", "with_skill": true, "baseline": false},
+        {"id": "A8", "text": "Explicitly shows GOOD vs BAD format examples (new in iter-2)", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "8/8",
+      "baseline_score": "1/8"
+    }
+  ],
+  "totals": {
+    "with_skill": "24/24",
+    "baseline": "4/24",
+    "uplift": "+20 assertions"
+  },
+  "notes": [
+    "Iter-2 added 3 new precision assertions (A9 on E1, A7 on E2, A8 on E3) corresponding to the 3 applied skill edits. All pass with_skill, all fail baseline.",
+    "Iter-1 → iter-2 with_skill: 21/21 → 24/24 (+3 added).",
+    "Iter-1 → iter-2 baseline: 4/21 → 4/24 (no improvement, expected — baseline did not change).",
+    "Skill is now at ceiling for these evals."
+  ]
+}

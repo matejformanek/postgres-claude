@@ -1,0 +1,49 @@
+{
+  "iteration": 2,
+  "evals": [
+    {
+      "id": "orient-new-sql-fn",
+      "assertions": [
+        {"text": "names catalog-conventions skill", "with_skill": true},
+        {"text": "names fmgr-and-spi skill", "with_skill": true},
+        {"text": "names coding-style skill", "with_skill": true},
+        {"text": "mentions /setup-pg or /pg-restart command", "with_skill": true},
+        {"text": "points at knowledge/idioms/fmgr.md or catalog-conventions.md", "with_skill": true},
+        {"text": "mentions patch-submission / review-checklist for upstream path", "with_skill": true},
+        {"text": "directs edits into dev/ not source/", "with_skill": true},
+        {"text": "names specific target dir dev/src/backend/utils/adt/", "with_skill": true}
+      ],
+      "with_skill_score": "8/8"
+    },
+    {
+      "id": "debug-deadlock",
+      "assertions": [
+        {"text": "names /pg-attach command", "with_skill": true},
+        {"text": "names debugging skill", "with_skill": true},
+        {"text": "names locking skill", "with_skill": true},
+        {"text": "points at knowledge/idioms/locking-overview.md", "with_skill": true},
+        {"text": "points at knowledge/subsystems/storage-lmgr.md", "with_skill": true},
+        {"text": "mentions per-connection fork-model gotcha", "with_skill": true},
+        {"text": "mentions /pg-tail-log", "with_skill": true}
+      ],
+      "with_skill_score": "7/7"
+    },
+    {
+      "id": "learn-mvcc",
+      "assertions": [
+        {"text": "points at knowledge/architecture/mvcc.md", "with_skill": true},
+        {"text": "points at knowledge/architecture/overview.md as starting point", "with_skill": true},
+        {"text": "points at knowledge/architecture/wal.md as related", "with_skill": true},
+        {"text": "points at knowledge/subsystems/access-heap.md", "with_skill": true},
+        {"text": "points at knowledge/subsystems/access-transam.md", "with_skill": true},
+        {"text": "gives ordered reading list, not a dump", "with_skill": true},
+        {"text": "mentions cites use source/ paths so refs stay stable", "with_skill": true}
+      ],
+      "with_skill_score": "7/7"
+    }
+  ],
+  "totals": {
+    "with_skill": "22/22 (iter1: 21/21 — added one new assertion on specific dir)",
+    "baseline": "0/22 (unchanged from iter1)"
+  }
+}

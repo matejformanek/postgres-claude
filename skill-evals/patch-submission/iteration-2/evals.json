@@ -1,0 +1,21 @@
+{
+  "skill": "patch-submission",
+  "iteration": 2,
+  "evals": [
+    {
+      "id": "eval-1",
+      "prompt": "I just finished a feature that adds a new GUC for tuning autovacuum aggressiveness. I have it on a feature branch in dev/. Walk me through getting this on the pgsql-hackers list as a v1 patch.",
+      "intent": "End-to-end first-time submission: pre-flight, tests/docs, format-patch -v1, cover letter, CommitFest registration."
+    },
+    {
+      "id": "eval-2",
+      "prompt": "My CommitFest entry just got flipped to 'Waiting on Author' — the reviewer left several comments asking for a wider test case and pointed out one of my error messages is wrong style. What's the next step and how do I post the updated patch?",
+      "intent": "Mid-cycle revision: address feedback, generate v(N+1), reply on existing thread, flip CF status back to Needs Review."
+    },
+    {
+      "id": "eval-3",
+      "prompt": "I want to push a small bug fix upstream — it's a one-line fix in src/backend/utils/adt/numeric.c plus a regress test. Do I really need to do the whole CommitFest dance for something this small, or can I just email it?",
+      "intent": "Triage: small bug fix still goes via -hackers + CF; design-thread step can be skipped; whether to backpatch is committer's call."
+    }
+  ]
+}

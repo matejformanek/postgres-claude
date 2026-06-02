@@ -20,6 +20,10 @@ Before formatting anything, confirm:
       develop on master; backpatching is the committer's job.)
 - [ ] Does an existing CommitFest entry / thread already cover this? If yes,
       we're producing `vN+1` on that thread, not a new submission.
+- [ ] Decide upfront: **WIP** (you want shape / design feedback before
+      reviewers spend serious cycles) or **ready for review** (you believe
+      it's committable modulo nits). The tag goes in the cover email and
+      changes how reviewers triage.
 
 ## 1. Make sure the change is actually complete
 
@@ -31,6 +35,9 @@ A "complete" patch in PG terms means:
 - [ ] **SGML documentation** updated (`doc/src/sgml/`) — with at least one
       usable example, not just syntax
 - [ ] Comments explain *why*, not *what*
+- [ ] If the patch adds or changes user-facing error messages, conform to
+      the **Error Message Style Guide** in `doc/src/sgml/sources.sgml`
+      (the in-repo `error-handling` skill summarizes the rules)
 - [ ] If catalogs change: `CATALOG_VERSION_NO` bumped in
       `src/include/catalog/catversion.h`
 - [ ] If WAL changes: `XLOG_PAGE_MAGIC` bumped
@@ -60,6 +67,17 @@ git rebase -i master            # squash WIP commits, split mixed ones
 Each commit should be a coherent unit (e.g. `0001-refactor-X`,
 `0002-add-Y-API`, `0003-wire-Y-into-Z`). A single-commit patch is fine for
 small fixes.
+
+Before formatting, **rebase onto current upstream master** so the series
+applies cleanly:
+
+```bash
+git fetch origin
+git rebase origin/master
+```
+
+A v(N) that doesn't apply against current master is the most common
+reason a CF entry gets bounced back without review.
 
 ## 3. Generate the patch series
 
@@ -117,7 +135,9 @@ add an entry to the **open** CF (currently `PG20-1` as of mid-2026):
 - Title (mirror the patch subject)
 - Authors
 - Target version (master / next major)
-- Topic
+- Topic — maps to a backend subsystem (Server / Autovacuum, SQL Commands,
+  Replication & Recovery, Performance, …). Pick the one closest to the
+  patch's primary impact.
 - Thread Message-Id (the URL of your -hackers post on
   `https://www.postgresql.org/message-id/<id>`)
 
@@ -131,9 +151,13 @@ Cycle:
 1. Reviewer posts comments → CF entry flips to **Waiting on Author**.
 2. You address every point. For points you disagree with, explain in the
     reply rather than silently ignoring.
-3. Generate `vN+1` with `git format-patch -v<N+1>` and attach to a reply
+3. **Fold fixes back into the right logical commit via `git rebase -i
+    master`** — don't ship a "fix review comments" commit on top. v(N+1)
+    should look like a clean rewrite of v(N) with the asks applied, not
+    v(N) + fixup. Then re-run `ninja && meson test` before formatting.
+4. Generate `vN+1` with `git format-patch -v<N+1>` and attach to a reply
     on the same thread.
-4. Flip the CF entry back to **Needs Review**.
+5. Flip the CF entry back to **Needs Review**.
 
 If a CF ends and the patch isn't done, it usually rolls to the next CF
 (**Moved to next CommitFest**). Be responsive — patches that stall for a
@@ -153,6 +177,9 @@ Your CF entry flips to **Committed**. Done.
 ## Quick reference
 
 ```bash
+# Refresh against upstream before re-formatting
+git fetch origin && git rebase origin/master
+
 # Versioned patch series
 git format-patch -v3 master..HEAD
 

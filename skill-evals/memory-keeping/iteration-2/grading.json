@@ -1,0 +1,61 @@
+{
+  "iteration": 2,
+  "scoring": "Same assertions as iter-1. 1 pt full, 0.5 partial, 0 missed.",
+  "results": [
+    {
+      "id": "ev1-deep-read-ledger",
+      "assertions": [
+        {"a": "mentions appending 5 rows to progress/files-examined.md", "with_skill": 1, "baseline": 0},
+        {"a": "specifies depth=deep-read and last-verified-commit columns", "with_skill": 1, "baseline": 0},
+        {"a": "mentions adding a row to progress/coverage.md with the 5-column shape", "with_skill": 1, "baseline": 0},
+        {"a": "says STATE.md is edited in place (not appended)", "with_skill": 1, "baseline": 0},
+        {"a": "names the four session-log headings", "with_skill": 1, "baseline": 0},
+        {"a": "filename pattern sessions/YYYY-MM-DD-<topic>.md with today's date", "with_skill": 1, "baseline": 0},
+        {"a": "explicitly says do NOT edit old session logs", "with_skill": 1, "baseline": 0}
+      ],
+      "with_skill_score": "7/7 = 1.00",
+      "baseline_score": "0/7 = 0.00",
+      "delta_vs_iter1": "0.00 (already at ceiling, but the skill itself now contains files-examined.md so the answer no longer relies on CLAUDE.md context)"
+    },
+    {
+      "id": "ev2-when-session-log",
+      "assertions": [
+        {"a": "lists the four (now five) 'durable output' triggers", "with_skill": 1, "baseline": 0},
+        {"a": "pure exploration → optional, only if worth re-finding", "with_skill": 1, "baseline": 0.5},
+        {"a": "distinguishes sessions/ (act of producing) vs knowledge/ (artifact)", "with_skill": 1, "baseline": 0},
+        {"a": "mentions user-side trigger phrases (wrap up / close out / etc.)", "with_skill": 1, "baseline": 0},
+        {"a": "concrete recommendation for the user's case (skip the log)", "with_skill": 1, "baseline": 0.5},
+        {"a": "no hallucinated requirements", "with_skill": 1, "baseline": 1}
+      ],
+      "with_skill_score": "6/6 = 1.00",
+      "baseline_score": "2/6 = 0.33",
+      "delta_vs_iter1": "0.00 (ceiling)"
+    },
+    {
+      "id": "ev3-correction-to-old-doc",
+      "assertions": [
+        {"a": "explicit: do NOT edit old session log (append-only)", "with_skill": 1, "baseline": 0},
+        {"a": "write a NEW session log noting supersession", "with_skill": 1, "baseline": 0.5},
+        {"a": "update STATE.md to point at the newer log", "with_skill": 1, "baseline": 0},
+        {"a": "adjust confidence-summary in coverage.md row", "with_skill": 1, "baseline": 0},
+        {"a": "fix the actual claim in knowledge/subsystems/storage-buffer.md", "with_skill": 1, "baseline": 1},
+        {"a": "if re-verified, bump last-verified-commit and append to files-examined.md", "with_skill": 1, "baseline": 0},
+        {"a": "no advice to delete or rewrite history", "with_skill": 1, "baseline": 0.5}
+      ],
+      "with_skill_score": "7/7 = 1.00",
+      "baseline_score": "2/7 = 0.29",
+      "delta_vs_iter1": "0.00 (ceiling, but assertion 6 is now table-grounded rather than inferred — more robust)"
+    }
+  ],
+  "totals": {
+    "with_skill": "20/20 = 1.00",
+    "baseline": "4.0/20 = 0.20",
+    "delta_vs_iter1_with_skill": "+0.00 (ceiling)",
+    "delta_vs_iter1_baseline": "0.00"
+  },
+  "observations": [
+    "Iter-1 with-skill already maxed assertions because they were derived from the SKILL.md itself plus surrounding CLAUDE.md context. The numeric ceiling masks a real improvement: in iter-1 the files-examined.md content came from CLAUDE.md, in iter-2 it is in the skill itself — invocations without CLAUDE.md context will now succeed.",
+    "Sharper assertions would be needed to numerically capture the iter-2 improvement (e.g., 'answer does NOT depend on outside files'). Logged in FINAL.md as a methodology note.",
+    "Baseline scores unchanged (skill not consulted in the baseline arm)."
+  ]
+}

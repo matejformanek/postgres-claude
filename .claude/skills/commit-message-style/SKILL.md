@@ -76,7 +76,7 @@ Standard tags, in roughly the order you'll see them:
 | Tag                | Meaning                                              |
 | ------------------ | ---------------------------------------------------- |
 | `Author:`          | Patch author. Omit if the committer is sole author.  |
-| `Co-authored-by:`  | Additional patch authors (PG variant — lowercase `a`).|
+| `Co-authored-by:`  | Additional human patch authors when there is more than one. First author goes on `Author:`; subsequent humans on `Co-authored-by:`. PG variant — lowercase `a` / `b`.|
 | `Reported-by:`     | Person who found the bug / suggested the feature.    |
 | `Suggested-by:`    | Specifically suggested an approach.                  |
 | `Diagnosed-by:`    | Root-caused it without writing the patch.            |
@@ -96,13 +96,24 @@ Notes:
 - Attribution is **cut-and-paste from the email From: header**,
   unaltered. Don't normalize names or emails. [from-wiki:
   Commit_Message_Guidance]
+- If the committer is also the sole patch author, **omit `Author:`
+  entirely** — don't write `Author: <self>`. `Reported-by:` /
+  `Reviewed-by:` etc. still apply as usual. [verified-by-code:
+  `08127c641c0` is committer-authored and has no `Author:` line.]
 - `Discussion:` URL uses the `postgr.es/m/...` shortener, **not** the
-  raw archives URL. [verified-by-code: every Discussion line in `git
-  log -20` uses `https://postgr.es/m/`.]
+  raw archives URL. Prefer `https://`; `http://` also appears
+  occasionally and is accepted, but `https://` dominates recent log.
+  [verified-by-code: in `git log -100` Discussion lines, 93 are
+  `https://postgr.es/m/` vs 2 `http://postgr.es/m/`.]
 - `Backpatch-through:` value is the **oldest** branch that gets the
   fix, expressed as a major-version number: `18`, `15`, `14`.
-  [verified-by-code: `08127c641c0` has `Backpatch-through: 18`;
-  `89d243d5218` has `Backpatch-through: 14`. from-wiki:
+  Good: `Backpatch-through: 16`. Bad: `Backpatch-through: 16-18`,
+  `Backpatch-through: REL_16_STABLE`, `Backpatch from master`.
+  (The wiki notes that range and `only` forms are technically allowed,
+  but recent practice in the log is overwhelmingly the bare-oldest
+  form.) [verified-by-code: `08127c641c0` has `Backpatch-through: 18`;
+  `89d243d5218` has `Backpatch-through: 14`; recent log (`git log -200`)
+  shows the bare-version form on all 63 observed instances. from-wiki:
   Commit_Message_Guidance — "use oldest branch version (e.g., '15'),
   range format (e.g., '13-15'), or 'only' for single branches".]
 - For master-only commits, omit `Backpatch-through:` entirely.

@@ -1,0 +1,55 @@
+{
+  "iteration": 2,
+  "skill": "gucs-bgworker-parallel",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Custom GUC sizing shared memory — registration sequence",
+      "assertions": [
+        {"text": "Picks DefineCustomIntVariable as the right typed entry point", "with_skill": true, "baseline": true},
+        {"text": "Selects PGC_POSTMASTER and justifies it via the shmem-allocation-is-fixed-at-startup invariant", "with_skill": true, "baseline": true},
+        {"text": "Sets GUC_UNIT_KB so SQL accepts size suffixes like '128MB'", "with_skill": true, "baseline": true},
+        {"text": "Requires MarkGUCPrefixReserved (not just EmitWarningsOnPlaceholders) and explains it must be called AFTER all DefineCustom* calls", "with_skill": true, "baseline": false},
+        {"text": "Mentions placeholder removal — placeholders created when conf mentions the GUC before extension load", "with_skill": true, "baseline": false},
+        {"text": "Cites a specific source path (guc.h, guc.c, or worker_spi.c) with file:line for at least one claim", "with_skill": true, "baseline": false},
+        {"text": "Notes that without MarkGUCPrefixReserved, parallel-worker startup can later trip over orphan placeholders OR mentions the typo-detection benefit explicitly", "with_skill": true, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "One-shot dynamic bgworker, never restart, join from launcher",
+      "assertions": [
+        {"text": "Uses RegisterDynamicBackgroundWorker (not the static RegisterBackgroundWorker) and explains why (latter only callable from _PG_init with process_shared_preload_libraries_in_progress)", "with_skill": true, "baseline": false},
+        {"text": "Sets bgw_restart_time = BGW_NEVER_RESTART", "with_skill": true, "baseline": true},
+        {"text": "Mentions that proc_exit(0) (return 0) also disables restart regardless of bgw_restart_time", "with_skill": true, "baseline": false},
+        {"text": "Sets bgw_notify_pid = MyProcPid and explains it enables SIGUSR1 on state transitions so wait calls work efficiently", "with_skill": true, "baseline": true},
+        {"text": "Uses WaitForBackgroundWorkerShutdown(handle) for joining", "with_skill": true, "baseline": true},
+        {"text": "Shows BGWORKER_SHMEM_ACCESS + BGWORKER_BACKEND_DATABASE_CONNECTION flags for a DB-touching worker", "with_skill": true, "baseline": true},
+        {"text": "Specifies worker main signature as pg_noreturn PGDLLEXPORT void f(Datum) and that signal handlers go BEFORE BackgroundWorkerUnblockSignals", "with_skill": true, "baseline": false},
+        {"text": "Cites a specific source path (bgworker.h or worker_spi.c) with file:line", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "Extension-driven parallel via ParallelContext + DSM + workers vs leader GUCs",
+      "assertions": [
+        {"text": "Lists the full lifecycle: EnterParallelMode, CreateParallelContext, estimate, InitializeParallelDSM, allocate+insert, LaunchParallelWorkers, WaitForParallelWorkersToFinish, DestroyParallelContext, ExitParallelMode", "with_skill": true, "baseline": true},
+        {"text": "Specifies worker signature `void f(dsm_segment*, shm_toc*)` and PGDLLEXPORT requirement", "with_skill": true, "baseline": true},
+        {"text": "States the reserved TOC key range 0xFFFFFFFFFFFF0001..0xFFFFFFFFFFFF000F and recommends small ints for extension keys", "with_skill": true, "baseline": false},
+        {"text": "Lists forbidden worker actions: no DB writes, no temp tables, no sequences, no non-buffer locks unilaterally, no PARALLEL UNSAFE functions", "with_skill": true, "baseline": true},
+        {"text": "Confirms workers see leader's GUCs at launch via serialization through PARALLEL_KEY_GUC / ParallelWorkerMain and that later SETs don't propagate", "with_skill": true, "baseline": false},
+        {"text": "Warns that pcxt->nworkers_launched may be less than requested and must be checked", "with_skill": true, "baseline": false},
+        {"text": "Mentions estimate-then-allocate symmetry as a gotcha (shm_toc_estimate_chunk + estimate_keys must precede InitializeParallelDSM)", "with_skill": true, "baseline": false},
+        {"text": "Cites a specific source path (parallel.h, parallel.c) with file:line", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 22,
+    "with_skill_total": 22,
+    "baseline_passed": 11,
+    "baseline_total": 22,
+    "with_skill_pass_rate": 1.0,
+    "baseline_pass_rate": 0.5
+  }
+}
