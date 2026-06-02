@@ -89,3 +89,4 @@ target backend's main process never sees the cancel-channel socket.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

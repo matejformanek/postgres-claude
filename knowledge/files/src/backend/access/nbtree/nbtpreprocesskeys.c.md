@@ -32,3 +32,4 @@ Preprocess the user-visible scan keys (a `ScanKey[]` of comparison-operator scan
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

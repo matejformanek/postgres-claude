@@ -70,3 +70,4 @@ The transaction lock ensures that wait is visible.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

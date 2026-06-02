@@ -47,3 +47,4 @@ loaded as a dynamic module so the main server binary stays libpq-free), and
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../subsystems/replication.md)

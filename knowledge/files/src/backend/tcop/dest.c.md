@@ -67,3 +67,4 @@ that was given to `rStartup`. [from-comment `dest.h:107-111`]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

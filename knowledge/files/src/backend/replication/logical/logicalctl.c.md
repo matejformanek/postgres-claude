@@ -45,3 +45,4 @@ need more coordination (terminate walsenders, archivers). [from-comment]
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

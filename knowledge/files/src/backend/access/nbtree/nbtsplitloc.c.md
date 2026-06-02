@@ -40,3 +40,4 @@ Choose the split point during a leaf or internal page split. The decision is a m
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

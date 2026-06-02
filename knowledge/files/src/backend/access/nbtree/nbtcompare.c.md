@@ -21,3 +21,4 @@ Built-in BTORDER_PROC comparison functions for "trivial" datatypes that nbtree's
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

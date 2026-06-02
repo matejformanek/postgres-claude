@@ -19,3 +19,7 @@
 - Bitmask values: `COMMAND_OK_IN_READ_ONLY_TXN`,
   `COMMAND_OK_IN_PARALLEL_MODE`, `COMMAND_OK_IN_RECOVERY`,
   `COMMAND_IS_STRICTLY_READ_ONLY`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

@@ -38,3 +38,4 @@ Two related last-line-of-defense mechanisms before a leaf page split, both imple
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

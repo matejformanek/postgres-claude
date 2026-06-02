@@ -96,3 +96,4 @@ The outer loop iterates: phase 1 → repeated phase 2 until the leaf is fully de
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

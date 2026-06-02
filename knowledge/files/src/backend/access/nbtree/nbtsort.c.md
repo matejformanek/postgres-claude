@@ -59,3 +59,4 @@ Build a btree index from scratch by **sorting input tuples then sequentially loa
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

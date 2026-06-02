@@ -69,3 +69,4 @@ concurrent syncs), `last_start_time` (restart throttle).
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

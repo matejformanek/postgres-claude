@@ -14,3 +14,7 @@
 
 Portal struct itself is declared in `utils/portal.h`; storage of portals
 (create/drop/lookup-by-name) is in `utils/mmgr/portalmem.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

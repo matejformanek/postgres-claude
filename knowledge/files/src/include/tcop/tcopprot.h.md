@@ -29,3 +29,7 @@ Public prototypes for `tcop/postgres.c`.
 
 `InitPostgres` lives in `utils/init/postinit.c`; its prototype is in
 `miscadmin.h` (not here).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

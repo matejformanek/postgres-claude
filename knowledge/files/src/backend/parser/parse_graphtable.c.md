@@ -29,3 +29,4 @@ syntactic + catalog-resolved description.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

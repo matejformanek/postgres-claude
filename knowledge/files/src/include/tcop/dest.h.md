@@ -42,3 +42,7 @@ struct _DestReceiver {
 `EndReplicationCommand`, `NullCommand`, `ReadyForQuery`.
 
 `None_Receiver` — globally available singleton for `DestNone`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

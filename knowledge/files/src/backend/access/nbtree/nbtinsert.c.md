@@ -73,3 +73,4 @@ WAL: `XLOG_BTREE_SPLIT_L` if `newitemonleft`, else `_R`. Block 0 = original/left
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

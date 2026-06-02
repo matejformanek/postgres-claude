@@ -90,3 +90,7 @@ What phase 2 of page deletion writes: `leftsib`, `rightsib`, `level`, `safexid` 
 ## Why this file is worth reading carefully
 
 The on-disk format here is the canonical spec for what nbtree promises to crash-safe. Any change to a record type is an upgrade event; any divergence between the primary emitter and the REDO routine is a data-corruption bug. The header is the contract; nbtinsert.c/nbtpage.c are one side and nbtxlog.c is the other.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-nbtree.md](../../../../subsystems/access-nbtree.md)

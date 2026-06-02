@@ -44,3 +44,4 @@ sets `walRcvState = WALRCV_STOPPED`, inits the condition variable
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../subsystems/replication.md)

@@ -18,3 +18,7 @@
 
 `tcop/cmdtaglist.h` — the canonical PG_CMDTAG list to edit when adding a
 new command tag.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

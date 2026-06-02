@@ -163,3 +163,4 @@ outlive the columns they refer to. `:103-146`
 <!-- backlinks:auto -->
 - [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

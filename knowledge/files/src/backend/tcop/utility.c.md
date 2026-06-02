@@ -72,3 +72,4 @@ Calls every `commands/*` module. Header: `tcop/utility.h`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)
