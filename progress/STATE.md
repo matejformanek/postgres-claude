@@ -1,7 +1,7 @@
 # pg-claude — current state
 
 **Phase:** Spine-synthesis catch-up (interactive) + nightly cloud routines (autonomous). `/refresh-upstream` shakedown still pending.
-**Last activity:** 2026-06-02 (afternoon, interactive) — wrote `knowledge/subsystems/parser-and-rewrite.md`: 766-line spine synthesis over the 33 per-file docs under `knowledge/files/src/backend/{parser,rewrite}/` (parser/ has a README, rewrite/ does not). 47 confidence-tagged cites. Covers the four-stage pipeline (raw parse → parse-analyze → rewrite → planner handoff), seven key data structures (`RawStmt`, `Query`, `RangeTblEntry`, `ParseState`, `RewriteRule`, `CommonTableExpr`, `TargetEntry`), and 18 invariants — most load-bearing: RLS-applied-last ordering at `rewriteHandler.c:2249-2255`, three-sites-change rule at `analyze.c:363-367`, DDL deferred to `ProcessUtility` time, `AcquireRewriteLocks` contract for non-fresh Queries. All line numbers verified against current source. Earlier same day (cloud): first cloud-routine cycle ran — 7 of 9 producers opened PRs (#11–#17) but evening-merger fired before they were ready, so 0 roster PRs merged this cycle; pg-quality-auditor was SILENT (needs investigation). Daily watchdog briefing at `progress/_briefings/2026-06-02.md`. Prior activity 2026-06-01: cross-reference pass added 633 upward backlinks, `data-structures/bufferdesc-state.md` refreshed for PG18 atomic state-word.
+**Last activity:** 2026-06-02 (afternoon, interactive) — wrote `knowledge/subsystems/access-nbtree.md`: 892-line spine synthesis over the 15 per-file nbtree docs + 2 header docs. 60 confidence-tagged cites. Covers L&Y descent + page split lock-coupling (`nbtinsert.c:1907-1911` canonical "left to right" comment), two-phase page deletion (`nbtpage.c:2429-2437` "moving right, then up"), 23 invariants including the `safexid` recycle gate (`nbtree.h:291-319`), the three tuple shapes (non-pivot / pivot / posting at `nbtree.h:372-549`), three flavors of leaf-tuple deletion, dedup + bottom-up deletion, parallel scan + parallel build, WAL replay ordering. All line numbers verified against current source via grep -n. Earlier same day: parser-and-rewrite spine synthesis landed (PR #19). Cloud cycle: 7 of 9 producers opened PRs (#11–#17); evening-merger fired before they were ready, so 0 roster PRs merged this cycle; pg-quality-auditor SILENT (needs investigation). Daily watchdog briefing at `progress/_briefings/2026-06-02.md`. Prior activity 2026-06-01: cross-reference pass added 633 upward backlinks, `data-structures/bufferdesc-state.md` refreshed for PG18 atomic state-word.
 **Source commit at last verification:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (refreshed 2026-06-01; previous anchor `ef6a95c7c64` had 1 trailing commit, build-system only, no corpus impact — see `progress/refresh-2026-06-01.md`).
 
 ## Done
@@ -15,7 +15,7 @@
 ### Knowledge corpus
 
 - **Architecture** (9 docs): `overview`, `process-model`, `query-lifecycle`, `executor`, `planner`, `wal`, `mvcc`, `replication`, `access-methods`. The 4 long-form docs flagged by file-level passes (`process-model`, `replication`, `executor`, `planner`) have been corrected in this session with file:line cites for the new findings (SIGURG vs SIGUSR1, `subsystemlist.h`, ProcSignalBarrier, PG18 `effective_wal_level`, sequence sync, `pg_conflict_detection`, failover slots, `resvalue`/`resnull` direct-write, `execAmi.c` mini-dispatch, MinimalTuple loss in tqueue, `additionalsize` HashAgg, ModifyTable Prologue/Act/Epilogue refactor, 9-item `set_plan_references` contract, four-phase join simplification, GEQO as planner extension, PHI freeze invariant).
-- **Subsystems** (17 docs): `storage-buffer` (calibration anchor) + 8 spine syntheses `access-heap`, `access-transam`, `storage-lmgr`, `storage-ipc`, `utils-mmgr`, `utils-cache`, `executor`, `optimizer` (synthesized over the per-file corpus, ~287–1092 lines each, ~80–120 citations each, all cross-referenced via `[via knowledge/files/...]`). Plus 7 leaf subsystem docs from wave 3 (`libpq-backend`, `port`, `main`, `foreign`, `jit`, `partitioning`, `headers-wave3`). **+1 added 2026-06-02:** `parser-and-rewrite` (766 lines, 47 cites, synthesized over the 33 parser/+rewrite/ per-file docs).
+- **Subsystems** (18 docs): `storage-buffer` (calibration anchor) + 8 spine syntheses `access-heap`, `access-transam`, `storage-lmgr`, `storage-ipc`, `utils-mmgr`, `utils-cache`, `executor`, `optimizer` (synthesized over the per-file corpus, ~287–1092 lines each, ~80–120 citations each, all cross-referenced via `[via knowledge/files/...]`). Plus 7 leaf subsystem docs from wave 3 (`libpq-backend`, `port`, `main`, `foreign`, `jit`, `partitioning`, `headers-wave3`). **+2 added 2026-06-02 (interactive):** `parser-and-rewrite` (766 lines, 47 cites, merged in #19), `access-nbtree` (892 lines, 60 cites).
 - **Idioms** (10 docs): `error-handling`, `memory-contexts`, `locking-overview`, `catalog-conventions`, `fmgr`, `spi`, `node-types-and-lists`, `parser-pipeline`, `guc-variables`, `bgworker-and-parallel`.
 - **Data-structures** (4 docs): `heap-tuple-layout`, `snapshot-lifecycle`, `bufferdesc-state`, `pgproc-fields`. New this session — focused notes between the idiom level and the per-file level.
 - **Conventions** (3): `coding-style`, `testing`, `extension-layout`.
@@ -43,7 +43,11 @@
 - Registry rows in `progress/files-examined.md`: **1021**.
 - Per-file docs under `knowledge/files/`: **917** (+15 this session — 13 synthesis-gap backfills + 2 buffer backfills).
 - Per-file docs with upward backlinks: **652** (+17 net-new blocks from the 2026-06-02 corpus-maintainer source-path backlink pass; 633 from the earlier cross-reference pass).
+<<<<<<< HEAD
 - Subsystem + data-structures docs: **21** (17 subsystem + 4 data-structures).
+=======
+- Subsystem + data-structures docs: **22** (18 subsystem + 4 data-structures).
+>>>>>>> fe2ca72 (ft(corpus): synthesize access/nbtree spine (892 lines, 60 cites))
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.
 - Glossary: `knowledge/glossary.md`, **15** entries (top-15 internals terms; grown by `pg-corpus-maintainer`).
@@ -51,7 +55,12 @@
 
 ## Recent session logs
 
+<<<<<<< HEAD
 - `sessions/2026-06-02-parser-rewrite-synthesis.md` — interactive: wrote `knowledge/subsystems/parser-and-rewrite.md` (766 lines, 47 cites).
+=======
+- `sessions/2026-06-02-access-nbtree-synthesis.md` — interactive: wrote `knowledge/subsystems/access-nbtree.md` (892 lines, 60 cites).
+- `sessions/2026-06-02-parser-rewrite-synthesis.md` — interactive: wrote `knowledge/subsystems/parser-and-rewrite.md` (766 lines, 47 cites) — PR #19.
+>>>>>>> fe2ca72 (ft(corpus): synthesize access/nbtree spine (892 lines, 60 cites))
 - `sessions/2026-06-02-corpus-maintainer-backlinks-glossary.md` — cloud routine: +117 source-path backlinks, new 15-entry glossary.
 - `sessions/2026-06-01-wave2-consolidation.md` — wave-2 consolidation.
 - `sessions/2026-06-01-leaf-subsystems-wave3.md` — libpq-backend, port, main, foreign, jit, partitioning.
