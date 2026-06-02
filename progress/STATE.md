@@ -51,6 +51,7 @@
 
 ## Recent session logs
 
+- `sessions/2026-06-02-extension-anthropologist-timescaledb.md` — cloud routine: `knowledge/ideologies/timescaledb.md` (two-tier versioned loader, Apache/TSL license split, own chunk/hypercube partitioning).
 - `sessions/2026-06-02-corpus-maintainer-backlinks-glossary.md` — cloud routine: +117 source-path backlinks, new 15-entry glossary.
 - `sessions/2026-06-01-wave2-consolidation.md` — wave-2 consolidation.
 - `sessions/2026-06-01-leaf-subsystems-wave3.md` — libpq-backend, port, main, foreign, jit, partitioning.
