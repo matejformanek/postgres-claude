@@ -35,6 +35,9 @@ correct `dev/...` paths, and macOS gotchas.
 | Wipe data dir, keep build | `/pg-fresh --yes` |
 | Nuke the dev clone and re-clone | `/pg-reclone-dev --yes` |
 | Document a subsystem | `/document-subsystem <path>` |
+| Brainstorm a PG feature (Phase 1 of planner) | `/pg-brainstorm <idea>` |
+| Heavy plan for a brainstormed feature (Phase 2) | `/pg-plan <slug>` |
+| Execute a plan phase-by-phase (Phase 3, plan-linked commits) | `/pg-implement <slug>` |
 
 **Be proactive.** If the user says "let's build", "start the server", "run tests",
 "debug this backend", "let me query that", etc., invoke the command — don't ask
@@ -78,9 +81,18 @@ didn't trigger.
 |---|---|---|
 | Format-patch + CF registration + email etiquette | `patch-submission` | "let's send this upstream" |
 | Pre-submission self-review checklist | `review-checklist` | "review my patch" or pre-mailing pass |
-| PG-style commit messages (no Co-Authored-By!) | `commit-message-style` | drafting commits intended for upstream |
+| PG-style commit messages (no Co-Authored-By!) | `commit-message-style` | drafting commits in `dev/` intended for upstream |
 | Parser, Node taxonomy, gen_node_support.pl | `parser-and-nodes` | grammar/Node changes, new SQL statement |
 | Executor + planner integration | `executor-and-planner` | new node type, new path, planner change |
+
+### Planning + implementing a PG feature (the three-phase planner)
+
+| Topic | Skill | Trigger |
+|---|---|---|
+| Phase 1: explore an idea, sketch 2-3 approaches | `pg-feature-brainstorm` | "let's brainstorm X", "/pg-brainstorm" |
+| Phase 2: heavy plan with file:line cites | `pg-feature-plan` | "plan this", "/pg-plan <slug>" |
+| Phase 3: execute plan phase-by-phase, plan-linked commits | `pg-implement` | "/pg-implement <slug>" |
+| Strict rules for plan-linked commits + scope discipline | `.claude/rules/pg-implement-discipline.md` (not a skill — binding rules) | auto-loaded by `pg-implement` |
 
 ### Project-internal
 
@@ -88,6 +100,7 @@ didn't trigger.
 |---|---|
 | Master command index (this skill) | `pg-claude` |
 | Keep STATE.md / coverage.md / sessions/ in sync | `memory-keeping` |
+| Commit-message style for THIS repo (with Co-Authored-By) | `meta-commit-style` |
 
 ## Knowledge corpus — where to look things up
 
@@ -111,6 +124,10 @@ knowledge/
 └── files/          # one .md per source file — 750+ docs mirroring source/src/
                     #   layout. Use when you need precise file:line context for a
                     #   specific .c or .h.
+
+planning/           # forward-looking design docs for features in-flight (NEW)
+                    # one subdir per slug, with brainstorm.md / plan.md / notes.md
+                    # See planning/README.md for the layout.
 ```
 
 **Routing rule:**
@@ -174,6 +191,11 @@ User asks for...                              You reach for...
                           /setup-pg → /pg-restart → /pg-psql → /pg-test
 "send upstream"       → patch-submission + review-checklist + commit-message-style
 "document subsystem"  → /document-subsystem <path>
+"brainstorm a feature"→ /pg-brainstorm <idea>  (Phase 1; ~150-300 line sketch)
+"plan that feature"   → /pg-plan <slug>        (Phase 2; heavy implementable plan)
+"implement the plan"  → /pg-implement <slug>   (Phase 3; per-phase commits, plan-linked)
+"commit in THIS repo" → meta-commit-style skill (with Co-Authored-By)
+"commit in dev/"      → commit-message-style skill (NO Co-Authored-By; upstream style)
 "what was done"       → progress/STATE.md + progress/coverage.md
 ```
 
