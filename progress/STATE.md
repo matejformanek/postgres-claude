@@ -1,7 +1,7 @@
 # pg-claude — current state
 
-**Phase:** Cross-reference pass + correctness fixes — done. `/refresh-upstream` shakedown next.
-**Last activity:** 2026-06-01 — cross-reference pass added upward backlinks from 633 per-file docs to the long-form synthesizers that reference them (specific cites + directory-scope globs from optimizer.md / executor.md). Idempotent regenerator at `/tmp/build_backlinks.py`. Also: backfilled `buf_internals.h.md` + `bufmgr.c.md` per-file docs (broken-cite gap surfaced by the cross-ref pass); refreshed stale `data-structures/bufferdesc-state.md` to match current source (state word is now `pg_atomic_uint64` with content lock encoded in-word, not a separate LWLock). Earlier same date: 13 per-file backfills for spine-synthesis gaps; 4 remaining spine syntheses completed (all 8 now exist).
+**Phase:** Cloud-routine harness live (day zero). Corpus phase: cross-reference pass + correctness fixes — done.
+**Last activity:** 2026-06-02 — cloud-routine harness went live: PR #1 scaffolded 10 daily recipes + 6 work queues (audits 39 / skills 21 / docs 15 / wiki 10 / extensions 14 / files 15 pending, all fresh) + per-routine dirs; pg-preflight passed (git/date/pwd OK; `gh` CLI absent, GitHub ops route through MCP). First `pg-state-keeper` watchdog run produced the morning briefing at `progress/_briefings/2026-06-02.md`. Zero overnight cloud merges — the 20:11→02:11 cycle predates the 08:30 scaffold, so all 9 siblings are SILENT this cycle by definition; their first live slot is tonight (2026-06-02 evening). Corpus unchanged from 2026-06-01 (cross-reference backlink pass + `bufferdesc-state.md` refresh; see prior session logs).
 **Source commit at last verification:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (refreshed 2026-06-01; previous anchor `ef6a95c7c64` had 1 trailing commit, build-system only, no corpus impact — see `progress/refresh-2026-06-01.md`).
 
 ## Done
