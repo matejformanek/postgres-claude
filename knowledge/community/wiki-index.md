@@ -162,9 +162,12 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
 ## Subsystem notes
 
 - **Hint_Bits** — https://wiki.postgresql.org/wiki/Hint_Bits
+  *(distilled 2026-06-02 → `knowledge/wiki-distilled/Hint_Bits.md`)*
   Tight, useful page on `XMIN_COMMITTED/ABORTED` and `XMAX_COMMITTED/ABORTED`.
   Explains why "just reading" can issue writes (hint bits get set on
   visibility check) [from-wiki](https://wiki.postgresql.org/wiki/Hint_Bits).
+  Note: page is from 2015 — the distilled doc supplements the missing
+  `SetHintBits`/`MarkBufferDirtyHint`/WAL-flush machinery from the corpus.
 
 - **MVCC** — https://wiki.postgresql.org/wiki/MVCC
   **Stale stub** (last meaningful update May 2012). Just a pointer to
