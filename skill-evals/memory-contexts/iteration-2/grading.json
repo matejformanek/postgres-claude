@@ -1,0 +1,53 @@
+{
+  "iteration": 2,
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "SRF tuple corruption between calls",
+      "assertions": [
+        {"text": "Identifies that CurrentMemoryContext inside expr eval is the per-tuple ExprContext and gets reset between tuple cycles", "with_skill": true, "baseline": true},
+        {"text": "Notes that the per-tuple context is reset at the START of each tuple cycle (not the end), per README:308-368", "with_skill": true, "baseline": false},
+        {"text": "Recommends multi_call_memory_ctx from SRF_FIRSTCALL_INIT/FuncCallContext for value-per-call SRFs", "with_skill": true, "baseline": true},
+        {"text": "Recommends rsinfo->econtext->ecxt_per_query_memory for Materialize-mode tuplestore allocation", "with_skill": true, "baseline": true},
+        {"text": "Mentions datumCopy / pstrdup as the way to move pass-by-reference data across the boundary", "with_skill": true, "baseline": true},
+        {"text": "Cites a specific knowledge/idioms or source file (file:line or named file) for the per-tuple lifetime claim", "with_skill": true, "baseline": false},
+        {"text": "Shows the MemoryContextSwitchTo save/restore idiom with oldcxt", "with_skill": true, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "Relcache build callback scoping",
+      "assertions": [
+        {"text": "States that palloc directly into CacheMemoryContext leaks for backend lifetime", "with_skill": true, "baseline": true},
+        {"text": "Recommends creating a CHILD context of CacheMemoryContext and storing it on the cache entry", "with_skill": true, "baseline": true},
+        {"text": "Recommends ALLOCSET_SMALL_SIZES preset for per-relation cache contexts", "with_skill": true, "baseline": true},
+        {"text": "Notes that AllocSetContextCreate name must be a string literal (StaticAssertExpr) and to use MemoryContextSetIdentifier for dynamic names", "with_skill": true, "baseline": true},
+        {"text": "Names a concrete relcache.c precedent field (rd_rulescxt, rd_indexcxt, or rd_smgrcxt)", "with_skill": true, "baseline": true},
+        {"text": "Mentions that MemoryContextDelete is recursive so a single delete frees the entire subtree", "with_skill": true, "baseline": false},
+        {"text": "Cites SKILL.md or knowledge/idioms/memory-contexts.md (not just source) for the rule", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "2 GB alloc and huge allocation API",
+      "assertions": [
+        {"text": "Identifies MaxAllocSize = 1 GB - 1 as the cap that triggered the error", "with_skill": true, "baseline": true},
+        {"text": "Recommends palloc_extended(sz, MCXT_ALLOC_HUGE) or MemoryContextAllocHuge as the correct API", "with_skill": true, "baseline": true},
+        {"text": "Mentions repalloc_huge for resizing huge chunks", "with_skill": true, "baseline": true},
+        {"text": "States MaxAllocHugeSize = SIZE_MAX/2 as the huge cap", "with_skill": true, "baseline": true},
+        {"text": "Confirms OOM still throws ereport(ERROR) unless MCXT_ALLOC_NO_OOM is set", "with_skill": true, "baseline": true},
+        {"text": "Notes that Bump does NOT support pfree/repalloc and is therefore unsuitable for a growable buffer", "with_skill": true, "baseline": true},
+        {"text": "Mentions AggCheckCallContext / aggcontext as the correct context for aggregate transition state", "with_skill": true, "baseline": true},
+        {"text": "Cites memutils.h:40-49 or knowledge file with file:line for MaxAllocHugeSize", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 22,
+    "with_skill_total": 22,
+    "baseline_passed": 17,
+    "baseline_total": 22,
+    "with_skill_pass_rate": 1.0,
+    "baseline_pass_rate": 0.773
+  }
+}

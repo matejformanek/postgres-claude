@@ -1,0 +1,53 @@
+{
+  "iteration": 1,
+  "skill": "fmgr-and-spi",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Materialize-mode SRF: where state must live",
+      "assertions": [
+        {"text": "States the tuplestore + TupleDesc MUST live in rsinfo->econtext->ecxt_per_query_memory, NOT CurrentMemoryContext", "with_skill": true, "baseline": true},
+        {"text": "Explains *why*: CurrentMemoryContext at fmgr entry is typically a per-tuple ExprContext that is reset between tuple cycles", "with_skill": true, "baseline": true},
+        {"text": "Recommends the InitMaterializedSRF(fcinfo, flags) helper as the canonical/preferred pattern", "with_skill": true, "baseline": true},
+        {"text": "Mentions that Materialize-mode ignores the Datum return value, so PG_RETURN_NULL() is the convention", "with_skill": true, "baseline": true},
+        {"text": "Mentions MAT_SRF_BLESS / MAT_SRF_USE_EXPECTED_DESC flags for RECORD or caller-expected descriptors", "with_skill": true, "baseline": false},
+        {"text": "Cites a specific file:line or named knowledge file for the rule (funcapi.c:100-122 or knowledge/idioms/fmgr.md §8)", "with_skill": true, "baseline": false},
+        {"text": "Calls out that this is the single most common SRF pitfall / flags it as a known footgun", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "SPI_prepare on fn_extra segfaults second call",
+      "assertions": [
+        {"text": "Diagnoses that a bare SPI_prepare's plan lives in the SPI Proc context and is freed by SPI_finish", "with_skill": true, "baseline": true},
+        {"text": "Prescribes SPI_keepplan(plan) before SPI_finish, noting it reparents under CacheMemoryContext", "with_skill": true, "baseline": true},
+        {"text": "Notes SPI_keepplan is one-way (saved=true) and pins underlying CachedPlanSources", "with_skill": true, "baseline": false},
+        {"text": "Warns that the cache struct hung on fn_extra must be allocated in flinfo->fn_mcxt, not CurrentMemoryContext", "with_skill": true, "baseline": true},
+        {"text": "Mentions that SRF value-per-call mode uses fn_extra itself (SRF_IS_FIRSTCALL tests fn_extra==NULL) so it cannot be shared", "with_skill": true, "baseline": false},
+        {"text": "Mentions SPI_prepare returns NULL on failure and the code lands in the global SPI_result", "with_skill": true, "baseline": true},
+        {"text": "Cites a specific file:line or named knowledge file for the keepplan/Proc-context rule", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "SPI_tuptable after subxact rollback",
+      "assertions": [
+        {"text": "Identifies AtEOSubXact_SPI as the cleanup hook that frees tuptables/executor state from the dying subxact", "with_skill": true, "baseline": false},
+        {"text": "States explicitly that SPI_tuptable created inside the failed subxact has been freed and touching it after rollback is use-after-free", "with_skill": true, "baseline": true},
+        {"text": "Prescribes CopyErrorData BEFORE FlushErrorState to capture diagnostics, allocated in the saved oldctx", "with_skill": true, "baseline": true},
+        {"text": "Mentions that SPI stack frames opened INSIDE the dying subxact are also popped (cannot continue SPI in them)", "with_skill": true, "baseline": false},
+        {"text": "Shows the full canonical subxact pattern (oldctx + oldowner save, BeginInternalSubTransaction, PG_TRY/PG_CATCH, restore CurrentResourceOwner)", "with_skill": true, "baseline": true},
+        {"text": "Connects this to why SPI_commit/SPI_rollback are forbidden inside a PL exception block (same root: open subxact)", "with_skill": true, "baseline": false},
+        {"text": "Cites a specific file:line (spi.c:482-572) or knowledge/idioms/spi.md §9 for the cleanup rule", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 21,
+    "with_skill_total": 21,
+    "baseline_passed": 12,
+    "baseline_total": 21,
+    "with_skill_pass_rate": 1.0,
+    "baseline_pass_rate": 0.571
+  }
+}

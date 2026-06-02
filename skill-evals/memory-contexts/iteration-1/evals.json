@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "memory-contexts",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I'm writing a set-returning function (SRF) that builds a tuplestore. Each call I'm palloc'ing the result tuple in CurrentMemoryContext, but the rows seem to be getting corrupted between calls when the SRF is in an expression. Where should I allocate the result, and what's the canonical pattern?"
+    },
+    {
+      "eval_id": 2,
+      "question": "I'm writing a relcache build callback that creates a few cached lookup tables for a relation. If I just palloc them inside the build callback, will they leak? What's the right way to scope them so they live as long as the relcache entry but no longer?"
+    },
+    {
+      "eval_id": 3,
+      "question": "I need to allocate a 2 GB working buffer for a custom aggregate's transition state. palloc() rejects it with 'invalid memory alloc request size'. What's the right API, and what's the hard cap? Also: are there any restrictions on which context types support this?"
+    }
+  ]
+}

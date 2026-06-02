@@ -1,0 +1,170 @@
+{
+  "iteration": 1,
+  "skill": "executor-and-planner",
+  "grading_notes": "Each assertion is graded pass/partial/fail across both attempts. Skill is judged on whether it gave Claude the material to consistently produce the right answer.",
+  "evals": [
+    {
+      "id": "eval-1",
+      "prompt_summary": "FilterCache new node — checklist",
+      "assertions": [
+        {
+          "id": "1.1",
+          "claim": "Mentions Plan struct in plannodes.h with `Plan plan;` first field",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "1.2",
+          "claim": "Mentions PlanState struct in execnodes.h, embedding PlanState (not ScanState because not a scan)",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "1.3",
+          "claim": "Lists the five core executor functions (ExecInit/Exec/ExecEnd/ExecReScan) and notes ExecProcNode is set inside ExecInit",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "1.4",
+          "claim": "Wires into all THREE dispatch switches: ExecInitNode + ExecEndNode in execProcnode.c, ExecReScan in execAmi.c",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "1.5",
+          "claim": "Mentions meson.build + Makefile + header include in execProcnode.c alphabetical block",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "1.6",
+          "claim": "Mentions EXPLAIN integration in commands/explain.c",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "1.7",
+          "claim": "Mentions set_plan_references / setrefs.c if the node carries expressions",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "1.8",
+          "claim": "Calls out the no-malloc / use-palloc memory rule and the close-relations-in-ExecEnd rule",
+          "attempt_A": "pass",
+          "attempt_B": "partial - mentioned palloc but did not enumerate ExecEnd relation-closing rule as separate pitfall in B"
+        }
+      ],
+      "score": "7.5 / 8"
+    },
+    {
+      "id": "eval-2",
+      "prompt_summary": "Path → Plan, role of set_plan_references",
+      "assertions": [
+        {
+          "id": "2.1",
+          "claim": "Distinguishes Path (planner currency, cost-comparable) from Plan (executor instruction)",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "2.2",
+          "claim": "Identifies create_plan as the entry point with create_plan_recurse switching on best_path->pathtype",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "2.3",
+          "claim": "Cites correct file:line (createplan.c:339 / 390)",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "2.4",
+          "claim": "Places set_plan_references AFTER create_plan returns",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "2.5",
+          "claim": "Explains what set_plan_references actually does: Var renumbering to INNER_VAR/OUTER_VAR/scan attno",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "2.6",
+          "claim": "Notes finalrtable assembly / relationOids collection / plan-cache invalidation items",
+          "attempt_A": "partial - mentions finalrtable and relationOids but not invalItems explicitly",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "2.7",
+          "claim": "Warns new Plan nodes carrying expressions must be added to fix_*_references_walker",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        }
+      ],
+      "score": "6.5 / 7"
+    },
+    {
+      "id": "eval-3",
+      "prompt_summary": "Unrecognized node type after adding planner-side scaffolding",
+      "assertions": [
+        {
+          "id": "3.1",
+          "claim": "Identifies ExecReScan lives in execAmi.c, not execProcnode.c — the likely miss",
+          "attempt_A": "pass",
+          "attempt_B": "pass (called out very explicitly)"
+        },
+        {
+          "id": "3.2",
+          "claim": "Distinguishes Plan-tag dispatch (ExecInitNode) vs PlanState-tag dispatch (ExecEndNode, ExecReScan)",
+          "attempt_A": "pass",
+          "attempt_B": "partial - mentioned but less explicit in B"
+        },
+        {
+          "id": "3.3",
+          "claim": "Cites file:line for the three switches",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "3.4",
+          "claim": "Reminds to include the new header in execProcnode.c alphabetical block",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "3.5",
+          "claim": "Suggests checking gen_node_support.pl generated NodeTags for both Plan and PlanState types",
+          "attempt_A": "pass",
+          "attempt_B": "pass"
+        },
+        {
+          "id": "3.6",
+          "claim": "Asks WHICH switch is firing (init/end/rescan) to localize the bug",
+          "attempt_A": "partial - implies it via the early/cleanup/rescan walkthrough",
+          "attempt_B": "pass - explicit"
+        },
+        {
+          "id": "3.7",
+          "claim": "Considers MultiExecProcNode but correctly notes it does not apply to a scan-returning-tuples",
+          "attempt_A": "fail - did not mention",
+          "attempt_B": "pass"
+        }
+      ],
+      "score": "5.5 / 7"
+    }
+  ],
+  "overall": {
+    "raw": "19.5 / 22",
+    "percentage": 88.6,
+    "headline": "Skill is operational. All three answers were correct and grounded in the right file:line cites. The two attempts were highly consistent — variance is low, which is the iteration goal.",
+    "gaps_observed": [
+      "MultiExecProcNode was nearly forgotten in eval-3 attempt A — it's listed in SKILL.md A.2 but easy to skip when not obviously relevant.",
+      "The skill could surface the Plan-tag-vs-PlanState-tag asymmetry more loudly. Both attempts caught it but it deserves explicit billing as a common pitfall.",
+      "`fix_*_references_walker` family is mentioned only in the Common Mistakes section; it would help to include a one-line cite path."
+    ]
+  }
+}

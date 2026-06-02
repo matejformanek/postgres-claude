@@ -1,0 +1,49 @@
+{
+  "iteration": 1,
+  "evals": [
+    {
+      "eval_id": 1,
+      "assertions": [
+        {"text": "Recommends errcode_for_file_access() for open()/read() failures (not generic errcode(ERRCODE_INTERNAL_ERROR))", "with_skill": true, "baseline": false},
+        {"text": "Uses %m for errno-derived string in the file-error errmsg", "with_skill": true, "baseline": true},
+        {"text": "Picks a specific non-default SQLSTATE for the parser branch (e.g. ERRCODE_SYNTAX_ERROR / ERRCODE_CONFIG_FILE_ERROR), not INTERNAL_ERROR", "with_skill": true, "baseline": false},
+        {"text": "Demonstrates errmsg lowercase + no period + identifier quoted as \\\"%s\\\" simultaneously in at least one example", "with_skill": true, "baseline": false},
+        {"text": "Demonstrates errdetail/errhint as full sentences (capital + period) distinct from errmsg style", "with_skill": true, "baseline": false},
+        {"text": "States explicitly that no cleanup code (e.g. close(fd)) is needed after ereport(ERROR) because it longjmps", "with_skill": true, "baseline": true},
+        {"text": "Mentions OpenTransientFile (or a ResourceOwner-tracked alternative) so the fd is auto-closed on xact abort", "with_skill": true, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "assertions": [
+        {"text": "Recommends PG_FINALLY over PG_CATCH for the symmetric free-on-success-and-error case", "with_skill": true, "baseline": false},
+        {"text": "Says the parser context pointer must be declared volatile because it's modified in TRY and read in FINALLY/CATCH", "with_skill": true, "baseline": true},
+        {"text": "States that PG_FINALLY auto-rethrows (no manual PG_RE_THROW needed), or equivalently warns PG_CATCH must PG_RE_THROW", "with_skill": true, "baseline": true},
+        {"text": "Explicitly states FATAL is NOT caught by PG_TRY/PG_CATCH/PG_FINALLY", "with_skill": true, "baseline": true},
+        {"text": "Names PG_ENSURE_ERROR_CLEANUP (in storage/ipc.h) as the FATAL-safe mechanism", "with_skill": true, "baseline": false},
+        {"text": "Notes the catch block / error stack has a hard recursion limit (5 frames / ERRORDATA_STACK_SIZE) before PANIC", "with_skill": true, "baseline": false},
+        {"text": "Reasons that for process-local memory like libxml2 ctxt, FATAL is mostly moot because OS reclaims process memory", "with_skill": true, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "assertions": [
+        {"text": "Identifies all four style flaws in snippet 1: leading capital, trailing period, newline, unquoted identifier", "with_skill": true, "baseline": true},
+        {"text": "Identifies missing errcode() in snippet 1 and suggests a specific non-default SQLSTATE (e.g. ERRCODE_UNDEFINED_TABLE)", "with_skill": true, "baseline": true},
+        {"text": "Identifies the goto-after-ereport(ERROR) as dead code due to longjmp", "with_skill": true, "baseline": true},
+        {"text": "Recommends switching snippet 2 from ereport(ERROR, ERRCODE_INTERNAL_ERROR, errmsg(...)) to elog(ERROR, ...) as the canonical 'should never happen' form", "with_skill": true, "baseline": true},
+        {"text": "Calls out the adjacent-string-literal concatenation in snippet 2 as breaking gettext / fragment-concatenation rule", "with_skill": true, "baseline": true},
+        {"text": "Flags 'can't' contraction in snippet 3 as violating PG style (must use 'cannot')", "with_skill": true, "baseline": true},
+        {"text": "Flags embedding 'ERROR 22003' (severity + SQLSTATE in message text) as violating the rule that errcode() and logger handle those", "with_skill": true, "baseline": true}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 21,
+    "with_skill_total": 21,
+    "with_skill_pass_rate": 1.0,
+    "baseline_passed": 13,
+    "baseline_total": 21,
+    "baseline_pass_rate": 0.619
+  }
+}

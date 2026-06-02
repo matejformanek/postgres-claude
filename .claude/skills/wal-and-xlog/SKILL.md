@@ -1,6 +1,6 @@
 ---
 name: wal-and-xlog
-description: PostgreSQL WAL/XLOG checklist for adding or modifying a WAL record — choosing builtin rmgr vs Generic WAL (generic_xlog.c) vs custom rmgr (RegisterCustomRmgr), XLogInsert + XLogRegisterBuffer idiom, writing a correct redo function, FPI/hint-bit (MarkBufferDirtyHint) rules, updating rmgrdesc and pg_waldump. Use when editing C that emits XLogInsert, adding an access method needing durability, or reviewing patches that change WAL record formats. Do NOT trigger on MySQL binlog, SQLite WAL mode, Kafka logs, pgbackrest/wal_level config, or generic write-ahead-logging theory questions.
+description: PostgreSQL WAL/XLOG checklist for adding or modifying a WAL record — choosing builtin rmgr vs Generic WAL (generic_xlog.c) vs custom rmgr (RegisterCustomRmgr), XLogInsert + XLogRegisterBuffer idiom, writing a correct redo function, FPI/hint-bit (MarkBufferDirtyHint) rules, updating rmgrdesc and pg_waldump. Use when editing C that emits XLogInsert, adding an access method needing durability, or reviewing patches that change WAL record formats. Companion skills: `locking` for buffer-lock ordering around modified pages, `error-handling` for `ereport(PANIC, …)` inside redo. Do NOT trigger on MySQL binlog, SQLite WAL mode, Kafka logs, pgbackrest/wal_level config, or generic write-ahead-logging theory questions.
 ---
 
 # WAL & XLOG — operational skill
@@ -63,7 +63,8 @@ static const RmgrData my_rmgr = {
     .rm_startup   = NULL,         /* optional */
     .rm_cleanup   = NULL,         /* optional */
     .rm_mask      = my_mask,      /* needed for wal_consistency_checking */
-    .rm_decode    = NULL,         /* set only if you want logical decoding */
+    .rm_decode    = NULL,         /* optional; only if records should be
+                                     visible to logical decoding plugins */
 };
 ```
 
@@ -76,7 +77,9 @@ void
 _PG_init(void)
 {
     if (!process_shared_preload_libraries_in_progress)
-        ereport(ERROR, ...);    /* must be in shared_preload_libraries */
+        ereport(ERROR,
+                (errcode(ERRCODE_INVALID_PARAMETER_VALUE),
+                 errmsg("my_extension must be loaded via shared_preload_libraries")));
     RegisterCustomRmgr(RM_EXPERIMENTAL_ID, &my_rmgr);
 }
 ```
@@ -173,6 +176,22 @@ my_redo(XLogReaderState *record)
 }
 ```
 
+`XLogReadBufferForRedo` return values you will hit
+[verified-by-code `source/src/include/access/xlogutils.h:74-78`]:
+
+| return | meaning | what to do |
+|---|---|---|
+| `BLK_NEEDS_REDO` | page LSN < record LSN; apply the change | apply, `PageSetLSN(page, record->EndRecPtr)`, `MarkBufferDirty` |
+| `BLK_DONE` | page LSN ≥ record LSN; already applied | skip body, but still `UnlockReleaseBuffer` if `BufferIsValid` |
+| `BLK_RESTORED` | FPI was just applied | skip body, page already at correct LSN |
+| `BLK_NOTFOUND` | block doesn't exist (e.g. truncated) | nothing to do; buffer is invalid |
+
+Use `record->EndRecPtr` (end of the record being replayed) for
+`PageSetLSN` so the page LSN advances *past* the record once it's fully
+applied — using the start LSN would leave the page LSN equal to the
+record's start and falsely re-admit `BLK_NEEDS_REDO` on a re-scan that
+restarts exactly at this record.
+
 Hard rules for redo:
 - **Idempotent**: must produce the right result regardless of how many
   times it's replayed, by virtue of the LSN check (`BLK_NEEDS_REDO` is
@@ -246,8 +265,10 @@ Redo applies the delta. No custom redo function needed. [verified-by-code
 `source/src/backend/access/transam/generic_xlog.c:1-44`]
 
 Caveats:
-- Up to `MAX_GENERIC_XLOG_PAGES` pages per call (a small constant in
-  `generic_xlog.h`). [unverified value — check at use site]
+- Up to `MAX_GENERIC_XLOG_PAGES` = `XLR_NORMAL_MAX_BLOCK_ID` = **4**
+  pages per call. [verified-by-code
+  `source/src/include/access/generic_xlog.h:23`,
+  `source/src/include/access/xloginsert.h:28`]
 - One transaction may emit many Generic records.
 - Buffers are dirtied for you on `GenericXLogFinish`.
 
@@ -285,6 +306,12 @@ emit these directly. [from-comment
 - [ ] Multi-page records: writer and redo use the same buffer lock order.
 - [ ] Redo function is idempotent and only modifies pages when
       `XLogReadBufferForRedo` returns `BLK_NEEDS_REDO`.
+- [ ] **Writer ↔ redo symmetry**: for every field the writer reads from
+      the in-memory state, the corresponding bytes are written into the
+      record via `XLogRegisterData` / `XLogRegisterBufData` and read back
+      via `XLogRecGetData` / `XLogRecGetBlockData` in redo. This bug
+      class survives `wal_consistency_checking=all` (the writer never
+      produces a diverging on-disk page) — only crash recovery exposes it.
 - [ ] `rm_desc` and `rm_identify` implemented (and follow the
       `rmgrdesc/README` formatting).
 - [ ] `rm_mask` implemented if the record can leave hint-bit-like
@@ -309,11 +336,10 @@ emit these directly. [from-comment
 
 ## Open questions to verify on first real use
 
-- `[unverified]` `MAX_GENERIC_XLOG_PAGES` exact value (check
-  `access/generic_xlog.h`).
+- `rm_decode` is **optional**: `decode.c` checks `if (rmgr.rm_decode != NULL)`
+  before invoking it. Set it only if you want your rmgr's records to be
+  visible to logical decoding plugins. [verified-by-code
+  `source/src/backend/replication/logical/decode.c:116-117`]
 - `[unverified]` Behaviour of `XLogRegisterBlock` (the lower-level variant
   of `XLogRegisterBuffer`) — used by recovery-friendly paths that don't
   have a Buffer yet; signature in `xloginsert.h:51-53`.
-- `[unverified]` Whether `rm_decode` is mandatory for `wal_level=logical`
-  or only required if your rmgr's records should be visible to logical
-  decoding plugins.

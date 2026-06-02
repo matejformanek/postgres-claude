@@ -174,6 +174,11 @@ must `guc_malloc` the new value and `guc_free` the old one.
 
 [verified-by-code `source/src/include/postmaster/bgworker.h:122-133`]
 
+`RegisterBackgroundWorker` errors out unless called from `_PG_init` during
+shared-library preload (i.e. `process_shared_preload_libraries_in_progress`
+is true). From any other site — including a regular backend at runtime —
+use `RegisterDynamicBackgroundWorker` instead.
+
 ### 2.2 Filling the `BackgroundWorker` struct
 
 ```c
@@ -219,13 +224,14 @@ RegisterBackgroundWorker(&worker);
 
 ### 2.5 Restart policy
 
-- `bgw_restart_time = N` (seconds): postmaster restarts the worker N seconds
-  after it exits with non-zero status.
-- `bgw_restart_time = BGW_NEVER_RESTART` (`-1`): exit is final; slot is
-  freed.
-- Returning **0** from the worker's main function: never restarted, slot
-  freed regardless of `bgw_restart_time`.
-- Returning **1** (or `proc_exit(1)`): restarted unless `BGW_NEVER_RESTART`.
+Two knobs decide restart; both must allow it.
+
+| `bgw_restart_time` | Worker exit | Restarted? |
+|---|---|---|
+| `BGW_NEVER_RESTART` (`-1`) | any | No — slot is freed. |
+| N seconds | `proc_exit(0)` (return 0) | No — clean exit retires the slot regardless of `bgw_restart_time`. |
+| N seconds | `proc_exit(1)` (return 1) | Yes, after N seconds. |
+| N seconds | crash / signal | Yes, after N seconds. |
 
 [from-comment `source/src/include/postmaster/bgworker.h:14-27`]
 

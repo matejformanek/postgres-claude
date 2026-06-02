@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "fmgr-and-spi",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I'm writing a C function that returns a setof composite from a query. I'm building a tuplestore with InitMaterializedSRF and tuplestore_putvalues, but reading back gives garbage or crashes. I had also tried palloc'ing the tuplestore manually in CurrentMemoryContext before switching to the helper. What's the rule about where Materialize-mode SRF state must live, and what's the minimal correct pattern?"
+    },
+    {
+      "eval_id": 2,
+      "question": "Inside an SPI session I prepare a plan with SPI_prepare and stash the SPIPlanPtr on fcinfo->flinfo->fn_extra so I can reuse it on subsequent calls. The first call works; the second call segfaults. What am I doing wrong and what's the correct lifecycle?"
+    },
+    {
+      "eval_id": 3,
+      "question": "I have a PL handler that runs a user query via SPI_execute inside BeginInternalSubTransaction/PG_TRY. On exception I do RollbackAndReleaseCurrentSubTransaction and then want to look at SPI_tuptable from the failed query to log diagnostics. It crashes. Why, and what's the correct way to capture diagnostics from a failed SPI call?"
+    }
+  ]
+}

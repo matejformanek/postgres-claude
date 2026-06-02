@@ -42,6 +42,8 @@ from-comment `source/src/backend/replication/logical/launcher.c:10-15,53-56`]
   replication-protocol commands `IDENTIFY_SYSTEM`, `BASE_BACKUP`,
   `CREATE_REPLICATION_SLOT`, `START_REPLICATION`. Grammar:
   `source/src/backend/replication/repl_gram.y:62-300`.
+  Batch size: `MAX_SEND_SIZE = XLOG_BLCKSZ * 16` (~128 KB with default 8K
+  blocks) — `walsender.c:110-118`.
 - Receiver: `source/src/backend/replication/walreceiver.c` + the dynamically
   loaded `libpqwalreceiver/` (keeps libpq out of the main server binary).
   [from-README `source/src/backend/replication/README:3-16`]
@@ -85,7 +87,12 @@ from-comment `source/src/backend/replication/logical/launcher.c:10-15,53-56`]
 - Conflict logging (v18): `logical/conflict.c` — types in
   `ConflictTypeNames[]` (`conflict.c:27-36`).
 - Sequence sync: `logical/sequencesync.c`.
-- Slot sync to standby: `logical/slotsync.c`.
+- Slot sync to standby: `logical/slotsync.c`. The three sync-ready
+  preconditions (standby WAL past remote `confirmed_flush_lsn`; catalog xmin
+  not behind; consistent snapshot buildable at `restart_lsn` before
+  `confirmed_flush_lsn`) — `slotsync.c:11-40`. Mirror slots stay
+  `RS_TEMPORARY` until all three hold, then flip to `RS_PERSISTENT` with
+  `synced=true`. Full discussion in `knowledge/architecture/replication.md` §2.
 - Replication origins: `logical/origin.c`.
 
 ### Synchronous replication
@@ -110,6 +117,11 @@ hot_standby = on
 max_logical_replication_workers = 4    # launcher.c:54
 max_sync_workers_per_subscription = 2  # launcher.c:55
 max_parallel_apply_workers_per_subscription = 2  # launcher.c:56
+
+# Logical decoding tuning
+logical_decoding_work_mem = 64MB       # per-reorderbuffer memory ceiling
+                                       # before the LARGEST in-progress txn
+                                       # spills to disk (reorderbuffer.c)
 
 # Synchronous
 synchronous_standby_names = 'FIRST 2 (s1, s2, s3)'   # or 'ANY 2 (...)'
@@ -148,6 +160,10 @@ synchronized_standby_slots = 's1,s2'   # on primary
   v18 logging is automatic.
 - "Failover broke my logical subscription" → slot sync chapter + `failover`
   flag on slot.
+- "Why is my logical slot stuck behind a physical standby?" →
+  `synchronized_standby_slots` gate + the walsender wakeup chain
+  (`WalSndWaitForWal` → `PhysicalWakeupLogicalWalSnd` →
+  `wal_confirm_rcv_cv`). See `knowledge/architecture/replication.md` §2.
 
 ## Files examined for this skill
 

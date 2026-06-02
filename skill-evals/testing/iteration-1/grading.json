@@ -1,0 +1,53 @@
+{
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "eval-1-regress-new-builtin",
+      "assertions": [
+        {"id": "a1", "text": "Picks regress (not TAP / isolation / module) as the flavor.", "A": "pass", "B": "pass"},
+        {"id": "a2", "text": "Names the three required files: sql/<name>.sql, expected/<name>.out, parallel_schedule.", "A": "pass", "B": "pass"},
+        {"id": "a3", "text": "Tells the user to GENERATE expected/.out by running and copying from results/, not type by hand.", "A": "pass", "B": "pass"},
+        {"id": "a4", "text": "Mentions the max-20-per-group rule in parallel_schedule.", "A": "pass", "B": "pass"},
+        {"id": "a5", "text": "Warns about volatile output (OIDs, timestamps, row order) before committing.", "A": "pass", "B": "pass"},
+        {"id": "a6", "text": "Provides a single-test fast-loop command (pg_regress or meson).", "A": "pass", "B": "pass"},
+        {"id": "a7", "text": "Points to regression.diffs as first stop on failure.", "A": "pass", "B": "pass"}
+      ],
+      "score_A": "7/7",
+      "score_B": "7/7"
+    },
+    {
+      "id": "eval-2-tap-stream-rep-wal-record",
+      "assertions": [
+        {"id": "a1", "text": "Picks TAP and places it under source/src/test/recovery/t/NNN_name.pl.", "A": "pass", "B": "pass"},
+        {"id": "a2", "text": "Mentions appending NNN (don't renumber existing tests) for backport safety.", "A": "pass", "B": "pass"},
+        {"id": "a3", "text": "Mentions wiring into recovery/meson.build.", "A": "pass", "B": "pass"},
+        {"id": "a4", "text": "Provides a working skeleton with PostgreSQL::Test::Cluster, init(allows_streaming=>1), init_from_backup, start.", "A": "pass", "B": "partial"},
+        {"id": "a5", "text": "Mentions wait_for_replay_catchup (or equivalent sync) as the way to wait for the standby.", "A": "pass", "B": "pass"},
+        {"id": "a6", "text": "Gives the one-line single-TAP-test runner (meson test --suite recovery NNN_name or PROVE_TESTS=).", "A": "pass", "B": "pass"},
+        {"id": "a7", "text": "Points to build/testrun/<suite>/<test>/log/regress_log_* as first place to look on failure.", "A": "pass", "B": "pass"},
+        {"id": "a8", "text": "Honestly notes that there is no direct 'assert WAL record of type X applied' API — verify via observable state/LSN.", "A": "pass", "B": "pass"}
+      ],
+      "score_A": "8/8",
+      "score_B": "7.5/8"
+    },
+    {
+      "id": "eval-3-isolation-new-locking-path",
+      "assertions": [
+        {"id": "a1", "text": "Picks isolation spec, not TAP, for two-session heavyweight-lock contention.", "A": "pass", "B": "pass"},
+        {"id": "a2", "text": "Names the three files: specs/<name>.spec, expected/<name>.out, isolation_schedule.", "A": "pass", "B": "pass"},
+        {"id": "a3", "text": "Calls out that explicit permutation lines are MANDATORY when steps block (else auto-permutations hang).", "A": "pass", "B": "pass"},
+        {"id": "a4", "text": "Mentions isolationtester only detects heavyweight locks via pg_locks (LWLock/buffer pin invisible → injection points).", "A": "pass", "B": "pass"},
+        {"id": "a5", "text": "Provides at least a sketch of session/step/permutation grammar.", "A": "pass", "B": "partial"},
+        {"id": "a6", "text": "Discourages _1.out variants; recommends markers (s1(*), s1(s2), s1(s2 notices N)) for stabilization.", "A": "pass", "B": "pass"},
+        {"id": "a7", "text": "Provides the single-spec runner command (pg_isolation_regress) and points to output_iso/regression.diffs on failure.", "A": "pass", "B": "pass"}
+      ],
+      "score_A": "7/7",
+      "score_B": "6.5/7"
+    }
+  ],
+  "totals": {
+    "attempt_A": "22/22",
+    "attempt_B": "21/22"
+  },
+  "notes": "Both attempts pass nearly every assertion. The SKILL is well-structured: decision tree + wiring table + run/debug commands map cleanly onto the kind of prompt a real PG contributor asks. Attempt B is terser (skipped a full skeleton in eval 2, skipped a full spec sketch in eval 3) but still correct — these are 'partial' because they reduce a beginner's chance of getting it right without re-reading. No assertion failed outright; nothing in the SKILL led either attempt astray."
+}

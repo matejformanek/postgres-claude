@@ -16,7 +16,21 @@ Answer these in order. **First "yes" wins.**
    heavyweight-lock contention?**
    → **isolation spec** in `source/src/test/isolation/specs/<name>.spec`.
    Caveat: `isolationtester` only sees heavyweight locks via `pg_locks`. LWLock /
-   buffer-pin contention → use injection points or a C test module instead.
+   buffer-pin contention → use `source/src/test/modules/injection_points/`
+   (or a custom C test module) instead.
+
+   Minimal spec grammar:
+
+   ```
+   setup    { CREATE TABLE t (a int); }
+   teardown { DROP TABLE t; }
+   session "s1" { step "s1a" { BEGIN; } step "s1b" { COMMIT; } }
+   session "s2" { step "s2a" { SELECT * FROM t; } }
+   permutation "s1a" "s2a" "s1b"
+   ```
+
+   When any step blocks, the `permutation` line is **mandatory** — auto-generated
+   permutations will hang CI.
 
 2. **Does it need initdb, a restart, multiple clusters, replication, a backup,
    a signal, or testing a CLI tool (`pg_dump`, `pg_basebackup`, `pg_rewind`)?**
@@ -65,6 +79,20 @@ timestamp-y, or row-order-y is a future buildfarm failure. Cast it, ORDER BY it,
 or `SET` it away.
 
 ## Step 4: Run only your test (fast loop)
+
+TAP replication-sync idiom (in `src/test/recovery/t/`):
+
+```perl
+$primary->wait_for_replay_catchup($standby);
+# or, explicitly:
+my $lsn = $primary->lsn('insert');
+$standby->poll_query_until('postgres',
+    "SELECT pg_last_wal_replay_lsn() >= '$lsn'::pg_lsn");
+```
+
+End every TAP file with `done_testing();`. TAP tests verify replicated state
+(LSN advance, table contents), not WAL-record identity — use `pg_waldump` from
+a shell step if you really need the latter.
 
 ```bash
 # Single TAP test

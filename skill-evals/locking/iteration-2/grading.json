@@ -1,0 +1,61 @@
+{
+  "iteration": 2,
+  "design_notes": "Harder than iter-1: each eval has a trap (group-locking no-op; named vs request tranche; ProcArrayLock+syscache ordering). Assertions go beyond cite-the-line-number and test whether the answer identifies the real failure mode.",
+  "evals": [
+    {
+      "eval_id": 1,
+      "trap": "User proposes heavyweight advisory lock for leader/worker serialization. The trap is that heavyweight locks within a lock group don't conflict.",
+      "assertions": [
+        {"text": "Explicitly states heavyweight/advisory lock is wrong because lock-group members don't conflict", "with_skill": true, "baseline": true},
+        {"text": "Cites lock.c around 1610-1618 (LockCheckConflicts subtracts same-group holders) with line numbers", "with_skill": true, "baseline": false},
+        {"text": "Names RELATION_EXTEND as the one exception that still conflicts within a group, with file:line", "with_skill": true, "baseline": false},
+        {"text": "Cites README:629-634 (or near) for the conceptual statement of group-no-conflict", "with_skill": true, "baseline": false},
+        {"text": "Recommends an LWLock (named tranche, RequestNamedLWLockTranche, or DSM-resident via LWLockNewTrancheId/Register) as the replacement", "with_skill": true, "baseline": true},
+        {"text": "Mentions that LWLockAcquire has no lock-group semantics (it serializes raw waiters)", "with_skill": true, "baseline": true},
+        {"text": "Recommends a code comment defending the LWLock choice so a future patch doesn't 'cleanup' to advisory lock", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "trap": "Lists files but misses the 'add at end / don't renumber' rule, or conflates PG_LWLOCK with RequestNamedLWLockTranche.",
+      "assertions": [
+        {"text": "Names BOTH lwlocklist.h and wait_event_names.txt as required edits", "with_skill": true, "baseline": true},
+        {"text": "States the 'add at end, don't renumber' rule and explains why (DTrace / external scripts)", "with_skill": true, "baseline": true},
+        {"text": "Cites the lwlocklist.h header comment (lines ~22-32) for that rule", "with_skill": true, "baseline": false},
+        {"text": "Identifies the next free ID (58) or refers to 'one past the current last entry' explicitly", "with_skill": true, "baseline": false},
+        {"text": "Notes that names omit the 'Lock' suffix in the macro (added by codegen)", "with_skill": true, "baseline": true},
+        {"text": "Correctly distinguishes PG_LWLOCK (core, fixed ID, must edit .txt) vs RequestNamedLWLockTranche (extensions, dynamic, no .txt edit)", "with_skill": true, "baseline": true},
+        {"text": "Mentions the third pattern (LWLockNewTrancheId + LWLockInitialize + LWLockRegisterTranche) for DSM-resident locks", "with_skill": true, "baseline": true},
+        {"text": "Recommends README update in the subsystem owning the lock", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "trap": "Surface reading says 'LWLock auto-releases on error, so this is fine'. The real bug is lock ordering / hold time / uncancellable wait.",
+      "assertions": [
+        {"text": "Rejects the 'LWLock is error-safe' justification as a non-sequitur / insufficient", "with_skill": true, "baseline": true},
+        {"text": "Identifies that SearchSysCache1 takes a heavyweight lock on pg_authid (AccessShareLock) on miss", "with_skill": true, "baseline": true},
+        {"text": "Identifies that SearchSysCache1 takes BufMapping partition LWLock + buffer content LWLocks", "with_skill": true, "baseline": true},
+        {"text": "Names the resulting lock-order claim explicitly (ProcArrayLock -> heavyweight -> BufMapping -> content_lock) and flags it as the real bug", "with_skill": true, "baseline": true},
+        {"text": "States LWLocks have no deadlock detector (silent hang) as the consequence of the ordering violation", "with_skill": true, "baseline": true},
+        {"text": "Cites README:39-45 for query-cancel-held-off-during-LWLock-wait", "with_skill": true, "baseline": false},
+        {"text": "Explains LW_EXCLUSIVE makes contention worse but the bug class is identical", "with_skill": true, "baseline": true},
+        {"text": "Correctly says MAX_SIMUL_LWLOCKS=200 is not the real concern here (only a few extra transient holds)", "with_skill": true, "baseline": true},
+        {"text": "Recommends concrete fix: hoist syscache lookup out of ProcArrayLock section (read fields under lock, release, lookup, optionally re-acquire briefly)", "with_skill": true, "baseline": true}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 24,
+    "with_skill_total": 24,
+    "with_skill_pass_rate": 1.0,
+    "baseline_passed": 15,
+    "baseline_total": 24,
+    "baseline_pass_rate": 0.625
+  },
+  "per_eval_summary": [
+    {"eval_id": 1, "with_skill": "7/7", "baseline": "3/7"},
+    {"eval_id": 2, "with_skill": "8/8", "baseline": "5/8"},
+    {"eval_id": 3, "with_skill": "9/9", "baseline": "7/9"}
+  ]
+}

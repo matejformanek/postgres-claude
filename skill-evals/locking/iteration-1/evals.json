@@ -1,0 +1,17 @@
+{
+  "skill_name": "locking",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm adding a new shared-memory counter that tracks the number of times autovacuum has been skipped on a relation because of a lock conflict. Multiple backends will increment it on the hot path; a stats collector reads it once per minute. Walk me through which locking primitive to use (atomic, spinlock, LWLock, or heavyweight), why, what I need to document on the struct, and any ordering rules I have to obey. Cite specific files and line ranges in src/backend/storage/lmgr/ or src/include/storage/ to back each claim."
+    },
+    {
+      "id": 2,
+      "prompt": "I'm writing code that needs to acquire two BufferMapping partition LWLocks at once (for example, to atomically swap a buffer's tag between two partitions). What's the rule I have to follow to avoid a silent LWLock deadlock, and where exactly is that rule enforced or documented? Also: how many BufferMapping partitions are there, where is that constant defined, and what happens if I get the order wrong — does the deadlock detector save me? Cite source files and line numbers."
+    },
+    {
+      "id": 3,
+      "prompt": "Review this hypothetical patch: a developer added a spinlock around a critical section in src/backend/storage/lmgr/proc.c that (a) calls a helper function ProcSleep() which can ereport(ERROR), (b) does a CHECK_FOR_INTERRUPTS, and (c) holds the lock for ~50 lines while iterating ProcArray. List every rule this violates, the consequence of each violation, and what primitive the developer should use instead. Cite the README and header files that establish each rule."
+    }
+  ]
+}

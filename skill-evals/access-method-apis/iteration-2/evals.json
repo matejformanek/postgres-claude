@@ -1,0 +1,56 @@
+{
+  "iteration": 2,
+  "skill": "access-method-apis",
+  "skill_path": "/Users/matej/Work/postgres/postgres-claude/.claude/skills/access-method-apis/SKILL.md",
+  "date": "2026-06-02",
+  "methodology": "single-context, no subagents; baseline = answer w/o reading SKILL.md; with_skill = answer after reading the iter-2-edited SKILL.md plus knowledge/architecture/access-methods.md. Baseline questions re-answered fresh (independent attempt, no memory of iter-1 answers).",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to write a custom Index Access Method for PostgreSQL. What's the minimum set of IndexAmRoutine callbacks I must implement, and which ones can I leave NULL? Also, what's the rule about ambeginscan and RelationGetIndexScan?",
+      "baseline_answer": "To implement a custom index AM you fill in an IndexAmRoutine and return a pointer to it from a HANDLER function declared with CREATE ACCESS METHOD. The clearly-mandatory callbacks are the ones the executor and planner always dereference: ambuild (build from scratch), aminsert (insert one tuple), ambulkdelete + amvacuumcleanup (vacuum), amcostestimate (planner), amoptions (reloptions parsing), ambeginscan, amrescan, amendscan, and at least one of amgettuple or amgetbitmap (gin only has the bitmap one). Optional callbacks: ammarkpos/amrestrpos (for mark/restore in merge joins), amcanreturn (for index-only scans), the parallel-scan setup hooks if you want amcanparallel=true. I think ambuildempty is also needed for unlogged-index init forks. ambeginscan typically calls RelationGetIndexScan to allocate the IndexScanDesc — there's a convention that you return that exact pointer because the framework keeps a reference. dummy_index_am in src/test/modules is the minimal stub.",
+      "with_skill_answer": "Mandatory callbacks (planner/executor dereferences unconditionally): ambuild, ambuildempty (builds the init fork for unlogged indexes — easy to forget), aminsert, ambulkdelete (returns IndexBulkDeleteResult*), amvacuumcleanup (also returns IndexBulkDeleteResult*), amcostestimate, amoptions (parse WITH-options via build_reloptions; may return NULL), amvalidate (sanity-check opclass at CREATE OPERATOR CLASS), ambeginscan, amrescan, amendscan. You also need at least one of amgettuple or amgetbitmap; gin is bitmap-only. Optional (may be NULL): aminsertcleanup (called once per inserting statement at end, not per-row — used by btree for deferred unique checks), amcanreturn (index-only scans), amgettreeheight, amproperty, ambuildphasename, amadjustmembers, ammarkpos/amrestrpos (NULL fine if amcanbackward=false or no merge-join support is needed), the three parallel-scan hooks amestimate/aminit/amparallelrescan (required iff amcanparallel=true), amtranslatestrategy/amtranslatecmptype. GOTCHA: ambeginscan MUST return the exact IndexScanDesc that RelationGetIndexScan() gave it — not a copy, not a wrapper. index_endscan in genam.c reaches inside that struct *after* your amendscan has already run, so any reallocation breaks teardown. Allocate your private state separately and hang it off scan->opaque. Don't overlook the ~22 declarative flag fields (amcanorder, amcanunique, amcanmulticol, amoptionalkey, amsearcharray, amsearchnulls, amstorage, amclusterable, ampredlocks, amcanparallel, amcaninclude, amsummarizing, etc.) plus amstrategies, amsupport, amparallelvacuumoptions (set to VACUUM_OPTION_NO_PARALLEL = 0 to opt out of parallel vacuum on day one), amkeytype — the planner reads these before any callback is invoked. Minimal valid stub: src/test/modules/dummy_index_am/dummy_index_am.c.",
+      "assertions": [
+        "Lists ambuild, aminsert, ambulkdelete, amvacuumcleanup, amcostestimate, amoptions, ambeginscan, amrescan, amendscan as mandatory",
+        "Mentions ambuildempty (for init fork of unlogged indexes) as mandatory",
+        "Mentions amvalidate as mandatory",
+        "States need at least one of amgettuple or amgetbitmap",
+        "States ambeginscan MUST return what RelationGetIndexScan() returned",
+        "Mentions optional callbacks like ammarkpos/amrestrpos, parallel-scan hooks (conditional on amcanparallel), amcanreturn",
+        "Mentions the static flag fields (amcanorder/amcanunique/etc.) and that planner reads them before any callback",
+        "References dummy_index_am or a concrete reference implementation"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "How does VACUUM interact with an index AM — which callbacks fire, in what order, and what are the semantic requirements? Is ambulkdelete called once or many times?",
+      "baseline_answer": "VACUUM calls ambulkdelete and amvacuumcleanup on every index. ambulkdelete walks the index and removes entries whose heap TIDs match a vacuum-supplied callback; amvacuumcleanup does a final pass that can reclaim empty pages and return statistics. ambulkdelete may be called more than once per vacuum because the heap dead-TID buffer flushes when it fills up, so for a large table with many dead tuples and limited maintenance_work_mem you can get several ambulkdelete calls followed by a single amvacuumcleanup. Both probably return some result struct with stats. Concurrency matters — readers run during vacuum, so the AM has to use page-level locking carefully (btree uses Lehman-Yao). There are also flags on IndexAmRoutine for parallel vacuum participation.",
+      "with_skill_answer": "Order: ambulkdelete (possibly many times) → amvacuumcleanup (once). ambulkdelete is the pass that drops index entries whose heap TID matches a vacuum-supplied callback. It can be called multiple times because the heap is vacuumed in batches — when the dead-TID accumulator hits its memory limit it flushes by calling each index's ambulkdelete, then resumes scanning the heap. amvacuumcleanup is the final pass: it may return stats and reclaim empty pages. Both return IndexBulkDeleteResult* (same struct, accumulated across calls). Concurrency: the AM must work under concurrent readers — each AM picks its own page-level discipline (btree uses Lehman & Yao right-link-and-restart with a BTCycleId to avoid re-vacuuming pages that have been split into the scan; gist uses NSN versions). VACUUM-related properties on IndexAmRoutine: amparallelvacuumoptions (bitmask of VACUUM_OPTION_PARALLEL_BULKDEL / _COND_CLEANUP / _CLEANUP; set to VACUUM_OPTION_NO_PARALLEL = 0 to opt out of parallel vacuum entirely), amusemaintenanceworkmem. Canonical two-pass cycle-id reference: nbtree's BTCycleId. WAL durability: every real AM uses a custom rmgr so replay reproduces a state consistent with the pre-crash heap (Generic WAL is the low-frequency fallback).",
+      "assertions": [
+        "States ambulkdelete may be called multiple times (heap vacuumed in batches)",
+        "States amvacuumcleanup runs once at the end",
+        "States ambulkdelete uses a vacuum-supplied callback to identify dead heap TIDs",
+        "Mentions both return IndexBulkDeleteResult* (or that amvacuumcleanup may return stats)",
+        "Mentions concurrency: scans run while vacuum runs, AM picks own locking discipline",
+        "References amparallelvacuumoptions bitmask or a concrete vacuum-related flag",
+        "Mentions nbtree as the canonical two-pass-with-cycle-id reference"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I want to build a columnar table access method. The TableAmRoutine struct is huge — what's the hardest part of implementing one, and what heap-specific assumptions still leak through the API?",
+      "baseline_answer": "TableAmRoutine has on the order of 40+ callbacks and was added in v12. The single hardest thing is TIDs: indexes assume ItemPointer is a 6-byte (block, offset), and that format is baked into a lot of code, so a columnar AM has to invent stable TIDs and route index_fetch_tuple against them. MVCC is also yours to implement — tuple_satisfies_snapshot lives in your AM. Heap-specific stuff that leaks: visibility map (index-only scans consult it directly), FSM, TOAST (relation_needs_toast_table lets you opt out though), HOT (there's no API for it but tuple_update returns a TU_UpdateIndexes enum that gives non-heap AMs a similar 'which indexes need re-insert' optimization). heapam_handler.c is the only in-tree implementation. Vacuum is via relation_vacuum but autovacuum's decision to call it presumably comes from the same heap-style stats counters, which a non-heap AM may not maintain.",
+      "with_skill_answer": "Hardest part is TID semantics. ItemPointer is a 6-byte (block, offset) pair baked into the index AM interface, WAL, syscaches, pg_class rowcount estimation, and exposed to SQL as tid/ctid. A non-heap AM must fabricate stable, ~48-bit, monotone-ish TIDs for every row and route index_fetch_tuple and tuple_fetch_row_version against them. This is the single biggest reason most experimental table AMs (zheap, columnar) never reach production. Heap-specific leakage that survives the v12 abstraction: (1) ItemPointer / TID format itself; (2) Visibility Map and FSM — only heap maintains them; index-only scans consult VM_ALL_VISIBLE directly and would always see 'no' for a non-heap AM unless that AM also writes a VM fork; (3) HOT — no API; non-heap equivalent is the TU_UpdateIndexes return value of tuple_update (TU_None / TU_Summarizing / TU_All); (4) Autovacuum scheduling — relation_vacuum is the callback but autovacuum's per-table decisions are driven by pg_stat_all_tables' n_dead_tup / n_live_tup counters that heap maintains via pgstat_count_heap_*. A non-heap AM that doesn't fake equivalent counters (via pgstat_count_heap_insert/_update/_delete or pgstat_report_vacuum from inside its own tuple ops) will simply never be visited by autovacuum. Plan stats-faking from day one. (5) TOAST — relation_needs_toast_table lets you opt out, but opt-in pulls heap-style out-of-line storage; (6) relation_size(MAIN_FORKNUM) presumes block-oriented storage and is used by BRIN + ANALYZE. Mandatory surface: tableamapi.c::GetTableAmRoutine has 37 Assert(routine->X != NULL) lines — only finish_bulk_insert and the TID-range pair (scan_set_tidrange/scan_getnextslot_tidrange) are truly optional; even tuple_insert_speculative is mandatory. Slot interface: slot_callbacks(rel) returns a TupleTableSlotOps* — you define your own (heap uses TTSOpsBufferHeapTuple); raw HeapTuple only appears inside the heap AM. Reference: heapam_handler.c (the only in-tree table AM), and the API docs in tableam.sgml.",
+      "assertions": [
+        "Identifies TID semantics (6-byte ItemPointer / fabricating stable 48-bit TIDs) as the single hardest problem",
+        "Mentions Visibility Map and FSM as heap-only machinery",
+        "Mentions index-only scans consulting the VM directly as a concrete VM-leakage example",
+        "Mentions HOT lacks API surface but tuple_update returns TU_UpdateIndexes (TU_None/TU_All/TU_Summarizing)",
+        "Mentions autovacuum scheduling depends on heap-produced statistics",
+        "States almost all callbacks are mandatory (Assert list in tableamapi.c / GetTableAmRoutine), with only finish_bulk_insert + TID-range truly optional",
+        "Mentions TupleTableSlotOps / slot_callbacks as the tuple-movement interface",
+        "References heapam_handler.c as the only in-tree implementation"
+      ]
+    }
+  ]
+}

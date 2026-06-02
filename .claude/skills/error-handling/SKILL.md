@@ -17,7 +17,9 @@ Reference doc: `knowledge/idioms/error-handling.md` (read it for the *why*).
    which is rarely what you want. Pick the most specific SQLSTATE from
    `src/backend/utils/errcodes.txt`. For file/socket errors use
    `errcode_for_file_access()` / `errcode_for_socket_access()` right after the
-   syscall (they consume `errno`).
+   syscall (they consume `errno`). Pair with `%m` in the `errmsg` format
+   string to splice `strerror(errno)` into the message, e.g.
+   `errmsg("could not open file \"%s\": %m", path)`.
 3. **`errmsg` style — no leading capital, no trailing period, no newline,
    one phrase.** Example: `errmsg("relation \"%s\" does not exist", name)`.
 4. **`errdetail` / `errhint` / `errcontext` are full sentences** — capital,
@@ -29,6 +31,10 @@ Reference doc: `knowledge/idioms/error-handling.md` (read it for the *why*).
    Build via printf args.
 8. **Use `errmsg_internal` for messages that should not be translated**
    (developer-only "can't happen" cases). `elog` already does this.
+9. **Don't clobber `errno` between the failing syscall and the `ereport`.**
+   Any palloc, syscall, or function call may overwrite it. Capture into a
+   local (`int save_errno = errno;`) if you need to do work first, or
+   restore via `errno = save_errno;` before the `ereport`.
 
 ## Picking elevel
 
@@ -52,6 +58,9 @@ cleanup code after it.** Anything reached "after" an ERROR in the source is
 dead code from a runtime perspective. Don't `goto cleanup`; let transaction
 abort handle memory contexts, locks, buffer pins, etc.
 
+For fds specifically, open via `OpenTransientFile()` (registers with the
+transaction's ResourceOwner so it closes on abort) rather than raw `open(2)`.
+
 ## PG_TRY / PG_CATCH — when to use
 
 Default answer: **don't**. Almost all backend code lets ERROR propagate.
@@ -69,8 +78,13 @@ When you do use it:
   `RollbackAndReleaseCurrentSubTransaction()`. Never swallow silently.
 - Locals modified in TRY and read in CATCH must be `volatile`.
 - Keep CATCH minimal — errors inside CATCH recurse on a 5-frame stack
-  before PANIC.
-- For symmetric cleanup, prefer `PG_FINALLY` over `PG_CATCH`.
+  (`ERRORDATA_STACK_SIZE` in `src/backend/utils/error/elog.c:154`) before
+  PANIC.
+- **Prefer `PG_FINALLY` over `PG_CATCH`** whenever the cleanup is the same
+  on success and error (the common case). `PG_FINALLY` auto-rethrows; you
+  can't accidentally swallow the original error. Use `PG_CATCH` only when
+  the error path genuinely needs different work (e.g. converting to a
+  host-language exception).
 - `FATAL` is not caught by PG_TRY. Use `PG_ENSURE_ERROR_CLEANUP`
   (`storage/ipc.h`) for FATAL-safe cleanup of process-external resources.
 

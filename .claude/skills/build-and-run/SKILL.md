@@ -5,6 +5,27 @@ description: How to configure, build, and run PostgreSQL from source in the `dev
 
 # build-and-run
 
+## Slash-command wrappers (use these first)
+
+The recipes in this skill are also exposed as slash commands under
+`.claude/commands/`. Prefer them — they encode the right flags and
+guardrails:
+
+- `/setup-pg` — first-time meson setup + build + install (idempotent;
+  `--force` to reconfigure).
+- `/pg-start`, `/pg-stop`, `/pg-restart` — lifecycle.
+- `/pg-psql` — `psql -h /tmp -d postgres` against the dev cluster.
+- `/pg-test [--suite NAME] [--test PAT]` — meson test, always prepends
+  `--suite setup` so the initdb-template trap can't bite.
+- `/pg-attach` — get a backend PID and print the `lldb -p` line.
+- `/pg-tail-log` — follow `dev/data-debug/server.log`.
+- `/pg-fresh --yes` — wipe `data-debug/`, re-initdb (preserves the build).
+- `/pg-reclone-dev` — nuclear: re-clone the whole dev tree from the
+  read-only reference.
+
+The rest of this file is the underlying mechanics, for cases where you need
+to deviate from the wrappers.
+
 ## Repo split — important
 
 There are TWO upstream clones in the parent dir, both symlinked into this meta repo:
@@ -64,6 +85,27 @@ psql -h /tmp -d postgres
 pg_ctl -D "$PGDATA" stop -m fast
 ```
 
+## The edit -> rebuild -> retest cycle
+
+After editing any backend C file:
+
+```bash
+ninja -C dev/build-debug install       # incremental — ninja recompiles only what changed
+pg_ctl -D "$PGDATA" restart            # CRITICAL — see below
+psql -h /tmp -d postgres -c 'SELECT 1;'
+```
+
+**Why the restart is mandatory:** the running postmaster is still mapped to
+the previous `postgres` image, and every backend it forks for new
+connections inherits that image. `ninja install` only updates the on-disk
+binary — without a restart, your edits are invisible. The same applies to
+shared libraries / extensions under `dev/install-debug/lib/` and
+`dev/install-debug/share/`.
+
+Slash-command wrappers that automate this: `/setup-pg` (build+install),
+`/pg-restart` (stop -m fast + start), `/pg-psql` (psql -h /tmp).
+See `.claude/commands/`.
+
 ## The per-connection fork model — critical gotcha
 
 PostgreSQL uses a **process-per-connection** model. The postmaster forks a new
@@ -86,6 +128,25 @@ postgres --single -D "$PGDATA" postgres
 Runs the backend in the foreground bound to your terminal. No SQL frontend,
 no fork. Useful for debugging code that runs early in backend startup or for
 running short SQL non-interactively under a debugger.
+
+### Launching single-user mode under lldb
+
+For startup paths (`InitPostgres`, recovery, GUC bootstrap, shmem init)
+that run before any client connects, launch the backend *under* the
+debugger so you're at instruction 0 with no fork race:
+
+```bash
+lldb -- $PWD/dev/install-debug/bin/postgres --single -D "$PGDATA" postgres
+(lldb) breakpoint set --name InitPostgres
+(lldb) run
+```
+
+This sidesteps the per-connection fork problem entirely — there is no
+postmaster, no fork, just one process you control end-to-end.
+
+For *post-startup* query debugging, attach to a live backend by PID instead
+— see `.claude/commands/pg-attach.md`, which automates the
+`SELECT pg_backend_pid()` + `lldb -p <pid>` flow.
 
 ## Useful debug knobs
 

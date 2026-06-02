@@ -1,0 +1,64 @@
+{
+  "iteration": 2,
+  "skill": "access-method-apis",
+  "grading_scale": "pass / partial / fail per assertion (pass=1, partial=0.5, fail=0)",
+  "evals": [
+    {
+      "id": 1,
+      "topic": "Minimum IndexAmRoutine callbacks + RelationGetIndexScan rule",
+      "assertion_results": [
+        {"assertion": "Lists ambuild, aminsert, ambulkdelete, amvacuumcleanup, amcostestimate, amoptions, ambeginscan, amrescan, amendscan as mandatory", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "Mentions ambuildempty (for init fork of unlogged indexes) as mandatory", "baseline": "partial", "with_skill": "pass", "note": "Baseline hedged ('I think ambuildempty is also needed') — partial credit."},
+        {"assertion": "Mentions amvalidate as mandatory", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "States need at least one of amgettuple or amgetbitmap", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "States ambeginscan MUST return what RelationGetIndexScan() returned", "baseline": "partial", "with_skill": "pass", "note": "Baseline says 'convention that you return that exact pointer' — captures the rule softly. with_skill now has it as a fenced GOTCHA block."},
+        {"assertion": "Mentions optional callbacks like ammarkpos/amrestrpos, parallel-scan hooks (conditional on amcanparallel), amcanreturn", "baseline": "partial", "with_skill": "pass", "note": "Baseline this time named ammarkpos/amrestrpos, amcanreturn, and parallel-scan hooks — actually pretty good. Partial because conditional-on-amcanparallel rule not stated."},
+        {"assertion": "Mentions the static flag fields (amcanorder/amcanunique/etc.) and that planner reads them before any callback", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "References dummy_index_am or a concrete reference implementation", "baseline": "pass", "with_skill": "pass", "note": "Baseline this time did mention dummy_index_am."}
+      ],
+      "baseline_score": "5/8",
+      "with_skill_score": "8/8",
+      "delta": "+3"
+    },
+    {
+      "id": 2,
+      "topic": "VACUUM and index AM",
+      "assertion_results": [
+        {"assertion": "States ambulkdelete may be called multiple times (heap vacuumed in batches)", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "States amvacuumcleanup runs once at the end", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "States ambulkdelete uses a vacuum-supplied callback to identify dead heap TIDs", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "Mentions both return IndexBulkDeleteResult* (or that amvacuumcleanup may return stats)", "baseline": "partial", "with_skill": "pass", "note": "Baseline says 'some result struct with stats' — half-credit. with_skill now names IndexBulkDeleteResult* explicitly (iter-2 edit #1)."},
+        {"assertion": "Mentions concurrency: scans run while vacuum runs, AM picks own locking discipline", "baseline": "partial", "with_skill": "pass", "note": "Baseline mentions Lehman-Yao but not the broader 'each AM picks its own discipline' framing."},
+        {"assertion": "References amparallelvacuumoptions bitmask or a concrete vacuum-related flag", "baseline": "partial", "with_skill": "pass", "note": "Baseline said 'flags on IndexAmRoutine for parallel vacuum participation' — captures existence but doesn't name the field or the bits."},
+        {"assertion": "Mentions nbtree as the canonical two-pass-with-cycle-id reference", "baseline": "fail", "with_skill": "pass"}
+      ],
+      "baseline_score": "4.5/7",
+      "with_skill_score": "7/7",
+      "delta": "+2.5"
+    },
+    {
+      "id": 3,
+      "topic": "Columnar table AM — hard parts and heap leakage",
+      "assertion_results": [
+        {"assertion": "Identifies TID semantics (6-byte ItemPointer / fabricating stable 48-bit TIDs) as the single hardest problem", "baseline": "pass", "with_skill": "pass", "note": "Baseline this time led with TID semantics and called it 'the single hardest thing' — strong."},
+        {"assertion": "Mentions Visibility Map and FSM as heap-only machinery", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "Mentions index-only scans consulting the VM directly as a concrete VM-leakage example", "baseline": "pass", "with_skill": "pass", "note": "Baseline 'visibility map (index-only scans consult it directly)' — explicit."},
+        {"assertion": "Mentions HOT lacks API surface but tuple_update returns TU_UpdateIndexes (TU_None/TU_All/TU_Summarizing)", "baseline": "partial", "with_skill": "pass", "note": "Baseline mentions HOT + TU_UpdateIndexes but doesn't name the three enum values."},
+        {"assertion": "Mentions autovacuum scheduling depends on heap-produced statistics", "baseline": "partial", "with_skill": "pass", "note": "Baseline ends with a hedged 'autovacuum's decision to call it presumably comes from the same heap-style stats counters' — half-credit."},
+        {"assertion": "States almost all callbacks are mandatory (Assert list in tableamapi.c / GetTableAmRoutine), with only finish_bulk_insert + TID-range truly optional", "baseline": "fail", "with_skill": "pass", "note": "with_skill now cites 37 Asserts (iter-2 edit #4 — accurate count, was '~30' before)."},
+        {"assertion": "Mentions TupleTableSlotOps / slot_callbacks as the tuple-movement interface", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "References heapam_handler.c as the only in-tree implementation", "baseline": "pass", "with_skill": "pass"}
+      ],
+      "baseline_score": "6/8",
+      "with_skill_score": "8/8",
+      "delta": "+2"
+    }
+  ],
+  "overall": {
+    "baseline_total": "15.5/23",
+    "with_skill_total": "23/23",
+    "delta": "+7.5",
+    "uplift_pct": 33,
+    "notes": "with_skill still scores 23/23. Baseline scored higher this iteration (15.5 vs 11.5) — the eval-prompter happened to recall more API surface this time, especially around dummy_index_am, parallel-vacuum flags existing, autovacuum-stats hand-wave, and TIDs being the hard part. This is sampling noise in a single-judge methodology, not a real shift in skill value. with_skill answers are *qualitatively* better in iter-2 — explicit IndexBulkDeleteResult* return type, named VACUUM_OPTION_NO_PARALLEL = 0 opt-out, accurate 37-Assert count, named pgstat_count_heap_* entry points for stats faking, GOTCHA-block ambeginscan rule — but the iter-1 assertion list doesn't reward those refinements, so the headline score is unchanged at 23/23."
+  }
+}

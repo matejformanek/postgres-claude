@@ -1,0 +1,49 @@
+{
+  "iteration": 1,
+  "evals": [
+    {
+      "eval_id": 1,
+      "assertions": [
+        {"text": "Recommends pg_atomic (specifically u64 fetch_add) as the primary answer", "with_skill": true, "baseline": true},
+        {"text": "Cites src/include/port/atomics.h with line numbers (not just file path)", "with_skill": true, "baseline": false},
+        {"text": "Mentions u64 atomics fall back to spinlock emulation on platforms lacking 8-byte atomicity", "with_skill": true, "baseline": false},
+        {"text": "Mentions BufferDesc.state as the gold-standard pattern for packed atomic state", "with_skill": true, "baseline": false},
+        {"text": "Explicitly says 'no lock protects it' should be documented (not omitted)", "with_skill": true, "baseline": true},
+        {"text": "Mentions barrier requirements only kick in for multi-location ordering and points at README.barrier", "with_skill": true, "baseline": false},
+        {"text": "Correctly states no lwlocklist.h / wait_event_names.txt update is needed (no tranche)", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "assertions": [
+        {"text": "States the rule as 'acquire in partition-number order'", "with_skill": true, "baseline": true},
+        {"text": "Gives NUM_BUFFER_PARTITIONS = 128 with file location", "with_skill": true, "baseline": true},
+        {"text": "Explicitly says LWLocks have NO deadlock detection (system wedges silently)", "with_skill": true, "baseline": true},
+        {"text": "Notes interrupts/query-cancel are held off while waiting on LWLock (pg_cancel_backend won't help)", "with_skill": true, "baseline": true},
+        {"text": "Cites storage/buffer/README with line numbers (140-143) for the rule", "with_skill": true, "baseline": false},
+        {"text": "Cross-references the parallel rule for LockManager partitions and CheckDeadLock at proc.c:1871-1872", "with_skill": true, "baseline": false},
+        {"text": "Mentions related rules (pin-before-content-lock, release-after-pin, buffer_strategy_lock spinlock)", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "assertions": [
+        {"text": "Identifies all four violations (ereport, CFI, subroutine call, long hold)", "with_skill": true, "baseline": true},
+        {"text": "Cites spin.h:26-29 specifically for the CHECK_FOR_INTERRUPTS rule", "with_skill": true, "baseline": false},
+        {"text": "Cites README:8-11 specifically for the 'few dozen instructions / no subroutines' rule", "with_skill": true, "baseline": false},
+        {"text": "Cites s_lock.c NUM_DELAYS=1000 / PANIC consequence with line range", "with_skill": true, "baseline": false},
+        {"text": "Names the consequence as cluster PANIC + crash recovery, not just 'hang'", "with_skill": true, "baseline": true},
+        {"text": "Recommends specifically ProcArrayLock (existing LWLock) for the ProcArray scan", "with_skill": true, "baseline": true},
+        {"text": "Mentions LWLock auto-release on error (README:23-26) as the key reason it's the right swap", "with_skill": true, "baseline": true}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 21,
+    "with_skill_total": 21,
+    "with_skill_pass_rate": 1.0,
+    "baseline_passed": 10,
+    "baseline_total": 21,
+    "baseline_pass_rate": 0.476
+  }
+}

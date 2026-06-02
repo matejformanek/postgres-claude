@@ -1,0 +1,22 @@
+{
+  "iteration": 1,
+  "skill": "wal-and-xlog",
+  "skill_path": ".claude/skills/wal-and-xlog/SKILL.md",
+  "evals": [
+    {
+      "id": "E1",
+      "prompt": "I'm building a small contrib extension that maintains a custom index. I need it to be crash-safe. What's the cheapest way to WAL-log my page edits, and what are the trade-offs vs writing a full custom rmgr?",
+      "intent": "Decision: Generic WAL vs custom rmgr. Skill should recommend Generic WAL for prototypes/small AMs and articulate the trade-offs (record volume, logical decoding, custom replay)."
+    },
+    {
+      "id": "E2",
+      "prompt": "I'm adding a new WAL record type for my access method. Walk me through the writer-side idiom — the exact sequence of calls around XLogInsert, including critical-section placement and what has to happen before vs after.",
+      "intent": "Writer-side 5-step rule: pin/lock, START_CRIT_SECTION, modify, MarkBufferDirty BEFORE XLogInsert, XLogBeginInsert/Register*/Insert, PageSetLSN, END_CRIT_SECTION, unlock."
+    },
+    {
+      "id": "E3",
+      "prompt": "I'm writing the redo function for my new WAL record. What are the hard rules I must follow, and what's the right way to read back a registered buffer so the LSN check works correctly?",
+      "intent": "Redo function: signature, XLogReadBufferForRedo + BLK_NEEDS_REDO idempotency, PageSetLSN after applying, no new WAL emitted, no MarkBufferDirtyHint, multi-buffer lock ordering matches writer, only startup process modifies pages."
+    }
+  ]
+}

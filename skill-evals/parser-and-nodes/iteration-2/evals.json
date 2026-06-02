@@ -1,0 +1,17 @@
+{
+  "skill_name": "parser-and-nodes",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm adding a brand-new top-level SQL statement, say MERGE-but-different: BLEND <target> INTO <source>. Walk me through every layer I need to touch — lexer, grammar, kwlist, parse node, analyze.c, generated copy/equal/out/read funcs — in the right order. For each step name the file and the specific thing I need to add or wire in, and tell me whether this requires a catversion bump. Cite the actual files I should look at."
+    },
+    {
+      "id": 2,
+      "prompt": "I have a Node *expr (some expression subtree, post-parse-analysis) and I want to deep-copy it so I can scribble on the copy without affecting the original. What's the right tool, what does it actually do under the hood, and what gotchas should I watch out for (e.g. by-ref Datums, extensible nodes, stack depth, List flavors)? Cite file:line."
+    },
+    {
+      "id": 3,
+      "prompt": "I want to walk a Query parsetree and rewrite every ColumnRef / Var that names a specific column to instead point at a different attribute number. What's the right walker/mutator infrastructure to use, what's the contract (return values, NULL handling), and what's the difference between expression_tree_mutator and raw_expression_tree_walker — which one fits which stage of the pipeline? Also: if I add a new expression node type someday, what files do I have to update so walkers don't silently skip it?"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "gucs-bgworker-parallel",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I'm adding a custom GUC `myext.cache_size_kb` for my extension. It controls the size of a shared-memory area I allocate in `shmem_request_hook`. What's the registration sequence in `_PG_init`, which GucContext do I pick, which flags do I set, and is there anything I have to call after the DefineCustom* calls?"
+    },
+    {
+      "eval_id": 2,
+      "question": "I want to launch a background worker from a regular backend that runs once (does a migration), exits, and is never restarted. How do I register it dynamically, how does the launcher know when it has finished, and how do I make the worker actually not restart? Show the relevant fields on BackgroundWorker and the wait API."
+    },
+    {
+      "eval_id": 3,
+      "question": "I want to run arbitrary parallel C code from my extension via the ParallelContext API (not via an executor node). What's the lifecycle of calls, how do I share state with workers through a DSM, what TOC key ranges are reserved, and what is my worker function NOT allowed to do? Also: does my worker see the leader's GUC values?"
+    }
+  ]
+}

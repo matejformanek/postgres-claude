@@ -1,0 +1,18 @@
+{
+  "skill": "catalog-conventions",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "eval-1",
+      "prompt": "I want to add a new builtin SQL function pg_my_frobnitz(int4) returns int4 to PostgreSQL. Walk me through the full workflow — where do I put the C code, what catalog entries do I need, how do I pick an OID, and what do I need to do to make sure my local build picks it up and existing clusters don't silently break?"
+    },
+    {
+      "id": "eval-2",
+      "prompt": "I'm adding a new boolean column to pg_class called relhasfrobnitz. What edits do I need to make in pg_class.h and pg_class.dat, do I need to touch every existing row, and what's the right way to expose this so existing code reading Form_pg_class still works without recompiling everyone?"
+    },
+    {
+      "id": "eval-3",
+      "prompt": "Inside a new backend C function I look up a pg_proc row with SearchSysCache1(PROCOID, ObjectIdGetDatum(funcoid)), read some fields, and then I want to know if I need to do anything special before returning. Also — what happens if the row doesn't exist?"
+    }
+  ]
+}

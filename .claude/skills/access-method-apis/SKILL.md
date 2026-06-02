@@ -49,7 +49,9 @@ Declarative facts the planner needs *before* it ever calls a function pointer:
   `amstorage`, `amclusterable`, `ampredlocks`, `amcanparallel`,
   `amcanbuildparallel`, `amcaninclude`, `amusemaintenanceworkmem`,
   `amsummarizing`, `amconsistentequality`, `amconsistentordering`.
-- `amparallelvacuumoptions` — bitmask of `VACUUM_OPTION_*`.
+- `amparallelvacuumoptions` — bitmask of `VACUUM_OPTION_*` (`PARALLEL_BULKDEL`,
+  `PARALLEL_COND_CLEANUP`, `PARALLEL_CLEANUP`). Set to `VACUUM_OPTION_NO_PARALLEL`
+  (= 0) to opt out of parallel vacuum entirely — the right default for a brand-new AM.
 - `amkeytype` — fixed key type OID, or `InvalidOid` if variable.
 
 ### Function pointers — mandatory
@@ -60,8 +62,8 @@ Must be non-NULL (planner/executor will dereference unconditionally):
 | `ambuild` | Build a new index from scratch over `heapRelation`. Drives parallel build internally. |
 | `ambuildempty` | Build the **init fork** for unlogged indexes. |
 | `aminsert` | Insert one tuple. Called inside `ExecInsertIndexTuples`. |
-| `ambulkdelete` | Vacuum pass that drops index entries whose heap TID matches a callback. |
-| `amvacuumcleanup` | Final vacuum pass; may return stats and reclaim empty pages. |
+| `ambulkdelete` | Vacuum pass that drops index entries whose heap TID matches a callback (returns `IndexBulkDeleteResult *`). |
+| `amvacuumcleanup` | Final vacuum pass (returns `IndexBulkDeleteResult *`); may return stats and reclaim empty pages. |
 | `amcostestimate` | Planner cost callback. Fill in start/total/selectivity/correlation/pages. |
 | `amoptions` | Parse `WITH (...)` reloptions via `build_reloptions`. May return NULL. |
 | `amvalidate` | Sanity-check an opclass at `CREATE OPERATOR CLASS` time. |
@@ -69,9 +71,13 @@ Must be non-NULL (planner/executor will dereference unconditionally):
 | `amrescan` | (Re)bind scan keys. |
 | `amendscan` | Tear down scan-private state (don't free the IndexScanDesc itself). |
 
-`ambeginscan` is special: **it MUST return what `RelationGetIndexScan()` gave it**,
-because `index_endscan` (in `genam.c`) reaches inside the struct after the AM's
-`amendscan` runs. The comment at the top of `genam.c` calls this "kinda ugly".
+> **GOTCHA — `ambeginscan` return identity.**
+> `ambeginscan` **MUST return the exact `IndexScanDesc` that `RelationGetIndexScan()`
+> gave it** — not a copy, not a wrapper. `index_endscan` (in `genam.c`) reaches
+> inside that struct *after* the AM's `amendscan` has already run, so any
+> reallocation breaks teardown. The comment at the top of `genam.c` calls this
+> "kinda ugly". Allocate your private state separately and hang it off
+> `scan->opaque`.
 
 ### Function pointers — optional (may be NULL)
 `aminsertcleanup`, `amcanreturn` (for index-only scans), `amgettreeheight`,
@@ -88,9 +94,9 @@ bitmap-only).
 ### Lifecycle — build / insert / scan / vacuum
 
 ```
-CREATE INDEX  → ambuild → (per row) aminsert → aminsertcleanup
+CREATE INDEX  → ambuild
 SELECT ...    → ambeginscan → amrescan → (loop) amgettuple|amgetbitmap → amendscan
-INSERT/UPDATE → aminsert
+INSERT/UPDATE → (per row) aminsert → (once at end of statement) aminsertcleanup
 VACUUM        → ambulkdelete (may be called many times) → amvacuumcleanup
 DROP INDEX    → catalog work only; storage smgr handles file
 ```
@@ -115,9 +121,10 @@ btree-compatible opclasses on other AMs.
 ## Table AM (TableAmRoutine)
 
 Pluggable since v12. There is exactly **one in-tree implementation: heap.**
-The struct surface is much larger than the index-AM one (~45 callbacks) because
-table AMs own MVCC, storage layout, vacuum, sampling, and the per-tuple slot
-type.
+The struct surface is much larger than the index-AM one (~45-callback struct;
+`tableamapi.c::GetTableAmRoutine` asserts 37 of them non-NULL, the rest have
+soft "may be NULL" contracts inside specific call sites) because table AMs own
+MVCC, storage layout, vacuum, sampling, and the per-tuple slot type.
 
 ### What "heap is just a table-AM" means in practice
 
@@ -166,7 +173,7 @@ optimizations for non-heap AMs).
 `index_build_range_scan`, `index_validate_scan`.
 
 ### All mandatory
-`tableamapi.c::GetTableAmRoutine` runs ~30 `Assert(routine->X != NULL)` lines.
+`tableamapi.c::GetTableAmRoutine` runs 37 `Assert(routine->X != NULL)` lines.
 Only `finish_bulk_insert` and the TID-range pair are truly optional.
 
 ### The hard part: TID semantics
@@ -178,6 +185,13 @@ doesn't store tuples in (block, offset) pages (columnar, LSM, external) has to
 `index_fetch_tuple` and `tuple_fetch_row_version` against them. This is the
 single biggest reason most experimental table AMs never become production
 ready. See `MaxHeapTuplesPerPage` and the warnings in `tableam.sgml`.
+
+Stats-leakage corollary: autovacuum's per-table scheduling is driven by the
+`n_dead_tup` / `n_live_tup` counters in `pg_stat_all_tables`, which heap
+maintains via `pgstat_count_heap_*`. A non-heap AM that doesn't fake equivalent
+counters will simply never be visited by autovacuum — plan to call
+`pgstat_count_heap_insert`/`_update`/`_delete` (or the lower-level
+`pgstat_report_vacuum`) from inside your own tuple ops from day one.
 
 ## Registering a new AM
 

@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "executor-and-planner",
+  "evals": [
+    {
+      "id": "eval-1",
+      "prompt": "I want to add a new executor node called FilterCache that sits between a scan and its parent and caches the most recent N tuples that passed quals. What files do I have to touch and what functions do I have to implement? Don't write the code, just give me the checklist."
+    },
+    {
+      "id": "eval-2",
+      "prompt": "Walk me through how a Path becomes a Plan in the PostgreSQL planner. I'm especially confused about where set_plan_references fits and what it actually does. Concrete function names + file:line cites please."
+    },
+    {
+      "id": "eval-3",
+      "prompt": "I added a new scan path type in pathnode.c, wrote cost_myscan, called add_path on it from set_plain_rel_pathlist, and wrote create_myscan_plan. But at runtime I'm getting 'unrecognized node type' from the executor. The dispatch in execProcnode.c looks like it should work — what did I miss?"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "skill": "catalog-conventions",
+  "iteration": 2,
+  "grading_notes": "Same assertion list as iteration-1. Each assertion is binary (1 = present and correct, 0 = absent or wrong). Honest grader: credits baseline when general PG knowledge covers a point, deducts when with_skill misses something.",
+  "evals": [
+    {
+      "id": "eval-1",
+      "prompt_topic": "Add a builtin function — full workflow",
+      "assertions": [
+        "Specifies that prosrc must match the C symbol name",
+        "Mentions PG_FUNCTION_INFO_V1 + Datum signature for the C impl",
+        "Tells user to use unused_oids and to pick a random OID in the 8000-9999 range (the actual project policy)",
+        "Tells user to add a pg_proc.dat entry with at least oid/descr/proname/prorettype/proargtypes/prosrc",
+        "Tells user NOT to write pronargs because Catalog.pm computes it (and/or NOT to write columns matching BKI_DEFAULT)",
+        "Mentions placing the new entry near related ones, not at random/end of file",
+        "Tells user to bump CATALOG_VERSION_NO with the YYYYMMDDN format explanation",
+        "Tells user to run ./duplicate_oids as a verification step",
+        "Tells user a full rebuild is needed (genbki.pl regenerates headers) and a re-initdb is required after catversion bump",
+        "Mentions adding a regression test and/or watching opr_sanity/type_sanity",
+        "Mentions updating doc/src/sgml/func.sgml for user-facing docs"
+      ],
+      "with_skill_grades": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "baseline_grades":   [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1],
+      "with_skill_score": "11/11",
+      "baseline_score":   "8/11",
+      "notes": "with_skill still hits everything, with the strengthened OID-range explanation (now grounded in transam.h) and the worked .dat example making assertions 3 and 5 even more crisp than iter-1. Baseline misses the same three things as iter-1: 8000-9999 policy (it hedged with '6000-9000 band'), the don't-write-pronargs/BKI_DEFAULT rule (it actively suggested writing provolatile => 'i' which is the BKI_DEFAULT), and 'group near related entries'."
+    },
+    {
+      "id": "eval-2",
+      "prompt_topic": "Add a column to pg_class",
+      "assertions": [
+        "Identifies that pg_class.h is where the struct is edited",
+        "Recommends BKI_DEFAULT(f) so existing rows / bootstrap inserts don't all need updating",
+        "Correctly addresses 'do I need to touch every existing row' (answer: no, BKI_DEFAULT handles it; and pg_class specifically has no .dat)",
+        "Calls out that varlena/nullable columns must live in #ifdef CATALOG_VARLEN (even if bool doesn't trigger it, the rule should be mentioned)",
+        "Honestly addresses the 'so existing code reading Form_pg_class still works without recompiling' question — i.e. you CANNOT avoid recompiling extensions; struct layout changes",
+        "Recommends appending at the end of the fixed-length section to minimize offset churn for other code",
+        "Tells user to bump CATALOG_VERSION_NO",
+        "Tells user a full rebuild + re-initdb is needed",
+        "Mentions that expected regression .out files may need updates (column count change)",
+        "Mentions updating doc/src/sgml/catalogs.sgml"
+      ],
+      "with_skill_grades": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "baseline_grades":   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "with_skill_score": "10/10",
+      "baseline_score":   "10/10",
+      "notes": "Still a draw on assertion count, BUT the new 'append at the end of the fixed-length section' bullet (edit 2) makes with_skill more authoritative on assertion 6 — the skill now states the rule explicitly with a justification, while baseline arrives at the same conclusion from general knowledge. Both answers are solid; the skill earns its keep on confidence and groundedness rather than raw point delta."
+    },
+    {
+      "id": "eval-3",
+      "prompt_topic": "SearchSysCache1 lifecycle and miss behavior",
+      "assertions": [
+        "States that ReleaseSysCache must pair every successful SearchSysCache* call",
+        "Explains that missing the release produces 'cache reference leak' warnings",
+        "Warns that pointers into the tuple are invalid after release (no dereferencing post-release)",
+        "Mentions SearchSysCacheCopy1 as an alternative that gives a palloc'd copy with different lifetime semantics (heap_freetuple)",
+        "States that a miss returns NULL / HeapTupleIsValid is false, and is NOT an error from syscache itself — caller decides",
+        "Mentions the elog(ERROR, 'cache lookup failed for function %u', ...) idiom for 'should never happen' misses vs ereport(ERRCODE_UNDEFINED_FUNCTION) for user-triggerable",
+        "Mentions SearchSysCacheExists1 as the right tool for pure existence checks",
+        "Notes that cross-backend coherence is handled automatically via shared invalidation"
+      ],
+      "with_skill_grades": [1, 1, 1, 1, 1, 1, 1, 1],
+      "baseline_grades":   [1, 1, 1, 1, 1, 1, 1, 1],
+      "with_skill_score": "8/8",
+      "baseline_score":   "8/8",
+      "notes": "Still 8/8 on both. The new 'Using a syscache from C' mini-section (edit 4) materially changed the with_skill answer's structure — it now systematically covers every assertion with a worked example, whereas iter-1's with_skill leaned on general knowledge augmented by the idioms doc. Baseline is unchanged from iter-1: a competent PG developer answers this from training. Net point delta is still zero, but the skill text is now self-contained for this question instead of redirecting to idioms/."
+    }
+  ],
+  "summary": {
+    "with_skill_total": "29/29",
+    "baseline_total":   "26/29",
+    "delta_pts": 3,
+    "delta_pct": "10.3%",
+    "vs_iteration_1": "Identical point totals (29/29 vs 26/29, delta +3). The edits did not move the score numerically because iter-1 was already saturated on with_skill and baseline answers for evals 2 and 3 draw on common PG knowledge that the skill can't suppress. The edits' real value: (a) the worked pg_proc.dat example and the OID-range justification make eval-1's with_skill answer materially more confident and grounded, (b) the 'Using a syscache from C' mini-section makes the skill self-contained for eval-3 instead of leaning on the idioms doc, (c) the 'append at end of fixed-length section' bullet makes eval-2's with_skill rationale explicit instead of implicit. These are qualitative wins that a binary assertion grader cannot capture.",
+    "honest_assessment": "Score is saturated. Further iterations cannot improve the delta against this eval set without either (i) harder evals that pierce common PG knowledge, or (ii) a baseline grader more willing to penalise vague-but-not-wrong answers. The skill is in good shape; recommend freezing here."
+  }
+}

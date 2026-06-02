@@ -1,0 +1,38 @@
+{
+  "skill": "build-and-run",
+  "iteration": 1,
+  "prompts": [
+    {
+      "id": 1,
+      "prompt": "I just edited src/backend/access/heap/heapam.c in this PostgreSQL workspace. What's the fastest rebuild + regression-test cycle to verify I didn't break anything? Give exact commands.",
+      "assertions": [
+        "uses meson/ninja (not autoconf/make)",
+        "builds in dev/build-debug (not source/)",
+        "mentions ninja -C dev/build-debug install or similar",
+        "uses meson test or ninja test with --suite setup alongside --suite regress (or runs full test target)",
+        "does NOT instruct user to run from source/ tree"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I want to step through PostgreSQL backend code with lldb while it executes a query. How do I attach to the right process? I'm running on macOS.",
+      "assertions": [
+        "explains per-connection fork model (postmaster forks a backend per connection)",
+        "mentions SELECT pg_backend_pid() to get the backend PID",
+        "mentions attaching to the forked backend, NOT the postmaster",
+        "mentions building with debug/-O0 (or --buildtype=debug, cassert)",
+        "mentions single-user mode (postgres --single) as alternative for startup paths"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I ran 'meson test -C dev/build-debug --suite regress' and got 'copying of initdb template failed'. What went wrong and how do I fix it?",
+      "assertions": [
+        "identifies missing --suite setup as the cause",
+        "explains tmp_install / initdb-template / initdb_cache needs to be built first",
+        "gives corrected command including --suite setup alongside --suite regress",
+        "does NOT suggest wiping the build dir or reinstalling toolchain as first remedy"
+      ]
+    }
+  ]
+}

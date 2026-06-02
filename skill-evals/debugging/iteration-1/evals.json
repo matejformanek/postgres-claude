@@ -1,0 +1,42 @@
+{
+  "skill": "debugging",
+  "iteration": 1,
+  "model": "claude-opus-4-7[1m]",
+  "prompts": [
+    {
+      "id": 1,
+      "prompt": "I'm on macOS. I have a slow query running in psql against my locally-built postgres in postgres-claude/dev/. I want to attach a debugger to the *specific* backend serving that psql session and set a breakpoint at the executor entry point. Walk me through it end-to-end, including how to identify the right PID and which debugger to use.",
+      "assertions": [
+        "Mentions calling pg_backend_pid() from inside the target psql session (not a transient one)",
+        "Recommends lldb on macOS over gdb (and explains the codesigning reason or at least flags it)",
+        "Gives the correct attach syntax: lldb -p <pid>",
+        "Names a real executor entry point as the breakpoint (ExecutorRun / ExecutorStart / exec_simple_query)",
+        "Warns that the postmaster is not the right process to attach to (per-connection fork model)",
+        "Uses paths consistent with the project (dev/install-debug/bin or similar) OR references /pg-attach"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "I just added a new C function to the backend and when I call it from SQL the backend dies with SIGSEGV. The cluster is in /Users/matej/Work/postgres/postgres-claude/dev/data-debug. How do I narrow down where it's crashing using PostgreSQL's facilities — assume a fresh debug build on macOS.",
+      "assertions": [
+        "Mentions debug build with cassert enabled (so Asserts fire before the segfault)",
+        "Mentions enabling core dumps on macOS (ulimit -c unlimited and /cores)",
+        "Tells the user to open the core with lldb (lldb /path/to/postgres /cores/core.<pid>)",
+        "Suggests attaching lldb to the backend BEFORE the crash via pg_backend_pid()+lldb -p, or setting a breakpoint on errfinish/PG-level traps",
+        "Suggests elog/ereport instrumentation OR a pg_usleep waitpoint to catch fast paths",
+        "Mentions that postgres binary on macOS must not be hardened/Apple-signed for cores to land (or otherwise notes the macOS suppress-cores caveat)"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "I need to stop in the postmaster startup code path — specifically in InitPostgres before any client can connect. Attaching after psql is up is too late. What's the right approach in PostgreSQL?",
+      "assertions": [
+        "Recommends single-user mode: postgres --single -D $PGDATA <dbname>",
+        "Explains that --single does not fork, so the whole lifetime is in one process the debugger can follow",
+        "Gives the correct invocation pattern: lldb -- postgres --single ... OR gdb --args postgres --single ...",
+        "Notes that single-user mode terminates commands on newline (not semicolon) OR mentions -j flag",
+        "Alternatively or additionally mentions PGOPTIONS=\"-W N\" / pg_usleep waitpoint as a way to pause an early backend so you can attach"
+      ]
+    }
+  ]
+}

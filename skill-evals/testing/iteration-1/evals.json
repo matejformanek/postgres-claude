@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": ".claude/skills/testing/SKILL.md",
+  "evals": [
+    {
+      "id": "eval-1-regress-new-builtin",
+      "prompt": "I'm adding a new builtin SQL function (a string-manipulation function in src/backend/utils/adt/varlena.c). I need to write a regression test for it. What files do I create/edit, and how do I generate the expected output without typing it by hand?"
+    },
+    {
+      "id": "eval-2-tap-stream-rep-wal-record",
+      "prompt": "I want a TAP test that sets up streaming replication, runs a specific operation on the primary that emits a custom WAL record, and verifies the standby replays it and ends up with matching state. Where does the test live, what's the skeleton, and how do I run just that one test fast?"
+    },
+    {
+      "id": "eval-3-isolation-new-locking-path",
+      "prompt": "I added a new heavyweight lock acquisition path to ALTER TABLE that conflicts with concurrent SELECTs in a specific way. I want an isolation test that exercises the conflict — two sessions, one blocks the other, the blocker commits, the waiter proceeds. What's the right way to write this, and how do I keep it from hanging in CI?"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "skill": "commit-message-style",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "E1",
+      "prompt": "I'm about to commit a small bug fix to PostgreSQL master. The diff fixes a NULL-pointer deref in pg_dump when --exclude-schema is given an empty string. Reported on the mailing list by Bob Smith <bob@example.com>; Tom Lane reviewed. Thread message-id: CAB7nPqTexample@mail.gmail.com. Write the commit message in the project's house style.",
+      "context": "Tests: subject prefix (`pg_dump:`), imperative mood, no period, paragraph body, trailer order (Reported-by before Reviewed-by before Discussion), postgr.es/m/ shortener, NO Co-Authored-By trailer, NO Signed-off-by, no conventional-commits prefix, master-only so NO Backpatch-through line."
+    },
+    {
+      "id": "E2",
+      "prompt": "Claude Code suggested adding `Co-Authored-By: Claude <noreply@anthropic.com>` to a commit I'm planning to send to pgsql-hackers. Is that appropriate for an upstream PostgreSQL commit? What's the right convention?",
+      "context": "Tests: explicit rejection of `Co-Authored-By: Claude` for upstream PG; awareness that PG variant is lowercase `Co-authored-by:`; that attribution is for humans only; pointer to Author/Reviewed-by trailers instead."
+    },
+    {
+      "id": "E3",
+      "prompt": "I'm backpatching a fix to PG 16, 17, and 18 (master is currently 19). The patch was authored by Jane Doe and I diagnosed the root cause. Two reviewers signed off. What goes on the `Backpatch-through:` line, and does the commit message differ between the back branches?",
+      "context": "Tests: Backpatch-through names the OLDEST branch (`16`), as a bare major version number; same message across all branches (identical body for release-note tooling); Diagnosed-by trailer is a real PG tag; trailer order; that Backpatch-through goes last."
+    }
+  ]
+}

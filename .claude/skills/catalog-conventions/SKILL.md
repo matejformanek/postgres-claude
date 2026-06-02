@@ -27,8 +27,13 @@ hands-on procedure; consult it before/after any change to
    ./unused_oids
    ```
    Pick a *random* starting OID in **8000-9999** and a contiguous block big
-   enough for your patch. Final renumbering down to a tidy range happens
-   at commit time via `renumber_oids.pl` — don't do that yourself in
+   enough for your patch. The 8000-9999 range is reserved by project
+   convention for in-progress patches and forks (see
+   `src/include/access/transam.h` comments around `FirstGenbkiObjectId`);
+   keeping new work in that range minimises collisions with concurrent
+   patches. 10000-11999 is reserved for genbki.pl auto-assignment, and
+   the committer renumbers your patch down to a tidy low-OID range via
+   `renumber_oids.pl` at commit time — don't do that yourself in
    in-flight work.
 
 ## Making the edit
@@ -41,6 +46,11 @@ hands-on procedure; consult it before/after any change to
    - Public constants (relkinds, prokinds, …) belong inside
      `#ifdef EXPOSE_TO_CLIENT_CODE` so frontend code can read them via
      the generated `pg_X_d.h`.
+   - When adding a new fixed-length column to an existing catalog, append
+     it at the end of the fixed-length section (before any
+     `CATALOG_VARLEN` block). This minimises ABI churn for code that
+     reads `Form_pg_X->existing_field` — offsets of pre-existing fields
+     don't shift.
 
 4. **Edit the data file (`pg_X.dat`)**.
    - Group new entries near related existing ones (not at the end).
@@ -49,6 +59,20 @@ hands-on procedure; consult it before/after any change to
      not numeric OIDs. `BKI_LOOKUP` resolves them.
    - Don't write columns that have a `BKI_DEFAULT` matching your value.
    - Don't write computed columns like `pronargs`.
+
+   For a typical immutable strict `int4 -> int4` function the `.dat` row
+   is just:
+   ```
+   { oid => '8473', descr => 'frobnitz of an int',
+     proname => 'frobnitz', prorettype => 'int4',
+     proargtypes => 'int4', prosrc => 'my_new_func' },
+   ```
+   Don't write: `pronargs` (computed by `AddDefaultValues`),
+   `provolatile` (default `i` = immutable), `proisstrict` (default `t`),
+   `proparallel` (default `s` = safe), `prokind` (default `f`), and
+   anything else matching `BKI_DEFAULT` in `pg_proc.h`. Only write
+   columns where you DIVERGE from the default (e.g. a stable function
+   needs `provolatile => 's'`).
 
 5. **Write/wire the C implementation.**
    - For a new function: `PG_FUNCTION_INFO_V1(name); Datum name(PG_FUNCTION_ARGS) { ... }`
@@ -60,6 +84,30 @@ hands-on procedure; consult it before/after any change to
 6. **Adding a new lookup pattern?** Add a `DECLARE_UNIQUE_INDEX` and
    `MAKE_SYSCACHE(NAME, idx, nbuckets)` to the header. Use the syscache
    from C with `SearchSysCacheN` + `ReleaseSysCache`.
+
+### Using a syscache from C
+
+- Every `SearchSysCache*` (non-Copy) call that returns a valid tuple
+  MUST be paired with `ReleaseSysCache(tup)` before return. Unreleased
+  pins log "cache reference leak" at transaction end.
+- Pointers into the tuple (e.g. `GETSTRUCT(tup)`, `SysCacheGetAttr`
+  results that point into the tuple) are only valid between
+  `SearchSysCache*` and `ReleaseSysCache`. If you need them longer,
+  either copy them out (`pstrdup`, `datumCopy`) or use
+  `SearchSysCacheCopy1` which returns a palloc'd copy; free it with
+  `heap_freetuple` instead of `ReleaseSysCache`.
+- A miss returns an invalid HeapTuple (`HeapTupleIsValid(tup) == false`,
+  i.e. NULL). This is NOT an error from the cache — the caller decides
+  what to do. Idioms:
+    - "Should never happen": `elog(ERROR, "cache lookup failed for
+      function %u", oid)`
+    - User-triggerable: `ereport(ERROR,
+      (errcode(ERRCODE_UNDEFINED_FUNCTION), errmsg(...)))`
+- Pure existence check: `SearchSysCacheExists1` (no release needed).
+- OID-only fetch: `GetSysCacheOid1`.
+- Cross-backend coherence is automatic via shared invalidation
+  messages — you don't need to invalidate manually after a catalog
+  update done through the normal heap_update path.
 
 7. **Adding a TOAST-eligible catalog?** `DECLARE_TOAST(name, toastoid,
    indexoid)` — pin both OIDs.

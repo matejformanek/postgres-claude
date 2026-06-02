@@ -1,0 +1,18 @@
+{
+  "skill": "review-checklist",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "eval-1-guc-inline-func",
+      "prompt": "I'm reviewing a patch on pgsql-hackers that adds a new GUC plus a new inline helper function in src/include/utils/. What should I check?"
+    },
+    {
+      "id": "eval-2-wal-xlog",
+      "prompt": "A CommitFest patch touches WAL and adds a new XLOG record type for a new index AM. What's my review checklist for it?"
+    },
+    {
+      "id": "eval-3-perf-claim",
+      "prompt": "Pre-submission review: my own patch claims a 30% speedup on hash join probes by reordering a hot loop. How do I verify the claim before sending to hackers?"
+    }
+  ]
+}

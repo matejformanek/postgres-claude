@@ -1,0 +1,59 @@
+{
+  "iteration": 1,
+  "skill": "replication-overview",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "COMMIT through physical streaming with remote_apply",
+      "assertions": [
+        {"text": "Identifies the four processes: committing backend, walsender (primary), walreceiver (standby), startup process (standby)", "with_skill": true, "baseline": true},
+        {"text": "Notes walreceiver is NOT linked against libpq directly — uses dynamically loaded libpqwalreceiver/", "with_skill": true, "baseline": false},
+        {"text": "Mentions MAX_SEND_SIZE = 16 * XLOG_BLCKSZ = 128 KB batch size", "with_skill": true, "baseline": false},
+        {"text": "Explains that with remote_apply the backend waits on SyncRepQueue keyed by commit LSN and walsender wakes it on feedback", "with_skill": true, "baseline": true},
+        {"text": "Distinguishes the three feedback levels (write_lsn / flush_lsn / apply_lsn) matched to remote_write / on / remote_apply", "with_skill": true, "baseline": true},
+        {"text": "Notes that a standby must already be caught up to count toward the sync policy (configuration alone insufficient)", "with_skill": true, "baseline": false},
+        {"text": "Notes the shutdown-order subtlety: walsenders wait until AFTER the shutdown checkpoint, opposite of normal backends", "with_skill": true, "baseline": false},
+        {"text": "Cites at least one source file:line (e.g. syncrep.c, walsender.c, README) for a specific claim", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "Logical decoding pipeline",
+      "assertions": [
+        {"text": "Names decode.c → reorderbuffer.c → output plugin → walsender/SRF as the three-stage pipeline", "with_skill": true, "baseline": true},
+        {"text": "Explains that WAL is in record order not transaction order, so reorder buffer groups by xid and emits at commit", "with_skill": true, "baseline": true},
+        {"text": "Notes that decode.c also calls ReorderBufferProcessXid for non-data records to keep subxact trees consistent", "with_skill": true, "baseline": false},
+        {"text": "Names the two memory contexts used by reorder buffer: SlabContext (fixed-size) and GenerationContext (variable-length)", "with_skill": true, "baseline": false},
+        {"text": "States that on memory pressure the LARGEST in-progress transaction is spilled (via max-heap keyed by size)", "with_skill": true, "baseline": false},
+        {"text": "Mentions logical_decoding_work_mem as the per-reorderbuffer memory limit GUC", "with_skill": false, "baseline": true},
+        {"text": "Explains snapbuild.c builds historical MVCC catalog snapshots at the LSN of the change", "with_skill": true, "baseline": true},
+        {"text": "Names the output_plugin.h callback contract including _PG_output_plugin_init and OutputPluginCallbacks", "with_skill": true, "baseline": false},
+        {"text": "Mentions test_decoding (contrib) and pgoutput as canonical / built-in output plugins", "with_skill": true, "baseline": true},
+        {"text": "Notes toast chunks are reassembled inline within a toplevel txn", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "Failover slots and synchronized_standby_slots",
+      "assertions": [
+        {"text": "States that v17 introduced slot sync to let logical subscriptions survive failover without resnapshotting", "with_skill": true, "baseline": true},
+        {"text": "Identifies the failover=true flag on the slot and sync_replication_slots GUC on the standby", "with_skill": true, "baseline": true},
+        {"text": "Names the slot-sync worker in logical/slotsync.c as the puller on the standby", "with_skill": true, "baseline": false},
+        {"text": "Lists all THREE sync-ready preconditions: standby WAL past remote confirmed_flush_lsn; catalog xmin not behind; consistent snapshot buildable at restart_lsn before confirmed_flush_lsn", "with_skill": true, "baseline": false},
+        {"text": "Notes that mirror slots are RS_TEMPORARY until sync-ready, then flip to RS_PERSISTENT with synced=true", "with_skill": true, "baseline": false},
+        {"text": "Explains synchronized_standby_slots gates the logical slot's confirmed_flush from advancing past lagging physical standbys", "with_skill": true, "baseline": true},
+        {"text": "Names the wakeup chain: WalSndWaitForWal → NeedToWaitForStandbys/NeedToWaitForWal → PhysicalWakeupLogicalWalSnd → wal_confirm_rcv_cv condition variable", "with_skill": true, "baseline": false},
+        {"text": "Notes synced slots are treated as inactive for idle-timeout purposes", "with_skill": true, "baseline": false},
+        {"text": "Cites slotsync.c:11-35 or walsender.c:1801-1886 or slot.c lines for a specific claim", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 26,
+    "with_skill_total": 27,
+    "baseline_passed": 11,
+    "baseline_total": 27,
+    "with_skill_pass_rate": 0.963,
+    "baseline_pass_rate": 0.407
+  }
+}

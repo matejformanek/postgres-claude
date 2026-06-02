@@ -1,0 +1,54 @@
+{
+  "iteration": 1,
+  "skill": "wal-and-xlog",
+  "scale": "Each assertion graded pass/fail per condition. Score = passed/total.",
+  "evals": [
+    {
+      "id": "E1",
+      "assertions": [
+        {"id": "A1", "text": "Recommends Generic WAL for small/prototype extension", "with_skill": "pass", "baseline": "pass"},
+        {"id": "A2", "text": "Shows the GenericXLogStart/RegisterBuffer/Finish three-call idiom", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A3", "text": "Notes that the writer edits a workspace copy, not the live buffer", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A4", "text": "States the custom rmgr ID range 128..255 and RM_EXPERIMENTAL_ID=128", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A5", "text": "Lists at least 3 reasons to prefer custom rmgr (volume, semantics, logical decoding, pg_waldump output)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A6", "text": "Mentions the CustomWALResourceManagers wiki for ID reservation", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A7", "text": "Cites contrib/bloom or another concrete example", "with_skill": "pass", "baseline": "fail"}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "1.5/7"
+    },
+    {
+      "id": "E2",
+      "assertions": [
+        {"id": "A1", "text": "Lists all 7 steps in correct order (lock, START_CRIT, modify, MarkBufferDirty, XLogInsert sequence, END_CRIT, unlock)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A2", "text": "MarkBufferDirty placement BEFORE XLogInsert explicitly called out", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A3", "text": "PageSetLSN AFTER XLogInsert, on every modified buffer", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A4", "text": "Pre-flight checks belong OUTSIDE the critical section", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A5", "text": "Mentions XLogEnsureRecordSpace for >5 buffers / >20 chunks, called outside crit-section", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A6", "text": "Covers REGBUF_* flag choices with rationale", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A7", "text": "Multi-page changes split into chain of atomic records (btree-split example)", "with_skill": "pass", "baseline": "fail"}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "1.5/7"
+    },
+    {
+      "id": "E3",
+      "assertions": [
+        {"id": "A1", "text": "Gives correct signature void rm_redo(XLogReaderState *)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A2", "text": "Uses XLogReadBufferForRedo and BLK_NEEDS_REDO for idempotency", "with_skill": "pass", "baseline": "pass"},
+        {"id": "A3", "text": "PageSetLSN uses record->EndRecPtr explicitly", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A4", "text": "States no new WAL is emitted during redo", "with_skill": "pass", "baseline": "pass"},
+        {"id": "A5", "text": "States no MarkBufferDirtyHint during redo and explains why", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A6", "text": "Multi-buffer lock ordering must match writer (Hot Standby readers)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A7", "text": "Mentions rm_mask + wal_consistency_checking for testing", "with_skill": "pass", "baseline": "fail"}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "2/7"
+    }
+  ],
+  "totals": {
+    "with_skill": "21/21 (100%)",
+    "baseline": "5/21 (~24%)"
+  },
+  "notes": "Skill clearly differentiates from baseline on every eval. Biggest deltas: exact constants (128..255, EXPERIMENTAL_ID), placement rules (MarkBufferDirty BEFORE XLogInsert), and Hot Standby implications for redo lock ordering. Baseline gets the broad shape but misses the precision needed to actually write correct code."
+}

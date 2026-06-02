@@ -1,0 +1,17 @@
+{
+  "skill_name": "error-handling",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm writing a new function in src/backend/commands that opens a configuration file with open(2), reads it, and parses it. open() can fail, fread() can fail, and the parser can find a malformed line. For each of those three failure modes, show me the exact ereport / elog call I should write — including which errcode helper to use, what elevel, what errmsg style (capitalisation/period/identifier quoting), and whether I need errdetail/errhint. Also: do I need to close(fd) before reporting, or does transaction abort handle it? Cite the skill rules and any header files."
+    },
+    {
+      "id": 2,
+      "prompt": "I'm embedding a libxml2 parser in a backend function. libxml2 allocates a parser context with xmlNewParserCtxt() that must be freed with xmlFreeParserCtxt() — it's not tracked by any PG ResourceOwner or memory context. The parsing work calls back into PG code that can ereport(ERROR). How do I structure this so the parser context is always freed, even on ERROR? Show the exact macro to use, where the volatile keyword has to go, and what the catch/finally block should do. Also: what if a FATAL fires instead of ERROR — does the same mechanism still work?"
+    },
+    {
+      "id": 3,
+      "prompt": "Code review this snippet from a hypothetical patch and list every error-handling style violation, with the specific rule each one breaks:\n\n```c\nif (lookup_failed) {\n    ereport(ERROR,\n            errmsg(\"Relation %s Does Not Exist.\\n\", name));\n    goto cleanup;\n}\nif (cache_miss) {\n    ereport(ERROR,\n            (errcode(ERRCODE_INTERNAL_ERROR),\n             errmsg(\"cache lookup failed for relation \" \"%u\", oid)));\n}\nif (bad_input) {\n    ereport(ERROR,\n            (errmsg(\"can't parse value: ERROR 22003 numeric overflow\")));\n}\n```\n\nFor each violation, name the rule and say what the fixed call should look like."
+    }
+  ]
+}

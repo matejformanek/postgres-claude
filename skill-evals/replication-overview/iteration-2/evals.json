@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "replication-overview",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "Trace a single COMMIT on the primary all the way through physical streaming replication to the moment a hot standby's reader can see the row. Which processes are involved on each side, what gets written/read, and where does synchronous_commit=remote_apply plug in?"
+    },
+    {
+      "eval_id": 2,
+      "question": "How does logical decoding turn a WAL record back into row-level change events for an output plugin? Specifically: how are interleaved subtransactions reassembled, what happens when memory pressure hits, and how does decoding know the historical catalog shape?"
+    },
+    {
+      "eval_id": 3,
+      "question": "What's the failover slot mechanism in v17+ and when does it kick in? Walk through how a logical slot on the primary gets mirrored to a standby, what gates the slot's confirmed_flush from advancing too far, and what the synchronized_standby_slots GUC does."
+    }
+  ]
+}

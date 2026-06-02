@@ -1,0 +1,53 @@
+{
+  "iteration": 2,
+  "skill_path": ".claude/skills/build-and-run/SKILL.md",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "Fastest rebuild + smoke-test cycle after editing a backend C file (macOS, debug build)",
+      "assertions": [
+        {"text": "Uses meson/ninja (not autoconf/make) as the primary toolchain", "with_skill": true, "baseline": true},
+        {"text": "Builds inside dev/build-debug, not source/ or generic build/", "with_skill": true, "baseline": false},
+        {"text": "Runs 'ninja -C dev/build-debug install' (incremental rebuild + reinstall)", "with_skill": true, "baseline": false},
+        {"text": "Explicitly says the running postmaster must be restarted to pick up the new binary (pg_ctl restart or stop+start)", "with_skill": true, "baseline": false},
+        {"text": "Regression command includes --suite setup alongside --suite regress (avoids the initdb-template trap)", "with_skill": true, "baseline": false},
+        {"text": "Uses 'psql -h /tmp' for the smoke-test connection on macOS", "with_skill": true, "baseline": false},
+        {"text": "References at least one slash command (/pg-restart, /pg-test, /pg-psql, /setup-pg) by name or path", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question": "meson test --suite isolation dies with 'copying of initdb template failed' — why and fix",
+      "assertions": [
+        {"text": "Diagnoses the cause as the missing --suite setup (not a stale build or toolchain problem)", "with_skill": true, "baseline": false},
+        {"text": "Names tmp_install and/or initdb-template / initdb_cache as the artifacts the setup suite produces", "with_skill": true, "baseline": false},
+        {"text": "Gives the corrected command: 'meson test -C dev/build-debug --suite setup --suite isolation'", "with_skill": true, "baseline": false},
+        {"text": "Does NOT recommend wiping the build dir / reconfiguring as the primary fix", "with_skill": true, "baseline": false},
+        {"text": "Mentions the rule generalizes: always prepend --suite setup when filtering any suite", "with_skill": true, "baseline": false},
+        {"text": "References /pg-test or .claude/commands/pg-test.md as the wrapper that auto-prepends --suite setup", "with_skill": true, "baseline": false},
+        {"text": "Points at meson-logs/testlog.txt or testrun/.../regression.diffs for failure output", "with_skill": true, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question": "Step through backend startup code — lldb on postmaster doesn't hit breakpoints",
+      "assertions": [
+        {"text": "Explains the per-connection fork model (postmaster forks a backend per connection, query/startup code runs in the child)", "with_skill": true, "baseline": true},
+        {"text": "Recommends 'postgres --single -D $PGDATA postgres' single-user mode for early startup paths (no fork)", "with_skill": true, "baseline": false},
+        {"text": "Shows launching the single-user backend directly under lldb (lldb -- postgres --single ...) so startup is debuggable from instruction 0", "with_skill": true, "baseline": false},
+        {"text": "Mentions the pg_usleep waitpoint pattern (elog + pg_usleep, rebuild, tail log, attach to logged PID)", "with_skill": true, "baseline": true},
+        {"text": "Recommends lldb over gdb on macOS (codesigning friction with gdb)", "with_skill": true, "baseline": true},
+        {"text": "References /pg-attach or .claude/commands/pg-attach.md", "with_skill": true, "baseline": false},
+        {"text": "Confirms the debug build flags (--buildtype=debug, -Dcassert=true, -Ddebug=true) are what make symbols/asserts readable", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 21,
+    "with_skill_total": 21,
+    "with_skill_pass_rate": 1.0,
+    "baseline_passed": 5,
+    "baseline_total": 21,
+    "baseline_pass_rate": 0.238
+  }
+}

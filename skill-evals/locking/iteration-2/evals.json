@@ -1,0 +1,19 @@
+{
+  "skill_name": "locking",
+  "iteration": 2,
+  "notes": "Harder than iter-1. Each eval has a trap where general PG knowledge or naive reading misleads. Concrete-edit framing.",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm writing a parallel-aware aggregate that needs to serialize access to a small piece of shared state held in a DSM segment shared between the parallel leader and its workers. My first instinct is to take an AccessExclusiveLock on a dummy advisory key via LockAcquire(LOCKTAG_ADVISORY, ...) so workers and leader serialize cleanly. Is that the right primitive? Walk me through the gotcha with heavyweight locks inside a parallel worker lock group, what the actual rule is, where it's documented/enforced in the source, and what I should use instead. Cite file:line."
+    },
+    {
+      "id": 2,
+      "prompt": "I'm adding a new individually-named LWLock 'FooBarLock' that protects a new shared-memory hash table. List every file I have to edit to register the lock so that (a) the lock is allocated in MainLWLockArray at backend startup, (b) pg_stat_activity.wait_event_type='LWLock' / wait_event='FooBarLock' shows up correctly when a backend waits on it, and (c) the lock is referenceable from C as GetNamedLWLockTranche-equivalent or by direct symbol. For each file, name the exact line/section to edit and the exact syntax. Then: how does this differ from RequestNamedLWLockTranche() and why would I choose one over the other? Cite file:line."
+    },
+    {
+      "id": 3,
+      "prompt": "Code review: a developer's patch adds a new code path that, while holding ProcArrayLock in LW_SHARED, calls a helper that does a syscache lookup (SearchSysCache1) on pg_authid. The justification in the commit message says 'LWLocks are error-safe so this is fine'. Is this OK? Specifically address: (a) the error-safety claim, (b) the implicit lock-ordering claim that's being made, (c) any interaction with CHECK_FOR_INTERRUPTS / query cancel, (d) what the MAX_SIMUL_LWLOCKS limit has to do with this if anything, and (e) whether the answer would change if it were ProcArrayLock in LW_EXCLUSIVE instead of LW_SHARED. Cite file:line for each rule you invoke."
+    }
+  ]
+}

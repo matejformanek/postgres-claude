@@ -1,0 +1,55 @@
+{
+  "iteration": 1,
+  "evals": [
+    {
+      "eval_id": 1,
+      "assertions": [
+        {"text": "Calls out that adding a keyword requires BOTH kwlist.h AND a keyword-classification rule in gram.y (unreserved_keyword / col_name_keyword / etc.)", "with_skill": true, "baseline": true},
+        {"text": "Notes scan.l does NOT need a change for a new keyword (only for a new token shape)", "with_skill": true, "baseline": true},
+        {"text": "Cites the transformStmt switch location at analyze.c:334-444 (or :368) and names it specifically", "with_skill": true, "baseline": false},
+        {"text": "Mentions the load-bearing 'Caution' that transformStmt changes must also update stmt_requires_parse_analysis and analyze_requires_snapshot (analyze.c:363-367 / :468-505 / :512-529)", "with_skill": true, "baseline": false},
+        {"text": "States T_BlendStmt is auto-generated into nodetags.h and must NOT be hand-edited", "with_skill": true, "baseline": false},
+        {"text": "Mentions parsenodes.h must already be in gen_node_support.pl's @all_input_files (or cites that list)", "with_skill": true, "baseline": false},
+        {"text": "Mentions catversion bump is required only if the node ends up in stored catalog trees (rule actions / views)", "with_skill": true, "baseline": true},
+        {"text": "Mentions the debug GUCs (debug_copy_parse_plan_trees / debug_write_read_parse_plan_trees / debug_raw_expression_coverage_test) for round-trip testing", "with_skill": true, "baseline": false},
+        {"text": "Mentions walker integration in nodeFuncs.c (expression_tree_walker / mutator / raw walker) if the node holds child expressions", "with_skill": true, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "assertions": [
+        {"text": "Recommends copyObject(p) as the primary answer", "with_skill": true, "baseline": true},
+        {"text": "Notes the typeof_unqual macro magic that preserves the argument type without a cast (nodes.h:228-233)", "with_skill": true, "baseline": true},
+        {"text": "Cites copyfuncs.c with line numbers for copyObjectImpl (e.g. :176-212 or :185)", "with_skill": true, "baseline": false},
+        {"text": "Explains by-ref Datum handling via _copyConst calling datumCopy with line cite", "with_skill": true, "baseline": true},
+        {"text": "Calls out check_stack_depth() guard at top of copyObjectImpl (with cite)", "with_skill": true, "baseline": true},
+        {"text": "Distinguishes T_List (deep, via list_copy_deep) vs T_IntList/T_OidList/T_XidList (shallow list_copy) with copyfuncs.c line cite", "with_skill": true, "baseline": false},
+        {"text": "Mentions extensible nodes (_copyExtensibleNode) require a registered nodeCopy callback", "with_skill": true, "baseline": true},
+        {"text": "Notes the copy is allocated in CurrentMemoryContext and switching contexts is on the caller", "with_skill": true, "baseline": true},
+        {"text": "Connects to the roundtrip copyObject(stringToNode(nodeToString(p))) being load-bearing for plan cache / rules / parallel workers", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "assertions": [
+        {"text": "Recommends expression_tree_mutator (not walker) since the task is rewrite, returning Node *", "with_skill": true, "baseline": true},
+        {"text": "States the mutator contract: NULL return means 'delete this subtree'", "with_skill": true, "baseline": false},
+        {"text": "States the walker contract: callback returns true to short-circuit, false to keep going", "with_skill": true, "baseline": true},
+        {"text": "Explains macro wrapping (nodeFuncs.h:155-183) suppresses callback-type warnings so callbacks can be typed", "with_skill": true, "baseline": false},
+        {"text": "Distinguishes raw_expression_tree_walker (pre-analysis, ColumnRef/A_Expr) vs expression_tree_walker (post-analysis, Var/OpExpr)", "with_skill": true, "baseline": true},
+        {"text": "Notes ColumnRef only exists pre-analysis and Var is the post-analysis equivalent — picks the correct walker per stage", "with_skill": true, "baseline": true},
+        {"text": "Lists ALL of {exprType, exprTypmod, exprCollation, exprLocation, walker, mutator, raw walker} as maintenance points when adding an expression node, with line cites in nodeFuncs.c", "with_skill": true, "baseline": false},
+        {"text": "Mentions query_tree_walker/mutator flags (QTW_*) from nodeFuncs.h:21-34 for controlling rtable/subquery recursion", "with_skill": true, "baseline": false},
+        {"text": "Mentions planstate_tree_walker as the executor-time equivalent (rounding out the 3-stage picture)", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 27,
+    "with_skill_total": 27,
+    "with_skill_pass_rate": 1.0,
+    "baseline_passed": 13,
+    "baseline_total": 27,
+    "baseline_pass_rate": 0.481
+  }
+}

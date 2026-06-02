@@ -1,0 +1,182 @@
+{
+  "iteration": 2,
+  "skill": "executor-and-planner",
+  "grading_notes": "Same assertion list as iteration-1. Each assertion graded pass/partial/fail across the two attempts (with_skill, baseline). We compare to iter-1 which scored 19.5/22 with two with_skill attempts. In iter-2 we deliberately compare with_skill vs baseline (no skill) so the delta is to iter-1's with_skill score.",
+  "evals": [
+    {
+      "id": "eval-1",
+      "prompt_summary": "FilterCache new node — checklist",
+      "assertions": [
+        {
+          "id": "1.1",
+          "claim": "Mentions Plan struct in plannodes.h with `Plan plan;` first field",
+          "with_skill": "pass",
+          "baseline": "pass"
+        },
+        {
+          "id": "1.2",
+          "claim": "Mentions PlanState struct in execnodes.h, embedding PlanState (not ScanState because not a scan)",
+          "with_skill": "pass",
+          "baseline": "partial - mentioned PlanState but did not explicitly distinguish from ScanState"
+        },
+        {
+          "id": "1.3",
+          "claim": "Lists the five core executor functions (ExecInit/Exec/ExecEnd/ExecReScan) and notes ExecProcNode is set inside ExecInit",
+          "with_skill": "pass",
+          "baseline": "partial - listed functions but did not call out the ExecProcNode-set-inside-ExecInit detail"
+        },
+        {
+          "id": "1.4",
+          "claim": "Wires into all THREE dispatch switches: ExecInitNode + ExecEndNode in execProcnode.c, ExecReScan in execAmi.c",
+          "with_skill": "pass - explicitly four switches with Plan/PlanState tag asymmetry called out",
+          "baseline": "partial - mentioned three switches but unsure where ExecReScan lives"
+        },
+        {
+          "id": "1.5",
+          "claim": "Mentions meson.build + Makefile + header include in execProcnode.c alphabetical block",
+          "with_skill": "pass",
+          "baseline": "partial - mentioned meson + Makefile but not the alphabetical-block detail"
+        },
+        {
+          "id": "1.6",
+          "claim": "Mentions EXPLAIN integration in commands/explain.c",
+          "with_skill": "pass",
+          "baseline": "pass"
+        },
+        {
+          "id": "1.7",
+          "claim": "Mentions set_plan_references / setrefs.c if the node carries expressions",
+          "with_skill": "pass - with concrete walker cite paths (fix_scan_expr / fix_upper_expr)",
+          "baseline": "partial - vague reference to setrefs.c"
+        },
+        {
+          "id": "1.8",
+          "claim": "Calls out the no-malloc / use-palloc memory rule and the close-relations-in-ExecEnd rule",
+          "with_skill": "pass - both pitfalls listed explicitly with README cite",
+          "baseline": "pass"
+        }
+      ],
+      "score_with_skill": "8 / 8",
+      "score_baseline": "5 / 8"
+    },
+    {
+      "id": "eval-2",
+      "prompt_summary": "Path → Plan, role of set_plan_references",
+      "assertions": [
+        {
+          "id": "2.1",
+          "claim": "Distinguishes Path (planner currency, cost-comparable) from Plan (executor instruction)",
+          "with_skill": "pass",
+          "baseline": "pass"
+        },
+        {
+          "id": "2.2",
+          "claim": "Identifies create_plan as the entry point with create_plan_recurse switching on best_path->pathtype",
+          "with_skill": "pass",
+          "baseline": "pass"
+        },
+        {
+          "id": "2.3",
+          "claim": "Cites correct file:line (createplan.c:339 / 390)",
+          "with_skill": "pass",
+          "baseline": "partial - approximate (~300-400) without exact line"
+        },
+        {
+          "id": "2.4",
+          "claim": "Places set_plan_references AFTER create_plan returns",
+          "with_skill": "pass",
+          "baseline": "pass"
+        },
+        {
+          "id": "2.5",
+          "claim": "Explains what set_plan_references actually does: Var renumbering to INNER_VAR/OUTER_VAR/scan attno",
+          "with_skill": "pass",
+          "baseline": "pass"
+        },
+        {
+          "id": "2.6",
+          "claim": "Notes finalrtable assembly / relationOids collection / plan-cache invalidation items",
+          "with_skill": "pass - explicitly lists all three (finalrtable, relationOids, invalItems) — fixed in iter-2 edits",
+          "baseline": "partial - mentioned global rtable and relation OIDs but not invalItems"
+        },
+        {
+          "id": "2.7",
+          "claim": "Warns new Plan nodes carrying expressions must be added to fix_*_references_walker",
+          "with_skill": "pass - with cite paths for each walker (fix_scan_expr / fix_join_expr / fix_upper_expr)",
+          "baseline": "partial - guessed at fix_*_expr_walker family without confidence"
+        }
+      ],
+      "score_with_skill": "7 / 7",
+      "score_baseline": "5 / 7"
+    },
+    {
+      "id": "eval-3",
+      "prompt_summary": "Unrecognized node type after adding planner-side scaffolding",
+      "assertions": [
+        {
+          "id": "3.1",
+          "claim": "Identifies ExecReScan lives in execAmi.c, not execProcnode.c — the likely miss",
+          "with_skill": "pass - bolded as the most common miss",
+          "baseline": "partial - mentioned but uncertain ('I think this lives in execProcnode.c too, or maybe execAmi.c')"
+        },
+        {
+          "id": "3.2",
+          "claim": "Distinguishes Plan-tag dispatch (ExecInitNode) vs PlanState-tag dispatch (ExecEndNode, ExecReScan)",
+          "with_skill": "pass - explicit and bolded thanks to the new callout box (the iter-1 weak spot was attempt B's lack of explicitness; the callout now hands this over pre-derived)",
+          "baseline": "pass"
+        },
+        {
+          "id": "3.3",
+          "claim": "Cites file:line for the three switches",
+          "with_skill": "pass",
+          "baseline": "fail - no file:line cites"
+        },
+        {
+          "id": "3.4",
+          "claim": "Reminds to include the new header in execProcnode.c alphabetical block",
+          "with_skill": "pass",
+          "baseline": "partial - mentioned header inclusion but not alphabetical-block detail"
+        },
+        {
+          "id": "3.5",
+          "claim": "Suggests checking gen_node_support.pl generated NodeTags for both Plan and PlanState types",
+          "with_skill": "pass",
+          "baseline": "pass"
+        },
+        {
+          "id": "3.6",
+          "claim": "Asks WHICH switch is firing (init/end/rescan) to localize the bug",
+          "with_skill": "pass - explicit",
+          "baseline": "pass"
+        },
+        {
+          "id": "3.7",
+          "claim": "Considers MultiExecProcNode but correctly notes it does not apply to a scan-returning-tuples",
+          "with_skill": "pass - listed as the 4th switch with explicit 'skip for tuple-returning scan' (the iter-1 fail in attempt A is fixed by the Edit 2 promotion of MultiExecProcNode to 4th switch)",
+          "baseline": "pass - mentioned"
+        }
+      ],
+      "score_with_skill": "7 / 7",
+      "score_baseline": "5 / 7"
+    }
+  ],
+  "overall": {
+    "with_skill": {
+      "raw": "22 / 22",
+      "percentage": 100.0
+    },
+    "baseline": {
+      "raw": "15 / 22",
+      "percentage": 68.2
+    },
+    "iter1_with_skill_comparison": {
+      "raw": "19.5 / 22",
+      "percentage": 88.6
+    },
+    "delta_vs_iter1": "+2.5 / 22 (+11.4 percentage points)",
+    "headline": "The four edits closed the three remaining gaps from iter-1. (a) Edit 2 (MultiExecProcNode as 4th switch) fixed 3.7's iter-1 fail. (b) Edit 1 (tag-asymmetry callout box) fixed 3.2's iter-1 partial. (c) Edit 3 (setrefs.c cite path with verified line numbers + named invalItems) fixed 2.6's iter-1 partial. (d) The explicit 'close-relations-in-ExecEnd' README cite tightened 1.8. with_skill answers now hit every assertion. The skill comfortably beats baseline (22/22 vs 15/22) — large with-skill advantage, particularly on file:line citation and on the Plan/PlanState tag asymmetry which baseline can derive but only after several sentences of reasoning.",
+    "gaps_remaining": [
+      "All iter-1 gaps addressed. Future iterations could stress-test rarer scenarios: parallel-aware new nodes, custom-scan API, or upper-rel injection points like apply_scanjoin_target_to_paths — but these are beyond the current eval set."
+    ]
+  }
+}

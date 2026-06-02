@@ -1,0 +1,21 @@
+{
+  "skill": "coding-style",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "eval-1-includes-and-decls",
+      "prompt": "I'm adding a new .c file under src/backend/access/heap/. What needs to be at the top — what include comes first, can I sprinkle <stdio.h> in next to my project headers, and where do I put my static helper prototypes? Also: I want to declare a loop counter inside a for() and a temporary int halfway down the function body — both OK in C99, right?",
+      "intent": "Tests include order (postgres.h FIRST), grouping with blank lines, static prototype block, and the banned C99 features (mid-block decls). Common trap: a generic C dev will say 'yes mid-block decls are fine, it's C99'."
+    },
+    {
+      "id": "eval-2-pgindent-typedef-churn",
+      "prompt": "I added a new typedef `FooScanState` in my patch and ran pgindent. Now pgindent is reformatting a bunch of *other* files I didn't touch — it's putting weird spacing around `FooScanState` uses across the tree. What did I forget, and is there anything else about typedefs that bites you with pgindent?",
+      "intent": "Tests the operational typedef.list rule and the function-named-same-as-typedef gotcha. Both are easy to forget and very PG-specific."
+    },
+    {
+      "id": "eval-3-ereport-message-style",
+      "prompt": "Review this for me: `ereport(ERROR, errcode(ERRCODE_INVALID_PARAMETER_VALUE), errmsg(\"Unable to open file %s: open() failed.\", path)); pfree(buf);` — anything wrong with the message text, the structure, or the line after it?",
+      "intent": "Tests: errmsg style (lowercase, no period, no 'unable', no function-name leakage, quote %s), unreachable code after ereport(ERROR), and ideally the %m idiom instead of explicit errno."
+    }
+  ]
+}

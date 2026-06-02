@@ -1,0 +1,64 @@
+{
+  "iteration": 2,
+  "skill": "wal-and-xlog",
+  "scale": "Each assertion graded pass/fail per condition. Score = passed/total. Assertion set frozen from iter-1 grading.json for comparability.",
+  "evals": [
+    {
+      "id": "E1",
+      "assertions": [
+        {"id": "A1", "text": "Recommends Generic WAL for small/prototype extension", "with_skill": "pass", "baseline": "pass"},
+        {"id": "A2", "text": "Shows the GenericXLogStart/RegisterBuffer/Finish three-call idiom", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A3", "text": "Notes that the writer edits a workspace copy, not the live buffer", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A4", "text": "States the custom rmgr ID range 128..255 and RM_EXPERIMENTAL_ID=128", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A5", "text": "Lists at least 3 reasons to prefer custom rmgr (volume, semantics, logical decoding, pg_waldump output)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A6", "text": "Mentions the CustomWALResourceManagers wiki for ID reservation", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A7", "text": "Cites contrib/bloom or another concrete example", "with_skill": "pass", "baseline": "fail"}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "1.5/7"
+    },
+    {
+      "id": "E2",
+      "assertions": [
+        {"id": "A1", "text": "Lists all 7 steps in correct order (lock, START_CRIT, modify, MarkBufferDirty, XLogInsert sequence, END_CRIT, unlock)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A2", "text": "MarkBufferDirty placement BEFORE XLogInsert explicitly called out", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A3", "text": "PageSetLSN AFTER XLogInsert, on every modified buffer", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A4", "text": "Pre-flight checks belong OUTSIDE the critical section", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A5", "text": "Mentions XLogEnsureRecordSpace for >5 buffers / >20 chunks, called outside crit-section", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A6", "text": "Covers REGBUF_* flag choices with rationale", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A7", "text": "Multi-page changes split into chain of atomic records (btree-split example)", "with_skill": "pass", "baseline": "fail"}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "1.5/7"
+    },
+    {
+      "id": "E3",
+      "assertions": [
+        {"id": "A1", "text": "Gives correct signature void rm_redo(XLogReaderState *)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A2", "text": "Uses XLogReadBufferForRedo and BLK_NEEDS_REDO for idempotency", "with_skill": "pass", "baseline": "pass"},
+        {"id": "A3", "text": "PageSetLSN uses record->EndRecPtr explicitly", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A4", "text": "States no new WAL is emitted during redo", "with_skill": "pass", "baseline": "pass"},
+        {"id": "A5", "text": "States no MarkBufferDirtyHint during redo and explains why", "with_skill": "pass", "baseline": "fail"},
+        {"id": "A6", "text": "Multi-buffer lock ordering must match writer (Hot Standby readers)", "with_skill": "pass", "baseline": "partial"},
+        {"id": "A7", "text": "Mentions rm_mask + wal_consistency_checking for testing", "with_skill": "pass", "baseline": "fail"}
+      ],
+      "with_skill_score": "7/7",
+      "baseline_score": "2/7"
+    }
+  ],
+  "totals": {
+    "with_skill": "21/21 (100%)",
+    "baseline": "5/21 (~24%)"
+  },
+  "delta_vs_iter1": {
+    "headline_scores": "unchanged at 21/21 with_skill, 5/21 baseline",
+    "qualitative_improvements": [
+      "E1 with_skill now cites MAX_GENERIC_XLOG_PAGES = 4 as a concrete number (was '[unverified value — check at use site]') and states rm_decode is optional with a code cite — both former [unverified] markers retired.",
+      "E3 with_skill now reasons about why record->EndRecPtr (not start) — the iter-1 answer was correct but the skill didn't explain it, so the assertion passed by luck of recall. Now the skill itself carries the rationale, raising robustness across model swaps.",
+      "E3 with_skill now mentions the writer↔redo symmetry trap (new pre-commit item), a class of bug wal_consistency_checking can't catch. No assertion covers this yet but it would be A8 in a future eval.",
+      "_PG_init snippet now has a real ereport — A1/A4 for E1 didn't depend on it, but reduces copy-paste landmines for a junior dev acting on the skill."
+    ],
+    "no_regressions": "All 21 with_skill passes retained. Baseline answers are independent of skill content and therefore unchanged in shape."
+  },
+  "notes": "Iter-2 didn't move the headline score because iter-1 was already at ceiling on this assertion set. The wins are robustness wins: the skill now stands on its own for the rationale behind EndRecPtr, the exact constant 4, and the optionality of rm_decode — claims that previously depended on either the model's recall or a runtime grep."
+}

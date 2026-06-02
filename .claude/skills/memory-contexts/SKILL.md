@@ -31,6 +31,12 @@ Reference doc: `knowledge/idioms/memory-contexts.md`.
 - **`palloc(0)` is legal** — returns a usable chunk.
 - **Do not test palloc's return for NULL** unless you used `MCXT_ALLOC_NO_OOM`.
 - **Single-allocation cap is `MaxAllocSize` (1 GB - 1)** for regular palloc.
+  Exceeding it raises `errmsg("invalid memory alloc request size %zu")` —
+  switch to `MemoryContextAllocHuge` / `palloc_extended(..., MCXT_ALLOC_HUGE)`,
+  capped at `MaxAllocHugeSize = SIZE_MAX/2`. Use `repalloc_huge` to grow.
+  Slab is fixed-size so N/A; Bump cannot be repalloc'd; AllocSet and
+  Generation both support huge chunks (AllocSet routes any chunk ≥ 8 KB
+  straight to malloc).
 
 ## Picking the right context
 
@@ -39,12 +45,15 @@ that still outlives the data you're allocating.**
 
 | You need data to live until... | Allocate in / switch to |
 |---|---|
-| End of one tuple cycle | the executor's per-tuple ExprContext (usually already `CurrentMemoryContext` in expression eval) |
-| End of one statement | per-query context (executor sets this up; `estate->es_query_cxt`) or `MessageContext` |
+| End of one tuple cycle | the executor's per-tuple ExprContext (usually already `CurrentMemoryContext` in expression eval); reset at the *start* of the next cycle |
+| End of one statement | per-query context (executor sets this up; `estate->es_query_cxt` or `econtext->ecxt_per_query_memory`) or `MessageContext` |
+| Across SRF calls (value-per-call) | `funcctx->multi_call_memory_ctx` from `SRF_FIRSTCALL_INIT()` |
+| Across SRF calls (materialize) | `rsinfo->econtext->ecxt_per_query_memory` for the tuplestore |
+| Across aggregate transitions (per group) | the aggcontext from `AggCheckCallContext(fcinfo, &aggcontext)` |
 | End of current (sub)transaction | `CurTransactionContext` |
 | End of top-level transaction | `TopTransactionContext` |
 | Lifetime of one portal | the portal's private context (`PortalContext` when active) |
-| Lifetime of a cache entry | a child of `CacheMemoryContext` you control |
+| Lifetime of a cache entry | a child of `CacheMemoryContext` you control (delete the child on invalidation; delete is recursive) |
 | Backend lifetime / forever | `TopMemoryContext` — but only if truly forever |
 
 **Avoid making `TopMemoryContext` or `CacheMemoryContext` `CurrentMemoryContext`.**
@@ -71,6 +80,22 @@ MemoryContext cxt = AllocSetContextCreate(parent,
                                           ALLOCSET_DEFAULT_SIZES);
 MemoryContextSetIdentifier(cxt, dynamic_name);  /* if you need a runtime label */
 ```
+
+Cache-entry pattern (per-relation child of `CacheMemoryContext`, blown
+away as a unit on invalidation — `MemoryContextDelete` is recursive):
+
+```c
+MemoryContext rulescxt = AllocSetContextCreate(CacheMemoryContext,
+                                               "relation rules",
+                                               ALLOCSET_SMALL_SIZES);
+MemoryContextCopyAndSetIdentifier(rulescxt, RelationGetRelationName(rel));
+oldcxt = MemoryContextSwitchTo(rulescxt);
+/* build cache contents; everything lands in rulescxt */
+MemoryContextSwitchTo(oldcxt);
+rel->rd_rulescxt = rulescxt;            /* invalidation: MemoryContextDelete */
+```
+See `source/src/backend/utils/cache/relcache.c` for the real precedent
+(`rd_rulescxt`, `rd_indexcxt`, `rd_pdcxt`, …).
 
 Sizing presets:
 - `ALLOCSET_DEFAULT_SIZES` — 0 / 8KB / 8MB. Use when the context may hold a lot.

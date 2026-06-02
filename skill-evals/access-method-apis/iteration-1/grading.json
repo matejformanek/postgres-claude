@@ -1,0 +1,64 @@
+{
+  "iteration": 1,
+  "skill": "access-method-apis",
+  "grading_scale": "pass / partial / fail per assertion",
+  "evals": [
+    {
+      "id": 1,
+      "topic": "Minimum IndexAmRoutine callbacks + RelationGetIndexScan rule",
+      "assertion_results": [
+        {"assertion": "Lists ambuild, aminsert, ambulkdelete, amvacuumcleanup, amcostestimate, amoptions, ambeginscan, amrescan, amendscan as mandatory", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "Mentions ambuildempty (for init fork of unlogged indexes) as mandatory", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "Mentions amvalidate as mandatory", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "States need at least one of amgettuple or amgetbitmap", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "States ambeginscan MUST return what RelationGetIndexScan() returned", "baseline": "partial", "with_skill": "pass"},
+        {"assertion": "Mentions optional callbacks like ammarkpos/amrestrpos, parallel-scan hooks (conditional on amcanparallel), amcanreturn", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "Mentions the static flag fields (amcanorder/amcanunique/etc.) and that planner reads them before any callback", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "References dummy_index_am or a concrete reference implementation", "baseline": "fail", "with_skill": "pass"}
+      ],
+      "baseline_score": "3.5/8",
+      "with_skill_score": "8/8",
+      "delta": "+4.5"
+    },
+    {
+      "id": 2,
+      "topic": "VACUUM and index AM",
+      "assertion_results": [
+        {"assertion": "States ambulkdelete may be called multiple times (heap vacuumed in batches)", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "States amvacuumcleanup runs once at the end", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "States ambulkdelete uses a vacuum-supplied callback to identify dead heap TIDs", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "Mentions both return IndexBulkDeleteResult* (or that amvacuumcleanup may return stats)", "baseline": "partial", "with_skill": "pass"},
+        {"assertion": "Mentions concurrency: scans run while vacuum runs, AM picks own locking discipline", "baseline": "partial", "with_skill": "pass"},
+        {"assertion": "References amparallelvacuumoptions bitmask or a concrete vacuum-related flag", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "Mentions nbtree as the canonical two-pass-with-cycle-id reference", "baseline": "fail", "with_skill": "pass"}
+      ],
+      "baseline_score": "4/7",
+      "with_skill_score": "7/7",
+      "delta": "+3"
+    },
+    {
+      "id": 3,
+      "topic": "Columnar table AM — hard parts and heap leakage",
+      "assertion_results": [
+        {"assertion": "Identifies TID semantics (6-byte ItemPointer / fabricating stable 48-bit TIDs) as the single hardest problem", "baseline": "partial", "with_skill": "pass"},
+        {"assertion": "Mentions Visibility Map and FSM as heap-only machinery", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "Mentions index-only scans consulting the VM directly as a concrete VM-leakage example", "baseline": "partial", "with_skill": "pass"},
+        {"assertion": "Mentions HOT lacks API surface but tuple_update returns TU_UpdateIndexes (TU_None/TU_All/TU_Summarizing)", "baseline": "pass", "with_skill": "pass"},
+        {"assertion": "Mentions autovacuum scheduling depends on heap-produced statistics", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "States almost all callbacks are mandatory (Assert list in tableamapi.c / GetTableAmRoutine), with only finish_bulk_insert + TID-range truly optional", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "Mentions TupleTableSlotOps / slot_callbacks as the tuple-movement interface", "baseline": "fail", "with_skill": "pass"},
+        {"assertion": "References heapam_handler.c as the only in-tree implementation", "baseline": "pass", "with_skill": "pass"}
+      ],
+      "baseline_score": "4/8",
+      "with_skill_score": "8/8",
+      "delta": "+4"
+    }
+  ],
+  "overall": {
+    "baseline_total": "11.5/23",
+    "with_skill_total": "23/23",
+    "delta": "+11.5",
+    "uplift_pct": 50,
+    "notes": "Baseline gets the broad shape right (it's well-known PG API surface) but consistently misses the operational details that prevent bugs: the RelationGetIndexScan return-identity rule, ambuildempty/amvalidate as mandatory, amparallelvacuumoptions, the Assert-list as definitive contract, autovacuum-statistics leakage. The skill closes all gaps in iteration 1."
+  }
+}

@@ -29,8 +29,9 @@ headerscheck`) and as C++ (`make cpluspluscheck`).
 ### 3. C99 subset only — these are banned even though C99 has them
 - No `//` line comments (use `/* … */`)
 - No variable-length arrays
-- No declarations interleaved with statements (declare locals at the top
-  of the block before any statement)
+- No declarations interleaved with statements — declare locals at the
+  top of the block before any statement. This includes
+  `for (int i = 0; …)` — declare `i` at the top of the enclosing block.
 - No universal character names (`\uXXXX`)
 - Newer features (`_Static_assert`, GCC builtins) require a fallback.
 
@@ -47,7 +48,10 @@ ereport(ERROR,
 ```
 Use `elog(level, …)` **only** for internal / "cannot happen" / debug
 messages (no SQLSTATE, no translation). `ereport(ERROR, …)` does **not
-return** — never write code after it.
+return** — never write code after it. Memory and resource cleanup
+after `ereport(ERROR, …)` is also unnecessary — `AbortTransaction()`
+releases the per-query memory context, locks, buffers, and open file
+descriptors.
 
 ### 6. Assertions never have side effects
 `Assert(cond)` compiles away in non-cassert builds. Move any side effect

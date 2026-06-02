@@ -21,7 +21,8 @@ For an extension named `<ext>` at version `1.0`:
 <ext>--1.0.sql         # SQL objects installed by CREATE EXTENSION <ext>
 <ext>.c                # C code (if there is any)
 Makefile               # PGXS build
-meson.build            # in-tree meson build (only needed for contrib/)
+meson.build            # only for in-tree contrib/ builds; out-of-tree
+                       # extensions use PGXS (Makefile)
 ```
 
 Add upgrade scripts as the version moves: `<ext>--1.0--1.1.sql`,
@@ -76,6 +77,17 @@ LANGUAGE C STRICT PARALLEL SAFE;
 install time.
 
 ## 2. Two build paths
+
+Out-of-tree extensions overwhelmingly use PGXS. The in-tree meson path is
+reserved for `source/contrib/*` — third-party extensions targeting meson
+directly are rare and unsupported by the official extension docs.
+
+Since PG 18, the admin GUC `extension_control_path` (C symbol
+`Extension_control_path`) can override the default `<sharedir>/extension/`
+lookup directory — useful for installing extensions to non-standard
+locations without a custom build of PG. See
+`source/src/backend/commands/extension.c:77` and the
+`find_extension_control_filename` path [verified-by-code].
 
 ### PGXS (out-of-tree extensions)
 
@@ -175,6 +187,20 @@ don't rely on it.
 
 `auto_explain` is a textbook preload module — it installs executor hooks in
 `_PG_init` [verified-by-code, `auto_explain.c:312-321`].
+
+**Pure-hook extensions** (auto_explain, pg_stat_statements partial) ship a
+near-empty `<ext>--1.0.sql` containing only the `\echo … \quit` header.
+Everything they do is wired up by `_PG_init` once loaded via
+`shared_preload_libraries`. The control file + `.so` are still required.
+
+**Quick decision table — lazy vs preload:**
+
+| Extension does ... | Loading mode |
+|---|---|
+| Only `CREATE FUNCTION` C funcs | Lazy (no preload needed) |
+| Installs any executor/planner/utility/auth hook | `shared_preload_libraries` REQUIRED |
+| Calls `RequestAddinShmemSpace` / `RequestNamedLWLockTranche` | `shared_preload_libraries` REQUIRED |
+| Registers a background worker | `shared_preload_libraries` REQUIRED |
 
 ### `PG_FUNCTION_INFO_V1` for each SQL-callable function
 

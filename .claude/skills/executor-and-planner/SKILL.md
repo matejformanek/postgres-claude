@@ -25,7 +25,9 @@ fails at run time with `unrecognized node type`.
 ### A.1 The five-or-six functions to implement
 
 For a new node `Foo`, in `src/backend/executor/nodeFoo.c` plus header
-`src/include/executor/nodeFoo.h`:
+`src/include/executor/nodeFoo.h` (see `parser-and-nodes` skill for the
+NodeTag / copy / equal / out / read machinery you'll need before any of
+this compiles — also recapped in A.6):
 
 | Function | Purpose | Pattern |
 |----------|---------|---------|
@@ -54,13 +56,21 @@ the new type:
    `ExecEndFoo`.
 3. **`ExecReScan`** in `execAmi.c` — add `case T_FooState:` calling
    `ExecReScanFoo`.
+4. **`MultiExecProcNode`** (`execProcnode.c:488`) — **only if** the node
+   returns something other than tuples (Hash builds a hashtable, Bitmap
+   nodes build a TIDBitmap). Tuple-returning scans and joins do NOT need
+   a case here.
+
+> **Tag asymmetry — the #1 cause of "unrecognized node type" after adding
+> a new node**: `ExecInitNode` switches on the **Plan** tag (`T_Foo`)
+> because its input is a `Plan *`. `ExecEndNode` and `ExecReScan` switch
+> on the **PlanState** tag (`T_FooState`) because their input is a
+> `PlanState *`. `MultiExecProcNode` also switches on the PlanState tag.
+> Mixing them compiles cleanly and dies at run time.
 
 And include your new header in `execProcnode.c` (alphabetical block at
 `execProcnode.c:77-119`). Also add the .c file to `src/backend/executor/meson.build`
 and `Makefile`.
-
-If your node returns something other than tuples (a hashtable, a bitmap),
-also add a case to **`MultiExecProcNode`** (`execProcnode.c:488`).
 
 ### A.3 The Plan ↔ PlanState shape rule
 
@@ -267,6 +277,15 @@ shares the single `PlannerGlobal` (`glob`) so things like `paramExecTypes`,
   numbering to executor-global slot numbering (INNER_VAR / OUTER_VAR / scan
   attno). A new plan node that holds expressions must be added to
   `fix_*_references_walker` cases or your Vars will not resolve at run time.
+  Concretely: see `set_plan_refs` (`setrefs.c:642`, the big switch on
+  `nodeTag`) and the `fix_scan_expr` (`setrefs.c:160`) /
+  `fix_join_expr` (`setrefs.c:186`) / `fix_upper_expr` (`setrefs.c:196`)
+  walkers below it. New scan-like nodes plug into `fix_scan_expr`; new
+  join-like nodes plug into `fix_join_expr`; new nodes operating above
+  joins (Agg/Window/Sort-like) use `fix_upper_expr`. `set_plan_references`
+  itself (`setrefs.c:291`) is the entry point that also assembles
+  `finalrtable`, accumulates `relationOids`, and records `invalItems` for
+  plan-cache invalidation.
 
 - **Allocating with `malloc` in `ExecInit*`.** Use `palloc` so the per-query
   context reclaims it on `FreeExecutorState`. See `memory-contexts` skill.

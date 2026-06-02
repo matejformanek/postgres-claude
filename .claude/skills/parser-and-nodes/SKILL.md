@@ -7,6 +7,13 @@ description: Operational checklist for hacking the PostgreSQL parser (scan.l fle
 
 Companion docs: `knowledge/idioms/parser-pipeline.md`, `knowledge/idioms/node-types-and-lists.md`.
 
+## Tools for working with an existing tree
+
+- `copyObject(p)` — deep copy (preserves argument type via `typeof_unqual` macro, `nodes.h:228-233`). Dispatcher `copyObjectImpl` in `copyfuncs.c:177-212`, with `check_stack_depth()` guard (`:185`). By-ref Datums go through `_copyConst` → `datumCopy`; `T_List` is deep-copied via `list_copy_deep`, `T_IntList`/`T_OidList`/`T_XidList` shallow via `list_copy`. Extensible nodes dispatch to a registered `nodeCopy` callback (`_copyExtensibleNode`). Allocated in `CurrentMemoryContext` — caller controls the lifetime.
+- `equal(a, b)` — deep structural compare (`equalfuncs.c`).
+- `nodeToString(p)` / `stringToNode(s)` — Lisp-ish text serialization; load-bearing for plan cache, rule storage (`pg_rewrite.ev_action`), parallel-worker plan shipping. The round-trip `copyObject(stringToNode(nodeToString(p)))` underpins the `debug_write_read_parse_plan_trees` GUC.
+- `expression_tree_walker` / `_mutator` — polymorphic recursion over expression trees (post-analysis: `Var`, `OpExpr`, …). `raw_expression_tree_walker` for the pre-analysis shape (`A_Expr`, `ColumnRef`). `query_tree_walker` / `_mutator` wrap for Query, with `QTW_*` flags (`nodeFuncs.h:22-34`) to control rtable/CTE descent. `planstate_tree_walker` is the executor-time analogue. Mutator contract: return `NULL` to delete a subtree; walker contract: callback returns `true` to short-circuit, `false` to keep descending. The macro wrappers (`nodeFuncs.h:155-183`) let callbacks be typed without `-Wincompatible-pointer-types` warnings.
+
 ## When you're adding a new SQL statement
 
 Touch four layers, in order. Build between each so you fail fast.
@@ -24,7 +31,7 @@ Touch four layers, in order. Build between each so you fail fast.
    - Annotate fields if needed: `pg_node_attr(...)` on the struct, per-field attrs like `query_jumble_ignore`, `equal_ignore`. See `nodes.h:43-125` for the full list.
 
 4. **Analyze / execute**
-   - Optimizable statement → add a `transformFooStmt(ParseState *, FooStmt *)` in `parser/analyze.c` and wire it into the `switch (nodeTag(parseTree))` inside `transformStmt` (analyze.c:368).
+   - Optimizable statement → add a `transformFooStmt(ParseState *, FooStmt *)` in `parser/analyze.c` and wire it into the `switch (nodeTag(parseTree))` inside `transformStmt` (analyze.c:334-451, switch at :368). **Caution (analyze.c:363-367)**: any change to that switch must also be reflected in `stmt_requires_parse_analysis()` (`:469-505`) and `analyze_requires_snapshot()` (`:513-529`) — three sites, one logical change.
    - Utility statement → no transform needed; just dump into a Query with `CMD_UTILITY` (the default path). Execution lives in `src/backend/commands/` via `ProcessUtility` / `standard_ProcessUtility` (`src/backend/tcop/utility.c`).
 
 5. Run `gen_node_support.pl` (done automatically by the build) and verify the generated `copyfuncs.funcs.c`, `equalfuncs.funcs.c`, `outfuncs.funcs.c`, `readfuncs.funcs.c` chunks for your new struct look sane.
@@ -42,7 +49,12 @@ From `src/backend/nodes/README` "Steps to Add a Node":
    - `pg_node_attr(custom_copy_equal)` — write your own bodies in `copyfuncs.c` / `equalfuncs.c` and the generator will skip yours.
    - `pg_node_attr(no_copy_equal, no_read, no_query_jumble)` — opt out entirely (executor state nodes typically use `nodetag_only`).
    - Per-field: `array_size(otherfield)`, `copy_as(VALUE)`, `equal_ignore`, `read_write_ignore`, `query_jumble_ignore`, `query_jumble_location`.
-5. Add cases to `nodeFuncs.c` (`expression_tree_walker_impl`, `expression_tree_mutator_impl`, `raw_expression_tree_walker_impl`) if your node holds child expressions/plans that walkers must descend into. Grep for a sibling node type to find every place that needs touching.
+5. If your node is an **expression** (lives in primnodes.h or has child Expr fields), add cases to **every** giant switch in `nodeFuncs.c`:
+   - `exprType` (`:42+`), `exprTypmod` (`:304+`), `exprCollation` / `exprSetCollation` / `exprInputCollation` (`:826+`, `:1140+`, `:1092+`), `exprLocation` (`:1403+`) — type/typmod/collation/location introspection.
+   - `expression_tree_walker_impl` (`:2111+`), `expression_tree_mutator_impl` (`:3018+`) — recursion into children.
+   - `raw_expression_tree_walker_impl` (`:4115+`) — only if the node can appear in raw parsetrees.
+   - `set_opfuncid` family (`:1890+`) — only if your node holds an operator OID needing resolution.
+   Grep `T_<SiblingNode>` (e.g. `T_OpExpr`) to find every site; five-to-eight maintenance points per node, miss one and walkers silently misbehave.
 6. **Adding a node type renumbers existing tags.** Recompile the whole tree (`--enable-depend` helps). No initdb needed — node numbers never go to disk. BUT if the node can appear in a *stored* parse tree (rule actions, view definitions), bump `CATALOG_VERSION_NO` in `src/include/catalog/catversion.h`.
 7. Test with `debug_copy_parse_plan_trees=on`, `debug_write_read_parse_plan_trees=on`, `debug_raw_expression_coverage_test=on` (set via `PG_TEST_INITDB_EXTRA_OPTS`).
 

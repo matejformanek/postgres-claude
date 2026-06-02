@@ -1,0 +1,50 @@
+{
+  "iteration": 2,
+  "evals": [
+    {
+      "eval_id": 1,
+      "assertions": [
+        {"text": "Mentions calling pg_backend_pid() from inside the target psql session (not a transient one)", "with_skill": true, "baseline": true},
+        {"text": "Recommends lldb on macOS over gdb (and explains the codesigning reason or at least flags it)", "with_skill": true, "baseline": true},
+        {"text": "Gives the correct attach syntax: lldb -p <pid>", "with_skill": true, "baseline": true},
+        {"text": "Names a real executor entry point as the breakpoint (ExecutorRun / ExecutorStart / exec_simple_query)", "with_skill": true, "baseline": true},
+        {"text": "Warns that the postmaster is not the right process to attach to (per-connection fork model)", "with_skill": true, "baseline": true},
+        {"text": "Uses paths consistent with the project (dev/install-debug/bin or similar) OR references /pg-attach", "with_skill": true, "baseline": true},
+        {"text": "Mentions silencing SIGUSR1 in the debugger (latch wakeup noise)", "with_skill": true, "baseline": false},
+        {"text": "Shows pprint(Node*) for plan inspection via expr/call", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "assertions": [
+        {"text": "Mentions debug build with cassert enabled (so Asserts fire before the segfault)", "with_skill": true, "baseline": true},
+        {"text": "Mentions enabling core dumps on macOS (ulimit -c unlimited and /cores)", "with_skill": true, "baseline": true},
+        {"text": "Tells the user to open the core with lldb (lldb /path/to/postgres /cores/core.<pid>)", "with_skill": true, "baseline": true},
+        {"text": "Suggests attaching lldb to the backend BEFORE the crash via pg_backend_pid()+lldb -p, or setting a breakpoint on errfinish/PG-level traps", "with_skill": true, "baseline": true},
+        {"text": "Suggests elog/ereport instrumentation OR a pg_usleep waitpoint to catch fast paths", "with_skill": true, "baseline": true},
+        {"text": "Mentions that postgres binary on macOS must not be hardened/Apple-signed for cores to land (or otherwise notes the macOS suppress-cores caveat)", "with_skill": true, "baseline": false},
+        {"text": "Names errfinish specifically as the universal ereport breakpoint", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "assertions": [
+        {"text": "Recommends single-user mode: postgres --single -D $PGDATA <dbname>", "with_skill": true, "baseline": true},
+        {"text": "Explains that --single does not fork, so the whole lifetime is in one process the debugger can follow", "with_skill": true, "baseline": true},
+        {"text": "Gives the correct invocation pattern: lldb -- postgres --single ... OR gdb --args postgres --single ...", "with_skill": true, "baseline": true},
+        {"text": "Notes that single-user mode terminates commands on newline (not semicolon) OR mentions -j flag", "with_skill": true, "baseline": false},
+        {"text": "Alternatively or additionally mentions PGOPTIONS=\"-W N\" / pg_usleep waitpoint as a way to pause an early backend so you can attach", "with_skill": true, "baseline": true},
+        {"text": "Distinguishes when to use --single vs -W vs spin-loop waitpoint (decision criteria)", "with_skill": true, "baseline": true},
+        {"text": "Mentions that elog(LOG, ...) inside the waitpoint reveals the PID in the server log", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 22,
+    "with_skill_total": 22,
+    "with_skill_pass_rate": 1.0,
+    "baseline_passed": 16,
+    "baseline_total": 22,
+    "baseline_pass_rate": 0.727
+  }
+}

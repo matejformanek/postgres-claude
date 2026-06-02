@@ -23,6 +23,11 @@ for autoconf builds — `-Og` keeps reasonable perf while preserving frames.
 
 ## 2. The attach pattern (most common workflow)
 
+**Project shortcuts.** In this repo, `/pg-attach` automates the
+`pg_backend_pid()` grab and prints the exact `lldb -p <pid>` line ready to
+paste; `/pg-tail-log` follows `dev/data-debug/server.log` (where `pprint`
+and `elog` output land). Use them.
+
 The postmaster itself never executes your query. Attach to the **backend**
 that handles your session:
 
@@ -60,11 +65,29 @@ quirk — `[inferred]` for the entitlement specifics]
 | `call pprint(node)`          | `expr pprint(node)`           |
 | `handle SIGUSR1 noprint pass`| `pro hand -p true -s false SIGUSR1` |
 
-PostgreSQL uses `SIGUSR1` heavily for latch wakeups. Silence it before
-you do anything else, or every continue lands back in the signal handler.
+### First command after every attach
+
+PostgreSQL uses `SIGUSR1` heavily for latch wakeups. **Silence it before
+you do anything else**, or every `continue` lands back in the signal
+handler:
+
+```
+(lldb) pro hand -p true -s false SIGUSR1
+(gdb)  handle SIGUSR1 noprint pass
+```
+
 [from-wiki: Developer_FAQ]
 
 ## 3. Stepping the startup path — single-user mode
+
+**Decision rule — which tool for which startup phase:**
+
+| Symptom                                                                | Tool                                  |
+| ---------------------------------------------------------------------- | ------------------------------------- |
+| Code runs *before* shared memory is attached / inside `InitPostgres`   | `postgres --single` (this section)    |
+| Code runs in the forked-backend startup path (post-shmem, pre-query)   | `PGOPTIONS="-W N" psql ...` (§4)      |
+| Code runs in a worker (autovacuum / parallel / bgworker)               | spin-loop waitpoint (§4)              |
+| Code runs during a query you can drive from psql                       | normal `lldb -p` attach (§2)          |
 
 Attaching to a forked backend can't help with code that runs *before* the
 backend is ready to accept queries (auth, shmem init, startup hooks).
@@ -128,6 +151,22 @@ Where to break depends on what you're chasing:
 The rest: verified-by-code, names exist as symbols in
 `source/src/backend/{tcop,executor,storage/buffer,storage/lmgr,access/transam,access/heap}/`.]
 
+### 5.1 Trapping every error (the universal ereport breakpoint)
+
+For SIGSEGV chases or "I don't know which `ereport()` is firing", break on
+`errfinish` — it's the single funnel every `ereport`/`elog` call goes
+through. Filter on `elevel >= ERROR` (= 21) so you don't stop on every
+LOG/NOTICE:
+
+```
+(lldb) b errfinish
+(lldb) br mod -c 'edata->elevel >= 21'   # ERROR = 21
+(gdb)  b errfinish
+(gdb)  cond <n> edata->elevel >= 21
+```
+
+[`ERROR = 21` verified-by-code: `source/src/include/utils/elog.h:53`.]
+
 ## 6. Pretty-printing PG internals
 
 Postgres ships `pprint()` for `Node *` trees (parse trees, plans).
@@ -175,37 +214,42 @@ goes straight to the controlling terminal. Don't ship that.
 
 ## 8. Core dumps on macOS
 
-Three things must all be true before you get a usable core:
+### Prerequisites
 
 ```bash
 # 1. The shell that launches postgres must allow cores.
 ulimit -c unlimited
+# expected (after setting): "unlimited"
 
-# 2. macOS writes cores to /cores by default. Make sure it exists
-#    and is writable by your user.
+# 2. /cores must exist and be writable.
 ls -ld /cores
-sudo chmod 1777 /cores    # if needed
+# expected: drwxrwxrwt  root  wheel   (sticky, world-writable)
+sudo chmod 1777 /cores    # only if the perms above don't match
 
-# 3. The kern.coredump sysctl must be 1 (default on most macOS, but check).
+# 3. Verify kernel allows cores.
 sysctl kern.coredump
 # expected: kern.coredump: 1
 ```
 
-Then crash the backend and:
+Then crash the backend and open the core:
 
 ```bash
 lldb /path/to/postgres /cores/core.<pid>
 ```
 
-[`ulimit -c unlimited` and `/cores` location: `[verified-by-code]`
-behavior of macOS — these are standard Darwin defaults documented in
-`man 5 core` on macOS. `kern.coredump` sysctl: `[inferred]` from
-historical macOS behavior; if `sysctl` reports it missing, cores are
-controlled solely by `ulimit` on recent macOS. Verify on your box.]
+### Caveats (macOS-specific)
 
-Cores from Apple-signed binaries are suppressed regardless of ulimit;
-this is not a concern for a locally-built `postgres`, which is unsigned.
-[inferred]
+- **Apple-signed / hardened binaries suppress cores** regardless of
+  `ulimit`. Our locally-built `postgres` is unsigned, so this isn't a
+  concern here — but if you ever try to core-dump `/usr/bin/postgres` or a
+  Homebrew bottle, this is why nothing lands in `/cores`.
+- **No `kern.coredump` sysctl on your machine?** If `sysctl kern.coredump`
+  returns `unknown oid`, your macOS version controls cores via `ulimit`
+  alone — steps 1 and 2 are sufficient.
+
+[`ulimit -c unlimited` and `/cores` location: standard Darwin defaults
+documented in `man 5 core` on macOS. `kern.coredump` sysctl and
+hardened-binary suppression: `[inferred]` from well-known Darwin behavior.]
 
 ## 9. SQL-level inspection extensions
 

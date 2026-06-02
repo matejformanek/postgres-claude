@@ -230,9 +230,13 @@ my_mat_srf(PG_FUNCTION_ARGS)
 [verified-by-code] `src/backend/utils/fmgr/funcapi.c:100-122`. This is
 the single most common SRF pitfall.
 
-Flag `MAT_SRF_USE_EXPECTED_DESC` reuses the caller's `expectedDesc`;
-`MAT_SRF_BLESS` calls `BlessTupleDesc` to assign a typmod for RECORD
-[verified-by-code] `src/include/funcapi.h:296-298`.
+Flags to `InitMaterializedSRF(fcinfo, flags)`
+[verified-by-code] `src/include/funcapi.h:296-298`:
+
+| Flag | When to set |
+|---|---|
+| `MAT_SRF_USE_EXPECTED_DESC` | You want the tupdesc the caller already expects (e.g. `SELECT * FROM srf() AS (...)`). |
+| `MAT_SRF_BLESS` | Return type is RECORD and needs a typmod assigned (calls `BlessTupleDesc`). |
 
 ### 1.11 Calling another fmgr function from C
 
@@ -296,6 +300,10 @@ if (fcinfo->flinfo->fn_extra == NULL)
 }
 MyCache *c = fcinfo->flinfo->fn_extra;
 ```
+
+Do not use `fn_extra` in a value-per-call SRF — it is owned by
+`SRF_FIRSTCALL_INIT` (see §1.9), which uses `fn_extra == NULL` as the
+first-call test.
 
 ### 1.13 Three things easy to get wrong about fmgr
 
@@ -395,6 +403,34 @@ SPI_freeplan(plan);   /* only call after the last execute */
 `CacheMemoryContext` and pins underlying `CachedPlanSource`s
 [verified-by-code] `src/backend/executor/spi.c:977-1001`.
 
+**Cached on `fn_extra` — the full pattern.** The cache struct itself must
+live in `flinfo->fn_mcxt` (see §1.12), and the plan it holds must be
+kept with `SPI_keepplan` before `SPI_finish`. Both rules together:
+
+```c
+typedef struct { SPIPlanPtr plan; } MyCache;
+
+MyCache *c = fcinfo->flinfo->fn_extra;
+if (c == NULL)
+{
+    MemoryContext old = MemoryContextSwitchTo(fcinfo->flinfo->fn_mcxt);
+    c = palloc0(sizeof(*c));
+    fcinfo->flinfo->fn_extra = c;
+    MemoryContextSwitchTo(old);
+
+    SPI_connect();
+    c->plan = SPI_prepare("SELECT ... WHERE id = $1", 1,
+                          (Oid[]){ INT4OID });
+    if (c->plan == NULL)
+        elog(ERROR, "SPI_prepare: %s",
+             SPI_result_code_string(SPI_result));
+    SPI_keepplan(c->plan);        /* survive SPI_finish */
+    SPI_finish();
+}
+```
+
+Missing either half is a use-after-free on the second call.
+
 ### 2.4 Cursor pattern
 
 Use this for large result sets to avoid materializing in memory:
@@ -418,10 +454,11 @@ SPI_freeplan(plan);
 ### 2.5 Returning values across SPI_finish
 
 `SPI_finish` deletes the SPI Proc context — anything palloc'd inside
-the SPI session vanishes. To return data to the caller, allocate it in
-the caller's context with `SPI_palloc` / `SPI_copytuple` /
-`SPI_returntuple` — these switch to `_SPI_current->savedcxt` (the
-caller's context at SPI_connect time)
+the SPI session vanishes. (The same memory-context machinery is what
+`AtEOSubXact_SPI` runs at subxact end — see §2.7.) To return data to
+the caller, allocate it in the caller's context with `SPI_palloc` /
+`SPI_copytuple` / `SPI_returntuple` — these switch to
+`_SPI_current->savedcxt` (the caller's context at SPI_connect time)
 [verified-by-code] `src/backend/executor/spi.c:1048-1104, 1339-1378`.
 
 ```c
@@ -481,6 +518,17 @@ unwound to the SPI_connect() level that owns it. SPI work *inside* an
 aborted (sub)transaction is not supported — the executor state is
 gone. [inferred] from the AtEOSubXact_SPI cleanup; see also the
 `internal_xact` flag at lines 263-317.
+
+**Capturing diagnostics from a failed SPI call.** `SPI_tuptable` and
+any tuples from the failed call have been freed by `AtEOSubXact_SPI` —
+touching them after `RollbackAndReleaseCurrentSubTransaction` is
+use-after-free. The supported channel is the `ErrorData`: call
+`CopyErrorData()` (allocated in the saved `oldctx`) BEFORE
+`FlushErrorState()`, then read `edata->message`, `edata->sqlerrcode`,
+etc. after rollback. If you need *partial result rows* from before the
+failure, you must `SPI_palloc` / `SPI_copytuple` them out into `oldctx`
+BEFORE `ReleaseCurrentSubTransaction` — once the subxact is gone they
+cannot be recovered.
 
 ### 2.8 Three things easy to get wrong about SPI
 

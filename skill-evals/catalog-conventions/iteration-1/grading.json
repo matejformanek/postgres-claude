@@ -1,0 +1,77 @@
+{
+  "skill": "catalog-conventions",
+  "iteration": 1,
+  "grading_notes": "Each assertion is binary (1 = present and correct, 0 = absent or wrong). Grader is honest — credits baseline when it covers a point even without the skill, deducts when with_skill missed something.",
+  "evals": [
+    {
+      "id": "eval-1",
+      "prompt_topic": "Add a builtin function — full workflow",
+      "assertions": [
+        "Specifies that prosrc must match the C symbol name",
+        "Mentions PG_FUNCTION_INFO_V1 + Datum signature for the C impl",
+        "Tells user to use unused_oids and to pick a random OID in the 8000-9999 range (the actual project policy)",
+        "Tells user to add a pg_proc.dat entry with at least oid/descr/proname/prorettype/proargtypes/prosrc",
+        "Tells user NOT to write pronargs because Catalog.pm computes it (and/or NOT to write columns matching BKI_DEFAULT)",
+        "Mentions placing the new entry near related ones, not at random/end of file",
+        "Tells user to bump CATALOG_VERSION_NO with the YYYYMMDDN format explanation",
+        "Tells user to run ./duplicate_oids as a verification step",
+        "Tells user a full rebuild is needed (genbki.pl regenerates headers) and a re-initdb is required after catversion bump",
+        "Mentions adding a regression test and/or watching opr_sanity/type_sanity",
+        "Mentions updating doc/src/sgml/func.sgml for user-facing docs"
+      ],
+      "with_skill_grades": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "baseline_grades":  [1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1],
+      "with_skill_score": "11/11",
+      "baseline_score":   "8/11",
+      "notes": "Baseline misses: the specific 8000-9999 policy range, the 'don't write pronargs / BKI_DEFAULT-omit' rule, and 'group near related entries'. Both cover the rest. Skill answer is more confident and more accurate."
+    },
+    {
+      "id": "eval-2",
+      "prompt_topic": "Add a column to pg_class",
+      "assertions": [
+        "Identifies that pg_class.h is where the struct is edited",
+        "Recommends BKI_DEFAULT(f) so existing rows / bootstrap inserts don't all need updating",
+        "Correctly addresses 'do I need to touch every existing row' (answer: no, BKI_DEFAULT handles it; and pg_class specifically has no .dat)",
+        "Calls out that varlena/nullable columns must live in #ifdef CATALOG_VARLEN (even if bool doesn't trigger it, the rule should be mentioned)",
+        "Honestly addresses the 'so existing code reading Form_pg_class still works without recompiling' question — i.e. you CANNOT avoid recompiling extensions; struct layout changes",
+        "Recommends appending at the end of the fixed-length section to minimize offset churn for other code",
+        "Tells user to bump CATALOG_VERSION_NO",
+        "Tells user a full rebuild + re-initdb is needed",
+        "Mentions that expected regression .out files may need updates (column count change)",
+        "Mentions updating doc/src/sgml/catalogs.sgml"
+      ],
+      "with_skill_grades": [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "baseline_grades":  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      "with_skill_score": "10/10",
+      "baseline_score":   "10/10",
+      "notes": "This one is a draw — the question is squarely in the wheelhouse of any reasonably-informed PG developer. Both answers are solid. The SKILL.md doesn't actually have much beyond what general knowledge provides for ALTER-column-on-existing-catalog. Possible iteration target: SKILL.md could explicitly mention 'append at end of struct' best practice."
+    },
+    {
+      "id": "eval-3",
+      "prompt_topic": "SearchSysCache1 lifecycle and miss behavior",
+      "assertions": [
+        "States that ReleaseSysCache must pair every successful SearchSysCache* call",
+        "Explains that missing the release produces 'cache reference leak' warnings",
+        "Warns that pointers into the tuple are invalid after release (no dereferencing post-release)",
+        "Mentions SearchSysCacheCopy1 as an alternative that gives a palloc'd copy with different lifetime semantics (heap_freetuple)",
+        "States that a miss returns NULL / HeapTupleIsValid is false, and is NOT an error from syscache itself — caller decides",
+        "Mentions the elog(ERROR, 'cache lookup failed for function %u', ...) idiom for 'should never happen' misses vs ereport(ERRCODE_UNDEFINED_FUNCTION) for user-triggerable",
+        "Mentions SearchSysCacheExists1 as the right tool for pure existence checks",
+        "Notes that cross-backend coherence is handled automatically via shared invalidation"
+      ],
+      "with_skill_grades": [1, 1, 1, 1, 1, 1, 1, 1],
+      "baseline_grades":  [1, 1, 1, 1, 1, 1, 1, 1],
+      "with_skill_score": "8/8",
+      "baseline_score":   "8/8",
+      "notes": "Another draw. The skill content on syscache is in the IDIOMS doc (catalog-conventions.md §4), and SKILL.md itself only has one line. A well-prepared PG developer answers this correctly without the skill. The skill adds very little for this question."
+    }
+  ],
+  "summary": {
+    "with_skill_total": "29/29",
+    "baseline_total":   "26/29",
+    "delta_pts": 3,
+    "delta_pct": "10.3%",
+    "wins_for_skill": "eval-1 (workflow specificity: 8000-9999 policy, don't-write-pronargs/BKI_DEFAULT-omit, group-near-related)",
+    "ties": "eval-2, eval-3 — questions answerable from general PG knowledge"
+  }
+}
