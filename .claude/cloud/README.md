@@ -1,53 +1,54 @@
 # .claude/cloud — daily cloud-task recipes
 
-Each `pg-*.md` file in this directory is the **single source of truth** for one
-scheduled claude.ai cloud task. The cloud-task prompt is a thin loader: it
-checks out `postgres-claude`, reads the recipe, and follows it exactly.
+Each `pg-*.md` file in this directory is the **single source of truth** for what
+one scheduled claude.ai cloud task *does*. `_loader.md` is the single source of
+truth for *how every routine runs* (the shared envelope: pull, skip-gate, run
+log, PR, exit discipline).
 
 See `pg-claude-plan.md` at the workspace root for the master design.
 
-## How a routine runs (cloud-side loader prompt)
+## How a routine runs
+
+The claude.ai `RemoteTrigger` for each routine bakes in only a **two-line
+bootstrap**:
 
 ```
-You are running as the `<routine>` daily cloud routine.
-Working dir: the postgres-claude repo, checked out at main.
-Today's date: <auto-injected by claude.ai>.
-
-1. `git pull --ff-only origin main`.
-2. If `.cloud-skip-<routine>` exists at repo root, log "skipped" and exit 0.
-3. Read `.claude/cloud/<routine>.md` end-to-end. Follow its recipe exactly.
-4. When done, ensure `progress/cloud-routines/<routine>/<YYYY-MM-DD>.md`
-   exists and is committed on the branch.
-5. Open a PR with title `[cloud:<routine>] <summary>` and body containing:
-   the recipe path, sources fetched (URLs + ISO timestamps), and a
-   self-review against `.claude/skills/review-checklist/SKILL.md`.
-
-If anything blocks, write a clear failure log and exit non-zero (no PR).
+You are the `<routine>` daily cloud routine for postgres-claude.
+1. git pull --ff-only origin main
+2. Read .claude/cloud/_loader.md and follow it exactly, with routine = <routine>.
 ```
 
-## Conventions (apply to every recipe)
+Everything else — the full 8-step workflow, the run-log template, the PR shape,
+the failure discipline — lives in **[`_loader.md`](./_loader.md)**, versioned on
+`main`. This keeps the workflow fixable over time without re-issuing the 10
+triggers: edit `_loader.md`, commit, and the next night's run picks it up.
 
-1. **Branch per run:** `cloud/<routine>/<YYYY-MM-DD>`.
-2. **PR title:** `[cloud:<routine>] <one-line summary>`.
-3. **PR body** lists: recipe path, sources fetched (URLs + ISO timestamps),
-   self-review against `.claude/skills/review-checklist/SKILL.md`, items
-   popped from the queue.
-4. **Work queues** at `progress/_queues/<routine>.md` are append-only with
+The routine's own `pg-*.md` recipe governs its domain work (sources, outputs,
+budget); `_loader.md` governs the envelope. If the two ever disagree, the recipe
+wins for the domain work, the loader wins for the envelope.
+
+## Conventions
+
+The **envelope** conventions — branch-per-run, PR title/body shape, skip
+lockfile, daily run-log template, failure discipline — are defined once in
+**[`_loader.md`](./_loader.md)**. Don't restate them in recipes; rely on the
+loader.
+
+The **recipe-facing** conventions every `pg-*.md` should honor:
+
+1. **Work queues** at `progress/_queues/<routine>.md` are append-only with
    `[pending]` / `[in-progress:<branch>]` / `[done:<merged-sha>]` markers.
-5. **Skip lockfile** `.cloud-skip-<routine>` at repo root → log + exit 0.
-6. **Daily run log** at `progress/cloud-routines/<routine>/<YYYY-MM-DD>.md`
-   with fields: `tried`, `found`, `skipped`, `sources`, `cost`,
-   `exit_reason`. Committed in the same PR.
-7. **Source fetch via URL** (no clone). Anchor SHA lives in
+2. **Source fetch via URL** (no clone). Anchor SHA lives in
    `progress/STATE.md` — routines read it before fetching:
    - File at SHA: `https://raw.githubusercontent.com/postgres/postgres/<sha>/<path>`
    - Recent commits: `https://api.github.com/repos/postgres/postgres/commits?since=<iso>&sha=master&per_page=100`
    - Commit diff: `https://github.com/postgres/postgres/commit/<sha>.diff`
    - Tree listing: `https://api.github.com/repos/postgres/postgres/git/trees/<sha>?recursive=1`
    - Buildfarm RSS: `https://buildfarm.postgresql.org/cgi-bin/show_failures.pl`
-8. **Always load** `.claude/skills/pg-claude/SKILL.md` (master navigator) and
-   `.claude/skills/memory-keeping/SKILL.md` (ledger discipline).
-9. **Token budget** declared in recipe frontmatter; workers self-cap.
+3. **Always load** `.claude/skills/pg-claude/SKILL.md` (master navigator) and
+   `.claude/skills/memory-keeping/SKILL.md` (ledger discipline) — plus whatever
+   the recipe's `skills_required` frontmatter names.
+4. **Token budget** declared in recipe frontmatter; workers self-cap.
 
 ## Schedule (Europe/Prague)
 
@@ -64,19 +65,7 @@ If anything blocks, write a clear failure log and exit non-zero (no PR).
 | 02:11 | pg-evening-merger | no | 150k / 30k |
 | 05:43 | pg-state-keeper | no | 60k / 20k |
 
-## Daily-run-log template (committed by every routine)
+## Daily-run-log template
 
-```markdown
-# <routine> — <YYYY-MM-DD>
-
-- tried: <what the routine attempted>
-- found: <file paths + line counts>
-- skipped: <queue items bypassed and why>
-- sources:
-  - <url> @ <iso-timestamp> → <http-status>
-- cost:
-  - input_tokens: <n>
-  - output_tokens: <n>
-  - total_tokens: <n>
-- exit_reason: <ok | rate-limited | queue-empty | error: ...>
-```
+Defined once in **[`_loader.md`](./_loader.md)** §6 (committed by every routine,
+on every run, including skips and failures). Not restated here to avoid drift.
