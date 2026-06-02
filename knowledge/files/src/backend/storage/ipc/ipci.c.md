@@ -107,5 +107,6 @@ LogicalDecodingCtl, DataChecksums, Aio. `[verified-by-code]`.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/process-model.md](../../../../../architecture/process-model.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

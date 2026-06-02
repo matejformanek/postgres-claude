@@ -81,4 +81,5 @@ smallest LSN in each substream. [from-comment] (`reorderbuffer.c:13-31`)
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

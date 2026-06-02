@@ -187,3 +187,8 @@ Caller must ensure `ptr != NULL` — documented but not asserted
 - `[verified-by-code]` × 6
 - `[from-comment]` × 11
 - `[unverified]` × 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/memory-contexts.md](../../../../idioms/memory-contexts.md)
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

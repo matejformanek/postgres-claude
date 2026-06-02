@@ -175,3 +175,8 @@ and child callbacks run before parent callbacks (`mcxt.c:636-651, 533`
 
 - `[verified-by-code]` × 6
 - `[from-comment]` × 9
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/memory-contexts.md](../../../../idioms/memory-contexts.md)
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

@@ -107,3 +107,7 @@ uint32 xlp_xlog_blcksz; }`. First page of every segment has this.
 - `[verified-by-code]`: 16
 - `[from-comment]`: 3
 - `[unverified]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/wal.md](../../../../architecture/wal.md)

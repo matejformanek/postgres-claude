@@ -246,5 +246,6 @@ headers.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/memory-contexts.md](../../../../../idioms/memory-contexts.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

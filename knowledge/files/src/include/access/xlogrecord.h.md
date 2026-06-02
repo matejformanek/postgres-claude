@@ -124,3 +124,7 @@ None.
 
 - `[verified-by-code]`: 13
 - `[from-comment]`: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/wal.md](../../../../architecture/wal.md)

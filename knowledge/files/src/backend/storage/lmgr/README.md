@@ -44,5 +44,6 @@ These are the lines other code points back to. Cite the README at these line num
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/locking-overview.md](../../../../../idioms/locking-overview.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

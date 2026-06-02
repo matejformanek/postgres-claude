@@ -139,4 +139,6 @@ recovery via the sigsetjmp landing.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

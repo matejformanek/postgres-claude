@@ -61,4 +61,5 @@ START_REPLICATION). Both must be true to actually do 2PC decoding.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

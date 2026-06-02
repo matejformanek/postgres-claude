@@ -27,3 +27,4 @@ A `DECLARE … CURSOR WITH HOLD` portal must outlive the declaring transaction. 
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

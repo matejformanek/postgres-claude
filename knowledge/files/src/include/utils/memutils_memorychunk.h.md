@@ -203,3 +203,7 @@ accessors are the only public way in.
 
 - `[verified-by-code]` × 6
 - `[from-comment]` × 9
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

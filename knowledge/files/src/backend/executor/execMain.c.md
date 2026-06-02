@@ -152,5 +152,6 @@ file is the runtime mechanism.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

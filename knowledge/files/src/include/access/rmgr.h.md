@@ -70,3 +70,7 @@ Resource managers definition
 
 - `[verified-by-code]`: 12
 - `[from-comment]`: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/wal.md](../../../../architecture/wal.md)

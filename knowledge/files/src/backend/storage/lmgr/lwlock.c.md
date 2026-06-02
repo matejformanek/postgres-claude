@@ -138,3 +138,4 @@ Initialises a fresh `LWLock`: `state = LW_FLAG_RELEASE_OK` (no — actually just
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

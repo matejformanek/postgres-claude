@@ -52,4 +52,5 @@ bookkeeping without invoking the output plugin — used by slot advance.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

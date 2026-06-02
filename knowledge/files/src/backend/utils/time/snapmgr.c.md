@@ -99,5 +99,6 @@ Five overlapping sets of snapshots a backend may hold; each has a different free
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/mvcc.md](../../../../../architecture/mvcc.md)
 - [data-structures/snapshot-lifecycle.md](../../../../../data-structures/snapshot-lifecycle.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -157,5 +157,6 @@ Used by CREATE INDEX CONCURRENTLY and similar to enumerate `VirtualTransactionId
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [data-structures/pgproc-fields.md](../../../../../data-structures/pgproc-fields.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

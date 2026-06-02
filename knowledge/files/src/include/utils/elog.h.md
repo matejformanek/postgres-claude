@@ -114,3 +114,7 @@ Defined later in the header (around line 380+). Built on `sigsetjmp` writing to 
 ## Confidence tag tally
 
 `[verified-by-code]=8 [from-comment]=6 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/error-handling.md](../../../../idioms/error-handling.md)

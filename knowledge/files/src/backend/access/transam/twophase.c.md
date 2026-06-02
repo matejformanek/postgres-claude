@@ -176,4 +176,5 @@ state, restores the dummy PGPROC so post-recovery
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
