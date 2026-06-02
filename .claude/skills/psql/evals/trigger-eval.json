@@ -1,0 +1,22 @@
+[
+  {"query": "the cluster is up — i want to see which backends are currently sleeping in pg_sleep, and on which application_names. dev DB at /tmp", "should_trigger": true},
+  {"query": "i made a change to BufferAlloc in src/backend/storage/buffer/bufmgr.c and rebuilt with /setup-pg. how do i see how many shared buffer hits a SELECT count(*) FROM pg_class actually does after each restart of the local cluster", "should_trigger": true},
+  {"query": "open me a psql to the dev DB, i need to poke at pg_class for that relhassubclass thing", "should_trigger": true},
+  {"query": "i want to repro the deadlock detection logic — open two transactions against the local dev cluster (the one i built with /setup-pg) and have them grab locks in opposite order so the detector fires", "should_trigger": true},
+  {"query": "create a temp table on the local cluster, copy /tmp/data.csv into it with \\copy, time it with \\timing on. trust auth, /tmp socket", "should_trigger": true},
+  {"query": "do i need a password for the local dev cluster i just built from source via meson, or trust auth on the unix socket", "should_trigger": true},
+  {"query": "i'm seeing RSS climb in a backend after running the same prepared statement 100k times against my dev DB. how do i watch pg_backend_memory_contexts grow per iteration in psql to find the leaking context", "should_trigger": true},
+  {"query": "show me the actual SQLSTATE code, file:line of the ereport, and the DETAIL/HINT when DROP TABLE on pg_class fails — \\errverbose i think? on the local cluster", "should_trigger": true},
+  {"query": "force a seq scan on the dev DB and EXPLAIN ANALYZE BUFFERS to see what costsize.c picks vs what i want", "should_trigger": true},
+  {"query": "postmaster's running on /tmp, just gimme the right connect line for the local cluster i built — it's postgres user or my unix login?", "should_trigger": true},
+  {"query": "i pushed a fix for our user_signups table on staging — write me a Django migration that adds a CHECK constraint matching what models.py declares", "should_trigger": false},
+  {"query": "production postgres at db.acme.com is throwing 'invalid byte sequence for encoding utf8' on a customer's row after a pg_dump|pg_restore. what are the standard recovery steps and which GUCs do i tune", "should_trigger": false},
+  {"query": "explain how pg_class is structured and why relfilenode != oid for some relations after VACUUM FULL", "should_trigger": false},
+  {"query": "the planner picks a hashjoin over my expected mergejoin on a 2-table query — walk me through cost_hashjoin in src/backend/optimizer/path/costsize.c and why it loses to the merge cost", "should_trigger": false},
+  {"query": "how does WAL insertion serialize multiple backends' XLogInsert calls into one record stream — the WALInsertLock partitioning thing", "should_trigger": false},
+  {"query": "give me a quick SQLAlchemy snippet to query users where created_at > last week, ordered by signups_count desc, limit 50", "should_trigger": false},
+  {"query": "set up postgres from source on my mac for the first time — i have homebrew, no clones yet, want to be able to start a debug build", "should_trigger": false},
+  {"query": "set a breakpoint on heap_update in lldb and step through what happens when i UPDATE a row — i want to see the tuple-locking branch", "should_trigger": false},
+  {"query": "what are the lock modes between ACCESS EXCLUSIVE and ROW EXCLUSIVE — i need the conflict matrix and which one DROP TABLE actually takes", "should_trigger": false},
+  {"query": "i need a one-shot read-only query from inside an agent loop: pull row counts per schema from the local dev DB and feed them back to my planning step", "should_trigger": false}
+]
