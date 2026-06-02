@@ -159,5 +159,3 @@ sub-pages and only summarized here.
   `ef6a95c7c64`; STATE.md records the delta to the current anchor
   `4b0bf0788b` as build-system-only with no corpus impact, so they are treated
   as still valid. [inferred]
-</content>
-</invoke>

@@ -169,10 +169,23 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   Note: page is from 2015 — the distilled doc supplements the missing
   `SetHintBits`/`MarkBufferDirtyHint`/WAL-flush machinery from the corpus.
 
+- **Hot_Standby** — https://wiki.postgresql.org/wiki/Hot_Standby
+  *(distilled 2026-06-02 → `knowledge/wiki-distilled/Hot_Standby.md`)*
+  Outline of read-only queries on a replaying standby. Page is from 2016
+  and **stale on parameter names** (`wal_level=hot_standby`, `standby_mode`,
+  `txid_current_snapshot`); silent on recovery conflicts, the
+  `max_standby_*_delay`/`hot_standby_feedback` GUCs, and
+  KnownAssignedXids. The distilled doc supplements all of these from the
+  official `hot-standby.html` (§27.4)
+  [from-wiki](https://wiki.postgresql.org/wiki/Hot_Standby).
+
 - **MVCC** — https://wiki.postgresql.org/wiki/MVCC
   **Stale stub** (last meaningful update May 2012). Just a pointer to
   the official docs and Bruce Momjian talks. Don't use as a learning
   resource [from-wiki](https://wiki.postgresql.org/wiki/MVCC).
+  *(The official Chapter 13 concurrency-control docs were distilled
+  2026-06-02 → `knowledge/docs-distilled/mvcc.md` — use that, not this
+  wiki stub.)*
 
 - **Backend_flowchart** — referenced everywhere but the wiki page URL
   returns 404 in our crawl. The actual flowchart asset lives in the

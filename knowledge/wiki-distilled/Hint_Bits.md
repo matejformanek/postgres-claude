@@ -111,5 +111,3 @@ dated (2015). Every supplement that names a symbol or invariant is
 treated current per STATE.md anchor delta). The checksum/`wal_log_hints`
 amplification is `[inferred]` and should be confirmed against `bufmgr.c`
 `MarkBufferDirtyHint` + `XLogSaveBufferForHint` in a future file-backfill run.
-</content>
-</invoke>
