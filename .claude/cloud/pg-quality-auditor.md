@@ -2,34 +2,40 @@
 name: pg-quality-auditor
 schedule: "31 23 * * * Europe/Prague"
 fetches_source_via_url: true
-queue: [progress/_queues/audits.md, progress/_queues/skills.md]
-output_dirs: [knowledge, skill-evals]
+queue: [progress/_queues/audits.md, progress/_queues/skills.md, progress/_queues/issues.md]
+output_dirs: [knowledge, knowledge/issues, skill-evals]
 skills_required: [pg-claude, memory-keeping]
-max_input_tokens: 70000
+max_input_tokens: 80000
 max_output_tokens: 20000
 ---
 
 # pg-quality-auditor
 
-Round-robin between auditing a long-form doc claim and re-running a skill
-eval. Merges stale-claim-auditor + skill-regression-runner — both verify
-"yesterday's claim still holds today" with the same shape.
+Three-mode rotation: audit a long-form doc claim, re-run a skill eval,
+or triage open issues in the issue register. All three verify
+"yesterday's claim still holds today" with the same shape. Merges
+stale-claim-auditor + skill-regression-runner + issue-triage.
 
 ## Inputs
 
 - `progress/_queues/audits.md` — list of `knowledge/architecture/*.md`,
   `knowledge/subsystems/*.md`, `knowledge/data-structures/*.md`,
   `knowledge/idioms/*.md` paths.
-- `progress/_queues/skills.md` — the 21 skill slugs from `.claude/skills/`.
+- `progress/_queues/skills.md` — skill slugs from `.claude/skills/`
+  (currently 26).
+- `progress/_queues/issues.md` — auto-seeded from
+  `knowledge/issues/<subsystem>.md` registers: any `open` row whose
+  date is older than 30 days. Refilled when empty.
 - Anchor SHA from `progress/STATE.md`.
 
 ## Per-run recipe
 
 1. Load `pg-claude`, `memory-keeping`.
 2. Branch: `cloud/pg-quality-auditor/<YYYY-MM-DD>`.
-3. Pick mode by parity of day-of-year:
-   - **Even → AUDIT mode** (long-form doc).
-   - **Odd → SKILL mode** (skill regression).
+3. Pick mode by `day-of-year mod 3`:
+   - **0 → AUDIT mode** (long-form doc).
+   - **1 → SKILL mode** (skill regression).
+   - **2 → ISSUE mode** (issue-register triage).
 
 ### AUDIT mode
 
@@ -57,12 +63,49 @@ eval. Merges stale-claim-auditor + skill-regression-runner — both verify
    regression`.
 6. Otherwise → run log only, no PR.
 
+### ISSUE mode
+
+1. Pop head `[pending]` from `issues.md` (an open issue row older than
+   30 days).
+2. Re-fetch the source file at the cited `<path>:<line>` via
+   `raw.githubusercontent.com/postgres/postgres/<anchor-sha>/<path>`.
+3. Determine the issue's current state:
+   - **Still present** → bump the register row's `triaged: <date>`
+     annotation; status stays `open`. No PR unless severity should
+     change.
+   - **Fixed upstream** (the line / pattern no longer matches) → update
+     register row status to `landed` with a `git log -S` lookup for the
+     resolving commit SHA. Open PR `[cloud:pg-quality-auditor:issue]
+     <subsystem>: <N> resolved`.
+   - **Reproducer drifted** (line numbers off but pattern still there
+     elsewhere in the file) → patch the register row's file:line and
+     the inline tag in the per-file doc; status stays `open`. Open PR.
+4. If the issue's per-file doc tag is missing (someone removed it but
+   the register row remains) → re-add the inline tag and note in the
+   run log.
+
 ## Failure modes
 
-- No drift / no regression → no PR, log notes "clean".
+- No drift / no regression / no register movement → no PR, log notes
+  "clean".
 - Queue empty → refill from source-of-truth list, retry once; if still
   empty exit `queue-empty`.
+- `knowledge/issues/` directory empty (no registers yet, Phase A still
+  early) → ISSUE mode short-circuits to AUDIT mode for that run.
+
+## Failure-to-run defenses (added 2026-06-02)
+
+The routine went SILENT on 2026-06-02 (no log written at all). Defenses:
+
+- Write `progress/cloud-routines/pg-quality-auditor/<YYYY-MM-DD>.md`
+  with `exit_reason: starting` **before** entering mode dispatch — so a
+  silent crash still leaves evidence.
+- If any queue refill fails, write a partial log + exit `queue-error`
+  rather than continuing into a mode that can't proceed.
+- If anchor SHA is older than 7 days (stale), log a warning and continue
+  rather than fail hard — Phase A reviews tolerate slight drift.
 
 ## Budget
 
-70k input / 20k output.
+80k input / 20k output. Bumped from 70k for the issue-mode lookups
+(per-issue `git log -S` resolution fetches).

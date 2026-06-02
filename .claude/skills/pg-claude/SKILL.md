@@ -123,11 +123,14 @@ knowledge/
 ├── subsystems/     # per-subsystem deep-dives (storage-buffer.md is the calibration
 │                   #   anchor; more land via /document-subsystem)
 ├── data-structures/# focused notes on individual structs / invariant families
-└── files/          # one .md per source file — 750+ docs mirroring source/src/
+├── issues/         # corpus-surfaced issue register (Phase A) — one .md per subsystem
+│                   #   with [ISSUE-*] tagged concerns: leaks, doc-drift, stale TODOs,
+│                   #   undocumented invariants, questions. See issues/README.md.
+└── files/          # one .md per source file — 917+ docs mirroring source/src/
                     #   layout. Use when you need precise file:line context for a
                     #   specific .c or .h.
 
-planning/           # forward-looking design docs for features in-flight (NEW)
+planning/           # forward-looking design docs for features in-flight (Phase B/C/D)
                     # one subdir per slug, with brainstorm.md / plan.md / notes.md
                     # See planning/README.md for the layout.
 ```
@@ -136,12 +139,15 @@ planning/           # forward-looking design docs for features in-flight (NEW)
 - "What does PG do at a high level?" → `architecture/`.
 - "How is this pattern done in PG?" → `idioms/`.
 - "Is there a doc for `bufmgr.c`?" → `files/src/backend/storage/buffer/bufmgr.c.md`.
+- "What's odd / suspect / undocumented in subsystem X?" → `issues/X.md`.
 - "What's the current state of pg-claude itself?" → `progress/STATE.md`.
+- "Where can I help close the corpus gap?" → `progress/coverage-gaps.md` (Phase A work queue).
 
 ## Progress files — the ledger
 
 - `progress/STATE.md` — current phase, what's done, what's next. **Re-read at session start.**
-- `progress/coverage.md` — subsystems documented + per-file coverage summary.
+- `progress/coverage.md` — subsystems documented + per-file coverage summary (top-line numbers).
+- `progress/coverage-gaps.md` — per-directory gap map; the Phase A work queue. Updated when coverage shifts ≥50 docs or a dir crosses a 10% boundary.
 - `progress/census.md` — one-time enumeration of the source tree.
 - `progress/files-examined.md` — append-only ledger: every source file read in non-trivial depth, with verification commit + produced-doc link.
 

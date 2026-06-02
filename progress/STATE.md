@@ -1,7 +1,7 @@
 # pg-claude — current state
 
-**Phase:** Tooling buildout (three-phase planner suite) + nightly cloud routines (autonomous). Spine-synthesis catch-up complete (20 subsystem docs); `/refresh-upstream` shakedown still pending.
-**Last activity:** 2026-06-02 (evening, interactive) — landed **PG patch-review v2**: `pg-patch-review` skill (multi-agent comprehensive: 4 critic sub-agents in parallel — architecture/invariants, breaking-change, test-coverage, style/commit-message — then a synthesizer composes one PG-house-style review email) + `/pg-review <CF#|PR#|file>` slash command (mechanical pre-amble: fetch + apply + build + regress + isolation). Modeled on `plan-review-comprehensive`; calibrated against the same-afternoon CF #6402 v0 manual walk in `sessions/2026-06-02-cf6402-review-validation.md`. Master `pg-claude` skill updated to register both. Earlier same afternoon: **three-phase PG planner suite** landed: `pg-feature-brainstorm` (Phase 1 skill) + `pg-feature-plan` (Phase 2 skill) + `pg-implement` (Phase 3 skill, distinct from generic `/implement`) + their three slash-command wrappers (`/pg-brainstorm`, `/pg-plan`, `/pg-implement`) + the strict `.claude/rules/pg-implement-discipline.md` rules file (R1–R12, plan-linked commits, scope discipline, two-repo separation) + `meta-commit-style` skill (postgres-claude commit style, distinct from upstream-only `commit-message-style`) + `planning/` directory + README. Same-day priors: 4 subsystem-synthesis PRs merged — parser-and-rewrite (#19), access-nbtree (#21), replication (#25), tcop (#27). Cloud cycle: 7 of 9 producers opened PRs (#11–#17); pg-quality-auditor SILENT (needs investigation). Daily watchdog briefing at `progress/_briefings/2026-06-02.md`. Prior activity 2026-06-01: cross-reference pass added 633 upward backlinks, `data-structures/bufferdesc-state.md` refreshed for PG18 atomic state-word.
+**Phase:** **Phase A — corpus completeness + issue surfacing.** Tooling buildout complete (three-phase planner suite + pg-patch-review v2 landed 2026-06-02). New arc decided 2026-06-02 evening: A → B → C → D where A=full file-by-file coverage of src/+contrib/ (currently 35.8%; gap 1 647 files), B=developer personas mined from pgsql-hackers + commits, C=calibration of the planner + review pipelines, D=PG data-leak hardening project. Nightly cloud routines run autonomously.
+**Last activity:** 2026-06-02 (evening, interactive) — Phase A setup landed: refreshed `progress/coverage.md` with current numbers; wrote `progress/coverage-gaps.md` (per-directory work queue); created `knowledge/issues/` skeleton (README + tag convention `[ISSUE-&lt;type&gt;: ...]` + template + storage-buffer starter); extended `.claude/cloud/pg-file-backfiller.md` (scope widened beyond src/backend; batch 2-3 small files/run; issue-surfacing step added; budgets bumped); extended `.claude/cloud/pg-corpus-maintainer.md` (added Pass 3 issue-register mirroring); extended `.claude/cloud/pg-quality-auditor.md` (added third ISSUE-triage mode + failure-to-run defenses for the 2026-06-02 SILENT incident). Master `pg-claude` skill updated to register `knowledge/issues/` and `progress/coverage-gaps.md`. Earlier same afternoon: **PG patch-review v2** + **three-phase planner suite** landed (#28, #29). Same-day priors: 4 subsystem-synthesis PRs merged — parser-and-rewrite (#19), access-nbtree (#21), replication (#25), tcop (#27). Cloud cycle: 7 of 9 producers opened PRs (#11–#17); pg-quality-auditor SILENT — defenses added this session, real root cause still TBD. Daily watchdog briefing at `progress/_briefings/2026-06-02.md`. Prior activity 2026-06-01: cross-reference pass added 633 upward backlinks, `data-structures/bufferdesc-state.md` refreshed for PG18 atomic state-word.
 **Source commit at last verification:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (refreshed 2026-06-01; previous anchor `ef6a95c7c64` had 1 trailing commit, build-system only, no corpus impact — see `progress/refresh-2026-06-01.md`).
 
 ## Done
@@ -30,29 +30,48 @@
 
 ## In progress
 
-- (nothing in flight)
+- **Phase A** — corpus completeness + issue surfacing. Setup landed 2026-06-02; bulk fill ongoing (cloud routine + foreground sweeps).
 
 ## Next
 
-1. **First real run of the three-phase planner.** The planner suite (Phase 1 brainstorm → Phase 2 plan → Phase 3 pg-implement, with `.claude/rules/pg-implement-discipline.md` as binding rules) landed 2026-06-02 — pick a real feature to brainstorm + plan + implement, calibrate the skills. Candidate features queued: `pg_buffercount()` builtin (small, exercises catalog + fmgr + tests), `pg_current_vxact_id()` (CF #6298, Good First Review), `+`/`-` operators for `xid8` (CF #6478).
-2. **First real run of pg-patch-review v2.** The multi-agent review pipeline landed 2026-06-02 evening — pick the next CF entry the user wants to review and exercise `/pg-review <CF#>` end-to-end. Calibration target: reproduce the CF #6402 v0 review quality in less wall time, or surface skill gaps that the v0 didn't.
-3. Workflow agents (Phase 2 of master plan): `code-explorer`, `doc-verifier`. (`patch-reviewer` + `feature-planner` superseded by `pg-patch-review` + the planner suite above.)
-4. Stretch: filename-form backlink pass — syntheses also mention files by short name (`aset.c`, `heapam.c`) in prose without the `knowledge/files/` prefix. Could widen backlinks beyond the current 633 but carries false-positive risk for common names.
-5. Audit pass for pre-anchor staleness: the `bufferdesc-state.md` fix on 2026-06-01 was drift from BEFORE the anchor. Other PG18-era changes may have invalidated similar claims (lwlock subsystem, AIO read-stream, SLRU). Spot-check the most-asserted invariants in idiom + data-structures docs against current source.
+### Phase A active work queue (corpus completeness — 1 647 files to go)
 
-## Coverage snapshot
+1. **Foreground sweep #1 — `src/include/catalog/`** (85 headers, 17% covered). Highest-density invariant source; needed for any catalog work and the Phase D data-leak project. Spawn parallel Explore agents per file family (pg_class, pg_proc, pg_type, pg_attribute, pg_constraint, …).
+2. **Foreground sweep #2 — libpq stack** (`src/include/libpq/` 20 + `src/backend/libpq/` 17 + `src/interfaces/libpq/` ~120). Data-leak project prerequisite; most-attacked surface.
+3. **Foreground sweep #3 — `src/bin/pg_dump/` + `src/bin/psql/`** (~40 files). User-facing tool surface; privilege boundaries.
+4. **Cloud routine grind** — pg-file-backfiller continues nightly under the widened scope; targets remaining `src/port`, `src/common`, `src/timezone`, `src/fe_utils`, then `src/pl/`, then contrib/.
+5. Refresh `progress/coverage-gaps.md` whenever per-file count moves ≥50 or a dir crosses a 10% boundary.
 
-- Registry rows in `progress/files-examined.md`: **1021**.
-- Per-file docs under `knowledge/files/`: **917** (+15 this session — 13 synthesis-gap backfills + 2 buffer backfills).
+### Phase B/C/D — queued behind Phase A
+
+6. **Phase B — developer personas.** Mine pgsql-hackers + commit attribution for 6-12 reviewer/committer personas (Tom Lane, Andres Freund, Robert Haas, Peter Eisentraut, Heikki, Álvaro, Tomas Vondra, Nathan Bossart, Michael Paquier). Each: typical concerns, blocking-vs-nit threshold, what they catch others miss. Wire into `pg-patch-review` as critic-persona options + into `pg-feature-plan` as planning lenses.
+7. **Phase C — calibration.** Exercise the planner suite + review v2 + personas against real CF entries + small features. Tighten skill prompts via `hf(skill):` commits. Goal: production-ready before Phase D.
+8. **Phase D — PostgreSQL data-leak hardening project.** The payload. Scope TBD (memory / info / RLS / leaky-view family); will brainstorm via `/pg-brainstorm` once A-C done.
+
+### Side concerns (pickable anytime)
+
+9. Workflow agents (Phase 2 of master plan): `code-explorer`, `doc-verifier`. (`patch-reviewer` + `feature-planner` superseded by `pg-patch-review` + the planner suite.)
+10. Filename-form backlink pass — syntheses also mention files by short name (`aset.c`, `heapam.c`) in prose without the `knowledge/files/` prefix. Stretch; false-positive risk for common names.
+11. Audit pass for pre-anchor staleness: the `bufferdesc-state.md` fix on 2026-06-01 was drift from BEFORE the anchor. Other PG18-era changes (lwlock, AIO read-stream, SLRU) may have invalidated similar claims. Spot-check the most-asserted invariants.
+12. **pg-quality-auditor SILENT 2026-06-02 root cause.** Defenses landed in this session; the actual reason it didn't write a log still unknown. Pull the cloud-routine event log next day cycle.
+
+## Coverage snapshot (refreshed 2026-06-02 evening)
+
+- Source files (.c + .h) under `source/src/` + `source/contrib/`: **2 564**.
+- Per-file docs under `knowledge/files/`: **917** (35.8%).
+- Registry rows in `progress/files-examined.md`: **1 021**.
+- **Phase A gap: 1 647 files undocumented.** Full per-directory breakdown in `progress/coverage-gaps.md`.
+- Top-line per top-level tree: src/backend 69.2%, src/include 34.2%, src/common 1.6%, src/port 0%, src/interfaces 0%, src/bin 0%, src/pl 0%, contrib 0%.
 - Per-file docs with upward backlinks: **652** (+17 net-new blocks from the 2026-06-02 corpus-maintainer source-path backlink pass; 633 from the earlier cross-reference pass).
 - Subsystem + data-structures docs: **24** (20 subsystem + 4 data-structures).
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.
+- Issue registers: **knowledge/issues/** — 1 starter file (`storage-buffer.md`) + README/template. Will grow as Phase A surfaces issues.
 - Glossary: `knowledge/glossary.md`, **15** entries (top-15 internals terms; grown by `pg-corpus-maintainer`).
-- Top directories by registry rows: `executor/` (80+), `access/transam` (47), `catalog/` (50), `commands/` (78), `replication/` (56), `optimizer/` (75), `parser/+rewrite/` (57), `storage/ipc` (35), `access/{brin,gin,gist,hash,spgist}` (~80), `nodes/` (33), `utils/cache` (25), `utils/mmgr` (11).
 
 ## Recent session logs
 
+- `sessions/2026-06-02-phase-a-setup.md` — interactive: Phase A (corpus completeness) setup landed — refreshed coverage.md, wrote coverage-gaps.md, created knowledge/issues/ skeleton, extended pg-file-backfiller + pg-corpus-maintainer + pg-quality-auditor recipes.
 - `sessions/2026-06-02-pg-review-v2.md` — interactive: landed `pg-patch-review` skill (4 critics + synthesizer) + `/pg-review` slash command. Modeled on `plan-review-comprehensive`. Master `pg-claude` nav updated.
 - `sessions/2026-06-02-planner-suite.md` — interactive: landed the three-phase planner suite (3 skills + 3 commands + rules file + meta-commit-style + planning/ dir).
 - `sessions/2026-06-02-cf6402-review-validation.md` — interactive: Phase-D validation run; reviewed CF #6402 (nbtree dedup) end-to-end; draft review email + system-validation analysis.
