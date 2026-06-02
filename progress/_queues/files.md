@@ -7,7 +7,7 @@ take top 50.
 
 ## Entries
 
-[pending] src/backend/access/heap/heapam_visibility.c loc=1900 priority=H
+[done:pending-pr] src/backend/access/heap/heapam_visibility.c loc=1900 priority=H
 [pending] src/backend/access/transam/twophase.c loc=2700 priority=H
 [pending] src/backend/access/transam/multixact.c loc=3700 priority=H
 [pending] src/backend/storage/buffer/freelist.c loc=700 priority=H
