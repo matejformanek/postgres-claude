@@ -49,6 +49,21 @@ Tell the user:
 - Server log is at `dev/data-debug/server.log`.
 - Suggest `/pg-stop` to shut down cleanly; `/pg-restart` to bounce.
 
+## Worktree note
+
+All `/pg-*` commands resolve paths through the `dev/` symlink at the
+postgres-claude repo root. If you're inside a `.claude/worktrees/<name>/`
+worktree and `dev/` doesn't exist, either run this command from main, or
+add absolute-path symlinks per-worktree:
+
+```bash
+ln -s /Users/matej/Work/postgres/postgresql-dev dev
+ln -s /Users/matej/Work/postgres/postgresql     source
+```
+
+See `.claude/skills/build-and-run/SKILL.md` "Running these from a git
+worktree" for details.
+
 ## Troubleshooting
 
 - **`initdb: error: directory "..." exists but is not empty`**: a previous half-

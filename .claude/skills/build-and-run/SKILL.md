@@ -22,9 +22,102 @@ guardrails:
 - `/pg-fresh --yes` — wipe `data-debug/`, re-initdb (preserves the build).
 - `/pg-reclone-dev` — nuclear: re-clone the whole dev tree from the
   read-only reference.
+- `/setup-pg-asan` / `/pg-start-asan` — sibling profile built with
+  AddressSanitizer + UndefinedBehaviorSanitizer (see "Sanitizer builds"
+  below); use this when chasing memory bugs or undefined behavior.
 
 The rest of this file is the underlying mechanics, for cases where you need
 to deviate from the wrappers.
+
+## Running these from a git worktree (gotcha)
+
+Every `/pg-*` command above resolves paths via `$PWD/dev/...` and
+`$PWD/source/...`. The `dev` and `source` symlinks live at the
+**root of the postgres-claude repo**, and `git worktree add` (or this
+project's `EnterWorktree` tool) does NOT propagate them into the new
+worktree. Inside a worktree, the commands break with `No such file or
+directory`.
+
+Two ways to handle it:
+
+1. **Run from main** (simplest). The pg-* commands are stateful — they
+   touch the dev cluster, not the meta-repo source — so running them
+   from main is harmless even when your edits live on a feature branch.
+2. **Add symlinks per worktree** (when you genuinely need everything in
+   one tree). One-liner from inside the worktree, using absolute paths so
+   they don't drift:
+   ```bash
+   ln -s /Users/matej/Work/postgres/postgresql-dev dev
+   ln -s /Users/matej/Work/postgres/postgresql     source
+   ```
+   These are local-only — they won't be tracked by git (the parent
+   `.gitignore` excludes them) and ExitWorktree won't try to commit them.
+
+## Sanitizer builds (`build-asan` profile)
+
+The default `dev/build-debug/` enables Asserts + debug symbols but no
+sanitizers. For memory-bug hunting (use-after-free, heap-buffer-overflow,
+double-free, integer/signed overflow, alignment violations) build a
+parallel `dev/build-asan/` profile with ASan + UBSan turned on:
+
+```bash
+meson setup dev/build-asan dev \
+  --buildtype=debug \
+  -Dcassert=true \
+  -Ddebug=true \
+  -Db_sanitize=address,undefined \
+  -Db_lundef=false \
+  -Dprefix=$PWD/dev/install-asan
+ninja -C dev/build-asan
+ninja -C dev/build-asan install
+```
+
+`-Db_lundef=false` is required on macOS / clang because ASan needs
+runtime symbols resolved late; without it linking fails with "undefined
+symbols for arch arm64: ___asan_init…".
+
+To run the cluster against this build, point `PATH`/`PGDATA` at the asan
+install + a separate data dir (so you can hop between debug + asan
+clusters without `initdb` collisions):
+
+```bash
+export PATH="$PWD/dev/install-asan/bin:$PATH"
+export PGDATA="$PWD/dev/data-asan"
+[ ! -f "$PGDATA/PG_VERSION" ] && initdb -D "$PGDATA" --locale=C --encoding=UTF8
+# ASan-specific runtime knobs:
+export ASAN_OPTIONS="abort_on_error=1:detect_leaks=0:detect_stack_use_after_return=1:print_stacktrace=1"
+export UBSAN_OPTIONS="print_stacktrace=1:halt_on_error=1"
+pg_ctl -D "$PGDATA" -l "$PGDATA/server.log" start
+```
+
+`/setup-pg-asan` and `/pg-start-asan` wrap this exactly.
+
+### macOS-specific caveats
+
+- **LeakSanitizer is not available on Darwin.** `detect_leaks=0` above is
+  required; setting `detect_leaks=1` errors out at runtime. For real leak
+  detection you have three options:
+  1. Build the asan profile on Linux (container or VM) — LSan works there.
+  2. Use macOS-native `leaks <pid>` against the running backend (no
+     rebuild needed). Set `MallocStackLogging=1` before `pg_ctl start`
+     for proper backtraces; see the `debugging` skill.
+  3. Use `pg_backend_memory_contexts` to watch a single context grow
+     across a workload (also in the `debugging` skill).
+- ASan still catches **use-after-free**, **heap-buffer-overflow**, and
+  **double-free** on macOS, which is the common case for backend C bugs.
+- The ASan slowdown is ~2-3x on PG workloads — fine for development,
+  obviously not for benchmarking.
+
+### Picking which profile to use
+
+| Symptom / task                                   | Profile        |
+| ------------------------------------------------ | -------------- |
+| Normal feature work, stepping in lldb            | `build-debug`  |
+| `Assert()` triggered, want to inspect            | `build-debug`  |
+| SIGSEGV, suspected use-after-free, OOB write     | `build-asan`   |
+| UB suspected (signed overflow, alignment, etc.)  | `build-asan`   |
+| Leak chase                                       | `leaks` macOS or LSan on Linux |
+| Performance work                                 | release build (separate prefix) |
 
 ## Repo split — important
 
