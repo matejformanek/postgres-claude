@@ -1,25 +1,37 @@
 {
   "permissions": {
-    "defaultMode": "bypassPermissions",
     "allow": [
-      "Bash(*)",
-      "Read",
-      "Write",
-      "Edit",
-      "MultiEdit",
-      "Glob",
-      "Grep",
-      "WebFetch",
-      "WebSearch",
-      "TodoWrite",
-      "Task",
-      "NotebookEdit"
+      "Bash(ls:*)",
+      "Bash(find source:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(wc:*)",
+      "Bash(cat source/*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git diff:*)",
+      "Bash(git blame:*)",
+      "Bash(git status)",
+      "Bash(git -C source/*)",
+      "Bash(ctags:*)",
+      "Bash(cscope:*)",
+      "Bash(ninja -C build*)",
+      "Bash(meson*)"
+    ],
+    "ask": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(git rebase:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)"
     ],
     "deny": [
       "Bash(git push --force:*)",
-      "Bash(git push -f:*)",
-      "Bash(rm -rf /:*)",
-      "Bash(rm -rf ~:*)",
+      "Bash(rm -rf /*)",
       "Bash(sudo:*)"
     ]
   }
