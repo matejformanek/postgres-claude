@@ -7,7 +7,7 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 
 ## Entries
 
-[done:pending-merge] citusdata/citus branch=main files=README.md,src/backend/distributed/README.md,src/include/distributed/citus_custom_scan.h
+[done:ce97359] citusdata/citus branch=main files=README.md,src/backend/distributed/README.md,src/include/distributed/citus_custom_scan.h
 [pending] timescale/timescaledb branch=main files=README.md,docs/SECURITY.md,src/chunk.h,src/hypertable.h
 [pending] pgpartman/pg_partman branch=master files=README.md,doc/pg_partman.md,sql/types/types.sql
 [pending] pgvector/pgvector branch=master files=README.md,src/vector.h,src/ivfflat.h,src/hnsw.h

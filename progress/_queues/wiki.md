@@ -10,7 +10,7 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 
 ## Entries
 
-[done:PENDING-MERGE-SHA] Hint_Bits https://wiki.postgresql.org/wiki/Hint_Bits
+[done:a49dd51] Hint_Bits https://wiki.postgresql.org/wiki/Hint_Bits
 [pending] Hot_Standby https://wiki.postgresql.org/wiki/Hot_Standby
 [pending] Logical_Decoding https://wiki.postgresql.org/wiki/Logical_Decoding
 [pending] MultiXacts https://wiki.postgresql.org/wiki/MultiXacts
