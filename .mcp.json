@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "postgres-dev": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql:///postgres?host=/tmp"
+      ],
+      "description": "Read-only Postgres MCP pointing at the local dev cluster (Unix socket /tmp, trust auth, database 'postgres'). Use for SELECT-only exploration: schema introspection, sampling rows, EXPLAIN-style queries. For anything that mutates state or needs psql meta-commands (\\d, \\timing, \\watch, COPY, transactions, gdb-friendly client_min_messages), use the psql skill instead — psql is more capable and supports the full DDL/DML surface."
+    }
+  }
+}
