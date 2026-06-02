@@ -23,13 +23,46 @@ for autoconf builds — `-Og` keeps reasonable perf while preserving frames.
 
 ## 2. The attach pattern (most common workflow)
 
-**Project shortcuts.** In this repo, `/pg-attach` automates the
-`pg_backend_pid()` grab and prints the exact `lldb -p <pid>` line ready to
-paste; `/pg-tail-log` follows `dev/data-debug/server.log` (where `pprint`
-and `elog` output land). Use them.
+**Project shortcuts.** In this repo, `/pg-attach` automates the held-PID
+grab and prints the exact `lldb -p <pid>` line ready to paste; `/pg-tail-log`
+follows `dev/data-debug/server.log` (where `pprint` and `elog` output land).
+Use them.
 
 The postmaster itself never executes your query. Attach to the **backend**
-that handles your session:
+that handles your session. The key footgun: a one-shot
+`psql -tAc "SELECT pg_backend_pid()"` closes the connection immediately,
+so the backend you "got the PID of" is already gone by the time you read
+the output. You need a **held** backend — one whose connection stays open
+long enough for you to attach.
+
+### The held-PID pattern (works from a script)
+
+Open a backend that holds its connection for N seconds via `pg_sleep`, tag
+it with a recognizable `application_name`, then look the PID up via
+`pg_stat_activity`:
+
+```bash
+# Hold a backend open for 60s, tagged so we can find it.
+PGAPPNAME=hold psql -h /tmp -d postgres -X -c 'SELECT pg_sleep(60);' &
+
+# Look up its backend PID (give it a moment to register).
+sleep 0.5
+PID=$(psql -h /tmp -d postgres -tAc \
+  "SELECT pid FROM pg_stat_activity WHERE application_name='hold'")
+echo "$PID"
+
+# Attach in a separate terminal:
+lldb -p "$PID"
+```
+
+`PGAPPNAME` is a libpq env var (NOT a psql `\set` variable — that won't
+propagate to the server). Inside the lldb session, the backend will be
+parked inside `pg_sleep`'s `WaitLatch` loop, ready for breakpoints.
+
+### The interactive variant
+
+When you actually want to drive queries through the attached session, hold
+psql open interactively instead:
 
 ```sql
 -- in psql, on the connection you want to debug:
@@ -38,6 +71,8 @@ SELECT pg_backend_pid();
 ----------------
           54321
 ```
+
+Keep that psql session alive while you attach in another terminal:
 
 Then in another terminal:
 
@@ -310,7 +345,101 @@ taste.]
 To dive deeper into the locking model itself, see
 `.claude/skills/locking/`.
 
-## 11. Quick checklist
+## 11. Memory bugs and leak hunting
+
+Three tools, in increasing order of "bring out the heavy machinery":
+
+### 11.1 `pg_backend_memory_contexts` — observe before debugging
+
+Cheapest first step for any "the backend's RSS keeps growing" suspicion.
+Run on the suspect connection between iterations of a workload:
+
+```sql
+SELECT name, level, parent, total_bytes/1024 AS kb, used_bytes/1024 AS used_kb
+FROM   pg_backend_memory_contexts
+ORDER  BY total_bytes DESC
+LIMIT  20;
+```
+
+Run the suspect workload N times via `\watch`, then re-check. A context
+that grows monotonically across iterations is your leak signature. For
+*another* backend's contexts, use `pg_log_backend_memory_contexts(<pid>)`
+(PG 14+) — it dumps to `dev/data-debug/server.log`. [verified-by-code;
+`pg_backend_memory_contexts` view and `pg_log_backend_memory_contexts`
+function exist in `src/backend/utils/adt/mcxtfuncs.c`.]
+
+### 11.2 AddressSanitizer + UndefinedBehaviorSanitizer
+
+For use-after-free, heap-buffer-overflow, double-free, and undefined
+behavior (signed overflow, alignment violations, bool-from-non-bool).
+Use the sanitizer build profile — see
+`.claude/skills/build-and-run/SKILL.md` "Sanitizer builds":
+
+```bash
+# One-time build
+/setup-pg-asan
+# Start the asan cluster (separate data dir from debug cluster)
+/pg-start-asan
+```
+
+Important runtime knobs (the `/pg-start-asan` wrapper sets them):
+
+```bash
+export ASAN_OPTIONS="abort_on_error=1:detect_leaks=0:detect_stack_use_after_return=1:print_stacktrace=1"
+export UBSAN_OPTIONS="print_stacktrace=1:halt_on_error=1"
+```
+
+On a hit, ASan writes a full stack to the server log AND the controlling
+terminal, then aborts the backend (postmaster restarts a fresh one).
+Check `dev/data-asan/server.log` for the report. The stack frames will
+have file:line directly into the source you built — no addr2line dance.
+
+**`detect_leaks=0` is required on macOS** — LeakSanitizer is not
+supported on Darwin and setting `detect_leaks=1` errors out at startup.
+For leaks specifically, use 11.3 instead, or rebuild this profile on
+Linux. [verified: macOS ASan does NOT include LSan, per LLVM
+sanitizer-platform compat matrix.]
+
+### 11.3 macOS-native leak detection (`leaks` / `malloc_history`)
+
+When LSan isn't an option (i.e., on this Mac), the Darwin tooling does
+the job — no rebuild required, works against the existing `build-debug`:
+
+```bash
+# Before pg_ctl start, enable malloc backtraces.
+export MallocStackLogging=1
+/pg-restart
+
+# Reproduce the leak workload, then:
+PID=<the suspect backend pid>
+leaks "$PID"           # one-shot report
+leaks --atExit -- /path/to/cmd       # for short-lived subprocesses
+
+# Get allocation backtrace for a specific address found by `leaks`:
+malloc_history "$PID" <addr>
+```
+
+`MallocStackLogging` adds ~10-30% RSS overhead — fine for dev, don't
+ship.
+
+**When `pg_backend_memory_contexts` is the right tool vs `leaks`:**
+PG-context allocations (`palloc`/`MemoryContextAlloc`) show up in the
+context view, NOT in `leaks` — because palloc'd memory is freed via
+`MemoryContextDelete()` and is not "leaked" from libc's perspective.
+For raw `malloc()` leaks (which do exist — extension code, libpq,
+third-party libs called from the backend), `leaks` is the answer.
+
+### 11.4 Choosing the right tool
+
+| Symptom                                           | Reach for     |
+| ------------------------------------------------- | ------------- |
+| RSS grows, suspect a palloc-context not freed     | 11.1 contexts |
+| Use-after-free, heap-buffer-overflow, double-free | 11.2 ASan     |
+| Signed overflow / alignment / undefined behavior  | 11.2 UBSan    |
+| raw `malloc()` leak (often in extension code)     | 11.3 `leaks`  |
+| Need real LSan-quality leak reports               | Linux + ASan  |
+
+## 12. Quick checklist
 
 When something is wrong, in order:
 
@@ -323,3 +452,4 @@ When something is wrong, in order:
 5. If it's shared state, ask `pg_buffercache` / `pg_locks` /
    `pg_stat_activity` before reaching for the debugger.
 6. If it crashed, check `/cores/core.<pid>` and open it with lldb.
+7. If it's a memory bug (UAF, OOB, leak), pick the right tool from §11.4.
