@@ -5,8 +5,8 @@ fetches_source_via_url: false
 queue: null
 output_dirs: [knowledge/community/threads, knowledge/community/commitfest, knowledge/community/blog-roundup]
 skills_required: [pg-claude, memory-keeping, patch-submission, review-checklist]
-max_input_tokens: 100000
-max_output_tokens: 30000
+max_input_tokens: 250000
+max_output_tokens: 60000
 ---
 
 # pg-community-pulse

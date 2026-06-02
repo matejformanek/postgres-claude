@@ -5,8 +5,8 @@ fetches_source_via_url: false
 queue: null
 output_dirs: [knowledge/community/user-questions]
 skills_required: [pg-claude, memory-keeping]
-max_input_tokens: 70000
-max_output_tokens: 15000
+max_input_tokens: 200000
+max_output_tokens: 50000
 ---
 
 # pg-user-question-harvester
@@ -40,8 +40,10 @@ tagged over many days are dead-code candidates.
 1. Load `pg-claude`, `memory-keeping`. Read the 21 skill descriptions.
 2. Branch: `cloud/pg-user-question-harvester/<YYYY-MM-DD>`.
 3. Fetch the three list archives. Record URLs + HTTP status.
-4. Pick 5-8 threads that pass the internals filter and weren't covered in the
-   prior 3 days' files (de-dup by message-id URL).
+4. Pick **15-25 threads** that pass the internals filter and weren't covered
+   in the prior 3 days' files (de-dup by message-id URL). Per `_loader.md`
+   §5 "Fill the budget" — with the 50k output budget at ~1-2k per question
+   entry, target 20+ questions per run, not 5-8.
 5. For each, write to `knowledge/community/user-questions/<YYYY-MM-DD>.md`:
    - Subject + message-id URL + source list
      (pgsql-general / pgsql-performance / pgsql-hackers).
@@ -61,4 +63,7 @@ tagged over many days are dead-code candidates.
 
 ## Budget
 
-70k input / 15k output.
+200k input / 50k output. Bumped from 70k/15k 2026-06-02 evening per the
+"fill the budget" directive (`_loader.md` §5). At ~1-2k output per
+question entry the new budget supports 20-30 questions per run vs prior
+5-8 — more skill-tagging signal for the gap-detection use case.

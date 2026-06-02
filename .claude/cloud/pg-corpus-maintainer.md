@@ -5,8 +5,8 @@ fetches_source_via_url: false
 queue: null
 output_dirs: [knowledge, knowledge/issues]
 skills_required: [pg-claude, memory-keeping]
-max_input_tokens: 80000
-max_output_tokens: 20000
+max_input_tokens: 250000
+max_output_tokens: 60000
 ---
 
 # pg-corpus-maintainer
@@ -39,10 +39,13 @@ diff. Merges cross-ref-maintainer + glossary-grower + issue-mirror.
 6. Walk `knowledge/` and tokenize. For each candidate term (CamelCase
    identifiers, ALL_CAPS macros, lowercase jargon like "snapshot",
    "tuple", "xid"), check if it's defined in `knowledge/glossary.md`.
-7. Take the top-15 most-frequent undefined terms; for each, write a 2-3
-   sentence entry citing the file:line of its strongest definition site
-   in corpus (no source fetch needed — use existing per-file docs as the
-   primary definition source).
+7. **Take the top-50 most-frequent undefined terms** (or however many fit
+   in the remaining output budget — at ~150 tokens per entry, 50 entries
+   ≈ 7.5k output). For each, write a 2-3 sentence entry citing the
+   file:line of its strongest definition site in corpus (no source fetch
+   needed — use existing per-file docs as the primary definition source).
+   Per `_loader.md` §5 "Fill the budget": **don't stop at 15 if budget
+   for more remains**.
 
 ### Pass 3 — issue-register mirroring
 
@@ -82,6 +85,10 @@ diff. Merges cross-ref-maintainer + glossary-grower + issue-mirror.
 
 ## Budget
 
-80k input / 20k output. Bumped from 60k/15k for the issue-mirror pass —
-grepping `knowledge/files/` is cheap but enumerating subsystems +
-template-creating new register files adds output.
+250k input / 60k output. Bumped from 80k/20k 2026-06-02 evening per the
+"fill the budget" directive (see `_loader.md` §5). All three passes
+should consume real volume — Pass 1 sweeping every per-file doc in
+`knowledge/files/`, Pass 2 growing the glossary by 30-50 terms, Pass 3
+mirroring however many `[ISSUE-*]` tags landed in the last 24h.
+Idempotent passes mean an over-budget run still produces a coherent
+diff; an under-utilized run leaves work on the table.

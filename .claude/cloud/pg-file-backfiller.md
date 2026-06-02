@@ -5,8 +5,8 @@ fetches_source_via_url: true
 queue: progress/_queues/files.md
 output_dirs: [knowledge/files, knowledge/issues]
 skills_required: [pg-claude, memory-keeping]
-max_input_tokens: 120000
-max_output_tokens: 25000
+max_input_tokens: 400000
+max_output_tokens: 100000
 ---
 
 # pg-file-backfiller
@@ -73,9 +73,15 @@ See `progress/coverage-gaps.md` for the per-directory work queue;
    - Be conservative — a noisy register loses value fast. Don't tag
      style nits unless they're systemic; don't tag intentional design
      choices.
-7. Try to fit **2-3 small files (≤500 LOC each)** per run when budget
-   allows; one large file (>2 000 LOC) is fine standalone. Stop when
-   `max_output_tokens / 2` consumed (leave headroom for the run log).
+7. **Fill the budget.** With the 100k output ceiling, target **10-20 small
+   files (≤500 LOC each)** per run, OR **3-5 medium files (500-2 000 LOC)**,
+   OR **1-2 large files (>2 000 LOC)**. Pop the next queue item after each
+   doc as long as `output_tokens_so_far < 0.70 * max_output_tokens` AND the
+   queue still has `[pending]`. Only stop at `0.85 *` for budget-cap, or
+   when queue is empty (record `exit_reason: queue-empty`). The A1
+   catalog-headers sweep landed 11-13 files per agent in ~80k tokens; this
+   routine should hit similar volume nightly. **An empty-handed run is a
+   process bug** — flag in the run log if you exit at < 30% budget consumed.
 8. Append a row to `progress/files-examined.md` per file processed
    (or upgrade the existing row to `depth: deep`).
 9. Mark queue entry `[done:<commit-sha>]`.
@@ -97,15 +103,19 @@ See `progress/coverage-gaps.md` for the per-directory work queue;
 
 ## Budget
 
-120k input / 25k output. Bumped from 80k/15k for the multi-file batch
-mode + issue-register writes. One 4 000-line file is still ~70k input.
+400k input / 100k output. Bumped from 120k/25k after the A1 catalog-headers
+sweep (2026-06-02 evening) demonstrated that 12-13 files fit comfortably in
+~80k tokens; the cloud routine should match that throughput nightly. One
+4 000-line source file is still ~70k input.
 
 ## Why this changed (2026-06-02)
 
-Phase A decision: scope widened from `src/backend`-focused to full
-`src/` + `contrib/` (2 564 files; 1 647 uncovered). Single-file/run
-cadence would take 4-5 years to close; batched 2-3-files-per-run mode
-brings it to ~18 months at one-routine-per-night. Issue-surfacing
-step added so the per-file pass produces durable observation, not just
-description. See `sessions/2026-06-02-phase-a-setup.md` for the
-rationale.
+- **Phase A decision** (earlier 2026-06-02): scope widened from `src/backend`-
+  focused to full `src/` + `contrib/` (2 564 files; 1 647 uncovered). Issue-
+  surfacing step added.
+- **Throughput bump** (2026-06-02 evening): the routine was still budgeted
+  for 2-3 files/run, which at one-routine-per-night needs ~18 months to
+  close the gap. With 100k output budget and an explicit "fill the budget"
+  loop the realistic throughput is 10-20 small files/run, closing Phase A
+  in **~3-4 months** at the same nightly cadence. See
+  `sessions/2026-06-02-cloud-throughput-bump.md`.
