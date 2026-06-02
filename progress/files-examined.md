@@ -1116,3 +1116,6 @@ grep '| deep-read |' progress/files-examined.md
 <!-- storage/buffer per-file docs (backfilling earlier deep reads with companion .md) -->
 | src/backend/storage/buffer/bufmgr.c | 2026-06-01 | ef6a95c7c64 | deep-read | file-by-file-bufmgr | knowledge/files/src/backend/storage/buffer/bufmgr.c.md | Per-file companion: public API + BufferAlloc/GetVictimBuffer/Pin/Unpin/Flush/Lock/Cleanup/IO/Checkpoint dispatch; 8 967 lines |
 | src/include/storage/buf_internals.h | 2026-06-01 | ef6a95c7c64 | read | file-by-file-bufmgr | knowledge/files/src/include/storage/buf_internals.h.md | Per-file companion: 64-bit packed state layout, BufferDesc locking rules, BM_* flags, forward decls for the whole subsystem |
+
+<!-- cloud:pg-file-backfiller 2026-06-02 — deep re-verify at new anchor -->
+| src/backend/access/heap/heapam_visibility.c | 2026-06-02 | 4b0bf0788b0 | deep-read | cloud:pg-file-backfiller | knowledge/files/src/backend/access/heap/heapam_visibility.c.md | Deep re-verify at anchor 4b0bf07; corrected hint-bit drift (BufferBeginSetHintBits/BufferFinishSetHintBits/BufferSetHintBits16 + SetHintBitsState replacing single-shot MarkBufferDirtyHint); HeapTupleSatisfiesMVCCBatch amortized path |
