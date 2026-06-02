@@ -11,20 +11,27 @@ max_output_tokens: 15000
 
 # pg-user-question-harvester
 
-Pull recent internals-flavored questions from dba.stackexchange.com and
-r/PostgreSQL. Tag each with which existing skill *should* answer it.
-Skills never tagged over many days are dead-code candidates.
+Pull recent internals-flavored questions from the PostgreSQL mailing-list
+archives. Tag each with which existing skill *should* answer it. Skills never
+tagged over many days are dead-code candidates.
+
+> Source note: the original sources (dba.stackexchange.com, r/PostgreSQL) are
+> unreachable from the cloud sandbox — their CDNs reject datacenter/non-browser
+> fetches with HTTP 403 (anti-bot, not Anthropic's egress; even WebFetch and the
+> official `api.stackexchange.com` are refused). The pgsql mailing-list archives
+> on `www.postgresql.org` serve the same purpose (real users asking internals
+> questions), are reliably reachable, and need no auth.
 
 ## Inputs
 
-- Stack Exchange search:
-  `https://dba.stackexchange.com/questions/tagged/postgresql-internals?tab=Newest`
-  and `https://dba.stackexchange.com/questions/tagged/postgresql?tab=Newest`
-  (filter to posts from last 7 days via WebFetch; pick internals-flavored
-  keywords: WAL, lock, MVCC, vacuum, planner, executor, buffer,
-  replication, snapshot, xid).
-- Reddit: `https://www.reddit.com/r/PostgreSQL/new.json?limit=50` (apply
-  the same keyword filter).
+- PostgreSQL mailing-list archives (HTML, on the reachable `www.postgresql.org`):
+  - `https://www.postgresql.org/list/pgsql-general/` — general user Q&A
+  - `https://www.postgresql.org/list/pgsql-performance/` — performance/tuning Qs
+  - `https://www.postgresql.org/list/pgsql-hackers/` — internals discussion
+  Fetch each list page, follow into the current month (e.g.
+  `.../pgsql-general/<YYYY>/<MM>/`), and read recent thread subjects + opening
+  messages. Filter to the last 7 days and internals-flavored keywords: WAL,
+  lock, MVCC, vacuum, planner, executor, buffer, replication, snapshot, xid.
 - Skill descriptions: lazy-load frontmatter `description:` field from each
   `.claude/skills/*/SKILL.md` for tagging.
 
@@ -32,11 +39,12 @@ Skills never tagged over many days are dead-code candidates.
 
 1. Load `pg-claude`, `memory-keeping`. Read the 21 skill descriptions.
 2. Branch: `cloud/pg-user-question-harvester/<YYYY-MM-DD>`.
-3. Fetch SE + Reddit listings. Record URLs + status.
-4. Pick 5-8 questions that pass the internals filter and weren't covered in
-   the prior 3 days' files (de-dup by URL).
+3. Fetch the three list archives. Record URLs + HTTP status.
+4. Pick 5-8 threads that pass the internals filter and weren't covered in the
+   prior 3 days' files (de-dup by message-id URL).
 5. For each, write to `knowledge/community/user-questions/<YYYY-MM-DD>.md`:
-   - Title + URL + source (SE / Reddit).
+   - Subject + message-id URL + source list
+     (pgsql-general / pgsql-performance / pgsql-hackers).
    - 2-3 sentence summary of the actual question.
    - **Skill tag** — which skill (or skills) *should* be triggered by this
      question. If no skill fits, tag as `gap:<topic>`.
@@ -46,10 +54,10 @@ Skills never tagged over many days are dead-code candidates.
 
 ## Failure modes
 
-- SE 429 → use Reddit only; note gap. Reddit 429 → SE only.
-- Both unreachable → no PR, exit `rate-limited`.
-- Fewer than 3 questions pass the filter → still open PR with what was
-  found and note "thin day" in run log.
+- One list archive unreachable → use the others, note the gap.
+- All three archives unreachable → no PR, exit `rate-limited`.
+- Fewer than 3 questions pass the filter → still open PR with what was found
+  and note "thin day" in run log.
 
 ## Budget
 
