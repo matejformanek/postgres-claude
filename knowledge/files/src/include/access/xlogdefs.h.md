@@ -80,3 +80,7 @@ timeline number definitions
 
 - `[verified-by-code]`: 12
 - `[from-comment]`: 5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/wal.md](../../../../architecture/wal.md)

@@ -107,4 +107,5 @@ standby's flushes. (`:3070-3077`) [verified-by-code]
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/replication.md](../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

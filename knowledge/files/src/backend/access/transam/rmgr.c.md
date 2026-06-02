@@ -96,4 +96,5 @@ None.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

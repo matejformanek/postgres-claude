@@ -201,3 +201,7 @@ work. `unlikely()` hint plus inline keeps the success path tight.
 
 - `[verified-by-code]` × 2
 - `[from-comment]` × 10
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

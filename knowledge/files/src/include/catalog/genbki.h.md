@@ -20,3 +20,7 @@
 ## Tally
 
 `[verified-by-code]=2 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)

@@ -80,3 +80,7 @@ signature looked up by name via `LookupParallelWorkerFunction`.
 
 - `[verified-by-code]`: 13
 - `[from-comment]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)

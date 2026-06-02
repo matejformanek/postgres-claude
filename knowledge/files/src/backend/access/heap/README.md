@@ -50,5 +50,7 @@ Two design documents that explain non-obvious heap-AM mechanisms:
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/mvcc.md](../../../../../architecture/mvcc.md)
+- [idioms/locking-overview.md](../../../../../idioms/locking-overview.md)
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

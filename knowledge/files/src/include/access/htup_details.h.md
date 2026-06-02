@@ -78,5 +78,6 @@ Defines the on-disk layout of a heap tuple's fixed header (`HeapTupleHeaderData`
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/mvcc.md](../../../../architecture/mvcc.md)
 - [data-structures/heap-tuple-layout.md](../../../../data-structures/heap-tuple-layout.md)
 - [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

@@ -52,3 +52,7 @@ Canonical definition of `SnapshotData` and the `SnapshotType` enum that drives t
 ## Confidence tag tally
 
 `[verified-by-code]=1 [from-comment]=10 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/snapshot-lifecycle.md](../../../../data-structures/snapshot-lifecycle.md)

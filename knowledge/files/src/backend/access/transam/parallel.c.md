@@ -144,4 +144,5 @@ leader if any worker reported an error.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/bgworker-and-parallel.md](../../../../../idioms/bgworker-and-parallel.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

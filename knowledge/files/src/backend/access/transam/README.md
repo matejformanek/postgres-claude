@@ -217,5 +217,7 @@ behavior contract for these:
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/mvcc.md](../../../../../architecture/mvcc.md)
+- [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

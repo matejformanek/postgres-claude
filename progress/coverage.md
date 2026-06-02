@@ -13,6 +13,12 @@ Row format example:
 | storage-buffer | knowledge/subsystems/storage-buffer.md | ef6a95c7c64 | verified=N1, from-README=N2, from-comment=N3, inferred=N4, unverified=N5 | M items, see §9 of doc |
 -->
 
+## Glossary
+
+| Name | Path | Last verified commit | Confidence summary | Open questions |
+|---|---|---|---|---|
+| glossary | knowledge/glossary.md | ef6a95c7c64 | 15 entries, cites carried forward from per-file docs (verified-by-code/from-comment/from-README) with explicit "— via" provenance | grown by pg-corpus-maintainer; next terms: LWLock, MemoryContext, MVCC, PGPROC, redo, rmgr |
+
 ## Per-file coverage
 
 Authoritative ledger: `progress/files-examined.md` (one row per examined source file).

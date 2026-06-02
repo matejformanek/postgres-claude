@@ -75,3 +75,4 @@ verified-by-code: 11 — from-comment: 8 — from-readme: 0 — inferred: 0 — 
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

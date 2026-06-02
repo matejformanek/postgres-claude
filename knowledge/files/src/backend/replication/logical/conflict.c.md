@@ -44,4 +44,5 @@ enum. (`conflict.h:25-30`)
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

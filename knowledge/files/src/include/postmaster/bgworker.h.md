@@ -28,3 +28,7 @@
 
 `postmaster/bgworker_internals.h` (postmaster-side state) and the canonical
 bgworker skill.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)

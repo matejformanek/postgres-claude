@@ -194,3 +194,4 @@ a system reboot). `:319-366`.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)
+- [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

@@ -159,3 +159,7 @@ LWLocks.").
 - `[verified-by-code]`: 26
 - `[from-comment]`: 5
 - `[inferred]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)

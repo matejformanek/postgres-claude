@@ -161,4 +161,5 @@ outlive the columns they refer to. `:103-146`
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

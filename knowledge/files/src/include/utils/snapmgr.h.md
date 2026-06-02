@@ -53,3 +53,7 @@ Declarations for snapmgr.c plus the three statically allocated special snapshots
 ## Confidence tag tally
 
 `[verified-by-code]=2 [from-comment]=3 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/snapshot-lifecycle.md](../../../../data-structures/snapshot-lifecycle.md)

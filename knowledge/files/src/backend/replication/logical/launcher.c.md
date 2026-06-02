@@ -62,4 +62,5 @@ subscription change `ApplyLauncherWakeup` (`:1195`) sets the latch.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

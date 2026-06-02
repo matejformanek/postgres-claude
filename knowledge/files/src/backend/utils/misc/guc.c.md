@@ -137,4 +137,5 @@ and stack/restore every PG run-time setting. SQL-level entry points
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/guc-variables.md](../../../../../idioms/guc-variables.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

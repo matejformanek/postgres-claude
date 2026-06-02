@@ -106,4 +106,5 @@ on release/crash), `RS_TEMPORARY` (session-bound). (`slot.h:43-48`)
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/replication.md](../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

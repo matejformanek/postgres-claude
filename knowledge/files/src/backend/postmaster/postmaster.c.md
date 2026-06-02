@@ -104,4 +104,5 @@ children to postmaster goes through:
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

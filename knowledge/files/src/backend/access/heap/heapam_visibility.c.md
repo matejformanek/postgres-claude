@@ -102,5 +102,6 @@ None defined here. Consumes `HeapTupleData`, `Snapshot`, `Buffer`. `TM_Result` (
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/mvcc.md](../../../../../architecture/mvcc.md)
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

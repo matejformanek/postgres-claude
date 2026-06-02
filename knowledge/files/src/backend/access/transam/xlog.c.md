@@ -331,5 +331,6 @@ until the file is fully allocated.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

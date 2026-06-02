@@ -35,3 +35,7 @@ Note: deliberately **does not** include `utils/catcache.h` (comment at line 21).
 ## Confidence tag tally
 
 verified-by-code: 0 — from-comment: 3 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
