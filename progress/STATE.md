@@ -46,11 +46,12 @@
 - Subsystem + data-structures docs: **20** (16 subsystem + 4 data-structures).
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.
-- Glossary: `knowledge/glossary.md`, **15** entries (top-15 internals terms; grown by `pg-corpus-maintainer`).
+- Glossary: `knowledge/glossary.md`, **30** entries (grown by `pg-corpus-maintainer`; run-2 added the next top-15 by doc-frequency: tuple, OID, vacuum, visibility map, PGPROC, redo, TOAST, checkpoint, spinlock, TupleDesc, rmgr, MVCC, tablespace, walsender, latch).
 - Top directories by registry rows: `executor/` (80+), `access/transam` (47), `catalog/` (50), `commands/` (78), `replication/` (56), `optimizer/` (75), `parser/+rewrite/` (57), `storage/ipc` (35), `access/{brin,gin,gist,hash,spgist}` (~80), `nodes/` (33), `utils/cache` (25), `utils/mmgr` (11).
 
 ## Recent session logs
 
+- `sessions/2026-06-02-corpus-maintainer-glossary-run2.md` — cloud routine run 2: glossary 15 → 30 (Pass 1 idempotent no-op).
 - `sessions/2026-06-02-corpus-maintainer-backlinks-glossary.md` — cloud routine: +117 source-path backlinks, new 15-entry glossary.
 - `sessions/2026-06-01-wave2-consolidation.md` — wave-2 consolidation.
 - `sessions/2026-06-01-leaf-subsystems-wave3.md` — libpq-backend, port, main, foreign, jit, partitioning.
