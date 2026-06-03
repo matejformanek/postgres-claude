@@ -4,8 +4,8 @@ The per-directory undocumented-file map. This is the **work queue** the
 `pg-file-backfiller` cloud routine + foreground interactive sweeps pull
 from until Phase A closes (100% coverage of `src/` + `contrib/`).
 
-**Refreshed:** 2026-06-03 (post A2 libpq-stack sweep), source pin `4b0bf0788b0`.
-**Top-line:** 1 058 / 2 564 docs (41.3% coverage). **Gap: 1 506 files.**
+**Refreshed:** 2026-06-03 (post A3 pg_dump sweep), source pin `4b0bf0788b0`.
+**Top-line:** 1 094 / 2 564 docs (42.7% coverage). **Gap: 1 470 files.**
 
 Numbers below count `.c` + `.h` files. The doc count exceeds source count
 in some dirs because docs include companion files (Makefiles, .y, .l, .dat,
@@ -184,17 +184,18 @@ already; verify alignment.
 
 ---
 
-## Suggested attack order (post A2)
+## Suggested attack order (post A3)
 
 0. ~~**Foreground sweep #1** — `src/include/catalog/`~~ — **DONE 2026-06-02 evening** (72 docs, 68 issues; `knowledge/issues/catalog.md`).
-1. ~~**Foreground sweep #2** — libpq stack~~ — **DONE 2026-06-03** (69 docs, 227 issues; `knowledge/issues/libpq.md`).
-2. **Foreground sweep #3** — `src/bin/pg_dump/` (16) + `src/bin/psql/` (~22) + `src/bin/pg_basebackup/` (~8). User-facing tool surface; visible privilege boundaries; pg_dump security model is Phase D territory.
-3. **Foreground sweep #4** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files).
-4. **Foreground sweep #5** — `src/common/` (50, 1.6%) + `src/include/common/` headers. Cross-frontend/backend shared crypto + scram + base64 + protocol; **Phase D candidate** because libpq + pg_dump rely on these.
-5. **Foreground sweep #6** — `src/include/replication/` (22, 4.5%) — close the gap exposed by the spine doc.
-6. **Cloud routine** — keep grinding through `src/port`, `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
-7. **Cloud routine + foreground** — `src/pl/plpgsql/` (16 files; privileged-sandbox boundary), `src/pl/plperl/plpython/pltcl`, contrib/ top modules (pg_stat_statements, pgcrypto, postgres_fdw).
-8. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
+1. ~~**Foreground sweep #2** — libpq stack~~ — **DONE 2026-06-03 morning** (69 docs, 227 issues; `knowledge/issues/libpq.md`).
+2. ~~**Foreground sweep #3** — pg_dump~~ — **DONE 2026-06-03 afternoon** (36 docs, 80 issues; `knowledge/issues/pg_dump.md`). pg_dump.c alone is ~17k LOC; B2's "trust the archive source" finding is the headline.
+3. **Foreground sweep #4** — `src/bin/psql/` (~22) + `src/bin/pg_basebackup/` (~8) + `src/bin/initdb/` (~5). Deferred from sweep #3 because pg_dump alone filled a batch. Privilege boundary continues here.
+4. **Foreground sweep #5** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files).
+5. **Foreground sweep #6** — `src/common/` (50, 1.6%) + `src/include/common/` headers. Cross-frontend/backend shared crypto + scram + base64 + protocol; **Phase D candidate** because libpq + pg_dump rely on these.
+6. **Foreground sweep #7** — `src/include/replication/` (22, 4.5%) — close the gap exposed by the spine doc.
+7. **Cloud routine** — keep grinding through `src/port`, `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
+8. **Cloud routine + foreground** — `src/pl/plpgsql/` (16 files; privileged-sandbox boundary), `src/pl/plperl/plpython/pltcl`, contrib/ top modules (pg_stat_statements, pgcrypto, postgres_fdw).
+9. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
 
 ---
 
