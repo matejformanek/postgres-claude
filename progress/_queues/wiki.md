@@ -12,11 +12,11 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 
 [done:a49dd51] Hint_Bits https://wiki.postgresql.org/wiki/Hint_Bits
 [done:c34e6da] Hot_Standby https://wiki.postgresql.org/wiki/Hot_Standby
-[pending] Logical_Decoding https://wiki.postgresql.org/wiki/Logical_Decoding
-[pending] MultiXacts https://wiki.postgresql.org/wiki/MultiXacts
-[pending] Parallel_Query_Execution https://wiki.postgresql.org/wiki/Parallel_Query_Execution
-[pending] Free_Space_Map_Problems https://wiki.postgresql.org/wiki/Free_Space_Map_Problems
-[pending] Group_Commit https://wiki.postgresql.org/wiki/Group_commit
-[pending] Index-only_scans https://wiki.postgresql.org/wiki/Index-only_scans
-[pending] WAL_Internals https://wiki.postgresql.org/wiki/WAL_Internals
-[pending] Generic_WAL https://wiki.postgresql.org/wiki/Generic_WAL
+[skipped:404-no-such-wiki-page] Logical_Decoding https://wiki.postgresql.org/wiki/Logical_Decoding
+[skipped:404-no-such-wiki-page] MultiXacts https://wiki.postgresql.org/wiki/MultiXacts
+[skipped:stale-2017-design-stub] Parallel_Query_Execution https://wiki.postgresql.org/wiki/Parallel_Query_Execution
+[in-progress:cloud/pg-docs-miner/2026-06-03] Free_Space_Map_Problems https://wiki.postgresql.org/wiki/Free_Space_Map_Problems
+[in-progress:cloud/pg-docs-miner/2026-06-03] Group_Commit https://wiki.postgresql.org/wiki/Group_commit
+[in-progress:cloud/pg-docs-miner/2026-06-03] Index-only_scans https://wiki.postgresql.org/wiki/Index-only_scans
+[skipped:404-no-such-wiki-page] WAL_Internals https://wiki.postgresql.org/wiki/WAL_Internals
+[skipped:404-no-such-wiki-page] Generic_WAL https://wiki.postgresql.org/wiki/Generic_WAL
