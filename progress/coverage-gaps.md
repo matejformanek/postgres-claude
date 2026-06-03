@@ -4,8 +4,8 @@ The per-directory undocumented-file map. This is the **work queue** the
 `pg-file-backfiller` cloud routine + foreground interactive sweeps pull
 from until Phase A closes (100% coverage of `src/` + `contrib/`).
 
-**Refreshed:** 2026-06-03 (post A5 common sweep), source pin `4b0bf0788b0`.
-**Top-line:** 1 245 / 2 564 docs (48.6% coverage). **Gap: 1 319 files.**
+**Refreshed:** 2026-06-03 (post A6 bin-upgrade sweep), source pin `4b0bf0788b0`.
+**Top-line:** 1 281 / 2 564 docs (50.0% coverage — **halfway**). **Gap: 1 283 files.**
 
 Numbers below count `.c` + `.h` files. The doc count exceeds source count
 in some dirs because docs include companion files (Makefiles, .y, .l, .dat,
@@ -157,15 +157,15 @@ Test infrastructure (regress/, isolation/, ssl/, kerberos/, ldap/,
 recovery/, modules/). **High priority for review skills + Phase B
 personas** — test conventions are visible here.
 
-## src/bin — 79 / 160 docs (49.4%)
+## src/bin — 115 / 160 docs (71.9%)
 
-User-facing utilities. Done: pg_dump (36, A3), psql (29, A4),
-pg_basebackup (12, A4), initdb (2, A4). Remaining: pg_upgrade,
-pg_rewind, pg_amcheck, pg_ctl, pg_resetwal, pg_test_fsync,
-pg_test_timing, pg_waldump, pg_combinebackup, pg_verifybackup,
-pg_walsummary, pg_archivecleanup, pg_controldata, pg_checksums, scripts/.
-**High priority for the data-leak project** (pg_upgrade catalog
-migration safety, pg_rewind data dir manipulation, pg_amcheck integrity).
+User-facing utilities. **Done:** pg_dump (36, A3), psql (29, A4),
+pg_basebackup (12, A4), initdb (2, A4), pg_upgrade (22, A6),
+pg_rewind (13, A6), pg_amcheck (1, A6). **Remaining:** pg_ctl,
+pg_resetwal, pg_test_fsync, pg_test_timing, pg_waldump,
+pg_combinebackup, pg_verifybackup, pg_walsummary, pg_archivecleanup,
+pg_controldata, pg_checksums, scripts/. Mostly small mechanical tools
+suitable for cloud-routine backfill.
 
 ## src/fe_utils — 0 / 18 docs (0.0%)
 
@@ -197,8 +197,8 @@ already; verify alignment.
 2. ~~**Foreground sweep #3** — pg_dump~~ — **DONE 2026-06-03 afternoon** (36 docs, 80 issues; `knowledge/issues/pg_dump.md`). pg_dump.c alone is ~17k LOC; B2's "trust the archive source" finding is the headline.
 3. ~~**Foreground sweep #4** — psql + pg_basebackup + initdb~~ — **DONE 2026-06-03 evening** (43 docs, 146 issues; `knowledge/issues/{psql,pg_basebackup,initdb}.md`). 5 parallel agents; 0 misdirection. Headlines: psql secret-scrub cluster (history+logfile+password buffers); pg_basebackup backup-stream trust (server-controlled `spclocation` + `data_directory_mode`); initdb `--pwfile` stale-TODO ("paranoia for now" never resolved).
 4. ~~**Foreground sweep #5** — src/common + src/include/common~~ — **DONE 2026-06-03 evening** (109 docs, 124 issues; `knowledge/issues/common.md`). 5 parallel agents; 0 misdirection. **Headlines:** SecretBuf hosting site at `src/include/common/secretbuf.h` (proposed) closes 10+ A5 sites + 4 prior cross-corpus sites in one coordinated patch series; backup-trust echo of A3 in `blkreftable.c` + `parse_manifest.c` (CRC/SHA-256 over attacker-controlled bytes); `pg_lzcompress` decompression-bomb potential; `percentrepl.c` GUC-boundary shell-injection; `controldata_utils` torn-write window.
-5. **Foreground sweep #6** — `src/bin/pg_upgrade/` + `src/bin/pg_rewind/` + `src/bin/pg_amcheck/` (~30 files combined). Closes the remaining high-judgement bin/ tools; pg_upgrade is the most security-sensitive (catalog migration during major-version jump).
-6. **Foreground sweep #7** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files).
+5. ~~**Foreground sweep #6** — pg_upgrade + pg_rewind + pg_amcheck~~ — **DONE 2026-06-03 late evening** (36 docs, 170 issues; `knowledge/issues/{pg_upgrade,pg_rewind,pg_amcheck}.md`). 5 parallel agents; 0 misdirection. **Headlines:** (1) **pg_upgrade `check_loadable_libraries` RCE** — actually `LOAD`s old-cluster-named `.so` files into the NEW cluster (concrete privilege-escalation primitive); (2) **pg_rewind zero `O_NOFOLLOW` everywhere** + server-supplied symlink targets accepted unchecked + null-bytea-from-source = unlink-target-file primitive; (3) **pg_amcheck fail-open at per-database level** (silent skip on missing extension); (4) **pg_upgrade `pg_authid` hash file persists** under pg_dir_create_mode in new pgdata until cleanup. **Past corpus halfway point at 50.0%.**
+6. **Foreground sweep #7** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files; backend's biggest unaddressed area).
 7. **Foreground sweep #8** — `src/include/replication/` (22, 4.5%) — close the gap exposed by the spine doc.
 8. **Cloud routine** — keep grinding through `src/port`, `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
 9. **Cloud routine + foreground** — `src/pl/plpgsql/` (16 files; privileged-sandbox boundary), `src/pl/plperl/plpython/pltcl`, contrib/ top modules (pg_stat_statements, pgcrypto, postgres_fdw).

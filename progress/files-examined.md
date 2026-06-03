@@ -1458,3 +1458,41 @@ grep '| deep-read |' progress/files-examined.md
 | src/include/common/unicode_normprops_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_normprops_table.h.md | Generated Unicode table — stub doc |
 | src/include/common/unicode_version.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/unicode_version.h.md | A5 sweep per-file doc |
 | src/include/common/username.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/username.h.md | A5 sweep per-file doc |
+
+<!-- a6-bin-upgrade 2026-06-03 — foreground sweep #6 (Phase A); 36 docs via 5 parallel general-purpose agents covering src/bin/{pg_upgrade,pg_rewind,pg_amcheck} -->
+| src/bin/pg_upgrade/check.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/check.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/controldata.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/controldata.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/dump.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/dump.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/exec.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/exec.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/file.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/file.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/function.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/function.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/info.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/info.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/multixact_read_v18.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/multixact_read_v18.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/multixact_read_v18.h | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/multixact_read_v18.h.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/multixact_rewrite.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/multixact_rewrite.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/option.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/option.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/parallel.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/parallel.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/pg_upgrade.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/pg_upgrade.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/pg_upgrade.h | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/pg_upgrade.h.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/relfilenumber.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/relfilenumber.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/server.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/server.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/slru_io.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/slru_io.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/slru_io.h | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/slru_io.h.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/tablespace.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/tablespace.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/task.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/task.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/util.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/util.c.md | A6 sweep per-file doc |
+| src/bin/pg_upgrade/version.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_upgrade/version.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/datapagemap.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/datapagemap.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/datapagemap.h | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/datapagemap.h.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/file_ops.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/file_ops.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/file_ops.h | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/file_ops.h.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/filemap.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/filemap.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/filemap.h | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/filemap.h.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/libpq_source.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/libpq_source.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/local_source.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/local_source.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/parsexlog.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/parsexlog.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/pg_rewind.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/pg_rewind.c.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/pg_rewind.h | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/pg_rewind.h.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/rewind_source.h | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/rewind_source.h.md | A6 sweep per-file doc |
+| src/bin/pg_rewind/timeline.c | 2026-06-03 | 4b0bf0788b0 | read | bin-upgrade-a6 | knowledge/files/src/bin/pg_rewind/timeline.c.md | A6 sweep per-file doc |
+| src/bin/pg_amcheck/pg_amcheck.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-upgrade-a6 | knowledge/files/src/bin/pg_amcheck/pg_amcheck.c.md | A6 sweep — heap/btree verifier frontend |
