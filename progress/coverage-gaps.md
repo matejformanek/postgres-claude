@@ -4,8 +4,8 @@ The per-directory undocumented-file map. This is the **work queue** the
 `pg-file-backfiller` cloud routine + foreground interactive sweeps pull
 from until Phase A closes (100% coverage of `src/` + `contrib/`).
 
-**Refreshed:** 2026-06-02 (evening — post A1 catalog-headers sweep), source pin `4b0bf0788b0`.
-**Top-line:** 989 / 2 564 docs (38.6% coverage). **Gap: 1,575 files.**
+**Refreshed:** 2026-06-03 (post A2 libpq-stack sweep), source pin `4b0bf0788b0`.
+**Top-line:** 1 058 / 2 564 docs (41.3% coverage). **Gap: 1 506 files.**
 
 Numbers below count `.c` + `.h` files. The doc count exceeds source count
 in some dirs because docs include companion files (Makefiles, .y, .l, .dat,
@@ -89,11 +89,12 @@ matters as much as `.c` files.
 | statistics | 4 | 1 | 25.0% |
 | regex | 5 | 1 | 20.0% |
 
-### Done or near-done (post A1)
+### Done or near-done (post A1, A2)
 
-| Subdir | Source | Docs | Coverage |
-|---|---:|---:|---:|
-| **catalog** | 85 | 87 | 102.4% | A1 sweep landed 72 new docs 2026-06-02 evening (counts >100% include _README + _catalog_headers_overview companion docs). |
+| Subdir | Source | Docs | Coverage | Notes |
+|---|---:|---:|---:|---|
+| **catalog** | 85 | 87 | 102.4% | A1 sweep landed 72 docs 2026-06-02 evening. |
+| **libpq** (src/include) | 20 | 20 | 100.0% | A2 sweep landed all 20 backend headers 2026-06-03. |
 
 ### Big absolute gaps (high-priority foreground sweep candidates)
 
@@ -101,7 +102,6 @@ matters as much as `.c` files.
 |---|---:|---:|---:|---|
 | **common** | 50 | 0 | 0.0% | Cross-backend shared helpers (cryptohash, scram, blkreffile, …) |
 | **port** | 47 | 0 | 0.0% | Cross-platform portability headers — `pg_iovec.h`, `pg_pthread.h`, etc. |
-| **libpq** | 20 | 0 | 0.0% | The libpq protocol headers; loadbearing for replication + frontend |
 | **replication** | 22 | 1 | 4.5% | Surprising gap — the C bodies are 107% but the headers are <5% |
 | **lib** | 15 | 0 | 0.0% | binaryheap, dshash, hyperloglog, pairingheap, simplehash, etc. |
 | **fe_utils** | 16 | 0 | 0.0% | Frontend-shared helpers |
@@ -184,18 +184,17 @@ already; verify alignment.
 
 ---
 
-## Suggested attack order (post A1)
+## Suggested attack order (post A2)
 
-0. ~~**Foreground sweep #1** — `src/include/catalog/`~~ — **DONE 2026-06-02 evening** (72 docs landed via 6 parallel agents; 68 [ISSUE-*] tags surfaced; see `knowledge/issues/catalog.md`).
-1. **Foreground sweep #2** — `src/include/libpq/` (20) + `src/backend/libpq/` (17) + `src/interfaces/libpq/` (~120). The whole libpq stack. Data-leak project prerequisite.
-2. **Foreground sweep #3** — `src/bin/pg_dump/` (16) + `src/bin/psql/` (~22). User-facing tool surface; visible privilege boundaries.
+0. ~~**Foreground sweep #1** — `src/include/catalog/`~~ — **DONE 2026-06-02 evening** (72 docs, 68 issues; `knowledge/issues/catalog.md`).
+1. ~~**Foreground sweep #2** — libpq stack~~ — **DONE 2026-06-03** (69 docs, 227 issues; `knowledge/issues/libpq.md`).
+2. **Foreground sweep #3** — `src/bin/pg_dump/` (16) + `src/bin/psql/` (~22) + `src/bin/pg_basebackup/` (~8). User-facing tool surface; visible privilege boundaries; pg_dump security model is Phase D territory.
 3. **Foreground sweep #4** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files).
-4. **Cloud routine** — keep grinding through `src/port`, `src/common`,
-   `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
-5. **Cloud routine + foreground** — `src/pl/plpgsql/`, contrib/ top
-   modules (pg_stat_statements, pgcrypto, postgres_fdw).
-6. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode),
-   `pch/` (precompiled-header glue), `po/` (translations).
+4. **Foreground sweep #5** — `src/common/` (50, 1.6%) + `src/include/common/` headers. Cross-frontend/backend shared crypto + scram + base64 + protocol; **Phase D candidate** because libpq + pg_dump rely on these.
+5. **Foreground sweep #6** — `src/include/replication/` (22, 4.5%) — close the gap exposed by the spine doc.
+6. **Cloud routine** — keep grinding through `src/port`, `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
+7. **Cloud routine + foreground** — `src/pl/plpgsql/` (16 files; privileged-sandbox boundary), `src/pl/plperl/plpython/pltcl`, contrib/ top modules (pg_stat_statements, pgcrypto, postgres_fdw).
+8. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
 
 ---
 
