@@ -1,57 +1,58 @@
----
-path: src/backend/utils/adt/oid8.c
-anchor_sha: 4b0bf0788b066a4ca1d4f959566678e44ec93422
-loc: 168
-depth: read
----
+# `src/backend/utils/adt/oid8.c`
 
-# oid8.c
-
-- **Source path:** `source/src/backend/utils/adt/oid8.c`
-- **Lines:** 168
-- **Depth:** read
-- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`
-- **Companion files:** `src/include/catalog/pg_type.h`, `src/include/utils/builtins.h` (`PG_GETARG_OID8`/`PG_RETURN_OID8`, `uint64in_subr`, `pg_ulltoa_n`, `Oid8` typedef), `src/include/libpq/pqformat.h`, `src/include/catalog/pg_proc.dat`
-
-> Note: at this anchor SHA `oid8.c` is the **scalar 8-byte OID type (`Oid8`)** — an unsigned 64-bit OID, analogous to `xid8` — NOT the `oidvector` helper. The `oidvector` code lives in `oid.c`. (The task's context blurb describing this as "oidvector helpers" is stale.)
+- **File:** `source/src/backend/utils/adt/oid8.c` (168 lines)
+- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (2026-06-03)
 
 ## Purpose
-SQL type I/O, comparison, hashing, and min/max-aggregate support for the `oid8` type, an unsigned 64-bit object identifier [from-comment `oid8.c:3-4`, verified-by-code `oid8.c:27-168`]. `Oid8` is an unsigned integer, so all comparisons are plain unsigned C operators on the underlying 64-bit value — there is no wraparound semantics here (unlike `xid`) [verified-by-code `oid8.c:86-138`].
 
-## Public symbols
-| Symbol | file:line | Role |
-|---|---|---|
-| `oid8in` | `oid8.c:27` | cstring → oid8 via `uint64in_subr` |
-| `oid8out` | `oid8.c:37` | oid8 → cstring via `pg_ulltoa_n` + manual palloc/memcpy |
-| `oid8recv` | `oid8.c:60` | binary recv (`pq_getmsgint64`) |
-| `oid8send` | `oid8.c:71` | binary send (`pq_sendint64`) |
-| `oid8eq`/`oid8ne` | `oid8.c:86`/`95` | (in)equality, plain `==`/`!=` |
-| `oid8lt`/`oid8le`/`oid8ge`/`oid8gt` | `oid8.c:104`/`113`/`122`/`131` | ordering, plain unsigned compares |
-| `hashoid8`/`hashoid8extended` | `oid8.c:140`/`146` | delegate to `hashint8`/`hashint8extended` |
-| `oid8larger`/`oid8smaller` | `oid8.c:152`/`161` | min/max aggregate support |
+The `oid8` (`Oid8`) **scalar** type — a 64-bit OID. NOT an array of OIDs
+despite the suggestive name. Companion to the 32-bit `Oid` in `oid.c`.
+Used for 64-bit object identifiers in newer catalog contexts.
+(`oid8.c:1-13` [from-comment])
 
-## Internal landmarks
-- `MAXOID8LEN` (=20) sizes the output stack buffer for a 64-bit decimal value [verified-by-code `oid8.c:21`, `oid8.c:41`].
-- `oid8out` avoids `pstrdup`'s `strlen` by computing the length from `pg_ulltoa_n` and doing a manual `palloc`+`memcpy` [from-comment `oid8.c:48-53`].
-- `hashoid8`/`hashoid8extended` pass `fcinfo` straight through to `hashint8`/`hashint8extended` [verified-by-code `oid8.c:140-150`].
+## Type role
 
-## Invariants & gotchas
-- **Plain unsigned ordering, no wraparound.** Unlike `xid`, `oid8` comparisons (`<`, `<=`, etc.) are direct unsigned comparisons on the 64-bit value; sorting is a true total order [verified-by-code `oid8.c:104-138`].
-- **oid8 hashes identically to int8.** Because hashing delegates to `hashint8[extended]`, an `oid8` and the bit-identical `int8`/`bigint` produce the same hash — relevant for any cross-type hash assumptions [verified-by-code `oid8.c:140-150`].
-- **Output buffer is exact.** `MAXOID8LEN + 1` (=21) bytes holds the largest 64-bit decimal plus NUL; the `+ 1` from `pg_ulltoa_n` then the `buf[len-1] = '\0'` is the standard numutils idiom [verified-by-code `oid8.c:41-46`].
+- **Input:** `oid8in` (`:28`) — delegates to `uint64in_subr` (numutils.c),
+  with typname `"oid8"` so error messages say "value out of range for
+  type oid8" rather than "bigint".
+- **Output:** `oid8out` (`:38`) — uses `pg_ulltoa_n` for fast formatting,
+  manual palloc+memcpy to skip the `pstrdup` strlen (`:48-53`
+  [from-comment]).
+- **Binary I/O:** `oid8recv` (`:61`) / `oid8send` (`:72`) — raw int64.
+- **Comparison:** `oid8eq/ne/lt/le/gt/ge`, `oid8larger`/`oid8smaller`.
+  Unlike the `oid` type, no `oid8cmp` exists in this file — comparison
+  is unsigned via direct `<`/`>` on `Oid8` (which is unsigned 64-bit).
+- **Hash:** `hashoid8` / `hashoid8extended` — delegate to `hashint8`.
 
-## Cross-references
-- [[knowledge/files/src/backend/utils/adt/oid.c.md]] — the 32-bit `oid` type and `oidvector`.
-- [[knowledge/files/src/backend/utils/adt/xid.c.md]] — `xid8` is the analogous 64-bit transaction-id type and likewise delegates hashing to int8.
-- [[knowledge/files/src/backend/utils/adt/int8.c.md]] — `hashint8`/`hashint8extended` targets.
-- [[knowledge/files/src/backend/utils/adt/numutils.c.md]] — `uint64in_subr`, `pg_ulltoa_n`.
-- [[knowledge/idioms/fmgr.md]] — V1 calling convention.
+## Phase D notes
+
+- **Unlike `oidin('-1')` which wraps to MAXUINT32 (uint32in_subr
+  legacy compat), `oid8in('-1')` rejects** — `uint64in_subr` does not
+  have the cross-extension fallback (see numutils.c notes).
+  [verified-by-code]
+- No additional input syntax beyond what `uint64in_subr` provides
+  (whitespace, decimal/hex/octal/binary via `strtou64(s, &endptr, 0)`).
+- `oid8out` skips a strlen by tracking length explicitly — modest
+  perf win on hot catalog paths.
+- All comparison ops use direct `Oid8` operators; no signed/unsigned
+  confusion possible because `Oid8` is unambiguously `uint64`.
 
 ## Potential issues
-None surfaced. Trivial type-support file; all idioms match siblings.
+
+- `[ISSUE-correctness: oid8 has no "vector" sibling like oidvector for
+  oid; if a 64-bit-OID-array type is needed, the absence of oid8vector
+  is a future-feature gap. (info)]`
+- `[ISSUE-undocumented-invariant: oid8in('-1') rejects but oidin('-1')
+  wraps; this cross-type behavior asymmetry is not flagged in user
+  docs. (low)]`
+
+## Cross-references
+
+- `source/src/backend/utils/adt/numutils.c` — `uint64in_subr`,
+  `pg_ulltoa_n`.
+- `source/src/backend/utils/adt/oid.c` — 32-bit sibling.
 
 ## Confidence tag tally
-- [verified-by-code]: 9
-- [from-comment]: 3
-- [inferred]: 0
-- [unverified]: 0
+
+- `[verified-by-code]` × 2
+- `[from-comment]` × 1

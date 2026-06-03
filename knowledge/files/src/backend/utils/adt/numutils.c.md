@@ -1,74 +1,114 @@
----
-path: src/backend/utils/adt/numutils.c
-anchor_sha: 4b0bf0788b066a4ca1d4f959566678e44ec93422
-loc: 1311
-depth: deep
----
+# `src/backend/utils/adt/numutils.c`
 
-# numutils.c
-
-- **Source path:** `source/src/backend/utils/adt/numutils.c`
-- **Lines:** 1311
-- **Depth:** deep
-- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`
-- **Companion files:** `src/include/utils/builtins.h` (declares `pg_strtoint*`/`pg_*toa`/`pg_ultostr*`/`uint*in_subr`), `src/include/common/int.h` (`pg_neg_u16/32/64_overflow`, `pg_add/sub/mul_s64_overflow`, `strtou64`), `src/include/port/pg_bitutils.h` (`pg_leftmost_one_pos32/64`). Callers: int2.c/int4.c/int8.c, oid.c, timestamp/date code (`pg_ultostr_zeropad`), and most numeric I/O.
+- **File:** `source/src/backend/utils/adt/numutils.c` (1311 lines)
+- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (2026-06-03)
 
 ## Purpose
-The integer<->string conversion core for the backend: string-to-int parsing with overflow detection (`pg_strtoint16/32/64` + their `_safe` variants and `uint32in_subr`/`uint64in_subr`), and int-to-string formatting (`pg_itoa`/`pg_ltoa`/`pg_lltoa`, the no-NUL `pg_ultoa_n`/`pg_ulltoa_n`, and `pg_ultostr`/`pg_ultostr_zeropad`). [from-comment] `numutils.c:3-4`. These are plain exported C helpers (not fmgr functions) used pervasively across the backend; the type I/O wrappers that call them live elsewhere. Formatting uses a two-digit lookup table and a base-10-length precomputation for speed `numutils.c:28-85`.
 
-## Public symbols
-| Symbol | file:line | Role |
-| --- | --- | --- |
-| `pg_strtoint16` | `numutils.c:120` | Hard-error wrapper -> `pg_strtoint16_safe(s, NULL)`. |
-| `pg_strtoint16_safe` | `numutils.c:127` | smallint parse; base 10/16/8/2, underscores, escontext-aware. |
-| `pg_strtoint32` | `numutils.c:382` | Hard-error wrapper. |
-| `pg_strtoint32_safe` | `numutils.c:388` | integer parse. |
-| `pg_strtoint64` | `numutils.c:643` | Hard-error wrapper. |
-| `pg_strtoint64_safe` | `numutils.c:649` | bigint parse. |
-| `uint32in_subr` | `numutils.c:896` | unsigned 32-bit parse via `strtoul`, with `endloc` continuation + width recheck. |
-| `uint64in_subr` | `numutils.c:983` | unsigned 64-bit parse via `strtou64`, with `endloc`. |
-| `pg_itoa` | `numutils.c:1040` | int16 -> string (delegates to `pg_ltoa`), returns strlen. |
-| `pg_ultoa_n` | `numutils.c:1053` | uint32 -> string, NOT NUL-terminated, returns length. |
-| `pg_ltoa` | `numutils.c:1118` | int32 -> NUL-terminated string, returns strlen. |
-| `pg_ulltoa_n` | `numutils.c:1138` | uint64 -> string, NOT NUL-terminated, returns length. |
-| `pg_lltoa` | `numutils.c:1225` | int64 -> NUL-terminated string, returns strlen. |
-| `pg_ultostr_zeropad` | `numutils.c:1265` | uint32 -> zero-padded to minwidth; returns end ptr, no NUL. |
-| `pg_ultostr` | `numutils.c:1305` | uint32 -> string; returns end ptr, no NUL. |
+The **canonical integer parser and formatter** for the backend. Every
+int2/int4/int8 input function and every oid input ultimately funnels
+through one of these. Also exports the fast int-to-string converters used
+by `printf`-free hot paths. (`numutils.c:1-13` [from-comment])
 
-No SQL-callable (`PG_FUNCTION_ARGS`) entry points live in this file — it is entirely plain C helpers.
+## Type role
 
-## Internal landmarks
-- **Two-digit lookup table** `DIGIT_TABLE[200]` `numutils.c:28-38`: 100 ASCII digit pairs; formatting copies 2 bytes at a time.
-- **Base-10 length precompute** `decimalLength32`/`decimalLength64` `numutils.c:43-85`: `(leftmost_one_pos+1) * 1233 / 4096` approximates log10 from log2, then a `PowersOfTen` table corrects off-by-one `numutils.c:58-59,83-84`. Drives right-to-left digit placement so the writer knows the output width up front.
-- **Hex lookup** `hexlookup[128]` `numutils.c:87-96`: maps ASCII to 0-15, -1 for non-hex; indexed by `(unsigned char)*ptr` (so 128 entries cover the 7-bit ASCII range used after `isxdigit`).
-- **Two-pass parse strategy** (all three `pg_strtoint*_safe`): a branch-light fast path assuming base-10 ASCII digits, optional leading `-`, no spaces/underscores `numutils.c:136-202`; on any deviation it `goto slow` and re-parses from the start handling sign, `0x`/`0o`/`0b` prefixes, underscores, and surrounding whitespace `numutils.c:204-344`.
-- **Overflow-detection strategy (the high-value part):** accumulation is done in the *unsigned* counterpart (`uint16`/`uint32`/`uint64`) `numutils.c:116-118,131`. Before each multiply-add the code checks `tmp > -(PG_INTnn_MIN / base)` `numutils.c:182,231,255,279,303` — i.e. the magnitude limit derived from the most-negative value, so both signs are covered by one test. Final sign application: negatives go through `pg_neg_uNN_overflow` `numutils.c:194,336`; positives are bounded by `tmp > PG_INTnn_MAX` `numutils.c:199,341`. This is why the most-negative int (whose magnitude exceeds `PG_INTnn_MAX`) parses correctly — see the "NB: Accumulate input as an unsigned number" header comment `numutils.c:116-118`.
-- **uint*in_subr ERANGE/EINVAL handling** `numutils.c:904-923,990-1009`: `errno`-based; treats EINVAL like a parse failure (endptr==s) and normalizes ERANGE to the out-of-range message. `uint32in_subr` additionally rechecks width when `unsigned long` is wider than uint32 and accepts both signed- and unsigned-extended matches for back-compat with minus-signed input `numutils.c:944-963`.
-- **Formatting fast paths:** `pg_ultostr_zeropad` short-cuts the 2-digit/minwidth==2 case with a single `memcpy` `numutils.c:1272-1276`; the `pg_ulltoa_n` loop strips 8 digits per iteration while >= 1e8, then drops to 32-bit math `numutils.c:1155-1179`.
+Infrastructure for primitive integer types. Not bound to a single fmgr
+function.
 
-## Invariants & gotchas
-- **Overflow must be detected pre-store, not post.** The `-(PG_INTnn_MIN / base)` guard runs *before* `tmp = tmp*base + digit` `numutils.c:182-185,303-306`, so the unsigned accumulator never wraps silently. Changing the comparison to `>=` or moving it after the multiply would corrupt boundary values.
-- **`_safe` vs non-`_safe` is the soft-error contract.** The bare `pg_strtointNN(s)` pass `NULL` escontext `numutils.c:123,384,645`, so `ereturn` degrades to a hard `ereport(ERROR)`. The `_safe(s, escontext)` form fills an `ErrorSaveContext` if given one; callers MUST then check `SOFT_ERROR_OCCURRED()` `numutils.c:112-114,373-375,634-636`. Same for `uint*in_subr` `numutils.c:892-894,979-981`.
-- **Underscore rules:** a single `_` is allowed only *between* digits, never leading/trailing/doubled; each branch enforces "must be followed by more digits" `numutils.c:236-242,308-317`, and the decimal branch additionally forbids a leading underscore `numutils.c:310-312`. The fast path bails to slow on any `_`.
-- **Out-of-range vs invalid-syntax are distinct SQLSTATEs.** `ERRCODE_NUMERIC_VALUE_OUT_OF_RANGE` for overflow `numutils.c:347-350` vs `ERRCODE_INVALID_TEXT_REPRESENTATION` for bad syntax `numutils.c:353-356`; the type name in the message is hardcoded per function ("smallint"/"integer"/"bigint").
-- **No-NUL functions need exact buffer sizing.** `pg_ultoa_n` requires >= 10 bytes `numutils.c:1050-1051`, `pg_ulltoa_n` >= MAXINT8LEN `numutils.c:1135-1136`, `pg_ltoa` >= 12 `numutils.c:1113-1116`, `pg_lltoa` >= MAXINT8LEN+1 `numutils.c:1222-1223`. `pg_ultostr`/`pg_ultostr_zeropad` write no terminator and return the end pointer for chaining `numutils.c:1249-1250,1291-1292`.
-- **`pg_ltoa`/`pg_lltoa` negate via unsigned** `numutils.c:1126,1233`: `uvalue = (uintNN) 0 - uvalue` to handle INT_MIN without signed-overflow UB.
-- **`pg_ultostr_zeropad` asserts minwidth > 0** `numutils.c:1270`; the `memmove`+`memset` left-pads in place after `pg_ultoa_n` `numutils.c:1282-1284`.
-- **decimalLength tables must stay in sync with the type width:** `decimalLength64`'s `PowersOfTen` runs to 1e19 `numutils.c:76`; an undersized table would index out of bounds for large values.
+## Public API
 
-## Cross-references
-- [[knowledge/files/src/backend/utils/adt/cash.c]], [[knowledge/files/src/backend/utils/adt/enum.c]] — sibling adt files.
-- [[knowledge/idioms/error-handling]] — `ereturn`/`escontext`/`SOFT_ERROR_OCCURRED`, the OUT_OF_RANGE vs INVALID_TEXT_REPRESENTATION split.
-- `source/src/include/common/int.h` — `pg_neg_uNN_overflow`, `strtou64`, the s64 overflow helpers reused by cash.c.
-- `source/src/include/port/pg_bitutils.h` — `pg_leftmost_one_pos32/64` behind `decimalLength*`.
-- `source/src/backend/utils/adt/int8.c`, `int.c` — primary fmgr callers wrapping these helpers.
+- `pg_strtoint16(s)` / `_safe(s, escontext)` (`:121`, `:127`).
+- `pg_strtoint32(s)` / `_safe(s, escontext)` (`:382`, `:388`).
+- `pg_strtoint64(s)` / `_safe(s, escontext)` (`:643`, `:649`).
+- `uint32in_subr(s, endloc, typname, escontext)` (`:897`) — uses
+  `strtoul` for legacy compat; required by `oidin`, `tidin`'s block
+  parse, and other unsigned paths.
+- `uint64in_subr` (`:984`) — uses `strtou64`; required by `oid8in`.
+- `pg_itoa(int16, char *)` (`:1041`).
+- `pg_ltoa(int32, char *)` (`:1119`).
+- `pg_lltoa(int64, char *)` and `pg_ulltoa_n(uint64, char *)` (`:1139`)
+  — the latter is what oid8out and many JSON paths use.
+- The 200-byte `DIGIT_TABLE` (`:28-38`) and `decimalLength32` /
+  `decimalLength64` (`:43`, `:62`) helpers for the
+  4-digit-per-iteration ryu-style formatter.
+
+## Input-format support
+
+`pg_strtoint{16,32,64}_safe` accept:
+
+1. Optional leading `+` or `-`.
+2. Decimal (default), hexadecimal (`0x` / `0X`), octal (`0o` / `0O`),
+   or binary (`0b` / `0B`) prefix.
+3. Optional `_` separator between digits (must be flanked by digits on
+   both sides) (`:308-317, :569-578, :830-839`).
+4. Leading and trailing whitespace.
+
+## Phase D notes (the hot zone)
+
+- **`INT_MIN` negation is handled correctly** by accumulating into an
+  `uint{16,32,64}` and using `pg_neg_u{16,32,64}_overflow` (`:194,
+  336, 455, 597, 716, 858`) [verified-by-code]. No `(int)-x` where
+  `x == INT_MIN` UB.
+- **Overflow check during accumulation:** `tmp > -(PG_INTNN_MIN / 10)`
+  before each multiply-add (`:182, 303, 443, 564, 704, 825`). This
+  bounds `tmp` against the MAX-magnitude of the negative side; since
+  the accumulator is unsigned and `PG_INTNN_MIN` has larger magnitude
+  than `PG_INTNN_MAX`, this is the tighter bound and ensures
+  post-loop `tmp` fits when negated. [verified-by-code]
+- **Fast path** for the common case (base-10, no separators, no
+  leading `+`, no leading whitespace) at the top of each function
+  (`:142-202, 405-464, 666-725`). Falls back to the labeled
+  `slow:` block on any non-digit at the first position, on a leading
+  `+`, or on non-numeric trailing chars. [verified-by-code]
+- **Underscore validation:** must NOT be first (`firstdigit` check at
+  `:311, 572, 833`) and MUST be followed by a digit (`:240-241,
+  264-265, 288-289, 314-316, 501-502, 525-526, 549-550, 576-577, etc.`).
+  This is the canonical PG-17 numeric literal underscore feature; no
+  arithmetic surface.
+- **`uint32in_subr` quirk:** for backwards compatibility, accepts a
+  leading `-` as long as the value matches after either signed or
+  unsigned extension (`:947-963` [from-comment]). I.e. `'-1'::oid` =
+  4294967295. This is the **oid-cast-from-text wrap-around** behavior
+  that surprises many users. [verified-by-code]
+- **`uint64in_subr`** does NOT have the matching backwards-compat
+  branch — it's used by oid8 which is a newer type. So `oid8in('-1')`
+  rejects, but `oidin('-1')` accepts and wraps. [verified-by-code via
+  absence at :983-1029]
+- All `goto out_of_range` / `goto invalid_syntax` paths use `ereturn`
+  with soft-error context (`:347, 608, 869, 914, etc.`), so all six
+  parsers are SAFE for use under `escontext`/`SOFT_ERROR_OCCURRED`.
+
+## Output path
+
+`pg_ultoa_n` / `pg_ulltoa_n` write digits **back-to-front** via the
+2-digit `DIGIT_TABLE` (`:1054`, `:1139`). Caller must pre-allocate the
+right buffer size (10 bytes for u32, MAXINT8LEN for u64). Length
+returned, no NUL terminator.
 
 ## Potential issues
-- None surfaced. The overflow paths are guarded pre-store and the soft/hard error split is consistent and documented in each function header.
+
+- `[ISSUE-correctness: uint32in_subr accepts negative sign as wrap-around
+  to uint32 for legacy reasons (:947-963); uint64in_subr does not
+  (:983-1029). Cross-type asymmetry. (medium) — documented but
+  surprising]`
+- `[ISSUE-undocumented-invariant: the `tmp > -(PG_INTNN_MIN / 10)` bound
+  is correct but subtle; comment at `:158-160, 419-421, 680-682` only
+  partially explains. A future cleanup that "simplifies" to MAX/10
+  would be wrong. (medium)]`
+- `[ISSUE-info-disclosure: invalid-syntax errmsg echoes input verbatim
+  (:355, 615, 877). (info) — standard idiom]`
+- `[ISSUE-stale-todo: none observed. (info)]`
+
+## Cross-references
+
+- `source/src/common/int.h` — `pg_neg_u{16,32,64}_overflow`,
+  `pg_add/sub/mul_s{16,32,64}_overflow` (A5 layer).
+- `source/src/port/strtou64.c` (or wrapper) — `strtou64`.
+- `source/src/backend/utils/adt/int.c`, `int8.c` — primary callers.
+- `source/src/backend/utils/adt/oid.c` — uint32in_subr consumer.
+- `source/src/backend/utils/adt/oid8.c` — uint64in_subr consumer.
 
 ## Confidence tag tally
-- [verified-by-code]: 9
-- [from-comment]: 3
-- [from-README]: 0
-- [inferred]: 0
-- [unverified]: 0
+
+- `[verified-by-code]` × 6
+- `[from-comment]` × 2

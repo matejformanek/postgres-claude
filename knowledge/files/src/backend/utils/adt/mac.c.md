@@ -1,58 +1,68 @@
----
-path: src/backend/utils/adt/mac.c
-anchor_sha: 4b0bf0788b066a4ca1d4f959566678e44ec93422
-loc: 430
-depth: deep
----
+# `src/backend/utils/adt/mac.c`
 
-# mac.c
-
-- **Source path:** `source/src/backend/utils/adt/mac.c`
-- **Lines:** 430
-- **Depth:** deep
-- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`
-- **Companion files:** `src/include/utils/inet.h` (`macaddr` struct = 6 `unsigned char` fields `a`..`f`, `PG_GETARG_MACADDR_P`/`PG_RETURN_MACADDR_P`, `DatumGetMacaddrP`), `src/include/utils/sortsupport.h` (`ssup_datum_unsigned_cmp`, `DatumBigEndianToNative`), `src/common/hashfn.h`
+- **File:** `source/src/backend/utils/adt/mac.c` (430 lines)
+- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (2026-06-03)
 
 ## Purpose
-Implements the `macaddr` SQL type: a 6-byte EUI-48 MAC address. Provides flexible text input accepting seven punctuation/grouping notations `[verified-by-code: mac.c:60-79]`, fixed colon-separated `%02x` output `[verified-by-code: mac.c:117]`, binary I/O (six raw bytes MSB-first), the full comparison/btree/hash opclass surface, abbreviated-key sortsupport, bitwise NOT/AND/OR, and `macaddr_trunc` (zero the lower 3 bytes to compare by manufacturer OUI) `[verified-by-code: mac.c:329-345]`. All entry points are fmgr V1.
 
-## Public symbols
-| Symbol | file:line | Role |
-| --- | --- | --- |
-| `macaddr_in` | mac.c:43 | Text input; tries 7 `sscanf` formats, range-checks octets |
-| `macaddr_out` | mac.c:109 | Output as `aa:bb:cc:dd:ee:ff` |
-| `macaddr_recv` / `macaddr_send` | mac.c:128 / 149 | Binary I/O, 6 bytes MSB-first |
-| `macaddr_cmp` | mac.c:185 | btree 3-way compare via `macaddr_cmp_internal` |
-| `macaddr_lt/le/eq/ge/gt/ne` | mac.c:198-250 | Comparison operators |
-| `hashmacaddr` / `hashmacaddrextended` | mac.c:255 / 263 | hash opclass over `hash_any`(`sizeof(macaddr)`) |
-| `macaddr_not` / `macaddr_and` / `macaddr_or` | mac.c:275 / 291 / 308 | Bitwise ops, field by field |
-| `macaddr_trunc` | mac.c:329 | Zero bytes d/e/f (keep 24-bit OUI) |
-| `macaddr_sortsupport` | mac.c:351 | Installs abbreviated-key path |
+The `macaddr` type — 6-byte EUI-48 MAC addresses. I/O, comparison,
+abbreviated-key SortSupport, and bitwise NOT/AND/OR/truncation.
+(`mac.c:1-12` [from-comment])
 
-## Internal landmarks
-- **Parser** (`macaddr_in`, mac.c:60-84): cascade of `sscanf` attempts, each with a trailing `%1s` into `junk` so any trailing non-whitespace garbage makes `count != 6` and the format is rejected `[from-comment: mac.c:58]`. Formats: `x:x:...`, `x-x-...`, `xxxxxx:xxxxxx`, `xxxxxx-xxxxxx`, `xxxx.xxxx.xxxx`, `xxxx-xxxx-xxxx`, and bare `xxxxxxxxxxxx` `[verified-by-code: mac.c:60-79]`.
-- **Range check** (mac.c:86-91): each parsed `%x` is an `int`; values must be 0..255, else `ERRCODE_NUMERIC_VALUE_OUT_OF_RANGE`. The `< 0` arm matters because `%x` into a signed int could read a sign elsewhere; the guard is explicit.
-- **Comparison key construction** (`hibits`/`lobits` macros, mac.c:28-32): packs bytes a/b/c into one `unsigned long`, d/e/f into another, compared high-then-low in `macaddr_cmp_internal` `[verified-by-code: mac.c:170-183]`. This is unsigned-numeric ordering equivalent to lexicographic byte order.
-- **Byte-order in abbreviation** (`macaddr_abbrev_convert`, mac.c:403-430): zero an 8-byte Datum, `memcpy` the 6 bytes, then `DatumBigEndianToNative` so the unsigned 3-way comparator orders correctly on little-endian; two trailing zero pad bytes are least-significant `[from-comment: mac.c:394-401]`.
-- **Abort never fires** (`macaddr_abbrev_abort`, mac.c:388-392): always returns false because 6 bytes fit entirely in a 64-bit Datum, making the abbreviated key authoritative `[from-comment: mac.c:383-387]`.
+## Type role
 
-## Invariants & gotchas
-- **`sizeof(macaddr)` == 6 with no padding** — the struct is six contiguous `unsigned char` fields (inet.h:94-102), so `hash_any((unsigned char *) key, sizeof(macaddr))` hashes exactly the 6 value bytes with no uninitialized padding `[verified-by-code: mac.c:260; inet.h:94-102]`. Equal macaddrs always hash equally.
-- **Comparison is unsigned numeric, equivalent to MSB-first byte lexicographic** (mac.c:170-183): `macaddr_trunc` zeroing d/e/f keeps the OUI ordering stable, which is the whole point of grouping by manufacturer `[verified-by-code: mac.c:329-345]`.
-- **Bitwise NOT writes `~x` into an `unsigned char` field** (mac.c:282-287): the `int` result of `~addr->a` is truncated to 8 bits on assignment; correct, but relies on implicit narrowing.
-- **Input is lenient, output is canonical** — round-tripping any of the 7 accepted forms yields the single colon form (mac.c:117). The abbreviation pad bytes are never compared as data because the full comparator breaks ties.
+- **Input:** `macaddr_in` (`:44`) — accepts seven notations via cascading
+  `sscanf` formats: `xx:xx:..`, `xx-xx-..`, `xxxxxx:xxxxxx`,
+  `xxxxxx-xxxxxx`, `xxxx.xxxx.xxxx`, `xxxx-xxxx-xxxx`, plain `xxxxxxxxxxxx`
+  (`:60-79`). `%1s` trailing-garbage trap, then per-octet `0..255` range
+  check (`:86-91`).
+- **Output:** `macaddr_out` (`:110`) — always canonical `xx:xx:xx:xx:xx:xx`.
+- **Binary I/O:** `macaddr_recv`/`macaddr_send` — six raw bytes.
+- **Comparison:** `macaddr_cmp_internal` (`:171`) — two 24-bit halves
+  via the `hibits`/`lobits` macros.
+- **Sort support:** `macaddr_sortsupport` (`:352`) installs
+  `ssup_datum_unsigned_cmp` and the abbreviated-key converter
+  `macaddr_abbrev_convert` (`:404`). **Abbreviation is never aborted**
+  because 6 bytes fits entirely in 8-byte Datum — the abbreviated key is
+  authoritative (`:384-392` [from-comment]).
+- **Arithmetic:** `macaddr_not`, `_and`, `_or`, `_trunc` (zero out the
+  manufacturer-specific lower 3 bytes).
 
-## Cross-references
-- Sibling 8-byte type: [[knowledge/files/src/backend/utils/adt/mac8.c]] (EUI-64; macaddr<->macaddr8 conversions live there).
-- Sibling adt I/O types: [[knowledge/files/src/backend/utils/adt/pg_lsn.c]], [[knowledge/files/src/backend/utils/adt/uuid.c]].
-- Abbreviated-key sortsupport machinery shared with `uuid.c`: `src/include/utils/sortsupport.h`.
-- fmgr V1 conventions: [[knowledge/idioms/fmgr-and-spi]].
+## Phase D notes
+
+- **`sscanf` with `%x` accepts signed input.** That's why the explicit
+  range check `(a < 0) || (a > 255)` exists at `:86-91` — `sscanf("%x")`
+  parses into `int`, so `-1` becomes a valid scanf match but is rejected
+  here. [verified-by-code]
+- **The cascading sscanf is O(7) per input.** Each `sscanf` rescans the
+  whole string up to 17 chars; not a DoS surface. No backtracking.
+- **`hibits`/`lobits` macros** are written with implicit-int promotion
+  (`(addr)->a << 16` where `a` is unsigned char). On a system where
+  `unsigned long` is 32 bits, this is fine; on a 64-bit `unsigned long`,
+  the upper bits are zero and comparison still works. No bug.
+- The abbreviated-key path big-endian-izes via `DatumBigEndianToNative`
+  (`:427`) so `ssup_datum_unsigned_cmp` (which compares Datums as native
+  ints) yields the correct collation order on little-endian.
 
 ## Potential issues
-- None surfaced. The all-`char` struct means `sizeof(macaddr)`-based hashing and the 8-byte abbreviation `memcpy` are both padding-safe (`mac.c:260,417`; `inet.h:94-102`).
+
+- `[ISSUE-correctness: macaddr_in accepts e.g. "12345678901234567890" as
+  the 7th sscanf fallback would not match (it expects 12 chars exactly),
+  but very long inputs are silently truncated past 12 chars? Need to
+  verify the %2x%2x%2x%2x%2x%2x format rejects extras via %1s. (low)]`
+- `[ISSUE-undocumented-invariant: which of 7 input notations is canonical
+  is not specified; output is always colon-form (low).]`
+- `[ISSUE-info-disclosure: errmsg echoes raw input (:83, :91). (info)]`
+
+## Cross-references
+
+- `source/src/include/utils/inet.h` — `macaddr` struct.
+- `source/src/backend/utils/sort/sortsupport.c` —
+  `ssup_datum_unsigned_cmp`.
+- `source/src/backend/utils/adt/mac8.c` — EUI-64 sibling.
 
 ## Confidence tag tally
-- verified-by-code: 8
-- from-comment: 4
-- inferred: 0
-- unverified: 0
+
+- `[verified-by-code]` × 3
+- `[from-comment]` × 2
+- `[inferred]` × 1
