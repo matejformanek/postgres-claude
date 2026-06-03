@@ -1302,3 +1302,48 @@ grep '| deep-read |' progress/files-examined.md
 | src/bin/pg_dump/parallel.c | 2026-06-03 | 4b0bf0788b0 | deep-read | pg-dump-a3 | knowledge/files/src/bin/pg_dump/parallel.c.md | -j N worker pool: fork on Unix, threads on Windows; signal-safety + pgpipe TCP loopback |
 | src/bin/pg_dump/parallel.h | 2026-06-03 | 4b0bf0788b0 | read | pg-dump-a3 | knowledge/files/src/bin/pg_dump/parallel.h.md | ParallelState, ParallelCompletionPtr, WFW enum, PG_MAX_JOBS |
 | src/bin/pg_dump/pg_backup_utils.h | 2026-06-03 | 4b0bf0788b0 | read | pg-dump-a3 | knowledge/files/src/bin/pg_dump/pg_backup_utils.h.md | pg_fatal override → exit_nicely; section flags; on_exit_nicely callback type |
+
+<!-- a4-bin-tools 2026-06-03 — foreground sweep #4 (Phase A); 43 docs via 5 parallel general-purpose agents covering src/bin/{psql,pg_basebackup,initdb} -->
+| src/bin/psql/command.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/command.c.md | All `\` meta-commands dispatcher; restrict_key static gate; \password/\copy/\edit/\!/\connect |
+| src/bin/psql/command.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/command.h.md | Meta-command status + handler prototypes |
+| src/bin/psql/common.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/common.c.md | SendQuery, ExecQueryAndProcessResults, PrintNotifications, -L logfile capture, \gexec, SIGINT longjmp |
+| src/bin/psql/common.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/common.h.md | SIGINT longjmp protocol declarations; query-side externs |
+| src/bin/psql/copy.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/copy.c.md | \copy implementation; PROGRAM 'cmd' → popen; protocol-v2 fallback path |
+| src/bin/psql/copy.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/copy.h.md | do_copy/handleCopyIn/handleCopyOut prototypes |
+| src/bin/psql/crosstabview.c | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/crosstabview.c.md | \crosstabview AVL-tree pivot with CROSSTABVIEW_MAX_COLUMNS=1600 cap |
+| src/bin/psql/crosstabview.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/crosstabview.h.md | PrintResultsInCrosstab prototype |
+| src/bin/psql/describe.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/describe.c.md | Every `\d*` catalog query builder; processSQLNamePattern audit; printTable usage |
+| src/bin/psql/describe.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/describe.h.md | listX/describeX prototypes |
+| src/bin/psql/help.c | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/help.c.md | --help text, \? topic dispatch, helpVariables/helpSQL |
+| src/bin/psql/help.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/help.h.md | Help dispatch prototypes |
+| src/bin/psql/input.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/input.c.md | readline/libedit wrapper; ~/.psql_history at 0600 but no O_NOFOLLOW; no password-pattern filter |
+| src/bin/psql/input.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/input.h.md | gets_interactive/gets_fromFile/pg_append_history prototypes |
+| src/bin/psql/large_obj.c | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/large_obj.c.md | \lo_import/export with arbitrary client-side paths under psql UID |
+| src/bin/psql/large_obj.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/large_obj.h.md | do_lo_* prototypes |
+| src/bin/psql/mainloop.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/mainloop.c.md | REPL loop, transaction-state echo, pg_append_history every input line (no scrub) |
+| src/bin/psql/mainloop.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/mainloop.h.md | MainLoop prototype |
+| src/bin/psql/prompt.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/prompt.c.md | PROMPT %-substitution; %`cmd` popen on every render; %:var: forwards server error text raw |
+| src/bin/psql/prompt.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/prompt.h.md | get_prompt + promptStatus_t |
+| src/bin/psql/psqlscanslash.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/psqlscanslash.h.md | Slash-arg flex scanner externs (impl in .l) |
+| src/bin/psql/settings.h | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/settings.h.md | Master PsqlSettings/pset struct; pset.db holds libpq PGconn with cached credentials |
+| src/bin/psql/startup.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/startup.c.md | main(); option parsing; .psqlrc lookup; simple_prompt password (no explicit_bzero) |
+| src/bin/psql/stringutils.c | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/stringutils.c.md | strtokx token splitting; e_strings+del_quotes combo documented unsupported |
+| src/bin/psql/stringutils.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/stringutils.h.md | strtokx prototype |
+| src/bin/psql/tab-complete.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/tab-complete.h.md | initialize_readline prototype |
+| src/bin/psql/tab-complete.in.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/psql/tab-complete.in.c.md | Tab queries on user's open transaction; processSQLNamePattern via psqlscan callback; auto-firing PQexec |
+| src/bin/psql/variables.c | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/variables.c.md | psql variable store; bare :var unsanitized; \gset path from server |
+| src/bin/psql/variables.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/psql/variables.h.md | VariableSpace + hooks prototypes |
+| src/bin/pg_basebackup/astreamer_inject.c | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/astreamer_inject.c.md | Tablespace-map / signal-file injection into the backup tar stream |
+| src/bin/pg_basebackup/astreamer_inject.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/astreamer_inject.h.md | bbstreamer_inject_file / bbstreamer_recovery_injector prototypes |
+| src/bin/pg_basebackup/pg_basebackup.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md | Main; CopyStream / tar / plain output; spclocation trust; --waldir symlink |
+| src/bin/pg_basebackup/pg_createsubscriber.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/pg_createsubscriber.c.md | Convert standby → logical-replication subscriber; .conf→.disabled credential retention |
+| src/bin/pg_basebackup/pg_receivewal.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/pg_receivewal.c.md | Receive + archive WAL; FindStreamingStart hex-filename scan; sync_method |
+| src/bin/pg_basebackup/pg_recvlogical.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md | Receive logical decoding output; newline-as-separator not enforced; outfile no O_NOFOLLOW |
+| src/bin/pg_basebackup/receivelog.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/receivelog.c.md | WAL receive loop; timeline jumps; static globals encode single-stream invariant |
+| src/bin/pg_basebackup/receivelog.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/receivelog.h.md | StreamCtl + ReceiveXlogStream prototype |
+| src/bin/pg_basebackup/streamutil.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/streamutil.c.md | Shared connection helpers; password static; wal_segment_size + data_directory_mode trusted from server |
+| src/bin/pg_basebackup/streamutil.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/streamutil.h.md | GetConnection/CreateReplicationSlot/etc prototypes |
+| src/bin/pg_basebackup/walmethods.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/walmethods.c.md | Pluggable WAL writer (tar + directory); 8 GiB ustar cap inherited |
+| src/bin/pg_basebackup/walmethods.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/walmethods.h.md | WalWriteMethod vtable contract |
+| src/bin/initdb/findtimezone.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/initdb/findtimezone.c.md | System timezone autodetection; bare strcat under install-trusted tzdir |
+| src/bin/initdb/initdb.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/initdb/initdb.c.md | Cluster bootstrap; superuser_password never zeroed; --pwfile stale-TODO "paranoia for now" |
