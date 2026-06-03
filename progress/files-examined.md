@@ -1347,3 +1347,114 @@ grep '| deep-read |' progress/files-examined.md
 | src/bin/pg_basebackup/walmethods.h | 2026-06-03 | 4b0bf0788b0 | read | bin-tools-a4 | knowledge/files/src/bin/pg_basebackup/walmethods.h.md | WalWriteMethod vtable contract |
 | src/bin/initdb/findtimezone.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/initdb/findtimezone.c.md | System timezone autodetection; bare strcat under install-trusted tzdir |
 | src/bin/initdb/initdb.c | 2026-06-03 | 4b0bf0788b0 | deep-read | bin-tools-a4 | knowledge/files/src/bin/initdb/initdb.c.md | Cluster bootstrap; superuser_password never zeroed; --pwfile stale-TODO "paranoia for now" |
+
+<!-- a5-common 2026-06-03 — foreground sweep #5 (Phase A); 109 docs via 5 parallel general-purpose agents covering src/common/ + src/include/common/ -->
+| src/common/archive.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/archive.c.md | A5 sweep per-file doc |
+| src/common/base64.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/base64.c.md | A5 sweep per-file doc |
+| src/common/binaryheap.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/binaryheap.c.md | A5 sweep per-file doc |
+| src/common/blkreftable.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/blkreftable.c.md | A5 sweep per-file doc |
+| src/common/checksum_helper.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/checksum_helper.c.md | A5 sweep per-file doc |
+| src/common/compression.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/compression.c.md | A5 sweep per-file doc |
+| src/common/config_info.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/config_info.c.md | A5 sweep per-file doc |
+| src/common/controldata_utils.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/controldata_utils.c.md | A5 sweep per-file doc |
+| src/common/cryptohash.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/cryptohash.c.md | A5 sweep per-file doc |
+| src/common/cryptohash_openssl.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/cryptohash_openssl.c.md | A5 sweep per-file doc |
+| src/common/d2s.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/d2s.c.md | A5 sweep per-file doc |
+| src/common/d2s_full_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/common/d2s_full_table.h.md | Generated Ryu d2s lookup table — stub doc |
+| src/common/d2s_intrinsics.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/d2s_intrinsics.h.md | A5 sweep per-file doc |
+| src/common/digit_table.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/digit_table.h.md | A5 sweep per-file doc |
+| src/common/encnames.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/encnames.c.md | A5 sweep per-file doc |
+| src/common/exec.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/exec.c.md | A5 sweep per-file doc |
+| src/common/f2s.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/f2s.c.md | A5 sweep per-file doc |
+| src/common/fe_memutils.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/fe_memutils.c.md | A5 sweep per-file doc |
+| src/common/file_perm.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/file_perm.c.md | A5 sweep per-file doc |
+| src/common/file_utils.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/file_utils.c.md | A5 sweep per-file doc |
+| src/common/hashfn.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/hashfn.c.md | A5 sweep per-file doc |
+| src/common/hmac.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/hmac.c.md | A5 sweep per-file doc |
+| src/common/hmac_openssl.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/hmac_openssl.c.md | A5 sweep per-file doc |
+| src/common/instr_time.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/instr_time.c.md | A5 sweep per-file doc |
+| src/common/ip.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/ip.c.md | A5 sweep per-file doc |
+| src/common/jsonapi.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/jsonapi.c.md | A5 sweep per-file doc |
+| src/common/keywords.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/keywords.c.md | A5 sweep per-file doc |
+| src/common/kwlookup.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/kwlookup.c.md | A5 sweep per-file doc |
+| src/common/link-canary.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/link-canary.c.md | A5 sweep per-file doc |
+| src/common/logging.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/logging.c.md | A5 sweep per-file doc |
+| src/common/md5.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/md5.c.md | A5 sweep per-file doc |
+| src/common/md5_common.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/md5_common.c.md | A5 sweep per-file doc |
+| src/common/md5_int.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/md5_int.h.md | A5 sweep per-file doc |
+| src/common/parse_manifest.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/parse_manifest.c.md | A5 sweep per-file doc |
+| src/common/percentrepl.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/percentrepl.c.md | A5 sweep per-file doc |
+| src/common/pg_get_line.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/pg_get_line.c.md | A5 sweep per-file doc |
+| src/common/pg_lzcompress.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/pg_lzcompress.c.md | A5 sweep per-file doc |
+| src/common/pg_prng.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/pg_prng.c.md | A5 sweep per-file doc |
+| src/common/pgfnames.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/pgfnames.c.md | A5 sweep per-file doc |
+| src/common/psprintf.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/psprintf.c.md | A5 sweep per-file doc |
+| src/common/relpath.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/relpath.c.md | A5 sweep per-file doc |
+| src/common/restricted_token.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/restricted_token.c.md | A5 sweep per-file doc |
+| src/common/rmtree.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/rmtree.c.md | A5 sweep per-file doc |
+| src/common/ryu_common.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/ryu_common.h.md | A5 sweep per-file doc |
+| src/common/saslprep.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/saslprep.c.md | A5 sweep per-file doc |
+| src/common/scram-common.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/scram-common.c.md | A5 sweep per-file doc |
+| src/common/sha1.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/sha1.c.md | A5 sweep per-file doc |
+| src/common/sha1_int.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/sha1_int.h.md | A5 sweep per-file doc |
+| src/common/sha2.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/sha2.c.md | A5 sweep per-file doc |
+| src/common/sha2_int.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/sha2_int.h.md | A5 sweep per-file doc |
+| src/common/sprompt.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/sprompt.c.md | A5 sweep per-file doc |
+| src/common/string.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/string.c.md | A5 sweep per-file doc |
+| src/common/stringinfo.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/stringinfo.c.md | A5 sweep per-file doc |
+| src/common/unicode_case.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/unicode_case.c.md | A5 sweep per-file doc |
+| src/common/unicode_category.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/unicode_category.c.md | A5 sweep per-file doc |
+| src/common/unicode_norm.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/unicode_norm.c.md | A5 sweep per-file doc |
+| src/common/username.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/username.c.md | A5 sweep per-file doc |
+| src/common/wait_error.c | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/common/wait_error.c.md | A5 sweep per-file doc |
+| src/common/wchar.c | 2026-06-03 | 4b0bf0788b0 | deep-read | common-a5 | knowledge/files/src/common/wchar.c.md | A5 sweep per-file doc |
+| src/include/common/archive.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/archive.h.md | A5 sweep per-file doc |
+| src/include/common/base64.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/base64.h.md | A5 sweep per-file doc |
+| src/include/common/blkreftable.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/blkreftable.h.md | A5 sweep per-file doc |
+| src/include/common/checksum_helper.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/checksum_helper.h.md | A5 sweep per-file doc |
+| src/include/common/compression.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/compression.h.md | A5 sweep per-file doc |
+| src/include/common/config_info.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/config_info.h.md | A5 sweep per-file doc |
+| src/include/common/connect.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/connect.h.md | A5 sweep per-file doc |
+| src/include/common/controldata_utils.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/controldata_utils.h.md | A5 sweep per-file doc |
+| src/include/common/cryptohash.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/cryptohash.h.md | A5 sweep per-file doc |
+| src/include/common/fe_memutils.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/fe_memutils.h.md | A5 sweep per-file doc |
+| src/include/common/file_perm.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/file_perm.h.md | A5 sweep per-file doc |
+| src/include/common/file_utils.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/file_utils.h.md | A5 sweep per-file doc |
+| src/include/common/hashfn.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/hashfn.h.md | A5 sweep per-file doc |
+| src/include/common/hashfn_unstable.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/hashfn_unstable.h.md | A5 sweep per-file doc |
+| src/include/common/hmac.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/hmac.h.md | A5 sweep per-file doc |
+| src/include/common/int.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/int.h.md | A5 sweep per-file doc |
+| src/include/common/int128.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/int128.h.md | A5 sweep per-file doc |
+| src/include/common/ip.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/ip.h.md | A5 sweep per-file doc |
+| src/include/common/jsonapi.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/jsonapi.h.md | A5 sweep per-file doc |
+| src/include/common/keywords.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/keywords.h.md | A5 sweep per-file doc |
+| src/include/common/kwlookup.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/kwlookup.h.md | A5 sweep per-file doc |
+| src/include/common/link-canary.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/link-canary.h.md | A5 sweep per-file doc |
+| src/include/common/logging.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/logging.h.md | A5 sweep per-file doc |
+| src/include/common/md5.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/md5.h.md | A5 sweep per-file doc |
+| src/include/common/oauth-common.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/oauth-common.h.md | A5 sweep per-file doc |
+| src/include/common/openssl.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/openssl.h.md | A5 sweep per-file doc |
+| src/include/common/parse_manifest.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/parse_manifest.h.md | A5 sweep per-file doc |
+| src/include/common/percentrepl.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/percentrepl.h.md | A5 sweep per-file doc |
+| src/include/common/pg_lzcompress.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/pg_lzcompress.h.md | A5 sweep per-file doc |
+| src/include/common/pg_prng.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/pg_prng.h.md | A5 sweep per-file doc |
+| src/include/common/relpath.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/relpath.h.md | A5 sweep per-file doc |
+| src/include/common/restricted_token.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/restricted_token.h.md | A5 sweep per-file doc |
+| src/include/common/saslprep.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/saslprep.h.md | A5 sweep per-file doc |
+| src/include/common/scram-common.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/scram-common.h.md | A5 sweep per-file doc |
+| src/include/common/sha1.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/sha1.h.md | A5 sweep per-file doc |
+| src/include/common/sha2.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/sha2.h.md | A5 sweep per-file doc |
+| src/include/common/shortest_dec.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/shortest_dec.h.md | A5 sweep per-file doc |
+| src/include/common/string.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/string.h.md | A5 sweep per-file doc |
+| src/include/common/unicode_case.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/unicode_case.h.md | A5 sweep per-file doc |
+| src/include/common/unicode_case_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_case_table.h.md | Generated Unicode table — stub doc |
+| src/include/common/unicode_category.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/unicode_category.h.md | A5 sweep per-file doc |
+| src/include/common/unicode_category_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_category_table.h.md | Generated Unicode table — stub doc |
+| src/include/common/unicode_east_asian_fw_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_east_asian_fw_table.h.md | Generated Unicode table — stub doc |
+| src/include/common/unicode_nonspacing_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_nonspacing_table.h.md | Generated Unicode table — stub doc |
+| src/include/common/unicode_norm.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/unicode_norm.h.md | A5 sweep per-file doc |
+| src/include/common/unicode_norm_hashfunc.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_norm_hashfunc.h.md | Generated Unicode table — stub doc |
+| src/include/common/unicode_norm_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_norm_table.h.md | Generated Unicode table — stub doc |
+| src/include/common/unicode_normprops_table.h | 2026-06-03 | 4b0bf0788b0 | skim | common-a5 | knowledge/files/src/include/common/unicode_normprops_table.h.md | Generated Unicode table — stub doc |
+| src/include/common/unicode_version.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/unicode_version.h.md | A5 sweep per-file doc |
+| src/include/common/username.h | 2026-06-03 | 4b0bf0788b0 | read | common-a5 | knowledge/files/src/include/common/username.h.md | A5 sweep per-file doc |
