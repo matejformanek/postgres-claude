@@ -73,3 +73,7 @@ secure-transport entry points implemented in `be-secure*.c` [from-comment].
 ## Tally
 
 `[verified-by-code]=6 [from-comment]=2 [inferred]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

@@ -204,6 +204,31 @@ The "remove someday" cluster.
 
 10. **The validator-library OAuth design** keeps heavy crypto outside the backend but runs the validator in the connecting backend's address space — a malicious or buggy validator can crash or leak. Hardening territory (sandboxing?).
 
+## P4 — A2 follow-up: backend/libpq + header files missed by the file-grouped sweep
+
+The 2026-06-03 A2 sweep grouped its register rows by Phase-D pattern and
+left six files with inline `## Potential issues` tags unmirrored here
+(`pg-corpus-maintainer` 2026-06-03 reverse-check). Mirrored below verbatim
+from each per-file doc.
+
+| Date | File:line | Type | Severity | Summary | Status | Linked doc |
+|---|---|---|---|---|---|---|
+| 2026-06-03 | pqmq.c:255-263 | question | maybe | Parallel-worker DEBUG5→DEBUG1 downgrade reaches client even when client_min_messages=LOG — partial client_min_messages bypass, undocumented | open | knowledge/files/src/backend/libpq/pqmq.c.md |
+| 2026-06-03 | pqmq.c:205-207 | correctness | nit | SHM_MQ_DETACHED treated as EOF/success — genuine queue-detach during transmit silently dropped, no distinct error to callers | open | knowledge/files/src/backend/libpq/pqmq.c.md |
+| 2026-06-03 | pqmq.c:172-194 | undocumented-invariant | nit | SendProcSignal fires before checking send result — inverts produce-then-notify ordering; spurious signal on WOULD_BLOCK | open | knowledge/files/src/backend/libpq/pqmq.c.md |
+| 2026-06-03 | pqformat.c:413-441 | correctness | maybe | pq_getmsgint returns unsigned; hostile 0xFFFFFFFF length may pass `<= maxlen` if maxlen unsigned — audit length-prefix consumers in COPY/replication/extension protocol | open | knowledge/files/src/backend/libpq/pqformat.c.md |
+| 2026-06-03 | pqformat.c:511-550 | correctness | maybe | pq_getmsgbytes/pq_getmsgtext/pq_copymsgbytes int arithmetic underflows on INT32_MIN datalen if a StringInfo is synthesized from untrusted shm-mq input | open | knowledge/files/src/backend/libpq/pqformat.c.md |
+| 2026-06-03 | pqformat.c:97 | undocumented-invariant | nit | msgtype stashed in buf->cursor pre-send; a future sendXXX touching cursor would silently corrupt the message type — wants Assert in pq_endmessage | open | knowledge/files/src/backend/libpq/pqformat.c.md |
+| 2026-06-03 | pqformat.c (pqcomm.c) | stale-todo | nit | pq_putmessage_v2 vestige remains in pqcomm.c while pqformat has no v2 path — asymmetry bites if a v2 caller ever appears | open | knowledge/files/src/backend/libpq/pqformat.c.md |
+| 2026-06-03 | pqexpbuffer.c:213 | correctness | maybe | INT_MAX ceiling silently caps PQExpBuffer growth at ~2GiB; a 2GiB request succeeds truncated and only fails-broken on the next enlargePQExpBuffer call | open | knowledge/files/src/interfaces/libpq/pqexpbuffer.c.md |
+| 2026-06-03 | pqexpbuffer.c (vsnprintf) | correctness | maybe | vsnprintf on buffer tail with avail=maxlen-len could corrupt the next heap chunk on a buggy libc; relies on configure detecting broken snprintf and using src/port/snprintf.c | open | knowledge/files/src/interfaces/libpq/pqexpbuffer.c.md |
+| 2026-06-03 | libpq-be-fe.h:244-257 | correctness | maybe | `#define PQclear libpqsrv_PQclear` macro takeover hides function-pointer assignments (`&PQclear`); extension callback registration silently gets the wrapper expecting a libpqsrv_PGresult* | open | knowledge/files/src/include/libpq/libpq-be-fe.h.md |
+| 2026-06-03 | libpq-be-fe.h:69-119 | undocumented-invariant | maybe | libpqsrv_PQwrap uses MCXT_ALLOC_NO_OOM+ereport but libpqsrv_PGresultSetParent uses throwing MemoryContextAlloc — undocumented OOM-path asymmetry | open | knowledge/files/src/include/libpq/libpq-be-fe.h.md |
+| 2026-06-03 | pqformat.h:99-124 | undocumented-invariant | maybe | pq_writestring caller must pre-size for client-encoding expansion; only an Assert guards — a non-assert build writes past the buffer on UTF-8 multibyte growth | open | knowledge/files/src/include/libpq/pqformat.h.md |
+| 2026-06-03 | pqformat.h:170-187 | stale-todo | nit | pq_sendint marked deprecated with no removal horizon; new callers passing b=8 get a runtime elog(ERROR), not a compile error | open | knowledge/files/src/include/libpq/pqformat.h.md |
+| 2026-06-03 | hba.h:117 | leak | maybe | HbaLine.ldapbindpasswd held as plain char* for config lifetime; no scrub/no-log hint in the header — audit hba.c errcontext/debug dumps (declaration site of the auth.c P0 LDAP-bindpasswd finding) | open | knowledge/files/src/include/libpq/hba.h.md |
+| 2026-06-03 | hba.h:42 | undocumented-invariant | maybe | USER_AUTH_LAST=uaOAuth macro lives inside the enum; adding a value after uaOAuth without updating the macro silently undercounts array sizing | open | knowledge/files/src/include/libpq/hba.h.md |
+
 ## Wontfix / Submitted / Landed
 
 | Date | File:line | Type | Summary | Status | Resolution |

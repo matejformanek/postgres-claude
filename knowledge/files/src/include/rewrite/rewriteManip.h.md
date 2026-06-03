@@ -36,3 +36,7 @@ ruleutils, FDW pushdown.
 These walkers are "anything that needs to splice or renumber pieces of a
 Query." Many callers therefore depend on this header without being
 rule-related.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

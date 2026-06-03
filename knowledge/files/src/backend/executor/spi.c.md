@@ -188,5 +188,6 @@ nested SPI use).
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/spi.md](../../../../idioms/spi.md)
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

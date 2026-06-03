@@ -65,3 +65,7 @@ Wait-event names in `src/backend/utils/activity/wait_event_names.txt` must stay 
 
 - `[verified-by-code]`: 5
 - `[from-comment]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/locking-overview.md](../../../../idioms/locking-overview.md)

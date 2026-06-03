@@ -73,3 +73,8 @@
 ## Tally
 
 `[verified-by-code]=4 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)
+- [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)

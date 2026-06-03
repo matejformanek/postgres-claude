@@ -78,3 +78,7 @@ Header note: the three varlena fields above are not present in a relcache entry'
 ## Tally
 
 `[verified-by-code]=8 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)

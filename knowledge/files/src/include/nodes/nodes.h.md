@@ -110,3 +110,7 @@ appears as the first field. `nodetag_only` is **not** inherited.
 - Generator: `source/src/backend/nodes/gen_node_support.pl`
 - Generated: `nodes/nodetags.h`, `copyfuncs.funcs.c`, etc.
 - Idiom doc: `knowledge/idioms/node-types-and-lists.md`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/node-types-and-lists.md](../../../../idioms/node-types-and-lists.md)

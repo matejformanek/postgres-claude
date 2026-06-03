@@ -68,5 +68,6 @@ verified-by-code: 7 — from-comment: 8 — from-readme: 0 — inferred: 0 — u
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/catalog-conventions.md](../../../../../idioms/catalog-conventions.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

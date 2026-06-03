@@ -197,4 +197,5 @@ SRF-free targets and SRF-bearing levels. The `targets` /
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/parser-pipeline.md](../../../../../idioms/parser-pipeline.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -114,5 +114,6 @@ Standalone test harness — not compiled into the backend. Builds a test binary 
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/locking-overview.md](../../../../../idioms/locking-overview.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)

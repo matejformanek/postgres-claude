@@ -55,3 +55,7 @@ cleaner read/write functions. `:24-26` `[from-comment]`
 - Implementation: `source/src/backend/nodes/value.c`
 - Idiom: `knowledge/idioms/node-types-and-lists.md` (Value-nodes
   section).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/node-types-and-lists.md](../../../../idioms/node-types-and-lists.md)
