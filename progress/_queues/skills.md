@@ -6,7 +6,6 @@ last-rerun date in this file is > 30 days old go back to `[pending]`.
 
 ## Entries
 
-[pending] access-method-apis last_passrate=never
 [pending] build-and-run last_passrate=never
 [pending] catalog-conventions last_passrate=never
 [pending] coding-style last_passrate=never
@@ -27,3 +26,4 @@ last-rerun date in this file is > 30 days old go back to `[pending]`.
 [pending] review-checklist last_passrate=never
 [pending] testing last_passrate=never
 [pending] wal-and-xlog last_passrate=never
+[done:2026-06-03] access-method-apis last_passrate=100% reran=2026-06-03
