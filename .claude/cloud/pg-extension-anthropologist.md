@@ -5,14 +5,16 @@ fetches_source_via_url: true
 queue: progress/_queues/extensions.md
 output_dirs: [knowledge/ideologies]
 skills_required: [pg-claude, memory-keeping, extension-development, catalog-conventions, access-method-apis, coding-style]
-max_input_tokens: 70000
-max_output_tokens: 20000
+max_input_tokens: 250000
+max_output_tokens: 60000
 ---
 
 # pg-extension-anthropologist
 
-Pick one popular PG extension per run and capture how its design diverges
-from core Postgres.
+Capture how popular PG extensions diverge from core Postgres design.
+**Process extensions in a loop until budget is consumed** (per `_loader.md`
+§5 "Fill the budget"); aim for 2-4 extensions per run with the 60k output
+budget, more for smaller extensions.
 
 ## Inputs
 
@@ -26,33 +28,42 @@ from core Postgres.
 1. Load skills `pg-claude`, `memory-keeping`, `extension-development`,
    `catalog-conventions`, `access-method-apis`, `coding-style`.
 2. Branch: `cloud/pg-extension-anthropologist/<YYYY-MM-DD>`.
-3. Pop the head `[pending]` queue entry; mark `[in-progress:<branch>]`. Entry
-   format: `owner/repo branch=<ref> files=README.md,ARCHITECTURE.md,...`.
-4. Tree listing (for header/file discovery):
-   `https://api.github.com/repos/<owner>/<repo>/git/trees/<branch>?recursive=1`.
-5. Fetch each manifest file via
-   `https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<path>`.
-6. Produce `knowledge/ideologies/<extension>.md` covering:
-   - **Domain & purpose** — one paragraph.
-   - **How it hooks into PG** — which APIs (hooks, AMs, BG workers,
-     `_PG_init`, custom plan nodes, ...).
-   - **Where it diverges from core idioms** — memory contexts, catalog
-     conventions, locking, WAL/replication implications.
-   - **Notable design decisions** with file:line cites into the ext repo.
-   - **Links into corpus** — `[[link]]` to relevant `knowledge/idioms/...`,
-     `knowledge/architecture/...`, `knowledge/subsystems/...` notes.
-7. Mark queue entry `[done:<placeholder>]`; the merger rewrites with the
-   merge SHA.
-8. Write run log + self-review + open PR
-   `[cloud:pg-extension-anthropologist] <extension>`.
+3. **Loop** until `output_tokens_so_far ≥ 0.70 * max_output_tokens` OR queue
+   is empty. Per iteration:
+
+   a. Pop the head `[pending]` queue entry; mark `[in-progress:<branch>]`. Entry
+      format: `owner/repo branch=<ref> files=README.md,ARCHITECTURE.md,...`.
+   b. Tree listing (for header/file discovery):
+      `https://api.github.com/repos/<owner>/<repo>/git/trees/<branch>?recursive=1`.
+   c. Fetch each manifest file via
+      `https://raw.githubusercontent.com/<owner>/<repo>/<branch>/<path>`.
+   d. Produce `knowledge/ideologies/<extension>.md` covering:
+      - **Domain & purpose** — one paragraph.
+      - **How it hooks into PG** — which APIs (hooks, AMs, BG workers,
+        `_PG_init`, custom plan nodes, ...).
+      - **Where it diverges from core idioms** — memory contexts, catalog
+        conventions, locking, WAL/replication implications.
+      - **Notable design decisions** with file:line cites into the ext repo.
+      - **Links into corpus** — `[[link]]` to relevant `knowledge/idioms/...`,
+        `knowledge/architecture/...`, `knowledge/subsystems/...` notes.
+   e. Mark queue entry `[done:<placeholder>]`; the merger rewrites with the
+      merge SHA.
+   f. **Check budget** — if `output_tokens_so_far < 0.70 * max_output_tokens`
+      AND queue has more `[pending]`, continue loop with the next extension.
+
+4. Write run log + self-review + open PR
+   `[cloud:pg-extension-anthropologist] <N> extensions: <list>`.
 
 ## Failure modes
 
 - Extension repo 404 / branch missing → mark queue entry `[skipped:404]`,
-  pop the next one. Cap at 2 pops per run to bound budget.
+  pop the next one. No special cap — let the budget loop handle exit.
 - Manifest file 404 → log and continue with the files that did fetch; note
   the gap in the ideology doc's "Sources" footer.
+- ≥ 3 consecutive 404s or fetch errors → exit `queue-error`.
 
 ## Budget
 
-70k input / 20k output. Manifests should stay under ~30k input combined.
+250k input / 60k output. Manifests typically run ~30-50k input per
+extension; output ~10-20k per ideology doc → 3-4 extensions per run with
+the new budget.

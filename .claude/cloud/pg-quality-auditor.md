@@ -5,8 +5,8 @@ fetches_source_via_url: true
 queue: [progress/_queues/audits.md, progress/_queues/skills.md, progress/_queues/issues.md]
 output_dirs: [knowledge, knowledge/issues, skill-evals]
 skills_required: [pg-claude, memory-keeping]
-max_input_tokens: 80000
-max_output_tokens: 20000
+max_input_tokens: 250000
+max_output_tokens: 60000
 ---
 
 # pg-quality-auditor
@@ -32,10 +32,16 @@ stale-claim-auditor + skill-regression-runner + issue-triage.
 
 1. Load `pg-claude`, `memory-keeping`.
 2. Branch: `cloud/pg-quality-auditor/<YYYY-MM-DD>`.
-3. Pick mode by `day-of-year mod 3`:
+3. Pick **primary mode** by `day-of-year mod 3`:
    - **0 → AUDIT mode** (long-form doc).
    - **1 → SKILL mode** (skill regression).
    - **2 → ISSUE mode** (issue-register triage).
+4. **Loop in the primary mode** until `output_tokens_so_far ≥ 0.70 *
+   max_output_tokens` OR that mode's queue is empty. Target **5-10 items
+   per run** with the 60k output budget (vs prior 1 item/run). If primary
+   mode's queue empties before budget is consumed, rotate to the next
+   mode and continue. Per `_loader.md` §5 "Fill the budget" — don't exit
+   after one item if budget remains.
 
 ### AUDIT mode
 
@@ -107,5 +113,9 @@ The routine went SILENT on 2026-06-02 (no log written at all). Defenses:
 
 ## Budget
 
-80k input / 20k output. Bumped from 70k for the issue-mode lookups
-(per-issue `git log -S` resolution fetches).
+250k input / 60k output. Bumped 2026-06-02 evening per the "fill the
+budget" directive (`_loader.md` §5). At ~5-8k output per AUDIT/SKILL/ISSUE
+item, supports **5-10 items per run** vs prior single-item cadence —
+which means the audit queue (currently ~24 long-form docs) cycles every
+3-5 days instead of every 24+ days, and the issue register triage keeps
+up with growth.

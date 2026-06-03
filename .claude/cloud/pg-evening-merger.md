@@ -5,8 +5,8 @@ fetches_source_via_url: false
 queue: null
 output_dirs: [progress/cloud-routines/_digest]
 skills_required: [pg-claude, memory-keeping, review-checklist, commit-message-style, coding-style, patch-submission]
-max_input_tokens: 150000
-max_output_tokens: 30000
+max_input_tokens: 300000
+max_output_tokens: 60000
 ---
 
 # pg-evening-merger

@@ -5,8 +5,8 @@ fetches_source_via_url: true
 queue: null
 output_dirs: [knowledge/upstream-deltas, knowledge/buildfarm-lessons, progress]
 skills_required: [pg-claude, memory-keeping, wal-and-xlog, executor-and-planner, locking, coding-style]
-max_input_tokens: 80000
-max_output_tokens: 25000
+max_input_tokens: 200000
+max_output_tokens: 50000
 ---
 
 # pg-upstream-watcher

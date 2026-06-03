@@ -5,8 +5,8 @@ fetches_source_via_url: false
 queue: null
 output_dirs: [progress, progress/_briefings]
 skills_required: [pg-claude, memory-keeping, commit-message-style]
-max_input_tokens: 60000
-max_output_tokens: 20000
+max_input_tokens: 150000
+max_output_tokens: 40000
 ---
 
 # pg-state-keeper

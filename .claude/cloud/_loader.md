@@ -76,9 +76,32 @@ Follow `.claude/cloud/<routine>.md`'s "Per-run recipe" exactly. Respect:
 - **Source fetch via URL only** (no clone of upstream postgres). The anchor SHA
   lives in `progress/STATE.md`; read it before fetching pinned files. URL forms
   are listed in `README.md` §Conventions item 7.
-- **Token budget** from the recipe frontmatter (`max_input_tokens` /
-  `max_output_tokens`). Self-cap; if you approach the ceiling, stop early and
-  record `exit_reason: rate-limited` or `budget-capped`.
+- **Token budget — fill it.** The recipe frontmatter (`max_input_tokens` /
+  `max_output_tokens`) is sized so each run produces real volume, not a single
+  token-cheap item. **You are expected to keep doing recipe work until you have
+  consumed ≥ 70% of `max_output_tokens` OR the recipe's per-run queue is
+  empty.** Specifically:
+  - If the recipe is queue-driven (`pg-file-backfiller`,
+    `pg-quality-auditor`, `pg-extension-anthropologist`,
+    `pg-user-question-harvester`, `pg-docs-miner`): pop and process queue
+    entries in a loop. After each item, check `output_tokens_so_far`. If
+    `< 0.70 * max_output_tokens` AND the queue still has `[pending]` items,
+    pop the next one. Only exit the loop when one of:
+    `output_tokens_so_far ≥ 0.70 * max_output_tokens`, `queue-empty`, or
+    `≥ 3 consecutive failures` (then `exit_reason: queue-error`).
+  - If the recipe is sweep-driven (`pg-corpus-maintainer`,
+    `pg-upstream-watcher`, `pg-community-pulse`): keep doing passes until
+    one of the same exit conditions. e.g. `pg-corpus-maintainer` Pass 2
+    (glossary growth) should grow `top-N` until budget allows; don't stop
+    at `top-15` if budget for `top-50` remains.
+  - **Approaching the ceiling**: only when `output_tokens_so_far ≥ 0.85 *
+    max_output_tokens` should you stop mid-item and record
+    `exit_reason: budget-capped`. The ceiling is a soft cap with safety
+    margin; the goal is the 70% floor.
+  - **An empty-handed run is a process bug**, not a graceful no-op. If you
+    consistently exit at < 30% budget consumed, the recipe under-uses the
+    routine; flag it in the run log so `pg-state-keeper` can surface a
+    "routine under-utilization" item.
 - **Work queues** at `progress/_queues/<routine>.md` are append-only with
   `[pending]` / `[in-progress:<branch>]` / `[done:<merged-sha>]` markers.
 
