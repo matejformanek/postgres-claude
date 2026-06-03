@@ -27,14 +27,14 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-02 (evening), source pin `4b0bf0788b0`.
+Refreshed 2026-06-02 (evening — post A1 catalog-headers sweep), source pin `4b0bf0788b0`.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **917**.
-- Registry rows in `progress/files-examined.md`: **1,021**.
-- **Top-line coverage: ~35.8%** of source files have a per-file doc.
+- Per-file docs under `knowledge/files/`: **989** (+72 from A1 catalog-headers sweep).
+- Registry rows in `progress/files-examined.md`: **1,093** (+72).
+- **Top-line coverage: ~38.6%** of source files have a per-file doc (up from 35.8%).
 
 The doc count exceeds the registered-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
@@ -46,7 +46,7 @@ replication 107.4%) reflects those companion docs.
 | Tree | Source | Docs | Coverage |
 |---|---:|---:|---:|
 | `src/backend` | 906 | 627 | 69.2% |
-| `src/include` | 844 | 289 | 34.2% |
+| `src/include` | 844 | 361 | 42.8% |
 | `src/common` | 62 | 1 | 1.6% |
 | `src/port` | 64 | 0 | 0.0% |
 | `src/interfaces` (libpq + ecpg) | 166 | 0 | 0.0% |
@@ -56,12 +56,12 @@ replication 107.4%) reflects those companion docs.
 | `src/fe_utils` | 18 | 0 | 0.0% |
 | `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 0 | 0.0% |
 | `contrib` (extensions) | 210 | 0 | 0.0% |
-| **TOTAL** | **2,564** | **917** | **35.8%** |
+| **TOTAL** | **2,564** | **989** | **38.6%** |
 
 ### Phase A target (decided 2026-06-02)
 
 Scope: **everything under src/ + contrib/** (full 2,564-file target).
-Gap to close: **1,647 files** undocumented as of the refresh above.
+Gap to close: **1,575 files** undocumented as of the refresh above (down from 1,647 after the A1 catalog-headers sweep landed 72 new docs).
 Cadence: hybrid — `pg-file-backfiller` cloud routine grinds breadth nightly;
 foreground interactive sweeps accelerate high-value directories
 (`utils/`, `libpq-backend`, `replication/`, `executor/`, `bin/`).

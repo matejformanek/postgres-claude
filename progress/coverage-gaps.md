@@ -4,8 +4,8 @@ The per-directory undocumented-file map. This is the **work queue** the
 `pg-file-backfiller` cloud routine + foreground interactive sweeps pull
 from until Phase A closes (100% coverage of `src/` + `contrib/`).
 
-**Refreshed:** 2026-06-02 (evening), source pin `4b0bf0788b0`.
-**Top-line:** 917 / 2 564 docs (35.8% coverage). **Gap: 1,647 files.**
+**Refreshed:** 2026-06-02 (evening — post A1 catalog-headers sweep), source pin `4b0bf0788b0`.
+**Top-line:** 989 / 2 564 docs (38.6% coverage). **Gap: 1,575 files.**
 
 Numbers below count `.c` + `.h` files. The doc count exceeds source count
 in some dirs because docs include companion files (Makefiles, .y, .l, .dat,
@@ -59,7 +59,7 @@ sub-dir overviews); flagged with `>100%`.
 
 ---
 
-## src/include — 289 / 844 docs (34.2%)
+## src/include — 361 / 844 docs (42.8%)
 
 Headers are the API surface and the principal source of invariant
 documentation (struct field comments, INV-* anchors). Coverage here
@@ -89,11 +89,16 @@ matters as much as `.c` files.
 | statistics | 4 | 1 | 25.0% |
 | regex | 5 | 1 | 20.0% |
 
+### Done or near-done (post A1)
+
+| Subdir | Source | Docs | Coverage |
+|---|---:|---:|---:|
+| **catalog** | 85 | 87 | 102.4% | A1 sweep landed 72 new docs 2026-06-02 evening (counts >100% include _README + _catalog_headers_overview companion docs). |
+
 ### Big absolute gaps (high-priority foreground sweep candidates)
 
 | Subdir | Source | Docs | Coverage | Why |
 |---|---:|---:|---:|---|
-| **catalog** | 85 | 15 | 17.6% | All the `pg_*` headers + companion .dat. Critical for any catalog work + the data-leak project (catalog leaks via timing) |
 | **common** | 50 | 0 | 0.0% | Cross-backend shared helpers (cryptohash, scram, blkreffile, …) |
 | **port** | 47 | 0 | 0.0% | Cross-platform portability headers — `pg_iovec.h`, `pg_pthread.h`, etc. |
 | **libpq** | 20 | 0 | 0.0% | The libpq protocol headers; loadbearing for replication + frontend |
@@ -179,16 +184,12 @@ already; verify alignment.
 
 ---
 
-## Suggested attack order (Phase A0.5 → A1)
+## Suggested attack order (post A1)
 
-1. **Foreground sweep #1** — `src/include/catalog/` (85 files, 17%
-   coverage) + `src/backend/utils/cache/` (within the 233 utils/
-   files). Highest concentration of invariants + frequently-cited.
-2. **Foreground sweep #2** — `src/include/libpq/` (20) + `src/backend/
-   libpq/` (17) + `src/interfaces/libpq/` (~120). The whole libpq
-   stack. Data-leak project prerequisite.
-3. **Foreground sweep #3** — `src/bin/pg_dump/` (16) + `src/bin/psql/`
-   (~22). User-facing tool surface; visible privilege boundaries.
+0. ~~**Foreground sweep #1** — `src/include/catalog/`~~ — **DONE 2026-06-02 evening** (72 docs landed via 6 parallel agents; 68 [ISSUE-*] tags surfaced; see `knowledge/issues/catalog.md`).
+1. **Foreground sweep #2** — `src/include/libpq/` (20) + `src/backend/libpq/` (17) + `src/interfaces/libpq/` (~120). The whole libpq stack. Data-leak project prerequisite.
+2. **Foreground sweep #3** — `src/bin/pg_dump/` (16) + `src/bin/psql/` (~22). User-facing tool surface; visible privilege boundaries.
+3. **Foreground sweep #4** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files).
 4. **Cloud routine** — keep grinding through `src/port`, `src/common`,
    `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
 5. **Cloud routine + foreground** — `src/pl/plpgsql/`, contrib/ top
