@@ -11,7 +11,7 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 ## Entries
 
 [done:a49dd51] Hint_Bits https://wiki.postgresql.org/wiki/Hint_Bits
-[done:pending-merge] Hot_Standby https://wiki.postgresql.org/wiki/Hot_Standby
+[done:c34e6da] Hot_Standby https://wiki.postgresql.org/wiki/Hot_Standby
 [pending] Logical_Decoding https://wiki.postgresql.org/wiki/Logical_Decoding
 [pending] MultiXacts https://wiki.postgresql.org/wiki/MultiXacts
 [pending] Parallel_Query_Execution https://wiki.postgresql.org/wiki/Parallel_Query_Execution
