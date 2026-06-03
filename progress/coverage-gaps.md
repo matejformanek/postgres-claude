@@ -4,8 +4,8 @@ The per-directory undocumented-file map. This is the **work queue** the
 `pg-file-backfiller` cloud routine + foreground interactive sweeps pull
 from until Phase A closes (100% coverage of `src/` + `contrib/`).
 
-**Refreshed:** 2026-06-03 (post A4 bin-tools sweep), source pin `4b0bf0788b0`.
-**Top-line:** 1 137 / 2 564 docs (44.3% coverage). **Gap: 1 427 files.**
+**Refreshed:** 2026-06-03 (post A5 common sweep), source pin `4b0bf0788b0`.
+**Top-line:** 1 245 / 2 564 docs (48.6% coverage). **Gap: 1 319 files.**
 
 Numbers below count `.c` + `.h` files. The doc count exceeds source count
 in some dirs because docs include companion files (Makefiles, .y, .l, .dat,
@@ -124,11 +124,15 @@ matters as much as `.c` files.
 
 ---
 
-## src/common — 1 / 62 docs (1.6%)
+## src/common — 59 / 62 docs (95.2%)
 
 Cross-backend + frontend shared helpers — cryptography, encoding,
-scram-auth, file utilities. Material for the data-leak project.
-Whole tree is essentially a single foreground-sweep batch.
+scram-auth, file utilities. **DONE 2026-06-03 evening (A5 sweep)**:
+59 .c + .h files documented; 124 issues into `knowledge/issues/common.md`.
+Headline: **SecretBuf hosting site identified** at the proposed
+`src/include/common/secretbuf.h` — closes A2-libpq + A4-psql/streamutil/initdb
++ A5-common secret-scrub findings in one coordinated Phase D series.
+Remaining 3 source-counted entries are subdirs (unicode/, etc.) not in scope.
 
 ## src/port — 0 / 64 docs (0.0%)
 
@@ -192,7 +196,7 @@ already; verify alignment.
 1. ~~**Foreground sweep #2** — libpq stack~~ — **DONE 2026-06-03 morning** (69 docs, 227 issues; `knowledge/issues/libpq.md`).
 2. ~~**Foreground sweep #3** — pg_dump~~ — **DONE 2026-06-03 afternoon** (36 docs, 80 issues; `knowledge/issues/pg_dump.md`). pg_dump.c alone is ~17k LOC; B2's "trust the archive source" finding is the headline.
 3. ~~**Foreground sweep #4** — psql + pg_basebackup + initdb~~ — **DONE 2026-06-03 evening** (43 docs, 146 issues; `knowledge/issues/{psql,pg_basebackup,initdb}.md`). 5 parallel agents; 0 misdirection. Headlines: psql secret-scrub cluster (history+logfile+password buffers); pg_basebackup backup-stream trust (server-controlled `spclocation` + `data_directory_mode`); initdb `--pwfile` stale-TODO ("paranoia for now" never resolved).
-4. **Foreground sweep #5** — `src/common/` (50, 1.6%) + `src/include/common/` headers. Cross-frontend/backend shared crypto + scram + base64 + protocol; **Phase D candidate** because libpq + pg_dump + psql + initdb all rely on these. Cheapest single-sweep close of the unified `SecretBuf`/`explicit_bzero` patch hosting site (4 occurrences of the same gap found across A2+A4).
+4. ~~**Foreground sweep #5** — src/common + src/include/common~~ — **DONE 2026-06-03 evening** (109 docs, 124 issues; `knowledge/issues/common.md`). 5 parallel agents; 0 misdirection. **Headlines:** SecretBuf hosting site at `src/include/common/secretbuf.h` (proposed) closes 10+ A5 sites + 4 prior cross-corpus sites in one coordinated patch series; backup-trust echo of A3 in `blkreftable.c` + `parse_manifest.c` (CRC/SHA-256 over attacker-controlled bytes); `pg_lzcompress` decompression-bomb potential; `percentrepl.c` GUC-boundary shell-injection; `controldata_utils` torn-write window.
 5. **Foreground sweep #6** — `src/bin/pg_upgrade/` + `src/bin/pg_rewind/` + `src/bin/pg_amcheck/` (~30 files combined). Closes the remaining high-judgement bin/ tools; pg_upgrade is the most security-sensitive (catalog migration during major-version jump).
 6. **Foreground sweep #7** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files).
 7. **Foreground sweep #8** — `src/include/replication/` (22, 4.5%) — close the gap exposed by the spine doc.
