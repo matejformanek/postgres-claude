@@ -1,7 +1,8 @@
 # pg-claude — current state
 
 **Phase:** **Phase A — corpus completeness + issue surfacing.** Tooling buildout complete (three-phase planner suite + pg-patch-review v2 landed 2026-06-02). New arc decided 2026-06-02 evening: A → B → C → D where A=full file-by-file coverage of src/+contrib/ (currently 35.8%; gap 1 647 files), B=developer personas mined from pgsql-hackers + commits, C=calibration of the planner + review pipelines, D=PG data-leak hardening project. Nightly cloud routines run autonomously.
-**Last activity:** 2026-06-02 (evening, interactive) — Phase A setup landed: refreshed `progress/coverage.md` with current numbers; wrote `progress/coverage-gaps.md` (per-directory work queue); created `knowledge/issues/` skeleton (README + tag convention `[ISSUE-&lt;type&gt;: ...]` + template + storage-buffer starter); extended `.claude/cloud/pg-file-backfiller.md` (scope widened beyond src/backend; batch 2-3 small files/run; issue-surfacing step added; budgets bumped); extended `.claude/cloud/pg-corpus-maintainer.md` (added Pass 3 issue-register mirroring); extended `.claude/cloud/pg-quality-auditor.md` (added third ISSUE-triage mode + failure-to-run defenses for the 2026-06-02 SILENT incident). Master `pg-claude` skill updated to register `knowledge/issues/` and `progress/coverage-gaps.md`. Earlier same afternoon: **PG patch-review v2** + **three-phase planner suite** landed (#28, #29). Same-day priors: 4 subsystem-synthesis PRs merged — parser-and-rewrite (#19), access-nbtree (#21), replication (#25), tcop (#27). Cloud cycle: 7 of 9 producers opened PRs (#11–#17); pg-quality-auditor SILENT — defenses added this session, real root cause still TBD. Daily watchdog briefing at `progress/_briefings/2026-06-02.md`. Prior activity 2026-06-01: cross-reference pass added 633 upward backlinks, `data-structures/bufferdesc-state.md` refreshed for PG18 atomic state-word.
+**Last activity:** 2026-06-03 (overnight, cloud) — second autonomous cloud cycle merged green by `pg-evening-merger` (digest `fee5a16`): 6 roster PRs — `pg-file-backfiller` deepened `twophase.c` to depth:deep (#30), `pg-corpus-maintainer` +91 backlinks (661 docs now carry them) + glossary 15→30 (#31), `pg-docs-miner` distilled `mvcc` chapter + `Hot_Standby` wiki (#34), `pg-extension-anthropologist` characterized TimescaleDB (#37), `pg-user-question-harvester` 8 questions + 3 gap tags (#38), `pg-quality-auditor` reran `access-method-apis` clean 23/23 (#39). **The pg-quality-auditor SILENT incident (2026-06-02) is RESOLVED** — it ran and logged cleanly this cycle. Watchdog flag this cycle: `pg-community-pulse` (20:11) + `pg-upstream-watcher` (21:23) produced no evening-cycle run log (only the morning bootstrap batch, PRs #11/#17) — see `progress/_briefings/2026-06-03.md` §Needs fix. Two human `ft_*` PRs (#35 A1 catalog headers / 72 docs; #36 throughput bump) left open for human review.
+**Prior activity:** 2026-06-02 (evening, interactive) — Phase A setup landed: refreshed `progress/coverage.md` with current numbers; wrote `progress/coverage-gaps.md` (per-directory work queue); created `knowledge/issues/` skeleton (README + tag convention `[ISSUE-&lt;type&gt;: ...]` + template + storage-buffer starter); extended `.claude/cloud/pg-file-backfiller.md` (scope widened beyond src/backend; batch 2-3 small files/run; issue-surfacing step added; budgets bumped); extended `.claude/cloud/pg-corpus-maintainer.md` (added Pass 3 issue-register mirroring); extended `.claude/cloud/pg-quality-auditor.md` (added third ISSUE-triage mode + failure-to-run defenses for the 2026-06-02 SILENT incident). Master `pg-claude` skill updated to register `knowledge/issues/` and `progress/coverage-gaps.md`. Earlier same afternoon: **PG patch-review v2** + **three-phase planner suite** landed (#28, #29). Same-day priors: 4 subsystem-synthesis PRs merged — parser-and-rewrite (#19), access-nbtree (#21), replication (#25), tcop (#27). Cloud cycle: 7 of 9 producers opened PRs (#11–#17); pg-quality-auditor SILENT — defenses added this session, real root cause still TBD. Daily watchdog briefing at `progress/_briefings/2026-06-02.md`. Prior activity 2026-06-01: cross-reference pass added 633 upward backlinks, `data-structures/bufferdesc-state.md` refreshed for PG18 atomic state-word.
 **Source commit at last verification:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (refreshed 2026-06-01; previous anchor `ef6a95c7c64` had 1 trailing commit, build-system only, no corpus impact — see `progress/refresh-2026-06-01.md`).
 
 ## Done
@@ -53,21 +54,24 @@
 9. Workflow agents (Phase 2 of master plan): `code-explorer`, `doc-verifier`. (`patch-reviewer` + `feature-planner` superseded by `pg-patch-review` + the planner suite.)
 10. Filename-form backlink pass — syntheses also mention files by short name (`aset.c`, `heapam.c`) in prose without the `knowledge/files/` prefix. Stretch; false-positive risk for common names.
 11. Audit pass for pre-anchor staleness: the `bufferdesc-state.md` fix on 2026-06-01 was drift from BEFORE the anchor. Other PG18-era changes (lwlock, AIO read-stream, SLRU) may have invalidated similar claims. Spot-check the most-asserted invariants.
-12. **pg-quality-auditor SILENT 2026-06-02 root cause.** Defenses landed in this session; the actual reason it didn't write a log still unknown. Pull the cloud-routine event log next day cycle.
+12. ~~**pg-quality-auditor SILENT 2026-06-02 root cause.**~~ **RESOLVED 2026-06-03** — after the defenses landed, the auditor ran and logged cleanly in the 2026-06-03 cycle (SKILL mode, `access-method-apis` 23/23, PR #39). The original no-log root cause was never isolated, but the routine is now producing run logs; watching for recurrence.
 
 ## Coverage snapshot (refreshed 2026-06-02 evening)
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2 564**.
 - Per-file docs under `knowledge/files/`: **917** (35.8%).
-- Registry rows in `progress/files-examined.md`: **1 021**.
+- Registry rows in `progress/files-examined.md`: **1 039**.
 - **Phase A gap: 1 647 files undocumented.** Full per-directory breakdown in `progress/coverage-gaps.md`.
 - Top-line per top-level tree: src/backend 69.2%, src/include 34.2%, src/common 1.6%, src/port 0%, src/interfaces 0%, src/bin 0%, src/pl 0%, contrib 0%.
-- Per-file docs with upward backlinks: **652** (+17 net-new blocks from the 2026-06-02 corpus-maintainer source-path backlink pass; 633 from the earlier cross-reference pass).
+- Per-file docs with upward backlinks: **661** (+9 net-new blocks from the 2026-06-02/03 corpus-maintainer run-2 pass over the new parser/nbtree/replication/tcop spines; 652 prior).
 - Subsystem + data-structures docs: **24** (20 subsystem + 4 data-structures).
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.
 - Issue registers: **knowledge/issues/** — 1 starter file (`storage-buffer.md`) + README/template. Will grow as Phase A surfaces issues.
-- Glossary: `knowledge/glossary.md`, **15** entries (top-15 internals terms; grown by `pg-corpus-maintainer`).
+- Glossary: `knowledge/glossary.md`, **30** entries (grown by `pg-corpus-maintainer`; run-2 added AM, GUC, HOT, LSN, LWLock, MVCC, PGPROC, portal, PostgresMain, RTE, rmgr, SLRU, smgr, TID, TOAST).
+- Docs distilled: `knowledge/docs-distilled/` **2** (storage, mvcc) · wiki distilled: `knowledge/wiki-distilled/` **2** (Hint_Bits, Hot_Standby).
+- Extension ideologies: `knowledge/ideologies/` **2** (citus, timescaledb).
+- User-question registers: `knowledge/community/user-questions/` **2** (2026-06-02, 2026-06-03).
 
 ## Recent session logs
 
