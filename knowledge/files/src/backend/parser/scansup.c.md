@@ -29,3 +29,4 @@ What remains here is the identifier-folding contract.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

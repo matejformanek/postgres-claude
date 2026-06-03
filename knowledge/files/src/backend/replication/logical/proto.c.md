@@ -38,3 +38,4 @@ Constants in `logicalproto.h:40-45`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

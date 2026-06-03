@@ -16,3 +16,4 @@ data. [from-comment] (`syncrep_gram.y:25-32`)
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../subsystems/replication.md)

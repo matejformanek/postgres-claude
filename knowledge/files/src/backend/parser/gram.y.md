@@ -64,3 +64,4 @@ The only public symbol is `base_yyparse(yyscanner)`, called by
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

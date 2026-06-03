@@ -33,3 +33,4 @@ either immediately (non-transactional) or via the txn's change queue.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

@@ -5,3 +5,7 @@
 
 Tiny. Just the prototype `HandleFunctionRequest(StringInfo msgBuf)` — the
 entry point called from `PostgresMain` on protocol message `'F'`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

@@ -68,3 +68,4 @@ remapped through the view's targetlist. This helper does the bitmap remap.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

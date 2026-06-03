@@ -185,3 +185,7 @@ keeping stats enum in sync.
 
 40 lines. `PGOutputData` state struct — three memory contexts, protocol
 fields, options (binary/streaming/messages/two_phase/publish_no_origin).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/replication.md](../../../../subsystems/replication.md)

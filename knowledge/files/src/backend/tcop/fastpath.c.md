@@ -53,3 +53,4 @@ the path for security-restricted contexts where appropriate.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

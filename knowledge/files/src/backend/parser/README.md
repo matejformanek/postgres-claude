@@ -62,3 +62,4 @@ how raw text becomes a `Query` becomes a rewritten `List<Query>`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

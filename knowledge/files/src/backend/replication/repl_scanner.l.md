@@ -22,3 +22,4 @@ fatal-error path doesn't actually `exit()` the backend.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../subsystems/replication.md)

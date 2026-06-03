@@ -34,3 +34,4 @@ exposes the slot-sync skip-reason enum mapping (`SlotSyncSkipReasonNames`,
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../subsystems/replication.md)

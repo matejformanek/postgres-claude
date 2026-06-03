@@ -69,3 +69,7 @@ Inline accessors `BTreeTupleIsPivot`, `BTreeTupleIsPosting`, `BTreeTupleSetPosti
 ## Cross-references
 
 - Included by every `*.c` in `access/nbtree/`, by `amcheck`, by `pg_visibility`, by `pageinspect`, and by extensions that build btree pages directly (e.g. some FDWs in tests).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-nbtree.md](../../../../subsystems/access-nbtree.md)

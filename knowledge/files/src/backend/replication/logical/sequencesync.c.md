@@ -45,3 +45,4 @@ query `pg_subscription_rel`. Hence the apply worker triggers spawning.
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

@@ -69,3 +69,4 @@ default is FIRST. (`syncrep.c:32-64`) [from-comment]
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../subsystems/replication.md)

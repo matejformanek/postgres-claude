@@ -64,3 +64,4 @@ write / flush events; loop selects on a latch with multiple deadlines.
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/replication.md](../../../../subsystems/replication.md)

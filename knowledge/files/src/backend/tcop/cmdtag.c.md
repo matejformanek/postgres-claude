@@ -39,3 +39,4 @@ the event-trigger code, and the rewriter. [from-comment] `:3-5`
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

@@ -40,3 +40,4 @@ condition, and a list of `MergeAction` nodes — one per `WHEN` branch.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

@@ -47,3 +47,4 @@ Tree-descent code for nbtree: `_bt_search` (the recursive descent from root to l
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

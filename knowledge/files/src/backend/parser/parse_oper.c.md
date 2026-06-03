@@ -43,3 +43,4 @@ matches, then by implicit-coercion matches. SQL spec §9.5 priority.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

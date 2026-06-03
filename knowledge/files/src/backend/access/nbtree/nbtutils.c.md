@@ -35,3 +35,4 @@ The "miscellaneous utilities" file for nbtree. Builds insertion scankeys (`_bt_m
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)
