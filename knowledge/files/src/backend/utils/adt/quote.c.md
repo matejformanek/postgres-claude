@@ -2,7 +2,7 @@
 path: src/backend/utils/adt/quote.c
 anchor_sha: 4b0bf0788b066a4ca1d4f959566678e44ec93422
 loc: 135
-depth: read
+depth: deep
 ---
 
 # quote.c
