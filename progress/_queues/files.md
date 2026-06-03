@@ -38,23 +38,23 @@ take top 50.
 
 ## src/backend/utils/adt/ scalar-type cluster (recomputed gap, 2026-06-03)
 
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/bool.c loc=274 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/char.c loc=196 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/name.c loc=286 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/xid.c loc=300 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/tid.c loc=388 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/oid8.c loc=107 priority=M
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/arrayutils.c loc=220 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/pg_lsn.c loc=219 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/uuid.c loc=674 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/mac.c loc=332 priority=M
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/mac8.c loc=405 priority=M
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/enum.c loc=550 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/cash.c loc=912 priority=M
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/numutils.c loc=1020 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/encode.c loc=801 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/quote.c loc=92 priority=H
-[in-progress:cloud/pg-file-backfiller/2026-06-03] src/backend/utils/adt/ascii.c loc=159 priority=M
+[done:17f18fb] src/backend/utils/adt/bool.c loc=274 priority=H
+[done:17f18fb] src/backend/utils/adt/char.c loc=196 priority=H
+[done:17f18fb] src/backend/utils/adt/name.c loc=286 priority=H
+[done:17f18fb] src/backend/utils/adt/xid.c loc=300 priority=H
+[done:17f18fb] src/backend/utils/adt/tid.c loc=388 priority=H
+[done:17f18fb] src/backend/utils/adt/oid8.c loc=107 priority=M
+[done:17f18fb] src/backend/utils/adt/arrayutils.c loc=220 priority=H
+[done:17f18fb] src/backend/utils/adt/pg_lsn.c loc=219 priority=H
+[done:17f18fb] src/backend/utils/adt/uuid.c loc=674 priority=H
+[done:17f18fb] src/backend/utils/adt/mac.c loc=332 priority=M
+[done:17f18fb] src/backend/utils/adt/mac8.c loc=405 priority=M
+[done:17f18fb] src/backend/utils/adt/enum.c loc=550 priority=H
+[done:17f18fb] src/backend/utils/adt/cash.c loc=912 priority=M
+[done:17f18fb] src/backend/utils/adt/numutils.c loc=1020 priority=H
+[done:17f18fb] src/backend/utils/adt/encode.c loc=801 priority=H
+[done:17f18fb] src/backend/utils/adt/quote.c loc=92 priority=H
+[done:17f18fb] src/backend/utils/adt/ascii.c loc=159 priority=M
 
 ## Next-up (remaining utils/adt/ scalar + encoding gap, for future runs)
 
