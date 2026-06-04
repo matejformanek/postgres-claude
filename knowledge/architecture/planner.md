@@ -82,7 +82,7 @@ planner / standard_planner                    planner.c:333 / 351
             │   create_distinct_paths / create_ordered_paths
             └─ create_limit_path
   └─ create_plan(best_path)                   createplan.c:339
-  └─ set_plan_references (setrefs.c:227)      ← see §10 for its 9-item contract
+  └─ set_plan_references (setrefs.c:291)      ← see §10 for its 9-item contract
   return PlannedStmt
 ```
 
@@ -362,10 +362,11 @@ that calls the matching `create_foo_plan`. For `T_SeqScan` →
 4. Copies cost numbers from Path to Plan.
 
 After all `create_plan` recursion, `set_plan_references`
-(`setrefs.c:227-272`) makes one final pass over the finished Plan tree. It
-does *not* change join order or cost — it adjusts representational details
-the executor depends on. The top-of-file comment enumerates a 9-item
-contract:
+(`setrefs.c:291`; the 9-item contract is enumerated in the function's
+header comment at `setrefs.c:224-272`) makes one final pass over the
+finished Plan tree. It does *not* change join order or cost — it adjusts
+representational details the executor depends on. That header comment
+enumerates a 9-item contract:
 
 1. **Flatten subquery rangetables** into a single list; null out RTE fields
    the executor doesn't need.
@@ -385,7 +386,7 @@ Plus an extra "final optimization", documented as a closing step in the
 same comment: **delete useless `SubqueryScan` / `Append` / `MergeAppend`
 nodes**. This must happen here, not earlier, because earlier removal would
 break `set_upper_references` — the Var-numbering rewrite in step 3 relies
-on the buffer those nodes provide. [from-comment `setrefs.c:231-272`]
+on the buffer those nodes provide. [from-comment `setrefs.c:260-272`]
 
 The Var-renumbering in steps 2-3 is the most visible change: per-subquery
 RTE indexes get replaced by executor-global slot conventions, which is the

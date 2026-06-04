@@ -7,14 +7,6 @@ back to `[pending]`.
 
 ## Entries
 
-[pending] knowledge/architecture/overview.md verified=never
-[pending] knowledge/architecture/mvcc.md verified=never
-[pending] knowledge/architecture/wal.md verified=never
-[pending] knowledge/architecture/executor.md verified=never
-[pending] knowledge/architecture/planner.md verified=never
-[pending] knowledge/architecture/query-lifecycle.md verified=never
-[pending] knowledge/architecture/access-methods.md verified=never
-[pending] knowledge/architecture/process-model.md verified=never
 [pending] knowledge/architecture/replication.md verified=never
 [pending] knowledge/subsystems/access-heap.md verified=never
 [pending] knowledge/subsystems/access-transam.md verified=never
@@ -46,3 +38,11 @@ back to `[pending]`.
 [pending] knowledge/data-structures/heap-tuple-layout.md verified=never
 [pending] knowledge/data-structures/pgproc-fields.md verified=never
 [pending] knowledge/data-structures/snapshot-lifecycle.md verified=never
+[pending] knowledge/architecture/overview.md verified=2026-06-04
+[pending] knowledge/architecture/mvcc.md verified=2026-06-04
+[pending] knowledge/architecture/wal.md verified=2026-06-04
+[pending] knowledge/architecture/executor.md verified=2026-06-04
+[pending] knowledge/architecture/planner.md verified=2026-06-04
+[pending] knowledge/architecture/query-lifecycle.md verified=2026-06-04
+[pending] knowledge/architecture/access-methods.md verified=2026-06-04
+[pending] knowledge/architecture/process-model.md verified=2026-06-04
