@@ -1,74 +1,36 @@
----
-path: src/backend/utils/adt/xid.c
-anchor_sha: 4b0bf0788b066a4ca1d4f959566678e44ec93422
-loc: 413
-depth: deep
----
-
-# xid.c
-
-- **Source path:** `source/src/backend/utils/adt/xid.c`
-- **Lines:** 413
-- **Depth:** deep
-- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`
-- **Companion files:** `src/include/access/transam.h` (TransactionId, FullTransactionId, TransactionIdPrecedes/Equals/IsNormal, FrozenTransactionId/BootstrapTransactionId/FirstNormalTransactionId, XidFromFullTransactionId/FullTransactionIdFromU64), `src/include/utils/xid8.h` (xid8 SQL-type get/return macros), `src/include/access/multixact.h` (ReadNextMultiXactId, MultiXactIdIsValid), `src/include/access/xact.h`, `src/include/catalog/pg_proc.dat` (SQL function bindings)
+# xid.c — 32-bit `xid` + `xid8` + `cid` type I/O
 
 ## Purpose
-SQL type I/O, comparison, hashing, and aggregate-support functions for the transaction-identifier datatypes: `xid` (32-bit `TransactionId`), `xid8` (64-bit `FullTransactionId`), and `cid` (32-bit `CommandId`) [from-comment `xid.c:3-4`]. The key subtlety is that `xid` equality is exact but `xid` *ordering* is wraparound-aware (epoch-relative) and therefore not a total order, while `xid8` ordering is a plain 64-bit total order [verified-by-code `xid.c:80-99`, `xid.c:144-158`, `xid.c:253-301`]. `xid_age`/`mxid_age` compute distance from the latest stable (multi)xid using raw subtraction [verified-by-code `xid.c:116-142`].
 
-## Public symbols
-| Symbol | file:line | Role |
-|---|---|---|
-| `xidin` | `xid.c:32` | cstring → xid; parses via `uint32in_subr` |
-| `xidout` | `xid.c:42` | xid → cstring (`%u`, 16-byte buf) |
-| `xidrecv` | `xid.c:55` | binary recv (4-byte int) |
-| `xidsend` | `xid.c:66` | binary send (int32) |
-| `xideq` | `xid.c:80` | xid equality via `TransactionIdEquals` |
-| `xidneq` | `xid.c:92` | xid inequality |
-| `hashxid` | `xid.c:101` | hash via `hash_uint32` |
-| `hashxidextended` | `xid.c:107` | extended (seeded) hash |
-| `xid_age` | `xid.c:116` | age of xid vs `GetStableLatestTransactionId()` |
-| `mxid_age` | `xid.c:132` | age of multixact vs `ReadNextMultiXactId()` |
-| `xidComparator` | `xid.c:151` | qsort cmp, plain u32 order (NOT wraparound) |
-| `xidLogicalComparator` | `xid.c:168` | qsort cmp, wraparound order; asserts normal xids |
-| `xid8toxid` | `xid.c:186` | xid8 → xid (drops epoch) |
-| `xid8in` | `xid.c:194` | cstring → xid8 via `uint64in_subr` |
-| `xid8out` | `xid.c:204` | xid8 → cstring (21-byte buf) |
-| `xid8recv` / `xid8send` | `xid.c:214` / `xid.c:224` | binary I/O (int64) |
-| `xid8eq` / `xid8ne` | `xid.c:235` / `xid.c:244` | xid8 (in)equality |
-| `xid8lt`/`xid8gt`/`xid8le`/`xid8ge` | `xid.c:253`/`262`/`271`/`280` | xid8 ordering via FullTransactionId Precedes/Follows[OrEquals] |
-| `xid8cmp` | `xid.c:289` | btree 3-way compare for xid8 |
-| `hashxid8` / `hashxid8extended` | `xid.c:303` / `xid.c:309` | delegate to `hashint8`/`hashint8extended` |
-| `xid8_larger` / `xid8_smaller` | `xid.c:315` / `xid.c:327` | min/max aggregate support |
-| `cidin`/`cidout`/`cidrecv`/`cidsend` | `xid.c:346`/`359`/`372`/`383` | CommandId I/O |
-| `cideq` | `xid.c:394` | CommandId equality (plain `==`) |
-| `hashcid` / `hashcidextended` | `xid.c:403` / `xid.c:409` | CommandId hashing |
+Defines the SQL-visible `xid` (32-bit `TransactionId`), `xid8` (64-bit `FullTransactionId`), and `cid` (32-bit `CommandId`) types: text/binary I/O, equality, age, hash, and the qsort comparators used inside snapshot processing.
 
-## Internal landmarks
-- `PG_GETARG_COMMANDID` / `PG_RETURN_COMMANDID` macros defined locally [verified-by-code `xid.c:28-29`].
-- Wraparound vs non-wraparound comparison split: `xidComparator` deliberately uses `pg_cmp_u32` because wraparound comparison "does not respect the triangle inequality" and would break qsort [from-comment `xid.c:144-158`]. `xidLogicalComparator` uses `TransactionIdPrecedes` but asserts both inputs are normal (same-epoch) so the triangle inequality holds [from-comment + verified-by-code `xid.c:160-184`].
-- `xid_age` special-cases non-normal xids (bootstrap/frozen/invalid) as `INT_MAX` ("infinitely old") and otherwise returns raw `now - xid` cast to int32 [verified-by-code `xid.c:122-126`].
-- `mxid_age` mirrors this with `MultiXactIdIsValid` → `INT_MAX` for invalid [verified-by-code `xid.c:138-141`].
-- `xid8cmp` is a plain total-order 3-way compare (Follows / Equals / else -1) — no wraparound concerns because xid8 carries the epoch [verified-by-code `xid.c:289-301`].
+Source: `source/src/backend/utils/adt/xid.c` (413 lines).
 
-## Invariants & gotchas
-- **xid ordering is epoch-relative and not a total order.** Any code sorting raw `xid` values must use `xidComparator` (plain u32) unless all values are guaranteed same-epoch normal xids, in which case `xidLogicalComparator` gives wraparound-correct order [verified-by-code `xid.c:144-184`].
-- **`xideq`/`xidneq` use exact equality** (`TransactionIdEquals`), not wraparound — equality is well-defined regardless of epoch [verified-by-code `xid.c:80-99`].
-- **Non-normal xids are special.** FrozenTransactionId/BootstrapTransactionId/InvalidTransactionId fail `TransactionIdIsNormal` and are treated as infinitely old by `xid_age` [verified-by-code `xid.c:123-124`].
-- **Buffer sizes are exact.** `xidout` uses a 16-byte buffer (max u32 is 10 digits + NUL), `xid8out` 21 bytes (max u64 is 20 digits + NUL) [verified-by-code `xid.c:46-48`, `xid.c:208-210`].
-- **`xid8toxid` silently drops the epoch** — converting a full xid to 32-bit xid is lossy and only the low 32 bits survive [verified-by-code `xid.c:186-192`].
-- **xid8 hashing piggybacks on int8 hashing** — `hashxid8`/`hashxid8extended` pass `fcinfo` straight to `hashint8`/`hashint8extended`, so xid8 and int8 hash identically [verified-by-code `xid.c:303-313`].
+## Key functions
 
-## Cross-references
-- [[knowledge/subsystems/access-transam.md]] — TransactionId allocation, wraparound, FullTransactionId epoch semantics.
-- [[knowledge/idioms/fmgr.md]] — the `Datum foo(PG_FUNCTION_ARGS)` V1 calling convention used throughout.
-- Sibling adt files: [[knowledge/files/src/backend/utils/adt/oid.c.md]], [[knowledge/files/src/backend/utils/adt/int8.c.md]], [[knowledge/files/src/backend/utils/adt/tid.c.md]], [[knowledge/files/src/backend/utils/adt/numutils.c.md]] (`uint32in_subr`/`uint64in_subr`/`pg_ulltoa_n`).
+- `xidin` (33) — parses an unsigned 32-bit int via `uint32in_subr`. Note: a 32-bit xid wraps every ~4 billion transactions, so values >= 2^31 are valid "future" xids in wraparound math. [verified-by-code]
+- `xidout` (43) — emits decimal via `snprintf("%u")`. [verified-by-code]
+- `xidrecv` (56) / `xidsend` (67) — wire format, 4 bytes. [verified-by-code]
+- `xideq` (81) / `xidneq` (93) — uses `TransactionIdEquals`. Note: equality is reflexive on the bit pattern, not on epoch-aware logical identity. [verified-by-code]
+- `hashxid` / `hashxidextended` (102, 108) — hash via `hash_uint32`. [verified-by-code]
+- `xid_age` (117) — distance to `GetStableLatestTransactionId()`; treats permanent xids (FrozenXid, BootstrapXid) as INT_MAX. [verified-by-code]
+- `mxid_age` (133) — same idea for MultiXactId. [verified-by-code]
+- `xidComparator` (152) — qsort key. Comment block at 145-150 is critical: "We can't use wraparound comparison for XIDs because that does not respect the triangle inequality! Any old sort order will do." So uses `pg_cmp_u32`, which is unsigned-int compare, NOT TransactionIdPrecedes. [verified-by-code]
+- `xidLogicalComparator` (169) — for xids known to be from the same epoch (e.g. all from currently-running backends), uses `TransactionIdPrecedes`. Asserts both inputs are normal. [verified-by-code]
+- `xid8toxid` (187), `xid8in` (195), `xid8out` (205), `xid8recv` (215), `xid8send` (225) — 64-bit family. [verified-by-code]
+- `xid8eq` ... `xid8cmp` (236-301), `hashxid8` / `_extended` (304, 310), `xid8_larger`/`_smaller` (316, 328). [verified-by-code]
+- `cidin` / `cidout` / `cidrecv` / `cidsend` / `cideq` / `hashcid` / `hashcidextended` (347-414). [verified-by-code]
+
+## Phase D notes
+
+- **Triangle-inequality issue with wraparound compare** — explicitly called out at xid.c:145-150. The qsort comparator MUST be a total order; `TransactionIdPrecedes` is not one across the full 32-bit range. The code correctly uses bitwise compare for sorting and saves logical compare for snapshot-internal use. [verified-by-code]
+- **Permanent xid handling**: `xid_age` returns INT_MAX for FrozenXid (= 2) and BootstrapXid (= 1) so an aged tuple's `xmin` shows up as "infinitely old" in queries. [verified-by-code:122-124]
+- **xid8 wraps at 2^64**, not 2^32. The FullTransactionId encoding adds an epoch counter to the visible xid, so `xid8` is monotonically increasing for the foreseeable future (~10^11 years at PG18 commit rates).
+- **No string injection in I/O** — `snprintf` into a fixed buffer with `%u`/`UINT64_FORMAT`.
 
 ## Potential issues
-None surfaced. The wraparound/triangle-inequality split is documented intentional design, not a bug.
 
-## Confidence tag tally
-- [verified-by-code]: 16
-- [from-comment]: 5
-- [inferred]: 0
-- [unverified]: 0
+- `[ISSUE-correctness: xidComparator is unsigned-int order, which means SQL `ORDER BY xid` is NOT logical-transaction order across epochs. A user inspecting old WAL via `pg_stat_activity.backend_xmin` may see surprising orderings. Documented in user docs (low)]`.
+- `[ISSUE-undocumented-invariant: cidin accepts any uint32 but cids in practice are bounded by max command id per transaction. A user-supplied cid >= 2^32 is rejected; one near 2^32 - 1 (combo-cid territory) round-trips fine but may interact oddly with combocids if used as a tuple cid (low)]`.
+
+Confidence: `[verified-by-code]`.

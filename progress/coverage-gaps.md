@@ -4,8 +4,8 @@ The per-directory undocumented-file map. This is the **work queue** the
 `pg-file-backfiller` cloud routine + foreground interactive sweeps pull
 from until Phase A closes (100% coverage of `src/` + `contrib/`).
 
-**Refreshed:** 2026-06-03 (post A6 bin-upgrade sweep), source pin `4b0bf0788b0`.
-**Top-line:** 1 281 / 2 564 docs (50.0% coverage — **halfway**). **Gap: 1 283 files.**
+**Refreshed:** 2026-06-03 (post A7 utils sweep), source pin `4b0bf0788b0`.
+**Top-line:** 1 385 / 2 564 docs (54.0% coverage). **Gap: 1 179 files.**
 
 Numbers below count `.c` + `.h` files. The doc count exceeds source count
 in some dirs because docs include companion files (Makefiles, .y, .l, .dat,
@@ -39,7 +39,7 @@ sub-dir overviews); flagged with `>100%`.
 
 | Subdir | Source | Docs | Coverage | Why prioritize |
 |---|---:|---:|---:|---|
-| **utils** | 233 | 98 | 42.1% | Biggest absolute gap; spans adt/, cache/, error/, fmgr/, hash/, init/, mb/, misc/, mmgr/, resowner/, sort/, time/, activity/ |
+| **utils** | 233 | 202 | 86.7% | **A7 closed cache + adt** (104 docs, 310 issues; `knowledge/issues/utils.md`). Remaining: error/, fmgr/, hash/, init/, mb/, misc/, mmgr/, resowner/, sort/, time/, activity/ subdirs |
 | libpq | 17 | 0 | 0.0% | Backend libpq (auth, be-secure, hba, crypt). Loadbearing for connection security; touched by data-leak threat models |
 | statistics | 8 | 4 | 50.0% | Half-done; finish the rest |
 
@@ -198,7 +198,7 @@ already; verify alignment.
 3. ~~**Foreground sweep #4** — psql + pg_basebackup + initdb~~ — **DONE 2026-06-03 evening** (43 docs, 146 issues; `knowledge/issues/{psql,pg_basebackup,initdb}.md`). 5 parallel agents; 0 misdirection. Headlines: psql secret-scrub cluster (history+logfile+password buffers); pg_basebackup backup-stream trust (server-controlled `spclocation` + `data_directory_mode`); initdb `--pwfile` stale-TODO ("paranoia for now" never resolved).
 4. ~~**Foreground sweep #5** — src/common + src/include/common~~ — **DONE 2026-06-03 evening** (109 docs, 124 issues; `knowledge/issues/common.md`). 5 parallel agents; 0 misdirection. **Headlines:** SecretBuf hosting site at `src/include/common/secretbuf.h` (proposed) closes 10+ A5 sites + 4 prior cross-corpus sites in one coordinated patch series; backup-trust echo of A3 in `blkreftable.c` + `parse_manifest.c` (CRC/SHA-256 over attacker-controlled bytes); `pg_lzcompress` decompression-bomb potential; `percentrepl.c` GUC-boundary shell-injection; `controldata_utils` torn-write window.
 5. ~~**Foreground sweep #6** — pg_upgrade + pg_rewind + pg_amcheck~~ — **DONE 2026-06-03 late evening** (36 docs, 170 issues; `knowledge/issues/{pg_upgrade,pg_rewind,pg_amcheck}.md`). 5 parallel agents; 0 misdirection. **Headlines:** (1) **pg_upgrade `check_loadable_libraries` RCE** — actually `LOAD`s old-cluster-named `.so` files into the NEW cluster (concrete privilege-escalation primitive); (2) **pg_rewind zero `O_NOFOLLOW` everywhere** + server-supplied symlink targets accepted unchecked + null-bytea-from-source = unlink-target-file primitive; (3) **pg_amcheck fail-open at per-database level** (silent skip on missing extension); (4) **pg_upgrade `pg_authid` hash file persists** under pg_dir_create_mode in new pgdata until cleanup. **Past corpus halfway point at 50.0%.**
-6. **Foreground sweep #7** — `src/backend/utils/cache/` + `src/backend/utils/adt/` (the heaviest part of the 233 utils/ files; backend's biggest unaddressed area).
+6. ~~**Foreground sweep #7** — src/backend/utils/cache + adt~~ — **DONE 2026-06-03 night** (104 docs, 310 issues; `knowledge/issues/utils.md`). 6 parallel agents; 0 misdirection. **Headlines:** (1) genfile.c is server-side trust target pg_rewind (A6) extracts; `pg_read_server_files` membership = total bypass + `Log_directory`-escape vector; (2) xml.c uses custom XXE defense via `xmlSetExternalEntityLoader` returning empty string instead of `XML_PARSE_NONET` (works today; libxml2 changes could regress); (3) pg_upgrade_support.c is catalog-corruption-primitive battery gated by single `IsBinaryUpgrade` bool; (4) acl.c PUBLIC-friendly defaults (DATABASE→CONNECT, FUNCTION→EXECUTE); (5) formatting.c to_char has no input-length cap (50 MB format → 600 MB palloc); (6) binary recv DoS surface (tsvectorrecv 16M lexemes, multirange_recv 100 MB pre-alloc, record_recv lacks check_stack_depth); (7) extended-stats deserializers only `Assert`-validate `nattributes`. **What's working:** gen_random_uuid uses pg_strong_random; ri_triggers fully safe; quote_literal safe due to encoding allowlist; datetime parser-DoS defenses intact; JSON backend recursion stack-guarded.
 7. **Foreground sweep #8** — `src/include/replication/` (22, 4.5%) — close the gap exposed by the spine doc.
 8. **Cloud routine** — keep grinding through `src/port`, `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
 9. **Cloud routine + foreground** — `src/pl/plpgsql/` (16 files; privileged-sandbox boundary), `src/pl/plperl/plpython/pltcl`, contrib/ top modules (pg_stat_statements, pgcrypto, postgres_fdw).
