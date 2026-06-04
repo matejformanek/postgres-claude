@@ -183,6 +183,37 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   the official docs and Bruce Momjian talks. Don't use as a learning
   resource [from-wiki](https://wiki.postgresql.org/wiki/MVCC).
 
+- **Index-only_scans** — https://wiki.postgresql.org/wiki/Index-only_scans
+  *(distilled 2026-06-03 → `knowledge/wiki-distilled/Index-only_scans.md`)*
+  2016 page; the core visibility-map gate is unchanged through PG18. The
+  distilled doc supplements the VM bit semantics (`visibilitymap.c`) and the
+  `btcanreturn`/`amcanreturn` path the wiki only gestures at
+  [from-wiki](https://wiki.postgresql.org/wiki/Index-only_scans).
+
+- **Free_Space_Map_Problems** — https://wiki.postgresql.org/wiki/Free_Space_Map_Problems
+  *(distilled 2026-06-03 → `knowledge/wiki-distilled/Free_Space_Map_Problems.md`)*
+  Narrower than its title: a detect-and-repair guide for corrupt `_fsm` forks
+  around 2016 WAL-logging bugs (all in unsupported majors). Lasting value is the
+  `pg_freespacemap` detection recipe; the distilled doc adds the actual FSM
+  architecture (`FSM_CATEGORIES=256`, the `_fsm` fork) from the corpus
+  [from-wiki](https://wiki.postgresql.org/wiki/Free_Space_Map_Problems).
+
+- **Group_commit** — https://wiki.postgresql.org/wiki/Group_commit
+  *(distilled 2026-06-03 → `knowledge/wiki-distilled/Group_commit.md`)*
+  A stale 2012-era **design proposal** (Riggs/Geoghegan, targeted 9.2), not
+  shipped behavior. The distilled doc records the history and then documents what
+  PG actually does today — the implicit ganged `XLogFlush` plus the
+  `commit_delay`/`commit_siblings` knob — from the corpus + docs
+  [from-wiki](https://wiki.postgresql.org/wiki/Group_commit).
+
+- **Dead wiki URLs (404 as of 2026-06-03 crawl):** `Logical_Decoding`,
+  `MultiXacts`, `WAL_Internals`, `Generic_WAL` all return 404 — there is no
+  such wiki page; these topics live in the official docs / source READMEs, and
+  the corpus already documents `generic_xlog.c` and `multixact.c` per-file.
+  `Parallel_Query_Execution` exists but is a stale 2017 design stub (superseded
+  by `knowledge/docs-distilled/parallel-query.md`). All marked
+  `[skipped:...]` in `progress/_queues/wiki.md` so they are not re-queued.
+
 - **Backend_flowchart** — referenced everywhere but the wiki page URL
   returns 404 in our crawl. The actual flowchart asset lives in the
   source tree / on the main website, not the wiki [from-wiki](https://wiki.postgresql.org/wiki/Developer_FAQ).
