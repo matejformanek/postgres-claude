@@ -20,3 +20,14 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 [done:19c6e24] Index-only_scans https://wiki.postgresql.org/wiki/Index-only_scans
 [skipped:404-no-such-wiki-page] WAL_Internals https://wiki.postgresql.org/wiki/WAL_Internals
 [skipped:404-no-such-wiki-page] Generic_WAL https://wiki.postgresql.org/wiki/Generic_WAL
+
+## Refill 2026-06-04 (re-walk of wiki-index.md — developer-relevant pages without a wiki-distilled/<slug>.md)
+
+[in-progress:cloud/pg-docs-miner/2026-06-04] Submitting_a_Patch https://wiki.postgresql.org/wiki/Submitting_a_Patch
+[in-progress:cloud/pg-docs-miner/2026-06-04] Reviewing_a_Patch https://wiki.postgresql.org/wiki/Reviewing_a_Patch
+[in-progress:cloud/pg-docs-miner/2026-06-04] Valgrind https://wiki.postgresql.org/wiki/Valgrind
+[in-progress:cloud/pg-docs-miner/2026-06-04] Continuous_Integration https://wiki.postgresql.org/wiki/Continuous_Integration
+[pending] Creating_Clean_Patches https://wiki.postgresql.org/wiki/Creating_Clean_Patches
+[pending] Commit_Message_Guidance https://wiki.postgresql.org/wiki/Commit_Message_Guidance
+[pending] Regression_test_authoring https://wiki.postgresql.org/wiki/Regression_test_authoring
+[pending] Working_with_Git https://wiki.postgresql.org/wiki/Working_with_Git

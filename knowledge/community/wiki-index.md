@@ -86,6 +86,7 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
 ## Patch workflow
 
 - **Submitting_a_Patch** — https://wiki.postgresql.org/wiki/Submitting_a_Patch
+  *(distilled 2026-06-04 → `knowledge/wiki-distilled/Submitting_a_Patch.md`)*
   Use `git format-patch`. Email must include: description, target branch
   (usually master), compile+test status, regression tests, docs.
   "Any patch without these two items is automatically considered a WIP one"
@@ -93,6 +94,7 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   [from-wiki](https://wiki.postgresql.org/wiki/Submitting_a_Patch).
 
 - **Reviewing_a_Patch** — https://wiki.postgresql.org/wiki/Reviewing_a_Patch
+  *(distilled 2026-06-04 → `knowledge/wiki-distilled/Reviewing_a_Patch.md`)*
   Six-phase checklist: Submission review, Usability review, Feature test,
   Performance review, Coding review, Architecture review. Use as the
   template when reviewing
@@ -141,12 +143,14 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   [from-wiki](https://wiki.postgresql.org/wiki/Working_with_Git).
 
 - **Continuous_Integration** — https://wiki.postgresql.org/wiki/Continuous_Integration
+  *(distilled 2026-06-04 → `knowledge/wiki-distilled/Continuous_Integration.md`)*
   Cfbot (unofficial) auto-runs CI on patches posted to -hackers.
   Cirrus CI is the widest-OS path (Linux/Windows/FreeBSD/macOS).
   Control files live in the feature branch
   [from-wiki](https://wiki.postgresql.org/wiki/Continuous_Integration).
 
 - **Valgrind** — https://wiki.postgresql.org/wiki/Valgrind
+  *(distilled 2026-06-04 → `knowledge/wiki-distilled/Valgrind.md`)*
   Build with `CPPFLAGS="-DUSE_VALGRIND"`. Combine with
   `MEMORY_CONTEXT_CHECKING` for `repalloc()` instrumentation. Suppressions
   file is `src/tools/valgrind.supp`
