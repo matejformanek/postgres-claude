@@ -58,11 +58,75 @@ take top 50.
 
 ## Next-up (remaining utils/adt/ scalar + encoding gap, for future runs)
 
-[pending] src/backend/utils/adt/varbit.c loc=1465 priority=M
-[pending] src/backend/utils/adt/bytea.c loc=1106 priority=H
-[pending] src/backend/utils/adt/oracle_compat.c loc=841 priority=M
-[pending] src/backend/utils/adt/regproc.c loc=1708 priority=H
-[pending] src/backend/utils/adt/format_type.c loc=431 priority=H
-[pending] src/backend/utils/adt/domains.c loc=424 priority=H
-[pending] src/backend/utils/adt/datum.c loc=560 priority=H
-[pending] src/backend/utils/adt/expandeddatum.c loc=130 priority=H
+> **2026-06-04 queue audit (cloud/pg-file-backfiller):** this entire
+> block was **stale** — all 8 files already have deep per-file docs under
+> `knowledge/files/src/backend/utils/adt/` (verified on disk this run;
+> `varbit.c.md`, `bytea.c.md`, `oracle_compat.c.md`, `regproc.c.md`,
+> `format_type.c.md`, `domains.c.md`, `datum.c.md`, `expandeddatum.c.md`
+> all present). Marked `[done:covered-prior]`. Per the refill rule (queue
+> depth < 5), refilled from `progress/coverage-gaps.md` suggested attack
+> order item 10 (`src/fe_utils`, 0/18 docs) — also closes the A4-flagged
+> `string_utils.c` + `astreamer_tar.c` corpus gaps.
+
+[done:covered-prior] src/backend/utils/adt/varbit.c loc=1465 priority=M
+[done:covered-prior] src/backend/utils/adt/bytea.c loc=1106 priority=H
+[done:covered-prior] src/backend/utils/adt/oracle_compat.c loc=841 priority=M
+[done:covered-prior] src/backend/utils/adt/regproc.c loc=1708 priority=H
+[done:covered-prior] src/backend/utils/adt/format_type.c loc=431 priority=H
+[done:covered-prior] src/backend/utils/adt/domains.c loc=424 priority=H
+[done:covered-prior] src/backend/utils/adt/datum.c loc=560 priority=H
+[done:covered-prior] src/backend/utils/adt/expandeddatum.c loc=130 priority=H
+
+## src/fe_utils/ frontend-shared utilities (refill, 2026-06-04)
+
+Source path: `src/fe_utils/`. Anchor `4b0bf0788b0`. 18 .c files, 0 docs.
+Frontend-shared helpers linked into psql, pg_dump, pg_basebackup, etc.
+High-value: `string_utils.c` (fmtId + processSQLNamePattern chokepoint —
+A4 gap), `astreamer_tar.c` (tar-stream trust — A4 gap), `recovery_gen.c`
+(writes `primary_conninfo` with password — secret-scrub theme), the
+`astreamer_{gzip,lz4,zstd}.c` decompression-bomb cluster (A5 theme).
+
+[done:a11-fe_utils-2026-06-04] src/fe_utils/string_utils.c loc=1300 priority=H
+[done:a11-fe_utils-2026-06-04] src/fe_utils/option_utils.c loc=120 priority=H
+[done:a11-fe_utils-2026-06-04] src/fe_utils/query_utils.c loc=70 priority=H
+[done:a11-fe_utils-2026-06-04] src/fe_utils/simple_list.c loc=120 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/conditional.c loc=130 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/cancel.c loc=190 priority=H
+[done:a11-fe_utils-2026-06-04] src/fe_utils/connect_utils.c loc=160 priority=H
+[done:a11-fe_utils-2026-06-04] src/fe_utils/recovery_gen.c loc=210 priority=H
+[done:a11-fe_utils-2026-06-04] src/fe_utils/version.c loc=80 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/archive.c loc=100 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/astreamer_file.c loc=400 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/astreamer_tar.c loc=560 priority=H
+[done:a11-fe_utils-2026-06-04] src/fe_utils/astreamer_gzip.c loc=380 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/astreamer_lz4.c loc=420 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/astreamer_zstd.c loc=360 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/mbprint.c loc=300 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/parallel_slot.c loc=470 priority=M
+[done:a11-fe_utils-2026-06-04] src/fe_utils/print.c loc=2700 priority=M
+
+## Next-up (src/include/fe_utils headers — companions to the A11 sweep, seeded 2026-06-04)
+
+16 headers under `src/include/fe_utils/` (0 docs). Natural follow-on to
+the A11 `src/fe_utils/*.c` sweep — most are small API-surface headers
+declaring the structs/protos for the just-documented .c files. `print.h`
+and `astreamer.h` carry the load-bearing struct definitions
+(`printTableContent`, the `astreamer` vtable/ops). Refill source:
+`progress/coverage-gaps.md` src/include → fe_utils 0/16.
+
+[pending] src/include/fe_utils/print.h loc=300 priority=M
+[pending] src/include/fe_utils/astreamer.h loc=270 priority=M
+[pending] src/include/fe_utils/string_utils.h loc=90 priority=H
+[pending] src/include/fe_utils/conditional.h loc=120 priority=M
+[pending] src/include/fe_utils/psqlscan_int.h loc=210 priority=M
+[pending] src/include/fe_utils/psqlscan.h loc=95 priority=M
+[pending] src/include/fe_utils/parallel_slot.h loc=70 priority=M
+[pending] src/include/fe_utils/simple_list.h loc=65 priority=M
+[pending] src/include/fe_utils/connect_utils.h loc=45 priority=M
+[pending] src/include/fe_utils/option_utils.h loc=40 priority=M
+[pending] src/include/fe_utils/mbprint.h loc=30 priority=M
+[pending] src/include/fe_utils/recovery_gen.h loc=30 priority=M
+[pending] src/include/fe_utils/cancel.h loc=25 priority=M
+[pending] src/include/fe_utils/query_utils.h loc=25 priority=M
+[pending] src/include/fe_utils/version.h loc=22 priority=M
+[pending] src/include/fe_utils/archive.h loc=20 priority=M

@@ -81,6 +81,7 @@ first issue. Index here:
 | storage-buffer | knowledge/issues/storage-buffer.md | (no issues yet) |
 | access-nbtree | knowledge/issues/access-nbtree.md | (no issues yet) |
 | utils-adt | knowledge/issues/utils-adt.md | 12 open (all nit/maybe; scalar-type cluster, 2026-06-03) |
+| fe_utils | knowledge/issues/fe_utils.md | 20 open (all nit/maybe; A11 sweep, 2026-06-04 — secret-scrub + backup-stream-trust + decompression-bomb + identifier-quoting clusters) |
 | ... | ... | ... |
 
 (Will populate as Phase A issues land.)
