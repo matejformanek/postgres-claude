@@ -147,7 +147,9 @@ flag set: during recovery it *ships* catalog invalidations to hot-standby
 readers but has no catalog cache of its own (it isn't running queries), so
 it never *receives* messages and `SICleanupQueue` ignores its slot when
 computing `minMsgNum`. [verified-by-code] `sinvaladt.c:148-154` (ProcState
-`sendOnly` field), `:584-590` (cleanup skips `sendOnly`).
+`sendOnly` field), `:596-612` (`SICleanupQueue` ignores `sendOnly` slots —
+comment at `:596-599`, the `if (... || stateP->sendOnly) continue;` skip at
+`:612`).
 
 ### Latches and signals
 
