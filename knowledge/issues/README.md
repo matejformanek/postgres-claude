@@ -80,6 +80,7 @@ first issue. Index here:
 |---|---|---|
 | storage-buffer | knowledge/issues/storage-buffer.md | (no issues yet) |
 | access-nbtree | knowledge/issues/access-nbtree.md | (no issues yet) |
+| utils-adt | knowledge/issues/utils-adt.md | 12 open (all nit/maybe; scalar-type cluster, 2026-06-03) |
 | ... | ... | ... |
 
 (Will populate as Phase A issues land.)
