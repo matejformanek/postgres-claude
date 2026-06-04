@@ -38,4 +38,5 @@ fmgr-callable C functions. Already covered in part by other docs.
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/fmgr.md](../../../../../idioms/fmgr.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

@@ -193,4 +193,5 @@ System view:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/tcop.md](../../../../../subsystems/tcop.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)

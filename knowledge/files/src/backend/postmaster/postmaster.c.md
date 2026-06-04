@@ -106,3 +106,4 @@ children to postmaster goes through:
 <!-- backlinks:auto -->
 - [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

@@ -141,5 +141,6 @@ recovery via the sigsetjmp landing.
 <!-- backlinks:auto -->
 - [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
-- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
 - [subsystems/tcop.md](../../../../subsystems/tcop.md)
+- [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)

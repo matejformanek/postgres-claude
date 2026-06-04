@@ -35,3 +35,7 @@ to the Query.
 
 `(any PERMISSIVE matches) AND (all RESTRICTIVE match)` — no matching
 PERMISSIVE policy means default-deny.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

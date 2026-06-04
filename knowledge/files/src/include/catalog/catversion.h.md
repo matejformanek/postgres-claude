@@ -29,3 +29,7 @@ No `CATALOG(...)` declaration. The entire functional content of this file is a s
 ## Tally
 
 `[verified-by-code]=2 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)

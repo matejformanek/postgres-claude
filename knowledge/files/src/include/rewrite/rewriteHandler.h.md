@@ -38,3 +38,7 @@ extern void   ExecCheckOneRtePermissions(RangeTblEntry *rte, ...);
   the plan cache, or any other source older than the current command.
 - *Not* needed for a Query that just came out of the parser — parse
   analysis already took those locks.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

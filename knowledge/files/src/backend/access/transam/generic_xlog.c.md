@@ -122,4 +122,5 @@ For `wal_consistency_checking`: masks volatile parts of the page
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)

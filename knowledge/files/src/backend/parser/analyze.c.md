@@ -107,5 +107,6 @@ Each lives further down in the file:
 
 ## Synthesized by
 <!-- backlinks:auto -->
+- [idioms/parser-pipeline.md](../../../../idioms/parser-pipeline.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

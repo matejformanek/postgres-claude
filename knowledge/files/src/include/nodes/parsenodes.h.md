@@ -96,3 +96,8 @@ runs ~150 statement types).
 - Downstream: `pathnodes.h` (planner views these), `plannodes.h`
   (plan-time outputs that contain some parse-tree fragments).
 - Idiom: `knowledge/idioms/node-types-and-lists.md`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/parser-pipeline.md](../../../../idioms/parser-pipeline.md)
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

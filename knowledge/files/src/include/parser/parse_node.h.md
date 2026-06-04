@@ -97,3 +97,7 @@ Dropped columns: all-zero struct, conventionally `p_varno == 0` test.
 `transformContainerType`, `transformContainerSubscripts`, `make_var`,
 `make_const`, `make_andclause`, and the `parser_errposition_callback`
 plumbing.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

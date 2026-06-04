@@ -69,3 +69,7 @@ Per header: varlena fields are NOT present in tuple descriptors. `[from-comment]
 ## Tally
 
 `[verified-by-code]=4 [from-comment]=4 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
