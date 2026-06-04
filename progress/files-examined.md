@@ -1686,3 +1686,43 @@ grep '| deep-read |' progress/files-examined.md
 | src/pl/plpython/plpy_subxactobject.c | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_subxactobject.md | A10 sweep; combined .c+.h module doc |
 | src/pl/plpython/plpy_subxactobject.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_subxactobject.md | A10 sweep; combined .c+.h module doc |
 | src/pl/tcl/pltcl.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/tcl/pltcl.c.md | A10 sweep per-file doc; dual-posture trusted+untrusted; Tcl Safe slave interp |
+
+<!-- a11-contrib-top 2026-06-04 — foreground sweep #11 (Phase A); 36 source files via 4 parallel general-purpose agents; FIRST contrib/ sweep -->
+| contrib/pg_stat_statements/pg_stat_statements.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pg_stat_statements/pg_stat_statements.c.md | A11; query telemetry |
+| contrib/dblink/dblink.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/dblink/dblink.c.md | A11; cross-cluster query bridge |
+| contrib/postgres_fdw/postgres_fdw.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/postgres_fdw/postgres_fdw.c.md | A11; 8837 LOC FDW core |
+| contrib/postgres_fdw/connection.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/postgres_fdw/connection.c.md | A11; cross-cluster trust boundary |
+| contrib/postgres_fdw/deparse.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/postgres_fdw/deparse.c.md | A11; SQL emission |
+| contrib/postgres_fdw/option.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/postgres_fdw/option.c.md | A11; option allowlist |
+| contrib/postgres_fdw/shippable.c | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/postgres_fdw/shippable.c.md | A11; pushdown decisions |
+| contrib/postgres_fdw/postgres_fdw.h | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/postgres_fdw/postgres_fdw.h.md | A11; internal header |
+| contrib/pgcrypto/pgcrypto.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgcrypto.md | A11; SQL surface (combined .c+.h) |
+| contrib/pgcrypto/pgcrypto.h | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgcrypto.md | A11; combined .c+.h |
+| contrib/pgcrypto/px.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/px.md | A11; PX abstract API (combined .c+.h) |
+| contrib/pgcrypto/px.h | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/px.md | A11; combined .c+.h |
+| contrib/pgcrypto/px-crypt.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/px-crypt.md | A11; crypt(3) dispatch |
+| contrib/pgcrypto/px-crypt.h | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/px-crypt.md | A11; combined .c+.h |
+| contrib/pgcrypto/px-hmac.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/px-hmac.md | A11; HMAC over PX hash |
+| contrib/pgcrypto/openssl.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/openssl.md | A11; OpenSSL backend |
+| contrib/pgcrypto/mbuf.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/mbuf.md | A11; byte-buffer (combined .c+.h) |
+| contrib/pgcrypto/mbuf.h | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/mbuf.md | A11; combined .c+.h |
+| contrib/pgcrypto/crypt-blowfish.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/crypt-blowfish.md | A11; bcrypt |
+| contrib/pgcrypto/crypt-des.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/crypt-des.md | A11; traditional DES crypt(3) |
+| contrib/pgcrypto/crypt-md5.c | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/crypt-md5.md | A11; $1$ MD5-crypt |
+| contrib/pgcrypto/crypt-sha.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/crypt-sha.md | A11; $5$/$6$ SHA-crypt |
+| contrib/pgcrypto/crypt-gensalt.c | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/crypt-gensalt.md | A11; salt generators |
+| contrib/pgcrypto/pgp.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp.md | A11; PGP framework (combined .c+.h) |
+| contrib/pgcrypto/pgp.h | 2026-06-04 | 4b0bf0788b0 | read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp.md | A11; combined .c+.h |
+| contrib/pgcrypto/pgp-pgsql.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-pgsql.md | A11; PGP SQL bindings |
+| contrib/pgcrypto/pgp-armor.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-armor.md | A11; ASCII-armor |
+| contrib/pgcrypto/pgp-cfb.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-cfb.md | A11; CFB mode |
+| contrib/pgcrypto/pgp-compress.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-compress.md | A11; zlib decompression — CRITICAL bomb |
+| contrib/pgcrypto/pgp-decrypt.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-decrypt.md | A11; PGP packet parser + decrypt |
+| contrib/pgcrypto/pgp-encrypt.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-encrypt.md | A11; PGP encryption |
+| contrib/pgcrypto/pgp-info.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-info.md | A11; key-info functions |
+| contrib/pgcrypto/pgp-mpi-openssl.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-mpi-openssl.md | A11; MPI via OpenSSL |
+| contrib/pgcrypto/pgp-mpi.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-mpi.md | A11; MPI shared |
+| contrib/pgcrypto/pgp-pubdec.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-pubdec.md | A11; PKCS#1 v1.5 decrypt |
+| contrib/pgcrypto/pgp-pubenc.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-pubenc.md | A11; PKCS#1 v1.5 encrypt |
+| contrib/pgcrypto/pgp-pubkey.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-pubkey.md | A11; public-key parsing |
+| contrib/pgcrypto/pgp-s2k.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-s2k.md | A11; String-to-Key |
