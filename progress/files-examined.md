@@ -1654,3 +1654,35 @@ grep '| deep-read |' progress/files-examined.md
 | src/pl/plpgsql/src/pl_scanner.c | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_scanner.md | A9 sweep per-file doc |
 | src/pl/plpgsql/src/pl_unreserved_kwlist.h | 2026-06-04 | 4b0bf0788b0 | read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_kwlists.md | A9 sweep; combined kwlist doc |
 | src/pl/plpgsql/src/plpgsql.h | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/plpgsql.md | A9 sweep per-file doc; 1333 LOC landmark header |
+
+<!-- a10-pl-other 2026-06-04 — foreground sweep #10 (Phase A); 30 source files via 4 parallel general-purpose agents; ppport.h SKIPPED as vendored Devel::PPPort boilerplate; plpython .c/.h modules combined into one doc per module per A9 pl_kwlists.md precedent -->
+| src/pl/plperl/plperl.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plperl/plperl.c.md | A10 sweep per-file doc; dual-posture trusted+untrusted |
+| src/pl/plperl/plperl.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plperl/plperl.h.md | A10 sweep per-file doc |
+| src/pl/plperl/plperl_system.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plperl/plperl_system.h.md | A10 sweep per-file doc |
+| src/pl/plpython/plpython.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpython.h.md | A10 sweep per-file doc |
+| src/pl/plpython/plpython_system.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpython_system.h.md | A10 sweep per-file doc |
+| src/pl/plpython/plpy_main.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_main.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_main.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_main.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_elog.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_elog.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_elog.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_elog.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_exec.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_exec.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_exec.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_exec.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_procedure.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_procedure.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_procedure.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_procedure.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_typeio.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_typeio.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_typeio.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_typeio.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_plpymodule.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_plpymodule.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_plpymodule.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_plpymodule.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_resultobject.c | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_resultobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_resultobject.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_resultobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_planobject.c | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_planobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_planobject.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_planobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_cursorobject.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_cursorobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_cursorobject.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_cursorobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_spi.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_spi.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_spi.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_spi.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_util.c | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_util.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_util.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_util.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_subxactobject.c | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_subxactobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/plpython/plpy_subxactobject.h | 2026-06-04 | 4b0bf0788b0 | read | pl-other-a10 | knowledge/files/src/pl/plpython/plpy_subxactobject.md | A10 sweep; combined .c+.h module doc |
+| src/pl/tcl/pltcl.c | 2026-06-04 | 4b0bf0788b0 | deep-read | pl-other-a10 | knowledge/files/src/pl/tcl/pltcl.c.md | A10 sweep per-file doc; dual-posture trusted+untrusted; Tcl Safe slave interp |

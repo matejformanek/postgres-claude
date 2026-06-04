@@ -173,13 +173,19 @@ Frontend-shared utilities (cancel handling, conditional, mbprint,
 parallel slot, recovery_gen, simple_list, string_utils). Small,
 mechanical.
 
-## src/pl — 8 / 39 docs (20.5%)
+## src/pl — 26 / 39 docs (66.7%, all 4 PLs covered)
 
-Procedural languages: ~~plpgsql~~ (**A9 DONE 2026-06-04**, 8 docs
-covering 9 source files), plperl (~5), plpython (~10), pltcl (~3) +
-tcl-wrappers + shared. **High priority for data-leak project**: PL
-code runs inside the backend with full privilege; any sandbox-escape
-or info-leak through PL is critical.
+**Procedural languages — ALL 4 PLs documented as of A10 (2026-06-04):**
+~~plpgsql~~ (A9, 8 docs / 9 files), ~~plperl~~ (A10-1, 3 docs / 3
+files; `ppport.h` skipped as vendored Devel::PPPort), ~~plpython~~
+(A10-2/3/4, 14 docs / 26 files; most .c/.h pairs combined into module
+docs), ~~pltcl~~ (A10-4, 1 doc / 1 file). The 13 "missing" docs are
+all .c/.h pair-combined into module docs — file-coverage is
+effectively 100% modulo `ppport.h`. **Cross-PL trust-gate ranking
+(THE A10 headline):** Tcl Safe (C-dispatch level) ≥ Perl opcode-mask
+(NOT Safe.pm — docs hand-wave) > nothing (plpgsql, language has no
+I/O) > N/A (plpython untrusted-only — `import`/ctypes vectors make
+Safe.pm-equivalent impossible).
 
 ## contrib — 0 / 210 docs (0.0%)
 
@@ -202,9 +208,10 @@ already; verify alignment.
 6. ~~**Foreground sweep #7** — src/backend/utils/cache + adt~~ — **DONE 2026-06-03 night** (104 docs, 310 issues; `knowledge/issues/utils.md`). 6 parallel agents; 0 misdirection. **Headlines:** (1) genfile.c is server-side trust target pg_rewind (A6) extracts; `pg_read_server_files` membership = total bypass + `Log_directory`-escape vector; (2) xml.c uses custom XXE defense via `xmlSetExternalEntityLoader` returning empty string instead of `XML_PARSE_NONET` (works today; libxml2 changes could regress); (3) pg_upgrade_support.c is catalog-corruption-primitive battery gated by single `IsBinaryUpgrade` bool; (4) acl.c PUBLIC-friendly defaults (DATABASE→CONNECT, FUNCTION→EXECUTE); (5) formatting.c to_char has no input-length cap (50 MB format → 600 MB palloc); (6) binary recv DoS surface (tsvectorrecv 16M lexemes, multirange_recv 100 MB pre-alloc, record_recv lacks check_stack_depth); (7) extended-stats deserializers only `Assert`-validate `nattributes`. **What's working:** gen_random_uuid uses pg_strong_random; ri_triggers fully safe; quote_literal safe due to encoding allowlist; datetime parser-DoS defenses intact; JSON backend recursion stack-guarded.
 7. ~~**Foreground sweep #8** — `src/include/replication/`~~ — **DONE 2026-06-04** (22 docs, 98 issues; `knowledge/issues/include-replication.md`). 3 parallel agents; 0 misdirection. **Headlines:** (1) **output_plugin dlopen primitive** confirmed (A6 echo) — `pg_create_logical_replication_slot('name', 'arbitrary_so')` gates only on `has_rolreplication`, `_PG_init` runs via dlopen side effect BEFORE missing-symbol check; this is the FIFTH "load arbitrary code" primitive in the corpus; (2) `pg_logical_emit_message` is EXECUTE PUBLIC by default; (3) subscriber resolves target table by publisher-supplied `nspname.relname` not OID; (4) `max_slot_wal_keep_size = -1` default → unbounded WAL retention DoS; (5) `primary_conninfo` plaintext window in WalRcv shared memory between RequestXLogStreaming and post-connect memset; (6) reorderbuffer disk-bomb (memory cap only); (7) REPLICATION role reads all databases' WAL bypassing per-DB CONNECT.
 8. ~~**Foreground sweep #9** — `src/pl/plpgsql/`~~ — **DONE 2026-06-04** (8 docs covering 9 source files, 87 issues; `knowledge/issues/plpgsql.md`). 4 parallel agents; 0 misdirection. **Headlines:** (1) **trusted-PL boundary enforced exactly twice** in `pl_handler.c` (`CheckFunctionValidatorAccess` silent-no-op + `variable_conflict` PGC_SUSET); everything else delegated to fmgr/`pg_language` ACL — once you call a plpgsql function, the trust boundary is gone; (2) **EXECUTE has zero injection defenses for the query body** (USING params parameterized, body never); (3) **WHEN OTHERS swallows everything except QUERY_CANCELED + ASSERT_FAILURE**; (4) **COMMIT-in-procedure breaks one-snapshot-per-command** (fresh snapshot via EnsurePortalSnapshotExists); (5) **two never-invalidated session caches**: `cast_expr_hash` + simple-expr plancache trust; (6) `variable_conflict` policy **baked at first-compile-in-this-backend** — later SET has no effect on cached function; (7) `%TYPE`/`%ROWTYPE` NAME→OID **baked at compile** with `NoLock` — joins corpus-wide NAME-vs-OID Phase D pattern (now A3+A6+A7+A8+A9); (8) grammar admits known-fragile heuristics in its own comments (INTO disambiguation, integer-FOR `..` lookahead, PERFORM strlen-equality rewrite); (9) `PLpgSQL_function` struct **intentionally never freed** to keep external `fn_extra` pointers valid.
-9. **Cloud routine** — keep grinding through `src/port`, `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
-10. **Cloud routine + foreground** — `src/pl/plperl`/`plpython`/`pltcl`, contrib/ top modules (pg_stat_statements, pgcrypto, postgres_fdw).
-11. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
+9. ~~**Foreground sweep #10** — `src/pl/{plperl,plpython,tcl}`~~ — **DONE 2026-06-04 mid-day** (18 docs covering 30 source files, ~92 issues; `knowledge/issues/{plperl,plpython,pltcl}.md`). 4 parallel agents; 0 misdirection. **Headlines (the cross-PL trust-gate comparison sweep):** (1) **plperl uses opcode-mask + opcode-redirect, NOT Safe.pm despite docs hand-wave** — `grep Safe plperl.c` = 0 matches; the mechanism is `PL_op_mask = plperl_opmask` generated from Perl's Opcode.pm; drift-prone as new ops get added; (2) **plpython is untrusted-only by design** — no `plpython3` trusted variant because Python's `import`/`__builtins__`/getattr/ctypes vectors make a Safe.pm analogue impossible; the entire defense is `superuser = true` at `CREATE EXTENSION plpython3u`; (3) **pltcl uses Tcl Safe (C-dispatch level), structurally strongest** — dangerous commands (`exec`, `socket`, `open`, `file delete`, `load`) NOT PRESENT in the safe interp's command table at all; (4) **`PLy_cursor_plan` missing `is_PLyPlanObject` check** that `PLy_spi_execute` has — text-fallback `"O|O"` parse accepts any PyObject as a "plan" (most concrete Phase D candidate from A10); (5) **one Python interpreter per backend, never finalized** — `sys.modules` patches + ctypes loads persist for backend lifetime; amplified by transaction-poolers; (6) **`plpy.execute(text)` injection surface = plpgsql injection ∪ every PG type's `_in()`** — scalar-return path runs every type's input function; (7) **`plpy.subtransaction()` swallows Python `try/except` and COMMITS subxact** — opposite of plpgsql `EXCEPTION` rollback semantics (cross-PL footgun); (8) **plperl one Perl interpreter per `(trusted?user_id:0)`, never evicted** — long-lived pooled backends accumulate. **NEW corpus-wide cluster: cross-PL trust-gate ranking** (Tcl Safe ≥ Perl opcode-mask > plpgsql nothing > plpython N/A). **NEW corpus-wide cluster: PL dynamic-SQL injection quad** (plpgsql EXECUTE + plperl spi_exec_query + plpython plpy.execute(text) + pltcl spi_exec).
+10. **Cloud routine** — keep grinding through `src/port`, `src/timezone`, `src/fe_utils` (mechanical, low-judgement).
+11. **Cloud routine + foreground** — contrib/ top modules (pg_stat_statements, pgcrypto, postgres_fdw, dblink).
+12. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
 
 ---
 
