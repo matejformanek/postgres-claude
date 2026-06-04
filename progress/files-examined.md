@@ -1643,3 +1643,14 @@ grep '| deep-read |' progress/files-examined.md
 | src/include/replication/walsender.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/walsender.h.md | A8 sweep per-file doc |
 | src/include/replication/walsender_private.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/walsender_private.h.md | A8 sweep per-file doc |
 | src/include/replication/worker_internal.h | 2026-06-04 | 4b0bf0788b0 | deep-read | include-replication-a8 | knowledge/files/src/include/replication/worker_internal.h.md | A8 sweep per-file doc |
+
+<!-- a9-plpgsql 2026-06-04 — foreground sweep #9 (Phase A); 9 source files via 4 parallel general-purpose agents; pl_kwlists.md combines the two kwlist headers -->
+| src/pl/plpgsql/src/pl_comp.c | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_comp.md | A9 sweep per-file doc |
+| src/pl/plpgsql/src/pl_exec.c | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_exec.md | A9 sweep per-file doc; 9218 LOC giant |
+| src/pl/plpgsql/src/pl_funcs.c | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_funcs.md | A9 sweep per-file doc |
+| src/pl/plpgsql/src/pl_gram.y | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_gram.md | A9 sweep per-file doc; Bison grammar |
+| src/pl/plpgsql/src/pl_handler.c | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_handler.md | A9 sweep per-file doc; privileged entrypoint |
+| src/pl/plpgsql/src/pl_reserved_kwlist.h | 2026-06-04 | 4b0bf0788b0 | read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_kwlists.md | A9 sweep; combined kwlist doc |
+| src/pl/plpgsql/src/pl_scanner.c | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_scanner.md | A9 sweep per-file doc |
+| src/pl/plpgsql/src/pl_unreserved_kwlist.h | 2026-06-04 | 4b0bf0788b0 | read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/pl_kwlists.md | A9 sweep; combined kwlist doc |
+| src/pl/plpgsql/src/plpgsql.h | 2026-06-04 | 4b0bf0788b0 | deep-read | plpgsql-a9 | knowledge/files/src/pl/plpgsql/src/plpgsql.md | A9 sweep per-file doc; 1333 LOC landmark header |

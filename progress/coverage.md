@@ -27,14 +27,14 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-04 (post A8 include/replication sweep), source pin `4b0bf0788b0`.
+Refreshed 2026-06-04 (post A9 plpgsql sweep), source pin `4b0bf0788b0`.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **1,407** (+22 from A8 sweep; cumulative +490 since 2026-06-02 morning).
-- Registry rows in `progress/files-examined.md`: **1,512** (+22).
-- **Top-line coverage: ~54.9%** of source files have a per-file doc (up from 54.0%).
+- Per-file docs under `knowledge/files/`: **1,415** (+8 from A9 sweep — pl_kwlists.md combines 2 source headers; cumulative +498 since 2026-06-02 morning).
+- Registry rows in `progress/files-examined.md`: **1,521** (+9).
+- **Top-line coverage: ~55.2%** of source files have a per-file doc (up from 54.9%).
 
 The doc count exceeds the registered-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
@@ -54,14 +54,14 @@ replication 107.4%) reflects those companion docs.
 | `src/test` | 74 | 0 | 0.0% |
 | `src/bin` (psql, pg_dump, initdb, pg_upgrade, pg_rewind, pg_amcheck, …) | 160 | 115 | 71.9% |
 | `src/fe_utils` | 18 | 0 | 0.0% |
-| `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 0 | 0.0% |
+| `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 8 | 20.5% |
 | `contrib` (extensions) | 210 | 0 | 0.0% |
-| **TOTAL** | **2,564** | **1,407** | **54.9%** |
+| **TOTAL** | **2,564** | **1,415** | **55.2%** |
 
 ### Phase A target (decided 2026-06-02)
 
 Scope: **everything under src/ + contrib/** (full 2,564-file target).
-Gap to close: **1,157 files** undocumented (down from 1,179 after A8 landed 22 docs; cumulative -490 since 2026-06-02 morning's 1,647). **Past halfway, into final 45%.**
+Gap to close: **1,149 files** undocumented (down from 1,157 after A9 landed 8 docs; cumulative -498 since 2026-06-02 morning's 1,647). **Past halfway, into final 45%.**
 Cadence: hybrid — `pg-file-backfiller` cloud routine grinds breadth nightly;
 foreground interactive sweeps accelerate high-value directories
 (`utils/`, `libpq-backend`, `replication/`, `executor/`, `bin/`).
