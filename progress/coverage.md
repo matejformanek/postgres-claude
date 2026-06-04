@@ -27,14 +27,14 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-03 (post A7 utils sweep), source pin `4b0bf0788b0`.
+Refreshed 2026-06-04 (post A8 include/replication sweep), source pin `4b0bf0788b0`.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **1,385** (+104 from A7 utils sweep; cumulative +468 since 2026-06-02 morning).
-- Registry rows in `progress/files-examined.md`: **1,490** (+104).
-- **Top-line coverage: ~54.0%** of source files have a per-file doc (up from 50.0%).
+- Per-file docs under `knowledge/files/`: **1,407** (+22 from A8 sweep; cumulative +490 since 2026-06-02 morning).
+- Registry rows in `progress/files-examined.md`: **1,512** (+22).
+- **Top-line coverage: ~54.9%** of source files have a per-file doc (up from 54.0%).
 
 The doc count exceeds the registered-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
@@ -46,7 +46,7 @@ replication 107.4%) reflects those companion docs.
 | Tree | Source | Docs | Coverage |
 |---|---:|---:|---:|
 | `src/backend` | 906 | 748 | 82.6% |
-| `src/include` | 844 | 431 | 51.1% |
+| `src/include` | 844 | 453 | 53.7% |
 | `src/common` | 62 | 59 | 95.2% |
 | `src/port` | 64 | 0 | 0.0% |
 | `src/interfaces` (libpq + ecpg) | 166 | 32 | 19.3% |
@@ -56,12 +56,12 @@ replication 107.4%) reflects those companion docs.
 | `src/fe_utils` | 18 | 0 | 0.0% |
 | `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 0 | 0.0% |
 | `contrib` (extensions) | 210 | 0 | 0.0% |
-| **TOTAL** | **2,564** | **1,385** | **54.0%** |
+| **TOTAL** | **2,564** | **1,407** | **54.9%** |
 
 ### Phase A target (decided 2026-06-02)
 
 Scope: **everything under src/ + contrib/** (full 2,564-file target).
-Gap to close: **1,179 files** undocumented (down from 1,283 after A7 utils landed 104 docs; cumulative -468 since 2026-06-02 morning's 1,647). **Past halfway, into final third.**
+Gap to close: **1,157 files** undocumented (down from 1,179 after A8 landed 22 docs; cumulative -490 since 2026-06-02 morning's 1,647). **Past halfway, into final 45%.**
 Cadence: hybrid — `pg-file-backfiller` cloud routine grinds breadth nightly;
 foreground interactive sweeps accelerate high-value directories
 (`utils/`, `libpq-backend`, `replication/`, `executor/`, `bin/`).

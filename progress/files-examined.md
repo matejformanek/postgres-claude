@@ -1619,3 +1619,27 @@ grep '| deep-read |' progress/files-examined.md
 | src/backend/utils/cache/funccache.c | 2026-06-03 | 4b0bf0788b0 | deep-read | utils-a7 | knowledge/files/src/backend/utils/cache/funccache.c.md | A7 sweep per-file doc |
 | src/backend/utils/cache/relfilenumbermap.c | 2026-06-03 | 4b0bf0788b0 | read | utils-a7 | knowledge/files/src/backend/utils/cache/relfilenumbermap.c.md | A7 sweep per-file doc |
 | src/backend/utils/cache/relmapper.c | 2026-06-03 | 4b0bf0788b0 | deep-read | utils-a7 | knowledge/files/src/backend/utils/cache/relmapper.c.md | A7 sweep per-file doc |
+
+<!-- a8-include-replication 2026-06-04 — foreground sweep #8 (Phase A); 22 docs via 3 parallel general-purpose agents -->
+| src/include/replication/conflict.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/conflict.h.md | A8 sweep per-file doc |
+| src/include/replication/decode.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/decode.h.md | A8 sweep per-file doc |
+| src/include/replication/logical.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/logical.h.md | A8 sweep per-file doc |
+| src/include/replication/logicalctl.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/logicalctl.h.md | A8 sweep per-file doc |
+| src/include/replication/logicallauncher.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/logicallauncher.h.md | A8 sweep per-file doc |
+| src/include/replication/logicalproto.h | 2026-06-04 | 4b0bf0788b0 | deep-read | include-replication-a8 | knowledge/files/src/include/replication/logicalproto.h.md | A8 sweep per-file doc |
+| src/include/replication/logicalrelation.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/logicalrelation.h.md | A8 sweep per-file doc |
+| src/include/replication/logicalworker.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/logicalworker.h.md | A8 sweep per-file doc |
+| src/include/replication/message.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/message.h.md | A8 sweep per-file doc |
+| src/include/replication/origin.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/origin.h.md | A8 sweep per-file doc |
+| src/include/replication/output_plugin.h | 2026-06-04 | 4b0bf0788b0 | deep-read | include-replication-a8 | knowledge/files/src/include/replication/output_plugin.h.md | A8 sweep per-file doc |
+| src/include/replication/pgoutput.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/pgoutput.h.md | A8 sweep per-file doc |
+| src/include/replication/reorderbuffer.h | 2026-06-04 | 4b0bf0788b0 | deep-read | include-replication-a8 | knowledge/files/src/include/replication/reorderbuffer.h.md | A8 sweep per-file doc |
+| src/include/replication/slot.h | 2026-06-04 | 4b0bf0788b0 | deep-read | include-replication-a8 | knowledge/files/src/include/replication/slot.h.md | A8 sweep per-file doc |
+| src/include/replication/slotsync.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/slotsync.h.md | A8 sweep per-file doc |
+| src/include/replication/snapbuild.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/snapbuild.h.md | A8 sweep per-file doc |
+| src/include/replication/snapbuild_internal.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/snapbuild_internal.h.md | A8 sweep per-file doc |
+| src/include/replication/syncrep.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/syncrep.h.md | A8 sweep per-file doc |
+| src/include/replication/walreceiver.h | 2026-06-04 | 4b0bf0788b0 | deep-read | include-replication-a8 | knowledge/files/src/include/replication/walreceiver.h.md | A8 sweep per-file doc |
+| src/include/replication/walsender.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/walsender.h.md | A8 sweep per-file doc |
+| src/include/replication/walsender_private.h | 2026-06-04 | 4b0bf0788b0 | read | include-replication-a8 | knowledge/files/src/include/replication/walsender_private.h.md | A8 sweep per-file doc |
+| src/include/replication/worker_internal.h | 2026-06-04 | 4b0bf0788b0 | deep-read | include-replication-a8 | knowledge/files/src/include/replication/worker_internal.h.md | A8 sweep per-file doc |
