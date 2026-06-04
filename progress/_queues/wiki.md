@@ -15,8 +15,8 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 [skipped:404-no-such-wiki-page] Logical_Decoding https://wiki.postgresql.org/wiki/Logical_Decoding
 [skipped:404-no-such-wiki-page] MultiXacts https://wiki.postgresql.org/wiki/MultiXacts
 [skipped:stale-2017-design-stub] Parallel_Query_Execution https://wiki.postgresql.org/wiki/Parallel_Query_Execution
-[in-progress:cloud/pg-docs-miner/2026-06-03] Free_Space_Map_Problems https://wiki.postgresql.org/wiki/Free_Space_Map_Problems
-[in-progress:cloud/pg-docs-miner/2026-06-03] Group_Commit https://wiki.postgresql.org/wiki/Group_commit
-[in-progress:cloud/pg-docs-miner/2026-06-03] Index-only_scans https://wiki.postgresql.org/wiki/Index-only_scans
+[done:19c6e24] Free_Space_Map_Problems https://wiki.postgresql.org/wiki/Free_Space_Map_Problems
+[done:19c6e24] Group_Commit https://wiki.postgresql.org/wiki/Group_commit
+[done:19c6e24] Index-only_scans https://wiki.postgresql.org/wiki/Index-only_scans
 [skipped:404-no-such-wiki-page] WAL_Internals https://wiki.postgresql.org/wiki/WAL_Internals
 [skipped:404-no-such-wiki-page] Generic_WAL https://wiki.postgresql.org/wiki/Generic_WAL
