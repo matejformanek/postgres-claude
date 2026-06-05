@@ -4,8 +4,10 @@ The per-directory undocumented-file map. This is the **work queue** the
 `pg-file-backfiller` cloud routine + foreground interactive sweeps pull
 from until Phase A closes (100% coverage of `src/` + `contrib/`).
 
-**Refreshed:** 2026-06-04 (post A8 include/replication sweep), source pin `4b0bf0788b0`.
-**Top-line:** 1 407 / 2 564 docs (54.9% coverage). **Gap: 1 157 files.**
+**Refreshed:** 2026-06-04 (post A11 src/fe_utils sweep), source pin `4b0bf0788b0`.
+**Top-line:** ~1 451 / 2 564 docs (≈56.6% coverage). **Gap: ~1 113 files.**
+(A9 plpgsql +8, A10 pl-other +18, A11 src/fe_utils +18 since the 54.9%
+snapshot below; the per-subdir tables below predate A9–A11 except where noted.)
 
 Numbers below count `.c` + `.h` files. The doc count exceeds source count
 in some dirs because docs include companion files (Makefiles, .y, .l, .dat,
@@ -167,11 +169,24 @@ pg_combinebackup, pg_verifybackup, pg_walsummary, pg_archivecleanup,
 pg_controldata, pg_checksums, scripts/. Mostly small mechanical tools
 suitable for cloud-routine backfill.
 
-## src/fe_utils — 0 / 18 docs (0.0%)
+## src/fe_utils — 18 / 18 docs (100.0%) — DONE (A11, 2026-06-04)
 
 Frontend-shared utilities (cancel handling, conditional, mbprint,
-parallel slot, recovery_gen, simple_list, string_utils). Small,
-mechanical.
+parallel slot, recovery_gen, simple_list, string_utils, the astreamer
+backup-stream chain, print). **DONE 2026-06-04 (A11 sweep,
+cloud/pg-file-backfiller):** all 18 .c files documented; 20 issues into
+`knowledge/issues/fe_utils.md`. **Headlines:** (1) `string_utils.c` is
+the identifier-quoting chokepoint (`fmtId` shared static buffer +
+`appendShellString` allowlist + `processSQLNamePattern`) the A4 sweep
+flagged as a gap — now closed; (2) `astreamer_tar.c` IS the A4
+"trust-the-stream" boundary (server-supplied tar name/size/mode drive
+local writes; mitigated by `path_is_safe_for_extraction` + hard
+`pg_fatal` on PAX headers); (3) `recovery_gen.c` is the canonical
+secret-to-disk site (cleartext password into `primary_conninfo`),
+extending the secret-scrub cluster; (4) the gzip/lz4/zstd astreamers
+are streaming with fixed output buffers — NO RAM decompression bomb,
+only a cumulative-output/disk dimension. **Next-up:** the 16 companion
+`src/include/fe_utils/` headers (queued).
 
 ## src/pl — 26 / 39 docs (66.7%, all 4 PLs covered)
 

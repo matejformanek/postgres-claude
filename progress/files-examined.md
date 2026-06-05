@@ -1726,3 +1726,23 @@ grep '| deep-read |' progress/files-examined.md
 | contrib/pgcrypto/pgp-pubenc.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-pubenc.md | A11; PKCS#1 v1.5 encrypt |
 | contrib/pgcrypto/pgp-pubkey.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-pubkey.md | A11; public-key parsing |
 | contrib/pgcrypto/pgp-s2k.c | 2026-06-04 | 4b0bf0788b0 | deep-read | contrib-top-a11 | knowledge/files/contrib/pgcrypto/pgp-s2k.md | A11; String-to-Key |
+
+<!-- a11-fe_utils 2026-06-04 — cloud pg-file-backfiller sweep (overnight); 18 .c files in src/fe_utils/ via 4 parallel general-purpose agents -->
+| src/fe_utils/string_utils.c | 2026-06-04 | 4b0bf0788b0 | deep-read | a11-fe_utils | knowledge/files/src/fe_utils/string_utils.c.md | A11 sweep; fmtId/processSQLNamePattern/appendShellString chokepoint (A4 gap closed) |
+| src/fe_utils/option_utils.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/option_utils.c.md | A11 sweep; option_parse_int/str, handle_help_version_opts |
+| src/fe_utils/query_utils.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/query_utils.c.md | A11 sweep; executeQuery/executeMaintenanceCommand |
+| src/fe_utils/simple_list.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/simple_list.c.md | A11 sweep; simple_{string,oid,ptr}_list helpers |
+| src/fe_utils/conditional.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/conditional.c.md | A11 sweep; psql \if/\elif/\else/\endif conditional stack |
+| src/fe_utils/cancel.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/cancel.c.md | A11 sweep; async-signal-safe query cancel; cancelConn global |
+| src/fe_utils/connect_utils.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/connect_utils.c.md | A11 sweep; connectDatabase + password retry; secret-scrub site |
+| src/fe_utils/recovery_gen.c | 2026-06-04 | 4b0bf0788b0 | deep-read | a11-fe_utils | knowledge/files/src/fe_utils/recovery_gen.c.md | A11 sweep; writes primary_conninfo cleartext password to postgresql.auto.conf |
+| src/fe_utils/version.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/version.c.md | A11 sweep; PG_VERSION parse; memcpy uninit-tail correctness flag |
+| src/fe_utils/archive.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/archive.c.md | A11 sweep; thin wrapper; escaping lives in src/common/archive.c |
+| src/fe_utils/astreamer_file.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/astreamer_file.c.md | A11 sweep; plain_writer/extractor; absolute-symlink path-check bypass |
+| src/fe_utils/astreamer_tar.c | 2026-06-04 | 4b0bf0788b0 | deep-read | a11-fe_utils | knowledge/files/src/fe_utils/astreamer_tar.c.md | A11 sweep; tar parser/archiver; A4 trust-the-stream boundary; PAX rejected |
+| src/fe_utils/astreamer_gzip.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/astreamer_gzip.c.md | A11 sweep; gzip streamer; streaming output buffer (no RAM bomb) |
+| src/fe_utils/astreamer_lz4.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/astreamer_lz4.c.md | A11 sweep; lz4 streamer; streaming output buffer |
+| src/fe_utils/astreamer_zstd.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/astreamer_zstd.c.md | A11 sweep; zstd streamer; ZSTD_DStreamOutSize bound |
+| src/fe_utils/mbprint.c | 2026-06-04 | 4b0bf0788b0 | read | a11-fe_utils | knowledge/files/src/fe_utils/mbprint.c.md | A11 sweep; pg_wcswidth/pg_wcsformat; mbvalidate UTF-8-only no-op |
+| src/fe_utils/parallel_slot.c | 2026-06-04 | 4b0bf0788b0 | deep-read | a11-fe_utils | knowledge/files/src/fe_utils/parallel_slot.c.md | A11 sweep; async connection-slot pool for reindexdb/vacuumdb |
+| src/fe_utils/print.c | 2026-06-04 | 4b0bf0788b0 | deep-read | a11-fe_utils | knowledge/files/src/fe_utils/print.c.md | A11 sweep; psql result formatter; 8-format dispatch; width_total overflow flag |
