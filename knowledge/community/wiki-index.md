@@ -72,12 +72,14 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   `/*------` are exempt [from-wiki](https://wiki.postgresql.org/wiki/Developer_FAQ).
 
 - **Creating_Clean_Patches** — https://wiki.postgresql.org/wiki/Creating_Clean_Patches
+  *(distilled 2026-06-05 → `knowledge/wiki-distilled/Creating_Clean_Patches.md`)*
   Treat the diff itself as a product. Use `git diff --color` to spot
   whitespace, `git rebase -i origin/master` to squash, and
   `git diff --patience` when default diff produces ugly alignment
   [from-wiki](https://wiki.postgresql.org/wiki/Creating_Clean_Patches).
 
 - **Regression_test_authoring** — https://wiki.postgresql.org/wiki/Regression_test_authoring
+  *(distilled 2026-06-05 → `knowledge/wiki-distilled/Regression_test_authoring.md`)*
   Tests live in `src/test/regress/`. Add new tests to both
   `parallel_schedule` AND `serial_schedule`. `.source` files get
   preprocessed (`@abs_srcdir@` substitutions)
@@ -129,6 +131,7 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   [from-wiki](https://wiki.postgresql.org/wiki/Committing_with_Git).
 
 - **Commit_Message_Guidance** — https://wiki.postgresql.org/wiki/Commit_Message_Guidance
+  *(distilled 2026-06-05 → `knowledge/wiki-distilled/Commit_Message_Guidance.md`)*
   Summary < 64 chars. Tags: `Reported-by`, `Suggested-by`, `Diagnosed-by`,
   `Author`, `Co-authored-by`, `Reviewed-by`, `Tested-by`, `Discussion`
   (postgr.es/m/MESSAGE_ID), `Backpatch-through`
@@ -137,6 +140,7 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
 ## Tooling
 
 - **Working_with_Git** — https://wiki.postgresql.org/wiki/Working_with_Git
+  *(distilled 2026-06-05 → `knowledge/wiki-distilled/Working_with_Git.md`)*
   Standard clone is `https://git.postgresql.org/git/postgresql.git`.
   Stable branches use `REL_<N>_STABLE` convention. Run
   `make maintainer-clean` when switching between major versions
