@@ -1762,3 +1762,20 @@ grep '| deep-read |' progress/files-examined.md
 | src/include/fe_utils/query_utils.h | 2026-06-05 | 4b0bf0788b0 | read | fe_utils-headers | knowledge/files/src/include/fe_utils/query_utils.h.md | headers sweep; executeQuery/Command/MaintenanceCommand exit-vs-bool split |
 | src/include/fe_utils/version.h | 2026-06-05 | 4b0bf0788b0 | read | fe_utils-headers | knowledge/files/src/include/fe_utils/version.h.md | headers sweep; get_pg_version + GET_PG_MAJORVERSION_NUM; PG_VERSION_H guard-name reuse |
 | src/include/fe_utils/archive.h | 2026-06-05 | 4b0bf0788b0 | read | fe_utils-headers | knowledge/files/src/include/fe_utils/archive.h.md | headers sweep; RestoreArchivedFile restore_command runner |
+| src/port/explicit_bzero.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/explicit_bzero.c.md | port sweep; 5-arm dead-store-resistant scrub; SecretBuf primitive |
+| src/port/pg_strong_random.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/pg_strong_random.c.md | port sweep; CSPRNG OpenSSL/Win32/urandom; return-value load-bearing; O_CLOEXEC nit |
+| src/port/timingsafe_bcmp.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/timingsafe_bcmp.c.md | port sweep; constant-time compare; CRYPTO_memcmp / XOR-OR fold |
+| src/port/snprintf.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/snprintf.c.md | port sweep; PG own printf; %m=errno-at-entry; %n$ positional; C99 subset |
+| src/port/path.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/path.c.md | port sweep; canonicalize + path_is_safe_for_extraction gate; canonicalization precondition |
+| src/port/quotes.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/quotes.c.md | port sweep; config-file quote-doubling; NOT for SQL; int-len trunc nit |
+| src/port/tar.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/tar.c.md | port sweep; ustar header octal/base-256; 99-byte name cap; checksum-last |
+| src/port/strlcpy.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/strlcpy.c.md | port sweep; OpenBSD bounded copy; always NUL-terminates |
+| src/port/strlcat.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/strlcat.c.md | port sweep; OpenBSD bounded concat; siz=whole-buffer |
+| src/port/pgmkdirp.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/pgmkdirp.c.md | port sweep; mkdir -p; umask dance; mutates path on failure |
+| src/port/pgcheckdir.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/pgcheckdir.c.md | port sweep; dir empty/dotfile/mount classification; errno=0 readdir idiom |
+| src/port/pg_bitutils.c | 2026-06-06 | 4b0bf0788b0 | read | port-shims | knowledge/files/src/port/pg_bitutils.c.md | port sweep; clz/ctz/popcount tables + portable popcount; mask-splat |
+| src/port/chklocale.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/chklocale.c.md | port sweep; locale codeset -> PG encoding map; save/restore LC_CTYPE |
+| src/port/getpeereid.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/port/getpeereid.c.md | port sweep; UDS peer uid/gid; kernel-attested; peer auth anchor |
+| src/timezone/pgtz.c | 2026-06-06 | 4b0bf0788b0 | deep | port-shims | knowledge/files/src/timezone/pgtz.c.md | timezone glue; case-insensitive tzfile open; GMT no-fs special-case; hidden-file traversal guard |
+| src/timezone/pgtz.h | 2026-06-06 | 4b0bf0788b0 | read | port-shims | knowledge/files/src/timezone/pgtz.h.md | tz private header; struct state/ttinfo/lsinfo/pg_tz; fixed-size zone footprint |
+| src/timezone/tzfile.h | 2026-06-06 | 4b0bf0788b0 | read | port-shims | knowledge/files/src/timezone/tzfile.h.md | TZif on-disk format; TZ_MAX_* DoS bounds; v2/v3 dual layout |

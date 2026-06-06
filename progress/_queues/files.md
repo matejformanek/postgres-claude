@@ -153,18 +153,47 @@ non-constant-time finding). Then the broadly-used string/format/path
 shims. The ~22 `win32*.c` shims are low-priority platform glue — left for
 a later batch, not seeded here.
 
-[pending] src/port/explicit_bzero.c loc=55 priority=H
-[pending] src/port/pg_strong_random.c loc=160 priority=H
-[pending] src/port/timingsafe_bcmp.c loc=50 priority=H
-[pending] src/port/snprintf.c loc=1400 priority=M
-[pending] src/port/path.c loc=750 priority=H
-[pending] src/port/quotes.c loc=60 priority=M
-[pending] src/port/tar.c loc=200 priority=M
-[pending] src/port/strlcpy.c loc=55 priority=M
-[pending] src/port/strlcat.c loc=55 priority=M
-[pending] src/port/pgmkdirp.c loc=130 priority=M
-[pending] src/port/pgcheckdir.c loc=90 priority=M
-[pending] src/port/pg_bitutils.c loc=450 priority=M
-[pending] src/port/chklocale.c loc=460 priority=M
-[pending] src/port/getaddrinfo.c loc=420 priority=M
-[pending] src/port/getpeereid.c loc=90 priority=M
+> **2026-06-06 (cloud/pg-file-backfiller):** src/port security+broadly-used
+> shim block processed — 14 per-file docs under `knowledge/files/src/port/`
+> (the security trio `explicit_bzero`/`pg_strong_random`/`timingsafe_bcmp` are
+> the in-tree SecretBuf/constant-time primitives; `path.c` is the
+> archive-extraction path-traversal gate). New `knowledge/issues/port.md`
+> register (3 open: nit/maybe). LOC corrected from queue estimates where they
+> drifted (path.c 1165, snprintf.c 1515, pg_bitutils.c 194, chklocale.c 383).
+> `getaddrinfo.c` is **deleted upstream** (404 at anchor) → `[skipped:deleted]`.
+> Marked `[done:port-shims-2026-06-06]`.
+
+[done:port-shims-2026-06-06] src/port/explicit_bzero.c loc=73 priority=H
+[done:port-shims-2026-06-06] src/port/pg_strong_random.c loc=179 priority=H
+[done:port-shims-2026-06-06] src/port/timingsafe_bcmp.c loc=43 priority=H
+[done:port-shims-2026-06-06] src/port/snprintf.c loc=1515 priority=M
+[done:port-shims-2026-06-06] src/port/path.c loc=1165 priority=H
+[done:port-shims-2026-06-06] src/port/quotes.c loc=51 priority=M
+[done:port-shims-2026-06-06] src/port/tar.c loc=235 priority=M
+[done:port-shims-2026-06-06] src/port/strlcpy.c loc=71 priority=M
+[done:port-shims-2026-06-06] src/port/strlcat.c loc=61 priority=M
+[done:port-shims-2026-06-06] src/port/pgmkdirp.c loc=148 priority=M
+[done:port-shims-2026-06-06] src/port/pgcheckdir.c loc=92 priority=M
+[done:port-shims-2026-06-06] src/port/pg_bitutils.c loc=194 priority=M
+[done:port-shims-2026-06-06] src/port/chklocale.c loc=383 priority=M
+[skipped:deleted] src/port/getaddrinfo.c (404 at anchor 4b0bf0788b0 — removed upstream)
+[done:port-shims-2026-06-06] src/port/getpeereid.c loc=78 priority=H
+
+## src/timezone sweep (refill, 2026-06-06)
+
+Source path: `src/timezone/`. Anchor `4b0bf0788b0`. PG-authored glue +
+vendored IANA library. `pgtz.c` (the integration layer: zone load/cache,
+case-insensitive tzfile open, session/log zone GUCs, enumeration) documented
+this run. Remaining: the small PG/vendored headers (`pgtz.h`, `tzfile.h`,
+`private.h`) then the large vendored IANA C files (`localtime.c` ~1600 LOC,
+`strftime.c` ~500, `zic.c` ~3000 — the zone compiler; lowest doc-value as
+near-verbatim upstream imports). The ~22 `src/port/win32*.c` shims remain
+deferred as low-priority platform glue.
+
+[done:port-shims-2026-06-06] src/timezone/pgtz.c loc=497 priority=H
+[done:port-shims-2026-06-06] src/timezone/pgtz.h loc=81 priority=M
+[done:port-shims-2026-06-06] src/timezone/tzfile.h loc=110 priority=M
+[pending] src/timezone/private.h loc=155 priority=M
+[pending] src/timezone/localtime.c loc=1600 priority=M
+[pending] src/timezone/strftime.c loc=500 priority=L
+[pending] src/timezone/zic.c loc=3000 priority=L
