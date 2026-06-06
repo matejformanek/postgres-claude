@@ -6,9 +6,11 @@ pg_basebackup, reindexdb/vacuumdb, etc.). See
 `knowledge/issues/README.md` for the tag convention, severity scale,
 and workflow.
 
-**Parent corpus:** `knowledge/files/src/fe_utils/*.md` (per-file docs).
-Surfaced during the A11 `src/fe_utils` sweep (cloud/pg-file-backfiller,
-2026-06-04), anchor `4b0bf0788b0`.
+**Parent corpus:** `knowledge/files/src/fe_utils/*.md` +
+`knowledge/files/src/include/fe_utils/*.md` (per-file docs). Surfaced
+during the A11 `src/fe_utils` sweep (cloud/pg-file-backfiller,
+2026-06-04) and the follow-on `src/include/fe_utils` headers sweep
+(cloud/pg-file-backfiller, 2026-06-05). Anchor `4b0bf0788b0`.
 
 ## Open / Triaged
 
@@ -34,6 +36,9 @@ Surfaced during the A11 `src/fe_utils` sweep (cloud/pg-file-backfiller,
 | 2026-06-04 | version.c:64 | correctness | maybe | `memcpy(*version_str, buf, st.st_size)` copies file-length bytes from a `%63s`-filled buffer → copies uninitialized trailing bytes and does not guarantee NUL-termination; bounded by 64-byte dest (no overflow), harmless on well-formed `PG_VERSION` | open | knowledge/files/src/fe_utils/version.c.md §Potential issues |
 | 2026-06-04 | print.c:776 | correctness | maybe | `width_total` + per-format border overhead accumulate into a 32-bit `unsigned int`; cell-count overflow is guarded at init (`:3203`) but the display-width sum is not range-checked — could wrap on multi-GB-wide output (practically unreachable) | open | knowledge/files/src/fe_utils/print.c.md §Potential issues |
 | 2026-06-04 | print.c:3706 | doc-drift | nit | `PRINT_LATEX_LONGTABLE` vertical case dispatches to the non-longtable `print_latex_vertical` (intentional — longtable only differs horizontally) but is unannotated at the switch site; reads like a copy-paste bug | open | knowledge/files/src/fe_utils/print.c.md §Potential issues |
+| 2026-06-05 | print.h:202 | undocumented-invariant | nit | `pg_utf8format` exported non-const and mutated in place by `refresh_utf8format()` (its `pg_asciiformat`/`_old` siblings are immutable); benign under frontend single-threading but it is process-global mutable formatter state a future threaded consumer would race on | open | knowledge/files/src/include/fe_utils/print.h.md §Potential issues |
+| 2026-06-05 | astreamer.h:94 | undocumented-invariant | nit | "first element should be 'astreamer base'" — every concrete streamer is cast through `astreamer *` requiring the base as first member, but no `StaticAssertDecl`/`offsetof` guard; a reordered streamer struct silently corrupts the pipeline (same class as A9 plpgsql struct-prefix copy-paste convention) | open | knowledge/files/src/include/fe_utils/astreamer.h.md §Potential issues |
+| 2026-06-05 | psqlscan_int.h:121 | question | nit | `identifiers[4]` fixed window for BEGIN/END block detection is a heuristic, not a parser; can misclassify unusual statement prefixes (worst case a mis-split at a semicolon → syntax error); same family as the A9 `pl_gram.y` documented-fragile lexer heuristics | open | knowledge/files/src/include/fe_utils/psqlscan_int.h.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 

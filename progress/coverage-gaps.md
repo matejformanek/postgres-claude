@@ -106,7 +106,7 @@ matters as much as `.c` files.
 | **port** | 47 | 0 | 0.0% | Cross-platform portability headers — `pg_iovec.h`, `pg_pthread.h`, etc. |
 | ~~**replication**~~ | 22 | 23 | 104.5% | **DONE 2026-06-04 (A8 sweep)** — 22 docs + 1 pre-existing headers.md; 98 issues in `knowledge/issues/include-replication.md`; output-plugin dlopen primitive identified |
 | **lib** | 15 | 0 | 0.0% | binaryheap, dshash, hyperloglog, pairingheap, simplehash, etc. |
-| **fe_utils** | 16 | 0 | 0.0% | Frontend-shared helpers |
+| ~~**fe_utils**~~ | 16 | 16 | 100.0% | **DONE 2026-06-05 (headers sweep, cloud/pg-file-backfiller)** — all 16 `src/include/fe_utils/*.h` docs; +3 header-level issues in `knowledge/issues/fe_utils.md` |
 
 ### Low-priority
 

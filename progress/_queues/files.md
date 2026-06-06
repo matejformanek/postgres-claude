@@ -114,19 +114,57 @@ and `astreamer.h` carry the load-bearing struct definitions
 (`printTableContent`, the `astreamer` vtable/ops). Refill source:
 `progress/coverage-gaps.md` src/include → fe_utils 0/16.
 
-[pending] src/include/fe_utils/print.h loc=300 priority=M
-[pending] src/include/fe_utils/astreamer.h loc=270 priority=M
-[pending] src/include/fe_utils/string_utils.h loc=90 priority=H
-[pending] src/include/fe_utils/conditional.h loc=120 priority=M
-[pending] src/include/fe_utils/psqlscan_int.h loc=210 priority=M
-[pending] src/include/fe_utils/psqlscan.h loc=95 priority=M
-[pending] src/include/fe_utils/parallel_slot.h loc=70 priority=M
-[pending] src/include/fe_utils/simple_list.h loc=65 priority=M
-[pending] src/include/fe_utils/connect_utils.h loc=45 priority=M
-[pending] src/include/fe_utils/option_utils.h loc=40 priority=M
-[pending] src/include/fe_utils/mbprint.h loc=30 priority=M
-[pending] src/include/fe_utils/recovery_gen.h loc=30 priority=M
-[pending] src/include/fe_utils/cancel.h loc=25 priority=M
-[pending] src/include/fe_utils/query_utils.h loc=25 priority=M
-[pending] src/include/fe_utils/version.h loc=22 priority=M
-[pending] src/include/fe_utils/archive.h loc=20 priority=M
+> **2026-06-05 (cloud/pg-file-backfiller):** all 16 `src/include/fe_utils`
+> headers documented this run → `knowledge/files/src/include/fe_utils/*.md`
+> (companions to the A11 `.c` sweep). 3 new header-level
+> undocumented-invariant issues filed (`print.h:202` mutable
+> `pg_utf8format`, `astreamer.h:94` base-must-be-first-member,
+> `psqlscan_int.h:121` BEGIN/END 4-identifier heuristic). `src/include/fe_utils`
+> now 16/16. Marked `[done:fe_utils-headers-2026-06-05]`.
+
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/print.h loc=238 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/astreamer.h loc=231 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/string_utils.h loc=69 priority=H
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/conditional.h loc=102 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/psqlscan_int.h loc=155 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/psqlscan.h loc=93 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/parallel_slot.h loc=84 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/simple_list.h loc=71 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/connect_utils.h loc=48 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/option_utils.h loc=34 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/mbprint.h loc=30 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/recovery_gen.h loc=30 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/cancel.h loc=32 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/query_utils.h loc=24 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/version.h loc=23 priority=M
+[done:fe_utils-headers-2026-06-05] src/include/fe_utils/archive.h loc=21 priority=M
+
+## src/port platform-shim sweep (refill, 2026-06-05)
+
+Source path: `src/port/`. Anchor `4b0bf0788b0`. 70 .c/.h files, 0 docs
+(`progress/coverage-gaps.md` src/port 0/64 — file count drifted up to 70
+incl. win32* shims). Refill per the queue depth<5 rule after the
+fe_utils-headers run emptied the pending block. **Security-relevant
+first** (Phase-D secret-scrub + crypto theme): `explicit_bzero.c` (the
+in-tree scrub primitive the SecretBuf proposal would standardize on),
+`pg_strong_random.c` (CSPRNG behind gen_random_uuid/SCRAM nonces),
+`timingsafe_bcmp.c` (constant-time compare — pairs with the A11 pgcrypto
+non-constant-time finding). Then the broadly-used string/format/path
+shims. The ~22 `win32*.c` shims are low-priority platform glue — left for
+a later batch, not seeded here.
+
+[pending] src/port/explicit_bzero.c loc=55 priority=H
+[pending] src/port/pg_strong_random.c loc=160 priority=H
+[pending] src/port/timingsafe_bcmp.c loc=50 priority=H
+[pending] src/port/snprintf.c loc=1400 priority=M
+[pending] src/port/path.c loc=750 priority=H
+[pending] src/port/quotes.c loc=60 priority=M
+[pending] src/port/tar.c loc=200 priority=M
+[pending] src/port/strlcpy.c loc=55 priority=M
+[pending] src/port/strlcat.c loc=55 priority=M
+[pending] src/port/pgmkdirp.c loc=130 priority=M
+[pending] src/port/pgcheckdir.c loc=90 priority=M
+[pending] src/port/pg_bitutils.c loc=450 priority=M
+[pending] src/port/chklocale.c loc=460 priority=M
+[pending] src/port/getaddrinfo.c loc=420 priority=M
+[pending] src/port/getpeereid.c loc=90 priority=M
