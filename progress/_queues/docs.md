@@ -22,3 +22,24 @@ table of contents, exclude chapters whose slug already exists under
 [done:f53b7bf] performance-tips https://www.postgresql.org/docs/current/performance-tips.html
 [done:f53b7bf] xfunc-c https://www.postgresql.org/docs/current/xfunc-c.html
 [done:19c6e24] bgworker https://www.postgresql.org/docs/current/bgworker.html
+
+## Refill 2026-06-06 (re-walk of internals.html ToC — Part VII chapters without a docs-distilled/<slug>.md; per-catalog/per-view reference pages excluded as reference, not internals prose)
+
+[in-progress:cloud/pg-docs-miner/2026-06-06] overview https://www.postgresql.org/docs/current/overview.html
+[in-progress:cloud/pg-docs-miner/2026-06-06] tableam https://www.postgresql.org/docs/current/tableam.html
+[in-progress:cloud/pg-docs-miner/2026-06-06] indexam https://www.postgresql.org/docs/current/indexam.html
+[in-progress:cloud/pg-docs-miner/2026-06-06] bki https://www.postgresql.org/docs/current/bki.html
+[in-progress:cloud/pg-docs-miner/2026-06-06] transactions https://www.postgresql.org/docs/current/transactions.html
+[in-progress:cloud/pg-docs-miner/2026-06-06] protocol-flow https://www.postgresql.org/docs/current/protocol-flow.html
+[pending] custom-scan https://www.postgresql.org/docs/current/custom-scan.html
+[pending] geqo https://www.postgresql.org/docs/current/geqo.html
+[pending] fdwhandler https://www.postgresql.org/docs/current/fdwhandler.html
+[pending] tablesample-method https://www.postgresql.org/docs/current/tablesample-method.html
+[pending] plhandler https://www.postgresql.org/docs/current/plhandler.html
+[pending] source https://www.postgresql.org/docs/current/source.html
+[pending] storage-toast https://www.postgresql.org/docs/current/storage-toast.html
+[pending] storage-vm https://www.postgresql.org/docs/current/storage-vm.html
+[pending] storage-hot https://www.postgresql.org/docs/current/storage-hot.html
+[pending] wal-for-extensions https://www.postgresql.org/docs/current/wal-for-extensions.html
+[pending] hash-index https://www.postgresql.org/docs/current/hash-index.html
+[pending] planner-stats-details https://www.postgresql.org/docs/current/planner-stats-details.html

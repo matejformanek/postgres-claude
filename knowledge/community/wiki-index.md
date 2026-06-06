@@ -110,8 +110,11 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   https://commitfest.postgresql.org.
 
 - **CommitFest_Checklist** — https://wiki.postgresql.org/wiki/CommitFest_Checklist
+  *(distilled 2026-06-06 → `knowledge/wiki-distilled/CommitFest_Checklist.md`)*
   Timeline + email templates for the Commitfest Manager (CFM). Audience
-  is the CFM, not the average contributor
+  is the CFM, not the average contributor — but the distilled doc pulls out
+  the patch-state machine (Needs Review / Waiting on Author / Ready for
+  Committer / …) and the submission-deadline = CF-start timing rule
   [from-wiki](https://wiki.postgresql.org/wiki/CommitFest_Checklist).
 
 - **Running_a_Commitfest** — https://wiki.postgresql.org/wiki/Running_a_Commitfest
@@ -126,6 +129,7 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   to `pgsql-rrreviewers` to participate.
 
 - **Committing_with_Git** — https://wiki.postgresql.org/wiki/Committing_with_Git
+  *(distilled 2026-06-06 → `knowledge/wiki-distilled/Committing_with_Git.md`)*
   Committers-only. Sets `branch.autosetuprebase=always`, always use
   `git push --dry-run` first. Refers out to Commit_Message_Guidance
   [from-wiki](https://wiki.postgresql.org/wiki/Committing_with_Git).
