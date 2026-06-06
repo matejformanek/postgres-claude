@@ -27,7 +27,7 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 [done:1aa5183] Reviewing_a_Patch https://wiki.postgresql.org/wiki/Reviewing_a_Patch
 [done:1aa5183] Valgrind https://wiki.postgresql.org/wiki/Valgrind
 [done:1aa5183] Continuous_Integration https://wiki.postgresql.org/wiki/Continuous_Integration
-[in-progress:cloud/pg-docs-miner/2026-06-05] Creating_Clean_Patches https://wiki.postgresql.org/wiki/Creating_Clean_Patches
-[in-progress:cloud/pg-docs-miner/2026-06-05] Commit_Message_Guidance https://wiki.postgresql.org/wiki/Commit_Message_Guidance
-[in-progress:cloud/pg-docs-miner/2026-06-05] Regression_test_authoring https://wiki.postgresql.org/wiki/Regression_test_authoring
-[in-progress:cloud/pg-docs-miner/2026-06-05] Working_with_Git https://wiki.postgresql.org/wiki/Working_with_Git
+[done:f53b7bf] Creating_Clean_Patches https://wiki.postgresql.org/wiki/Creating_Clean_Patches
+[done:f53b7bf] Commit_Message_Guidance https://wiki.postgresql.org/wiki/Commit_Message_Guidance
+[done:f53b7bf] Regression_test_authoring https://wiki.postgresql.org/wiki/Regression_test_authoring
+[done:f53b7bf] Working_with_Git https://wiki.postgresql.org/wiki/Working_with_Git

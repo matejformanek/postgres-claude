@@ -18,7 +18,7 @@ table of contents, exclude chapters whose slug already exists under
 [done:1aa5183] runtime-config-wal https://www.postgresql.org/docs/current/runtime-config-wal.html
 [done:1aa5183] runtime-config-replication https://www.postgresql.org/docs/current/runtime-config-replication.html
 [done:19c6e24] parallel-query https://www.postgresql.org/docs/current/parallel-query.html
-[in-progress:cloud/pg-docs-miner/2026-06-05] planner-stats https://www.postgresql.org/docs/current/planner-stats.html
-[in-progress:cloud/pg-docs-miner/2026-06-05] performance-tips https://www.postgresql.org/docs/current/performance-tips.html
-[in-progress:cloud/pg-docs-miner/2026-06-05] xfunc-c https://www.postgresql.org/docs/current/xfunc-c.html
+[done:f53b7bf] planner-stats https://www.postgresql.org/docs/current/planner-stats.html
+[done:f53b7bf] performance-tips https://www.postgresql.org/docs/current/performance-tips.html
+[done:f53b7bf] xfunc-c https://www.postgresql.org/docs/current/xfunc-c.html
 [done:19c6e24] bgworker https://www.postgresql.org/docs/current/bgworker.html
