@@ -155,3 +155,7 @@ the replication subsystem doc.
 - [ISSUE-undocumented-invariant: `slotsync_skip_reason` not persisted —
   diagnostic data lost across restart, hampering postmortem of a
   failover-slot promotion that never happened (sev=unlikely)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/replication.md](../../../../architecture/replication.md)
