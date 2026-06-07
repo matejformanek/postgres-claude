@@ -23,7 +23,7 @@ Row format example:
 
 | Name | Path | Last verified commit | Confidence summary | Open questions |
 |---|---|---|---|---|
-| glossary | knowledge/glossary.md | ef6a95c7c64 | 15 entries, cites carried forward from per-file docs (verified-by-code/from-comment/from-README) with explicit "— via" provenance | grown by pg-corpus-maintainer; next terms: LWLock, MemoryContext, MVCC, PGPROC, redo, rmgr |
+| glossary | knowledge/glossary.md | ef6a95c7c64 | 374 entries (2026-06-07: +62), cites carried forward from per-file docs (verified-by-code/from-comment/from-README) with explicit "— via" provenance | grown by pg-corpus-maintainer; remaining candidates skew to tool-internal helpers (WriteInt/PullFilter/HandleSlashCmds) below the cite-or-don't-claim bar |
 
 ## Per-file coverage — top-level summary
 
