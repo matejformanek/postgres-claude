@@ -136,3 +136,7 @@ walsender.
 - [ISSUE-info-disclosure: `OutputPluginOptions.receive_rewrites` lets
   a plugin demand HEAP_REWRITE (cluster/VACUUM FULL) records — full
   table snapshots visible to the plugin (sev=unlikely)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/replication.md](../../../../architecture/replication.md)
