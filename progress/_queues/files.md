@@ -193,7 +193,41 @@ deferred as low-priority platform glue.
 [done:5025355] src/timezone/pgtz.c loc=497 priority=H
 [done:5025355] src/timezone/pgtz.h loc=81 priority=M
 [done:5025355] src/timezone/tzfile.h loc=110 priority=M
-[pending] src/timezone/private.h loc=155 priority=M
-[pending] src/timezone/localtime.c loc=1600 priority=M
-[pending] src/timezone/strftime.c loc=500 priority=L
-[pending] src/timezone/zic.c loc=3000 priority=L
+[done:timezone-2026-06-07] src/timezone/private.h loc=155 priority=M
+[done:timezone-2026-06-07] src/timezone/localtime.c loc=2023 priority=M
+[done:timezone-2026-06-07] src/timezone/strftime.c loc=582 priority=L
+[done:timezone-2026-06-07] src/timezone/zic.c loc=4022 priority=L
+
+## src/backend/libpq backend-connection-security sweep (refill, 2026-06-07)
+
+Source path: `src/backend/libpq/`. Anchor `4b0bf0788b0`. 17 .c files, 0 docs
+(`progress/coverage-gaps.md` src/backend → libpq 0/17, flagged high-priority:
+"Loadbearing for connection security; touched by data-leak threat models").
+This closes the `src/timezone` block (now 7/7, 100%); refill per the queue
+depth<5 rule. **Data-leak-relevant first** (auth + secret + crypto surface):
+`auth.c` (the auth-method dispatcher), `crypt.c` (password verification +
+`pg_authid` hash handling), `auth-scram.c` (SCRAM server side), `hba.c`
+(`pg_hba.conf` parse + matching — the access-policy chokepoint),
+`be-secure-openssl.c` (TLS), `be-secure-gssapi.c` / `be-gssapi-common.c`,
+`auth-sasl.c` / `auth-oauth.c`, `be-secure.c` / `be-secure-common.c`. Then the
+wire-protocol plumbing: `pqcomm.c`, `pqformat.c`, `pqmq.c`, `pqsignal.c`,
+`ifaddr.c`, `be-fsstubs.c` (large-object server stubs). Sizes from the GitHub
+tree API at anchor; LOC below are byte-size-derived estimates, correct on read.
+
+[pending] src/backend/libpq/auth.c loc=1900 priority=H
+[pending] src/backend/libpq/crypt.c loc=350 priority=H
+[pending] src/backend/libpq/auth-scram.c loc=1300 priority=H
+[pending] src/backend/libpq/hba.c loc=2200 priority=H
+[pending] src/backend/libpq/be-secure-openssl.c loc=1800 priority=H
+[pending] src/backend/libpq/be-secure-gssapi.c loc=650 priority=M
+[pending] src/backend/libpq/be-gssapi-common.c loc=110 priority=M
+[pending] src/backend/libpq/auth-sasl.c loc=180 priority=H
+[pending] src/backend/libpq/auth-oauth.c loc=900 priority=M
+[pending] src/backend/libpq/be-secure.c loc=280 priority=H
+[pending] src/backend/libpq/be-secure-common.c loc=350 priority=M
+[pending] src/backend/libpq/pqcomm.c loc=1500 priority=M
+[pending] src/backend/libpq/pqformat.c loc=550 priority=M
+[pending] src/backend/libpq/pqmq.c loc=280 priority=L
+[pending] src/backend/libpq/pqsignal.c loc=80 priority=L
+[pending] src/backend/libpq/ifaddr.c loc=300 priority=L
+[pending] src/backend/libpq/be-fsstubs.c loc=600 priority=M

@@ -83,6 +83,7 @@ first issue. Index here:
 | utils-adt | knowledge/issues/utils-adt.md | 12 open (all nit/maybe; scalar-type cluster, 2026-06-03) |
 | fe_utils | knowledge/issues/fe_utils.md | 23 open (all nit/maybe; A11 .c sweep 2026-06-04 + include/fe_utils headers 2026-06-05 — secret-scrub + backup-stream-trust + decompression-bomb + identifier-quoting clusters; +3 header-level undocumented-invariants) |
 | port | knowledge/issues/port.md | 3 open (nit/maybe; src/port shim sweep 2026-06-06 — path-traversal canonicalization precondition, /dev/urandom O_CLOEXEC, quotes.c int-len truncation; hosts the in-tree secret/crypto primitives) |
+| timezone | knowledge/issues/timezone.md | 4 open (all nit; src/timezone sweep 2026-06-07 — vendored IANA tzcode; static result buffer, malloc-not-palloc, %Z untrusted-input path, TZif producer/consumer trust split) |
 | ... | ... | ... |
 
 (Will populate as Phase A issues land.)
