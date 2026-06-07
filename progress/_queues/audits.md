@@ -7,11 +7,6 @@ back to `[pending]`.
 
 ## Entries
 
-[pending] knowledge/architecture/replication.md verified=never
-[pending] knowledge/subsystems/access-heap.md verified=never
-[pending] knowledge/subsystems/access-transam.md verified=never
-[pending] knowledge/subsystems/executor.md verified=never
-[pending] knowledge/subsystems/optimizer.md verified=never
 [pending] knowledge/subsystems/storage-buffer.md verified=never
 [pending] knowledge/subsystems/storage-ipc.md verified=never
 [pending] knowledge/subsystems/storage-lmgr.md verified=never
@@ -46,3 +41,8 @@ back to `[pending]`.
 [pending] knowledge/architecture/query-lifecycle.md verified=2026-06-04
 [pending] knowledge/architecture/access-methods.md verified=2026-06-04
 [pending] knowledge/architecture/process-model.md verified=2026-06-04
+[pending] knowledge/architecture/replication.md verified=2026-06-07
+[pending] knowledge/subsystems/access-heap.md verified=2026-06-07
+[pending] knowledge/subsystems/access-transam.md verified=2026-06-07
+[pending] knowledge/subsystems/executor.md verified=2026-06-07
+[pending] knowledge/subsystems/optimizer.md verified=2026-06-07

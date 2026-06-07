@@ -2,7 +2,7 @@
 
 - **Source path:** `source/src/backend/access/heap/`
 - **Header path:** `source/src/include/access/` (`heapam.h`, `heapam_xlog.h`, `htup.h`, `htup_details.h`, `hio.h`, `visibilitymap.h`)
-- **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)
+- **Last verified commit:** `4b0bf0788b06` (2026-06-01); §6 cites re-audited 2026-06-07 (pg-quality-auditor) — heapam_visibility.c / visibilitymap.c / heapam_xlog.c comment cites corrected for refactor drift
 - **README anchor:** `source/src/backend/access/heap/README.HOT` + `README.tuplock` (the directory has no plain `README`; the two design docs are the canonical narratives)
 
 ## 1. Purpose
@@ -12,7 +12,7 @@ The heap access method is PostgreSQL's default `TableAmRoutine` implementation: 
 ## 2. Mental model
 
 - **Tuple = row version.** Every UPDATE/DELETE leaves the old version on disk with `xmax` set; only VACUUM (or HOT prune) reclaims the space. The 23-byte `HeapTupleHeaderData` carries `t_xmin`/`t_xmax`/`t_cid`/`t_ctid`/`t_infomask`/`t_infomask2` plus a null bitmap. [from-comment, htup_details.h:50-120] [via knowledge/files/src/include/access/htup_details.h.md]
-- **MVCC visibility via xmin/xmax + hint bits + procarray.** A tuple is visible to a snapshot iff its inserting xact is committed-and-not-in-snapshot and its deleting xact is not-yet-committed-or-aborted (modulo lock-only xmax). `heapam_visibility.c` is the canonical authority; hint bits cache the answer but are not themselves WAL-logged. [from-comment, heapam_visibility.c:163-228] [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md]
+- **MVCC visibility via xmin/xmax + hint bits + procarray.** A tuple is visible to a snapshot iff its inserting xact is committed-and-not-in-snapshot and its deleting xact is not-yet-committed-or-aborted (modulo lock-only xmax). `heapam_visibility.c` is the canonical authority; hint bits cache the answer but are not themselves WAL-logged. [from-comment, heapam_visibility.c:6-37] [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md]
 - **HOT (Heap-Only Tuple).** When an UPDATE changes no indexed column and the new version fits on the same page, the new tuple is marked `HEAP_ONLY_TUPLE` and chained from its predecessor via `t_ctid`; indexes are not touched. Single-page pruning collapses dead chain members and converts root line pointers into `LP_REDIRECT` so existing index TIDs keep pointing at the chain head. [from-README, README.HOT] [via knowledge/files/src/backend/access/heap/README.md]
 - **Freeze / vacuum cycle.** Lazy VACUUM scans the heap (skipping all-visible runs using the VM), prunes/freezes each page in one shot, accumulates dead TIDs in a TID store, vacuums every index, then revisits the heap to convert `LP_DEAD` line pointers to `LP_UNUSED`. Freezing replaces still-live old xids with `FrozenTransactionId` (encoded as `HEAP_XMIN_FROZEN`) so they survive xid wraparound. [from-comment, vacuumlazy.c:1-225] [via knowledge/files/src/backend/access/heap/vacuumlazy.c.md]
 - **WAL is the source of truth for crash + replica.** Every mutating heap operation emits a WAL record from one of two resource managers (`RM_HEAP_ID`, `RM_HEAP2_ID` — split because the first ran out of opcodes); redo lives in `heapam_xlog.c` and shares `heap_page_prune_execute` with the emitter to keep emit/redo bit-identical. [from-comment, heapam_xlog.h:27-66] [via knowledge/files/src/include/access/heapam_xlog.h.md]
@@ -21,7 +21,7 @@ The heap access method is PostgreSQL's default `TableAmRoutine` implementation: 
 ## 3. Key files
 
 - `heapam.c` (9264 lines) — the DML spine: `heap_insert`, `heap_multi_insert`, `heap_delete`, `heap_update`, `heap_lock_tuple`, speculative insertion, freeze prepare/execute, scan iteration (`heapgettup_pagemode`), `heap_index_delete_tuples`, MultiXact resolution helpers, replica-identity extraction. Top comment at `heapam.c:1-30`. [via knowledge/files/src/backend/access/heap/heapam.c.md]
-- `heapam_visibility.c` (1753 lines) — every `HeapTupleSatisfies*` routine; the MVCC oracle. Top comment at `heapam_visibility.c:163-228`. [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md]
+- `heapam_visibility.c` (1753 lines) — every `HeapTupleSatisfies*` routine; the MVCC oracle. Top comment at `heapam_visibility.c:1-100`. [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md]
 - `pruneheap.c` (2735 lines) — on-access pruning (`heap_page_prune_opt`) and the unified VACUUM `heap_page_prune_and_freeze` (prune + freeze + VM-set in one WAL record). `heap_page_prune_execute` is shared with redo. [via knowledge/files/src/backend/access/heap/pruneheap.c.md]
 - `vacuumlazy.c` (3883 lines) — the three-phase lazy VACUUM driver, eager-freeze logic, anti-wraparound failsafe, post-vacuum truncation. Entry point `heap_vacuum_rel` at `vacuumlazy.c:624`. [via knowledge/files/src/backend/access/heap/vacuumlazy.c.md]
 - `heapam_handler.c` (2734 lines) — the `TableAmRoutine` table; thin shims forwarding to `heap_*` functions plus the CLUSTER/VACUUM FULL rewrite driver `heapam_relation_copy_for_cluster` (`heapam_handler.c:594`). [via knowledge/files/src/backend/access/heap/heapam_handler.c.md]
@@ -39,7 +39,7 @@ The heap access method is PostgreSQL's default `TableAmRoutine` implementation: 
   - Visibility bits in `t_infomask` (high byte): `HEAP_XMIN_COMMITTED 0x0100`, `HEAP_XMIN_INVALID 0x0200`, `HEAP_XMIN_FROZEN = both = 0x0300`, `HEAP_XMAX_COMMITTED 0x0400`, `HEAP_XMAX_INVALID 0x0800`, `HEAP_XMAX_IS_MULTI 0x1000`, `HEAP_UPDATED 0x2000`. [verified-by-code, htup_details.h:204-217]
   - Lock bits: `HEAP_XMAX_KEYSHR_LOCK 0x0010`, `HEAP_XMAX_EXCL_LOCK 0x0040`, `HEAP_XMAX_LOCK_ONLY 0x0080`. `HEAP_LOCKED_UPGRADED` detects a 9.2-era pg_upgrade legacy multixact that must not be resolved locally. [from-comment, htup_details.h:237-261]
   - `t_infomask2`: low 11 bits = nattrs (`HEAP_NATTS_MASK 0x07FF`); `HEAP_KEYS_UPDATED 0x2000`, `HEAP_HOT_UPDATED 0x4000`, `HEAP_ONLY_TUPLE 0x8000`. [verified-by-code, htup_details.h:291-296]
-  - Hint bits are *hints* only; an unset hint never lies, a set hint may only be written after the relevant xact's commit WAL is flushed (else crash recovery can lose data). [from-comment, heapam_visibility.c:163-228] [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md]
+  - Hint bits are *hints* only; an unset hint never lies, a set hint may only be written after the relevant xact's commit WAL is flushed (else crash recovery can lose data). [from-comment, heapam_visibility.c:115-124] [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md]
 - **`HeapTupleData`** (`htup.h:62`) — in-memory wrapper: `t_len`, `t_self`, `t_tableOid`, `HeapTupleHeader t_data`. Has *five* documented usage modes (pointer-into-buffer, NULL, palloc'd-adjacent, palloc'd-separate, minimal-tuple-overlay); when `t_data` points into a shared buffer the caller MUST hold a pin on that buffer — and this is not encoded in the struct. **Footgun.** [from-comment, htup.h:30-60] [via knowledge/files/src/include/access/htup.h.md]
 - **`BulkInsertStateData`** (`hio.h:29`) — strategy ring + `current_buf` (an *extra* pin held when non-Invalid) + bulk-extension scratch (`next_free`, `last_free`, `already_extended_by`). Used by COPY and the multi-insert path. [from-comment, hio.h:23-50] [via knowledge/files/src/include/access/hio.h.md]
 - **`HeapTupleFreeze`** (`heapam.h:153`) and **`HeapPageFreeze`** (`heapam.h:191`) — split between *plan* (computed by `heap_prepare_freeze_tuple` outside any crit section) and *execution* (`heap_freeze_prepared_tuples` inside the prune/freeze critical section). `HeapPageFreeze` keeps TWO tracker sets (`FreezePageRelfrozenXid` vs `NoFreezePageRelfrozenXid`) because VACUUM may *choose* not to freeze a page and the relfrozenxid candidates differ. [from-comment, heapam.h:191-246] [via knowledge/files/src/include/access/heapam.h.md]
@@ -55,8 +55,8 @@ The heap access method is PostgreSQL's default `TableAmRoutine` implementation: 
 1. `heap_prepare_insert` (`heapam.c:2202`) — set `xmin = GetCurrentTransactionId()`, `cmin = GetCurrentCommandId(true)`, `xmax = 0`, infomask (`HEAP_HASNULL`, `HEAP_HASVARWIDTH` per tuple); if total size > toast threshold, call `heap_toast_insert_or_update` first.
 2. `RelationGetBufferForTuple(rel, len, InvalidBuffer, options, bistate, &vmbuffer, NULL, num_pages)` (`hio.c:500`) — find/extend a page; may pin a VM page. [via knowledge/files/src/backend/access/heap/hio.c.md]
 3. `START_CRIT_SECTION()`.
-4. `RelationPutHeapTuple(rel, buffer, tup, false)` — `PageAddItem`; set `tup->t_self`; fix `t_ctid` (unless speculative). PANIC on `PageAddItem` failure — no `ereport(ERROR)` allowed in this region. [from-comment, hio.c:35-38]
-5. If `PD_ALL_VISIBLE` was set on the heap page, `visibilitymap_clear` — and this MUST happen inside the critical section so crash recovery sees heap + VM as one unit. [verified-by-code, heapam.c:2004-2200; from-comment, visibilitymap.c:797-812] [via knowledge/files/src/backend/access/heap/heapam.c.md]
+4. `RelationPutHeapTuple(rel, buffer, tup, false)` — `PageAddItem`; set `tup->t_self`; fix `t_ctid` (unless speculative). PANIC on `PageAddItem` failure — no `ereport(ERROR)` allowed in this region. [from-comment, hio.c:28-33]
+5. If `PD_ALL_VISIBLE` was set on the heap page, `visibilitymap_clear` — and this MUST happen inside the critical section so crash recovery sees heap + VM as one unit. [verified-by-code, heapam.c:2004-2200; from-comment, visibilitymap.c:76-90] [via knowledge/files/src/backend/access/heap/heapam.c.md]
 6. Emit `XLOG_HEAP_INSERT` (with `XLH_INSERT_*` flags), `MarkBufferDirty`.
 7. `END_CRIT_SECTION()`; release VM pin; release buffer lock.
 
@@ -93,7 +93,7 @@ The heap AM relies on locks at five layers; the buffer-manager rules (pin before
 
 ### 6.1 MVCC visibility ordering rule [HIGHEST-RISK CLAIM]
 
-When testing visibility of an xid, code **MUST** check `TransactionIdIsInProgress` **before** `TransactionIdDidCommit`. Reason: `xact.c` records commit in `pg_xact` *before* clearing `MyProc->xid`. Doing it the other way around can briefly see a just-committed xact as "crashed" because pg_xact says "no" while procarray hasn't been cleared yet. For MVCC snapshots, `XidInMVCCSnapshot` plays the same role as `TransactionIdIsInProgress`, with the same ordering rule. `TransactionIdDidAbort` cannot be used — it doesn't treat crashed-while-running xids as aborted; aborted-ness is determined by elimination (not in progress AND not committed). [from-comment, heapam_visibility.c:177-198] [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md] **This is the rule that broke Multigres; getting it wrong is silent data corruption.**
+When testing visibility of an xid, code **MUST** check `TransactionIdIsInProgress` **before** `TransactionIdDidCommit`. Reason: `xact.c` records commit in `pg_xact` *before* clearing `MyProc->xid`. Doing it the other way around can briefly see a just-committed xact as "crashed" because pg_xact says "no" while procarray hasn't been cleared yet. For MVCC snapshots, `XidInMVCCSnapshot` plays the same role as `TransactionIdIsInProgress`, with the same ordering rule. `TransactionIdDidAbort` cannot be used — it doesn't treat crashed-while-running xids as aborted; aborted-ness is determined by elimination (not in progress AND not committed). [from-comment, heapam_visibility.c:13-37] [via knowledge/files/src/backend/access/heap/heapam_visibility.c.md] **This is the rule that broke Multigres; getting it wrong is silent data corruption.**
 
 ### 6.2 Hint-bit WAL-flush rule [HIGH-RISK]
 
@@ -112,11 +112,11 @@ A hint bit (`HEAP_XMIN_COMMITTED`, `HEAP_XMAX_COMMITTED`, …) may only be set o
 
 - Pruning that **moves tuple data** (creates redirects, reassigns LP_DEAD where a tuple body exists) requires a **buffer cleanup lock** (pin count = 1). [from-comment, heapam_xlog.h:302-310] [via knowledge/files/src/include/access/heapam_xlog.h.md]
 - Freeze-only OR `LP_DEAD→LP_UNUSED`-only modifications can run under an ordinary `BUFFER_LOCK_EXCLUSIVE`. [from-comment, heapam_xlog.h:302-310]
-- The `XLHP_CLEANUP_LOCK` WAL flag encodes which one redo must acquire. `heap_xlog_prune_freeze` asserts: if `XLHP_CLEANUP_LOCK` is not set, then `XLHP_HAS_REDIRECTIONS | XLHP_HAS_DEAD_ITEMS` must also be unset. [verified-by-code, heapam_xlog.c:291-298] [via knowledge/files/src/backend/access/heap/heapam_xlog.c.md]
+- The `XLHP_CLEANUP_LOCK` WAL flag encodes which one redo must acquire. `heap_xlog_prune_freeze` asserts: if `XLHP_CLEANUP_LOCK` is not set, then `XLHP_HAS_REDIRECTIONS | XLHP_HAS_DEAD_ITEMS` must also be unset. [verified-by-code, heapam_xlog.c:53-54] [via knowledge/files/src/backend/access/heap/heapam_xlog.c.md]
 
 ### 6.5 Critical-section discipline
 
-Between `START_CRIT_SECTION()` and `END_CRIT_SECTION()` **no `ereport(ERROR)` is permitted** — it would PANIC. The page lock is held throughout. `RelationPutHeapTuple` runs inside this region: the comment block at `hio.c:35-38` is emphatic ("EREPORT(ERROR) IS DISALLOWED HERE! Must PANIC on failure!!!"). VM-bit changes for the same operation are bundled into the same critical section so crash recovery sees both as a single unit. [from-comment, hio.c:35-38] [via knowledge/files/src/backend/access/heap/hio.c.md]
+Between `START_CRIT_SECTION()` and `END_CRIT_SECTION()` **no `ereport(ERROR)` is permitted** — it would PANIC. The page lock is held throughout. `RelationPutHeapTuple` runs inside this region: the comment block at `hio.c:28-33` is emphatic ("EREPORT(ERROR) IS DISALLOWED HERE! Must PANIC on failure!!!"). VM-bit changes for the same operation are bundled into the same critical section so crash recovery sees both as a single unit. [from-comment, hio.c:28-33] [via knowledge/files/src/backend/access/heap/hio.c.md]
 
 ### 6.6 Freeze plan/execute split
 
@@ -132,11 +132,11 @@ When `heap_update` needs to write a new tuple on a different page from the old o
 
 ### 6.9 VM bit invariants
 
-- `ALL_FROZEN` may be set only if `ALL_VISIBLE` is also set. [from-comment, visibilitymap.c:760-762]
-- VM bit changes are NOT independently WAL-logged — the heap WAL record drives both forks. [from-comment, visibilitymap.c:767-771]
-- VM is **conservative**: set bit authoritative, clear bit means "unknown". [from-comment, visibilitymap.c:763-766]
-- `PD_ALL_VISIBLE` on the heap page MUST stay in sync with the VM bit. [from-comment, visibilitymap.c:780-782]
-- The "examine page → pin VM → re-lock" dance: a modifier inspects the heap page (unlocked or share-locked), decides whether it might be all-visible; if maybe, releases lock, pins the VM page (because VM-page read can block on I/O — never hold a buffer lock across VM I/O), then re-acquires the heap lock and re-checks. The race window is documented and ubiquitous. [from-comment, visibilitymap.c:797-812] [via knowledge/files/src/backend/access/heap/visibilitymap.c.md]
+- `ALL_FROZEN` may be set only if `ALL_VISIBLE` is also set. [from-comment, visibilitymap.c:31; verified-by-code, visibilitymap.c:279]
+- VM bit changes are NOT independently WAL-logged — the heap WAL record drives both forks. [from-comment, visibilitymap.c:37-42]
+- VM is **conservative**: set bit authoritative, clear bit means "unknown". [from-comment, visibilitymap.c:33-35]
+- `PD_ALL_VISIBLE` on the heap page MUST stay in sync with the VM bit. [from-comment, visibilitymap.c:50-51]
+- The "examine page → pin VM → re-lock" dance: a modifier inspects the heap page (unlocked or share-locked), decides whether it might be all-visible; if maybe, releases lock, pins the VM page (because VM-page read can block on I/O — never hold a buffer lock across VM I/O), then re-acquires the heap lock and re-checks. The race window is documented and ubiquitous. [from-comment, visibilitymap.c:76-90] [via knowledge/files/src/backend/access/heap/visibilitymap.c.md]
 
 ### 6.10 In-place catalog updates
 
@@ -202,7 +202,7 @@ Carried forward from the per-file docs:
 - **`LP_DEAD`** — Line pointer whose tuple was reclaimed by pruning but whose LP cannot yet be reused because index entries may still point at it. Converted to `LP_UNUSED` by VACUUM's phase III after the indexes are vacuumed. [from-README, README.HOT]
 - **`LP_UNUSED`** — Free line pointer; can be reused by a new insert. [verified-by-code]
 - **Infomask bits** — `HEAP_XMIN_COMMITTED`/`_INVALID`/`_FROZEN`, `HEAP_XMAX_COMMITTED`/`_INVALID`/`_IS_MULTI`/`_LOCK_ONLY`/`_KEYSHR_LOCK`/`_EXCL_LOCK`, `HEAP_HASNULL`, `HEAP_HASVARWIDTH`, `HEAP_HASEXTERNAL`, `HEAP_UPDATED`, `HEAP_COMBOCID`, `HEAP_MOVED_*`. In `t_infomask2`: `HEAP_NATTS_MASK`, `HEAP_KEYS_UPDATED`, `HEAP_HOT_UPDATED`, `HEAP_ONLY_TUPLE`. [verified-by-code, htup_details.h:190-296]
-- **Hint bits** — `HEAP_XMIN_COMMITTED`/`HEAP_XMAX_COMMITTED` (and friends): commit-status caches set lazily by visibility routines. Not WAL-logged; written under share-exclusive content lock; cannot be set before the relevant commit-WAL is flushed. [from-comment, heapam_visibility.c:163-228]
+- **Hint bits** — `HEAP_XMIN_COMMITTED`/`HEAP_XMAX_COMMITTED` (and friends): commit-status caches set lazily by visibility routines. Not WAL-logged; written under share-exclusive content lock; cannot be set before the relevant commit-WAL is flushed. [from-comment, heapam_visibility.c:6-11,115-124]
 - **Freeze** — Replace a still-live old xmin with `FrozenTransactionId` (encoded as `HEAP_XMIN_FROZEN = HEAP_XMIN_COMMITTED|HEAP_XMIN_INVALID`) so the tuple survives 32-bit xid wraparound. Also strip lock-only xmax bits below the multixact cutoff. [verified-by-code, htup_details.h:204-208]
 - **Vacuum cycle id** — Per-VACUUM identifier used by index AMs (e.g. btree) to detect concurrent splits; the heap AM doesn't carry it on tuples but supplies it via VACUUM driver parameters. [verified-by-code]
 - **`ItemPointer` / TID** — `(BlockNumber, OffsetNumber)` pair identifying an LP slot on a page. `t_self` is the tuple's own TID; `t_ctid` points to the successor or to itself (= no successor or speculative-insert token). [verified-by-code, htup_details.h:86-112]
