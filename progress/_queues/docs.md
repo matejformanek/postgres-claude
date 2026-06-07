@@ -25,12 +25,12 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-06 (re-walk of internals.html ToC — Part VII chapters without a docs-distilled/<slug>.md; per-catalog/per-view reference pages excluded as reference, not internals prose)
 
-[in-progress:cloud/pg-docs-miner/2026-06-06] overview https://www.postgresql.org/docs/current/overview.html
-[in-progress:cloud/pg-docs-miner/2026-06-06] tableam https://www.postgresql.org/docs/current/tableam.html
-[in-progress:cloud/pg-docs-miner/2026-06-06] indexam https://www.postgresql.org/docs/current/indexam.html
-[in-progress:cloud/pg-docs-miner/2026-06-06] bki https://www.postgresql.org/docs/current/bki.html
-[in-progress:cloud/pg-docs-miner/2026-06-06] transactions https://www.postgresql.org/docs/current/transactions.html
-[in-progress:cloud/pg-docs-miner/2026-06-06] protocol-flow https://www.postgresql.org/docs/current/protocol-flow.html
+[done:a9c263b] overview https://www.postgresql.org/docs/current/overview.html
+[done:a9c263b] tableam https://www.postgresql.org/docs/current/tableam.html
+[done:a9c263b] indexam https://www.postgresql.org/docs/current/indexam.html
+[done:a9c263b] bki https://www.postgresql.org/docs/current/bki.html
+[done:a9c263b] transactions https://www.postgresql.org/docs/current/transactions.html
+[done:a9c263b] protocol-flow https://www.postgresql.org/docs/current/protocol-flow.html
 [pending] custom-scan https://www.postgresql.org/docs/current/custom-scan.html
 [pending] geqo https://www.postgresql.org/docs/current/geqo.html
 [pending] fdwhandler https://www.postgresql.org/docs/current/fdwhandler.html

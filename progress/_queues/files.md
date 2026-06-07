@@ -161,23 +161,23 @@ a later batch, not seeded here.
 > register (3 open: nit/maybe). LOC corrected from queue estimates where they
 > drifted (path.c 1165, snprintf.c 1515, pg_bitutils.c 194, chklocale.c 383).
 > `getaddrinfo.c` is **deleted upstream** (404 at anchor) → `[skipped:deleted]`.
-> Marked `[done:port-shims-2026-06-06]`.
+> Marked `[done:5025355]`.
 
-[done:port-shims-2026-06-06] src/port/explicit_bzero.c loc=73 priority=H
-[done:port-shims-2026-06-06] src/port/pg_strong_random.c loc=179 priority=H
-[done:port-shims-2026-06-06] src/port/timingsafe_bcmp.c loc=43 priority=H
-[done:port-shims-2026-06-06] src/port/snprintf.c loc=1515 priority=M
-[done:port-shims-2026-06-06] src/port/path.c loc=1165 priority=H
-[done:port-shims-2026-06-06] src/port/quotes.c loc=51 priority=M
-[done:port-shims-2026-06-06] src/port/tar.c loc=235 priority=M
-[done:port-shims-2026-06-06] src/port/strlcpy.c loc=71 priority=M
-[done:port-shims-2026-06-06] src/port/strlcat.c loc=61 priority=M
-[done:port-shims-2026-06-06] src/port/pgmkdirp.c loc=148 priority=M
-[done:port-shims-2026-06-06] src/port/pgcheckdir.c loc=92 priority=M
-[done:port-shims-2026-06-06] src/port/pg_bitutils.c loc=194 priority=M
-[done:port-shims-2026-06-06] src/port/chklocale.c loc=383 priority=M
+[done:5025355] src/port/explicit_bzero.c loc=73 priority=H
+[done:5025355] src/port/pg_strong_random.c loc=179 priority=H
+[done:5025355] src/port/timingsafe_bcmp.c loc=43 priority=H
+[done:5025355] src/port/snprintf.c loc=1515 priority=M
+[done:5025355] src/port/path.c loc=1165 priority=H
+[done:5025355] src/port/quotes.c loc=51 priority=M
+[done:5025355] src/port/tar.c loc=235 priority=M
+[done:5025355] src/port/strlcpy.c loc=71 priority=M
+[done:5025355] src/port/strlcat.c loc=61 priority=M
+[done:5025355] src/port/pgmkdirp.c loc=148 priority=M
+[done:5025355] src/port/pgcheckdir.c loc=92 priority=M
+[done:5025355] src/port/pg_bitutils.c loc=194 priority=M
+[done:5025355] src/port/chklocale.c loc=383 priority=M
 [skipped:deleted] src/port/getaddrinfo.c (404 at anchor 4b0bf0788b0 — removed upstream)
-[done:port-shims-2026-06-06] src/port/getpeereid.c loc=78 priority=H
+[done:5025355] src/port/getpeereid.c loc=78 priority=H
 
 ## src/timezone sweep (refill, 2026-06-06)
 
@@ -190,9 +190,9 @@ this run. Remaining: the small PG/vendored headers (`pgtz.h`, `tzfile.h`,
 near-verbatim upstream imports). The ~22 `src/port/win32*.c` shims remain
 deferred as low-priority platform glue.
 
-[done:port-shims-2026-06-06] src/timezone/pgtz.c loc=497 priority=H
-[done:port-shims-2026-06-06] src/timezone/pgtz.h loc=81 priority=M
-[done:port-shims-2026-06-06] src/timezone/tzfile.h loc=110 priority=M
+[done:5025355] src/timezone/pgtz.c loc=497 priority=H
+[done:5025355] src/timezone/pgtz.h loc=81 priority=M
+[done:5025355] src/timezone/tzfile.h loc=110 priority=M
 [pending] src/timezone/private.h loc=155 priority=M
 [pending] src/timezone/localtime.c loc=1600 priority=M
 [pending] src/timezone/strftime.c loc=500 priority=L

@@ -34,8 +34,8 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 
 ## Refill 2026-06-06 (re-walk of wiki-index.md — remaining developer pages without a wiki-distilled/<slug>.md; stale stubs and 404s from prior runs excluded)
 
-[in-progress:cloud/pg-docs-miner/2026-06-06] Committing_with_Git https://wiki.postgresql.org/wiki/Committing_with_Git
-[in-progress:cloud/pg-docs-miner/2026-06-06] CommitFest_Checklist https://wiki.postgresql.org/wiki/CommitFest_Checklist
+[done:a9c263b] Committing_with_Git https://wiki.postgresql.org/wiki/Committing_with_Git
+[done:a9c263b] CommitFest_Checklist https://wiki.postgresql.org/wiki/CommitFest_Checklist
 [pending] Committing_checklist https://wiki.postgresql.org/wiki/Committing_checklist
 [pending] Todo https://wiki.postgresql.org/wiki/Todo
 [pending] RRReviewers https://wiki.postgresql.org/wiki/RRReviewers
