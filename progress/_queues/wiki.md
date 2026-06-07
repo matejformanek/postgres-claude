@@ -31,3 +31,11 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 [done:f53b7bf] Commit_Message_Guidance https://wiki.postgresql.org/wiki/Commit_Message_Guidance
 [done:f53b7bf] Regression_test_authoring https://wiki.postgresql.org/wiki/Regression_test_authoring
 [done:f53b7bf] Working_with_Git https://wiki.postgresql.org/wiki/Working_with_Git
+
+## Refill 2026-06-06 (re-walk of wiki-index.md — remaining developer pages without a wiki-distilled/<slug>.md; stale stubs and 404s from prior runs excluded)
+
+[in-progress:cloud/pg-docs-miner/2026-06-06] Committing_with_Git https://wiki.postgresql.org/wiki/Committing_with_Git
+[in-progress:cloud/pg-docs-miner/2026-06-06] CommitFest_Checklist https://wiki.postgresql.org/wiki/CommitFest_Checklist
+[pending] Committing_checklist https://wiki.postgresql.org/wiki/Committing_checklist
+[pending] Todo https://wiki.postgresql.org/wiki/Todo
+[pending] RRReviewers https://wiki.postgresql.org/wiki/RRReviewers
