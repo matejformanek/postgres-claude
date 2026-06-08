@@ -41,5 +41,18 @@ table of contents, exclude chapters whose slug already exists under
 [done:b91492b] storage-vm https://www.postgresql.org/docs/current/storage-vm.html
 [done:b91492b] storage-hot https://www.postgresql.org/docs/current/storage-hot.html
 [done:b91492b] wal-for-extensions https://www.postgresql.org/docs/current/wal-for-extensions.html
-[pending] hash-index https://www.postgresql.org/docs/current/hash-index.html
-[pending] planner-stats-details https://www.postgresql.org/docs/current/planner-stats-details.html
+[in-progress:cloud/pg-docs-miner/2026-06-08] hash-index https://www.postgresql.org/docs/current/hash-index.html
+[pending] planner-stats-details https://www.postgresql.org/docs/current/planner-stats-details.html  # 2026-06-08: WebFetch extraction returned ToC-only twice (chapter landing summarized, subsection content not pulled); left pending for a retry
+
+## Refill 2026-06-08 (re-walk of internals.html ToC + Part V "Extending SQL" index chapters — internals-prose chapters without a docs-distilled/<slug>.md; per-catalog/per-view reference pages excluded)
+
+[in-progress:cloud/pg-docs-miner/2026-06-08] btree https://www.postgresql.org/docs/current/btree.html
+[in-progress:cloud/pg-docs-miner/2026-06-08] xindex https://www.postgresql.org/docs/current/xindex.html
+[in-progress:cloud/pg-docs-miner/2026-06-08] nls https://www.postgresql.org/docs/current/nls.html
+[in-progress:cloud/pg-docs-miner/2026-06-08] monitoring-stats https://www.postgresql.org/docs/current/monitoring-stats.html
+
+## Refill 2026-06-08 (second pass — both queues drained mid-run; re-walked "Extending SQL" (Part V) + WAL internals chapters to keep filling the output budget)
+
+[in-progress:cloud/pg-docs-miner/2026-06-08] xtypes https://www.postgresql.org/docs/current/xtypes.html
+[in-progress:cloud/pg-docs-miner/2026-06-08] xaggr https://www.postgresql.org/docs/current/xaggr.html
+[in-progress:cloud/pg-docs-miner/2026-06-08] wal-internals https://www.postgresql.org/docs/current/wal-internals.html

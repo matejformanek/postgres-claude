@@ -21,10 +21,13 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   [from-wiki](https://wiki.postgresql.org/wiki/Main_Page).
 
 - **Development_information** — https://wiki.postgresql.org/wiki/Development_information
+  *(distilled 2026-06-08 → `knowledge/wiki-distilled/Development_information.md`)*
   The *real* developer hub. Groups: Development Process, Developer Resources,
   CommitFests, Roadmaps, Past Developer Meeting Notes. Use this as the
   canonical "where do I find the dev page on X" jump-table
-  [from-wiki](https://wiki.postgresql.org/wiki/Development_information).
+  [from-wiki](https://wiki.postgresql.org/wiki/Development_information). The
+  distilled doc notes the corpus `wiki-index.md` is the more reliable map and
+  flags the stale roadmap/projects links this hub still points at.
 
 - **Developer_FAQ** — https://wiki.postgresql.org/wiki/Developer_FAQ
   Long-form Q&A. Covers source tree layout, debugging (gdb, perf, rr,
@@ -42,16 +45,23 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
 ## Getting started
 
 - **HowToBetaTest** — https://wiki.postgresql.org/wiki/HowToBetaTest
+  *(distilled 2026-06-08 → `knowledge/wiki-distilled/HowToBetaTest.md`)*
   How non-coders can help by testing beta releases. The version-specific
   content is dated (focuses on PG 9.6 features) but the testing-method
   taxonomy is still useful [from-wiki](https://wiki.postgresql.org/wiki/HowToBetaTest).
+  The distilled doc keeps the durable taxonomy + the catversion-bump-means-
+  re-initdb-between-betas caveat and explicitly flags the 9.6 feature list as
+  historical.
 
 - **Mailing_Lists** — https://wiki.postgresql.org/wiki/Mailing_Lists
+  *(distilled 2026-06-08 → `knowledge/wiki-distilled/Mailing_Lists.md`)*
   Which list to use for what. `pgsql-hackers` = patches + internals,
   `pgsql-bugs` = bug reports, `pgsql-docs` = docs, `pgsql-committers` =
   commit announcements. Etiquette: reply-all, no top-posting, no HTML,
   strip confidentiality notices
-  [from-wiki](https://wiki.postgresql.org/wiki/Mailing_Lists).
+  [from-wiki](https://wiki.postgresql.org/wiki/Mailing_Lists). Distilled doc
+  adds the In-Reply-To/postgr.es message-id threading tie-in and the
+  post-without-subscribing-but-moderated nuance.
 
 - **Todo** — https://wiki.postgresql.org/wiki/Todo
   *(distilled 2026-06-07 → `knowledge/wiki-distilled/Todo.md`)*
@@ -106,11 +116,14 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   [from-wiki](https://wiki.postgresql.org/wiki/Reviewing_a_Patch).
 
 - **CommitFest** — https://wiki.postgresql.org/wiki/CommitFest
+  *(distilled 2026-06-08 → `knowledge/wiki-distilled/CommitFest.md`)*
   > "A Commitfest (CF) is a periodic break to PostgreSQL development
   > that focuses on patch review and commit rather than new development."
   ~1 month long, 1-month gaps between cycles
   [from-wiki](https://wiki.postgresql.org/wiki/CommitFest). Live app at
-  https://commitfest.postgresql.org.
+  https://commitfest.postgresql.org. Distilled doc captures the patch
+  state machine, the review-one-to-submit-one norm, and the
+  Alpha/Beta-out-of-CF release tie-in.
 
 - **CommitFest_Checklist** — https://wiki.postgresql.org/wiki/CommitFest_Checklist
   *(distilled 2026-06-06 → `knowledge/wiki-distilled/CommitFest_Checklist.md`)*
