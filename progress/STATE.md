@@ -77,7 +77,7 @@
 - Long-form architecture docs: **9**.
 - Idiom docs: **10**.
 - Issue registers: **knowledge/issues/** — 1 starter file (`storage-buffer.md`) + README/template. Will grow as Phase A surfaces issues.
-- Glossary: `knowledge/glossary.md`, **374** entries (grown by `pg-corpus-maintainer`; +62 on 2026-06-07).
+- Glossary: `knowledge/glossary.md`, **467** entries (grown by `pg-corpus-maintainer`; +93 on 2026-06-08).
 
 ## Recent session logs
 
