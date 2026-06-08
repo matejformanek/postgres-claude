@@ -193,10 +193,10 @@ deferred as low-priority platform glue.
 [done:5025355] src/timezone/pgtz.c loc=497 priority=H
 [done:5025355] src/timezone/pgtz.h loc=81 priority=M
 [done:5025355] src/timezone/tzfile.h loc=110 priority=M
-[done:timezone-2026-06-07] src/timezone/private.h loc=155 priority=M
-[done:timezone-2026-06-07] src/timezone/localtime.c loc=2023 priority=M
-[done:timezone-2026-06-07] src/timezone/strftime.c loc=582 priority=L
-[done:timezone-2026-06-07] src/timezone/zic.c loc=4022 priority=L
+[done:06b42c6] src/timezone/private.h loc=155 priority=M
+[done:06b42c6] src/timezone/localtime.c loc=2023 priority=M
+[done:06b42c6] src/timezone/strftime.c loc=582 priority=L
+[done:06b42c6] src/timezone/zic.c loc=4022 priority=L
 
 ## src/backend/libpq backend-connection-security sweep (refill, 2026-06-07)
 

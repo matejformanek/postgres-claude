@@ -36,6 +36,6 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 
 [done:a9c263b] Committing_with_Git https://wiki.postgresql.org/wiki/Committing_with_Git
 [done:a9c263b] CommitFest_Checklist https://wiki.postgresql.org/wiki/CommitFest_Checklist
-[in-progress:cloud/pg-docs-miner/2026-06-07] Committing_checklist https://wiki.postgresql.org/wiki/Committing_checklist
-[in-progress:cloud/pg-docs-miner/2026-06-07] Todo https://wiki.postgresql.org/wiki/Todo
-[in-progress:cloud/pg-docs-miner/2026-06-07] RRReviewers https://wiki.postgresql.org/wiki/RRReviewers
+[done:b91492b] Committing_checklist https://wiki.postgresql.org/wiki/Committing_checklist
+[done:b91492b] Todo https://wiki.postgresql.org/wiki/Todo
+[done:b91492b] RRReviewers https://wiki.postgresql.org/wiki/RRReviewers
