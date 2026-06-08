@@ -54,11 +54,14 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   [from-wiki](https://wiki.postgresql.org/wiki/Mailing_Lists).
 
 - **Todo** — https://wiki.postgresql.org/wiki/Todo
+  *(distilled 2026-06-07 → `knowledge/wiki-distilled/Todo.md`)*
   Catalogue of bugs/features/wishlist items. 28 sections. **Warning
   quoted on the page**: "Do not assume that you can select one, code it
   and then expect it to be committed" — workflow is
   Desirability→Design→Implement→Test→Review→Commit
-  [from-wiki](https://wiki.postgresql.org/wiki/Todo).
+  [from-wiki](https://wiki.postgresql.org/wiki/Todo). The distilled doc
+  flags it as a *direction signal, not a spec* — every entry is
+  `[unverified]` until the linked thread + current source confirm.
 
 ## Coding & conventions
 
@@ -123,16 +126,29 @@ Crawled ~24 pages. Pages that came back **404** (don't link to them):
   [from-wiki](https://wiki.postgresql.org/wiki/Running_a_Commitfest).
 
 - **RRReviewers** — https://wiki.postgresql.org/wiki/RRReviewers
+  *(distilled 2026-06-07 → `knowledge/wiki-distilled/RRReviewers.md`)*
   Round-Robin Reviewers program. Volunteers get randomly assigned
   patches during a commitfest. **Active as of Aug 2025**
   [from-wiki](https://wiki.postgresql.org/wiki/RRReviewers). Subscribe
-  to `pgsql-rrreviewers` to participate.
+  to `pgsql-rrreviewers` to participate. Sign-up: subscribe hackers +
+  rrreviewers, volunteer, make a wiki account, read Reviewing_a_Patch;
+  CFM assigns by email, claim on the CF app, review within ~4 days.
 
 - **Committing_with_Git** — https://wiki.postgresql.org/wiki/Committing_with_Git
   *(distilled 2026-06-06 → `knowledge/wiki-distilled/Committing_with_Git.md`)*
   Committers-only. Sets `branch.autosetuprebase=always`, always use
   `git push --dry-run` first. Refers out to Commit_Message_Guidance
   [from-wiki](https://wiki.postgresql.org/wiki/Committing_with_Git).
+
+- **Committing_checklist** — https://wiki.postgresql.org/wiki/Committing_checklist
+  *(distilled 2026-06-07 → `knowledge/wiki-distilled/Committing_checklist.md`)*
+  Committers-only pre-/post-push checklist. The version-stamp matrix
+  (`CATALOG_VERSION_NO` / `PG_CONTROL_VERSION` / `XLOG_PAGE_MAGIC` /
+  `PGSTAT_FILE_FORMAT_ID`), the smoke-test menu (Valgrind,
+  `CLOBBER_CACHE_ALWAYS`, `wal_consistency_checking=all`,
+  `COPY_PARSE_PLAN_TREES`), back-patch ABI rules (no struct changes in
+  `src/include/*`), and the release-freeze window are the load-bearing
+  parts [from-wiki](https://wiki.postgresql.org/wiki/Committing_checklist).
 
 - **Commit_Message_Guidance** — https://wiki.postgresql.org/wiki/Commit_Message_Guidance
   *(distilled 2026-06-05 → `knowledge/wiki-distilled/Commit_Message_Guidance.md`)*
