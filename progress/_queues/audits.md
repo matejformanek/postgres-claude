@@ -7,11 +7,6 @@ back to `[pending]`.
 
 ## Entries
 
-[pending] knowledge/subsystems/storage-buffer.md verified=never
-[pending] knowledge/subsystems/storage-ipc.md verified=never
-[pending] knowledge/subsystems/storage-lmgr.md verified=never
-[pending] knowledge/subsystems/utils-cache.md verified=never
-[pending] knowledge/subsystems/utils-mmgr.md verified=never
 [pending] knowledge/subsystems/partitioning.md verified=never
 [pending] knowledge/subsystems/jit.md verified=never
 [pending] knowledge/subsystems/foreign.md verified=never
@@ -46,3 +41,8 @@ back to `[pending]`.
 [pending] knowledge/subsystems/access-transam.md verified=2026-06-07
 [pending] knowledge/subsystems/executor.md verified=2026-06-07
 [pending] knowledge/subsystems/optimizer.md verified=2026-06-07
+[pending] knowledge/subsystems/storage-buffer.md verified=2026-06-08
+[pending] knowledge/subsystems/storage-ipc.md verified=2026-06-08
+[pending] knowledge/subsystems/storage-lmgr.md verified=2026-06-08
+[pending] knowledge/subsystems/utils-cache.md verified=2026-06-08
+[pending] knowledge/subsystems/utils-mmgr.md verified=2026-06-08
