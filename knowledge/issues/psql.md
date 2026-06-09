@@ -131,6 +131,7 @@ credential-reading files). Same gap on the psql side.
 | 2026-06-03 | command.c | info-disclosure | nit | ECHO_HIDDEN echoes internal queries including `SELECT CURRENT_USER` from `\password` | open | knowledge/files/src/bin/psql/command.c.md |
 | 2026-06-03 | prompt.c:138-303 | info-disclosure | nit | PROMPT `%`-sequences expose internal hostnames, PIDs, search_path to terminal-history readers | open | knowledge/files/src/bin/psql/prompt.c.md |
 | 2026-06-03 | stringutils.c:42-43 | correctness | nit | `strtokx(e_strings=true, del_quotes=true)` combo documented unsupported but not asserted; regression risk if new caller stumbles in | open | knowledge/files/src/bin/psql/stringutils.c.md |
+| 2026-06-09 | copy.h / copy.c:293,312 | shell-injection | nit | `\copy ... PROGRAM 'cmd'` passes the quoted command straight to `popen(3)` with no sanitization beyond quote-stripping; by design (restricting it needs server-level GUCs) but worth documenting | open | knowledge/files/src/bin/psql/copy.h.md |
 
 ---
 

@@ -23,7 +23,7 @@ Row format example:
 
 | Name | Path | Last verified commit | Confidence summary | Open questions |
 |---|---|---|---|---|
-| glossary | knowledge/glossary.md | ef6a95c7c64 | 467 entries (2026-06-08: +93), cites carried forward from per-file docs (verified-by-code/from-comment/from-README) with explicit "— via" provenance | grown by pg-corpus-maintainer; remaining candidates skew to tool-internal helpers (WriteInt/PullFilter/HandleSlashCmds) + SCRAM key-derivation locals, below the cite-or-don't-claim bar |
+| glossary | knowledge/glossary.md | ef6a95c7c64 | 570 entries (2026-06-09: +103 — core catalogs, tuple/page internals, planner stages, SLRUs, AIO, security primitives), cites carried forward from per-file docs (verified-by-code/from-comment/from-README) with explicit "— via" provenance | grown by pg-corpus-maintainer; remaining candidates skew to tool-internal helpers (WriteInt/PullFilter/HandleSlashCmds) + SCRAM key-derivation locals, below the cite-or-don't-claim bar |
 
 ## Per-file coverage — top-level summary
 
