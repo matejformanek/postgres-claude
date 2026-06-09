@@ -212,7 +212,7 @@ effectively 100% modulo `ppport.h`. **Cross-PL trust-gate ranking
 I/O) > N/A (plpython untrusted-only — `import`/ctypes vectors make
 Safe.pm-equivalent impossible).
 
-## contrib — 61 / 210 docs (29.0%, top-4 + security-themed complete)
+## contrib — 114 / 210 docs (54.3%, top-4 + security-themed + datatypes/index-AMs complete)
 
 In-tree extensions, ~40 modules. **A11 (2026-06-04)** landed the
 top-4 highest-Phase-D-value modules: ~~pg_stat_statements~~,
@@ -220,12 +220,16 @@ top-4 highest-Phase-D-value modules: ~~pg_stat_statements~~,
 files). **A12 (2026-06-09)** landed the security-themed bundle:
 ~~amcheck~~ (4 docs / 5 files), ~~pageinspect~~ (8 docs / 9 files),
 ~~pgstattuple~~ (3 docs), ~~sepgsql~~ (10 docs), ~~file_fdw~~,
-~~auth_delay~~, ~~sslinfo~~. Remaining ~149 files across ~29
-modules: load-bearing (btree_gin, btree_gist, hstore, ltree,
-intarray, citext, tablefunc, pageinspect-leftovers, pg_visibility,
-pg_buffercache, pg_freespacemap, pg_prewarm, pgrowlocks,
-pg_walinspect, basebackup_to_shell, basic_archive,
-pg_overexplain). **A12 critical Phase D findings: sepgsql 3
+~~auth_delay~~, ~~sslinfo~~. **A13 (2026-06-09)** landed the
+datatypes + index-AM bundle: ~~hstore~~ (7 docs), ~~ltree~~ (12
+docs), ~~btree_gist~~ (24 docs / 27 files), ~~intarray~~ (7 docs),
+~~tablefunc~~, ~~citext~~, ~~btree_gin~~. Remaining ~96 files
+across ~22 modules: pg_visibility, pg_buffercache,
+pg_freespacemap, pg_prewarm, pgrowlocks, pg_walinspect,
+basebackup_to_shell, basic_archive, pg_overexplain,
+pg_surgery, bloom (GiST/RUM extension), seg, cube, isn, lo,
+unaccent, dict_xsyn, dict_int, earthdistance, fuzzystrmatch,
+pg_trgm, tsm_system_*. **A12 critical Phase D findings: sepgsql 3
 confirmed security-class bugs (permissive-mode AVC widening
 persistence, parallel-workers run with server label, proc.c:279
 typo); pageinspect's `tuple_data_split(do_detoast=true)` is cross-

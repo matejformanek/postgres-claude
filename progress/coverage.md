@@ -27,14 +27,14 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-09 (post A12 contrib security-themed sweep — 7 modules, ~153 issues), source pin `4b0bf0788b0`.
+Refreshed 2026-06-09 (post A13 contrib datatypes + index-AM sweep — 7 modules, ~155 issues), source pin `4b0bf0788b0`.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **1,569** (+28 from A12; cumulative +652 since 2026-06-02 morning).
-- Registry rows in `progress/files-examined.md`: **1,728** (+30 source files documented).
-- **Top-line coverage: ~61.2%** of source files have a per-file doc (up from 60.1%).
+- Per-file docs under `knowledge/files/`: **1,622** (+53 from A13; cumulative +705 since 2026-06-02 morning).
+- Registry rows in `progress/files-examined.md`: **1,784** (+56 source files documented).
+- **Top-line coverage: ~63.3%** of source files have a per-file doc (up from 61.2%).
 
 The doc count exceeds the registered-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
@@ -55,13 +55,13 @@ replication 107.4%) reflects those companion docs.
 | `src/bin` (psql, pg_dump, initdb, pg_upgrade, pg_rewind, pg_amcheck, …) | 160 | 115 | 71.9% |
 | `src/fe_utils` | 18 | 18 | 100.0% |
 | `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 26 | 66.7% |
-| `contrib` (extensions) | 210 | 61 | 29.0% |
-| **TOTAL** | **2,564** | **1,569** | **61.2%** |
+| `contrib` (extensions) | 210 | 114 | 54.3% |
+| **TOTAL** | **2,564** | **1,622** | **63.3%** |
 
 ### Phase A target (decided 2026-06-02)
 
 Scope: **everything under src/ + contrib/** (full 2,564-file target).
-Gap to close: **~995 files** undocumented (down from 1,080 after A12 landed 28 docs covering 30 source files; cumulative -652 since 2026-06-02 morning's 1,647). **Past halfway, into final 39%. src/pl complete; src/fe_utils complete (100%); src/timezone complete (100%); contrib top-4 (pg_stat_statements, dblink, postgres_fdw, pgcrypto) complete; contrib security-themed bundle complete (amcheck, pageinspect, pgstattuple, sepgsql, file_fdw, auth_delay, sslinfo); ~149 contrib files remaining.**
+Gap to close: **~942 files** undocumented (down from ~995 after A13 landed 53 docs covering 56 source files; cumulative -705 since 2026-06-02 morning's 1,647). **Past halfway, into final 37%. src/pl complete; src/fe_utils complete; src/timezone complete; contrib top-4 + security-themed + datatypes/index-AMs bundle complete; ~96 contrib files remaining.**
 Cadence: hybrid — `pg-file-backfiller` cloud routine grinds breadth nightly;
 foreground interactive sweeps accelerate high-value directories
 (`utils/`, `libpq-backend`, `replication/`, `executor/`, `bin/`).
