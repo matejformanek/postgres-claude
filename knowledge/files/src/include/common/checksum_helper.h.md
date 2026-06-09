@@ -28,5 +28,31 @@ Algorithm-agnostic checksum API: `pg_checksum_init` / `update` / `final`, dispat
 
 - CRC-32C is **not crypto** — it is collision-trivial and an attacker who can modify a manifest can also rewrite the CRC. CRC-32C is included only as a faster integrity check for accidental damage. The header comment is explicit. [from-comment, checksum_helper.h:20-27]
 
+## Issues
+
+[ISSUE-trust-boundary: enum `pg_checksum_type` (`checksum_helper.h:29-37`)
+puts `CHECKSUM_TYPE_CRC32C` and `CHECKSUM_TYPE_SHA512` in the same
+namespace; the API forces no distinction between "fast integrity" and
+"crypto-strong" choices at compile time. A5 finding: callers that
+parameterize on user input (e.g. `pg_basebackup --manifest-checksums=`)
+can be talked into the weakest acceptable option (medium)] The
+header notes MD5 was deliberately omitted but does not warn that
+CRC32C is similarly weak for adversarial settings.
+
+[ISSUE-stale-todo: comment at `checksum_helper.h:20-27` says "we
+include CRC-32C because it's much faster" — true but loaded; an
+explicit "DO NOT USE FOR AUTHENTICITY" warning would make the
+header self-documenting (low)]
+
+[ISSUE-trust-boundary: `pg_checksum_parse_type` (`checksum_helper.h:64`)
+takes a `char *name` — parser for CLI/manifest input. Lower-case
+matching, locale-dependent? Header says nothing (low)]
+
+## Cross-refs
+
+- A5 `common.md` — CRC32C-vs-SHA misuse.
+- A6 `pg_verifybackup` — primary consumer.
+- Companion: `src/common/checksum_helper.c.md`, `parse_manifest.h.md`.
+
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=5`

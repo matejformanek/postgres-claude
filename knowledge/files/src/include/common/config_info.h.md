@@ -25,5 +25,18 @@ Tiny key/value struct (`ConfigData{name,setting}`) and the single function `get_
 
 - Pure introspection / read-only. Not a trust boundary.
 
+## Issues
+
+[ISSUE-trust-boundary: `get_configdata(my_exec_path, ...)`
+(`config_info.h:18-19`) leaks compiled-in build paths
+(`pkglibdir`, `sharedir`, configure flags) — fine for the standard
+`pg_config` CLI, but extensions that re-expose this through SQL
+could let an unprivileged DB user fingerprint the host (low)]
+Header has no consumer-facing warning.
+
+## Cross-refs
+
+- Companion: `src/common/config_info.c.md`.
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=2`

@@ -57,10 +57,30 @@ reminds the editor to bump FORKNAMECHARS — but it's a manual
 coupling and `GetRelationPath` ends with `Assert`, not a runtime
 check.
 
-## Potential issues
+## Issues
 
-- The wrapper macros at lines 140-152 carry an explicit "beware of
-  multiple evaluation" warning — `relpathbackend((rlocator), x, y)`
-  evaluates `rlocator` three times. Callers that pass
-  `*table_open(...)` or similar side-effectful expressions would
-  break silently.
+[ISSUE-undocumented-invariant: REL_PATH_STR_MAXLEN encodes
+FORKNAMECHARS=4; any new fork name >4 chars overflows the in-place
+struct buffer (lines 97-113) (low)] The comment at lines 65-67
+reminds the editor to bump FORKNAMECHARS — but it's a manual
+coupling and `GetRelationPath` ends with `Assert`, not a runtime
+check.
+
+[ISSUE-undocumented-invariant: wrapper macros (`relpath.h:140-152`)
+carry "beware of multiple evaluation" warning — `relpathbackend`
+evaluates `rlocator` three times. A caller that passes a
+side-effectful expression (e.g. a function call) silently invokes it
+three times (medium)]
+
+[ISSUE-trust-boundary: `GetRelationPath` (`relpath.h:133`) accepts
+any (`dbOid`, `spcOid`, `RelFileNumber`) tuple and composes a
+filesystem path under PGDATA. A6 + A14 cross-link: code paths that
+pass attacker-influenced relation numbers (e.g. logical-replication
+worker, replication slot, etc.) could be steered toward unexpected
+filesystem locations. Header has no validation contract (low)]
+
+## Cross-refs
+
+- A6 `pg_upgrade` — path composition + symlink interaction.
+- A14 path-traversal cluster — relation-path echo.
+- Companion: `src/common/relpath.c.md`.

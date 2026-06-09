@@ -29,5 +29,35 @@ Public surface for PG's in-tree LZ implementation — historically the default t
 
 See `pg_lzcompress.c.md` — bounds-checking detail on the decompressor.
 
+## Issues
+
+[ISSUE-trust-boundary: `pglz_decompress(source, slen, dest, rawsize, check_complete)`
+(`pg_lzcompress.h:88-89`) — caller supplies `rawsize` as the
+expected output length, but the header documents no upper bound on
+the input/output ratio. A5's `common.md` headline: a malicious TOAST
+chunk can claim `rawsize` arbitrarily large vs `slen` → decompression
+bomb (high)] The header is silent. Cross-link: A11 pgcrypto pgp
+decompression bomb is the same family.
+
+[ISSUE-undocumented-invariant: `PGLZ_MAX_OUTPUT(dlen)` macro
+(`pg_lzcompress.h:21`) — comment says "4 bytes for overrun before
+detecting compression failure", but does not state that this is the
+ONLY tolerance — i.e. callers MUST size dest to at least
+`PGLZ_MAX_OUTPUT(slen)` or the compressor may step on memory (low)]
+
+[ISSUE-trust-boundary: `check_complete` parameter
+(`pg_lzcompress.h:89`) is a bool whose semantics ("error out if
+decompression finishes early") are not explained at the header
+level (low)] Misuse — passing `false` when the caller actually
+needs strict completeness — yields silent truncation, exactly the
+class of TOAST-corruption attack `pglz` has been hardened against
+historically.
+
+## Cross-refs
+
+- A5 `common.md` — pglz decompression bomb.
+- A11 pgcrypto pgp — sibling decompression bomb class.
+- Companion: `src/common/pg_lzcompress.c.md`.
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=6`

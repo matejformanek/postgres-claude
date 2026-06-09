@@ -88,6 +88,15 @@ None — all inline static.
   unchecked-overflow paths. The PG codebase passes a clean Coverity
   scan — these primitives are part of why.
 
+## Cross-refs
+- A7 corpus finding: `knowledge/subsystems/utils.md` — `numeric.c`
+  and `formatting.c` integer-overflow surface; this header is the
+  primitive layer those callers must use.
+- A5 corpus finding: `knowledge/subsystems/common.md` —
+  arithmetic-safety idiom across `src/common/`.
+- `source/src/include/c.h` — `i64abs` / `PG_INT64_MIN` macros
+  these helpers depend on.
+
 ## Potential issues
 - [ISSUE-correctness: pg_abs_s64(PG_INT64_MIN) special case is correct,
   but any backend code path that does `(uint64) -x` or `abs(x)` directly

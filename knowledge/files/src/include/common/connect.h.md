@@ -26,9 +26,25 @@ authentication.
 
 ## Phase D notes
 
-[ISSUE-undocumented-invariant: callers must run this AFTER auth
-but BEFORE any other query — header doesn't spell that out (low)]
-The wrong ordering (running a query first, then setting the
+## Issues
+
+[ISSUE-undocumented-invariant: callers must run this AFTER auth but
+BEFORE any other query — header doesn't spell that out (low)] The
+wrong ordering (running a query first, then setting the
 search_path) defeats the protection. All in-tree callers do it
 correctly, but a new caller copying the macro name without reading
 the comment could get it wrong.
+
+[ISSUE-trust-boundary: header explicitly notes "not suitable in
+SECURITY DEFINER functions" — but the macro name
+`ALWAYS_SECURE_SEARCH_PATH_SQL` is misleading and could lure a
+backend-side author into pasting it into a SECURITY DEFINER body
+(low)] The comment in lines 17-23 documents the limitation but the
+NAME does not.
+
+## Cross-refs
+
+- A2 libpq stack — every FE tool consumes this immediately
+  post-connect.
+- Companion: each tool's `main.c` (no .c for this header — it is
+  macro-only).

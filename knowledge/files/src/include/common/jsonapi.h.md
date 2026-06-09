@@ -78,9 +78,9 @@ inside the API struct.
 
 - The `setJsonLexContextOwnsTokens` machinery exists *because*
   libpq must not leak on parse failure — the header comment
-  explicitly cites this as a long-lived-client concern.
-  Backend memcontext cleanup makes the same machinery less
-  critical for backend callers.
+  explicitly cites this as a long-lived-client concern
+  (`jsonapi.h:233-248`). [from-comment] Backend memcontext cleanup
+  makes the same machinery less critical for backend callers.
 - `JsonLexContext.strval` is the unescape buffer; setting
   `need_escapes=false` skips the buffer allocation but means
   field names / scalar string values are NOT available to
@@ -88,7 +88,53 @@ inside the API struct.
 - `JSON_INCOMPLETE` is only returned by the incremental parser,
   never by `pg_parse_json` — but the same enum is shared, so
   callers must know which entry they invoked.
+- **Recursive-vs-incremental depth handling asymmetry** (A5 finding).
+  The header exposes *two* parse entry points side-by-side
+  (`pg_parse_json` and `pg_parse_json_incremental`,
+  `jsonapi.h:174-181`). They guard against deeply-nested input via
+  DIFFERENT mechanisms:
+  - The **incremental** parser uses an explicit stack array capped
+    at `JSON_TD_MAX_STACK = 6400`
+    (`source/src/common/jsonapi.c:431`), returning
+    `JSON_NESTING_TOO_DEEP` past that
+    (`jsonapi.c:953, 984; jsonapi.h:39`). [verified-by-code]
+  - The **recursive** `pg_parse_json` relies on C-stack recursion
+    plus `check_stack_depth()` at two sites
+    (`jsonapi.c:1406, 1523`). [verified-by-code]
+    `check_stack_depth()` is a **NO-OP in frontend builds** of
+    libpq/psql/pg_dump (it's defined as a backend-only function).
+    A frontend caller of `pg_parse_json` on adversarial JSON input
+    therefore has no nesting cap and will SIGSEGV the client on
+    deeply nested input. Backend callers are protected.
+  - Mitigation in practice: backend SQL JSON entry points all use
+    the recursive parser via callers that run inside a transaction
+    where `check_stack_depth()` is real; libpq's JSON consumers
+    (e.g. `PQexecParams` JSON-typed parameters? no — libpq does
+    NOT currently parse JSON results) avoid this footgun by
+    convention, not by API design.
+- **A7/A8 backend recursive-parser stack-depth concern.** Same
+  asymmetry: backend code in `tsvectorrecv`, `tsqueryrecv`,
+  `multirange_recv`, `record_recv` follows the same "recursive
+  descent + `check_stack_depth()`" pattern. The pattern is *safe*
+  in backend (limit is `max_stack_depth` GUC, default 2 MB) but
+  the JSON entry point is shared frontend/backend and therefore
+  needs the asymmetry documented.
+
+## Cross-refs
+
+- `source/src/common/jsonapi.c` — the implementation; both depth
+  caps live there.
+- A5 corpus finding: `knowledge/subsystems/common.md` recursive
+  jsonapi entry — this header is the API host.
+- A7 corpus finding: `knowledge/subsystems/utils.md`
+  tsvector/tsquery/multirange/record recv stack-depth — the
+  recursive-parser pattern echoes across backend.
 
 ## Potential issues
 
-None at the header level.
+- [ISSUE-trust-boundary: `pg_parse_json` (recursive) depends on
+  `check_stack_depth()` which is a no-op in frontend builds — a
+  libpq/psql/pg_dump linker of jsonapi on adversarial deeply-nested
+  JSON can SIGSEGV; only the incremental entry point has an
+  explicit `JSON_TD_MAX_STACK=6400` cap. Header exposes both
+  entry points without making the asymmetry obvious. (medium)]

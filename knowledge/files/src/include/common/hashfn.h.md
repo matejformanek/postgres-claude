@@ -47,6 +47,24 @@ None.
   hash_combine(b, a)`. Important for callers iterating tuple columns.
 - **Same hash-flooding caveat as hashfn.c** — no per-process keying.
 
-## Potential issues
-- [ISSUE-stale-todo: `#define oid_hash uint32_hash /* Remove me
-  eventually */` (hashfn.h:59) has been there since 2017. (low)]
+## Cross-refs
+- Stable impl: `knowledge/files/src/common/hashfn.c.md`.
+- Unstable companion: `knowledge/files/src/include/common/hashfn_unstable.h.md`.
+- Hash-collision DoS: A11 / A13 / A14 echo this in pgcrypto and
+  fuzzystrmatch contexts. See `knowledge/issues/pgcrypto.md` and
+  `knowledge/issues/contrib/fuzzystrmatch.md`.
+
+## Issues
+1. `[ISSUE-documentation: header doesn't declare "stable, on-disk safe"
+   contract; reviewers must infer from companion-header naming
+   (likely)]` — `source/src/include/common/hashfn.h:1-119`.
+2. `[ISSUE-audit-gap: no header-level distinction between
+   security-grade vs general-purpose hash; murmurhash32/64 inline
+   helpers are not security-grade and have no warning (maybe)]` —
+   `source/src/include/common/hashfn.h:91-117`.
+3. `[ISSUE-stale-todo: \`#define oid_hash uint32_hash /* Remove me
+   eventually */\` has been there since 2017 (nit)]` —
+   `source/src/include/common/hashfn.h:59`.
+4. `[ISSUE-defense-in-depth: no per-process keying; hash-flood DoS
+   surface on attacker-controlled inputs to dynahash tables (maybe)]` —
+   `source/src/include/common/hashfn.h:23`.

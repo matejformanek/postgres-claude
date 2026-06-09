@@ -2072,3 +2072,27 @@ grep '| deep-read |' progress/files-examined.md
 | src/backend/access/rmgrdesc/seqdesc.c | 2026-06-09 | 4b0bf0788b0 | read | pg-file-backfiller | knowledge/files/src/backend/access/rmgrdesc/seqdesc.c.md | rmgrdesc cloud sweep; single SEQ_LOG opcode; relation locator render |
 | src/backend/access/rmgrdesc/smgrdesc.c | 2026-06-09 | 4b0bf0788b0 | read | pg-file-backfiller | knowledge/files/src/backend/access/rmgrdesc/smgrdesc.c.md | rmgrdesc cloud sweep; CREATE/TRUNCATE; relpathperm().str by-value idiom |
 | src/backend/access/rmgrdesc/tblspcdesc.c | 2026-06-09 | 4b0bf0788b0 | read | pg-file-backfiller | knowledge/files/src/backend/access/rmgrdesc/tblspcdesc.c.md | rmgrdesc cloud sweep; CREATE (symlink path) / DROP |
+
+<!-- a16-include-common-port 2026-06-09 — foreground sweep #16 (Phase A); 22 NEW port docs + 50 enriched common docs via 4 parallel general-purpose agents -->
+| src/include/port/aix.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/aix.h.md | A16; AIX platform shim |
+| src/include/port/atomics.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/atomics.h.md | A16; backend concurrency primitives |
+| src/include/port/cygwin.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/cygwin.h.md | A16; Cygwin platform shim |
+| src/include/port/darwin.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/darwin.h.md | A16; macOS platform shim |
+| src/include/port/freebsd.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/freebsd.h.md | A16; FreeBSD platform shim |
+| src/include/port/linux.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/linux.h.md | A16; Linux platform shim |
+| src/include/port/netbsd.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/netbsd.h.md | A16; NetBSD platform shim |
+| src/include/port/openbsd.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/openbsd.h.md | A16; OpenBSD platform shim |
+| src/include/port/pg_bitutils.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/pg_bitutils.h.md | A16; popcount/ctz/clz dispatch |
+| src/include/port/pg_bswap.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/pg_bswap.h.md | A16; byte-swap abstractions |
+| src/include/port/pg_cpu.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/pg_cpu.h.md | A16; CPU dispatch |
+| src/include/port/pg_crc32c.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/pg_crc32c.h.md | A16; CRC32C w/ SSE4.2/Arm/fallback |
+| src/include/port/pg_getopt_ctx.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/pg_getopt_ctx.h.md | A16; re-entrant getopt |
+| src/include/port/pg_iovec.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/pg_iovec.h.md | A16; iovec/readv-writev (storage-aio) |
+| src/include/port/pg_lfind.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/pg_lfind.h.md | A16; SIMD linear find |
+| src/include/port/pg_numa.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/pg_numa.h.md | A16; NUMA topology query |
+| src/include/port/pg_pthread.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/pg_pthread.h.md | A16; pthread abstraction |
+| src/include/port/simd.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/simd.h.md | A16; Vector8/Vector32 dispatch |
+| src/include/port/solaris.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/solaris.h.md | A16; Solaris platform shim |
+| src/include/port/win32.h | 2026-06-09 | 4b0bf0788b0 | read | include-port-a16 | knowledge/files/src/include/port/win32.h.md | A16; Windows base shim |
+| src/include/port/win32_port.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/win32_port.h.md | A16; Windows port (signal/spawn/fsync=_commit) |
+| src/include/port/win32ntdll.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-port-a16 | knowledge/files/src/include/port/win32ntdll.h.md | A16; Windows NT DLL (proper FlushBuffers) |

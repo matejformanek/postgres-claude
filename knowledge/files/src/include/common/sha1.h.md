@@ -19,16 +19,36 @@ Constants for SHA-1 (`SHA1_DIGEST_LENGTH = 20`, `SHA1_BLOCK_SIZE =
 
 ## Phase D notes
 
-SHA-1 is broken; PG uses it only as a building block inside
-`pg_cryptohash` (never as the SCRAM hash; that's SHA-256). No public
-`pg_sha1_*` typedef leaks here — those live in `sha1_int.h` for the
-fallback impl only.
+- **SHA-1 is cryptographically broken.** The header still exposes its
+  constants because `pg_cryptohash_type` includes `PG_SHA1` (and
+  hence the legacy MD5-SCRAM-style code paths and any extension
+  passing `PG_SHA1`). No header-level deprecation note steers callers
+  away.
+- **Bare-state vs opaque-ctx split.** Unlike OpenSSL's
+  `EVP_MD_CTX`, the in-tree fallback's `pg_sha1_ctx` lives in
+  `src/common/sha1_int.h` (`_int.h` = internal); only the constants
+  leak here. That's correct compartmentalization. But the lack of a
+  `pg_sha1_*` typedef means callers cannot embed a SHA-1 ctx on the
+  stack and scrub it themselves — they must go through cryptohash,
+  which is good.
+- **Header is constant-only; zero state, zero secrets.** Trust-boundary
+  surface is purely the cryptohash dispatch (see cryptohash.h.md).
 
 ## Cross-refs
 
 - Internal state header: `knowledge/files/src/common/sha1_int.h.md`.
 - Fallback impl: `knowledge/files/src/common/sha1.c.md`.
+- Dispatcher: `knowledge/files/src/include/common/cryptohash.h.md`.
+
+## Issues
+
+1. `[ISSUE-documentation: no deprecation note that SHA-1 is broken
+   for collision resistance and should not be used in new MAC /
+   signature constructions (nit)]` — `source/src/include/common/sha1.h:1-21`.
+2. `[ISSUE-defense-in-depth: PG_SHA1 still routable through cryptohash
+   API; a deprecated-runtime warning at cryptohash_create(PG_SHA1)
+   would surface accidental use (nit)]` — `source/src/include/common/sha1.h:17`.
 
 ## Tally
 
-`[verified-by-code]=1`
+`[verified-by-code]=2`

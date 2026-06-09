@@ -32,5 +32,44 @@ Callback-driven JSON backup-manifest parser. `pg_verifybackup` and `pg_combineba
 
 See `parse_manifest.c.md` — every field that becomes a callback argument crosses the trust boundary.
 
+## Issues
+
+[ISSUE-trust-boundary: SHA-256 stored in `per_file_cb`'s
+`checksum_payload` (`parse_manifest.h:29-32`) provides INTEGRITY,
+not AUTHENTICITY — an attacker who controls the bytes of the
+manifest also controls the SHA. A5's `common.md` finding: the
+header presents `checksum_type`/`checksum_length`/`checksum_payload`
+as if they were a security feature, but absent a signed manifest
+or trusted distribution channel, they only detect accidental
+corruption (high)] The header carries no warning. Cross-link to
+checksum_helper.h's explicit "CRC-32C is not crypto" comment —
+parse_manifest.h should echo the same statement for the whole
+manifest.
+
+[ISSUE-trust-boundary: `error_cb` is documented `pg_attribute_printf(2,3)`
+and "must NOT return" by convention (`parse_manifest.h:36-37`) —
+but the typedef has no `noreturn` annotation. A buggy registrant
+returning normally leaves the parser in an inconsistent state
+(medium)]
+
+[ISSUE-trust-boundary: `json_parse_manifest_incremental_chunk`
+(`parse_manifest.h:52-54`) — chunk-by-chunk parser; underlying
+JSON parser is recursive. A5 + A8 jsonapi finding: deeply nested
+JSON inputs from an attacker-controlled manifest could exhaust the
+parser stack (high)] Cross-link: A8 jsonapi recursion echo.
+
+[ISSUE-undocumented-invariant: `pathname` passed to `per_file_cb`
+(`parse_manifest.h:30`) is consumer-trusted to be a relative,
+non-traversing path — but the parser does NOT enforce this (low)]
+A manifest containing `"path": "../../../etc/passwd"` reaches the
+callback verbatim; pg_verifybackup callers must filter.
+
+## Cross-refs
+
+- A5 `common.md` — SHA-256 = integrity not authenticity.
+- A8 `jsonapi.h` — recursion echo.
+- A6 `pg_verifybackup` / `pg_combinebackup` — primary consumers.
+- Companion: `src/common/parse_manifest.c.md`.
+
 ## Confidence tag tally
 `[verified-by-code]=6`

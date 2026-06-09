@@ -37,6 +37,24 @@ frontend's case conversion and the backend's would manifest as an
 identifier folding bug. saslprep normalisation lives in
 `unicode_norm.c`, not here.
 
+- **A13/A14 cross-Unicode-version index hazard.** `citext` and
+  `pg_trgm` (when used with `DEFAULT_COLLATION_OID` and the
+  builtin Unicode provider) call into these case-folding paths to
+  build comparison/match keys. If a major PG upgrade regenerates
+  `unicode_case_table.h` from a newer Unicode version, the case
+  fold of a small set of codepoints (Turkish dotless-i, exotic
+  Cherokee/Georgian, etc.) can change — invalidating existing
+  index entries. REINDEX is the only safe remediation; the header
+  has no way to surface that constraint.
+
+## Cross-refs
+
+- `source/src/common/unicode_case.c` — implementation.
+- `source/src/include/common/unicode_case_table.h` — generated
+  data (Unicode 17.0 currently).
+- A13 corpus finding: `knowledge/files/contrib/citext/...`.
+- A14 corpus finding: `knowledge/files/contrib/pg_trgm/...`.
+
 ## Potential issues
 
-None at the header level.
+None at the header level — declaration-only.

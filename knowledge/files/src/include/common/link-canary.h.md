@@ -23,7 +23,35 @@ One-symbol API used by libpq to assert it was linked against the **frontend** co
 ## Phase D notes
 
 - Pure build/link sanity-check; no trust-boundary surface.
-- If libpq's startup ever skips the canary assertion, a subtle ABI mix could resurrect (e.g. backend `palloc` vs frontend `malloc` mismatch on `pfree`). [inferred] [maybe — Phase D, see ISSUE register]
+- If libpq's startup ever skips the canary assertion, a subtle ABI
+  mix could resurrect (e.g. backend `palloc` vs frontend `malloc`
+  mismatch on `pfree`). [inferred]
+- The mechanism: impl defines `pg_link_canary_is_frontend()` two
+  different ways depending on `#ifdef FRONTEND`, and the chosen
+  translation unit is link-determined. If libpq is linked but
+  somehow resolves the symbol to the backend's copy at runtime
+  (LD_PRELOAD, conflicting RTLD_GLOBAL, dlopen mistake), the
+  assertion in libpq's PQconnect path catches it.
+- **Nothing here gives the caller a way to be loud about
+  failure** — `pg_link_canary_is_frontend` returns bool; libpq
+  decides what to do. A header-level `pg_assert_link_canary()`
+  macro could short-circuit init.
+
+## Cross-refs
+
+- Impl: `knowledge/files/src/common/link-canary.c.md`.
+- libpq use: `src/interfaces/libpq/fe-connect.c::PQconnectStart`.
+
+## Issues
+
+1. `[ISSUE-documentation: header lacks any pointer to "where this
+   gets checked" — a new contributor adding a libpq-like build
+   product needs to read the impl to discover the assertion
+   convention (nit)]` — `source/src/include/common/link-canary.h:15`.
+2. `[ISSUE-defense-in-depth: API returns bool but offers no helper
+   for "assert and abort with a coherent diagnostic" — every
+   consumer reinvents the check (nit)]` —
+   `source/src/include/common/link-canary.h:15`.
 
 ## Confidence tag tally
-`[from-comment]=1 [verified-by-code]=1 [inferred]=1`
+`[from-comment]=1 [verified-by-code]=1 [inferred]=2`
