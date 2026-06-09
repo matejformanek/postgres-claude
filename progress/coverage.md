@@ -27,14 +27,14 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-05 (post A11 contrib top-4 sweep + A11 fe_utils cloud sweep), source pin `4b0bf0788b0`.
+Refreshed 2026-06-09 (post PR #91 AIO/rmgrdesc + 5 overnight cloud cycles 2026-06-06 → 2026-06-09), source pin `4b0bf0788b0`.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **1,484** (+51 from BOTH A11 sweeps — 33 from contrib top-4 foreground + 18 from cloud fe_utils backfill; cumulative +567 since 2026-06-02 morning).
-- Registry rows in `progress/files-examined.md`: **1,605** (+54 source files documented).
-- **Top-line coverage: ~57.9%** of source files have a per-file doc (up from 55.9%).
+- Per-file docs under `knowledge/files/`: **1,541** (recomputed via `find`; +57 since 2026-06-05's 1,484; cumulative +624 since 2026-06-02 morning).
+- Registry rows in `progress/files-examined.md`: **1,698** (+93).
+- **Top-line coverage: ~60.1%** of source files have a per-file doc (up from 57.9%).
 
 The doc count exceeds the registered-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
