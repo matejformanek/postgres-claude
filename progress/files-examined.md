@@ -1835,3 +1835,61 @@ grep '| deep-read |' progress/files-examined.md
 | contrib/file_fdw/file_fdw.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/file_fdw/file_fdw.c.md | A12; in-tree path-traversal class |
 | contrib/auth_delay/auth_delay.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/auth_delay/auth_delay.c.md | A12; failure-only delay = timing oracle |
 | contrib/sslinfo/sslinfo.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sslinfo/sslinfo.c.md | A12; TLS connection introspection |
+
+<!-- a13-contrib-datatypes 2026-06-09 — foreground sweep #13 (Phase A); 56 source files via 4 parallel general-purpose agents; contrib datatypes + index-AM opclasses -->
+| contrib/hstore/hstore.h | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/hstore/hstore.h.md | A13; hstore varlena format |
+| contrib/hstore/hstore_compat.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/hstore/hstore_compat.c.md | A13; pre-PG-8.4 compat — forged HS_FLAG_NEWVERSION bypass |
+| contrib/hstore/hstore_gin.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/hstore/hstore_gin.c.md | A13; GIN opclass |
+| contrib/hstore/hstore_gist.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/hstore/hstore_gist.c.md | A13; GiST CRC32 signature collisions |
+| contrib/hstore/hstore_io.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/hstore/hstore_io.c.md | A13; I/O — hstore_recv DoS surface |
+| contrib/hstore/hstore_op.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/hstore/hstore_op.c.md | A13; operators + modifiers |
+| contrib/hstore/hstore_subs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/hstore/hstore_subs.c.md | A13; subscripting |
+| contrib/ltree/ltree.h | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/ltree.h.md | A13; ltree/lquery/ltxtquery varlena |
+| contrib/ltree/ltree_io.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/ltree_io.c.md | A13; parse_lquery 400000x memory amplification |
+| contrib/ltree/lquery_op.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/lquery_op.c.md | A13; checkCond catastrophic backtracking |
+| contrib/ltree/ltree_op.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/ltree_op.c.md | A13; ltree operators |
+| contrib/ltree/ltxtquery_io.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/ltxtquery_io.c.md | A13; ltxtquery parser + deparser |
+| contrib/ltree/ltxtquery_op.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/ltxtquery_op.c.md | A13; ltxtquery evaluation |
+| contrib/ltree/ltree_gist.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/ltree_gist.c.md | A13; GiST opclass; siglen=64 default too small |
+| contrib/ltree/_ltree_gist.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/_ltree_gist.c.md | A13; ltree[] GiST; per-INSERT CPU DoS |
+| contrib/ltree/_ltree_op.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/_ltree_op.c.md | A13; ltree[] operators |
+| contrib/ltree/crc32.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/crc32.c.md | A13; locale-change breaks GiST signatures |
+| contrib/ltree/crc32.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/ltree/crc32.h.md | A13 |
+| contrib/btree_gist/btree_gist.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_gist.md | A13; combined .c+.h |
+| contrib/btree_gist/btree_gist.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_gist.md | A13; combined .c+.h |
+| contrib/btree_gist/btree_utils_num.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_utils_num.md | A13; combined .c+.h |
+| contrib/btree_gist/btree_utils_num.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_utils_num.md | A13; combined .c+.h |
+| contrib/btree_gist/btree_utils_var.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_utils_var.md | A13; latent collation footgun |
+| contrib/btree_gist/btree_utils_var.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_utils_var.md | A13; combined .c+.h |
+| contrib/btree_gist/btree_bit.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_bit.c.md | A13 |
+| contrib/btree_gist/btree_bool.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_bool.c.md | A13 |
+| contrib/btree_gist/btree_bytea.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_bytea.c.md | A13 |
+| contrib/btree_gist/btree_cash.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_cash.c.md | A13 |
+| contrib/btree_gist/btree_date.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_date.c.md | A13 |
+| contrib/btree_gist/btree_enum.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_enum.c.md | A13; OID stability footgun |
+| contrib/btree_gist/btree_float4.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_float4.c.md | A13; NaN divergence vs nbtree |
+| contrib/btree_gist/btree_float8.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_float8.c.md | A13; NaN divergence vs nbtree |
+| contrib/btree_gist/btree_inet.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_inet.c.md | A13; lossy double scalar; *recheck=true |
+| contrib/btree_gist/btree_int2.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_int2.c.md | A13 |
+| contrib/btree_gist/btree_int4.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_int4.c.md | A13 |
+| contrib/btree_gist/btree_int8.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_int8.c.md | A13 |
+| contrib/btree_gist/btree_interval.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_interval.c.md | A13 |
+| contrib/btree_gist/btree_macaddr.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_macaddr.c.md | A13 |
+| contrib/btree_gist/btree_macaddr8.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_macaddr8.c.md | A13 |
+| contrib/btree_gist/btree_numeric.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_numeric.c.md | A13; trnc=false load-bearing |
+| contrib/btree_gist/btree_oid.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_oid.c.md | A13 |
+| contrib/btree_gist/btree_text.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_text.c.md | A13; trnc=false saves text indexes |
+| contrib/btree_gist/btree_time.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_time.c.md | A13 |
+| contrib/btree_gist/btree_ts.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_ts.c.md | A13 |
+| contrib/btree_gist/btree_uuid.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gist/btree_uuid.c.md | A13; WORDS_BIGENDIAN assumption |
+| contrib/intarray/_int.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_int.md | A13; combined .h+_int_tool.c |
+| contrib/intarray/_int_tool.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_int.md | A13; combined .h+_int_tool.c |
+| contrib/intarray/_int_bool.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_int_bool.md | A13; bool query parser; ~3GB DoS |
+| contrib/intarray/_int_gin.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_int_gin.md | A13; GIN opclass |
+| contrib/intarray/_int_gist.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_int_gist.md | A13; GiST opclass |
+| contrib/intarray/_int_op.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_int_op.md | A13; array operators |
+| contrib/intarray/_int_selfuncs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_int_selfuncs.md | A13; selectivity functions |
+| contrib/intarray/_intbig_gist.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/intarray/_intbig_gist.md | A13; intbig GiST; trivial bit-collisions |
+| contrib/tablefunc/tablefunc.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/tablefunc/tablefunc.md | A13; CRITICAL — connectby_text SQL injection |
+| contrib/citext/citext.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/citext/citext.md | A13; collation asymmetry |
+| contrib/btree_gin/btree_gin.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gin/btree_gin.md | A13; GIN opclass framework |
