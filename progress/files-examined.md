@@ -1939,3 +1939,120 @@ grep '| deep-read |' progress/files-examined.md
 | contrib/fuzzystrmatch/fuzzystrmatch.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/fuzzystrmatch/fuzzystrmatch.c.md | A14; soundex / metaphone / levenshtein |
 | contrib/fuzzystrmatch/dmetaphone.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/fuzzystrmatch/dmetaphone.c.md | A14; no length cap, no CFI in main loop |
 | contrib/fuzzystrmatch/daitch_mokotoff.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/fuzzystrmatch/daitch_mokotoff.c.md | A14; D-M soundex variant |
+
+<!-- a15-include-finishing 2026-06-09 — foreground sweep #15 (Phase A); 115 header files via 4 parallel general-purpose agents; src/include/utils + storage + lib + executor finishing pass -->
+| src/include/utils/acl.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/acl.h.md | A15; utils header |
+| src/include/utils/aclchk_internal.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/aclchk_internal.h.md | A15; utils header |
+| src/include/utils/array.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/array.md | A15; utils header |
+| src/include/utils/arrayaccess.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/arrayaccess.md | A15; utils header |
+| src/include/utils/ascii.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/ascii.h.md | A15; utils header |
+| src/include/utils/backend_progress.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/backend_progress.md | A15; utils header |
+| src/include/utils/backend_status.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/backend_status.md | A15; utils header |
+| src/include/utils/builtins.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/builtins.md | A15; utils header |
+| src/include/utils/bytea.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/bytea.md | A15; utils header |
+| src/include/utils/cash.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/cash.md | A15; utils header |
+| src/include/utils/conffiles.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/conffiles.h.md | A15; utils header |
+| src/include/utils/datetime.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/datetime.md | A15; utils header |
+| src/include/utils/datum.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/datum.md | A15; utils header |
+| src/include/utils/dsa.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/dsa.md | A15; utils header |
+| src/include/utils/expandeddatum.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/expandeddatum.md | A15; utils header |
+| src/include/utils/expandedrecord.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/expandedrecord.md | A15; utils header |
+| src/include/utils/float.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/float.md | A15; utils header |
+| src/include/utils/fmgrtab.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/fmgrtab.md | A15; utils header |
+| src/include/utils/formatting.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/formatting.h.md | A15; utils header |
+| src/include/utils/freepage.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/freepage.md | A15; utils header |
+| src/include/utils/funccache.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/funccache.md | A15; utils header |
+| src/include/utils/geo_decls.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/geo_decls.md | A15; utils header |
+| src/include/utils/guc.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/guc.h.md | A15; utils header |
+| src/include/utils/guc_hooks.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/guc_hooks.h.md | A15; utils header |
+| src/include/utils/guc_tables.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/guc_tables.h.md | A15; utils header |
+| src/include/utils/help_config.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/help_config.h.md | A15; utils header |
+| src/include/utils/hsearch.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/hsearch.md | A15; utils header |
+| src/include/utils/index_selfuncs.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/index_selfuncs.md | A15; utils header |
+| src/include/utils/inet.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/inet.md | A15; utils header |
+| src/include/utils/injection_point.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/injection_point.h.md | A15; utils header |
+| src/include/utils/json.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/json.md | A15; utils header |
+| src/include/utils/jsonfuncs.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/jsonfuncs.md | A15; utils header |
+| src/include/utils/memdebug.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/memdebug.md | A15; utils header |
+| src/include/utils/multirangetypes.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/multirangetypes.md | A15; utils header |
+| src/include/utils/numeric.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/numeric.md | A15; utils header |
+| src/include/utils/pg_crc.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pg_crc.md | A15; utils header |
+| src/include/utils/pg_locale.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pg_locale.h.md | A15; utils header |
+| src/include/utils/pg_locale_c.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pg_locale_c.h.md | A15; utils header |
+| src/include/utils/pg_lsn.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pg_lsn.md | A15; utils header |
+| src/include/utils/pg_rusage.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pg_rusage.md | A15; utils header |
+| src/include/utils/pgstat_internal.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pgstat_internal.md | A15; utils header |
+| src/include/utils/pgstat_kind.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pgstat_kind.md | A15; utils header |
+| src/include/utils/pidfile.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/pidfile.h.md | A15; utils header |
+| src/include/utils/portal.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/portal.md | A15; utils header |
+| src/include/utils/ps_status.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/ps_status.h.md | A15; utils header |
+| src/include/utils/queryenvironment.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/queryenvironment.md | A15; utils header |
+| src/include/utils/rangetypes.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/rangetypes.md | A15; utils header |
+| src/include/utils/regproc.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/regproc.h.md | A15; utils header |
+| src/include/utils/rel.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/rel.md | A15; utils header |
+| src/include/utils/relfilenumbermap.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/relfilenumbermap.md | A15; utils header |
+| src/include/utils/relmapper.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/relmapper.md | A15; utils header |
+| src/include/utils/relptr.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/relptr.md | A15; utils header |
+| src/include/utils/reltrigger.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/reltrigger.md | A15; utils header |
+| src/include/utils/resowner.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/resowner.md | A15; utils header |
+| src/include/utils/rls.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/rls.h.md | A15; utils header |
+| src/include/utils/ruleutils.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/ruleutils.md | A15; utils header |
+| src/include/utils/sampling.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/sampling.md | A15; utils header |
+| src/include/utils/selfuncs.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/selfuncs.md | A15; utils header |
+| src/include/utils/sharedtuplestore.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/sharedtuplestore.md | A15; utils header |
+| src/include/utils/skipsupport.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/skipsupport.md | A15; utils header |
+| src/include/utils/timeout.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/timeout.md | A15; utils header |
+| src/include/utils/tzparser.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/tzparser.h.md | A15; utils header |
+| src/include/utils/usercontext.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/usercontext.h.md | A15; utils header |
+| src/include/utils/uuid.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/uuid.md | A15; utils header |
+| src/include/utils/varbit.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/varbit.md | A15; utils header |
+| src/include/utils/varlena.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/varlena.md | A15; utils header |
+| src/include/utils/wait_classes.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/wait_classes.md | A15; utils header |
+| src/include/utils/wait_event.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/wait_event.md | A15; utils header |
+| src/include/utils/xid8.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/xid8.md | A15; utils header |
+| src/include/utils/xml.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-1 | knowledge/files/src/include/utils/xml.md | A15; utils header |
+| src/include/storage/block.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/block.h.md | A15; storage core header |
+| src/include/storage/buf.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/buf.h.md | A15; storage core header |
+| src/include/storage/bufmgr.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/bufmgr.h.md | A15; storage core header |
+| src/include/storage/condition_variable.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/condition_variable.h.md | A15; storage core header |
+| src/include/storage/indexfsm.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/indexfsm.h.md | A15; storage core header |
+| src/include/storage/io_worker.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/io_worker.h.md | A15; storage core header |
+| src/include/storage/itemid.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/itemid.h.md | A15; storage core header |
+| src/include/storage/large_object.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/large_object.h.md | A15; storage core header |
+| src/include/storage/lmgr.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/lmgr.h.md | A15; storage core header |
+| src/include/storage/lockdefs.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/lockdefs.h.md | A15; storage core header |
+| src/include/storage/locktag.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/locktag.h.md | A15; storage core header |
+| src/include/storage/lwlocklist.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/lwlocklist.h.md | A15; storage core header |
+| src/include/storage/off.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/off.h.md | A15; storage core header |
+| src/include/storage/pg_sema.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/pg_sema.h.md | A15; storage core header |
+| src/include/storage/pg_shmem.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/pg_shmem.h.md | A15; storage core header |
+| src/include/storage/predicate.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/predicate.h.md | A15; storage core header |
+| src/include/storage/predicate_internals.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/predicate_internals.h.md | A15; storage core header |
+| src/include/storage/procnumber.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/procnumber.h.md | A15; storage core header |
+| src/include/storage/read_stream.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/read_stream.h.md | A15; storage core header |
+| src/include/storage/relfilelocator.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/relfilelocator.h.md | A15; storage core header |
+| src/include/storage/s_lock.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/s_lock.h.md | A15; storage core header |
+| src/include/storage/spin.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/storage/spin.h.md | A15; storage core header |
+| src/include/lib/binaryheap.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/binaryheap.h.md | A15; lib data structure header |
+| src/include/lib/bipartite_match.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/bipartite_match.h.md | A15; lib data structure header |
+| src/include/lib/bloomfilter.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/bloomfilter.h.md | A15; lib data structure header |
+| src/include/lib/dshash.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/dshash.h.md | A15; lib data structure header |
+| src/include/lib/hyperloglog.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/hyperloglog.h.md | A15; lib data structure header |
+| src/include/lib/ilist.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/ilist.h.md | A15; lib data structure header |
+| src/include/lib/integerset.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/integerset.h.md | A15; lib data structure header |
+| src/include/lib/knapsack.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/knapsack.h.md | A15; lib data structure header |
+| src/include/lib/pairingheap.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/pairingheap.h.md | A15; lib data structure header |
+| src/include/lib/qunique.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/qunique.h.md | A15; lib data structure header |
+| src/include/lib/radixtree.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/radixtree.h.md | A15; lib data structure header |
+| src/include/lib/rbtree.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/rbtree.h.md | A15; lib data structure header |
+| src/include/lib/simplehash.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/simplehash.h.md | A15; lib data structure header |
+| src/include/lib/sort_template.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/sort_template.h.md | A15; lib data structure header |
+| src/include/lib/stringinfo.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-4 | knowledge/files/src/include/lib/stringinfo.h.md | A15; lib data structure header |
+| src/include/executor/execAsync.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/execAsync.md | A15; executor support header |
+| src/include/executor/execParallel.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/execParallel.md | A15; executor support header |
+| src/include/executor/execScan.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/execScan.md | A15; executor support header |
+| src/include/executor/execdebug.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/execdebug.md | A15; executor support header |
+| src/include/executor/hashjoin.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/hashjoin.md | A15; executor support header |
+| src/include/executor/instrument_node.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/instrument_node.md | A15; executor support header |
+| src/include/executor/spi.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/spi.md | A15; executor support header |
+| src/include/executor/tqueue.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-finishing-a15-3 | knowledge/files/src/include/executor/tqueue.md | A15; executor support header |
