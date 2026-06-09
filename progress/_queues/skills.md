@@ -6,16 +6,16 @@ last-rerun date in this file is > 30 days old go back to `[pending]`.
 
 ## Entries
 
-[pending] locking last_passrate=never
-[pending] memory-contexts last_passrate=never
-[pending] memory-keeping last_passrate=never
-[pending] parser-and-nodes last_passrate=never
-[pending] patch-submission last_passrate=never
-[pending] pg-claude last_passrate=never
-[pending] replication-overview last_passrate=never
-[pending] review-checklist last_passrate=never
-[pending] testing last_passrate=never
-[pending] wal-and-xlog last_passrate=never
+[done:2026-06-09] locking last_passrate=100% reran=2026-06-09
+[done:2026-06-09] memory-contexts last_passrate=100% reran=2026-06-09
+[done:2026-06-09] memory-keeping last_passrate=100% reran=2026-06-09
+[done:2026-06-09] parser-and-nodes last_passrate=100% reran=2026-06-09
+[done:2026-06-09] patch-submission last_passrate=100% reran=2026-06-09
+[done:2026-06-09] pg-claude last_passrate=100% reran=2026-06-09
+[done:2026-06-09] replication-overview last_passrate=96.3% reran=2026-06-09
+[done:2026-06-09] review-checklist last_passrate=100% reran=2026-06-09
+[done:2026-06-09] testing last_passrate=100% reran=2026-06-09
+[done:2026-06-09] wal-and-xlog last_passrate=100% reran=2026-06-09
 [done:2026-06-03] access-method-apis last_passrate=100% reran=2026-06-03
 [done:2026-06-06] build-and-run last_passrate=100% reran=2026-06-06
 [done:2026-06-06] catalog-conventions last_passrate=100% reran=2026-06-06
