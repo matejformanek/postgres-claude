@@ -62,7 +62,7 @@ sub-dir overviews); flagged with `>100%`.
 
 ---
 
-## src/include — 361 / 844 docs (42.8%)
+## src/include — 568 / 844 docs (67.3%, +207 from A15)
 
 Headers are the API surface and the principal source of invariant
 documentation (struct field comments, INV-* anchors). Coverage here
@@ -73,21 +73,22 @@ matters as much as `.c` files.
 | Subdir | Source | Docs | Coverage |
 |---|---:|---:|---:|
 | optimizer | 28 | 28 | 100.0% |
+| ~~lib~~ | 15 | 15 | 100.0% (DONE 2026-06-09, A15) |
 | postmaster | 15 | 14 | 93.3% |
+| storage | 69 | 61 | 88.4% (post-A15) |
 | rewrite | 9 | 7 | 77.8% |
 | commands | 43 | 33 | 76.7% |
 | nodes | 24 | 18 | 75.0% |
+| utils | 97 | 98 | 100%+ (post-A15) |
 | parser | 23 | 16 | 69.6% |
 | access | 94 | 63 | 67.0% |
 | tcop | 9 | 6 | 66.7% |
 
-### Mid gaps (workable in cloud)
+### Mid gaps
 
 | Subdir | Source | Docs | Coverage |
 |---|---:|---:|---:|
-| storage | 69 | 35 | 50.7% |
-| executor | 61 | 20 | 32.8% |
-| utils | 97 | 28 | 28.9% |
+| executor | 61 | 28 | 45.9% (post-A15; ~33 thin nodeXxx.h headers deferred to cloud) |
 | tsearch | 7 | 2 | 28.6% |
 | statistics | 4 | 1 | 25.0% |
 | regex | 5 | 1 | 20.0% |
@@ -99,6 +100,13 @@ matters as much as `.c` files.
 | **catalog** | 85 | 87 | 102.4% | A1 sweep landed 72 docs 2026-06-02 evening. |
 | **libpq** (src/include) | 20 | 20 | 100.0% | A2 sweep landed all 20 backend headers 2026-06-03. |
 
+### A15 landings (2026-06-09)
+
+- **utils** 28→98 docs (~73 new) via 3 parallel slices: A15-1 sec/locale/GUC (18); A15-2 types+memory+datum (~30); A15-3 backend-state (~25). 4 new registers: `knowledge/issues/include-utils.md` (~163 entries).
+- **storage** 39→61 docs (~22 new). Register: `knowledge/issues/include-storage.md` (~14 entries).
+- **lib** 0→15 docs (FULL DIR). Register: `knowledge/issues/include-lib.md` (~11 entries).
+- **executor** 20→28 docs (~8 SPI/parallel/async support); deferred ~33 `nodeXxx.h` plan-node 1-line decl headers to cloud. Register: `knowledge/issues/include-executor.md` (~11 entries).
+
 ### Big absolute gaps (high-priority foreground sweep candidates)
 
 | Subdir | Source | Docs | Coverage | Why |
@@ -106,7 +114,7 @@ matters as much as `.c` files.
 | **common** | 50 | 0 | 0.0% | Cross-backend shared helpers (cryptohash, scram, blkreffile, …) |
 | **port** | 47 | 0 | 0.0% | Cross-platform portability headers — `pg_iovec.h`, `pg_pthread.h`, etc. |
 | ~~**replication**~~ | 22 | 23 | 104.5% | **DONE 2026-06-04 (A8 sweep)** — 22 docs + 1 pre-existing headers.md; 98 issues in `knowledge/issues/include-replication.md`; output-plugin dlopen primitive identified |
-| **lib** | 15 | 0 | 0.0% | binaryheap, dshash, hyperloglog, pairingheap, simplehash, etc. |
+| ~~**lib**~~ | 15 | 15 | 100.0% | **DONE 2026-06-09 (A15 sweep)** — all 15 docs; 11 issues in `knowledge/issues/include-lib.md`. Headline: stringinfo is the central injection sink for A7/A13/A14 cluster. |
 | ~~**fe_utils**~~ | 16 | 16 | 100.0% | **DONE 2026-06-05 (headers sweep, cloud/pg-file-backfiller)** — all 16 `src/include/fe_utils/*.h` docs; +3 header-level issues in `knowledge/issues/fe_utils.md` |
 
 ### Low-priority
@@ -268,7 +276,8 @@ CRC32 + intarray mod-hash + pg_trgm mod-hash + bloom LCG).
 12. ~~**Foreground sweep #12** — contrib/ security-themed bundle~~ — **DONE 2026-06-09 (PR #99)** (28 docs / 30 files, ~153 issues; `knowledge/issues/{amcheck,pageinspect,pgstattuple,sepgsql,file_fdw,auth_delay,sslinfo}.md`). 4 parallel agents; 0 misdirection. Headlines summarized inline at "## contrib" above.
 13. ~~**Foreground sweep #13** — contrib/ datatypes + index-AMs~~ — **DONE 2026-06-09 (PR #100 — pending merge at A14 branch time)** (53 docs / 56 files, ~155 issues; `knowledge/issues/{hstore,ltree,btree_gist,intarray,tablefunc,citext,btree_gin}.md`). 4 parallel agents; 0 misdirection. **Headlines:** (1) **🚨 `tablefunc.connectby_text` SQL injection** — 5 of 6 identifier args interpolated raw via `appendStringInfo`; (2) **ltree `parse_lquery` ~400000× memory amplification** + `checkCond` regex-class catastrophic backtracker + `crc32.c` locale-change silently breaks GiST signatures; (3) **hstore forged `HS_FLAG_NEWVERSION` bypasses ALL validation** → controllable OOB-read; (4) **btree_gist float4/float8 NaN divergence vs nbtree** — `EXCLUDE USING gist (val WITH =)` permits duplicate NaN rows; (5) **intarray signature-tree trivial bit-collisions** (mod-hash siglen*8); (6) **citext collation asymmetry** (`=` DEFAULT-collation vs `<` INPUT-collation). **NEW corpus-wide clusters:** GiST-collision attacks on attacker data (4-module); text-to-SPI injection sinks (5-sweep cluster).
 14. ~~**Foreground sweep #14** — contrib/ remainder cleanup~~ — **DONE 2026-06-09 (this sweep)** (40 docs / 44 files, ~90 issues across 23 modules; `knowledge/issues/{pg_visibility,pg_buffercache,pg_freespacemap,pg_prewarm,pgrowlocks,pg_walinspect,pg_surgery,pg_overexplain,basebackup_to_shell,basic_archive,tsm_system_rows,tsm_system_time,lo,bloom,isn,seg,cube,earthdistance,unaccent,dict_xsyn,dict_int,pg_trgm,fuzzystrmatch}.md`). 4 parallel agents; 0 misdirection. **14 sweeps in a row.** Headlines summarized inline at "## contrib" above.
-15. **Next foreground candidates:** `src/interfaces/ecpg` (~127 files, low Phase D priority); `src/include` finishing pass (utils=70, storage=34, executor=41 remaining); `src/port` shims (the ~22 `win32*.c` remaining); `src/test` regress framework selectively. **Or: refresh source anchor** — `4b0bf0788b0` is ~9 days stale; ~29-50 master commits accumulated.
+15. ~~**Foreground sweep #15** — src/include finishing pass~~ — **DONE 2026-06-09 (PR #102)** (115 docs / 115 files, ~188 issues across 4 sub-trees; 4 parallel agents; zero misdirection; 15 sweeps in a row). Slices: A15-1 utils sec/locale/GUC (18 headers); A15-2 utils types+memory+datum (~30 headers); A15-3 utils backend-state + executor support (~28 headers); A15-4 lib (15, FULL DIR) + storage core (~22). Headlines: PS title leaks SQL (incl passwords) to other OS users; `USE_INJECTION_POINTS` in prod = arbitrary dlopen + symbol execute; spi.h is the canonical text-to-SQL injection sink (A9/A10/A13 cluster); stringinfo.h is the central injection sink for A7/A13/A14; ruleutils `pg_get_viewdef` loses view security clauses (A7 cross-finding confirmed at API layer); `pg_str{lower,upper}` 3x ICU casemap uncapped (A7 echo); MCV-leak gate per-estimator; bloomfilter.h is the in-tree generic Bloom — contrib AMs each ship their own (5 implementations); execParallel workers inherit leader's whole security envelope. Registers: `knowledge/issues/include-{utils,executor,lib,storage}.md`.
+16. **Next foreground candidates:** `src/interfaces/ecpg` (~127 files, low Phase D priority); `src/include/common` (50 headers, cryptohash/scram/blkreffile); `src/include/port` (47 headers, platform shims); `src/port` shims (the ~22 `win32*.c` remaining); `src/test` regress framework selectively. **Or: refresh source anchor** — `4b0bf0788b0` is ~9 days stale; ~29-50 master commits accumulated.
 16. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
 
 ---
