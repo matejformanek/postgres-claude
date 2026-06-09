@@ -23,7 +23,7 @@ regions for `pg_waldump`. [from-comment, genericdesc.c:3-4, 19-22]
 
 | Symbol | Line | Role |
 |---|---|---|
-| `generic_desc(buf, record)` | `generic_desc.c:23` | render the delta region list |
+| `generic_desc(buf, record)` | `genericdesc.c:23` | render the delta region list |
 | `generic_identify(info)` | `genericdesc.c:51` | always returns `"Generic"` |
 
 ## Invariants & gotchas
