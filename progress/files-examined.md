@@ -1893,3 +1893,49 @@ grep '| deep-read |' progress/files-examined.md
 | contrib/tablefunc/tablefunc.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/tablefunc/tablefunc.md | A13; CRITICAL — connectby_text SQL injection |
 | contrib/citext/citext.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/citext/citext.md | A13; collation asymmetry |
 | contrib/btree_gin/btree_gin.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-datatypes-a13 | knowledge/files/contrib/btree_gin/btree_gin.md | A13; GIN opclass framework |
+
+<!-- a14-contrib-remainder 2026-06-09 — foreground sweep #14 (Phase A); 44 source files via 4 parallel general-purpose agents; contrib remainder cleanup (23 modules) -->
+| contrib/pg_visibility/pg_visibility.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_visibility/pg_visibility.c.md | A14; VM/FSM introspection; no C-side privilege checks |
+| contrib/pg_buffercache/pg_buffercache_pages.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_buffercache/pg_buffercache_pages.c.md | A14; shared-buffers introspection; REVOKE-only gate |
+| contrib/pg_freespacemap/pg_freespacemap.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/pg_freespacemap/pg_freespacemap.c.md | A14; tiny FSM wrapper |
+| contrib/pg_prewarm/pg_prewarm.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_prewarm/pg_prewarm.c.md | A14; page-prewarming SRF |
+| contrib/pg_prewarm/autoprewarm.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_prewarm/autoprewarm.c.md | A14; PUBLIC autoprewarm controls (no REVOKE) |
+| contrib/pgrowlocks/pgrowlocks.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pgrowlocks/pgrowlocks.c.md | A14; row-lock introspection; buffer→SLRU lock ordering |
+| contrib/pg_walinspect/pg_walinspect.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_walinspect/pg_walinspect.c.md | A14; 🚨 show_data=true RLS bypass via FPI |
+| contrib/pg_surgery/heap_surgery.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_surgery/heap_surgery.c.md | A14; force-freeze resurrects aborted tuples |
+| contrib/pg_overexplain/pg_overexplain.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_overexplain/pg_overexplain.c.md | A14; EXPLAIN extension; thin |
+| contrib/basebackup_to_shell/basebackup_to_shell.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/basebackup_to_shell/basebackup_to_shell.c.md | A14; %-escape substitution model fragile |
+| contrib/basic_archive/basic_archive.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/basic_archive/basic_archive.c.md | A14; sample WAL archive; stat-rename TOCTOU |
+| contrib/tsm_system_rows/tsm_system_rows.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/tsm_system_rows/tsm_system_rows.c.md | A14; TABLESAMPLE with row target |
+| contrib/tsm_system_time/tsm_system_time.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/tsm_system_time/tsm_system_time.c.md | A14; time budget enforced at block boundary |
+| contrib/lo/lo.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/lo/lo.c.md | A14; legacy orphan-LO trigger |
+| contrib/bloom/blcost.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/bloom/blcost.c.md | A14; bloom cost estimator |
+| contrib/bloom/blinsert.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/bloom/blinsert.c.md | A14; metapage-lock serializes inserters |
+| contrib/bloom/bloom.h | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/bloom/bloom.h.md | A14; bloom signature header |
+| contrib/bloom/blscan.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/bloom/blscan.c.md | A14; sequential index scan |
+| contrib/bloom/blutils.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/bloom/blutils.c.md | A14; deterministic signValue LCG |
+| contrib/bloom/blvacuum.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/bloom/blvacuum.c.md | A14; bulk-delete |
+| contrib/bloom/blvalidate.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/bloom/blvalidate.c.md | A14; opclass validator |
+| contrib/isn/isn.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/isn/isn.c.md | A14; ISBN/ISSN/ISMN/EAN/UPC parser; weak-input GUC |
+| contrib/isn/isn.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/isn/isn.h.md | A14; orphan `initialize` decl |
+| contrib/isn/EAN13.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/isn/isn_data_headers.md | A14; combined w/ ISBN/ISMN/ISSN/UPC; 2004/2006 tables |
+| contrib/isn/ISBN.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/isn/isn_data_headers.md | A14; combined w/ EAN/ISMN/ISSN/UPC |
+| contrib/isn/ISMN.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/isn/isn_data_headers.md | A14; combined w/ EAN/ISBN/ISSN/UPC |
+| contrib/isn/ISSN.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/isn/isn_data_headers.md | A14; combined w/ EAN/ISBN/ISMN/UPC |
+| contrib/isn/UPC.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/isn/isn_data_headers.md | A14; combined w/ EAN/ISBN/ISMN/ISSN |
+| contrib/seg/seg.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/seg/seg.c.md | A14; float seg; NaN-poison GiST |
+| contrib/seg/segdata.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/seg/segdata.h.md | A14; SEG struct + sentinels |
+| contrib/cube/cube.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/cube/cube.c.md | A14; N-d cube; 16 MB palloc upstream of dim cap |
+| contrib/cube/cubedata.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/cube/cubedata.h.md | A14; NDBOX header |
+| contrib/earthdistance/earthdistance.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/earthdistance/earthdistance.c.md | A14; spherical earth (cube wrapper) |
+| contrib/unaccent/unaccent.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/unaccent/unaccent.c.md | A14; accent-removal dictionary; trie |
+| contrib/dict_xsyn/dict_xsyn.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/dict_xsyn/dict_xsyn.c.md | A14; synonym dictionary |
+| contrib/dict_int/dict_int.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-remainder-a14 | knowledge/files/contrib/dict_int/dict_int.c.md | A14; integer-truncation dict |
+| contrib/pg_trgm/trgm.h | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_trgm/trgm.h.md | A14; HASHVAL=trgm%95 sig-bit map |
+| contrib/pg_trgm/trgm_gin.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_trgm/trgm_gin.c.md | A14; GIN opclass; full-scan on empty trigrams |
+| contrib/pg_trgm/trgm_gist.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_trgm/trgm_gist.c.md | A14; GiST signature opclass |
+| contrib/pg_trgm/trgm_op.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_trgm/trgm_op.c.md | A14; trigram extraction + similarity; show_trgm oracle |
+| contrib/pg_trgm/trgm_regexp.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/pg_trgm/trgm_regexp.c.md | A14; zero CFI in regex→NFA pipeline |
+| contrib/fuzzystrmatch/fuzzystrmatch.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/fuzzystrmatch/fuzzystrmatch.c.md | A14; soundex / metaphone / levenshtein |
+| contrib/fuzzystrmatch/dmetaphone.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/fuzzystrmatch/dmetaphone.c.md | A14; no length cap, no CFI in main loop |
+| contrib/fuzzystrmatch/daitch_mokotoff.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-remainder-a14 | knowledge/files/contrib/fuzzystrmatch/daitch_mokotoff.c.md | A14; D-M soundex variant |

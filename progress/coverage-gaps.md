@@ -212,33 +212,42 @@ effectively 100% modulo `ppport.h`. **Cross-PL trust-gate ranking
 I/O) > N/A (plpython untrusted-only — `import`/ctypes vectors make
 Safe.pm-equivalent impossible).
 
-## contrib — 114 / 210 docs (54.3%, top-4 + security-themed + datatypes/index-AMs complete)
+## contrib — 154 / 210 docs (73.3%, top-4 + security-themed + datatypes/index-AMs + remainder cleanup all complete)
 
 In-tree extensions, ~40 modules. **A11 (2026-06-04)** landed the
 top-4 highest-Phase-D-value modules: ~~pg_stat_statements~~,
 ~~dblink~~, ~~postgres_fdw~~ (6 docs), ~~pgcrypto~~ (25 docs / 28
 files). **A12 (2026-06-09)** landed the security-themed bundle:
-~~amcheck~~ (4 docs / 5 files), ~~pageinspect~~ (8 docs / 9 files),
-~~pgstattuple~~ (3 docs), ~~sepgsql~~ (10 docs), ~~file_fdw~~,
-~~auth_delay~~, ~~sslinfo~~. **A13 (2026-06-09)** landed the
-datatypes + index-AM bundle: ~~hstore~~ (7 docs), ~~ltree~~ (12
+~~auth_delay~~, ~~sslinfo~~. **A13 (2026-06-09, PR #100)** landed
+contrib datatypes + index-AMs: ~~hstore~~ (7 docs), ~~ltree~~ (12
 docs), ~~btree_gist~~ (24 docs / 27 files), ~~intarray~~ (7 docs),
-~~tablefunc~~, ~~citext~~, ~~btree_gin~~. Remaining ~96 files
-across ~22 modules: pg_visibility, pg_buffercache,
-pg_freespacemap, pg_prewarm, pgrowlocks, pg_walinspect,
-basebackup_to_shell, basic_archive, pg_overexplain,
-pg_surgery, bloom (GiST/RUM extension), seg, cube, isn, lo,
-unaccent, dict_xsyn, dict_int, earthdistance, fuzzystrmatch,
-pg_trgm, tsm_system_*. **A12 critical Phase D findings: sepgsql 3
-confirmed security-class bugs (permissive-mode AVC widening
-persistence, parallel-workers run with server label, proc.c:279
-typo); pageinspect's `tuple_data_split(do_detoast=true)` is cross-
-table read primitive; amcheck has zero C-side permission checks +
-leaks page LSN/heap-TID/XID in errdetail; auth_delay's failure-only
-delay is a deliberate timing oracle; file_fdw is single-layer trust
-(diverges from postgres_fdw gold standard, inherits A6 O_NOFOLLOW
-gap); sslinfo `ssl_issuer_field` returns issuer-DN from unverified
-cert.**
+~~tablefunc~~, ~~citext~~, ~~btree_gin~~ (53 docs / 56 source
+files). **A14 (2026-06-09, PR #101)** landed the contrib remainder
+cleanup bundle: ~~pg_visibility~~, ~~pg_buffercache~~,
+~~pg_freespacemap~~, ~~pg_prewarm~~, ~~pgrowlocks~~,
+~~pg_walinspect~~, ~~pg_surgery~~, ~~pg_overexplain~~,
+~~basebackup_to_shell~~, ~~basic_archive~~, ~~tsm_system_rows~~,
+~~tsm_system_time~~, ~~lo~~, ~~bloom~~, ~~isn~~, ~~seg~~,
+~~cube~~, ~~earthdistance~~, ~~unaccent~~, ~~dict_xsyn~~,
+~~dict_int~~, ~~pg_trgm~~, ~~fuzzystrmatch~~ (40 docs / 44 source
+files / 23 modules). **Only `contrib/intagg` legacy stub remains.**
+**A12 critical Phase D findings:** sepgsql 3 confirmed
+security-class bugs; pageinspect cross-table read primitive;
+amcheck zero C-side permission checks; auth_delay timing oracle;
+file_fdw single-layer trust; sslinfo unverified-cert leak.
+**A13 critical Phase D findings:** 🚨 tablefunc.connectby_text SQL
+injection; ltree parse_lquery 400000× memory amplification +
+checkCond catastrophic backtracker + crc32 locale-change breaks
+GiST signatures; hstore forged HS_FLAG_NEWVERSION → OOB-read;
+btree_gist NaN divergence; intarray signature collisions; citext
+collation asymmetry. **A14 critical Phase D findings:**
+🚨 pg_walinspect `show_data=true` confirmed RLS/column-priv bypass;
+🚨 pg_prewarm autoprewarm PUBLIC (no REVOKE); 🚨 pg_surgery
+heap_force_freeze resurrects aborted tuples; basebackup_to_shell
+%-escape model fragile; cube palloc's 16 MB upstream of dim cap;
+pg_trgm trgm_regexp.c zero CHECK_FOR_INTERRUPTS; pg_trgm/bloom
+join the 5-module signature-collision cluster (hstore CRC32 + ltree
+CRC32 + intarray mod-hash + pg_trgm mod-hash + bloom LCG).
 
 ---
 
@@ -256,8 +265,11 @@ cert.**
 9. ~~**Foreground sweep #10** — `src/pl/{plperl,plpython,tcl}`~~ — **DONE 2026-06-04 mid-day** (18 docs covering 30 source files, ~92 issues; `knowledge/issues/{plperl,plpython,pltcl}.md`). 4 parallel agents; 0 misdirection. **Headlines (the cross-PL trust-gate comparison sweep):** (1) **plperl uses opcode-mask + opcode-redirect, NOT Safe.pm despite docs hand-wave** — `grep Safe plperl.c` = 0 matches; the mechanism is `PL_op_mask = plperl_opmask` generated from Perl's Opcode.pm; drift-prone as new ops get added; (2) **plpython is untrusted-only by design** — no `plpython3` trusted variant because Python's `import`/`__builtins__`/getattr/ctypes vectors make a Safe.pm analogue impossible; the entire defense is `superuser = true` at `CREATE EXTENSION plpython3u`; (3) **pltcl uses Tcl Safe (C-dispatch level), structurally strongest** — dangerous commands (`exec`, `socket`, `open`, `file delete`, `load`) NOT PRESENT in the safe interp's command table at all; (4) **`PLy_cursor_plan` missing `is_PLyPlanObject` check** that `PLy_spi_execute` has — text-fallback `"O|O"` parse accepts any PyObject as a "plan" (most concrete Phase D candidate from A10); (5) **one Python interpreter per backend, never finalized** — `sys.modules` patches + ctypes loads persist for backend lifetime; amplified by transaction-poolers; (6) **`plpy.execute(text)` injection surface = plpgsql injection ∪ every PG type's `_in()`** — scalar-return path runs every type's input function; (7) **`plpy.subtransaction()` swallows Python `try/except` and COMMITS subxact** — opposite of plpgsql `EXCEPTION` rollback semantics (cross-PL footgun); (8) **plperl one Perl interpreter per `(trusted?user_id:0)`, never evicted** — long-lived pooled backends accumulate. **NEW corpus-wide cluster: cross-PL trust-gate ranking** (Tcl Safe ≥ Perl opcode-mask > plpgsql nothing > plpython N/A). **NEW corpus-wide cluster: PL dynamic-SQL injection quad** (plpgsql EXECUTE + plperl spi_exec_query + plpython plpy.execute(text) + pltcl spi_exec).
 10. ~~**Foreground sweep #11** — contrib/ top 4 modules~~ — **DONE 2026-06-04 afternoon** (33 docs covering 36 source files, ~208 issues — second-largest after A7; `knowledge/issues/{pg_stat_statements,dblink,postgres_fdw,pgcrypto}.md`). 4 parallel agents; 0 misdirection. **Headlines:** (1) **🚨 CRITICAL: pgcrypto decompression bomb** — `pgp_sym_decrypt(small_compressed_blob, pw)` has NO output-size ceiling (`pgp-compress.c:278-310`); 10 KB ciphertext → multi-GB plaintext → backend OOM; reachable via public SQL API with attacker-controlled bytea; same class as A5 `pg_lzcompress` finding but with SQL trigger; (2) **pgcrypto EFAIL surface still reachable** — legacy SYMENCRYPTED_DATA tag-9 ciphertexts accepted without MDC (`pgp-decrypt.c:1141-1152`); only mitigation is delayed-error reporting (Mister-Zuccherato); `disable-mdc=1` SQL option produces no-MDC ciphertext with NO WARNING; (3) **pgcrypto non-constant-time RSA/Elgamal secret-exponent ops** — `BN_mod_exp` called without `BN_FLG_CONSTTIME` for `pgp_rsa_decrypt`/`pgp_elgamal_decrypt` (`pgp-mpi-openssl.c:266,183`); Brumley-Boneh 2003 timing attack; one-line fix; paired with PKCS#1 v1.5 padding short-circuit (`pgp-pubdec.c:42-67`) = Bleichenbacher oracle; (4) **pgcrypto S2K iter byte uncapped** — attacker controls iter via `pgp_sym_decrypt`/`pgp_pub_decrypt` bytea args (`pgp-s2k.c:270`); ~65M digest ops per call; cumulative DoS; (5) **pgcrypto OpenSSL error stack silently discarded everywhere** — `ERR_get_error()` never called; every EVP failure collapses to 3 PXE codes (`px.c:42-84`); (6) **pgcrypto memory hygiene weaker than core PG** — `px_memset` (LTO-elidable) instead of `explicit_bzero`; wrapped legacy algorithms (bcrypt, sha-crypt) DO scrub stack — they're MORE disciplined than the SQL-boundary surrounding them; (7) **pgcrypto weak-by-default password hashing** — `crypt(pw, 'aa')` returns DES (no warning); `gen_salt('bf')` defaults to cost=5 (OWASP min 12); shacrypt accepts ~hour-long DoS; (8) **pgcrypto `encrypt(data, key, 'aes-cbc')` no-IV form silently uses all-zero IV** — confirmed; two encryptions of same plaintext = identical ciphertext; (9) **pgcrypto: no AEAD modes in 2026** (no GCM/CCM/ChaCha20-Poly1305); raw HMAC tags + SQL `=` = timing-attackable; (10) **postgres_fdw `password_required` two-layered defense** is the GOLD STANDARD — `option.c:194` (CREATE-time superuser check) + `connection.c:759` (`check_conn_params` pre-connect) + `connection.c:446` (`pgfdw_security_check` post-connect cross-checking `PQconnectionUsedPassword`); canonical loopback-bypass-RLS requires EXPLICIT `password_required=false`; SCRAM passthrough adds third allowed path; (11) **postgres_fdw stats-import + ANALYZE-as-table-owner enlarge attack surface** — ANALYZE opens remote conn as `relowner`; hostile remote can plant decoy MCVs via `restore_stats=true`; (12) **postgres_fdw TLS not enforced** — default `sslmode=prefer` allows MITM downgrade; **Phase D candidate: `postgres_fdw.min_sslmode` GUC**; (13) **postgres_fdw cross-cluster semantic mismatch silent** — shippable functions/aggregates resolved by NAME at remote; same-named aggregate with different semantics = silently wrong result; (14) **dblink conninfo-trust has zero host-restriction enforcement** — canonical loopback-to-bypass-RLS / privilege-escalation surface; `dblink_security_check` correctly gates credentials but NOT host; (15) **pg_stat_statements track_utility=on (DEFAULT TRUE) captures CREATE/ALTER USER PASSWORD cleartext** in `pg_stat_tmp/pgss_query_texts.stat` exposed to `pg_read_all_stats` — exact A4 psql-history cycle at cluster scope; (16) **pg_stat_statements stat file readable by `pg_read_server_files`** — confirms A7 genfile.c bypass at a second concrete site. **NEW corpus-wide Phase D pitch cluster (pgcrypto modernization patch series): EVP_CIPHER_fetch migration + AEAD modes + `explicit_bzero` adoption + `BN_FLG_CONSTTIME` + S2K iter cap GUC + decompression-bomb ceiling — single coherent OpenSSL-3.0-era refresh.**
 11. **Cloud routine** — keep grinding. ~~`src/fe_utils` (18 files)~~ DONE (A11 + headers); ~~`src/timezone` (7 files)~~ DONE 2026-06-07; `src/port` security+broadly-used shims done 2026-06-06 (the ~22 `win32*.c` shims remain deferred); ~~`src/backend/libpq` (17 files)~~ was ALREADY DONE by A2 (the queue's "0/17" was stale — see 2026-06-08 queue audit); ~~`src/backend/storage/aio` (10 .c + 4 headers)~~ DONE 2026-06-08 (PG18 AIO subsystem). **Next cloud target: `src/include/utils` (70 headers, biggest single remaining gap) or `src/include/storage` aio companions + the rest (34 headers); also `src/backend/access/rmgrdesc` (22, WAL-desc) and `src/include/executor` (41).** Recompute the genuine gap from the GitHub tree at anchor before refilling — `coverage-gaps.md` per-subdir 0% rows have proven unreliable (libpq was wrong).
-12. **Foreground sweep #12 — contrib/ second-tier modules** — btree_gin/btree_gist (index AMs), amcheck (verification), file_fdw (file FDW), pageinspect/pgstattuple (low-level inspection). Or hstore/ltree/intarray (datatypes).
-13. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
+12. ~~**Foreground sweep #12** — contrib/ security-themed bundle~~ — **DONE 2026-06-09 (PR #99)** (28 docs / 30 files, ~153 issues; `knowledge/issues/{amcheck,pageinspect,pgstattuple,sepgsql,file_fdw,auth_delay,sslinfo}.md`). 4 parallel agents; 0 misdirection. Headlines summarized inline at "## contrib" above.
+13. ~~**Foreground sweep #13** — contrib/ datatypes + index-AMs~~ — **DONE 2026-06-09 (PR #100 — pending merge at A14 branch time)** (53 docs / 56 files, ~155 issues; `knowledge/issues/{hstore,ltree,btree_gist,intarray,tablefunc,citext,btree_gin}.md`). 4 parallel agents; 0 misdirection. **Headlines:** (1) **🚨 `tablefunc.connectby_text` SQL injection** — 5 of 6 identifier args interpolated raw via `appendStringInfo`; (2) **ltree `parse_lquery` ~400000× memory amplification** + `checkCond` regex-class catastrophic backtracker + `crc32.c` locale-change silently breaks GiST signatures; (3) **hstore forged `HS_FLAG_NEWVERSION` bypasses ALL validation** → controllable OOB-read; (4) **btree_gist float4/float8 NaN divergence vs nbtree** — `EXCLUDE USING gist (val WITH =)` permits duplicate NaN rows; (5) **intarray signature-tree trivial bit-collisions** (mod-hash siglen*8); (6) **citext collation asymmetry** (`=` DEFAULT-collation vs `<` INPUT-collation). **NEW corpus-wide clusters:** GiST-collision attacks on attacker data (4-module); text-to-SPI injection sinks (5-sweep cluster).
+14. ~~**Foreground sweep #14** — contrib/ remainder cleanup~~ — **DONE 2026-06-09 (this sweep)** (40 docs / 44 files, ~90 issues across 23 modules; `knowledge/issues/{pg_visibility,pg_buffercache,pg_freespacemap,pg_prewarm,pgrowlocks,pg_walinspect,pg_surgery,pg_overexplain,basebackup_to_shell,basic_archive,tsm_system_rows,tsm_system_time,lo,bloom,isn,seg,cube,earthdistance,unaccent,dict_xsyn,dict_int,pg_trgm,fuzzystrmatch}.md`). 4 parallel agents; 0 misdirection. **14 sweeps in a row.** Headlines summarized inline at "## contrib" above.
+15. **Next foreground candidates:** `src/interfaces/ecpg` (~127 files, low Phase D priority); `src/include` finishing pass (utils=70, storage=34, executor=41 remaining); `src/port` shims (the ~22 `win32*.c` remaining); `src/test` regress framework selectively. **Or: refresh source anchor** — `4b0bf0788b0` is ~9 days stale; ~29-50 master commits accumulated.
+16. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
 
 ---
 
