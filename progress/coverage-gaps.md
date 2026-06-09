@@ -212,21 +212,29 @@ effectively 100% modulo `ppport.h`. **Cross-PL trust-gate ranking
 I/O) > N/A (plpython untrusted-only — `import`/ctypes vectors make
 Safe.pm-equivalent impossible).
 
-## contrib — 33 / 210 docs (15.7%, top-4 modules complete)
+## contrib — 61 / 210 docs (29.0%, top-4 + security-themed complete)
 
-In-tree extensions, ~40 modules. **A11 (2026-06-04) landed the top 4
-highest-Phase-D-value modules**: ~~pg_stat_statements~~ (A11-1, 1
-doc), ~~dblink~~ (A11-1, 1 doc), ~~postgres_fdw~~ (A11-2, 6 docs),
-~~pgcrypto~~ (A11-3/4, 25 docs covering 28 source files). Remaining
-~177 files across ~36 modules: hardly-used (auth_delay, sslinfo) to
-load-bearing (btree_gin, btree_gist, pgrowlocks, hstore, ltree,
-intarray, citext, tablefunc, pageinspect, pgstattuple, amcheck,
-file_fdw, pg_visibility, pg_buffercache, pg_freespacemap,
-pg_prewarm). **Critical Phase D findings landed in A11: pgcrypto
-decompression bomb (CRITICAL), EFAIL surface, non-CT RSA/Elgamal;
-postgres_fdw `password_required` two-layered defense documented as
-the gold standard; dblink loopback-bypass-RLS pattern fully
-mapped.**
+In-tree extensions, ~40 modules. **A11 (2026-06-04)** landed the
+top-4 highest-Phase-D-value modules: ~~pg_stat_statements~~,
+~~dblink~~, ~~postgres_fdw~~ (6 docs), ~~pgcrypto~~ (25 docs / 28
+files). **A12 (2026-06-09)** landed the security-themed bundle:
+~~amcheck~~ (4 docs / 5 files), ~~pageinspect~~ (8 docs / 9 files),
+~~pgstattuple~~ (3 docs), ~~sepgsql~~ (10 docs), ~~file_fdw~~,
+~~auth_delay~~, ~~sslinfo~~. Remaining ~149 files across ~29
+modules: load-bearing (btree_gin, btree_gist, hstore, ltree,
+intarray, citext, tablefunc, pageinspect-leftovers, pg_visibility,
+pg_buffercache, pg_freespacemap, pg_prewarm, pgrowlocks,
+pg_walinspect, basebackup_to_shell, basic_archive,
+pg_overexplain). **A12 critical Phase D findings: sepgsql 3
+confirmed security-class bugs (permissive-mode AVC widening
+persistence, parallel-workers run with server label, proc.c:279
+typo); pageinspect's `tuple_data_split(do_detoast=true)` is cross-
+table read primitive; amcheck has zero C-side permission checks +
+leaks page LSN/heap-TID/XID in errdetail; auth_delay's failure-only
+delay is a deliberate timing oracle; file_fdw is single-layer trust
+(diverges from postgres_fdw gold standard, inherits A6 O_NOFOLLOW
+gap); sslinfo `ssl_issuer_field` returns issuer-DN from unverified
+cert.**
 
 ---
 

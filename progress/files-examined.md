@@ -1803,3 +1803,35 @@ grep '| deep-read |' progress/files-examined.md
 | src/backend/access/rmgrdesc/heapdesc.c | 2026-06-08 | 4b0bf0788b0 | deep | rmgrdesc | knowledge/files/src/backend/access/rmgrdesc/heapdesc.c.md | rmgrdesc sweep; heap/heap2 record set; heap_xlog_deserialize_prune_and_freeze (shared); infobits/VM-bit decoding |
 | src/backend/access/rmgrdesc/clogdesc.c | 2026-06-08 | 4b0bf0788b0 | read | rmgrdesc | knowledge/files/src/backend/access/rmgrdesc/clogdesc.c.md | rmgrdesc sweep; CLOG zeropage/truncate only; int64 pageno; status bits not individually WAL-logged |
 | src/backend/access/rmgrdesc/standbydesc.c | 2026-06-08 | 4b0bf0788b0 | deep | rmgrdesc | knowledge/files/src/backend/access/rmgrdesc/standbydesc.c.md | rmgrdesc sweep; hot-standby LOCK/RUNNING_XACTS/INVALIDATIONS; standby_desc_invalidations shared inval renderer |
+
+<!-- a12-contrib-security 2026-06-09 — foreground sweep #12 (Phase A); 30 source files via 4 parallel general-purpose agents; SECURITY-themed contrib bundle -->
+| contrib/amcheck/verify_common.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/amcheck/verify_common.md | A12; combined .c+.h |
+| contrib/amcheck/verify_common.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-security-a12 | knowledge/files/contrib/amcheck/verify_common.md | A12; combined .c+.h |
+| contrib/amcheck/verify_gin.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/amcheck/verify_gin.md | A12; GIN verification |
+| contrib/amcheck/verify_heapam.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/amcheck/verify_heapam.md | A12; heap verification; honest crash disclosure |
+| contrib/amcheck/verify_nbtree.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/amcheck/verify_nbtree.md | A12; B-tree verification |
+| contrib/pageinspect/pageinspect.h | 2026-06-09 | 4b0bf0788b0 | read | contrib-security-a12 | knowledge/files/contrib/pageinspect/pageinspect.md | A12; combined .h+rawpage.c |
+| contrib/pageinspect/rawpage.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pageinspect/pageinspect.md | A12; central RLS-bypass primitive |
+| contrib/pageinspect/heapfuncs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pageinspect/heapfuncs.c.md | A12; tuple_data_split = type-input bypass canary |
+| contrib/pageinspect/btreefuncs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pageinspect/btreefuncs.c.md | A12; B-tree page introspection |
+| contrib/pageinspect/brinfuncs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pageinspect/brinfuncs.c.md | A12; BRIN page introspection |
+| contrib/pageinspect/ginfuncs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pageinspect/ginfuncs.c.md | A12; GIN page introspection |
+| contrib/pageinspect/gistfuncs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pageinspect/gistfuncs.c.md | A12; GiST page introspection |
+| contrib/pageinspect/hashfuncs.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pageinspect/hashfuncs.c.md | A12; most-hardened decoder |
+| contrib/pageinspect/fsmfuncs.c | 2026-06-09 | 4b0bf0788b0 | read | contrib-security-a12 | knowledge/files/contrib/pageinspect/fsmfuncs.c.md | A12; FSM page introspection |
+| contrib/pgstattuple/pgstattuple.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pgstattuple/pgstattuple.c.md | A12; table stats; SnapshotDirty |
+| contrib/pgstattuple/pgstatindex.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pgstattuple/pgstatindex.c.md | A12; index stats |
+| contrib/pgstattuple/pgstatapprox.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/pgstattuple/pgstatapprox.c.md | A12; VM-trust fail-open |
+| contrib/sepgsql/sepgsql.h | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/sepgsql.h.md | A12; SELinux class IDs + bit positions |
+| contrib/sepgsql/hooks.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/hooks.c.md | A12; object_access_hook dispatch |
+| contrib/sepgsql/selinux.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/selinux.c.md | A12; libselinux wrapper |
+| contrib/sepgsql/uavc.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/uavc.c.md | A12; userspace AVC cache; permissive-widening bug |
+| contrib/sepgsql/label.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/label.c.md | A12; security-label storage |
+| contrib/sepgsql/database.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/database.c.md | A12; db_database class |
+| contrib/sepgsql/schema.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/schema.c.md | A12; db_schema class |
+| contrib/sepgsql/relation.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/relation.c.md | A12; db_table/sequence/view classes |
+| contrib/sepgsql/proc.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/proc.c.md | A12; db_procedure class; line-279 typo finding |
+| contrib/sepgsql/dml.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sepgsql/dml.c.md | A12; DML row-level filter; foreign-table gap |
+| contrib/file_fdw/file_fdw.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/file_fdw/file_fdw.c.md | A12; in-tree path-traversal class |
+| contrib/auth_delay/auth_delay.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/auth_delay/auth_delay.c.md | A12; failure-only delay = timing oracle |
+| contrib/sslinfo/sslinfo.c | 2026-06-09 | 4b0bf0788b0 | deep-read | contrib-security-a12 | knowledge/files/contrib/sslinfo/sslinfo.c.md | A12; TLS connection introspection |
