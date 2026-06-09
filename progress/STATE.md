@@ -67,9 +67,9 @@
 ## Coverage snapshot (headline counters refreshed 2026-06-09 post-merge; per-directory map authoritative in `progress/coverage.md` / `coverage-gaps.md`)
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2 564**.
-- Per-file docs under `knowledge/files/`: **1 504** (~58.0%) — _unchanged this cycle; the 2026-06-09 cycle's 20 new AIO/rmgrdesc docs are stranded in unmerged PR #91 and will bump this to ~1,524 once it lands._
-- Registry rows in `progress/files-examined.md`: **1 785**.
-- **Phase A gap: ~1 080 files undocumented.** Full per-directory breakdown in `progress/coverage-gaps.md`.
+- Per-file docs under `knowledge/files/`: **1 524** (~59.4%) — +20 from PR #91 (PG18 AIO subsystem complete-dir + 6 rmgrdesc files).
+- Registry rows in `progress/files-examined.md`: **1 805**.
+- **Phase A gap: ~1 060 files undocumented.** Full per-directory breakdown in `progress/coverage-gaps.md` — note per-subdir 0% rows in the gap map are unreliable (libpq listed 0/17 while fully covered); recompute from the tree before refilling.
 - _Per-tree breakdown below is the 2026-06-02 baseline (stale — src/pl complete, src/fe_utils complete, contrib top-4 complete); see `coverage.md` for current._
 - Top-line per top-level tree: src/backend 69.2%, src/include 34.2%, src/common 1.6%, src/port 0%, src/interfaces 0%, src/bin 0%, src/pl 0%, contrib 0%.
 - Per-file docs with upward backlinks: **652** (+17 net-new blocks from the 2026-06-02 corpus-maintainer source-path backlink pass; 633 from the earlier cross-reference pass).

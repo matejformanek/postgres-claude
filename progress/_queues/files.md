@@ -200,34 +200,98 @@ deferred as low-priority platform glue.
 
 ## src/backend/libpq backend-connection-security sweep (refill, 2026-06-07)
 
-Source path: `src/backend/libpq/`. Anchor `4b0bf0788b0`. 17 .c files, 0 docs
-(`progress/coverage-gaps.md` src/backend → libpq 0/17, flagged high-priority:
-"Loadbearing for connection security; touched by data-leak threat models").
-This closes the `src/timezone` block (now 7/7, 100%); refill per the queue
-depth<5 rule. **Data-leak-relevant first** (auth + secret + crypto surface):
-`auth.c` (the auth-method dispatcher), `crypt.c` (password verification +
-`pg_authid` hash handling), `auth-scram.c` (SCRAM server side), `hba.c`
-(`pg_hba.conf` parse + matching — the access-policy chokepoint),
-`be-secure-openssl.c` (TLS), `be-secure-gssapi.c` / `be-gssapi-common.c`,
-`auth-sasl.c` / `auth-oauth.c`, `be-secure.c` / `be-secure-common.c`. Then the
-wire-protocol plumbing: `pqcomm.c`, `pqformat.c`, `pqmq.c`, `pqsignal.c`,
-`ifaddr.c`, `be-fsstubs.c` (large-object server stubs). Sizes from the GitHub
-tree API at anchor; LOC below are byte-size-derived estimates, correct on read.
+> **2026-06-08 queue audit (cloud/pg-file-backfiller):** this entire block was
+> **STALE on refill** — all 17 `src/backend/libpq/*.c` files already have deep
+> per-file docs under `knowledge/files/src/backend/libpq/` from the **A2
+> libpq-stack sweep (2026-06-03, PR #41)**. `coverage-gaps.md` line 45 still
+> listed "libpq 17 | 0 | 0.0%" (contradicting its own A2 note at line 99 for the
+> *headers*), and the 2026-06-07 timezone-sweep refill copied that stale 0/17
+> into the queue without checking the `.c` dir. Verified 2026-06-08 by listing
+> `knowledge/files/src/backend/libpq/` (17 `.c.md` docs present, deep, anchored
+> at `4b0bf0788b0`) and spot-reading `auth.c.md`/`crypt.c.md`/`auth-scram.c.md`/
+> `hba.c.md`/`be-secure-openssl.c.md`. Marked `[done:covered-2026-06-03]`. The
+> genuine gap was recomputed by diffing the GitHub tree at anchor against
+> `knowledge/files/` (1 127 uncovered .c/.h). This run pops the
+> `src/backend/storage/aio` cluster (PG18 AIO subsystem — flagged in STATE.md as
+> the top `knowledge/subsystems/storage-aio.md` candidate, demand-signalled 4×
+> by pg-user-question-harvester).
 
-[pending] src/backend/libpq/auth.c loc=1900 priority=H
-[pending] src/backend/libpq/crypt.c loc=350 priority=H
-[pending] src/backend/libpq/auth-scram.c loc=1300 priority=H
-[pending] src/backend/libpq/hba.c loc=2200 priority=H
-[pending] src/backend/libpq/be-secure-openssl.c loc=1800 priority=H
-[pending] src/backend/libpq/be-secure-gssapi.c loc=650 priority=M
-[pending] src/backend/libpq/be-gssapi-common.c loc=110 priority=M
-[pending] src/backend/libpq/auth-sasl.c loc=180 priority=H
-[pending] src/backend/libpq/auth-oauth.c loc=900 priority=M
-[pending] src/backend/libpq/be-secure.c loc=280 priority=H
-[pending] src/backend/libpq/be-secure-common.c loc=350 priority=M
-[pending] src/backend/libpq/pqcomm.c loc=1500 priority=M
-[pending] src/backend/libpq/pqformat.c loc=550 priority=M
-[pending] src/backend/libpq/pqmq.c loc=280 priority=L
-[pending] src/backend/libpq/pqsignal.c loc=80 priority=L
-[pending] src/backend/libpq/ifaddr.c loc=300 priority=L
-[pending] src/backend/libpq/be-fsstubs.c loc=600 priority=M
+[done:covered-2026-06-03] src/backend/libpq/auth.c loc=1900 priority=H
+[done:covered-2026-06-03] src/backend/libpq/crypt.c loc=350 priority=H
+[done:covered-2026-06-03] src/backend/libpq/auth-scram.c loc=1300 priority=H
+[done:covered-2026-06-03] src/backend/libpq/hba.c loc=2200 priority=H
+[done:covered-2026-06-03] src/backend/libpq/be-secure-openssl.c loc=1800 priority=H
+[done:covered-2026-06-03] src/backend/libpq/be-secure-gssapi.c loc=650 priority=M
+[done:covered-2026-06-03] src/backend/libpq/be-gssapi-common.c loc=110 priority=M
+[done:covered-2026-06-03] src/backend/libpq/auth-sasl.c loc=180 priority=H
+[done:covered-2026-06-03] src/backend/libpq/auth-oauth.c loc=900 priority=M
+[done:covered-2026-06-03] src/backend/libpq/be-secure.c loc=280 priority=H
+[done:covered-2026-06-03] src/backend/libpq/be-secure-common.c loc=350 priority=M
+[done:covered-2026-06-03] src/backend/libpq/pqcomm.c loc=1500 priority=M
+[done:covered-2026-06-03] src/backend/libpq/pqformat.c loc=550 priority=M
+[done:covered-2026-06-03] src/backend/libpq/pqmq.c loc=280 priority=L
+[done:covered-2026-06-03] src/backend/libpq/pqsignal.c loc=80 priority=L
+[done:covered-2026-06-03] src/backend/libpq/ifaddr.c loc=300 priority=L
+[done:covered-2026-06-03] src/backend/libpq/be-fsstubs.c loc=600 priority=M
+
+## src/backend/storage/aio — PG18 AIO subsystem sweep (refill, 2026-06-08)
+
+Source path: `src/backend/storage/aio/` + the 4 companion headers under
+`src/include/storage/`. Anchor `4b0bf0788b0`. Complete-the-directory run: the
+10 `.c` files of the AIO engine plus `aio.h`/`aio_internal.h`/`aio_types.h`/
+`aio_subsys.h`. **Top `knowledge/subsystems/storage-aio.md` candidate** per
+STATE.md (AIO / read-stream / io_uring cluster flagged 4× by
+pg-user-question-harvester #71). Core engine first (`aio.c` — handle state
+machine), then callbacks/io/target/init/funcs, then the IO methods
+(`method_worker.c`, `method_io_uring.c`, `method_sync.c`), then the
+`read_stream.c` helper (the most-asked-about file). Headers carry the struct +
+state-machine invariants.
+
+[done:aio-2026-06-08] src/backend/storage/aio/aio.c loc=1358 priority=H
+[done:aio-2026-06-08] src/backend/storage/aio/aio_callback.c loc=333 priority=H
+[done:aio-2026-06-08] src/backend/storage/aio/aio_io.c loc=235 priority=H
+[done:aio-2026-06-08] src/backend/storage/aio/aio_target.c loc=122 priority=M
+[done:aio-2026-06-08] src/backend/storage/aio/aio_init.c loc=255 priority=M
+[done:aio-2026-06-08] src/backend/storage/aio/aio_funcs.c loc=230 priority=M
+[done:aio-2026-06-08] src/backend/storage/aio/method_sync.c loc=47 priority=L
+[done:aio-2026-06-08] src/backend/storage/aio/method_worker.c loc=1031 priority=H
+[done:aio-2026-06-08] src/backend/storage/aio/method_io_uring.c loc=812 priority=H
+[done:aio-2026-06-08] src/backend/storage/aio/read_stream.c loc=1471 priority=H
+[done:aio-2026-06-08] src/include/storage/aio.h loc=369 priority=H
+[done:aio-2026-06-08] src/include/storage/aio_internal.h loc=421 priority=H
+[done:aio-2026-06-08] src/include/storage/aio_types.h loc=137 priority=M
+[done:aio-2026-06-08] src/include/storage/aio_subsys.h loc=34 priority=L
+
+## src/backend/access/rmgrdesc — WAL-record-description routines (refill, 2026-06-08)
+
+Source path: `src/backend/access/rmgrdesc/`. Anchor `4b0bf0788b0`. 22 `.c`
+files (one `*desc.c` per resource manager) + the shared `rmgrdesc_utils.c`,
+0 docs. These render WAL records for `pg_waldump` + rmgr debug logging;
+several are the **canonical shared deserializers** between backend redo and
+frontend waldump (`xactdesc.c` commit/abort/prepare parsers, `heapdesc.c`
+prune+freeze deserializer, `standbydesc.c` shared-inval renderer). Done this
+run: the 6 highest WAL-format value (shared helper + xlog/xact/heap/clog/
+standby). The remaining 16 (per-AM descs) are queued for the next cloud run.
+
+[done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/rmgrdesc_utils.c loc=61 priority=H
+[done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/xlogdesc.c loc=425 priority=H
+[done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/xactdesc.c loc=517 priority=H
+[done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/heapdesc.c loc=475 priority=H
+[done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/clogdesc.c loc=59 priority=M
+[done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/standbydesc.c loc=140 priority=H
+[pending] src/backend/access/rmgrdesc/nbtdesc.c loc=230 priority=M
+[pending] src/backend/access/rmgrdesc/gindesc.c loc=200 priority=M
+[pending] src/backend/access/rmgrdesc/gistdesc.c loc=95 priority=M
+[pending] src/backend/access/rmgrdesc/hashdesc.c loc=160 priority=M
+[pending] src/backend/access/rmgrdesc/spgdesc.c loc=140 priority=M
+[pending] src/backend/access/rmgrdesc/brindesc.c loc=90 priority=M
+[pending] src/backend/access/rmgrdesc/mxactdesc.c loc=85 priority=M
+[pending] src/backend/access/rmgrdesc/committsdesc.c loc=42 priority=L
+[pending] src/backend/access/rmgrdesc/dbasedesc.c loc=60 priority=L
+[pending] src/backend/access/rmgrdesc/genericdesc.c loc=45 priority=L
+[pending] src/backend/access/rmgrdesc/logicalmsgdesc.c loc=46 priority=L
+[pending] src/backend/access/rmgrdesc/relmapdesc.c loc=35 priority=L
+[pending] src/backend/access/rmgrdesc/replorigindesc.c loc=44 priority=L
+[pending] src/backend/access/rmgrdesc/seqdesc.c loc=34 priority=L
+[pending] src/backend/access/rmgrdesc/smgrdesc.c loc=45 priority=L
+[pending] src/backend/access/rmgrdesc/tblspcdesc.c loc=42 priority=L
