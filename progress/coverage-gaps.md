@@ -62,7 +62,7 @@ sub-dir overviews); flagged with `>100%`.
 
 ---
 
-## src/include — 568 / 844 docs (67.3%, +207 from A15)
+## src/include — 661 / 844 docs (78.3%, +93 from A17)
 
 Headers are the API surface and the principal source of invariant
 documentation (struct field comments, INV-* anchors). Coverage here
@@ -73,16 +73,17 @@ matters as much as `.c` files.
 | Subdir | Source | Docs | Coverage |
 |---|---:|---:|---:|
 | optimizer | 28 | 28 | 100.0% |
-| ~~lib~~ | 15 | 15 | 100.0% (DONE 2026-06-09, A15) |
+| ~~lib~~ | 15 | 15 | 100.0% (A15) |
+| ~~rewrite~~ | 9 | 9 | 100.0% (A17) |
+| ~~commands~~ | 43 | 43 | 100.0% (A17) |
+| ~~nodes~~ | 24 | 24 | 100.0% (A17) |
+| ~~parser~~ | 23 | 23 | 100.0% (A17) |
+| ~~tcop~~ | 9 | 9 | 100.0% (A17) |
+| ~~executor~~ | 61 | 61 | 100.0% (A15+A17) |
 | postmaster | 15 | 14 | 93.3% |
 | storage | 69 | 61 | 88.4% (post-A15) |
-| rewrite | 9 | 7 | 77.8% |
-| commands | 43 | 33 | 76.7% |
-| nodes | 24 | 18 | 75.0% |
 | utils | 97 | 98 | 100%+ (post-A15) |
-| parser | 23 | 16 | 69.6% |
-| access | 94 | 63 | 67.0% |
-| tcop | 9 | 6 | 66.7% |
+| access | 94 | 95 | 101.1% (A17 — 32 added) |
 
 ### Mid gaps
 
@@ -277,9 +278,10 @@ CRC32 + intarray mod-hash + pg_trgm mod-hash + bloom LCG).
 13. ~~**Foreground sweep #13** — contrib/ datatypes + index-AMs~~ — **DONE 2026-06-09 (PR #100 — pending merge at A14 branch time)** (53 docs / 56 files, ~155 issues; `knowledge/issues/{hstore,ltree,btree_gist,intarray,tablefunc,citext,btree_gin}.md`). 4 parallel agents; 0 misdirection. **Headlines:** (1) **🚨 `tablefunc.connectby_text` SQL injection** — 5 of 6 identifier args interpolated raw via `appendStringInfo`; (2) **ltree `parse_lquery` ~400000× memory amplification** + `checkCond` regex-class catastrophic backtracker + `crc32.c` locale-change silently breaks GiST signatures; (3) **hstore forged `HS_FLAG_NEWVERSION` bypasses ALL validation** → controllable OOB-read; (4) **btree_gist float4/float8 NaN divergence vs nbtree** — `EXCLUDE USING gist (val WITH =)` permits duplicate NaN rows; (5) **intarray signature-tree trivial bit-collisions** (mod-hash siglen*8); (6) **citext collation asymmetry** (`=` DEFAULT-collation vs `<` INPUT-collation). **NEW corpus-wide clusters:** GiST-collision attacks on attacker data (4-module); text-to-SPI injection sinks (5-sweep cluster).
 14. ~~**Foreground sweep #14** — contrib/ remainder cleanup~~ — **DONE 2026-06-09 (this sweep)** (40 docs / 44 files, ~90 issues across 23 modules; `knowledge/issues/{pg_visibility,pg_buffercache,pg_freespacemap,pg_prewarm,pgrowlocks,pg_walinspect,pg_surgery,pg_overexplain,basebackup_to_shell,basic_archive,tsm_system_rows,tsm_system_time,lo,bloom,isn,seg,cube,earthdistance,unaccent,dict_xsyn,dict_int,pg_trgm,fuzzystrmatch}.md`). 4 parallel agents; 0 misdirection. **14 sweeps in a row.** Headlines summarized inline at "## contrib" above.
 15. ~~**Foreground sweep #15** — src/include finishing pass~~ — **DONE 2026-06-09 (PR #102)** (115 docs / 115 files, ~188 issues across 4 sub-trees; 4 parallel agents; zero misdirection; 15 sweeps in a row). Slices: A15-1 utils sec/locale/GUC (18 headers); A15-2 utils types+memory+datum (~30 headers); A15-3 utils backend-state + executor support (~28 headers); A15-4 lib (15, FULL DIR) + storage core (~22). Headlines: PS title leaks SQL (incl passwords) to other OS users; `USE_INJECTION_POINTS` in prod = arbitrary dlopen + symbol execute; spi.h is the canonical text-to-SQL injection sink (A9/A10/A13 cluster); stringinfo.h is the central injection sink for A7/A13/A14; ruleutils `pg_get_viewdef` loses view security clauses (A7 cross-finding confirmed at API layer); `pg_str{lower,upper}` 3x ICU casemap uncapped (A7 echo); MCV-leak gate per-estimator; bloomfilter.h is the in-tree generic Bloom — contrib AMs each ship their own (5 implementations); execParallel workers inherit leader's whole security envelope. Registers: `knowledge/issues/include-{utils,executor,lib,storage}.md`.
-16. ~~**Foreground sweep #16** — src/include/{common,port} enrichment + port finishing~~ — **DONE 2026-06-09 (PR #103)** (22 NEW port docs + 50 enriched common docs; ~130 new ISSUE tags; 2 new registers; 4 parallel agents; zero misdirection; 16 sweeps in a row). Slices: A16-1 common crypto/hash/secret (14 enriched); A16-2 common file/parse/string (19 enriched); A16-3 common types/unicode/json (17 enriched); A16-4 port (22 NEW top-level + 11 platform-specific shims). Headlines: jsonapi recursive-parser frontend SIGSEGV (A5 at API layer); cryptohash.h is the SecretBuf template; no constant-time compare helpers anywhere in tree; SCRAM iter cap absent; pg_prng exposes s0/s1 raw with no "NOT FOR SECURITY"; OpenSSL 3.0 EVP_*_fetch shims not yet in tree (A11 modernization); percentrepl.h does no shell escaping (A5+A8+A14); atomics.h u64 fallback invisible at call sites; CRC32C trivially collidable (A11/A13/A14 cluster echo); pg_numa cross-pid query is privacy probe. Registers: `knowledge/issues/{include-common,include-port}.md`. **25 port subdir files (atomics/*.h, win32/*.h, win32_msvc/*.h) deferred to cloud routine.**
-17. **Next foreground candidates:** **refresh source anchor** (`4b0bf0788b0` ~9 days stale; ~29-50 master commits accumulated) — first-class candidate; OR `src/include/executor` remaining ~33 thin `nodeXxx.h` plan-node decl headers (low value, cloud-fillable); OR `src/interfaces/ecpg` (~127 files, low Phase D); OR `src/test` regress framework selectively; OR pivot toward **Phase B** (developer personas mined from pgsql-hackers + commits).
-18. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
+16. ~~**Foreground sweep #16** — src/include/{common,port} enrichment + port finishing~~ — **DONE 2026-06-09 (PR #103)** (22 NEW port docs + 50 enriched common docs; ~130 new ISSUE tags; 2 new registers; 4 parallel agents; zero misdirection; 16 sweeps in a row).
+17. ~~**Foreground sweep #17** — src/include remainder load-bearing (access + commands + nodes + parser + tcop + rewrite + executor nodeXxx.h)~~ — **DONE 2026-06-09 (PR #104)** (93 NEW docs / 93 files / ~153 issues; 4 parallel agents; zero misdirection; **17 sweeps in a row**). Slices: A17-1 access AM/heap/toast (16); A17-2 access WAL/multixact/visibility/sequence (16); A17-3 commands/nodes/parser/tcop/rewrite (28); A17-4 executor nodeXxx.h (33). Headlines: amapi.h+tableam.h required callbacks Assert-only in prod; heaptoast.h trusts caller valueid (A12 cross-table read API host); 4-site X-macro cluster confirmed (rmgrlist+lwlocklist+cmdtaglist+kwlist); A11 cleartext-password 3-header cluster (queryjumble+cmdtaglist+deparse_utility); readfuncs.h hostile-deserialization not named as trust boundary; PG18 SQL/PGQ entirely new attack surface; syncscan.h cross-tenant read-pattern leak (NEW monitoring-as-extraction echo); nodeCustom.h unsandboxed extension RCE surface; nodeTableFuncscan.h XMLTABLE→libxml2 (A7 echo); subscripting+supportnodes self-asserted leakproof flag breaks RLS ordering. Registers: `knowledge/issues/{include-access,include-cmds-nodes-parser-tcop-rewrite}.md` + extended `include-executor.md`.
+18. **Next foreground candidates:** **refresh source anchor** (`4b0bf0788b0` ~10 days stale) — first-class candidate; OR `src/interfaces/ecpg` (~127 files, low Phase D); OR `src/test` regress framework selectively; OR pivot toward **Phase B** (developer personas mined from pgsql-hackers + commits). src/include is now ~81% covered (~163 thin or non-load-bearing files remain — most fillable by cloud routine).
+19. **Defer** — `snowball/` (generated), `timezone/` (imported tzcode), `pch/` (precompiled-header glue), `po/` (translations), ecpg (127 files; embedded SQL — low Phase D priority).
 
 ---
 
