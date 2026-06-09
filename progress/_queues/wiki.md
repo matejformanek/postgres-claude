@@ -42,7 +42,7 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 
 ## Refill 2026-06-08 (re-walk of wiki-index.md — remaining developer pages without a wiki-distilled/<slug>.md; Developer_FAQ + So-you-want already have community/ docs, stale stubs and 404s excluded)
 
-[in-progress:cloud/pg-docs-miner/2026-06-08] Mailing_Lists https://wiki.postgresql.org/wiki/Mailing_Lists
-[in-progress:cloud/pg-docs-miner/2026-06-08] CommitFest https://wiki.postgresql.org/wiki/CommitFest
-[in-progress:cloud/pg-docs-miner/2026-06-08] HowToBetaTest https://wiki.postgresql.org/wiki/HowToBetaTest
-[in-progress:cloud/pg-docs-miner/2026-06-08] Development_information https://wiki.postgresql.org/wiki/Development_information
+[done:8c2dd79] Mailing_Lists https://wiki.postgresql.org/wiki/Mailing_Lists
+[done:8c2dd79] CommitFest https://wiki.postgresql.org/wiki/CommitFest
+[done:8c2dd79] HowToBetaTest https://wiki.postgresql.org/wiki/HowToBetaTest
+[done:8c2dd79] Development_information https://wiki.postgresql.org/wiki/Development_information
