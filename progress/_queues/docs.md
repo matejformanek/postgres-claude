@@ -42,7 +42,7 @@ table of contents, exclude chapters whose slug already exists under
 [done:b91492b] storage-hot https://www.postgresql.org/docs/current/storage-hot.html
 [done:b91492b] wal-for-extensions https://www.postgresql.org/docs/current/wal-for-extensions.html
 [done:8c2dd79] hash-index https://www.postgresql.org/docs/current/hash-index.html
-[pending] planner-stats-details https://www.postgresql.org/docs/current/planner-stats-details.html  # 2026-06-08: WebFetch extraction returned ToC-only twice (chapter landing summarized, subsection content not pulled); left pending for a retry
+[skipped:webfetch-toc-only-4x] planner-stats-details https://www.postgresql.org/docs/current/planner-stats-details.html  # 2026-06-09: retried twice more (/current/ and /docs/18/ slugs) — WebFetch markdown conversion strips the body of this multi-subsection page every time, returning only the ToC (4 failed attempts total across 06-08/06-09). Genuine extraction failure, not transient. Body lives in subsections (Functional Dependencies / Multivariate N-Distinct / MCV Lists); revisit only if WebFetch behavior changes or via a manual paste.
 
 ## Refill 2026-06-08 (re-walk of internals.html ToC + Part V "Extending SQL" index chapters — internals-prose chapters without a docs-distilled/<slug>.md; per-catalog/per-view reference pages excluded)
 
@@ -56,3 +56,13 @@ table of contents, exclude chapters whose slug already exists under
 [done:8c2dd79] xtypes https://www.postgresql.org/docs/current/xtypes.html
 [done:8c2dd79] xaggr https://www.postgresql.org/docs/current/xaggr.html
 [done:8c2dd79] wal-internals https://www.postgresql.org/docs/current/wal-internals.html
+
+## Refill 2026-06-09 (both queues drained at run start — wiki side fully exhausted per wiki-index.md; re-walked internals.html ToC for protocol + rule-system + trigger leaf chapters not yet under docs-distilled/, picking dense leaf-prose pages over ToC-style parent chapters to dodge the planner-stats-details extraction failure)
+
+[in-progress:cloud/pg-docs-miner/2026-06-09] protocol-message-formats https://www.postgresql.org/docs/current/protocol-message-formats.html
+[in-progress:cloud/pg-docs-miner/2026-06-09] protocol-replication https://www.postgresql.org/docs/current/protocol-replication.html
+[in-progress:cloud/pg-docs-miner/2026-06-09] xfunc-volatility https://www.postgresql.org/docs/current/xfunc-volatility.html
+[in-progress:cloud/pg-docs-miner/2026-06-09] querytree https://www.postgresql.org/docs/current/querytree.html
+[in-progress:cloud/pg-docs-miner/2026-06-09] trigger-interface https://www.postgresql.org/docs/current/trigger-interface.html
+[in-progress:cloud/pg-docs-miner/2026-06-09] rules-views https://www.postgresql.org/docs/current/rules-views.html
+[in-progress:cloud/pg-docs-miner/2026-06-09] trigger-datachanges https://www.postgresql.org/docs/current/trigger-datachanges.html

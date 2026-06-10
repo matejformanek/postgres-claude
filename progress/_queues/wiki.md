@@ -46,3 +46,16 @@ without a corresponding `knowledge/wiki-distilled/<slug>.md`.
 [done:8c2dd79] CommitFest https://wiki.postgresql.org/wiki/CommitFest
 [done:8c2dd79] HowToBetaTest https://wiki.postgresql.org/wiki/HowToBetaTest
 [done:8c2dd79] Development_information https://wiki.postgresql.org/wiki/Development_information
+
+## EXHAUSTED — 2026-06-09 re-walk of wiki-index.md
+
+Wiki side is drained: every developer-relevant page in `knowledge/community/wiki-index.md`
+either has a `knowledge/wiki-distilled/<slug>.md` (all rows above) or is explicitly
+unusable — `MVCC` (stale 2012 stub), `Parallel_Query_Execution` (stale 2017 design stub,
+superseded by docs-distilled/parallel-query.md), `Development_projects`/roadmap pages
+(archival), and the confirmed 404s (`Logical_Decoding`, `MultiXacts`, `WAL_Internals`,
+`Generic_WAL`, `Backend_flowchart`, `Hacking_on_PostgreSQL`, `Glossary`,
+`Working_with_GDB`, `Developer_Mentoring`). `Coding_Conventions` / `Running_a_Commitfest`
+are redirects/stubs deferring to docs `source.html` / `CommitFest_Checklist` (both already
+distilled). No new wiki candidates exist this run; this routine ran docs-only. Refill only
+if wiki-index.md gains new rows.
