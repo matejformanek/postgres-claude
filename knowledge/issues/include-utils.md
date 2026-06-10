@@ -88,6 +88,7 @@ Per-subsystem issue register for the **utils header layer** — ACL/RLS, locale/
 - [ISSUE-documentation: inet_recv validation contract hidden (maybe)] — `inet.h:23-89`
 - [ISSUE-correctness: varstr_levenshtein `trusted=true` flag is foot-gun (maybe)] — `varlena.h:21-28`
 - [ISSUE-correctness: varbit_recv pad-bit-zero contract hidden (maybe)] — `varbit.h:25-28`
+- [ISSUE-documentation: array iterator's `i` argument is misleading — iteration is sequential despite the index param; an `i == prev+1` assert under USE_ASSERT_CHECKING would catch misuse (nit)] — `arrayaccess.h:29-30`
 
 ### XML / JSON
 - [ISSUE-correctness: pg_xml_init must wrap every libxml call (likely)] — `xml.h:65-70` (A7 critical)
@@ -120,6 +121,8 @@ Per-subsystem issue register for the **utils header layer** — ACL/RLS, locale/
 - [ISSUE-correctness: hash_seq_term required to avoid leaked scan flag (maybe)] — `hsearch.h:144-149`
 - [ISSUE-documentation: pg_crc legacy error-detection properties unknown (nit, A11/A13 cluster echo)] — `pg_crc.h:67-73`
 - [ISSUE-documentation: pg_prng not security-grade (nit)] — `sampling.h:16-23`
+- [ISSUE-documentation: sentinel write/check is MEMORY_CONTEXT_CHECKING-only; production builds skip it so buffer-overrun sentinels corrupt silently (nit)] — `memdebug.h:51-72`
+- [ISSUE-documentation: FPM_PAGE_SIZE is 4 kB, easily confused with the 8 kB BLCKSZ buffer page by readers grepping for the page constant (nit)] — `freepage.h:30`
 
 ## Entries — A15-3 (backend-state + relation caches)
 
@@ -159,6 +162,7 @@ Per-subsystem issue register for the **utils header layer** — ACL/RLS, locale/
 - [ISSUE-api-shape: timeout.h only 10 USER_TIMEOUT slots; not documented as hard cluster-wide limit (nit)] — `timeout.h:39-42`
 - [ISSUE-documentation: timeout.h handler-context (deferred-via-CFI vs signal) not named in header (maybe)] — `timeout.h:46`
 - [ISSUE-api-shape: `pgstat_report_wait_start` unconditional (no track_activities check); cross-role-visible even when monitoring "off" (nit)] — `wait_event.h:58-61`
+- [ISSUE-documentation: the `0x02` gap in the wait-class encoding is uncommented; future readers may wonder whether it can be claimed (nit)] — `wait_classes.h:19-20`
 
 ## Cross-sweep references
 
