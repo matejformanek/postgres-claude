@@ -27,7 +27,7 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-10 (post A17 src/include remainder sweep — 7 sub-trees, ~153 issues; combined with A16 + overnight cloud rmgrdesc), source pin `4b0bf0788b0`.
+Refreshed 2026-06-10 (post A17 src/include remainder sweep — 7 sub-trees, ~153 issues; combined with A16 + overnight cloud rmgrdesc). **Source pin bumped 2026-06-10 from `4b0bf0788b0` (Stamp 19beta1) to `e18b0cb7344` (Fix MarkBufferDirtyHint() local-buffer regression) — 63 master commits absorbed; drift inventory at `progress/anchor-refresh-2026-06-10.md`.** Per-file docs that pre-date this refresh remain tagged against `4b0bf0788b0` and will be re-anchored on next re-touch.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
