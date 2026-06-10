@@ -313,36 +313,83 @@ standby). The remaining 16 (per-AM descs) are queued for the next cloud run.
 > `<name>.h.md` (keep the `.h`) to match the majority convention and
 > avoid widening the naming split.
 
-[pending] src/include/executor/nodeBitmapAnd.h loc=26 priority=M
-[pending] src/include/executor/nodeBitmapHeapscan.h loc=57 priority=M
-[pending] src/include/executor/nodeBitmapIndexscan.h loc=45 priority=M
-[pending] src/include/executor/nodeBitmapOr.h loc=26 priority=M
-[pending] src/include/executor/nodeCtescan.h loc=24 priority=M
-[pending] src/include/executor/nodeCustom.h loc=48 priority=M
-[pending] src/include/executor/nodeForeignscan.h loc=50 priority=M
-[pending] src/include/executor/nodeFunctionscan.h loc=26 priority=M
-[pending] src/include/executor/nodeGather.h loc=26 priority=M
-[pending] src/include/executor/nodeGatherMerge.h loc=30 priority=M
-[pending] src/include/executor/nodeGroup.h loc=24 priority=M
-[pending] src/include/executor/nodeIncrementalSort.h loc=43 priority=M
-[pending] src/include/executor/nodeIndexonlyscan.h loc=64 priority=M
-[pending] src/include/executor/nodeLimit.h loc=23 priority=M
-[pending] src/include/executor/nodeLockRows.h loc=24 priority=M
-[pending] src/include/executor/nodeMaterial.h loc=28 priority=M
-[pending] src/include/executor/nodeMemoize.h loc=39 priority=M
-[pending] src/include/executor/nodeMergeAppend.h loc=25 priority=M
-[pending] src/include/executor/nodeNamedtuplestorescan.h loc=26 priority=M
-[pending] src/include/executor/nodeNestloop.h loc=24 priority=M
-[pending] src/include/executor/nodeProjectSet.h loc=25 priority=M
-[pending] src/include/executor/nodeRecursiveunion.h loc=27 priority=M
-[pending] src/include/executor/nodeResult.h loc=27 priority=M
-[pending] src/include/executor/nodeSamplescan.h loc=25 priority=M
-[pending] src/include/executor/nodeSeqscan.h loc=52 priority=M
-[pending] src/include/executor/nodeSetOp.h loc=26 priority=M
-[pending] src/include/executor/nodeSubqueryscan.h loc=26 priority=M
-[pending] src/include/executor/nodeTableFuncscan.h loc=26 priority=M
-[pending] src/include/executor/nodeTidrangescan.h loc=57 priority=M
-[pending] src/include/executor/nodeTidscan.h loc=24 priority=M
-[pending] src/include/executor/nodeUnique.h loc=23 priority=M
-[pending] src/include/executor/nodeValuesscan.h loc=23 priority=M
-[pending] src/include/executor/nodeWorktablescan.h loc=24 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeBitmapAnd.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeBitmapHeapscan.h loc=57 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeBitmapIndexscan.h loc=45 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeBitmapOr.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeCtescan.h loc=24 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeCustom.h loc=48 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeForeignscan.h loc=50 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeFunctionscan.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeGather.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeGatherMerge.h loc=30 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeGroup.h loc=24 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeIncrementalSort.h loc=43 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeIndexonlyscan.h loc=64 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeLimit.h loc=23 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeLockRows.h loc=24 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeMaterial.h loc=28 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeMemoize.h loc=39 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeMergeAppend.h loc=25 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeNamedtuplestorescan.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeNestloop.h loc=24 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeProjectSet.h loc=25 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeRecursiveunion.h loc=27 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeResult.h loc=27 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeSamplescan.h loc=25 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeSeqscan.h loc=52 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeSetOp.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeSubqueryscan.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeTableFuncscan.h loc=26 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeTidrangescan.h loc=57 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeTidscan.h loc=24 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeUnique.h loc=23 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeValuesscan.h loc=23 priority=M
+[done:exec-headers-cloud-2026-06-10] src/include/executor/nodeWorktablescan.h loc=24 priority=M
+
+## src/include/port platform + arch-primitive headers (refill, 2026-06-10 cloud)
+
+> **2026-06-10 (cloud/pg-file-backfiller):** the `src/include/executor/`
+> thin-header block above is now **fully drained** — all 33 deferred
+> `nodeXxx.h` plan-node declaration headers documented this run
+> (`knowledge/files/src/include/executor/*.h.md`). With those landed,
+> `src/include/executor/` is effectively complete: the remote tree at
+> anchor `4b0bf0788b0` lists 61 `.h`, and the corpus now holds 61
+> matching docs (53 `*.h.md` + 8 `*.md` for the non-thin support files).
+> No new issues filed — these are pure prototype headers; the one
+> cross-cutting observation (Values/Worktable/NamedTuplestore declare no
+> `ExecEnd*`) is already documented in source at `execProcnode.c:734-738`,
+> so it's a cross-ref, not an issue. Per the refill rule (queue depth < 5),
+> the next-priority gap was verified by listing the GitHub tree at anchor:
+> `src/include/port` is a clean **0/22** (untouched by the A15 src/include
+> sweep, which covered utils/executor/lib/storage). High-value first: the
+> arch primitives `atomics.h` (the lock-free abstraction — pairs with the
+> `locking` skill), `pg_crc32c.h` / `pg_bswap.h` / `pg_bitutils.h` /
+> `simd.h` / `pg_lfind.h` (SIMD-accelerated search), and the PG18
+> `pg_numa.h`. The OS-specific glue headers (aix/darwin/freebsd/linux/
+> netbsd/openbsd/solaris/cygwin/win32*) are low doc-value platform
+> boilerplate — queued last. LOC values are rough byte/30 estimates;
+> the next run should correct from the fetched file.
+
+[pending] src/include/port/atomics.h loc=600 priority=H
+[pending] src/include/port/pg_crc32c.h loc=210 priority=H
+[pending] src/include/port/pg_bswap.h loc=160 priority=H
+[pending] src/include/port/pg_bitutils.h loc=320 priority=H
+[pending] src/include/port/simd.h loc=490 priority=H
+[pending] src/include/port/pg_lfind.h loc=170 priority=H
+[pending] src/include/port/pg_numa.h loc=33 priority=M
+[pending] src/include/port/pg_iovec.h loc=95 priority=M
+[pending] src/include/port/pg_cpu.h loc=45 priority=M
+[pending] src/include/port/pg_pthread.h loc=33 priority=M
+[pending] src/include/port/pg_getopt_ctx.h loc=40 priority=M
+[pending] src/include/port/win32_port.h loc=580 priority=L
+[pending] src/include/port/win32.h loc=25 priority=L
+[pending] src/include/port/win32ntdll.h loc=55 priority=L
+[pending] src/include/port/aix.h loc=27 priority=L
+[pending] src/include/port/darwin.h loc=10 priority=L
+[pending] src/include/port/freebsd.h loc=10 priority=L
+[pending] src/include/port/linux.h loc=12 priority=L
+[pending] src/include/port/netbsd.h loc=10 priority=L
+[pending] src/include/port/openbsd.h loc=10 priority=L
+[pending] src/include/port/solaris.h loc=35 priority=L
+[pending] src/include/port/cygwin.h loc=10 priority=L
