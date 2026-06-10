@@ -279,19 +279,70 @@ standby). The remaining 16 (per-AM descs) are queued for the next cloud run.
 [done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/heapdesc.c loc=475 priority=H
 [done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/clogdesc.c loc=59 priority=M
 [done:rmgrdesc-2026-06-08] src/backend/access/rmgrdesc/standbydesc.c loc=140 priority=H
-[pending] src/backend/access/rmgrdesc/nbtdesc.c loc=230 priority=M
-[pending] src/backend/access/rmgrdesc/gindesc.c loc=200 priority=M
-[pending] src/backend/access/rmgrdesc/gistdesc.c loc=95 priority=M
-[pending] src/backend/access/rmgrdesc/hashdesc.c loc=160 priority=M
-[pending] src/backend/access/rmgrdesc/spgdesc.c loc=140 priority=M
-[pending] src/backend/access/rmgrdesc/brindesc.c loc=90 priority=M
-[pending] src/backend/access/rmgrdesc/mxactdesc.c loc=85 priority=M
-[pending] src/backend/access/rmgrdesc/committsdesc.c loc=42 priority=L
-[pending] src/backend/access/rmgrdesc/dbasedesc.c loc=60 priority=L
-[pending] src/backend/access/rmgrdesc/genericdesc.c loc=45 priority=L
-[pending] src/backend/access/rmgrdesc/logicalmsgdesc.c loc=46 priority=L
-[pending] src/backend/access/rmgrdesc/relmapdesc.c loc=35 priority=L
-[pending] src/backend/access/rmgrdesc/replorigindesc.c loc=44 priority=L
-[pending] src/backend/access/rmgrdesc/seqdesc.c loc=34 priority=L
-[pending] src/backend/access/rmgrdesc/smgrdesc.c loc=45 priority=L
-[pending] src/backend/access/rmgrdesc/tblspcdesc.c loc=42 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/nbtdesc.c loc=230 priority=M
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/gindesc.c loc=200 priority=M
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/gistdesc.c loc=95 priority=M
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/hashdesc.c loc=160 priority=M
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/spgdesc.c loc=140 priority=M
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/brindesc.c loc=90 priority=M
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/mxactdesc.c loc=85 priority=M
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/committsdesc.c loc=42 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/dbasedesc.c loc=60 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/genericdesc.c loc=45 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/logicalmsgdesc.c loc=46 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/relmapdesc.c loc=35 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/replorigindesc.c loc=44 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/seqdesc.c loc=34 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/smgrdesc.c loc=45 priority=L
+[done:rmgrdesc-cloud-2026-06-09] src/backend/access/rmgrdesc/tblspcdesc.c loc=42 priority=L
+
+## src/include/executor/ thin nodeXxx.h decl headers (refill, 2026-06-09 cloud)
+
+> **2026-06-09 queue refill (cloud/pg-file-backfiller):** the
+> `src/backend/access/rmgrdesc/` block above is now **fully drained** —
+> all 22 WAL-descriptor files covered (6 high-value on 2026-06-08 + the
+> 16 per-AM descs this run). Per the refill rule (queue depth < 5), the
+> next-priority gap was recomputed by diffing the GitHub tree at anchor
+> `4b0bf0788b0` against `knowledge/files/src/include/executor/` (with
+> name normalization for the `nodeAgg.h.md` vs `execAsync.md` split that
+> the A15 sweep left behind): **33 uncovered thin `nodeXxx.h`
+> plan-node execution declaration headers**, exactly the set A15
+> explicitly deferred to cloud. Each is a 1-3 line `ExecInitXxx` /
+> `ExecXxx` / `ExecEndXxx` prototype header; expect to batch many per
+> run. Load the `executor-and-planner` skill. NB: write docs as
+> `<name>.h.md` (keep the `.h`) to match the majority convention and
+> avoid widening the naming split.
+
+[pending] src/include/executor/nodeBitmapAnd.h loc=26 priority=M
+[pending] src/include/executor/nodeBitmapHeapscan.h loc=57 priority=M
+[pending] src/include/executor/nodeBitmapIndexscan.h loc=45 priority=M
+[pending] src/include/executor/nodeBitmapOr.h loc=26 priority=M
+[pending] src/include/executor/nodeCtescan.h loc=24 priority=M
+[pending] src/include/executor/nodeCustom.h loc=48 priority=M
+[pending] src/include/executor/nodeForeignscan.h loc=50 priority=M
+[pending] src/include/executor/nodeFunctionscan.h loc=26 priority=M
+[pending] src/include/executor/nodeGather.h loc=26 priority=M
+[pending] src/include/executor/nodeGatherMerge.h loc=30 priority=M
+[pending] src/include/executor/nodeGroup.h loc=24 priority=M
+[pending] src/include/executor/nodeIncrementalSort.h loc=43 priority=M
+[pending] src/include/executor/nodeIndexonlyscan.h loc=64 priority=M
+[pending] src/include/executor/nodeLimit.h loc=23 priority=M
+[pending] src/include/executor/nodeLockRows.h loc=24 priority=M
+[pending] src/include/executor/nodeMaterial.h loc=28 priority=M
+[pending] src/include/executor/nodeMemoize.h loc=39 priority=M
+[pending] src/include/executor/nodeMergeAppend.h loc=25 priority=M
+[pending] src/include/executor/nodeNamedtuplestorescan.h loc=26 priority=M
+[pending] src/include/executor/nodeNestloop.h loc=24 priority=M
+[pending] src/include/executor/nodeProjectSet.h loc=25 priority=M
+[pending] src/include/executor/nodeRecursiveunion.h loc=27 priority=M
+[pending] src/include/executor/nodeResult.h loc=27 priority=M
+[pending] src/include/executor/nodeSamplescan.h loc=25 priority=M
+[pending] src/include/executor/nodeSeqscan.h loc=52 priority=M
+[pending] src/include/executor/nodeSetOp.h loc=26 priority=M
+[pending] src/include/executor/nodeSubqueryscan.h loc=26 priority=M
+[pending] src/include/executor/nodeTableFuncscan.h loc=26 priority=M
+[pending] src/include/executor/nodeTidrangescan.h loc=57 priority=M
+[pending] src/include/executor/nodeTidscan.h loc=24 priority=M
+[pending] src/include/executor/nodeUnique.h loc=23 priority=M
+[pending] src/include/executor/nodeValuesscan.h loc=23 priority=M
+[pending] src/include/executor/nodeWorktablescan.h loc=24 priority=M
