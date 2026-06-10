@@ -31,5 +31,35 @@ Block-reference-table API consumed by `pg_combinebackup` (and the server-side in
 
 See `blkreftable.c.md` — magic+CRC are the only on-disk auth; chunk-count sanity-checked but per-block bitmap is unbounded by design.
 
+## Issues
+
+[ISSUE-trust-boundary: `BlockRefTableSetLimitBlock` accepts arbitrary
+`limit_block` from caller-controlled data; no header-level contract
+that a malicious BRT cannot silently drop blocks from a combined
+backup (high)] `blkreftable.h:54-57` declares the setter with no
+bounds-validation hint. A5's `common.md` headline: a hostile BRT can
+set `limit_block` to a value smaller than the relation's true length,
+and `pg_combinebackup` will treat the dropped tail as
+"covered-by-bitmap" → blocks vanish from the reconstructed backup.
+The .h does not even comment that the limit is security-sensitive on
+read. Cross-link: backup chain trust model.
+
+[ISSUE-undocumented-invariant: `report_error_fn` is documented to
+"not return" (`blkreftable.h:44`) but the typedef is a normal C
+function pointer — there is no compiler-enforced `noreturn`. A
+buggy callback that DOES return leaves the reader in an undefined
+state (medium)] The contract is comment-only.
+
+[ISSUE-trust-boundary: `io_callback_fn` (`blkreftable.h:46`) takes
+attacker-controlled `data`/`length` on read; the header punts all
+length validation to callers. The opaque `BlockRefTableReader`
+implementation in `.c` is the actual integrity-checker (low)]
+
+## Cross-refs
+
+- A5 `common.md` — limit_block attack (high).
+- A6 `pg_combinebackup` — primary consumer.
+- Companion: `src/common/blkreftable.c.md`.
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=8`

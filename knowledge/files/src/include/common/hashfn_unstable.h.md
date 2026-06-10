@@ -72,16 +72,28 @@ None. All inline.
   simplehash users typically operate on small in-memory sets where
   collisions are bounded by `work_mem` spill.
 
-## Potential issues
-- [ISSUE-undocumented-invariant: simplehash users mustn't persist their
-  hash values — enforced only by naming and the "unstable" header.
-  A future caller could violate this by serializing a simplehash entry's
-  hashcode. (maybe)]
-- [ISSUE-correctness: `fasthash_accum_cstring_aligned` reads up to 7
-  bytes past NUL. Safe on palloc'd strings (allocator alignment), unsafe
-  on stack-allocated short strings or string slices not on 8-byte
-  boundaries. The `PointerIsAligned(str, uint64)` gate at line 309 is
-  the only check. (maybe)]
-- [ISSUE-side-channel: hashfn_unstable timings can leak data layout via
-  branch prediction (length-dependent switch in fasthash_accum), but the
-  data being hashed is typically not security-sensitive. (low)]
+## Cross-refs
+- Stable companion: `knowledge/files/src/include/common/hashfn.h.md`.
+- simplehash template: `src/include/lib/simplehash.h` callers.
+- A11/A13/A14 hash-collision cluster context:
+  `knowledge/issues/pgcrypto.md`, `knowledge/issues/contrib/citext.md`.
+
+## Issues
+1. `[ISSUE-audit-gap: simplehash users mustn't persist their hash
+   values — enforced only by naming and the "unstable" header. A
+   future caller could violate this by serializing a simplehash
+   entry's hashcode (maybe)]` —
+   `source/src/include/common/hashfn_unstable.h:1-13`.
+2. `[ISSUE-correctness: fasthash_accum_cstring_aligned reads up to 7
+   bytes past NUL. Safe on palloc'd strings (allocator alignment),
+   unsafe on stack-allocated short strings or string slices not on
+   8-byte boundaries. PointerIsAligned gate at line 309 is the only
+   check (maybe)]` — `source/src/include/common/hashfn_unstable.h:259-291`.
+3. `[ISSUE-defense-in-depth: timings can leak data layout via
+   branch prediction (length-dependent switch in fasthash_accum), but
+   data hashed is typically not security-sensitive (nit)]` —
+   `source/src/include/common/hashfn_unstable.h:144-219`.
+4. `[ISSUE-documentation: "unstable" guarantee is only in the file's
+   leading comment; no per-function reminder — easy to copy a
+   prototype into a context where it gets persisted (nit)]` —
+   `source/src/include/common/hashfn_unstable.h:1-13`.

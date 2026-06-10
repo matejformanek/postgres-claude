@@ -41,6 +41,22 @@ whitespace. [from-comment, base64.h:3-5]
 - Primary SCRAM consumer: `src/common/scram-common.c`.
 - Looser non-common variant: `src/backend/utils/adt/encode.c`.
 
+## Issues
+
+1. `[ISSUE-documentation: header doesn't explain why two base64
+   codecs exist in tree (common vs encode.c) — invites the next
+   contributor to add another (nit)]` —
+   `source/src/include/common/base64.h:14-17`.
+2. `[ISSUE-api-shape: pg_b64_decode returns int and uses -1 as the
+   error sentinel; if len < 0 is passed by an int->int casting bug,
+   behaviour depends on impl. Header doesn't constrain len > 0
+   (maybe)]` — `source/src/include/common/base64.h:15`.
+3. `[ISSUE-defense-in-depth: no constant-time decode helper — if a
+   caller uses pg_b64_decode on a SCRAM ServerSignature comparison
+   path, dst content compared with memcmp may leak timing. Today
+   SCRAM uses timingsafe_bcmp post-decode, so this is theoretical
+   (nit)]` — `source/src/include/common/base64.h:15`.
+
 ## Tally
 
-`[verified-by-code]=3 [from-comment]=1`
+`[verified-by-code]=3 [from-comment]=2`

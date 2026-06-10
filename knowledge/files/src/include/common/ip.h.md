@@ -28,5 +28,26 @@ Pulls in `<netdb.h>`, `<sys/socket.h>`, and `libpq/pqcomm.h`.
 
 ## Phase D notes
 
-None specific to the header; all behaviour lives in `ip.c` and is
-documented there.
+## Issues
+
+[ISSUE-undocumented-invariant: `pg_getaddrinfo_all`
+(`ip.h:23-25`) "requires non-NULL hintp" — but the header has no
+explicit precondition statement. Passing NULL (legal for libc
+`getaddrinfo`) results in a `NULL hintp->ai_family` deref inside the
+wrapper (low)]
+
+[ISSUE-trust-boundary: `pg_getnameinfo_all` (`ip.h:28-31`) — the
+`flags` argument is passed verbatim to libc `getnameinfo`; a misuse
+(`NI_NAMEREQD` vs `NI_NUMERICHOST`) changes whether the reverse-DNS
+boundary is crossed. Header silent on which flags are appropriate
+for which caller (low)]
+
+[ISSUE-trust-boundary: shared FE+BE — pg_hba.conf hostname matching
+uses these wrappers; a poisoned DNS response can become an auth
+decision in the backend listener path (medium)] A2 cross-link;
+implementation in .c, but the .h could state the trust model.
+
+## Cross-refs
+
+- A2 libpq stack — primary consumer (auth, hostname matching).
+- Companion: `src/common/ip.c`.

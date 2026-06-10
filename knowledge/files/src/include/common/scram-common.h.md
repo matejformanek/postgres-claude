@@ -50,19 +50,69 @@ the five low-level helpers that implement RFC 5802 §3 derivations.
 
 ## Phase D notes
 
-- All five primitives take `const char *password` / `const uint8
-  *salted_password` — secret material lives in the caller's frame.
-  `scram_build_secret` is the only one that allocates output
-  (palloc/malloc); its three intermediate `uint8 [SCRAM_MAX_KEY_LEN]`
-  stack arrays in the impl carry derived key material. See
-  scram-common.c notes.
+- **All five primitives take raw `const char *password` / `const uint8
+  *salted_password`** — secret material lives in the caller's frame
+  and the header imposes no scrub contract. `scram_build_secret` is
+  the only one that allocates output (palloc/malloc); its three
+  intermediate `uint8 [SCRAM_MAX_KEY_LEN]` stack arrays in the impl
+  carry derived key material. See scram-common.c notes.
+- **Iteration-count clamping is absent at header level.** The
+  `SCRAM_SHA_256_DEFAULT_ITERATIONS = 4096` is per RFC 7677 minimum
+  (line 50). But `scram_SaltedPassword`'s `int iterations` param is
+  unbounded above — a malicious server can send a huge iteration
+  count in `SCRAM-SHA-256$<iter>:...` to force the client through
+  PBKDF2 for minutes; OWASP-2026 advisory is 600k as the *default*,
+  not the floor. Header offers no `SCRAM_SHA_256_MAX_ITERATIONS` cap
+  for callers to gate on. A8 / A11-related DoS surface.
+- **Hash type is parameterized** (`pg_cryptohash_type hash_type`) but
+  the impl only validates `PG_SHA256`; passing `PG_MD5` would silently
+  produce 32-byte truncated output that nothing in the wire format
+  accepts. Header doesn't constrain.
+- **Wire-protocol stability.** `SCRAM_SHA_256_NAME` and
+  `SCRAM_SHA_256_PLUS_NAME` are on-wire IANA names — renaming
+  breaks every SCRAM client. `SCRAM_RAW_NONCE_LEN = 18` and
+  `SCRAM_DEFAULT_SALT_LEN = 16` are wire-derived defaults; raising
+  them is a compat issue with old clients.
+- **`scram_build_secret` returns palloc'd / malloc'd string with the
+  full secret** in `pg_authid.rolpassword` shape — caller must
+  `pfree` (backend) or `free` (frontend). Output contains the
+  base64-encoded stored key (a SecretBuf candidate, technically, but
+  this one is meant to be persisted).
+- **`*errstr` opacity.** Every primitive returns `int` 0/-1 with
+  `const char **errstr`. The string is statically allocated and
+  reaches `ereport(ERROR)` callsites verbatim — same OpenSSL-leakage
+  concern as cryptohash_error.
 
 ## Cross-refs
 
 - Impl: `knowledge/files/src/common/scram-common.c.md`.
 - Backend caller: `knowledge/files/src/backend/libpq/auth-scram.c.md`.
 - Frontend caller: `src/interfaces/libpq/fe-auth-scram.c`.
+- HMAC dep: `knowledge/files/src/include/common/hmac.h.md`.
+- SHA-2 sizing: `knowledge/files/src/include/common/sha2.h.md`.
+
+## Issues
+
+1. `[ISSUE-defense-in-depth: no SCRAM_SHA_256_MAX_ITERATIONS upper
+   bound; client-side parse can be coerced into expensive PBKDF2
+   loops by a malicious server (likely)]` —
+   `source/src/include/common/scram-common.h:50`.
+2. `[ISSUE-documentation: SCRAM_SHA_256_DEFAULT_ITERATIONS = 4096 is
+   the RFC minimum; OWASP-2026 recommends ≥ 600 000. Header offers
+   no MIN/MAX guidance (likely)]` —
+   `source/src/include/common/scram-common.h:50`.
+3. `[ISSUE-api-shape: scram_SaltedPassword takes pg_cryptohash_type
+   hash_type but impl only accepts PG_SHA256; header doesn't
+   constrain (nit)]` — `source/src/include/common/scram-common.h:52`.
+4. `[ISSUE-defense-in-depth: password / salted_password params are
+   raw const char *; no SecretBuf-aware variant — caller must scrub
+   their own frame (likely)]` —
+   `source/src/include/common/scram-common.h:52-64`.
+5. `[ISSUE-documentation: SCRAM_MAX_KEY_LEN ties statically to
+   SCRAM_SHA_256_KEY_LEN; adding SCRAM-SHA-512 requires coordinated
+   bumps the header doesn't flag (nit)]` —
+   `source/src/include/common/scram-common.h:30`.
 
 ## Tally
 
-`[verified-by-code]=5 [inferred]=1`
+`[verified-by-code]=6 [inferred]=2`

@@ -27,14 +27,14 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-10 (cloud cycle: +16 `src/backend/access/rmgrdesc` per-AM descs via pg-file-backfiller #106; glossary +103 via pg-corpus-maintainer #107). Prior refresh 2026-06-09 (post A15 src/include finishing sweep — 4 sub-trees, ~188 issues), source pin `4b0bf0788b0`.
+Refreshed 2026-06-10 (post A16 src/include/{common,port} enrichment + port finishing — 130 new ISSUE tags, 2 new registers; combined with overnight cloud: +16 rmgrdesc via pg-file-backfiller #106 + glossary +103 via pg-corpus-maintainer #107), source pin `4b0bf0788b0`.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **1,793** (+16 from cloud #106 rmgrdesc; +115 from A15; cumulative +876 since 2026-06-02 morning).
-- Registry rows in `progress/files-examined.md`: **1,958** (+16 rmgrdesc per-AM docs this cycle).
-- **Top-line coverage: ~69.9%** of source files have a per-file doc (up from 69.3% post-A15).
+- Per-file docs under `knowledge/files/`: **1,815** (+22 NEW from A16-4 port top-level headers + 16 from cloud rmgrdesc #106; cumulative +898 since 2026-06-02 morning). **A16-{1,2,3} were enrichment-only of the 50 pre-existing `src/include/common` docs (A5 sweep)** — ~1,049 net lines of new Phase D content added to existing docs.
+- Registry rows in `progress/files-examined.md`: **1,981** (+22 port headers + 16 rmgrdesc; A5's 50 common entries already counted).
+- **Top-line coverage: ~70.8%** of source files have a per-file doc (up from 69.3%).
 
 The doc count exceeds the registered-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
@@ -46,7 +46,7 @@ replication 107.4%) reflects those companion docs.
 | Tree | Source | Docs | Coverage |
 |---|---:|---:|---:|
 | `src/backend` | 906 | 764 | 84.3% |
-| `src/include` | 844 | 568 | 67.3% |
+| `src/include` | 844 | 590 | 69.9% |
 | `src/common` | 62 | 59 | 95.2% |
 | `src/port` | 64 | 0 | 0.0% |
 | `src/interfaces` (libpq + ecpg) | 166 | 32 | 19.3% |
@@ -56,12 +56,12 @@ replication 107.4%) reflects those companion docs.
 | `src/fe_utils` | 18 | 18 | 100.0% |
 | `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 26 | 66.7% |
 | `contrib` (extensions) | 210 | 154 | 73.3% |
-| **TOTAL** | **2,564** | **1,793** | **69.9%** |
+| **TOTAL** | **2,564** | **1,815** | **70.8%** |
 
 ### Phase A target (decided 2026-06-02)
 
 Scope: **everything under src/ + contrib/** (full 2,564-file target).
-Gap to close: **~787 files** undocumented (down from ~902 after A15 landed 115 docs across `src/include/utils` (+70), `src/include/storage` (+22), `src/include/lib` (+15 — full dir), `src/include/executor` (+8); cumulative -860 since 2026-06-02 morning's 1,647). **Past two-thirds, into final 31%. src/pl complete; src/fe_utils complete (100%); src/timezone complete (100%); contrib effectively complete (only `intagg` left); src/include/lib complete (100%); src/include/utils 28→98 docs (~73%); src/include/storage 39→61 docs (~88%); src/include/executor 20→28 docs (~46% — 33 thin nodeXxx.h headers deferred to cloud).**
+Gap to close: **~765 files** undocumented (down from ~787 after A16 landed 22 NEW port headers + 130 ISSUE tags enriching the 50 pre-existing common headers; cumulative -882 since 2026-06-02 morning's 1,647). **Past 70%, into final 30%. src/pl complete; src/fe_utils complete (100%); src/timezone complete (100%); contrib effectively complete (only `intagg` left); src/include/lib complete (100%); src/include/common complete (100%, A5+A16 enriched); src/include/utils 100%+; src/include/storage 88%; src/include/port top-level 22/22 done (25 subdir files in atomics/win32/win32_msvc deferred to cloud); src/include/executor 46% (33 thin nodeXxx.h headers deferred to cloud).**
 Cadence: hybrid — `pg-file-backfiller` cloud routine grinds breadth nightly;
 foreground interactive sweeps accelerate high-value directories
 (`utils/`, `libpq-backend`, `replication/`, `executor/`, `bin/`).

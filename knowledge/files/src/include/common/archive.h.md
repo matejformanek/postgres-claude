@@ -24,5 +24,27 @@ Single-function API for substituting `%p`/`%f`/`%r` placeholders in the `restore
 
 - This is the GUC → shell-command boundary. See `archive.c.md` ISSUE entries.
 
+## Issues
+
+[ISSUE-undocumented-invariant: `BuildRestoreCommand`
+(`archive.h:16-19`) returns a string fed straight to `system(3)` /
+`OpenPipeStream` and the header carries no warning about shell
+escaping; identical posture to `percentrepl.h` (high)] A5's
+`common.md`: `%p`/`%f`/`%r` substitution is byte-level — a WAL
+file name with shell metacharacters substitutes verbatim. The trust
+model is "WAL filenames are controlled by PG, restoreCommand is
+DBA-set", but neither contract is written in the header.
+
+[ISSUE-trust-boundary: shared FE+BE — pg_rewind /
+pg_archivecleanup invoke this with potentially less-trusted argv
+(low)]
+
+## Cross-refs
+
+- A5 `common.md` — GUC-boundary shell injection.
+- A8 `archive_command` — sibling.
+- A14 `basebackup_to_shell` — same %-substitution pattern.
+- Companion: `src/common/archive.c.md`, `src/common/percentrepl.h.md`.
+
 ## Confidence tag tally
 `[verified-by-code]=2`

@@ -40,9 +40,25 @@ prefix). [from-comment, md5.h:6-8]
   `md5_password_warnings` GUC). The fallback impl
   (`src/common/md5.c`) is preserved because some platforms still
   build PG without OpenSSL.
-- The three helpers do not accept a "context" or hold per-caller
-  state; they wrap allocation+init+update+final around the
-  `pg_cryptohash_ctx` opaque type. Each call pays an alloc/free pair.
+- **Header lacks deprecation comment.** Nothing in `md5.h:1-37` warns
+  the reader "MD5 is for legacy auth only — do NOT use this for
+  password hashing or message authentication in new code." A
+  reader who searches for "MD5 PostgreSQL" lands here and finds
+  `pg_md5_encrypt` with no caveats.
+- **`pg_md5_encrypt` parameter validation.** Takes `salt_len` but the
+  impl in `md5_common.c` allows any salt length up to internal
+  buffer; the header doesn't document min/max. Same for `passwd`
+  length.
+- **SecretBuf candidate sites.** A5's common.md flags
+  `md5_common.c:151,170` (the `crypt_buf` hex digest staging and the
+  intermediate `*outbuf`) as secret-scrub gaps — the header-level
+  fix is for `pg_md5_encrypt`'s `buf` parameter to become a
+  `SecretBuf` so the caller can't accidentally leave the derived
+  hash on the stack.
+- **No constant-time compare helper for MD5 hex digests.** Password
+  verification in `crypt.c::md5_crypt_verify` uses `strcmp` against
+  the stored hash — A5 finding (#likely). Header-level `pg_md5_equal`
+  would have steered them right.
 
 ## Cross-refs
 
@@ -50,7 +66,23 @@ prefix). [from-comment, md5.h:6-8]
 - Fallback impl of primitive: `knowledge/files/src/common/md5.c.md`.
 - Internal state: `knowledge/files/src/common/md5_int.h.md`.
 - Caller: `knowledge/files/src/backend/libpq/crypt.c.md`.
+- A5 SecretBuf cluster: `knowledge/issues/common.md`.
+
+## Issues
+
+1. `[ISSUE-documentation: no deprecation/use-only-for-legacy-SCRAM
+   note in header — discoverability hazard for new contributors
+   (likely)]` — `source/src/include/common/md5.h:1-38`.
+2. `[ISSUE-api-shape: pg_md5_encrypt's output buf is caller-owned
+   plain char[]; A5 SecretBuf candidate site (likely)]` —
+   `source/src/include/common/md5.h:33-35`.
+3. `[ISSUE-documentation: pg_md5_encrypt's salt_len constraints
+   (range, why salt is uint8* but passed by uint8 type) are not in
+   header (nit)]` — `source/src/include/common/md5.h:33`.
+4. `[ISSUE-api-shape: no constant-time pg_md5_equal helper — every
+   caller uses strcmp on hex digests, leaking timing (maybe)]` —
+   `source/src/include/common/md5.h:29-32`.
 
 ## Tally
 
-`[verified-by-code]=4 [from-comment]=1`
+`[verified-by-code]=4 [from-comment]=2`

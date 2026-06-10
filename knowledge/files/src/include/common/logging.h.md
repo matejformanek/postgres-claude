@@ -44,8 +44,31 @@ global threshold (`__pg_log_level`).
 
 ## Phase D notes
 
+## Issues
+
 [ISSUE-secret-scrub: every `pg_log_error` callsite that includes
 `PQerrorMessage(conn)` may print a secret-bearing parse error
-verbatim (maybe)] See `logging.c` doc. The header doesn't carry a
-"do not pass untrusted strings" warning; new callers tend to
-follow the existing pattern.
+verbatim (medium)] `logging.h:108-115` declares the macros with no
+scrubbing layer. A4 psql secret-scrub cluster echo — frontend tools
+that log a failed `CONNECT` reveal the connection string verbatim,
+including any inline `password=` field that a user accidentally
+passed in argv.
+
+[ISSUE-undocumented-invariant: `pg_log_debug` macros
+(`logging.h:135-148`) only compile their args away when wrapped in
+the `unlikely(...)` guard; the side-effect/cost contract is
+implicit (low)] A caller writing
+`pg_log_debug("%s", expensive_call())` pays for
+`expensive_call()` even when debug logging is off, unless they
+manually wrap.
+
+[ISSUE-trust-boundary: `pg_logging_set_locus_callback`
+(`logging.h:93`) lets ANY caller install a file/line callback that
+runs on every log message; no thread-safety contract (low)]
+Frontend tools are single-threaded so this matters only for
+extensions that consume `logging.h` from a multi-threaded host.
+
+## Cross-refs
+
+- A4 psql secret-scrub cluster — primary echo.
+- Companion: `src/common/logging.c.md`.

@@ -18,7 +18,22 @@ Declares the OS-username lookup helpers.
 
 ## Phase D notes
 
+## Issues
+
 [ISSUE-trust-boundary: header does not document the static-buffer
 lifetime (low)] A caller who holds the pointer across another
 `getpwuid`/`getpwnam` call has undefined behavior on glibc; on
 Windows the function-local static is reused on every call.
+
+[ISSUE-trust-boundary: `get_user_name` (`username.h:12`) returns
+the OS-level effective username; PG tools then compare it against
+PG role names. The OS↔PG namespace overlap is a documented design
+choice (peer-auth) but the header carries no warning that this
+mapping is security-relevant (low)] A2 + A6 cross-link — peer auth
+trusts the OS uid lookup.
+
+## Cross-refs
+
+- A2 libpq peer auth — OS uid → PG role mapping.
+- A6 `pg_upgrade` / `initdb` — `get_user_name_or_exit` consumer.
+- Companion: `src/common/username.c.md`.

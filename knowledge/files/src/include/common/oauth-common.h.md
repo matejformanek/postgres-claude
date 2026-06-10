@@ -37,6 +37,20 @@ both `src/backend/libpq/auth-sasl.c` advertising and the libpq
   `fe-auth-oauth-curl.c`.
 - The validator-module API: `src/include/libpq/oauth.h`.
 
+## Issues
+
+1. `[ISSUE-documentation: header is a single #define; it doesn't tell
+   the reader where the bearer-token handling lives (split between
+   backend auth-oauth.c, oauth validator modules loaded via
+   oauth_validator_libraries, and libpq fe-auth-oauth*.c). A
+   header-comment pointer would save discovery time (nit)]` —
+   `source/src/include/common/oauth-common.h:13-19`.
+2. `[ISSUE-audit-gap: PG18 OAuth validator-module mechanism is a
+   trust-boundary surface (LOAD-style validator .so picks who gets
+   in); this header is the only "common" file mentioning OAuth and
+   does NOT cross-reference the validator-loader contract (likely)]`
+   — `source/src/include/common/oauth-common.h:13-19`.
+
 ## Tally
 
-`[verified-by-code]=1 [inferred]=1`
+`[verified-by-code]=1 [inferred]=2`

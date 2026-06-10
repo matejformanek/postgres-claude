@@ -33,6 +33,31 @@ etc.) use `pg_get_line` and `simple_prompt`.
 injection in server logs — see `string.c.md` for the actual
 implementation review.
 
-## Potential issues
+## Issues
 
-None at the header level.
+[ISSUE-trust-boundary: `pg_strip_crlf(str)` (`string.h:31`) mutates
+the string in place to remove trailing `\r`/`\n`. Used by
+log-injection prevention paths (HBA-line reader, password prompts)
+— but the header gives no semantics for embedded (non-trailing)
+control characters (medium)] An attacker who can inject `\n` MID
+string defeats the strip; `pg_clean_ascii` is the broader scrubber
+and callers must pick correctly. Cross-link: A4 psql + A5 frontend
+log-injection.
+
+[ISSUE-trust-boundary: `simple_prompt`/`simple_prompt_extended`
+(`string.h:41-43`) — used by every tool that asks for a password
+(`pg_dump -W`, `psql -W`, `vacuumdb -W`, …). The returned buffer
+is malloc'd and lifetime-managed by the caller; A4 secret-scrub
+cluster: no `pg_explicit_bzero` wrapper, free does not wipe (low)]
+
+[ISSUE-undocumented-invariant: `PromptInterruptContext`
+(`string.h:18-24`) — `jmpbuf` is declared `void *` to avoid
+`<setjmp.h>` here; type-checking is the caller's job (low)] A
+caller that passes a wrong-typed pointer crashes on SIGINT during
+prompt.
+
+## Cross-refs
+
+- A4 psql secret-scrub cluster — simple_prompt buffer lifetime.
+- A5 `common.md` — log-injection prevention.
+- Companion: `src/common/string.c.md`, `src/common/sprompt.c`.
