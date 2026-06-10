@@ -27,14 +27,14 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-10 (post A16 src/include/{common,port} enrichment + port finishing — 130 new ISSUE tags, 2 new registers; combined with overnight cloud: +16 rmgrdesc via pg-file-backfiller #106 + glossary +103 via pg-corpus-maintainer #107), source pin `4b0bf0788b0`.
+Refreshed 2026-06-10 (post A17 src/include remainder sweep — 7 sub-trees, ~153 issues; combined with A16 + overnight cloud rmgrdesc), source pin `4b0bf0788b0`.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
 **Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **1,815** (+22 NEW from A16-4 port top-level headers + 16 from cloud rmgrdesc #106; cumulative +898 since 2026-06-02 morning). **A16-{1,2,3} were enrichment-only of the 50 pre-existing `src/include/common` docs (A5 sweep)** — ~1,049 net lines of new Phase D content added to existing docs.
-- Registry rows in `progress/files-examined.md`: **1,981** (+22 port headers + 16 rmgrdesc; A5's 50 common entries already counted).
-- **Top-line coverage: ~70.8%** of source files have a per-file doc (up from 69.3%).
+- Per-file docs under `knowledge/files/`: **1,908** (+93 from A17 + 22 from A16 + 16 from cloud rmgrdesc; cumulative +991 since 2026-06-02 morning).
+- Registry rows in `progress/files-examined.md`: **2,074** (+93 + 22 + 16).
+- **Top-line coverage: ~74.4%** of source files have a per-file doc (up from 69.3% pre-A15).
 
 The doc count exceeds the registered-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
@@ -46,7 +46,7 @@ replication 107.4%) reflects those companion docs.
 | Tree | Source | Docs | Coverage |
 |---|---:|---:|---:|
 | `src/backend` | 906 | 764 | 84.3% |
-| `src/include` | 844 | 590 | 69.9% |
+| `src/include` | 844 | 683 | 80.9% |
 | `src/common` | 62 | 59 | 95.2% |
 | `src/port` | 64 | 0 | 0.0% |
 | `src/interfaces` (libpq + ecpg) | 166 | 32 | 19.3% |
@@ -56,12 +56,12 @@ replication 107.4%) reflects those companion docs.
 | `src/fe_utils` | 18 | 18 | 100.0% |
 | `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 26 | 66.7% |
 | `contrib` (extensions) | 210 | 154 | 73.3% |
-| **TOTAL** | **2,564** | **1,815** | **70.8%** |
+| **TOTAL** | **2,564** | **1,908** | **74.4%** |
 
 ### Phase A target (decided 2026-06-02)
 
 Scope: **everything under src/ + contrib/** (full 2,564-file target).
-Gap to close: **~765 files** undocumented (down from ~787 after A16 landed 22 NEW port headers + 130 ISSUE tags enriching the 50 pre-existing common headers; cumulative -882 since 2026-06-02 morning's 1,647). **Past 70%, into final 30%. src/pl complete; src/fe_utils complete (100%); src/timezone complete (100%); contrib effectively complete (only `intagg` left); src/include/lib complete (100%); src/include/common complete (100%, A5+A16 enriched); src/include/utils 100%+; src/include/storage 88%; src/include/port top-level 22/22 done (25 subdir files in atomics/win32/win32_msvc deferred to cloud); src/include/executor 46% (33 thin nodeXxx.h headers deferred to cloud).**
+Gap to close: **~656 files** undocumented (down from ~787 after A16+A17 landed 115 docs + cloud added 16 rmgrdesc; cumulative -991 since 2026-06-02 morning's 1,647). **Past 74%, into final 26%. src/pl complete; src/fe_utils complete (100%); src/timezone complete (100%); contrib effectively complete (only `intagg` left); src/include/lib complete (100%); src/include/common complete (100%, A5+A16); src/include/utils 100%+; src/include/storage 88%; src/include/executor 100% (61/61, A15+A17); src/include/access 100%+ (A17); src/include/commands ~100% (A17); src/include/nodes ~100% (A17); src/include/parser ~100% (A17); src/include/tcop ~100% (A17); src/include/rewrite ~100% (A17); src/include/port top-level 22/22 done (A16 — 25 subdir files in atomics/win32/win32_msvc deferred to cloud).**
 Cadence: hybrid — `pg-file-backfiller` cloud routine grinds breadth nightly;
 foreground interactive sweeps accelerate high-value directories
 (`utils/`, `libpq-backend`, `replication/`, `executor/`, `bin/`).

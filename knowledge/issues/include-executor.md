@@ -1,8 +1,8 @@
 # Issues — `src/include/executor`
 
-Per-subsystem issue register for the **executor header layer** — SPI, parallel-executor support, async, hash join, instrumentation. 8 headers / ~11 entries surfaced 2026-06-09 by A15-3.
+Per-subsystem issue register for the **executor header layer** — SPI, parallel-executor support, async, hash join, instrumentation, + all 33 `nodeXxx.h` plan-node decl headers. 41 headers / ~22 entries surfaced 2026-06-09 by A15-3 + A17-4.
 
-**Parent docs:** `knowledge/files/src/include/executor/*` (28 docs total).
+**Parent docs:** `knowledge/files/src/include/executor/*` (61 docs total — full coverage after A17).
 
 ## Headlines
 
@@ -31,3 +31,23 @@ Per-subsystem issue register for the **executor header layer** — SPI, parallel
 - A9 plpgsql `exec_stmt_dynexecute` + A10 plperl/plpython/pltcl SPI + A13 tablefunc.connectby_text = **5-sweep text-to-SPI injection sinks cluster** with spi.h as the API host.
 - A11 postgres_fdw cross-cluster trust + execAsync — connection-cache reuse pattern.
 - A11/A12 sharedtuplestore + hashjoin spill files = parallel-spill-on-disk-clear-text cluster.
+
+## Entries — A17-4 (`nodeXxx.h` plan-node decl headers, 33 files)
+
+The 33 `nodeXxx.h` headers are mostly thin 3-decl files (`Exec<Node>`, `ExecInit<Node>`, `ExecEnd<Node>`). Phase D content concentrates in the extension-surface + parallel-aware + privileged-data-handling nodes.
+
+- [ISSUE-security: Custom-scan extension surface is unsandboxed function-pointer dispatch — `CustomExecMethods` vtable runs with full backend privilege (likely)] — `nodeCustom.h:21` — third-party scan providers (Citus, Timescale, Hydra, pg_strom); supply-chain compromise yields backend RCE.
+- [ISSUE-security: ForeignScan async path mixes credential-bearing remote connections with executor reentrancy; connection cache may reuse prior role's session (likely, A11 echo)] — `nodeForeignscan.h:34`
+- [ISSUE-security: Gather/GatherMerge inherit leader's auth context into workers via ParallelContext serialization (maybe, A15 echo)] — `nodeGather.h:19`
+- [ISSUE-resource: GatherMerge leader holds tuples from every worker queue — back-pressure asymmetry under high max_parallel_workers_per_gather (nit)] — `nodeGatherMerge.h:19`
+- [ISSUE-resource: Memoize result-cache is simplehash keyed on parameter values — adversarial keys hash-flood into O(n) lookups (maybe, A11 echo)] — `nodeMemoize.h:20`
+- [ISSUE-security: TableFuncScan drives XMLTABLE through libxml2 on user input — XXE / DTD-bomb / billion-laughs surface (likely, A7 echo)] — `nodeTableFuncscan.h:19`
+- [ISSUE-security: SampleScan dispatches into TsmRoutine vtable from any installed TSM method (maybe, A14 echo)] — `nodeSamplescan.h:19`
+- [ISSUE-correctness: LockRows holds tuple locks that pin catalog_xmin via FOR KEY SHARE (nit, A8 echo)] — `nodeLockRows.h:19`
+- [ISSUE-security: FunctionScan invokes any user-callable SRF via FROM-clause (nit, A14 tablefunc echo)] — `nodeFunctionscan.h:19`
+- [ISSUE-api-shape: BitmapHeapScan / SeqScan / IndexOnlyScan / TidRangeScan share a dual-track DSM-init pattern inconsistently applied across other parallel-aware nodes (nit, architectural)] — `nodeBitmapHeapscan.h:31`
+- [ISSUE-api-shape: NamedTuplestoreScan, ValuesScan, WorkTableScan lack ExecEnd* decls (nit)] — `nodeNamedtuplestorescan.h:19`
+
+### Honest note
+
+The remaining 22 `nodeXxx.h` headers (BitmapAnd, BitmapOr, BitmapIndexscan, Ctescan, Group, IncrementalSort, IndexonlyScan, Limit, Material, MergeAppend, Nestloop, ProjectSet, Recursiveunion, Result, Seqscan, SetOp, Subqueryscan, TidRangeScan, Tidscan, Unique, Valuesscan, Worktablescan) are zero-issue mechanical 3-decl files. Documented for completeness; no Phase-D surface flagged.
