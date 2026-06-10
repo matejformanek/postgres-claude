@@ -7,13 +7,6 @@ back to `[pending]`.
 
 ## Entries
 
-[pending] knowledge/subsystems/partitioning.md verified=never
-[pending] knowledge/subsystems/jit.md verified=never
-[pending] knowledge/subsystems/foreign.md verified=never
-[pending] knowledge/subsystems/libpq-backend.md verified=never
-[pending] knowledge/subsystems/headers-wave3.md verified=never
-[pending] knowledge/subsystems/main.md verified=never
-[pending] knowledge/subsystems/port.md verified=never
 [pending] knowledge/idioms/locking-overview.md verified=never
 [pending] knowledge/idioms/memory-contexts.md verified=never
 [pending] knowledge/idioms/catalog-conventions.md verified=never
@@ -46,3 +39,10 @@ back to `[pending]`.
 [pending] knowledge/subsystems/storage-lmgr.md verified=2026-06-08
 [pending] knowledge/subsystems/utils-cache.md verified=2026-06-08
 [pending] knowledge/subsystems/utils-mmgr.md verified=2026-06-08
+[pending] knowledge/subsystems/partitioning.md verified=2026-06-10
+[pending] knowledge/subsystems/jit.md verified=2026-06-10
+[pending] knowledge/subsystems/foreign.md verified=2026-06-10
+[pending] knowledge/subsystems/libpq-backend.md verified=2026-06-10
+[pending] knowledge/subsystems/headers-wave3.md verified=2026-06-10
+[pending] knowledge/subsystems/main.md verified=2026-06-10
+[pending] knowledge/subsystems/port.md verified=2026-06-10
