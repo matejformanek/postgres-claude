@@ -59,10 +59,10 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-09 (both queues drained at run start — wiki side fully exhausted per wiki-index.md; re-walked internals.html ToC for protocol + rule-system + trigger leaf chapters not yet under docs-distilled/, picking dense leaf-prose pages over ToC-style parent chapters to dodge the planner-stats-details extraction failure)
 
-[in-progress:cloud/pg-docs-miner/2026-06-09] protocol-message-formats https://www.postgresql.org/docs/current/protocol-message-formats.html
-[in-progress:cloud/pg-docs-miner/2026-06-09] protocol-replication https://www.postgresql.org/docs/current/protocol-replication.html
-[in-progress:cloud/pg-docs-miner/2026-06-09] xfunc-volatility https://www.postgresql.org/docs/current/xfunc-volatility.html
-[in-progress:cloud/pg-docs-miner/2026-06-09] querytree https://www.postgresql.org/docs/current/querytree.html
-[in-progress:cloud/pg-docs-miner/2026-06-09] trigger-interface https://www.postgresql.org/docs/current/trigger-interface.html
-[in-progress:cloud/pg-docs-miner/2026-06-09] rules-views https://www.postgresql.org/docs/current/rules-views.html
-[in-progress:cloud/pg-docs-miner/2026-06-09] trigger-datachanges https://www.postgresql.org/docs/current/trigger-datachanges.html
+[done:cbdd5b0] protocol-message-formats https://www.postgresql.org/docs/current/protocol-message-formats.html
+[done:cbdd5b0] protocol-replication https://www.postgresql.org/docs/current/protocol-replication.html
+[done:cbdd5b0] xfunc-volatility https://www.postgresql.org/docs/current/xfunc-volatility.html
+[done:cbdd5b0] querytree https://www.postgresql.org/docs/current/querytree.html
+[done:cbdd5b0] trigger-interface https://www.postgresql.org/docs/current/trigger-interface.html
+[done:cbdd5b0] rules-views https://www.postgresql.org/docs/current/rules-views.html
+[done:cbdd5b0] trigger-datachanges https://www.postgresql.org/docs/current/trigger-datachanges.html
