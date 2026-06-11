@@ -69,11 +69,11 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-10 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked internals.html ToC for dense internals-prose LEAF chapters not yet under docs-distilled/, preferring leaf-prose over ToC parents to dodge the planner-stats-details extraction failure; catalog/view reference pages excluded)
 
-[in-progress:cloud/pg-docs-miner/2026-06-10] sasl-authentication https://www.postgresql.org/docs/current/sasl-authentication.html
-[in-progress:cloud/pg-docs-miner/2026-06-10] generic-wal https://www.postgresql.org/docs/current/generic-wal.html
-[in-progress:cloud/pg-docs-miner/2026-06-10] custom-rmgr https://www.postgresql.org/docs/current/custom-rmgr.html
-[in-progress:cloud/pg-docs-miner/2026-06-10] protocol-logical-replication https://www.postgresql.org/docs/current/protocol-logical-replication.html
-[in-progress:cloud/pg-docs-miner/2026-06-10] backup-manifest-format https://www.postgresql.org/docs/current/backup-manifest-format.html  # parent ToC-only; field detail salvaged from backup-manifest-files.html leaf
-[in-progress:cloud/pg-docs-miner/2026-06-10] query-path https://www.postgresql.org/docs/current/query-path.html
-[in-progress:cloud/pg-docs-miner/2026-06-10] planner-optimizer https://www.postgresql.org/docs/current/planner-optimizer.html
-[in-progress:cloud/pg-docs-miner/2026-06-10] row-estimation-examples https://www.postgresql.org/docs/current/row-estimation-examples.html
+[done:009b82d] sasl-authentication https://www.postgresql.org/docs/current/sasl-authentication.html
+[done:009b82d] generic-wal https://www.postgresql.org/docs/current/generic-wal.html
+[done:009b82d] custom-rmgr https://www.postgresql.org/docs/current/custom-rmgr.html
+[done:009b82d] protocol-logical-replication https://www.postgresql.org/docs/current/protocol-logical-replication.html
+[done:009b82d] backup-manifest-format https://www.postgresql.org/docs/current/backup-manifest-format.html  # parent ToC-only; field detail salvaged from backup-manifest-files.html leaf
+[done:009b82d] query-path https://www.postgresql.org/docs/current/query-path.html
+[done:009b82d] planner-optimizer https://www.postgresql.org/docs/current/planner-optimizer.html
+[done:009b82d] row-estimation-examples https://www.postgresql.org/docs/current/row-estimation-examples.html
