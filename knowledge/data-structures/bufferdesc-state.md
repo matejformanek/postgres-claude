@@ -1,7 +1,7 @@
 # BufferDesc — state-encoding bits
 
 - **Source path:** `source/src/include/storage/buf_internals.h`
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (2026-06-11; §1–3 re-verified against `buf_internals.h`: content-lock-in-`state` refactor, `BUF_*_BITS` widths, `StaticAssertDecl`s, full 12-bit flag block incl. bit-6-unused, `BM_MAX_USAGE_COUNT=5`. No claim drift.)
 - **Companion docs:** `knowledge/files/src/include/storage/buf_internals.h.md`,
   `knowledge/subsystems/storage-buffer.md`, `knowledge/files/src/backend/storage/buffer/bufmgr.c.md`
 
