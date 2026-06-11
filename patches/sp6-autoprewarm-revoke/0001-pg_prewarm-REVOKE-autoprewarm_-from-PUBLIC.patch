@@ -1,0 +1,209 @@
+From acd8c00fb96a627e02fc05e82eb8047080f7b581 Mon Sep 17 00:00:00 2001
+From: Matej Formanek <manekmatej@gmail.com>
+Date: Wed, 10 Jun 2026 21:07:10 +0200
+Subject: [PATCH] pg_prewarm: REVOKE autoprewarm_* from PUBLIC
+
+The autoprewarm_start_worker() and autoprewarm_dump_now() functions
+exposed by contrib/pg_prewarm version 1.2 were created with the PG
+default of EXECUTE granted to PUBLIC, and have no C-side privilege
+check (autoprewarm.c:813-859).  Any logged-in user can therefore:
+
+* Trigger an O(NBuffers) scan + buffer-header spinlock contention via
+  autoprewarm_dump_now() at any time;
+
+* Start the autoprewarm background worker via
+  autoprewarm_start_worker(), which performs the same scan plus a
+  dumpfile write -- with no rate limiting and no role-membership gate.
+
+Both functions are clearly intended as maintenance entry points for a
+DBA, not as general-user APIs.
+
+This commit closes the gap by:
+
+1. Adding REVOKE EXECUTE ... FROM PUBLIC for both functions in the
+   existing 1.1-to-1.2 install script, so a fresh install picks up the
+   tightening without depending on the upgrade chain reaching 1.3.
+
+2. Introducing pg_prewarm--1.2--1.3.sql which re-applies the same
+   REVOKEs as an explicit ALTER EXTENSION UPDATE step.  This is the
+   path existing 1.2 installations follow.
+
+3. Bumping default_version in pg_prewarm.control from 1.2 to 1.3.
+
+Regression test coverage is added in both flavours.  The SQL regress
+test creates a fresh role, asserts permission-denied on both
+autoprewarm_* functions, then verifies that GRANT EXECUTE on
+autoprewarm_dump_now() unblocks that function specifically (without
+affecting autoprewarm_start_worker()).  The TAP test 001_basic.pl
+gains a parallel block that exercises the same path against the
+test_user role already created for pg_prewarm() privilege checks.
+
+The dumpfile-path / "<<N>> signed-int parse -> dsm_create(20*N) OOM"
+exposure tracked in the same corpus item is a separate concern and
+not addressed here.
+
+Reported in postgres-claude corpus sweep A14 (2026-06-09); see
+knowledge/issues/pg_prewarm.md.
+---
+ contrib/pg_prewarm/Makefile                 |  2 +-
+ contrib/pg_prewarm/expected/pg_prewarm.out  | 16 +++++++++++++
+ contrib/pg_prewarm/meson.build              |  1 +
+ contrib/pg_prewarm/pg_prewarm--1.1--1.2.sql |  3 +++
+ contrib/pg_prewarm/pg_prewarm--1.2--1.3.sql |  7 ++++++
+ contrib/pg_prewarm/pg_prewarm.control       |  2 +-
+ contrib/pg_prewarm/sql/pg_prewarm.sql       | 14 ++++++++++++
+ contrib/pg_prewarm/t/001_basic.pl           | 25 +++++++++++++++++++++
+ 8 files changed, 68 insertions(+), 2 deletions(-)
+ create mode 100644 contrib/pg_prewarm/pg_prewarm--1.2--1.3.sql
+
+diff --git a/contrib/pg_prewarm/Makefile b/contrib/pg_prewarm/Makefile
+index 617ac8e09b2..25ee3576137 100644
+--- a/contrib/pg_prewarm/Makefile
++++ b/contrib/pg_prewarm/Makefile
+@@ -7,7 +7,7 @@ OBJS = \
+ 	pg_prewarm.o
+ 
+ EXTENSION = pg_prewarm
+-DATA = pg_prewarm--1.1--1.2.sql pg_prewarm--1.1.sql pg_prewarm--1.0--1.1.sql
++DATA = pg_prewarm--1.2--1.3.sql pg_prewarm--1.1--1.2.sql pg_prewarm--1.1.sql pg_prewarm--1.0--1.1.sql
+ PGFILEDESC = "pg_prewarm - preload relation data into system buffer cache"
+ 
+ REGRESS = pg_prewarm
+diff --git a/contrib/pg_prewarm/expected/pg_prewarm.out b/contrib/pg_prewarm/expected/pg_prewarm.out
+index 94e4fa1a9d2..d68040af545 100644
+--- a/contrib/pg_prewarm/expected/pg_prewarm.out
++++ b/contrib/pg_prewarm/expected/pg_prewarm.out
+@@ -5,6 +5,22 @@ CREATE TABLE test (c1 int) PARTITION BY RANGE (c1);
+ SELECT pg_prewarm('test', 'buffer');
+ ERROR:  relation "test" does not have storage
+ DETAIL:  This operation is not supported for partitioned tables.
++-- autoprewarm_* are revoked from PUBLIC; a non-superuser without an
++-- explicit GRANT must hit permission-denied (CVE-class hardening).
++CREATE ROLE regress_prewarm_nopriv;
++SET ROLE regress_prewarm_nopriv;
++SELECT autoprewarm_start_worker();
++ERROR:  permission denied for function autoprewarm_start_worker
++SELECT autoprewarm_dump_now();
++ERROR:  permission denied for function autoprewarm_dump_now
++RESET ROLE;
++GRANT EXECUTE ON FUNCTION autoprewarm_dump_now() TO regress_prewarm_nopriv;
++SET ROLE regress_prewarm_nopriv;
++SELECT autoprewarm_start_worker();  -- still denied
++ERROR:  permission denied for function autoprewarm_start_worker
++RESET ROLE;
++REVOKE EXECUTE ON FUNCTION autoprewarm_dump_now() FROM regress_prewarm_nopriv;
++DROP ROLE regress_prewarm_nopriv;
+ -- Cleanup
+ DROP TABLE test;
+ DROP EXTENSION pg_prewarm;
+diff --git a/contrib/pg_prewarm/meson.build b/contrib/pg_prewarm/meson.build
+index e70546a451b..5ae2acb8de6 100644
+--- a/contrib/pg_prewarm/meson.build
++++ b/contrib/pg_prewarm/meson.build
+@@ -20,6 +20,7 @@ contrib_targets += pg_prewarm
+ install_data(
+   'pg_prewarm--1.0--1.1.sql',
+   'pg_prewarm--1.1--1.2.sql',
++  'pg_prewarm--1.2--1.3.sql',
+   'pg_prewarm--1.1.sql',
+   'pg_prewarm.control',
+   kwargs: contrib_data_args,
+diff --git a/contrib/pg_prewarm/pg_prewarm--1.1--1.2.sql b/contrib/pg_prewarm/pg_prewarm--1.1--1.2.sql
+index 2381c06eb97..b43ffeccbfa 100644
+--- a/contrib/pg_prewarm/pg_prewarm--1.1--1.2.sql
++++ b/contrib/pg_prewarm/pg_prewarm--1.1--1.2.sql
+@@ -12,3 +12,6 @@ CREATE FUNCTION autoprewarm_dump_now()
+ RETURNS pg_catalog.int8 STRICT
+ AS 'MODULE_PATHNAME', 'autoprewarm_dump_now'
+ LANGUAGE C;
++
++REVOKE EXECUTE ON FUNCTION autoprewarm_start_worker() FROM PUBLIC;
++REVOKE EXECUTE ON FUNCTION autoprewarm_dump_now() FROM PUBLIC;
+diff --git a/contrib/pg_prewarm/pg_prewarm--1.2--1.3.sql b/contrib/pg_prewarm/pg_prewarm--1.2--1.3.sql
+new file mode 100644
+index 00000000000..37988e906a3
+--- /dev/null
++++ b/contrib/pg_prewarm/pg_prewarm--1.2--1.3.sql
+@@ -0,0 +1,7 @@
++/* contrib/pg_prewarm/pg_prewarm--1.2--1.3.sql */
++
++-- complain if script is sourced in psql, rather than via ALTER EXTENSION
++\echo Use "ALTER EXTENSION pg_prewarm UPDATE TO '1.3'" to load this file. \quit
++
++REVOKE EXECUTE ON FUNCTION autoprewarm_start_worker() FROM PUBLIC;
++REVOKE EXECUTE ON FUNCTION autoprewarm_dump_now() FROM PUBLIC;
+diff --git a/contrib/pg_prewarm/pg_prewarm.control b/contrib/pg_prewarm/pg_prewarm.control
+index 40e3add4810..cb97cf6f13c 100644
+--- a/contrib/pg_prewarm/pg_prewarm.control
++++ b/contrib/pg_prewarm/pg_prewarm.control
+@@ -1,5 +1,5 @@
+ # pg_prewarm extension
+ comment = 'prewarm relation data'
+-default_version = '1.2'
++default_version = '1.3'
+ module_pathname = '$libdir/pg_prewarm'
+ relocatable = true
+diff --git a/contrib/pg_prewarm/sql/pg_prewarm.sql b/contrib/pg_prewarm/sql/pg_prewarm.sql
+index c76f2c79164..becc4754964 100644
+--- a/contrib/pg_prewarm/sql/pg_prewarm.sql
++++ b/contrib/pg_prewarm/sql/pg_prewarm.sql
+@@ -5,6 +5,20 @@ CREATE EXTENSION pg_prewarm;
+ CREATE TABLE test (c1 int) PARTITION BY RANGE (c1);
+ SELECT pg_prewarm('test', 'buffer');
+ 
++-- autoprewarm_* are revoked from PUBLIC; a non-superuser without an
++-- explicit GRANT must hit permission-denied (CVE-class hardening).
++CREATE ROLE regress_prewarm_nopriv;
++SET ROLE regress_prewarm_nopriv;
++SELECT autoprewarm_start_worker();
++SELECT autoprewarm_dump_now();
++RESET ROLE;
++GRANT EXECUTE ON FUNCTION autoprewarm_dump_now() TO regress_prewarm_nopriv;
++SET ROLE regress_prewarm_nopriv;
++SELECT autoprewarm_start_worker();  -- still denied
++RESET ROLE;
++REVOKE EXECUTE ON FUNCTION autoprewarm_dump_now() FROM regress_prewarm_nopriv;
++DROP ROLE regress_prewarm_nopriv;
++
+ -- Cleanup
+ DROP TABLE test;
+ DROP EXTENSION pg_prewarm;
+diff --git a/contrib/pg_prewarm/t/001_basic.pl b/contrib/pg_prewarm/t/001_basic.pl
+index 71796111bb9..ad37c2e273a 100644
+--- a/contrib/pg_prewarm/t/001_basic.pl
++++ b/contrib/pg_prewarm/t/001_basic.pl
+@@ -75,6 +75,31 @@ like($result, qr/^[1-9][0-9]*$/, 'pg_prewarm succeeded as expected');
+ $result = $node->safe_psql("postgres", "SELECT autoprewarm_dump_now();");
+ like($result, qr/^[1-9][0-9]*$/, 'autoprewarm_dump_now succeeded');
+ 
++# test_user should be unable to call autoprewarm_* without explicit GRANT
++($cmdret, $stdout, $stderr) = $node->psql(
++	"postgres",
++	"SELECT autoprewarm_dump_now();",
++	extra_params => [ '--username' => 'test_user' ]);
++ok($stderr =~ /permission denied for function autoprewarm_dump_now/,
++	'autoprewarm_dump_now blocked by REVOKE');
++
++($cmdret, $stdout, $stderr) = $node->psql(
++	"postgres",
++	"SELECT autoprewarm_start_worker();",
++	extra_params => [ '--username' => 'test_user' ]);
++ok($stderr =~ /permission denied for function autoprewarm_start_worker/,
++	'autoprewarm_start_worker blocked by REVOKE');
++
++# explicit GRANT EXECUTE should restore access
++$node->safe_psql("postgres",
++	"GRANT EXECUTE ON FUNCTION autoprewarm_dump_now() TO test_user;");
++$result = $node->safe_psql(
++	"postgres",
++	"SELECT autoprewarm_dump_now();",
++	extra_params => [ '--username' => 'test_user' ]);
++like($result, qr/^[0-9]+$/,
++	'autoprewarm_dump_now succeeds for test_user after GRANT EXECUTE');
++
+ # restart, to verify that auto prewarm actually works
+ $node->restart;
+ 
+-- 
+2.50.1 (Apple Git-155)
+
