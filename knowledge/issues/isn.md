@@ -26,3 +26,10 @@ International Standard Numbers (ISBN/ISSN/ISMN/EAN13/UPC) datatype. 9 source fil
 - [ISSUE-correctness: silent no-hyphen fallback on unknown registration prefixes (nit)] — `isn.c:189-198`
 - [ISSUE-documentation: registration tables dated 2004/2006; real assignments have moved on (nit)] — `EAN13.h:5`, `ISSN.h:5`
 - [ISSUE-correctness: `check_table` consistency check runs only under ASSERT (maybe)] — `isn.c:31-35,906-919`
+
+## Appended 2026-06-11 (A21-B sweep) — per-header pointer docs
+
+Per-file docs added for `EAN13.h`, `ISBN.h`, `ISMN.h`, `ISSN.h`,
+`UPC.h` — each points to `isn_data_headers.md` for the combined
+analysis. No new issues surfaced; pre-existing items above
+(D1/D2/D3 in `isn_data_headers.md`) cover the surface.

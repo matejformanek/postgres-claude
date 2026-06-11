@@ -169,3 +169,24 @@ column GiST indexes alongside geometry types). 27 source files /
   `btree_bool.c`, `btree_cash.c`, `btree_macaddr.c`,
   `btree_macaddr8.c`, `btree_ts.c` — standard fixed-width
   comparators following btree_utils_num framework.
+
+## Appended 2026-06-11 (A21-B sweep) — headers
+
+Headers `btree_gist.h`, `btree_utils_num.h`, `btree_utils_var.h`
+documented per-file.
+
+### btree_gist.h
+
+- [ISSUE-undocumented-invariant: `gbt_t_var` umbrella enum value's role vs specific var-types not documented in this header (nit)] — `:14-39`
+
+### btree_utils_num.h
+
+- [ISSUE-style: `penalty_num` macro hardcodes `PG_GETARG_POINTER(0)` — only usable from fmgr-style call sites (nit)] — `:74`
+- [ISSUE-doc-drift: `gbtree_ninfo` field semantics underdocumented (nit)] — `:33-51`
+- [ISSUE-undocumented-invariant: `INTERVAL_TO_SEC` is a 30-day-month / 24-hour-day approximation; kNN-only but could surprise users (nit)] — `:84-87`
+
+### btree_utils_var.h
+
+- [ISSUE-correctness: `trnc=false` for text/bpchar is load-bearing for collation correctness (likely)] — `:31, btree_text.c:85,155`
+- [ISSUE-style: `GBT_VARKEY = bytea` typedef obscures actual varlena layout (nit)] — `:11`
+- [ISSUE-doc-drift: `gbtree_vinfo` methods underdocumented (nit)] — `:23-42`
