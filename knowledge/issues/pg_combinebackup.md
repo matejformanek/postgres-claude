@@ -21,6 +21,7 @@ under `knowledge/files/src/bin/pg_combinebackup/`).
 | 2026-06-11 | src/bin/pg_combinebackup/pg_combinebackup.c:567 | stale-todo | maybe | XXX comment notes overly-strict cross-backup LSN equality check; should accept `start_lsn > check_lsn` if within switchpoint | open | knowledge/files/src/bin/pg_combinebackup/pg_combinebackup.c.md §Potential issues |
 | 2026-06-11 | src/bin/pg_combinebackup/pg_combinebackup.c:1083-1102 | undocumented-invariant | nit | Missing manifest entry is warned but tolerated; pg_combinebackup is not a manifest verifier — documented nowhere | open | knowledge/files/src/bin/pg_combinebackup/pg_combinebackup.c.md §Potential issues |
 | 2026-06-11 | src/bin/pg_combinebackup/backup_label.c:151 | question | maybe | `INCREMENTAL FROM `-prefix-based strip could silently drop a future field with the same prefix | open | knowledge/files/src/bin/pg_combinebackup/backup_label.c.md §Potential issues |
+| 2026-06-11 | src/bin/pg_combinebackup/copy_file.h (CopyMethod enum) | style | nit | `COPY_METHOD_COPYFILE` is a Windows-only `#ifdef`'d enum member; any future non-Windows `switch (copy_method)` caller must stay platform-aware or risk a fall-through to a case-label that exists only on Windows | open | knowledge/files/src/bin/pg_combinebackup/copy_file.h.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 
