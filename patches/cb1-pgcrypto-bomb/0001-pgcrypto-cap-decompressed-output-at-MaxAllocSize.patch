@@ -1,0 +1,115 @@
+From 2dda343c51870aa10875baee7ce4faccd61f13e8 Mon Sep 17 00:00:00 2001
+From: Matej Formanek <manekmatej@gmail.com>
+Date: Thu, 11 Jun 2026 13:03:40 +0200
+Subject: [PATCH] pgcrypto: cap decompressed output at MaxAllocSize
+
+The decompression filter in contrib/pgcrypto/pgp-compress.c inflates
+zlib/zip-compressed OpenPGP packets via libz's inflate() in chunks of
+ZIP_OUT_BUF (8 KB) at a time, called repeatedly until the stream ends.
+The function has no output-size ceiling.
+
+A small OpenPGP blob (10-100 KB) can encode a payload that decompresses
+to many GB - the classic decompression-bomb shape.  pgp_sym_decrypt and
+pgp_pub_decrypt are public SQL APIs reachable by any role with EXECUTE
+(no REVOKE in the install scripts), so a hostile blob fed via either
+entry point will inflate until the backend's StringInfo aggregator
+trips the MaxAllocSize check.  At that point the backend has already
+allocated nearly MaxAllocSize bytes and burned the corresponding CPU on
+the inflate.
+
+This commit caps the cumulative output of the decompression filter at
+MaxAllocSize, the same ceiling that the eventual bytea/text Datum must
+satisfy.  A new uint64 total_out counter on DecomprData accumulates
+after each inflate() call; if the running total exceeds MaxAllocSize,
+decompress_read returns a new error code
+PXE_PGP_OUTPUT_LIMIT_EXCEEDED.  The error maps to "Decompressed output
+exceeds maximum allowed size" via internal_error_table in px.c.
+
+The cap is hardcoded rather than GUC-driven for backpatch friendliness;
+output above MaxAllocSize can never succeed in PostgreSQL regardless of
+configuration.  Operators who want a tighter bound can be addressed by
+a follow-up GUC patch.
+
+No regression test is added.  Constructing a true decompression bomb
+needs a binary fixture (a small compressed blob whose decompressed
+form exceeds MaxAllocSize); the cap is structurally correct and the
+worst-case behavior is exercised by inspection.
+
+Reported in postgres-claude corpus sweep A11 (2026-06-09); see
+knowledge/issues/pgcrypto.md.
+---
+ contrib/pgcrypto/pgp-compress.c | 18 ++++++++++++++++++
+ contrib/pgcrypto/px.c           |  1 +
+ contrib/pgcrypto/px.h           |  1 +
+ 3 files changed, 20 insertions(+)
+
+diff --git a/contrib/pgcrypto/pgp-compress.c b/contrib/pgcrypto/pgp-compress.c
+index caa80ecdb45..55863395c7d 100644
+--- a/contrib/pgcrypto/pgp-compress.c
++++ b/contrib/pgcrypto/pgp-compress.c
+@@ -33,6 +33,7 @@
+ 
+ #include "pgp.h"
+ #include "px.h"
++#include "utils/memutils.h"
+ 
+ /*
+  * Compressed pkt writer
+@@ -197,6 +198,7 @@ struct DecomprData
+ 	uint8	   *pos;
+ 	z_stream	stream;
+ 	int			eof;
++	uint64		total_out;		/* cumulative inflate output, capped at MaxAllocSize */
+ 	uint8		buf[ZIP_OUT_BUF];
+ };
+ 
+@@ -283,6 +285,22 @@ restart:
+ 	}
+ 
+ 	dec->buf_data = dec->buf_len - dec->stream.avail_out;
++
++	/*
++	 * Cap cumulative inflate output to bound decompression-bomb attacks
++	 * against pgp_sym_decrypt() / pgp_pub_decrypt().  A small compressed
++	 * blob can encode many gigabytes of output; the final bytea/text Datum
++	 * is bounded by MaxAllocSize anyway, so anything past that can never
++	 * succeed.  Failing here avoids the cost of inflating the rest of the
++	 * stream into a destination that will subsequently error.
++	 */
++	dec->total_out += (uint64) dec->buf_data;
++	if (dec->total_out > (uint64) MaxAllocSize)
++	{
++		px_debug("decompress_read: output exceeds MaxAllocSize");
++		return PXE_PGP_OUTPUT_LIMIT_EXCEEDED;
++	}
++
+ 	if (res == Z_STREAM_END)
+ 	{
+ 		uint8	   *tmp;
+diff --git a/contrib/pgcrypto/px.c b/contrib/pgcrypto/px.c
+index 32f62f3fc1b..2d0129b1752 100644
+--- a/contrib/pgcrypto/px.c
++++ b/contrib/pgcrypto/px.c
+@@ -79,6 +79,7 @@ static const struct error_desc px_err_list[] = {
+ 	{PXE_PGP_BAD_S2K_MODE, "Bad S2K mode"},
+ 	{PXE_PGP_UNSUPPORTED_PUBALGO, "Unsupported public key algorithm"},
+ 	{PXE_PGP_MULTIPLE_SUBKEYS, "Several subkeys not supported"},
++	{PXE_PGP_OUTPUT_LIMIT_EXCEEDED, "Decompressed output exceeds maximum allowed size"},
+ 
+ 	{0, NULL},
+ };
+diff --git a/contrib/pgcrypto/px.h b/contrib/pgcrypto/px.h
+index 440acf6a527..29b71f3f0f0 100644
+--- a/contrib/pgcrypto/px.h
++++ b/contrib/pgcrypto/px.h
+@@ -88,6 +88,7 @@
+ #define PXE_PGP_BAD_S2K_MODE		-121
+ #define PXE_PGP_UNSUPPORTED_PUBALGO -122
+ #define PXE_PGP_MULTIPLE_SUBKEYS	-123
++#define PXE_PGP_OUTPUT_LIMIT_EXCEEDED	-124
+ 
+ typedef enum BuiltinCryptoOptions
+ {
+-- 
+2.50.1 (Apple Git-155)
+
