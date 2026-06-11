@@ -66,3 +66,14 @@ table of contents, exclude chapters whose slug already exists under
 [done:cbdd5b0] trigger-interface https://www.postgresql.org/docs/current/trigger-interface.html
 [done:cbdd5b0] rules-views https://www.postgresql.org/docs/current/rules-views.html
 [done:cbdd5b0] trigger-datachanges https://www.postgresql.org/docs/current/trigger-datachanges.html
+
+## Refill 2026-06-10 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked internals.html ToC for dense internals-prose LEAF chapters not yet under docs-distilled/, preferring leaf-prose over ToC parents to dodge the planner-stats-details extraction failure; catalog/view reference pages excluded)
+
+[in-progress:cloud/pg-docs-miner/2026-06-10] sasl-authentication https://www.postgresql.org/docs/current/sasl-authentication.html
+[in-progress:cloud/pg-docs-miner/2026-06-10] generic-wal https://www.postgresql.org/docs/current/generic-wal.html
+[in-progress:cloud/pg-docs-miner/2026-06-10] custom-rmgr https://www.postgresql.org/docs/current/custom-rmgr.html
+[in-progress:cloud/pg-docs-miner/2026-06-10] protocol-logical-replication https://www.postgresql.org/docs/current/protocol-logical-replication.html
+[in-progress:cloud/pg-docs-miner/2026-06-10] backup-manifest-format https://www.postgresql.org/docs/current/backup-manifest-format.html  # parent ToC-only; field detail salvaged from backup-manifest-files.html leaf
+[in-progress:cloud/pg-docs-miner/2026-06-10] query-path https://www.postgresql.org/docs/current/query-path.html
+[in-progress:cloud/pg-docs-miner/2026-06-10] planner-optimizer https://www.postgresql.org/docs/current/planner-optimizer.html
+[in-progress:cloud/pg-docs-miner/2026-06-10] row-estimation-examples https://www.postgresql.org/docs/current/row-estimation-examples.html
