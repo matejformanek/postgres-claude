@@ -1,0 +1,86 @@
+From 06c8204b3007aaf090e64e97b18cddd7736b2a42 Mon Sep 17 00:00:00 2001
+From: Matej Formanek <manekmatej@gmail.com>
+Date: Thu, 11 Jun 2026 13:09:01 +0200
+Subject: [PATCH] hstore: validate structure before trusting HS_FLAG_NEWVERSION
+
+contrib/hstore/hstore_compat.c::hstoreUpgrade() returns the input
+hstore unchanged when its HS_FLAG_NEWVERSION bit is set:
+
+    if (hs->size_ & HS_FLAG_NEWVERSION)
+        return hs;
+
+The function hstoreValidNewFormat() in the same file short-circuited
+the same way:
+
+    if (hs->size_ & HS_FLAG_NEWVERSION)
+        return 2;
+
+Both checks trust the flag without inspecting the entry array.  A
+forged datum can set HS_FLAG_NEWVERSION on top of garbage HEntry
+offsets; downstream macros (HSE_ISFIRST, HSE_ENDPOS, HSTORE_KEY,
+HSTORE_VAL) then memcpy off attacker-controlled offsets.  The
+realistic forgery vector is a malicious bytea fed via dump / restore
+or COPY ... FROM with an hstore column, producing a controllable
+out-of-bounds read in the consuming session.
+
+This commit closes both halves of the trust gap:
+
+* hstoreValidNewFormat() always runs the structural pass; the flag is
+  only an intent signal, not a trust signal.
+
+* hstoreUpgrade() only short-circuits when both the flag AND the
+  structural check agree.  Forged datums fall through to the existing
+  dual-validation path (valid_new + valid_old), which already rejects
+  inconsistent inputs.
+
+Reported in postgres-claude corpus sweep A13 (2026-06-09); see
+knowledge/issues/hstore.md.
+---
+ contrib/hstore/hstore_compat.c | 24 ++++++++++++++++++++----
+ 1 file changed, 20 insertions(+), 4 deletions(-)
+
+diff --git a/contrib/hstore/hstore_compat.c b/contrib/hstore/hstore_compat.c
+index 3a9f7f45cb7..e4ab648512e 100644
+--- a/contrib/hstore/hstore_compat.c
++++ b/contrib/hstore/hstore_compat.c
+@@ -127,8 +127,16 @@ hstoreValidNewFormat(HStore *hs)
+ 	int			vsize = CALCDATASIZE(count, buflen);
+ 	int			i;
+ 
+-	if (hs->size_ & HS_FLAG_NEWVERSION)
+-		return 2;
++	/*
++	 * Previously this short-circuited to "valid" whenever
++	 * HS_FLAG_NEWVERSION was set, trusting the flag without inspecting the
++	 * underlying entry array.  That left the downstream HSTORE_KEY /
++	 * HSTORE_VAL macros open to forged datums whose offset entries are
++	 * structurally invalid - a controllable out-of-bounds read via dump /
++	 * restore or COPY-supplied bytea.  Run the full structural validation
++	 * regardless of the flag; the flag only indicates that the producer
++	 * believed it was emitting the new format, not that the bytes obey it.
++	 */
+ 
+ 	if (count == 0)
+ 		return 2;
+@@ -238,8 +246,16 @@ hstoreUpgrade(Datum orig)
+ 	int			valid_new;
+ 	int			valid_old;
+ 
+-	/* Return immediately if no conversion needed */
+-	if (hs->size_ & HS_FLAG_NEWVERSION)
++	/*
++	 * Return immediately if the new-version flag is set AND the structure
++	 * actually obeys the new format.  A forged datum can set the flag
++	 * with garbage offsets in the entry array, so the flag alone is not
++	 * a safe trust signal.  hstoreValidNewFormat() now inspects structure
++	 * unconditionally; only return early when both the flag and the
++	 * structure agree, otherwise fall through to the dual-validation
++	 * recovery path below.
++	 */
++	if ((hs->size_ & HS_FLAG_NEWVERSION) && hstoreValidNewFormat(hs))
+ 		return hs;
+ 
+ 	/* Do we have a writable copy? If not, make one. */
+-- 
+2.50.1 (Apple Git-155)
+
