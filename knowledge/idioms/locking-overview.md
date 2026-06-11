@@ -1,7 +1,7 @@
 # Locking and concurrency — overview
 
 - **Source paths:** `source/src/backend/storage/lmgr/`, `source/src/include/storage/{lock,lwlock,spin,s_lock,lockdefs,locktag,predicate}.h`, `source/src/include/port/atomics.h`
-- **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)
+- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (2026-06-11; §1.1–1.4 cites re-verified: atomics.h, spin.h, lwlock.h, lock.h, lockdefs.h, locktag.h. One drift fixed — `lockdefs.h:39-40` now lists `REPACK CONCURRENTLY` for ShareUpdateExclusiveLock.)
 - **Primary READMEs:** `source/src/backend/storage/lmgr/README` (heavyweight lock manager), `source/src/backend/storage/lmgr/README-SSI` (predicate locks / SSI), `source/src/backend/storage/lmgr/README.barrier` (memory ordering), `source/src/backend/access/heap/README.tuplock` (row-level locks).
 
 This is the calibration overview. Deep dives (heavyweight lock manager internals, LWLock implementation details, SSI in depth) are expected to live in subsystem files that anchor to the sections below.
@@ -92,7 +92,7 @@ Eight numeric modes, ordered weakest → strongest `[verified-by-code]` (`lockde
 | 1 | AccessShareLock | `SELECT` |
 | 2 | RowShareLock | `SELECT FOR UPDATE/SHARE` |
 | 3 | RowExclusiveLock | `INSERT`, `UPDATE`, `DELETE` |
-| 4 | ShareUpdateExclusiveLock | `VACUUM` (non-FULL), `ANALYZE`, `CREATE INDEX CONCURRENTLY`, `REINDEX CONCURRENTLY` |
+| 4 | ShareUpdateExclusiveLock | `VACUUM` (non-FULL), `ANALYZE`, `CREATE INDEX CONCURRENTLY`, `REINDEX CONCURRENTLY`, `REPACK CONCURRENTLY` |
 | 5 | ShareLock | `CREATE INDEX` (non-concurrent) |
 | 6 | ShareRowExclusiveLock | like Exclusive but allows ROW SHARE |
 | 7 | ExclusiveLock | blocks ROW SHARE / SELECT…FOR UPDATE |

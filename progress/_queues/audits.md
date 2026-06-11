@@ -7,17 +7,10 @@ back to `[pending]`.
 
 ## Entries
 
-[pending] knowledge/idioms/locking-overview.md verified=never
-[pending] knowledge/idioms/memory-contexts.md verified=never
-[pending] knowledge/idioms/catalog-conventions.md verified=never
-[pending] knowledge/idioms/error-handling.md verified=never
-[pending] knowledge/idioms/fmgr.md verified=never
-[pending] knowledge/idioms/spi.md verified=never
 [pending] knowledge/idioms/parser-pipeline.md verified=never
 [pending] knowledge/idioms/node-types-and-lists.md verified=never
 [pending] knowledge/idioms/bgworker-and-parallel.md verified=never
 [pending] knowledge/idioms/guc-variables.md verified=never
-[pending] knowledge/data-structures/bufferdesc-state.md verified=never
 [pending] knowledge/data-structures/heap-tuple-layout.md verified=never
 [pending] knowledge/data-structures/pgproc-fields.md verified=never
 [pending] knowledge/data-structures/snapshot-lifecycle.md verified=never
@@ -46,3 +39,10 @@ back to `[pending]`.
 [pending] knowledge/subsystems/headers-wave3.md verified=2026-06-10
 [pending] knowledge/subsystems/main.md verified=2026-06-10
 [pending] knowledge/subsystems/port.md verified=2026-06-10
+[pending] knowledge/idioms/locking-overview.md verified=2026-06-11
+[pending] knowledge/idioms/memory-contexts.md verified=2026-06-11
+[pending] knowledge/idioms/catalog-conventions.md verified=2026-06-11
+[pending] knowledge/idioms/error-handling.md verified=2026-06-11
+[pending] knowledge/idioms/fmgr.md verified=2026-06-11
+[pending] knowledge/idioms/spi.md verified=2026-06-11
+[pending] knowledge/data-structures/bufferdesc-state.md verified=2026-06-11
