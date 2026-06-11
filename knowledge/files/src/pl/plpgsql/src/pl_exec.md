@@ -5,7 +5,7 @@ node, evaluates expressions via SPI (with a fast "simple expression"
 bypass that calls `ExecEvalExpr` directly), manages per-call/per-stmt
 memory contexts, runs subtransactions for EXCEPTION blocks, and shepherds
 trigger/event-trigger/procedure entry and exit. Source pin
-`4b0bf0788b0`, 9218 lines.
+`e18b0cb7344`, 9218 lines.
 
 ## One-line summary
 

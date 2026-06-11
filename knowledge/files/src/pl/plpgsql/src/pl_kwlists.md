@@ -1,6 +1,6 @@
 # pl_reserved_kwlist.h and pl_unreserved_kwlist.h
 
-**Source pin:** `4b0bf0788b0`. Lines read: `pl_reserved_kwlist.h` 1–50 (complete),
+**Source pin:** `e18b0cb7344`. Lines read: `pl_reserved_kwlist.h` 1–50 (complete),
 `pl_unreserved_kwlist.h` 1–114 (complete).
 
 ## One-line summary

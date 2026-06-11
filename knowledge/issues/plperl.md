@@ -5,10 +5,11 @@ Per-subsystem issue register for the **PL/Perl procedural language**
 (`plperlu`), implemented in a single source file (`plperl.c`)
 dispatched via `pg_language.lanpltrusted` and `select_perl_context`.
 
-**Parent docs:** `knowledge/files/src/pl/plperl/*` (3 docs covering 3
-source files: `plperl.c.md`, `plperl.h.md`, `plperl_system.h.md`;
-`ppport.h` SKIPPED as vendored Perl `Devel::PPPort` boilerplate, NOT
-PostgreSQL code).
+**Parent docs:** `knowledge/files/src/pl/plperl/*` (4 docs covering 4
+source files: `plperl.c.md`, `plperl.h.md`, `plperl_system.h.md`, and
+`ppport.h.md` added by A20 — vendored Perl `Devel::PPPort` v3.63
+boilerplate, NOT PostgreSQL code, documented briefly for refresh
+procedure + PG-side override surface).
 
 **Source:** 16 entries surfaced 2026-06-04 by the A10 foreground sweep
 (agent A10-1). Mirrored in the per-file doc's `## Issues spotted` block.
@@ -176,3 +177,28 @@ untrusted variant gated by superuser.
   under MSVC+Strawberry-Perl drops branch hints throughout Perl
   (perf-only, but worth noting in Phase D) (nit)] —
   `source/src/pl/plperl/plperl_system.h:70-72`.
+
+### ppport.h (17 925 LOC, vendored Devel::PPPort 3.63) — added A20
+
+Third-party CPAN file. Risk surface is the two PG-side fallback
+macros it forces (`HeUTF8`, `GvCV_set`) and the refresh process.
+
+- [ISSUE-undocumented-invariant: dual C-header / Perl-script layout
+  (file is simultaneously a valid `.h` AND a self-regenerating Perl
+  script) is not documented anywhere in PG's tree (nit)] —
+  `source/src/pl/plperl/ppport.h:1-22` opening preamble.
+- [ISSUE-doc-drift: refresh procedure (`perl -MDevel::PPPort
+  -eDevel::PPPort::WriteFile`) is not recorded in any
+  PG-tracked doc — no `src/pl/plperl/README`, nothing in
+  `doc/src/sgml/plperl.sgml`, nothing in `MAINTAINING` notes
+  (maybe)].
+- [ISSUE-doc-drift: license origin (`Devel::PPPort` is Artistic/GPL,
+  not PostgreSQL license) is not called out near the file or in
+  `src/pl/plperl/` — relies on the global `COPYRIGHT` third-party
+  convention (maybe)].
+- [ISSUE-stale-todo: `plperl_system.h:178-189` adds PG-side
+  fallbacks for `HeUTF8` and `GvCV_set` because v3.63 of ppport.h
+  doesn't supply them; a future ppport.h refresh may make these
+  redundant — nothing currently detects redundancy (nit)] —
+  `source/src/pl/plperl/plperl_system.h:178-189`,
+  `source/src/pl/plperl/ppport.h` (whole file).

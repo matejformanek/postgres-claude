@@ -2191,3 +2191,16 @@ grep '| deep-read |' progress/files-examined.md
 | src/include/executor/nodeUnique.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-executor-nodeXxx-a17 | knowledge/files/src/include/executor/nodeUnique.md | A17; executor header |
 | src/include/executor/nodeValuesscan.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-executor-nodeXxx-a17 | knowledge/files/src/include/executor/nodeValuesscan.md | A17; executor header |
 | src/include/executor/nodeWorktablescan.h | 2026-06-09 | 4b0bf0788b0 | deep-read | include-executor-nodeXxx-a17 | knowledge/files/src/include/executor/nodeWorktablescan.md | A17; executor header |
+
+<!-- a20-pl-bin-tails 2026-06-11 — A20 sweep bucket B; ppport.h documented (was SKIPPED in A10); the 24 plpython .c+.h pair files were already covered by the 12 combined module docs from A10, no new docs needed -->
+| src/pl/plperl/ppport.h | 2026-06-11 | e18b0cb7344 | scan | pl-bin-tails-a20 | knowledge/files/src/pl/plperl/ppport.h.md | A20; vendored Devel::PPPort 3.63, ~17.9k LOC, doc focuses on purpose + refresh + PG-side override surface |
+
+<!-- a20-pl-bin-tails 2026-06-11 — A20 sweep bucket A; plpgsql core 8 files re-verified at e18b0cb7344 (no cite drift from A19's 4b0bf0788b0); kwlists split into per-file docs -->
+| src/pl/plpgsql/src/pl_comp.c | 2026-06-11 | e18b0cb7344 | re-verify | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/pl_comp.md | A20; pin bump from A19, cites spot-checked |
+| src/pl/plpgsql/src/pl_exec.c | 2026-06-11 | e18b0cb7344 | re-verify | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/pl_exec.md | A20; pin bump from A19, cites spot-checked |
+| src/pl/plpgsql/src/pl_funcs.c | 2026-06-11 | e18b0cb7344 | re-verify | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/pl_funcs.md | A20; pin bump from A19 |
+| src/pl/plpgsql/src/pl_handler.c | 2026-06-11 | e18b0cb7344 | re-verify | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/pl_handler.md | A20; pin bump, cites spot-checked |
+| src/pl/plpgsql/src/pl_scanner.c | 2026-06-11 | e18b0cb7344 | re-verify | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/pl_scanner.md | A20; pin bump from A19 |
+| src/pl/plpgsql/src/plpgsql.h | 2026-06-11 | e18b0cb7344 | re-verify | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/plpgsql.md | A20; pin bump from A19 |
+| src/pl/plpgsql/src/pl_reserved_kwlist.h | 2026-06-11 | e18b0cb7344 | deep-read | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/pl_reserved_kwlist.h.md | A20; split out from pl_kwlists.md to honor 1-doc-per-file |
+| src/pl/plpgsql/src/pl_unreserved_kwlist.h | 2026-06-11 | e18b0cb7344 | deep-read | pl-bin-tails-a20 | knowledge/files/src/pl/plpgsql/src/pl_unreserved_kwlist.h.md | A20; split out from pl_kwlists.md to honor 1-doc-per-file |
