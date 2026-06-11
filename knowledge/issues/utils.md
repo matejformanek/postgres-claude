@@ -321,3 +321,90 @@ THE Phase D pitch order from this sweep:
 5. **`record_recv` explicit `check_stack_depth()`** — match `record_in` posture for the binary protocol.
 6. **Extended-stats runtime `nattributes` validation** — replace `Assert` with hard check against `STATS_MAX_DIMENSIONS`.
 7. **`hbafuncs.c` secret masking** — RADIUS/LDAP password fields stripped from `pg_hba_file_rules.options[]`.
+
+---
+
+## A19 sweep bucket A append (2026-06-11) — backend utils tails
+
+13 files covering `utils/{mb,misc,sort,activity,fmgr}` — small mb compare
+routines, GUC support headers, tzparser, injection points, pgstat
+shmem/lock, sharedtuplestore, and the fmgr dispatcher. The big
+findings:
+
+- **fmgr.c trampoline edge cases** — `pg_stat_user_functions` skews on
+  SECURITY DEFINER, fmgr_hook ABORT/END contract subtle, CFuncHash
+  has no eviction, function-pointer leaks in NULL-result ERROR.
+- **injection_point.c** — documented dlopen leak on detach-after-load,
+  TOCTOU between exists-check and dlopen (test-only build so low
+  severity).
+- **tzparser.c** — header openly admits OOM violates check_hook
+  no-ERROR contract (stale TODO), alpha-only filename is sole
+  path-traversal defense for `@INCLUDE`.
+- **pgstat_shmem.c** — long-standing XXX wishes for
+  `dshash_create_in_place`, ad-hoc DB-drop cascade, DSA OOM risk under
+  high-cardinality custom stats kinds.
+- **sharedtuplestore.c** — SHARED_TUPLESTORE_SINGLE_PASS flag is
+  documented dead, read_buffer doubling never shrinks.
+
+### Open / Triaged — A19A append
+
+| Date | File:line | Type | Severity | Summary | Status | Linked doc |
+|---|---|---|---|---|---|---|
+| 2026-06-11 | fmgr.c:633-779 | undocumented-invariant | nit | fmgr_hook FHET_START error path skips FHET_END | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:206-216 | undocumented-invariant | nit | pg_stat_user_functions skews for SECURITY DEFINER / proconfig functions (fn_stats forced TRACK_FUNC_ALL) | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:1752-1789 | leak | nit | OidInputFunctionCall et al. self-document as leaky in seldom-executed paths | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:556-558 | leak | nit | CFuncHash unbounded; no eviction, only invalidation on xmin/ctid mismatch | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:802-809 | info-disclosure | nit | function pointer (`%p`) printed in ERROR for NULL-result via DirectFunctionCallN — ASLR-sensitive | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:233 | leak | nit | prosrc not pfree'd when fmgr_lookupByName errors | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:1611,1666 | undocumented-invariant | maybe | Soft-error compliance is per-input-function; ereport(ERROR) inside _in escapes the soft path | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:2098-2108 | undocumented-invariant | nit | CheckFunctionValidatorAccess explicitly notes EXECUTE-priv bypass via cloning | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:2073-2076 | undocumented-invariant | nit | get_fn_opclass_options precondition (must call has_fn_opclass_options first) is implicit | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | fmgr.c:531-532 | style | nit | CFuncHash invalidation on FREEZE causes refetch (perf nit only) | open | knowledge/files/src/backend/utils/fmgr/fmgr.c.md |
+| 2026-06-11 | injection_point.c:162-173 | leak | nit | Documented dlopen leak on detach-after-load | open | knowledge/files/src/backend/utils/misc/injection_point.c.md |
+| 2026-06-11 | injection_point.c:189-198 | correctness | nit | TOCTOU between pg_file_exists and load_external_function (test-only) | open | knowledge/files/src/backend/utils/misc/injection_point.c.md |
+| 2026-06-11 | injection_point.c:359-390 | style | nit | max_inuse can drift higher than strictly needed after middle-slot frees | open | knowledge/files/src/backend/utils/misc/injection_point.c.md |
+| 2026-06-11 | injection_point.c:460-505 | style | nit | O(n) point lookup, acceptable at MAX=128 | open | knowledge/files/src/backend/utils/misc/injection_point.c.md |
+| 2026-06-11 | injection_point.c:477 | style | nit | memcmp(name, namelen+1) trusts strlcpy NUL termination | open | knowledge/files/src/backend/utils/misc/injection_point.c.md |
+| 2026-06-11 | tzparser.c:9-12 | stale-todo | maybe | Header openly admits OOM-via-ereport escapes check_hook no-ERROR convention | open | knowledge/files/src/backend/utils/misc/tzparser.c.md |
+| 2026-06-11 | tzparser.c:294-306 | undocumented-invariant | maybe | Alpha-only filename check is sole path-traversal defense for @INCLUDE | open | knowledge/files/src/backend/utils/misc/tzparser.c.md |
+| 2026-06-11 | tzparser.c:415-419 | undocumented-invariant | nit | @OVERRIDE flag scope vs @INCLUDE recursion is subtle | open | knowledge/files/src/backend/utils/misc/tzparser.c.md |
+| 2026-06-11 | tzparser.c:250-263 | style | nit | Quadratic insertion sort, acceptable at current sizes | open | knowledge/files/src/backend/utils/misc/tzparser.c.md |
+| 2026-06-11 | pgstat_shmem.c:204-206 | stale-todo | nit | XXX wish for dshash_create_in_place — long-standing | open | knowledge/files/src/backend/utils/activity/pgstat_shmem.c.md |
+| 2026-06-11 | pgstat_shmem.c:1039-1041 | stale-todo | nit | XXX ad-hoc database-drop cascade | open | knowledge/files/src/backend/utils/activity/pgstat_shmem.c.md |
+| 2026-06-11 | pgstat_shmem.c:625 | undocumented-invariant | maybe | release-vs-pending ordering contract; elog(ERROR) on misuse | open | knowledge/files/src/backend/utils/activity/pgstat_shmem.c.md |
+| 2026-06-11 | pgstat_shmem.c:680-685 | correctness | nit | Cache delete elog ERROR after shared refcount mutation = partial state | open | knowledge/files/src/backend/utils/activity/pgstat_shmem.c.md |
+| 2026-06-11 | pgstat_shmem.c:548-552 | undocumented-invariant | maybe | DSA OOM under high-cardinality custom stats kinds | open | knowledge/files/src/backend/utils/activity/pgstat_shmem.c.md |
+| 2026-06-11 | pgstat_shmem.c:1124 | undocumented-invariant | nit | Silent no-op on missing entry for pgstat_reset_entry | open | knowledge/files/src/backend/utils/activity/pgstat_shmem.c.md |
+| 2026-06-11 | sharedtuplestore.c:282-286 | stale-todo | nit | SHARED_TUPLESTORE_SINGLE_PASS flag accepted but no semantics | open | knowledge/files/src/backend/utils/sort/sharedtuplestore.c.md |
+| 2026-06-11 | sharedtuplestore.c:141-152 | style | nit | strcpy after length check (vs strlcpy convention) | open | knowledge/files/src/backend/utils/sort/sharedtuplestore.c.md |
+| 2026-06-11 | sharedtuplestore.c:463-467 | style | nit | errcode_for_file_access on corrupt chunk header — should be ERRCODE_DATA_CORRUPTED | open | knowledge/files/src/backend/utils/sort/sharedtuplestore.c.md |
+| 2026-06-11 | sharedtuplestore.c:201 | undocumented-invariant | nit | memset after BufFileWrite relies on synchronous-copy semantics | open | knowledge/files/src/backend/utils/sort/sharedtuplestore.c.md |
+| 2026-06-11 | sharedtuplestore.c:434 | leak | maybe | read_buffer doubling never shrinks within accessor lifetime | open | knowledge/files/src/backend/utils/sort/sharedtuplestore.c.md |
+| 2026-06-11 | sharedtuplestore.c:124-130 | undocumented-invariant | nit | SharedTuplestore name uniqueness within fileset is caller responsibility | open | knowledge/files/src/backend/utils/sort/sharedtuplestore.c.md |
+| 2026-06-11 | sharedtuplestore.c:232-246 | undocumented-invariant | nit | sts_reinitialize caller-side sync requirement | open | knowledge/files/src/backend/utils/sort/sharedtuplestore.c.md |
+| 2026-06-11 | pgstat_lock.c:130-133,145-148 | correctness | nit | release-build bounds check missing on locktag_type; Assert-only | open | knowledge/files/src/backend/utils/activity/pgstat_lock.c.md |
+| 2026-06-11 | pgstat_lock.c:147 | style | nit | no clamp on negative msecs input | open | knowledge/files/src/backend/utils/activity/pgstat_lock.c.md |
+| 2026-06-11 | pgstat_lock.c:133,149 | undocumented-invariant | nit | side effect on pgstat_report_fixed is implicit cross-module coupling | open | knowledge/files/src/backend/utils/activity/pgstat_lock.c.md |
+| 2026-06-11 | queryenvironment.c:138 | undocumented-invariant | maybe | TupleDesc returned via NoLock open relies on outer relation pin | open | knowledge/files/src/backend/utils/misc/queryenvironment.c.md |
+| 2026-06-11 | queryenvironment.c:109 | style | nit | linear strcmp lookup, O(N²) for N ENRs | open | knowledge/files/src/backend/utils/misc/queryenvironment.c.md |
+| 2026-06-11 | queryenvironment.c:- | undocumented-invariant | nit | ENR name case-sensitivity contract implicit | open | knowledge/files/src/backend/utils/misc/queryenvironment.c.md |
+| 2026-06-11 | help_config.c:113-114 | correctness | nit | misleading exit status (still 0) on unknown vartype | open | knowledge/files/src/backend/utils/misc/help_config.c.md |
+| 2026-06-11 | help_config.c:66-69 | stale-todo | nit | comment references nonexistent user-mode output switch | open | knowledge/files/src/backend/utils/misc/help_config.c.md |
+| 2026-06-11 | pg_config.c:23-49 | info-disclosure | nit | compile-time paths/options exposed to PUBLIC (intentional; fingerprinting surface) | open | knowledge/files/src/backend/utils/misc/pg_config.c.md |
+| 2026-06-11 | stringinfo_mb.c:80-82 | undocumented-invariant | nit | "tail has no apostrophe" invariant implicit in quoted-string emission | open | knowledge/files/src/backend/utils/mb/stringinfo_mb.c.md |
+| 2026-06-11 | stringinfo_mb.c:45 | style | nit | strlen called unconditionally even when about to clip | open | knowledge/files/src/backend/utils/mb/stringinfo_mb.c.md |
+| 2026-06-11 | wstrcmp.c:43-46 | correctness | nit | signed-vs-unsigned promotion asymmetry between loop compare and return | open | knowledge/files/src/backend/utils/mb/wstrcmp.c.md |
+| 2026-06-11 | wstrncmp.c:- | doc-drift | nit | divergence from wstrcmp.c sibling on char→pg_wchar widening (unsigned cast added here) | open | knowledge/files/src/backend/utils/mb/wstrncmp.c.md |
+
+### A19A notes
+
+- Several files in this bucket are "tail" infrastructure (mb compare
+  primitives, GUC private header) with effectively zero issues —
+  recorded as 1-2 nits each to preserve audit coverage.
+- The `fmgr.c` trampoline is the highest-value target for follow-up
+  review: it owns SECURITY DEFINER, proconfig GUC override, and the
+  fmgr_hook plugin entry/exit contract. Anything that goes wrong
+  there has system-wide blast radius.
+- The injection_point.c lock-free generation protocol is well-commented
+  and looks correct; tagged nits are quality-of-impl only.
+
