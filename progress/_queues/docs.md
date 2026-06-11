@@ -77,3 +77,22 @@ table of contents, exclude chapters whose slug already exists under
 [done:009b82d] query-path https://www.postgresql.org/docs/current/query-path.html
 [done:009b82d] planner-optimizer https://www.postgresql.org/docs/current/planner-optimizer.html
 [done:009b82d] row-estimation-examples https://www.postgresql.org/docs/current/row-estimation-examples.html
+
+## Refill 2026-06-11 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked internals.html + "Extending SQL" + protocol + coding-conventions ToCs for dense internals-prose LEAF chapters not yet under docs-distilled/; storage §66 leaf chapters (page-layout/fsm/file-layout/init) + overview §52 leaves (executor/parser-stage/connect-estab) prioritized; 3 candidates 404'd this run: gin-implementation, gist-implementation, gin-extensibility — current docs tree has no such slugs)
+
+[in-progress:cloud/pg-docs-miner/2026-06-11] storage-page-layout https://www.postgresql.org/docs/current/storage-page-layout.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] storage-fsm https://www.postgresql.org/docs/current/storage-fsm.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] storage-file-layout https://www.postgresql.org/docs/current/storage-file-layout.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] storage-init https://www.postgresql.org/docs/current/storage-init.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] executor https://www.postgresql.org/docs/current/executor.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] parser-stage https://www.postgresql.org/docs/current/parser-stage.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] connect-estab https://www.postgresql.org/docs/current/connect-estab.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] bki-structure https://www.postgresql.org/docs/current/bki-structure.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] protocol-overview https://www.postgresql.org/docs/current/protocol-overview.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] protocol-error-fields https://www.postgresql.org/docs/current/protocol-error-fields.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] error-style-guide https://www.postgresql.org/docs/current/error-style-guide.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] xoper-optimization https://www.postgresql.org/docs/current/xoper-optimization.html
+[in-progress:cloud/pg-docs-miner/2026-06-11] nls-programmer https://www.postgresql.org/docs/current/nls-programmer.html
+[skipped:404-no-such-docs-slug] gin-implementation https://www.postgresql.org/docs/current/gin-implementation.html
+[skipped:404-no-such-docs-slug] gist-implementation https://www.postgresql.org/docs/current/gist-implementation.html
+[skipped:404-no-such-docs-slug] gin-extensibility https://www.postgresql.org/docs/current/gin-extensibility.html
