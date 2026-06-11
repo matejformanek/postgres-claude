@@ -19,6 +19,8 @@ for the tag convention, severity scale, and workflow.
 | 2026-06-11 | access/heap/heapam_indexscan.c:199 | undocumented-invariant | maybe | "Note: if you change the criterion here for what is 'dead', fix the planner's `get_actual_variable_range()` function to match" — cross-module invariant only enforced by a comment | open | knowledge/files/src/backend/access/heap/heapam_indexscan.c.md §Potential issues |
 | 2026-06-11 | access/heap/heaptoast.c:213 | stale-todo | nit | `XXX maybe the threshold should be less than maxDataLen?` — open design question in toast compression pass 1, immediate-externalise threshold | open | knowledge/files/src/backend/access/heap/heaptoast.c.md §Potential issues |
 | 2026-06-11 | access/heap/heaptoast.c:401 | doc-drift | nit | `toast_flatten_tuple` copies HEAP_XACT_MASK / HEAP2_XACT_MASK visibility bits "in case anybody looks at those fields in a syscache entry" — no concrete description of what would break otherwise | open | knowledge/files/src/backend/access/heap/heaptoast.c.md §Potential issues |
+| 2026-06-11 | access/nbtree/nbtreadpage.c | question | maybe | Should the array-keys state machine (~half of the file, ~1500 lines) be split into its own TU separate from the page-read hot path? Pre-PG18 it lived in nbtutils.c | open | knowledge/files/src/backend/access/nbtree/nbtreadpage.c.md §Potential issues |
+| 2026-06-11 | access/nbtree/nbtreadpage.c:134-535 | style | nit | `_bt_readpage` is one ~400-line function interleaving parallel + SAOP forward + non-SAOP forward + backward paths — high cognitive load | open | knowledge/files/src/backend/access/nbtree/nbtreadpage.c.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 

@@ -174,3 +174,148 @@ Per-subsystem issue register for the **utils header layer** — ACL/RLS, locale/
 - **A11** postgres_fdw stats-import — selfuncs.h `get_relation_stats_hook` echo.
 - **NAME→OID cluster** (A3/A6/A7/A8/A9/A10) — regproc.h + guc_hooks.h header anchors.
 - **A14** monitoring-as-extraction — backend_status.h + pgstat_internal.h + sharedtuplestore.h echoes.
+
+## A22-A: top-level `src/include/*.h` core headers (2026-06-11)
+
+17 core-API headers added in sweep A22 bucket A (~6,726 LOC). These
+are the headers every PG backend developer sees first: `c.h`,
+`postgres.h`, `postgres_fe.h`, `postgres_ext.h`, `fmgr.h`,
+`funcapi.h`, `varatt.h`, `miscadmin.h`, `pgstat.h`, `port.h`,
+`pgtime.h`, `pgtar.h`, `pg_trace.h`, `pg_getopt.h`,
+`getopt_long.h`, `pg_config_manual.h`, `windowapi.h`.
+
+### A22-A headlines
+
+13. **`varatt_external` is stored UNALIGNED in tuples** (`varatt.h:27-29`) — must memcpy to local before field access; direct dereference SIGBUS on alignment-strict platforms. Equality test goes via memcmp (header must have ZERO padding); no `StaticAssert(sizeof(varatt_external) == 16)`.
+14. **TOAST compression-method field is 2 bits** (`varatt.h:45-46, 520-526`) — pglz + lz4 + zstd consumes 3 of 4 patterns; future 4th method = on-disk-format break. The Assert in `VARATT_EXTERNAL_SET_SIZE_AND_COMPRESS_METHOD` is cassert-only.
+15. **`Pg_abi_values` compared via memcmp must be padding-free** (`fmgr.h:458-460, 468-476`) — no compile-time check; future field additions could silently break module-compat detection. `FMGR_ABI_EXTRA` ≤ 32 bytes IS asserted.
+16. **`fmgr_hook` is a single global with no chaining discipline at header level** (`fmgr.h:830-855`) — two preloaded sec-policy plugins silently overwrite each other; arbitrary-code-execution on every function call.
+17. **`pg_disable_aslr` deliberately weakens process ASLR**, only `#ifdef EXEC_BACKEND` (`port.h:147-150`) — developer-only but no "DO NOT USE" warning at header.
+18. **`DEFAULT_PGSOCKET_DIR = "/tmp"` socket squatting** (`pg_config_manual.h:181-201`) — known hazard; any local user can create `.s.PGSQL.5432` before postmaster. Default `pg_socket_dir` permission check is the sole mitigation.
+19. **`MAXPGPATH = 1024` silently truncates** vs Linux `PATH_MAX = 4096` (`pg_config_manual.h:105`) — deep nesting paths get `strlcpy`-cut with no error.
+20. **`PGSTAT_FILE_FORMAT_ID` bump is comment-only** (`pgstat.h:216-221`) — struct change without bump silently loads corrupt stats. `pg_memory_is_all_zeros` pattern also constrains struct layout (counters only, no derived/timestamps fields) without compile-time check.
+21. **PS / cancel / session globals exported PGDLLIMPORT-mutable** (`miscadmin.h:269-273, 544; pgstat.h:868-870; pgtime.h:90-91`) — `work_mem`, `shmem_request_hook`, timing counters, `session_timezone`, `log_timezone` all writable by extension code with no audit.
+22. **`InitializeSessionUserId(bypass_login_check)` + `INIT_PG_OVERRIDE_ROLE_LOGIN`** (`miscadmin.h:438-440, 506-510`) — bare bool / undocumented flag bypasses NOLOGIN; pg_upgrade uses it.
+23. **`SRF_RETURN_NEXT` macro assumes `fcinfo->resultinfo` is `ReturnSetInfo`** (`funcapi.h:311-318`) — DirectFunctionCall on an SRF crashes.
+24. **`pg_unreachable()` codegen differs cassert vs release** (`c.h:362-368`) — `abort()` under cassert, `__builtin_unreachable` else; a flow that hits `abort()` in test may silently UB in production.
+
+### Entries — A22-A: c.h / postgres.h / postgres_fe.h / postgres_ext.h (universal)
+
+- [ISSUE-style: `ExceptionalCondition` extern at `c.h:988` is gated by `!FRONTEND`; new extern declarations routinely miss this gate (nit)] — `c.h:982-990`
+- [ISSUE-undocumented-invariant: `Min`/`Max` multi-eval not flagged at definition site (nit)] — `c.h:1085-1091`
+- [ISSUE-undocumented-invariant: `MemSet`'s `Size _len = (len)` truncates if caller passes wider int (nit)] — `c.h:1107-1132`
+- [ISSUE-correctness: `pg_unreachable` codegen differs between cassert and release; abort() in cassert may UB silently in release (likely)] — `c.h:362-368`
+- [ISSUE-doc-drift: `HAVE_INT128` gate not mentioned beside `int128` typedef (nit)] — `c.h:646-663`
+- [ISSUE-doc-drift: `PGDLLEXPORT` visibility-attribute requirement not loud enough (nit)] — `c.h:1439-1452`
+- [ISSUE-stale-todo: MinGW-64 setjmp workaround could be removed once buildfarm drops mingw-w64-x86_64 (nit)] — `c.h:1483-1494`
+- [ISSUE-undocumented-invariant: `BoolGetDatum(DatumGetBool(x))` round-trip loses "any-nonzero" property (nit)] — `postgres.h:99-114`
+- [ISSUE-undocumented-invariant: PointerGetDatum-macro contract not flagged at alternative inline-function-form rejected (nit)] — `postgres.h:340-355`
+- [ISSUE-defense-in-depth: NON_EXEC_STATIC turns module-private state into linker-visible symbols under EXEC_BACKEND (nit)] — `postgres.h:570-574`
+- [ISSUE-stale-todo: SIZEOF_DATUM is vestigial; should be `#define DEPRECATED 1` or commented hostilely (nit)] — `postgres.h:76`
+- [ISSUE-api-shape: asymmetric GetDatum/DatumGet pair for MultiXactId (nit)] — `postgres.h:288-294`
+- [ISSUE-api-shape: `pg_ternary` "unset" easy to miss in switch (nit)] — `postgres.h:556-561`
+- [ISSUE-style: defensive `#ifndef FRONTEND` guard accepts non-1 values (nit)] — `postgres_fe.h:22-24`
+- [ISSUE-undocumented-invariant: omitting postgres_fe.h fails at link time, not compile time (nit)] — `postgres_fe.h`
+- [ISSUE-doc-drift: `Oid8` is backend-only but the comment doesn't explain why it's not in `postgres_ext.h` (nit)] — `c.h:755` ↔ `postgres_ext.h`
+- [ISSUE-undocumented-invariant: no static assert that `sizeof(Oid) == 4` at the public-ABI boundary (nit)] — `postgres_ext.h:32`
+- [ISSUE-correctness: `atooid` silently truncates inputs > 2^32 on 64-bit `long` platforms (maybe)] — `postgres_ext.h:43`
+- [ISSUE-api-shape: PG_DIAG_* namespace is single-char ASCII with no allocation discipline document (nit)] — `postgres_ext.h:55-72`
+
+### Entries — A22-A: fmgr.h / funcapi.h / varatt.h (fmgr surface)
+
+- [ISSUE-undocumented-invariant: no `StaticAssert(sizeof(Pg_abi_values) == expected_packed_size)`; future field additions could silently break ABI compat detection (likely)] — `fmgr.h:468-476`
+- [ISSUE-security: fmgr_hook is unrestricted by superuser — any preloaded library can install it (likely)] — `fmgr.h:830-855`
+- [ISSUE-api-shape: stack allocation of `FunctionCallInfoBaseData` by sizeof silently under-allocates `args[]` (likely)] — `fmgr.h:78-83`
+- [ISSUE-undocumented-invariant: isnull reset on re-use is comment-only; no Assert (maybe)] — `fmgr.h:166-170`
+- [ISSUE-api-shape: PG_GETARG_FLOATx has no type-system protection (nit)] — `fmgr.h:282-283`
+- [ISSUE-api-shape: PG_MODULE_MAGIC placement contract not enforced (nit)] — `fmgr.h:445-449`
+- [ISSUE-style: abi_extra should be ASCII-printable (nit)] — `fmgr.h:475`
+- [ISSUE-api-shape: DirectFunctionCall family limited to 9 args (nit)] — `fmgr.h:563-682`
+- [ISSUE-defense-in-depth: fmgr_hook lacks chained-hook idiom in header docs (likely)] — `fmgr.h:830-855`
+- [ISSUE-style: `load_file` restricted parameter is bare bool (nit)] — `fmgr.h:798`
+- [ISSUE-undocumented-invariant: SRF non-memory resource leakage on early-exit is comment-only (likely)] — `funcapi.h:279-288`
+- [ISSUE-api-shape: SRF_IS_FIRSTCALL conflates `fn_extra` usage (likely)] — `funcapi.h:305`
+- [ISSUE-correctness: SRF_RETURN_NEXT assumes resultinfo is ReturnSetInfo (likely)] — `funcapi.h:311-318`
+- [ISSUE-style: MAT_SRF_* flag bits should be enum (nit)] — `funcapi.h:296-298`
+- [ISSUE-correctness: HeapTupleGetDatum has no NULL-`t_data` guard (nit)] — `funcapi.h:230-233`
+- [ISSUE-style: extract_variadic_args `convert_unknown` is bare bool (nit)] — `funcapi.h:356-358`
+- [ISSUE-correctness: unaligned `varatt_external` access (read or write) silently SIGBUS on alignment-strict platforms (confirmed)] — `varatt.h:27-29`
+- [ISSUE-undocumented-invariant: no `StaticAssert(sizeof(varatt_external) == 16)` to catch accidental padding (likely)] — `varatt.h:32-39`
+- [ISSUE-correctness: pad-byte-zero invariant has no validity check (maybe)] — `varatt.h:175-176`
+- [ISSUE-style: vartag_external numbering scheme is undocumented for future additions (nit)] — `varatt.h:84-90`
+- [ISSUE-undocumented-invariant: vartag_external numbering scheme is load-bearing for `VARTAG_IS_EXPANDED` macro (nit)] — `varatt.h:94-98`
+- [ISSUE-correctness: only 2 compression-method bits available; zstd + pglz + lz4 + 1 more would need an on-disk-format break (maybe)] — `varatt.h:45-46, 520-526`
+- [ISSUE-correctness: `VARDATA_ANY` on external/compressed silently garbage (likely)] — `varatt.h:486-489`
+- [ISSUE-correctness: compression-method bits not validated in release builds (nit)] — `varatt.h:520-526`
+- [ISSUE-doc-drift: 2 GB vs 1 GB limit mismatch not flagged (nit)] — `varatt.h:34`
+- [ISSUE-stale-todo: compression-method bit budget tight (likely)] — `varatt.h:45-46`
+- [ISSUE-style: `sizeof(varattrib_1b_e)` semantics not documented (nit)] — `varatt.h:148-154`
+
+### Entries — A22-A: miscadmin.h / pgstat.h / port.h (process / stats / portability)
+
+- [ISSUE-defense-in-depth: no header-level guidance for "should this be a crit section?" — answer is almost always no (likely)] — `miscadmin.h:79-84`
+- [ISSUE-undocumented-invariant: `MyDatabaseHasLoginEventTriggers` is per-session, stale across CREATE EVENT TRIGGER (maybe)] — `miscadmin.h:214`
+- [ISSUE-undocumented-invariant: SECURITY_* bit allocation policy is comment-only (nit)] — `miscadmin.h:319-323`
+- [ISSUE-defense-in-depth: shmem_request_hook chaining is extension-author's responsibility, not enforced (likely)] — `miscadmin.h:543-544`
+- [ISSUE-doc-drift: MyCancelKey array size opaque at header (nit)] — `miscadmin.h:198-199`
+- [ISSUE-defense-in-depth: tuning GUCs mutable via direct symbol access (nit)] — `miscadmin.h:269-273`
+- [ISSUE-api-shape: BackendType not extensible (likely)] — `miscadmin.h:340-381`
+- [ISSUE-security: bypass_login_check is bare bool; misuse silently bypasses NOLOGIN (likely)] — `miscadmin.h:438-440`
+- [ISSUE-security: INIT_PG_OVERRIDE_ROLE_LOGIN is dangerous, no header marker (likely)] — `miscadmin.h:506-510`
+- [ISSUE-correctness: CritSectionCount underflow on mis-pairing silent in release (maybe)] — `miscadmin.h:108, 154-156`
+- [ISSUE-undocumented-invariant: PGSTAT_FILE_FORMAT_ID bump is comment-only; no static-assert on struct sizes (likely)] — `pgstat.h:216-221`
+- [ISSUE-undocumented-invariant: pg_memory_is_all_zeros pattern constrains struct layout; new field additions silently break it if non-zero by default (likely)] — `pgstat.h:126-129, 240-242`
+- [ISSUE-correctness: PGSTAT_FILE_FORMAT_ID discipline is comment-only (confirmed echo of A15 ISSUE pattern)] — `pgstat.h:221`
+- [ISSUE-style: pgstat.h fan-in too broad (nit)] — `pgstat.h:14-22`
+- [ISSUE-api-shape: PgStat_StatDBEntry has no version field (nit)] — `pgstat.h:368-403`
+- [ISSUE-doc-drift: slotsync_skip_count is single bucket (nit)] — `pgstat.h:425-426`
+- [ISSUE-defense-in-depth: timing counters mutable via PGDLLIMPORT (nit)] — `pgstat.h:868-870`
+- [ISSUE-style: pgstat GUCs declared as int (nit)] — `pgstat.h:835-841`
+- [ISSUE-style: side-effect in pgstat_should_count_relation (nit)] — `pgstat.h:711-713`
+- [ISSUE-leak: pgstat_acquire/drop_replslot pairing not enforced (maybe)] — `pgstat.h:777-782`
+- [ISSUE-doc-drift: xl_xact_stats_item layout opaque at header (nit)] — `pgstat.h:822-823`
+- [ISSUE-security: `pg_disable_aslr` deliberately weakens process ASLR; only intended for EXEC_BACKEND devs (confirmed)] — `port.h:147-150`
+- [ISSUE-stale-todo: libintl printf-replacement undef list is hand-maintained against libintl ABI (nit)] — `port.h:209-232`
+- [ISSUE-api-shape: `&printf` function pointer silently bypasses pg_printf (likely)] — `port.h:267`
+- [ISSUE-api-shape: `qsort` macro override is sticky (nit)] — `port.h:489`
+- [ISSUE-documentation: pg_strong_random init contract not in header (maybe)] — `port.h:529-531`
+- [ISSUE-correctness: pg_localeconv_r failure mode opaque (nit)] — `port.h:511-515`
+- [ISSUE-style: pg_backend_random alias misleading (nit)] — `port.h:531-536`
+- [ISSUE-defense-in-depth: pqsignal vs libc signal not flagged at header (likely)] — `port.h:553`
+- [ISSUE-style: HAVE_* unconditional on Unix; documentation trust-the-platform (nit)] — `port.h:575-583`
+
+### Entries — A22-A: time / archive / debug / config / window (utility)
+
+- [ISSUE-correctness: pg_tm convention mismatch is comment-only; no static helper to convert (likely)] — `pgtime.h:28-32`
+- [ISSUE-resource: `pg_tzset_offset` cache unbounded (maybe)] — `pgtime.h:95`
+- [ISSUE-defense-in-depth: session/log_timezone are PGDLLIMPORT-mutable (nit)] — `pgtime.h:90-91`
+- [ISSUE-documentation: pg_tz_acceptable contract opaque (nit)] — `pgtime.h:81`
+- [ISSUE-doc-drift: timezone-abbreviation function family is duplicative (nit)] — `pgtime.h:67-71`
+- [ISSUE-style: no StaticAssert anchoring tarHeaderOffset values (nit)] — `pgtar.h:38-56`
+- [ISSUE-api-shape: tarCreateHeader partial-failure mutation not flagged (nit)] — `pgtar.h:69-72`
+- [ISSUE-security: isValidTarHeader does not validate against path traversal (likely)] — `pgtar.h:75-76`
+- [ISSUE-correctness: isValidTarHeader has no length parameter (nit)] — `pgtar.h:76`
+- [ISSUE-doc-drift: no provision for future PG-specific tar extensions (nit)] — `pgtar.h`
+- [ISSUE-stale-todo: pg_trace.h is a one-line stub; consider direct include of probes.h or merging (nit)] — `pg_trace.h:15`
+- [ISSUE-api-shape: no probe-name namespace allocation (nit)] — `pg_trace.h`
+- [ISSUE-style: portability of optind declaration on Windows is fragile (nit)] — `pg_getopt.h:31-42`
+- [ISSUE-style: optreset branch grows linearly with platforms (nit)] — `pg_getopt.h:46-50`
+- [ISSUE-correctness: no signature compatibility check at link (nit)] — `pg_getopt.h:53-55`
+- [ISSUE-style: no static-assert that `sizeof(struct option)` matches expected (nit)] — `getopt_long.h:15-28`
+- [ISSUE-doc-drift: getopt_long porting requirements not documented at header (nit)] — `getopt_long.h:30-35`
+- [ISSUE-style: bare global macro names from POSIX (nit)] — `getopt_long.h:25-27`
+- [ISSUE-api-shape: NAMEDATALEN = 64 is a hard limit for forks with long identifiers (likely)] — `pg_config_manual.h:39`
+- [ISSUE-api-shape: FUNC_MAX_ARGS in ABI block means forks need custom backend (nit)] — `pg_config_manual.h:53`
+- [ISSUE-correctness: MAXPGPATH = 1024 silently truncates (likely)] — `pg_config_manual.h:105`
+- [ISSUE-security: DEFAULT_PGSOCKET_DIR `/tmp` is a known socket-squatting hazard (confirmed)] — `pg_config_manual.h:181-201`
+- [ISSUE-stale-todo: PG_CACHE_LINE_SIZE could be configure-detected (nit)] — `pg_config_manual.h:217`
+- [ISSUE-correctness: PG_IO_ALIGN_SIZE = 4 KB may be insufficient for 16 KB sector NVMe (maybe)] — `pg_config_manual.h:223`
+- [ISSUE-stale-todo: SLRU_PAGES_PER_SEGMENT could be made GUC-tunable (likely)] — `pg_config_manual.h:30`
+- [ISSUE-stale-todo: VG client requests slow non-VG runs (nit)] — `pg_config_manual.h:261-262`
+- [ISSUE-style: auto-enable hides perf cost (nit)] — `pg_config_manual.h:328-339`
+- [ISSUE-api-shape: NULL TREATMENT support requires explicit window-function opt-in (likely)] — `windowapi.h:46-48`
+- [ISSUE-style: window seek type is bare int not enum (nit)] — `windowapi.h:59-65`
+- [ISSUE-undocumented-invariant: WinSetMarkPosition usage is performance-only, not correctness; hidden hazard (likely)] — `windowapi.h:55`
+- [ISSUE-api-shape: window-frame mode opaque to extensions (likely)] — `windowapi.h:39`
+- [ISSUE-api-shape: per-partition memory size contract (nit)] — `windowapi.h:50`
+- [ISSUE-documentation: windowapi.h delegates almost all semantic docs to .c file (nit)] — `windowapi.h:6-19`
