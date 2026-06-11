@@ -1,5 +1,20 @@
 # Phase D pitch roadmap
 
+> **STATUS — PARKED (2026-06-11).**
+>
+> Phase D delivery is suspended. The 6 patches already produced (SP7 tablefunc-quoting, SP6 autoprewarm-REVOKE, SP2 pg_str*-MaxAllocSize-cap, CB7 ltree-parse_lquery-cap, CB1 pgcrypto-decompression-bomb-cap, CB8 hstore-HS_FLAG_NEWVERSION-validation) sit in `patches/<slug>/` with format-patch + COVER.md drafts. **None have been sent to pgsql-hackers** and none will be until the rest of the arc lands:
+>
+>   1. Phase A — finish "substantive 100%" (~240 files: utils tail, access/storage/cmds tail, pl/bin tail, contrib remainder, include tails). Mechanical 416 files (`src/interfaces`, `src/test`, `src/port`, snowball) deferred to cloud routines.
+>   2. Phase B — developer personas mined from pgsql-hackers archives + commit history.
+>   3. Phase C — calibration of the planner + review pipelines against the staged Phase D patches as the test bed.
+>
+> When Phase D resumes, the 6 staged patches are the starting point and the remaining 24 items below are the queue. **Do not pick a new pitch and produce a new patch without first resolving the staged 6 via pgsql-hackers submission + review.**
+>
+> The full roadmap below is preserved as the eventual playbook for Phase D execution.
+
+---
+
+
 **Status:** A→D bridge document. Consolidates the Phase D candidate pitches surfaced across A1–A17 (sweeps 2026-06-02 → 2026-06-09) plus A18 (anchor refresh).
 
 **Inputs:** ~2,720 inline `[ISSUE-*]` tags across 38+ subsystem registers under `knowledge/issues/`. ~1,908 per-file docs covering 74.4% of `src/` + `contrib/` at source pin `e18b0cb7344` (was `4b0bf0788b0` for A1–A17).
