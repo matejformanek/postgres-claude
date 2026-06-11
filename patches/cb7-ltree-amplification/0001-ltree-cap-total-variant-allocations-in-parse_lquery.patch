@@ -1,0 +1,141 @@
+From 944e540792f40039f6438df37f33aef73b23aee6 Mon Sep 17 00:00:00 2001
+From: Matej Formanek <manekmatej@gmail.com>
+Date: Thu, 11 Jun 2026 12:55:53 +0200
+Subject: [PATCH] ltree: cap total variant allocations in parse_lquery
+
+contrib/ltree's parse_lquery() makes two passes over its input.  The
+first counts the global number of '.' separators (num, the level count)
+and the global number of '|' characters (numOR, the variants count).
+The second walks the input and, at every level, allocates an array
+sized for the GLOBAL numOR count:
+
+    palloc0_array(nodeitem, numOR + 1);   /* ltree_io.c:322 and :329 */
+
+so the cumulative scratch is num * (numOR + 1) * sizeof(nodeitem)
+bytes.  With LQUERY_MAX_LEVELS = PG_UINT16_MAX = 65535 and sizeof
+(nodeitem) = 24, a roughly 256 KB hostile input of the shape
+
+    a|b|c.a|b|c.a|b|c...
+
+can drive that product to N * (N+1) * 24 bytes - about 100 GB scratch.
+Each individual palloc stays well below MaxAllocSize so the existing
+allocation cap does not fire; the bug is the unbounded growth of the
+cross-level product.
+
+This commit adds a hardcoded cap on the total variant slots allocated
+across all levels.  The cap is 1 << 17 (131072) nodeitems - well above
+any legitimate query (typical lqueries have tens of levels and tens of
+variants), leaves room for the existing single-level overflow test at
+65535 variants, and bounds the worst-case scratch to a few MB
+regardless of input.
+
+The check is placed in parse_lquery() immediately after the existing
+LQUERY_MAX_LEVELS check and before any palloc fires.  Above the cap,
+ereport ERRCODE_PROGRAM_LIMIT_EXCEEDED with a specific errmsg + detail
+naming the totals so the operator can see what was rejected.
+
+A regression test covers the cap with a ~21 KB input that would
+otherwise drive ~10M nodeitems of scratch allocation, well into the
+attack territory but small enough not to dominate the regression run.
+
+Reported in postgres-claude corpus sweep A13 (2026-06-09); see
+knowledge/issues/ltree.md.
+---
+ contrib/ltree/expected/ltree.out | 14 +++++++++++++
+ contrib/ltree/ltree_io.c         | 34 ++++++++++++++++++++++++++++++++
+ contrib/ltree/sql/ltree.sql      |  8 ++++++++
+ 3 files changed, 56 insertions(+)
+
+diff --git a/contrib/ltree/expected/ltree.out b/contrib/ltree/expected/ltree.out
+index 15b9131a750..623f5f99ade 100644
+--- a/contrib/ltree/expected/ltree.out
++++ b/contrib/ltree/expected/ltree.out
+@@ -8226,3 +8226,17 @@ DETAIL:  Total size of level exceeds the maximum allowed (65535 bytes).
+ SELECT (repeat('a|', 65535) || 'a')::lquery;
+ ERROR:  lquery level has too many variants
+ DETAIL:  Number of variants exceeds the maximum allowed (65535).
++--- CB7: total-variants cap.  A query of N levels each with M variants
++--- allocates N * (M + 1) nodeitems in scratch; cap that product to
++--- block the cross-level amplification.  Input below is ~21 KB and
++--- produces num=1001 * (numOR + 1)=10001 = ~10M slots, well above the
++--- LQUERY_MAX_TOTAL_VARIANTS cap.
++SELECT length(s::text) FROM (SELECT repeat('a|b|c|d|e|f|g|h|i|j.', 1000) || 'k' AS s) v;
++ length 
++--------
++  20001
++(1 row)
++
++SELECT (repeat('a|b|c|d|e|f|g|h|i|j.', 1000) || 'k')::lquery;
++ERROR:  lquery is too complex
++DETAIL:  Total of 9010001 variant slots across 1001 levels exceeds the maximum allowed (131072).
+diff --git a/contrib/ltree/ltree_io.c b/contrib/ltree/ltree_io.c
+index 88d2ef0c917..97bb2a19fd3 100644
+--- a/contrib/ltree/ltree_io.c
++++ b/contrib/ltree/ltree_io.c
+@@ -22,6 +22,23 @@ typedef struct
+ 	int			wlen;			/* length in characters */
+ } nodeitem;
+ 
++/*
++ * Cap on the total variant slots allocated across all lquery levels.
++ *
++ * parse_lquery allocates palloc0_array(nodeitem, numOR + 1) at every level,
++ * so the cumulative scratch is num * (numOR + 1) * sizeof(nodeitem) bytes.
++ * With LQUERY_MAX_LEVELS = PG_UINT16_MAX, an input with N levels and N |s
++ * globally can reach N * (N+1) * sizeof(nodeitem) - tens of GB at the upper
++ * end.  Individual palloc's stay below MaxAllocSize so the existing cap
++ * doesn't fire; we need a separate cap on the cross-level product.
++ *
++ * 2^17 = 131072 nodeitems is more than any legitimate lquery needs while
++ * leaving room for the existing test case at the single-level overflow
++ * boundary (65535 variants in one level, ~1.5 MB) and bounding the
++ * worst-case cross-level scratch to a few MB.
++ */
++#define LQUERY_MAX_TOTAL_VARIANTS	(1 << 17)
++
+ #define LTPRS_WAITNAME	0
+ #define LTPRS_WAITDELIM 1
+ 
+@@ -308,6 +325,23 @@ parse_lquery(const char *buf, struct Node *escontext)
+ 				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
+ 				 errmsg("number of lquery items (%d) exceeds the maximum allowed (%d)",
+ 						num, LQUERY_MAX_LEVELS)));
++
++	/*
++	 * Reject inputs whose per-level variant array (palloc0_array(nodeitem,
++	 * numOR + 1) at every level) would sum to more than
++	 * LQUERY_MAX_TOTAL_VARIANTS slots.  Individual allocations stay small
++	 * enough that the MaxAllocSize cap doesn't catch the amplification
++	 * across levels; this is a structural cap on the parser's scratch.
++	 */
++	if ((uint64) num * (uint64) (numOR + 1) > (uint64) LQUERY_MAX_TOTAL_VARIANTS)
++		ereturn(escontext, NULL,
++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
++				 errmsg("lquery is too complex"),
++				 errdetail("Total of %llu variant slots across %d levels exceeds the maximum allowed (%d).",
++						   (unsigned long long) num * (numOR + 1),
++						   num,
++						   LQUERY_MAX_TOTAL_VARIANTS)));
++
+ 	curqlevel = tmpql = (lquery_level *) palloc0(ITEMSIZE * num);
+ 	ptr = buf;
+ 	while (*ptr)
+diff --git a/contrib/ltree/sql/ltree.sql b/contrib/ltree/sql/ltree.sql
+index d0fade9d17d..fe82b0d5fdf 100644
+--- a/contrib/ltree/sql/ltree.sql
++++ b/contrib/ltree/sql/ltree.sql
+@@ -477,3 +477,11 @@ SELECT (repeat('x', 255) || repeat('|' || repeat('x', 255), 256))::lquery;
+ --- Test for overflow of lquery_level.numvar, with a set of single-char
+ --- variants in one level.
+ SELECT (repeat('a|', 65535) || 'a')::lquery;
++
++--- CB7: total-variants cap.  A query of N levels each with M variants
++--- allocates N * (M + 1) nodeitems in scratch; cap that product to
++--- block the cross-level amplification.  Input below is ~21 KB and
++--- produces num=1001 * (numOR + 1)=10001 = ~10M slots, well above the
++--- LQUERY_MAX_TOTAL_VARIANTS cap.
++SELECT length(s::text) FROM (SELECT repeat('a|b|c|d|e|f|g|h|i|j.', 1000) || 'k' AS s) v;
++SELECT (repeat('a|b|c|d|e|f|g|h|i|j.', 1000) || 'k')::lquery;
+-- 
+2.50.1 (Apple Git-155)
+
