@@ -1,0 +1,124 @@
+From 7e837854a65d0bd592569490e03cb70028637017 Mon Sep 17 00:00:00 2001
+From: Matej Formanek <manekmatej@gmail.com>
+Date: Thu, 11 Jun 2026 11:48:00 +0200
+Subject: [PATCH] Cap input size for pg_strlower/upper/title/fold to
+ MaxAllocSize/3
+
+The four case-mapping primitives pg_strlower, pg_strtitle, pg_strupper
+and pg_strfold dispatch to ICU's ucasemap_utf8To{Lower,Upper,Title} or
+to libc when the locale's ctype is non-NULL.  Both implementations can
+expand the result up to 3x the input length (the canonical German
+sharp s -> SS and Greek final sigma cases).
+
+Callers in src/backend/utils/adt/formatting.c follow the documented
+two-call pattern:
+
+    dstsize = srclen + 1;
+    dst = palloc(dstsize);
+    needed = pg_strlower(dst, dstsize, src, srclen, locale);
+    if (needed + 1 > dstsize)
+    {
+        dstsize = needed + 1;       /* up to 3 * srclen + 1 */
+        dst = repalloc(dst, dstsize);
+        needed = pg_strlower(dst, dstsize, src, srclen, locale);
+    }
+
+When srclen is close to MaxAllocSize (about 1 GB), the first palloc
+succeeds, ICU/libc walks the entire input computing `needed`, and the
+subsequent repalloc trips the MaxAllocSize check with the opaque
+message "invalid memory alloc request size N".  The same pattern is
+present in contrib/ltree/lquery_op.c and contrib/ltree/crc32.c via
+pg_strfold.
+
+This commit adds a single early cap inside each of the four pg_str*
+entry points.  The cap is (MaxAllocSize - 1) / 3, chosen so that both
+the initial palloc(srclen + 1) and the worst-case repalloc(3 * srclen
++ 1) remain under MaxAllocSize.  Above the cap, ereport with
+ERRCODE_PROGRAM_LIMIT_EXCEEDED and a specific message naming the
+SQL-visible function (lower/upper/initcap/casefold) plus a DETAIL
+giving the exact byte-count limit.
+
+The C/POSIX fast path is reached only after the cap, which is a
+tiny conservatism: ASCII case mapping is 1:1, so a stricter bound
+would technically be admissible there, but a single uniform limit
+keeps the code readable and the diff small.
+
+No regression test is added.  The natural input that exercises the
+cap is > 357 MB and would dominate buildfarm test time + memory; the
+cap is straightforward defense-in-depth and the worst-case 3x bound
+is the documented ICU contract.
+
+Reported in postgres-claude corpus sweep A7/A15/A16 (cross-finding);
+see knowledge/issues/pg_locale.md and knowledge/issues/include-utils.md.
+---
+ src/backend/utils/adt/pg_locale.c | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/src/backend/utils/adt/pg_locale.c b/src/backend/utils/adt/pg_locale.c
+index 11d48a3916e..0a1074c3418 100644
+--- a/src/backend/utils/adt/pg_locale.c
++++ b/src/backend/utils/adt/pg_locale.c
+@@ -1266,6 +1266,28 @@ get_collation_actual_version(char collprovider, const char *collcollate)
+ 	return collversion;
+ }
+ 
++/*
++ * Maximum input length accepted by the case-mapping primitives below.
++ *
++ * Case mapping can expand the result up to 3x the input (e.g. German
++ * sharp s, Greek final sigma).  Both the caller's initial palloc of
++ * srclen + 1 bytes and the worst-case repalloc to 3 * srclen + 1 bytes
++ * must remain under MaxAllocSize, so cap srclen at (MaxAllocSize - 1) / 3.
++ */
++#define PG_STR_CASEMAP_MAX_SRCLEN	((MaxAllocSize - 1) / 3)
++
++static inline void
++check_str_casemap_srclen(size_t srclen, const char *funcname)
++{
++	if (unlikely(srclen > PG_STR_CASEMAP_MAX_SRCLEN))
++		ereport(ERROR,
++				(errcode(ERRCODE_PROGRAM_LIMIT_EXCEEDED),
++				 errmsg("input string is too long for %s", funcname),
++				 errdetail("Input length %zu exceeds the case-mapping limit of %zu bytes.",
++						   srclen,
++						   (size_t) PG_STR_CASEMAP_MAX_SRCLEN)));
++}
++
+ /* lowercasing/casefolding in C locale */
+ static size_t
+ strlower_c(char *dst, size_t dstsize, const char *src, size_t srclen)
+@@ -1321,6 +1343,7 @@ size_t
+ pg_strlower(char *dst, size_t dstsize, const char *src, size_t srclen,
+ 			pg_locale_t locale)
+ {
++	check_str_casemap_srclen(srclen, "lower()");
+ 	if (locale->ctype == NULL)
+ 		return strlower_c(dst, dstsize, src, srclen);
+ 	else
+@@ -1331,6 +1354,7 @@ size_t
+ pg_strtitle(char *dst, size_t dstsize, const char *src, size_t srclen,
+ 			pg_locale_t locale)
+ {
++	check_str_casemap_srclen(srclen, "initcap()");
+ 	if (locale->ctype == NULL)
+ 		return strtitle_c(dst, dstsize, src, srclen);
+ 	else
+@@ -1341,6 +1365,7 @@ size_t
+ pg_strupper(char *dst, size_t dstsize, const char *src, size_t srclen,
+ 			pg_locale_t locale)
+ {
++	check_str_casemap_srclen(srclen, "upper()");
+ 	if (locale->ctype == NULL)
+ 		return strupper_c(dst, dstsize, src, srclen);
+ 	else
+@@ -1351,6 +1376,7 @@ size_t
+ pg_strfold(char *dst, size_t dstsize, const char *src, size_t srclen,
+ 		   pg_locale_t locale)
+ {
++	check_str_casemap_srclen(srclen, "casefold()");
+ 	/* in the C locale, casefolding is the same as lowercasing */
+ 	if (locale->ctype == NULL)
+ 		return strlower_c(dst, dstsize, src, srclen);
+-- 
+2.50.1 (Apple Git-155)
+
