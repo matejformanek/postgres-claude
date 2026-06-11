@@ -5,13 +5,17 @@ language** — the in-process language interpreter that runs as part of
 the backend, inherits the function definer's privileges, and is the
 single most-used PL in the PostgreSQL ecosystem.
 
-**Parent docs:** `knowledge/files/src/pl/plpgsql/src/*` (8 new docs
-covering 9 source files — `pl_kwlists.md` combines the two `_kwlist.h`
-headers).
+**Parent docs:** `knowledge/files/src/pl/plpgsql/src/*` — one per
+source file (`pl_comp.md`, `pl_exec.md`, `pl_funcs.md`, `pl_gram.md`,
+`pl_handler.md`, `pl_scanner.md`, `plpgsql.md`,
+`pl_reserved_kwlist.h.md`, `pl_unreserved_kwlist.h.md`); the legacy
+combined `pl_kwlists.md` is retained as a deep-dive on the x-macro
+machinery.
 
 **Source:** 87 entries surfaced 2026-06-04 by the A9 foreground sweep
-(4 parallel batches B1-B4). Each is mirrored in the per-file doc's
-`## Potential issues` / `## Issues spotted` block.
+(4 parallel batches B1-B4); refreshed 2026-06-11 by the A20 sweep
+against pin `e18b0cb7344` (cites spot-checked, no drift). Each entry
+is mirrored in the per-file doc's `## Potential issues` block.
 
 This sweep covers the **privileged sandbox boundary** — what the
 trusted PL relies on, what it does not validate, and where its
@@ -283,6 +287,17 @@ trusted PL relies on, what it does not validate, and where its
   `gen_keywordlist.pl`'s output (maybe)] —
   `source/src/pl/plpgsql/src/pl_reserved_kwlist.h:25` — presumably
   enforced by Perl script, but not visible from the header.
+- [ISSUE-undocumented-invariant: unreserved keywords are shadowable by
+  user-declared variables (e.g. `assert`, `commit`, `merge`) because
+  the namespace lookup runs before the unreserved-keyword scan; not
+  called out in `plpgsql.sgml` (nit)] —
+  `source/src/pl/plpgsql/src/pl_scanner.c:247-253` consumes
+  `source/src/pl/plpgsql/src/pl_unreserved_kwlist.h` — surprises
+  users who write a local `commit` variable.
+- [ISSUE-documentation: `elseif`/`elsif` synonym pair lacks an
+  in-comment cross-reference (nit)] —
+  `source/src/pl/plpgsql/src/pl_unreserved_kwlist.h:56-57` — both
+  map to `K_ELSIF`; only documented in `plpgsql.sgml`.
 
 ### pl_exec.c (executor, 9218 LOC — the giant)
 

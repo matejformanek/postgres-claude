@@ -4,7 +4,7 @@
 
 The PL/pgSQL language handler — the three SQL-visible entrypoints (`plpgsql_call_handler`, `plpgsql_inline_handler`, `plpgsql_validator`) that the core function manager dispatches to whenever a PL/pgSQL function, anonymous `DO` block, or `CREATE FUNCTION ... LANGUAGE plpgsql` validation runs, plus the module's GUC registration and `_PG_init` library load.
 
-Source pin: `4b0bf0788b0`. File length: 550 lines. [verified-by-code]
+Source pin: `e18b0cb7344`. File length: 550 lines. [verified-by-code]
 
 ## Public API
 

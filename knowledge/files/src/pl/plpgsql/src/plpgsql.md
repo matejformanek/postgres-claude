@@ -4,7 +4,7 @@
 
 The single canonical header for the PL/pgSQL language implementation — declares every AST node type (`PLpgSQL_stmt_*`, `PLpgSQL_datum`, `PLpgSQL_expr`), the compiled-function and runtime-execstate structs, the instrumentation `PLpgSQL_plugin` hook interface, all extern globals, and every function prototype shared between `pl_handler.c`, `pl_comp.c`, `pl_exec.c`, `pl_funcs.c`, `pl_scanner.c`, `pl_gram.y`. The "landmark" file for understanding plpgsql's shape.
 
-Source pin: `4b0bf0788b0`. File length: 1333 lines. [verified-by-code]
+Source pin: `e18b0cb7344`. File length: 1333 lines. [verified-by-code]
 
 ## Public API
 
