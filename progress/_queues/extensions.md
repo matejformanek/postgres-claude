@@ -45,3 +45,23 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 [done:05c8363] pgRouting/pgrouting branch=develop files=README.md,pgrouting.control.in,include/c_common/pgr_alloc.hpp,src/dijkstra/dijkstra.c  # 2026-06-10 cloud/pg-extension-anthropologist; manifest pgrouting.control.in + include/c_common/pgr_alloc.hpp both 404 → control template at sql/common/pgrouting.control, no pgr_alloc.hpp in c_common; added src/dijkstra/shortestPath_driver.cpp for the C++ boundary. Two-language extension: thin C/fmgr SRF (dijkstra.c) marshals PG args → C++/Boost-Graph driver (do_shortestPath) runs STL algos on its OWN heap (outside MemoryContext) → only the result Path_rt* array crosses into palloc. LOAD-BEARING idiom: catch-all try{...}catch(...) firewall writes errors to ostringstream out-params so C++ exceptions never reach PG's siglongjmp; C side then ereports — exact inverse of pgrx's pg_guard_ffi_boundary. GPL-2.0 (not PG license); requires postgis; CMake+Boost build. → knowledge/ideologies/pgrouting.md
 
 # Queue empty as of 2026-06-10 (5 entries processed this run: pg_auto_failover, plpgsql_check, orafce, uuidv47, pgrouting — the full 2026-06-09 refill backlog is now drained). Refill rule: run `gh search topics postgresql-extension --limit 50` (or the GitHub MCP search), filter to repos > 500 stars not yet under knowledge/ideologies/, append as [pending].
+
+# --- Refill (seeded 2026-06-11 cloud/pg-extension-anthropologist) ---
+# `topic:postgresql-extension stars:>500` was fully drained (all 14 hits already
+# under knowledge/ideologies/). Broadened the search: `topic:postgres stars:>800
+# extension`, `topic:postgresql stars:>1000`, and by-name lookups for well-known
+# backend extensions. Filtered OUT the non-backend-extension noise that those
+# broader queries surface (k8s operators cloudnative-pg/kubegres, poolers
+# pgcat/PgBouncer, CDC/replication services peerdb/sequin/supabase-etl/pgstream/
+# repmgr/wal-e, client libs slick-pg, distributions pigsty). Remaining = genuine
+# loadable backend extensions (.control/_PG_init/output-plugin/AM) not yet covered.
+[done:placeholder] eulerto/wal2json branch=master files=README.md,wal2json.c  # 1496 stars; logical-decoding OUTPUT PLUGIN (no .control, no CREATE EXTENSION) — the output-plugin-callbacks divergence vs the rest of the corpus which is mostly .so extensions.
+[done:placeholder] michelp/pgsodium branch=main files=README.md,pgsodium.control,src/pgsodium.c,src/pgsodium.h,src/kdf.c  # 606 stars; libsodium crypto + server-side key management (getkey-script-derived root key never in SQL) + security-label-driven transparent column encryption.
+[done:placeholder] supabase/pg_graphql branch=master files=README.md,pg_graphql.control,src/lib.rs,src/resolve.rs,src/sql_types.rs,src/transpile.rs  # 3338 stars; Rust/pgrx. A single graphql.resolve() SQL function that introspects the catalog and transpiles a whole GraphQL query into ONE SQL statement — GraphQL-as-a-stored-function-over-catalog-reflection.
+[done:placeholder] paradedb/paradedb branch=main files=README.md,pg_search/pg_search.control,pg_search/src/postgres/index.rs,pg_search/src/postgres/build.rs,pg_search/src/postgres/insert.rs,pg_search/src/postgres/scan.rs,pg_search/src/postgres/fake_aminsertcleanup.rs  # 8924 stars; Rust/pgrx monorepo (pg_search crate). A real index AM whose on-disk segments are a Tantivy (Lucene-family) full-text index, paired with a CustomScan for BM25 scoring/snippets.
+
+# --- Refill backlog (not processed this run; >500 stars, genuine backend extensions, not yet covered) ---
+[pending] lanterndata/lantern branch=main files=README.md,lantern.control,src/hnsw.c  # 885 stars; Rust/C vector index, external on-disk HNSW build (usearch), parallel/index-on-disk story vs pgvector.
+[pending] supervc-stack/VectorChord branch=main files=README.md  # 1699 stars; pgvecto.rs successor, RaBitQ quantization, disk-friendly vector storage. VERIFY canonical repo (may be tensorchord/VectorChord) before processing.
+[pending] postgresml/postgresml branch=master files=README.md,pgml-extension/pgml.control,pgml-extension/src/lib.rs  # 6800 stars; Rust/pgrx, in-backend ML training+inference (embeds Python/torch/xgboost in the backend process).
+[pending] supabase/index_advisor branch=main files=README.md,index_advisor.control,index_advisor--0.2.0.sql  # 1700 stars; pure-SQL/plpgsql index advisor built on top of hypopg — extension-on-an-extension.
