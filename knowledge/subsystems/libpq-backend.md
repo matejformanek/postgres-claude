@@ -1,5 +1,19 @@
 # libpq (backend side)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Peter Eisentraut (31), Daniel Gustafsson (16), Tom Lane (14), Nathan Bossart (9)
+- **Top reviewers (last 24mo):** Jacob Champion (11), Daniel Gustafsson (11), Tom Lane (10), Andres Freund (10)
+- **Recent landmark commits (12mo):**
+  - `112faf1378e (Fujii Masao, 2025-07-22): Log remote NOTICE, WARNING, and similar messages using ereport().`
+  - `7d8f5957792 (Tom Lane, 2025-07-25): Create infrastructure to reliably prevent leakage of PGresults.`
+  - `db01c90b2f0 (Tom Lane, 2025-08-02): Silence Valgrind leakage complaints in more-or-less-hackish ways.`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/libpq/`
 - **Header path:** `source/src/include/libpq/`
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)

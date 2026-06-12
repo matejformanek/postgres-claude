@@ -1,5 +1,19 @@
 # Optimizer — Path-enumeration, cost-based planner
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Richard Guo (85), Tom Lane (40), David Rowley (33), Robert Haas (25)
+- **Top reviewers (last 24mo):** Tom Lane (40), David Rowley (23), Andrei Lepikhov (23), Tender Wang (18)
+- **Recent landmark commits (12mo):**
+  - `b8a1bdc458e (Tom Lane, 2025-08-28): Fix "variable not found in subplan target lists" in semijoin de-duplication.`
+  - `a1b754558ae (Richard Guo, 2026-05-08): Consider opfamily and collation when removing redundant GROUP BY columns`
+  - `f41ab51573a (Richard Guo, 2026-02-10): Teach planner to transform "x IS [NOT] DISTINCT FROM NULL" to a NullTest`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source root:** `source/src/backend/optimizer/` (≈ 1.7 MB of C across plan/,
   path/, prep/, util/, geqo/)
 - **Last verified commit:** `ef6a95c7c64`

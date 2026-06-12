@@ -1,5 +1,19 @@
 # Subsystem: access/nbtree (B-tree access method)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Peter Geoghegan (78), Peter Eisentraut (22), Álvaro Herrera (7), Tom Lane (6)
+- **Top reviewers (last 24mo):** Matthias van de Meent (12), Tomas Vondra (11), Chao Li (9), Peter Geoghegan (6)
+- **Recent landmark commits (12mo):**
+  - `8a27d418f8f (Peter Eisentraut, 2025-10-31): Mark function arguments of type "Datum *" as "const Datum *" where possible`
+  - `9b5acad3f40 (Heikki Linnakangas, 2026-04-06): Convert all remaining subsystems to use the new shmem allocation API`
+  - `8191937082a (Tom Lane, 2025-12-15): Add offnum range checks to suppress compile warnings with UBSAN.`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Path:** `source/src/backend/access/nbtree/` (13 `.c` files + `README`),
   `source/src/include/access/nbtree.h`, `source/src/include/access/nbtxlog.h`
 - **Verified against commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`

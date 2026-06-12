@@ -1,5 +1,19 @@
 # Subsystem: parser + rewrite
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Peter Eisentraut (51), Tom Lane (36), Álvaro Herrera (20), Michael Paquier (15)
+- **Top reviewers (last 24mo):** Jian He (24), Peter Eisentraut (14), Álvaro Herrera (14), Tom Lane (13)
+- **Recent landmark commits (12mo):**
+  - `81ce602d48e (Fujii Masao, 2025-06-26): Make CREATE TABLE LIKE copy comments on NOT NULL constraints when requested.`
+  - `5548a969b65 (Dean Rasheed, 2026-04-22): Fix UPDATE/DELETE ... WHERE CURRENT OF on a table with virtual columns.`
+  - `487cf2cbd2f (Andrew Dunstan, 2026-03-12): Extend DomainHasConstraints() to optionally check constraint volatility`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Paths:** `source/src/backend/parser/`, `source/src/backend/rewrite/`,
   `source/src/include/parser/`, `source/src/include/rewrite/`
 - **Verified against commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`

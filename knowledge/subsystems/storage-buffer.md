@@ -1,5 +1,19 @@
 # Storage / Buffer Manager
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Andres Freund (62), Peter Eisentraut (19), Michael Paquier (12), Noah Misch (7)
+- **Top reviewers (last 24mo):** Melanie Plageman (22), Andres Freund (20), Noah Misch (13), Matthias van de Meent (8)
+- **Recent landmark commits (12mo):**
+  - `e18b0cb7344 (Michael Paquier, 2026-06-10): Fix MarkBufferDirtyHint() to not call GetBufferDescriptor() for local buffers`
+  - `c75ebc657ff (Andres Freund, 2025-11-06): bufmgr: Allow some buffer state modifications while holding header lock`
+  - `c819d1017dd (Andres Freund, 2025-10-09): bufmgr: Fix valgrind checking for buffers pinned in StrategyGetBuffer()`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/storage/buffer/`
 - **Header path:** `source/src/include/storage/` (`bufmgr.h`, `buf_internals.h`, `buf.h`, `bufpage.h`)
 - **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)

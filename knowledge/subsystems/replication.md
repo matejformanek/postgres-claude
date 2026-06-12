@@ -1,5 +1,19 @@
 # Subsystem: replication
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Amit Kapila (87), Peter Eisentraut (39), Fujii Masao (34), Michael Paquier (33)
+- **Top reviewers (last 24mo):** Amit Kapila (107), Chao Li (44), Masahiko Sawada (32), Hayato Kuroda (30)
+- **Recent landmark commits (12mo):**
+  - `d87d07b7ad3 (Masahiko Sawada, 2025-06-16): Fix re-distributing previously distributed invalidation messages during logical decoding.`
+  - `64bf53dd61e (Noah Misch, 2025-12-15): Revisit cosmetics of "For inplace update, send nontransactional invalidations."`
+  - `883a95646a8 (Fujii Masao, 2025-10-22): Fix stalled lag columns in pg_stat_replication when replay LSN stops advancing.`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Paths:** `source/src/backend/replication/` (+ `logical/`, `pgoutput/`,
   `libpqwalreceiver/` subdirs), `source/src/include/replication/`
 - **Verified against commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`

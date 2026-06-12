@@ -1,5 +1,19 @@
 # Executor — subsystem synthesis
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Tom Lane (41), Peter Eisentraut (37), David Rowley (37), Amit Langote (28)
+- **Top reviewers (last 24mo):** Andres Freund (25), Tom Lane (21), Chao Li (21), Tomas Vondra (18)
+- **Recent landmark commits (12mo):**
+  - `e6d6e32f424 (Álvaro Herrera, 2026-01-28): Fix duplicate arbiter detection during REINDEX CONCURRENTLY on partitions`
+  - `dd78e69cfc3 (Melanie Plageman, 2026-04-06): Allocate separate DSM chunk for parallel Index[Only]Scan instrumentation`
+  - `487cf2cbd2f (Andrew Dunstan, 2026-03-12): Extend DomainHasConstraints() to optionally check constraint volatility`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)
 - **Companion architecture doc:** `knowledge/architecture/executor.md`
   (Volcano model, four trees, EState lifecycle, NestLoop worked example).

@@ -1,5 +1,19 @@
 # Memory-context manager (palloc / MemoryContext)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Tom Lane (14), Peter Eisentraut (11), Michael Paquier (6), Nathan Bossart (6)
+- **Top reviewers (last 24mo):** Andres Freund (6), Chao Li (4), Michael Paquier (4), Sami Imseih (3)
+- **Recent landmark commits (12mo):**
+  - `7d8f5957792 (Tom Lane, 2025-07-25): Create infrastructure to reliably prevent leakage of PGresults.`
+  - `46593aea0a5 (Tom Lane, 2026-05-11): Make palloc_array() and friends safe against integer overflow.`
+  - `4da2afd01f9 (Michael Paquier, 2026-03-09): Fix size underestimation of DSA pagemap for odd-sized segments`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/utils/mmgr/`
 - **Header path:** `source/src/include/utils/{palloc.h,memutils.h,memutils_internal.h,memutils_memorychunk.h,memdebug.h,freepage.h,dsa.h,portal.h,relptr.h}` + `source/src/include/nodes/memnodes.h`
 - **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)

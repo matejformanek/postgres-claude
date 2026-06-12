@@ -1,5 +1,19 @@
 # Transaction management + WAL machinery
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Michael Paquier (67), Heikki Linnakangas (33), Alexander Korotkov (31), Peter Eisentraut (25)
+- **Top reviewers (last 24mo):** Chao Li (24), Michael Paquier (23), Andres Freund (19), Bertrand Drouvot (14)
+- **Recent landmark commits (12mo):**
+  - `65f4976189b (Michael Paquier, 2025-11-04): Add assertion check for WAL receiver state during stream-archive transition`
+  - `351265a6c7f (Fujii Masao, 2026-02-16): Remove recovery.signal at recovery end when both signal files are present.`
+  - `03facc1211b (Michael Paquier, 2026-03-10): Switch to FATAL error for missing checkpoint record without backup_label`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/access/transam/`
 - **Header path:** `source/src/include/access/` (`xact.h`, `xlog.h`, `xloginsert.h`, `xlogrecord.h`, `xlogreader.h`, `xlogrecovery.h`, `clog.h`, `multixact.h`, `subtrans.h`, `twophase.h`, `slru.h`, `transam.h`, `parallel.h`, `rmgr.h`, `xlogdefs.h`, `xlog_internal.h`)
 - **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)

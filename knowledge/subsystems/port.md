@@ -1,5 +1,19 @@
 # port (backend platform layer)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Nathan Bossart (18), Peter Eisentraut (13), Tom Lane (11), John Naylor (11)
+- **Top reviewers (last 24mo):** John Naylor (12), Tom Lane (8), Heikki Linnakangas (8), Nathan Bossart (7)
+- **Recent landmark commits (12mo):**
+  - `3e2a1496bae (Andrew Dunstan, 2026-04-14): Rework signal handler infrastructure to pass sender info as argument.`
+  - `e2362eb2bd1 (Heikki Linnakangas, 2026-01-30): Move shmem allocator's fields from PGShmemHeader to its own struct`
+  - `fbc57f2bc2e (John Naylor, 2026-04-04): Compute CRC32C on ARM using the Crypto Extension where available`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/port/`
 - **Header path:** `source/src/include/port/` (especially `atomics.h` + `atomics/*.h`)
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)

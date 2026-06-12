@@ -1,5 +1,19 @@
 # Lock manager (heavyweight + lightweight + spinlock + predicate)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Heikki Linnakangas (49), Peter Eisentraut (16), Michael Paquier (15), Nathan Bossart (14)
+- **Top reviewers (last 24mo):** Andres Freund (20), Matthias van de Meent (11), Ashutosh Bapat (11), Michael Paquier (10)
+- **Recent landmark commits (12mo):**
+  - `3fd05777282 (Heikki Linnakangas, 2026-03-27): Refactor PredicateLockShmemInit to not reuse var for different things`
+  - `fd6ecbfa75f (Fujii Masao, 2026-03-16): Ensure "still waiting on lock" message is logged only once per wait.`
+  - `ec317440716 (Álvaro Herrera, 2026-01-29): Replace literal 0 with InvalidXLogRecPtr for XLogRecPtr assignments`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/storage/lmgr/`
 - **Header path:** `source/src/include/storage/{lock,lwlock,proc,predicate,predicate_internals,s_lock,spin,lmgr,lockdefs,locktag,condition_variable,proclist,proclist_types}.h`
 - **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)

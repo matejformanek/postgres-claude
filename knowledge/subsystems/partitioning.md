@@ -1,5 +1,19 @@
 # partitioning (declarative partitioning support)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Alexander Korotkov (9), Peter Eisentraut (7), Amit Langote (4), Tom Lane (3)
+- **Top reviewers (last 24mo):** Alexander Korotkov (6), Tomas Vondra (4), Robert Haas (4), Jian He (3)
+- **Recent landmark commits (12mo):**
+  - `0392fb900eb (Alexander Korotkov, 2026-05-20): Revert "Reject degenerate SPLIT PARTITION with DEFAULT partition"`
+  - `8a27d418f8f (Peter Eisentraut, 2025-10-31): Mark function arguments of type "Datum *" as "const Datum *" where possible`
+  - `7724cb9935a (Peter Eisentraut, 2026-03-19): Add some const qualifiers enabled by typeof_unqual change on copyObject`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/partitioning/`
 - **Header path:** `source/src/include/partitioning/`
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)
