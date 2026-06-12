@@ -20,8 +20,9 @@ You are the `<routine>` daily cloud routine for postgres-claude.
 
 Everything else — the full 8-step workflow, the run-log template, the PR shape,
 the failure discipline — lives in **[`_loader.md`](./_loader.md)**, versioned on
-`main`. This keeps the workflow fixable over time without re-issuing the 10
+`main`. This keeps the workflow fixable over time without re-issuing the 11
 triggers: edit `_loader.md`, commit, and the next night's run picks it up.
+(11th routine `pg-anchor-refresh` added 2026-06-12 to handle drift.)
 
 The routine's own `pg-*.md` recipe governs its domain work (sources, outputs,
 budget); `_loader.md` governs the envelope. If the two ever disagree, the recipe

@@ -1,9 +1,15 @@
 # Queue: pg-quality-auditor — audit (long-form doc) side
 
-Format: `[status] <doc-path> verified=<YYYY-MM-DD|never>`
+Format: `[status] <doc-path> verified=<YYYY-MM-DD|never> [reason=<tag>]`
 Refill rule: re-walk `knowledge/{architecture,subsystems,idioms,data-structures}/*.md`;
 any doc whose `verified` annotation is > 30 days old (or `never`) goes
 back to `[pending]`.
+
+**Added 2026-06-12 (pg-anchor-refresh):** `pg-anchor-refresh` (11th routine,
+schedule 03:37) also enqueues `knowledge/files/<path>.md` entries with
+`reason=anchor-bump <old>..<new>` whenever upstream master moves and the
+touched paths have an existing per-file doc. These are higher-priority
+than the periodic 30-day refresh: process them first.
 
 ## Entries
 
