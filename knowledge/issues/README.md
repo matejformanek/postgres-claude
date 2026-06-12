@@ -85,6 +85,7 @@ first issue. Index here:
 | port | knowledge/issues/port.md | 3 open (nit/maybe; src/port shim sweep 2026-06-06 — path-traversal canonicalization precondition, /dev/urandom O_CLOEXEC, quotes.c int-len truncation; hosts the in-tree secret/crypto primitives) |
 | timezone | knowledge/issues/timezone.md | 4 open (all nit; src/timezone sweep 2026-06-07 — vendored IANA tzcode; static result buffer, malloc-not-palloc, %Z untrusted-input path, TZif producer/consumer trust split) |
 | access-rmgrdesc | knowledge/issues/access-rmgrdesc.md | 4 open (all nit; rmgrdesc per-AM desc cloud sweep 2026-06-09 — empty gist PAGE_UPDATE desc, hash SPLIT_PAGE/CLEANUP no-desc case, committs/replorigin identify-on-unmasked-info, logicalmsg user-prefix raw %s into waldump) |
+| libpq-oauth | knowledge/issues/libpq-oauth.md | 5 open (nit/maybe; libpq-oauth device-flow cloud sweep 2026-06-11 — sscanf %lf LC_NUMERIC, client_secret not bzero'd vs scrubbed token, client id/secret ASCII-assumed-unenforced, test F_SETFD/F_GETFL slip, uri_regress stable-order XXX) |
 | ... | ... | ... |
 
 (Will populate as Phase A issues land.)

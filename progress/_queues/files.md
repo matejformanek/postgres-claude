@@ -298,6 +298,23 @@ standby). The remaining 16 (per-AM descs) are queued for the next cloud run.
 
 ## src/include/executor/ thin nodeXxx.h decl headers (refill, 2026-06-09 cloud)
 
+> **2026-06-11 queue audit (cloud/pg-file-backfiller):** this entire
+> block was **STALE** — all 33 `src/include/executor/nodeXxx.h` headers
+> already have deep per-file docs under
+> `knowledge/files/src/include/executor/`, written under the `<name>.md`
+> convention (without the `.h`, e.g. `nodeBitmapAnd.md`,
+> `nodeSeqscan.md`) — *not* the `<name>.h.md` the 2026-06-09 refill note
+> below requested. Verified on disk this run (spot-read
+> `nodeBitmapAnd.md` + `nodeSeqscan.md`: both document the
+> `src/include/executor/*.h` headers, pinned at `4b0bf0788b0`). STATE.md
+> already records `src/include/executor` as 100% (A15+A17). Marked
+> `[done:covered-prior]`. Genuine gap recomputed by diffing the GitHub
+> tree at anchor `e18b0cb7344` against `knowledge/files/` (457 uncovered
+> .c/.h). Highest-priority *real* cluster this run:
+> `src/interfaces/libpq-oauth` (OAuth device-flow client — credential
+> surface) + the `src/interfaces/libpq/test` tail. New block appended at
+> the bottom.
+
 > **2026-06-09 queue refill (cloud/pg-file-backfiller):** the
 > `src/backend/access/rmgrdesc/` block above is now **fully drained** —
 > all 22 WAL-descriptor files covered (6 high-value on 2026-06-08 + the
@@ -313,36 +330,69 @@ standby). The remaining 16 (per-AM descs) are queued for the next cloud run.
 > `<name>.h.md` (keep the `.h`) to match the majority convention and
 > avoid widening the naming split.
 
-[pending] src/include/executor/nodeBitmapAnd.h loc=26 priority=M
-[pending] src/include/executor/nodeBitmapHeapscan.h loc=57 priority=M
-[pending] src/include/executor/nodeBitmapIndexscan.h loc=45 priority=M
-[pending] src/include/executor/nodeBitmapOr.h loc=26 priority=M
-[pending] src/include/executor/nodeCtescan.h loc=24 priority=M
-[pending] src/include/executor/nodeCustom.h loc=48 priority=M
-[pending] src/include/executor/nodeForeignscan.h loc=50 priority=M
-[pending] src/include/executor/nodeFunctionscan.h loc=26 priority=M
-[pending] src/include/executor/nodeGather.h loc=26 priority=M
-[pending] src/include/executor/nodeGatherMerge.h loc=30 priority=M
-[pending] src/include/executor/nodeGroup.h loc=24 priority=M
-[pending] src/include/executor/nodeIncrementalSort.h loc=43 priority=M
-[pending] src/include/executor/nodeIndexonlyscan.h loc=64 priority=M
-[pending] src/include/executor/nodeLimit.h loc=23 priority=M
-[pending] src/include/executor/nodeLockRows.h loc=24 priority=M
-[pending] src/include/executor/nodeMaterial.h loc=28 priority=M
-[pending] src/include/executor/nodeMemoize.h loc=39 priority=M
-[pending] src/include/executor/nodeMergeAppend.h loc=25 priority=M
-[pending] src/include/executor/nodeNamedtuplestorescan.h loc=26 priority=M
-[pending] src/include/executor/nodeNestloop.h loc=24 priority=M
-[pending] src/include/executor/nodeProjectSet.h loc=25 priority=M
-[pending] src/include/executor/nodeRecursiveunion.h loc=27 priority=M
-[pending] src/include/executor/nodeResult.h loc=27 priority=M
-[pending] src/include/executor/nodeSamplescan.h loc=25 priority=M
-[pending] src/include/executor/nodeSeqscan.h loc=52 priority=M
-[pending] src/include/executor/nodeSetOp.h loc=26 priority=M
-[pending] src/include/executor/nodeSubqueryscan.h loc=26 priority=M
-[pending] src/include/executor/nodeTableFuncscan.h loc=26 priority=M
-[pending] src/include/executor/nodeTidrangescan.h loc=57 priority=M
-[pending] src/include/executor/nodeTidscan.h loc=24 priority=M
-[pending] src/include/executor/nodeUnique.h loc=23 priority=M
-[pending] src/include/executor/nodeValuesscan.h loc=23 priority=M
-[pending] src/include/executor/nodeWorktablescan.h loc=24 priority=M
+[done:covered-prior] src/include/executor/nodeBitmapAnd.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeBitmapHeapscan.h loc=57 priority=M
+[done:covered-prior] src/include/executor/nodeBitmapIndexscan.h loc=45 priority=M
+[done:covered-prior] src/include/executor/nodeBitmapOr.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeCtescan.h loc=24 priority=M
+[done:covered-prior] src/include/executor/nodeCustom.h loc=48 priority=M
+[done:covered-prior] src/include/executor/nodeForeignscan.h loc=50 priority=M
+[done:covered-prior] src/include/executor/nodeFunctionscan.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeGather.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeGatherMerge.h loc=30 priority=M
+[done:covered-prior] src/include/executor/nodeGroup.h loc=24 priority=M
+[done:covered-prior] src/include/executor/nodeIncrementalSort.h loc=43 priority=M
+[done:covered-prior] src/include/executor/nodeIndexonlyscan.h loc=64 priority=M
+[done:covered-prior] src/include/executor/nodeLimit.h loc=23 priority=M
+[done:covered-prior] src/include/executor/nodeLockRows.h loc=24 priority=M
+[done:covered-prior] src/include/executor/nodeMaterial.h loc=28 priority=M
+[done:covered-prior] src/include/executor/nodeMemoize.h loc=39 priority=M
+[done:covered-prior] src/include/executor/nodeMergeAppend.h loc=25 priority=M
+[done:covered-prior] src/include/executor/nodeNamedtuplestorescan.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeNestloop.h loc=24 priority=M
+[done:covered-prior] src/include/executor/nodeProjectSet.h loc=25 priority=M
+[done:covered-prior] src/include/executor/nodeRecursiveunion.h loc=27 priority=M
+[done:covered-prior] src/include/executor/nodeResult.h loc=27 priority=M
+[done:covered-prior] src/include/executor/nodeSamplescan.h loc=25 priority=M
+[done:covered-prior] src/include/executor/nodeSeqscan.h loc=52 priority=M
+[done:covered-prior] src/include/executor/nodeSetOp.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeSubqueryscan.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeTableFuncscan.h loc=26 priority=M
+[done:covered-prior] src/include/executor/nodeTidrangescan.h loc=57 priority=M
+[done:covered-prior] src/include/executor/nodeTidscan.h loc=24 priority=M
+[done:covered-prior] src/include/executor/nodeUnique.h loc=23 priority=M
+[done:covered-prior] src/include/executor/nodeValuesscan.h loc=23 priority=M
+[done:covered-prior] src/include/executor/nodeWorktablescan.h loc=24 priority=M
+
+## src/interfaces/libpq-oauth + libpq/test (refill, 2026-06-11 cloud)
+
+Source paths: `src/interfaces/libpq-oauth/` (5 files) +
+`src/interfaces/libpq/test/` (2 files). Anchor `e18b0cb7344`. Selected as
+the highest-value uncovered cluster after the stale executor block was
+drained: the libpq-oauth module is the client-side OAuth Device
+Authorization (RFC 8628) engine — a credential/data-leak surface squarely
+on the Phase D theme. The `src/interfaces/libpq` directory itself was
+already covered (32 `.c`/`.h` docs from a prior run); these 2 `test/`
+files complete it. New `knowledge/issues/libpq-oauth.md` register (5 open:
+nit/maybe). NB: docs written as `<name>.c.md`/`<name>.h.md` (keeping the
+extension), matching the libpq-oauth sibling convention.
+
+[done:cloud-2026-06-11] src/interfaces/libpq-oauth/oauth-curl.c loc=3163 priority=H
+[done:cloud-2026-06-11] src/interfaces/libpq-oauth/oauth-curl.h loc=24 priority=M
+[done:cloud-2026-06-11] src/interfaces/libpq-oauth/oauth-utils.c loc=155 priority=H
+[done:cloud-2026-06-11] src/interfaces/libpq-oauth/oauth-utils.h loc=52 priority=M
+[done:cloud-2026-06-11] src/interfaces/libpq-oauth/test-oauth-curl.c loc=527 priority=M
+[done:cloud-2026-06-11] src/interfaces/libpq/test/libpq_testclient.c loc=37 priority=L
+[done:cloud-2026-06-11] src/interfaces/libpq/test/libpq_uri_regress.c loc=84 priority=M
+
+## Next-up (for the next cloud run — genuine gap recomputed 2026-06-11)
+
+457 .c/.h uncovered at anchor `e18b0cb7344`. Biggest clusters (after this
+run): src/interfaces/ecpg 127 (low Phase D); src/test/modules 60;
+src/backend/snowball 56 + src/include/snowball 56 (generated stemmers —
+defer); src/include/port 25; **src/backend/utils 22 (all
+mb/conversion_procs encoding converters — encoding-smuggling theme, good
+next target)**; src/backend/jit 5 + src/include/jit 5; src/backend/port 10
+(sema/shmem + win32). Recompute from the tree before refilling — the
+per-subdir 0% rows in coverage-gaps.md remain unreliable (executor and
+libpq client were both already done).
