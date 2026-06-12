@@ -133,15 +133,16 @@ The main agent does this **once** before fanning out:
    than ~20 lines or naming since-removed symbols), STOP and tell the
    user the corpus needs an `hf(corpus):` refresh before this review.
 
-### Stage 2 — fan out 4 critic sub-agents IN PARALLEL
+### Stage 2 — fan out 5 critic sub-agents IN PARALLEL
 
-Launch **all four** in a single message with parallel tool calls. Each
-gets the dispatch block from stage 1 + its assigned slice. Each is
-read-only — sub-agents do NOT edit files or commit. Each returns a
-structured finding list.
+Launch **all five** (A-E; Critic E added 2026-06-12 from Phase C) in
+a single message with parallel tool calls. Each gets the dispatch
+block from stage 1 + its assigned slice. Each is read-only —
+sub-agents do NOT edit files or commit. Each returns a structured
+finding list.
 
 Use the `Agent` tool with `subagent_type: "general-purpose"` for each.
-Estimate ~10-20 min wall time for all four to complete (in parallel).
+Estimate ~10-20 min wall time for all five to complete (in parallel).
 
 #### Critic A — Architecture & invariants
 
@@ -256,6 +257,102 @@ Phase 5 (Coding review) + Phase 7 (Committer-readiness).
 **Output:** same structured list. Most items here are `suggestion` or
 `warning`; only fundamentally broken style is `blocking`.
 
+#### Critic E — Reviewer-reflex probes (added 2026-06-12 from Phase C)
+
+**Scope:** does the patch trigger any of the persona-driven reflexes
+the corpus has documented but the generic critics A-D don't encode?
+
+**Loads:** `knowledge/calibration/gap-catalog.md` (the 11-item
+catalog) + `knowledge/personas/<name>.md` for each persona named in
+items 4-11 that triggers + `knowledge/personas/committer-map.md` +
+`knowledge/personas/domain-ownership.md` (item 11 cross-reference).
+
+**Checks (each maps 1:1 to a catalog item):**
+
+- **Cleanup-on-early-return tracing (catalog #4).** Scan the diff for
+  a new `return` statement added inside a function whose entry block
+  owns a resource handle (`z_stream`, `BufFile`, `FileFd`,
+  `MemoryContext`, `Relation`, `LWLock`). If found, surface "trace
+  cleanup path under the new error return — does
+  `<resource>_destroy()` / `_close()` / `_release()` run on this
+  branch?". Driver: `daniel-gustafsson.md` errorhandling discipline.
+
+- **Multibyte/encoding interaction (catalog #5).** Scan the diff for
+  byte-walking patterns (`*p++`, `*input++`, manual `for` loops over
+  `varlena`/`text`/`cstring`) OR size caps on text-processing
+  primitives. If found, surface "enumerate worst-case per encoding
+  (UTF-8 documented, GB18030, EUC_JP, EUC_KR, EUC_CN, EUC_TW); cite
+  the Unicode TR / SpecialCasing.txt entry for any UTF-8-specific
+  bound". Driver: `noah-misch.md` §4 + `jeff-davis.md` Unicode
+  standard fidelity.
+
+- **Subsystem-local cap discoverability (catalog #6).** Scan the
+  diff for a new `#define` in a `contrib/*/*.c` file (not header).
+  If found, surface "move to `<subsystem>.h` if a public-style cap;
+  cite the precedent constant in the same area (e.g.
+  `LQUERY_MAX_LEVELS` for `ltree_io.c`)". Driver:
+  `peter-eisentraut.md` style reflex.
+
+- **"Third state" cross-check for binary-format changes (catalog
+  #7).** Scan the diff for changes in how a flag-bit, version-bit,
+  or layout-bit is interpreted. If found, surface "enumerate the
+  third state: bit set but structure invalid, OR bit unset but
+  structure looks valid — what handles each?". Driver:
+  `heikki-linnakangas.md` binary-format reflex.
+
+- **`injection_points` reproducer for DoS / scratch-allocation /
+  race claims (catalog #8).** Scan the commit-message + COVER for
+  phrases like "prevents N MB scratch", "N GB allocation", "fixes a
+  race", "OOB read", "amplification". If found AND the patch has
+  no `src/test/modules/injection_points/` change, surface "include
+  an `injection_points` measurement at the allocation /
+  race-windowed boundary; the structural argument is not enough on
+  a security claim". Driver: `noah-misch.md` §5.
+
+- **Hot-path branch-prediction / micro-benchmark (catalog #9).**
+  When the patch touches a function in `src/backend/utils/adt/*`,
+  `src/backend/access/{heap,nbtree}/`, `src/backend/optimizer/`, or
+  similar query-evaluator path AND adds a new guard check, surface
+  "include micro-benchmark numbers confirming the guard is in the
+  unlikely branch and adds <1% overhead on typical inputs". Driver:
+  `thomas-munro.md` + `heikki-linnakangas.md` performance reflex on
+  hot paths.
+
+- **Symmetric-check refactor for N-entry-point guards (catalog
+  #10).** Diff scan for 3+ near-identical added blocks (heuristic:
+  same `if`/`ereport`/`ereturn` pattern at 3+ places). If found,
+  surface "consider a shared inline helper `<module>_check_<thing>()`
+  to keep entry points symmetric". Driver: `peter-eisentraut.md`
+  symmetric-primitives reflex.
+
+- **Persona-aware backpatch routing (catalog #11).** When COVER
+  claims back-patching AND the predicted top committer for the
+  touched subsystem (from `domain-ownership.md` top-committer
+  column) has a 24mo backpatch rate < 5% (compute from
+  `committer-map.md` or `/usr/bin/git log --author=<name> --since=
+  '2yr' --pretty=%s | grep -ciE 'back.?patch'` ratio), surface "X
+  doesn't backpatch in 24mo; the realistic v16/v17/v18 landing
+  committer is Y (from `domain-ownership.md` reviewer column — pick
+  the highest-ranked committer who backpatches at ≥10%). CC them
+  on the thread.". Driver: Peter Eisentraut row in
+  `committer-map.md`.
+
+**Severity rules for Critic E:**
+
+- Catalog #1-#3 are NOT this critic's job — they live in
+  `review-checklist` Phase 0 (gates that block before the patch
+  enters the critic fan-out).
+- Catalog #4, #5, #7, #8 are `warning` (sometimes `blocking` if the
+  COVER doesn't even acknowledge the question).
+- Catalog #6, #9, #10, #11 are `suggestion` by default — they
+  improve the patch but don't block.
+- Catalog #5 escalates to `blocking` if the patch caps a text
+  primitive AND no per-encoding analysis is in the COVER — that's
+  a real correctness gap (e.g. SP2 had this; the 3× UTF-8 bound
+  may not hold for GB18030).
+
+**Output:** same structured-finding list as critics A-D.
+
 ### Stage 3 — orchestrator consolidates (10 min)
 
 The main agent gathers all four critics' outputs and:
@@ -361,10 +458,12 @@ Below the email in the SAME session file, append:
 
 ## Boundaries vs other skills
 
-- **`review-checklist`** (the seven-phase scaffold): each critic walks
-  the relevant phase of it. This skill orchestrates four critics doing
-  that in parallel and synthesizes. Don't bypass `review-checklist`'s
-  phase definitions — extend them.
+- **`review-checklist`** (the eight-phase scaffold — Phase 0 added
+  2026-06-12 for reviewer-reflex gates): each critic walks the
+  relevant phase of it. This skill orchestrates five critics doing
+  that in parallel (A-E; E added 2026-06-12 from Phase C) and
+  synthesizes. Don't bypass `review-checklist`'s phase definitions —
+  extend them.
 - **`patch-submission`**: the self-review counterpart. If you're
   reviewing YOUR OWN patch before mailing, use that — it invokes the
   same critics but on the pre-submission path.

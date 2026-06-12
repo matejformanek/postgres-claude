@@ -26,6 +26,81 @@ re-deriving the deep rules here:
 - `commit-message-style` — judging committer-readiness of the message
 - `patch-submission` — pre-submission of our own change
 
+## Phase 0 — Reviewer-reflex gates (added 2026-06-12 from Phase C)
+
+Three persona-driven gates that fire before the mechanical checks. Each
+one was triggered repeatedly across the five Phase C calibrations
+(`knowledge/calibration/`); leaving them implicit causes the
+mechanical-only review to ship patches that real reviewers will
+push back on. If any gate fails, the patch goes back to the author
+with the gate's specific question before Phase 1.
+
+The full catalog is at `knowledge/calibration/gap-catalog.md` items
+1-3.
+
+### Gate 1 — `security@` embargo (HARD)
+
+**Trigger:** the patch's commit message or COVER body contains any of
+`DoS`, `denial of service`, `decompression bomb`, `amplification`,
+`integer overflow`, `buffer overflow`, `injection`, `TOCTOU`,
+`privilege`, `REVOKE`, `GRANT`, AND the patch touches a path
+callable via a public SQL API (any `contrib/*/` `.c` exporting a
+`Datum *` function; any `src/backend/utils/adt/`; any
+`contrib/*/*--*.sql`).
+
+**Question:** has `security@postgresql.org` been notified before
+this thread on `pgsql-hackers`?
+
+**Exemption protocol:** the author may answer "no embargo needed
+because (defense-in-depth + auth-required + DoS-class + no data
+disclosure)" — that's the SP6 shape (`sp6-autoprewarm-revoke.md`).
+The exemption argument is acceptable when explicitly stated in COVER;
+the gate is about asking the question, not auto-blocking.
+
+**Calibration support:** 5-for-5 across CB1+CB7+CB8+SP2+SP6
+(catalog item 1). Source persona: `noah-misch.md` §2.
+
+### Gate 2 — Test-omission skepticism (HARD on security patches)
+
+**Trigger:** the patch's COVER acknowledges "no regression test,
+the fixture would dominate buildfarm time / would need N LOC of
+scaffolding".
+
+**Question:** is `PG_TEST_EXTRA=stress` (per Daniel Gustafsson's
+online-checksums work) an acceptable home for the test? Even if
+the fixture costs 50-100 LOC, the structural-correctness claim
+needs a counterexample.
+
+**Exemption protocol:** a `PG_TEST_EXTRA=stress` test is the default
+answer. "Skip the test" is acceptable only if the patch is a pure
+refactor with existing test coverage of the refactored path.
+
+**Calibration support:** 3-for-3 (CB1+CB8+SP2); pre-empted by
+SP6 which added both SQL and TAP tests up front (catalog item 2).
+Source personas: `noah-misch.md` §1+§5.
+
+### Gate 3 — Install-script immutability
+
+**Trigger:** the patch modifies a `contrib/*/*--A--B.sql` file
+where the `A→B` extension version was released in a tagged
+PostgreSQL version.
+
+**Question:** are we editing a shipped extension upgrade script?
+Shipped `--*.sql` scripts are immutable post-release — installations
+that already ran the `A→B` upgrade have a different post-state than
+a fresh install with the edited script. The right shape is shipping
+a new `--B--C.sql` with the desired behavior.
+
+**Exemption protocol:** none routine. If you really need to fix a
+shipped script (rare — e.g. a syntax error that prevents the script
+from running at all), that needs explicit hackers thread agreement
+captured in the commit body.
+
+**Calibration support:** 1-for-1 (SP6) but flagged in the methodology
+plan as the install-script reflex to test for (catalog item 3).
+Source persona: `tom-lane.md` API/ABI back-compatibility reflex
+applied to install-script files.
+
 ## Phase 1 — Submission review (5 minutes)
 
 Cheap, mechanical checks. If any fail, kick back to author immediately
