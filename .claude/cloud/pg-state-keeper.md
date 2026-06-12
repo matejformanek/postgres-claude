@@ -15,7 +15,7 @@ Three jobs in one routine, run after `pg-evening-merger` (02:11) so it sees
 actual merge outcomes and every sibling routine has already had its slot:
 
 1. **Refresh `progress/STATE.md`** to reflect overnight merges.
-2. **Audit all 9 sibling routines** — this routine is the **watchdog**. For
+2. **Audit all 10 sibling routines** — this routine is the **watchdog**. For
    every other routine it must produce an explicit verdict (`OK` / `SKIPPED`
    / `FAILED` / `SILENT`) so the user knows, each morning, whether anything
    needs fixing. A routine that died before writing its log must NOT pass
@@ -24,7 +24,7 @@ actual merge outcomes and every sibling routine has already had its slot:
    morning. It **leads** with the audit's `🔧 Needs fix` section, then the
    rest.
 
-## Routine roster (the 9 siblings this watchdog must account for)
+## Routine roster (the 10 siblings this watchdog must account for)
 
 By 05:43 all of these have had their slot. Compare this roster against the
 run logs actually present for the cycle — any routine on the roster with no
@@ -33,7 +33,8 @@ log is `SILENT` (a failure to investigate, not an absence to shrug at):
 `pg-community-pulse 20:11 · pg-docs-miner 20:47 · pg-upstream-watcher 21:23 ·
 pg-extension-anthropologist 22:07 · pg-file-backfiller 22:53 ·
 pg-quality-auditor 23:31 · pg-corpus-maintainer 00:13 ·
-pg-user-question-harvester 00:47 · pg-evening-merger 02:11`
+pg-user-question-harvester 00:47 · pg-evening-merger 02:11 ·
+pg-anchor-refresh 03:37`
 
 **Verdict definitions** (assign exactly one per sibling):
 - `OK` — run log present, `exit_reason: ok`, PR opened (or cleanly merged).
@@ -82,7 +83,7 @@ routine that produced nothing.
      `FAILED` and `SILENT` routine, one line each, with the most specific
      cause available: the `exit_reason` text, "no run log for the cycle"
      for `SILENT`, or the failing source URL + HTTP status. If none, write
-     "All 9 routines healthy." Distinct from "Needs your attention" below
+     "All 10 routines healthy." Distinct from "Needs your attention" below
      (which is about unresolved PRs, not broken routines).
    - **TLDR** — 3-5 bullets, headline of last night.
    - **Merged overnight** — table: routine, PR #, title, files +/-.
