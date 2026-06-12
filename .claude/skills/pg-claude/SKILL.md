@@ -1,6 +1,33 @@
 ---
 name: pg-claude
 description: Master index for hacking on PostgreSQL internals in the pg-claude meta repo — catalogues every pg-claude skill, slash command, and the knowledge/ corpus layout (subsystems, idioms, data-structures). Use proactively whenever the task is PG backend work: building from source, debugging a backend, writing C in src/backend, adding a GUC/index AM/access method, preparing a pgsql-hackers patch, or reviewing a CommitFest entry. Do NOT trigger on user-level SQL, DBA tuning (autovacuum, shared_buffers), client libraries/ORMs, or installing/comparing PG distros.
+when_to_load: Any PG backend task — first reach for routing; use when the user's intent doesn't auto-trigger a specific skill, or when picking among multiple candidate skills.
+companion_skills:
+  - build-and-run
+  - debugging
+  - psql
+  - testing
+  - coding-style
+  - error-handling
+  - memory-contexts
+  - locking
+  - catalog-conventions
+  - wal-and-xlog
+  - fmgr-and-spi
+  - extension-development
+  - access-method-apis
+  - replication-overview
+  - parser-and-nodes
+  - executor-and-planner
+  - patch-submission
+  - review-checklist
+  - pg-patch-review
+  - commit-message-style
+  - meta-commit-style
+  - memory-keeping
+  - pg-feature-brainstorm
+  - pg-feature-plan
+  - pg-implement
 ---
 
 # pg-claude — the master navigator
@@ -64,7 +91,10 @@ didn't trigger.
 | WAL records, redo functions, custom rmgr | `wal-and-xlog` | any XLogInsert, redo, durability change |
 | fmgr/PG_FUNCTION_INFO_V1, SPI lifecycle | `fmgr-and-spi` | any SQL-callable C fn, any SPI work |
 | Extension layout, hooks, custom GUCs | `extension-development` | building an extension or hook |
-| GUC variables, bgworkers, parallel query | `gucs-bgworker-parallel` | any GUC, bgworker, parallel-aware code |
+| Custom GUCs (DefineCustomXxxVariable, check/assign hooks) | `gucs-config` *(planned PR 4 — SPLIT of gucs-bgworker-parallel)* | any GUC add/change |
+| Background workers + extension hooks | `bgworker-and-extensions` *(planned PR 4 — SPLIT of gucs-bgworker-parallel)* | RegisterBackgroundWorker, shmem, hook layering |
+| Parallel-query workers (Gather/GatherMerge, parallel-safe) | `parallel-query` *(planned PR 4 — SPLIT of gucs-bgworker-parallel)* | any parallel-aware code |
+| ⚠️ (deprecated, will be deleted in PR 4) GUC + bgworker + parallel combined | `gucs-bgworker-parallel` | until PR 4 lands; covers all three above |
 | IndexAmRoutine / TableAmRoutine | `access-method-apis` | any new AM or AM-pluggable code |
 | Replication overview (physical + logical) | `replication-overview` | walsender/walreceiver/slot/logical-decoding work |
 
@@ -236,3 +266,13 @@ When you finish a command or an edit, give the user one short "what now" line:
 - After a knowledge doc landed: "Wrote `knowledge/files/.../X.md`. Registry row appended."
 
 Don't recap what already showed in the tool output. Just point at the next move.
+
+## Cross-references
+
+This skill is the master index — every other skill is cross-referenced above. The most-used adjacencies:
+
+- `.claude/skills/memory-keeping/SKILL.md` — sync `progress/STATE.md` / `coverage.md` / `files-examined.md` at session end.
+- `.claude/skills/meta-commit-style/SKILL.md` — commit style for changes inside this index.
+- `.claude/rules/pg-implement-discipline.md` — strict rules layer on top of the planner suite (R1–R12).
+- `progress/STATE.md`, `progress/coverage.md`, `progress/coverage-gaps.md`, `progress/census.md`, `progress/files-examined.md` — the ledger this index points into.
+- Top-level `CLAUDE.md` + `postgres-claude/CLAUDE.md` — project-level orientation.
