@@ -1,5 +1,19 @@
 # Subsystem: tcop (traffic cop)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Heikki Linnakangas (20), Peter Eisentraut (15), Michael Paquier (14), Álvaro Herrera (9)
+- **Top reviewers (last 24mo):** Tom Lane (12), Michael Paquier (11), Daniel Gustafsson (9), Chao Li (8)
+- **Recent landmark commits (12mo):**
+  - `2c16deee2f7 (Andres Freund, 2026-04-08): instrumentation: Allocate query level instrumentation in ExecutorStart`
+  - `910690415b6 (Michael Paquier, 2025-11-14): Revert "Drop unnamed portal immediately after execution to completion"`
+  - `b63f25bddfe (Michael Paquier, 2026-05-11): Fix unbounded recursive handling of SSL/GSS in ProcessStartupPacket()`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Path:** `source/src/backend/tcop/` (7 `.c` files), `source/src/include/tcop/`
   (6 headers)
 - **Verified against commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`

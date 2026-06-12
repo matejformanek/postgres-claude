@@ -1,5 +1,19 @@
 # Storage / Inter-Process Communication (shmem, sinval, latches, DSM, procsignal)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Heikki Linnakangas (50), Peter Eisentraut (17), Nathan Bossart (15), Álvaro Herrera (11)
+- **Top reviewers (last 24mo):** Andres Freund (22), Chao Li (14), Matthias van de Meent (12), Ashutosh Bapat (12)
+- **Recent landmark commits (12mo):**
+  - `2dd506b859c (Nathan Bossart, 2025-11-26): Revert "Teach DSM registry to ERROR if attaching to an uninitialized entry."`
+  - `3e2a1496bae (Andrew Dunstan, 2026-04-14): Rework signal handler infrastructure to pass sender info as argument.`
+  - `01a80f06214 (Álvaro Herrera, 2026-05-23): Revert "Allow logical replication snapshots to be database-specific"`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/storage/ipc/`
 - **Header path:** `source/src/include/storage/` (`shmem.h`, `shmem_internal.h`, `ipc.h`, `sinval.h`, `sinvaladt.h`, `latch.h`, `waiteventset.h`, `dsm.h`, `dsm_impl.h`, `dsm_registry.h`, `procsignal.h`, `pmsignal.h`, `procarray.h`, `barrier.h`, `shm_mq.h`, `shm_toc.h`, `standby.h`, `subsystemlist.h`)
 - **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)

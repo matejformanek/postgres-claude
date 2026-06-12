@@ -1,5 +1,19 @@
 # Catalog / relation / plan caches (`utils/cache`)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Peter Eisentraut (35), Michael Paquier (13), Tom Lane (12), Álvaro Herrera (10)
+- **Top reviewers (last 24mo):** Tom Lane (13), Andres Freund (11), Michael Paquier (9), Jian He (9)
+- **Recent landmark commits (12mo):**
+  - `64bf53dd61e (Noah Misch, 2025-12-15): Revisit cosmetics of "For inplace update, send nontransactional invalidations."`
+  - `487cf2cbd2f (Andrew Dunstan, 2026-03-12): Extend DomainHasConstraints() to optionally check constraint volatility`
+  - `8a27d418f8f (Peter Eisentraut, 2025-10-31): Mark function arguments of type "Datum *" as "const Datum *" where possible`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/utils/cache/`
 - **Header path:** `source/src/include/utils/{catcache,syscache,relcache,plancache,typcache,inval,lsyscache,attoptcache,evtcache,spccache,partcache,relfilenumbermap,ts_cache}.h`
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)

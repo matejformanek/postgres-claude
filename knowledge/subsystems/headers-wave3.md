@@ -1,5 +1,19 @@
 # Headers skim — wave 3 (libpq / port / foreign / jit / partitioning)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Peter Eisentraut (26), Nathan Bossart (23), Thomas Munro (14), Tom Lane (13)
+- **Top reviewers (last 24mo):** Tom Lane (19), John Naylor (13), Andres Freund (10), Chao Li (10)
+- **Recent landmark commits (12mo):**
+  - `112faf1378e (Fujii Masao, 2025-07-22): Log remote NOTICE, WARNING, and similar messages using ereport().`
+  - `fbc57f2bc2e (John Naylor, 2026-04-04): Compute CRC32C on ARM using the Crypto Extension where available`
+  - `7d8f5957792 (Tom Lane, 2025-07-25): Create infrastructure to reliably prevent leakage of PGresults.`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)
 - **Purpose:** one-paragraph inventory of every header read while
   documenting the six wave-3 subsystems, so future sessions can

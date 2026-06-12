@@ -1,5 +1,18 @@
 # main (process startup dispatch)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Bruce Momjian (2), Tom Lane (2), Peter Eisentraut (2), Jeff Davis (1)
+- **Top reviewers (last 24mo):** Peter Eisentraut (3), Heikki Linnakangas (1), Greg Sabino Mullane (1), Álvaro Herrera (1)
+- **Recent landmark commits (12mo):**
+  - `5e6e42e44fe (Jeff Davis, 2025-07-16): Force LC_COLLATE to C in postmaster.`
+  - `d4baa327a1c (Tom Lane, 2025-11-05): Avoid possible crash within libsanitizer.`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/main/`
 - **Header path:** none of its own (uses miscadmin.h, postmaster.h, etc.)
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)

@@ -1,5 +1,19 @@
 # foreign (FDW dispatch + catalog accessors)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Jeff Davis (5), Bruce Momjian (2), Michael Paquier (2), Richard Guo (2)
+- **Top reviewers (last 24mo):** Ashutosh Bapat (2), Chao Li (2), Michael Paquier (2), Amit Kapila (2)
+- **Recent landmark commits (12mo):**
+  - `28972b6fc3d (Etsuro Fujita, 2026-04-08): Add support for importing statistics from remote servers.`
+  - `70407d39b7e (Peter Eisentraut, 2025-09-15): Improve ExplainState type handling in header files`
+  - `f16f5d608ca (Jeff Davis, 2026-03-24): GetSubscription(): use per-object memory context.`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/foreign/`
 - **Header path:** `source/src/include/foreign/`
 - **Last verified commit:** `ef6a95c7c64` (2026-06-01)

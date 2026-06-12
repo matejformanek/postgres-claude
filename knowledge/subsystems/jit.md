@@ -1,5 +1,19 @@
 # jit (provider-independent JIT + LLVM provider)
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Thomas Munro (12), Peter Eisentraut (8), Tom Lane (7), David Rowley (7)
+- **Top reviewers (last 24mo):** Andres Freund (7), Tom Lane (5), Andreas Karlsson (4), Álvaro Herrera (3)
+- **Recent landmark commits (12mo):**
+  - `6911f80379d (David Rowley, 2025-10-23): Fix incorrect zero extension of Datum in JIT tuple deform code`
+  - `137d05df2f2 (Peter Eisentraut, 2026-02-03): Rename AssertVariableIsOfType to StaticAssertVariableIsOfType`
+  - `4300d8b6a79 (Tom Lane, 2025-07-29): Don't put library-supplied -L/-I switches before user-supplied ones.`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
+
 - **Source path:** `source/src/backend/jit/` (dispatch) and
   `source/src/backend/jit/llvm/` (LLVM provider)
 - **Header path:** `source/src/include/jit/`

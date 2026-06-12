@@ -1,5 +1,18 @@
 # Heap access method
 
+## Owners (as of 2026-06-12)
+
+- **Top committers (last 24mo):** Melanie Plageman (75), Peter Eisentraut (19), Álvaro Herrera (18), Noah Misch (14)
+- **Top reviewers (last 24mo):** Andres Freund (42), Chao Li (29), Kirill Reshke (22), Masahiko Sawada (13)
+- **Recent landmark commits (12mo):**
+  - `64bf53dd61e (Noah Misch, 2025-12-15): Revisit cosmetics of "For inplace update, send nontransactional invalidations."`
+  - `8b9d42bf6bd (Melanie Plageman, 2026-03-02): Save prune cycles by consistently clearing prune hints on all-visible pages`
+  - `0839fbe400d (Noah Misch, 2025-12-15): Correct comments of "Fix data loss at inplace update after heap_update()".`
+
+See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, methodology, and committer/reviewer affinity clusters.
+
+---
+
 - **Source path:** `source/src/backend/access/heap/`
 - **Header path:** `source/src/include/access/` (`heapam.h`, `heapam_xlog.h`, `htup.h`, `htup_details.h`, `hio.h`, `visibilitymap.h`)
 - **Last verified commit:** `4b0bf0788b06` (2026-06-01); §6 cites re-audited 2026-06-07 (pg-quality-auditor) — heapam_visibility.c / visibilitymap.c / heapam_xlog.c comment cites corrected for refactor drift
