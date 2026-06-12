@@ -45,3 +45,23 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 [done:05c8363] pgRouting/pgrouting branch=develop files=README.md,pgrouting.control.in,include/c_common/pgr_alloc.hpp,src/dijkstra/dijkstra.c  # 2026-06-10 cloud/pg-extension-anthropologist; manifest pgrouting.control.in + include/c_common/pgr_alloc.hpp both 404 → control template at sql/common/pgrouting.control, no pgr_alloc.hpp in c_common; added src/dijkstra/shortestPath_driver.cpp for the C++ boundary. Two-language extension: thin C/fmgr SRF (dijkstra.c) marshals PG args → C++/Boost-Graph driver (do_shortestPath) runs STL algos on its OWN heap (outside MemoryContext) → only the result Path_rt* array crosses into palloc. LOAD-BEARING idiom: catch-all try{...}catch(...) firewall writes errors to ostringstream out-params so C++ exceptions never reach PG's siglongjmp; C side then ereports — exact inverse of pgrx's pg_guard_ffi_boundary. GPL-2.0 (not PG license); requires postgis; CMake+Boost build. → knowledge/ideologies/pgrouting.md
 
 # Queue empty as of 2026-06-10 (5 entries processed this run: pg_auto_failover, plpgsql_check, orafce, uuidv47, pgrouting — the full 2026-06-09 refill backlog is now drained). Refill rule: run `gh search topics postgresql-extension --limit 50` (or the GitHub MCP search), filter to repos > 500 stars not yet under knowledge/ideologies/, append as [pending].
+
+# --- Refill (seeded 2026-06-12 cloud/pg-extension-anthropologist) ---
+# `topic:postgresql-extension stars:>500` is now SATURATED — all 14 hits already covered.
+# Broadened via `topic:postgres-extension`, `postgres extension language:C stars:>900`,
+# `pg_ ... language:Rust stars:>900`, and name/desc queries. Filtered to repos >500 stars
+# not yet under knowledge/ideologies/. PolarDB-for-PostgreSQL (3173★) SKIPPED — it is a full
+# forked PG cloud distribution (shared-storage cloud-native), not a loadable extension
+# diverging via the extension API (cf. the pg_top not-an-extension + orioledb fork notes).
+# index_advisor (1700★, PLpgSQL), PgQue (1669★, PLpgSQL queue ≈ pgmq dup), pglite-fusion
+# (830★), pgx_ulid (502★ ≈ uuidv47 dup), pg_jsonschema (1193★), temporal_tables (1039★)
+# left as [pending] backlog for the next runs.
+[done:pending-merge] timescale/pgvectorscale branch=main files=README.md,pgvectorscale/src/lib.rs,pgvectorscale/src/access_method/mod.rs,pgvectorscale/src/access_method/build.rs,pgvectorscale/src/access_method/scan.rs  # 3053★ Rust/pgrx; StreamingDiskANN index AM complementing pgvector (covered)
+[done:pending-merge] timescale/pg_textsearch branch=main files=README.md,src/bm25.c,src/bm25am.c  # 3802★ C; BM25 relevance-ranked FTS index AM, diverges from core GIN+ts_rank
+[done:pending-merge] sraoss/pg_ivm branch=main files=README.md,pg_ivm.control,createas.c,matview.c,pg_ivm.c  # 1434★ C; Incremental View Maintenance via rewriter + AFTER triggers
+[done:pending-merge] ossc-db/pg_hint_plan branch=master files=README.md,pg_hint_plan.c,pg_hint_plan.control  # 907★ C; optimizer hint injection via planner/get_relation_info hooks + hint-comment parsing
+[pending] supabase/pg_jsonschema branch=master files=README.md,src/lib.rs  # 1193★ Rust/pgrx; JSON Schema validation function
+[pending] supabase/index_advisor branch=main files=README.md  # 1700★ PLpgSQL; index advisor (parasite on hypopg, SQL-only)
+[pending] frectonz/pglite-fusion branch=main files=README.md  # 830★ Rust/pgrx; embeds SQLite in a PG column value (sqlite-in-postgres type)
+[pending] arkhipov/temporal_tables branch=master files=README.md  # 1039★ C; system-versioned temporal tables via trigger + SPI
+[pending] NikolayS/PgQue branch=main files=README.md  # 1669★ PLpgSQL; zero-bloat queue on PgQ + pg_cron (compare/contrast with pgmq, covered)
