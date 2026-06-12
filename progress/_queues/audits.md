@@ -7,12 +7,6 @@ back to `[pending]`.
 
 ## Entries
 
-[pending] knowledge/idioms/parser-pipeline.md verified=never
-[pending] knowledge/idioms/node-types-and-lists.md verified=never
-[pending] knowledge/idioms/bgworker-and-parallel.md verified=never
-[pending] knowledge/idioms/guc-variables.md verified=never
-[pending] knowledge/data-structures/heap-tuple-layout.md verified=never
-[pending] knowledge/data-structures/pgproc-fields.md verified=never
 [pending] knowledge/data-structures/snapshot-lifecycle.md verified=never
 [pending] knowledge/architecture/overview.md verified=2026-06-04
 [pending] knowledge/architecture/mvcc.md verified=2026-06-04
@@ -46,3 +40,9 @@ back to `[pending]`.
 [pending] knowledge/idioms/fmgr.md verified=2026-06-11
 [pending] knowledge/idioms/spi.md verified=2026-06-11
 [pending] knowledge/data-structures/bufferdesc-state.md verified=2026-06-11
+[pending] knowledge/idioms/parser-pipeline.md verified=2026-06-12
+[pending] knowledge/idioms/node-types-and-lists.md verified=2026-06-12
+[pending] knowledge/idioms/bgworker-and-parallel.md verified=2026-06-12
+[pending] knowledge/idioms/guc-variables.md verified=2026-06-12
+[pending] knowledge/data-structures/heap-tuple-layout.md verified=2026-06-12
+[pending] knowledge/data-structures/pgproc-fields.md verified=2026-06-12

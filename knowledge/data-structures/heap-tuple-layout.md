@@ -1,7 +1,8 @@
 # HeapTuple — on-disk and in-memory layouts
 
 - **Source path:** `source/src/include/access/htup.h`, `htup_details.h`
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `e18b0cb7344` (cites re-anchored 2026-06-12 by
+  pg-quality-auditor; previously `ef6a95c7c64`)
 - **Companion docs:** `knowledge/files/src/include/access/htup.h.md`,
   `knowledge/files/src/include/access/htup_details.h.md`,
   `knowledge/files/src/backend/access/heap/heapam.c.md`
@@ -14,7 +15,7 @@ single biggest source of bugs in new heap code:
 - **`HeapTupleHeaderData`** — the on-disk header. Always followed in memory
   by a null bitmap (optional) + an OID (optional, legacy) + the actual user
   data. This is what's stored on a heap page. Defined in `htup_details.h`.
-  [verified-by-code source/src/include/access/htup_details.h:152]
+  [verified-by-code source/src/include/access/htup_details.h:153]
 
 - **`HeapTupleData`** — a thin in-memory wrapper. Carries the TID
   (`t_self`), the heap relation's OID (`t_tableOid`), a length (`t_len`),
@@ -73,7 +74,7 @@ HEAP_HOT_UPDATED   0x4000   tuple was HOT-updated (skip index updates)
 HEAP_ONLY_TUPLE    0x8000   tuple is in a HOT chain, not reachable from index
 ```
 
-[verified-by-code `htup_details.h:184-275`]
+[verified-by-code `htup_details.h:188-217` (t_infomask bits), `htup_details.h:288-298` (t_infomask2 bits)]
 
 ## 4. The hint bits — performance, not correctness
 
@@ -108,7 +109,7 @@ The visibility ordering rule (from `heapam_visibility.c`): **always check
 `xact.c` records the pg_xact commit *before* clearing `MyProc->xid`. The
 reverse order can read pg_xact-committed but still-in-procarray and decide
 "crashed". The cite for this is the long comment block at
-`heapam_visibility.c:177-191`.
+`heapam_visibility.c:13-35`.
 
 ## 6. The HOT chain via t_ctid
 
