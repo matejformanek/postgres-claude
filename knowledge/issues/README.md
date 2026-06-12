@@ -86,6 +86,7 @@ first issue. Index here:
 | timezone | knowledge/issues/timezone.md | 4 open (all nit; src/timezone sweep 2026-06-07 — vendored IANA tzcode; static result buffer, malloc-not-palloc, %Z untrusted-input path, TZif producer/consumer trust split) |
 | access-rmgrdesc | knowledge/issues/access-rmgrdesc.md | 4 open (all nit; rmgrdesc per-AM desc cloud sweep 2026-06-09 — empty gist PAGE_UPDATE desc, hash SPLIT_PAGE/CLEANUP no-desc case, committs/replorigin identify-on-unmasked-info, logicalmsg user-prefix raw %s into waldump) |
 | libpq-oauth | knowledge/issues/libpq-oauth.md | 5 open (nit/maybe; libpq-oauth device-flow cloud sweep 2026-06-11 — sscanf %lf LC_NUMERIC, client_secret not bzero'd vs scrubbed token, client id/secret ASCII-assumed-unenforced, test F_SETFD/F_GETFL slip, uri_regress stable-order XXX) |
+| ecpg | knowledge/issues/ecpg.md | 40 open (mostly nit; ecpg runtime-library cloud sweep 2026-06-12 — ecpglib+pgtypeslib+compatlib. Two systemic themes: pgtypeslib forks of backend datetime/numeric drift; Informix/pgtypes *_to_asc formatters write unbounded caller buffers. Maybe-flags: execute.c:761 bool[] heap overflow, execute.c:1649 PGresult leak, numeric.c:181 exponent alloc-sizing, dt_common.c:20 token-table sortedness, informix.c:660 NULL-deref asymmetry, prepare.c auto-prepare lifetime/threadsafety) |
 | ... | ... | ... |
 
 (Will populate as Phase A issues land.)

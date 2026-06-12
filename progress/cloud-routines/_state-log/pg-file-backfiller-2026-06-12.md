@@ -1,0 +1,1 @@
+**pg-file-backfiller** 2026-06-12 — ecpg runtime-library trilogy documented: 20 per-file docs (ecpglib 11 + pgtypeslib 8 + compatlib 1) under knowledge/files/src/interfaces/ecpg/, new knowledge/issues/ecpg.md register (40 rows); notable maybe-issue execute.c:761 bool[] heap overflow. Next: ecpg/preproc + include. (PR pending).
