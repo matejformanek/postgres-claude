@@ -34,17 +34,19 @@ buildfarm failures. Merges upstream-deltas-explainer + buildfarm-miner.
    smaller). Record each fetch URL + status in run log.
 4. For each commit (cap 50/day): one-line explainer with author, subject,
    files touched (top 3), 1-sentence "what changed".
-5. Pick up to 5 commits flagged "interesting" (heuristic: touches
+5. Pick **10-15** commits flagged "interesting" (heuristic: touches
    `src/backend/storage`, `src/backend/access`, `src/backend/optimizer`,
-   `src/backend/executor`, `src/backend/replication`, or any header in
-   `src/include/`). For each: fetch its diff, write a 5-15-line deep
-   explainer with file:line cites and `[[link]]` into corpus.
+   `src/backend/executor`, `src/backend/replication`, `src/backend/utils`,
+   `src/backend/commands`, `src/backend/libpq`, `src/backend/postmaster`,
+   `src/backend/jit`, any header in `src/include/`, or any contrib whose
+   docs we already maintain). For each: fetch its diff, write a 5-15-line
+   deep explainer with file:line cites and `[[link]]` into corpus.
 6. Output → `knowledge/upstream-deltas/<YYYY-MM-DD>.md`.
 7. If any commits land, also generate a `/refresh-upstream`-style cross-ref
    report at `progress/refresh-<YYYY-MM-DD>.md` listing potentially-impacted
    corpus files (grep `knowledge/files/<changed-path>.md`).
-8. **Buildfarm:** fetch RSS, pick 3-5 failures from the last 24h that aren't
-   obvious flakes. For each: animal name, branch, stage, failure URL,
+8. **Buildfarm:** fetch RSS, pick **6-10** failures from the last 24h that
+   aren't obvious flakes. For each: animal name, branch, stage, failure URL,
    1-paragraph rootcause guess. Output →
    `knowledge/buildfarm-lessons/<YYYY-MM-DD>.md`.
 9. **Anchor bump:** if (and only if) the commits explained produce zero
@@ -65,5 +67,8 @@ buildfarm failures. Merges upstream-deltas-explainer + buildfarm-miner.
 
 ## Budget
 
-80k input / 25k output. Cap each diff fetch at 8k; commit-list pages are
-~5-15k each.
+200k input / 50k output (matches frontmatter; reconciled 2026-06-12 — the
+prior "80k/25k" footer was making the agent self-cap at half budget).
+Cap each diff fetch at 12k (was 8k); commit-list pages are ~5-15k each. At
+10-15 deep commits × ~3k each + 6-10 buildfarm rootcauses × ~2k each, the
+output target is ~40-50k — the 70% floor `_loader.md` §5 enforces.

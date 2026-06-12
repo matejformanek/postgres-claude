@@ -31,9 +31,11 @@ planet-postgres-aggregator into a single review-able PR.
 2. Branch: `cloud/pg-community-pulse/<YYYY-MM-DD>`.
 3. `WebFetch` each of the three sources. Record the URL and HTTP status in
    the run log's `sources` block.
-4. **Hackers section** — pick 3-5 threads from the last 24h that look
+4. **Hackers section** — pick **8-12** threads from the last 24h that look
    internals-relevant (filter on keywords: WAL, lock, MVCC, planner, executor,
-   buffer, vacuum, replication, etc.). For each:
+   buffer, vacuum, replication, etc. — broaden to also catch: AIO, IO concurrency,
+   parallel query, partition pruning, logical replication, BRR/SSL, libpq, oauth,
+   pg_dump/restore, security, JIT, table AM). For each:
    - Subject line, archive URL, 3-bullet summary, "Why it matters" sentence,
      `[[link]]` into existing corpus where applicable.
    - Output → `knowledge/community/threads/<YYYY-MM-DD>.md`.
@@ -42,7 +44,7 @@ planet-postgres-aggregator into a single review-able PR.
    - New entries added, entries moved status, entries closed/committed.
    - One-line note per change with patch author + URL.
    - Output → `knowledge/community/commitfest/<cycle>-<YYYY-MM-DD>.md`.
-6. **Blog roundup** — pick 3-5 posts from planet RSS published in the last
+6. **Blog roundup** — pick **6-10** posts from planet RSS published in the last
    24h. For each: title, URL, 2-bullet TL;DR, "Read if you care about <X>"
    tag.
    - Output → `knowledge/community/blog-roundup/<YYYY-MM-DD>.md`.
@@ -59,4 +61,11 @@ planet-postgres-aggregator into a single review-able PR.
 
 ## Budget
 
-100k input / 30k output. Largest of the day. Cap per source: 30k input.
+250k input / 60k output (matches frontmatter; bumped 2026-06-02 evening and
+reconciled with the footer 2026-06-12 — the prior "100k/30k" line was
+caps-on-the-prior-budget and was making the agent stop at half budget).
+Cap per source: 60k input. **Target**: hackers section grows from 3-5
+threads to **8-12** at the new budget; planet roundup grows from 3-5 to
+**6-10**; CommitFest diff is whatever the day produced. The recipe is
+sweep-driven — fill until `output_tokens_so_far ≥ 0.70 *
+max_output_tokens` per `_loader.md` §5.

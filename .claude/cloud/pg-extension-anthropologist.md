@@ -51,6 +51,14 @@ budget, more for smaller extensions.
    f. **Check budget** — if `output_tokens_so_far < 0.70 * max_output_tokens`
       AND queue has more `[pending]`, continue loop with the next extension.
 
+   **Parallel fanout (recommended, added 2026-06-12)**: when the queue head
+   holds ≥ 3 extensions of similar shape (each ~one manifest worth of files,
+   no shared cross-cuts), pop them up front and dispatch each to a sub-agent
+   — brief per `memory: foreground-sweep-pattern` ("paths RELATIVE to repo
+   root", one extension per agent, return the `knowledge/ideologies/<ext>.md`
+   doc). Sequential mode is correct when extensions are large (Citus-class)
+   and need the full input budget.
+
 4. Write run log + self-review + open PR
    `[cloud:pg-extension-anthropologist] <N> extensions: <list>`.
 
