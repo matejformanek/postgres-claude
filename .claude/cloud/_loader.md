@@ -102,8 +102,45 @@ Follow `.claude/cloud/<routine>.md`'s "Per-run recipe" exactly. Respect:
     consistently exit at < 30% budget consumed, the recipe under-uses the
     routine; flag it in the run log so `pg-state-keeper` can surface a
     "routine under-utilization" item.
+  - **Frontmatter is authoritative; the recipe's `## Budget` footer
+    must match it.** The 2026-06-12 audit found 3 recipes
+    (`pg-community-pulse`, `pg-upstream-watcher`, `pg-evening-merger`)
+    whose footer claimed a smaller budget than the frontmatter; agents
+    were reading the footer and self-capping at half the real budget.
+    If you bump a routine's budget, bump BOTH places in the same
+    commit. If they disagree, **the frontmatter wins** and the agent
+    should ignore the footer and log a "stale footer" warning.
 - **Work queues** at `progress/_queues/<routine>.md` are append-only with
   `[pending]` / `[in-progress:<branch>]` / `[done:<merged-sha>]` markers.
+
+### 5.5. STATE.md write serialization (added 2026-06-12)
+
+**Sibling routines must NOT prepend `progress/STATE.md`.** Every routine
+prepending a `**Last activity:**` line to STATE.md was the structural
+cause of the recurring `cloud/*` merger collisions (multiple PRs from
+the same night editing the same head-of-file region; `pg-evening-merger`
+can't auto-resolve because both sides are real content).
+
+Instead, sibling routines (every routine EXCEPT `pg-evening-merger`)
+write a single-line entry to:
+
+```
+progress/cloud-routines/_state-log/<routine>-<YYYY-MM-DD>.md
+```
+
+Schema: one line, `**<routine>** <YYYY-MM-DD> — <summary> (PR #<n>).`
+Identical content to what used to go into STATE.md, just written to a
+per-routine file that no other routine touches.
+
+`pg-evening-merger` reads every file matching that glob each night,
+synthesises ONE consolidated "Last activity" line, and prepends THAT
+single line to `progress/STATE.md`. Result: STATE.md only sees one
+prepend per night, no collision surface.
+
+If a routine genuinely must edit STATE.md outside the "Last activity"
+prepend (e.g. anchor SHA bump in `pg-upstream-watcher` step 9), it
+edits the line in place rather than prepending — non-overlapping
+diff hunk, no collision with the merger's prepend.
 
 ### 6. Write the daily run log
 

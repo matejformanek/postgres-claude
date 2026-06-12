@@ -40,10 +40,16 @@ tagged over many days are dead-code candidates.
 1. Load `pg-claude`, `memory-keeping`. Read the 21 skill descriptions.
 2. Branch: `cloud/pg-user-question-harvester/<YYYY-MM-DD>`.
 3. Fetch the three list archives. Record URLs + HTTP status.
-4. Pick **15-25 threads** that pass the internals filter and weren't covered
+4. Pick **30-40 threads** that pass the internals filter and weren't covered
    in the prior 3 days' files (de-dup by message-id URL). Per `_loader.md`
-   §5 "Fill the budget" — with the 50k output budget at ~1-2k per question
-   entry, target 20+ questions per run, not 5-8.
+   §5 "Fill the budget" — with the 50k output budget at ~1.5k per question
+   entry, target 30+ questions per run. The 2026-06-12 audit showed the
+   routine consistently hit ~22-24 questions; the cap belongs higher. Also
+   consider: **GitHub Discussions** on `postgres/postgres` and on the
+   major-extension repos (`pgvector/pgvector`, `citusdata/citus`,
+   `timescale/timescaledb`) are reachable from the sandbox via the GH API
+   and surface internals-flavored Qs the mailing list misses; include 5-10
+   from there if the day is thin on mailing-list hits.
 5. For each, write to `knowledge/community/user-questions/<YYYY-MM-DD>.md`:
    - Subject + message-id URL + source list
      (pgsql-general / pgsql-performance / pgsql-hackers).

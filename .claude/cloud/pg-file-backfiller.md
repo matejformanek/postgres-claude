@@ -77,11 +77,24 @@ See `progress/coverage-gaps.md` for the per-directory work queue;
    files (≤500 LOC each)** per run, OR **3-5 medium files (500-2 000 LOC)**,
    OR **1-2 large files (>2 000 LOC)**. Pop the next queue item after each
    doc as long as `output_tokens_so_far < 0.70 * max_output_tokens` AND the
-   queue still has `[pending]`. Only stop at `0.85 *` for budget-cap, or
-   when queue is empty (record `exit_reason: queue-empty`). The A1
-   catalog-headers sweep landed 11-13 files per agent in ~80k tokens; this
-   routine should hit similar volume nightly. **An empty-handed run is a
-   process bug** — flag in the run log if you exit at < 30% budget consumed.
+   queue still has `[pending]`. **Re-pop discipline (added 2026-06-12 after
+   audit showed 33% avg utilization)**: after each doc, if
+   `output_tokens_so_far < 0.50 * max_output_tokens`, you MUST commit to
+   at least **3 more** queue pops before re-evaluating the budget gate.
+   The previous per-doc gate was exiting too eagerly when the agent
+   expected an upcoming large file. **Parallel fanout (recommended,
+   added 2026-06-12)**: when the queue head holds ≥ 4 small files
+   (≤500 LOC) of similar shape (same directory, same subsystem),
+   pop 4 up front and dispatch each to a sub-agent — brief per
+   `memory: foreground-sweep-pattern` ("paths RELATIVE to repo root",
+   one file per agent, return the per-file doc + any issue tags).
+   The foreground sweeps A19/A21/A22 landed 47/52/77 docs respectively
+   using this pattern; the cloud routine should match. Only stop at
+   `0.85 *` for budget-cap, or when queue is empty (record
+   `exit_reason: queue-empty`). The A1 catalog-headers sweep landed
+   11-13 files per agent in ~80k tokens; this routine should hit
+   similar volume nightly. **An empty-handed run is a process bug** —
+   flag in the run log if you exit at < 30% budget consumed.
 8. Append a row to `progress/files-examined.md` per file processed
    (or upgrade the existing row to `depth: deep`).
 9. Mark queue entry `[done:<commit-sha>]`.
