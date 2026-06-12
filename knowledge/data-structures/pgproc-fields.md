@@ -1,7 +1,8 @@
 # PGPROC — the per-backend shared-memory anchor
 
 - **Source path:** `source/src/include/storage/proc.h`
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `e18b0cb7344` (cites re-anchored 2026-06-12 by
+  pg-quality-auditor; previously `ef6a95c7c64`)
 - **Companion docs:** `knowledge/files/src/include/storage/proc.h.md`,
   `knowledge/files/src/backend/storage/lmgr/proc.c.md`,
   `knowledge/files/src/backend/storage/ipc/procarray.c.md`
@@ -73,11 +74,11 @@ reads via `pgstat`.
 ### Fast-path (relation locks only)
 
 ```
-LWLock              fpInfoLock;      // lock for fpRelId/fpLockBits
-Oid                 fpRelId[FP_LOCK_SLOTS_PER_BACKEND];  // FP_LOCK_SLOTS=16
-uint32              fpLockBits[FP_LOCK_SLOTS_PER_BACKEND];
-uint64              fpLockGroupLeader;
-TransactionId       fpVxidPart;
+LWLock              fpInfoLock;           // protects per-backend fast-path state
+uint64             *fpLockBits;           // lock modes held per fast-path slot
+Oid                *fpRelId;              // slots for rel oids
+bool                fpVXIDLock;           // holding a fast-path VXID lock?
+LocalTransactionId  fpLocalTransactionId; // lxid for fast-path VXID lock
 ```
 
 Fast-path lets a backend take a weak relation lock (AccessShareLock,
@@ -86,7 +87,15 @@ table. The slot is reserved when the lock is acquired, freed when released.
 On contention with a strong lock, the strong-locker transfers all fast-path
 entries to the main table — see `lock.c` `FastPathTransferRelationLocks`.
 
-[verified-by-code `proc.h:152-170`, `lock.c:2885-2954`]
+As of PG18 the slot arrays are dynamically sized (hence `fpLockBits`/`fpRelId`
+are now pointers, not fixed C arrays): the per-backend count is
+`FastPathLockSlotsPerBackend() = FP_LOCK_SLOTS_PER_GROUP (16) *
+FastPathLockGroupsPerBackend`, where the group count scales with
+`max_locks_per_transaction` up to `FP_LOCK_GROUPS_PER_BACKEND_MAX` (1024).
+
+[verified-by-code `proc.h:329-335` (fields), `proc.h:101-104`
+(`FastPathLockSlotsPerBackend`), `lock.c:2862-2954`
+(`FastPathTransferRelationLocks`)]
 
 ### Signaling
 
@@ -109,13 +118,16 @@ identity used to index into ProcState.
 ### Group-locking (parallel query)
 
 ```
-PGPROC             *lockGroupLeader;     // pointer to leader's PGPROC, NULL if not in a group
-List               *lockGroupMembers;    // leader-only: list of member pgprocnos
+PGPROC             *lockGroupLeader;     // leader's PGPROC, NULL if not in a group
+dlist_head          lockGroupMembers;    // leader-only: list of member PGPROCs
+dlist_node          lockGroupLink;       // my member link, if I'm a member
 ```
 
 Lock-group members are considered as one "logical xact" by the heavyweight
 lock mgr — they don't block each other. Used by parallel workers to share
-relation locks with the leader. [verified-by-code `proc.h:362-372`]
+relation locks with the leader. Members are linked via `lockGroupLink` into
+the leader's `lockGroupMembers` dlist (not a `List *` of pgprocnos).
+[verified-by-code `proc.h:304-306`]
 
 ### Auxiliary process slot (non-backend)
 
@@ -181,6 +193,8 @@ grep -n 'fpInfoLock\|fpRelId\|FAST_PATH' source/src/backend/storage/lmgr/lock.c
 - **MyProc**: per-backend cached pointer into PROC_HDR.allProcs[].
 - **procNumber / pgprocno**: stable small-int identity, distinct from OS pid.
 - **Fast-path lock**: weak relation lock recorded in PGPROC.fpRelId[]
-  instead of the main lock table. Up to 16 per backend.
+  instead of the main lock table. Slot count is dynamic since PG18
+  (`FastPathLockSlotsPerBackend()`, 16 per group × group count scaling with
+  `max_locks_per_transaction`); was a fixed 16 per backend in older releases.
 - **Lock group**: leader + parallel workers sharing relation locks.
 - **PGXACT**: legacy hot-field array; merged back into PGPROC in PG14.
