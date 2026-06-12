@@ -56,6 +56,27 @@ Per-subsystem issue register for the **cross-platform port header layer** — at
 - [ISSUE-documentation: linux.h `HAVE_LINUX_EIDRM_BUG` workaround dates to July 2007; worth re-validating against 6.x kernels (nit)] — `linux.h:3-13`
 - [ISSUE-documentation: darwin.h doesn't link `HAVE_FSYNC_WRITETHROUGH` to "fsync alone is insufficient on macOS HFS+/APFS" durability narrative (nit)] — `darwin.h:5-8`
 
+## A23 sub-dir sweep additions (atomics/, win32/)
+
+Closed 2026-06-12 by A23-3 — 19 sub-dir files documented (atomics/ ×7, win32/ ×12). Most win32 shims are 1-3 line placeholders; the atomics layer's invariants are anchored in `atomics.h` and `fallback.h` already.
+
+### atomics/ — layer ordering reminder
+
+Include chain inside `atomics.h`: `arch-<cpu>.h` → `generic-gcc.h` or `generic-msvc.h` → `generic.h` (synthesizers) → `fallback.h` (only if no u64 support yet). Each layer ONLY defines what its `#ifndef PG_HAVE_*` test allows. Tampering with one layer's macro set silently changes which fallback runs.
+
+### atomics/ — new nits surfaced
+
+- [ISSUE-documentation: `arch-ppc.h` lacks the `#ifndef INSIDE_ATOMICS_H` guard that all sibling arch headers carry (nit, consistency)] — `arch-ppc.h:1-14`
+- [ISSUE-documentation: `__atomic_compare_exchange_n` calls all pin SEQ_CST/SEQ_CST; FIXME comment at gcc generic acknowledges weaker model would work, perf opportunity] — `generic-gcc.h:163-165`
+- [ISSUE-documentation: `pg_atomic_read_membarrier_u32/_u64` is implemented as `fetch_add(0)`; semantically read but performs an R-M-W and dirties cache line. Easy to mis-pick over plain read in hot paths] — `generic.h:236-242, 420-426`
+- [ISSUE-documentation: `InterlockedCompareExchange(dest, newval, expected)` MSVC arg order DIFFERS from gcc `__sync_val_compare_and_swap(dest, expected, newval)` — confusing during cross-platform diff (nit)] — `generic-msvc.h:53`
+
+### win32/ — observations (no new bugs)
+
+- The `sys/socket.h` `#undef ERROR / #define ERROR PGERROR` dance (`:22-28`) is fragile but documented; any future change to Windows SDK that leaks more macros from `<wingdi.h>` will need similar treatment.
+- `sys/un.h` carries its own copy of `struct sockaddr_un` instead of using `<afunix.h>` because not all toolchains ship it (`:7-10`). When/if the toolchain baseline is bumped, this should be revisited — it's a layout-equivalence assumption against Microsoft headers.
+- `sys/resource.h`'s reduced `rusage` (only utime/stime) is a known-unknown for any monitoring tool reading `ru_maxrss` — silently zero on Windows.
+
 ## Cross-sweep references
 
 - **A11/A13/A14 signature-collision cluster** — pg_crc32c.h is the hardware-CRC anchor (NOT crypto hash).

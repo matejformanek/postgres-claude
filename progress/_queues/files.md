@@ -396,3 +396,36 @@ next target)**; src/backend/jit 5 + src/include/jit 5; src/backend/port 10
 (sema/shmem + win32). Recompute from the tree before refilling — the
 per-subdir 0% rows in coverage-gaps.md remain unreliable (executor and
 libpq client were both already done).
+
+## A23 close-gap update — 2026-06-12 (recomputed)
+
+Foreground sweep landed `src/backend/jit/` (5/5), `src/backend/utils/mb/conversion_procs/`
+(directory doc + 3 deep), `src/include/port/atomics/` (7/7), `src/include/port/win32/`
+(12/12), `src/backend/snowball/` (directory doc + dict_snowball.c deep — 111 mechanical
+files conceptually covered by the directory README and excluded from per-file queue).
+
+**Remaining gap = ~240 files**, all on the cloud routine queue (NOT foreground):
+
+### priority H — src/interfaces/ecpg (~127)
+Embedded SQL preprocessor + runtime. Lower Phase-D relevance than libpq-oauth
+(which is done) but still real cite surface. Order: `ecpg/preproc/` (the
+.c bison/yacc-generated + helpers), then `ecpg/pgtypeslib/`, then `ecpg/ecpglib/`,
+then `ecpg/include/`. Skip the `ecpg/test/*` SQL files (not .c/.h).
+
+### priority M — src/test (~74)
+Test scaffolding. Order: `src/test/modules/` (the real C modules — injection_points,
+test_oat_hooks, test_decoding, etc. — each has cite-worthy invariants), then
+`src/test/regress/` (regression-test C helpers like `regress.c`), then
+`src/test/perl/` (mostly .pm — skip those, only the .c files matter).
+
+### priority L — assorted stragglers (~10-15)
+- `src/backend/jit/*.h` (1-2 if not covered by Agent 1)
+- Any new files added upstream since 2026-06-10 anchor — `pg-anchor-refresh` will
+  flag them via the audit queue once it starts running.
+
+### Snowball — explicitly NOT in this queue
+The 112 snowball files (55 .c + 55 .h + dict_snowball.c + snowball_runtime.h)
+are documented as a unit via the directory README. Per-file docs would be
+wasted on the 111 autogen files. If a stemmer needs special attention later,
+the `pg-quality-auditor` can be asked to write a one-off per-file doc — but
+the default is "directory-doc coverage".
