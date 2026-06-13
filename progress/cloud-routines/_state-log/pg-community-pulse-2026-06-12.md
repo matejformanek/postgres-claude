@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-06-12 — hackers digest (11 expanded threads incl. CSN-visibility, ephemeral-slot race, PITR-pause subxid bypass, REPACK×generated-cols); CommitFest 59 +6 committed (71→77, week's biggest landing, total flat at 510, RfC-supply watch opened); planet roundup 7 posts. Fixed recipe's hackers URL form (dashed-ISO 404 → compact 12-digit). (PR #181).
