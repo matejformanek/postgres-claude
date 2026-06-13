@@ -52,3 +52,31 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/architecture/query-lifecycle.md verified=2026-06-13
 [pending] knowledge/data-structures/snapshot-lifecycle.md verified=2026-06-13 [drift-fixed: heapam_visibility.c cite 177-191→13-35]
 [pending] knowledge/architecture/executor.md verified=2026-06-13 [drift-fixed: nodeModifyTable.c §8a cites +13 lines]
+
+## anchor-bump 2026-06-13 (e18b0cb..3e3d787, 19 commits)
+
+[pending] knowledge/files/contrib/seg/seg.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/contrib/xml2/xpath.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/access/transam/xlog.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/access/transam/xlogutils.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/catalog/pg_subscription.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/commands/subscriptioncmds.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/commands/tablecmds.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/libpq/crypt.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/libpq/pqmq.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/nodes/makefuncs.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/parser/parse_coerce.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/parser/parse_expr.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/parser/parse_relation.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/parser/parse_target.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/replication/logical/relation.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/replication/walsender.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/utils/adt/ri_triggers.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/utils/adt/xml.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/utils/cache/inval.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/backend/utils/init/postinit.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/bin/psql/describe.c.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/include/miscadmin.h.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/files/src/include/parser/parse_relation.h.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787
+[pending] knowledge/subsystems/parser-and-rewrite.md  reason=anchor-bump 2026-06-13:e18b0cb..3e3d787 [>=5 impacted files: 7 parser/nodes paths this run]
