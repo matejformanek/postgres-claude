@@ -200,4 +200,4 @@ synchronized_standby_slots = 's1,s2'   # on primary
 - `.claude/skills/error-handling/SKILL.md` — apply-worker error escalation; conflict detection in logical replication.
 - `.claude/skills/testing/SKILL.md` — TAP tests in `src/test/recovery/t/`, `src/test/subscription/t/`.
 - `knowledge/architecture/replication.md` — long-form architecture.
-- `knowledge/subsystems/replication.md`, `knowledge/subsystems/replication-logical.md` — deep-dive corpus docs.
+- `knowledge/subsystems/replication.md` — deep-dive corpus doc covering both physical and logical replication.
