@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-06-13 — watchdog audit: 9 OK · 0 SKIPPED · 0 FAILED · 1 SILENT (pg-community-pulse, no 06-12 log/PR, first miss). pg-anchor-refresh first-ever run OK (#179, awaits tonight's merger). Briefing at progress/_briefings/2026-06-13.md (PR pending).
