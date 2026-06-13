@@ -429,3 +429,46 @@ are documented as a unit via the directory README. Per-file docs would be
 wasted on the 111 autogen files. If a stemmer needs special attention later,
 the `pg-quality-auditor` can be asked to write a one-off per-file doc — but
 the default is "directory-doc coverage".
+
+## src/interfaces/ecpg — runtime libraries (cloud/pg-file-backfiller, 2026-06-12)
+
+> Queue was empty (0 pending) at run start. Refilled per the refill rule
+> from the priority-H `src/interfaces/ecpg` gap (A23 close-gap update,
+> ordered preproc → pgtypeslib → ecpglib → include). This run took the
+> **runtime-library trilogy** (ecpglib + pgtypeslib + compatlib = 20
+> files) as one coherent fanout — the libraries a compiled ecpg program
+> links against — leaving the `preproc` compiler + `include/` headers for
+> the next runs. Anchor e18b0cb7344. New register: knowledge/issues/ecpg.md.
+
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/connect.c loc=746 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/data.c loc=962 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/descriptor.c loc=1008 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/execute.c loc=2316 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/error.c loc=346 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/misc.c loc=599 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/prepare.c loc=662 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/sqlda.c loc=592 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/memory.c loc=176 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/typename.c loc=145 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/ecpglib_extern.h loc=270 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/dt_common.c loc=3027 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/numeric.c loc=1588 priority=H
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/interval.c loc=1091 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/timestamp.c loc=921 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/datetime.c loc=713 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/common.c loc=148 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/dt.h loc=343 priority=M
+[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/pgtypeslib_extern.h loc=45 priority=L
+[done:cloud-2026-06-12] src/interfaces/ecpg/compatlib/informix.c loc=1054 priority=H
+
+## Next-up (for the next cloud run — ecpg remainder + src/test)
+
+> ecpg runtime libraries DONE 2026-06-12. Remaining ecpg = `preproc/` (14
+> .c/.h — the .y/.l-driven compiler: c_keywords.c, descriptor.c, ecpg.c,
+> keywords.c, output.c, parser.c, type.c, util.c, variable.c + the
+> *_extern.h / *_kwlist.h / type.h headers) and `include/` (19 installed
+> headers: ecpglib.h, ecpgtype.h, sqlca.h, sqlda*.h, pgtypes_*.h, etc.).
+> Take preproc next (priority H — load `parser-and-nodes` skill; the
+> bison/flex .y/.l files are generated so skip those, document the .c
+> helpers). Then the include/ headers as a cheap header batch. After ecpg:
+> src/test/modules (~60, priority M).
