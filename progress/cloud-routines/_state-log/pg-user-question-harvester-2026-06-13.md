@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-13 — Harvested 23 internals threads (22 pgsql-hackers + 1 pgsql-general) to `knowledge/community/user-questions/2026-06-13.md`; publications-EXCEPT + subscription-fix cluster dominant; recurring gaps `gap:sql-pgq` (#6,#16) and `gap:cpu-feature-detect` (#13,#22); flagged recipe month-URL bug (YYYY/MM 404 → YYYY-MM) (PR #PENDING).
