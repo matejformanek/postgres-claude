@@ -1,1 +1,1 @@
-**pg-quality-auditor** 2026-06-13 — ISSUE-mode no-op (issue corpus <30d old → empty queue), rotated to AUDIT mode; audited 6 long-form docs against anchor e18b0cb, fixed cite drift in 2 (snapshot-lifecycle, executor) (PR #PENDING).
+**pg-quality-auditor** 2026-06-13 — ISSUE-mode no-op (issue corpus <30d old → empty queue), rotated to AUDIT mode; audited 6 long-form docs against anchor e18b0cb, fixed cite drift in 2 (snapshot-lifecycle, executor) (PR #178).
