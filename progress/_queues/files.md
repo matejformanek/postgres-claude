@@ -440,26 +440,26 @@ the default is "directory-doc coverage".
 > links against — leaving the `preproc` compiler + `include/` headers for
 > the next runs. Anchor e18b0cb7344. New register: knowledge/issues/ecpg.md.
 
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/connect.c loc=746 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/data.c loc=962 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/descriptor.c loc=1008 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/execute.c loc=2316 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/error.c loc=346 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/misc.c loc=599 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/prepare.c loc=662 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/sqlda.c loc=592 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/memory.c loc=176 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/typename.c loc=145 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/ecpglib/ecpglib_extern.h loc=270 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/dt_common.c loc=3027 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/numeric.c loc=1588 priority=H
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/interval.c loc=1091 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/timestamp.c loc=921 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/datetime.c loc=713 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/common.c loc=148 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/dt.h loc=343 priority=M
-[done:cloud-2026-06-12] src/interfaces/ecpg/pgtypeslib/pgtypeslib_extern.h loc=45 priority=L
-[done:cloud-2026-06-12] src/interfaces/ecpg/compatlib/informix.c loc=1054 priority=H
+[done:ee88d24] src/interfaces/ecpg/ecpglib/connect.c loc=746 priority=H
+[done:ee88d24] src/interfaces/ecpg/ecpglib/data.c loc=962 priority=H
+[done:ee88d24] src/interfaces/ecpg/ecpglib/descriptor.c loc=1008 priority=H
+[done:ee88d24] src/interfaces/ecpg/ecpglib/execute.c loc=2316 priority=H
+[done:ee88d24] src/interfaces/ecpg/ecpglib/error.c loc=346 priority=H
+[done:ee88d24] src/interfaces/ecpg/ecpglib/misc.c loc=599 priority=M
+[done:ee88d24] src/interfaces/ecpg/ecpglib/prepare.c loc=662 priority=H
+[done:ee88d24] src/interfaces/ecpg/ecpglib/sqlda.c loc=592 priority=M
+[done:ee88d24] src/interfaces/ecpg/ecpglib/memory.c loc=176 priority=M
+[done:ee88d24] src/interfaces/ecpg/ecpglib/typename.c loc=145 priority=M
+[done:ee88d24] src/interfaces/ecpg/ecpglib/ecpglib_extern.h loc=270 priority=M
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/dt_common.c loc=3027 priority=H
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/numeric.c loc=1588 priority=H
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/interval.c loc=1091 priority=M
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/timestamp.c loc=921 priority=M
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/datetime.c loc=713 priority=M
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/common.c loc=148 priority=M
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/dt.h loc=343 priority=M
+[done:ee88d24] src/interfaces/ecpg/pgtypeslib/pgtypeslib_extern.h loc=45 priority=L
+[done:ee88d24] src/interfaces/ecpg/compatlib/informix.c loc=1054 priority=H
 
 ## Next-up (for the next cloud run — ecpg remainder + src/test)
 

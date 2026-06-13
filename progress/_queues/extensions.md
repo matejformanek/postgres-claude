@@ -56,10 +56,10 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # index_advisor (1700★, PLpgSQL), PgQue (1669★, PLpgSQL queue ≈ pgmq dup), pglite-fusion
 # (830★), pgx_ulid (502★ ≈ uuidv47 dup), pg_jsonschema (1193★), temporal_tables (1039★)
 # left as [pending] backlog for the next runs.
-[done:pending-merge] timescale/pgvectorscale branch=main files=README.md,pgvectorscale/src/lib.rs,pgvectorscale/src/access_method/mod.rs,pgvectorscale/src/access_method/build.rs,pgvectorscale/src/access_method/scan.rs  # 3053★ Rust/pgrx; StreamingDiskANN index AM complementing pgvector (covered)
-[done:pending-merge] timescale/pg_textsearch branch=main files=README.md,src/bm25.c,src/bm25am.c  # 3802★ C; BM25 relevance-ranked FTS index AM, diverges from core GIN+ts_rank
-[done:pending-merge] sraoss/pg_ivm branch=main files=README.md,pg_ivm.control,createas.c,matview.c,pg_ivm.c  # 1434★ C; Incremental View Maintenance via rewriter + AFTER triggers
-[done:pending-merge] ossc-db/pg_hint_plan branch=master files=README.md,pg_hint_plan.c,pg_hint_plan.control  # 907★ C; optimizer hint injection via planner/get_relation_info hooks + hint-comment parsing
+[done:96fdd1b] timescale/pgvectorscale branch=main files=README.md,pgvectorscale/src/lib.rs,pgvectorscale/src/access_method/mod.rs,pgvectorscale/src/access_method/build.rs,pgvectorscale/src/access_method/scan.rs  # 3053★ Rust/pgrx; StreamingDiskANN index AM complementing pgvector (covered)
+[done:96fdd1b] timescale/pg_textsearch branch=main files=README.md,src/bm25.c,src/bm25am.c  # 3802★ C; BM25 relevance-ranked FTS index AM, diverges from core GIN+ts_rank
+[done:96fdd1b] sraoss/pg_ivm branch=main files=README.md,pg_ivm.control,createas.c,matview.c,pg_ivm.c  # 1434★ C; Incremental View Maintenance via rewriter + AFTER triggers
+[done:96fdd1b] ossc-db/pg_hint_plan branch=master files=README.md,pg_hint_plan.c,pg_hint_plan.control  # 907★ C; optimizer hint injection via planner/get_relation_info hooks + hint-comment parsing
 [pending] supabase/pg_jsonschema branch=master files=README.md,src/lib.rs  # 1193★ Rust/pgrx; JSON Schema validation function
 [pending] supabase/index_advisor branch=main files=README.md  # 1700★ PLpgSQL; index advisor (parasite on hypopg, SQL-only)
 [pending] frectonz/pglite-fusion branch=main files=README.md  # 830★ Rust/pgrx; embeds SQLite in a PG column value (sqlite-in-postgres type)
