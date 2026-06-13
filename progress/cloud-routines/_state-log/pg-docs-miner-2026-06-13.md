@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-06-13 — both queues drained at start (wiki EXHAUSTED); docs-only run distilled 8 internals chapters: the full Logical Decoding §49 family (concepts/output-plugin/streaming/synchronous), SPI §47 overview, event-trigger C ABI §40.4, archive-module callbacks §51.3, replication origins §50 — closing a major logical-decoding coverage gap (PR pending).
