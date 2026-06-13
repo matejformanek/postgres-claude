@@ -260,8 +260,8 @@ flag marks the latter.
 `nodeModifyTable.c` is no longer a monolithic per-operation switch. Since
 PG 15 (introduced with MERGE), each DML primitive — INSERT / UPDATE /
 DELETE — is split into a **Prologue / Act / Epilogue** triplet
-[verified-by-code `nodeModifyTable.c:2383, 2461, 2614` for UPDATE;
-`:1739, 1771, 1798` for DELETE]:
+[verified-by-code `nodeModifyTable.c:2370, 2448, 2601` for UPDATE;
+`:1726, 1758, 1785` for DELETE]:
 
 - **Prologue** — BEFORE ROW triggers, generated-column / RLS / FK pre-checks.
 - **Act** — the single `table_tuple_insert` / `table_tuple_update` /
@@ -270,7 +270,7 @@ DELETE — is split into a **Prologue / Act / Epilogue** triplet
 - **Epilogue** — index update (`ExecInsertIndexTuples` /
   `ExecUpdateIndexTuples`), AFTER ROW triggers, RETURNING projection queue.
 
-This factoring exists so `ExecMerge` (`:3394`) can drive any of the three
+This factoring exists so `ExecMerge` (`:3381`) can drive any of the three
 actions per WHEN clause without re-implementing trigger + index logic. The
 shared bottom layer is also what lets MERGE retry a `WHEN MATCHED` clause
 via EvalPlanQual on `TM_Updated`/`TM_Deleted` without losing trigger
@@ -278,11 +278,11 @@ semantics.
 
 **Cross-partition UPDATE** is the other subtle case: when the new
 partition-key value would route the row to a different partition,
-`ExecCrossPartitionUpdate` (`:2218`) turns the UPDATE into a `DELETE`
+`ExecCrossPartitionUpdate` (`:2205`) turns the UPDATE into a `DELETE`
 against the old partition followed by an `INSERT` into the new one. Trigger
 firing rules for this rewrite are not symmetric with a plain UPDATE — see
-the long comment at `nodeModifyTable.c:2218+`. `ExecCrossPartitionUpdateForeignKey`
-(`:2669`) handles the FK-action side of the same rewrite.
+the long comment at `nodeModifyTable.c:2205+`. `ExecCrossPartitionUpdateForeignKey`
+(`:2656`) handles the FK-action side of the same rewrite.
 
 ## 9. Worked example: `SELECT … FROM dept, emp WHERE …`
 

@@ -13,13 +13,7 @@ than the periodic 30-day refresh: process them first.
 
 ## Entries
 
-[pending] knowledge/data-structures/snapshot-lifecycle.md verified=never
 [pending] knowledge/architecture/overview.md verified=2026-06-04
-[pending] knowledge/architecture/mvcc.md verified=2026-06-04
-[pending] knowledge/architecture/wal.md verified=2026-06-04
-[pending] knowledge/architecture/executor.md verified=2026-06-04
-[pending] knowledge/architecture/planner.md verified=2026-06-04
-[pending] knowledge/architecture/query-lifecycle.md verified=2026-06-04
 [pending] knowledge/architecture/access-methods.md verified=2026-06-04
 [pending] knowledge/architecture/process-model.md verified=2026-06-04
 [pending] knowledge/architecture/replication.md verified=2026-06-07
@@ -52,3 +46,9 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/idioms/guc-variables.md verified=2026-06-12
 [pending] knowledge/data-structures/heap-tuple-layout.md verified=2026-06-12
 [pending] knowledge/data-structures/pgproc-fields.md verified=2026-06-12
+[pending] knowledge/architecture/mvcc.md verified=2026-06-13
+[pending] knowledge/architecture/wal.md verified=2026-06-13
+[pending] knowledge/architecture/planner.md verified=2026-06-13
+[pending] knowledge/architecture/query-lifecycle.md verified=2026-06-13
+[pending] knowledge/data-structures/snapshot-lifecycle.md verified=2026-06-13 [drift-fixed: heapam_visibility.c cite 177-191→13-35]
+[pending] knowledge/architecture/executor.md verified=2026-06-13 [drift-fixed: nodeModifyTable.c §8a cites +13 lines]
