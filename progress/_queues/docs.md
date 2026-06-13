@@ -96,3 +96,18 @@ table of contents, exclude chapters whose slug already exists under
 [skipped:404-no-such-docs-slug] gin-implementation https://www.postgresql.org/docs/current/gin-implementation.html
 [skipped:404-no-such-docs-slug] gist-implementation https://www.postgresql.org/docs/current/gist-implementation.html
 [skipped:404-no-such-docs-slug] gin-extensibility https://www.postgresql.org/docs/current/gin-extensibility.html
+
+## Refill 2026-06-12 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked indexam.html §63 + wal.html §30 ToCs for the remaining dense internals-prose LEAF subsections not yet under docs-distilled/. The §63 indexam subsections (functions/scanning/locking/unique/cost) and the §30 WAL subsections (intro/reliability/async-commit/configuration) are the meatiest remaining internals chapters. Confirmed this run that the per-AM "extensibility"/"implementation" leaf slugs (gist-extensibility, spgist-extensibility, hash-implementation) are folded into their single-page parents in the current docs tree — all 404, matching prior gin/gist-implementation 404s; do not re-queue.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-12] index-functions https://www.postgresql.org/docs/current/index-functions.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] index-scanning https://www.postgresql.org/docs/current/index-scanning.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] index-locking https://www.postgresql.org/docs/current/index-locking.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] index-unique-checks https://www.postgresql.org/docs/current/index-unique-checks.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] index-cost-estimation https://www.postgresql.org/docs/current/index-cost-estimation.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] wal-intro https://www.postgresql.org/docs/current/wal-intro.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] wal-reliability https://www.postgresql.org/docs/current/wal-reliability.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] wal-async-commit https://www.postgresql.org/docs/current/wal-async-commit.html
+[in-progress:cloud/pg-docs-miner/2026-06-12] wal-configuration https://www.postgresql.org/docs/current/wal-configuration.html
+[skipped:404-no-such-docs-slug] gist-extensibility https://www.postgresql.org/docs/current/gist-extensibility.html
+[skipped:404-no-such-docs-slug] spgist-extensibility https://www.postgresql.org/docs/current/spgist-extensibility.html
+[skipped:404-no-such-docs-slug] hash-implementation https://www.postgresql.org/docs/current/hash-implementation.html
