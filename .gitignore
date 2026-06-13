@@ -59,3 +59,6 @@ source
 
 # Reverse symlink to the mutable dev clone — also never commit
 dev
+
+# Skill-creator workspaces (raw eval iteration data; only benchmark.json + notes.md committed)
+.claude/skill-creator-workspaces/**/iteration-*/

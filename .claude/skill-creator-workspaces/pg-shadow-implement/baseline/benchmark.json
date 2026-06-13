@@ -1,0 +1,51 @@
+{
+  "skill_name": "pg-shadow-implement",
+  "description": "Phase E shadow-implementation run for the pg-claude calibration loop. Take a pgsql-hackers thread (COVER + thread discussion only \u2014 NOT the attached patch), produce a spec, run the planner suite (pg-feature-brainstorm / pg-feature-plan / pg-implement) as-if the user asked for the feature, fetch the upstream patch only after implementation is complete, diff against ours, score the gap, and emit comparison.md + skill-gaps.md. Output is calibration data about the planner suite's implementation accuracy. Use when the user invokes `/pg-shadow <thread-url>`, says \"shadow-implement that thread\", or \"run Phase E against <thread>\". Do NOT trigger for actual upstream patches we plan to send (use `pg-feature-plan` + `pg-implement` directly), for already-committed threads (re-implementing landed code is meaningless), or for non-PG calibration.",
+  "results": [
+    {
+      "query": "/pg-shadow https://www.postgresql.org/message-id/flat/20241118123000.example%40pgsql.org",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "run Phase E against the Filip Janus temp-file compression thread",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "review this patch I want to submit upstream",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "shadow-implement that thread about temp-file compression",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "help me debug why VACUUM is slow on my production database",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "passed": 2,
+    "failed": 3
+  }
+}
