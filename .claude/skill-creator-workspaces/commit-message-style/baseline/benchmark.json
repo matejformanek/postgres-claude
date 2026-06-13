@@ -1,0 +1,51 @@
+{
+  "skill_name": "commit-message-style",
+  "description": "Write a commit message in upstream PostgreSQL house style \u2014 imperative single-line title (NO conventional-commits feat:/fix: prefix), paragraph body wrapped near 76 chars, Author / Reviewed-by / Reported-by / Discussion / Backpatch-through trailer block; explicitly NO Co-authored-by, NO emoji, NO ticket numbers, NO bullet lists, NO Signed-off-by. Use proactively when drafting a commit log for a PG patch destined for master. Do NOT trigger for conventional-commits messages, Linux kernel Signed-off-by commits, Rust/JS/Go project commits, or GitHub PR descriptions.",
+  "results": [
+    {
+      "query": "commit message for src/backend/access/heap/heapam.c change",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "write a commit message for my PG patch that adds a new GUC",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "what's the difference between LWLockAcquire and LWLockConditionalAcquire",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "write a commit message for my React component refactor",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "format-patch this for upstream pgsql-hackers",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "passed": 2,
+    "failed": 3
+  }
+}
