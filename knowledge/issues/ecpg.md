@@ -70,6 +70,17 @@ libraries (`ecpglib`, `pgtypeslib`, `compatlib`) and, later, the
 | 2026-06-12 | compatlib/informix.c:682 | bounds | nit | `intoasc` unbounded `strcpy` into caller buffer (NULL is checked) | open | knowledge/files/src/interfaces/ecpg/compatlib/informix.c.md §Potential issues |
 | 2026-06-12 | compatlib/informix.c:760 | robustness | nit | `getRightMostDot` narrows `size_t len` to `int` in its return; fragile for very long fmt strings | open | knowledge/files/src/interfaces/ecpg/compatlib/informix.c.md §Potential issues |
 | 2026-06-12 | compatlib/informix.c:988 | dead-path | nit | `rgetmsg`/`rtypalign`/`rtypmsize`/`rtypwidth` are no-op stubs returning 0; struct-layout callers get wrong answers | open | knowledge/files/src/interfaces/ecpg/compatlib/informix.c.md §Potential issues |
+| 2026-06-13 | preproc/ecpg.c:501 | correctness | maybe | stdin input + parse error + no `-o` → cleanup block derefs NULL `output_filename` in `strcmp(output_filename, "-")` (crash); `-o` path sets out_option=1 so is unaffected | open | knowledge/files/src/interfaces/ecpg/preproc/ecpg.c.md §Potential issues |
+| 2026-06-13 | preproc/ecpg.c:221 | leak | nit | a second `-o` on the command line reassigns `base_yyout` without `fclose`-ing the prior stream; single-shot tool so benign | open | knowledge/files/src/interfaces/ecpg/preproc/ecpg.c.md §Potential issues |
+| 2026-06-13 | preproc/type.c:425 | overflow | maybe | `atoi`-based array/varchar size sniffing misreads non-literal size expressions (macros, `sizeof(...)` → atoi==0); pointer-vs-`&` decision falls back only on `strcmp(...,"0")` — fragile undocumented heuristic | open | knowledge/files/src/interfaces/ecpg/preproc/type.c.md §Potential issues |
+| 2026-06-13 | preproc/type.c:153 | doc-drift | nit | inconsistent dead `break;` after `return` across `get_type`/`get_dtype` arms (4 omit it); harmless dead-code noise | open | knowledge/files/src/interfaces/ecpg/preproc/type.c.md §Potential issues |
+| 2026-06-13 | preproc/variable.c:90 | undocumented-invariant | maybe | `find_struct_member` bracket-matching loop lacks the `'\0'` guard that `find_variable:262-264` has; malformed unmatched-`[` could read past the string end. Mitigated: input is a scanner-validated CVARIABLE | open | knowledge/files/src/interfaces/ecpg/preproc/variable.c.md §Potential issues |
+| 2026-06-13 | preproc/variable.c:9 | stale-todo | nit | `loc_nstrdup` carries a long-standing "probably belongs in util.c" comment; still only used here | open | knowledge/files/src/interfaces/ecpg/preproc/variable.c.md §Potential issues |
+| 2026-06-13 | preproc/descriptor.c:143 | correctness | nit | `lookup_descriptor` lazy-binds connection via `mm_strdup` with no free of prior value; benign because the `!i->connection` guard ensures prior is always NULL, but the invariant is load-bearing and unguarded against future edits | open | knowledge/files/src/interfaces/ecpg/preproc/descriptor.c.md §Potential issues |
+| 2026-06-13 | preproc/parser.c:280 | doc-drift | nit | `check_uescapechar`/`ecpg_isspace` are hand-copied from `pgc.l` with only a comment to enforce the invariant — no compile-time link, so the two copies can silently drift | open | knowledge/files/src/interfaces/ecpg/preproc/parser.c.md §Potential issues |
+| 2026-06-13 | preproc/type.h:78 | style | nit | header named for the `ECPGtype` type model but bottom ~155 lines are an unrelated grab-bag of grammar-symbol structs (cursor, defines, descriptor, WHENEVER); long-standing layout, not a bug | open | knowledge/files/src/interfaces/ecpg/preproc/type.h.md §Potential issues |
+| 2026-06-13 | preproc/c_kwlist.h:23 | undocumented-invariant | nit | ASCII sort order required by `gen_keywordlist.pl` is not runtime-checked; out-of-order add without regenerating `c_kwlist_d.h` yields silent wrong lookups rather than a build error | open | knowledge/files/src/interfaces/ecpg/preproc/c_keywords.c.md §Potential issues |
+| 2026-06-13 | preproc/ecpg_kwlist.h:26 | doc-drift | nit | C-type keywords (`bool`/`long`/`short`/`signed`/`struct`/`unsigned`) appear in both `ecpg_kwlist.h` and `c_kwlist.h`; no runtime conflict (different lexer states) but adding a new C-type keyword means editing both lists | open | knowledge/files/src/interfaces/ecpg/preproc/ecpg_kwlist.h.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 
@@ -94,3 +105,20 @@ libraries (`ecpglib`, `pgtypeslib`, `compatlib`) and, later, the
   a `doc-drift` "fork has lagged" item rather than a live bug.
 - None of these were promoted to a patch in this run — they're corpus
   notebook entries, surfaced during the 2026-06-12 ecpg runtime sweep.
+- **2026-06-13 preproc compiler sweep (cloud/pg-file-backfiller).** Added
+  11 rows for the `src/interfaces/ecpg/preproc/` compiler (the `ecpg`
+  binary that translates `.pgc` → `.c`). The compiler has a *different*
+  memory model from the runtime libraries: `mm_alloc`/`mm_strdup`
+  (`preproc/util.c`) are exit-on-OOM so callers skip NULL checks, and a
+  per-statement local arena (`loc_alloc`/`reclaim_local_storage`) is
+  all-or-nothing freed — a `cat*_str`/`make*_str` pointer held across a
+  statement boundary is a use-after-free. Theme #1 (client forks of
+  backend code drift) extends here: `parser.c:280` hand-copies
+  `check_uescapechar`/`ecpg_isspace` from `pgc.l`, and the keyword-list
+  X-macro tables (`c_kwlist.h`, `ecpg_kwlist.h`) duplicate C-type keyword
+  names. The two `maybe` rows worth a real second read:
+  `ecpg.c:501` (NULL `output_filename` deref on stdin+parse-error+no-`-o`)
+  and `type.c:425` (`atoi`-based size sniffing of non-literal expressions).
+  The `output.c`/`util.c` "looks scary but safe" index-arithmetic and
+  varargs notes were documented inline in their per-file docs but graded
+  no-issue (not registered).
