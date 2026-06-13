@@ -228,6 +228,7 @@ from each per-file doc.
 | 2026-06-03 | pqformat.h:170-187 | stale-todo | nit | pq_sendint marked deprecated with no removal horizon; new callers passing b=8 get a runtime elog(ERROR), not a compile error | open | knowledge/files/src/include/libpq/pqformat.h.md |
 | 2026-06-03 | hba.h:117 | leak | maybe | HbaLine.ldapbindpasswd held as plain char* for config lifetime; no scrub/no-log hint in the header — audit hba.c errcontext/debug dumps (declaration site of the auth.c P0 LDAP-bindpasswd finding) | open | knowledge/files/src/include/libpq/hba.h.md |
 | 2026-06-03 | hba.h:42 | undocumented-invariant | maybe | USER_AUTH_LAST=uaOAuth macro lives inside the enum; adding a value after uaOAuth without updating the macro silently undercounts array sizing | open | knowledge/files/src/include/libpq/hba.h.md |
+| 2026-06-13 | libpq_uri_regress.c:50 | undocumented-invariant | nit | Lockstep walk assumes `PQconninfoParse` and `PQconndefaults` always return options in the same keyword order (XXX at :50-52); true by construction today (shared `PQconninfoOptions` table) but brittle coupling | open | knowledge/files/src/interfaces/libpq/test/libpq_uri_regress.c.md |
 
 ## Wontfix / Submitted / Landed
 
