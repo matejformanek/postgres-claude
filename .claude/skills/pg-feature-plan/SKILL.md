@@ -1,6 +1,15 @@
 ---
 name: pg-feature-plan
 description: Phase 2 of the two-phase PostgreSQL feature planner — heavy, citation-rich implementation plan for a PG feature whose design space has been narrowed (typically by `pg-feature-brainstorm` in Phase 1). Loads the relevant subsystem + per-file corpus, names every file that must change with file:line cites, enumerates catalog/catversion/WAL/lock-order risks, proposes the test surface (regress/iso/TAP), structures the patch series, and proposes a CommitFest landing strategy. Output is a plan-mode plan ready to hand to `/pg-implement`. Use when the user says "plan this", "make a plan for X", "/pg-plan <slug>", or has a brainstorm doc + a picked approach. Do NOT trigger if the idea is still exploratory (use `pg-feature-brainstorm` first) or for non-PG planning (app planning, infra planning).
+when_to_load: Pick an approach is picked, drop a heavy plan with file:line cites; shadow-implementation runs; spec-to-plan from a pgsql-hackers thread; REJECT-track plans where the proposal should be declined.
+companion_skills:
+  - pg-feature-brainstorm
+  - pg-implement
+  - pg-claude
+  - pg-patch-review
+  - review-checklist
+  - patch-submission
+  - commit-message-style
 ---
 
 # pg-feature-plan — Phase 2 of the PG planner
@@ -19,6 +28,57 @@ plan with file:line cites that `/pg-implement` (NOT the generic
   of the picked approach + any constraints the user has already locked
   down. But note in the plan's intro that Phase 1 was skipped (and
   therefore some design-space exploration may be missing).
+- **Thread spec?** A `planning/<slug>/spec.md` extracted from a
+  pgsql-hackers thread (shadow-implementation runs). Run the spec
+  through the engagement-classification step below before treating
+  any of its content as locked.
+
+## Context awareness — mandatory pre-step (M2)
+
+**Before drafting any plan content**, run a context probe. Surfaced
+by the money-fx-exchange shadow run (April-1 2026 joke proposal that
+the planner initially treated earnestly).
+
+1. **Posting date.** Check the thread's first-message date:
+   - April 1 → flag for joke-check (look for `[PoC]` / `[RFC]`
+     wording, absence of patch attachment, deadpan replies).
+   - Within 2 weeks of a release-branch cut → flag for late-cycle
+     context; the realistic CF target is the *next* window, not
+     this one.
+   - During an open CommitFest's commit window → check if the
+     author intends this CF or the next.
+2. **Author history.** One-shot poster vs sustained contributor.
+   `git -C source log --author=<email> --oneline` and a quick
+   pgsql-hackers archive search. A one-shot speculative post
+   warrants different planning energy than a sustained
+   contributor's serious proposal.
+3. **Thread engagement signal** (see M5 below for the taxonomy).
+   Reply count alone is misleading; classify what kind of
+   engagement the replies represent.
+
+Output a `## Context` block at the top of the plan that names date,
+author posture, and engagement class. If the probe surfaces signal
+that the proposal isn't serious (deadpan-only replies, joke
+indicators, demonstrably unimplementable), the plan's recommended
+verdict shifts to **REJECT** with cited reasons rather than a phased
+implementation. See `.claude/skills/review-checklist/SKILL.md` Phase 0
+for the REJECT-A/B/C grade rubric.
+
+## Thread-engagement classification (M5)
+
+When the input includes a thread (typical for shadow-implementation
+runs), classify the engagement explicitly — not just the reply count.
+Surfaced by the money-fx-exchange shadow run, where the deadpan
+"thanks, add to commitfest" reply was the only public signal.
+
+| Class | Signature | Plan implication |
+|---|---|---|
+| `unengaged` | No technical replies; deadpan acks; silence | Treat the spec as the *author's* unreviewed take. Don't pretend community endorsement exists. |
+| `acked` | Technical replies with no objections | Spec is community-validated; proceed at normal confidence. |
+| `debated` | Multiple substantive replies with disagreements + counter-proposals | Plan should enumerate the open questions as §13 risks, not paper over them. |
+| `contested` | Named senior contributors raising correctness / design objections | Plan should NOT proceed to implementation phases until the objections are addressed. Output may be a REJECT or a brainstorm-revival pointer. |
+
+Record the classification in the plan's `## Context` block.
 
 ## Output
 
@@ -177,14 +237,34 @@ below. Length scales with the feature: ~400 lines for a small change,
 7. **Risk surface (§13) is mandatory.** If you genuinely can't think
    of any, you haven't probed deeply enough.
 
-8. **Validate before handing off** by spot-checking 3-5 of your
-   file:line citations against current source.
+8. **Verify every file:line cite — required final step (M3).**
+   Surfaced by the money-fx-exchange shadow run (`cash_out` initially
+   cited as `provolatile='i'`; actual is `'s'` per
+   `source/src/include/catalog/pg_proc.dat:1954`).
+
+   For each cite that appears in the produced plan:
+   - Resolve the file at the anchor commit (today: `e18b0cb7344`;
+     update when `pg-anchor-refresh` lands the next bump).
+   - Confirm the symbol / line / value matches what the plan claims.
+   - For `.dat` / config cites: spot-check the actual cell value
+     (`provolatile`, `proisstrict`, GUC default, etc.), not just the
+     file:line.
+   - Reuse `pg-quality-auditor`'s file:line discipline (already
+     established for merged docs).
+
+   If any cite fails resolution: fix the plan inline. **Do not hand
+   off a plan with stale cites.**
 
 9. **End with a one-line hand-off:** *"Run `/pg-implement <slug>` to
    start phase 1."* (Use `/pg-implement`, NOT the generic
    `/implement` — the PG version enforces plan-linked commits, per-phase
    tests, and the file:line citation rules in
    `.claude/rules/pg-implement-discipline.md`.)
+
+   For a REJECT-track plan (context awareness or thread engagement
+   surfaced design-level problems), the hand-off is instead: *"Plan
+   recommends REJECT — see Verdict block. Write a thread reply per
+   `.claude/skills/review-checklist/SKILL.md` Phase 0."*
 
 ## Boundaries vs other skills
 
@@ -224,3 +304,18 @@ appended-to per phase.
 When the feature lands upstream, link the plan from the commit message
 ("see planning/<slug>/plan.md in pg-claude meta repo for design
 notes") and consider archiving the brainstorm if it's no longer useful.
+
+## Cross-references
+
+- `.claude/skills/pg-feature-brainstorm/SKILL.md` — Phase 1 upstream; consumes the brainstorm + DECISION: answers.
+- `.claude/skills/pg-implement/SKILL.md` — Phase 3 consumer; executes the plan phase-by-phase with the discipline rules.
+- `.claude/skills/pg-patch-review/SKILL.md` — Critic E supplies the REJECT-A/B/C grade rubric this skill references.
+- `.claude/skills/review-checklist/SKILL.md` — Phase 0 REJECT-track is the destination when context-awareness or engagement classification recommends REJECT.
+- `.claude/skills/patch-submission/SKILL.md` — used after `/pg-implement` lands the code, not here.
+- `.claude/skills/commit-message-style/SKILL.md` — referenced from §12 (CF landing strategy); upstream-PG style, not meta.
+- `.claude/skills/meta-commit-style/SKILL.md` — the plan.md file itself commits to the meta repo via this style.
+- `.claude/skills/memory-keeping/SKILL.md` — session log of the planning effort goes through this skill at end.
+- `.claude/skills/pg-claude/SKILL.md` — master nav for picking subsystem docs.
+- `knowledge/shadow-implementations/money-fx-exchange/skill-gaps.md` — M2/M3/M5 origin (Phase E run 1).
+- `knowledge/calibration/shadow-implementation-methodology.md` — methodology this skill participates in.
+- `.claude/commands/pg-plan.md` — slash-command wrapper.
