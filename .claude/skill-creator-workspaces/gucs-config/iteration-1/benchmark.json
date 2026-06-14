@@ -1,0 +1,51 @@
+{
+  "skill_name": "gucs-config",
+  "description": "Add or modify a custom GUC variable in a PostgreSQL backend patch or extension \u2014 covers DefineCustomBoolVariable / IntVariable / RealVariable / StringVariable / EnumVariable, picking the right GucContext (PGC_POSTMASTER / PGC_SIGHUP / PGC_SUSET / PGC_USERSET), MarkGUCPrefixReserved, the check/assign/show hook trio, GUC_LIST_INPUT / GUC_LIST_QUOTE / GUC_UNIT_MS / GUC_UNIT_KB / GUC_REPORT / GUC_EXPLAIN flags, and string-GUC guc_malloc rules. Use whenever a PG patch or extension calls DefineCustom*Variable, picks a GucContext, wires check/assign/show hooks, debugs a placeholder GUC, or marks a GUC reserved via MarkGUCPrefixReserved. Skip for DBA tuning of shared_buffers / max_connections / work_mem in production, dotenv / Viper / Dynaconf / Spring @Value configuration libraries, Kubernetes ConfigMap, Terraform variables, and non-PG application config systems.",
+  "results": [
+    {
+      "query": "How do I wire a check_hook and assign_hook for my custom GUC in PostgreSQL?",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "How do I parse environment variables in my Node.js app using dotenv?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "I'm adding a custom GUC to my PG extension via DefineCustomIntVariable. What GucContext do I pass?",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 1,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "What value should I set shared_buffers to for a 32 GB production PostgreSQL server?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "When should I use GUC_LIST_INPUT vs GUC_LIST_QUOTE for a string-list GUC?",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "passed": 3,
+    "failed": 2
+  }
+}
