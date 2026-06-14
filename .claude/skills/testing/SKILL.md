@@ -1,6 +1,12 @@
 ---
 name: testing
 description: Pick the right PostgreSQL test flavor for a core/contrib patch — pg_regress .sql/.out pairs, isolationtester specs and permutations for concurrency/deadlock races, TAP (PostgreSQL::Test::Cluster) for multi-node and pg_basebackup/replication scenarios, and src/test/modules for in-tree C test modules. Covers where files live and how to run a single test fast. Use whenever adding or reviewing tests on a PG patch, or asked "regress vs isolation vs TAP" for a feature or bug. Skip pytest/Jest/Go testing/RSpec and pgbench benchmarking questions.
+when_to_load: Decide regress vs isolation vs TAP vs test-module for a PG patch; wire a new test into the right schedule/meson.build; debug a regression diff.
+companion_skills:
+  - build-and-run
+  - debugging
+  - coding-style
+  - review-checklist
 ---
 
 # Testing PostgreSQL — decision tree
@@ -147,3 +153,12 @@ meson test -C build --suite recovery
   must be in Perl 5.14 core.
 
 See `knowledge/conventions/testing.md` for full citations and the long form.
+
+## Cross-references
+
+- `knowledge/conventions/testing.md` — long-form reference with citations.
+- `.claude/skills/build-and-run/SKILL.md` — `--suite setup` requirement, single-test invocations under meson.
+- `.claude/skills/debugging/SKILL.md` — waitpoints + `PGOPTIONS="-W N"` for catching things that happen too fast.
+- `.claude/skills/coding-style/SKILL.md` — `regress_*` naming, `EXPLAIN (COSTS OFF)` portability rule.
+- `.claude/skills/review-checklist/SKILL.md` — the test-coverage phase consults this skill.
+- `.claude/commands/pg-test.md` — slash-command wrapper that always prepends `--suite setup`.

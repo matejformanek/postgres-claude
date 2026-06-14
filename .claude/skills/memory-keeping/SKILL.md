@@ -1,6 +1,11 @@
 ---
 name: memory-keeping
 description: End-of-session bookkeeping for the pg-claude meta repo — sync progress/STATE.md, progress/coverage.md, progress/files-examined.md, and append a sessions/ log entry whenever a session produced durable output (new knowledge/idioms or knowledge/subsystems doc, verified-by-code fact, discovered gotcha, file-by-file deep read, or a locked decision from pg-claude-plan.md §14). Use proactively when the user says "wrap up", "close out", "sync memory files", "record this gotcha", or "we're done for the day". Do NOT trigger for PG MemoryContext/palloc questions, LangChain agent memory, app memory leaks, or finding old Claude sessions.
+when_to_load: Session wrap-up where durable output was produced (new knowledge doc, verified fact, file-by-file deep read, locked plan decision); user says "close out" / "sync memory" / "record this".
+companion_skills:
+  - pg-claude
+  - meta-commit-style
+  - pg-implement
 ---
 
 # memory-keeping
@@ -103,3 +108,12 @@ priority. Don't delete rows — if a doc is retired, mark its row with
   *act of producing*; knowledge/ is the produced artifact.
 - Don't try to compact session logs by deleting old ones — they are the
   audit trail.
+
+## Cross-references
+
+- `.claude/skills/pg-claude/SKILL.md` — master index; this skill keeps its progress/ pointers honest.
+- `.claude/skills/meta-commit-style/SKILL.md` — STATE.md / coverage.md updates land via this commit style.
+- `.claude/skills/pg-implement/SKILL.md` — R12 (end-of-implementation gate) explicitly invokes this skill.
+- `progress/STATE.md` — the front page this skill maintains.
+- `progress/coverage.md`, `progress/files-examined.md` — the per-artifact / per-file ledgers this skill appends to.
+- Top-level `CLAUDE.md` — Rule 6 ("Track what you read") is the reason files-examined.md exists.

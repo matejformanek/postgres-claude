@@ -59,3 +59,7 @@ source
 
 # Reverse symlink to the mutable dev clone — also never commit
 dev
+
+# Skill-creator workspaces — eval iteration outputs are ephemeral;
+# only final evals.json + benchmark.json summaries check in (see plan).
+.claude/skill-creator-workspaces/

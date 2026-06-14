@@ -1,6 +1,12 @@
 ---
 name: commit-message-style
 description: Write a commit message in upstream PostgreSQL house style — imperative single-line title (NO conventional-commits feat:/fix: prefix), paragraph body wrapped near 76 chars, Author / Reviewed-by / Reported-by / Discussion / Backpatch-through trailer block; explicitly NO Co-authored-by, NO emoji, NO ticket numbers, NO bullet lists, NO Signed-off-by. Use proactively when drafting a commit log for a PG patch destined for master. Do NOT trigger for conventional-commits messages, Linux kernel Signed-off-by commits, Rust/JS/Go project commits, or GitHub PR descriptions.
+when_to_load: Draft a commit message in dev/ for a master-targeted PG patch (or a backpatch); a committer-style cover for format-patch output.
+companion_skills:
+  - meta-commit-style
+  - patch-submission
+  - review-checklist
+  - coding-style
 ---
 
 # commit-message-style
@@ -266,3 +272,11 @@ similar.
 
 When uncertain, run `git log --format='%n----- %h %s%n%n%b' -20` and
 mirror the style of the most recent committer in that subsystem.
+
+## Cross-references
+
+- `.claude/skills/meta-commit-style/SKILL.md` — the *other* commit style (postgres-claude meta repo). Distinct: requires `Co-Authored-By`, uses `ft(scope):` prefix.
+- `.claude/skills/patch-submission/SKILL.md` — the surrounding flow: format-patch + cover letter + CF registration. This skill produces the per-commit messages it wraps.
+- `.claude/skills/review-checklist/SKILL.md` — committer-readiness phase pulls from this skill.
+- `.claude/skills/coding-style/SKILL.md` — the diff this message describes.
+- `knowledge/community/patch-workflow.md` — long-form workflow context.

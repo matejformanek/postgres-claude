@@ -1,6 +1,12 @@
 ---
 name: psql
 description: Drive `psql` against the LOCAL dev cluster built from source in this workspace (Unix socket `/tmp`, trust auth, db `postgres`, ports 5432 debug / 5433 asan). Covers the connection idiom, high-yield meta-commands (`\d+`, `\df+`, `\sf`, `\timing`, `\watch`, `\gexec`, `\errverbose`), session-only debug GUCs (`client_min_messages`, `log_min_messages`, `EXPLAIN (ANALYZE, BUFFERS, WAL)`, `enable_seqscan`/`enable_hashjoin`/etc.), runtime introspection of *this* postmaster (`pg_stat_activity`, `pg_backend_memory_contexts`, `pg_locks`, `pg_log_backend_memory_contexts`), the held-PID handoff to lldb (`PGAPPNAME=hold` + `pg_sleep`), and what's safe vs not on a disposable dev cluster. **Use this skill proactively whenever the user wants to run SQL interactively or by script against the locally-built Postgres, reproduce a backend bug on the dev cluster, watch a backend's memory contexts grow, capture a backend PID for the debugger, force a specific plan shape via `SET enable_*`, run `EXPLAIN ANALYZE` against the dev DB, time a query with `\timing`, get the connection string for the dev cluster, or do any psql-driven exploration of an internals-flavored question — even when the user doesn't say the word "psql".** Skip for: questions about production / managed PostgreSQL instances at someone else's company; SQL written for app frameworks (Django/Rails/SQLAlchemy/Prisma/JDBC ORM/`models.py`/migration files); pure "how does pg_class / OID work" catalog-structure questions (use `catalog-conventions`); subsystem-internals questions answered from source code (cost_hashjoin, XLogInsert, deadlock detector, LWLock — use `executor-and-planner` / `wal-and-xlog` / `locking`); first-time build-from-source or start/stop lifecycle (use `build-and-run`); lldb/gdb stepping itself, single-user mode, sanitizer setup (use `debugging`); and one-shot read-only agent queries that should go through the `postgres-dev` MCP at `.mcp.json` instead of psql.
+when_to_load: Drive SQL against the dev cluster — interactive, scripted, or for backend introspection (`pg_stat_activity`, `pg_locks`, `pg_backend_memory_contexts`); capture a backend PID for `/pg-attach`.
+companion_skills:
+  - build-and-run
+  - debugging
+  - error-handling
+  - memory-contexts
 ---
 
 # Working with the local dev cluster via psql
@@ -179,15 +185,13 @@ database, edit `.mcp.json` rather than passing flags ad-hoc.
   painful for an interactive session. Use `SET LOCAL` inside `BEGIN`/`COMMIT`
   for scoped noise.
 
-## Cross-references into corpus
+## Cross-references
 
-- `knowledge/architecture/process-model.md` — how psql's connection becomes
-  a postmaster `fork()` + per-connection backend.
-- `knowledge/idioms/error-handling.md` — what `\errverbose` is actually
-  showing (the `ereport()` machinery).
-- `knowledge/idioms/memory-contexts.md` — interpreting
-  `pg_backend_memory_contexts`.
-- `knowledge/data-structures/snapshot-lifecycle.md` — what `\d+ <table>`
-  is computing under the hood when it touches catalog snapshots.
-- `knowledge/subsystems/storage-buffer.md` — what `BUFFERS` in
-  `EXPLAIN (ANALYZE, BUFFERS)` is counting.
+- `.claude/skills/build-and-run/SKILL.md` — cluster lifecycle (`/pg-start`, `/pg-stop`, `/pg-restart`, `/pg-fresh`) and PATH/PGDATA wiring this skill assumes.
+- `.claude/skills/debugging/SKILL.md` — held-PID handoff to lldb (`PGAPPNAME=hold` + `pg_sleep`); single-user mode when the backend you want doesn't exist yet.
+- `.claude/skills/error-handling/SKILL.md` — what `\errverbose` is showing (the `ereport()` machinery).
+- `.claude/skills/memory-contexts/SKILL.md` — interpreting `pg_backend_memory_contexts` / `pg_log_backend_memory_contexts` output.
+- `knowledge/architecture/process-model.md` — how a psql connection becomes a postmaster `fork()` + per-connection backend.
+- `knowledge/data-structures/snapshot-lifecycle.md` — what `\d+ <table>` is computing under the hood when it touches catalog snapshots.
+- `knowledge/subsystems/storage-buffer.md` — what `BUFFERS` in `EXPLAIN (ANALYZE, BUFFERS)` is counting.
+- `.mcp.json` — the read-only `postgres-dev` MCP endpoint for one-shot agent queries (alternative to psql for non-interactive lookups).
