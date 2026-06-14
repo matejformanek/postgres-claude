@@ -1,0 +1,51 @@
+{
+  "skill_name": "parallel-query",
+  "description": "Parallel-query infrastructure in PostgreSQL backend / extensions \u2014 ParallelContext lifecycle (EnterParallelMode / CreateParallelContext / InitializeParallelDSM / LaunchParallelWorkers / WaitForParallelWorkersToFinish / DestroyParallelContext / ExitParallelMode), shm_toc estimate + allocate + insert + lookup, dsm_segment + TOC key namespace, ParallelWorkerNumber / IsParallelWorker, parallel-safety markings (pg_proc.proparallel s/r/u, PARALLEL SAFE / RESTRICTED / UNSAFE), execParallel.c hooks (ExecXXXInitializeDSM / ExecXXXInitializeWorker / ExecXXXReInitializeDSM), GUC_ALLOW_IN_PARALLEL. Use whenever a patch or extension adds parallel-aware code, marks a function's parallel safety, or extends execParallel.c. Skip generic threading questions and unrelated worker-pool questions.",
+  "results": [
+    {
+      "query": "How do I use CreateParallelContext, shm_toc, and LaunchParallelWorkers from an extension to spawn parallel workers from C code?",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "Should I mark my PG extension's C function PARALLEL SAFE, RESTRICTED, or UNSAFE in pg_proc.dat?",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "I'm adding a custom executor node and need to plumb in ExecXXXInitializeDSM and ExecXXXInitializeWorker hooks for parallel execution. What's the lifecycle?",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "In React, how do I use useEffect to fetch data from a parallel set of endpoints?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "How do I configure max_connections and shared_buffers for a 64 GB PostgreSQL server?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "passed": 2,
+    "failed": 3
+  }
+}

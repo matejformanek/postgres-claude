@@ -1,0 +1,51 @@
+{
+  "skill_name": "parallel-query",
+  "description": "Add parallel-aware C code in a PostgreSQL backend patch or extension \u2014 covers ParallelContext lifecycle (EnterParallelMode / CreateParallelContext / InitializeParallelDSM / LaunchParallelWorkers / WaitForParallelWorkersToFinish / DestroyParallelContext / ExitParallelMode), shm_toc DSM allocation + key lookup, ExecXXXInitializeDSM / ExecXXXInitializeWorker / ExecXXXReInitializeDSM hooks on plan nodes, and parallel-safety markings (pg_proc.proparallel s/r/u; PARALLEL SAFE / RESTRICTED / UNSAFE). Use whenever a PG patch or extension adds parallel-aware code, picks PARALLEL SAFE/RESTRICTED/UNSAFE for a SQL-callable function, extends execParallel.c, plumbs a worker shmem state via shm_toc, or debugs a parallel worker DSM/TOC issue. Skip for DBA tuning of max_parallel_workers GUC, OpenMP / CUDA / pthread / Tokio / Go-goroutine parallelism, JavaScript Promise.all and async-iter parallel fetches, generic worker-pool questions, and ML data-parallel training.",
+  "results": [
+    {
+      "query": "I'm adding a custom executor node and need to plumb in ExecXXXInitializeDSM and ExecXXXInitializeWorker hooks for parallel execution. What's the lifecycle?",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "Should I mark my PG extension's C function PARALLEL SAFE, RESTRICTED, or UNSAFE in pg_proc.dat?",
+      "should_trigger": true,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": false
+    },
+    {
+      "query": "How do I use CreateParallelContext, shm_toc, and LaunchParallelWorkers from an extension to spawn parallel workers from C code?",
+      "should_trigger": true,
+      "trigger_rate": 1.0,
+      "triggers": 1,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "How do I configure max_connections and shared_buffers for a 64 GB PostgreSQL server?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    },
+    {
+      "query": "In React, how do I use useEffect to fetch data from a parallel set of endpoints?",
+      "should_trigger": false,
+      "trigger_rate": 0.0,
+      "triggers": 0,
+      "runs": 1,
+      "pass": true
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "passed": 3,
+    "failed": 2
+  }
+}
