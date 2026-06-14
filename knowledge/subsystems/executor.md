@@ -14,7 +14,11 @@ See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, meth
 ---
 
 
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Last verified commit:** `e18b0cb7344` (2026-06-14; pg-quality-auditor —
+  §3.1/§3.2 execExpr.c cites corrected for −20/−33-line drift, the phantom
+  `ExecInitExprWithContext` entry point removed, and §9 nodeModifyTable.c cites
+  corrected for the same ~−13-line shift earlier fixed in
+  `architecture/executor.md`. Previously `ef6a95c7c64` (2026-06-01).)
 - **Companion architecture doc:** `knowledge/architecture/executor.md`
   (Volcano model, four trees, EState lifecycle, NestLoop worked example).
 - **Companion docs:** `knowledge/architecture/query-lifecycle.md`,
@@ -171,19 +175,22 @@ that uses expressions.
 
 [Via `knowledge/files/.../execExpr.c.md`]
 
-- `ExecInitExpr(Expr*, PlanState *parent)` `:142` — most common; resolves Vars
+- `ExecInitExpr(Expr*, PlanState *parent)` `:143` — most common; resolves Vars
   against the parent's input slots and Params against
   `estate->es_param_list_info`.
-- `ExecInitExprWithContext` `:162` — variant taking an `ErrorSaveContext` for
-  soft-error opcodes (SQL/JSON, `COPY ON_ERROR`).
-- `ExecInitExprWithParams(Expr*, ParamListInfo)` `:200` — no parent PlanState;
+- `ExecInitExprWithParams(Expr*, ParamListInfo)` `:180` — no parent PlanState;
   used by SPI and PL/pgSQL where there is no PlanState scope. Only EXTERN
   params are usable.
-- `ExecInitQual(qualList, parent)` `:249` — compiles an implicit-AND list with
+- `ExecInitQual(qualList, parent)` `:229` — compiles an implicit-AND list with
   `EEOP_QUAL` short-circuit semantics (NULL → false, jump on first false).
-- `ExecInitCheck(qualList, parent)` `:335` — like ExecInitQual but **preserves
+- `ExecInitCheck(qualList, parent)` `:315` — like ExecInitQual but **preserves
   NULL** semantics (used for CHECK constraints).
-- `ExecPrepareExpr` / `ExecPrepareQual` / `ExecPrepareCheck` `:785+` — for
+- `ExecInitExprList(nodes, parent)` `:335` — compiles a `List` of expressions
+  to a list of separate ExprStates. (There is **no** `ExecInitExprWithContext`
+  entry point: soft-error opcodes for SQL/JSON and `COPY ON_ERROR` are handled
+  not by a distinct init function but by threading an `ErrorSaveContext`
+  through `state->escontext` during `ExecInitExprRec` `:919`.)
+- `ExecPrepareExpr` / `ExecPrepareQual` / `ExecPrepareCheck` `:765+` — for
   callers with a bare `EState` (no parent PlanState). Switches to per-query
   context and runs `expression_planner` first for const-folding.
 
@@ -192,23 +199,23 @@ that uses expressions.
 The fact that **so much per-row work is one `ExecEvalExpr` call** is a major
 PG-12-and-later perf story. Builders [via `knowledge/files/.../execExpr.c.md`]:
 
-- `ExecBuildProjectionInfo(tlist, econtext, slot, parent, inputDesc)` `:391` —
+- `ExecBuildProjectionInfo(tlist, econtext, slot, parent, inputDesc)` `:370` —
   TLIST compilation. Fast path: `EEOP_ASSIGN_{INNER,OUTER,SCAN}_VAR` (one step
   per trivial Var copy). General path: evaluate expr then `EEOP_ASSIGN_TMP`.
-- `ExecBuildUpdateProjection` `:568` — UPDATE specialization. Combines
+- `ExecBuildUpdateProjection` `:547` — UPDATE specialization. Combines
   unchanged columns from old tuple with new-value SET expressions. Emits
   `EEOP_ASSIGN_TMP_MAKE_RO` so expanded datums in unchanged columns survive
   the slot transfer.
-- `ExecBuildAggTrans(AggState, phase, doSort, doHash, nullcheck)` `:3704` —
+- `ExecBuildAggTrans(AggState, phase, doSort, doHash, nullcheck)` `:3671` —
   one ExprState that advances **every** transition for an Agg phase in one
   pass. This is what makes HashAgg fast: per input row, one
   `ExecEvalExpr(state)` does all transitions, with no Aggref-tree walk
   [via `knowledge/files/.../nodeAgg.c.md`].
-- `ExecBuildHash32FromAttrs` `:4168` / `ExecBuildHash32Expr` `:4329` — compile
+- `ExecBuildHash32FromAttrs` `:4135` / `ExecBuildHash32Expr` `:4296` — compile
   a slot-or-expr hash to uint32, used by HashAgg / Hashjoin / Memoize.
-- `ExecBuildGroupingEqual` `:4493` — compile an early-exit per-column equality
+- `ExecBuildGroupingEqual` `:4461` — compile an early-exit per-column equality
   between two slots (returns boolean).
-- `ExecBuildParamSetEqual` `:4653` — Memoize uses this to compare a probe param
+- `ExecBuildParamSetEqual` `:4620` — Memoize uses this to compare a probe param
   vector against a cached entry.
 
 ### 3.3 Setup-prefix `FETCHSOME` optimization
@@ -585,7 +592,7 @@ re-running outer.
 `knowledge/architecture/executor.md` §8a]
 
 `nodeModifyTable.c` (~5500 lines) is the driver for **all DML**: INSERT,
-UPDATE, DELETE, MERGE. The top loop `ExecModifyTable` `:4619`:
+UPDATE, DELETE, MERGE. The top loop `ExecModifyTable` `:4606`:
 
 1. Pull one row from `outerPlanState(mtstate)`.
 2. Read row-identity junk columns (CTID, tableoid for partitioned targets,
@@ -598,8 +605,8 @@ UPDATE, DELETE, MERGE. The top loop `ExecModifyTable` `:4619`:
 ### 9.1 The Prologue / Act / Epilogue refactor
 
 Since PG 15 (introduced with MERGE), each DML primitive factors into three
-phases [verified-by-code via per-file doc: UPDATE `:2383,2461,2614`; DELETE
-`:1739,1771,1798`]:
+phases [verified-by-code via per-file doc: UPDATE `:2370,2448,2601`; DELETE
+`:1726,1758,1785`]:
 
 - **Prologue** — BEFORE ROW triggers, generated-column / RLS / FK pre-checks.
 - **Act** — the single `table_tuple_insert/update/delete` call and its tuple-
@@ -607,7 +614,7 @@ phases [verified-by-code via per-file doc: UPDATE `:2383,2461,2614`; DELETE
 - **Epilogue** — index update (`ExecInsertIndexTuples` /
   `ExecUpdateIndexTuples`), AFTER ROW triggers, RETURNING projection queue.
 
-This factoring exists so `ExecMerge` `:3394` can drive any of the three
+This factoring exists so `ExecMerge` `:3381` can drive any of the three
 actions per WHEN clause without re-implementing trigger + index logic. The
 shared bottom layer is also what lets MERGE retry a WHEN MATCHED clause via
 EvalPlanQual on `TM_Updated`/`TM_Deleted` without losing trigger semantics.
@@ -616,11 +623,11 @@ EvalPlanQual on `TM_Updated`/`TM_Deleted` without losing trigger semantics.
 
 [Via `knowledge/files/.../nodeModifyTable.c.md`]
 
-`ExecInsert` `:872` runs BEFORE ROW, BEFORE STATEMENT (`fireBSTriggers`
-`:4448`), then for ON CONFLICT runs `ExecCheckIndexConstraints` first to find
+`ExecInsert` `:874` runs BEFORE ROW, BEFORE STATEMENT (`fireBSTriggers`
+`:4435`), then for ON CONFLICT runs `ExecCheckIndexConstraints` first to find
 a conflicting CTID before the heap insert. Heap insert uses
 `HEAP_INSERT_SPECULATIVE` for ON CONFLICT. On conflict in any arbiter index,
-`heap_abort_speculative` + `ExecOnConflictUpdate` `:3134`.
+`heap_abort_speculative` + `ExecOnConflictUpdate` `:3121`.
 
 ### 9.3 EvalPlanQual under READ COMMITTED
 
@@ -640,11 +647,11 @@ diversion uniformly for all scan-family nodes.
 
 ### 9.4 Cross-partition UPDATE
 
-`ExecCrossPartitionUpdate` `:2218`: when the new partition-key sends a row to
+`ExecCrossPartitionUpdate` `:2205`: when the new partition-key sends a row to
 a different partition, the UPDATE becomes a DELETE on the old partition +
 INSERT into the new. Trigger semantics: UPDATE row triggers fire on the old
 partition; INSERT triggers fire on the new. FK side handled in
-`ExecCrossPartitionUpdateForeignKey` `:2669`
+`ExecCrossPartitionUpdateForeignKey` `:2656`
 [via `knowledge/files/.../nodeModifyTable.c.md`].
 
 ### 9.5 Index updates and constraint enforcement
