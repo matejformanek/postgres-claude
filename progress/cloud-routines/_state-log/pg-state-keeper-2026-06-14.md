@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-06-14 — audit + briefing: 6/7 cloud PRs merged green (#208/#218/#220/#221/#222/#223), #219 held; OK 8 · SILENT 1 [pg-user-question-harvester]; flagged systemic merger gap (prior-night cloud PRs #179/#180/#181 not draining → anchor stuck at e18b0cb since 06-10) (PR #225).
