@@ -1,0 +1,7 @@
+[
+    {"query": "I'm adding a custom GUC to my PG extension via DefineCustomIntVariable. What GucContext do I pass?", "should_trigger": true},
+    {"query": "How do I wire a check_hook and assign_hook for my custom GUC in PostgreSQL?", "should_trigger": true},
+    {"query": "When should I use GUC_LIST_INPUT vs GUC_LIST_QUOTE for a string-list GUC?", "should_trigger": true},
+    {"query": "What value should I set shared_buffers to for a 32 GB production PostgreSQL server?", "should_trigger": false},
+    {"query": "How do I parse environment variables in my Node.js app using dotenv?", "should_trigger": false}
+]
