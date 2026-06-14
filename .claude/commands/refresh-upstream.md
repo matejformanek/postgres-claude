@@ -1,5 +1,5 @@
 ---
-description: Pull upstream master in both PG clones, diff against the last-verified commit, and list which corpus docs reference files that have changed. Surfaces the rot list before the corpus drifts silently.
+description: Pull upstream master in both PG clones, diff against the last-verified commit, and list which corpus docs reference files that have changed. Surfaces the rot list before the corpus drifts silently. **Manual escape hatch** — the daily anchor-bump path is the `pg-anchor-refresh` cloud routine (per the 2026-06-12 backbone audit); use this command only when the routine is offline or a one-off targeted check is needed.
 ---
 
 # refresh-upstream
@@ -8,6 +8,15 @@ The pg-claude corpus is anchored to a specific upstream commit (recorded in
 each doc's "Last verified commit" line and in `progress/files-examined.md`).
 Upstream master moves; without active maintenance, file:line citations can
 become wrong without anyone noticing.
+
+**Note on the routine vs this command.** As of 2026-06-10 the
+`pg-anchor-refresh` cloud routine (`.claude/cloud/pg-anchor-refresh.md`)
+runs daily and handles the structural-drift case (anchor bump + per-doc
+re-verify queue + auto-edit of stale cites where confident). **Prefer
+the routine** for the daily / scheduled refresh path. This command stays
+as the manual escape hatch — useful when the routine is offline, when
+you want to inspect the rot list before any auto-edits, or when chasing
+a specific subsystem's drift.
 
 This command:
 
