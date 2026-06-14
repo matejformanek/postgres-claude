@@ -1,0 +1,22 @@
+[
+    {
+        "query": "I'm adding a custom executor node and need to plumb in ExecXXXInitializeDSM and ExecXXXInitializeWorker hooks for parallel execution. What's the lifecycle?",
+        "should_trigger": true
+    },
+    {
+        "query": "Should I mark my PG extension's C function PARALLEL SAFE, RESTRICTED, or UNSAFE in pg_proc.dat?",
+        "should_trigger": true
+    },
+    {
+        "query": "How do I use CreateParallelContext, shm_toc, and LaunchParallelWorkers from an extension to spawn parallel workers from C code?",
+        "should_trigger": true
+    },
+    {
+        "query": "How do I configure max_connections and shared_buffers for a 64 GB PostgreSQL server?",
+        "should_trigger": false
+    },
+    {
+        "query": "In React, how do I use useEffect to fetch data from a parallel set of endpoints?",
+        "should_trigger": false
+    }
+]
