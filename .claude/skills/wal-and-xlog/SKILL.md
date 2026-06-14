@@ -1,6 +1,14 @@
 ---
 name: wal-and-xlog
 description: PostgreSQL WAL/XLOG checklist for adding or modifying a WAL record — choosing builtin rmgr vs Generic WAL (generic_xlog.c) vs custom rmgr (RegisterCustomRmgr), XLogInsert + XLogRegisterBuffer idiom, writing a correct redo function, FPI/hint-bit (MarkBufferDirtyHint) rules, updating rmgrdesc and pg_waldump. Use when editing C that emits XLogInsert, adding an access method needing durability, or reviewing patches that change WAL record formats. Companion skills: `locking` for buffer-lock ordering around modified pages, `error-handling` for `ereport(PANIC, …)` inside redo. Do NOT trigger on MySQL binlog, SQLite WAL mode, Kafka logs, pgbackrest/wal_level config, or generic write-ahead-logging theory questions.
+when_to_load: Emit a WAL record (`XLogInsert`); add or modify a custom rmgr; write a redo function; bump `XLOG_PAGE_MAGIC`; review WAL-record changes in a patch.
+companion_skills:
+  - locking
+  - error-handling
+  - replication-overview
+  - access-method-apis
+  - catalog-conventions
+  - coding-style
 ---
 
 # WAL & XLOG — operational skill
@@ -343,3 +351,14 @@ emit these directly. [from-comment
 - `[unverified]` Behaviour of `XLogRegisterBlock` (the lower-level variant
   of `XLogRegisterBuffer`) — used by recovery-friendly paths that don't
   have a Buffer yet; signature in `xloginsert.h:51-53`.
+
+## Cross-references
+
+- `.claude/skills/locking/SKILL.md` — buffer-content lock ordering around modified pages; WAL-before-data rule.
+- `.claude/skills/error-handling/SKILL.md` — `ereport(PANIC, …)` inside redo; redo functions can't `ereport(ERROR)`.
+- `.claude/skills/replication-overview/SKILL.md` — walsender / walreceiver consumers of WAL records; logical decoding `rm_decode`.
+- `.claude/skills/access-method-apis/SKILL.md` — AM-specific rmgrs for index / table AMs.
+- `.claude/skills/catalog-conventions/SKILL.md` — `XLOG_PAGE_MAGIC` bump rules; `pg_control` version bumps.
+- `.claude/skills/coding-style/SKILL.md` — backend C style for redo functions, rmgrdesc structures.
+- `knowledge/architecture/wal.md` — long-form WAL design discussion.
+- `source/src/backend/access/transam/README` — canonical XLOG-record format discussion.

@@ -1,7 +1,7 @@
 # GUC variables — long-form
 
 Conceptual reference for the GUC (Grand Unified Configuration) subsystem.
-For the procedural cookbook see `.claude/skills/gucs-bgworker-parallel/SKILL.md`.
+For the procedural cookbook see `.claude/skills/gucs-config/SKILL.md`.
 
 ## Big picture
 
