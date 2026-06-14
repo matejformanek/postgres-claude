@@ -1,6 +1,18 @@
 ---
 name: pg-patch-review
-description: Multi-agent comprehensive review of a PostgreSQL patch — CommitFest entry, GitHub PR, or local `.patch` file. Orchestrates the mechanical pre-amble (fetch + apply + build + regress/iso/TAP) and then fans out 4 critic sub-agents IN PARALLEL — architecture/invariants critic (cross-checks the patch against `knowledge/subsystems/*.md` INV-* tags), breaking-change critic (on-disk + WAL + catalog + extension ABI), test-coverage critic (consults `testing` skill), style/commit-message critic (consults `commit-message-style` + `coding-style`) — then synthesizes one PG-house-style review email. Heavier than the manual seven-phase `review-checklist` walk; meant for CF entries you intend to send a real review on. Use when the user says "/pg-review <CF#|PR#|patchfile>", "deep-review this patch", "comprehensive review of CF NNNN". Do NOT trigger for non-PG patch review, for self-review-before-mail (use `patch-submission`), or for the lightweight 7-phase walk (use `review-checklist` directly).
+description: Multi-agent comprehensive review of a PostgreSQL patch — CommitFest entry, GitHub PR, or local `.patch` file. Orchestrates the mechanical pre-amble (fetch + apply + build + regress/iso/TAP) and then fans out 5 critic sub-agents IN PARALLEL — architecture/invariants critic (cross-checks the patch against `knowledge/subsystems/*.md` INV-* tags), breaking-change critic (on-disk + WAL + catalog + extension ABI), test-coverage critic (consults `testing` skill), style/commit-message critic (consults `commit-message-style` + `coding-style`), reviewer-reflex probes critic (consults `knowledge/calibration/gap-catalog.md`) — then synthesizes one PG-house-style review email. Stage 3 verdict supports REJECT-A/B/C grades for design-level rejections (M4 from Phase E run 1). Heavier than the manual seven-phase `review-checklist` walk; meant for CF entries you intend to send a real review on. Use when the user says "/pg-review <CF#|PR#|patchfile>", "deep-review this patch", "comprehensive review of CF NNNN". Do NOT trigger for non-PG patch review, for self-review-before-mail (use `patch-submission`), or for the lightweight 7-phase walk (use `review-checklist` directly).
+when_to_load: Mailing-grade review of someone else's CF patch / GitHub PR / `.patch` file; 5-critic fan-out with synthesis; verdict includes REJECT-A/B/C for design-level NACKs.
+companion_skills:
+  - review-checklist
+  - patch-submission
+  - commit-message-style
+  - coding-style
+  - testing
+  - wal-and-xlog
+  - locking
+  - catalog-conventions
+  - memory-contexts
+  - error-handling
 ---
 
 # pg-patch-review — multi-agent comprehensive PG patch review
@@ -351,7 +363,20 @@ items 4-11 that triggers + `knowledge/personas/committer-map.md` +
   a real correctness gap (e.g. SP2 had this; the 3× UTF-8 bound
   may not hold for GB18030).
 
-**Output:** same structured-finding list as critics A-D.
+**REJECT-track escalation (M4).** When Critic E surfaces 3+
+`blocking`-severity findings from the catalog AND the
+context-awareness signal (engagement class `contested` OR a
+documented `INV-*` invariant is foreclosed), the critic's output
+should explicitly recommend a `REJECT-A` Stage-3 verdict rather than
+"Waiting on Author". The Stage-3 orchestrator then decides between
+REJECT-A (the grade above), REJECT-B (acknowledge that the critic
+may have missed a concern), or downgrade to non-REJECT if the
+findings don't actually compose to a design-level NACK. Critic E
+*recommends*; Stage 3 *decides*.
+
+**Output:** same structured-finding list as critics A-D, plus an
+optional `recommend_verdict: REJECT-A | REJECT-B` field when the
+escalation rule above triggers.
 
 ### Stage 3 — orchestrator consolidates (10 min)
 
@@ -371,7 +396,25 @@ The main agent gathers all four critics' outputs and:
    - Ready for Committer
    - Waiting on Author (blocking issues)
    - Needs more info from author (open questions dominate)
-   - Reject (rare — design fundamentally wrong)
+   - **REJECT-A** — design fundamentally wrong, all critical problems
+     identified, alternative proposed. The right deliverable is a
+     thread reply explaining the rejection with cites; saves community
+     cycles. Use this when the patch is in `contested` engagement
+     class or the Context-awareness probe (from
+     `pg-feature-plan`) flagged it.
+   - **REJECT-B** — design wrong, but you missed at least one major
+     concern that a critic from the community will raise. Solid but
+     incomplete; send the reply, acknowledge gaps.
+   - **REJECT-C** — rejected for the wrong reasons OR rejected when
+     the proposal is actually sound. **STOP** — escalate to user
+     before posting. Likely you need to re-run with looser
+     priors or load more corpus.
+
+   M4 origin:
+   `knowledge/shadow-implementations/money-fx-exchange/skill-gaps.md`.
+   The REJECT-A/B/C grades parallel the A-F grade rubric on
+   non-REJECT outcomes — they're not lesser verdicts, just the right
+   shape for proposals that shouldn't proceed.
 
 ### Stage 4 — synthesize the review email
 
@@ -522,3 +565,18 @@ The 2026-06-02 v0 review of CF #6402 in
 target — re-running THIS skill against that patch should reproduce a
 review of comparable quality (same draft conclusion, same blocking-vs-nit
 split) in less wall time than the v0 manual walk.
+
+## Cross-references
+
+- `.claude/skills/review-checklist/SKILL.md` — the eight-phase scaffold each critic walks; Phase 0 hosts the REJECT-A/B/C grade rubric this skill's Stage 3 verdict consumes.
+- `.claude/skills/patch-submission/SKILL.md` — invokes this skill in `--self` mode for the self-review path.
+- `.claude/skills/pg-feature-plan/SKILL.md` — supplies the Context-awareness probe + Thread-engagement classification that drive Critic E's REJECT-track escalation.
+- `.claude/skills/commit-message-style/SKILL.md` — Critic D + synthesizer use this for upstream PG commit-message format.
+- `.claude/skills/coding-style/SKILL.md` — Critic D style check.
+- `.claude/skills/testing/SKILL.md` — Critic C test-coverage check.
+- `.claude/skills/wal-and-xlog/SKILL.md`, `.claude/skills/catalog-conventions/SKILL.md` — Critic B breaking-change scan.
+- `.claude/skills/locking/SKILL.md`, `.claude/skills/memory-contexts/SKILL.md`, `.claude/skills/error-handling/SKILL.md` — Critic A architecture check.
+- `knowledge/calibration/gap-catalog.md` — items 4-11 source Critic E's eight reflex probes.
+- `knowledge/personas/*.md` — Critic E loads relevant persona docs per probe.
+- `knowledge/shadow-implementations/money-fx-exchange/skill-gaps.md` — M4 origin (REJECT-A/B/C verdict).
+- `.claude/commands/pg-review.md` — slash-command wrapper that runs Stage 0 inline.

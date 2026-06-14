@@ -1,6 +1,15 @@
 ---
 name: locking
-description: PostgreSQL backend locking decision tree for code touching shared state — picking among atomics (pg_atomic_u32), spinlocks (SpinLockAcquire), LWLocks (LWLockAcquire LW_SHARED/LW_EXCLUSIVE), heavyweight locks, predicate (SSI) locks, and buffer pin/content locks; lock ordering to avoid deadlocks; what protects PGPROC/BufferDesc/shmem fields. Use whenever writing or reviewing C in src/backend that touches shared memory, MainLWLockArray, procArray, or adds shmem state. Do NOT trigger on pthread/Java/Go/Rust mutex questions, Redis/ZooKeeper distributed locks, ORM optimistic locking, or user-level SELECT FOR UPDATE.
+description: PostgreSQL backend locking decision tree for code touching shared state — picking among atomics (pg_atomic_u32), spinlocks (SpinLockAcquire), LWLocks (LWLockAcquire LW_SHARED/LW_EXCLUSIVE), heavyweight locks, predicate (SSI) locks, and buffer pin/content locks; lock ordering to avoid deadlocks; LWLock partition rank rules; multi-XID interaction with tuple locks; common deadlock patterns; what protects PGPROC/BufferDesc/shmem fields. Use whenever writing or reviewing C in src/backend that touches shared memory, MainLWLockArray, procArray, or adds shmem state. Do NOT trigger on pthread/Java/Go/Rust mutex questions, Redis/ZooKeeper distributed locks, ORM optimistic locking, or user-level SELECT FOR UPDATE.
+when_to_load: Touch shared state in src/backend; add a new LWLock or tranche; debug a deadlock or LWLock hang; review a patch that changes lock-acquisition order; interact with tuple/MultiXact locks.
+companion_skills:
+  - debugging
+  - memory-contexts
+  - wal-and-xlog
+  - bgworker-and-extensions
+  - parallel-query
+  - coding-style
+  - error-handling
 ---
 
 # Locking — operational checklist
@@ -82,6 +91,62 @@ If any of these is "no", upgrade to an LWLock.
 - [ ] If you need ordering between multiple atomic locations, add `pg_read_barrier`/`pg_write_barrier`/`pg_memory_barrier` and a comment justifying the choice. Read `src/backend/storage/lmgr/README.barrier` first.
 - [ ] Beware: u64 atomics fall back to spinlock-backed emulation on platforms lacking 8-byte atomicity (`atomics.h:107-112`). Don't assume they're free.
 
+## 2.5 LWLock partition rank cheat-sheet
+
+Three families of partitioned LWLocks; each is one tranche with N
+locks indexed `[0..N-1]`. **Within a family, always acquire in
+ascending partition-number order.** Across families, the canonical
+order is: BufferMapping → LockManager → PredicateLockManager.
+[verified-by-code `source/src/include/storage/lwlocknames.h`]
+
+| Tranche | Partitions | Computed from |
+|---|---|---|
+| `BufferMapping` | `NUM_BUFFER_PARTITIONS` (128) | `BufTableHashPartition(hash) = hash % 128` |
+| `LockManager` | `NUM_LOCK_PARTITIONS` (16) | `LockHashPartition(hashcode) = hashcode % 16` |
+| `PredicateLockManager` | `NUM_PREDICATELOCK_PARTITIONS` (16) | `PredicateLockHashPartition(hashcode) = hashcode % 16` |
+
+**Within-family hazard:** if your code path may end up holding two
+partitions of the same tranche, pre-sort the partition numbers and
+acquire low → high. Otherwise two backends crossing in opposite
+order silently deadlock (LWLocks have no deadlock detector).
+
+**Cross-family hazard:** holding BufferMapping while acquiring a
+heavyweight lock requires going through `LockAcquire`, which itself
+takes a `LockManager` partition. Composition rule still holds:
+BufferMapping → LockManager → ... in the natural call order.
+
+## 2.6 MultiXact interaction with tuple locks
+
+A `MultiXactId` packs multiple xact ids + per-member lock-mode into
+one id. It's stored in a tuple's `xmax` when more than one
+session needs a non-conflicting lock on the same row simultaneously.
+
+[verified-by-code `source/src/backend/access/heap/README.tuplock`]
+
+Operational implications:
+
+- **Reading `xmax` is not enough.** If `HEAP_XMAX_IS_MULTI` is set on
+  the tuple, you have to call `GetMultiXactIdMembers(xmax, ...)` to
+  enumerate the actual xact ids and their lock modes. Forgetting this
+  is the classic "I checked xmax but the row was still locked" bug.
+
+- **MultiXact has its own SLRU** (`pg_multixact/`). Reading a member
+  may need I/O even if you already have the tuple in shared buffers.
+  Don't call `GetMultiXactIdMembers` while holding a spinlock.
+
+- **Tuple-lock upgrade promotes to a new MultiXact.** Going from
+  `FOR KEY SHARE` to `FOR UPDATE` on a row already locked by other
+  sessions allocates a new MultiXactId. The old members are copied
+  forward; nothing is freed until vacuum-freeze runs.
+
+- **Hot-standby visibility.** Hot Standby cannot create new MultiXact
+  members; row-level lock requests fall through to a no-op there.
+
+Key headers:
+`source/src/include/access/multixact.h`,
+`source/src/backend/access/transam/multixact.c`,
+`source/src/backend/access/heap/README.tuplock`.
+
 ## 3. Ordering rules you must obey
 
 These are the rules that, when violated, produce LWLock deadlocks (no detector — the system wedges) or break correctness:
@@ -117,7 +182,82 @@ For every new lock, tranche, or shared-memory struct you add:
 - "I added a new individually-named LWLock and `wait_event_names.txt` is unchanged" → build will fail or wait-events will show wrong names. Update both.
 - "I'm taking a heavyweight lock from a critical section / signal handler / spinlock" → forbidden; heavyweight lock acquisition can sleep and ereport.
 
-## 6. Cross-references
+## 6. Common deadlock patterns — cheat-sheet
+
+The four shapes of deadlock that recur in PG code review. Each is
+named in `storage/lmgr/README` or in subsystem READMEs; recognize
+them before they're committed.
+
+### 6.1 AB-BA across two heavyweight locks
+
+```
+Session 1: LOCK TABLE a IN EXCLUSIVE; LOCK TABLE b IN EXCLUSIVE;
+Session 2: LOCK TABLE b IN EXCLUSIVE; LOCK TABLE a IN EXCLUSIVE;
+```
+
+Detector resolves this — one session gets
+`ERROR: deadlock detected`. The fix in code is a canonical order
+(by relation OID, by relname, by purpose) documented in a comment
+near the acquisition. Common offenders: pairwise FK enforcement,
+multi-relation DDL.
+
+### 6.2 AB-BA across two LWLock partitions of the same tranche
+
+```
+Backend 1: LWLockAcquire(BufMapping[3], EX); ... LWLockAcquire(BufMapping[7], EX);
+Backend 2: LWLockAcquire(BufMapping[7], EX); ... LWLockAcquire(BufMapping[3], EX);
+```
+
+**No detector.** System hangs silently. The fix is the rank rule in
+§2.5 — pre-sort partition numbers, acquire low → high. Common
+offenders: rehash + lookup paths that need to lock the source and
+destination buckets.
+
+### 6.3 LWLock-then-heavyweight inversion
+
+```
+Path A: LWLockAcquire(SomeLWLock, EX); LockAcquire(LOCKTAG_RELATION, ...);
+Path B: LockAcquire(LOCKTAG_RELATION, ...); LWLockAcquire(SomeLWLock, EX);
+```
+
+Heavyweight lock acquisition can itself take an LWLock (the
+`LockManager` partition). If your path holds an LWLock and the
+other path holds the heavyweight lock while waiting on yours,
+neither moves. The shape rule: **don't hold an LWLock while
+calling `LockAcquire`**. Release first; re-acquire after.
+
+### 6.4 Buffer-content-while-waiting
+
+```
+Backend 1: holds content lock on buffer B EXCLUSIVE; tries to
+           XLogFlush which waits for WAL writer
+WAL writer: needs to flush a page that needs B's content lock
+```
+
+Rare but real on tight WAL/buffer hot paths. Fix: never call
+`XLogFlush` while holding a buffer content lock; either release
+first or use `XLogFlushAsync` if the call site allows.
+
+### 6.5 Quick diagnostic recipe
+
+When the system looks deadlocked but `ERROR: deadlock detected`
+never fires, the deadlock is almost certainly an LWLock or
+buffer-pin loop. In another psql session:
+
+```sql
+SELECT pid, wait_event_type, wait_event, state, query
+FROM   pg_stat_activity
+WHERE  wait_event_type IS NOT NULL;
+```
+
+`wait_event` names match `wait_event_names.txt`. Multiple backends
+in `LWLock` / `LWLockNamed` waiting on each other's partition is
+the silent-LWLock-deadlock signature.
+
+See `.claude/skills/debugging/SKILL.md` §10 for the held-PID +
+lldb attach recipe.
+
+## 7. Cross-references
 
 - `knowledge/idioms/locking-overview.md` — the conceptual map and citations.
 - `knowledge/subsystems/storage-buffer.md` — the calibration deep-dive (six lock primitives in one subsystem).
@@ -129,3 +269,8 @@ For every new lock, tranche, or shared-memory struct you add:
 - `source/src/include/storage/lockdefs.h` — the 8 heavyweight lock modes.
 - `https://www.postgresql.org/docs/current/explicit-locking.html` — user-facing conflict matrix.
 - `https://wiki.postgresql.org/wiki/Lock_dependency_information` — debugging tips for diagnosing lock waits.
+- `.claude/skills/debugging/SKILL.md` — `pg_locks` + `pg_stat_activity` walk-through; lldb-attach recipe for silent LWLock hangs (§6.5 here).
+- `.claude/skills/wal-and-xlog/SKILL.md` — WAL-before-data rule (§3 #8 here); `XLogFlush` vs buffer-content interaction (§6.4 here).
+- `.claude/skills/bgworker-and-extensions/SKILL.md` — `RequestNamedLWLockTranche` / `LWLockNewTrancheId` for extension-owned tranches.
+- `.claude/skills/parallel-query/SKILL.md` — lock-group semantics for parallel workers (§2.3 here).
+- `.claude/skills/memory-contexts/SKILL.md` — `MemoryContext`s are per-backend, NOT protected by locks (§0 here).

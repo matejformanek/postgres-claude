@@ -1,6 +1,12 @@
 ---
 name: pg-feature-brainstorm
 description: Phase 1 of the two-phase PostgreSQL feature planner — open-ended exploration of an idea before any heavy planning. Frame the problem, name relevant PG subsystems, sketch 2-3 candidate approaches with tradeoffs, run a "has this been tried?" check against CommitFest + git log + corpus, and surface decisions the user must make before Phase 2. Produces a short brainstorm doc (~150-300 lines, NOT a plan). Use whenever the user says "let's brainstorm", "I have an idea for PG", "what would it take to add X", "could we do Y in PG", "explore the design space for Z", or invokes `/pg-brainstorm`. Do NOT trigger for already-scoped tasks where the user clearly wants implementation; for those, go straight to `pg-feature-plan` or `/implement`. Skip for non-PG brainstorming (app architecture, infra design, marketing copy).
+when_to_load: Explore a PG feature idea before any plan is appropriate; narrow the design space; "has this been tried?" triage; surface DECISION: questions only the user can answer.
+companion_skills:
+  - pg-feature-plan
+  - pg-claude
+  - pg-implement
+  - meta-commit-style
 ---
 
 # pg-feature-brainstorm — Phase 1 of the PG planner
@@ -172,3 +178,12 @@ forward-looking.
 Cleanup policy: planning docs stay in tree until the feature lands
 (then the plan is referenced by the patch's commit message and can
 be archived) or until the user explicitly says drop it.
+
+## Cross-references
+
+- `.claude/skills/pg-feature-plan/SKILL.md` — Phase 2 consumer of this skill's output; reads `planning/<slug>/brainstorm.md` + the inline DECISION: answers.
+- `.claude/skills/pg-implement/SKILL.md` — Phase 3 consumer (via the plan); brainstorm is read for context only, not procedure.
+- `.claude/skills/pg-claude/SKILL.md` — master index used to pick which 1-3 `knowledge/subsystems/*.md` docs to load.
+- `.claude/skills/meta-commit-style/SKILL.md` — the brainstorm.md file commits to the meta repo via this style.
+- `planning/README.md` — directory layout for `planning/<slug>/`.
+- `.claude/commands/pg-brainstorm.md` — slash-command wrapper that invokes this skill.

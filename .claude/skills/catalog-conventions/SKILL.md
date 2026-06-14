@@ -1,6 +1,14 @@
 ---
 name: catalog-conventions
 description: PostgreSQL system-catalog modification checklist — adding a pg_proc.dat builtin, pg_operator.dat operator, pg_type.dat type, pg_cast.dat cast, pg_opclass.dat opclass, new column on pg_class/pg_aggregate/etc., BKI bootstrap entries, OID assignment policy, catversion bump, regenerating postgres.bki. Use whenever editing anything under src/include/catalog/ (.h or .dat) or adding builtin SQL-visible objects. Do NOT trigger on user-level information_schema queries, Django/Alembic migrations, Oracle/MySQL catalog equivalents, schema design/normalization, or adding constraints to user tables.
+when_to_load: Edit anything under `src/include/catalog/`; add a builtin SQL-visible object; assign an OID; bump `CATALOG_VERSION_NO`; verify a patch's catalog impact.
+companion_skills:
+  - fmgr-and-spi
+  - access-method-apis
+  - parser-and-nodes
+  - extension-development
+  - testing
+  - commit-message-style
 ---
 
 # Catalog modification checklist
@@ -210,3 +218,13 @@ hands-on procedure; consult it before/after any change to
 - https://www.postgresql.org/docs/current/bki.html
 - https://www.postgresql.org/docs/current/system-catalog-declarations.html
 - https://www.postgresql.org/docs/current/catalogs.html
+
+## Cross-references
+
+- `.claude/skills/fmgr-and-spi/SKILL.md` — `pg_proc.dat` rows for SQL-callable C functions (provolatile / proisstrict / proparallel).
+- `.claude/skills/access-method-apis/SKILL.md` — `pg_am.dat`, opclass / strategy / support-function registration.
+- `.claude/skills/parser-and-nodes/SKILL.md` — catversion bump rules when serialized `Query` fields change (views / rules).
+- `.claude/skills/extension-development/SKILL.md` — extensions shipping their own `pg_proc` / `pg_type` entries via SQL install scripts (not `.dat`).
+- `.claude/skills/testing/SKILL.md` — regress test for new catalog entries (OID-portable output, no plain `\d` in expected files).
+- `.claude/skills/commit-message-style/SKILL.md` — committer convention: catversion bump lives in the same commit as the catalog change.
+- `knowledge/idioms/catalog-conventions.md` — long-form discussion.

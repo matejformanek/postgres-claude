@@ -1,6 +1,13 @@
 ---
 name: fmgr-and-spi
 description: PostgreSQL backend fmgr (function manager) and SPI calling conventions for hacking SQL-callable C functions — PG_FUNCTION_INFO_V1, PG_GETARG_*/PG_RETURN_*, PG_ARGISNULL, SRF_* ValuePerCall and Materialize mode, composite/polymorphic returns, DirectFunctionCall*/OidFunctionCall*, plus SPI_connect/SPI_execute/SPI_prepare/SPI_finish, plan caching, cursors, subxact rollback, return codes. Use whenever editing C with a `Datum foo(PG_FUNCTION_ARGS)` entry point, calling fmgr from C, or running SQL via SPI_* in a backend, trigger, or PL handler. Skip for plpgsql, libpq/JDBC client code, or generic executor questions.
+when_to_load: Write or modify a `Datum foo(PG_FUNCTION_ARGS)` SQL-callable C function; call fmgr from backend C; embed SQL via SPI in a backend / trigger / PL handler; expose a set-returning function.
+companion_skills:
+  - extension-development
+  - catalog-conventions
+  - memory-contexts
+  - error-handling
+  - coding-style
 ---
 
 # fmgr and SPI — operational playbook
@@ -566,8 +573,11 @@ grep -n 'SPI_OK_\|SPI_ERROR_'    source/src/include/executor/spi.h
 
 ## 4. Cross-references
 
-- Long-form details: `knowledge/idioms/fmgr.md`, `knowledge/idioms/spi.md`.
-- Memory-context rules referenced throughout: `knowledge/idioms/memory-contexts.md`.
-- Error/soft-error reporting: `.claude/skills/error-handling/SKILL.md`.
-- Official chapters: <https://www.postgresql.org/docs/current/xfunc-c.html>,
-  <https://www.postgresql.org/docs/current/spi.html>.
+- `.claude/skills/extension-development/SKILL.md` — the surrounding extension that wraps a `Datum foo(PG_FUNCTION_ARGS)` symbol.
+- `.claude/skills/catalog-conventions/SKILL.md` — `pg_proc.dat` row for the function (provolatile / proisstrict / proparallel / prorettype).
+- `.claude/skills/memory-contexts/SKILL.md` — per-call memory-context rules (MultiCallMemoryCtx for SRFs, fcinfo->flinfo->fn_mcxt for fmgr cache).
+- `.claude/skills/error-handling/SKILL.md` — `ereport` from fmgr; soft errors via `escontext`.
+- `.claude/skills/coding-style/SKILL.md` — `PG_FUNCTION_INFO_V1`, `PGDLLEXPORT`, header rules for fmgr functions.
+- `knowledge/idioms/fmgr.md`, `knowledge/idioms/spi.md` — long-form details.
+- `knowledge/idioms/memory-contexts.md` — memory-context rules referenced throughout.
+- Official chapters: <https://www.postgresql.org/docs/current/xfunc-c.html>, <https://www.postgresql.org/docs/current/spi.html>.

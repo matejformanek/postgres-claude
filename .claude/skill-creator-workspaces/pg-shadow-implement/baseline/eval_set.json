@@ -1,0 +1,22 @@
+[
+  {
+    "query": "/pg-shadow https://www.postgresql.org/message-id/flat/20241118123000.example%40pgsql.org",
+    "should_trigger": true
+  },
+  {
+    "query": "shadow-implement that thread about temp-file compression",
+    "should_trigger": true
+  },
+  {
+    "query": "run Phase E against the Filip Janus temp-file compression thread",
+    "should_trigger": true
+  },
+  {
+    "query": "review this patch I want to submit upstream",
+    "should_trigger": false
+  },
+  {
+    "query": "help me debug why VACUUM is slow on my production database",
+    "should_trigger": false
+  }
+]

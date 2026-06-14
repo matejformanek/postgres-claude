@@ -64,7 +64,9 @@ didn't trigger.
 | WAL records, redo functions, custom rmgr | `wal-and-xlog` | any XLogInsert, redo, durability change |
 | fmgr/PG_FUNCTION_INFO_V1, SPI lifecycle | `fmgr-and-spi` | any SQL-callable C fn, any SPI work |
 | Extension layout, hooks, custom GUCs | `extension-development` | building an extension or hook |
-| GUC variables, bgworkers, parallel query | `gucs-bgworker-parallel` | any GUC, bgworker, parallel-aware code |
+| Custom GUCs (DefineCustomXxxVariable, check/assign hooks) | `gucs-config` | any custom GUC add/change |
+| Background workers + extension hooks | `bgworker-and-extensions` | RegisterBackgroundWorker, shmem, hook layering |
+| Parallel-query workers (Gather/GatherMerge, parallel-safe) | `parallel-query` | any parallel-aware code |
 | IndexAmRoutine / TableAmRoutine | `access-method-apis` | any new AM or AM-pluggable code |
 | Replication overview (physical + logical) | `replication-overview` | walsender/walreceiver/slot/logical-decoding work |
 

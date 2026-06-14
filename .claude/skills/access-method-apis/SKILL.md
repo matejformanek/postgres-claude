@@ -1,6 +1,14 @@
 ---
 name: access-method-apis
 description: PostgreSQL pluggable access method internals for hackers implementing an index or table AM — IndexAmRoutine callbacks (ambuild, aminsert, amgettuple, amgetbitmap, ambulkdelete, amvacuumcleanup), TableAmRoutine callbacks (scan_begin, scan_getnextslot, tuple_insert, tuple_insert_speculative, slot_callbacks), opclass/strategy numbers and support functions, TID semantics for non-heap stores, genam.c and tableam.h wrappers, CREATE ACCESS METHOD + pg_am/pg_opclass registration. Use whenever a patch implements or modifies an index AM or table AM. Skip user-facing "which index should I use" or query-tuning questions.
+when_to_load: Implement or modify an index AM / table AM; add opclass / strategy / support-function entries; design TID semantics for a non-heap store; review an AM patch.
+companion_skills:
+  - wal-and-xlog
+  - catalog-conventions
+  - executor-and-planner
+  - locking
+  - extension-development
+  - testing
 ---
 
 # Access-method APIs — operational guide
@@ -249,3 +257,13 @@ counters will simply never be visited by autovacuum — plan to call
   `heapam_methods` near line 2665) — the only table AM.
 - `doc/src/sgml/indexam.sgml`, `doc/src/sgml/tableam.sgml` — user-facing chapters
   with extra discussion of locking and semantic requirements.
+
+## Cross-references
+
+- `.claude/skills/wal-and-xlog/SKILL.md` — durability for the AM: rmgr design, custom rmgr vs Generic WAL.
+- `.claude/skills/catalog-conventions/SKILL.md` — `pg_am.dat`, opclass / strategy / support-function registration via `pg_opclass.dat` / `pg_amop.dat` / `pg_amproc.dat`.
+- `.claude/skills/executor-and-planner/SKILL.md` — `amcostestimate` interaction with the planner; bitmap-scan plumbing.
+- `.claude/skills/locking/SKILL.md` — AM-specific lock-ordering rules (e.g. nbtree left-to-right buffer coupling).
+- `.claude/skills/extension-development/SKILL.md` — `CREATE ACCESS METHOD` from an extension; PGXS / meson packaging.
+- `.claude/skills/testing/SKILL.md` — amcheck integration; isolation specs for AM concurrency.
+- `knowledge/subsystems/access-nbtree.md`, `knowledge/subsystems/access-heap.md` — canonical AM deep-dives.

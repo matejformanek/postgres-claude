@@ -1,6 +1,18 @@
 ---
 name: review-checklist
-description: The seven-phase PostgreSQL patch review checklist from the wiki — applies to reviewing someone else's pgsql-hackers/CommitFest submission OR self-reviewing your own patch before mailing it. Covers apply/build, regress + check-world, pgindent, design fit, docs, comments, and committer-readiness. Use proactively whenever the user says "review this patch", "is it ready to send to hackers", "CF entry NNNN review", or "pre-submission review". Do NOT trigger for generic GitHub PR review, Terraform/Python/Rust code review, or app security review.
+description: The seven-phase PostgreSQL patch review checklist from the wiki (Phase 0 added 2026-06-12) — applies to reviewing someone else's pgsql-hackers/CommitFest submission OR self-reviewing your own patch before mailing it. Covers reviewer-reflex gates, apply/build, regress + check-world, pgindent, design fit, docs, comments, and committer-readiness. Phase 0 also encodes the REJECT-A/B/C grade rubric for design-level rejections (M4 from Phase E run 1). Use proactively whenever the user says "review this patch", "is it ready to send to hackers", "CF entry NNNN review", or "pre-submission review". Do NOT trigger for generic GitHub PR review, Terraform/Python/Rust code review, or app security review.
+when_to_load: Review a PG patch (others' or own) using the seven-phase scaffold; reach a REJECT-A/B/C verdict at Phase 0; produce per-phase findings for `pg-patch-review`'s critics to consume.
+companion_skills:
+  - pg-patch-review
+  - patch-submission
+  - commit-message-style
+  - coding-style
+  - testing
+  - wal-and-xlog
+  - locking
+  - error-handling
+  - memory-contexts
+  - catalog-conventions
 ---
 
 # Review Checklist Skill
@@ -26,17 +38,60 @@ re-deriving the deep rules here:
 - `commit-message-style` — judging committer-readiness of the message
 - `patch-submission` — pre-submission of our own change
 
-## Phase 0 — Reviewer-reflex gates (added 2026-06-12 from Phase C)
+## Phase 0 — Reviewer-reflex gates + REJECT-track (added 2026-06-12)
 
-Three persona-driven gates that fire before the mechanical checks. Each
-one was triggered repeatedly across the five Phase C calibrations
-(`knowledge/calibration/`); leaving them implicit causes the
-mechanical-only review to ship patches that real reviewers will
-push back on. If any gate fails, the patch goes back to the author
-with the gate's specific question before Phase 1.
+Three persona-driven gates + the REJECT-A/B/C grade rubric. Both fire
+before the mechanical checks. Each gate was triggered repeatedly
+across the five Phase C calibrations (`knowledge/calibration/`);
+leaving them implicit causes the mechanical-only review to ship
+patches that real reviewers will push back on. If any gate fails, the
+patch goes back to the author with the gate's specific question
+before Phase 1.
 
-The full catalog is at `knowledge/calibration/gap-catalog.md` items
-1-3.
+The REJECT-track was added 2026-06-12 from Phase E run 1 (M4 in
+`knowledge/shadow-implementations/money-fx-exchange/skill-gaps.md`).
+Not every patch should proceed to Phase 1 mechanical review — some
+are design-level NACKs where the right output is a thread reply
+explaining why the proposal can't proceed, not a phased
+implementation. Phase 0 is where that branch happens.
+
+The full reflex catalog is at `knowledge/calibration/gap-catalog.md`
+items 1-3.
+
+### REJECT-track decision (M4)
+
+Run this **first** in Phase 0 — before the three reflex gates. If the
+patch is design-level rejectable, the gates are moot.
+
+A patch is REJECT-track candidate if any of:
+
+- **Design forecloses on a documented PG invariant** (e.g. proposes a
+  network-IO immutable function; would require backwards-incompatible
+  on-disk format change without an upgrade path; violates a
+  subsystem's `INV-*` tag that the corpus has documented).
+- **Context-awareness probe flags it** (per `pg-feature-plan`'s
+  Context-awareness pre-step: April-1 thread, joke proposal,
+  demonstrably unimplementable).
+- **Engagement classification is `contested`** (per `pg-feature-plan`'s
+  Thread-engagement classification: named senior contributors raising
+  correctness/design objections that haven't been addressed).
+
+If REJECT-track applies, grade as:
+
+| Grade | Meaning |
+|---|---|
+| `REJECT-A` | Identified all critical design problems, proposed correct alternative. Equivalent to an A-grade review on a serious patch — saves the community cycles. |
+| `REJECT-B` | Identified most critical problems but missed one major concern. |
+| `REJECT-C` | Rejected for the wrong reasons OR rejected when the proposal was actually sound. Self-correct: re-open and run the seven-phase review. |
+
+For REJECT-A/B verdicts: the deliverable is a thread reply per the
+"Posting the review" section below, NOT a phased implementation plan.
+The reply names the specific reasons (cited to `source/` invariants
+or `knowledge/personas/<name>.md` design reflexes) and offers the
+alternative if one exists. Don't continue to Phase 1.
+
+For REJECT-C: stop, escalate to the user — your verdict probably
+needs revision before going public.
 
 ### Gate 1 — `security@` embargo (HARD)
 
@@ -244,3 +299,15 @@ seven phases but be ruthless on:
 - [Submitting a Patch — wiki](https://wiki.postgresql.org/wiki/Submitting_a_Patch)
 - [Committing Checklist — wiki](https://wiki.postgresql.org/wiki/Committing_checklist)
 - knowledge/community/review-patterns.md
+
+## Cross-references
+
+- `.claude/skills/pg-patch-review/SKILL.md` — multi-agent orchestration above this scaffold; each critic walks one of these phases.
+- `.claude/skills/patch-submission/SKILL.md` — invokes this skill (via `pg-patch-review --self`) for the self-review path before format-patching.
+- `.claude/skills/pg-feature-plan/SKILL.md` — supplies the Context-awareness and Thread-engagement classification feeding Phase 0's REJECT-track.
+- `.claude/skills/commit-message-style/SKILL.md` — Phase 5 / committer-readiness defers to this for the commit-message check.
+- `.claude/skills/coding-style/SKILL.md` — Phase 5 style check.
+- `.claude/skills/testing/SKILL.md` — Phase 3 / Phase 6 test-coverage and feature-test checks.
+- `knowledge/calibration/gap-catalog.md` — items 1-3 source the three reflex gates in Phase 0.
+- `knowledge/personas/noah-misch.md`, `knowledge/personas/tom-lane.md`, `knowledge/personas/daniel-gustafsson.md` — persona drivers behind the gates.
+- `knowledge/shadow-implementations/money-fx-exchange/skill-gaps.md` — M4 origin (REJECT-A/B/C rubric).

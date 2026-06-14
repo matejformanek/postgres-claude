@@ -1,6 +1,13 @@
 ---
 name: replication-overview
 description: Operational orientation for PostgreSQL replication internals — physical streaming, archive, logical decoding, logical replication PUB/SUB, synchronous commit. Names walsender / walreceiver / replication slot / output plugin callbacks plus GUCs (wal_level, max_wal_senders, max_replication_slots, max_logical_replication_workers, primary_conninfo, primary_slot_name, synchronous_standby_names) and the source files behind each flavor. Use whenever the user mentions PG walsender, walreceiver, replication slot, logical decoding, output plugin, publication/subscription, conflict detection, sync replication, failover slots, pg_basebackup, or pg_receivewal. Skip MySQL/Mongo/Cassandra/Kafka/Debezium replication.
+when_to_load: Orient around PG replication flavor (physical / archive / logical decoding / logical PUB/SUB / sync commit); identify which walsender / walreceiver / output-plugin callback to touch; review a replication patch.
+companion_skills:
+  - wal-and-xlog
+  - locking
+  - bgworker-and-extensions
+  - error-handling
+  - testing
 ---
 
 # Replication — operational orientation
@@ -184,3 +191,13 @@ synchronized_standby_slots = 's1,s2'   # on primary
 | `source/src/backend/replication/logical/conflict.c` | 1-60 | header |
 | `source/src/backend/replication/repl_gram.y` | grep | command surface |
 | `source/src/include/replication/output_plugin.h` | grep | callback contract |
+
+## Cross-references
+
+- `.claude/skills/wal-and-xlog/SKILL.md` — WAL records consumed by walsenders; `rm_decode` for logical decoding visibility.
+- `.claude/skills/locking/SKILL.md` — `ProcArrayLock`, `ReplicationSlotControlLock`, `SyncRepLock` ordering; standby-conflict-detection.
+- `.claude/skills/bgworker-and-extensions/SKILL.md` — logical-replication apply workers are bgworkers; subscription launcher manages them.
+- `.claude/skills/error-handling/SKILL.md` — apply-worker error escalation; conflict detection in logical replication.
+- `.claude/skills/testing/SKILL.md` — TAP tests in `src/test/recovery/t/`, `src/test/subscription/t/`.
+- `knowledge/architecture/replication.md` — long-form architecture.
+- `knowledge/subsystems/replication.md` — deep-dive corpus doc covering both physical and logical replication.

@@ -1,0 +1,22 @@
+[
+  {
+    "query": "write a commit message for my PG patch that adds a new GUC",
+    "should_trigger": true
+  },
+  {
+    "query": "format-patch this for upstream pgsql-hackers",
+    "should_trigger": true
+  },
+  {
+    "query": "commit message for src/backend/access/heap/heapam.c change",
+    "should_trigger": true
+  },
+  {
+    "query": "write a commit message for my React component refactor",
+    "should_trigger": false
+  },
+  {
+    "query": "what's the difference between LWLockAcquire and LWLockConditionalAcquire",
+    "should_trigger": false
+  }
+]
