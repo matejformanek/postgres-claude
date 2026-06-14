@@ -517,3 +517,51 @@ the default is "directory-doc coverage".
 > injection_points, test_oat_hooks, test_decoding, etc., priority M),
 > then src/test/regress C helpers. Recompute the genuine gap from the
 > GitHub tree at the current anchor before refilling.
+
+## src/interfaces/ecpg/include — installed public headers (cloud/pg-file-backfiller, 2026-06-14)
+
+> Queue was fully drained (0 pending) at run start. Refilled per the refill
+> rule from the priority-H `src/interfaces/ecpg` remainder (A23 close-gap;
+> preproc landed 2026-06-13). This run takes the **19 installed `.h`
+> headers** under `src/interfaces/ecpg/include/` (the public ABI surface an
+> ECPG-generated `.c` includes). The directory listing at anchor was
+> recomputed via the GitHub contents API: `ecpg_config.h.in` (template, not
+> a `.h`), `Makefile`, `meson.build`, `.gitignore` excluded. Docs written as
+> `<name>.h.md` (keeping the extension), matching the ecpg sibling
+> convention. 4 issue rows filed (all nit/ABI-frozen). **ecpg now FULLY
+> covered** (ecpglib + pgtypeslib + compatlib + preproc + include).
+> Anchor e18b0cb7344.
+
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpglib.h loc=79 priority=H
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpgtype.h loc=109 priority=H
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlca.h loc=66 priority=H
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpgerrno.h loc=82 priority=H
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpg_informix.h loc=90 priority=H
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqltypes.h loc=59 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/sql3types.h loc=43 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_numeric.h loc=69 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_date.h loc=32 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_timestamp.h loc=31 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_interval.h loc=40 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_error.h loc=18 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes.h loc=17 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlda.h loc=18 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlda-native.h loc=43 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlda-compat.h loc=47 priority=M
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/datetime.h loc=14 priority=L
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/decimal.h loc=13 priority=L
+[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpg-pthread-win32.h loc=49 priority=M
+
+## Next-up (for the next cloud run — src/test/modules, then src/test/regress)
+
+> ecpg is now FULLY drained (ecpglib + pgtypeslib + compatlib + preproc +
+> include all covered). `ecpg_config.h.in` is a build template (not a `.h`)
+> and the bison/flex grammar inputs are generated → intentionally not
+> per-file documented. Next priority-M cluster per the A23 close-gap plan:
+> **src/test/modules** (~60 real C test modules — injection_points,
+> test_oat_hooks, test_decoding, test_shm_mq, worker_spi, delay_execution,
+> etc.; each has cite-worthy invariants and several are referenced by the
+> calibration gap-catalog, e.g. injection_points). Then src/test/regress C
+> helpers (regress.c, etc.). Recompute the genuine gap from the GitHub tree
+> at the current anchor before refilling — the per-subdir 0% rows in
+> coverage-gaps.md remain unreliable.
