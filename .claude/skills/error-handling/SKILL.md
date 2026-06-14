@@ -1,6 +1,13 @@
 ---
 name: error-handling
 description: PostgreSQL backend error-reporting idioms — ereport vs elog, picking SQLSTATE from errcodes.txt, errcode_for_file_access, errmsg/errdetail/errhint capitalisation rules, soft errors via escontext, PG_TRY/PG_CATCH longjmp-safe cleanup, DEBUG/LOG/NOTICE/WARNING/ERROR/FATAL/PANIC levels. Use whenever writing, editing, or reviewing C in source/src/backend that reports errors or logs messages. Do NOT trigger on Python try/except, Go error returns, Rust Result, C++ exceptions, Java checked exceptions, Sentry/pino logging, or Oracle/MySQL error codes.
+when_to_load: Add or review a backend `ereport` / `elog`; pick a SQLSTATE; use soft errors via `escontext`; write `PG_TRY` / `PG_CATCH` cleanup; pick elevel (DEBUG / LOG / NOTICE / WARNING / ERROR / FATAL / PANIC).
+companion_skills:
+  - memory-contexts
+  - coding-style
+  - debugging
+  - locking
+  - wal-and-xlog
 ---
 
 # Error handling — actionable rules
@@ -133,3 +140,13 @@ Reference live examples by grepping similar paths:
 - `src/backend/access/heap/heapam.c` for access-method internal errors.
 - `src/backend/utils/cache/lsyscache.c` for `elog(ERROR, "cache lookup failed ...")`.
 - `src/pl/plpgsql/src/pl_exec.c` for non-trivial `PG_TRY`/`PG_CATCH`.
+
+## Cross-references
+
+- `.claude/skills/memory-contexts/SKILL.md` — `AbortTransaction` releases per-query contexts after `ereport(ERROR)`; `PG_TRY` + `volatile` discipline.
+- `.claude/skills/coding-style/SKILL.md` — error-message style guide (lowercase `errmsg`, complete-sentence `errdetail`/`errhint`).
+- `.claude/skills/debugging/SKILL.md` — `errfinish` breakpoint to trap any `ereport`/`elog`; `\errverbose` from psql.
+- `.claude/skills/locking/SKILL.md` — spinlock + error-safety: spinlocks NOT released on error; LWLocks ARE.
+- `.claude/skills/wal-and-xlog/SKILL.md` — redo functions must `ereport(PANIC)`, never `ereport(ERROR)` (no rollback during replay).
+- `knowledge/idioms/error-handling.md` — long-form idiom doc.
+- `source/src/include/utils/errcodes.txt` — canonical SQLSTATE list.

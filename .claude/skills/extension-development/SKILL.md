@@ -1,6 +1,14 @@
 ---
 name: extension-development
 description: Operational checklist for building a PostgreSQL backend loadable extension (.so / contrib module) — .control file, foo--1.0.sql install + foo--1.0--1.1.sql upgrade scripts, PGXS vs meson build, `_PG_init`, shared_preload_libraries, chained hook installation (ProcessUtility_hook, planner_hook, ExecutorStart_hook), trusted vs untrusted, CREATE EXTENSION. Use whenever the user is writing a Postgres extension, adding a contrib module, exposing a C function as SQL, or installing a backend hook. Do NOT trigger for VS Code / Chrome / Firefox / browser extensions.
+when_to_load: Build a contrib / external extension; write `.control` + install + upgrade SQL; layer extension hooks; pick PGXS vs meson; understand trusted-vs-untrusted policy.
+companion_skills:
+  - fmgr-and-spi
+  - gucs-config
+  - bgworker-and-extensions
+  - catalog-conventions
+  - testing
+  - coding-style
 ---
 
 # Building a PostgreSQL extension
@@ -405,3 +413,13 @@ skill writes; don't edit the registry directly here):
 | src/include/fmgr.h | 2026-06-01 | (current master) | read | extension-development skill | same | _PG_init decl + PG_MODULE_MAGIC[_EXT] macros |
 | src/include/utils/guc.h | 2026-06-01 | (current master) | read | extension-development skill | same | DefineCustomXxxVariable + MarkGUCPrefixReserved signatures |
 ```
+
+## Cross-references
+
+- `.claude/skills/fmgr-and-spi/SKILL.md` — the `Datum foo(PG_FUNCTION_ARGS)` entry points this skill's extensions expose.
+- `.claude/skills/gucs-config/SKILL.md` — custom GUCs in `_PG_init`; `MarkGUCPrefixReserved`.
+- `.claude/skills/bgworker-and-extensions/SKILL.md` — `RegisterBackgroundWorker` from `_PG_init`; hook-chaining pattern.
+- `.claude/skills/catalog-conventions/SKILL.md` — for extensions that ship `pg_proc.dat` / `pg_operator.dat` entries.
+- `.claude/skills/testing/SKILL.md` — regress / TAP for contrib extensions; `t/` directory layout.
+- `.claude/skills/coding-style/SKILL.md` — `PG_MODULE_MAGIC` / `PG_MODULE_MAGIC_EXT`, header rules for extensions.
+- `knowledge/conventions/extension-layout.md` — long-form `.control` / install / upgrade reference.

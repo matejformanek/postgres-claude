@@ -1,6 +1,13 @@
 ---
 name: memory-contexts
 description: PostgreSQL backend palloc / MemoryContext idioms — picking the right context (CurrentMemoryContext, TopMemoryContext, per-query, per-tuple, ExecutorState), MemoryContextSwitchTo discipline, palloc/palloc0/pstrdup/psprintf, OOM-throws-ereport contract, pfree vs MemoryContextReset, AllocSet vs Slab vs Generation vs Bump context types, leak scoping in long-running backends. Use when writing or editing C in src/backend that allocates memory or creates contexts. Do NOT trigger on plain malloc/jemalloc, JVM/Go GC tuning, Rust Box/Rc, shared_buffers tuning, or valgrind on non-PG programs.
+when_to_load: Allocate memory in backend C (palloc/palloc0/MemoryContextAlloc); create or switch a `MemoryContext`; pick AllocSet vs Slab vs Generation vs Bump; debug a context-shaped leak.
+companion_skills:
+  - error-handling
+  - debugging
+  - coding-style
+  - executor-and-planner
+  - fmgr-and-spi
 ---
 
 # Memory contexts — actionable rules
@@ -165,3 +172,12 @@ Pick a non-default context type when the allocation pattern fits:
   `CacheMemoryContext`.
 - `src/backend/utils/mmgr/mcxt.c` — type-independent operations.
 - `src/backend/utils/mmgr/README` — the canonical design discussion.
+
+## Cross-references
+
+- `.claude/skills/error-handling/SKILL.md` — OOM-throws-ereport contract; `AbortTransaction` releases per-query contexts; `PG_TRY` / `volatile` rules.
+- `.claude/skills/debugging/SKILL.md` — `pg_backend_memory_contexts`, `pg_log_backend_memory_contexts(pid)`, `MemoryContextStats(TopMemoryContext)` from the debugger.
+- `.claude/skills/executor-and-planner/SKILL.md` — `es_query_cxt`, `ExprContext`, per-tuple contexts in plan nodes.
+- `.claude/skills/fmgr-and-spi/SKILL.md` — `MultiCallMemoryCtx` for SRFs; `fcinfo->flinfo->fn_mcxt`.
+- `.claude/skills/coding-style/SKILL.md` — `palloc` vs raw `malloc` rule; `pstrdup`, `psprintf` conventions.
+- `knowledge/idioms/memory-contexts.md` — long-form idiom doc.

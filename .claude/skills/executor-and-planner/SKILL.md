@@ -1,6 +1,14 @@
 ---
 name: executor-and-planner
 description: Operational checklist for hacking the PostgreSQL executor (src/backend/executor/, nodeXxx.c, ExecInitNode/ExecProcNode/ExecEndNode/ExecReScan dispatch, PlanState lifecycle, EXPLAIN wiring) and planner/optimizer (src/backend/optimizer/, Path → Plan via createplan.c, RelOptInfo lifecycle, add_path cost-dominance pruning, cost_* units in cost.h). Use proactively when editing plan-node execution, path enumeration, costing, or join paths. Do NOT trigger for end-user query tuning, EXPLAIN ANALYZE of a prod query, work_mem/shared_buffers tuning, or non-PG query engines (MySQL/Mongo/BigQuery).
+when_to_load: Edit a plan-node executor; add a new Path or Plan type; change cost-model fields in `cost.h`; add EXPLAIN output for a new node; plumb a node into `execParallel.c`.
+companion_skills:
+  - parser-and-nodes
+  - access-method-apis
+  - parallel-query
+  - memory-contexts
+  - locking
+  - testing
 ---
 
 # Executor & Planner — operational
@@ -330,3 +338,14 @@ shares the single `PlannerGlobal` (`glob`) so things like `paramExecTypes`,
 - `source/src/backend/optimizer/plan/createplan.c:339-410, 2755+` —
   `create_plan`, `create_seqscan_plan`.
 - `source/src/include/nodes/pathnodes.h:1009-2015` — `RelOptInfo`, `Path`.
+
+## Cross-references
+
+- `.claude/skills/parser-and-nodes/SKILL.md` — upstream of this skill: Query tree → Plan tree pipeline; node-tag conventions; mutators / walkers.
+- `.claude/skills/access-method-apis/SKILL.md` — `amcostestimate` interaction with the planner; `IndexAmRoutine`/`TableAmRoutine` callback shape for new AMs.
+- `.claude/skills/parallel-query/SKILL.md` — per-node parallel hooks (`ExecXXXInitializeDSM` / `ExecXXXInitializeWorker`); Gather / GatherMerge.
+- `.claude/skills/memory-contexts/SKILL.md` — per-query / per-tuple contexts; `es_query_cxt`; `ExprContext`.
+- `.claude/skills/locking/SKILL.md` — buffer-pin / content-lock rules for executor scan nodes.
+- `.claude/skills/testing/SKILL.md` — `EXPLAIN (COSTS OFF)` for portable test output; isolation specs for concurrency.
+- `knowledge/architecture/executor.md`, `knowledge/architecture/planner.md` — long-form architecture.
+- `knowledge/subsystems/optimizer.md`, `knowledge/subsystems/executor.md` — deep-dive corpus docs.

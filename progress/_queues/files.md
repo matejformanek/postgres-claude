@@ -472,3 +472,48 @@ the default is "directory-doc coverage".
 > bison/flex .y/.l files are generated so skip those, document the .c
 > helpers). Then the include/ headers as a cheap header batch. After ecpg:
 > src/test/modules (~60, priority M).
+
+## src/interfaces/ecpg/preproc — the ECPG preprocessor/compiler (cloud/pg-file-backfiller, 2026-06-13)
+
+> Queue was fully drained (0 pending) at run start. Refilled per the
+> refill rule from the priority-H `src/interfaces/ecpg` remainder
+> (A23 close-gap; the runtime libraries landed 2026-06-12). This run
+> takes the **preproc compiler** (the `ecpg` binary that translates
+> embedded-SQL `.pgc` → `.c`): the 9 .c helpers named in the prior
+> next-up note + `ecpg_keywords.c` + the 4 declaration/kwlist headers
+> = 14 files. The flex scanner `pgc.l`, the bison grammar pieces
+> (`ecpg.addons`/`.header`/`.trailer`/`.tokens`/`.type`) and `parse.pl`
+> are generated/grammar-fragment inputs → NOT per-file documented.
+> Load `parser-and-nodes`. Anchor e18b0cb7344.
+
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/ecpg.c loc=470 priority=H
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/type.c loc=700 priority=H
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/variable.c loc=560 priority=H
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/descriptor.c loc=290 priority=H
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/parser.c loc=250 priority=H
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/output.c loc=190 priority=M
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/util.c loc=190 priority=M
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/type.h loc=190 priority=M
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/preproc_extern.h loc=170 priority=M
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/c_keywords.c loc=55 priority=M
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/c_kwlist.h loc=55 priority=L
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/ecpg_keywords.c loc=45 priority=M
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/ecpg_kwlist.h loc=70 priority=L
+[done:cloud-2026-06-13] src/interfaces/ecpg/preproc/keywords.c loc=40 priority=M
+
+## Next-up (for the next cloud run — ecpg include/ headers, then src/test)
+
+> preproc compiler DONE 2026-06-13 (14 files: 9 .c + ecpg_keywords.c + 4
+> headers). The flex `pgc.l`, the bison grammar fragments
+> (`ecpg.addons/.header/.trailer/.tokens/.type`) and `parse.pl` are
+> generated/grammar inputs → intentionally NOT per-file documented.
+> **ecpg now: ecpglib + pgtypeslib + compatlib + preproc all covered;
+> only `src/interfaces/ecpg/include/` remains** (19 installed headers:
+> ecpglib.h, ecpgtype.h, sqlca.h, sqlda-compat.h, sqlda-native.h,
+> sql3types.h, ecpgerrno.h, pgtypes_*.h, etc.). Take `include/` next as
+> a cheap header batch (load no special skill; they're API-surface
+> headers declaring the structs/codes the just-documented .c files emit).
+> After ecpg fully drained: **src/test/modules** (~60 C modules —
+> injection_points, test_oat_hooks, test_decoding, etc., priority M),
+> then src/test/regress C helpers. Recompute the genuine gap from the
+> GitHub tree at the current anchor before refilling.

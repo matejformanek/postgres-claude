@@ -1,6 +1,13 @@
 ---
 name: coding-style
 description: PostgreSQL C coding-style rulebook for src/backend and src/include — hard tabs width 4, BSD braces, postgres.h-first include order, C99 subset (no //, no VLA, no mid-block decls), naming conventions, function-header comment format, line-length, pgindent expectations. Use whenever editing, adding, or reviewing .c/.h under source/src/ or dev/src/, or when a reviewer flags pgindent churn on a PG patch. Do NOT trigger on Linux-kernel style, clang-format/rustfmt/prettier/black configs, or non-PG C/C++/Java/JS style questions.
+when_to_load: Edit, add, or review C under source/src/ or dev/src/; a reviewer flagged pgindent churn; you added a new typedef or named a function the same as a typedef.
+companion_skills:
+  - error-handling
+  - memory-contexts
+  - commit-message-style
+  - patch-submission
+  - build-and-run
 ---
 
 # PostgreSQL coding-style — operational rules
@@ -216,10 +223,11 @@ functions, parenthesized vs un-parenthesized `ereport` aux calls, etc.),
 match the file you are editing. Consistency *within* a file matters more
 than picking the globally "right" answer.
 
-## See also
+## Cross-references
 
-- Long-form rationale and citations: `knowledge/conventions/coding-style.md`
-- Error-handling deep-dive: `.claude/skills/error-handling/SKILL.md` (when written)
-- Memory contexts: `.claude/skills/memory-contexts/SKILL.md` (when written)
-- Patch submission flow: `.claude/skills/patch-submission/SKILL.md` (when written)
-- Build & run: `.claude/skills/build-and-run/SKILL.md`
+- `knowledge/conventions/coding-style.md` — long-form rationale and citations.
+- `.claude/skills/error-handling/SKILL.md` — `ereport`/`elog` rule (§5) deep-dive.
+- `.claude/skills/memory-contexts/SKILL.md` — `palloc` vs `malloc` rule (§4) deep-dive.
+- `.claude/skills/patch-submission/SKILL.md` — pgindent + check-world before submission.
+- `.claude/skills/commit-message-style/SKILL.md` — upstream-style commit message for the diff that comes out of this skill.
+- `.claude/skills/build-and-run/SKILL.md` — running `headerscheck` / `cpluspluscheck` under the dev build.

@@ -1,7 +1,9 @@
 # Background workers & parallel query — long-form
 
 Conceptual reference for the postmaster-managed worker subsystems. For the
-procedural cookbook see `.claude/skills/gucs-bgworker-parallel/SKILL.md`.
+procedural cookbook see `.claude/skills/bgworker-and-extensions/SKILL.md`
+(background workers + extension hooks) and
+`.claude/skills/parallel-query/SKILL.md` (parallel query infrastructure).
 
 ## Three kinds of "extra processes"
 

@@ -1,6 +1,12 @@
 ---
 name: build-and-run
 description: How to configure, build, and run PostgreSQL from source in the `dev/` clone for backend hacking — meson setup (PG >= 16 default) with cassert and debug flags, autoconf ./configure fallback, ninja install, initdb + pg_ctl start/stop, PGDATA/PATH wiring, single-user mode for startup debugging, attaching gdb/lldb under the per-connection fork model, -O0 -g3 builds. Use whenever the task involves actually compiling, installing, initdb-ing, starting, or attaching a debugger to a Postgres backend built from source. Skip brew/apt/Docker install, generic CMake, or kernel builds.
+when_to_load: Compile, install, initdb, start/stop, or wire PATH/PGDATA for the dev cluster; build the ASan profile; pick which build profile for a symptom.
+companion_skills:
+  - debugging
+  - psql
+  - testing
+  - error-handling
 ---
 
 # build-and-run
@@ -283,3 +289,12 @@ alongside any filtered suite selection.
 - Default extension SQL: `dev/install-debug/share/extension/`
 - Per-cluster data: `dev/data-debug/` (created by `initdb`)
 - Server log: `dev/data-debug/server.log`
+
+## Cross-references
+
+- `.claude/skills/debugging/SKILL.md` — attach lldb/gdb to a backend after this skill gets the cluster up.
+- `.claude/skills/psql/SKILL.md` — connect to the cluster this skill started.
+- `.claude/skills/testing/SKILL.md` — run pg_regress / isolation / TAP against this build.
+- `.claude/skills/error-handling/SKILL.md` — interpret `Assert()` triggers and `ereport()` output produced by a cassert build.
+- `.claude/commands/setup-pg.md`, `.claude/commands/pg-start.md`, `.claude/commands/pg-restart.md`, `.claude/commands/pg-fresh.md` — slash-command wrappers built on top of this skill.
+- Top-level `CLAUDE.md` — `source/` vs `dev/` symlink layout.
