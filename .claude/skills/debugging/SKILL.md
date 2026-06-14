@@ -1,6 +1,13 @@
 ---
 name: debugging
 description: Debug a running PostgreSQL backend — lldb/gdb attach to the right forked backend via pg_backend_pid, single-user mode for postmaster/InitPostgres startup paths, breakpoints in ExecInitNode/heap_update/LWLockAcquire, elog(LOG,...) instrumentation, macOS core dumps, and SQL-level inspection via pg_buffercache / pageinspect / pg_visibility. Use proactively whenever the user wants to step through backend C code, attach to a backend, chase a SIGSEGV/hang in PG, or inspect shared state at runtime. Do NOT trigger for app-level debugging in Node/Python/Go or for tuning a production PG instance.
+when_to_load: Step through, attach to, or instrument a live PG backend; chase a SIGSEGV / hang / leak; inspect shared state without a debugger.
+companion_skills:
+  - build-and-run
+  - psql
+  - locking
+  - error-handling
+  - memory-contexts
 ---
 
 # debugging
@@ -453,3 +460,12 @@ When something is wrong, in order:
    `pg_stat_activity` before reaching for the debugger.
 6. If it crashed, check `/cores/core.<pid>` and open it with lldb.
 7. If it's a memory bug (UAF, OOB, leak), pick the right tool from §11.4.
+
+## Cross-references
+
+- `.claude/skills/build-and-run/SKILL.md` — get a debug+cassert build before debugging anything; ASan profile lives here.
+- `.claude/skills/psql/SKILL.md` — held-PID handoff (`PGAPPNAME=hold` + `pg_sleep`), `pg_backend_memory_contexts`, `\errverbose` from the SQL side.
+- `.claude/skills/locking/SKILL.md` — interpret `pg_locks` / `wait_event` output once §10 surfaces the contention.
+- `.claude/skills/error-handling/SKILL.md` — `errfinish` + `elevel` numbering + `ereport` macro structure (§5.1, §7).
+- `.claude/skills/memory-contexts/SKILL.md` — what `pg_backend_memory_contexts` shows and how to read it (§11.1).
+- `.claude/commands/pg-attach.md`, `.claude/commands/pg-tail-log.md` — slash-command wrappers built on top of this skill.

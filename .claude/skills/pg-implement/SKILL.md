@@ -1,6 +1,17 @@
 ---
 name: pg-implement
 description: Phase 3 of the PostgreSQL planner suite — executes a `planning/<slug>/plan.md` produced by `pg-feature-plan` phase-by-phase, with per-phase commits, per-phase test runs, plan-linked commit messages, and a running notes log. Enforces the strict rules in `.claude/rules/pg-implement-discipline.md`: every commit references the plan slug + phase number; every code claim has a file:line cite; phase-end check must pass before the next phase starts. Use when the user says "/pg-implement <slug>", "implement the plan", "let's start implementing the X plan", or has a `planning/<slug>/plan.md` ready to execute. Do NOT trigger for ad-hoc coding (no plan), for non-PG implementation, or for the generic `/implement` flow (which is multi-project and does not enforce the PG rules).
+when_to_load: Execute a planning/<slug>/plan.md phase-by-phase; enforce R1–R12 discipline rules; per-phase commits, tests, notes.md appends in dev/.
+companion_skills:
+  - pg-feature-plan
+  - pg-feature-brainstorm
+  - commit-message-style
+  - meta-commit-style
+  - build-and-run
+  - testing
+  - patch-submission
+  - review-checklist
+  - memory-keeping
 ---
 
 # pg-implement — Phase 3 of the PG planner suite
@@ -227,3 +238,17 @@ defer to follow-up, abandon phase), ask. Don't push through.
 - Working log: `planning/<slug>/notes.md` (in `postgres-claude/`).
 - Plan-linked commits: the `Plan:` trailer is the link from commit
   back to plan.
+
+## Cross-references
+
+- `.claude/rules/pg-implement-discipline.md` — **the binding constitution.** This skill is the procedure; the rules are the invariants. R1–R12 win wherever they disagree with this skill.
+- `.claude/skills/pg-feature-plan/SKILL.md` — Phase 2 upstream. If scope shifts, escalate back; don't reshape the plan mid-implementation.
+- `.claude/skills/pg-feature-brainstorm/SKILL.md` — Phase 1 read for context, not procedure.
+- `.claude/skills/commit-message-style/SKILL.md` — per-phase commit format (upstream PG style; no `Co-Authored-By` because these commits may go upstream).
+- `.claude/skills/meta-commit-style/SKILL.md` — used for the *separate* meta-repo commit if implementation surfaces a corpus gap (R10 two-repo separation).
+- `.claude/skills/build-and-run/SKILL.md` — dev-loop fundamentals (`ninja install`, `/pg-restart`, build profiles).
+- `.claude/skills/testing/SKILL.md` — pick the right test flavor for each phase's phase-end check.
+- `.claude/skills/patch-submission/SKILL.md` — invoked at end-of-implementation if upstream-bound.
+- `.claude/skills/review-checklist/SKILL.md` — pre-submission gate (R12).
+- `.claude/skills/memory-keeping/SKILL.md` — end-of-implementation STATE.md update (R12 invokes this explicitly).
+- `.claude/commands/pg-implement.md` — slash-command wrapper.

@@ -2,7 +2,7 @@
 
 - **Source path:** `source/src/backend/utils/time/snapmgr.c`, `combocid.c`
 - **Header:** `source/src/include/utils/snapmgr.h`, `snapshot.h`
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `e18b0cb7344`
 - **Companion docs:** `knowledge/files/src/backend/utils/time/snapmgr.c.md`,
   `knowledge/idioms/error-handling.md` (snapshot ↔ ERROR cleanup),
   `knowledge/architecture/mvcc.md`
@@ -70,7 +70,7 @@ The pairing of steps 3 + 4 — `IsInProgress` BEFORE `DidCommit` — is critical
 `xact.c` records the pg_xact commit before clearing `MyProc->xid`. The
 reverse order can read pg_xact-committed but still-in-procarray, and
 decide "crashed". This is the rule documented at
-`heapam_visibility.c:177-191`. [verified-by-code]
+`heapam_visibility.c:13-35`. [verified-by-code]
 
 ## 4. Two registries, both ref-counted
 

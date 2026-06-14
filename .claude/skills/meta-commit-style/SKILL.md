@@ -1,6 +1,12 @@
 ---
 name: meta-commit-style
 description: Commit-message style for the postgres-claude META repo — knowledge corpus updates, skill/agent/command additions, planning artifacts, session logs, infra changes. Distinct from the upstream PG `commit-message-style` skill (which forbids Co-Authored-By and uses bare-imperative titles). The meta style uses `ft(scope):`/`hf(scope):`/`docs(scope):` prefix, a wrapped body, an optional `Plan:` trailer, and the global `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>` footer (per the user's global default). Use whenever drafting a commit message inside `postgres-claude/` (the meta repo) — not for commits inside `dev/` (the mutable PG clone) destined for upstream. Do NOT trigger for upstream PG patches, generic project commits, or Linux-kernel style.
+when_to_load: Draft a commit message inside postgres-claude (corpus, skill, planning, sessions, infra); a worktree branch off this repo about to land via PR.
+companion_skills:
+  - commit-message-style
+  - memory-keeping
+  - pg-implement
+  - pg-feature-plan
 ---
 
 # meta-commit-style — postgres-claude commit messages
@@ -206,3 +212,11 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 `/Users/matej/Work/postgres/postgres-claude/` — the meta repo. Both at
 top level and inside `.claude/worktrees/*` (which are still meta-repo
 worktrees, just on feature branches).
+
+## Cross-references
+
+- `.claude/skills/commit-message-style/SKILL.md` — the *other* style (upstream PG, dev/, no `Co-Authored-By`).
+- `.claude/skills/memory-keeping/SKILL.md` — pairs with this skill at session wrap; STATE.md updates land via this style.
+- `.claude/skills/pg-implement/SKILL.md` — invokes this for per-phase notes.md appends; pairs with `commit-message-style` for per-phase dev/ commits.
+- `.claude/skills/pg-feature-plan/SKILL.md` — planning artifacts (brainstorm.md, plan.md) land via this style.
+- `.claude/rules/pg-implement-discipline.md` — R10 (two-repo separation) is what makes this style necessary.

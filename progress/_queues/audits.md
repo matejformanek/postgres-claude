@@ -13,19 +13,6 @@ than the periodic 30-day refresh: process them first.
 
 ## Entries
 
-[pending] knowledge/data-structures/snapshot-lifecycle.md verified=never
-[pending] knowledge/architecture/overview.md verified=2026-06-04
-[pending] knowledge/architecture/mvcc.md verified=2026-06-04
-[pending] knowledge/architecture/wal.md verified=2026-06-04
-[pending] knowledge/architecture/executor.md verified=2026-06-04
-[pending] knowledge/architecture/planner.md verified=2026-06-04
-[pending] knowledge/architecture/query-lifecycle.md verified=2026-06-04
-[pending] knowledge/architecture/access-methods.md verified=2026-06-04
-[pending] knowledge/architecture/process-model.md verified=2026-06-04
-[pending] knowledge/architecture/replication.md verified=2026-06-07
-[pending] knowledge/subsystems/access-heap.md verified=2026-06-07
-[pending] knowledge/subsystems/access-transam.md verified=2026-06-07
-[pending] knowledge/subsystems/executor.md verified=2026-06-07
 [pending] knowledge/subsystems/optimizer.md verified=2026-06-07
 [pending] knowledge/subsystems/storage-buffer.md verified=2026-06-08
 [pending] knowledge/subsystems/storage-ipc.md verified=2026-06-08
@@ -52,3 +39,16 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/idioms/guc-variables.md verified=2026-06-12
 [pending] knowledge/data-structures/heap-tuple-layout.md verified=2026-06-12
 [pending] knowledge/data-structures/pgproc-fields.md verified=2026-06-12
+[pending] knowledge/architecture/mvcc.md verified=2026-06-13
+[pending] knowledge/architecture/wal.md verified=2026-06-13
+[pending] knowledge/architecture/planner.md verified=2026-06-13
+[pending] knowledge/architecture/query-lifecycle.md verified=2026-06-13
+[pending] knowledge/data-structures/snapshot-lifecycle.md verified=2026-06-13 [drift-fixed: heapam_visibility.c cite 177-191→13-35]
+[pending] knowledge/architecture/executor.md verified=2026-06-13 [drift-fixed: nodeModifyTable.c §8a cites +13 lines]
+[pending] knowledge/architecture/overview.md verified=2026-06-14
+[pending] knowledge/architecture/access-methods.md verified=2026-06-14
+[pending] knowledge/architecture/process-model.md verified=2026-06-14
+[pending] knowledge/architecture/replication.md verified=2026-06-14
+[pending] knowledge/subsystems/access-heap.md verified=2026-06-14
+[pending] knowledge/subsystems/access-transam.md verified=2026-06-14
+[pending] knowledge/subsystems/executor.md verified=2026-06-14 [drift-fixed: execExpr.c §3.1/§3.2 cites −20/−33 + phantom ExecInitExprWithContext removed; nodeModifyTable.c §9 cites −13]

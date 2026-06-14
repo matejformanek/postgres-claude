@@ -96,3 +96,29 @@ table of contents, exclude chapters whose slug already exists under
 [skipped:404-no-such-docs-slug] gin-implementation https://www.postgresql.org/docs/current/gin-implementation.html
 [skipped:404-no-such-docs-slug] gist-implementation https://www.postgresql.org/docs/current/gist-implementation.html
 [skipped:404-no-such-docs-slug] gin-extensibility https://www.postgresql.org/docs/current/gin-extensibility.html
+
+## Refill 2026-06-12 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked indexam.html §63 + wal.html §30 ToCs for the remaining dense internals-prose LEAF subsections not yet under docs-distilled/. The §63 indexam subsections (functions/scanning/locking/unique/cost) and the §30 WAL subsections (intro/reliability/async-commit/configuration) are the meatiest remaining internals chapters. Confirmed this run that the per-AM "extensibility"/"implementation" leaf slugs (gist-extensibility, spgist-extensibility, hash-implementation) are folded into their single-page parents in the current docs tree — all 404, matching prior gin/gist-implementation 404s; do not re-queue.)
+
+[done:3d79680] index-functions https://www.postgresql.org/docs/current/index-functions.html
+[done:3d79680] index-scanning https://www.postgresql.org/docs/current/index-scanning.html
+[done:3d79680] index-locking https://www.postgresql.org/docs/current/index-locking.html
+[done:3d79680] index-unique-checks https://www.postgresql.org/docs/current/index-unique-checks.html
+[done:3d79680] index-cost-estimation https://www.postgresql.org/docs/current/index-cost-estimation.html
+[done:3d79680] wal-intro https://www.postgresql.org/docs/current/wal-intro.html
+[done:3d79680] wal-reliability https://www.postgresql.org/docs/current/wal-reliability.html
+[done:3d79680] wal-async-commit https://www.postgresql.org/docs/current/wal-async-commit.html
+[done:3d79680] wal-configuration https://www.postgresql.org/docs/current/wal-configuration.html
+[skipped:404-no-such-docs-slug] gist-extensibility https://www.postgresql.org/docs/current/gist-extensibility.html
+[skipped:404-no-such-docs-slug] spgist-extensibility https://www.postgresql.org/docs/current/spgist-extensibility.html
+[skipped:404-no-such-docs-slug] hash-implementation https://www.postgresql.org/docs/current/hash-implementation.html
+
+## Refill 2026-06-13 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked the internals ToC for the two biggest UNcovered internals chapters: Logical Decoding §49 and SPI §47, plus the leaf C-ABI chapters for event triggers §40.4, archive modules §51.3, and replication origins §50. The logical-decoding family (concepts/output-plugin/streaming/synchronous) was a glaring gap — zero coverage despite being a top-tier internals subsystem. All 8 fetched clean, no 404s this run.)
+
+[done:becf948] logicaldecoding-explanation https://www.postgresql.org/docs/current/logicaldecoding-explanation.html
+[done:becf948] logicaldecoding-output-plugin https://www.postgresql.org/docs/current/logicaldecoding-output-plugin.html
+[done:becf948] logicaldecoding-streaming https://www.postgresql.org/docs/current/logicaldecoding-streaming.html
+[done:becf948] logicaldecoding-synchronous https://www.postgresql.org/docs/current/logicaldecoding-synchronous.html
+[done:becf948] spi https://www.postgresql.org/docs/current/spi.html
+[done:becf948] event-trigger-interface https://www.postgresql.org/docs/current/event-trigger-interface.html
+[done:becf948] archive-module-callbacks https://www.postgresql.org/docs/current/archive-module-callbacks.html
+[done:becf948] replication-origins https://www.postgresql.org/docs/current/replication-origins.html
