@@ -17,7 +17,9 @@ planet-postgres-aggregator into a single review-able PR.
 
 ## Inputs
 
-- pgsql-hackers archive: `https://www.postgresql.org/list/pgsql-hackers/since/<iso-24h-ago>`
+- pgsql-hackers archive: `https://www.postgresql.org/list/pgsql-hackers/since/<YYYYMMDDHHMM-24h-ago>`
+  (compact 12-digit timestamp, e.g. `202606110000` — the dashed ISO-date form
+  `.../since/2026-06-11` returns **HTTP 404**; verified 2026-06-12)
 - CommitFest page for current cycle: `https://commitfest.postgresql.org/`
   (follow the link to the open cycle; persist the cycle slug between runs in
   `progress/cloud-routines/pg-community-pulse/_cf-cycle.txt` for stable
