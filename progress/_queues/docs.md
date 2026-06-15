@@ -122,3 +122,16 @@ table of contents, exclude chapters whose slug already exists under
 [done:becf948] event-trigger-interface https://www.postgresql.org/docs/current/event-trigger-interface.html
 [done:becf948] archive-module-callbacks https://www.postgresql.org/docs/current/archive-module-callbacks.html
 [done:becf948] replication-origins https://www.postgresql.org/docs/current/replication-origins.html
+
+## Refill 2026-06-14 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked internals.html ToC §51-§70. Biggest UNcovered chapter is Transaction Processing §67 — all four leaf sections (transaction-id/xact-locking/subxacts/two-phase) had ZERO coverage despite being a top-tier internals topic with deep corpus backing (transam/lmgr file docs + snapshot/proc data-structures). Also picked the densest remaining leaves: ereport internals §55.2, logical-rep wire formats §54.9, the two BKI catalog-declaration chapters §68.1/§68.2, the rule-system overview §51.4, and miscellaneous coding conventions §55.4. Catalog/view per-object reference pages (§52/§53) excluded as reference, not internals prose.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-14] transaction-id https://www.postgresql.org/docs/current/transaction-id.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] xact-locking https://www.postgresql.org/docs/current/xact-locking.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] subxacts https://www.postgresql.org/docs/current/subxacts.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] two-phase https://www.postgresql.org/docs/current/two-phase.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] error-message-reporting https://www.postgresql.org/docs/current/error-message-reporting.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] protocol-logicalrep-message-formats https://www.postgresql.org/docs/current/protocol-logicalrep-message-formats.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] system-catalog-declarations https://www.postgresql.org/docs/current/system-catalog-declarations.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] system-catalog-initial-data https://www.postgresql.org/docs/current/system-catalog-initial-data.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] rule-system https://www.postgresql.org/docs/current/rule-system.html
+[in-progress:cloud/pg-docs-miner/2026-06-14] source-conventions https://www.postgresql.org/docs/current/source-conventions.html
