@@ -5,6 +5,7 @@ when_to_load: Mailing-grade review of someone else's CF patch / GitHub PR / `.pa
 companion_skills:
   - review-checklist
   - patch-submission
+  - pg-feature-plan
   - commit-message-style
   - coding-style
   - testing

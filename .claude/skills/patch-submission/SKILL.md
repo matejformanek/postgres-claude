@@ -5,6 +5,8 @@ when_to_load: Format-patch + cover letter + CF registration for a PG patch about
 companion_skills:
   - pg-patch-review
   - review-checklist
+  - pg-feature-plan
+  - pg-implement
   - commit-message-style
   - coding-style
   - testing
