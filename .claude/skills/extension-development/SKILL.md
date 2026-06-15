@@ -6,6 +6,7 @@ companion_skills:
   - fmgr-and-spi
   - gucs-config
   - bgworker-and-extensions
+  - access-method-apis
   - catalog-conventions
   - testing
   - coding-style

@@ -5,6 +5,8 @@ when_to_load: Review a PG patch (others' or own) using the seven-phase scaffold;
 companion_skills:
   - pg-patch-review
   - patch-submission
+  - pg-feature-plan
+  - pg-implement
   - commit-message-style
   - coding-style
   - testing

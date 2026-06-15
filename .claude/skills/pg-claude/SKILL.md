@@ -1,6 +1,14 @@
 ---
 name: pg-claude
 description: Route any PostgreSQL backend-hacking task through the pg-claude meta repo's skill / slash-command / knowledge map — master index cataloguing every pg-claude skill, every slash command, and the knowledge/ corpus layout (subsystems, idioms, data-structures). Use proactively as the first-touch routing skill whenever the task is PG backend work: building from source, debugging a backend, writing C in src/backend, adding a GUC / index AM / table AM / access method, hacking the executor or planner, adding a SQL keyword, preparing a pgsql-hackers patch, reviewing a CommitFest entry, or any "where does X live in PG" navigation question. Skip for user-level SQL writing and tuning, autovacuum / shared_buffers / work_mem production DBA tuning, psycopg / pg8000 / node-postgres / pgx / JDBC / SQLAlchemy / Prisma / Django ORM client libraries, comparing PG distros (Aurora / Cloud SQL / Crunchy / Supabase / Neon), and SQL standard / ANSI compatibility questions.
+companion_skills:
+  - memory-keeping
+  - pg-feature-brainstorm
+  - pg-feature-plan
+  - pg-implement
+  - pg-patch-review
+  - build-and-run
+  - debugging
 ---
 
 # pg-claude — the master navigator
