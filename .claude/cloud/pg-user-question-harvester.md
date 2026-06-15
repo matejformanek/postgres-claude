@@ -29,7 +29,8 @@ tagged over many days are dead-code candidates.
   - `https://www.postgresql.org/list/pgsql-performance/` — performance/tuning Qs
   - `https://www.postgresql.org/list/pgsql-hackers/` — internals discussion
   Fetch each list page, follow into the current month (e.g.
-  `.../pgsql-general/<YYYY>/<MM>/`), and read recent thread subjects + opening
+  `.../pgsql-general/<YYYY>-<MM>/` — note the **hyphen**; the `<YYYY>/<MM>`
+  slash form returns 404), and read recent thread subjects + opening
   messages. Filter to the last 7 days and internals-flavored keywords: WAL,
   lock, MVCC, vacuum, planner, executor, buffer, replication, snapshot, xid.
 - Skill descriptions: lazy-load frontmatter `description:` field from each
