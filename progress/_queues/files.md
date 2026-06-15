@@ -532,25 +532,25 @@ the default is "directory-doc coverage".
 > covered** (ecpglib + pgtypeslib + compatlib + preproc + include).
 > Anchor e18b0cb7344.
 
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpglib.h loc=79 priority=H
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpgtype.h loc=109 priority=H
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlca.h loc=66 priority=H
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpgerrno.h loc=82 priority=H
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpg_informix.h loc=90 priority=H
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqltypes.h loc=59 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/sql3types.h loc=43 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_numeric.h loc=69 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_date.h loc=32 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_timestamp.h loc=31 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_interval.h loc=40 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes_error.h loc=18 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/pgtypes.h loc=17 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlda.h loc=18 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlda-native.h loc=43 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/sqlda-compat.h loc=47 priority=M
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/datetime.h loc=14 priority=L
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/decimal.h loc=13 priority=L
-[done:cloud-2026-06-14] src/interfaces/ecpg/include/ecpg-pthread-win32.h loc=49 priority=M
+[done:4f09318] src/interfaces/ecpg/include/ecpglib.h loc=79 priority=H
+[done:4f09318] src/interfaces/ecpg/include/ecpgtype.h loc=109 priority=H
+[done:4f09318] src/interfaces/ecpg/include/sqlca.h loc=66 priority=H
+[done:4f09318] src/interfaces/ecpg/include/ecpgerrno.h loc=82 priority=H
+[done:4f09318] src/interfaces/ecpg/include/ecpg_informix.h loc=90 priority=H
+[done:4f09318] src/interfaces/ecpg/include/sqltypes.h loc=59 priority=M
+[done:4f09318] src/interfaces/ecpg/include/sql3types.h loc=43 priority=M
+[done:4f09318] src/interfaces/ecpg/include/pgtypes_numeric.h loc=69 priority=M
+[done:4f09318] src/interfaces/ecpg/include/pgtypes_date.h loc=32 priority=M
+[done:4f09318] src/interfaces/ecpg/include/pgtypes_timestamp.h loc=31 priority=M
+[done:4f09318] src/interfaces/ecpg/include/pgtypes_interval.h loc=40 priority=M
+[done:4f09318] src/interfaces/ecpg/include/pgtypes_error.h loc=18 priority=M
+[done:4f09318] src/interfaces/ecpg/include/pgtypes.h loc=17 priority=M
+[done:4f09318] src/interfaces/ecpg/include/sqlda.h loc=18 priority=M
+[done:4f09318] src/interfaces/ecpg/include/sqlda-native.h loc=43 priority=M
+[done:4f09318] src/interfaces/ecpg/include/sqlda-compat.h loc=47 priority=M
+[done:4f09318] src/interfaces/ecpg/include/datetime.h loc=14 priority=L
+[done:4f09318] src/interfaces/ecpg/include/decimal.h loc=13 priority=L
+[done:4f09318] src/interfaces/ecpg/include/ecpg-pthread-win32.h loc=49 priority=M
 
 ## Next-up (for the next cloud run — src/test/modules, then src/test/regress)
 

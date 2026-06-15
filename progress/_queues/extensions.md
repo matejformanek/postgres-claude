@@ -77,10 +77,10 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 #   pg_query/pg_query_go (libpg_query — parser extracted as a standalone lib), ruby-pg (client),
 #   pg_shard (deprecated, superseded by citus), pg_embedding (ARCHIVED + ≈pgvector dup).
 # Backlog left [pending] for next runs: zhparser (858★ Chinese FTS parser), pg_pathman (587★ CustomScan partitioning), pg_crdt (646★ supabase CRDT), pg_lake (1546★ Snowflake-Labs Iceberg).
-[done:pending-merge] heterodb/pg-strom branch=master files=README.md,src/pg_strom.h,src/main.c,src/gpu_service.c,src/gpu_scan.c  # 1401★ C; GPU/NVMe-SSD CustomScan offload
-[done:pending-merge] pramsey/pgsql-http branch=master files=README.md,http.c,http.control  # 1581★ C; synchronous outbound HTTP via libcurl from a SQL function
-[done:pending-merge] pgroonga/pgroonga branch=main files=README.md,src/pgroonga.c,pgroonga.control  # 730★ C; index AM wrapping the local Groonga FTS engine
-[done:pending-merge] aws/pgactive branch=main files=README.md,src/pgactive.c,src/pgactive.h,pgactive.control  # 1103★ C; multi-master logical replication (BDR lineage)
+[done:c6dcede] heterodb/pg-strom branch=master files=README.md,src/pg_strom.h,src/main.c,src/gpu_service.c,src/gpu_scan.c  # 1401★ C; GPU/NVMe-SSD CustomScan offload
+[done:c6dcede] pramsey/pgsql-http branch=master files=README.md,http.c,http.control  # 1581★ C; synchronous outbound HTTP via libcurl from a SQL function
+[done:c6dcede] pgroonga/pgroonga branch=main files=README.md,src/pgroonga.c,pgroonga.control  # 730★ C; index AM wrapping the local Groonga FTS engine
+[done:c6dcede] aws/pgactive branch=main files=README.md,src/pgactive.c,src/pgactive.h,pgactive.control  # 1103★ C; multi-master logical replication (BDR lineage)
 [pending] zhparser/zhparser branch=master files=README.md,zhparser.c,zhprs_test.c,zhparser.control  # 858★ C; Chinese full-text search parser (SCWS) via the FTS parser API
 [pending] postgrespro/pg_pathman branch=master files=README.md,src/pg_pathman.c,src/include/pathman.h,pg_pathman.control  # 587★ C; partitioning via CustomScan (RuntimeAppend) + planner hooks
 [pending] supabase/pg_crdt branch=master files=README.md,src/crdt.c,crdt.control  # 646★ C; CRDT type support (experimental)
