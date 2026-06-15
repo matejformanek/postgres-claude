@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-06-15 — 12 hackers threads (index prefetching, LEFT/FULL→ANTI join, catalog_xmin split, JIT SIGILL on LLVM19, wal_log_hints-no-restart); CF59 intake resumes (517→522, +6 Needs review) but Committed frozen at 77 for 3rd snapshot; blog roundup 2 net-new + 5 catch-up (PR #300).
