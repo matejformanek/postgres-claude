@@ -565,3 +565,51 @@ the default is "directory-doc coverage".
 > helpers (regress.c, etc.). Recompute the genuine gap from the GitHub tree
 > at the current anchor before refilling — the per-subdir 0% rows in
 > coverage-gaps.md remain unreliable.
+
+## src/test/modules cluster (recomputed gap, 2026-06-15, cloud/pg-file-backfiller)
+
+> Queue was fully drained as of 2026-06-15. Recomputed the genuine gap by
+> listing the GitHub tree at anchor `b78cd2bda5b1a306e2877059011933de1d0fb735`
+> for `src/test/modules/` (60 `.c`/`.h` files) and diffing against
+> `knowledge/files/src/test/modules/` (0 covered). This run pops the
+> high-value subsystem-anchor cluster (injection-point framework, bgworker/SPI,
+> shm_mq, DSM/DSA/shmem, SLRU, custom WAL rmgr, dummy index AM, OAT security
+> hooks, SP-GiST opclass). LOC noted as observed line counts.
+
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/injection_points/injection_points.c loc=565 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/injection_points/injection_points.h loc=33 priority=M
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/injection_points/regress_injection.c loc=78 priority=M
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/delay_execution/delay_execution.c loc=96 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/worker_spi/worker_spi.c loc=450 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_shmem/test_shmem.c loc=85 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_dsm_registry/test_dsm_registry.c loc=110 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_dsa/test_dsa.c loc=120 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_shm_mq/setup.c loc=325 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_shm_mq/test.c loc=274 priority=M
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_shm_mq/worker.c loc=192 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_shm_mq/test_shm_mq.h loc=45 priority=M
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_slru/test_slru.c loc=257 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_slru/test_multixact.c loc=54 priority=M
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_custom_rmgrs/test_custom_rmgrs.c loc=140 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/dummy_index_am/dummy_index_am.c loc=353 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/test_oat_hooks/test_oat_hooks.c loc=517 priority=H
+[done:cloud/pg-file-backfiller/2026-06-15] src/test/modules/spgist_name_ops/spgist_name_ops.c loc=504 priority=H
+
+## src/test/modules remaining (uncovered, for future runs — gap at anchor b78cd2bda5)
+
+[pending] src/test/modules/test_aio/test_aio.c loc=1020 priority=H
+[pending] src/test/modules/test_radixtree/test_radixtree.c loc=350 priority=M
+[pending] src/test/modules/test_tidstore/test_tidstore.c loc=320 priority=H
+[pending] src/test/modules/test_resowner/test_resowner_basic.c loc=200 priority=M
+[pending] src/test/modules/test_resowner/test_resowner_many.c loc=290 priority=M
+[pending] src/test/modules/test_rls_hooks/test_rls_hooks.c loc=150 priority=M
+[pending] src/test/modules/plsample/plsample.c loc=330 priority=M
+[pending] src/test/modules/test_parser/test_parser.c loc=90 priority=M
+[pending] src/test/modules/test_ddl_deparse/test_ddl_deparse.c loc=270 priority=M
+[pending] src/test/modules/test_predtest/test_predtest.c loc=260 priority=M
+[pending] src/test/modules/test_custom_stats/test_custom_var_stats.c loc=690 priority=M
+[pending] src/test/modules/test_custom_stats/test_custom_fixed_stats.c loc=215 priority=M
+[pending] src/test/modules/test_plan_advice/test_plan_advice.c loc=135 priority=M
+[pending] src/test/modules/dummy_seclabel/dummy_seclabel.c loc=47 priority=M
+[pending] src/test/modules/test_copy_callbacks/test_copy_callbacks.c loc=41 priority=L
+[pending] src/test/modules/test_custom_types/test_custom_types.c loc=135 priority=L
