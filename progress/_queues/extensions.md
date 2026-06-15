@@ -68,3 +68,20 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 
 # Queue empty as of 2026-06-13 (5 entries processed this run: pg_jsonschema, index_advisor, pglite-fusion, temporal_tables, PgQue — the full 2026-06-12 refill backlog is now drained). knowledge/ideologies/ now holds 41 ext docs.
 # Refill rule: `topic:postgresql-extension stars:>500` is SATURATED (all hits covered). Broaden via `topic:postgres-extension`, `postgres extension language:C stars:>900`, `pg_ ... language:Rust stars:>900`, and name/desc queries (use the GitHub MCP search_repositories tool — gh CLI is absent in cloud). Filter to repos >500 stars not yet under knowledge/ideologies/, append as [pending]. Known-skipped (don't re-add): PolarDB (forked distro), pg_top (client binary), pgx_ulid (≈uuidv47 dup).
+
+# --- Refill (seeded 2026-06-14 cloud/pg-extension-anthropologist) ---
+# Both topic searches (`postgresql-extension`, `postgres-extension`) still SATURATED — all hits covered.
+# Broadened via `postgresql extension language:C stars:>700` (18 hits) + `pg_ in:name language:C stars:>500` (28 hits).
+# Filtered out standalone tools/libs (NOT loadable extensions diverging via the extension API):
+#   pgbouncer/pgagroal (connection-pooler daemons), pgbackrest/pgcopydb/pg_rman (backup/copy CLIs),
+#   pg_query/pg_query_go (libpg_query — parser extracted as a standalone lib), ruby-pg (client),
+#   pg_shard (deprecated, superseded by citus), pg_embedding (ARCHIVED + ≈pgvector dup).
+# Backlog left [pending] for next runs: zhparser (858★ Chinese FTS parser), pg_pathman (587★ CustomScan partitioning), pg_crdt (646★ supabase CRDT), pg_lake (1546★ Snowflake-Labs Iceberg).
+[done:pending-merge] heterodb/pg-strom branch=master files=README.md,src/pg_strom.h,src/main.c,src/gpu_service.c,src/gpu_scan.c  # 1401★ C; GPU/NVMe-SSD CustomScan offload
+[done:pending-merge] pramsey/pgsql-http branch=master files=README.md,http.c,http.control  # 1581★ C; synchronous outbound HTTP via libcurl from a SQL function
+[done:pending-merge] pgroonga/pgroonga branch=main files=README.md,src/pgroonga.c,pgroonga.control  # 730★ C; index AM wrapping the local Groonga FTS engine
+[done:pending-merge] aws/pgactive branch=main files=README.md,src/pgactive.c,src/pgactive.h,pgactive.control  # 1103★ C; multi-master logical replication (BDR lineage)
+[pending] zhparser/zhparser branch=master files=README.md,zhparser.c,zhprs_test.c,zhparser.control  # 858★ C; Chinese full-text search parser (SCWS) via the FTS parser API
+[pending] postgrespro/pg_pathman branch=master files=README.md,src/pg_pathman.c,src/include/pathman.h,pg_pathman.control  # 587★ C; partitioning via CustomScan (RuntimeAppend) + planner hooks
+[pending] supabase/pg_crdt branch=master files=README.md,src/crdt.c,crdt.control  # 646★ C; CRDT type support (experimental)
+[pending] Snowflake-Labs/pg_lake branch=main files=README.md  # 1546★ C; Postgres with Iceberg + data-lake access
