@@ -1,0 +1,1 @@
+**pg-quality-auditor** 2026-06-15 — AUDIT mode (SKILL+ISSUE queues empty → rotated): re-verified 8 long-form subsystem docs against anchor e18b0cb7344; fixed cite drift in optimizer.md (subselect.c +3) and partitioning.md (PartitionRangeBound + partition_hbound_cmp); 6 clean. Flagged SKILL-queue hygiene gap (10 unqueued skills + stale gucs-bgworker-parallel entry) (PR #PENDING).

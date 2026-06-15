@@ -13,14 +13,6 @@ than the periodic 30-day refresh: process them first.
 
 ## Entries
 
-[pending] knowledge/subsystems/optimizer.md verified=2026-06-07
-[pending] knowledge/subsystems/storage-buffer.md verified=2026-06-08
-[pending] knowledge/subsystems/storage-ipc.md verified=2026-06-08
-[pending] knowledge/subsystems/storage-lmgr.md verified=2026-06-08
-[pending] knowledge/subsystems/utils-cache.md verified=2026-06-08
-[pending] knowledge/subsystems/utils-mmgr.md verified=2026-06-08
-[pending] knowledge/subsystems/partitioning.md verified=2026-06-10
-[pending] knowledge/subsystems/jit.md verified=2026-06-10
 [pending] knowledge/subsystems/foreign.md verified=2026-06-10
 [pending] knowledge/subsystems/libpq-backend.md verified=2026-06-10
 [pending] knowledge/subsystems/headers-wave3.md verified=2026-06-10
@@ -52,6 +44,14 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/subsystems/access-heap.md verified=2026-06-14
 [pending] knowledge/subsystems/access-transam.md verified=2026-06-14
 [pending] knowledge/subsystems/executor.md verified=2026-06-14 [drift-fixed: execExpr.c §3.1/§3.2 cites −20/−33 + phantom ExecInitExprWithContext removed; nodeModifyTable.c §9 cites −13]
+[pending] knowledge/subsystems/storage-ipc.md verified=2026-06-15
+[pending] knowledge/subsystems/storage-lmgr.md verified=2026-06-15
+[pending] knowledge/subsystems/utils-cache.md verified=2026-06-15
+[pending] knowledge/subsystems/utils-mmgr.md verified=2026-06-15
+[pending] knowledge/subsystems/storage-buffer.md verified=2026-06-15
+[pending] knowledge/subsystems/jit.md verified=2026-06-15
+[pending] knowledge/subsystems/optimizer.md verified=2026-06-15 [drift-fixed: subselect.c SS_process_ctes 883→886, SS_process_sublinks 2206→2209]
+[pending] knowledge/subsystems/partitioning.md verified=2026-06-15 [drift-fixed: PartitionRangeBound 50-71→65-71, partition_hbound_cmp 3770-3778→3580-3588]
 
 ## anchor-bump (2026-06-14) — e18b0cb7344..da1eff08a5be (20 commits)
 
