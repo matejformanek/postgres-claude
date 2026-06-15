@@ -69,8 +69,8 @@ planner / standard_planner                  planner.c:333, 351
          remove_useless_result_rtes
          preprocess_targetlist          preptlist.c:65
          preprocess_aggrefs              prepagg.c:109
-         SS_process_ctes                 subselect.c:883
-         SS_process_sublinks (top-qual)  subselect.c:2206
+         SS_process_ctes                 subselect.c:886
+         SS_process_sublinks (top-qual)  subselect.c:2209
        └─ grouping_planner                planner.c:1775
             preprocess_minmax_aggregates  planagg.c:73
             ├─ query_planner (planmain.c:53)   ← canonical phase ordering
@@ -769,11 +769,11 @@ that wasn't pulled up. Recursion sites [via
   `set_subquery_pathlist` during `set_rel_size`.
 - **CTEs that weren't inlined** — multiply-referenced CTEs, recursive CTEs,
   CTEs with side effects, `MATERIALIZED` CTEs. Handled by `SS_process_ctes`
-  (`subselect.c:883`); decision recorded in `cte_plan_ids` (parallel to
+  (`subselect.c:886`); decision recorded in `cte_plan_ids` (parallel to
   `parse->cteList`, `-1 = no initplan`) for the rest of the planner to
   read. [from-comment `subselect.c:875-881`]
 - **SubLinks** — correlated EXISTS/IN/expression subqueries that couldn't
-  be flattened to joins by `SS_process_sublinks` (subselect.c:2206) become
+  be flattened to joins by `SS_process_sublinks` (subselect.c:2209) become
   `SubPlan` nodes, each recursively planning its body.
 
 Each recursive call gets its own `PlannerInfo` (own RelOptInfo array, own

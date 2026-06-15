@@ -110,7 +110,7 @@ plus the partition OIDs in bound order.
   (`last_found_datum_index`, `last_found_part_index`,
   `last_found_count` for streak detection on COPY/INSERT).
 - **`PartitionHashBound`** / **`PartitionListValue`** /
-  **`PartitionRangeBound`** (private to `partbounds.c:50-71`) —
+  **`PartitionRangeBound`** (private to `partbounds.c:65-71`) —
   qsort-time intermediate representations used while building the
   bound info from the parser's `PartitionBoundSpec **`.
 - **`PartClauseInfo`** (`partprune.c:63-72`). One partition-key
@@ -174,7 +174,7 @@ appropriate `partition_*_bsearch` in this file:
 `partbounds.c:3730-3763`
 - Searches `(modulus, remainder)` pairs using
   `partition_hbound_cmp` which sorts by modulus then remainder
-  ([verified-by-code] `partbounds.c:3770-3778`).
+  ([verified-by-code] `partbounds.c:3580-3588`).
 
 The single-slot cache in `PartitionDescData`
 (`last_found_*_index`/`last_found_count`) skips the bsearch when
