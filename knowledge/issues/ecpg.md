@@ -81,6 +81,10 @@ libraries (`ecpglib`, `pgtypeslib`, `compatlib`) and, later, the
 | 2026-06-13 | preproc/type.h:78 | style | nit | header named for the `ECPGtype` type model but bottom ~155 lines are an unrelated grab-bag of grammar-symbol structs (cursor, defines, descriptor, WHENEVER); long-standing layout, not a bug | open | knowledge/files/src/interfaces/ecpg/preproc/type.h.md §Potential issues |
 | 2026-06-13 | preproc/c_kwlist.h:23 | undocumented-invariant | nit | ASCII sort order required by `gen_keywordlist.pl` is not runtime-checked; out-of-order add without regenerating `c_kwlist_d.h` yields silent wrong lookups rather than a build error | open | knowledge/files/src/interfaces/ecpg/preproc/c_keywords.c.md §Potential issues |
 | 2026-06-13 | preproc/ecpg_kwlist.h:26 | doc-drift | nit | C-type keywords (`bool`/`long`/`short`/`signed`/`struct`/`unsigned`) appear in both `ecpg_kwlist.h` and `c_kwlist.h`; no runtime conflict (different lexer states) but adding a new C-type keyword means editing both lists | open | knowledge/files/src/interfaces/ecpg/preproc/ecpg_kwlist.h.md §Potential issues |
+| 2026-06-14 | include/ecpgtype.h:92 | undocumented-invariant | nit | `IS_SIMPLE_TYPE` is a range check `ECPGt_char..ECPGt_interval`; relies on those codes staying contiguous in the `ECPGttype` enum (ecpgtype.h:43-55). Inserting a non-simple code mid-range silently changes the predicate with no diagnostic | open | knowledge/files/src/interfaces/ecpg/include/ecpgtype.h.md §Potential issues |
+| 2026-06-14 | include/pgtypes_date.h:9 | portability | nit | public `date` (`typedef long`) and `interval.month` (`long`, pgtypes_interval.h:22) change width LP64 vs LLP64 (Win64), so the installed `date`/`interval` ABI size is platform-dependent | open | knowledge/files/src/interfaces/ecpg/include/pgtypes_date.h.md §Potential issues |
+| 2026-06-14 | include/sqlda-native.h:16 | undocumented-invariant | nit | client `NAMEDATALEN` hardcoded to 64; a server built with a larger `NAMEDATALEN` silently truncates identifier names placed into the native SQLDA `sqlname.data`, no error | open | knowledge/files/src/interfaces/ecpg/include/sqlda-native.h.md §Potential issues |
+| 2026-06-14 | include/ecpg-pthread-win32.h:38 | leak | nit | Win32 `pthread_key_create` macro drops its `destructor` argument (documented FIXME); per-thread cleanup registered via a key destructor never runs on Windows → potential per-thread leak at thread exit | open | knowledge/files/src/interfaces/ecpg/include/ecpg-pthread-win32.h.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 
@@ -122,3 +126,17 @@ libraries (`ecpglib`, `pgtypeslib`, `compatlib`) and, later, the
   The `output.c`/`util.c` "looks scary but safe" index-arithmetic and
   varargs notes were documented inline in their per-file docs but graded
   no-issue (not registered).
+- **2026-06-14 include/ headers sweep (cloud/pg-file-backfiller).** Added
+  4 rows for the 19 installed `src/interfaces/ecpg/include/` headers (the
+  public ABI surface: `ecpglib.h`, `sqlca.h`, `ecpgtype.h`, the `pgtypes_*`
+  family, the `sqlda*` selector + two layouts, the Informix shims). These
+  are nearly all `nit`-grade and *ABI-frozen* — they document fragility, not
+  fixable bugs: `ecpgtype.h:92` `IS_SIMPLE_TYPE` couples to enum order;
+  `pgtypes_date.h:9` / `pgtypes_interval.h:22` make `date`/`interval` size
+  platform-dependent (`long` width); `sqlda-native.h:16` hardcodes
+  `NAMEDATALEN 64`; `ecpg-pthread-win32.h:38` is the long-standing Win32
+  TLS-destructor FIXME. The headers also confirm Theme #1: `pgtypes_numeric.h`
+  is a client fork of backend NUMERIC (the `decimal` fixed `digits[DECSIZE=30]`
+  cap is the conversion-overflow surface paired with the runtime
+  `numeric.c:181` row). With include/ done, **ecpg is now fully covered**
+  (ecpglib + pgtypeslib + compatlib + preproc + include all documented).
