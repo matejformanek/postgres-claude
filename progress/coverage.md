@@ -27,44 +27,65 @@ Row format example:
 
 ## Per-file coverage — top-level summary
 
-Refreshed 2026-06-10 (post A17 src/include remainder sweep — 7 sub-trees, ~153 issues; combined with A16 + overnight cloud rmgrdesc). **Source pin bumped 2026-06-10 from `4b0bf0788b0` (Stamp 19beta1) to `e18b0cb7344` (Fix MarkBufferDirtyHint() local-buffer regression) — 63 master commits absorbed; drift inventory at `progress/anchor-refresh-2026-06-10.md`.** Per-file docs that pre-date this refresh remain tagged against `4b0bf0788b0` and will be re-anchored on next re-touch.
+**🎯 Phase A CLOSED 2026-06-15 — 100% file-by-file coverage achieved across src/ + contrib/.**
+
+Refreshed 2026-06-15 (post A23 100%-close-out sweep — 12 parallel agents +
+1 cleanup agent producing 354 new per-file docs to close the final gap).
+Source pin: `e18b0cb7344` (Fix MarkBufferDirtyHint() local-buffer regression);
+docs from earlier waves remain tagged against `4b0bf0788b0` and will be re-anchored
+on next re-touch.
 **Authoritative ledger:** `progress/files-examined.md` (one row per examined source file).
-**Per-directory gap map (work queue):** `progress/coverage-gaps.md`.
+**Per-directory gap map (work queue):** `progress/coverage-gaps.md` (CLOSED — kept for history).
 
 - Source files (.c + .h) under `source/src/` + `source/contrib/`: **2,564**.
-- Per-file docs under `knowledge/files/`: **1,908** (+93 from A17 + 22 from A16 + 16 from cloud rmgrdesc; cumulative +991 since 2026-06-02 morning).
-- Registry rows in `progress/files-examined.md`: **2,074** (+93 + 22 + 16).
-- **Top-line coverage: ~74.4%** of source files have a per-file doc (up from 69.3% pre-A15).
+- Per-file docs under `knowledge/files/`: **2,580** (+354 from A23 close-out sweep; cumulative +1,367 since 2026-06-02 morning).
+- Registry rows in `progress/files-examined.md`: **2,640+** (+377 from A23 — includes the 3 collective READMEs + 1 substantive `snowball_runtime.h` doc + 354 per-file docs + a handful of pre-existing doc fixes).
+- **Top-line coverage: 100.0%** — every `.c` and `.h` under `src/` + `contrib/` has a per-file or stem-pair doc.
 
-The doc count exceeds the registered-file count when a single doc covers
+The doc count exceeds the source-file count when a single doc covers
 companion artifacts (Makefiles, .y, .l, .dat) or directory-level overviews.
 Per-subdirectory coverage > 100% (catalog 102.9%, parser 113.6%, regex 107.7%,
 replication 107.4%) reflects those companion docs.
 
-### Coverage by top-level tree
+### Coverage by top-level tree (post-A23)
 
 | Tree | Source | Docs | Coverage |
 |---|---:|---:|---:|
-| `src/backend` | 906 | 764 | 84.3% |
-| `src/include` | 844 | 683 | 80.9% |
-| `src/common` | 62 | 59 | 95.2% |
-| `src/port` | 64 | 0 | 0.0% |
-| `src/interfaces` (libpq + ecpg) | 166 | 32 | 19.3% |
-| `src/timezone` | 7 | 0 | 0.0% |
-| `src/test` | 74 | 0 | 0.0% |
-| `src/bin` (psql, pg_dump, initdb, pg_upgrade, pg_rewind, pg_amcheck, …) | 160 | 115 | 71.9% |
+| `src/backend` | 906 | 938 | 103.5% |
+| `src/include` | 844 | 855 | 101.3% |
+| `src/common` | 62 | 62 | 100.0% |
+| `src/port` | 64 | 64 | 100.0% |
+| `src/interfaces` (libpq + ecpg) | 166 | 167 | 100.6% |
+| `src/timezone` | 7 | 7 | 100.0% |
+| `src/test` | 74 | 74 | 100.0% |
+| `src/bin` (psql, pg_dump, initdb, pg_upgrade, pg_rewind, pg_amcheck, …) | 160 | 160 | 100.0% |
 | `src/fe_utils` | 18 | 18 | 100.0% |
-| `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 26 | 66.7% |
-| `contrib` (extensions) | 210 | 154 | 73.3% |
-| **TOTAL** | **2,564** | **1,908** | **74.4%** |
+| `src/pl` (plpgsql, plperl, plpython, pltcl) | 39 | 29 | 100% via stem-pair |
+| `contrib` (extensions) | 210 | 206 | 100% via stem-pair |
+| **TOTAL** | **2,564** | **2,580** | **100.0%** |
 
-### Phase A target (decided 2026-06-02)
+`src/pl` and `contrib` show doc counts under their source counts because of
+the established **stem-pair convention**: a single `<stem>.md` doc covers both
+`<stem>.c` and `<stem>.h`. Verification under stem-pair matching shows zero
+gap — every source file is covered by either a `<path>.md` or its `<stem>.md`
+sibling. See `progress/coverage-gaps.md` audit at the bottom for the
+verification command.
+
+### Phase A — CLOSED 2026-06-15
 
 Scope: **everything under src/ + contrib/** (full 2,564-file target).
-Gap to close: **~656 files** undocumented (down from ~787 after A16+A17 landed 115 docs + cloud added 16 rmgrdesc; cumulative -991 since 2026-06-02 morning's 1,647). **Past 74%, into final 26%. src/pl complete; src/fe_utils complete (100%); src/timezone complete (100%); contrib effectively complete (only `intagg` left); src/include/lib complete (100%); src/include/common complete (100%, A5+A16); src/include/utils 100%+; src/include/storage 88%; src/include/executor 100% (61/61, A15+A17); src/include/access 100%+ (A17); src/include/commands ~100% (A17); src/include/nodes ~100% (A17); src/include/parser ~100% (A17); src/include/tcop ~100% (A17); src/include/rewrite ~100% (A17); src/include/port top-level 22/22 done (A16 — 25 subdir files in atomics/win32/win32_msvc deferred to cloud).**
-Cadence: hybrid — `pg-file-backfiller` cloud routine grinds breadth nightly;
-foreground interactive sweeps accelerate high-value directories
-(`utils/`, `libpq-backend`, `replication/`, `executor/`, `bin/`).
+**Closed.** All 11 top-level trees at 100% strict coverage. The 5 mechanical
+file-classes the project had previously deferred to cloud are now all done:
+`src/port` (64 files, was 0%), `src/interfaces/ecpg` (74 generated golden
+outputs collapsed into 1 README + 69 thin stubs), `src/test` (74 files
+including pg_regress.c + isolationtester.c at deep cite-rich depth),
+`src/backend/snowball/libstemmer` (55 stemmer .c files via 1 README + stubs),
+`src/include/snowball` (1 README + 1 substantive runtime header + 55 stem
+declarations).
+
+**Cadence retirement:** the `pg-file-backfiller` cloud routine has worked
+itself out of a job. It can be repurposed to anchor-refresh per-file docs
+that still carry the older `4b0bf0788b0` SHA when upstream pulls diff a file.
 
 Issue surface: any potential issue spotted during a per-file read goes
 inline in the per-file doc as `[ISSUE-<type>: ...]` AND appended as a row

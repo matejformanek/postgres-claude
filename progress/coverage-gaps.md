@@ -1,11 +1,48 @@
-# Coverage gaps — Phase A work queue
+# Coverage gaps — Phase A work queue — **CLOSED 2026-06-15**
 
-The per-directory undocumented-file map. This is the **work queue** the
-`pg-file-backfiller` cloud routine + foreground interactive sweeps pull
-from until Phase A closes (100% coverage of `src/` + `contrib/`).
+**🎯 Phase A closed at 100% file-by-file coverage of `src/` + `contrib/`.**
+This file is **retired**. Kept as historical record of the multi-week
+breadth-first sweep that closed the gap from ~74.4% to 100% in a single
+parallel-agent wave on 2026-06-15 (the A23 close-out sweep — 12 parallel
+agents + 1 cleanup, 354 new per-file docs + 3 collective READMEs).
 
-**Refreshed:** 2026-06-04 (post A11 src/fe_utils sweep). **Source pin bumped 2026-06-10: `4b0bf0788b0` → `e18b0cb7344` (63 commits absorbed, see `progress/anchor-refresh-2026-06-10.md`).**
-**Top-line:** ~1 451 / 2 564 docs (≈56.6% coverage). **Gap: ~1 113 files.**
+Verification recipe (re-run any time after an upstream pull):
+
+```bash
+cd /Users/matej/Work/postgres/postgres-claude
+SRC=source DOCS=knowledge/files
+for d in src/backend src/include src/common src/port src/interfaces \
+         src/timezone src/test src/bin src/pl src/fe_utils contrib; do
+  find "$SRC/$d" -type f \( -name '*.c' -o -name '*.h' \) | while read f; do
+    rel=${f#$SRC/}; stem="${rel%.*}"
+    [ ! -f "$DOCS/${rel}.md" ] && [ ! -f "$DOCS/${stem}.md" ] && echo "$rel"
+  done
+done | wc -l   # → 0 (zero missing)
+```
+
+Two file-naming conventions in use under `knowledge/files/<path>.md`:
+
+1. **Full-name** — `<path>.md` (e.g. `knowledge/files/src/port/getpeereid.c.md`)
+   covers one `.c` or `.h`. The default.
+2. **Stem-pair** — `<stem>.md` (e.g. `knowledge/files/contrib/pgcrypto/pgp.md`)
+   covers both `<stem>.c` and `<stem>.h` together. Used in `src/pl/*`,
+   `contrib/*`, and a few other places where the `.c`+`.h` pair is one
+   unit of documentation.
+
+The verification recipe above accepts either layout — coverage is the union
+of both. As of close-out, every `.c`/`.h` under `src/` + `contrib/` is
+satisfied by one of the two.
+
+---
+
+## Historical record (pre-close-out)
+
+The per-directory undocumented-file map below documented the work queue
+that the `pg-file-backfiller` cloud routine + foreground interactive sweeps
+pulled from over the course of June 2026.
+
+**Original (stale) snapshot:** 2026-06-04 (post A11 src/fe_utils sweep). **Source pin bumped 2026-06-10: `4b0bf0788b0` → `e18b0cb7344` (63 commits absorbed, see `progress/anchor-refresh-2026-06-10.md`).**
+**Original top-line:** ~1 451 / 2 564 docs (≈56.6% coverage). **Original gap: ~1 113 files.**
 (A9 plpgsql +8, A10 pl-other +18, A11 src/fe_utils +18 since the 54.9%
 snapshot below; the per-subdir tables below predate A9–A11 except where noted.)
 
