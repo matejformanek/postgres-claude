@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-16 — 36 internals questions harvested (all pgsql-hackers; general/perf thin), skill-tagged; recurring gaps wire-protocol, pgstat-io, +new virtual-generated-columns / autovacuum-scoring (PR #<pending>).
