@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-06-15 — glossary +156 entries (862→1018), all [verified-by-code]/[inferred] with provenance pointers into 79 distinct corpus docs; Pass 1 deferred (via-file backlink mechanism still ambiguous + flagged backlink corruption unresolved), Pass 3 no-op (recent file additions carry no new [ISSUE-*] tags) (PR #310).
