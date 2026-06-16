@@ -52,7 +52,10 @@ worker.bgw_restart_time = BGW_NEVER_RESTART;          /* or seconds */
 sprintf(worker.bgw_library_name,  "my_ext");          /* shared object name */
 sprintf(worker.bgw_function_name, "my_ext_main");
 worker.bgw_main_arg     = Int32GetDatum(i);
-/* bgw_extra: up to BGW_EXTRALEN bytes of arbitrary blob */
+/* bgw_extra: up to BGW_EXTRALEN bytes the launcher hands to the worker
+   as an opaque blob. worker_spi packs Oid dboid + Oid roleoid + uint32
+   flags here (worker_spi.c:470-475); worker_spi_main memcpy's them out
+   in its main function (worker_spi.c:152-157). */
 worker.bgw_notify_pid   = MyProcPid;                  /* 0 = no SIGUSR1 */
 
 RegisterBackgroundWorker(&worker);
@@ -134,6 +137,21 @@ my_ext_main(Datum main_arg)
 
 ### Hard rules inside a worker
 
+- **Why these signal handlers?** `die`
+  (`source/src/backend/tcop/postgres.c:3023-3058`) and
+  `SignalHandlerForConfigReload`
+  (`source/src/backend/postmaster/interrupt.c:60-65`) both implement
+  the only async-signal-safe pattern: flip a flag (`ProcDiePending` /
+  `ConfigReloadPending`), call `SetLatch(MyLatch)`, return. The real
+  work — `AbortCurrentTransaction()` for SIGTERM,
+  `ProcessConfigFile(PGC_SIGHUP)` for SIGHUP — runs in the main loop
+  body once `CHECK_FOR_INTERRUPTS()` or the explicit
+  `ConfigReloadPending` check observes the flag. A custom handler
+  that calls `proc_exit(0)` directly would: (a) skip transaction
+  abort and leak resowner / lock / snapshot state, (b) run
+  signal-unsafe `palloc` / LWLock / `ereport` code, and (c) per the
+  bgworker contract retire the worker's slot regardless of
+  `bgw_restart_time`. Always set a flag, set the latch, return.
 - **Never `sleep()` / `usleep()`** — always wait on `MyLatch` with
   `WL_EXIT_ON_PM_DEATH`, otherwise an orphaned worker survives the
   postmaster's death.
@@ -161,26 +179,34 @@ If `bgw_notify_pid` is set to the launcher's PID, the launcher gets
 
 ## 8. Layering hooks on `_PG_init`
 
-Extensions installed via `shared_preload_libraries` (or
-`session_preload_libraries`) get their `_PG_init` called at the right
-time to install hooks. The canonical pattern: save the previous hook,
-install yours, call the previous one inside yours so chains compose.
+Extensions installed via `shared_preload_libraries`,
+`session_preload_libraries`, or `local_preload_libraries` get their
+`_PG_init` called at the right time to install hooks
+(postmaster-startup, per-backend-connect, or per-backend-connect-by-
+unprivileged-user respectively). The canonical pattern: save the
+previous hook, install yours, call the previous one inside yours so
+chains compose.
+
+The planner_hook callback prototype matches `planner_hook_type` exactly
+— five parameters with `ExplainState *es` as the trailing argument:
+[verified-by-code `source/src/include/optimizer/planner.h:28-32`]
 
 ```c
 static planner_hook_type prev_planner_hook = NULL;
 
 static PlannedStmt *
 my_planner(Query *parse, const char *query_string,
-           int cursorOptions, ParamListInfo boundParams)
+           int cursorOptions, ParamListInfo boundParams,
+           ExplainState *es)
 {
     PlannedStmt *result;
 
     if (prev_planner_hook)
         result = prev_planner_hook(parse, query_string,
-                                   cursorOptions, boundParams);
+                                   cursorOptions, boundParams, es);
     else
         result = standard_planner(parse, query_string,
-                                  cursorOptions, boundParams);
+                                  cursorOptions, boundParams, es);
 
     /* ... my modifications to result ... */
     return result;
@@ -200,6 +226,23 @@ Common hook variables to chain (all in their respective header):
 `ProcessUtility_hook`, `planner_hook`, `ExecutorStart_hook`,
 `ExecutorRun_hook`, `ExecutorFinish_hook`, `ExecutorEnd_hook`,
 `emit_log_hook`, `shmem_request_hook`, `shmem_startup_hook`.
+
+### No `_PG_fini`: libraries never unload
+
+PG's dynamic loader (`dfmgr.c:295-299`) `dlsym`s `_PG_init` from each
+loaded library and calls it once. There is no symmetric `_PG_fini` —
+PG never unloads a shared library for the life of the backend.
+Implications:
+
+- Once your hook is installed, it stays installed until the backend
+  exits.
+- `DROP EXTENSION` removes the SQL-level catalog bindings (functions
+  registered by the install script) but does NOT undo `_PG_init` and
+  does NOT unload the `.so`. Any chained hook is still wired in.
+- On postmaster shutdown each backend exits and the OS unmaps the
+  library; no per-process cleanup needed.
+
+[verified-by-code `source/src/backend/utils/fmgr/dfmgr.c:295-299`]
 
 ## 9. Checklist
 

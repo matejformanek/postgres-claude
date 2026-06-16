@@ -1,0 +1,21 @@
+{
+  "skill": "meta-commit-style",
+  "iteration": 2,
+  "evals": [
+    {
+      "id": "E1",
+      "prompt": "I just landed a new knowledge/idioms/lock-acquire-then-pin.md doc on the postgres-claude meta repo (148 lines, 22 cites into source/src/backend/storage/lmgr/*). What prefix do I use, what trailer set goes on it, and what does the body convention look like? Draft the commit message.",
+      "context": "Same as iter-1. Re-tests the lowercase Co-authored-by fix from Edit 1 and the broader corpus/skills vocabulary."
+    },
+    {
+      "id": "E2",
+      "prompt": "I'm finishing phase 3 of planning/feature_server_side_vars/plan.md. The phase touches 4 files under .claude/skills/ (two new SKILL.md files, two edits) and 2 under knowledge/scenarios/ (one new playbook, one edit). Draft the meta-repo commit message with the right Plan: trailer and Sites: block.",
+      "context": "Same as iter-1. Re-tests ft(skills) plural fix from Edit 2 and the Plan: canonical-form clarification from Edit 4."
+    },
+    {
+      "id": "E3",
+      "prompt": "A teammate is about to commit a new skill to the postgres-claude meta repo with title 'feat(skills): add new lock-budget skill'. Is that prefix correct for this repo? What about plain 'feat:' with no scope, or 'Add new lock-budget skill' with no prefix at all? Walk me through why or why not, and what the actual canonical form should be.",
+      "context": "Same as iter-1. Re-tests rejection of conventional-commits + bare-imperative + naming the canonical form with lowercase Co-authored-by and Edit 6's side-by-side."
+    }
+  ]
+}

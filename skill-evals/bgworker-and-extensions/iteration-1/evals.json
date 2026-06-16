@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "bgworker-and-extensions",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I'm writing a new contrib extension `idle_killer` that registers a periodic background worker. The worker should connect to a database, wake every 30 seconds, scan pg_stat_activity, and log any session whose state has been 'idle in transaction' for more than 10 seconds. Walk me through what the registration looks like, what files / functions I touch, what flags I set on the BackgroundWorker struct, and exactly how the worker's main loop should wait (signals, latch flags, naptime)."
+    },
+    {
+      "eval_id": 2,
+      "question": "My extension needs to observe every plan tree before execution (logging it for an audit feature). I want to layer planner_hook from my _PG_init. Show me what _PG_init should do, the exact prototype of my hook callback, how I chain to a previous hook installed by some other extension loaded earlier in shared_preload_libraries, and explain the unload story — what happens when the postmaster shuts down or if someone tries to drop the extension."
+    },
+    {
+      "eval_id": 3,
+      "question": "I'm reading worker_spi.c and I see it installs `pqsignal(SIGTERM, die);` as the SIGTERM handler instead of writing its own handler that calls `proc_exit(0)`. Why is `die` (from postgres.c) the right choice and what would actually go wrong if I replaced it with a custom handler that calls `proc_exit(0)` directly? Also: why is the SIGHUP handler `SignalHandlerForConfigReload` rather than calling `ProcessConfigFile()` straight from the handler?"
+    }
+  ]
+}

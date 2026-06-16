@@ -1,0 +1,71 @@
+{
+  "skill": "meta-commit-style",
+  "iteration": 1,
+  "evals": [
+    {
+      "id": "E1",
+      "assertions": [
+        {"id": "A1", "text": "Picks ft(corpus): prefix for knowledge/idioms/* write", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "No conventional-commits prefix (feat:/fix:/chore:)", "with_skill": true, "baseline": false},
+        {"id": "A3", "text": "Title is imperative present-tense with no trailing period", "with_skill": true, "baseline": true},
+        {"id": "A4", "text": "Title parenthetical includes line count + cite count per §Body rules", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Body explains the WHY (not a diff recap)", "with_skill": true, "baseline": true},
+        {"id": "A6", "text": "Body wrapped near 76 cols", "with_skill": true, "baseline": true},
+        {"id": "A7", "text": "Includes Co-authored-by trailer", "with_skill": true, "baseline": true},
+        {"id": "A8", "text": "Co-authored-by uses lowercase form (Co-authored-by:) not GitHub-style uppercase (Co-Authored-By:)", "with_skill": false, "baseline": false},
+        {"id": "A9", "text": "Co-authored-by identity is exactly 'Claude Opus 4.7 (1M context) <noreply@anthropic.com>'", "with_skill": true, "baseline": false},
+        {"id": "A10", "text": "No Plan: trailer (no plan.md backs this commit)", "with_skill": true, "baseline": true},
+        {"id": "A11", "text": "No Signed-off-by trailer", "with_skill": true, "baseline": true}
+      ],
+      "with_skill_score": "10/11",
+      "baseline_score": "5/11",
+      "note": "A8 fails with_skill in iter-1 because SKILL.md itself says 'Co-Authored-By:' (uppercase) in 3 places — but the real meta-repo log uses lowercase (45 lowercase vs 11 uppercase in last 50 commits). The with_skill answer faithfully followed the SKILL.md spelling. This is the highest-leverage edit candidate."
+    },
+    {
+      "id": "E2",
+      "assertions": [
+        {"id": "B1", "text": "Picks ft(skills): or ft(meta): prefix (not feat:)", "with_skill": true, "baseline": false},
+        {"id": "B2", "text": "Plan: trailer present", "with_skill": true, "baseline": false},
+        {"id": "B3", "text": "Plan: trailer matches exact format 'planning/<slug>/plan.md (phase <N>: <title>)'", "with_skill": true, "baseline": false},
+        {"id": "B4", "text": "Sites: trailer present and lists each non-obvious file", "with_skill": true, "baseline": false},
+        {"id": "B5", "text": "Trailers separated from body by a blank line", "with_skill": true, "baseline": true},
+        {"id": "B6", "text": "Plan: trailer ordered before Co-authored-by (Co-authored-by is last)", "with_skill": true, "baseline": false},
+        {"id": "B7", "text": "Co-authored-by trailer present (last)", "with_skill": true, "baseline": true},
+        {"id": "B8", "text": "Co-authored-by lowercase form", "with_skill": false, "baseline": false},
+        {"id": "B9", "text": "Single commit (not split — these are all meta-repo writes; R10 split rule applies only when one change touches BOTH dev/ and meta)", "with_skill": true, "baseline": true},
+        {"id": "B10", "text": "Picks plural scope ft(skills) matching real log (23 occurrences) rather than singular ft(skill) from the SKILL.md example", "with_skill": true, "baseline": false, "note": "with_skill caught the singular/plural drift between the SKILL.md example and the real log — bonus point for the agent."}
+      ],
+      "with_skill_score": "9/10",
+      "baseline_score": "3/10"
+    },
+    {
+      "id": "E3",
+      "assertions": [
+        {"id": "C1", "text": "Explicitly rejects feat(skills): as wrong prefix (conventional-commits forbidden)", "with_skill": true, "baseline": false},
+        {"id": "C2", "text": "Explicitly rejects bare feat: with no scope (scope is mandatory)", "with_skill": true, "baseline": false},
+        {"id": "C3", "text": "Explicitly rejects bare-imperative title with no prefix (for meta repo)", "with_skill": true, "baseline": false},
+        {"id": "C4", "text": "States the bare-imperative form IS correct for upstream PG / dev/ (commit-message-style)", "with_skill": true, "baseline": false},
+        {"id": "C5", "text": "Canonical form named as ft(scope): with mandatory scope", "with_skill": true, "baseline": false},
+        {"id": "C6", "text": "Co-authored-by trailer required for the corrected form", "with_skill": true, "baseline": false},
+        {"id": "C7", "text": "Co-authored-by lowercase form named", "with_skill": false, "baseline": false},
+        {"id": "C8", "text": "No Signed-off-by (not a DCO project)", "with_skill": true, "baseline": false},
+        {"id": "C9", "text": "Mentions ticket numbers are forbidden inline (squash-merge appends (#NN) automatically)", "with_skill": true, "baseline": false},
+        {"id": "C10", "text": "Names the contrast skill commit-message-style for upstream PG style", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "9/10",
+      "baseline_score": "0/10"
+    }
+  ],
+  "totals": {
+    "with_skill": "28/31 (90.3%)",
+    "baseline": "8/31 (25.8%)",
+    "uplift": "+20 assertions (+64.5pp)"
+  },
+  "notes": [
+    "Strongest signal: SKILL.md itself uses Co-Authored-By: (GitHub uppercase) in every example, but the actual meta-repo log uses lowercase Co-authored-by: 45 times vs 11 uppercase in the most-recent ~50 commits with a co-author trailer. This is the highest-leverage fix — the skill teaches an incorrect spelling.",
+    "Singular/plural drift: SKILL.md example uses ft(skill): (singular), real log uses ft(skills): (plural, 23 occurrences). Same for the scope vocabulary — real log has ft(meta), docs(state), docs(cloud), docs(community), ft(patches), ft(ideologies) — broader than what the skill enumerates.",
+    "Plan: trailer in the wild appears NOT just for planning/<slug>/plan.md (phase N: title) but for looser things like 'Plan: cloud routine pg-quality-auditor (AUDIT mode, 2026-06-14)'. Skill should either tighten the format to be authoritative or acknowledge the looser usage.",
+    "[cloud:<routine>] form in real log appears with descriptive payload (e.g. '5 commits · 8 bf failures') not a colon-then-imperative title. Skill example is structurally accurate but worth a real-log anchor.",
+    "Baseline reliably reaches for Conventional Commits + uppercase Co-Authored-By: Claude — both are wrong for this repo and the skill cleanly steers away from both (except for the casing bug)."
+  ]
+}
