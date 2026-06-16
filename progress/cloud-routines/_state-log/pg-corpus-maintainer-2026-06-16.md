@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-06-16 — backlinks +1 (autoprewarm.c.md ← contrib-pg_prewarm subsystem doc) · glossary +39 (1018→1057 headings, pure insertion) · issues +0 (892/892 docs already mirrored in prose form; comm-by-doc-link gap is a 100% false positive) (PR pending).
