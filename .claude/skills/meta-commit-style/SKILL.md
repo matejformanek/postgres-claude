@@ -7,6 +7,7 @@ companion_skills:
   - memory-keeping
   - pg-implement
   - pg-feature-plan
+  - pg-feature-brainstorm
 ---
 
 # meta-commit-style — postgres-claude commit messages

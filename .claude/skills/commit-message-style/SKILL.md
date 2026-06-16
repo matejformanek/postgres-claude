@@ -7,6 +7,9 @@ companion_skills:
   - patch-submission
   - review-checklist
   - coding-style
+  - pg-feature-plan
+  - pg-implement
+  - pg-patch-review
 ---
 
 # commit-message-style
