@@ -55,8 +55,8 @@ than the periodic 30-day refresh: process them first.
 
 ## anchor-bump (2026-06-14) — e18b0cb7344..da1eff08a5be (20 commits)
 
-[pending] knowledge/files/contrib/seg/seg.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/contrib/xml2/xpath.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/contrib/seg/seg.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/contrib/xml2/xpath.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
 [pending] knowledge/files/src/backend/access/transam/xlog.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/backend/access/transam/xlogutils.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/backend/catalog/pg_subscription.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
@@ -64,17 +64,17 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/backend/commands/tablecmds.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/backend/libpq/crypt.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/backend/libpq/pqmq.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/src/backend/nodes/makefuncs.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/src/backend/parser/parse_coerce.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/src/backend/parser/parse_expr.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/src/backend/parser/parse_relation.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/src/backend/parser/parse_target.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/src/backend/nodes/makefuncs.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/src/backend/parser/parse_coerce.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/src/backend/parser/parse_expr.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/src/backend/parser/parse_relation.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/src/backend/parser/parse_target.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
 [pending] knowledge/files/src/backend/replication/logical/relation.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/backend/replication/walsender.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/backend/utils/adt/ri_triggers.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/backend/utils/adt/xml.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
-[pending] knowledge/files/src/backend/utils/cache/inval.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
+[in-progress:cloud/pg-quality-auditor/2026-06-16] knowledge/files/src/backend/utils/cache/inval.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
 [pending] knowledge/files/src/backend/utils/init/postinit.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/bin/psql/describe.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/files/src/include/miscadmin.h.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be

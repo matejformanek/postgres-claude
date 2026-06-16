@@ -2,7 +2,11 @@
 
 - **Source path:** `source/src/backend/utils/cache/inval.c`
 - **Lines:** 1966
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `b78cd2bda5b1` (re-verified 2026-06-16 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `e18b0cb7344..da1eff08a5be`; line count unchanged and all 27
+  function-line cites + spot-checked top-comment ranges hold exactly —
+  fully clean, the file was not line-shifted in the bump range)
 - **Companion files:** `inval.h` (public surface), `catcache.c` (`PrepareToInvalidateCacheTuple`, `CatCacheInvalidate`), `syscache.c` (`SysCacheInvalidate`), `relcache.c` (`RelationCacheInvalidateEntry`, init-file pre/post hooks), `storage/sinval.c` + `sinvaladt.c` (the SI message queue infrastructure), `access/xact.c` (commit/abort drivers).
 
 ## Purpose
