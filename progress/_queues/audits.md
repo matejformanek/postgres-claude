@@ -81,3 +81,11 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/include/parser/parse_relation.h.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be
 [pending] knowledge/subsystems/parser-and-rewrite.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be (6 impacted parser files)
 [pending] knowledge/files/contrib/postgres_fdw/postgres_fdw.c.md  reason=anchor-bump 2026-06-15:da1eff08a5be..b78cd2bda5b1
+[pending] knowledge/files/src/backend/replication/libpqwalreceiver/libpqwalreceiver.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea (sig change + escaping rewrite)
+[pending] knowledge/files/src/backend/replication/repl_scanner.l.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea (new <xd>{xddouble} rule)
+[pending] knowledge/files/src/backend/commands/subscriptioncmds.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea (appendQuotedString helper; already queued for 06-14 anchor-bump)
+[pending] knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea
+[pending] knowledge/files/src/bin/pg_basebackup/receivelog.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea (stack buf -> PQExpBuffer)
+[pending] knowledge/files/src/bin/pg_basebackup/streamutil.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea
+[pending] knowledge/files/src/bin/pg_basebackup/streamutil.h.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea
+[pending] knowledge/files/src/interfaces/libpq/fe-protocol3.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..e0511883cae2 (VALID_LONG_MESSAGE_TYPE += ParameterDescription)
