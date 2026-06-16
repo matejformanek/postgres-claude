@@ -113,6 +113,43 @@ Surfaced by the money-fx-exchange shadow run, where the deadpan
 
 Record the classification in the plan's `## Context` block.
 
+## REJECT-track output shape (when verdict is REJECT)
+
+When the Context-awareness probe (M2) or Engagement classification (M5)
+recommends REJECT, the plan file's body becomes a **Verdict block** in
+place of the standard §3-§14 implementation sections. Required contents:
+
+1. **Verdict line.** `REJECT-A`, `REJECT-B`, or `REJECT-C` per the
+   `review-checklist/SKILL.md` Phase 0 rubric (summarized below).
+2. **N concrete reasons against the design** (numbered, 3-7 typical).
+   Each reason cites a `source/<path>:<line>` invariant, a
+   `knowledge/subsystems/<x>.md` INV-tag, or a documented persona
+   reflex from `knowledge/personas/<name>.md`.
+3. **Predicted lead reviewer** with the reflex they trigger
+   (e.g. "Tom Lane — type-system + dump-determinism";
+   "Andres Freund — per-row hot-path"; "Noah Misch — security /
+   install-script immutability"). See `knowledge/personas/` for the
+   reflex map.
+4. **Concrete alternative shape** if one exists (the "what they
+   probably wanted" rewrite). Skip only when the proposal is
+   irredeemable.
+5. **Hand-off line** points to `review-checklist/SKILL.md` Phase 0
+   ("Write a thread reply"), NOT `/pg-implement`.
+
+The §1 "What this plan is" + `## Context` block still appear; §2-§14 do
+not. No phased implementation, no §3 files table — those would imply the
+plan is implementable, which contradicts the verdict.
+
+### REJECT-A/B/C grade summary
+
+Full rubric: `.claude/skills/review-checklist/SKILL.md` Phase 0.
+
+| Grade | Meaning |
+|---|---|
+| `REJECT-A` | Identified all critical design problems + proposed correct alternative. Saves community cycles. |
+| `REJECT-B` | Identified most critical problems but missed one major concern. |
+| `REJECT-C` | Rejected for the wrong reasons OR rejected when the proposal was actually sound. Self-correct: re-open and run the seven-phase review (or this skill's standard track). |
+
 ## Output
 
 A single file at `planning/<slug>/plan.md` following the structure
@@ -131,15 +168,29 @@ below. Length scales with the feature: ~400 lines for a small change,
 
 3. **Files that change** (a table). Each row:
    - File path (under `source/...` or `dev/...` for new files).
-   - Change type: `new` / `modify` / `delete`.
+   - Change type: `new` / `modify` / `delete` / `not edited (sync trap)`
+     / `not edited (auto-generated)` / `not edited (build-time validator)`.
    - Approximate size: `tiny (<10 lines)` / `small (10-50)` / `medium
-     (50-200)` / `large (>200)`.
-   - One-sentence summary of what changes.
+     (50-200)` / `large (>200)` / `n/a` for NOT-edited rows.
+   - One-sentence summary of what changes — with a `source/<path>:<line>`
+     cite for any file:line claim in the summary. Example row:
+     `src/backend/utils/adt/lockfuncs.c | modify | small | Add PG_FUNCTION_INFO_V1 + body, model after pg_advisory_lock at source/src/backend/utils/adt/lockfuncs.c:624 | —`
    - Per-file doc citation: `[via knowledge/files/.../X.md]` if one
      exists.
 
    Aim for completeness here. Missing a file in this table is a Phase 2
    bug. If you don't know all the sites, do another grep pass.
+
+   **Pin contract reminder (from Method Step 0):** every file named in
+   the pinned scenario's checklist MUST appear in §3, including rows
+   marked `NOT edited` (build-time validators, auto-generated headers,
+   sync-trap files like `psqlscan.l` / `ecpg/pgc.l` / `check_keywords.pl`).
+   Listing a NOT-edited row with a one-line rationale is correct;
+   silently dropping it is the failure mode the §8a coverage gate
+   catches at plan-finalization time. The planner can ADD sites
+   discovered by grep, but can NEVER DROP a scenario row without
+   explicit user approval AND a follow-up edit to the scenario file
+   itself.
 
 4. **Catalog + on-disk impact** (bulleted). Each item is yes/no with
    rationale:
@@ -215,7 +266,18 @@ below. Length scales with the feature: ~400 lines for a small change,
 12. **CommitFest landing strategy** (bulleted):
     - Which CF? (e.g. "PG20-1, open now until 2026-06-30").
     - Pre-existing thread to revive, or new thread?
-    - Likely reviewers? (Authors of nearby subsystems.)
+    - Likely reviewers? Name 2-3 with the **reflex** each would apply.
+      Anchor on the subsystem the patch touches:
+      - Type-system / catalog / dump-determinism / API-back-compat → Tom Lane
+      - Performance / executor hot path / parallel safety → Andres Freund
+      - Security / install-script immutability / test-omission → Noah Misch
+      - Parser / locale / Windows portability → Michael Paquier, Peter Eisentraut
+      - Replication / logical decoding → Amit Kapila, Masahiko Sawada
+      - Planner / costing → David Rowley, Richard Guo
+      - Buffer manager / vacuum → Melanie Plageman, Andres Freund, Peter Geoghegan
+      See `knowledge/personas/<name>.md` for full reflex maps; otherwise
+      `git -C source log --pretty='%an' -- <touched-file>` for recent
+      committers.
     - Pre-mail self-review checklist: `review-checklist` skill.
     - First-patch-cover-letter structure.
     - Upstream commit-message style: `commit-message-style` skill
@@ -241,6 +303,11 @@ below. Length scales with the feature: ~400 lines for a small change,
 - Citations without `file:line` from `source/`. Vague references like
   "the executor" are Phase 1 talk.
 - Skipping §13 (Known risks). Every non-trivial plan has unknowns.
+- **Dropping a scenario-checklist row from §3** without explicit user
+  approval AND a follow-up edit to the scenario file itself. The §8a
+  coverage gate fails the plan if this happens silently. NOT-edited
+  rows still belong in §3 with a one-line rationale; the pin contract
+  is ADD-only, not subtract.
 
 ## Method
 

@@ -1,0 +1,18 @@
+{
+  "iteration": 2,
+  "skill": "pg-shadow-implement",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "Run a shadow against this hackers thread: https://www.postgresql.org/message-id/CAH2-WzkXyZ-fake-pgsql-2026-XYZ%40mail.gmail.com -- outline the steps you will take, the read-order discipline, and the per-run artifacts you will produce. (Trigger/routing probe \u2014 force the agent to name the 6-7 step loop, the COVER-only / patch-fetch-only-after discipline, and the comparison.md + skill-gaps.md outputs WITHOUT fetching the patch first.)"
+    },
+    {
+      "eval_id": 2,
+      "question": "Our shadow-implementation lands 90% of what the upstream patch achieves, but we picked a different MVCC visibility check (xmax-equals-self vs xmin-committed) -- same scope, no missed invariants, just one design diff. The thread also showed reviewer reflexes that our pg-patch-review Critic E correctly predicted. What grade does the methodology assign? Name the grade by letter from the rubric, the threshold reasoning, and any sub-track (REJECT-* etc.) that does or doesn't apply."
+    },
+    {
+      "eval_id": 3,
+      "question": "Let's just run pg-feature-plan + pg-implement on this hackers patch we want to send upstream -- what's the point of pg-shadow vs that? Should I invoke pg-shadow-implement here? (Anti-trigger probe \u2014 agent should explain the COVER-only / patch-fetch-only-after rule, the calibration purpose, and explicitly NOT trigger for real upstream-send-ready work.)"
+    }
+  ]
+}

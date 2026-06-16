@@ -1,0 +1,65 @@
+{
+  "iteration": 1,
+  "skill": "parallel-query",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Make nodeFoo parallel-aware",
+      "assertions": [
+        {"text": "Names all five hook functions: ExecFooEstimate, ExecFooInitializeDSM, ExecFooReInitializeDSM, ExecFooInitializeWorker, ExecFooShutdown", "with_skill": true, "baseline": false, "note": "skill §8 lists all five"},
+        {"text": "Notes ExecFooInitializeWorker takes ParallelWorkerContext (not ParallelContext) as second arg", "with_skill": false, "baseline": false, "note": "skill does not name ParallelWorkerContext"},
+        {"text": "States that the execParallel.c switch-on-nodeTag in ExecParallelEstimate/InitializeDSM/ReInitializeDSM is where the per-node dispatch is added", "with_skill": false, "baseline": false, "note": "skill §8 says 'override' but doesn't say where the dispatch lives"},
+        {"text": "Names parallel_aware flag on Plan/Path is what gates the per-node estimate/init calls", "with_skill": false, "baseline": false, "note": "skill doesn't mention parallel_aware flag"},
+        {"text": "Correct leader call order: ExecParallelEstimate → InitializeParallelDSM → ExecParallelInitializeDSM → LaunchParallelWorkers", "with_skill": true, "baseline": true, "note": "skill §3 has the lifecycle"},
+        {"text": "Notes pcxt->nworkers_launched must be checked because postmaster may launch fewer (possibly 0)", "with_skill": true, "baseline": false, "note": "skill §6 + checklist"},
+        {"text": "Inside ExecFooEstimate, must call BOTH shm_toc_estimate_chunk AND shm_toc_estimate_keys before InitializeParallelDSM", "with_skill": true, "baseline": false, "note": "skill §3 + checklist"},
+        {"text": "Worker side: ExecFooInitializeWorker calls shm_toc_lookup with the same key to fetch shared state", "with_skill": true, "baseline": true, "note": "skill §4"},
+        {"text": "ReInitializeDSM is the rescan hook — resets in place, does not re-allocate", "with_skill": true, "baseline": true, "note": "skill §8"},
+        {"text": "Names PARALLEL_KEY_EXECUTOR_FIXED / PARALLEL_KEY_PLANNEDSTMT as the executor-owned high-magic keys, distinct from per-node keys", "with_skill": false, "baseline": false, "note": "skill mentions reserved range but not these specific names"},
+        {"text": "Mentions worker's transaction/snapshot/GUC/combo-CID state is restored by ParallelWorkerMain BEFORE the node hook runs", "with_skill": true, "baseline": true, "note": "skill §4"},
+        {"text": "Cites at least one source file:line for hook signatures or key constants", "with_skill": true, "baseline": false, "note": "skill has cites in §3,4"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "Parallel safety for a bcrypt index-expression function (variants)",
+      "assertions": [
+        {"text": "Base case: PARALLEL SAFE — pure compute on arguments, deterministic, no session/DB access", "with_skill": true, "baseline": true, "note": "skill §2"},
+        {"text": "Mentions pg_proc.proparallel column / 's' value / pg_proc.dat as the catalog mechanism for C functions", "with_skill": true, "baseline": true, "note": "skill §2"},
+        {"text": "Variant (a) temp table: PARALLEL UNSAFE — workers cannot access temp tables (per-backend session)", "with_skill": true, "baseline": true, "note": "skill §2 lists temp tables as UNSAFE trigger; §5 explicit"},
+        {"text": "Variant (b) SET LOCAL work_mem: PARALLEL RESTRICTED, not SAFE; explains why (mutates GUC state inside parallel region)", "with_skill": true, "baseline": true, "note": "skill §7 + §2"},
+        {"text": "Variant (b): mentions GUC_ALLOW_IN_PARALLEL flag as the mechanism by which a custom GUC can be SET in a parallel block, and that work_mem doesn't carry it", "with_skill": true, "baseline": false, "note": "skill §7 names GUC_ALLOW_IN_PARALLEL"},
+        {"text": "Variant (b): explicitly notes RestoreGUCState / inherit-at-launch is the worker side, separate from set-during-execution", "with_skill": true, "baseline": false, "note": "skill §7 names RestoreGUCState"},
+        {"text": "Variant (c) UNSAFE wrapper: marking must be the most-restrictive of self and all callees; not transitive at runtime", "with_skill": true, "baseline": true, "note": "skill §2"},
+        {"text": "States planner trusts the declared marking (no runtime introspection); mis-marking SAFE while calling UNSAFE leads to runtime breakage in workers", "with_skill": true, "baseline": true, "note": "skill §5 final paragraph"},
+        {"text": "Notes RESTRICTED still allows the plan to be parallel — function just runs in leader's portion (vs UNSAFE which forbids any parallelism in the plan)", "with_skill": true, "baseline": false, "note": "skill §2 table"},
+        {"text": "Connects index-expression context: CREATE INDEX has parallel-aware build (btree) that benefits from SAFE marking; DML evaluation is leader-only regardless", "with_skill": false, "baseline": false, "note": "skill doesn't mention parallel CREATE INDEX context"}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "Why advisory userlocks between leader/workers are broken; correct rendezvous primitives",
+      "assertions": [
+        {"text": "Workers join the leader's lock group via BecomeLockGroupMember at startup (ParallelWorkerMain)", "with_skill": false, "baseline": true, "note": "skill does not mention lock groups at all"},
+        {"text": "LockCheckConflicts treats locks held by other group members as non-conflicting — names this as the bypass mechanism", "with_skill": false, "baseline": true, "note": "skill §5 says 'don't acquire locks not already held by the leader' but doesn't explain the lock-group bypass"},
+        {"text": "Net consequence: worker LockAcquire on the leader's userlock is granted immediately — no mutual exclusion between leader and worker", "with_skill": false, "baseline": true, "note": "not in skill; would require understanding lock groups"},
+        {"text": "Explains WHY the bypass exists (so leader's already-held table/index/catalog locks inherit-by-membership without workers deadlocking against the leader)", "with_skill": false, "baseline": true, "note": "not in skill"},
+        {"text": "Names the relation-extension lock (LOCKTAG_RELATION_EXTEND) as the carve-out that conflicts even within a group", "with_skill": false, "baseline": false, "note": "not in skill; trap-grade detail"},
+        {"text": "Cites lock.c with a line reference (1591-1614 or nearby) for the conflict-bypass code", "with_skill": false, "baseline": false, "note": "not in skill"},
+        {"text": "Correct primitive: ConditionVariable for wait/signal in shared memory; mentions the spurious-wakeup loop pattern", "with_skill": false, "baseline": true, "note": "skill does not mention ConditionVariable"},
+        {"text": "Correct primitive: shm_mq for streaming/queue between leader and workers; notes parallel infra already uses one per worker for error propagation", "with_skill": false, "baseline": true, "note": "skill mentions error-message-queue in §4 but does not name shm_mq as a primitive to reuse"},
+        {"text": "Correct primitive: LWLock allocated in DSM via LWLockNewTrancheId / LWLockInitialize for short critical sections", "with_skill": false, "baseline": false, "note": "not in skill"},
+        {"text": "Mentions Barrier (storage/ipc/barrier.c) for N-way phase synchronisation; names parallel hash join as a real-world user", "with_skill": false, "baseline": true, "note": "skill does not mention Barrier"},
+        {"text": "Cites condition_variable.h or parallel.c with a file:line reference for at least one of the recommended primitives", "with_skill": false, "baseline": false, "note": "not in skill"}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 20,
+    "with_skill_total": 33,
+    "baseline_passed": 14,
+    "baseline_total": 33,
+    "with_skill_pass_rate": 0.606,
+    "baseline_pass_rate": 0.424
+  }
+}

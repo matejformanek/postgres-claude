@@ -1,0 +1,21 @@
+{
+  "iteration": 2,
+  "skill": "pg-feature-brainstorm",
+  "evals": [
+    {
+      "eval_id": 1,
+      "kind": "half-formed-idea probe",
+      "question": "Rough idea — could PG support TTL on individual rows so a row auto-disappears after N hours without a sweeper job? Brainstorm the design space."
+    },
+    {
+      "eval_id": 2,
+      "kind": "subsystem-naming probe",
+      "question": "What if PG had a built-in 'rewind to LSN X' SQL command for point-in-time recovery without a server restart — what subsystems are involved, what are 2-3 approaches, and what's already in flight?"
+    },
+    {
+      "eval_id": 3,
+      "kind": "has-this-been-tried trap probe",
+      "question": "Let's brainstorm a 'plpgsql_check' extension that catches dead code at CREATE FUNCTION time — what would it take?"
+    }
+  ]
+}

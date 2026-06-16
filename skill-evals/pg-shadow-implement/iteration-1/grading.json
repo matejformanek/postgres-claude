@@ -1,0 +1,62 @@
+{
+  "iteration": 1,
+  "skill": "pg-shadow-implement",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Trigger/routing — outline the shadow procedure for a thread URL",
+      "assertions": [
+        {"text": "Names all 7 steps: pick/validate, spec extraction, shadow implementation, ground-truth fetch, diff+score, skill feedback, aggregate", "with_skill": true, "baseline": false},
+        {"text": "States the COVER-only / patch-not-read discipline applies until Step 4", "with_skill": true, "baseline": true},
+        {"text": "Names spec.md as the Step 2 artifact", "with_skill": true, "baseline": true},
+        {"text": "Names comparison.md as the Step 5 artifact", "with_skill": true, "baseline": true},
+        {"text": "Names skill-gaps.md as the Step 6 artifact", "with_skill": true, "baseline": false},
+        {"text": "Names plan.md (Step 3) and notes.md (Step 3 implementation) as artifacts", "with_skill": true, "baseline": false},
+        {"text": "Outputs land under knowledge/shadow-implementations/<slug>/ (NOT under planning/<slug>/)", "with_skill": true, "baseline": false},
+        {"text": "Names the M2 context-awareness pre-step (date / author posture / engagement)", "with_skill": true, "baseline": false},
+        {"text": "Names the M5 engagement classification (unengaged / acked / debated / contested)", "with_skill": true, "baseline": false},
+        {"text": "Names the M4 REJECT-track decision as a valid early termination", "with_skill": true, "baseline": false},
+        {"text": "Names the M1 fallback chain for Step 4 ground-truth fetch failures", "with_skill": true, "baseline": false},
+        {"text": "Notes the design-only variant exists (skip 3.3-3.5 / no dev branch) for small or additive patches", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "Grade a 90%-match, one-design-diff, no-invariant shadow run",
+      "assertions": [
+        {"text": "Names the grade B (not A, not C)", "with_skill": true, "baseline": true},
+        {"text": "Cites the B-threshold from the rubric: ≥70% overlap, no missed invariants, 1-2 design choices diverge", "with_skill": true, "baseline": false},
+        {"text": "Excludes A because A requires no novel-concern divergence (a design diff is a divergence)", "with_skill": true, "baseline": false},
+        {"text": "Excludes C because C requires 3+ design diffs OR 40-70% overlap", "with_skill": true, "baseline": false},
+        {"text": "States REJECT-A/B/C does NOT apply because the run implemented, did not reject", "with_skill": true, "baseline": true},
+        {"text": "Notes the REJECT track and the A-F track are mutually exclusive (different shadow output types: patch vs thread reply)", "with_skill": true, "baseline": false},
+        {"text": "Notes (design-only) tag does NOT apply — that's the M1 fallback marker for unfetchable patches", "with_skill": true, "baseline": false},
+        {"text": "Names Critic E reviewer-reflex match as a separate field that supports but does not shift the implementation grade", "with_skill": true, "baseline": true},
+        {"text": "Records the verdict in comparison.md §Verdict and the design diff in §Novel concerns or §Missed concerns", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "Anti-trigger — pg-shadow vs direct pg-feature-plan + pg-implement",
+      "assertions": [
+        {"text": "Explicitly says do NOT invoke pg-shadow-implement for real upstream-send-ready work", "with_skill": true, "baseline": true},
+        {"text": "Cites the skill's frontmatter anti-trigger list (real upstream patches / already-committed / non-PG calibration)", "with_skill": true, "baseline": false},
+        {"text": "Articulates the COVER-only read rule (Step 2 reads COVER + replies, not the .patch)", "with_skill": true, "baseline": false},
+        {"text": "Articulates the patch-fetch-only-after rule (Step 4 fetches patch only after Step 3 implementation is done)", "with_skill": true, "baseline": true},
+        {"text": "Names the calibration purpose (Phase E loop / measurement of planner-suite accuracy)", "with_skill": true, "baseline": false},
+        {"text": "Contrasts: calibration goal = restrict context; real upstream goal = use all context", "with_skill": true, "baseline": true},
+        {"text": "Names the alternative: pg-feature-brainstorm → pg-feature-plan → pg-implement → pg-patch-review (--self) → patch-submission", "with_skill": true, "baseline": true},
+        {"text": "Names the additional anti-trigger cases: already-committed threads, multi-thread series, undocumented subsystem", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 29,
+    "with_skill_total": 29,
+    "baseline_passed": 11,
+    "baseline_total": 29,
+    "with_skill_pass_rate": 1.000,
+    "baseline_pass_rate": 0.379,
+    "lift_pp": 62.1
+  }
+}
