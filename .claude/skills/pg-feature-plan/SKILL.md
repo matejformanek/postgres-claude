@@ -10,6 +10,7 @@ companion_skills:
   - review-checklist
   - patch-submission
   - commit-message-style
+  - meta-commit-style
 companion_scenarios:
   - add-new-builtin-function
   - add-new-data-type
