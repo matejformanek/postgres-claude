@@ -92,6 +92,10 @@ catalog-enforced.
   read primitive lands here.
 - A11 + A5 corpus findings: decompression-bomb echoes.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-security: heap_fetch_toast_slice trusts caller-supplied valueid (medium)]**
    — `heaptoast.h:145`-`147`.

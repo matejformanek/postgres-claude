@@ -147,3 +147,9 @@ helper, and the polymorphic-argtype resolver. [verified-by-code]
 - `funcapi.h:356-358` — `extract_variadic_args` `convert_unknown` is
   bool — silently changes call semantics. [ISSUE-style: bare bool
   api parameter (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

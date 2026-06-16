@@ -147,3 +147,11 @@ Symbols still exported despite being marked deprecated in comments — removing 
 ## Tally
 
 `[verified-by-code]=10 [from-comment]=8 [maybe]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

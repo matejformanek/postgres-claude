@@ -95,6 +95,10 @@ the ipad/opad XOR'd state suffices. [verified-by-code `px-hmac.c:83-91`]
 - RFC 2104 — Krawczyk et al, "HMAC: Keyed-Hashing for Message
   Authentication".
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: no constant-time-compare helper exposed (likely)]

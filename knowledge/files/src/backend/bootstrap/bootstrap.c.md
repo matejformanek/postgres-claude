@@ -148,3 +148,9 @@ no longer consulted (except in error fallback). [verified-by-code §bootstrap.c:
   `pronargdefaults = array_count` which is what
   `lookup_default_for_param` expects. Not a bug, but the alignment
   isn't asserted. [ISSUE-undocumented-invariant: array entries must align with trailing args (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bootstrap`](../../../../issues/bootstrap.md)
+<!-- issues:auto:end -->

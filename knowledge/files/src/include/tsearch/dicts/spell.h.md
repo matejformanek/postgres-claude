@@ -100,3 +100,9 @@ by the `ispell` text-search template. Builds a trie over base words
   build window. [ISSUE-undocumented-invariant: IspellDict mixes
   build-time and runtime members; only the build code clears them
   (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-tsearch`](../../../../../issues/include-tsearch.md)
+<!-- issues:auto:end -->

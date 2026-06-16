@@ -35,6 +35,10 @@
 - `knowledge/files/src/include/catalog/pg_foreign_server.h.md` (parent server)
 - `knowledge/files/src/include/catalog/pg_foreign_data_wrapper.h.md` (grandparent FDW)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-invariant-not-enforced-by-schema: pg_class RELKIND='f' ↔ pg_foreign_table row]** `pg_foreign_table.h:30-38` — every `pg_class` row with `relkind='f'` MUST have exactly one matching `pg_foreign_table.ftrelid`, and vice versa. This pairing is enforced only by the DDL paths (`CREATE/DROP FOREIGN TABLE`) and dependency machinery; no FK exists. A buggy in-place catalog edit (or partial DROP) can leave an orphan in either direction, which the planner / FDW dispatch then assumes-away.

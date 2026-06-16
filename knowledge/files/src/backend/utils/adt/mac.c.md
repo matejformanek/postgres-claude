@@ -61,6 +61,10 @@ abbreviated-key SortSupport, and bitwise NOT/AND/OR/truncation.
   `ssup_datum_unsigned_cmp`.
 - `source/src/backend/utils/adt/mac8.c` — EUI-64 sibling.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 3

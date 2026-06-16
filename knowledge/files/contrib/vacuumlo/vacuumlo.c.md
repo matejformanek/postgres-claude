@@ -131,3 +131,7 @@ and gets `lo_unlink`'d. Single-file program. [verified-by-code]
   `lo_unlink` semantics + locking.
 - Companion utility: `oid2name` (same `struct _param` + connect-loop
   pattern).
+
+<!-- issues:auto:begin -->
+- [Issue register — `vacuumlo`](../../../issues/vacuumlo.md)
+<!-- issues:auto:end -->

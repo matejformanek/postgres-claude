@@ -44,6 +44,10 @@ output buffers. [verified-by-code, sha2.h:19-30]
 - Fallback impl: `knowledge/files/src/common/sha2.c.md`.
 - SCRAM key-len dep: `knowledge/files/src/include/common/scram-common.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: *_STRING_LENGTH variants are hex-output

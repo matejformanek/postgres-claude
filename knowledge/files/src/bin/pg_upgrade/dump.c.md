@@ -84,3 +84,9 @@ log_opts.dumpdir/pg_upgrade_dump_<oid>.log capture pg_dump's own
 error output including database-name-bearing messages; not scrubbed
 on retention (maybe-low)] — files retained when `--retain` is set
 (util.c:cleanup_output_dirs).
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

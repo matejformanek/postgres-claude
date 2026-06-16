@@ -114,3 +114,7 @@ for DBA convenience. [verified-by-code]
   `PQescapeStringConn`.
 - Companion utility: `vacuumlo` (same `_param` connect-loop pattern,
   also lives in contrib/).
+
+<!-- issues:auto:begin -->
+- [Issue register — `oid2name`](../../../issues/oid2name.md)
+<!-- issues:auto:end -->

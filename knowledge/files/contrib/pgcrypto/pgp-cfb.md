@@ -88,6 +88,10 @@ surface.
 - EFAIL paper, Mister-Zuccherato 2005 "An Attack on CFB Mode Encryption As
   Used By OpenPGP" — referenced in `pgp-decrypt.c:1194-1196` comment.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: legacy resync-CFB path remains reachable on decrypt; an

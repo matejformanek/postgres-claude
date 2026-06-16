@@ -75,3 +75,9 @@ machinery and `subsystemlist.h` reorg). [verified-by-code] [inferred]
   invisible to most non-Windows reviewers. [verified-by-code]
   [ISSUE-doc-drift: `#ifdef EXEC_BACKEND` lines lack a comment that
   this is the Windows fork-emulation path (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

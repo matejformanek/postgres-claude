@@ -142,3 +142,9 @@ MAIN-externalise) is the heart of `heap_toast_insert_or_update`.
   comment at 393-394 says "in case anybody looks at those fields in a
   syscache entry" but doesn't explain what *would* go wrong otherwise.
   [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `access`](../../../../../issues/access.md)
+<!-- issues:auto:end -->

@@ -74,3 +74,9 @@ and needs to resolve them to logical relation OIDs. [from-comment, inferred]
 - [ISSUE-undocumented-invariant: caller must hold no relation locks
   that would deadlock with `AccessShareLock` on `pg_class`; not
   documented (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

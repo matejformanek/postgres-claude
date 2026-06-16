@@ -119,3 +119,9 @@ servers won't match modern clients; harmless modern.
 `ALWAYS_SECURE_SEARCH_PATH_SQL` is only set on SQL (`dbname != NULL`)
 connections (line 223). Pure replication connections don't run SQL
 so the search_path attack surface doesn't apply. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

@@ -36,6 +36,10 @@ Default ACLs of new objects — backs `ALTER DEFAULT PRIVILEGES`. Each row says:
 - Parent overview: `knowledge/files/src/include/catalog/_catalog_headers_overview.md`
 - Related: `pg_init_privs.h` (extension-installed initial privs, separate concept)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: DEFACLOBJ_* chars are on-disk, header doesn't say so]** `pg_default_acl.h:65-77` — comment says "These codes are used in the defaclobjtype column" but doesn't flag that they are persisted on disk and a renumbering breaks pg_upgrade. Compare `dependency.h`'s explicit on-disk warning for `DependencyType`. Severity `nit`, type `doc-drift`.

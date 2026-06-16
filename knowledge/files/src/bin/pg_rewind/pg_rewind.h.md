@@ -53,3 +53,9 @@ rather than scattered across `open_target_file`/`create_target_dir`/
 
 - `[ISSUE-undocumented-invariant: WalSegSz is read before it is set by digestControlFile() at pg_rewind.c:1044, so any code path that touches WalSegSz before the first control-file digest sees zero. The order is currently fine but the invariant is implicit (low)]`
 - `[ISSUE-undocumented-invariant: progress counters are uint64 globals with no atomicity. pg_rewind is single-threaded so this works, but the header gives no hint (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

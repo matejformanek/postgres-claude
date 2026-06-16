@@ -195,6 +195,10 @@ reloptions are NOT included in `pg_get_viewdef`.
 - `source/src/backend/commands/policy.c` — RLS policy deparse lives
   here, NOT in ruleutils.c.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 12

@@ -38,3 +38,9 @@ full POSIX regex per word would be wasteful. [from-comment]
 - `RegisNode.data` is a flexible array of `unsigned char` — meaning
   is type-dependent and not documented here. [ISSUE-undocumented-invariant:
   RegisNode.data layout per type code (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-tsearch`](../../../../../issues/include-tsearch.md)
+<!-- issues:auto:end -->

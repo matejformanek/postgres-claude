@@ -36,6 +36,10 @@ ACLs for configuration parameters (GUCs). Backs `GRANT SET / ALTER SYSTEM ON PAR
 - Related: `pg_authid.h` (grantees in `paracl`)
 - Related backend: `src/backend/catalog/pg_parameter_acl.c`, `src/backend/utils/misc/guc.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: parname is the raw user-supplied string, no canonicalization documented]** `pg_parameter_acl.h:38` — GUC names are case-insensitive and may have dot-qualified extension prefixes (`pg_stat_statements.track`). The header doesn't document whether `parname` is lower-cased or normalized before storage; the unique index uses `text_ops` (case-sensitive). A divergent canonicalization between GRANT and SET would create a silent privilege bypass. Severity `maybe`, type `correctness`. Worth verifying in `ParameterAclCreate` / `ParameterAclLookup` — flag for the data-leak hardening project.

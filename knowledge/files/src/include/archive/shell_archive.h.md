@@ -32,3 +32,9 @@ archiver (legacy `archive_command`) without loading a separate .so.
   is empty string. [ISSUE-doc-drift: archive_library = ''
   semantics not in header (nit)]
 - None of substance.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `archive`](../../../../issues/archive.md)
+<!-- issues:auto:end -->

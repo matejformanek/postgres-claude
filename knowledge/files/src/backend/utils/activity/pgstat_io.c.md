@@ -29,3 +29,14 @@ Flushed via `pgstat_io_flush_cb` (fixed-amount). [from-comment]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new BufferAccessStrategy ring](../../../../../scenarios/add-new-buffer-strategy.md)
+- [Scenario — Add a new BufferAccessStrategy ring](../../../../../scenarios/add-new-buffer-strategy.md)
+- [Scenario — Add a new BufferAccessStrategy ring](../../../../../scenarios/add-new-buffer-strategy.md)
+- [Scenario — Add a new BufferAccessStrategy ring](../../../../../scenarios/add-new-buffer-strategy.md)
+
+<!-- scenarios:auto:end -->

@@ -47,3 +47,9 @@ which would be a header cycle since `proclist.h` already needs
   [ISSUE-undocumented-invariant: rule "zero-init is sufficient for
   not-in-any-list state" depends on PGPROC remaining a `MemSet`-able
   POD allocation (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

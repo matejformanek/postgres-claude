@@ -70,3 +70,9 @@ the API rather than poke at the list. [from-comment] [verified-by-code]
   registering N ENRs and querying each is O(N²). Header acknowledges
   this; not an issue at expected sizes. [ISSUE-style: documented
   O(N) lookup; switch to hash if list grows (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

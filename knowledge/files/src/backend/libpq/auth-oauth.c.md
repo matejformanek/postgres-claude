@@ -140,6 +140,10 @@ is mandatory and there is no fallback (auth-oauth.c:765-769).
   `check_oauth_validator` callsite).
 - Sample validator: `src/test/modules/oauth_validator/`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: discovery error response leaks issuer URL even if

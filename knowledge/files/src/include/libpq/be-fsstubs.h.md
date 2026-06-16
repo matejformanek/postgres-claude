@@ -27,6 +27,10 @@ declared elsewhere; these are the non-fmgr backdoors [from-comment].
   (`INV_READ`/`INV_WRITE` flag bits).
 - LO storage proper is `src/backend/storage/large_object/inv_api.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-stale-todo: naming wart frozen by ABI]** `be-fsstubs.h:19-21` —

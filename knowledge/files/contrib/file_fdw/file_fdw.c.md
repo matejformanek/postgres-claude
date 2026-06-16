@@ -237,6 +237,10 @@ cstate = BeginCopyFrom(NULL,                       /* no ParseState */
   - **A6 (pg_rewind)** — found that PG file-handling lacks O_NOFOLLOW; file_fdw inherits the same gap.
   - **A11 (postgres_fdw)** — gold standard for FDW security: `password_required` two-layered defense. file_fdw has only the role gate, not a runtime check; the role IS the trust statement, by design.
 
+<!-- issues:auto:begin -->
+- [Issue register — `file_fdw`](../../../issues/file_fdw.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: file_fdw does NOT use O_NOFOLLOW — inherits PG-wide gap; symlink swap between DDL/ANALYZE/SELECT lets the file change identity without warning (maybe)]`

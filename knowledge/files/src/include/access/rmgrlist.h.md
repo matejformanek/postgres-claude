@@ -105,3 +105,11 @@ bug in `heap_mask` could either (a) cause spurious replay failures
 - **ISSUE-fragility**: removing an rmgr (even an unused one) silently
   shifts every downstream ID. There's no compile-time check that IDs
   are stable across versions; only `XLOG_PAGE_MAGIC` discipline catches it.
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+
+<!-- scenarios:auto:end -->

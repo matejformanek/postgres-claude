@@ -67,6 +67,10 @@ collation; only ctype/casemap varies. (`pg_locale_builtin.c:275-298`
   `source/src/common/unicode_category.c` — backing tables.
 - `source/src/backend/utils/adt/pg_locale.c` — dispatcher.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

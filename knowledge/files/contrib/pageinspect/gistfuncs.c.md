@@ -123,6 +123,10 @@ Defense in depth.
   `pg_get_indexdef_columns_extended` at `:253`.
 - `knowledge/files/contrib/pageinspect/pageinspect.md` — bytea source.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-correctness: bytea + regclass not cross-validated;

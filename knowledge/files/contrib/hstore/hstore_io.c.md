@@ -321,6 +321,10 @@ audits. Documented above as `[ISSUE-correctness]`.
 - `hstore_compat.c.md` — the OTHER input path (legacy-format upgrade on
   `DatumGetHStoreP`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `hstore`](../../../issues/hstore.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-memory: hstore_in's get_val grows a parse buffer by doubling

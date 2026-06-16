@@ -90,6 +90,10 @@ react to one IO" design is realized. [from-comment, aio_callback.c:1-13]
 - The actual callbacks: `bufmgr.c` (shared/local buffer readv), `md.c`
   (md readv) — both outside `aio/`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `storage-aio`](../../../../../issues/storage-aio.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: completion-callback set must be

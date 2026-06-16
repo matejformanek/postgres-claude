@@ -23,3 +23,11 @@ fatal-error path doesn't actually `exit()` the backend.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../subsystems/replication.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new replication / logical-decoding message](../../../../scenarios/add-new-replication-message.md)
+
+<!-- scenarios:auto:end -->

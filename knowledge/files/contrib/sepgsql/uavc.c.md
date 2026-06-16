@@ -215,6 +215,10 @@ Audit firing logic at `uavc.c:397-409`:
   `selinux_status_close`, `security_get_initial_context_raw`,
   `security_check_context_raw`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-security: permissive-mode cache widening (uavc.c:384)

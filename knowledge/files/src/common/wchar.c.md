@@ -195,3 +195,9 @@ header but not enforced. (low)]`
 `[ISSUE-dos: pg_utf8_verifystr backtracks at the end of the
 vectorised loop; well-bounded in practice but the do-while loop
 relies on `IS_HIGHBIT_SET(*s)` being eventually true. (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

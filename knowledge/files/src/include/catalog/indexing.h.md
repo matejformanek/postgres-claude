@@ -16,3 +16,11 @@
 ## Tally
 
 `[verified-by-code]=1 [from-comment]=1`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a column to an existing system catalog](../../../../scenarios/add-new-system-catalog-column.md)
+
+<!-- scenarios:auto:end -->

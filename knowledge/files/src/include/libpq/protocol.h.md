@@ -64,6 +64,10 @@ change" warning** [verified-by-code].
 - Frontend: `src/interfaces/libpq/fe-protocol3.c` consumes the same
   constants.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: every byte is wire-load-bearing]**
@@ -89,3 +93,11 @@ change" warning** [verified-by-code].
 ## Tally
 
 `[verified-by-code]=4 [from-comment]=2 [inferred]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

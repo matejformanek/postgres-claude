@@ -75,6 +75,10 @@ constructors for every concrete streamer type. The implementations live in the
   "Backup-stream-trust" and "Decompression-bomb").
 - Compression spec it consumes: `common/compression.h` (`pg_compress_specification`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: astreamer base-must-be-first-member is comment-only]**

@@ -86,6 +86,10 @@ Kukard / LBSD. [from-comment, ifaddr.c:1-17]
   `parse_hba_line` for CIDR), `auth.c` for radius source-address checks
 - Sibling: `source/src/common/ip.c` (`pg_getaddrinfo_all`)
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: IPv4-mapped IPv6 (`::ffff:0:0/96`) handling]**

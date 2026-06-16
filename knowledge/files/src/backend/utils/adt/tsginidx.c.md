@@ -45,3 +45,9 @@ agree on the layout.
   between `gin_extract_tsquery` and `gin_tsquery_consistent` is
   documented only by code — schema drift between the two would be
   a silent correctness bug. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

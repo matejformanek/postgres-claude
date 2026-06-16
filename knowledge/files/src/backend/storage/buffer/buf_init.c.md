@@ -80,3 +80,9 @@ contract. [verified-by-code]
   written as a raw field (not via atomic) because shmem is single-threaded
   at this point. Fine, but a comment noting "called only during
   postmaster startup" would help. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `storage-buffer`](../../../../../issues/storage-buffer.md)
+<!-- issues:auto:end -->

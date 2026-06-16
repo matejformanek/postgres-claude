@@ -126,3 +126,9 @@ Tar method uses `S_IRUSR | S_IWUSR` (0600) hardcoded in
 `pg_file_create_mode`. So mode set by server's
 `data_directory_mode` (streamutil.c) is ignored for WAL-in-tar.
 [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

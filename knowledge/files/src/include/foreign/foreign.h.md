@@ -68,3 +68,9 @@ or a foreign table by OID or by name. Backing catalogs are
 - `GetForeignServer` (non-Extended) raises an `ereport(ERROR)` on
   missing — the header doesn't document the failure mode.
   [ISSUE-doc-drift: missing-OK vs error contract (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-foreign`](../../../../issues/include-foreign.md)
+<!-- issues:auto:end -->

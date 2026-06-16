@@ -97,6 +97,10 @@ bulk at end of statement. `[verified-by-code]` (whole file)
   (`input_filename`, `output_filename`, `base_yylineno`, `base_yyin`,
   `base_yyout`, `ret_value`, `enum errortype`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-robustness: `cat_str` does not validate `count` against varargs]** `util.c:219` — `cat_str`
   reads `count` arguments via `va_arg` with no NULL-terminator sentinel; a

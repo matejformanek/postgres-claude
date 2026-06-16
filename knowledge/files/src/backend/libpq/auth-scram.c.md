@@ -148,6 +148,10 @@ auth-scram.c:6-81]
 - Common SCRAM primitives: `src/common/scram-common.c`, `src/common/saslprep.c`.
 - Cert hash for channel binding: `be-secure-openssl.c::be_tls_get_certificate_hash`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: parsed client proof / nonce not scrubbed]**

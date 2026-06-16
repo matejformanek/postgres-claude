@@ -50,6 +50,10 @@ critical section, no WAL.
 - `knowledge/files/contrib/pg_visibility/pg_visibility.c.md` — companion VM-byte peek
 - `src/backend/storage/freespace/README` — FSM tree shape (would explain the int2 return)
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_freespacemap`](../../../issues/pg_freespacemap.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-audit-gap: no C-side privilege check, only SQL grant to pg_stat_scan_tables (nit)] — `source/contrib/pg_freespacemap/pg_freespacemap.c:27-53`

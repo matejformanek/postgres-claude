@@ -100,3 +100,9 @@ sink can drop straight into its ops vtable to forward to
   every sink doing the right thing. No central enforcement.
   [ISSUE-undocumented-invariant: cleanup ordering relies on
   per-sink discipline (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `backup`](../../../../issues/backup.md)
+<!-- issues:auto:end -->

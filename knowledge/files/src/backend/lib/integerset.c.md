@@ -64,3 +64,9 @@ remains the canonical example of Simple-8b in the tree.
 - **File-line `integerset.c:218-220`.** The `rightmost_nodes` array
   comment says `rightmost_parent[0]`/`rightmost_parent[1]` but the
   variable is actually `rightmost_nodes`. [ISSUE-doc-drift: comment names wrong variable (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `lib`](../../../../issues/lib.md)
+<!-- issues:auto:end -->

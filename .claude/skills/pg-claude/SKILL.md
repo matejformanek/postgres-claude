@@ -45,6 +45,7 @@ correct `dev/...` paths, and macOS gotchas.
 | Document a subsystem | `/document-subsystem <path>` |
 | Brainstorm a PG feature (Phase 1 of planner) | `/pg-brainstorm <idea>` |
 | Heavy plan for a brainstormed feature (Phase 2) | `/pg-plan <slug>` |
+| Pull a scenario playbook + starter plan when change-class is already known | `/pg-scenario <slug>` |
 | Execute a plan phase-by-phase (Phase 3, plan-linked commits) | `/pg-implement <slug>` |
 | Multi-agent comprehensive patch review (CF# / PR# / .patch) | `/pg-review <ref>` |
 
@@ -136,6 +137,11 @@ knowledge/
 ├── issues/         # corpus-surfaced issue register (Phase A) — one .md per subsystem
 │                   #   with [ISSUE-*] tagged concerns: leaks, doc-drift, stale TODOs,
 │                   #   undocumented invariants, questions. See issues/README.md.
+├── scenarios/      # task-shaped playbooks — one .md per recurring change-class
+│                   #   (add a data type, a SQL keyword, a GUC, a WAL record, ...).
+│                   #   Each scenario has an authoritative file checklist that
+│                   #   pg-feature-plan PINS as the §3 table (hard integration).
+│                   #   See scenarios/README.md + scenarios/_index.md.
 └── files/          # one .md per source file — 917+ docs mirroring source/src/
                     #   layout. Use when you need precise file:line context for a
                     #   specific .c or .h.
@@ -148,6 +154,7 @@ planning/           # forward-looking design docs for features in-flight (Phase 
 **Routing rule:**
 - "What does PG do at a high level?" → `architecture/`.
 - "How is this pattern done in PG?" → `idioms/`.
+- "I want to add a new <thing>, what files do I touch?" → `scenarios/_index.md` (the decision tree). Each scenario lists the full file-by-file sweep.
 - "Is there a doc for `bufmgr.c`?" → `files/src/backend/storage/buffer/bufmgr.c.md`.
 - "What's odd / suspect / undocumented in subsystem X?" → `issues/X.md`.
 - "What's the current state of pg-claude itself?" → `progress/STATE.md`.

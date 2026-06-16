@@ -168,3 +168,9 @@ This is the **answer to the orchestrator's question 4**: what gates
   test; for very long paths or unusual encodings the canonical form
   may differ from what an admin expected when granting access. Edge
   cases worth a fuzz pass (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

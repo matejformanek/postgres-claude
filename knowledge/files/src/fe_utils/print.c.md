@@ -134,6 +134,10 @@ formats `:3647-3654`. `[verified-by-code]` `[from-comment]`
 - `column_type_alignment` `:3811` uses type OIDs (`INT4OID`, `NUMERICOID`, …)
   from `catalog/pg_type_d.h`. `[verified-by-code]`
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: `width_total` is `unsigned int`, additive over all

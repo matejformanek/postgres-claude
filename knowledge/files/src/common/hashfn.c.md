@@ -98,3 +98,9 @@ caveat (see Phase D).
 - [ISSUE-stale-todo: `#define oid_hash uint32_hash /* Remove me eventually */`
   (hashfn.h:59) — predates extension API stability discussion, still here.
   Not a bug, just a confirmed-stale TODO. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

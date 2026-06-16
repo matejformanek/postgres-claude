@@ -166,3 +166,18 @@ buffers are recycled in-place via the clock sweep. [verified-by-code]
   by another Assert elsewhere. [verified-by-code]
 - Line 738. `pg_unreachable()` after `elog(ERROR, ...)` is redundant
   belt-and-suspenders. Cosmetic. [verified-by-code]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new BufferAccessStrategy ring](../../../../../scenarios/add-new-buffer-strategy.md)
+- [Scenario — Add a new BufferAccessStrategy ring](../../../../../scenarios/add-new-buffer-strategy.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `storage-buffer`](../../../../../issues/storage-buffer.md)
+<!-- issues:auto:end -->

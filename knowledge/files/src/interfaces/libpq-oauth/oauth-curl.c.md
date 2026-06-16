@@ -159,6 +159,10 @@ downgrades between compile and run.
   here (if present in corpus).
 - `knowledge/issues/libpq-oauth.md` — issue register for this directory.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq-oauth`](../../../../issues/libpq-oauth.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: JSON number parse via `sscanf("%lf")` is

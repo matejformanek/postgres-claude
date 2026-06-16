@@ -141,6 +141,10 @@ efficiency curiosity.
 - `hstore_gist.c.md` — sibling GiST opclass; lossier but supports more
   queries.
 
+<!-- issues:auto:begin -->
+- [Issue register — `hstore`](../../../issues/hstore.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: extract_hstore_query does not bound query

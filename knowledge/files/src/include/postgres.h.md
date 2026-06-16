@@ -124,3 +124,9 @@ The TOC splits the file into (1) Datum type + support functions and
   exhaustiveness warnings unless compiled with
   `-Wswitch-enum`. [ISSUE-api-shape: `pg_ternary` "unset" easy to
   miss in switch (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

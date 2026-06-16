@@ -112,6 +112,10 @@ context yields use-after-free; no enforcement. `[inferred]`.
 - A14 amcheck: amcheck is the canonical "verify AM honors contract" tool;
   no hook here for it.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-defense-in-depth: required callbacks only Assert-checked (medium)]**
    — `source/src/backend/access/index/amapi.c:45`-`56`.

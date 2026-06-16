@@ -105,3 +105,9 @@ hottest code paths in the entire backend on indexed read workloads.
   SAOP + non-SAOP forward + backward code interleaved. Worth a deep
   read by anyone touching btree scans. No actionable issue, just a
   complexity flag. [ISSUE-style: _bt_readpage length and conditional density (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `access`](../../../../../issues/access.md)
+<!-- issues:auto:end -->

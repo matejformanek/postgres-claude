@@ -93,3 +93,9 @@ to break a header dep cycle with `proc.h`. [from-comment]
   inconsistent. [style]
   [ISSUE-style: comma-chained StaticAssert idiom is opaque to readers
   unfamiliar with PG ilist conventions (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

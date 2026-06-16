@@ -120,6 +120,10 @@ GUCs register their hooks directly through `DefineCustomXxxVariable`.
 - `knowledge/files/src/include/utils/guc_tables.h.md` — `config_generic`
   carries the function pointers.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-audit-gap: no per-hook taxonomy of trust surface; auditing

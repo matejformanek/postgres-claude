@@ -190,3 +190,9 @@ they get the standard CREATE/COPY treatment rather than `symlink(2)`.
 - `[ISSUE-undocumented-invariant: queue_fetch_range coalesces requests by **pointer equality** of path strings (line 363-368), not strcmp; the comment acknowledges this and says it's correctness-safe but performance-affecting. Future refactors must preserve the "caller passes same pointer" invariant (low)]`
 - `[ISSUE-dos: MAX_CHUNK_SIZE = 1 MiB and MAX_CHUNKS_PER_QUERY = 1000 mean up to ~1 GiB of bytea result can be materialized server-side per prepared-statement call; a slow client and a large source might OOM the server. No flow control beyond single-row mode (low)]`
 - `[ISSUE-undocumented-invariant: init_libpq_conn requires full_page_writes=on but does not check that wal_level is appropriate or that the source has not been recently reset; a freshly-promoted source missing the first checkpoint after promotion can leave timeline edge cases (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

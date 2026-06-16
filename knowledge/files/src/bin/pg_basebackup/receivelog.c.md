@@ -128,3 +128,9 @@ correct because tli 1 has no parent. [verified-by-code]
 No decompression in receivelog itself — compression is delegated to
 the WalWriteMethod (walmethods.c). So no decompression-bomb risk in
 this file.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

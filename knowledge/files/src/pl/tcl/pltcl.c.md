@@ -173,6 +173,10 @@ There is none — they're the same code path. `pltrusted` is a parameter, not a 
 - A10-4 (plpython spi/util/subxact, this same sweep): `plpy_spi.c`, `plpy_subxactobject.c`, `plpy_util.c`. The SPI bridge here is structurally identical (subxact-wrap every SPI call), but the trust posture is opposite.
 - `pltclerrcodes.h` — included verbatim into `exception_name_map[]` at `:266-269` to map SQLSTATE → condition name.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pltcl`](../../../../issues/pltcl.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: `spi_exec query` does NOT parameterize; user must call `quote` or use `spi_prepare`+`spi_execp` (likely, by design)]** — `source/src/pl/tcl/pltcl.c:2491`. Standard PL hazard, documented behavior. Phase D audit: every pltcl function that interpolates a parameter into the query string of `spi_exec` is a SQLi sink. Note that `quote` (`:2095-2142`) doubles single-quotes and backslashes but does NOT understand schema-qualified identifiers — users who need identifier quoting must build it themselves.

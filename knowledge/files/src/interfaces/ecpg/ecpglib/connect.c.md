@@ -107,6 +107,10 @@ ECPG preprocessor emits calls to) plus internal accessors used across ecpglib.
 - `ecpglib_extern.h` — declares `struct connection`, `ivlist`,
   `ecpg_internal_regression_mode`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: list-walk on a possibly-empty list in `ecpg_finish`]**

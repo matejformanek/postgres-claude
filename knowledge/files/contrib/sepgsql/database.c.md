@@ -118,6 +118,10 @@ current label AND attach to the new label.
 - `source/src/backend/catalog/pg_shseclabel.c` — storage of database
   labels (shared catalog).
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-audit-gap: get_database_oid raises before sepgsql checks

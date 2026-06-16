@@ -34,6 +34,10 @@ Note: no `objsubid` (shared objects don't have sub-objects); compare `pg_seclabe
 - Related: `pg_seclabel.h` (per-DB sibling)
 - Related backend: `src/backend/commands/seclabel.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: PK missing objsubid because shared objects can't have sub-objects, but classoid alone isn't enough to distinguish databases vs roles]** `pg_shseclabel.h:48` — the PK includes classoid, so shared objects in different shared catalogs (databases vs roles) don't collide. This is fine, but the omission of `objsubid` compared to `pg_seclabel` deserves a comment. Severity `nit`, type `doc-drift`.

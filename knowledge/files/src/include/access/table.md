@@ -56,6 +56,10 @@ where the SQL-level entry point is the only gate (A6/A12 finding pattern).
 - A6/A12 contrib audit findings: pageinspect functions take raw OID;
   perm check happens at SQL grant level only.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-audit-gap: no permission check in table_open (informational)]**
    — `table.h:21`-`26`. Caller's responsibility, contract not enforced

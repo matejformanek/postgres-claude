@@ -84,6 +84,10 @@ All five funnel into `like_regex_support(rawreq, Pattern_Type_*)`
 - `source/src/include/nodes/supportnodes.h` — `SupportRequestSelectivity`,
   `SupportRequestIndexCondition` definitions.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

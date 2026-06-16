@@ -125,6 +125,10 @@ rejects hex digits, `+`, `'`, `"`, and whitespace `parser.c:286-297`;
 - [[idioms/parser-pipeline]] — the scanner → filter → bison driver pattern shared
   with the backend.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-maintenance: duplicated whitespace/escape logic]** `parser.c:280-283`
   — `check_uescapechar` and `ecpg_isspace` are hand-copied from `pgc.l` with only

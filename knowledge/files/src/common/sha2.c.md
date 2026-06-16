@@ -87,6 +87,10 @@ Reentrant.
 - The SCRAM primitives that depend on it:
   `knowledge/files/src/common/scram-common.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=6 [from-comment]=2 [inferred]=2`

@@ -84,3 +84,9 @@ also (with a deliberate coding-conventions violation) includes
   Note: in `regcustom.h` PG overrides `REALLOC_ARRAY` to
   `repalloc_array_extended` which does include overflow detection,
   so the stale TODO actually lives in regguts.h's fallback path.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-regex`](../../../../issues/include-regex.md)
+<!-- issues:auto:end -->

@@ -138,3 +138,9 @@ block-number array, qsort, transpose to segment-relative numbers
   information, or to make it optional". Hot research direction for
   large clusters. [ISSUE-stale-todo: file-list memory footprint
   acknowledged but not addressed (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `backup`](../../../../issues/backup.md)
+<!-- issues:auto:end -->

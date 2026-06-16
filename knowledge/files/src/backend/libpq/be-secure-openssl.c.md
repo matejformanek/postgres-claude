@@ -197,6 +197,10 @@ All called from `be-secure.c` via thin wrappers:
   stay in sync per comments at be-secure-openssl.c:152 and
   be-secure-common.c:153).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: TLS 1.0 / 1.1 still selectable by GUC]**

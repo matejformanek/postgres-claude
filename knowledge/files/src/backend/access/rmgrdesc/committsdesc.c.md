@@ -43,6 +43,10 @@ for `pg_waldump`. [from-comment, committsdesc.c:3-4]
   `[[src/include/access/commit_ts.h]]`.
 - Descriptor format conventions: `source/src/backend/access/rmgrdesc/README`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `access-rmgrdesc`](../../../../../issues/access-rmgrdesc.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-style: identify switches on unmasked info]**

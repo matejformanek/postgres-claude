@@ -92,3 +92,9 @@ against concurrent `ATTACH PARTITION` / `DETACH CONCURRENTLY`.
   oddity — long-standing, deliberate, but acknowledged as a kluge.
   [ISSUE-stale-todo: documented kluge for old-partdesc retention
   (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `partitioning`](../../../../issues/partitioning.md)
+<!-- issues:auto:end -->

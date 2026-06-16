@@ -155,3 +155,17 @@ None.
 - [ISSUE-stale-todo: comment on `current_query()` (`:225`) says
   "We might want to use ActivePortal->sourceText someday." Long-
   standing TODO. (low)]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../../scenarios/add-new-sql-keyword.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

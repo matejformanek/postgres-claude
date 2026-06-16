@@ -45,3 +45,9 @@ the SysV `SHM_SHARE_MMU` (Solaris intimate shared memory).
 - `IPCProtection 0600` octal is correct but unlabeled — easy to
   misread as decimal 600. [ISSUE-style: 0600 vs S_IRUSR|S_IWUSR
   spelling (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../../issues/include-misc.md)
+<!-- issues:auto:end -->

@@ -88,3 +88,11 @@ For tranches the same applies (lines 93-99).
   PG hackers wiki. A skill (`gucs-bgworker-parallel` already
   covers some of this) should include lwlocklist edit
   procedure. (Informational.)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new LWLock tranche](../../../../scenarios/add-new-lwlock-tranche.md)
+
+<!-- scenarios:auto:end -->

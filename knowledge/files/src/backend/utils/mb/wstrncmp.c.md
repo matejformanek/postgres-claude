@@ -45,3 +45,9 @@ Compiled into both frontend and backend (uses `postgres_fe.h`). [verified-by-cod
   is **absent** in `wstrcmp.c`'s unbounded variant — see issue there.
   [ISSUE-doc-drift: divergence between the two sibling files in how
   they widen `char` → `pg_wchar` (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

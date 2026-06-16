@@ -90,6 +90,10 @@ parks the result into either a descriptor or an SQLDA.
 - also: `ecpg_store_result` / `ecpg_store_input` / `ecpg_auto_alloc` (execute path),
   `ecpg_build_compat_sqlda` / `ecpg_build_native_sqlda` ([[sqlda.c]]).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-leak: ECPGset_desc leaks `var` when item already had no slot? — NO]**
   Re-examined: `var` (descriptor.c:651) is freed on every exit

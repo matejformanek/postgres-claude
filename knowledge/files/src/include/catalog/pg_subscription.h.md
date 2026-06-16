@@ -61,6 +61,10 @@
 - `knowledge/files/src/include/catalog/pg_publication.h.md` (publisher side)
 - `knowledge/subsystems/replication.md` (when written)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-shared-but-name-scoped: subscription name uniqueness is per-DB on a shared catalog]** `pg_subscription.h:126` — the unique index is `(subdbid, subname)`, so two different databases can each have a subscription named "sub1". Code paths that look up by name alone must always pass `MyDatabaseId` for `subdbid` or they'll match the wrong row. The replication launcher walks the whole shared catalog (per the header comment), so this is load-bearing — any future "look up sub by name" helper needs the dbid scope.

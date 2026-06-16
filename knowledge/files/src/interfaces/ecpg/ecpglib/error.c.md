@@ -97,6 +97,10 @@ that decides which of the two raisers to call based on `PQresultStatus`
 - [[misc.c]] — home of `ECPGget_sqlca`, `ecpg_log`, `ecpg_gettext`,
   `ECPGfree_auto_mem` used throughout this file.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-infoleak: server message text surfaces in client `sqlca`]**
   `error.c:258` — `ecpg_raise_backend` copies the server's

@@ -67,3 +67,9 @@ but returning an `ltree` must go through the normal text I/O path.
 - `PG_FREE_IF_COPY` runs unconditionally after the list is built;
   no error path between alloc and free, so no leak window.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `ltree_plpython`](../../../issues/ltree_plpython.md)
+<!-- issues:auto:end -->

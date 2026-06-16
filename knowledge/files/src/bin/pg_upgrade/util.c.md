@@ -111,3 +111,9 @@ producing 0-valued ctrl fields that mostly fail later
 fatal. Used for the connect-string `user=` field; no setuid
 considerations because pg_upgrade is intended to run as the cluster
 owner.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

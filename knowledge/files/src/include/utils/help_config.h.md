@@ -54,6 +54,10 @@ runs outside a backend lifecycle — no shared memory, no transaction.
 - `knowledge/files/src/include/utils/guc_tables.h.md` —
   `config_group`, `config_type` enums printed by GucInfoMain.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-api-shape: `--describe-config` output format has no version

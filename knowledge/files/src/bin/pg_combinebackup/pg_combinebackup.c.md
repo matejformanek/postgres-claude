@@ -159,3 +159,9 @@ files straight through and feeding `INCREMENTAL.*` files into
 - Tablespace mapping table lookup (line 1291-1300) is O(n) per
   tablespace. With many tablespaces this is fine; backup
   directories rarely have more than a handful. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_combinebackup`](../../../../issues/pg_combinebackup.md)
+<!-- issues:auto:end -->

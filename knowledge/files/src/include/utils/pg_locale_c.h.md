@@ -62,6 +62,10 @@ in every C/POSIX-locale comparison and in many parser fast paths.
 - `knowledge/files/src/include/utils/pg_locale.h.md` — the broader locale
   abstraction this header backstops.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-correctness: no bounds guard for `c >= 128`; callers must check

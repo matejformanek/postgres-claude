@@ -60,3 +60,9 @@ from this). [verified-by-code] [from-comment]
   [ISSUE-correctness: misleading exit status on internal error (nit)]
 - File-line: help_config.c:66-69. Stale comment about user-selectable
   output mode. [ISSUE-stale-todo: dead documentation (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

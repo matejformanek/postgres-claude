@@ -111,3 +111,9 @@ All declared `extern`, defined in `btree_utils_var.c`:
   `gbt_var_node_cp_len` — they're file-local in
   `btree_utils_var.c`. Those are the actual truncation primitives
   that the trnc=false invariant guards. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `btree_gist`](../../../issues/btree_gist.md)
+<!-- issues:auto:end -->

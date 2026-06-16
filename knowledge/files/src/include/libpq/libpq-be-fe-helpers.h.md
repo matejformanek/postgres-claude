@@ -53,6 +53,10 @@ helpers [from-comment].
 - `storage/latch.h` — `WaitLatchOrSocket`, `MyLatch`.
 - Used by `dblink`, `postgres_fdw`, logical replication apply worker.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-stale-todo: connections not put into non-blocking mode]**

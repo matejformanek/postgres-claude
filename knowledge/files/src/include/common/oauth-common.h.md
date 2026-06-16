@@ -37,6 +37,10 @@ both `src/backend/libpq/auth-sasl.c` advertising and the libpq
   `fe-auth-oauth-curl.c`.
 - The validator-module API: `src/include/libpq/oauth.h`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: header is a single #define; it doesn't tell

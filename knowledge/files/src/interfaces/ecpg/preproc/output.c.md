@@ -89,6 +89,10 @@ literal. `[verified-by-code]` (whole file)
   `force_indicator`, `connection`, `questionmarks`, `auto_prepare`,
   `base_yylineno`, `input_filename`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-correctness: `output_escaped_str` quoted-close test reads `str[len]`]** `output.c:245` — the closing
   branch tests `str[0] == '"' && str[len] == '"'`, but `len` was already

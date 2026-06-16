@@ -47,6 +47,10 @@ Internal:
 - `source/contrib/ltree/_ltree_gist.c:415-437` — parallel path for `ltree[]` GiST.
 - `source/contrib/ltree/ltree.h:138-176` — `ITEM` struct + `VAL`/`OPR`/`VALTRUE` type codes.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `ltree_execute` has no `CHECK_FOR_INTERRUPTS()`. With a deeply nested ltxtquery (depth N) against a long ltree (M levels), total node visits ≈ N × M leaf-callback invocations interleaved with operator-node visits, all uninterruptible at this level. (likely — uninterruptible eval inner loop)] — `source/contrib/ltree/ltxtquery_op.c:20-47`.

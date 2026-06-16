@@ -188,6 +188,10 @@ violation.
 - Prior sweeps: A6 documented `pg_amcheck` (CLI wrapper) — gin support
   added via the 1.5 SQL upgrade script.
 
+<!-- issues:auto:begin -->
+- [Issue register — `amcheck`](../../../issues/amcheck.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-concurrency: GIN walker under AccessShareLock can race

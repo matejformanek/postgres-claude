@@ -60,6 +60,10 @@ clustering issues. `[from-comment]` `amapi.h:178`.
 - A13/A14 corpus: collation pin / NaN cluster — semantic mismatches that
   static `amvalidate` cannot catch.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-defense-in-depth: 64-bit bitmask caps strategy/procnum count (low)]**
    — `amvalidate.h:24`-`25`.

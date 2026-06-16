@@ -59,6 +59,10 @@ credential into a process-local MEMORY: ccache so later libpq calls
   `source/src/backend/libpq/be-secure-gssapi.c`
 - Frontend counterpart: `source/src/interfaces/libpq/fe-gssapi-common.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: principal-name truncation logged but no enforcement]**

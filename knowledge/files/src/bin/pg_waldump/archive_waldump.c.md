@@ -120,3 +120,9 @@ temp dir so the decoder can pick them up later. [verified-by-code]
   `TarWALDumpReadPage` (`pg_waldump.c:519`) addresses this by
   freeing only after we've moved past the previous segment.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_waldump`](../../../../issues/pg_waldump.md)
+<!-- issues:auto:end -->

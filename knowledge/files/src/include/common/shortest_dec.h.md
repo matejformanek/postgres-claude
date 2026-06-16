@@ -47,3 +47,9 @@ None.
 - [ISSUE-undocumented-invariant: `_bufn` variants do NOT NUL-terminate;
   the suffix `n` is the only signal. Mistaking `_bufn` for `_buf` would
   leave a non-terminated string. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

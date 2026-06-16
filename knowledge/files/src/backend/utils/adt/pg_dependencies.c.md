@@ -107,6 +107,10 @@ walked by `pg_parse_json` via these callbacks:
   `dependency_degree` machinery.
 - `source/src/common/jsonapi.c` — `pg_parse_json`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 7
 - `[from-comment]` × 1

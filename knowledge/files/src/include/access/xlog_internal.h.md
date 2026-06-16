@@ -111,3 +111,12 @@ uint32 xlp_xlog_blcksz; }`. First page of every segment has this.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [architecture/wal.md](../../../../architecture/wal.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+- [Scenario — Add a new WAL record](../../../../scenarios/add-new-wal-record.md)
+
+<!-- scenarios:auto:end -->

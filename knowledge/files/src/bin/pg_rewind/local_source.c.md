@@ -93,3 +93,9 @@ just for performance (direct-I/O friendliness); no correctness impact.
   page (8KB by default) — fine, but unbounded recursion if the
   caller misuses the API could blow the stack. Not currently an
   issue; flagged only as an invariant for refactorers.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

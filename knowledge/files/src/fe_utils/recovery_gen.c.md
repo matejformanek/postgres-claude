@@ -71,6 +71,10 @@ cleartext.**
 - `source/src/bin/pg_basebackup/pg_basebackup.c` — primary caller.
 - Secret-scrub cluster: walreceiver A8 (consumes this `primary_conninfo`), libpq A2, common A5.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: cleartext password persisted to postgresql.auto.conf]**

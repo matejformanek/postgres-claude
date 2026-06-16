@@ -91,6 +91,10 @@ the five low-level helpers that implement RFC 5802 §3 derivations.
 - HMAC dep: `knowledge/files/src/include/common/hmac.h.md`.
 - SHA-2 sizing: `knowledge/files/src/include/common/sha2.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-defense-in-depth: no SCRAM_SHA_256_MAX_ITERATIONS upper

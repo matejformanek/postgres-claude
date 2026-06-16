@@ -111,6 +111,10 @@ Functions here implement the SQL surface: `range_in`/`out`/`recv`/
   `source/src/backend/utils/adt/rangetypes_spgist.c` — index opclasses
   on top of these primitives.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 9
 - `[from-comment]` × 1

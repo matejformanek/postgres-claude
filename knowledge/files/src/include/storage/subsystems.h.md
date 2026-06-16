@@ -60,3 +60,9 @@ the implementing subsystem's `.c` file (e.g. `LWLockCallbacks` in
   comment of `subsystemlist.h`. [inferred]
   [ISSUE-style: header is intentionally minimal; future cleanup
   pressure may be a footgun (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

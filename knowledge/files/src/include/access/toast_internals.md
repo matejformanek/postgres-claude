@@ -76,6 +76,10 @@ subtle source of cross-tx reads if misused. `toast_internals.h:61`.
 - A11 + A5: decompression-bomb echoes — caps live in the compression layer,
   not here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-security: method field is 2-bit; reader must defend against unused codes (low)]**
    — `toast_internals.h:34`-`46`.

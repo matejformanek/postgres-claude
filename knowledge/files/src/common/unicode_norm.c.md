@@ -88,3 +88,9 @@ codepoints. No version-skew guard. (maybe)]`
 modest worst-case expansion ratio; not a hazard for saslprep
 (short inputs) but a generic exposed API. A future caller that
 feeds attacker-controlled text could see memory amplification. (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

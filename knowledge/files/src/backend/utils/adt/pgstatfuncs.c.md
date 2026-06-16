@@ -170,3 +170,9 @@ None. Reads `pgstat` snapshots.
 - [ISSUE-correctness: wait-event read with `UINT32_ACCESS_ONCE`
   but no fence — type/ID tear is possible. Practical impact:
   occasional bogus wait-event string in pg_stat_activity. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

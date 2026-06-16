@@ -51,3 +51,7 @@ implementation in .c, but the .h could state the trust model.
 
 - A2 libpq stack — primary consumer (auth, hostname matching).
 - Companion: `src/common/ip.c`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

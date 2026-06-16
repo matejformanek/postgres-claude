@@ -102,3 +102,9 @@ Entry points:
   helper; reorder-buffer callbacks rely on plugins flipping these in the
   right order via `OutputPluginPrepareWrite`/`OutputPluginWrite`. A
   misbehaving plugin can wedge the context. (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

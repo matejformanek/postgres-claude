@@ -54,6 +54,10 @@ None.
   fuzzystrmatch contexts. See `knowledge/issues/pgcrypto.md` and
   `knowledge/issues/contrib/fuzzystrmatch.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. `[ISSUE-documentation: header doesn't declare "stable, on-disk safe"
    contract; reviewers must infer from companion-header naming

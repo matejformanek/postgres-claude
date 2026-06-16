@@ -98,6 +98,10 @@ rebuilding everything against the new header — no catversion guard.
 - `knowledge/subsystems/access-nbtree.md` (not yet written) — btree consumer.
 - A14 amcheck: validates IndexTuple structure on-page.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-correctness: size=0 in corrupted t_info loops scans (low)]**
    — `itup.h:65`-`75`.

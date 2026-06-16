@@ -205,3 +205,17 @@ for the trust posture.
   "These values are also used in the on-the-wire protocol" (line 95)
   is the only thing keeping them stable. A reviewer who only sees the
   C side might re-letter them. (low / coupling hazard)]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new replication / logical-decoding message](../../../../scenarios/add-new-replication-message.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

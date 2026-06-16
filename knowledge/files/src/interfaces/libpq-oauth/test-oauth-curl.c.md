@@ -64,3 +64,7 @@ prints `1..0 # skip`.
 
 - [[oauth-curl.c]] — the file under test (included wholesale).
 - `knowledge/issues/libpq-oauth.md` — issue register.
+
+<!-- issues:auto:begin -->
+- [Issue register — `libpq-oauth`](../../../../issues/libpq-oauth.md)
+<!-- issues:auto:end -->

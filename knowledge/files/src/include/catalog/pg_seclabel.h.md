@@ -33,6 +33,10 @@
 - Related: `pg_shseclabel.h` (shared-object sibling)
 - Related backend: `src/backend/catalog/objectaddress.c`, `src/backend/commands/seclabel.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: label text is opaque to PG, parsed only by provider]** `pg_seclabel.h:38-39` — the `label` text is interpreted entirely by the registered label provider (e.g. sepgsql). Header has no comment noting this is a provider-defined opaque payload — a future reviewer could think it's a regular string and add a citext-style normalization. Severity `nit`, type `undocumented-invariant`.

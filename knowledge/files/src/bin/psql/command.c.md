@@ -214,6 +214,10 @@ Arg → that path. No arg → `$HOME` (Unix: getenv("HOME") fallback to `getpwui
 - `input.c::printHistory`, `pg_send_history` — `\s` and history flushing.
 - `dumputils.c::generate_restrict_key` — produces the key `pg_dump` puts into a `\restrict <key>`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tally
 
 `[verified-by-code]=40 [from-comment]=4 [inferred]=1`

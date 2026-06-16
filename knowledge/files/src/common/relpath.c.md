@@ -80,3 +80,9 @@ would shadow `"vm"`/`"main"`. Add a static check.
   overflows silently in release builds. The comment in
   `relpath.h:65-67` reminds the editor to bump these, but it's a
   manual coupling.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

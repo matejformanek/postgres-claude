@@ -57,3 +57,9 @@ return value. The body itself:
   auto-adds include guards (clang-tidy `llvm-header-guard`, IDE
   refactors) will break the build silently if pointed at this file.
   [ISSUE-style: guard-less header trips automatic-cleanup tooling (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

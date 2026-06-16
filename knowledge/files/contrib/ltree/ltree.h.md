@@ -65,6 +65,10 @@ Type-fetch macros:
 - `source/src/include/access/gist.h` — `GISTMaxIndexKeySize`.
 - A5 finding (`knowledge/files/.../jsonapi/...`): the incremental json parser has a 6400-byte stack cap; lquery/ltxtquery parsers use `check_stack_depth()` instead, which means they fail at `max_stack_depth` (default 100 actual nesting levels deep depending on per-frame size).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-doc: line 129 comment says "valid label chars are alphanumerics, underscores and hyphens" — implying ASCII. But `t_isalnum_cstr` is the encoding-aware tsearch helper, so under any UTF-8 locale it accepts Unicode letters. Two surprising consequences: (1) the same query string under different `lc_ctype` settings may parse differently; (2) the CRC is computed on case-folded UTF-8 bytes, so signature-bucket assignments are locale-dependent. **GiST indexes built under one locale and queried under another can silently disagree.** (likely)] — `source/contrib/ltree/ltree.h:130`.

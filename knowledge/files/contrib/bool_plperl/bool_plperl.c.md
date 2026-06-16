@@ -49,3 +49,9 @@ Perl SV → C `bool` via `SvTRUE`. [verified-by-code]
   untrusted split is encoded in the .control / .sql plumbing, not in
   the C source; future readers may wonder why no `plperlu` symbol is
   referenced (nit)].
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bool_plperl`](../../../issues/bool_plperl.md)
+<!-- issues:auto:end -->

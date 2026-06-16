@@ -40,6 +40,10 @@ Constants for SHA-1 (`SHA1_DIGEST_LENGTH = 20`, `SHA1_BLOCK_SIZE =
 - Fallback impl: `knowledge/files/src/common/sha1.c.md`.
 - Dispatcher: `knowledge/files/src/include/common/cryptohash.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: no deprecation note that SHA-1 is broken

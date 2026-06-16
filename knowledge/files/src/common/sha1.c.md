@@ -82,6 +82,10 @@ Reentrant.
 - Public constants: `knowledge/files/src/include/common/sha1.h.md`.
 - Dispatch facade: `knowledge/files/src/common/cryptohash.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=6 [from-comment]=2`

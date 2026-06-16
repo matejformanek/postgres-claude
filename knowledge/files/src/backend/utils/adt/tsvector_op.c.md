@@ -72,3 +72,9 @@ very large vocabularies, but bounded by per-query memory context.
   behaviour but worth noting. (low)]
 - [ISSUE-dead-code: None obvious in 2896 lines, but a closer pass
   would be useful — file is large and historically organic.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

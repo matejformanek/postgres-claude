@@ -101,6 +101,10 @@ Common helpers:
 - `source/src/backend/utils/cache/syscache.c` — every output uses
   SearchSysCache1(NAMEDOID) etc.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

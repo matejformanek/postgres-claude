@@ -77,3 +77,9 @@ function prototypes consumed by `pg_stash_advice.c`, `stashfuncs.c`, and
   fine for a low-contention path (advice modification is rare) but
   worth noting. [inferred] [ISSUE-style: no padding hints, fine here
   (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_stash_advice`](../../../issues/pg_stash_advice.md)
+<!-- issues:auto:end -->

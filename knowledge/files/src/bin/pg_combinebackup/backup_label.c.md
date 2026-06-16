@@ -76,3 +76,9 @@ backup. [verified-by-code]
   would be silently dropped. [unverified] [ISSUE-question: would a
   newly-added backup_label field with the INCREMENTAL FROM prefix be
   silently stripped? (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_combinebackup`](../../../../issues/pg_combinebackup.md)
+<!-- issues:auto:end -->

@@ -120,6 +120,10 @@ and the localised day/month name cache.
 - A7 (pg_locale_icu input-length finding), A13 (citext default-collation
   asymmetry), A14 (pg_trgm pinned `DEFAULT_COLLATION_OID`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-resource: `pg_str{lower,upper,fold,title}` accept caller-supplied

@@ -106,6 +106,10 @@ two recursive helpers (`ECPGdump_a_simple`, `ECPGdump_a_struct`) are `static`
   (defines `struct ECPGtype`, `struct ECPGstruct_member`, `enum ECPGttype`,
   `IS_SIMPLE_TYPE`, `ecpg_no_indicator`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-overflow: `atoi`-based array-size sniffing silently misreads large or
   expression sizes]** `type.c:425-426`, `type.c:457-460`, `type.c:526-527` —

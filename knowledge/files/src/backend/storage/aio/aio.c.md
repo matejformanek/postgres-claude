@@ -119,6 +119,10 @@ method-dispatch table (`pgaio_method_ops_table`) live here.
 - Subsystem entry points: `knowledge/files/src/include/storage/aio_subsys.h.md`.
 - Interrupt/critical-section idiom: `knowledge/idioms/error-handling.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `storage-aio`](../../../../../issues/storage-aio.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: `report_return` lifetime tied to

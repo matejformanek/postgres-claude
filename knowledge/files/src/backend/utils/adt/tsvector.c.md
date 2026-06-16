@@ -66,3 +66,9 @@ defeat the unique-position invariant.
   sets `haspos = 1` (`:504`). If a sender sends `npos = 0` but the
   caller expects `haspos = 1`, downstream code may break. Bounded
   by the recv check at `:504`. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

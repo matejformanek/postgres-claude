@@ -63,3 +63,9 @@ substitution (maybe)]`
 `[ISSUE-undocumented-invariant: the "no attacker-controlled
 placeholder values" rule is not stated in this file or in
 percentrepl.h. A future caller could miss it. (maybe)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

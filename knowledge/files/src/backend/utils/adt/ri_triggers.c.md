@@ -65,3 +65,9 @@ Plus `ri_LoadConstraintInfo` (302) — loads `RI_ConstraintInfo` from `pg_constr
 - `[ISSUE-correctness: ri_CompareWithCast at 288 — applies a cast operator to compare FK and PK values when types differ (e.g. int4 FK referencing int8 PK). A buggy cast for a user type could silently break FK enforcement (maybe — would need targeted audit)]`.
 
 Confidence: SQL-building paths `[verified-by-code]` via spot-check; quoteOneName implementation `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

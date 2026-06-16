@@ -93,3 +93,11 @@ There are no C declarations in this file — it is pure macro-invocation data.
 No issues. The file is a straightforward data table with 26 entries. The
 ASCII-sort invariant is documented in the file itself (`c_kwlist.h:23`) and is
 the only non-obvious constraint.
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../../scenarios/add-new-sql-keyword.md)
+
+<!-- scenarios:auto:end -->

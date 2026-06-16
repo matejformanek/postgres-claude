@@ -232,6 +232,10 @@ pg_user). `check_ident_usermap` (2626) supports regex-based
 - SQL view: `source/src/backend/utils/adt/hbafuncs.c` exposes the
   parsed state via `pg_hba_file_rules` and `pg_ident_file_mappings`
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: lexer silently accepts unterminated quote]**

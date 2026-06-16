@@ -172,6 +172,10 @@ Four-tier model documented at the top of the file (`source/src/pl/plpgsql/src/pl
 - `commands/trigger.c` — `TriggerData`, `TRIGGER_FIRED_*` macros, `tg_trigtuple`/`tg_newtuple`/`tg_relation` used by `plpgsql_exec_trigger`.
 - `parser/parse_coerce.c` — `coerce_to_target_type` with the special `COERCION_PLPGSQL` mode (`source/src/pl/plpgsql/src/pl_exec.c:8140`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 The file is mature, but several behaviors deserve attention from a security/audit/correctness lens — especially because PL/pgSQL is the canonical "privileged code runs as some user, processes some other user's data" surface.

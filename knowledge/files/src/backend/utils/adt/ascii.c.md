@@ -58,6 +58,10 @@ read-only constants.
 - `source/src/include/mb/pg_wchar.h` — `PG_LATIN1` etc.
 - `source/src/backend/utils/adt/oracle_compat.c` — `chr()`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 3

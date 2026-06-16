@@ -63,5 +63,9 @@ fallback when the AM doesn't override; cheap but not free.
   `GetIndexAmRoutineByAmId`.
 - `source/src/backend/access/index/genam.c` — `index_can_return`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 5

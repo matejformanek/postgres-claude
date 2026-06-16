@@ -79,3 +79,9 @@ options like `(BICYCLE 'red')`. [from-comment, verified-by-code]
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `commands`](../../../../issues/commands.md)
+<!-- issues:auto:end -->

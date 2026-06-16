@@ -128,3 +128,9 @@ replication_slot, compression_algorithm, endpos
 - `[ISSUE-stale-todo: ZSTD WAL compression unsupported at line 815 (low)]`
 - `[ISSUE-dos: 5-second pg_usleep in the reconnect loop delays signal handling (low)]`
 - `[ISSUE-info-disclosure: verbose mode logs every keepalive / segment boundary at INFO; if stderr is redirected to a shared log, observers learn the WAL LSN cadence (maybe)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

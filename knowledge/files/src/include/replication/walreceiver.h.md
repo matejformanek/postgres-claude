@@ -158,3 +158,9 @@ CONNECT-with-100-host-failover-list user might bump it.
   are documented only in scattered call sites (`ShutdownWalRcv`,
   `WalRcvDie`, `RequestXLogStreaming`); no single diagram in header
   (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

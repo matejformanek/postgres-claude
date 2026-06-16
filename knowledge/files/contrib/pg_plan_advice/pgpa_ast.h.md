@@ -63,3 +63,9 @@ identifiers-vs-target set classifier enum (`pgpa_itm_type`). [verified-by-code]
 - `pgpa_ast.h:152-155` — the `yyscan_t` typedef guard is necessary because
   bison-generated headers also emit it. Standard idiom but worth noting for
   anyone adding includes. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

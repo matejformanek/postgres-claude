@@ -41,6 +41,10 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 - Parent overview: `knowledge/files/src/include/catalog/_catalog_headers_overview.md`
 - Related: `pg_opfamily.h` (parent), `pg_amop.h`, `pg_amproc.h` (members), `commands/opclasscmds.c` (DDL).
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: opcdefault uniqueness not enforced]** `pg_opclass.h:13-17` — comment explicitly notes the "at most one default per (opcmethod, opcintype)" rule isn't enforced by an index because partial indexes aren't allowed on system catalogs. Relies on DDL validation in `opclasscmds.c`. Worth flagging because a corrupt catalog (e.g. extension misuse) could silently violate it.
@@ -48,3 +52,13 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 ## Tally
 
 `[verified-by-code]=5 [from-comment]=3`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+- [Scenario — Add a new operator class for an existing index AM](../../../../scenarios/add-new-operator-class.md)
+
+<!-- scenarios:auto:end -->

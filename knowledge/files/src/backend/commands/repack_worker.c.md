@@ -105,3 +105,9 @@ trigger-based capture but uses logical decoding directly. [verified-by-code]
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `commands`](../../../../issues/commands.md)
+<!-- issues:auto:end -->

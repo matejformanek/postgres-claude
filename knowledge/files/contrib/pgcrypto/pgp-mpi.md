@@ -85,6 +85,10 @@ read/write through Push/PullFilter, hash-update with bit-prefix, and the
 - `pgp-pubdec.md` / `pgp-pubenc.md` — MPI is the wire format for
   session-key encryption payloads.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: 65 535-bit MPI ceiling; cap at 8 192 (or

@@ -55,3 +55,9 @@ positives, more disk. Min documented in `tsvectorops_options`.
   conflated with `ARRKEY`/`SIGNKEY` via flag bitmask. Combining
   flags incorrectly (`ARRKEY | ALLISTRUE`) is undefined behavior
   not asserted. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

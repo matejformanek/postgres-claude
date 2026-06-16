@@ -101,3 +101,9 @@ archiver is removed, header would be invalid. [verified-by-code]
 
 No path traversal or symlink risk — pathnames are static string
 literals in this file. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

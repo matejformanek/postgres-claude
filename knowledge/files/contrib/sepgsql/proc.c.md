@@ -155,6 +155,10 @@ unless the cache hit suppresses the kernel call.
 - `source/src/include/catalog/pg_proc.h` —
   `proleakproof` field.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-security: proc.c:279 typo — namespace-change setattr

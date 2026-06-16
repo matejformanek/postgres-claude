@@ -138,6 +138,10 @@ The `struct statement` (allocated execute.c:1973) is the unit of ownership:
 
 - [[data.c]], [[prepare.c]], [[descriptor.c]], [[connect.c]], [[error.c]]
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: PGresult leaked on `ecpg_execute` failure]** `execute.c:1649` —

@@ -98,3 +98,9 @@ unchanged because each forked process gets its own copy.
 touches its old slot pointer (low)] — Comment at line 327 calls this
 out; "we can safely swap the struct pointers within the array"
 because the now-dead thread has already returned.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

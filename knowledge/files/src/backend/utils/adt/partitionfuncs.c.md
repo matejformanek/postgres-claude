@@ -58,3 +58,9 @@ None.
   not data, but enumeration is still leakage (low)]
 - [ISSUE-dos: `find_all_inheritors` lock acquisition on huge trees;
   no nrows clamp (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

@@ -37,6 +37,10 @@ Authorization identifier membership: edges from members to roles, with grantor +
 - Parent overview: `knowledge/files/src/include/catalog/_catalog_headers_overview.md`
 - Related: `pg_authid.h` (roles, also shared)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: grantor identifies the row uniquely with (roleid, member)]** `pg_auth_members.h:66-67` — the uniqueness keys both include `grantor`, meaning the same (roleid, member) pair can appear multiple times with different grantors. This is intentional (PG 16+ behavior) but the header doesn't note that revoking by a different grantor than the original is a SQL-spec edge case. Severity `nit`; semantics live in `aclchk.c`. Flag for the privilege-graph project.

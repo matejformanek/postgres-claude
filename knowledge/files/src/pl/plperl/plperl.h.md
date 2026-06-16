@@ -180,3 +180,7 @@ database encoding gate is the only filter (and database-wide).
   `PG_UTF8`. The `#include` at plperl.h:19 carries a comment noting
   it "defines free() by way of system headers, so must be included
   before perl.h" — a perl-vs-PG portability concern.
+
+<!-- issues:auto:begin -->
+- [Issue register — `plperl`](../../../../issues/plperl.md)
+<!-- issues:auto:end -->

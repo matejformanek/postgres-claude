@@ -238,3 +238,9 @@ OPTION` etc.
   — including unrelated roles. Pathological workload: rapid CREATE
   ROLE / DROP ROLE thrashes the cache for unrelated SQL backends
   (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

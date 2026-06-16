@@ -24,6 +24,10 @@ plumbing [from-comment].
 - Used by: `knowledge/files/src/include/libpq/libpq-be.h.md`,
   `knowledge/files/src/include/libpq/be-gssapi-common.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-stale-todo: documented but unfixable include-order hack]**

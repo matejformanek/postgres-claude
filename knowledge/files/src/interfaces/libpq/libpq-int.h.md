@@ -138,3 +138,11 @@ PGconn fields holding **secret material**: `pgpass`, `sslpassword`, `scram_clien
 ## Tally
 
 `[verified-by-code]=15 [from-comment]=4 [maybe]=4`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

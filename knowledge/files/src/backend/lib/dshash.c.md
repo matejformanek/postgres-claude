@@ -106,3 +106,9 @@ number of times until the table stabilises. [from-comment §dshash.c:13-21, 56-6
   shouldn't be reachable (caller holds exclusive lock and we just
   validated the magic), but it's a silent corruption window if it
   ever triggers in production. [ISSUE-correctness: bucket/count drift if delete_item_from_bucket fails non-assert (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `lib`](../../../../issues/lib.md)
+<!-- issues:auto:end -->

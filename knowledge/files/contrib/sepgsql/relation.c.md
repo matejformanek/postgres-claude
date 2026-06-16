@@ -213,6 +213,10 @@ that. This is also called from `OAT_POST_ALTER` on indexes via
 - `source/src/include/catalog/pg_class.h`,
   `source/src/include/catalog/pg_attribute.h` — catalog formdef.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-correctness: relation.c:197 passes SEPG_DB_PROCEDURE__RELABELTO

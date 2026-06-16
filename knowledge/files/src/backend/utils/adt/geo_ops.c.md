@@ -50,3 +50,9 @@ The file is defensive about IEEE-754 hazards:
 - `[ISSUE-stale-todo: many geo functions predate the float8 NaN/Inf cleanup of PG 12; some still return surprising results on Inf inputs rather than ereport (low)]`.
 
 Confidence: function indexing `[verified-by-code]`; quadratic / epsilon concerns `[inferred]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

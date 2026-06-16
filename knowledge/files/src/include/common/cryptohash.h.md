@@ -86,6 +86,10 @@ There is no per-call dispatch — the API is link-time-resolved.
 - A11 pgcrypto: `knowledge/issues/pgcrypto.md` (pgcrypto's `px_memset`
   is weaker than `explicit_bzero`; cryptohash is the model to adopt).
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: _free's explicit_bzero contract is NOT

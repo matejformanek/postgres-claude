@@ -204,3 +204,9 @@ level instead of inside the toast pointer machinery. [verified-by-code]
   page, this is one index lookup, but the scan happens unconditionally
   even when the caller just wants the current size with no intent to
   seek. Cheap, but synchronous. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `storage-large-object`](../../../../../issues/storage-large-object.md)
+<!-- issues:auto:end -->

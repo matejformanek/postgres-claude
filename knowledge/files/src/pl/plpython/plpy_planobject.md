@@ -172,6 +172,10 @@ Same shape, delegates to `PLy_cursor_plan` (in `plpy_cursorobject.c`).
     declared arg types.
   - `parser/parse_type.c` — `parseTypeString` for the types[] list.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: `PLy_cursor` text-vs-plan fallthrough at

@@ -86,3 +86,9 @@ queries, SQL generation, parallel dispatch) lives in
 - Line 244: `check_objfilter` is called BEFORE the
   analyze-mode/parallel/etc. checks. If a user has multiple
   errors, only the first is reported. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

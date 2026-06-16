@@ -36,6 +36,10 @@ and the legacy plaintext-verify path used when migrating passwords.
   (Port carries `scram_ClientKey`/`scram_ServerKey`).
 - Frontend: `src/interfaces/libpq/fe-auth-scram.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: stored_key / server_key buffer sizes implicit]**

@@ -37,3 +37,9 @@ and `pgpa_trove_result` (entries pointer + indexes bitmapset). [verified-by-code
 - `pgpa_trove.h:53-56` — enum values not given explicit numbers; reordering
   the declaration order in the source switches behaviors (currently used
   as indexed lookups in pgpa_trove.c slice selection). [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

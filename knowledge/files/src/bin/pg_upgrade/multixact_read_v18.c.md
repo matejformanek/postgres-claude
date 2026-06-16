@@ -98,3 +98,9 @@ crash-survivor multixids that the old server never wrote.
 [from-comment] **"We could return 'false' here, but we prefer to
 continue reading"** (line 309-313) — explicit choice to preserve
 evidence of corruption rather than fail-fast. Trade-off documented.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

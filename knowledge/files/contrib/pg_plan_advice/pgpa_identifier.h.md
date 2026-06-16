@@ -41,3 +41,9 @@ string-compare helper `strings_equal_or_both_null` reused across the contrib.
   Returns `const char *` (caller can't free it; it's palloc'd). [ISSUE-style:
   const char * return suggests immutability but each call allocates fresh
   in current memory context (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

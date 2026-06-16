@@ -82,6 +82,10 @@ The global `cancel_pressed` (from fe_utils/cancel) is read at the top of the loo
 - `input.c` — `gets_interactive`, `gets_fromFile`, `pg_append_history`, `pg_send_history`, `printHistory`.
 - `prompt.c::get_prompt` — produces the `%/`, `%~`, etc. prompt text.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tally
 
 `[verified-by-code]=18 [from-comment]=4 [inferred]=1`

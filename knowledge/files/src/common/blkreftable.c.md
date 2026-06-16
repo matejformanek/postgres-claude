@@ -65,5 +65,9 @@ This is the **central A3-shaped trust boundary**: pg_combinebackup reads BRT fil
 - pg_combinebackup driver: `src/bin/pg_combinebackup/*`.
 - Server-side writer: `src/backend/backup/basebackup_incremental.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=15 [maybe]=2 [ISSUE]=3`

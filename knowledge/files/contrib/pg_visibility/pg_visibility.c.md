@@ -131,6 +131,10 @@ TO foo` and hand `foo` the ability to:
 - `knowledge/subsystems/storage-buffer.md` — buffer-pin/share-lock discipline
 - `knowledge/subsystems/access-heap.md` — `HeapTupleSatisfiesVacuum` semantics
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_visibility`](../../../issues/pg_visibility.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-audit-gap: no C-side privilege checks on any of the 8 entrypoints; install-script REVOKE-from-PUBLIC is the only gate (likely)] — `source/contrib/pg_visibility/pg_visibility.c:58-66`

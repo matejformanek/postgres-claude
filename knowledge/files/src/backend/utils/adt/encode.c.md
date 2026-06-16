@@ -106,6 +106,10 @@ Both follow the same pattern:
   `hex_decode_safe`.
 - `source/src/include/port/simd.h` — `Vector8`, `vector8_*` primitives.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 7

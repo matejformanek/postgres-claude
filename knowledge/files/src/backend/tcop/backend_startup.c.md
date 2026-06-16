@@ -90,3 +90,11 @@ target backend's main process never sees the cancel-channel socket.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/tcop.md](../../../../subsystems/tcop.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

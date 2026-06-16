@@ -104,6 +104,10 @@ wouldn't have to re-implement these pieces.
 - Client-side mirror: `src/interfaces/libpq/fe-secure-openssl.c` (the
   permission check).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: passphrase not scrubbed on the success path]**

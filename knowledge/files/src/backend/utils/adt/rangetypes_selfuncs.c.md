@@ -58,6 +58,10 @@ strategy. The empty fraction is folded in as a separate constant.
 - `source/src/backend/utils/adt/selfuncs.c` — `examine_variable`,
   `statistic_proc_security_check`, `get_attstatsslot`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 3
 - `[inferred]` × 1

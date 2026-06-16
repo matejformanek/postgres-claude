@@ -86,3 +86,9 @@ checksums can't detect. [verified-by-code] [from-comment]
   RELSEG_SIZE)` uses the global block number; this assumes RELSEG_SIZE
   matches the build-time constant. There's no on-disk check for that
   (block size IS checked above). [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

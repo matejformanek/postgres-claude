@@ -42,3 +42,9 @@ Initial values are the safer defaults. The setter is the only path to relax them
 
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=7 [inferred]=1 [maybe]=3`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

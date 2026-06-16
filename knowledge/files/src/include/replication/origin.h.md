@@ -96,3 +96,9 @@ origin progress concurrently.
 - [ISSUE-undocumented-invariant: `DoNotReplicateId = PG_UINT16_MAX`
   must NEVER appear in the catalog; header asserts it as a sentinel
   but doesn't say where the check lives (origin.c) (sev=unlikely)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

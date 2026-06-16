@@ -269,6 +269,10 @@ posture per case:
     `makeMdArrayResult`, `construct_empty_array`.
   - `mb/pg_wchar.c` — `pg_verifymbstr` (encoding gate).
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: bytea length comes straight from `PyBytes_Size`

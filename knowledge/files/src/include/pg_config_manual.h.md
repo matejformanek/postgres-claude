@@ -188,3 +188,9 @@ Commented-out by default; uncomment for diagnostic builds:
   under cassert means CI exercises copy/equal/out/read codecs
   redundantly for every parse tree. Performance regression
   unavoidable. [ISSUE-style: auto-enable hides perf cost (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

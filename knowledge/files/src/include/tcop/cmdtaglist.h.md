@@ -94,3 +94,11 @@ values used in `pg_stat_activity.query_id` paths.
 - `[ISSUE-DOC: alphabetic-order invariant relies on developer discipline; no CI lint reported (low)] — source/src/include/tcop/cmdtaglist.h:22-24`
 - `[ISSUE-CODE: rowcount flag is wire-significant; changing TRUE→FALSE breaks libpq clients parsing CommandComplete; not flagged in header (low)] — source/src/include/tcop/cmdtaglist.h:26`
 - `[ISSUE-TRUST: A11 echo — event-trigger handler sees full statement string including PASSWORD literals; this list is the dispatch table (medium)] — source/src/include/tcop/cmdtaglist.h:53-94`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
+
+<!-- scenarios:auto:end -->

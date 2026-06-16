@@ -85,6 +85,10 @@ within the module. Externs declared (file:line cites):
   `ObjectAccessType` enum; the multiplex point sepgsql attaches to.
 - libselinux headers — external dependency.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-correctness: SEPG_*__* bit positions in header are coupled to

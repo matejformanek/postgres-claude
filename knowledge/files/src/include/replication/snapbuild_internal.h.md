@@ -115,3 +115,9 @@ readers.
 - [ISSUE-state-transition: `last_serialized_snapshot` is the only
   guard against re-serializing — if shmem is cleared without resetting
   it, two writers could race on the same `*.snap` file (sev=unlikely)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

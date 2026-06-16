@@ -68,3 +68,9 @@ against arbitrary data via a `TSExecuteCallback`. [verified-by-code]
 - `MAXNUMPOS=256` is a tsearch-wide cap on positions per lexeme; the
   number is fixed at compile time and not exposed as a GUC. [ISSUE-question:
   whether MAXNUMPOS should be tunable for very long documents (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-tsearch`](../../../../issues/include-tsearch.md)
+<!-- issues:auto:end -->

@@ -127,6 +127,10 @@ Reentrant. All globals read-only.
 - Backend caller: `knowledge/files/src/backend/libpq/auth-scram.c.md`.
 - Frontend caller: `src/interfaces/libpq/fe-auth-scram.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=15 [from-comment]=3 [inferred]=2`

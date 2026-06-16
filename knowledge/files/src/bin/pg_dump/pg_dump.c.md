@@ -350,6 +350,10 @@ fans `DumpableObject *` out to these `dumpXxx` siblings keyed on
 - `pg_dumpall.c.md` — `runPgDump` invokes this binary per database.
 - `pg_restore.c.md` — replays the archives this file writes.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_dump`](../../../../issues/pg_dump.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 **pg_dump is a primary Phase D candidate area** — it runs as an

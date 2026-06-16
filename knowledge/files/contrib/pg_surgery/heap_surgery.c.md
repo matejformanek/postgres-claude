@@ -153,6 +153,10 @@ SQL gating: `REVOKE EXECUTE ... FROM PUBLIC` in
 - `knowledge/files/contrib/amcheck/` — A12, partner tool (find corruption first)
 - `knowledge/files/contrib/pageinspect/` — A12, partner tool (read raw bytes to identify what's broken)
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_surgery`](../../../issues/pg_surgery.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-correctness: accepts system catalog OIDs; superuser confusion → instant catalog corruption (confirmed)] — `source/contrib/pg_surgery/heap_surgery.c:111-127`

@@ -60,6 +60,10 @@ and backend (`be-secure-openssl.c`). The entire body is gated by
   `knowledge/files/src/include/common/cryptohash.h.md`,
   `knowledge/files/src/include/common/hmac.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-audit-gap: no header-level helper to drain ERR_get_error()

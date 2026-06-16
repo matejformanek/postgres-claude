@@ -173,6 +173,10 @@ collector. Companion header: `pg_backup.h` (`Archive`, `DumpOptions`,
 - Archive layer: `pg_backup.h` (`Archive`, `DumpOptions`, `teSection`,
   `ArchiveFormat`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_dump`](../../../../issues/pg_dump.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: subclass-layout contract is unspecified

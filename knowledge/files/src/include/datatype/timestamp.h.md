@@ -123,3 +123,9 @@ APIs live in `utils/timestamp.h` and `utils/date.h`. [from-comment]
   (month-boundary vs day-boundary). A reviewer adding a new
   validator must keep that ordering. [ISSUE-undocumented-invariant:
   IS_VALID_JULIAN must remain ≥ IS_VALID_DATE coverage (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../../issues/include-misc.md)
+<!-- issues:auto:end -->

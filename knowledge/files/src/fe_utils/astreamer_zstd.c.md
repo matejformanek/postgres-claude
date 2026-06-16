@@ -87,6 +87,10 @@ constructors `pg_fatal` (`:130`, `:285`). [verified-by-code]
 - `source/src/common/compression.c` — `pg_compress_specification`,
   `PG_COMPRESSION_OPTION_*` flags.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: no cumulative decompressed-size cap]**

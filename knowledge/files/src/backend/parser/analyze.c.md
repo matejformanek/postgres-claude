@@ -110,3 +110,11 @@ Each lives further down in the file:
 - [idioms/parser-pipeline.md](../../../../idioms/parser-pipeline.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../scenarios/add-new-sql-keyword.md)
+
+<!-- scenarios:auto:end -->

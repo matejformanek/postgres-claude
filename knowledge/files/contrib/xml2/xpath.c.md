@@ -121,3 +121,9 @@ in `pg_xml_error_occurred → xml_ereport` doesn't lose track of them.
   would. Still worth flagging. [inferred]
   **[ISSUE-security: XML_PARSE_NOENT enables entity expansion; check
   XXE surface (maybe)]**
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `xml2`](../../../issues/xml2.md)
+<!-- issues:auto:end -->

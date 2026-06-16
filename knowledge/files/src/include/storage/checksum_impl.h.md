@@ -87,3 +87,9 @@ instead of the static inline. [verified-by-code] [from-comment]
   `BLCKSZ` would yield a wrong-size matrix. [verified-by-code]
   [ISSUE-undocumented-invariant: implicit `BLCKSZ % 128 == 0` constraint
   not StaticAsserted (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

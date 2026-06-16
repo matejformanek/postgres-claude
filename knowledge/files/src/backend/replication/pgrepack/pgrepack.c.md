@@ -87,3 +87,9 @@ caller that is not the REPACK worker process. [verified-by-code]
   cross-checking when reviewing the PG18 REPACK commit.
   [ISSUE-question: where exactly is REPACK's data snapshot
   pinned? (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `replication`](../../../../../issues/replication.md)
+<!-- issues:auto:end -->

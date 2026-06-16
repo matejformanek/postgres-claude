@@ -305,3 +305,9 @@ Same shape as the rest of the bin/ family — the corpus-level convention
 - `[ISSUE-undocumented-invariant: `else if (PQresultStatus(res) != PGRES_TUPLES_OK)` after the `if (PQresultStatus(res) == PGRES_TUPLES_OK)` branch is tautologically true (low)]` — pg_amcheck.c:1086. The `else if` could just be `else`. Harmless, but the explicit re-check suggests an earlier refactor.
 
 - `[ISSUE-correctness: parallel_workers calculation walks the relations list once just to cap at opts.jobs (low)]` — pg_amcheck.c:677-683. Loop counts reltotal and caps parallel_workers in one pass. Correct but unidiomatic — `parallel_workers = (opts.jobs < reltotal) ? opts.jobs : reltotal` after a `reltotal++`-only pass would be clearer. Cosmetic.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_amcheck`](../../../../issues/pg_amcheck.md)
+<!-- issues:auto:end -->

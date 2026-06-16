@@ -106,6 +106,10 @@ None. Uses `pset.encoding`, `pset.cur_cmd_source`, `pset.copyStream`, `pset.line
 - `copy.h` — the externs.
 - `mainloop.c` — uses sigint_interrupt_jmp similarly (mainloop.c:107).
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tally
 
 `[verified-by-code]=16 [from-comment]=3 [inferred]=1`

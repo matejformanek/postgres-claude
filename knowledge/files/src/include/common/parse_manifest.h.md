@@ -71,5 +71,9 @@ callback verbatim; pg_verifybackup callers must filter.
 - A6 `pg_verifybackup` / `pg_combinebackup` — primary consumers.
 - Companion: `src/common/parse_manifest.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=6`

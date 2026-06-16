@@ -218,6 +218,10 @@ run when OpenSSL is in FIPS strict mode.
 - `<openssl/evp.h>`, `<openssl/err.h>`, `<openssl/rand.h>` —
   external dependencies.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-audit-gap: OpenSSL ERR_get_error never called (confirmed)]

@@ -279,3 +279,9 @@ Stack-depth (`miscadmin.h:295-308`):
   Assert in macro catches under cassert (`miscadmin.h:154-156`) but
   release builds wrap. [ISSUE-correctness: CritSectionCount
   underflow on mis-pairing silent in release (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

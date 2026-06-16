@@ -42,3 +42,9 @@ under construction.
   attribute changes that affect `t_hoff` (e.g. nulls bitmap added).
   These would also short-circuit the optimisation correctly via the
   `t_hoff` check at `:70`. Not a bug, just under-commented. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

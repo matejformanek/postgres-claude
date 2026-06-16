@@ -117,3 +117,9 @@ inserts an enum value mid-list. [from-comment]
 - [ISSUE-state-transition: `elevel` parameter implies but does not
   document a planned conflict-resolution policy; calling-convention
   contract (when LOG vs ERROR) lives only in apply worker (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

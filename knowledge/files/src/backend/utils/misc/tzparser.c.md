@@ -106,3 +106,9 @@ during text-to-timestamp conversions. [verified-by-code] [from-comment]
   in the temp context — leaked if the temp context is reset, but
   `load_tzoffsets` deletes the context after `ConvertTimeZoneAbbrevs`,
   so they vanish. Safe. [ISSUE-leak: no leak in current flow (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

@@ -64,3 +64,9 @@ to display the relationship.
   no companion drop in this header; lifetime/teardown of
   `pg_conflict_detection` lives elsewhere. Search needed to confirm
   the slot survives a launcher crash cleanly. (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

@@ -331,6 +331,10 @@ must be defended explicitly.
 - Prior sweeps: A6 documented `pg_amcheck` which wraps both
   `verify_heapam` and `bt_index_check` from one CLI call.
 
+<!-- issues:auto:begin -->
+- [Issue register — `amcheck`](../../../issues/amcheck.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: `verify_heapam(..., check_toast=true)` can crash

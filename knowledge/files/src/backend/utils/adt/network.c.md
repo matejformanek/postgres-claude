@@ -39,3 +39,9 @@ Source: `source/src/backend/utils/adt/network.c` (2037 lines).
 - `[ISSUE-trust-boundary: inet_client_addr returns the peer address as recorded at connection time; if a reverse proxy forwards client connections, this won't be the "real" client address. Documented but a common operational gotcha (low)]`.
 
 Confidence: `[verified-by-code]` for the function/line map.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

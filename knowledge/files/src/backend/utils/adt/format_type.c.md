@@ -90,6 +90,10 @@ collisions.
 - `source/src/backend/parser/gram.y` — the special productions referenced
   in the comment at `:174-182`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

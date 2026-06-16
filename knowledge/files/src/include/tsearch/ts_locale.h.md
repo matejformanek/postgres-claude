@@ -47,3 +47,9 @@ to parse on-disk `.dict`/`.affix`/stopword files. [verified-by-code]
   (`/* deprecated */`) but not advertised anywhere user-facing.
   [ISSUE-doc-drift: deprecated t_isXxx not on a removal schedule
   (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-tsearch`](../../../../issues/include-tsearch.md)
+<!-- issues:auto:end -->

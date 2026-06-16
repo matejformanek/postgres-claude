@@ -56,3 +56,9 @@ shared `gbt_num_*` / `gbt_var_*` helpers). [verified-by-code]
   obvious from this header alone. [from-comment elsewhere]
   **[ISSUE-undocumented-invariant: gbt_t_var role vs specific
   var-types not documented in this header (nit)]**
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `btree_gist`](../../../issues/btree_gist.md)
+<!-- issues:auto:end -->

@@ -69,3 +69,9 @@ cluster's tablespace dir, never the new one (maybe-low)] —
 `tablespace.c:118`. New-cluster dir creation happens later under
 `file.c` / `transfer.c`. If a user mis-configures `pg_tblspc/` symlinks
 on the new cluster, the failure point is deferred.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

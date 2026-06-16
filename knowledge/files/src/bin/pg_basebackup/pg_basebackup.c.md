@@ -201,3 +201,9 @@ streamutil.c finding about trusting that value. [verified-by-code]
 (line 2411) so even argument-parsing exit paths clean up. Sets
 `success = true` only at the bottom of `main()` (line 2866).
 [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

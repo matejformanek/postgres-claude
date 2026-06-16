@@ -56,3 +56,11 @@ verified-by-code: 3 — from-comment: 5 — from-readme: 0 — inferred: 0 — u
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new cost-model constant (and optional GUC)](../../../../../scenarios/add-new-cost-model-knob.md)
+
+<!-- scenarios:auto:end -->

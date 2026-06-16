@@ -98,6 +98,10 @@ converters are private copies of the backend routines of the same names.
 ## Cross-refs
 - [[dt_common.c]], [[interval.c]], [[datetime.c]]
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-overflow: unchecked int64 subtraction in `PGTYPEStimestamp_sub`]**
   `timestamp.c:798` — `iv->time = (*ts1 - *ts2)` over two finite int64

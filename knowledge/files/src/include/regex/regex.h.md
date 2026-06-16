@@ -101,3 +101,9 @@ Original copyright Henry Spencer 1998-1999. [verified-by-code]
   `REG_MTRACE`, `REG_SMALL`) — opaque debug bits from the upstream
   Spencer code that PG carries forward. [ISSUE-stale-todo:
   undocumented debug bits inherited from Spencer (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-regex`](../../../../issues/include-regex.md)
+<!-- issues:auto:end -->

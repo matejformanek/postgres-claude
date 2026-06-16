@@ -576,6 +576,10 @@ A single backend ⇒ no concurrent threads. Each call-stack frame uses
   needs the opmask + `pp_require_safe` defense-in-depth layer that
   plpgsql doesn't have.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plperl`](../../../../issues/plperl.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted (inline)
 
 - [ISSUE-defense-in-depth: `pp_require_safe` accepts any non-undef

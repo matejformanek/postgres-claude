@@ -42,6 +42,10 @@ One-symbol API used by libpq to assert it was linked against the **frontend** co
 - Impl: `knowledge/files/src/common/link-canary.c.md`.
 - libpq use: `src/interfaces/libpq/fe-connect.c::PQconnectStart`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: header lacks any pointer to "where this

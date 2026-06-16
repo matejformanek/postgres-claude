@@ -48,6 +48,10 @@ the same bound-histogram-driven CDF machinery is reused.
 - `source/src/backend/utils/adt/rangetypes_selfuncs.c` — sibling with
   near-identical structure.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 2
 - `[from-comment]` × 1

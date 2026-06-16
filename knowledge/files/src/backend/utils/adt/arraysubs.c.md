@@ -101,6 +101,10 @@ Two main responsibilities:
 - `source/src/backend/utils/adt/arrayfuncs.c` — `array_get_element`,
   `array_get_slice`, `array_set_element`, `array_set_slice`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 8
 - `[from-comment]` × 4

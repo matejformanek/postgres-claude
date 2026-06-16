@@ -380,6 +380,10 @@ the post-query one. OK in practice.
   declarative FDW with column-type mapping, predicate pushdown, async
   remote estimates. dblink is the manual/explicit equivalent.
 
+<!-- issues:auto:begin -->
+- [Issue register — `dblink`](../../../issues/dblink.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: loopback dblink bypasses pg_hba host-based

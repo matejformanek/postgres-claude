@@ -151,3 +151,9 @@ files. [verified-by-code]
   [ISSUE-correctness: pg_waldump decodes assuming current-source
   WAL record layouts; cross-version WAL may be misdecoded if
   magic matches but record format differs (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_waldump`](../../../../issues/pg_waldump.md)
+<!-- issues:auto:end -->

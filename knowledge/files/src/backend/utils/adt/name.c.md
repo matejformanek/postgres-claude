@@ -83,6 +83,10 @@ the historical `char16` and **always uses the symbolic constant**
 - `source/src/backend/utils/adt/varlena.c` — `varstr_cmp`,
   `varstr_sortsupport`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

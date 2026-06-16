@@ -79,6 +79,10 @@ comment (interval.c:108-110) — in the backend it is exported `[from-comment]`.
 ## Cross-refs
 - [[dt_common.c]], [[datetime.c]], [[timestamp.c]]
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-overflow: month packing unchecked in DecodeInterval]**
   `interval.c:486` (and siblings 500-552) — `tm->tm_*` accumulation via `+=`

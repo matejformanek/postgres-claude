@@ -46,6 +46,10 @@ issuer-specific JWT verifier) implement to plug into HBA `oauth` lines.
   `pg_be_sasl_mech` interface OAuth plugs into),
   `knowledge/files/src/include/libpq/hba.h.md` (HbaLine `oauth_*` fields).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: error_detail allocation lifetime is ambiguous]**

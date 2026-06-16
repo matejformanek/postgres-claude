@@ -299,3 +299,9 @@ link. [verified-by-code] [from-comment]
   Failure inside set_config_with_handle (e.g. bad enum value) would
   ERROR with the partial proconfig already set; subxact abort
   rolls back. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

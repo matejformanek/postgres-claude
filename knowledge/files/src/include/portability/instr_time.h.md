@@ -119,3 +119,9 @@ stores ticks as int64 to keep add/subtract cheap. [from-comment]
   CPUID-derived names could be silently truncated.
   [ISSUE-question: 128 bytes enough for all CPUID strings?
   (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../../issues/include-misc.md)
+<!-- issues:auto:end -->

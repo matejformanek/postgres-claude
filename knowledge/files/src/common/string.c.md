@@ -59,3 +59,9 @@ by hostile client) translate into a 4× memory amplification in the
 log path. Currently bounded by application_name length limit
 (NAMEDATALEN-1), but the file does not state that assumption.
 (maybe)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

@@ -96,6 +96,10 @@ to a single fmgr type.
 - `source/src/backend/utils/adt/expandeddatum.c` — the generic R/W vs R/O
   expanded-Datum infrastructure this builds on.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 2

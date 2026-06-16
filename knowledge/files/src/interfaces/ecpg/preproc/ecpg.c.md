@@ -59,6 +59,10 @@ These globals are declared `extern` in `preproc_extern.h` (included at `ecpg.c:1
 - [[knowledge/idioms/parser-pipeline.md]] — `base_yyparse()` / `lex_init()` here are the ECPG analogue of the backend flex/bison front end.
 - Sibling preproc files (not yet in corpus): `preproc_extern.h` (declares the globals defined here), `pgc.l`/`preproc.y` (the lexer/grammar driven by `base_yyparse`), `type.c`, `variable.c`, `output.c` (`output_line_number` `ecpg.c:480`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-correctness: `output_filename` may be NULL in the error-unlink path]** `ecpg.c:501-505` — when an input file is read from `stdin`, the `out_option == 0` branch sets `base_yyout = stdout` and leaves `output_filename` NULL `ecpg.c:330-331` (it is never assigned for stdin). If a parse error sets `ret_value != 0` for that stdin input, the cleanup block dereferences `output_filename` in `strcmp(output_filename, "-")` `ecpg.c:503` with a NULL pointer → crash. The pre-existing `output_filename` from a previous `-o` invocation does not apply because `-o` sets `out_option = 1`, skipping this block. Severity: maybe (requires stdin input + parse error + no `-o`). `[inferred]`
 - **[ISSUE-leak: output `base_yyout` FILE leaked when `-o` open fails after a prior success]** `ecpg.c:221-236` — a second `-o` on the command line reassigns `base_yyout` without `fclose`-ing the previously opened stream; on failure it clears `output_filename` but the earlier successful stream (and `out_option`) handling is order-dependent. Minor, single-shot tool. Severity: nit. `[inferred]`

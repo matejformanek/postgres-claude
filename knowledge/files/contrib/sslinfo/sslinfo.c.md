@@ -117,6 +117,10 @@ Internal helpers:
 - Prior sweep A2 (libpq SSL/SCRAM) — handshake-side of TLS that produces the `MyProcPort` fields sslinfo reads.
 - `source/contrib/sslinfo/sslinfo.sql.in` — function declarations and GRANTs (not examined in this sweep; would confirm `PUBLIC EXECUTE` default).
 
+<!-- issues:auto:begin -->
+- [Issue register — `sslinfo`](../../../issues/sslinfo.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-security: ssl_issuer_field gates on !peer instead of !ssl_in_use || !peer_cert_valid — returns issuer-DN data from an UNVERIFIED peer cert; asymmetric vs ssl_client_dn_field (likely)]`

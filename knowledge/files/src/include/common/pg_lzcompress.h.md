@@ -59,5 +59,9 @@ historically.
 - A11 pgcrypto pgp — sibling decompression bomb class.
 - Companion: `src/common/pg_lzcompress.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=6`

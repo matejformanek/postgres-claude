@@ -168,6 +168,10 @@ All entry points use `PG_FUNCTION_INFO_V1` and are wired into SQL via
   No — also uses raw `memcmp` for SCRAM proof verification, with the
   same caveat. Cross-corpus finding.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: DES path still callable without deprecation

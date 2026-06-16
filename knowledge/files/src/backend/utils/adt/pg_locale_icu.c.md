@@ -104,6 +104,10 @@ paranoid about `ucol_close` on every error path.
   collate/ctype method tables.
 - `<unicode/ucol.h>` (system) — ICU public API.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 8

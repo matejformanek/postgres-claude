@@ -172,3 +172,9 @@ non-leap-second behavior.
 - `[ISSUE-undocumented-invariant: pg_load_tz returns pointer to file-scope static — second call invalidates first result (maybe)]` — comment at line 88 says so but callers should know.
 - `[ISSUE-info-disclosure: DEBUG_IDENTIFY_TIMEZONE writes every probed path to stderr (low)]` — off by default.
 - `[ISSUE-trust-boundary: $TZ honored without validating that the named zone is in our tzdir vs system tzdir (low)]` — `validate_zone` → `pg_load_tz` → `tzload` will accept system TZ files when SYSTEMTZDIR is configured, so result depends on build-time choice.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `initdb`](../../../../issues/initdb.md)
+<!-- issues:auto:end -->

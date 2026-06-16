@@ -114,3 +114,11 @@ appears as the first field. `nodetag_only` is **not** inherited.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/node-types-and-lists.md](../../../../idioms/node-types-and-lists.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new Node type](../../../../scenarios/add-new-node-type.md)
+
+<!-- scenarios:auto:end -->

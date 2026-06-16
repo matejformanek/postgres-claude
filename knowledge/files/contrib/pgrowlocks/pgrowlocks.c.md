@@ -103,6 +103,10 @@ SQL gating: `REVOKE ALL FROM PUBLIC` is in `pgrowlocks--1.2.sql`
 - `knowledge/files/contrib/pgstattuple/` — A12 pgstattuple, same pg_stat_scan_tables pattern
 - `knowledge/files/contrib/pg_visibility/pg_visibility.c.md` — also reads heap pages bypassing MVCC
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgrowlocks`](../../../issues/pgrowlocks.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-defense-in-depth: exposes per-tuple lock holder PIDs and modes; goes beyond pg_locks (nit)] — `source/contrib/pgrowlocks/pgrowlocks.c:127-263`

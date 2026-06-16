@@ -39,3 +39,11 @@ Each just contains the few command parameters; no further structure.
   `src/backend/replication/repl_scanner.l`.
 - Dispatch: `src/backend/replication/walsender.c exec_replication_command`.
 - Logical decoding side: `src/backend/replication/logical/`.
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new replication / logical-decoding message](../../../../scenarios/add-new-replication-message.md)
+
+<!-- scenarios:auto:end -->

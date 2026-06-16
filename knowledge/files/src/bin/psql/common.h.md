@@ -66,6 +66,10 @@ Declares the SendQuery / PSQLexec layer plus the SIGINT longjmp protocol that ev
 - `copy.c` — same, in `handleCopyIn` (copy.c:521).
 - `startup.c` — calls `psql_setup_cancel_handler` (startup.c:315) and `NoticeProcessor`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tally
 
 `[verified-by-code]=14 [from-comment]=1`

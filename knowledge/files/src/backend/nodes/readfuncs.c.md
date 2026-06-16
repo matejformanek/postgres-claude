@@ -60,3 +60,11 @@ columns (`readBoolCols`, `readIntCols`, `readOidCols`,
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new Node type](../../../../scenarios/add-new-node-type.md)
+
+<!-- scenarios:auto:end -->

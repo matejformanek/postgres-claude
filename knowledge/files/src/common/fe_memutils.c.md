@@ -89,3 +89,9 @@ enforced — `MaxAllocSize` is documented but not enforced
 - `add_size_error`/`mul_size_error` echo the requested sizes to
   stderr, which is fine in a tool but would be a small info leak in
   a server context (not applicable here — file is frontend-only).
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

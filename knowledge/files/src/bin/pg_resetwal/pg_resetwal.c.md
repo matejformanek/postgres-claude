@@ -158,3 +158,17 @@ below]
   told to `touch pg_control` to proceed. That's a deliberate footgun
   release valve; PG admins should know what they're doing.
   [verified-by-code]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Bump CATALOG_VERSION_NO](../../../../scenarios/bump-catversion.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_resetwal`](../../../../issues/pg_resetwal.md)
+<!-- issues:auto:end -->

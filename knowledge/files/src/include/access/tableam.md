@@ -113,6 +113,10 @@ caller, a mistaken hint becomes a correctness bug. `tableam.h:70`-`71`.
 - A12 `tuple_data_split(do_detoast=true)` finding — `relation_fetch_toast_slice`
   is the bottom of that call stack.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-defense-in-depth: required callbacks only Assert-checked (medium)]**
    — `tableam.h:312`-`319`.

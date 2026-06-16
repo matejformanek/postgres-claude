@@ -59,6 +59,10 @@ The header is internal to the extension — none of these symbols are SQL-callab
 - A2 libpq sweep — every `PGconn *` here flows through libpq.
 - `dblink/dblink.c` — same trust-class extension, parallel pattern.
 
+<!-- issues:auto:begin -->
+- [Issue register — `postgres_fdw`](../../../issues/postgres_fdw.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-api-shape: `PgFdwRelationInfo` has no version stamp; an extension subclassing/sharing this private struct (none exists today, but the header is installed in `pkg-include`) would silently break on PG upgrade. (nit)] — `source/contrib/postgres_fdw/postgres_fdw.h:30`.

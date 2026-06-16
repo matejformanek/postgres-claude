@@ -224,3 +224,9 @@ operator step:
   share a tag-prefix layout, but the order looks fragile.
   [ISSUE-style: cast-before-IsA-tag-check in get_partkey_exec_paramids
   (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `partitioning`](../../../../issues/partitioning.md)
+<!-- issues:auto:end -->

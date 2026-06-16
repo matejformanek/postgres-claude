@@ -142,3 +142,9 @@ CRC, version). [verified-by-code]
   off_t)` works via the Min macro's implicit comparison. Fine on
   64-bit; on 32-bit hosts an off_t > UINT32_MAX backup manifest is
   unrealistic. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_verifybackup`](../../../../issues/pg_verifybackup.md)
+<!-- issues:auto:end -->

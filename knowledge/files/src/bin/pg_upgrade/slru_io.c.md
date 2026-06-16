@@ -93,3 +93,9 @@ remaining bytes. Documented behavior, correct.] —
 read (line 144); if `pg_fatal` fires inside the read loop the state
 is half-updated. Since pg_fatal exits, this is harmless (low)] —
 `slru_io.c:144`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

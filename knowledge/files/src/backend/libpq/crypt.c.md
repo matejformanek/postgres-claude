@@ -118,6 +118,10 @@ crypt.c:30).
 - Caller dispatchers in `auth.c`: `CheckPasswordAuth`,
   `CheckPWChallengeAuth`, `CheckMD5Auth`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: shadow_pass not zeroed before pfree]** Returned by

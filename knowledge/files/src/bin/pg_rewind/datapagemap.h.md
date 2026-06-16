@@ -43,3 +43,9 @@ is opaque (forward-declared only).
   means once a relfile has > `INT_MAX * 8` dirty blocks the offset
   arithmetic in `.c` overflows. In practice a relfile is capped at 1 GB
   segments / `MaxBlockNumber`, so unreachable — but unstated.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

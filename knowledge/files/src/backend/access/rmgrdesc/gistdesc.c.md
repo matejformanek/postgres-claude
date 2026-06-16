@@ -49,6 +49,10 @@ helper per record type. [from-comment, gistdesc.c:3-4]
   `[[src/include/access/gistxlog.h]]`.
 - Descriptor format conventions: `source/src/backend/access/rmgrdesc/README`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `access-rmgrdesc`](../../../../../issues/access-rmgrdesc.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: empty PAGE_UPDATE desc is by design]**

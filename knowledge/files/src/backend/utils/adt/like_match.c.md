@@ -95,6 +95,10 @@ each candidate position triggers a `pg_strncoll` call (via ICU
 - `source/src/include/utils/pg_locale.h` — `pg_strncoll`, the
   collation-aware substring comparator.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 5

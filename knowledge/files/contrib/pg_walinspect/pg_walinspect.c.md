@@ -137,6 +137,10 @@ the caller has no privileges to read at the SQL level.
 - `knowledge/files/contrib/pageinspect/` — A12, similar page-bytes exposure but for live pages
 - `knowledge/files/contrib/amcheck/` — A12, similar bypass-MVCC pattern
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_walinspect`](../../../issues/pg_walinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-defense-in-depth: show_data=true returns raw FPI page bytes — DELETE'd / pre-UPDATE tuples bypass RLS, column privs (likely)] — `source/contrib/pg_walinspect/pg_walinspect.c:377-409, 425-467`

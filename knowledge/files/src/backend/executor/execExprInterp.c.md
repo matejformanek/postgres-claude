@@ -100,3 +100,11 @@ performs dispatch. [from-README] / `:206-215`
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new expression-eval step](../../../../scenarios/add-new-expression-eval-step.md)
+
+<!-- scenarios:auto:end -->

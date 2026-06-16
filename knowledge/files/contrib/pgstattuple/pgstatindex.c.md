@@ -187,6 +187,10 @@ when called on a partitioned index parent.
 - `knowledge/files/contrib/pgstattuple/pgstatapprox.c.md` — the
   VM-skip heap-stats alternative.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgstattuple`](../../../issues/pgstattuple.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: pgstatindex leaf metrics enable row-count

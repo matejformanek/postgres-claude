@@ -123,3 +123,9 @@ those commands across N parallel connections via
   reports the failure but the function returns regardless;
   `ParallelSlotsWaitCompletion` (driven from the caller) tracks
   any non-zero exit status. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

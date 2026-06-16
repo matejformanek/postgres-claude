@@ -208,6 +208,10 @@ goes through this header.
   is the GUC-side half of the CVE-2023-2454 fix.
 - `knowledge/idioms/gucs-bgworker-parallel.md` — operational checklist.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-defense-in-depth: no flag for "filesystem-touching GUCs"; audit

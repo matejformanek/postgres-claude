@@ -51,3 +51,9 @@ None.
 
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=14 [maybe]=4`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

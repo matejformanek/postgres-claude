@@ -189,3 +189,9 @@ merging, converts bound specs to executable predicate expressions
   suggest care was taken, but a property-test corpus would help.
   [ISSUE-question: partwise-join + FOJ + (default + null
   partitions) needs property-test coverage (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `partitioning`](../../../../issues/partitioning.md)
+<!-- issues:auto:end -->

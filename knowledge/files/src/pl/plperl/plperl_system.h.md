@@ -193,3 +193,7 @@ discipline by making it a compile-time requirement.
   `plperl_system.h`.
 - `source/src/pl/plperl/SPI.xs`, `Util.xs` — the only TUs that
   `#define PG_NEED_PERL_XSUB_H` before including plperl.h.
+
+<!-- issues:auto:begin -->
+- [Issue register — `plperl`](../../../../issues/plperl.md)
+<!-- issues:auto:end -->

@@ -50,3 +50,9 @@ Frontend file-utility hub. Backend has a parallel implementation in `storage/fil
 
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=18 [maybe]=4`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

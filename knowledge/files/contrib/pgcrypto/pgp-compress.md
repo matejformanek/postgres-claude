@@ -100,6 +100,10 @@ compression. Returns `PXE_PGP_UNSUPPORTED_COMPR` when built without
 - zlib `inflate` upstream — relied on for buffer-bounds safety on the
   decompressor side.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: zlib decompression bomb, no max-output cap on

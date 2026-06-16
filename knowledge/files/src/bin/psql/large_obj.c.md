@@ -67,5 +67,9 @@ Each operation does `SetCancelConn(NULL)` immediately before the libpq call and 
 - Cancel infrastructure: `fe_utils/cancel.c` (not in this batch).
 - `PSQLexec`: `common.c` (not in this batch).
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=14 [from-comment]=1 [inferred]=2 [no concern]=7 [ISSUE]=2`

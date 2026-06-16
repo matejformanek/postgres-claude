@@ -27,6 +27,10 @@ warn of this [verified-by-code].
 - Related: `knowledge/files/src/include/libpq/be-fsstubs.h.md`.
 - Frontend: `src/interfaces/libpq/fe-lobj.c` (uses the same flag values).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: INV_READ/INV_WRITE are part of the LO ABI]**

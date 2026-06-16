@@ -94,3 +94,9 @@ full `standby.h`. [from-comment]
   still load-bearing. [unverified]
   [ISSUE-question: is `xl_invalidations.tsId` still consumed during
   redo, or is it vestigial? (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

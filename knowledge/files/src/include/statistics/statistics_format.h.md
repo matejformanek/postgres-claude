@@ -44,3 +44,9 @@ frontend and backend code" per the comment). [verified-by-code]
   than a JSON blob. Not a bug, but the asymmetry could confuse a
   reviewer expecting a third block of constants.
   [ISSUE-question: should MCV have a parallel keys file? (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-statistics`](../../../../issues/include-statistics.md)
+<!-- issues:auto:end -->

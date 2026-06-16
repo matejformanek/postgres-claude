@@ -63,3 +63,9 @@ specific tables (resolved via `appendQualifiedRelation`).
   (line 222), but the cleanup happens AFTER `PQfinish`. If the
   PQfinish path runs an error exit the buffer is leaked — but
   process is exiting anyway. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

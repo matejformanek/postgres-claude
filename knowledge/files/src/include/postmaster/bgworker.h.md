@@ -32,3 +32,11 @@ bgworker skill.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new background worker](../../../../scenarios/add-new-bgworker.md)
+
+<!-- scenarios:auto:end -->

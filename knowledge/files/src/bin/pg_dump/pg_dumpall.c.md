@@ -213,6 +213,10 @@ pg_dumpall.c:1-21]
   `pg_authid` / `pg_tablespace` catalog evolution; multi-version
   branches at lines 1044, 1290, 1546, etc.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_dump`](../../../../issues/pg_dump.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: no transaction snapshot for globals]**

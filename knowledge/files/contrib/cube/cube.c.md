@@ -130,6 +130,10 @@ indicated by a header bit). [verified-by-code]
 - A13 `btree_gist` float — same NaN comparison hazard.
 - A7 `jsonapi` — comparable recursive-parser DoS family.
 
+<!-- issues:auto:begin -->
+- [Issue register — `cube`](../../../issues/cube.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 - `[ISSUE-correctness: NaN coordinates make cube_cmp_v0 / cube_contains_v0

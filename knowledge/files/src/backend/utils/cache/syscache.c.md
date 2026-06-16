@@ -71,3 +71,11 @@ verified-by-code: 7 — from-comment: 8 — from-readme: 0 — inferred: 0 — u
 - [idioms/catalog-conventions.md](../../../../../idioms/catalog-conventions.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a column to an existing system catalog](../../../../../scenarios/add-new-system-catalog-column.md)
+
+<!-- scenarios:auto:end -->

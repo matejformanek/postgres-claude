@@ -144,6 +144,10 @@ freePGconn          (5091)  →   free every owned buffer + addrinfo + conn->pst
 - Wire protocol counterpart in backend: `knowledge/files/src/backend/libpq/pqcomm.c.md`, `knowledge/files/src/backend/libpq/auth.c.md`, `knowledge/files/src/backend/postmaster/postmaster.c.md` (the listener side of multi-host connect).
 - Subsystem doc: `knowledge/subsystems/libpq.md` (when written).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: silent sslmode downgrade on connect failure]** `fe-connect.c:4836-4924` — `connection_failed` + `select_next_encryption_method` may step from `sslmode=prefer`/SSL handshake failure to plaintext without surfacing why to the application. The only signal is `PQconnectionUsedGSSAPI`/`PQparameterStatus("ssl_in_use")` after the fact. **Severity: maybe.** Not a leak in the network sense, but a real surface for "I thought SSL was on": clients defaulting to `sslmode=prefer` (the default!) get plaintext on a misconfigured server with no warning. Important for Phase D data-leak hardening.
@@ -158,3 +162,11 @@ freePGconn          (5091)  →   free every owned buffer + addrinfo + conn->pst
 ## Tally
 
 `[verified-by-code]=14 [from-comment]=8 [from-readme]=0 [inferred]=0 [unverified]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

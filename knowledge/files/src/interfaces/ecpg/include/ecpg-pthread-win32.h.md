@@ -45,6 +45,10 @@ init). [verified-by-code]
 - `knowledge/files/src/interfaces/ecpg/ecpglib/misc.c.md` — implements
   `pthread_mutex_*`, `win32_pthread_once`, and the per-thread sqlca.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-leak: Win32 pthread_key destructor never runs]**
   `ecpg-pthread-win32.h:38` — `pthread_key_create` drops its destructor on

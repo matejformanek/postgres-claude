@@ -57,3 +57,9 @@ backend's `utils/adt/timestamp.c`. [verified-by-code]
   print a negative microsecond fragment for pre-2000 timestamps.
   [verified-by-code] [ISSUE-correctness: pre-epoch TimestampTz could
   show negative usec fraction (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_waldump`](../../../../issues/pg_waldump.md)
+<!-- issues:auto:end -->

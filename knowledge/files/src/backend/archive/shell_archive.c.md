@@ -63,3 +63,9 @@ be loaded via `archive_library`. [verified-by-code §shell_archive.c:1-15]
   `xlogarchcmd`. The structure is mildly duplicative — could be one
   trailing `pfree(xlogarchcmd)` after the if-else. Cosmetic.
   [ISSUE-style: duplicate pfree branches (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `archive`](../../../../issues/archive.md)
+<!-- issues:auto:end -->

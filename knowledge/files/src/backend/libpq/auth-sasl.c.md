@@ -100,6 +100,10 @@ that timing and error shape don't reveal user existence).
 - Drives the AUTH_REQ_SASL* wire messages defined in
   `src/include/libpq/protocol.h`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: shadow_pass lifetime / scrub]**

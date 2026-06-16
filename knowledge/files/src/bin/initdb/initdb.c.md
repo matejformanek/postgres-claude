@@ -257,3 +257,17 @@ fclose(pwf);
 - `[ISSUE-info-disclosure: -s/--show prints VERSION/PGDATA/share_path/PGPATH banner including resolved paths (low)]`
 - `[ISSUE-stale-todo: pwfile permission check comment at line 1706-1711 ("paranoia for now") never resolved (maybe)]`
 - `[ISSUE-undocumented-invariant: chmod silently downgrades a pre-existing empty PGDATA from 0755 to 0700 (maybe)]`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Bump CATALOG_VERSION_NO](../../../../scenarios/bump-catversion.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `initdb`](../../../../issues/initdb.md)
+<!-- issues:auto:end -->

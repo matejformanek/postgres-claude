@@ -54,5 +54,9 @@ attacker-influenced. Header documents no path-traversal expectation
 - A6 `pg_upgrade` + `pg_rewind` — primary consumers.
 - Companion: `src/common/controldata_utils.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=4`

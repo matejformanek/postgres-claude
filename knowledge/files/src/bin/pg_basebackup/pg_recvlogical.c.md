@@ -154,3 +154,9 @@ line 358).
 - `[ISSUE-state-transition: no CLI to alter two_phase/failover on existing slot (maybe)]`
 - `[ISSUE-undocumented-invariant: SIGINT during stream leaves the slot on the server (low)]`
 - `[ISSUE-info-disclosure: verbose mode prints every flush LSN with slot name (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

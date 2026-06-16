@@ -162,6 +162,10 @@ Lines 2783-2785. This is mandatory because the foreign table's local composite t
 - `source/src/backend/utils/adt/ruleutils.c` — the OTHER deparser (rewrite-rule / function-body / view dumps); comment at line 9 admits this file is "annoyingly duplicative".
 - `source/src/backend/optimizer/util/clauses.c` — `contain_mutable_functions`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `postgres_fdw`](../../../issues/postgres_fdw.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: `T_CaseExpr` pushdown bails when the WHEN clause isn't a plain `OpExpr` w/ CaseTestExpr on left (lines 805-815). After certain optimizer passes (constant folding of the equality operator), legitimate CASE expressions silently stop being pushable, possibly causing performance regression after an unrelated optimizer change. (likely)] — `source/contrib/postgres_fdw/deparse.c:793-816`.

@@ -167,6 +167,10 @@ at `:548-549` for tuple length.
   (`bt_check_index_internal`) does the inverse: verifying invariants
   instead of exposing bytes.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: btreefuncs surfaces index-key on-disk bytes;

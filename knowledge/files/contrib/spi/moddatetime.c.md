@@ -71,3 +71,9 @@ SPI for query execution. [verified-by-code + from-comment]
   diverges from `autoinc.c`'s `"autoinc (%s): "`. Per-file style
   consistency. [verified-by-code]
   **[ISSUE-style: prefix inconsistency across spi/ tutorials (nit)]**
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `spi`](../../../issues/spi.md)
+<!-- issues:auto:end -->

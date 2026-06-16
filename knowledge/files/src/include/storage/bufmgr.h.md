@@ -133,3 +133,11 @@ Cross-link: `knowledge/subsystems/storage-buffer.md`.
   per-call privilege check at the SQL wrapper (currently in
   `pg_buffercache`); ensure not re-exposed in other extensions.
   (Informational.)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new BufferAccessStrategy ring](../../../../scenarios/add-new-buffer-strategy.md)
+
+<!-- scenarios:auto:end -->

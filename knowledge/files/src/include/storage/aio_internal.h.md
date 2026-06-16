@@ -103,6 +103,10 @@ aio_internal.h:138-147 and is the map for reading `aio.c`.
 - Method vtables: `method_sync.c`, `method_worker.c`, `method_io_uring.c`.
 - Locking idiom for the CV + read/write barriers: `knowledge/idioms/locking-overview.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-todo: `PGAIO_VERBOSE` defaults on in production builds]**

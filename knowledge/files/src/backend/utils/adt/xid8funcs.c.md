@@ -41,3 +41,9 @@ Source: `source/src/backend/utils/adt/xid8funcs.c` (684 lines).
 - `[ISSUE-undocumented-invariant: pg_current_xact_id forces an xid assignment (and an entry into the commit log); a workload that calls this on every read-only query will silently consume xids (low; documented in user docs)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

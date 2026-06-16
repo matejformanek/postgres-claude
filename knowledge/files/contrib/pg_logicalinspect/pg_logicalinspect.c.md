@@ -133,3 +133,7 @@ arrays, …). Access is restricted to `pg_read_server_files` via the
 - A14-era finding-class: "contrib extensions that REVOKE+GRANT to
   a default role but have no C-level permission check are
   trivially exposed via SECURITY DEFINER wrappers."
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_logicalinspect`](../../../issues/pg_logicalinspect.md)
+<!-- issues:auto:end -->

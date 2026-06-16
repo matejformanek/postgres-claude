@@ -67,6 +67,10 @@ fallback built on top of `pg_cryptohash_*`) or `hmac_openssl.c`
 - A5 SecretBuf hosting site: `knowledge/issues/common.md`.
 - A11 pgcrypto adoption candidate: `knowledge/issues/pgcrypto.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: _free's explicit_bzero scrubbing contract

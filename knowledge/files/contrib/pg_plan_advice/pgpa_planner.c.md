@@ -156,3 +156,9 @@ the `explain_per_plan_hook` to render. [verified-by-code]
 - `pgpa_planner.c:96-97` — `pgpa_planner_generate_advice` is a non-atomic int
   manipulated via `++`/`--`. Safe in single-backend context only. Comments
   imply expected single-backend use. [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

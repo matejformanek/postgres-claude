@@ -98,3 +98,7 @@ the upstream zic version — a PG-local patch.
 - `knowledge/files/src/timezone/private.h.md` — the arithmetic/limit macros.
 - `knowledge/files/src/timezone/pgtz.c.md` — runtime zone-dir scanning, the
   consumer-side path-traversal guard (`scan_directory_ci`).
+
+<!-- issues:auto:begin -->
+- [Issue register — `timezone`](../../../issues/timezone.md)
+<!-- issues:auto:end -->

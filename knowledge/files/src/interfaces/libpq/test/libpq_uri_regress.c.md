@@ -54,3 +54,7 @@ mis-authenticate a connection.
 - [[libpq_testclient.c]] — sibling test helper.
 - `knowledge/issues/libpq-oauth.md` — issue register (shared for this
   cloud run's libpq-tail findings).
+
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../../issues/libpq.md)
+<!-- issues:auto:end -->

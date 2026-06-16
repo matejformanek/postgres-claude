@@ -78,3 +78,9 @@ None local. Reads `HbaFileName`, `IdentFileName` (GUCs).
   `IsTransactionState()` or similar; calling from a SECURITY DEFINER
   function makes the parsed HBA secrets cross trust boundaries
   (low — by design of the ACL system)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

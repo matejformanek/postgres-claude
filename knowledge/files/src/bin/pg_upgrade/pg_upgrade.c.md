@@ -221,3 +221,9 @@ parseCommandLine) keeps env-var-derived user, but `os_info.user` is
 serialized into `output_completion_banner` via `appendShellString`
 (check.c line 853) — quoting is correct for shell] —
 verified-by-code.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

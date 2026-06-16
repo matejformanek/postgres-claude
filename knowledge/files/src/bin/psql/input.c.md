@@ -85,5 +85,9 @@ Mode `0600` is the only protection against other users reading the history file.
 - `pset.histsize`, `pset.histcontrol`: see `settings.h.md`.
 - Tab-completion: `tab-complete.c` (not in this batch).
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=14 [from-comment]=8 [no concern]=6 [ISSUE]=3`

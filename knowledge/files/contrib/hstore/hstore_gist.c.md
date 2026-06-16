@@ -187,6 +187,10 @@ UB. Good. `[verified-by-code]`.
 - A12 contrib security bundle — pg_trgm has a similar
   signature-tree-with-recheck shape via trgm_gist.
 
+<!-- issues:auto:begin -->
+- [Issue register — `hstore`](../../../issues/hstore.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: default siglen=16 (128 bits) gives high

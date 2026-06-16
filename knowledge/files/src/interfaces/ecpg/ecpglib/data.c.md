@@ -104,6 +104,10 @@ here — this file is purely the get/decode direction. [inferred]
   `PGTYPESinterval_from_asc`, `PGTYPEStimestamp_from_asc`) — the typed ASCII
   parsers invoked per arm.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-overflow: hex_decode returns -1 as unsigned]** `data.c:170` —
   `hex_decode` returns `(unsigned)-1` when `s >= srcend` after consuming the

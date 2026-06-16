@@ -96,3 +96,9 @@ executor nodes after the indexAM hands them a TID. [verified-by-code]
   is necessary because future maintainers might "fix" it by adding pin
   drops, which would regress nested-loop joins. The function is kept
   separate from `_end` only to preserve this contract. [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `access`](../../../../../issues/access.md)
+<!-- issues:auto:end -->

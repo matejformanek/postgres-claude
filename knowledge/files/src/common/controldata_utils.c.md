@@ -42,3 +42,9 @@ None. All state is on the stack or the caller's `ControlFile` pointer.
 
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=14 [maybe]=2`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

@@ -70,3 +70,9 @@ prompt. [verified-by-code]
 - Line 110-112: on failure we `PQfinish(conn)` and `exit(1)`,
   losing any cleanup the caller may have wanted to do. Acceptable
   for these one-shot scripts. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

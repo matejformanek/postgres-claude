@@ -100,5 +100,9 @@ Callbacks: `ndistinct_object_start`/`_end`, `ndistinct_array_*`,
   ndistinct-estimation logic.
 - `source/src/common/jsonapi.c` — `pg_parse_json`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 8

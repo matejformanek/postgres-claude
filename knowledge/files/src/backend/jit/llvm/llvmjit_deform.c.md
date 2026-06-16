@@ -70,5 +70,9 @@ JIT-compile a per-`TupleDesc`, per-slot-type heap-tuple deformer. The single exp
 - [[knowledge/files/src/backend/jit/llvm/llvmjit.c.md]] — provides `llvm_mutable_module`, `llvm_expand_funcname`, `llvm_pg_func`, `llvm_copy_attributes`.
 - [[knowledge/files/src/backend/jit/llvm/llvmjit_expr.c.md]] — calls `slot_compile_deform` from the `EEOP_*_FETCHSOME` cases.
 
+<!-- issues:auto:begin -->
+- [Issue register — `jit`](../../../../../issues/jit.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=9`

@@ -45,6 +45,10 @@ The varlena columns live in `#ifdef CATALOG_VARLEN`. [verified-by-code]
 - Parent overview: `knowledge/files/src/include/catalog/_catalog_headers_overview.md`
 - Related: `pg_attribute.h` (attcollation), `pg_type.h` (typcollation), `utils/adt/pg_locale.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: collprovider_name omits COLLPROVIDER_DEFAULT]** `pg_collation.h:79-93` — the inline switch returns "???" for `'d'`. May be intentional (default never appears in stored rows, only in CREATE COLLATION parsing) but the header doesn't say so.

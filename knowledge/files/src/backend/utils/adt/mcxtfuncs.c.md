@@ -90,3 +90,9 @@ None.
   trees this is O(contexts) per call; cumulative malloc inside the
   callbacks could trigger additional context creation (`stats`
   must be allocator-quiet, which is documented elsewhere). (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

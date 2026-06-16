@@ -116,3 +116,9 @@ NULL for joinrels. [from-comment]
   partition that may have stolen rows from DEFAULT; failure mode
   on a huge DEFAULT partition (scan time) is not flagged.
   [ISSUE-question: DEFAULT-partition rescan cost on ATTACH (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-partitioning`](../../../../issues/include-partitioning.md)
+<!-- issues:auto:end -->

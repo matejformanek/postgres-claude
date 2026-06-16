@@ -59,5 +59,9 @@ header could state the invariant.
 - A6 `pg_upgrade` — pg_authid mode-persistence finding.
 - Companion: `src/common/file_perm.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=9`

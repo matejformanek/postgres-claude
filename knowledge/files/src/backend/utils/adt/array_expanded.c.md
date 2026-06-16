@@ -81,6 +81,10 @@ the whole varlena per assignment.
 - `source/src/backend/utils/adt/arrayfuncs.c` — `deconstruct_array`,
   `CopyArrayEls`, `construct_*`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 7
 - `[from-comment]` × 3

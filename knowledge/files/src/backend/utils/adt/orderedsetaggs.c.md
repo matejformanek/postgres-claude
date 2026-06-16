@@ -66,3 +66,9 @@ sort alive across finals.
   `OSAPerQueryState` (`:58`) drives multi-final-call behaviour but
   the contract is subtle — nodeAgg decides; comments in nodeAgg.c
   would help. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

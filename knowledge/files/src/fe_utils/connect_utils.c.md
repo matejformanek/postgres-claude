@@ -66,6 +66,10 @@ across calls so a reconnect can reuse it.
 - `source/src/common/sprompt.c` — `simple_prompt`.
 - Secret-scrub cluster: libpq A2, psql/initdb A4, common A5, pg_upgrade A6, walreceiver A8.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: prompted password freed without zeroing]** `connect_utils.c:44,102` —

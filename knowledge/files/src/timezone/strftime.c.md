@@ -79,3 +79,7 @@ paths) without depending on the platform `strftime`, whose locale behavior and
   `MONSPERYEAR`, `DAYSPERWEEK`, `isleap_sum`.
 - `knowledge/files/src/backend/utils/adt/datetime.c.md` — backend timestamp
   rendering; sibling formatter for the SQL `to_char` path.
+
+<!-- issues:auto:begin -->
+- [Issue register — `timezone`](../../../issues/timezone.md)
+<!-- issues:auto:end -->

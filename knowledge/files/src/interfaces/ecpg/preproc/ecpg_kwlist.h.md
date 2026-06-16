@@ -72,6 +72,18 @@ host-variable modifiers (`indicator`, `reference`), connection management
 - `src/tools/gen_keywordlist.pl` — generates `ecpg_kwlist_d.h` (the perfect hash and `ScanECPGKeywords` struct) from this file.
 - `src/interfaces/ecpg/preproc/preproc.y` — bison grammar; must define a `%token` for every `SQL_*` name referenced here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: C-type keywords appear in both ecpg_kwlist.h and c_kwlist.h]** `ecpg_kwlist.h:26,45,56,57,61,63` — `bool`, `long`, `short`, `signed`, `struct`, `unsigned` exist in the ECPG keyword list AND likely in `c_kwlist.h` for C-context recognition. The two lookup functions (`ScanECPGKeywordLookup` vs `ScanCKeywordLookup`) are called in different lexer states so there is no runtime conflict, but a maintainer adding a new C-type keyword must remember to add it to both lists. Severity: low (documentation/maintenance concern, no current bug).
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../../scenarios/add-new-sql-keyword.md)
+
+<!-- scenarios:auto:end -->

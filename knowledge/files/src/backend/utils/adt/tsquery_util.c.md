@@ -48,3 +48,9 @@ ternary canonicalisation so that `(a AND b) AND c` and
   documented in this file (must `grep` ts_utils.h). Easy to forget
   to set/clear when transferring ownership of subtrees. (low)]
 - [ISSUE-dead-code: None visible.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

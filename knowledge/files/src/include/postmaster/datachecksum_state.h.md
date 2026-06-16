@@ -95,3 +95,9 @@ state change in lockstep. [from-comment] [inferred]
   [verified-by-code]
   [ISSUE-undocumented-invariant: enum ordinals are not currently
   serialized but may become so if tests start logging them (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-postmaster`](../../../../issues/include-postmaster.md)
+<!-- issues:auto:end -->

@@ -43,6 +43,10 @@ descriptor header with a `sqlvar[1]` flexible-array tail). [verified-by-code]
 - [[sqlda-compat.h]] — the (incompatible) Informix layout.
 - `knowledge/files/src/interfaces/ecpg/ecpglib/sqlda.c.md` — fills these.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-invariant: client NAMEDATALEN may lag server]** `sqlda-native.h:16` —
   hardcoded `NAMEDATALEN 64`; a server with a larger value truncates identifier

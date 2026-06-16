@@ -43,3 +43,9 @@ Source: `source/src/backend/utils/adt/jsonfuncs.c` (6170 lines — largest file 
 - `[ISSUE-dos: json_each / json_object_keys on a json (text) column reparses the text every call; no caching (low — design tradeoff)]`.
 
 Confidence: file is enormous, so claims are indexed-surface level. Cited line numbers are `[verified-by-code]`; behaviors are `[inferred]` from comments and standard PG patterns.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

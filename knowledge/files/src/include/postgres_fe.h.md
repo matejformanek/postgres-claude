@@ -56,3 +56,9 @@ file. [verified-by-code]
   link `ExceptionalCondition`. No header-level diagnostic.
   [ISSUE-undocumented-invariant: omitting postgres_fe.h fails at
   link time, not compile time (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

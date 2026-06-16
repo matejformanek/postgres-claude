@@ -46,3 +46,9 @@ Same considerations as `d2s.c`:
 ## Potential issues
 - [ISSUE-undocumented-invariant: same as d2s — `STRICTLY_SHORTEST` is a
   build-time switch that would silently change output if flipped. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

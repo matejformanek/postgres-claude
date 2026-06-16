@@ -87,6 +87,10 @@ string is just a token cast away.
 - `knowledge/idioms/debugging.md` — operational use of injection points
   during backend debugging.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-dlopen: a production build with `USE_INJECTION_POINTS` on is

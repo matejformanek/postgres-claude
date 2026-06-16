@@ -72,3 +72,9 @@ status, so the shell can test e.g. `$? -eq 0`. [verified-by-code]
   strings (no `=` check would actually catch them; reading
   again: the `strchr(pgdbname, '=') != NULL` check DOES catch
   `service=foo`). So OK. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

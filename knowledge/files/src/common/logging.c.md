@@ -94,3 +94,9 @@ fe_memutils.c — no helper for secret-bearing temporary buffers.
 - Thread safety: callers from `src/bin/pgbench` use threads;
   concurrent calls into `pg_log_generic` will interleave the
   multi-`fprintf` prefix sequence. There's no lock.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

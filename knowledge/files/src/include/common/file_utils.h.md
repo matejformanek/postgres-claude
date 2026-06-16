@@ -61,5 +61,9 @@ mitigation" pattern echoes back to controldata_utils.h (low)]
 - A14 `basic_archive` — durable_rename echo.
 - Companion: `src/common/file_utils.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=4`

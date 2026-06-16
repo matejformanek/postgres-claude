@@ -50,3 +50,9 @@ advice-overriding. [verified-by-code]
   a hook can adjust behavior under `EXPLAIN`, but it is *not* told whether the
   caller intends to use the result, only what `pg_plan_advice` itself does.
   [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

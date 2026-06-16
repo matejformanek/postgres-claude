@@ -160,3 +160,9 @@ operators who've aggressively truncated WAL.
 - `[ISSUE-dos: pg_fatal-on-first-bad-record gives no diagnostic
   surface (low)]` (`:91-97`). For operator debugging it would be
   nicer to dump the partial filemap before exiting. Cosmetic.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

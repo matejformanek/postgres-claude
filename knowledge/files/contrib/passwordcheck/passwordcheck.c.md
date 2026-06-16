@@ -102,3 +102,7 @@ production use. Optionally links cracklib for dictionary checks via
 - `source/src/backend/libpq/crypt.c` — `plain_crypt_verify`.
 - Companion: `contrib/passwordcheck/t/001_passwordcheck.pl` for TAP
   coverage.
+
+<!-- issues:auto:begin -->
+- [Issue register — `passwordcheck`](../../../issues/passwordcheck.md)
+<!-- issues:auto:end -->

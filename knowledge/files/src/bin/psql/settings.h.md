@@ -85,3 +85,9 @@ The single-source-of-truth `PsqlSettings` struct definition plus its global inst
 
 ## Confidence tag tally
 `[verified-by-code]=10 [from-comment]=5 [inferred]=2 [no concern]=2 [ISSUE]=4`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->

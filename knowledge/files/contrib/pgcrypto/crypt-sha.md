@@ -127,6 +127,10 @@ intermediate digest B.
   (used by libpq SCRAM). Different code path.
 - Drepper's spec: https://www.akkadia.org/drepper/SHA-crypt.txt.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: shacrypt max rounds = ~1B = ~hour-long CPU

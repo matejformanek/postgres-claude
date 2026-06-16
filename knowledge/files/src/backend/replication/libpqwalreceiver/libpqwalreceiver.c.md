@@ -161,3 +161,9 @@ options and empty values. [verified-by-code]
   tooling rebuilding against PG18 sources will need care.
   [ISSUE-question: PG_MODULE_MAGIC_EXT vs PG_MODULE_MAGIC binary
   compatibility (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `replication`](../../../../../issues/replication.md)
+<!-- issues:auto:end -->

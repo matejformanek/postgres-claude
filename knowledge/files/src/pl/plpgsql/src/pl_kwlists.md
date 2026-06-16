@@ -128,6 +128,10 @@ bison's specific token IDs.
   the core-SQL equivalents and the `ScanKeywordList` /
   `ScanKeywordLookup` API.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-audit-gap: no automated check that `pl_unreserved_kwlist.h`

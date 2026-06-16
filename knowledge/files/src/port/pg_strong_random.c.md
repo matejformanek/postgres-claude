@@ -69,3 +69,7 @@ Three mutually-exclusive backends, selected by build config:
 - `knowledge/files/src/port/explicit_bzero.c.md` — scrub the buffer after use.
 - `knowledge/files/src/backend/utils/adt/uuid.c.md` — `gen_random_uuid` consumer.
 - `knowledge/idioms/error-handling.md` — why this file avoids `elog`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `port`](../../../issues/port.md)
+<!-- issues:auto:end -->

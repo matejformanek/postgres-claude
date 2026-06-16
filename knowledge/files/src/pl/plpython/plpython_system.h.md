@@ -36,6 +36,10 @@ N/A — see `plpython.h.md` for the language-wide trust posture.
 - `plpython.h.md` — the canonical entry header that includes this one.
 - `source/src/include/utils/elog.h` — defines the colliding `errcode()` macro on the PG side.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-documentation: `system_header` pragma only fires on GCC/clang, not MSVC (nit)] — `#pragma GCC system_header` is guarded by `HAVE_PRAGMA_GCC_SYSTEM_HEADER`; on MSVC, Python header warnings are not suppressed [verified-by-code: `source/src/pl/plpython/plpython_system.h:26-28`]. Not a bug, but a portability quirk: MSVC plpython builds may emit warnings other compilers suppress. PG's MSVC support is in maintenance mode, so this is unlikely to matter in practice.

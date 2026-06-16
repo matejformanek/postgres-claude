@@ -204,6 +204,10 @@ Static helpers:
 - `source/src/backend/catalog/heap.c` —
   `find_all_inheritors`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: hardwired catalog/TOAST DML denial

@@ -74,6 +74,10 @@ in CurrentMemoryContext. `toast_helper.h:71`, `:111`.
 - `knowledge/idioms/memory-contexts.md` (not yet written) — TOAST temp
   allocations.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-correctness: ttc_attr size contract is documented-only (low)]**
    — `toast_helper.h:55`-`62`.

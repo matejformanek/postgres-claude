@@ -11,3 +11,11 @@ machinery: `add_path`, `add_path_precheck`, `add_partial_path`,
 
 Hook: `build_simple_rel_hook` for plugins to intervene during baserel
 construction. [verified-by-code:20-26]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
+
+<!-- scenarios:auto:end -->

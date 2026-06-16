@@ -40,6 +40,10 @@ library.
 - [[pgtypes_error.h]] — `PGTYPES_DATE_*` failure codes.
 - `knowledge/files/src/interfaces/ecpg/pgtypeslib/dt_common.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-portability: `date`/`interval.month` are `long`]** `pgtypes_date.h:9`
   (and `pgtypes_interval.h:22`) — `long`-typed fields change width LP64 vs LLP64

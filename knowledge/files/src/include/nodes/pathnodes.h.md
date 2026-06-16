@@ -94,3 +94,11 @@ copy/out for debugging.
 - Path → Plan: `optimizer/plan/createplan.c`.
 - Path generation: `optimizer/path/*.c`,
   `optimizer/util/pathnode.c`.
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
+
+<!-- scenarios:auto:end -->

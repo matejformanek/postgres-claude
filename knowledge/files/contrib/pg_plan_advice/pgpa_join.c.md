@@ -101,3 +101,9 @@ unrolled join. [verified-by-code] [from-README]
 - `pgpa_join.c:165-189` — the four parallel `repalloc_array` calls inside the
   growth branch could be reduced to one helper, but the current shape is
   readable. [ISSUE-style: parallel repalloc cluster could be extracted (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

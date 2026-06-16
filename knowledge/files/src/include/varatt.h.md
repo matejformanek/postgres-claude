@@ -245,3 +245,9 @@ The query macros (all `static inline`, take `const void *PTR`):
   bytes plus alignment padding (compiler-dependent on `char` arrays
   but usually 2). [ISSUE-style: `sizeof(varattrib_1b_e)` semantics not
   documented (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

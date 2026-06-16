@@ -65,3 +65,9 @@ the source DBA set them.
 - `[ISSUE-trust-boundary: file_entry_t.source_link_target is opaque server-supplied bytes used as the target of symlink(); no validation that it is an absolute path, no length cap beyond MAXPGPATH (low)]`
 - `[ISSUE-undocumented-invariant: file_action_t enum ordering is load-bearing for final_filemap_cmp; reordering by accident would silently corrupt action execution order. A static_assert would help (low)]`
 - `[ISSUE-undocumented-invariant: target_pages_to_overwrite is meaningful only when content_type == FILE_CONTENT_TYPE_RELATION; not enforced at the type level (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

@@ -93,6 +93,10 @@ to `autoprewarm.c` (auto-dump/load bgworker).
 - `knowledge/subsystems/storage-buffer.md` — read-stream / prefetch APIs
 - `knowledge/files/contrib/pg_buffercache/pg_buffercache_pages.c.md` — counterpart that evicts
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_prewarm`](../../../issues/pg_prewarm.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-defense-in-depth: ACL_SELECT covers all forks (VM/FSM/INIT), not just MAIN (nit)] — `source/contrib/pg_prewarm/pg_prewarm.c:149-167`

@@ -57,3 +57,9 @@ our `src/port/getopt.c`. [from-comment]
   have a same-named symbol with different argument types, link
   silently succeeds. [ISSUE-correctness: no signature compatibility
   check at link (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

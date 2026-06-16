@@ -47,3 +47,9 @@ SRF infrastructure. [verified-by-code]
   would be revoking EXECUTE from PUBLIC, but doing so breaks
   monitoring tools. [inferred] [ISSUE-info-disclosure: fingerprinting
   surface for PG installations (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

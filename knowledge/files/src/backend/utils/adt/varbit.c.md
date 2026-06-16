@@ -82,6 +82,10 @@ byte required to be zero. (`varbit.c:1-30` [from-comment])
   `VARBITMAXLEN`, `HIGHBIT`, `BITMASK`, `BITS_PER_BYTE`.
 - `source/src/backend/utils/adt/varlena.c` — varlena infrastructure.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

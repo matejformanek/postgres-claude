@@ -106,6 +106,10 @@ CRC24. Backs the SQL functions `armor`, `dearmor`, `pgp_armor_headers`.
 - `src/common/base64.c` — the in-tree base64 that this file duplicates.
 - RFC 4880 §6 (Radix-64 Conversions) — the spec.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: custom `pg_base64_encode`/`pg_base64_decode`

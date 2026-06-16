@@ -92,3 +92,9 @@ both `CREATE INDEX` (gininsert.c) and the pending-list cleanup path
   true even if the posting list might already be sorted by coincidence.
   Minor — `shouldSort` is set only when an out-of-order insert was
   observed, so this is bounded. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `access`](../../../../../issues/access.md)
+<!-- issues:auto:end -->

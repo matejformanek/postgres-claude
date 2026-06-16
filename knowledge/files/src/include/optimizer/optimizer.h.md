@@ -20,3 +20,11 @@ that's allowed to reach deeper. [from-comment:6-13]
 
 ## Tags
 `[verified-by-code]` ×2, `[from-comment]` ×1
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new cost-model constant (and optional GUC)](../../../../scenarios/add-new-cost-model-knob.md)
+
+<!-- scenarios:auto:end -->

@@ -61,3 +61,7 @@ prompt.
 - A4 psql secret-scrub cluster — simple_prompt buffer lifetime.
 - A5 `common.md` — log-injection prevention.
 - Companion: `src/common/string.c.md`, `src/common/sprompt.c`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

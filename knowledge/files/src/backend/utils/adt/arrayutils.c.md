@@ -69,6 +69,10 @@ and the `typmod[]` string-array decoder.
 - `source/src/include/common/int.h` — `pg_add_s32_overflow`.
 - `source/src/backend/utils/adt/arrayfuncs.c` — the heavy consumer.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 6
 - `[from-comment]` × 2

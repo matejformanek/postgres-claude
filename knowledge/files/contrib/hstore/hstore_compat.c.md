@@ -199,6 +199,10 @@ fine. `[verified-by-code]`.
 - A3 pg_dump trust-the-source — every contrib type that supports old
   on-disk formats inherits this trust assumption.
 
+<!-- issues:auto:begin -->
+- [Issue register — `hstore`](../../../issues/hstore.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-correctness: pos+keylen arithmetic in re-encode loop has no

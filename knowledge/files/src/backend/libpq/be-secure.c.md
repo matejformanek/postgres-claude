@@ -135,6 +135,10 @@ talks to `WaitEventSet`, so it also enforces the
 - Startup dispatch (which selects encryption): `tcop/backend_startup.c`,
   `ProcessStartupPacket`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: ssl_loaded_verify_locations is process-local

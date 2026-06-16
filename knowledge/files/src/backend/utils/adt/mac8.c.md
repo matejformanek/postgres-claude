@@ -62,6 +62,10 @@ EUI-64. EUI-48 → EUI-64 promotion inserts `FF:FE` between OUI and NIC.
 - `source/src/include/utils/inet.h` — `macaddr8` struct.
 - `source/src/backend/utils/adt/mac.c` — EUI-48 sibling.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 3

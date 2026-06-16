@@ -95,3 +95,11 @@ DSM area.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
+
+<!-- scenarios:auto:end -->

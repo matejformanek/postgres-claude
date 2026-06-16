@@ -41,3 +41,12 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 ## Tally
 
 `[verified-by-code]=6 [from-comment]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in type cast](../../../../scenarios/add-new-cast.md)
+- [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
+
+<!-- scenarios:auto:end -->

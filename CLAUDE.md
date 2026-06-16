@@ -21,6 +21,10 @@ Two upstream PG clones are mounted via symlinks:
   - `subsystems/<name>.md` — one file per backend subsystem (storage-buffer, access-heap, …).
   - `data-structures/<name>.md` — focused notes on a single struct or invariant family.
   - `idioms/<name>.md` — PG-wide patterns (memory contexts, ereport, fmgr, SPI, …).
+  - `scenarios/<name>.md` — task-shaped playbooks for recurring change-classes
+    (add-new-data-type, add-new-sql-keyword, add-startup-hook, …). Each
+    carries an authoritative file checklist that `pg-feature-plan` PINS
+    as the §3 table. See `scenarios/README.md` + `scenarios/_index.md`.
 - `sessions/` — append-only logs of significant working sessions (one file per session).
 - `progress/`
   - `STATE.md` — current phase, what's done, what's next. Always re-read at session start.

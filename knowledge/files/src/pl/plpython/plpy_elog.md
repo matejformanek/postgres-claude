@@ -66,6 +66,10 @@ One trust-relevant subtlety: `PLy_traceback` will include lines from `proc->src`
 - A9 plpgsql comparison: plpgsql's `exec_stmt_block` handles `EXCEPTION WHEN OTHERS THEN ...` via PG_TRY/PG_CATCH around subxact boundaries; the SQLSTATE matching is exact like here, but the exception "object" is just a `SQLERRM`/`SQLSTATE` pair, no nine-field detail. plpython's exposed attributes are strictly richer.
 - A10-1 plperl: builds a Perl `$_TD` hash for errors with similar fields; plpython is structurally close.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: `PLy_get_sqlerrcode` only validates alpha range up to F (likely)] — At `plpy_elog.c:371-376`, the SQLSTATE validator accepts `[0-9A-Z]` for all five positions and calls `MAKE_SQLSTATE`. But PG's actual SQLSTATE encoding uses `'0'-'9'` and `'A'-'Z'` for class/subclass identifiers, with a documented subset. The validator here accepts strings like `"ZZZZZ"` which is not a real SQLSTATE; it would be encoded into the errcode field and propagate to clients as a syntactically-valid-but-unknown SQLSTATE. Not a security issue, but a place where user-supplied SQLSTATE strings can construct arbitrary 5-char identifiers in error reports.

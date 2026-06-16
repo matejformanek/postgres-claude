@@ -74,3 +74,11 @@ Resource managers definition
 ## Synthesized by
 <!-- backlinks:auto -->
 - [architecture/wal.md](../../../../architecture/wal.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+
+<!-- scenarios:auto:end -->

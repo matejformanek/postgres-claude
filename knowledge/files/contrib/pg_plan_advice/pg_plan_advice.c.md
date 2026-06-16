@@ -100,3 +100,9 @@ option via `RegisterExtensionExplainOption`, installs the
   `MarkGUCPrefixReserved` before any of the `DefineCustom*` calls. The
   prefix reservation comes after the variable defines, which is fine but unusual.
   [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

@@ -102,3 +102,9 @@ the replication protocol). [verified-by-code]
   ever needed an extension, callers would have to grep the magic
   number area. [ISSUE-doc-drift: no provision for future
   PG-specific tar extensions (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

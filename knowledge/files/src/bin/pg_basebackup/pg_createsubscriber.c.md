@@ -187,3 +187,9 @@ Search-path is secured on every connection — `connect_database` line
 `atexit(cleanup_objects_atexit)` registered at line 2625, after
 `dbinfos.dbinfo` is allocated (line 2622). Comment line 2619-2621
 notes the ordering requirement. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_basebackup`](../../../../issues/pg_basebackup.md)
+<!-- issues:auto:end -->

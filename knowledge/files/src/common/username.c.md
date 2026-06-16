@@ -49,3 +49,9 @@ spelling out.
   it, glibc's `getpwuid` returning NULL with `errno` left over from
   a prior call would misreport "user does not exist" vs a real
   errno. Correct as written.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

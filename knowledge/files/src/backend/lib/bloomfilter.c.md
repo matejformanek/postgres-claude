@@ -49,3 +49,9 @@ parallel CREATE INDEX bloom filtering. [verified-by-code]
   silently in the very-low-cardinality regime. Not a bug — documented
   by the references — but worth noting.
   [ISSUE-undocumented-invariant: silent k clamp when m/n is very large (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `lib`](../../../../issues/lib.md)
+<!-- issues:auto:end -->

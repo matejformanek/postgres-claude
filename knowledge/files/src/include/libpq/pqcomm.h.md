@@ -55,6 +55,10 @@ in `libpq.h` [from-comment].
 - Frontend: `src/interfaces/libpq/fe-connect.c` consumes these same
   constants.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: ALPN value is wire-load-bearing]**
@@ -77,3 +81,11 @@ in `libpq.h` [from-comment].
 ## Tally
 
 `[verified-by-code]=6 [from-comment]=6 [inferred]=1`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

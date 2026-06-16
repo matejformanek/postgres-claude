@@ -80,6 +80,10 @@ Notable absences in plpy_main.c that mirror this posture:
 - A9 plpgsql comparison: `pl_handler.c` is plpgsql's analog. plpgsql has NO `_PG_init` interpreter bring-up because plpgsql has no interpreter — bytecode is interpreted by `pl_exec.c` directly. plpython's `_PG_init` is the cleanest example of "expensive one-time-per-backend init" in the source tree.
 - A10-1 plperl comparison: plperl has dual-handler `plperl_call_handler` vs `plperlu_call_handler` (both routing to the same internal dispatch, with the trust flag taken from `fn_oid`'s pg_language row). plpython has only one.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-api-shape: `SPI_finish()` lives in plpy_exec.c instead of plpy_main.c (maybe)] — Acknowledged in the source comment: `/* Note: SPI_finish() happens in plpy_exec.c, which is dubious design */` [verified-by-code: `plpy_main.c:155, :229`]. The push/connect happens here but the pop/disconnect lives two files away. If a new entry-point handler is added (e.g. a future inline-procedure handler) and forgets the SPI_finish in its dispatch arm, the SPI stack leaks. Not a current bug, but a foot-gun the maintainers have already flagged.

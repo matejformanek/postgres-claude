@@ -68,6 +68,14 @@ Phase 2 work prematurely — stop and hand off.
      reference it; otherwise skip (don't bulk-search the list).
    - Corpus: `grep -r '<keyword>' knowledge/` for anything already
      documented. Note any hit.
+   - **Scenarios layer: match against `knowledge/scenarios/_index.md`**.
+     If a scenario (or a composite of scenarios) matches the
+     brainstormed approach, name it in this section. Phase 2
+     (`pg-feature-plan`) will PIN to it as the authoritative §3 file
+     checklist — knowing in advance which scenario applies lets the
+     user spot a scope mismatch early. Format: `Scenario(s): <slug>`
+     or `Scenarios layer gap: <one-line description>` if no scenario
+     matches and the change-class is recurring.
 5. **Candidate approaches** (2-3, no more). For each:
    - One-paragraph description.
    - **Pros** (2-3 bullets).
@@ -184,6 +192,7 @@ be archived) or until the user explicitly says drop it.
 - `.claude/skills/pg-feature-plan/SKILL.md` — Phase 2 consumer of this skill's output; reads `planning/<slug>/brainstorm.md` + the inline DECISION: answers.
 - `.claude/skills/pg-implement/SKILL.md` — Phase 3 consumer (via the plan); brainstorm is read for context only, not procedure.
 - `.claude/skills/pg-claude/SKILL.md` — master index used to pick which 1-3 `knowledge/subsystems/*.md` docs to load.
+- `knowledge/scenarios/_index.md` — the scenarios decision tree consulted in §4 (Has this been tried?).
 - `.claude/skills/meta-commit-style/SKILL.md` — the brainstorm.md file commits to the meta repo via this style.
 - `planning/README.md` — directory layout for `planning/<slug>/`.
 - `.claude/commands/pg-brainstorm.md` — slash-command wrapper that invokes this skill.

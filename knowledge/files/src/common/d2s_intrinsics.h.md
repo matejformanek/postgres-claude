@@ -39,3 +39,9 @@ None. Pure inline helpers.
 - [ISSUE-dead-code: the no-intrinsics-no-int128 fallback path may be dead
   on all PG-supported platforms today. Should confirm via meson config
   whether any buildbot exercises it. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

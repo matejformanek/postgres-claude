@@ -35,3 +35,9 @@ No user-tunable siglen here, unlike `tsgistidx.c`.
 - [ISSUE-dead-code: Decompress is intentionally absent (comment at
   `:47-49` explains other support functions work on compressed
   form). Easy to misread as missing-function bug. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

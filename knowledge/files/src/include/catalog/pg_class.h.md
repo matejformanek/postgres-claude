@@ -71,6 +71,10 @@ Header note: the three varlena fields above are not present in a relcache entry'
 - `knowledge/files/src/include/catalog/pg_type.h.md` (reltype, reloftype)
 - `knowledge/files/src/include/catalog/heap.h.md` (relcache + heap helpers)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: RELKIND_* / RELPERSISTENCE_* / REPLICA_IDENTITY_* characters are on-disk values]** `pg_class.h:171-198` — these single-character constants are stored verbatim in `pg_class.relkind` / `relpersistence` / `relreplident` and persisted on disk. Changing any letter silently breaks all existing clusters and dumps. The header does not say so — only the underlying skill conventions and `dependency.h`'s analogous block call this out. Worth a one-line warning comment above the block.

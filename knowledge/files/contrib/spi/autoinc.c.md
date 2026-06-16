@@ -84,3 +84,9 @@ bracket — they're tuple-level utility wrappers.) [verified-by-code]
   error convention is intentional — these conditions indicate the
   trigger is misconfigured by a developer, not bad user input.
   [from-comment-style]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `spi`](../../../issues/spi.md)
+<!-- issues:auto:end -->

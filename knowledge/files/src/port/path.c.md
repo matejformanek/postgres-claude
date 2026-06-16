@@ -89,3 +89,7 @@ path strings. `[verified-by-code]`
   symlink-following (`O_NOFOLLOW`) gap that this file does *not* close (A6).
 - `knowledge/files/src/port/pgmkdirp.c.md` — consumes canonicalized paths.
 - `knowledge/files/src/fe_utils/astreamer_tar.c.md` — extraction caller (A11).
+
+<!-- issues:auto:begin -->
+- [Issue register — `port`](../../../issues/port.md)
+<!-- issues:auto:end -->

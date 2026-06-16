@@ -79,3 +79,9 @@ authoritative purpose is the client-side contract. [verified-by-code]
   collide with future PG additions without compile-time warning.
   [ISSUE-api-shape: PG_DIAG_* namespace is single-char ASCII with
   no allocation discipline document (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

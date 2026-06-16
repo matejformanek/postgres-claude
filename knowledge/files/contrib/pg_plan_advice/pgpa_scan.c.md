@@ -74,3 +74,9 @@ scans. [verified-by-code]
 - `pgpa_scan.c:113-121` — `default: strategy = PGPA_SCAN_ORDINARY;` catches
   single-relation ForeignScan as "ordinary"; multi-relation handled in the
   next branch. This split is documented inline. [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

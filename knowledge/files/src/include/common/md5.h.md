@@ -68,6 +68,10 @@ prefix). [from-comment, md5.h:6-8]
 - Caller: `knowledge/files/src/backend/libpq/crypt.c.md`.
 - A5 SecretBuf cluster: `knowledge/issues/common.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: no deprecation/use-only-for-legacy-SCRAM

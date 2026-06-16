@@ -57,3 +57,9 @@ tuple-level SPI utilities (`SPI_fnumber`, `SPI_gettypeid`,
 - No handling of NULL column value before overwrite — always
   overwrites, even on existing INSERT with explicit value. That's
   audit-style by design, not a bug. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `spi`](../../../issues/spi.md)
+<!-- issues:auto:end -->

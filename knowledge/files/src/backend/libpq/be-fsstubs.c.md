@@ -115,6 +115,10 @@ PG 8.0 — it lives in `libpq/` for purely historical reasons. [from-comment, be
 - xact hook registry: called from `source/src/backend/access/transam/xact.c`
   (`CommitTransaction`, `AbortTransaction`, sub-variants)
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: int32 lo_lseek overflow detection]**

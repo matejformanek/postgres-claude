@@ -53,3 +53,9 @@ single function. [verified-by-code] [from-comment]
   even when `maxlen >= 0`; for very long `s` with small `maxlen` this
   wastes work scanning past the eventual clip point. Minor. [ISSUE-style:
   avoidable `strlen` when caller is about to cap (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

@@ -160,6 +160,10 @@ twelve SQL entry points.
   `PXE_*` into `ereport(ERROR, ...)`.
 - `pgp-pgsql.c:633` `pg_verifymbstr` — see `src/backend/utils/mb`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `pgp_sym_decrypt`'s `data` bytea is fully

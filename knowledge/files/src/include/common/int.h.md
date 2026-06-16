@@ -97,6 +97,10 @@ None — all inline static.
 - `source/src/include/c.h` — `i64abs` / `PG_INT64_MIN` macros
   these helpers depend on.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - [ISSUE-correctness: pg_abs_s64(PG_INT64_MIN) special case is correct,
   but any backend code path that does `(uint64) -x` or `abs(x)` directly

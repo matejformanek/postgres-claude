@@ -23,6 +23,10 @@ In `source/contrib/ltree/ltree.h`:
 - `knowledge/files/contrib/ltree/ltree_gist.c.md` — opclass implementation for scalar `ltree`.
 - `knowledge/files/contrib/ltree/_ltree_gist.c.md` — opclass implementation for `ltree[]`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-organization: combining ~80 lines of GiST-only structure definitions into `ltree.h` (used by every operator file) means every `.c` file that just wants `ltree` / `lquery` types must also pull in `access/gist.h` indirectly (via the use of `GISTMaxIndexKeySize` at `ltree.h:237`). A split into `ltree_gist.h` would reduce header coupling, but would be on-disk-compatible. (nit — historical organization)] — `source/contrib/ltree/ltree.h:232-314`.

@@ -61,5 +61,9 @@ implementation in `.c` is the actual integrity-checker (low)]
 - A6 `pg_combinebackup` — primary consumer.
 - Companion: `src/common/blkreftable.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=8`

@@ -117,3 +117,7 @@ given. Requires the target table to have a PRIMARY KEY.
   `RelationGetIndexList`.
 - `knowledge/idioms/trigger-functions.md` for the
   `CALLED_AS_TRIGGER`/`TRIGGER_FIRED_*` discipline.
+
+<!-- issues:auto:begin -->
+- [Issue register — `tcn`](../../../issues/tcn.md)
+<!-- issues:auto:end -->

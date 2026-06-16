@@ -140,6 +140,10 @@ they cannot decode the new format. No silent miscompare.
   `_hash_ovflblkno_to_bitno`.
 - `knowledge/files/contrib/pageinspect/pageinspect.md` — bytea source.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: hash_page_items leaks per-row hashes;

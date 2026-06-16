@@ -15,3 +15,12 @@ the whole `enable_*` family.
 Caveat in source: "cost-estimation code should use the variables, not
 these constants" — DEFAULTS are for postgresql.conf seeding only.
 [from-comment:21-23]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new cost-model constant (and optional GUC)](../../../../scenarios/add-new-cost-model-knob.md)
+- [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
+
+<!-- scenarios:auto:end -->

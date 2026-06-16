@@ -91,3 +91,9 @@ calibrated TSC frequency drifts more than 10 % from the in-use value.
   in the header (line 391-392); fine but worth noting that the bucket
   semantics mean "less than 2^i ns" so the smallest bucket is "0 ns".
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

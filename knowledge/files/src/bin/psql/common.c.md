@@ -169,6 +169,10 @@ This file owns the SIGINT longjmp protocol. The contract:
 - `fe_utils/print.h` — printQuery, printQueryOpt, ClosePager, PageOutput.
 - `startup.c` — defines `pset`, calls `psql_setup_cancel_handler`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tally
 
 `[verified-by-code]=28 [from-comment]=6 [inferred]=1`

@@ -72,5 +72,17 @@ The big one. JIT-compiles a fully-formed `ExprState` step program (built by `exe
 - [[knowledge/files/src/backend/jit/llvm/llvmjit.c.md]] — provides `llvm_create_context`, `llvm_pg_func`, `llvm_function_reference`, `llvm_get_function`.
 - [[knowledge/files/src/backend/jit/llvm/llvmjit_deform.c.md]] — `slot_compile_deform` is called from the `EEOP_*_FETCHSOME` cases.
 
+<!-- issues:auto:begin -->
+- [Issue register — `jit`](../../../../../issues/jit.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=14`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new expression-eval step](../../../../../scenarios/add-new-expression-eval-step.md)
+
+<!-- scenarios:auto:end -->

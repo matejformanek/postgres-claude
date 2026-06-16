@@ -37,3 +37,9 @@ character with an embedded quote-escape). [verified-by-code]
   byte-level appender and silently corrupt SJIS output.
   [ISSUE-question: should the byte-level appender ereport on
   multibyte database encoding? (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../../issues/include-misc.md)
+<!-- issues:auto:end -->

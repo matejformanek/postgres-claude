@@ -431,6 +431,10 @@ of every leaf tuple.
 - Phase A prior sweeps: A11 contrib top-4 (pg_amcheck is in
   A6 sweep), A10 contrib sixth-tier.
 
+<!-- issues:auto:begin -->
+- [Issue register — `amcheck`](../../../issues/amcheck.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: page LSN exposed in errdetail across

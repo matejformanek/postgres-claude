@@ -84,6 +84,10 @@ impossible bounds.
 - `source/src/include/mb/pg_wchar.h` — `pg_mblen_range`,
   `pg_mbstrlen_with_len`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 5

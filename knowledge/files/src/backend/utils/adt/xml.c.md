@@ -50,3 +50,9 @@ This is a defensible design — `XML_PARSE_NONET` would only block `http://` URL
 - `[ISSUE-correctness: xpath() in non-UTF8 databases skips xml-decl parsing and is documented as "non-ASCII bug-compatible with historical behavior" at xml.c:4444-4448 (low; documented)]`.
 
 Confidence: XXE answer `[verified-by-code]`; amplification claim `[unverified]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

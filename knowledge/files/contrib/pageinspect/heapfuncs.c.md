@@ -182,6 +182,10 @@ ALTER TABLE could change the tupledesc; results decode against the
   invariant checks; pageinspect is the *reading* surface, amcheck
   the *verifying* surface. Complementary.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: `tuple_data_split` bypasses type-input

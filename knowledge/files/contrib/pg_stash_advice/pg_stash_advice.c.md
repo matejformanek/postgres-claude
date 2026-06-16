@@ -178,3 +178,9 @@ advisor early-exits when name is empty or queryId is 0
   semantics may leave the worker scheduled-but-not-running on
   postmaster-side; in single-user mode, you'd error out as comment
   notes. [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_stash_advice`](../../../issues/pg_stash_advice.md)
+<!-- issues:auto:end -->

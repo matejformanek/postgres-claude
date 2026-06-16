@@ -27,3 +27,9 @@ Source: `source/src/backend/utils/adt/geo_selfuncs.c` (95 lines).
 - `[ISSUE-undocumented-invariant: the 0.3333 constant is shared with many non-geo "I don't know" estimators; if a workload depends on this value to coax a particular plan, future changes could regress silently (low)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

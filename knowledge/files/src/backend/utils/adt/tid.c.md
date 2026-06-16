@@ -91,6 +91,10 @@ supports trivial single-SELECT views that project a CTID column.
   implementation for heap.
 - `source/src/backend/access/table/tableamapi.c` — tableam dispatch.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

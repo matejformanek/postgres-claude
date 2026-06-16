@@ -261,3 +261,9 @@ configure time on Unix-likes.
   but a hypothetical Unix-like without `setsid` would silently link
   fail. [ISSUE-style: HAVE_* unconditional on Unix; documentation
   trust-the-platform (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

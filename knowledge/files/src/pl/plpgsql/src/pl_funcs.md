@@ -269,6 +269,10 @@ are translatable. Probably intentional but worth a comment.
     on `CachedFunction`.
   - `source/src/backend/executor/spi.c` — `SPI_freeplan` consumer.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-memory: `PLpgSQL_function` struct intentionally leaks after

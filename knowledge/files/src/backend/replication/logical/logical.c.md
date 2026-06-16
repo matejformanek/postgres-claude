@@ -64,3 +64,11 @@ START_REPLICATION). Both must be true to actually do 2PC decoding.
 - [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new replication / logical-decoding message](../../../../../scenarios/add-new-replication-message.md)
+
+<!-- scenarios:auto:end -->

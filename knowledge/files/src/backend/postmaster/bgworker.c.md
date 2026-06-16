@@ -59,3 +59,11 @@ the postmaster's no-shmem-lock rule)
 <!-- backlinks:auto -->
 - [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new background worker](../../../../scenarios/add-new-bgworker.md)
+
+<!-- scenarios:auto:end -->

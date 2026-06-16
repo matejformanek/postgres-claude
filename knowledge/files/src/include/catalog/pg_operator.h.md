@@ -46,6 +46,10 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 - Parent overview: `knowledge/files/src/include/catalog/_catalog_headers_overview.md`
 - Related: `pg_amop.h` (operators wired into opfamilies), `pg_proc.h` (oprcode targets).
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: oprkind char codes are on-disk values]** `pg_operator.h:47` — `oprkind BKI_DEFAULT(b)` with comment "'l' for prefix or 'b' for infix" but no warning that changing the letters breaks on-disk format. Consistent with peers (pg_constraint, pg_am) that share the same gap.
@@ -53,3 +57,13 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 ## Tally
 
 `[verified-by-code]=5 [from-comment]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
+- [Scenario — Add a new built-in operator](../../../../scenarios/add-new-operator.md)
+- [Scenario — Add a new built-in operator](../../../../scenarios/add-new-operator.md)
+
+<!-- scenarios:auto:end -->

@@ -139,6 +139,10 @@ frequently asked-about AIO file. [from-comment, read_stream.c:1-73]
 - Subsystem overview: `knowledge/subsystems/storage-buffer.md`;
   AIO core `knowledge/files/src/backend/storage/aio/aio.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `storage-aio`](../../../../../issues/storage-aio.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: `int16` geometry caps the stream at

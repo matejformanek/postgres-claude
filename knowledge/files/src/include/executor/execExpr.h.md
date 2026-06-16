@@ -69,3 +69,11 @@ recorded in ExprState->flags after first prep.
 - [verified-by-code] opcode list line numbers, struct shape, exported helper
   set.
 - [from-comment] file header purpose.
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new expression-eval step](../../../../scenarios/add-new-expression-eval-step.md)
+
+<!-- scenarios:auto:end -->

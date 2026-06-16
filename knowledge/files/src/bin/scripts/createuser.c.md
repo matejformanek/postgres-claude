@@ -94,3 +94,9 @@ no". [verified-by-code]
   md5 depending on `password_encryption` GUC on the server. With
   a misconfigured server, the role could end up with a less-secure
   hash type than expected. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

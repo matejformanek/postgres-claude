@@ -54,3 +54,9 @@ front-end tools (psql, pg_dump, pg_basebackup, …) all use.
   `optional_argument` are bare macros not in any namespace; collide
   with user-defined macros of the same name. [ISSUE-style: bare
   global macro names from POSIX (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

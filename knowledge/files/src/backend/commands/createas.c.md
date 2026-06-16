@@ -75,3 +75,9 @@ that creates the target rel during `rStartup` and inserts the rows in
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `commands`](../../../../issues/commands.md)
+<!-- issues:auto:end -->

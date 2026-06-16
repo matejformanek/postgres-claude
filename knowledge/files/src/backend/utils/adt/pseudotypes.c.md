@@ -74,6 +74,10 @@ value of type X")` when invoked. (`pseudotypes.c:1-12` [from-comment])
 - `source/src/include/catalog/pg_type.dat` — pseudo-type entries
   pointing at these functions.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 6

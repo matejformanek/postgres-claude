@@ -43,3 +43,9 @@ regenerated between releases.
 `[ISSUE-correctness: NFKC table version skew between mismatched
 libpq+server can cause SCRAM auth failure on exotic codepoints
 (maybe)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

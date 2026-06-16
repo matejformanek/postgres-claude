@@ -85,6 +85,10 @@ the live `ExpandedObjectHeader` plus a R/W vs R/O distinction.
 - `source/src/include/utils/memutils.h` — `MemoryContextSetParent`,
   `MemoryContextDelete`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 3

@@ -158,3 +158,9 @@ claiming. [from-comment] [verified-by-code]
   buffer grows to 2 GB even if subsequent tuples are small. No
   shrink-back. [ISSUE-leak: read_buffer never shrinks within accessor
   lifetime (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

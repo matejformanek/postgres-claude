@@ -63,6 +63,10 @@ Entry points exposed as `oprrest`/`oprjoin` in `pg_operator.dat`:
 - `source/src/include/catalog/pg_statistic.h` —
   `STATISTIC_KIND_MCELEM`, `STATISTIC_KIND_DECHIST`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 4
 - `[from-comment]` × 2

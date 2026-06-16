@@ -26,3 +26,9 @@ Source: `source/src/backend/utils/adt/network_spgist.c` (714 lines).
 - `[ISSUE-correctness: inner_consistent must handle the family-mismatch case; a buggy prune that returned MAYBE for all children would still be correct (slower), but one that returned NO for a matching family would be a wrong-result bug (verified-by-code today)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

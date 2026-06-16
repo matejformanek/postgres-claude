@@ -76,3 +76,9 @@ transmission. [verified-by-code]
   here, which would then be copied/serialised as a Datum-sized int.
   The contract is "if `!OidIsValid(ptype)` the value is meaningless",
   but it's not asserted. [ISSUE-undocumented-invariant: invalid-ptype implies value-is-junk (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `nodes`](../../../../issues/nodes.md)
+<!-- issues:auto:end -->

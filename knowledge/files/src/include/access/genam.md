@@ -93,6 +93,10 @@ miss AM-private trailing fields. `genam.h:71`-`73`.
 - A14 amcheck Phase D: BuildIndexValueDescription redaction parallels
   amcheck's RLS bypass concerns.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-audit-gap: BuildIndexValueDescription column redaction is inside-C-only (informational)]**
    — `genam.h:217`-`218`.

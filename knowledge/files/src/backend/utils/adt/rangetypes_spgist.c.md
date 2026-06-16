@@ -69,6 +69,10 @@ it works for any range type without per-type configuration.
 - `source/src/backend/utils/adt/rangetypes.c` — bound comparison and
   range operators consumed here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[from-comment]` × 4
 - `[inferred]` × 1

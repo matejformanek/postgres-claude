@@ -90,6 +90,10 @@ packet and (on the encrypt side) the random salt/iter selection.
   used here.
 - RFC 4880 §3.7.1.3 — the byte-encoded count formula.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: uncapped attacker-controlled iter count on decrypt path,

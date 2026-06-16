@@ -108,6 +108,10 @@ lines and most of it is the grammar-symbol structs, not the type model.
 - The bison grammar (`preproc.y` / `ecpg.trailer` / `ecpg.header`) — primary
   user of the grammar-symbol structs (`cursor`, `prep`, `when`, `this_type`, …).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 No correctness defects. One conservative maintainability note:
 

@@ -50,6 +50,10 @@ No `#ifdef CATALOG_VARLEN` block. All columns are fixed-width. `[verified-by-cod
 - `knowledge/files/src/include/catalog/pg_subscription.h.md` (downstream side)
 - `knowledge/subsystems/replication.md` (when written)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: `pubgencols` char values are on-disk]** `pg_publication.h:128-131` — `PUBLISH_GENCOLS_NONE='n'` / `PUBLISH_GENCOLS_STORED='s'` are stored verbatim in `pg_publication.pubgencols`. The enum comment does not flag this as an on-disk format constant. Adding a third value (e.g. virtual gencols) is safe but renaming any letter would silently corrupt existing publications.

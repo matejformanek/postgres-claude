@@ -73,3 +73,9 @@ and not cache-friendly. [from-comment]
   `RelationGetPartitionDesc` directly and miss the pinning
   contract. [ISSUE-undocumented-invariant: PartitionDirectory pin
   contract (likely)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-partitioning`](../../../../issues/include-partitioning.md)
+<!-- issues:auto:end -->

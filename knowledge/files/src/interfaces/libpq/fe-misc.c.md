@@ -112,6 +112,10 @@ Also: while writing it may opportunistically call `pqReadData` to drain the sock
 - `knowledge/files/src/interfaces/libpq/libpq-int.h.md` — buffer field definitions.
 - Backend counterpart: `knowledge/files/src/backend/libpq/pqcomm.c.md` (server-side mirror of these primitives).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Invariants for INV tagging
 
 **INV-libpq-misc-1**: Input buffer left-justification at `pqReadData` and `pqCheckInBufferSpace` means `inStart`, `inCursor`, `inEnd` may all jump back to lower addresses between two `pqGet*` calls. Any caller holding a pointer into `inBuffer` across an I/O step has a dangling pointer. [verified-by-code, fe-misc.c:351-385, 610-625]
