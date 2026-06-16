@@ -108,6 +108,10 @@ and Elgamal encrypt/decrypt. Marshals `PGP_MPI` ↔ `BIGNUM` via
 - OpenSSL `BN_FLG_CONSTTIME` / `BN_set_flags` — the fix for timing
   leaks here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: secret-exponent `BN_mod_exp` calls do not set

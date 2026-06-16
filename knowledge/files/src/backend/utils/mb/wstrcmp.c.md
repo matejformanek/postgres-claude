@@ -44,3 +44,9 @@ both frontend and backend (uses `postgres_fe.h`). [verified-by-code]
   signed-char setting if a high-bit byte sits in `s1`. In practice
   PG's mb code uses unsigned byte interpretation throughout. [ISSUE-correctness:
   signed-vs-unsigned promotion mismatch (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

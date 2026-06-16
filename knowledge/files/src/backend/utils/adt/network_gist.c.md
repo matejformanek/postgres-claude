@@ -28,3 +28,9 @@ Source: `source/src/backend/utils/adt/network_gist.c` (811 lines).
 - `[ISSUE-correctness: inet_gist_fetch reconstructs the original inet from minaddr; if a future change makes the inner-key compression lossy, fetch would silently return wrong data on index-only scans (verified clean today)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

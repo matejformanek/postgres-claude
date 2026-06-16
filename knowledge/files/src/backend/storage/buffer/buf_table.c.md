@@ -89,3 +89,9 @@ file's own functions do no locking. [verified-by-code]
   "for tag's partition" — a reader has to know that
   `BufMappingPartitionLock(hashcode)` is the way to translate. Not a bug,
   just sparse. [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `storage-buffer`](../../../../../issues/storage-buffer.md)
+<!-- issues:auto:end -->

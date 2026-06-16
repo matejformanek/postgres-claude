@@ -58,3 +58,9 @@ frontend `palloc` shim in `src/common/fe_memutils.c`).
   non-literal `fmt` would compile silently. `__attribute__((format))` is
   set on the prototype in c.h, so `-Wformat-nonliteral` warnings would
   catch most cases — but PG does not enable that warning. (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

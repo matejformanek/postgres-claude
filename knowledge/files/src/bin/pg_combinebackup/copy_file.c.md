@@ -80,3 +80,9 @@ source only, no I/O). [verified-by-code]
   prevent it. The dry-run cleanup logic in `pg_combinebackup.c`
   removes the output directory entirely on failure so this is fine.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_combinebackup`](../../../../issues/pg_combinebackup.md)
+<!-- issues:auto:end -->

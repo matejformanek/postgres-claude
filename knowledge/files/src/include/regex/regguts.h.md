@@ -179,3 +179,9 @@ allocator + interrupt overrides take effect. [verified-by-code]
   is mandated by Spencer's "fns" pluggability. [ISSUE-question: is
   the fns indirection still load-bearing for any non-PG caller?
   (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-regex`](../../../../issues/include-regex.md)
+<!-- issues:auto:end -->

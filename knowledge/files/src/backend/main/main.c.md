@@ -104,3 +104,9 @@ historic EXEC_BACKEND testing on Unix). [verified-by-code §main.c:47-59, 243-27
   (must be argv[1]). A user who runs `postgres -D /path -C foo` as
   root gets a confusing rejection. The error message doesn't hint
   that placement matters. [ISSUE-style: -C carve-out is silently positional (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `main`](../../../../issues/main.md)
+<!-- issues:auto:end -->

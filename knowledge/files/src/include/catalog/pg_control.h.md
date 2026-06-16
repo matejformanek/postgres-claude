@@ -74,3 +74,11 @@ Fields, in order:
 ## Tally
 
 `[verified-by-code]=12 [from-comment]=6 [inferred]=3`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Bump CATALOG_VERSION_NO](../../../../scenarios/bump-catversion.md)
+
+<!-- scenarios:auto:end -->

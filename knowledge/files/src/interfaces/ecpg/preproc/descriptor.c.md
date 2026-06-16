@@ -119,6 +119,10 @@ consumed when an `output_*` emitter walks them, then freed via
   `struct variable` (the `descriptor_variable` / `sqlda_variable` builders here
   produce these for the rest of the preprocessor).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: lookup_descriptor leaks/overwrites connection on lazy bind]** `descriptor.c:143` — when a connectionless registered descriptor is later looked up *with* a connection, `i->connection = mm_strdup(connection)` overwrites the (NULL) field with no free of any prior value. Benign here because the prior value is always NULL on this path (the `!i->connection` guard at `descriptor.c:140` ensures it), so not an actual leak; flagged only as a place where the invariant ("only bind when currently NULL") is load-bearing and unguarded against future edits. Low severity / likely a non-issue.

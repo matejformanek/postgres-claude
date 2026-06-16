@@ -101,3 +101,9 @@ it (low)] — `task.c:389`.
 [from-code] **`select(2)` not poll/epoll** — POSIX-portable choice.
 maxFd cap is the libpq socket count, which is `user_opts.jobs` (a
 small integer); no FD_SETSIZE risk in practice.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

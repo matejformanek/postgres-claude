@@ -73,6 +73,10 @@ The comment at `:128` makes the contract explicit: "Caller wants to stay in orig
 - A10-1 plperl: subxact-via-die / eval block; comparable shape.
 - A10-4 pltcl (this sweep): the `subtransaction` Tcl command in pltcl.c (`pltcl_subtransaction` at `:2976`) plays the same role as plpy.subtransaction, but uses a *block of Tcl code as argument* rather than a context manager.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-correctness: Python's `try/except` inside `with` swallows exceptions; subxact COMMITS in that case (likely, by design)]** — `source/src/pl/plpython/plpy_subxactobject.c:178-186`. Different from plpgsql's `BEGIN ... EXCEPTION WHEN ... END` which always rolls back the inner block when an exception is caught. A plpython function that does `with plpy.subtransaction(): try: bad_sql() except plpy.SPIError: pass` will commit the (empty) subxact — but the user already saw the exception happen and probably expected rollback. Worth a doc note; not a bug.

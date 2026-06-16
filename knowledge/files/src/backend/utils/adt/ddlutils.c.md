@@ -89,3 +89,9 @@ None.
   by default this is OK, but if it's later marked SAFE the per-call
   ACL check would happen in every worker. Not currently an issue
   (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

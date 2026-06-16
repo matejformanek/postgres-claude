@@ -48,3 +48,7 @@ NAME does not.
   post-connect.
 - Companion: each tool's `main.c` (no .c for this header — it is
   macro-only).
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

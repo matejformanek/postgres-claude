@@ -136,3 +136,7 @@ fallback shims in `plperl_system.h`).
   XS API but never references ppport.h directly.
 - Upstream: `https://metacpan.org/pod/Devel::PPPort` — the canonical
   source and regeneration tooling.
+
+<!-- issues:auto:begin -->
+- [Issue register — `plperl`](../../../../issues/plperl.md)
+<!-- issues:auto:end -->

@@ -112,3 +112,9 @@ but yields a hard ereport instead of a graceful soft error. (low)]`
 context" invariant is documented in this file but not in
 lib/stringinfo.h — a caller reading only the header could
 misinterpret the lifetime rules. (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

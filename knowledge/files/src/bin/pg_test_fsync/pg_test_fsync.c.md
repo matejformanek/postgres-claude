@@ -94,3 +94,9 @@ that `O_DIRECT` works on their filesystem). [from-comment]
 - `pg_test_fsync.c:178` — `filename = pg_strdup(optarg);` — small leak
   on subsequent `-f`s; not material for a one-shot benchmark.
   [ISSUE-leak: leaks previous filename if -f given twice (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

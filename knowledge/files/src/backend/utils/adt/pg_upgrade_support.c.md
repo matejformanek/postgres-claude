@@ -111,3 +111,9 @@ More substantive:
 - [ISSUE-state-transition: `binary_upgrade_replorigin_advance` skips
   WAL — relies on subsequent shutdown checkpoint; crash before that
   loses the advance silently (low, by design)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

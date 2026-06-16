@@ -97,6 +97,10 @@ Reentrant. No globals.
 - Per-algorithm impls: `md5.c`, `sha1.c`, `sha2.c` under
   `src/common/`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=8 [from-comment]=1 [inferred]=2`

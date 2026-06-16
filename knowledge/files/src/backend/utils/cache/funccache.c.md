@@ -87,3 +87,9 @@ so a polymorphic function gets one entry per (oid, argtype-vector) shape.
   callResultType "which will probably never match anything" — i.e. a
   permanently-unreferenced hash entry. Effectively a slow leak under
   OOM pressure (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

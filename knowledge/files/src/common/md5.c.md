@@ -98,6 +98,10 @@ Reentrant. The two globals are read-only.
 - Dispatch facade: `knowledge/files/src/common/cryptohash.c.md`.
 - Password derivation: `knowledge/files/src/common/md5_common.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=8 [from-comment]=2 [inferred]=1`

@@ -111,3 +111,9 @@ backend explicitly reseeds (e.g. session-level `setseed`).
   scale and feeds to splitmix64. This loses precision and could give
   surprising results for SQL `setseed` values very close to ±1. Not a
   security bug — just a documentation/precision quirk. (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

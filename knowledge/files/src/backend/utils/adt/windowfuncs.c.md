@@ -64,3 +64,9 @@ double-check against test suite.
   not explicitly rejected; behaviour reverses direction. SQL spec
   says positive only. (low)]
 - [ISSUE-dead-code: None visible.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

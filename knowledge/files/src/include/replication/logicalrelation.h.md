@@ -86,3 +86,9 @@ descriptor received over the wire (`logicalproto.h`) to a LOCAL
   may include the publisher-supplied `nspname`/`relname` verbatim
   (server logs, possibly subscriber error tables). Low risk on its own.
   (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

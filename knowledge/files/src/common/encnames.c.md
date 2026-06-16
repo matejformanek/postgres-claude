@@ -85,3 +85,9 @@ binary search. A StaticAssertDecl-like check would catch this.
 `[ISSUE-correctness: "_dirty_" aliases (unicode→UTF8, win→WIN1251,
 koi8→KOI8R) are accepted in all contexts including CREATE DATABASE.
 Documented as "backward compatibility" but never deprecated. (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

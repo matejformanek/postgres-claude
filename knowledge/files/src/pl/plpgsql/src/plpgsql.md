@@ -136,6 +136,10 @@ Source pin: `e18b0cb7344`. File length: 1333 lines. [verified-by-code]
 - `source/src/include/access/xact.h`, `commands/trigger.h`, `commands/event_trigger.h` — pulled in for the callback enums and `TriggerData`/`EventTriggerData`.
 - `source/src/backend/utils/cache/plancache.c` — owns the refcount discipline `PLpgSQL_expr.expr_simple_plan_lxid` participates in.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-api-shape: `PLpgSQL_function.cfunc` being the first field is a load-bearing convention that's nowhere asserted (maybe)] — `source/src/pl/plpgsql/src/plpgsql.h:958-960` — `funccache.c` likely casts a `CachedFunction *` to/from `PLpgSQL_function *` (or uses `offsetof(struct, cfunc)`); no `StaticAssertDecl` here forces the constraint. Reordering would compile and pass most tests, then crash. maybe.

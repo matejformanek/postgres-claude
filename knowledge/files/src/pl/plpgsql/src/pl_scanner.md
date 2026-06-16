@@ -184,6 +184,10 @@ Backend touch-points:
 - `mb/pg_wchar.h` — `pg_mbstrlen_with_len` for byte→char offset in
   `plpgsql_scanner_errposition`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: `AT_STMT_START` is hardcoded; adding a new

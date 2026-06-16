@@ -94,3 +94,9 @@ the comment says "Currently, this is only ever called with
 nmembers == 1" (line 153) (low)] — Future caller passing > 1 would
 work, but `RecordMultiXactOffset` would need updating to bracket
 properly.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

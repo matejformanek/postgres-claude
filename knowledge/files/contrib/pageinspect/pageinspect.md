@@ -174,6 +174,10 @@ is fragile.
   `REVOKE … FROM PUBLIC` + `GRANT … TO pg_stat_scan_tables`, while
   pageinspect has only hardcoded `superuser()`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: `get_raw_page` is an RLS bypass primitive; if a

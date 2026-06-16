@@ -326,3 +326,9 @@ hardcode it rather than using that C #define..." — note line 116
 suggests "Eventually we may need a test on the source cluster's
 version to select the correct value." That eventuality has not
 arrived.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

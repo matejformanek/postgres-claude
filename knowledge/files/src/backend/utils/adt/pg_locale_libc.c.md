@@ -102,6 +102,10 @@ plus a Windows special case using `_create_locale`. (`pg_locale_libc.c`)
 - `source/src/backend/commands/collationcmds.c` — CREATE COLLATION.
 - `<locale.h>` POSIX — `newlocale`, `strcoll_l`, `uselocale`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 8

@@ -149,3 +149,9 @@ auto-stripped (`:345-346`). [verified-by-code]
   — correct. But if `FreeFile` itself sets errno to a "more
   interesting" value (e.g. EIO on flush), we lose the original write
   error. Probably fine. [inferred]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_stash_advice`](../../../issues/pg_stash_advice.md)
+<!-- issues:auto:end -->

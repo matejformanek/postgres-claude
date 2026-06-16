@@ -78,6 +78,10 @@ documented operator. `stratnum.h:51`-`82`.
 - A13/A14 corpus findings: collation pin, NaN cluster — strategy
   semantics mismatch.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-correctness: strategy semantics are convention-only, not enforced (informational)]**
    — `stratnum.h:29`-`33`.

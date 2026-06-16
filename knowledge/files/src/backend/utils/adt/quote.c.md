@@ -128,6 +128,10 @@ respect that invariant.
   `quote_literal_cstr` / `quote_identifier` for `%L` and `%I`.
 - `source/src/common/encnames.c` — server-encoding allowlist.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

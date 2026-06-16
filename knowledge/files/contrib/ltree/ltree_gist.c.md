@@ -75,6 +75,10 @@ Internal:
 - `source/src/include/access/reloptions.h` — `init_local_reloptions`, `add_local_int_reloption`, `register_reloptions_validator`.
 - `source/src/include/access/stratnum.h` — `BTLessStrategyNumber` etc.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-cost: default `siglen = 8 bytes = 64 bits` is far too small for realistic ltree workloads (anything > 10 labels saturates). The reloption raises it, but the default chosen pre-v13 was never revisited. **A new index with 1000-row data and default siglen typically has ALL inner nodes flipped to ALLTRUE within a few page splits**, after which lquery/ltxtquery searches scan every leaf. Cross-link: `ltree.h:236` for the constant. (likely — perf foot-gun, well-known in the ltree user community)] — `source/contrib/ltree/ltree_gist.c:736-746`.

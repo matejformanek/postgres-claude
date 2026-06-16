@@ -70,3 +70,9 @@ formats them as `TS <oid>, DB <oid>, REL <oid>, FORK <name>: block N`
   Inconsistent with `report_fatal_error` in `pg_verifybackup` which
   IS marked `pg_noreturn`. [ISSUE-style: missing pg_noreturn on
   exit-only function (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

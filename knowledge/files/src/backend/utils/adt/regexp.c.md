@@ -74,3 +74,9 @@ need a closer read of the flag table.
 - [ISSUE-correctness: `regexp_match` (singular) vs `regexp_matches`
   (set-returning, global flag) is a frequent user-facing footgun;
   documented in user manual but not in this file. (n/a)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

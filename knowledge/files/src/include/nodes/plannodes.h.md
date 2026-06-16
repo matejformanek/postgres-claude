@@ -76,3 +76,11 @@ require a CATALOG_VERSION bump. `nodes/README:113-115` `[from-README]`
 - Sibling: `execnodes.h` (PlanState executor-state nodes).
 - Path → Plan conversion: `optimizer/plan/createplan.c`.
 - Idiom: `knowledge/idioms/node-types-and-lists.md`.
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
+
+<!-- scenarios:auto:end -->

@@ -113,3 +113,9 @@ balanced when ereports interrupt traversal. [verified-by-code]
   language; it just registers the transform. A misuse via fake
   C-function call wouldn't go through transforms anyway.
   [inferred].
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `jsonb_plpython`](../../../issues/jsonb_plpython.md)
+<!-- issues:auto:end -->

@@ -129,6 +129,10 @@ record for SET / SET LOCAL inside a transaction).
 - `source/src/backend/utils/misc/README` — design notes (referenced
   at `:6`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-correctness: `config_var_value.extra` is untyped void*; no

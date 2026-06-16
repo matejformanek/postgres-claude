@@ -123,6 +123,10 @@ Same alphabet as MD5-crypt (NOT bcrypt's).
   paths.
 - FreeBSD `secure/lib/libcrypt/crypt-des.c` — upstream.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: DES is the silent default for `crypt(pw,

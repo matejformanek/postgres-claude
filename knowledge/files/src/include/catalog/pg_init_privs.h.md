@@ -35,6 +35,10 @@ Snapshot of "initial privileges" on objects, captured either at initdb time (for
 - Related: `pg_default_acl.h` (template ACLs for new objects — different mechanism)
 - Related: `pg_extension.h` (extension membership)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: InitPrivsType chars are on-disk, header doesn't say so]** `pg_init_privs.h:81-85` — `'i'`/`'e'` are persisted; renaming them silently corrupts dumps. Comment frames them as a runtime differentiation enum but doesn't warn. Severity `nit`, type `doc-drift`.

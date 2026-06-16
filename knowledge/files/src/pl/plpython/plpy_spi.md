@@ -92,6 +92,10 @@ The fallback when no custom Python exception class matches the SQLSTATE is the g
 - A10-1 (plperl): `spi_query`/`spi_prepare`/`spi_exec_prepared` in `plperl.c`; same subxact-wrap-every-SPI-call idiom.
 - A10-2 (plpython core): `plpy_main.c`, `plpy_exec.c`, `plpy_elog.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: `plpy.execute(text)` passes its argument straight to `SPI_execute` with no parameterization (likely)]** — `source/src/pl/plpython/plpy_spi.c:296-335`. Documented behavior, mirrors plpgsql `EXECUTE`. Cited here for the Phase D audit trail: every PL's text-execute path is a SQL-injection sink unless the user wraps with `plpy.quote_literal`/`plpy.quote_ident`. A SECURITY DEFINER plpython function that interpolates a parameter into a query string is the classic privesc.

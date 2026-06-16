@@ -37,3 +37,7 @@ trusts the OS uid lookup.
 - A2 libpq peer auth — OS uid → PG role mapping.
 - A6 `pg_upgrade` / `initdb` — `get_user_name_or_exit` consumer.
 - Companion: `src/common/username.c.md`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

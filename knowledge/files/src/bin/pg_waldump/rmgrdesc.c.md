@@ -53,3 +53,17 @@ lazily on first lookup with synthetic names `customNNN`.
 - `CustomRmgrDescInitialized` is a plain bool (line 46), not
   atomic. Fine because pg_waldump is single-threaded.
   [verified-by-code]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_waldump`](../../../../issues/pg_waldump.md)
+<!-- issues:auto:end -->

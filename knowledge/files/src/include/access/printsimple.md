@@ -37,6 +37,10 @@ will see errors on type drift. `printsimple.h:19`-`20`.
 - `access/printtup.h` (sibling, not in this slice) — full type-aware printer.
 - `tcop/dest.h` — `DestReceiver` interface.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-defense-in-depth: closed type set, elog on unknown (informational)]**
    — `printsimple.h:19`.

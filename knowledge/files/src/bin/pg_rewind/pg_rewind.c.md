@@ -186,3 +186,17 @@ bug.
 - `[ISSUE-wire-protocol: pg_current_wal_insert_lsn() is read after copying files for a live primary, so the target replays past that LSN. If the source crashes between the file copy and this query, pg_rewind aborts; if the source advances WAL by a record between the file copy and this query that touches files we already copied, those changes are caught only by WAL replay (assumed full_page_writes=on, checked at libpq_source.c:139-141) (low)]`
 - `[ISSUE-trust-boundary: server-controlled symlink target (source_link_target) flows into symlink(2) at file_ops.c:285 with no validation that the target is absolute, points outside the data dir, or is not a relative path that escapes via .. (low)]`
 - `[ISSUE-dead-code: createBackupLabel deliberately omits the LABEL: line (pg_rewind.c:998 comment "omit LABEL: line"). This may confuse tools that parse backup_label expecting a LABEL line (low)]`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Bump CATALOG_VERSION_NO](../../../../scenarios/bump-catversion.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

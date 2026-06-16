@@ -31,6 +31,10 @@ Per-large-object metadata: owner and ACL. Splits LO ownership/permissions out of
 - Related: `pg_largeobject.h` (chunks; `loid` LOOKUP→ here)
 - Related backend: `src/backend/catalog/objectaddress.c`, `src/backend/storage/large_object/inv_api.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: no TOAST table on lomacl]** `pg_largeobject_metadata.h` — `lomacl aclitem[1]` is VARLEN but no `DECLARE_TOAST` is present. If an LO accumulates many grantees, the row could exceed page size. Compare `pg_default_acl` and `pg_init_privs` which both have TOAST. Severity `maybe`, type `correctness` (or could be deliberate sizing assumption — needs a closer read). Worth verifying whether `GRANT ... ON LARGE OBJECT` to thousands of roles actually fails.

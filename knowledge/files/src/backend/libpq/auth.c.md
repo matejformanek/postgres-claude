@@ -139,6 +139,10 @@ verified-by-code, auth.c:374-675]
 - Password storage: `crypt.c.md`.
 - Frontend counterpart: `src/interfaces/libpq/fe-auth.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: client password buffer not zeroed before pfree]**

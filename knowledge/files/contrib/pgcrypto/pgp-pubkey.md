@@ -126,6 +126,10 @@ section with CFB decryption + SHA-1 or 16-bit checksum integrity check.
 - `pgp-pubdec.md` / `pgp-pubenc.md` — uses parsed key for RSA / Elgamal.
 - `pgp-info.md` — sibling that parses keys WITHOUT decryption.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: secret-key packet S2K iter is uncapped; attacker

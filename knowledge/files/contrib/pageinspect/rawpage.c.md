@@ -148,3 +148,7 @@ hard superuser-only debug surface. [verified-by-code]
 - Per-AM decoder files: `heapfuncs.c`, `btreefuncs.c`,
   `brinfuncs.c`, `ginfuncs.c`, `gistfuncs.c`, `hashfuncs.c`,
   `fsmfuncs.c`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->

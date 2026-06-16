@@ -63,6 +63,10 @@ Internal:
 - `source/contrib/ltree/_ltree_gist.c` — GiST opclass for `ltree[]`.
 - `source/src/include/utils/array.h` — `ARR_NDIM`, `ARR_DIMS`, `ARR_DATA_PTR`, `ArrayGetNItems`, `array_contains_nulls`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `array_iterator` has no `CHECK_FOR_INTERRUPTS()` in its loop (lines 54-66). Per-element callbacks (`ltq_regex`) do, but the outer loop doesn't add its own. So cancellation reaches into the matcher's inner loop but only fires when control returns from there. With many small arrays it works; with one big array of pathological lqueries it's coarse. (nit — partially mitigated by callback-internal checks)] — `source/contrib/ltree/_ltree_op.c:54-66`.

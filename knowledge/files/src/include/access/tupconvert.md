@@ -69,6 +69,10 @@ later use is use-after-free. `tupconvert.h:29`-`32`.
 - `knowledge/files/src/include/access/htup.h` (not in this slice) —
   HeapTuple flavor.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-correctness: attrMap/indesc mismatch is silent OOB read (low)]**
    — `tupconvert.h:42`.

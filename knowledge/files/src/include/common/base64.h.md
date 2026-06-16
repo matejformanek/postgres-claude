@@ -41,6 +41,10 @@ whitespace. [from-comment, base64.h:3-5]
 - Primary SCRAM consumer: `src/common/scram-common.c`.
 - Looser non-common variant: `src/backend/utils/adt/encode.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: header doesn't explain why two base64

@@ -220,6 +220,10 @@ wrapper:
   `selinux_raw_to_trans_context`, `selabel_open`, `selabel_lookup_raw`,
   `selabel_close`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: TCP connections fail FATAL at

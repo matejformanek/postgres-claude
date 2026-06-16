@@ -36,3 +36,9 @@ None.
 
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=3 [inferred]=2`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

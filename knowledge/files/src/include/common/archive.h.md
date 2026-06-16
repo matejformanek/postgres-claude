@@ -46,5 +46,9 @@ pg_archivecleanup invoke this with potentially less-trusted argv
 - A14 `basebackup_to_shell` — same %-substitution pattern.
 - Companion: `src/common/archive.c.md`, `src/common/percentrepl.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=2`

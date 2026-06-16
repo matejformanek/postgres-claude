@@ -250,6 +250,10 @@ Backend touch-points:
 - `utils/syscache.c` — `SearchSysCache1(TYPEOID,…)`, `SearchSysCacheAttName`.
 - `nodes/makefuncs.c` — `makeRangeVar`, `makeTypeName`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: `cur_estate` is reused across re-plans without

@@ -178,3 +178,9 @@ is dramatically simpler than the shared-buffer variant. [verified-by-code]
   defensive code is correct; the puzzle is whether the hash entry
   could ever legitimately predate the buffer slot. [ISSUE-undocumented-invariant:
   `found = true` branch in ExtendBufferedRelLocal undocumented (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `storage-buffer`](../../../../../issues/storage-buffer.md)
+<!-- issues:auto:end -->

@@ -224,3 +224,18 @@ pgstat_xact.c, pgstat_wal.c). Highlights:
   callers via forward struct decl. New caller types must consult
   the .c file. [ISSUE-doc-drift: xl_xact_stats_item layout opaque
   at header (nit)]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new BufferAccessStrategy ring](../../../scenarios/add-new-buffer-strategy.md)
+- [Scenario — Add a new `pg_stat_*` view](../../../scenarios/add-new-pg-stat-view.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

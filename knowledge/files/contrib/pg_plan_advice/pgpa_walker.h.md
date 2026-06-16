@@ -48,3 +48,9 @@ output. [verified-by-code]
   future_query_features postcondition not asserted (nit)]
 - `pgpa_walker.h:48-50` — same "update NUM_PGPA_QF_TYPES" comment pattern.
   [ISSUE-style: comment-only sentinel update (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

@@ -193,6 +193,10 @@ pg_dump_sort.c:191-582, 1166-1506; pg_dump.c:1191-1214]
   `dumpAttrDef` in `pg_dump.c` all read the `separate` / `dummy_view`
   / `postponed_def` flags set here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_dump`](../../../../issues/pg_dump.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: catalog-corruption sort fallback can place

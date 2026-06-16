@@ -102,3 +102,9 @@ once exported, any backend that knows the id and is in
   `SnapBuildExportSnapshot` has no per-id ACL beyond the publishing
   role's session lifetime — adopting backend just needs the id string
   (sev=maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

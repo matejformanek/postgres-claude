@@ -52,6 +52,10 @@ the same implementation. [from-comment, saslprep.h:6]
 - Frontend caller: `src/interfaces/libpq/fe-auth-scram.c`.
 - A5 SecretBuf cluster: `knowledge/issues/common.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. `[ISSUE-documentation: pg_saslprep's *output allocator (palloc

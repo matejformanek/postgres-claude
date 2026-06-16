@@ -41,6 +41,10 @@
 - `knowledge/files/src/include/catalog/pg_subscription.h.md` (parent, shared)
 - `knowledge/subsystems/replication.md` (when written)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: SUBREL_STATE_* letters are on-disk values]** `pg_subscription_rel.h:66-73` — the five stored state characters are written directly into `srsubstate` and persisted. The header does call out which states leave `sublsn` NULL vs set, but does not say "do not change these letters" — a future patch swapping 'd' and 'f' would silently mis-classify every existing replica's tablesync progress on upgrade.

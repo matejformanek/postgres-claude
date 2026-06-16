@@ -44,6 +44,10 @@ Per header: "remaining fields may be null; use `heap_getattr` to read them!" `[f
 - `knowledge/files/src/include/catalog/pg_namespace.h.md` (nspowner → here)
 - `knowledge/files/src/include/catalog/pg_class.h.md` (relowner → here)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: no TOAST table on pg_authid]** `pg_authid.h:71` — `rolpassword` is a `text` column with no length cap, yet there is no `DECLARE_TOAST`. SCRAM verifiers fit in a few hundred bytes so this is fine in practice, but a sufficiently long custom auth scheme could in principle overflow a heap tuple. Likely deliberate (avoid TOAST decoding during connection auth, which happens very early); worth confirming and documenting the rationale.

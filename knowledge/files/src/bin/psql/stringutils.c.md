@@ -66,5 +66,9 @@ Allocates `2 * strlen(src) + 3` for the result. Writes `quote`, then walks input
 - `psqlscan.l` and `psqlscanslash.l` for the heavier flex-based parsers.
 - `PQmblenBounded`: `src/interfaces/libpq` (mbutils).
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=10 [from-comment]=4 [no concern]=7 [ISSUE]=1`

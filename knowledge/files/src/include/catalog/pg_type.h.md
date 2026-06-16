@@ -69,6 +69,10 @@
 - `knowledge/files/src/include/catalog/pg_proc.h.md` (typinput/typoutput etc. target pg_proc)
 - `knowledge/files/src/include/catalog/pg_class.h.md` (typrelid links composites)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: TYPTYPE / TYPCATEGORY / TYPALIGN / TYPSTORAGE chars are on-disk values]** `pg_type.h:280-314` — same family of on-disk single-char enums as pg_class; changing any letter is an on-disk format break. The header comments above each block describe semantics but never call out the on-disk-stability contract.
@@ -77,3 +81,11 @@
 ## Tally
 
 `[verified-by-code]=7 [from-comment]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
+
+<!-- scenarios:auto:end -->

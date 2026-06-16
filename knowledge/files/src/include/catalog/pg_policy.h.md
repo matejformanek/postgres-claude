@@ -37,6 +37,10 @@ Row-Level Security (RLS) policy definitions. One row per `CREATE POLICY` stateme
 - Related: `pg_class.h` (RLS-related fields `relrowsecurity`, `relforcerowsecurity`)
 - Related backend: `src/backend/rewrite/rowsecurity.c`, `src/backend/commands/policy.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: polcmd char values come from ACL_*_CHR not a local enum]** `pg_policy.h:37` — `polcmd` holds an ACL char ('r' SELECT, 'a' INSERT, 'w' UPDATE, 'd' DELETE) plus `'*'` for ALL. These are **on-disk values** defined in `parsenodes.h` / `acl.h`. Header refers to "ACL_*_CHR" but doesn't pin down where they live or warn about the on-disk dependency. Severity `maybe`, type `undocumented-invariant`. Relevant for the data-leak hardening project — any divergence between `polcmd` and the SELECT/UPDATE/DELETE classification used during query rewriting is a candidate RLS bypass.

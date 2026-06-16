@@ -68,5 +68,9 @@ The contract: substitute hook **must** free its input if returning a different p
 - Special variable wiring: `startup.c` (not in this batch).
 - C scalars shadow store: `settings.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=15 [from-comment]=1 [inferred]=2 [no concern]=6 [ISSUE]=2`

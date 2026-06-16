@@ -151,6 +151,10 @@ Outgoing: builds a 'F' message with function OID, arg formats, arg values, resul
 - `knowledge/files/src/interfaces/libpq/fe-lobj.c.md` — sole user of `pqFunctionCall3` (via `PQfn`).
 - Backend mirror: `knowledge/files/src/backend/tcop/postgres.c.md` (the `PqMsg_*` dispatch on the server side), `knowledge/files/src/include/libpq/protocol.h.md` (the canonical `PqMsg_*` enum).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## INV tags (invariants for cross-referencing)
 
 **INV-libpq-proto3-1**: Every message body MUST be `msgLength - 4` bytes (the `-4` because `msgLength` includes its own length word). The dispatcher enforces this via the post-switch consistency check. [verified-by-code, fe-protocol3.c:455-475]
@@ -177,3 +181,11 @@ Outgoing: builds a 'F' message with function OID, arg formats, arg values, resul
 ## Tally
 
 `[verified-by-code]=20 [from-comment]=8 [from-readme]=0 [inferred]=0 [unverified]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

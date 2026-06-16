@@ -102,6 +102,10 @@ Pre-flight for every `lo_*`. Logic:
 - Backend counterparts (when written): `knowledge/files/src/backend/libpq/be-fsstubs.c.md` (the server-side `lo_*` C functions registered in pg_proc) and `knowledge/files/src/backend/storage/large_object/inv_api.c.md` (the backing storage).
 - `libpq/libpq-fs.h` — `INV_READ`/`INV_WRITE` macros.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: large-object permission check is server-side only]** fe-lobj.c — frontend has no client-side ACL check before issuing `lo_open`/`lo_unlink`. This is by design (single source of truth is the server) but means a malicious client can attempt to probe OIDs. Server should respond uniformly to "no such LO" vs "permission denied" to avoid information leak. Verify backend response uniformity. **Severity: maybe.** Phase D consideration.

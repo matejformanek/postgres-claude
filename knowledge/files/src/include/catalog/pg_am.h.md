@@ -35,6 +35,10 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 - Parent overview: `knowledge/files/src/include/catalog/_catalog_headers_overview.md`
 - Related: `pg_opclass.h`, `pg_opfamily.h`, `pg_amop.h`, `pg_amproc.h` (opclass/opfamily layered above pg_am), `access/amapi.h` and `access/tableam.h` (handler API the `amhandler` regproc returns).
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: amtype char codes are on-disk values]** `pg_am.h:65-66` — `AMTYPE_INDEX 'i'` and `AMTYPE_TABLE 't'` are stored verbatim in pg_am rows; the header doesn't warn that changing the letters is a catalog format break.
@@ -42,3 +46,11 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 ## Tally
 
 `[verified-by-code]=6 [from-comment]=1`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+
+<!-- scenarios:auto:end -->

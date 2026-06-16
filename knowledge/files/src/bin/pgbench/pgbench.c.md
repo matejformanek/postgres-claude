@@ -240,3 +240,7 @@ The file is enormous. Key functions, grouped:
 - `fe_utils/conditional.c` — conditional-stack used by \if.
 - `fe_utils/cancel.c` — Ctrl-C handler.
 - `common/pg_prng.c` — PRNG implementations behind getrand and friends.
+
+<!-- issues:auto:begin -->
+- [Issue register — `pgbench`](../../../../issues/pgbench.md)
+<!-- issues:auto:end -->

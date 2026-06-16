@@ -139,3 +139,9 @@ exactly this advice?" oracle that drives `PGPA_FB_FAILED` feedback.
 - `pgpa_walker.c:736-738` — early-out for JOIN_ORDER short-circuits the
   switch below, which uses `relids` that wasn't built for JOIN_ORDER.
   Correct, but the layout could be cleaner. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

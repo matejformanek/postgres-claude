@@ -66,5 +66,9 @@ After building the prompt for PROMPT1, scan it and compute display width using `
 - `pset.prompt1`/`2`/`3` storage — see `knowledge/files/src/bin/psql/settings.h.md`.
 - `RL_PROMPT_START_IGNORE` semantics — readline manual; psql relies on `>= 4.0`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=14 [from-comment]=2 [inferred]=1 [no concern]=4 [ISSUE]=3`

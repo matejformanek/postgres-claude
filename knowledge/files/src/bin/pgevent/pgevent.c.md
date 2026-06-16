@@ -79,3 +79,9 @@ at. Implements the standard self-registration ABI (`DllRegisterServer` /
   right name. Without `/i`, `event_source` stays at `DEFAULT_EVENT_SOURCE`
   and we delete the default key, which may not be what was registered.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

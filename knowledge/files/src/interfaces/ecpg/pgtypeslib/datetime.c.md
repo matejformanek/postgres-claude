@@ -107,6 +107,10 @@ Informix-style `dd`/`mm`/`yy` format strings. It leans heavily on the
 - [[timestamp.c]] — client `timestamp` type bridged by `from_timestamp`.
 - [[interval.c]] — sibling pgtypeslib client type.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-overflow: unbounded `outbuf` in `fmt_asc`]** `datetime.c:168,212` —

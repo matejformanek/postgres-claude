@@ -65,6 +65,10 @@ the end — branch-free per chunk.
   counterpart.
 - `source/src/include/port/simd.h` — `Vector8` typedef and operations.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-correctness: `is_valid_ascii` reads past `s + len` if `len % chunk

@@ -70,6 +70,10 @@ at fpoint=2. (`cash.c:1-17` [from-comment])
 - `source/src/include/utils/pg_locale.h` — `PGLC_localeconv` shim.
 - `source/src/common/int.h` — overflow helpers (A5 layer).
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

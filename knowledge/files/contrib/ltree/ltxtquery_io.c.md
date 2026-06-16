@@ -63,6 +63,10 @@ Internal:
 - `source/src/include/nodes/miscnodes.h` — `SOFT_ERROR_OCCURRED`, `ereturn`.
 - A5 jsonapi finding — recursive vs iterative parser stack discipline. ltxtquery follows the recursive + check_stack_depth pattern; lquery is iterative.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `makepol` recurses on every `OPEN` token (line 258). With `(((((...)))))` of depth N, the C stack grows linearly. `check_stack_depth()` (line 225) catches before overflow, but the default `max_stack_depth = 2 MB` and frame size ~150 bytes give ~13000 nesting levels. A 1-MB input of `((((` would parse before erroring. Cancel via statement_timeout works at the token level only if `CHECK_FOR_INTERRUPTS` were called — and it isn't. (likely — slow-fail parser DoS)] — `source/contrib/ltree/ltxtquery_io.c:213-294`.

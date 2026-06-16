@@ -73,5 +73,9 @@ The single most-misnamed file in the JIT — this is **not C code that runs**. I
 - [[knowledge/subsystems/jit.md]] §2 (mental-model bullet "Type sync via bitcode, not by hand").
 - [[knowledge/files/src/backend/jit/llvm/llvmjit.c.md]] — `llvm_create_types`, `llvm_pg_var_type`, `llvm_pg_func` are the consumers.
 
+<!-- issues:auto:begin -->
+- [Issue register — `jit`](../../../../../issues/jit.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=6`

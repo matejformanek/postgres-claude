@@ -127,3 +127,7 @@ v4 UUIDs in core (`gen_random_uuid()` in pgcrypto/built-in) and PG
   used in v3/v5 generation; no OpenSSL dependency.
 - `arc4random` is provided by libc on BSDs and modern glibc; PG
   does NOT carry a portable arc4random fallback for uuid-ossp.
+
+<!-- issues:auto:begin -->
+- [Issue register — `uuid-ossp`](../../../issues/uuid-ossp.md)
+<!-- issues:auto:end -->

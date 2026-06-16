@@ -63,3 +63,9 @@ who knows the connection time and PID. Documented at `:51-54`.
   applied uniformly across all overloads. Defense-in-depth would
   apply the check here too in case `random_numeric` changes
   semantics. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

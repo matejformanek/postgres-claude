@@ -141,5 +141,9 @@ local stderr-style print, not SQL or shell. [verified-by-code]
 - `settings.h` — defines the psql variables that `helpVariables`
   describes.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=10 [from-comment]=4 [inferred]=1`

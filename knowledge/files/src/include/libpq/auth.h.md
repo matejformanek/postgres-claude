@@ -39,6 +39,10 @@ used across the auth code [from-comment].
 - Related subsystem: `knowledge/subsystems/libpq-backend.md` (if/when
   written).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: hook signature integer is unnamed]** `auth.h:45` —

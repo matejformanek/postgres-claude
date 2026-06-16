@@ -48,5 +48,9 @@ The decompressor is the trust-boundary surface (TOAST data may have been written
 - TOAST writer: `src/backend/access/common/detoast.c`, `src/backend/access/common/toast_compression.c`.
 - LZ4 alternative: `src/backend/access/common/toast_compression.c` selects via `default_toast_compression` GUC.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=10 [inferred]=1 [maybe]=2`

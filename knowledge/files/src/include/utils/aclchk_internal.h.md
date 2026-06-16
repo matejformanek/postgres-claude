@@ -55,6 +55,10 @@ record + a list of AccessPriv nodes.
 - `knowledge/files/src/include/utils/acl.h.md` — defines the AclMode bitmask
   and ACL_ALL_RIGHTS_* this struct refers to.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-correctness: `InternalGrant.privileges` is mutated in place;

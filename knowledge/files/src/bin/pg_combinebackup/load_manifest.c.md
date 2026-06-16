@@ -84,3 +84,9 @@ manifest. [verified-by-code]
   manifest. [verified-by-code] [ISSUE-correctness: version_cb accepts
   any version >= 2 silently; future-format mismatch surfaces as later
   parse errors (likely)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_combinebackup`](../../../../issues/pg_combinebackup.md)
+<!-- issues:auto:end -->

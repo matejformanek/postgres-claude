@@ -25,3 +25,9 @@ Source: `source/src/backend/utils/adt/inet_cidr_ntop.c` (294 lines).
 - `[ISSUE-dead-code: the LIBC_SCCS guard at line 20 dates to the BIND9 import; harmless but worth a future cleanup (low)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

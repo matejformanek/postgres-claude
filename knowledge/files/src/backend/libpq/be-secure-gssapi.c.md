@@ -138,6 +138,10 @@ packets (be-secure-gssapi.c:56-62).
 - Frontend counterpart: `src/interfaces/libpq/fe-secure-gssapi.c`
   (must agree on `PQ_GSS_MAX_PACKET_SIZE`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: PQ_GSS_MAX_PACKET_SIZE must match

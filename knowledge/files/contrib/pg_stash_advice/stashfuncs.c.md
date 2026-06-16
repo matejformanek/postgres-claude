@@ -92,3 +92,9 @@ entries)` lookup. [verified-by-code]
   is per-call. For a stash with thousands of entries this rebuilds the
   count hash on every SRF call window. Fine in materialize mode (single
   call). [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_stash_advice`](../../../issues/pg_stash_advice.md)
+<!-- issues:auto:end -->

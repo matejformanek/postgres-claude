@@ -132,6 +132,10 @@ primary trust boundary for `pg_basebackup`/`pg_verifybackup`/`pg_combinebackup`.
 - `knowledge/files/src/bin/pg_basebackup/astreamer_inject.c.md` — sits between
   parser and archiver in `CreateBackupStreamer()`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: client fully trusts server tar metadata]**

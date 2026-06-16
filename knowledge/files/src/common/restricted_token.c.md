@@ -38,3 +38,9 @@ Frontend-only (`#error` for backend builds, line 17-19). Called near the top of 
 
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=8 [inferred]=1 [maybe]=2`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

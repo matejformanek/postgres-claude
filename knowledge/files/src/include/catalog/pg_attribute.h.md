@@ -61,6 +61,10 @@ Per header: varlena fields are NOT present in tuple descriptors. `[from-comment]
 - `knowledge/files/src/include/catalog/pg_type.h.md` (typlen/typbyval/typalign duplicated into attribute row)
 - `knowledge/files/src/include/catalog/heap.h.md` (system-attr struct copies)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: ATTRIBUTE_IDENTITY_* and ATTRIBUTE_GENERATED_* are on-disk char values]** `pg_attribute.h:230-234` — like RELKIND in pg_class, these single-char constants are written to disk verbatim. No warning comment in the block.

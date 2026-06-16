@@ -100,6 +100,10 @@ Reentrant.
 - Primary consumer: `knowledge/files/src/common/scram-common.c.md`.
 - Looser non-common variant: `src/backend/utils/adt/encode.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=10 [from-comment]=1 [inferred]=1`

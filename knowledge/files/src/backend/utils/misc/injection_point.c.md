@@ -147,3 +147,9 @@ the test-only nature is enforced at link time. [verified-by-code]
   *match* if the trailing bytes happen to align. Defensive coding
   could use `strncmp(..., INJ_NAME_MAXLEN)`. [ISSUE-style: memcmp
   trusts strlcpy NUL termination (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

@@ -110,3 +110,9 @@ All issues for this file are already enumerated in
 
 No new issues surface on this re-read; the file is stable and the
 sweep-A13 audit was thorough.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `intarray`](../../../issues/intarray.md)
+<!-- issues:auto:end -->

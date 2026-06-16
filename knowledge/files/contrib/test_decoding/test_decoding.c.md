@@ -172,3 +172,15 @@ end-to-end) and the docs' examples of how to write an output plugin.
   the broader decoding pipeline.
 - Companion tests: `contrib/test_decoding/sql/*.sql` +
   `contrib/test_decoding/specs/*.spec`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `test_decoding`](../../../issues/test_decoding.md)
+<!-- issues:auto:end -->
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new replication / logical-decoding message](../../../scenarios/add-new-replication-message.md)
+
+<!-- scenarios:auto:end -->

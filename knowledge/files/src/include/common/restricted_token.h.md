@@ -51,5 +51,9 @@ escaping contract.
 - A6 `pg_upgrade` — Windows execution path.
 - Companion: `src/common/restricted_token.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=2`

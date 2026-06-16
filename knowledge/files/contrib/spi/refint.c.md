@@ -130,3 +130,9 @@ This is the **canonical PG demo** of how to call `SPI_connect`,
 - `:539` (post-EOF): no `SPI_finish` cleanup in the early-return
   paths at `:137, 335` — but those paths explicitly call
   `SPI_finish()` first. Good. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `spi`](../../../issues/spi.md)
+<!-- issues:auto:end -->

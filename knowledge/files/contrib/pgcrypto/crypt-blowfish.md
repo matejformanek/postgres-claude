@@ -143,6 +143,10 @@ nonstandard bcrypt alphabet `"./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv
 - `openssl.c` has its own Blowfish (block cipher, not bcrypt) — the
   two implementations are unrelated.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: bcrypt cost=31 is a per-call DoS vector

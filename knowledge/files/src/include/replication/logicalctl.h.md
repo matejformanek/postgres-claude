@@ -62,3 +62,9 @@ This header is API-only — no public structs. The functions split into:
   errors out, but a stuck slot (subscriber gone) could pin the
   cluster in logical mode indefinitely; operators must drop the slot
   first. Standard PG slot-leak gotcha, but worth flagging here. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

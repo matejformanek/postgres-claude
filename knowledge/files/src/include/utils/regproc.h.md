@@ -93,6 +93,10 @@ schema qualification rules.
   role-side equivalent.
 - A3, A6, A7, A8, A9, A10 — the NAME-vs-OID cluster across the corpus.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-correctness: `stringToQualifiedNameList` is the parse half of

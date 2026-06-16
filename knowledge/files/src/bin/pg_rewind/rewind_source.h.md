@@ -66,3 +66,9 @@ normal source.
 - `[ISSUE-trust-boundary: vtable comment for queue_fetch_file admits the source may report a wrong size and the implementation should fetch more if needed; no protection against a source claiming size=0 for a large file so that target gets truncated to 0 (medium)]`
 - `[ISSUE-undocumented-invariant: destroy() comment says it does not close the PGconn, but only the libpq impl. A future caller swapping impls could leak or double-close (low)]`
 - `[ISSUE-trust-boundary: no integrity check (checksum/HMAC) at this layer; correctness relies entirely on transport security and the source-server's privilege model (maybe)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

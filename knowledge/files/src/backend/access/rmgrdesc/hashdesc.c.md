@@ -53,6 +53,10 @@ init/split/squeeze/vacuum and meta-page updates — for `pg_waldump`.
   `[[src/include/access/hash_xlog.h]]`.
 - Descriptor format conventions: `source/src/backend/access/rmgrdesc/README`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `access-rmgrdesc`](../../../../../issues/access-rmgrdesc.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: SPLIT_PAGE/SPLIT_CLEANUP have no desc

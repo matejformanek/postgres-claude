@@ -88,3 +88,9 @@ folding. Caller MUST validate upstream. (maybe)]`
 documented only in convert_case's comment, not in the header. A
 caller using titlecase for SCRAM-style "first letter caps" would
 get different results in full vs non-full mode. (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

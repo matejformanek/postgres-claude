@@ -10,6 +10,38 @@ companion_skills:
   - review-checklist
   - patch-submission
   - commit-message-style
+companion_scenarios:
+  - add-new-builtin-function
+  - add-new-data-type
+  - add-new-operator-class
+  - add-new-operator
+  - add-new-cast
+  - add-new-aggregate-function
+  - add-new-error-code
+  - add-new-system-catalog-column
+  - add-new-system-view
+  - add-new-sql-keyword
+  - add-new-node-type
+  - add-new-utility-statement
+  - add-new-plan-node
+  - add-new-expression-eval-step
+  - add-new-cost-model-knob
+  - add-new-index-am
+  - add-new-table-am
+  - add-new-wal-record
+  - add-new-buffer-strategy
+  - add-new-guc
+  - add-startup-hook
+  - add-new-bgworker
+  - add-new-hook
+  - add-new-lwlock-tranche
+  - add-new-shared-memory-region
+  - add-new-pg-stat-view
+  - add-new-protocol-message
+  - add-new-replication-message
+  - add-new-extension
+  - add-new-test-module
+  - bump-catversion
 ---
 
 # pg-feature-plan — Phase 2 of the PG planner
@@ -211,13 +243,57 @@ below. Length scales with the feature: ~400 lines for a small change,
 
 ## Method
 
+### Step 0 — Match the brainstorm against `knowledge/scenarios/` (hard integration)
+
+**This is the FIRST thing the planner does, before any corpus loading.**
+
+The scenarios layer (`knowledge/scenarios/`) is task-shaped: one
+playbook per recurring change-class, each with an authoritative file
+checklist. When the brainstorm's picked approach matches a scenario,
+that scenario's checklist is **load-bearing** — it becomes the
+starting authoritative §3 table.
+
+Process:
+
+1. **Read `knowledge/scenarios/_index.md`** — the decision tree + the
+   31-scenario inventory.
+2. **Match the brainstorm's change-class** against the index:
+   - **Exactly one scenario matches** → its file checklist is the
+     **starting authoritative §3 table**. Every file named in the
+     checklist MUST land in the plan. The planner can ADD sites
+     discovered by grep but can NEVER drop sites the scenario named.
+     Dropping a site requires explicit user approval AND a follow-up
+     edit to the scenario itself.
+   - **Multiple scenarios match (composite feature)** → union their
+     checklists. The §3 table is the deduplicated union; verify each
+     row still applies, but do not drop entries from the union.
+   - **Zero scenarios match** → ESCALATE to the user with a flag:
+     "The scenarios layer has a gap for this change-class." Record
+     the gap in `progress/scenarios-coverage.md` under "Gaps
+     surfaced by planner runs". Continue with grep-based discovery
+     only.
+3. **Check anchor drift.** Read the scenario's `last_verified_commit:`
+   frontmatter. If the plan's anchor SHA ≠ `last_verified_commit`,
+   emit a **"scenario stale" warning** in the plan's §1 and run a
+   fresh grep pass to validate every checklist row before treating
+   the table as authoritative.
+4. **Record which scenario(s) the plan pins to** in the plan's
+   `## Context` block (after the date / author posture / engagement
+   class). Format: `Scenario(s): add-new-data-type, add-new-operator-class`.
+
+Step 0 is the hard contract — it's what makes the scenarios layer
+load-bearing rather than advisory.
+
+### Subsequent steps
+
 1. **Read brainstorm + DECISION answers.** If they're missing or stale,
    re-run brainstorm or ask the user inline before proceeding.
 
 2. **Load corpus deeply.** Read the 1-3 subsystem docs from the
    brainstorm. Then walk per-file docs (`knowledge/files/src/...`) for
    the directories you'll touch. Open the actual `source/` files for
-   anything not in the per-file corpus.
+   anything not in the per-file corpus. Also load every per-file doc
+   linked from the pinned scenario's checklist.
 
 3. **Inventory the change sites.** Run targeted greps over `source/`
    for the symbols, structs, and call sites the plan will touch. Build
@@ -254,6 +330,23 @@ below. Length scales with the feature: ~400 lines for a small change,
 
    If any cite fails resolution: fix the plan inline. **Do not hand
    off a plan with stale cites.**
+
+8a. **Scenario-coverage gate — required (M3 extension).** For every
+    scenario pinned in Step 0, cross-check that **every file in the
+    scenario's checklist appears in the plan's §3 table**. Missing
+    files invalidate the plan:
+   - If a file from the checklist is genuinely not needed for this
+     specific feature, the user must explicitly approve dropping it
+     AND the scenario itself must be edited (don't paper over the
+     drop). Until the scenario is edited, the file stays in §3 even
+     if the plan's §8 phases skip it; the deviation is recorded in
+     §13 risks.
+   - If anchor-drift was flagged at Step 0 and the checklist appears
+     stale, run a fresh grep pass to validate each row; update the
+     scenario's `last_verified_commit:` if you do the verification.
+
+    The gate is binary: a plan with scenario-coverage gaps fails
+    validation. Don't ship a plan that quietly drops scenario sites.
 
 9. **End with a one-line hand-off:** *"Run `/pg-implement <slug>` to
    start phase 1."* (Use `/pg-implement`, NOT the generic
@@ -316,6 +409,7 @@ notes") and consider archiving the brainstorm if it's no longer useful.
 - `.claude/skills/meta-commit-style/SKILL.md` — the plan.md file itself commits to the meta repo via this style.
 - `.claude/skills/memory-keeping/SKILL.md` — session log of the planning effort goes through this skill at end.
 - `.claude/skills/pg-claude/SKILL.md` — master nav for picking subsystem docs.
+- `knowledge/scenarios/README.md` + `knowledge/scenarios/_index.md` — the scenarios layer Step 0 pins against.
 - `knowledge/shadow-implementations/money-fx-exchange/skill-gaps.md` — M2/M3/M5 origin (Phase E run 1).
 - `knowledge/calibration/shadow-implementation-methodology.md` — methodology this skill participates in.
 - `.claude/commands/pg-plan.md` — slash-command wrapper.

@@ -55,6 +55,10 @@ Result: 2 allocations + 1 free for an ASCII string on a UTF-8 server. Not a bug,
 - A10-1 plperl: `sv2cstr` is the spiritual equivalent for Perl strings; uses similar UTF-8-then-pg_any_to_server idiom.
 - pltcl.c (this sweep): `utf_u2e` / `utf_e2u` are even simpler — Tcl strings are always UTF-8 by design, so no Python-style intermediate is needed.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-memory: `PLyUnicode_AsString` doubles allocator pressure on hot paths (nit)]** — `source/src/pl/plpython/plpy_util.c:80-88`. Every call does PyUnicode→bytes→pstrdup, leaving the bytes refcount to be reaped by `Py_XDECREF`. For loops over large result sets this is measurable. Not a correctness issue; would be a non-trivial refactor to expose a "borrow the bytes" variant since the caller doesn't generally know how long it'll need the result.

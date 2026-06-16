@@ -334,3 +334,12 @@ until the file is fully allocated.
 - [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new WAL record](../../../../../scenarios/add-new-wal-record.md)
+- [Scenario — Bump CATALOG_VERSION_NO](../../../../../scenarios/bump-catversion.md)
+
+<!-- scenarios:auto:end -->

@@ -70,6 +70,10 @@ Internal:
 - `source/src/backend/utils/hash/hashfn.c` — `hash_any` / `hash_any_extended`.
 - `source/src/backend/utils/adt/selfuncs.c` — `generic_restriction_selectivity`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-doc: lines 60, 68, 77 — the `* 10 * (an + 1)` magnitude in `ltree_compare` looks deliberate but only the SIGN is used. A new reader might assume the magnitude is meaningful. (nit — would be cleaner as `return -1/0/1`)] — `source/contrib/ltree/ltree_op.c:60`.

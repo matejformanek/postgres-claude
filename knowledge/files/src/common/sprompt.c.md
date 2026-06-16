@@ -96,3 +96,9 @@ sometimes test for NULL anyway (low)]
   gettext — fine since prompts are static strings, but a caller
   passing untrusted text would face format-string risk if it later
   contained `%` chars (none observed in tree).
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

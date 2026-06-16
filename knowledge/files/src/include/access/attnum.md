@@ -52,6 +52,10 @@ reachable. `attnum.h:24`.
   separate index-attr cap (32 by default).
 - `access/htup_details.h` — `MaxHeapAttributeNumber=1600`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-correctness: AttrNumberGetAttrOffset asserts only on system attrs (low)]**
    — `attnum.h:51`-`55`.

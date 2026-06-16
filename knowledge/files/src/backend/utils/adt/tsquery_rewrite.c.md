@@ -54,3 +54,9 @@ deep rewrites.
   `findsubquery`'s `*isfind` is the loop guard, so once nothing
   changes the loop exits. **Safe.** `[verified-by-code]` (n/a)]
 - [ISSUE-stale-todo: None visible.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

@@ -116,6 +116,10 @@ circuits if a prior provider denied — sepgsql then doesn't run its check.
 - `source/src/backend/commands/schemacmds.c` — CREATE/DROP/ALTER
   SCHEMA path.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: pg_temp schemas all share one

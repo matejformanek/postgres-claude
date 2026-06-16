@@ -163,6 +163,10 @@ design — `ausearch` and `audit2allow` can consume it.
 - uavc.c — the only consumer of `sepgsql_compute_avd`.
 - label.c — the only consumer of `sepgsql_compute_create` (via uavc).
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-security: unknown-class fallback is fail-open unless

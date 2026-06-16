@@ -101,3 +101,9 @@ O(1) average. [verified-by-code]
   GEQO interaction (per `pgpa_planner.c` notes) means this could leak
   partial state. [ISSUE-leak: trove hash table tied to
   CurrentMemoryContext at build time, may interact poorly with GEQO (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

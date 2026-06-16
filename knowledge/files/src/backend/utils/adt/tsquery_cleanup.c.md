@@ -41,3 +41,9 @@ NOT-stop) — callers must handle that.
   by usage. A misordered call sequence can leave invalid trees
   detected only at index time. (low)]
 - [ISSUE-stale-todo: None visible; file is mature/stable.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

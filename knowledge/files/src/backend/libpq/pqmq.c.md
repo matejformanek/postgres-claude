@@ -89,6 +89,10 @@ vtable just like `pqcomm.c` does for sockets. [from-comment, pqmq.c:1-12]
 - Leader-side consumer: `source/src/backend/access/transam/parallel.c`
   (`HandleParallelMessages`)
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: silent DEBUG-level downgrade across parallel boundary]**

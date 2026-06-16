@@ -220,6 +220,10 @@ this file.
   - `mb/pg_wchar.c` — `pg_verifymbstr`.
   - `utils/hash/dynahash.c` — `hash_create`, `hash_search`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `plpy.execute(text)` runs arbitrary SQL with the

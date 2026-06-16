@@ -197,3 +197,9 @@ long-lived subscription can grow.
   (e.g. an UPDATE on a table with hashed_password), errors during
   apply will surface the value to the subscriber's log. (low,
   by-design)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

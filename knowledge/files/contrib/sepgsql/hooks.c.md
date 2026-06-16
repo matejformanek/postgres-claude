@@ -204,6 +204,10 @@ This file is the *entire activation surface* of sepgsql.
 - `source/src/backend/utils/misc/guc.c` — `DefineCustomBoolVariable`,
   `MarkGUCPrefixReserved`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `sepgsql`](../../../issues/sepgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: removing sepgsql from shared_preload_libraries

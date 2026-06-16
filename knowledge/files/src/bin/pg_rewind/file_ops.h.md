@@ -41,3 +41,9 @@ scoped to callers of these symbols.
   contract that all mutating ops respect `dry_run` is documented
   only in `file_ops.c`'s file header. Callers who add new write
   helpers might forget. Not a Phase D issue per se, but worth noting.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

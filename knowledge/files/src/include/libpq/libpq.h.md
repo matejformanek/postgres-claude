@@ -51,6 +51,10 @@ secure-transport entry points implemented in `be-secure*.c` [from-comment].
 - Related: `knowledge/files/src/include/libpq/libpq-be.h.md` (Port),
   `knowledge/files/src/include/libpq/pqcomm.h.md` (wire constants).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: 3DES is in the default cipher list]**

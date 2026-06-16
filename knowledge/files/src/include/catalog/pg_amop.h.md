@@ -45,3 +45,13 @@ No `CATALOG_VARLEN` block. [verified-by-code]
 ## Tally
 
 `[verified-by-code]=5 [from-comment]=3 [inferred]=1`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+- [Scenario — Add a new operator class for an existing index AM](../../../../scenarios/add-new-operator-class.md)
+
+<!-- scenarios:auto:end -->

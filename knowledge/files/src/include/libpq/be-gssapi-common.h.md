@@ -31,6 +31,10 @@ when `ENABLE_GSS` is defined [from-comment].
 - Related: `knowledge/files/src/include/libpq/pg-gssapi.h.md` (header
   include shim).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: GSS error text granularity]** `be-gssapi-common.h:21` —

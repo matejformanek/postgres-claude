@@ -53,6 +53,10 @@ Per header: `indkey` is variable-length but direct C-struct access is permitted 
 - `knowledge/files/src/include/catalog/pg_attribute.h.md` (indkey array FK)
 - `knowledge/files/src/include/catalog/index.h.md` (heap-side index DDL API)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: indkey direct C-struct access pun]** `pg_index.h:50-52` — same fragile pun as in `pg_proc.h` (proargtypes). Inserting any nullable fixed-length column above `indkey` silently breaks readers using `idx->indkey`. Worth a defensive comment + static-assert on the offset.

@@ -158,6 +158,10 @@ ALTER OPERATOR FAMILY runs concurrently — vanishingly rare.
 - `knowledge/files/contrib/pageinspect/pageinspect.md` — the
   `get_raw_page` source.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-correctness: `brin_page_items` does not cross-validate

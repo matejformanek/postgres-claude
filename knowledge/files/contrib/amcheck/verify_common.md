@@ -118,6 +118,10 @@ temp, `!indisvalid`, unlogged-on-standby).
 - amcheck callbacks: `verify_nbtree.c:bt_index_check_callback` (line 312),
   `verify_gin.c:gin_check_parent_keys_consistency` (line 388).
 
+<!-- issues:auto:begin -->
+- [Issue register — `amcheck`](../../../issues/amcheck.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-audit-gap: REVOKE-FROM-PUBLIC is the only access gate; no

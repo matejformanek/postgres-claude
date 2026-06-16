@@ -73,3 +73,9 @@ forward-typedef'd here as `void *` / opaque. [from-comment]
   any out-of-tree consumer (there are none in core, but extension authors
   occasionally vendor parts of pgbench). [ISSUE-style: ABI-fragile enum
   (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pgbench`](../../../../issues/pgbench.md)
+<!-- issues:auto:end -->

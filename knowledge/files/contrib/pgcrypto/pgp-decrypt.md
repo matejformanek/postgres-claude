@@ -174,6 +174,10 @@ packets after CFB decryption. Allowed inner tags: `LITERAL_DATA`,
 - Mister-Zuccherato 2005, EFAIL 2018 — the attack history this code
   is defending against.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: tag-9 legacy (no-MDC) ciphertexts still accepted;

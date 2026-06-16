@@ -46,3 +46,9 @@ between `fork()` and the child's first real work. [from-comment]
   decision-tree comment. [inferred]
   [ISSUE-doc-drift: header lacks any guidance on when `fork_process`
   is the correct entry point (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-postmaster`](../../../../issues/include-postmaster.md)
+<!-- issues:auto:end -->

@@ -104,3 +104,9 @@ order) is:
   worth pre-emptively documenting the convention. [inferred]
   [ISSUE-style: pattern for `#ifdef`-gated entries not documented in
   head comment (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-storage`](../../../../issues/include-storage.md)
+<!-- issues:auto:end -->

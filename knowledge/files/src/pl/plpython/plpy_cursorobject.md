@@ -257,6 +257,10 @@ the GC-friendly path.
   - `utils/mmgr/portalmem.c` — `GetPortalByName`, `PortalIsValid`,
     `PinPortal`, `UnpinPortal`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: `PLy_cursor_plan` casts `ob` to

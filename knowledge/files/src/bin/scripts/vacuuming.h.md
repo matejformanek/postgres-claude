@@ -44,3 +44,9 @@ functions. [verified-by-code]
   version-gated emission). Easy to miss one of the three.
   [verified-by-code] [ISSUE-style: 3-place edit footprint for
   adding any new VACUUM option; no central registry (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

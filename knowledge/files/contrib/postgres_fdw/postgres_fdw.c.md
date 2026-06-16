@@ -217,6 +217,10 @@ Cannot reuse. The cache is keyed by umid — different umids cannot share a PGco
 - A2 libpq sweep — every PGconn here.
 - `source/contrib/dblink/dblink.c` — same trust class, simpler semantics.
 
+<!-- issues:auto:begin -->
+- [Issue register — `postgres_fdw`](../../../issues/postgres_fdw.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `make_tuple_from_result_row` calls `InputFunctionCall` (line 8523) on remote text data using LOCAL type's input function. A type-mismatch (remote `text` containing non-numeric, local `int`) raises `invalid input syntax for type integer: "<remote value>"` echoing the offending string. **Remote data leaks into local error logs** even when the local user lacks RLS access to the offending row. (likely)] — `source/contrib/postgres_fdw/postgres_fdw.c:8523`.

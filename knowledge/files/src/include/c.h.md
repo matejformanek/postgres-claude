@@ -228,3 +228,9 @@ See above inline ISSUEs. Headlines:
 - `c.h:602` — `#include <stdbool.h>` is unconditional. Used to be
   guarded by `HAVE_STDBOOL_H`; the guard was removed when PG raised
   the C standard to C99 then C11. No issue today.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

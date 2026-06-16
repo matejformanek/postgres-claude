@@ -64,6 +64,10 @@ many backend callers. (`bool.c:1-14` [from-comment])
 - `source/src/include/utils/builtins.h` — declarations.
 - `source/src/backend/utils/misc/guc.c` — uses `parse_bool` for bool GUCs.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 3

@@ -431,6 +431,10 @@ SPI-level error positions then transpose cleanly.
   - `source/src/backend/access/xact.c` — host for the subxact
     callback that `pl_exec.c` registers; tangential to this file.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: INTO disambiguation is heuristic and known

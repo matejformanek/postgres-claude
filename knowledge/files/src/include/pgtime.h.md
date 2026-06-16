@@ -98,3 +98,9 @@ platforms. This header exposes a libc-shaped surface using
   for DST-spanning abbrevs (e.g. "EST" vs "EDT") is subtle.
   [ISSUE-doc-drift: timezone-abbreviation function family is
   duplicative (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

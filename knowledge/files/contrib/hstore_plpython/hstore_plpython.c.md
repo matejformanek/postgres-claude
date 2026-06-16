@@ -86,3 +86,9 @@ the Python side even if `PLyObject_AsString` ereports. [verified-by-code]
   Python interpreter error, not necessarily OOM. The error
   message swallows the actual cause. [ISSUE-error-handling:
   generic "out of memory" hides the Python-side error (nit)].
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `hstore_plpython`](../../../issues/hstore_plpython.md)
+<!-- issues:auto:end -->

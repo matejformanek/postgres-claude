@@ -66,6 +66,10 @@ ANALYZE how to collect statistics by setting `compute_stats` and
   the histograms produced here.
 - `source/src/backend/commands/analyze.c` — driver.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 4
 - `[from-comment]` × 3

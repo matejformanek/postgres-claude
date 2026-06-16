@@ -58,3 +58,9 @@ vector positions) — already bounded by tsvector caps (`MAXNUMPOS`
   is user-supplied via a SQL argument; values outside the mask are
   silently ignored. Worth an `errcode(ERRCODE_INVALID_PARAMETER_VALUE)`.
   (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

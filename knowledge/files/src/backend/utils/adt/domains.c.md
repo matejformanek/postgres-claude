@@ -86,3 +86,9 @@ None global. All state lives in caller's `fn_extra` (`DomainIOData *`).
   many domain types (`:70-74`) is bounded by the query lifetime, but
   a SQL function looping over many domain casts could grow `fn_extra`
   consumption (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

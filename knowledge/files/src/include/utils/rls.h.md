@@ -67,6 +67,10 @@ running with the *previous* environment.
 - `knowledge/subsystems/` (not yet documented) — row security policy
   evaluation lives in `src/backend/rewrite/rowsecurity.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-api-shape: `noError=true` collapses "no RLS" and "RLS applies"

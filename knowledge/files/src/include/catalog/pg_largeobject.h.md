@@ -37,6 +37,10 @@ Note: no `oid` column; no `#ifdef CATALOG_VARLEN` block (the `bytea` is laid out
 - Related: `pg_largeobject_metadata.h` (owner + ACL — separate catalog)
 - Related backend: `src/backend/storage/large_object/inv_api.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: direct bytea access bypasses TOAST]** `pg_largeobject.h:38-40` — comment says "we allow direct access; see inv_api.c"; the page size is hard-coded as `LOBLKSIZE` (BLCKSZ/4) in `large_object.h`. Header gives no hint that this catalog's storage layout is special — anyone wiring up new VARLEN columns here would silently break LO performance. Severity `maybe`, type `undocumented-invariant`. Relevant if data-leak hardening considers reading large-object pages without going through `lo_*` permission checks.

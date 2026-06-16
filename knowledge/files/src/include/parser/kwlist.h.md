@@ -81,3 +81,12 @@ definitions; that's why there is **no include guard** (`:19`
 
 - `[ISSUE-DOC: header comment notes "no include guard" but doesn't list the multiple consumers — readers grepping for #include "kwlist.h" find ~7 sites, surprising on first encounter (low)] — source/src/include/parser/kwlist.h:19`
 - `[ISSUE-CODE: ASCII-sort is checked at code-gen time (gen_keywordlist.pl asserts) but not in C build; manual edits can silently break ordering (low)] — source/src/include/parser/kwlist.h:25`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../scenarios/add-new-sql-keyword.md)
+- [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
+
+<!-- scenarios:auto:end -->

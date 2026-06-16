@@ -84,3 +84,11 @@ TupleTableSlot, TupleTableSlotOps, …).
 - Sibling: `plannodes.h` (the Plan side).
 - Implementation: every `src/backend/executor/node*.c`.
 - Idiom: `knowledge/idioms/node-types-and-lists.md`.
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
+
+<!-- scenarios:auto:end -->

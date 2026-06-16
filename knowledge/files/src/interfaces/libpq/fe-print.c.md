@@ -58,6 +58,10 @@ When `po->html3` is set, `PQprint` emits a `<table>...</table>` instead of ASCII
 - `knowledge/files/src/interfaces/libpq/fe-exec.c.md` — the PGresult these read.
 - `knowledge/files/src/fe_utils/print.c.md` — psql's much-more-capable modern printer (when written).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-stale-todo: `PQprint` documented as "should probably be removed"]** fe-print.c:62-68 — comment from many years ago saying psql no longer uses it. Still exported. Deprecation candidate but ABI freeze means we'd need a long sunset. **Severity: nit.**

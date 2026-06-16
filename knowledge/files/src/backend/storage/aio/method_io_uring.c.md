@@ -104,6 +104,10 @@ exported.)
   `aio_io.c::pgaio_io_perform_synchronously`.
 - LWLock tranche `LWTRANCHE_AIO_URING_COMPLETION`: `lwlocknames`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `storage-aio`](../../../../../issues/storage-aio.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: submit/EAGAIN → PANIC is a kernel-pressure crash

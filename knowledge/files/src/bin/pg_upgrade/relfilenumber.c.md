@@ -195,3 +195,9 @@ buffers. But the pattern is fragile; `strlcpy` would be safer.
 which is correct, but the sort happens ONLY in `do_swap` (line
 456). Non-swap modes never sort — `bsearch` is only used in swap
 mode.] — Note for refactors.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

@@ -110,6 +110,10 @@ tsvector pipeline. [verified-by-code]
   surface.
 - A12 / A13 corpus entries on tsearch dictionary loading.
 
+<!-- issues:auto:begin -->
+- [Issue register — `unaccent`](../../../issues/unaccent.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 - `[ISSUE-DoS-low: adversarial unaccent.rules file with many long

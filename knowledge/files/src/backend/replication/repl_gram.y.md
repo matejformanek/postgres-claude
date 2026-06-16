@@ -32,3 +32,11 @@ no memory. (`:33-43`) [from-comment]
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../subsystems/replication.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new replication / logical-decoding message](../../../../scenarios/add-new-replication-message.md)
+
+<!-- scenarios:auto:end -->

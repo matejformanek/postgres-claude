@@ -38,6 +38,10 @@ and verification helpers used by the auth methods (password, md5, scram).
 - Related: `knowledge/files/src/include/libpq/scram.h.md`,
   `knowledge/files/src/include/libpq/sasl.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: logdetail is the side-channel ledger]** `crypt.h:54,56-61` —

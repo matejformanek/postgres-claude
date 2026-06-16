@@ -44,3 +44,9 @@ struct initializers wrapped in braces, one per `REG_*` errcode from
 - "(reg version 0.8)" in REG_BADPAT message is a hard-coded
   Spencer-era version that no longer matches anything meaningful.
   [ISSUE-stale-todo: REG_BADPAT version string is stale (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-regex`](../../../../issues/include-regex.md)
+<!-- issues:auto:end -->

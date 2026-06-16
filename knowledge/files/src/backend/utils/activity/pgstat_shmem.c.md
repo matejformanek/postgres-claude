@@ -191,3 +191,17 @@ freed only when the last referrer releases. [verified-by-code]
   **exclusive** body lock on each match. Safe: the dshash shared
   lock only protects the index, the body lock protects content.
   [verified-by-code]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new `pg_stat_*` view](../../../../../scenarios/add-new-pg-stat-view.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

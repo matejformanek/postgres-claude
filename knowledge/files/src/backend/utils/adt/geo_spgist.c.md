@@ -27,3 +27,9 @@ Source: `source/src/backend/utils/adt/geo_spgist.c` (885 lines).
 - `[ISSUE-correctness: inner_consistent prunes via centroid-vs-query-box comparisons using FPlt/FPgt epsilon math; for very large coordinates the same scale issue as geo_ops can produce false negatives (would need targeted audit) (maybe)]`.
 
 Confidence: `[verified-by-code]` for function map.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

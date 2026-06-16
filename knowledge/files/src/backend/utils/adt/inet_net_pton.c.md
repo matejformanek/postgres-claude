@@ -31,3 +31,9 @@ Source: `source/src/backend/utils/adt/inet_net_pton.c` (562 lines). Historically
 - `[ISSUE-dead-code: assert() calls at lines 120, 149, 180 etc.; these are libc assert (defined ON in PG builds via NDEBUG?). Verify they're active under cassert. (low)]`.
 
 Confidence: `[verified-by-code]` for IPv4 paths; IPv6 paths reviewed at index level only.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

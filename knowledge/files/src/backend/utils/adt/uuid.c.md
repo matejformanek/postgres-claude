@@ -35,3 +35,9 @@ Source: `source/src/backend/utils/adt/uuid.c` (779 lines).
 - `[ISSUE-crypto-weakness: gen_random_uuid is correctly CSPRNG-backed; no concern. (n/a)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

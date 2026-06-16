@@ -161,6 +161,10 @@ Source pin: `4b0bf0788b0`.
 - `knowledge/files/contrib/hstore/hstore_compat.c.md` — the legacy-format
   upgrade path that this header explicitly waves through.
 
+<!-- issues:auto:begin -->
+- [Issue register — `hstore`](../../../issues/hstore.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: HENTRY_POSMASK silently truncates top-2 bits;

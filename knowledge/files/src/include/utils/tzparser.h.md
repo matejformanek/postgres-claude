@@ -60,6 +60,10 @@ abbrev cache for the postmaster lifetime (re-parsed on
   is defined there.
 - A14 echo: file-based config inputs without header-level size caps.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-resource: `load_tzoffsets` array growth unbounded; no

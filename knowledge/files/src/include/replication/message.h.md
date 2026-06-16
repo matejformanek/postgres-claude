@@ -92,3 +92,9 @@ fill `max_wal_size` with garbage emit-messages.
 - [ISSUE-undocumented-invariant: `prefix_size = strlen(prefix) + 1`
   (`message.c:61`) includes the NUL, but the header comment only says
   "length of prefix" (line 24). Future refactor risk. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

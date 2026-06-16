@@ -112,6 +112,10 @@ One trust-relevant subtlety: `PLy_procedure_munge_source` does not escape the **
 - A9 plpgsql comparison: plpgsql caches by `pl_comp.c:plpgsql_compile`, which uses a `plpgsql_HashEnt` keyed by `(fn_oid, trigOid, eventOid)` and validated by the same `xmin/tid` pair pattern. Structurally near-identical to plpython's cache. The big divergence: plpgsql `%TYPE` is NAME-based resolution during compile, plpython has no `%TYPE`-equivalent and is purely OID-based.
 - A10-1 plperl comparison: plperl caches by `plperl_proc_hash` with similar xmin/tid invalidation. Source mangling differs — plperl wraps as `sub { ... }` and stores a Perl coderef.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: source mangling does not escape user source for backslashes (likely)] — `PLy_procedure_munge_source` walks user source byte-by-byte, transforming only `\r`, `\n`, and `\r\n` [verified-by-code: `:465-478`]. All other bytes pass through verbatim, including backslashes, quotes, and embedded null bytes. This is correct because Python source files don't have a quoting layer — the bytes ARE the source. But: an embedded `'\0'` byte truncates the source at that point (`while (*sp != '\0')`), and PG TEXT fields can contain `'\0'` if loaded via pg_proc.dat or via a TEXT array-of-bytes ingestion. Probably not exploitable (pg_proc.prosrc is the text of a CREATE FUNCTION body, which goes through scan.l and rejects nulls), but worth noting that the munge function assumes NUL-termination semantics that the catalog enforces upstream.

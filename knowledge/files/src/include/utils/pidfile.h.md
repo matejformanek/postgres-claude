@@ -85,6 +85,10 @@ readers won't see a transiently-empty file.
   `AddToDataDirLockFile`.
 - `source/src/bin/pg_ctl/pg_ctl.c` — primary consumer.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-audit-gap: postmaster.pid concentrates discovery info in one

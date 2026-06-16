@@ -33,6 +33,10 @@ canonical signal masks every backend uses (`UnBlockSig`, `BlockSig`,
 - Related: `src/port/pqsignal.c`,
   `src/backend/utils/init/miscinit.c` (`pqinitmask` callers).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-stale-todo: sa_sigaction not yet implemented]** `pqsignal.h:28`

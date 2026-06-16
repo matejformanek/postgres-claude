@@ -53,3 +53,9 @@ different planned variant. [verified-by-code §hyperloglog.c:74, 81 vs. header �
   optimisations (bias correction, sparse mode, 64-bit hashing) were
   considered but not done; that's been true since 2014. No tracker
   link. [ISSUE-stale-todo: deferred HLL-in-Practice improvements (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `lib`](../../../../issues/lib.md)
+<!-- issues:auto:end -->

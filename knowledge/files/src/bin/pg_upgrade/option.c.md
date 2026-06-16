@@ -148,3 +148,9 @@ at lines 96-105 — happens BEFORE the `os_user_effective_id == 0`
 root check (line 109), as the comment notes. Means root-running
 get errors LATE not early. The comment is the only documentation of
 the intentional ordering.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

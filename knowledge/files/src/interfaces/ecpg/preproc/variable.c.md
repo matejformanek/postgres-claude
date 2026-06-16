@@ -98,6 +98,10 @@ type/typedef utilities (`get_typedef`, `check_indicator`, `adjust_array`)
   `add_variable_to_*`, `dump_variables`, `reset_variables`.
 - `util.c` — intended future home of `loc_nstrdup` (variable.c:9).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-undocumented-invariant: find_struct_member bracket scan can run off
   the end on malformed input]** `variable.c:90` — the bracket-matching loop

@@ -93,3 +93,9 @@ walsenders. Not a security issue; performance only. [inferred]
   `am_cascading_walsender` are three independent booleans; the
   legal combinations are not enumerated in the header — must read
   `WalSndInit` paths to know (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

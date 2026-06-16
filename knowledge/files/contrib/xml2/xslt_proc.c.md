@@ -98,3 +98,9 @@ without libxslt". DEPRECATED alongside the rest of `contrib/xml2`.
 - Whole module deprecated; new code should use the in-core
   XMLTABLE/XML functions. [inferred] **[ISSUE-stale-todo: module
   deprecated, still shipped (confirmed)]**
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `xml2`](../../../issues/xml2.md)
+<!-- issues:auto:end -->

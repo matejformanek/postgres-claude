@@ -88,3 +88,9 @@ between generic stats infra and the per-kind accumulator details.
   clears state but **does not** reset `pgstat_report_fixed` —
   fine because that flag is owned globally and other kinds may
   still want flushing. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

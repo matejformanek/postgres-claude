@@ -112,6 +112,10 @@ ultimately funnels through this header.
   `InternalGrant` representation used by `ExecuteGrantStmt`.
 - Echo: A3/A6/A7/A8/A9/A10 NAME-vs-OID cluster.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-api-shape: `is_member_of_role` is a silent footgun vs

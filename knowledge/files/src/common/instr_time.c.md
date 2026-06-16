@@ -89,3 +89,9 @@ process).
   right info in EXEC_BACKEND builds if this were used in the backend
   (which it currently is not)*" — a TODO masquerading as a comment.
   (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

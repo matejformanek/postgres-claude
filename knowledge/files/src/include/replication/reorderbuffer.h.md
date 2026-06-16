@@ -292,3 +292,17 @@ serializer is in `logicalproto.h` / `pgoutput.c`. [verified-by-code]
   (commit-record LSN vs latest-spilled-change LSN, comment lines 317-330)
   is a footgun for code that compares LSNs across in-flight vs
   committed states (maybe)]
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new replication / logical-decoding message](../../../../scenarios/add-new-replication-message.md)
+
+<!-- scenarios:auto:end -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

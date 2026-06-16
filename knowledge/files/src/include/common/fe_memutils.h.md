@@ -74,3 +74,7 @@ comment block but the function signatures look normal-C-API (low)]
   scrub).
 - A6 `pg_upgrade` / `pg_rewind` — heavy frontend allocators.
 - Companion: `src/common/fe_memutils.c.md`, `src/common/psprintf.c`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

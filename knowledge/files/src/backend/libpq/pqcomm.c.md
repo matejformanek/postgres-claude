@@ -198,6 +198,10 @@ different `SIO_KEEPALIVE_VALS` ioctl.
 - Latch primitive: `source/src/backend/storage/ipc/latch.c`
 - Postmaster listen orchestration: `source/src/backend/postmaster/postmaster.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: pq_getmessage int32 length, signed read]**
@@ -249,3 +253,11 @@ different `SIO_KEEPALIVE_VALS` ioctl.
 ## Tally
 
 `[verified-by-code]=28 [from-comment]=17 [inferred]=0`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

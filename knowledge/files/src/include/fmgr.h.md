@@ -221,3 +221,9 @@ Three families × N-argument variants × Coll suffix:
 - `fmgr.h:798` — `load_file(restricted)` second arg is a bool with
   no enum naming; calls with `false` vs `true` are easy to swap.
   [ISSUE-style: `load_file` restricted parameter is bare bool (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

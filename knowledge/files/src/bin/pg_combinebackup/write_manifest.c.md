@@ -97,3 +97,9 @@ checksum is self-verifiable. [verified-by-code]
   cassert builds. In release a wrong length silently corrupts the
   output. The pg_checksum_final API guarantees the length so this is
   safe in practice. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_combinebackup`](../../../../issues/pg_combinebackup.md)
+<!-- issues:auto:end -->

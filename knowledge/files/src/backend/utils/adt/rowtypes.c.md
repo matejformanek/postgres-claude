@@ -110,6 +110,10 @@ generic functions can re-discover the schema at runtime.
 - `source/src/backend/utils/adt/jsonfuncs.c` — `populate_record*` is the
   json→record companion (separate path).
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 8
 - `[from-comment]` × 1

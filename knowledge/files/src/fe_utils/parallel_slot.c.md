@@ -95,6 +95,10 @@ Four tiers, tried in order each loop iteration:
   `CancelRequested` (`fe_utils/cancel.h` at `:24`).
 - `knowledge/files/src/fe_utils/connect_utils.c.md`
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: connection on a failed `initcmd` / mid-setup error]**

@@ -43,3 +43,9 @@ Defines the scan strategy enum + the `pgpa_scan` struct. [verified-by-code]
   correspond to scans or even joins that are proved empty" — those wouldn't
   be re-provably-empty next time, but no advice is generated for them.
   The chosen tradeoff is documented. [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

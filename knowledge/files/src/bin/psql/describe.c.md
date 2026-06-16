@@ -257,5 +257,9 @@ N/A — this file is the `\d*` backend, not the readline completer.
 - Slash dispatch: `source/src/bin/psql/command.c` (`exec_command_d`,
   `exec_command_l`, `exec_command_z`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=20 [from-comment]=4 [inferred]=6 [unverified]=0`

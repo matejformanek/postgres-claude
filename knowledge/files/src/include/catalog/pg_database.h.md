@@ -48,6 +48,10 @@
 - `knowledge/files/src/include/catalog/pg_tablespace.h.md` (dattablespace)
 - `knowledge/files/src/include/catalog/pg_authid.h.md` (datdba)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-stale-todo: DATCONNLIMIT_INVALID_DB sentinel overload]** `pg_database.h:123-128` — comment explicitly acknowledges this is "not particularly clean" but was the backpatchable choice. A separate `datisinvalid` bool would be cleaner; flag for triage in case a major-version cycle wants to clean it up.

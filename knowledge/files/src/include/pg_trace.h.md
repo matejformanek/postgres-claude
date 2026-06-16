@@ -45,3 +45,9 @@ visible without IWYU stripping the include.
 - The probe set is unaudited at the header level — extensions
   using probes can collide with future PG probes. [ISSUE-api-shape:
   no probe-name namespace allocation (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

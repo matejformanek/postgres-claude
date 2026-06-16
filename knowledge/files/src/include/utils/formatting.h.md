@@ -75,6 +75,10 @@ to compile into the internal `FormatNode` array.
   used by `asc_*`.
 - A7 (`pg_locale_icu` and `to_char` length-cap finding).
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-resource: `to_char` / `parse_datetime` accept unbounded format

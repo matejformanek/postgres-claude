@@ -78,6 +78,10 @@ None. All inline.
 - A11/A13/A14 hash-collision cluster context:
   `knowledge/issues/pgcrypto.md`, `knowledge/issues/contrib/citext.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. `[ISSUE-audit-gap: simplehash users mustn't persist their hash
    values — enforced only by naming and the "unstable" header. A

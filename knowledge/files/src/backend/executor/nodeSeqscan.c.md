@@ -109,3 +109,9 @@ NULL-checks inside `ExecScanExtended`. [verified-by-code §nodeSeqscan.c:108-213
   indirect. Worth checking that the build actually picks up the
   intended specialisation via LTO / per-file inline-pickup.
   [ISSUE-question: does pg_attribute_always_inline actually fire through fn-ptr cast? (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `executor`](../../../../issues/executor.md)
+<!-- issues:auto:end -->

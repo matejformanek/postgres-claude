@@ -101,6 +101,10 @@ Empty `SIGCHLD`/`SIGALRM` handlers installed on non-Windows (startup.c:115-119, 
 - `help.c::usage`, `slashUsage`, `helpVariables` — the three `--help` modes.
 - `variables.c::SetVariable`, `SetVariableHooks`, `ParseVariableBool/Num/Double`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tally
 
 `[verified-by-code]=23 [from-comment]=4 [inferred]=3`

@@ -67,3 +67,9 @@ authentication nonce, etc. Most non-trivial tools (`pg_resetwal`,
 - Header `dbState` returns `"unrecognized status code"` for the default
   case but never logs which integer was seen. Forensic value reduced.
   [ISSUE-style: unrecognized enum should include the numeric value (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

@@ -308,6 +308,10 @@ hstore allocates `VARSIZE(hs)` — bounded.
 - A7 record_recv DoS findings — comparison point for the bounded-input
   helpers here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `hstore`](../../../issues/hstore.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-correctness: hstore_concat early SET_VARSIZE at line 489 is

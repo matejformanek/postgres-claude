@@ -172,3 +172,9 @@ because libpq's encoding IDs are version-pinned independently.
   carrying historical baggage; the comment chain is consistent
   but readability suffers. [ISSUE-style: historical-baggage
   density high (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../../issues/include-misc.md)
+<!-- issues:auto:end -->

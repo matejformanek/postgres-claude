@@ -73,6 +73,10 @@ links against and the headers it compiled with. `[from-comment]` (mbprint.c:20-2
 - libpq width primitives: `source/src/interfaces/libpq/fe-misc.c` (`PQmblen`, `PQdsplen`),
   `source/src/interfaces/libpq/fe-connect.c` (`pg_char_to_encoding`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: pg_wcsformat trusts caller-sized buffers]** `mbprint.c:294`

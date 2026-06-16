@@ -129,3 +129,9 @@ function-pointer struct on the relcache entry).
   but that error message is FDW-specific and hard to map back to
   "no unparameterized local path available". Worth a `errdetail`
   emitter inside the helper. [ISSUE-question: should this surface a structured "why" rather than NULL? (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `foreign`](../../../../issues/foreign.md)
+<!-- issues:auto:end -->

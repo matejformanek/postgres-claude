@@ -59,6 +59,10 @@ sanity-check a cluster's on-disk catalog version (e.g. `pg_combinebackup`,
   is written by `initdb` / `bootstrap`.
 - `source/src/common/logging.c` — `pg_fatal`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: memcpy of st.st_size bytes from a `%63s`-filled buffer]**

@@ -91,6 +91,10 @@ counter used as the LRU-ish eviction key `[verified-by-code prepare.c:600-662]`.
 ## Cross-refs
 - [[execute.c]], [[connect.c]], [[descriptor.c]]
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-leak: cache `ecpgQuery` never freed at shutdown]** `prepare.c:589` — the
   `stmtCacheEntries` array and the `ecpg_strdup`'d `ecpgQuery` strings are process-global

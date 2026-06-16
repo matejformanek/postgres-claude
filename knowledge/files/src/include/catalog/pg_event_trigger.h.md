@@ -39,6 +39,10 @@
 - `knowledge/files/src/include/catalog/pg_proc.h` (evtfoid target — function must return `event_trigger`)
 - Runtime: `source/src/include/commands/event_trigger.h`, `source/src/backend/commands/event_trigger.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-cross-header-on-disk-coupling: evtenabled chars defined in pg_trigger.h]** `pg_event_trigger.h:39-40` — the comment says "trigger's firing configuration WRT session_replication_role" but the actual `TRIGGER_FIRES_ON_ORIGIN/_ALWAYS/_ON_REPLICA/_DISABLED` characters live in `pg_trigger.h`. Any future split of trigger vs event-trigger firing semantics would silently desync. A `#include` or even a comment cite would help.

@@ -61,3 +61,9 @@ This is the **user-input parsing surface** for both `tsvector` and
   `[verified-by-code]` (n/a)]
 - [ISSUE-stale-todo: Commented-out `state->prsbuf += pg_mblen_cstr`
   at `:298` — looks like a debugging artifact, not a real TODO. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

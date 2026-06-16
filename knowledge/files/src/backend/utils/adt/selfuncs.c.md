@@ -230,3 +230,11 @@ catalog)
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../../scenarios/add-new-index-am.md)
+
+<!-- scenarios:auto:end -->

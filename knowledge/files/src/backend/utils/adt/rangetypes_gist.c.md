@@ -76,6 +76,10 @@ treated as a separate class to avoid skewing splits.
 - `source/src/backend/utils/adt/rangetypes.c` — provides
   `range_serialize`/`range_deserialize`, `range_cmp_bounds`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 - `[verified-by-code]` × 7
 - `[from-comment]` × 1

@@ -75,3 +75,9 @@ total has already been accumulated.
   silently allows `<0>` distance, which is then accepted by the
   upper validation. PHRASE distance 0 is semantically odd. Worth
   re-checking the upstream behavior. (low, maybe)] — `:200+`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

@@ -45,3 +45,9 @@ PGDLLEXPORT used by `test_plan_advice`. [verified-by-code]
 - `pgpa_planner.h:79-80` — `PGDLLEXPORT` for test-only function: convention
   in PG is "Must be exported for use by test_plan_advice" comment, used here.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

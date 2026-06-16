@@ -139,3 +139,9 @@ unlink fails too, future runs of pg_upgrade hit the O_EXCL guard
 dir. If the new cluster's PGDATA permission isn't writable by the
 pg_upgrade user, these abort with `pg_fatal` before any data is
 copied. Good fail-fast.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

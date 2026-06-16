@@ -97,3 +97,9 @@ entry points and the build-time entry from ANALYZE. [verified-by-code]
   external code calling the pre-`is_or` signature would silently
   miss the parameter. [ISSUE-undocumented-invariant: ABI break
   unflagged (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-statistics`](../../../../issues/include-statistics.md)
+<!-- issues:auto:end -->

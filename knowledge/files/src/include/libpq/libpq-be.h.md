@@ -84,6 +84,10 @@ clients** [from-comment].
   `knowledge/files/src/include/libpq/scram.h.md`,
   `knowledge/files/src/include/libpq/pg-gssapi.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: SCRAM keys live in Port for the connection lifetime]**

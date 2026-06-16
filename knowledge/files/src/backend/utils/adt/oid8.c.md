@@ -52,6 +52,10 @@ Used for 64-bit object identifiers in newer catalog contexts.
   `pg_ulltoa_n`.
 - `source/src/backend/utils/adt/oid.c` — 32-bit sibling.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 2

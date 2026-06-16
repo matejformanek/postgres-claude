@@ -77,6 +77,10 @@ macOS uses `setproctitle` or a similar call. The header hides that.
   GUC, declared via guc_tables.c.
 - `source/src/backend/utils/misc/ps_status.c` — the implementation.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-security: PS title can leak literal query text (incl. password

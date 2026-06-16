@@ -95,3 +95,9 @@ numeric I/O). [verified-by-code]
   the asymmetry with the top-level branch (which palloc's). [ISSUE-
   style: top-level vs nested allocation asymmetry warrants a
   comment (nit)].
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `jsonb_plperl`](../../../issues/jsonb_plperl.md)
+<!-- issues:auto:end -->

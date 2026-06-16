@@ -31,3 +31,9 @@ Source: `source/src/backend/utils/adt/enum.c` (616 lines).
 - `[ISSUE-undocumented-invariant: enum_range with NULL bounds returns the full range; with one NULL it returns the half-range. Documented in user docs but the function-level invariants are spread across enum_range_bounds/all/internal (low)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

@@ -42,6 +42,10 @@ callbacks [from-comment].
 - Frontend counterpart: `src/interfaces/libpq/fe-auth-sasl.h`
   [from-comment].
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: NULL shadow_pass contract is mechanism-level only]**

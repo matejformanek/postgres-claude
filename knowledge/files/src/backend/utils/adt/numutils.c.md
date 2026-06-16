@@ -108,6 +108,10 @@ returned, no NUL terminator.
 - `source/src/backend/utils/adt/oid.c` — uint32in_subr consumer.
 - `source/src/backend/utils/adt/oid8.c` — uint64in_subr consumer.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 6

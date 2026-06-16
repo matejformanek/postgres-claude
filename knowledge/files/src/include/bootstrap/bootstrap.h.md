@@ -100,3 +100,9 @@ catalog tuples one column at a time. [verified-by-code]
 - `BootstrapModeMain` is also `pg_noreturn` — it exits via
   `proc_exit(0)` on success and `ereport(FATAL)` on failure.
   [inferred]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bootstrap`](../../../../issues/bootstrap.md)
+<!-- issues:auto:end -->

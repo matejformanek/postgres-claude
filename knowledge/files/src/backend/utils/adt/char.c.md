@@ -51,6 +51,10 @@ single-letter codes (`relkind`, `typtype`, etc.). (`char.c:1-15` [from-comment])
 - `source/src/backend/utils/adt/varchar.c` — the bpchar/varchar(SQL CHAR/VARCHAR)
   type that is NOT this type.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 2

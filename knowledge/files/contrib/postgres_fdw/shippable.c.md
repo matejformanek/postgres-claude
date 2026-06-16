@@ -43,6 +43,10 @@ Internal:
 - `source/contrib/postgres_fdw/option.c:159` (`ExtractExtensionList`) — turns the server `extensions` option string into the OID list this file consults.
 - `source/src/backend/catalog/dependency.c` — `getExtensionOfObject`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `postgres_fdw`](../../../issues/postgres_fdw.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: extension-membership changes (`ALTER EXTENSION ... ADD/DROP MEMBER`) do NOT invalidate the shippable cache. A long-lived session that has cached `shippable=true` for `myext.foo` will keep shipping it after a DBA drops it from the extension. (likely)] — `source/contrib/postgres_fdw/shippable.c:56-62` (XXX in comment confirms by-design, not a bug, but bug-class behaviour).

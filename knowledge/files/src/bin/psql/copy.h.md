@@ -32,6 +32,10 @@ Three-function interface: `do_copy` (the `\copy` meta-command top-level) and the
 - `copy.c` — the implementation.
 - `common.c::HandleCopyResult` (common.c:938) — dispatches PGRES_COPY_IN / PGRES_COPY_OUT to these two functions.
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tally
 
 `[verified-by-code]=4 [from-comment]=1`

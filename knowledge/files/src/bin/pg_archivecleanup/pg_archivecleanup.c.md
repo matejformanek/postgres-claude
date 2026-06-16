@@ -71,3 +71,9 @@ top of the file is an explicit invitation to fork. [from-comment]
   than active extension point — extension authors would fork rather than
   patch in place today. [ISSUE-stale-todo: customizable-section banner
   is anachronistic (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

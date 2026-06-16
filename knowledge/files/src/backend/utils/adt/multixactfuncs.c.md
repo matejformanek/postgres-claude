@@ -54,3 +54,9 @@ None local — all data comes from `multixact.c`.
   in-range mxids could trigger expensive SLRU reads via
   `GetMultiXactIdMembers`. Bounded by SLRU size but a tight loop could
   thrash. No rate limit (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

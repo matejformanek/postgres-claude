@@ -76,3 +76,9 @@ HStore on the fly. [verified-by-code]
   is correct but easy to misread because most callers pass `false`
   / `true` meaning "missing-OK". [ISSUE-style: bool literal would
   read better as a named flag (nit)].
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `hstore_plperl`](../../../issues/hstore_plperl.md)
+<!-- issues:auto:end -->

@@ -89,6 +89,10 @@ This is the hand-rolled one. Constraints, per the head comment at fe-cancel.c:54
 - `knowledge/files/src/interfaces/libpq/libpq-int.h.md` — PGconn fields `be_pid`, `be_cancel_key`, `be_cancel_key_len`, `cancelRequest`.
 - Backend counterpart: `knowledge/files/src/backend/postmaster/postmaster.c.md` (the cancel-request branch of the connection acceptor) and `knowledge/files/src/backend/storage/ipc/procsignal.c.md` (delivers SIGINT to the target backend).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: unauthenticated `PQcancel` packet sent in cleartext]** fe-cancel.c:548-735 — the legacy path opens a raw socket and writes the cancel request without TLS. Even when the original connection was over TLS, a cancel travels in the clear. The cancel-key proves liveness but the very fact of cancellation (and the backend PID) leaks to a network observer. **Severity: maybe.** Documented as an intentional historical compatibility surface; the modern `PGcancelConn` path is the fix.

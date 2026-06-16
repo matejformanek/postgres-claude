@@ -26,3 +26,9 @@ Plus extensive private helpers (`inet_hist_value_sel`, `inet_mcv_join_sel`, `ine
 - `[ISSUE-undocumented-invariant: the join estimator assumes the two columns have stats from the SAME population sampling; cross-database joins via FDW with stale stats can produce nonsense estimates (low)]`.
 
 Confidence: `[verified-by-code]` for entry points.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

@@ -74,6 +74,10 @@ bytes, prepends cipher_algo byte and appends 16-bit checksum.
   `pgp_write_pubenc_sesskey` after `init_sess_key`.
 - `pgp-pubdec.md` — the matching decrypt path.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: only PKCS#1 v1.5 padding implemented; no

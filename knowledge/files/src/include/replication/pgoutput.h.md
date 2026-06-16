@@ -101,3 +101,9 @@ will create an apply loop.
   subscriber-supplied uint32 / char — pgoutput must validate them
   against supported ranges; header doesn't document the valid set
   (sev=unlikely)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

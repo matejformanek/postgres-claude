@@ -62,5 +62,9 @@ This is the other A3-shaped trust-boundary file in this batch. A manifest file i
 - pg_verifybackup driver: `src/bin/pg_verifybackup/pg_verifybackup.c`.
 - Backend manifest writer: `src/backend/backup/basebackup_manifest.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=18 [from-comment]=1 [maybe]=2 [ISSUE]=1`

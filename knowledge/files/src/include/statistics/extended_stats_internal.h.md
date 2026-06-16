@@ -103,3 +103,9 @@ through the backend-only header chain. [verified-by-code]
 - The header has no `_PG_EXTENDED_STATS_INTERNAL_H_` style include
   guard cookie — uses `EXTENDED_STATS_INTERNAL_H`, consistent with
   the rest of `src/include/statistics/`. None.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-statistics`](../../../../issues/include-statistics.md)
+<!-- issues:auto:end -->

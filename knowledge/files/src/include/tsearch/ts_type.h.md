@@ -93,3 +93,9 @@ here. [verified-by-code]
 - `valcrc` documented as "XXX: pg_crc32 would be a more appropriate
   data type" — long-standing comment, never cleaned up.
   [ISSUE-stale-todo: QueryOperand.valcrc int32-vs-pg_crc32 XXX (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-tsearch`](../../../../issues/include-tsearch.md)
+<!-- issues:auto:end -->

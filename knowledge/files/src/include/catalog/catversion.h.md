@@ -33,3 +33,23 @@ No `CATALOG(...)` declaration. The entire functional content of this file is a s
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in aggregate](../../../../scenarios/add-new-aggregate-function.md)
+- [Scenario — Add a new built-in SQL function](../../../../scenarios/add-new-builtin-function.md)
+- [Scenario — Add a new built-in type cast](../../../../scenarios/add-new-cast.md)
+- [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+- [Scenario — Add a new Node type](../../../../scenarios/add-new-node-type.md)
+- [Scenario — Add a new built-in operator](../../../../scenarios/add-new-operator.md)
+- [Scenario — Add a new operator class for an existing index AM](../../../../scenarios/add-new-operator-class.md)
+- [Scenario — Add a new `pg_stat_*` view](../../../../scenarios/add-new-pg-stat-view.md)
+- [Scenario — Add a new SQL keyword](../../../../scenarios/add-new-sql-keyword.md)
+- [Scenario — Add a column to an existing system catalog](../../../../scenarios/add-new-system-catalog-column.md)
+- [Scenario — Add a new system view](../../../../scenarios/add-new-system-view.md)
+- [Scenario — Bump CATALOG_VERSION_NO](../../../../scenarios/bump-catversion.md)
+
+<!-- scenarios:auto:end -->

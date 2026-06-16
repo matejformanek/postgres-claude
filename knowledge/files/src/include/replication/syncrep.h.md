@@ -103,3 +103,9 @@ but the change is persisted.
   `SyncRepStandbyData` (pid, lsns, priority) to any role that can see
   the view (default `pg_monitor`); names of sync standbys leak through
   `synchronous_standby_names` GUC visibility (sev=unlikely)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

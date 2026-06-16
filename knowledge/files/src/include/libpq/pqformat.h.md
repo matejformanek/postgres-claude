@@ -48,6 +48,10 @@ wire-protocol body bytes (after the 1-byte type + 4-byte length header).
 - Related: `knowledge/files/src/include/libpq/protocol.h.md` (msg type
   codes used as the `msgtype` argument here).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: pq_writestring caller must pre-size for conversion]**

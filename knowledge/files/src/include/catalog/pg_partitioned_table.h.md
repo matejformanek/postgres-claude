@@ -42,6 +42,10 @@ Note: `partstrat` values (the partitioning strategy chars `'l'`/`'r'`/`'h'`) are
 - `knowledge/files/src/include/catalog/pg_inherits.h.md` (parent↔child edges live there)
 - `knowledge/files/src/include/catalog/partition.h.md` (partition strategy/bound API)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: partstrat char values are on-disk]** `pg_partitioned_table.h:35` — `partstrat` is a `char` column persisted in catalog rows; the symbolic values (`PARTITION_STRATEGY_LIST` etc.) live in another header. Reader of just this file can't tell which letters are on-disk-stable. Worth a `/* see PARTITION_STRATEGY_* in <header> */` cross-reference.

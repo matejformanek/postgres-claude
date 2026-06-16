@@ -44,3 +44,9 @@ join subtrees consumed elsewhere. [verified-by-code]
 - `pgpa_join.h:35` — "update NUM_PGPA_JOIN_STRATEGY if you add anything here"
   comment is the only guard. Pattern reused throughout this contrib.
   [ISSUE-style: trailing-sentinel-via-comment is fragile (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

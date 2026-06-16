@@ -85,3 +85,9 @@ old version moves past 9.6.
 
 [from-code] No `process_cb` here that touches `argv`/environment.
 Pure SQL emission; trust boundary is the SQL connection.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

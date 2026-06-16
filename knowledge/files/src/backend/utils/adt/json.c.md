@@ -29,3 +29,9 @@ Source: `source/src/backend/utils/adt/json.c` (1883 lines). Companion: `src/comm
 - `[ISSUE-correctness: composite_to_json relies on the OUT type's typoutput/typsend; a buggy user-defined output function can emit invalid JSON text and corrupt the surrounding StringInfo (maybe)]` Mitigated by `escape_json` for strings, but numeric/composite output bypasses escape.
 
 Confidence: most claims `[verified-by-code]`; DoS surface `[inferred]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

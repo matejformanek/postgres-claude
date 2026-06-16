@@ -73,3 +73,9 @@ precomputed 5^k mantissas — Ryu's space-time tradeoff).
 - [ISSUE-dead-code: many `RYU_*` MSVC-intrinsics paths in `d2s_intrinsics.h`
   are only exercised on Windows x64 builds without HAVE_INT128. Linux CI
   doesn't cover them. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

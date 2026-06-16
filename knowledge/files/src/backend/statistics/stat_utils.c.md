@@ -125,3 +125,9 @@ information out of `pg_attribute`+`pg_type` and onto a per-slot
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `statistics`](../../../../issues/statistics.md)
+<!-- issues:auto:end -->

@@ -133,6 +133,10 @@ in `pg_buffercache--1.6--1.7.sql:5-12` [verified-by-code].
 - `knowledge/files/contrib/pg_prewarm/autoprewarm.c.md` — uses same LockBufHdr pattern
 - `knowledge/idioms/error-handling.md` — `superuser_check` pattern
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_buffercache`](../../../issues/pg_buffercache.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-audit-gap: read entrypoints have no C-side privilege check; SQL REVOKE is sole gate (likely)] — `source/contrib/pg_buffercache/pg_buffercache_pages.c:85,521,588,502`

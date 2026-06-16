@@ -177,3 +177,9 @@ the same excludeFiles[] table.
 - `[ISSUE-undocumented-invariant: final_filemap_cmp relies on file_action_t enum value ordering being CREATE < COPY < COPY_TAIL < NONE < TRUNCATE < REMOVE; a future refactor of the enum would silently break action ordering (low)]`
 - `[ISSUE-dead-code: filemap.c:761 hardcodes ".DS_Store" substring skip outside excludeFiles[]; either move to the list or document why this is special (low)]`
 - `[ISSUE-undocumented-invariant: getFileContentType only treats main fork as RELATION (comment line 588-591); FSM/VM forks are FILE_CONTENT_TYPE_OTHER and always full-copied, which is correct but worth a static check (low)]`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

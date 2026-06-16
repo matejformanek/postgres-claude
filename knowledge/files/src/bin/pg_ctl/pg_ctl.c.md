@@ -165,3 +165,9 @@ PID, start time, status, and several connectability hints).
   processInfo->dwProcessId)` into 128-byte buffer; the PID is at most
   10 digits, prefix is 11, so safe but `sprintf` is a code-smell. Should
   be `snprintf`. [ISSUE-style: prefer snprintf (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_ctl`](../../../../issues/pg_ctl.md)
+<!-- issues:auto:end -->

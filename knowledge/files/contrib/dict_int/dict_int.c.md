@@ -66,6 +66,10 @@ Unrecognized parameter → `ERRCODE_INVALID_PARAMETER_VALUE`. [verified-by-code]
 - `source/src/backend/tsearch/ts_public.c` — `TSLexeme` definition.
 - `source/contrib/dict_xsyn/dict_xsyn.c` — sibling text-search dict.
 
+<!-- issues:auto:begin -->
+- [Issue register — `dict_int`](../../../issues/dict_int.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 - `[ISSUE-robustness-low: dintdict_lexize reads in[0] before

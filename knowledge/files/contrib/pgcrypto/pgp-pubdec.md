@@ -98,6 +98,10 @@ session key into the `PGP_Context`.
 - Bleichenbacher 1998, "Chosen ciphertext attacks against protocols
   based on the RSA encryption standard PKCS #1".
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: PKCS#1 v1.5 EME padding check short-circuits;

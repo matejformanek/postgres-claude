@@ -63,6 +63,10 @@ sysadmin setups (`postgresql.conf` → `conf.d/01-base.conf` → etc.).
 - `knowledge/files/src/include/utils/guc.h.md` — `ParseConfigFile` /
   `ParseConfigDirectory` use these helpers.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-security: `GetConfFilesInDir` follows symlinks without

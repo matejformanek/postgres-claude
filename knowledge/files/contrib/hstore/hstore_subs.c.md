@@ -144,6 +144,10 @@ present with value NULL" via subscripting (use `defined(hs, 'k')` or
 - `utils/adt/jsonbsubs.c` — sibling jsonb subscripting handler for
   comparison (jsonb supports nested paths; hstore does not).
 
+<!-- issues:auto:begin -->
+- [Issue register — `hstore`](../../../issues/hstore.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-memory: subscript assignment overestimates allocation by

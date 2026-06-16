@@ -67,6 +67,10 @@ Internal:
 - A5 jsonapi finding — incremental parser uses explicit 6400-byte stack frame; the ltree/lquery parsers avoid the issue by being iterative.
 - A7 binary-recv DoS surface — ltree/lquery/ltxtquery are insulated because they re-route binary input through the text parser; no separate binary-format ABI to attack.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-cost: at line 322 / 329 `palloc0_array(nodeitem, numOR + 1)` is allocated PER LEVEL, where `numOR` is the global count of `|` characters in the input. **A query with N levels and M total `|`s allocates N × (M+1) × sizeof(nodeitem) of scratch.** With `N=M=65000`, that is `65000 × 65001 × 24 ≈ 100 GB` of scratch on a single `lquery_in` call. The size of the malicious input would be ~256 KB. **Amplification factor ~400000×.** This is the canonical Phase D memory-DoS finding for ltree. Mitigation: each per-level palloc should size to that level's own variant count, not the global count. (likely — should validate via reproduction)] — `source/contrib/ltree/ltree_io.c:322,329`.

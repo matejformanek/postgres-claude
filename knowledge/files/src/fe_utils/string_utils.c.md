@@ -151,6 +151,10 @@ made from a hard-coded copy of the scanner rules plus the shared keyword list
 - `source/src/interfaces/libpq/fe-exec.c` — `PQescapeStringConn` /
   `PQescapeStringInternal`, the libpq twin of `appendStringLiteral`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: fmtId callers must serialize use of the shared static buffer]** `string_utils.c:44` — every `fmtId`/`fmtIdEnc` return value aliases the same `static` buffer; a caller that does `printf("%s.%s", fmtId(a), fmtId(b))` silently prints `b.b`. This is documented per-function ("use the result before calling again") but there is no compile-time guard and the failure is silent. Established design, but a perennial footgun for new callers. (maybe)

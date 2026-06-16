@@ -60,6 +60,10 @@ Internal:
 - `source/src/backend/utils/misc/guc.c` — `MarkGUCPrefixReserved`.
 - `source/src/backend/libpq/auth.c` + libpq client `fe-connect.c` — for `PQconndefaults` shape.
 
+<!-- issues:auto:begin -->
+- [Issue register — `postgres_fdw`](../../../issues/postgres_fdw.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: ALTER USER MAPPING does not let the validator see the OLD value; comment at lines 187-193 makes this explicit. Combined with the fact that DROP USER MAPPING + CREATE USER MAPPING is also subject to the password_required check, this is the correct behavior — but the asymmetry deserves a regression test. (nit — defensive)] — `source/contrib/postgres_fdw/option.c:187`.

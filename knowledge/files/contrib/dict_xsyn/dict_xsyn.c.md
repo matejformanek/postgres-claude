@@ -83,6 +83,10 @@ Options accepted (`:165-192`): `matchorig`, `keeporig`, `matchsynonyms`,
   (basic, single key per line).
 - `source/src/backend/tsearch/ts_utils.c:33-61` — path validation.
 
+<!-- issues:auto:begin -->
+- [Issue register — `dict_xsyn`](../../../issues/dict_xsyn.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 - `[ISSUE-DoS-low: dict_xsyn loads entire rules file into memory with

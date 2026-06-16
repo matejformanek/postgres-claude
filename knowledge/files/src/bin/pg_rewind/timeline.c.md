@@ -88,3 +88,9 @@ silently drift from this copy.
 - `[ISSUE-undocumented-invariant: in-place mutation of caller's
   buffer at :58 (low)]`. Caller must not reuse the buffer expecting
   its original newlines.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

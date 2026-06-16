@@ -157,6 +157,10 @@ GUCs (`_PG_init`):
 - `knowledge/subsystems/storage-buffer.md` — `BufferDesc.tag` semantics
 - `knowledge/subsystems/replication-overview.md` — N/A (autoprewarm is standalone)
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_prewarm`](../../../issues/pg_prewarm.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-audit-gap: autoprewarm_start_worker / autoprewarm_dump_now have NO permission check (PUBLIC by default) (likely)] — `source/contrib/pg_prewarm/autoprewarm.c:814,846` and `pg_prewarm/pg_prewarm--1.1.sql` (no REVOKE)

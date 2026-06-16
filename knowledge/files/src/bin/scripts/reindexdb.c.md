@@ -107,3 +107,9 @@ serialize and we'd waste a connection). [verified-by-code]
   [ISSUE-correctness: assert at line 408 assumes items_count>0;
   empty-list path may slip through if process_list non-NULL but
   empty (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `scripts`](../../../../issues/scripts.md)
+<!-- issues:auto:end -->

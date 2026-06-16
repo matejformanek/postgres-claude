@@ -101,3 +101,9 @@ with extensions. [verified-by-code] [from-comment]
   in a comment. [ISSUE-undocumented-invariant: shmem_hash_allocator
   lifetime contract is implicit — must outlive dynahash creation but
   no comment says so (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `storage-ipc`](../../../../../issues/storage-ipc.md)
+<!-- issues:auto:end -->

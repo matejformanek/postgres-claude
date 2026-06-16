@@ -152,3 +152,9 @@ performed. This is documented in pg_rewind.sgml ([from-comment]).
   malicious source could report symlinks here that, when later
   created on the target, point into the source's filesystem and
   then be traversed by a *subsequent* pg_rewind run.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

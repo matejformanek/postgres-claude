@@ -107,3 +107,9 @@ at query time via rewrites; this file is the DDL side. [verified-by-code]
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `commands`](../../../../issues/commands.md)
+<!-- issues:auto:end -->

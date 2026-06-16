@@ -129,3 +129,7 @@ extension EXPLAIN options live here. The module is loaded via
   pattern.
 - Companion: `contrib/auto_explain/t/001_auto_explain.pl` for TAP
   coverage of the sample rate and parameter-logging knobs.
+
+<!-- issues:auto:begin -->
+- [Issue register — `auto_explain`](../../../issues/auto_explain.md)
+<!-- issues:auto:end -->

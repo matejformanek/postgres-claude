@@ -65,6 +65,10 @@
 - `knowledge/files/src/include/catalog/pg_language.h.md` (prolang target)
 - `knowledge/files/src/include/catalog/pg_namespace.h.md` (pronamespace target)
 
+<!-- issues:auto:begin -->
+- [Issue register — `catalog`](../../../../issues/catalog.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: PROKIND/PROVOLATILE/PROPARALLEL/PROARGMODE chars are on-disk values]** `pg_proc.h:155-190` — single-char enums persisted in catalog rows; changing letters breaks on-disk compatibility. Only PROARGMODE has a cross-reference comment (to parsenodes.h enum); the other three lack any stability note.
@@ -78,3 +82,19 @@
 <!-- backlinks:auto -->
 - [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in aggregate](../../../../scenarios/add-new-aggregate-function.md)
+- [Scenario — Add a new built-in SQL function](../../../../scenarios/add-new-builtin-function.md)
+- [Scenario — Add a new built-in type cast](../../../../scenarios/add-new-cast.md)
+- [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+- [Scenario — Add a new built-in operator](../../../../scenarios/add-new-operator.md)
+- [Scenario — Add a new operator class for an existing index AM](../../../../scenarios/add-new-operator-class.md)
+- [Scenario — Add a new `pg_stat_*` view](../../../../scenarios/add-new-pg-stat-view.md)
+- [Scenario — Add a new system view](../../../../scenarios/add-new-system-view.md)
+
+<!-- scenarios:auto:end -->

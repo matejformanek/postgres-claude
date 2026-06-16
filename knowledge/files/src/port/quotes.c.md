@@ -58,3 +58,7 @@ must be doubled too. `[verified-by-code]`
   the primary consumer (secret-to-disk theme).
 - `knowledge/idioms/safe-sql-identifiers.md` (proposed) — the SQL-side escaping
   helpers this is explicitly *not*.
+
+<!-- issues:auto:begin -->
+- [Issue register — `port`](../../../issues/port.md)
+<!-- issues:auto:end -->

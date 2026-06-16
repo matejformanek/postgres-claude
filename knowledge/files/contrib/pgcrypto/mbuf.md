@@ -167,6 +167,10 @@ plaintext flows through MBuf, and on cleanup the bytes are zeroed.
 - `pgp-cfb.c` — wraps the PX_Cipher in CFB-mode filter.
 - `px.c:px_memset` — the scrub primitive.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: ptxt in MBuf scrubbed via `px_memset` only,

@@ -81,3 +81,9 @@ written to `pg_rewrite.ev_action`, `pg_proc.proargdefaults`, etc.
   range-checked, but the asymmetry between the two parse calls
   (strtoint for type detection, atoi for value extraction) is a
   minor smell. [ISSUE-style: atoi after strtoint validation (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `nodes`](../../../../issues/nodes.md)
+<!-- issues:auto:end -->

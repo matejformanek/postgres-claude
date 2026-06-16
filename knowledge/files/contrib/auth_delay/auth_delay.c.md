@@ -47,6 +47,10 @@ A 75-line `shared_preload_libraries` extension that sleeps `auth_delay.milliseco
 - `source/src/port/pgsleep.c` — `pg_usleep` implementation; signal handling.
 - Prior sweep A2 (libpq SSL/SCRAM) — auth hook fires AFTER any SCRAM exchange, so SCRAM iteration count + auth_delay compound when guessing.
 
+<!-- issues:auto:begin -->
+- [Issue register — `auth_delay`](../../../issues/auth_delay.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - `[ISSUE-defense-in-depth: failure-only delay is a deliberate timing oracle distinguishing wrong-password from right-password by response time (maybe)]`

@@ -54,3 +54,7 @@ models.
 - A14 `basebackup_to_shell` — same %-substitution model in backup
   client tooling.
 - Companion: `src/common/percentrepl.c.md`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

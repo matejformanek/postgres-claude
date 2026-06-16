@@ -93,3 +93,9 @@ cycle. Identifier format documented in the file header:
   `SubPlanRTInfo->plan_name` instead. The two paths must agree on the
   string identity of every plan_name; only equality of the C strings is
   checked, not the source. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

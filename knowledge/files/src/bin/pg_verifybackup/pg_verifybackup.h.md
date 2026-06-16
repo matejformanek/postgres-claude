@@ -65,3 +65,9 @@ Shared types and helpers between `pg_verifybackup.c` and
   `pg_attribute_printf(2, 3)` but NOT `pg_noreturn`; the implementation
   may or may not exit depending on `context->exit_on_error`. Callers
   must not assume control transfer. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_verifybackup`](../../../../issues/pg_verifybackup.md)
+<!-- issues:auto:end -->

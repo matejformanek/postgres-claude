@@ -56,3 +56,9 @@ states, out-arcs per state, and the colormap. [verified-by-code]
   `arcs_len < pg_reg_getnumoutarcs(...)`. (Implementation truncates
   silently — see `backend/regex/regcomp.c`.) [ISSUE-doc-drift:
   truncation behavior of bounded getters not in header (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-regex`](../../../../issues/include-regex.md)
+<!-- issues:auto:end -->

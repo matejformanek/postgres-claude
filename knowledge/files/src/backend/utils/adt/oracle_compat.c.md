@@ -87,6 +87,10 @@ double-allocation discipline in those routines.
   string-builder helpers.
 - `source/src/include/common/int.h` — `pg_mul_s32_overflow` etc.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 6

@@ -64,3 +64,9 @@ functions total; each is a set-returning function except
   the body. Documenting the catalog-side ACL in a header comment
   would help auditing. [ISSUE-undocumented-invariant: access
   control lives entirely in pg_proc catalog (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `backup`](../../../../issues/backup.md)
+<!-- issues:auto:end -->

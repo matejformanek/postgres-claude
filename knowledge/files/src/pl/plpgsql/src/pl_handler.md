@@ -64,6 +64,10 @@ Module-scope globals exported to other plpgsql .c files (declared `extern` in `p
 - `source/src/backend/commands/functioncmds.c` — `CheckFunctionValidatorAccess` (the gatekeeper for `plpgsql_validator`).
 - `source/src/backend/executor/spi.c` — `SPI_connect_ext`, `SPI_OPT_NONATOMIC`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-error-handling: `plpgsql_extra_checks_check_hook` calls `list_free(elemlist)` after the `SplitIdentifierString` failure path even though that path leaves `elemlist` in an unspecified state (nit)] — `source/src/pl/plpgsql/src/pl_handler.c:81-87` — `SplitIdentifierString` documents that it may return without initializing `elemlist` on failure. In practice it always sets `*elemlist = NIL` first, so the `list_free(NIL)` is harmless, but the pattern reads as relying on implementation detail. nit.

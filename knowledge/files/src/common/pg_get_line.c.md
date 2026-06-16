@@ -75,3 +75,9 @@ in a setjmp/longjmp cleanup of its own.
 - `errno` is explicitly preserved across `pfree`
   (`pg_get_line.c:67-71`) so callers can `if (ferror(stream))
   perror(...)` — a real but easy-to-break invariant.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

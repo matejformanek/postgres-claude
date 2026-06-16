@@ -84,3 +84,15 @@ filesystem locations. Header has no validation contract (low)]
 - A6 `pg_upgrade` — path composition + symlink interaction.
 - A14 path-traversal cluster — relation-path echo.
 - Companion: `src/common/relpath.c.md`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Bump CATALOG_VERSION_NO](../../../../scenarios/bump-catversion.md)
+
+<!-- scenarios:auto:end -->

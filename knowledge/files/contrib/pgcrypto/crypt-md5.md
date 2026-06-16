@@ -104,6 +104,10 @@ the 120-byte dstlen minimum is generously oversized.
   replacement, with proper rounds parameter.
 - FreeBSD `lib/libcrypt/crypt-md5.c` — upstream.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: 1000-round hardcoded count makes MD5-crypt

@@ -35,3 +35,9 @@ None. Pure function of a compile-time macro.
 
 - [ISSUE-info-disclosure: full build banner exposed to PUBLIC by
   default; security scanners often flag this (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

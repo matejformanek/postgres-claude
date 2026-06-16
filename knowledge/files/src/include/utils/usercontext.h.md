@@ -74,6 +74,10 @@ ints, run code, restore 3 ints". The interesting bit is what's *not* saved:
   `AtEOXact_GUC` / `RestrictSearchPath` are the GUC-side machinery.
 - CVE-2023-2454 — the motivating vulnerability.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-utils`](../../../../issues/include-utils.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-documentation: header is mute about which SECURITY_* bits

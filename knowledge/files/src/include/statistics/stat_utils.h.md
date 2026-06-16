@@ -64,3 +64,9 @@ suitable for the inner implementation. [verified-by-code] [inferred]
 - `stats_fill_fcinfo_from_arg_pairs` returns bool — semantics of
   false (skip vs error) is not in the header.
   [ISSUE-doc-drift: false return contract (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-statistics`](../../../../issues/include-statistics.md)
+<!-- issues:auto:end -->

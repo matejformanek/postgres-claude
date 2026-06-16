@@ -103,6 +103,10 @@ opclass via `seg_cmp`, and the GiST opclass support functions
 - A13 `btree_gist` float family — same NaN comparison hazard with
   GiST exclusion constraints.
 
+<!-- issues:auto:begin -->
+- [Issue register — `seg`](../../../issues/seg.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 - `[ISSUE-correctness: NaN comparison in seg_cmp lets duplicate NaN

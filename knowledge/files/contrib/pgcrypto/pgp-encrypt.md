@@ -105,6 +105,10 @@ plaintext through. Backs SQL `pgp_sym_encrypt` / `pgp_pub_encrypt`.
 - `pgp-s2k.md` — `init_s2k_key` calls `pgp_s2k_fill` + `pgp_s2k_process`.
 - `pgp-decrypt.md` — matching reverse-direction filter chain.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: `disable-mdc=1` SQL option produces

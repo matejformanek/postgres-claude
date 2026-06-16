@@ -104,3 +104,9 @@ Formatters:
   tablespace" feels semantically off — a role might be granted CREATE
   on a tablespace for one purpose and inadvertently leak its total
   size. Documented in comment `:220-223` (low, by design)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

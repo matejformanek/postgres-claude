@@ -64,6 +64,10 @@ Internal:
   delegates spherical distance to cube. This C file is v1.0 only.
 - `source/utils/adt/geo_ops.c` — defines `Point`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `earthdistance`](../../../issues/earthdistance.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 - `[ISSUE-documentation: EARTH_RADIUS precision class undocumented;

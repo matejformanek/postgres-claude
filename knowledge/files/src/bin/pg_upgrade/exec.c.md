@@ -112,3 +112,9 @@ only catches non-zero exit, not signals (maybe-low)] — `exec.c:50`
 uses `pclose(output)` then `wait_result_to_str(rc)` for the error
 message; rc != 0 covers signaled child but a SIGPIPE during fgets
 won't reach this check.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

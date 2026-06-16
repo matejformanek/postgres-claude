@@ -68,3 +68,9 @@ on this. [verified-by-code]
   expression with `errno` evaluated once — works only when used as
   the argument to a function-like helper. Misuse is silent.
   [ISSUE-style: comma-expression macro (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `archive`](../../../../issues/archive.md)
+<!-- issues:auto:end -->

@@ -55,5 +55,9 @@ struct (low)]
 - A14 `basebackup_to_shell` — compression-spec parsing echo.
 - Companion: `src/common/compression.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=4`

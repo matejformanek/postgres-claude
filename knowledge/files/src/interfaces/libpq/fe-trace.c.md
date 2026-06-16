@@ -80,6 +80,10 @@ The trace uses single-letter / short codes for common fields. ErrorResponse / No
 - `knowledge/files/src/interfaces/libpq/fe-protocol3.c.md` — what each message means in the parser.
 - `src/test/modules/libpq_pipeline/` — the regression test that uses `PQTRACE_REGRESS_MODE`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: `PQsetTraceFlags` silently no-ops without active trace]** fe-trace.c:64-72 — easy to mis-order in user code (set flags, then enable trace) and have flags lost. Documented in the inline comment but worth a corpus tag.
@@ -91,3 +95,11 @@ The trace uses single-letter / short codes for common fields. ErrorResponse / No
 ## Tally
 
 `[verified-by-code]=10 [from-comment]=3 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

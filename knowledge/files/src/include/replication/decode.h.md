@@ -81,3 +81,9 @@ and the publisher-side walsender parses replication commands via
   not in header; new rmgrs that need decoding must touch
   `LogicalDecodingProcessRecord` and there's no compile-time
   enforcement (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

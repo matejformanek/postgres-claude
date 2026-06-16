@@ -150,6 +150,10 @@ tables are trivial. The RNG quality is irrelevant. [verified-by-code]
 - `openssl.c:CheckBuiltinCryptoMode` — the GUC enforcement.
 - `pg_strong_random` — corpus-wide RNG.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: DES dispatch path accessible without warning

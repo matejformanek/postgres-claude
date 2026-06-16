@@ -70,6 +70,10 @@ the rendering logic lives in `print.c`. `[verified-by-code]`
 - Companion accumulator gotcha (`width_total` 32-bit overflow flag) tracked in
   `knowledge/issues/fe_utils.md` row `print.c:776`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: `pg_utf8format` is mutable process-global state]**

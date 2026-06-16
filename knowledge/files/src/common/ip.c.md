@@ -77,3 +77,9 @@ which callers may treat differently (low)]
   defensive.
 - `getaddrinfo_unix` ignores `hintsp->ai_flags` entirely — comment
   at lines 150-153 calls out `AI_CANONNAME` is not supported.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

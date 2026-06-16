@@ -82,3 +82,9 @@ all advice-application logic in `pgpa_planner.c`. [verified-by-code]
 - `pgpa_ast.c:209-211` — `quote_identifier` is called on `indnamespace` even
   when it might already be quoted by the parser. Not a bug; it's idempotent
   for unquoted-safe identifiers. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

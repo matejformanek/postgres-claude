@@ -62,6 +62,10 @@ comparison, hash, and pg_lsn ± numeric arithmetic.
 - `source/src/backend/utils/adt/numeric.c` — `numeric_in`,
   `numeric_add`, `numeric_sub`, `numeric_pg_lsn`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 3

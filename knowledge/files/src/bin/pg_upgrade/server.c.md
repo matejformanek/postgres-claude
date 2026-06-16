@@ -119,3 +119,9 @@ the connection check immediately after (line 259) fails, we
 (set at line 173) will eventually run and shut it down, so no leak
 (verified)] — `os_info.running_cluster` is set BEFORE the
 connectivity check (line 251), so the hook covers this window.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

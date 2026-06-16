@@ -133,3 +133,7 @@ A heavily-PG-annotated copy of upstream tzcode `localtime.c`; the file builds in
   consumer of `pg_localtime`/`pg_next_dst_boundary`.
 - `knowledge/idioms/guc-variables.md` — `TimeZone`/`log_timezone` GUC wiring
   that drives which `pg_tz` is active.
+
+<!-- issues:auto:begin -->
+- [Issue register — `timezone`](../../../issues/timezone.md)
+<!-- issues:auto:end -->

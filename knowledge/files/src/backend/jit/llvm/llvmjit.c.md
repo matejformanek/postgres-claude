@@ -71,5 +71,9 @@ Core of the loadable LLVM JIT provider. Owns the per-backend LLVM session: creat
 - [[knowledge/files/src/backend/jit/llvm/llvmjit_expr.c.md]] — calls `llvm_create_context`, `llvm_mutable_module`, `llvm_get_function`.
 - [[knowledge/files/src/backend/jit/llvm/llvmjit_deform.c.md]] — calls `llvm_pg_func`, `llvm_pg_var_func_type`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `jit`](../../../../../issues/jit.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=13`

@@ -76,6 +76,10 @@ validity checks. The public-facing API is in [[knowledge/files/src/include/fe_ut
 - Implementations: `src/fe_utils/psqlscan.l`, `src/bin/psql/psqlscanslash.l` (the A4 sweep
   noted `psqlscan.l` as an uncovered corpus gap).
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: BEGIN/END detection uses a fixed 4-identifier window]**

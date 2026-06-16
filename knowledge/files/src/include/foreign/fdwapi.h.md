@@ -179,3 +179,9 @@ safety contracts).
   approach helps NEW callbacks (NULL = "not provided") but does
   not protect against REORDERING. [ISSUE-undocumented-invariant:
   FdwRoutine ABI stability is by convention only (likely)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-foreign`](../../../../issues/include-foreign.md)
+<!-- issues:auto:end -->

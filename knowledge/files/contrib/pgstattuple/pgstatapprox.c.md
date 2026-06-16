@@ -187,6 +187,10 @@ This is the buffer-management subtlety that read-stream's
 - `knowledge/files/contrib/pgstattuple/pgstattuple.c.md` — the
   full-scan counterpart with different "live" semantics.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgstattuple`](../../../issues/pgstattuple.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: pgstatapprox silently trusts VM bits; corrupt

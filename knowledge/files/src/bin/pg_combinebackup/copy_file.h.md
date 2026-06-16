@@ -29,3 +29,9 @@ the `copy_file()` entry point. [verified-by-code]
   Currently only `copy_file.c` switches on this enum so no risk.
   [verified-by-code] [ISSUE-style: enum has #ifdef'd member; consumers
   must be platform-aware (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_combinebackup`](../../../../issues/pg_combinebackup.md)
+<!-- issues:auto:end -->

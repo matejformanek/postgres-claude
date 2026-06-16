@@ -55,3 +55,9 @@ fills `HeadlineParsedText` during headline generation. [verified-by-code]
   the comment says nothing about the legal range or where it's
   defined (it's the parser-specific `lexid` from `LexDescr`).
   [ISSUE-doc-drift: type:8 semantics under-documented (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-tsearch`](../../../../issues/include-tsearch.md)
+<!-- issues:auto:end -->

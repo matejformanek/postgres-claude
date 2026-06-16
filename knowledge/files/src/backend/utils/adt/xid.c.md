@@ -34,3 +34,9 @@ Source: `source/src/backend/utils/adt/xid.c` (413 lines).
 - `[ISSUE-undocumented-invariant: cidin accepts any uint32 but cids in practice are bounded by max command id per transaction. A user-supplied cid >= 2^32 is rejected; one near 2^32 - 1 (combo-cid territory) round-trips fine but may interact oddly with combocids if used as a tuple cid (low)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

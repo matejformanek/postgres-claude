@@ -74,6 +74,10 @@ wildcard. Backs SQL `pgp_key_id(bytea)`.
   attempts decryption.
 - `pgp-pgsql.md` — `pgp_key_id_w` SQL wrapper.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: exposes only 64-bit long key ID, not full

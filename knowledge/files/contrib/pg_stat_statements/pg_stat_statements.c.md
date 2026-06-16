@@ -324,6 +324,10 @@ coarse cross-user workload signal (nit)].
   `pgstattuple` — all install hooks with similar lifetime patterns; none
   except pg_stat_statements stores per-statement text durably.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_stat_statements`](../../../issues/pg_stat_statements.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: track_utility=on captures CREATE/ALTER ROLE … PASSWORD

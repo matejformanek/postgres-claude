@@ -53,3 +53,9 @@ lives in `common/config_info.c` (`get_configdata`). [verified-by-code]
   end-of-table, but `j` is the local loop counter on the just-completed
   iteration. Works correctly because `j` retains its value after the
   `for` exits. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

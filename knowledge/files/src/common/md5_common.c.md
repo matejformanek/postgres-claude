@@ -101,6 +101,10 @@ Reentrant.
 - Dispatch facade: `knowledge/files/src/common/cryptohash.c.md` /
   `cryptohash_openssl.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=9 [from-comment]=2`

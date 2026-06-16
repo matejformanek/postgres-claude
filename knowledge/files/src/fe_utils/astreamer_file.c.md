@@ -90,6 +90,10 @@ anywhere and consumes raw bytes. Both are leaf nodes: `bbs_next == NULL`
 - `source/src/include/fe_utils/astreamer.h:62-91` — `astreamer_archive_context`
   enum and `astreamer_member` descriptor.
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: absolute symlink targets bypass the path-safety check]**

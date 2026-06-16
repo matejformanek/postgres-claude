@@ -88,6 +88,10 @@ Reentrant.
 - Fallback peer: `knowledge/files/src/common/hmac.c.md`.
 - Resowner conventions: `src/include/utils/resowner.h`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=9 [from-comment]=1 [inferred]=1`

@@ -40,6 +40,10 @@
   `knowledge/files/src/include/libpq/libpq.h.md` (HostsFileLoadResult and
   `load_hosts` live in libpq.h despite the file naming similarity).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: ldapbindpasswd lives in plaintext on HbaLine]** `hba.h:117` —

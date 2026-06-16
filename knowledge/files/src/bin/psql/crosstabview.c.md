@@ -70,5 +70,9 @@ If two source rows would map to the same `(row_key, col_key)` cell, **error out*
 - `printTable`/`printTableInit`/`printTableAddHeader`/`printTableCleanup`: `fe_utils/print.c` (not in this batch).
 - `column_type_alignment`: `common.c` (not in this batch).
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=15 [no concern]=6 [ISSUE]=1`

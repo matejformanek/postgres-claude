@@ -58,3 +58,9 @@ None.
   revoked; lets a low-privilege role enumerate which PIDs of high-privilege
   sessions are blocked — but only on heavyweight locks they themselves
   participate in, since interesting_pids is caller-supplied (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

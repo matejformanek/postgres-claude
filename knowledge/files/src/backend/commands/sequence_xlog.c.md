@@ -44,3 +44,9 @@ sequences. Tiny. The file's identification banner still reads
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `commands`](../../../../issues/commands.md)
+<!-- issues:auto:end -->

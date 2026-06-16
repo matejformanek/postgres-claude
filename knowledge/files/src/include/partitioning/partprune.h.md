@@ -74,3 +74,9 @@ evaluate pruning steps. [verified-by-code]
   header says so in a comment but the struct doesn't enforce it
   (no NULL invariant). [ISSUE-doc-drift: exprstates nullity tied to
   planstate (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-partitioning`](../../../../issues/include-partitioning.md)
+<!-- issues:auto:end -->

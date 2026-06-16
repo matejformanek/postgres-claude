@@ -189,6 +189,10 @@ State machine on `conn->pipelineStatus`: `PQ_PIPELINE_OFF` → `PQ_PIPELINE_ON` 
 - `knowledge/files/src/interfaces/libpq/fe-lobj.c.md` — sole serious caller of `PQfn`.
 - Backend counterparts: `knowledge/files/src/backend/tcop/postgres.c.md` (exec_simple_query / exec_execute_message dispatch), `knowledge/files/src/backend/access/common/printtup.c.md` (server-side row formatting).
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-leak: `PQescapeString` reads process-global encoding state]** fe-exec.c:4234-4248, 56-60 — `static_client_encoding` / `static_std_strings` are set per-PROCESS by the most recent connection's `pqSaveParameterStatus`. In a multi-connection app where conn A is `latin1` and conn B is `utf8`, calling `PQescapeString` after conn B's params arrive will use utf8 for data destined for conn A. **Severity: likely (data corruption / injection vector).** The fix is "always use `PQescapeStringConn`", but the unsafe variant remains in the ABI. Documented; flag for any libpq tutorial / linter audit.
@@ -203,3 +207,11 @@ State machine on `conn->pipelineStatus`: `PQ_PIPELINE_OFF` → `PQ_PIPELINE_ON` 
 ## Tally
 
 `[verified-by-code]=16 [from-comment]=10 [from-readme]=0 [inferred]=0 [unverified]=1`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
+
+<!-- scenarios:auto:end -->

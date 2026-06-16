@@ -64,6 +64,10 @@ Internal:
 - A5 jsonapi finding — recursive-descent parsers in PG use `check_stack_depth`; here `checkCond` does the same; OK.
 - Regex catastrophic-backtracking literature — Friedl, "Mastering Regular Expressions" §6 — the algorithmic shape here is identical.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `checkCond` exhibits exponential backtracking on adversarial input. Concrete repro recipe: `lquery '*{0,9}.*{0,9}.*{0,9}.*{0,9}.*{0,9}.*{0,9}.x'` against `ltree 'a.a.a.a.a.a.a.a.a.a.a.a.a.a.a.a.a.a'` — 6 nested `*{0,9}` give ~10^6 × 18 explorations. With `*{0,LTREE_MAX_LEVELS}` the count is bounded only by `check_stack_depth` (depth, not breadth) and `statement_timeout`. **Per-call CPU DoS class.** Mitigation: `CHECK_FOR_INTERRUPTS()` allows cancel; `statement_timeout` bounds it. Defense-in-depth: a per-call "explorations done" counter would be more direct. Compare to `src/backend/regex/regexec.c` which has explicit step bounds. (likely — known regex problem; arguably "use statement_timeout")] — `source/contrib/ltree/lquery_op.c:228-244`.

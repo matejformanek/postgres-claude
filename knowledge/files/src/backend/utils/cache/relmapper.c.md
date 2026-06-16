@@ -112,3 +112,9 @@ Internal I/O:
   documented in this file. The "load file after acquiring lock,
   close before releasing" Windows-driven ordering is here, but global
   lock-order discipline isn't (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils`](../../../../../issues/utils.md)
+<!-- issues:auto:end -->

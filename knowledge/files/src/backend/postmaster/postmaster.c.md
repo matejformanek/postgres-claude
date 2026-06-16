@@ -107,3 +107,11 @@ children to postmaster goes through:
 - [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/tcop.md](../../../../subsystems/tcop.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new background worker](../../../../scenarios/add-new-bgworker.md)
+
+<!-- scenarios:auto:end -->

@@ -54,3 +54,12 @@ Core support for `pg_class.reloptions` and `pg_tablespace.spcoptions`: a typed-o
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new cost-model constant (and optional GUC)](../../../../../scenarios/add-new-cost-model-knob.md)
+- [Scenario — Add a new index access method](../../../../../scenarios/add-new-index-am.md)
+
+<!-- scenarios:auto:end -->

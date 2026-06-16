@@ -102,3 +102,9 @@ None local.
   spaces are partitioned by `field4 ∈ {1, 2}`. Future addition of a
   new advisory shape (e.g. int4 single-key) must pick field4=3.
   Comment notes 1/2 only (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

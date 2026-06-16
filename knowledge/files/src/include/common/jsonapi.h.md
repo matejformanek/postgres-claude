@@ -130,6 +130,10 @@ inside the API struct.
   tsvector/tsquery/multirange/record recv stack-depth — the
   recursive-parser pattern echoes across backend.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - [ISSUE-trust-boundary: `pg_parse_json` (recursive) depends on

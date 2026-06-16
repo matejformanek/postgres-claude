@@ -101,3 +101,12 @@ runs ~150 statement types).
 <!-- backlinks:auto -->
 - [idioms/parser-pipeline.md](../../../../idioms/parser-pipeline.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../scenarios/add-new-sql-keyword.md)
+- [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
+
+<!-- scenarios:auto:end -->

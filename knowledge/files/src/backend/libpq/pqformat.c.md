@@ -110,6 +110,10 @@ flow (no socket I/O — just StringInfo formatting). [from-comment, pqformat.c:1
   `copy.c` (binary mode), every type's `typsend`/`typreceive`
 - StringInfo primitive: `source/src/common/stringinfo.c`
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: pq_getmsgint signed-overflow trap]**

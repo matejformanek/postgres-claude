@@ -72,3 +72,7 @@ extensions that consume `logging.h` from a multi-threaded host.
 
 - A4 psql secret-scrub cluster — primary echo.
 - Companion: `src/common/logging.c.md`.
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->

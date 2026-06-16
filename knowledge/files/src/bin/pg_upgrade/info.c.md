@@ -172,3 +172,9 @@ RELS within a DB, not DBs themselves. Wording is slightly off.]
 returning a string then `atoi`s — fine, but if the new server is
 unreachable mid-query the failure mode is `executeQueryOrDie ` ergo
 `pg_fatal`.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

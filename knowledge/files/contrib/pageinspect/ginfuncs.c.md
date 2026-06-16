@@ -113,6 +113,10 @@ this. Unlike btree which gates whole behaviors on
   not exposed here.
 - `knowledge/files/contrib/pageinspect/pageinspect.md` — bytea source.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-correctness: `ginPostingListDecode` is invoked on

@@ -41,3 +41,9 @@ None. All state is in `*context`.
 
 ## Confidence tag tally
 `[from-comment]=1 [verified-by-code]=9 [inferred]=1 [maybe]=2`
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

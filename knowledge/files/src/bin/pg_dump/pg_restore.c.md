@@ -177,6 +177,10 @@ pg_restore.c:521-630]
 - Filter file format: shared with `pg_dump`/`pg_dumpall` via
   `bin/pg_dump/filter.c`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_dump`](../../../../issues/pg_dump.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: per-DB connect-probe uses `ConnectDatabase`

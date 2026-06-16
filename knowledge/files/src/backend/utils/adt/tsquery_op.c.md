@@ -38,3 +38,9 @@ QTNode trees, so cheaper than rewrite.
   order (`b` becomes child[0], `a` becomes child[1] at `:46-47`).
   Comment-less reverse ordering is a footgun for new authors. (low)]
 - [ISSUE-dead-code: None visible.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

@@ -166,3 +166,9 @@ NextOID before:") the wrong field would be parsed (low)] —
 ends the parse; if pg_controldata crashes mid-output you get a
 partial parse and the "lacks some required control information"
 fatal at line 688 catches it. Defense-in-depth.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

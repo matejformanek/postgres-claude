@@ -110,3 +110,9 @@ CRC and system_identifier at TRAILER time. [verified-by-code]
   trailer is unlikely "but let's check anyway"; if the tar parser
   delivered short content for a manifest-recorded size, this is the
   catch-net. [from-comment]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_verifybackup`](../../../../issues/pg_verifybackup.md)
+<!-- issues:auto:end -->

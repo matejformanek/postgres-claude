@@ -192,6 +192,10 @@ security issue.
 - `knowledge/files/contrib/pageinspect/pageinspect.md` — the
   RAW-bytes contrast (superuser-only).
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgstattuple`](../../../issues/pgstattuple.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-security: pgstattuple reveals true RLS-bypassed row

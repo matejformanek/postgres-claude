@@ -161,3 +161,9 @@ Direction:
   `launch_operation != operation` — that's three reads of the same
   pair under three different lock acquisitions. Worth a helper.
   [ISSUE-style: triple-check of launch_operation==operation pattern (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `postmaster`](../../../../issues/postmaster.md)
+<!-- issues:auto:end -->

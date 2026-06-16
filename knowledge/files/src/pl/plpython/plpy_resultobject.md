@@ -164,6 +164,10 @@ beyond "tupdesc must be set for colnames/types/typmods". Notable:
   - `access/tupdesc.c` — `FreeTupleDesc`, `TupleDescAttr`.
   - `executor/spi.c` — `SPI_OK_*` constants are what `status` holds.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-api-shape: `result["colname"]` doesn't work; users must do

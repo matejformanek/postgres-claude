@@ -93,6 +93,10 @@ built under glibc 2.27 may sort differently under glibc 2.28.
 - `source/src/backend/utils/adt/varlena.c` — primary consumer of
   pg_strcoll/pg_strxfrm.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 7

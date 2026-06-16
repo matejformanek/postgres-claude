@@ -56,6 +56,10 @@ opcode — the WAL representation of `pg_logical_emit_message()` — for
 - Corpus theme — `appendStringInfo("%s", untrusted)` sinks: see
   `knowledge/issues/include-utils.md` (stringinfo.h trust notes).
 
+<!-- issues:auto:begin -->
+- [Issue register — `access-rmgrdesc`](../../../../../issues/access-rmgrdesc.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: user-controlled prefix rendered raw via %s into

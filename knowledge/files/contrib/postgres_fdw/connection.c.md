@@ -155,6 +155,10 @@ When local query is canceled (`CHECK_FOR_INTERRUPTS` ereports), the `pgfdw_xact_
 - `source/src/backend/access/transam/xact.c` — `RegisterXactCallback`, `RegisterSubXactCallback`.
 - A2 libpq sweep — every `PGconn *` traffic here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `postgres_fdw`](../../../issues/postgres_fdw.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `postgres_fdw_disconnect_all` lets non-superuser close superuser-established connections in same backend (XXX in comment at lines 2576-2584). Could be used for a local DoS (close a long-running superuser query's conn mid-flight). (likely)] — `source/contrib/postgres_fdw/connection.c:2587`.

@@ -301,5 +301,19 @@ All three use the same escape pipeline. [verified-by-code, 2104-2123]
   `pg_class_d.h` (included for `AMOID_*` and `RELKIND_*`
   CppAsString2 expansion).
 
+<!-- issues:auto:begin -->
+- [Issue register — `psql`](../../../../issues/psql.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[verified-by-code]=22 [from-comment]=6 [inferred]=5 [unverified]=0`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+- [Scenario — Add a new SQL keyword](../../../../scenarios/add-new-sql-keyword.md)
+- [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
+
+<!-- scenarios:auto:end -->

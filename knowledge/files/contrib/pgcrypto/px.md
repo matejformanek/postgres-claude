@@ -182,6 +182,10 @@ extra empty `/` slots between. Rejects unknown options with
 - `src/include/port.h` — `explicit_bzero` exists. pgcrypto does NOT
   use it.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `px_memset` may be elided by LTO (likely)] —

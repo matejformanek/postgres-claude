@@ -88,6 +88,10 @@ allocations are silent OOB writes. Sizing comes from
 - `knowledge/idioms/locking.md` (not yet written) — slock_t/atomic split
   inside ParallelBlockTableScanDesc.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-api-shape: opaque void* without type tag (informational)]**
    — `relscan.h:165`-`166`.

@@ -158,3 +158,9 @@ of the real path, which then fails downstream with a less-clear
 different from fopen()"] — historical fossil. All call sites could
 just use `fopen` directly. Not a bug, but a 100+ call site grep target
 for cleanup.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

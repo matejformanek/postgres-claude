@@ -99,6 +99,10 @@ X-macro include, and the generated hash machinery lives in `c_kwlist_d.h`
 - `src/tools/gen_keywordlist.pl` — build-time script that reads `c_kwlist.h` and
   emits `c_kwlist_d.h`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-undocumented-invariant: ASCII sort order not runtime-checked]**

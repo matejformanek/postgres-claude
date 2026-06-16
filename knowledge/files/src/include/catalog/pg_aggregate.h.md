@@ -57,3 +57,11 @@ The last two live in `#ifdef CATALOG_VARLEN`. [verified-by-code]
 ## Tally
 
 `[verified-by-code]=7 [from-comment]=2`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new built-in aggregate](../../../../scenarios/add-new-aggregate-function.md)
+
+<!-- scenarios:auto:end -->

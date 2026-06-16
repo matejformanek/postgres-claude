@@ -98,6 +98,10 @@ deforming, sorts, hashing, parallel exec.
 - `source/src/backend/executor/execParallel.c` — `datumSerialize` /
   `datumRestore` consumer.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 4

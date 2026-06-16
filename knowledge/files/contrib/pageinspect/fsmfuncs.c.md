@@ -81,6 +81,10 @@ doesn't affect the snapshot.
   source; users typically obtain FSM pages via
   `get_raw_page_fork('tbl', 'fsm', N)`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pageinspect`](../../../issues/pageinspect.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - **[ISSUE-defense-in-depth: no "is this actually an FSM page"

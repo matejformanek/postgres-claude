@@ -54,5 +54,9 @@ matching, locale-dependent? Header says nothing (low)]
 - A6 `pg_verifybackup` — primary consumer.
 - Companion: `src/common/checksum_helper.c.md`, `parse_manifest.h.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-common`](../../../../issues/include-common.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=5`

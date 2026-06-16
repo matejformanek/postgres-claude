@@ -45,3 +45,11 @@ when `IDENT` matches).
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../scenarios/add-new-sql-keyword.md)
+
+<!-- scenarios:auto:end -->

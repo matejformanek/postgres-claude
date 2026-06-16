@@ -119,6 +119,10 @@ hazard — see Invariants & gotchas [inferred].
 - `dt.h`, `pgtypeslib_extern.h` — token/mask macros (`DTK_*`, `TOKMAXLEN`,
   `MAXDATEFIELDS`) and `pgtypes_alloc`/`pgtypes_strdup`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-bounds: unbounded sprintf into caller buffer]** `dt_common.c:756`
   (and `dt_common.c:671`) — `EncodeDateTime`/`EncodeDateOnly` take a `char *str`

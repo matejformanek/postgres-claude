@@ -65,3 +65,12 @@ The only public symbol is `base_yyparse(yyscanner)`, called by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new SQL keyword](../../../../scenarios/add-new-sql-keyword.md)
+- [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
+
+<!-- scenarios:auto:end -->

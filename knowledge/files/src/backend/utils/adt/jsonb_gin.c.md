@@ -32,3 +32,9 @@ Source: `source/src/backend/utils/adt/jsonb_gin.c` (1410 lines).
 - `[ISSUE-undocumented-invariant: 32-bit hash collisions in jsonb_path_ops can spuriously match @> queries before recheck; documented behavior but not in the .md docs (low)]`.
 
 Confidence: `[verified-by-code]` for the function map and stack-depth gates.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

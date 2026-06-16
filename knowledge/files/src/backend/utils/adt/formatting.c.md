@@ -164,6 +164,10 @@ forked backend has its own arrays. No info leak across users.
   folding via `pg_locale_t`.
 - `source/src/include/utils/datetime.h` — `pg_tm`, `fmt_tm`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Confidence tag tally
 
 - `[verified-by-code]` × 12

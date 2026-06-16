@@ -120,6 +120,10 @@ Uses `pg_snprintf` for the rounds field; rejects on encoding error.
 - `crypt-md5.c:px_crypt_md5` — verifier for MD5-crypt.
 - `crypt-sha.c:px_crypt_shacrypt` — verifier for SHA-{256,512}-crypt.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: bcrypt default cost = 5 (confirmed)] — `:175`.

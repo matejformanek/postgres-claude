@@ -37,3 +37,11 @@ Public typedefs and prototypes for the reloptions framework. Defines the option 
 
 ## Confidence tag tally
 `[verified-by-code]=3 [from-comment]=4 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new index access method](../../../../scenarios/add-new-index-am.md)
+
+<!-- scenarios:auto:end -->

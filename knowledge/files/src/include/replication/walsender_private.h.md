@@ -122,3 +122,9 @@ concurrently re-parse `synchronous_standby_names`. [from-comment]
 - [ISSUE-state-transition: `WalSndState` transitions undocumented in
   header; STARTUP→BACKUP vs STARTUP→CATCHUP→STREAMING paths only clear
   after reading walsender.c (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

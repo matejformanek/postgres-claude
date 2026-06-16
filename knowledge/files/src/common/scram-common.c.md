@@ -132,6 +132,10 @@ Reentrant. The interrupt check is the only async-aware piece.
 - Hash backend: `knowledge/files/src/common/cryptohash.c.md` /
   `cryptohash_openssl.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=13 [from-comment]=2 [inferred]=2`

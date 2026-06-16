@@ -98,6 +98,10 @@ Reentrant.
 - OpenSSL peer: `knowledge/files/src/common/hmac_openssl.c.md`.
 - Primary consumer: `knowledge/files/src/common/scram-common.c.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->
+
 ## Tally
 
 `[verified-by-code]=10 [from-comment]=2 [inferred]=1`

@@ -48,6 +48,10 @@ ltree's CRC-32 helper used to spread labels across GiST signature bits. **NOT cr
 - `source/src/include/utils/pg_crc.h` — `INIT/COMP/FIN_TRADITIONAL_CRC32`.
 - `source/src/include/utils/pg_locale.h` — `pg_strfold`, `pg_database_locale`, `UNICODE_CASEMAP_BUFSZ`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: locale-change-at-runtime silently breaks CRC consistency. An index built under `lc_ctype = en_US.UTF-8` and queried under `C` produces different signatures for the same label values. Symptom: GiST searches return false negatives (rows that should match are missed). REINDEX is required after locale changes. **No code-side check; no documentation cross-reference; user-visible only as missing rows.** Cross-link to A12's locale findings if any. (likely — operational footgun, generic to PG locale-aware indexes)] — `source/contrib/ltree/crc32.c:27-30`.

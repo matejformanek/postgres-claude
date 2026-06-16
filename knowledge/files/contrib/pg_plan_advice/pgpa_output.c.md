@@ -74,3 +74,9 @@ column 76 to keep `EXPLAIN (PLAN_ADVICE)` output readable in an 80-col psql.
   (e.g. dropped between planning and EXPLAIN). Would produce a NULL deref
   in `appendStringInfoString`. [ISSUE-correctness: get_rel_name NULL not
   checked (maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
+<!-- issues:auto:end -->

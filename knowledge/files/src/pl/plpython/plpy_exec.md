@@ -116,6 +116,10 @@ One trust-relevant subtlety in `PLy_trigger_build_args`: the trigger dict expose
 - A9 plpgsql `pl_exec.c` comparison: plpgsql's `exec_stmt_block` and friends are 5000+ LOC because plpgsql interprets bytecode directly; plpy_exec is ~1200 LOC because Python's interpreter does the heavy lifting and plpython just shuffles args. The complexity here is in the *boundaries* (PG↔Python type coercion, refcount discipline, recursive-args stack), not in the language semantics.
 - A10-1 plperl comparison: plperl's `plperl_call_perl_func` does the analogous `args` setup as `@_`, the trigger TD setup as a `%TD` hash. plpython's TD as a Python `dict` is conceptually identical.
 
+<!-- issues:auto:begin -->
+- [Issue register — `plpython`](../../../../issues/plpython.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-correctness: NEW row in BEFORE trigger hides generated columns, but MODIFY rebuild via PLy_modify_tuple could resurface them (likely)] — `PLy_input_from_tuple(..., !TRIGGER_FIRED_BEFORE(...))` omits generated columns from `TD["new"]` in BEFORE triggers [verified-by-code: `:844-845`]. But `PLy_modify_tuple` only rejects writes to generated columns, not reads — and the heap_modify_tuple at `:1061` passes the OLD tuple as the base. If a user adds a `"gencol": x` key to `TD["new"]`, they get the "cannot set generated column" error correctly. But if they DON'T add it and the underlying OLD tuple has stale generated values, those flow through unchanged. This is correct heap-modify behavior, but the asymmetry between "hidden from NEW dict" and "preserved from OLD tuple" deserves a corpus note.

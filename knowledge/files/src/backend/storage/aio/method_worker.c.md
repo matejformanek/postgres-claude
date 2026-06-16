@@ -111,6 +111,10 @@ between `io_min_workers` and `io_max_workers` based on observed demand.
 - Locking: `AioWorkerSubmissionQueueLock`, `AioWorkerControlLock` —
   see `knowledge/idioms/locking-overview.md`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `storage-aio`](../../../../../issues/storage-aio.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: single global submission queue is a known

@@ -51,6 +51,10 @@ and transparently get the leak-safe wrappers [from-comment].
   (built on this header).
 - Frontend: `src/interfaces/libpq/libpq-fe.h`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `libpq`](../../../../issues/libpq.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-correctness: macro takeover hides function-pointer assignments]**

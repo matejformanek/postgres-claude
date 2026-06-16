@@ -66,6 +66,10 @@ Internal:
 - `source/src/include/port/pg_bitutils.h` — `pg_popcount`, `pg_number_of_ones[256]`.
 - `source/src/include/utils/array.h` — `ARR_NDIM`, `ARR_DIMS`, `ArrayGetNItems`, `array_contains_nulls`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `ltree`](../../../issues/ltree.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-security: `_ltree_compress` (lines 73-78) hashes every level of every element of an `ltree[]` array per insert/update. With a 1-GB `ltree[]` argument (allowed by `MaxAllocSize`), this is hours of CPU. **No `CHECK_FOR_INTERRUPTS()` in the loop.** A single INSERT could pin the backend uncancellably. (likely — per-call DoS, requires malicious large `ltree[]` input)] — `source/contrib/ltree/_ltree_gist.c:73-78`.

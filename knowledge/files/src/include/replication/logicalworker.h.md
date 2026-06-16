@@ -50,3 +50,9 @@ standard bgworker `Datum main_arg` and never return.
 - [ISSUE-state-transition: `ParallelApplyMessagePending` is volatile +
   sig_atomic_t (line 17), but the surrounding shm_mq drain isn't
   documented as edge-triggered vs level-triggered. (low)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

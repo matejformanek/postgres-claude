@@ -92,3 +92,9 @@ struct binaryheap {
   Assert is the only safety net. (low)]
 - [ISSUE-dead-code: no — every entry point appears used by at least one
   caller in the tree.]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `common`](../../../issues/common.md)
+<!-- issues:auto:end -->

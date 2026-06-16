@@ -115,3 +115,9 @@ just `copy_file()` it. [verified-by-code]
   But `read_block` already pg_fatals on a short read, so we never
   reach checksum_update with a partial buffer.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_combinebackup`](../../../../issues/pg_combinebackup.md)
+<!-- issues:auto:end -->

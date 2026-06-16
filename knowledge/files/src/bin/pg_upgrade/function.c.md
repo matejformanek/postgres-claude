@@ -98,3 +98,9 @@ attacker with file-system access to log dir sees it.
 from `slot_arr->slots[i].plugin` populated by info.c. Output plugins
 are typically `pgoutput` (builtin) or extension-supplied; same trust
 boundary as probin values.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_upgrade`](../../../../issues/pg_upgrade.md)
+<!-- issues:auto:end -->

@@ -52,6 +52,10 @@ version and any ecpglib version. [inferred]
 - `knowledge/files/src/interfaces/ecpg/ecpglib/typename.c.md` — runtime consumer
   (`ecpg_type_name` aborts on an unknown `ECPGttype`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `ecpg`](../../../../../issues/ecpg.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 - **[ISSUE-invariant: IS_SIMPLE_TYPE couples to enum order]** `ecpgtype.h:92` —
   the range macro relies on `ECPGt_char..ECPGt_interval` staying contiguous in

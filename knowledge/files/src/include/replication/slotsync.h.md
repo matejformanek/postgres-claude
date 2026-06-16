@@ -95,3 +95,9 @@ additional ACL on which slots may be synced.
   half-synced slot if the worker exits mid-write to
   `pg_replslot/<name>/state` — relies on slot.c's atomic-rename
   discipline (sev=maybe)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-replication`](../../../../issues/include-replication.md)
+<!-- issues:auto:end -->

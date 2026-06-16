@@ -99,3 +99,9 @@ import because those are stored as Jsonb in `pg_statistic_ext_data`
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `statistics`](../../../../issues/statistics.md)
+<!-- issues:auto:end -->

@@ -111,3 +111,9 @@ All declared `extern`, defined in `btree_utils_num.c`:
   multi-column GiST. For natts very large (e.g. multi-column index
   with many columns), the scale becomes small. Unlikely in practice.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `btree_gist`](../../../issues/btree_gist.md)
+<!-- issues:auto:end -->

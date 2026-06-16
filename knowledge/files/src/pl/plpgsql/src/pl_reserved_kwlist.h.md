@@ -88,3 +88,7 @@ control-flow syntax inside PL/pgSQL bodies. [from-comment]
 - `source/src/tools/gen_keywordlist.pl` — emits `*_d.h`.
 - `source/src/include/common/kwlookup.h` — `ScanKeywordList` /
   `ScanKeywordLookup` API.
+
+<!-- issues:auto:begin -->
+- [Issue register — `plpgsql`](../../../../../issues/plpgsql.md)
+<!-- issues:auto:end -->

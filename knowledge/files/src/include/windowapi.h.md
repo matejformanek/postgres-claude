@@ -118,3 +118,9 @@ For positioning row references:
   documentation to `nodeWindowAgg.c`. Extension authors must read
   source. [ISSUE-documentation: windowapi.h delegates almost all
   semantic docs to .c file (nit)]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `include-misc`](../../../issues/include-misc.md)
+<!-- issues:auto:end -->

@@ -42,3 +42,9 @@ Facility / Code). [from-comment]
 - The `_d.h` / catalog conventions don't apply here; this is a
   Windows-resource-compiler artifact, not a PG header.
   [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `bin-singletons`](../../../../issues/bin-singletons.md)
+<!-- issues:auto:end -->

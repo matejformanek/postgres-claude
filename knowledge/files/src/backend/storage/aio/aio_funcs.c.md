@@ -71,6 +71,10 @@ taking any lock**, using a generation/state recheck protocol instead.
 - Target description: `aio_target.c::pgaio_io_get_target_description`.
 - View definition: `src/backend/catalog/system_views.sql` (`pg_aios`).
 
+<!-- issues:auto:begin -->
+- [Issue register — `storage-aio`](../../../../../issues/storage-aio.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-info-disclosure: `pg_aios` exposes other backends' IO

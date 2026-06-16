@@ -66,3 +66,9 @@ WAL on disk already under the operator's control. Still:
   (small dirty set in a large relation) this is fine; for a hypothetical
   worst case (a few dirty blocks at the end of a many-GB relation) the
   iteration walks every byte. Not a security issue, just inefficient.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `pg_rewind`](../../../../issues/pg_rewind.md)
+<!-- issues:auto:end -->

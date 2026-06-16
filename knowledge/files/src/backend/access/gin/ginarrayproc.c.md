@@ -85,3 +85,9 @@ contained-by (`<@`, strategy 3), equal (`=`, strategy 4).
   uninitialized") despite `elog(ERROR)` not returning — the typedef
   changes (`bool` vs `GinTernaryValue`) mean the second one writes a
   type-mismatched value. Cosmetic. [verified-by-code]
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `access`](../../../../../issues/access.md)
+<!-- issues:auto:end -->

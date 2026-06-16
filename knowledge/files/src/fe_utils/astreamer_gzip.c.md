@@ -94,6 +94,10 @@ successor (typically `astreamer_tar_parser`). The whole file is wrapped in
   `bbs_buffer`, `astreamer_content`/`_finalize`/`_free`.
 - `source/src/common/compression.c` — `pg_compress_specification` (level, etc.).
 
+<!-- issues:auto:begin -->
+- [Issue register — `fe_utils`](../../../issues/fe_utils.md)
+<!-- issues:auto:end -->
+
 ## Potential issues
 
 - **[ISSUE-question: no cumulative decompressed-size cap]**

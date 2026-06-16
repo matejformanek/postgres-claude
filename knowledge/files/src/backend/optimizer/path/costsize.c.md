@@ -246,3 +246,12 @@ is applied. Significantly fixes the n-way join blowup for star schemas.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+## Appears in scenarios
+
+<!-- scenarios:auto:begin -->
+
+- [Scenario — Add a new cost-model constant (and optional GUC)](../../../../../scenarios/add-new-cost-model-knob.md)
+- [Scenario — Add a new plan node](../../../../../scenarios/add-new-plan-node.md)
+
+<!-- scenarios:auto:end -->

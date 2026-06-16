@@ -111,6 +111,10 @@ and `pgp.h` (326 lines).
 - `pgp-s2k.md` — concrete implementation of the three S2K modes referenced
   by `s2k_mode` enum here.
 
+<!-- issues:auto:begin -->
+- [Issue register — `pgcrypto`](../../../issues/pgcrypto.md)
+<!-- issues:auto:end -->
+
 ## Issues spotted
 
 - [ISSUE-defense-in-depth: SHA-1 and MD5 still permitted as `s2k-digest-algo`

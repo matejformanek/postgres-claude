@@ -115,6 +115,10 @@ unsigned char). [inferred from code structure; not a CVE-class audit]
   uses `DecodeDateTime`, `EncodeDateTime`.
 - `source/src/timezone/` — IANA tz database driver, accessed via `pg_tz`.
 
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->
+
 ## Open questions
 
 - Exact buflen contract of `ParseDateTime` and whether a malformed caller

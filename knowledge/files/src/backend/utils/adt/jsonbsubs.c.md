@@ -28,3 +28,9 @@ Source: `source/src/backend/utils/adt/jsonbsubs.c` (414 lines).
 - `[ISSUE-undocumented-invariant: integer subscripts on a jsonb object (non-array) silently no-op; lookup by text "0" on an object returns the value for key "0" if it exists, otherwise NULL (verified)]`.
 
 Confidence: `[verified-by-code]` for function map.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

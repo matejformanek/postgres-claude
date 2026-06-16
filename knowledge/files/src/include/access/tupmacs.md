@@ -98,6 +98,10 @@ trip this; current code has no such type, so unreachable in practice.
   primary consumer.
 - `knowledge/idioms/memory-contexts.md` (not yet written).
 
+<!-- issues:auto:begin -->
+- [Issue register — `include-access`](../../../../issues/include-access.md)
+<!-- issues:auto:end -->
+
 ## Issues
 1. **[ISSUE-correctness: fetch_att_noerr length-validation contract is comment-only (low)]**
    — `tupmacs.h:131`-`135`.

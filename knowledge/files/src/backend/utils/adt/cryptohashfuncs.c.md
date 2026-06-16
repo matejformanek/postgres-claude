@@ -27,3 +27,9 @@ Source: `source/src/backend/utils/adt/cryptohashfuncs.c` (169 lines).
 - `[ISSUE-crypto-weakness: md5_text / md5_bytea remain unrestricted on FIPS-disabled builds — by design; documented in user docs (low)]`.
 
 Confidence: `[verified-by-code]`.
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
+<!-- issues:auto:end -->

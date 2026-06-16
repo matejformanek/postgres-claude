@@ -90,3 +90,9 @@ without aborting the larger restore. [verified-by-code]
 
 ## Synthesized by
 <!-- backlinks:auto -->
+
+## Cross-references
+
+<!-- issues:auto:begin -->
+- [Issue register — `statistics`](../../../../issues/statistics.md)
+<!-- issues:auto:end -->

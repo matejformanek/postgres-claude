@@ -103,6 +103,10 @@ different form, plus some bitmapsets of RTIs.
 - `knowledge/idioms/extension-development.md` — hook chaining pattern
 - `src/backend/commands/explain.c` — the EXPLAIN core that this extends
 
+<!-- issues:auto:begin -->
+- [Issue register — `pg_overexplain`](../../../issues/pg_overexplain.md)
+<!-- issues:auto:end -->
+
 ## Issues
 
 1. [ISSUE-correctness: range-table loop has no CHECK_FOR_INTERRUPTS; partition-heavy plans with thousands of RTEs cancel-slow under EXPLAIN (RANGE_TABLE) (nit)] — `source/contrib/pg_overexplain/pg_overexplain.c:454-777`
