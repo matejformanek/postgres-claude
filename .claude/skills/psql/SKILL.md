@@ -78,6 +78,9 @@ EXPLAIN (ANALYZE, BUFFERS, WAL, SETTINGS, VERBOSE) <query>;
 EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON) <query>;  -- machine-parseable
 
 -- Force a specific plan shape to confirm a planner hypothesis.
+-- enable_* don't HARD-disable a node type — they apply a large cost
+-- penalty (disable_cost), so the planner picks the next-best plan.
+-- If every alternative is also disabled, the "disabled" node still wins.
 SET enable_seqscan = off;        -- and friends: enable_hashjoin / _nestloop / _indexonlyscan
 SET work_mem = '4MB';            -- sort/hash spill threshold
 SET jit = off;                   -- rule JIT in/out when timing things
@@ -95,7 +98,10 @@ FROM pg_stat_activity
 WHERE backend_type = 'client backend';
 
 -- Memory contexts of THIS backend — top consumers first.
-SELECT name, level, parent, total_bytes/1024 AS kb, used_bytes/1024 AS used_kb
+-- Columns (PG 17+): name, ident, type, level, path int4[], total_bytes,
+-- total_nblocks, free_bytes, free_chunks, used_bytes.
+-- `path` is the array of ancestor context_ids from TopMemoryContext down.
+SELECT name, type, level, path, total_bytes/1024 AS kb, used_bytes/1024 AS used_kb
 FROM pg_backend_memory_contexts
 ORDER BY total_bytes DESC LIMIT 20;
 
@@ -116,12 +122,39 @@ FROM pg_statio_user_tables ORDER BY hit + read DESC LIMIT 10;
 
 ## Capturing a backend PID for gdb/lldb
 
+Every psql connection causes the postmaster to `fork()` a fresh backend;
+the PID you get from `pg_backend_pid()` is THAT backend's pid (NOT
+psql's client-side pid). See `knowledge/architecture/process-model.md`.
+
+Quick PID grab from inside the session:
+
 ```sql
 SELECT pg_backend_pid();
 ```
 
 Then in another shell: `/pg-attach <pid>` (the slash command wraps lldb with
 breakpoints on `errstart` and `MemoryContextStats` pre-set).
+
+**Race-safe held-PID handoff** — when you need to attach BEFORE a query
+runs (so lldb sees its execution), use the `PGAPPNAME=hold` + `pg_sleep`
+pattern. `PGAPPNAME` is a libpq env var (NOT a psql `\set` variable —
+that won't propagate):
+
+```bash
+# 1. Tag a holding backend with application_name='hold' and pin it open.
+PGAPPNAME=hold psql -h /tmp -d postgres -X -c 'SELECT pg_sleep(600);' &
+
+# 2. From a second psql, find the PID.
+PID=$(psql -h /tmp -d postgres -At -c \
+  "SELECT pid FROM pg_stat_activity WHERE application_name='hold'")
+
+# 3. Attach.
+/pg-attach "$PID"
+
+# 4. From a THIRD psql session (same application_name='hold' if you
+#    want to drive queries through the attached backend), run your
+#    actual repro.
+```
 
 If the backend you want to debug doesn't exist yet (e.g., you're studying
 startup), use single-user mode instead — see `.claude/skills/debugging/SKILL.md`.
@@ -131,7 +164,10 @@ startup), use single-user mode instead — see `.claude/skills/debugging/SKILL.m
 The build defaults (`-Ddebug=true -Dcassert=true`) wire in the asserts and
 the clobber-freed-memory machinery. To hunt a suspected leak:
 
-1. Note baseline:
+1. Note baseline (MessageContext is the per-message context, reset
+   between client protocol messages — growth across iterations is the
+   leak signature for a per-message leak. Other commonly-watched
+   contexts: `CacheMemoryContext`, `ExecutorState`, `PortalContext`):
    ```sql
    SELECT name, total_bytes FROM pg_backend_memory_contexts WHERE name='MessageContext';
    ```
@@ -173,6 +209,12 @@ database, edit `.mcp.json` rather than passing flags ad-hoc.
 
 ## Common gotchas
 
+- **`psql -h db.acme.com …` (or any hostname / managed-PG vendor) is the
+  WRONG tool here.** This skill is for the LOCAL dev cluster built from
+  source — Unix socket `/tmp`, trust auth, db `postgres`. If the prompt
+  names a hostname, a managed-PG vendor (RDS / Cloud SQL / Supabase /
+  Neon / Aurora), or talks about touching prod data, stop. Use the
+  production-PG tooling for that team, NOT this skill.
 - **`psql: connection to server on socket "/tmp/.s.PGSQL.5432" failed: No
   such file or directory`** — the server isn't running, or `unix_socket_directories`
   isn't `/tmp`. Check `dev/data-debug/postgresql.conf`; `/pg-start` sets this.

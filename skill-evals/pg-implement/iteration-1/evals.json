@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "pg-implement",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "Walk me through implementing phase 2 of planning/sp2-pgstr-maxalloc/plan.md. Assume phase 1 just landed. What's the pre-phase verification, what's the per-edit cadence, what's the phase-end check, and how do I close out the phase?"
+    },
+    {
+      "eval_id": 2,
+      "question": "I'm mid-way through phase 3 of a 5-phase plan and just realized the phase needs to touch src/backend/access/heap/visibilitymap.c — but that file isn't in the plan's §3 'Files that change' table. What do I do? Be specific about the procedure and which rules apply."
+    },
+    {
+      "eval_id": 3,
+      "question": "A junior contributor says: 'We're running short on time. Let me just commit phase 3 with the regress failure noted as a TODO, and I'll come back to fix it after phase 4 lands.' Why is that wrong, and what specifically prevents it in this workflow?"
+    }
+  ]
+}

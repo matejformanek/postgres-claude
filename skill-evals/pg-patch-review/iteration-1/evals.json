@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "pg-patch-review",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I want to run a mailing-grade review of CF #5912 — a v3 patch that adds a new LWLock tranche for a per-database 'recent-DDL-stats' counter, exposed via a new system view pg_stat_recent_ddl. The COVER claims: (1) backwards-compatible — only adds catalog rows and a new shmem region; (2) no WAL changes; (3) refactor of LWLockNewTrancheId callers is mechanical. I have a built dev/ branch with the patch applied and regress passing. Walk me through how to drive this review end-to-end — what stages, what I delegate to sub-agents in parallel, what each one is looking for, and what the final deliverable looks like. Be concrete about which knowledge/ docs and which sibling skills get loaded."
+    },
+    {
+      "eval_id": 2,
+      "question": "Adversarial probe on a hypothetical patch. The diff adds a new error return path inside ReorderBufferIterTXNInit (reorderbuffer.c) that opens a BufFile via BufFileCreateFileSet, reads a header, and on a malformed header does `ereport(ERROR, ...)` WITHOUT calling BufFileClose first. The author claims 'the MemoryContext on backend reset will clean up'. Treat this as a critic-E exercise: what specific reflex does this trigger, what's the corpus precedent, and what severity should the finding carry? Also: what does Critic A (architecture) flag independently, and is this REJECT-track or Waiting-on-Author?"
+    },
+    {
+      "eval_id": 3,
+      "question": "A patch passes `meson test --no-rebuild regress/regress` (245/245), the isolation suite (129/129), and ninja install is warning-clean. The author writes in COVER: 'pure refactor, no behavior change, existing tests cover the refactored path'. What else should make me uneasy before I tick 'Ready for Committer'? Enumerate the non-mechanical checks this skill specifically calls out, including any persona-driven reflexes, REJECT-track conditions, and corpus drift checks. Cite which stage of pg-patch-review each check belongs to."
+    }
+  ]
+}

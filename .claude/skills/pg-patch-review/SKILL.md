@@ -85,8 +85,24 @@ critic fan-out + synthesis).
 
 Done by the `/pg-review` slash command. If invoked directly (without
 `/pg-review`), this skill does it inline before stage 1. See
-`.claude/commands/pg-review.md` for the exact recipe. The output of
-this stage is:
+`.claude/commands/pg-review.md` for the exact recipe.
+
+**Inline Stage 0 (when /pg-review wasn't used) — minimum commands:**
+
+1. `cd dev && git checkout master && git pull`
+2. `git checkout -b cf<N>-review` (or `pr<N>-review`)
+3. Fetch the patch (CF: `curl` the v<N> from the CF entry;
+   PR: `gh pr checkout <N>`; .patch file: copy in).
+4. `git am /path/to/v*.patch` (apply all v<N> hunks in order).
+5. `ninja -C build-debug install` — must be warning-clean.
+6. `meson test --no-rebuild regress/regress` — record pass/fail.
+7. `meson test --no-rebuild --suite isolation` — record pass/fail.
+8. `git diff --name-only HEAD~<N>..HEAD` — capture the touched-files
+   list.
+9. Note any pre-existing flakes (e.g. macOS
+   `recovery/040_standby_failover_slots_sync`).
+
+The output of this stage is:
 
 - `dev/` on branch `cf<N>-review` (or `pr<N>-review`) with the patch applied.
 - A built binary (`ninja install` clean, no new warnings).
@@ -375,11 +391,37 @@ may have missed a concern), or downgrade to non-REJECT if the
 findings don't actually compose to a design-level NACK. Critic E
 *recommends*; Stage 3 *decides*.
 
+**Critic E severity matrix at a glance:**
+
+| Catalog # | Probe | Default | Escalates to blocking when |
+|---|---|---|---|
+| #4 | Cleanup-on-early-return | warning | COVER doesn't acknowledge the cleanup question |
+| #5 | Multibyte / encoding | warning | text-primitive cap added with no per-encoding analysis in COVER |
+| #6 | Subsystem-local cap discoverability | suggestion | — |
+| #7 | "Third state" binary-format | warning | COVER doesn't enumerate bit-set-but-invalid AND bit-unset-but-looks-valid cases |
+| #8 | injection_points reproducer | warning | structural argument on a security claim with no injection_points test |
+| #9 | Hot-path micro-benchmark | suggestion | — |
+| #10 | Symmetric-check refactor | suggestion | — |
+| #11 | Persona-aware backpatch routing | suggestion | — |
+
+REJECT-track escalation: 3+ `blocking` from this table AND context-
+awareness signal (engagement class `contested` OR foreclosed
+`INV-*`) → recommend REJECT-A to Stage 3.
+
 **Output:** same structured-finding list as critics A-D, plus an
 optional `recommend_verdict: REJECT-A | REJECT-B` field when the
 escalation rule above triggers.
 
 ### Stage 3 — orchestrator consolidates (10 min)
+
+**Critic-E recommendation vs orchestrator verdict.** Critic E may
+emit `recommend_verdict: REJECT-A | REJECT-B` when its catalog-item
+threshold (3+ blocking findings + context-awareness signal) fires.
+The orchestrator at Stage 3 *decides*; Critic E *recommends*. The
+orchestrator may downgrade the recommendation to "Waiting on
+Author" if the findings, in aggregate, do NOT compose to a
+design-level NACK. Critic E's recommendation is one input, not the
+verdict.
 
 The main agent gathers all four critics' outputs and:
 
@@ -524,8 +566,12 @@ Below the email in the SAME session file, append:
 - **Stage-0 fail** (patch doesn't apply, build breaks, regress fails):
   stop, report, ask whether to send a "rebase needed" reply or to skip.
 - **Corpus drift** detected in stage 1 (cites stale > 10%): stop, ask
-  whether to refresh the corpus first via `pg-corpus-maintainer` or to
-  proceed with a "best-effort against possibly-stale docs" caveat.
+  the user whether to (a) refresh the corpus first via a separate
+  `hf(corpus):` commit (per Rule R9 of
+  `.claude/rules/pg-implement-discipline.md` — corpus fixes are their
+  own commits in the meta-repo), or (b) proceed with a "best-effort
+  against possibly-stale docs" caveat noted in the review email's
+  "Testing performed" block.
 - **Touched file not in any subsystem doc**: don't stop; note in the
   review email's "Testing performed" block that this area is
   uncovered by the corpus. After the review, file a followup to
@@ -561,11 +607,13 @@ Below the email in the SAME session file, append:
 
 ## Validation reference
 
-The 2026-06-02 v0 review of CF #6402 in
-`sessions/2026-06-02-cf6402-review-validation.md` is the calibration
-target — re-running THIS skill against that patch should reproduce a
-review of comparable quality (same draft conclusion, same blocking-vs-nit
-split) in less wall time than the v0 manual walk.
+The 2026-06-02 v0 review of CF #6402
+`[unverified: session log not preserved in sessions/ at the time of this writing]`
+is the calibration target — re-running THIS skill against that patch
+should reproduce a review of comparable quality (same draft conclusion,
+same blocking-vs-nit split) in less wall time than the v0 manual walk.
+A future preserved-and-named calibration session can replace this
+paragraph.
 
 ## Cross-references
 

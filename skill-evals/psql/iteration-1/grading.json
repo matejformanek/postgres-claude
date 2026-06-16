@@ -1,0 +1,65 @@
+{
+  "iteration": 1,
+  "skill": "psql",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Watch backend memory-context tree + snapshot another backend's contexts",
+      "assertions": [
+        {"text": "Uses the dev-cluster connection idiom: psql -h /tmp -d postgres (Unix socket, db postgres, no password)", "with_skill": true, "baseline": false},
+        {"text": "Notes the role/$USER gotcha (superuser is your shell user, not literally 'postgres')", "with_skill": true, "baseline": false},
+        {"text": "Queries pg_backend_memory_contexts ordered by total_bytes for the current backend", "with_skill": true, "baseline": true},
+        {"text": "Uses \\watch N to refresh the introspection query while a workload runs", "with_skill": true, "baseline": true},
+        {"text": "Calls out that pg_backend_memory_contexts is per-connection (current backend only)", "with_skill": true, "baseline": false},
+        {"text": "Uses pg_log_backend_memory_contexts(pid) to dump ANOTHER backend's contexts into the server log", "with_skill": true, "baseline": true},
+        {"text": "Points at dev/data-debug/server.log (or /pg-tail-log) as the destination for the dump", "with_skill": true, "baseline": false},
+        {"text": "Uses pg_stat_activity to find the target PID, filtering by backend_type='client backend' or by application_name", "with_skill": true, "baseline": true},
+        {"text": "Mentions MessageContext (or another named context) as the place to watch growth for a per-message leak", "with_skill": true, "baseline": false},
+        {"text": "Notes that the pg_log_* function requires PG 14+ (or otherwise calls out the version requirement)", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "Capture backend PID and hand off to lldb without race",
+      "assertions": [
+        {"text": "Uses the PGAPPNAME=hold env var to tag the holding session (NOT a \\set variable)", "with_skill": true, "baseline": false},
+        {"text": "Holds the backend with SELECT pg_sleep(N) so the PID stays alive long enough to attach", "with_skill": true, "baseline": true},
+        {"text": "Looks up the PID from a SECOND psql session by querying pg_stat_activity WHERE application_name='hold'", "with_skill": true, "baseline": false},
+        {"text": "Uses psql -At (unaligned, tuples-only) to make the PID-lookup output script-parseable", "with_skill": true, "baseline": false},
+        {"text": "Uses -X to skip ~/.psqlrc so noisy rc output doesn't pollute the session", "with_skill": true, "baseline": false},
+        {"text": "Hands the PID to /pg-attach (the project's lldb wrapper) rather than raw lldb -p", "with_skill": true, "baseline": false},
+        {"text": "Notes that /pg-attach pre-sets breakpoints on errstart and MemoryContextStats", "with_skill": true, "baseline": false},
+        {"text": "Connects to the local dev cluster on /tmp socket with db postgres (NOT a managed/network PG)", "with_skill": true, "baseline": false},
+        {"text": "Notes that EVERY psql connection forks its own backend (per-connection-fork model), so the PID is the BACKEND's not psql's", "with_skill": false, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "Force hash join, EXPLAIN (ANALYZE,BUFFERS,WAL), revert without restart",
+      "assertions": [
+        {"text": "Uses SET enable_nestloop = off (and/or enable_mergejoin = off) to force the planner toward hash join", "with_skill": true, "baseline": true},
+        {"text": "Notes that enable_* GUCs apply a huge cost penalty rather than HARD-disabling the node type", "with_skill": true, "baseline": false},
+        {"text": "Uses EXPLAIN (ANALYZE, BUFFERS, WAL, ...) — names BUFFERS and WAL specifically", "with_skill": true, "baseline": true},
+        {"text": "Includes SETTINGS and/or VERBOSE in the EXPLAIN options for full context", "with_skill": true, "baseline": false},
+        {"text": "Mentions FORMAT JSON for machine-parseable EXPLAIN output", "with_skill": true, "baseline": false},
+        {"text": "Notes that SET is session-scoped and exiting psql resets (or RESET ALL / RESET <guc> reverts)", "with_skill": true, "baseline": true},
+        {"text": "Distinguishes session SET from ALTER SYSTEM SET + pg_reload_conf for cross-session persistence", "with_skill": true, "baseline": false},
+        {"text": "Mentions SET LOCAL inside BEGIN/COMMIT for txn-scoped GUC changes", "with_skill": true, "baseline": false},
+        {"text": "Mentions \\timing on for wall-clock measurement independent of EXPLAIN instrumentation", "with_skill": true, "baseline": false},
+        {"text": "Uses the dev-cluster connection (psql -h /tmp -d postgres)", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 28,
+    "with_skill_total": 29,
+    "baseline_passed": 10,
+    "baseline_total": 29,
+    "with_skill_pass_rate": 0.966,
+    "baseline_pass_rate": 0.345
+  },
+  "notes": [
+    "with_skill missed one: did not explicitly call out the per-connection-fork model (which the skill mentions only in passing in cross-refs).",
+    "baseline does respectably on bare-mechanics assertions (SET enable_*, pg_log_backend_memory_contexts existence, pg_sleep hold) but loses every dev-cluster-specific assertion (connection idiom, /pg-attach wrapper, $USER vs postgres role, MallocStackLogging, log path, application_name=hold idiom)."
+  ]
+}
