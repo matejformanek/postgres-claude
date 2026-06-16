@@ -2,9 +2,9 @@
 
 > A meta repo that turns Claude Code into a long-term collaborator on
 > PostgreSQL internals: a cited knowledge corpus (2,580 per-file source
-> notes, 100% strict coverage of the in-scope tree), 31 agent skills,
-> 31 task-shaped scenarios, 155 PG-wide idioms, 127 issue registers,
-> and 47 session logs. Two side-by-side upstream clones are mounted
+> notes, 100% strict coverage of the in-scope tree), 30 agent skills,
+> 155 PG-wide idioms, 127 issue registers, and 50+ session logs.
+> Two side-by-side upstream clones are mounted
 > via symlinks: `source/` (read-only reference) and `dev/` (mutable
 > test field). Every concrete claim about PG behavior is cited at
 > `source/<path>:<line>` or tagged `[unverified]`.
@@ -24,9 +24,6 @@
   through this repo.
 - [progress/STATE.md](progress/STATE.md): Current phase, what's done,
   what's next. Always re-read at session start.
-- [knowledge/scenarios/_index.md](knowledge/scenarios/_index.md):
-  Index of 31 task-shaped scenarios (add-new-data-type,
-  add-new-sql-keyword, add-startup-hook, …).
 
 ## Knowledge corpus
 

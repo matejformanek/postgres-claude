@@ -31,8 +31,6 @@ The numbers below come from the current corpus on `master`:
   in-scope tree
 - **30** Claude Code [skills](.claude/skills/) — coding style, fmgr/SPI,
   locking, parser/nodes, WAL/xlog, memory contexts, patch submission, …
-- **32** task-shaped [scenarios](knowledge/scenarios/) — add-new-data-type,
-  add-new-sql-keyword, add-startup-hook, add-GUC, ship-a-PR-to-hackers, …
 - **155** PG-wide [idioms](knowledge/idioms/) (memory contexts, ereport,
   fmgr, SPI, lock-acquire-then-pin, …)
 - **127** issue registers under [`knowledge/issues/`](knowledge/issues/)
@@ -97,11 +95,11 @@ for the 12 implementation rules.
 
 Real working sessions, end-to-end:
 
-- [`sessions/2026-06-16-scenarios-layer.md`](sessions/2026-06-16-scenarios-layer.md)
-  — designing the task-shaped scenarios layer (add-new-data-type,
-  add-new-sql-keyword, …) on top of the existing knowledge corpus.
 - [`sessions/2026-06-15-phase-a-close-100pct-coverage.md`](sessions/2026-06-15-phase-a-close-100pct-coverage.md)
   — closing Phase A at 100% strict coverage across the in-scope PG tree.
+- The full [`sessions/`](sessions/) log captures 50+ working sessions:
+  subsystem deep-dives, multi-day patch reviews, cloud-routine intake,
+  and the experiment notes that shaped the current skill set.
 
 For a quick map of how a Claude Code session is supposed to feel inside
 this repo, start with
