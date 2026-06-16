@@ -1,0 +1,66 @@
+{
+  "iteration": 2,
+  "skill": "gucs-config",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Add extension_foo.log_query bool GUC — _PG_init, hooks?, read-from-C, MarkGUCPrefixReserved",
+      "assertions": [
+        {"text": "Names DefineCustomBoolVariable as the right entry point", "with_skill": true, "baseline": true},
+        {"text": "Shows it called inside _PG_init", "with_skill": true, "baseline": true},
+        {"text": "States that valueAddr (bool *) is the address of a static/extern backing variable; reads from C come from that variable directly, no getter needed", "with_skill": true, "baseline": true},
+        {"text": "States that for a plain boolean toggle no check/assign/show hooks are needed — pass NULL/NULL/NULL", "with_skill": true, "baseline": true},
+        {"text": "Calls MarkGUCPrefixReserved AFTER all DefineCustom* calls (ordering matters)", "with_skill": true, "baseline": true},
+        {"text": "Explains MarkGUCPrefixReserved does TWO things: (a) remove existing placeholders, (b) refuse future ones (typo-catching)", "with_skill": true, "baseline": false},
+        {"text": "Notes that parallel-worker startup would later trip over uncleaned placeholders (operational impact)", "with_skill": true, "baseline": false},
+        {"text": "Notes EmitWarningsOnPlaceholders is the old name, MarkGUCPrefixReserved the new one (or that both exist)", "with_skill": true, "baseline": true},
+        {"text": "Picks a sensible GucContext (PGC_SUSET or PGC_USERSET or PGC_SIGHUP, with reasoning)", "with_skill": true, "baseline": true},
+        {"text": "Cites at least one file:line in source/ (guc.h, guc.c, worker_spi, or README)", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "foo.cache_dir string GUC with directory-existence check_hook trio",
+      "assertions": [
+        {"text": "Uses DefineCustomStringVariable with char ** valueAddr", "with_skill": true, "baseline": true},
+        {"text": "check_hook signature: bool check(char **newval, void **extra, GucSource source)", "with_skill": true, "baseline": true},
+        {"text": "check_hook returns false on rejection (not true on rejection)", "with_skill": true, "baseline": true},
+        {"text": "Uses GUC_check_errdetail / GUC_check_errhint / GUC_check_errmsg / GUC_check_errcode for error reporting — NOT ereport(ERROR) directly", "with_skill": true, "baseline": false},
+        {"text": "States that the assign_hook cannot fail (no return value), so fallible work belongs in check_hook", "with_skill": true, "baseline": true},
+        {"text": "Notes that the check_hook may run OUTSIDE a transaction (bootstrap / postmaster startup / config reload), so catalog lookups must be guarded with IsTransactionState()", "with_skill": true, "baseline": true},
+        {"text": "States that string-GUC storage replacement must use guc_malloc / guc_strdup, NEVER palloc, and the old value must be guc_free()'d", "with_skill": true, "baseline": false},
+        {"text": "Notes that the check_hook may also be called purely to validate (not assign) — must be side-effect-free", "with_skill": true, "baseline": false},
+        {"text": "assign_hook may run during transaction rollback → no catalog lookups", "with_skill": true, "baseline": false},
+        {"text": "show_hook signature returns const char * and may use a static buffer (not reentrant)", "with_skill": true, "baseline": true},
+        {"text": "Cites a source file (guc.h, guc.c, README, or worker_spi.c) with a line range", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "PGC_USERSET trap for postmaster-bound worker count; GUC_LIST_INPUT vs GUC_LIST_QUOTE for identifier list",
+      "assertions": [
+        {"text": "Rejects PGC_USERSET for foo.worker_count because the count is bound at postmaster startup", "with_skill": true, "baseline": true},
+        {"text": "Recommends PGC_POSTMASTER as the right context (or PGC_SIGHUP with caveat)", "with_skill": true, "baseline": true},
+        {"text": "Notes that the rule of thumb is 'loosest context that's still safe' — picking PGC_POSTMASTER because reconfiguring would require restarting workers / re-requesting shared memory", "with_skill": true, "baseline": true},
+        {"text": "Names GUC_LIST_INPUT as the flag that enables comma-separated list parsing", "with_skill": true, "baseline": true},
+        {"text": "States that GUC_LIST_INPUT alone is INSUFFICIENT for identifier lists — without GUC_LIST_QUOTE, an identifier that needs quoting (embedded space or uppercase) won't round-trip through pg_dump / pg_dumpall", "with_skill": true, "baseline": true},
+        {"text": "Names GUC_LIST_QUOTE as the flag that double-quotes each element on serialization (matching search_path behaviour)", "with_skill": true, "baseline": true},
+        {"text": "Suggests using SplitIdentifierString (or SplitGUCList) in the check_hook to parse the list", "with_skill": true, "baseline": true},
+        {"text": "Notes that any string replacement in check_hook must use guc_malloc / guc_strdup, not palloc", "with_skill": true, "baseline": false},
+        {"text": "Cites guc.h line range for flag bit values (~214-242) or a similar source anchor", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 30,
+    "with_skill_total": 30,
+    "baseline_passed": 19,
+    "baseline_total": 30,
+    "with_skill_pass_rate": 1.0,
+    "baseline_pass_rate": 0.633
+  },
+  "iter1_vs_iter2_delta": {
+    "with_skill": "+0 (saturated at 30/30 both runs)",
+    "baseline": "+1 (18 → 19; baseline noise; eval-1 'AFTER all DefineCustom* calls' landed this run; eval-3 'GUC_LIST_INPUT alone insufficient' landed this run; iter-1 had 'Notes that the check_hook may also be called purely to validate' that did not land in iter-2 baseline)"
+  }
+}

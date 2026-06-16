@@ -1,0 +1,18 @@
+{
+  "iteration": 2,
+  "skill": "gucs-config",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I'm adding `extension_foo.log_query = bool` to extension `foo`. Walk me through exactly what changes in _PG_init, whether I need any check/assign/show hooks for a plain boolean toggle, how I read it from C in foo.c (do I need a getter or is a plain `extern` enough?), and what `MarkGUCPrefixReserved` does for me here."
+    },
+    {
+      "eval_id": 2,
+      "question": "The GUC `foo.cache_dir` is a directory path. I want it validated at SET time so that the path exists and is writable BEFORE the assign hook runs (else any later access blows up). Sketch the check_hook + assign_hook + show_hook trio: signatures, the return-on-rejection convention, how to report a useful error to the user, and how the storage is managed (since it's a string GUC). What's the gotcha about the check_hook being called outside a transaction?"
+    },
+    {
+      "eval_id": 3,
+      "question": "A colleague proposes `PGC_USERSET` on a GUC `foo.worker_count` that controls how many background workers the extension launches at postmaster startup. They also want a comma-separated `foo.databases` list of identifier names. Why might `PGC_USERSET` be wrong here, what's the right context, and what flags does the `foo.databases` GUC need to behave like `search_path` (i.e. accept a comma list, quote identifiers correctly)?"
+    }
+  ]
+}

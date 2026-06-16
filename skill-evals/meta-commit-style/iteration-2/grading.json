@@ -1,0 +1,71 @@
+{
+  "skill": "meta-commit-style",
+  "iteration": 2,
+  "evals": [
+    {
+      "id": "E1",
+      "assertions": [
+        {"id": "A1", "text": "Picks ft(corpus): prefix for knowledge/idioms/* write", "with_skill": true, "baseline": false},
+        {"id": "A2", "text": "No conventional-commits prefix (feat:/fix:/chore:)", "with_skill": true, "baseline": false},
+        {"id": "A3", "text": "Title is imperative present-tense with no trailing period", "with_skill": true, "baseline": true},
+        {"id": "A4", "text": "Title parenthetical includes line count + cite count per §Body rules", "with_skill": true, "baseline": false},
+        {"id": "A5", "text": "Body explains the WHY (not a diff recap)", "with_skill": true, "baseline": true},
+        {"id": "A6", "text": "Body wrapped near 76 cols", "with_skill": true, "baseline": true},
+        {"id": "A7", "text": "Includes Co-authored-by trailer", "with_skill": true, "baseline": true},
+        {"id": "A8", "text": "Co-authored-by uses lowercase form (Co-authored-by:) not GitHub-style uppercase (Co-Authored-By:)", "with_skill": true, "baseline": false, "note": "FIXED by Edit 1 — SKILL.md now teaches lowercase explicitly with a callout block and a real-log frequency anchor."},
+        {"id": "A9", "text": "Co-authored-by identity is exactly 'Claude Opus 4.7 (1M context) <noreply@anthropic.com>'", "with_skill": true, "baseline": false},
+        {"id": "A10", "text": "No Plan: trailer (no plan.md backs this commit)", "with_skill": true, "baseline": true},
+        {"id": "A11", "text": "No Signed-off-by trailer", "with_skill": true, "baseline": true}
+      ],
+      "with_skill_score": "11/11",
+      "baseline_score": "5/11"
+    },
+    {
+      "id": "E2",
+      "assertions": [
+        {"id": "B1", "text": "Picks ft(skills): or ft(meta): prefix (not feat:)", "with_skill": true, "baseline": false},
+        {"id": "B2", "text": "Plan: trailer present", "with_skill": true, "baseline": false},
+        {"id": "B3", "text": "Plan: trailer matches exact canonical format 'planning/<slug>/plan.md (phase <N>: <title>)'", "with_skill": true, "baseline": false},
+        {"id": "B4", "text": "Sites: trailer present and lists each non-obvious file", "with_skill": true, "baseline": false},
+        {"id": "B5", "text": "Trailers separated from body by a blank line", "with_skill": true, "baseline": true},
+        {"id": "B6", "text": "Plan: trailer ordered before Co-authored-by (Co-authored-by is last)", "with_skill": true, "baseline": false},
+        {"id": "B7", "text": "Co-authored-by trailer present (last)", "with_skill": true, "baseline": true},
+        {"id": "B8", "text": "Co-authored-by lowercase form", "with_skill": true, "baseline": false, "note": "FIXED by Edit 1."},
+        {"id": "B9", "text": "Single commit (not split — these are all meta-repo writes; R10 split rule applies only when one change touches BOTH dev/ and meta)", "with_skill": true, "baseline": true},
+        {"id": "B10", "text": "Picks plural scope ft(skills) matching real log", "with_skill": true, "baseline": false, "note": "FIXED by Edit 2 — SKILL.md example now uses plural; previously the agent had to override the example."}
+      ],
+      "with_skill_score": "10/10",
+      "baseline_score": "3/10"
+    },
+    {
+      "id": "E3",
+      "assertions": [
+        {"id": "C1", "text": "Explicitly rejects feat(skills): as wrong prefix (conventional-commits forbidden)", "with_skill": true, "baseline": false},
+        {"id": "C2", "text": "Explicitly rejects bare feat: with no scope (scope is mandatory)", "with_skill": true, "baseline": false},
+        {"id": "C3", "text": "Explicitly rejects bare-imperative title with no prefix (for meta repo)", "with_skill": true, "baseline": false},
+        {"id": "C4", "text": "States the bare-imperative form IS correct for upstream PG / dev/ (commit-message-style)", "with_skill": true, "baseline": false},
+        {"id": "C5", "text": "Canonical form named as ft(scope): with mandatory scope", "with_skill": true, "baseline": false},
+        {"id": "C6", "text": "Co-authored-by trailer required for the corrected form", "with_skill": true, "baseline": false},
+        {"id": "C7", "text": "Co-authored-by lowercase form named", "with_skill": true, "baseline": false, "note": "FIXED by Edit 1."},
+        {"id": "C8", "text": "No Signed-off-by (not a DCO project)", "with_skill": true, "baseline": false},
+        {"id": "C9", "text": "Mentions ticket numbers are forbidden inline (squash-merge appends (#NN) automatically)", "with_skill": true, "baseline": false},
+        {"id": "C10", "text": "Names the contrast skill commit-message-style for upstream PG style", "with_skill": true, "baseline": false}
+      ],
+      "with_skill_score": "10/10",
+      "baseline_score": "0/10"
+    }
+  ],
+  "totals": {
+    "with_skill": "31/31 (100%)",
+    "baseline": "8/31 (25.8%)",
+    "uplift_iter2": "+23 assertions (+74.2pp)",
+    "delta_iter1_to_iter2": "+3 assertions (rubric saturated by Edit 1 fixing the lowercase casing across A8/B8/C7)"
+  },
+  "notes": [
+    "Rubric saturated on iter-2. All three iter-1 failures (A8 / B8 / C7 — lowercase Co-authored-by) close cleanly via Edit 1.",
+    "Edit 2 (ft(skill) → ft(skills) plural) was already implicit in iter-1 (the agent caught the drift between example and real-log even with old SKILL.md) but is now consistent — the example doesn't fight the rule.",
+    "Edit 4 (looser Plan: form) doesn't affect this eval set but covers a real-log shape the strict spec previously contradicted.",
+    "Edits 3, 5, 6 (extended scope vocabulary, real SHA anchors, side-by-side block) increase robustness for adjacent prompts not in this eval set — particularly any commit that lands metadata changes or a contrast-style question about which repo a commit belongs in.",
+    "Baseline still fails on every PG-specific point. The lift over baseline is +23 assertions out of 31 (74.2pp), at the high end of the campaign range."
+  ]
+}

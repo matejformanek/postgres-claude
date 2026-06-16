@@ -102,7 +102,7 @@ your prefix. It does two things:
    typos in `postgresql.conf` (`my_ext.napitme`) now produce a clear error
    instead of silently being accepted.
 
-[verified-by-code `source/src/backend/utils/misc/guc.c:5178-5228`]
+[verified-by-code `source/src/backend/utils/misc/guc.c:5185-5228`]
 
 The old name `EmitWarningsOnPlaceholders` is still a `#define` alias —
 prefer the new name in new code. [verified-by-code
@@ -113,12 +113,28 @@ prefer the new name in new code. [verified-by-code
 For string GUCs, `valueAddr` is a `char **`. The pointed-to storage is
 owned by guc.c and must be allocated with `guc_malloc` / `guc_strdup` —
 **never `palloc`**. If a check_hook wants to replace the proposed value
-it must `guc_malloc` the new value and `guc_free` the old one.
-[from-README `source/src/backend/utils/misc/README:51-60`]
+it must `guc_malloc` the new value and `guc_free` the old one. Use
+`guc_realloc` to grow an existing `guc_malloc` allocation (typical for a
+derived `extra` payload). All four functions live in
+`source/src/include/utils/guc.h:473-476`.
+[from-README `source/src/backend/utils/misc/README:50-62`]
 
 ## 6. The hook trio
 
 ### `check_hook(newval *, void **extra, GucSource source) → bool`
+
+Signature varies by GUC type — the first argument's exact pointer type
+matches the variable's storage:
+
+| GUC type | check_hook first arg |
+|---|---|
+| bool   | `bool *newval` |
+| int    | `int *newval` |
+| real   | `double *newval` |
+| string | `char **newval` (so `*newval` is the proposed `char *`) |
+| enum   | `int *newval` (enum encoded as int) |
+
+[from-README `source/src/backend/utils/misc/README:25-30`]
 
 - Validate the proposed value; return false on reject.
 - May modify `*newval` to canonicalize (round, lowercase, ...).
@@ -126,22 +142,35 @@ it must `guc_malloc` the new value and `guc_free` the old one.
   `*extra` to pass derived data to the assign hook.
 - For error detail: `GUC_check_errdetail(...)`, `GUC_check_errhint(...)`,
   `GUC_check_errcode(...)`, `GUC_check_errmsg(...)` — never `ereport(ERROR)`
-  directly except on OOM.
+  directly except on OOM. `GUC_check_errcode(sqlerrcode)` overrides the
+  default rejection SQLSTATE (`ERRCODE_INVALID_PARAMETER_VALUE`, 22023);
+  only override when you have a more specific code.
 - May run **outside any transaction** (bootstrap, postmaster startup,
   config reload). Guard catalog lookups with `IsTransactionState()`.
 - May also be called just to validate without assigning — must not have
   side effects.
+- For `GUC_LIST_INPUT` GUCs (see §7), parse `*newval` inside the
+  check_hook with `SplitIdentifierString(rawstring, ',', &elemlist)`
+  (identifier-style lists) or `SplitGUCList(rawstring, ',', &elemlist)`
+  (general case). Both live in `source/src/include/utils/varlena.h:33-37`;
+  they `pstrdup` elements and `pfree`/`list_free` is the caller's job.
+  Don't roll your own splitter — these match how the parser handles
+  `search_path`, including quoted elements.
 
-[from-README `source/src/backend/utils/misc/README:25-109`]
+[from-README `source/src/backend/utils/misc/README:25-75`]
 
 ### `assign_hook(newval, void *extra) → void`
 
 - Cannot fail (no return). Do all fallible work in the check hook.
 - May be called during transaction rollback → no catalog lookups.
 
+[from-README `source/src/backend/utils/misc/README:78-109`]
+
 ### `show_hook(void) → const char *`
 
 - Customise what SHOW displays. Static buffer is fine; not reentrant.
+
+[from-README `source/src/backend/utils/misc/README:112-117`]
 
 ## 7. Useful `flags` bits
 

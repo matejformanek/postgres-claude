@@ -1,6 +1,6 @@
 ---
 name: meta-commit-style
-description: Write a commit message inside the postgres-claude META repo (knowledge corpus, skill / agent / command edits, planning artifacts, session logs, infra changes) — covers the meta style: `ft(scope):` / `hf(scope):` / `docs(scope):` prefix, a wrapped body, an optional `Plan:` trailer, and the global `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>` footer. Distinct from the upstream PG commit-message-style (which forbids Co-Authored-By and uses bare-imperative titles). Use whenever drafting a commit inside `postgres-claude/` (the meta repo) — corpus PR, skill rewrite, session log, planning doc, cloud-routine recipe, etc. Skip for upstream PG patches in `dev/` (use commit-message-style), Conventional Commits style (feat: / fix: / chore: across most non-PG projects), Linux-kernel Signed-off-by commits, Angular / Vue / React commit style, and the generic git-commit message question on any other project.
+description: Write a commit message inside the postgres-claude META repo (knowledge corpus, skill / agent / command edits, planning artifacts, session logs, infra changes) — covers the meta style: `ft(scope):` / `hf(scope):` / `docs(scope):` prefix, a wrapped body, an optional `Plan:` trailer, and the global `Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>` footer (lowercase trailer per real log — 45 lowercase vs 11 uppercase in last 50 commits). Distinct from the upstream PG commit-message-style (which forbids Co-authored-by and uses bare-imperative titles). Use whenever drafting a commit inside `postgres-claude/` (the meta repo) — corpus PR, skill rewrite, session log, planning doc, cloud-routine recipe, etc. Skip for upstream PG patches in `dev/` (use commit-message-style), Conventional Commits style (feat: / fix: / chore: across most non-PG projects), Linux-kernel Signed-off-by commits, Angular / Vue / React commit style, and the generic git-commit message question on any other project.
 when_to_load: Draft a commit message inside postgres-claude (corpus, skill, planning, sessions, infra); a worktree branch off this repo about to land via PR.
 companion_skills:
   - commit-message-style
@@ -18,7 +18,7 @@ upstream PG style** in `commit-message-style`:
 | Aspect | Upstream PG (`commit-message-style`) | Meta repo (this skill) |
 |---|---|---|
 | Title prefix | None (bare imperative) | `ft(scope):` / `hf(scope):` / `docs(scope):` / `[cloud:<routine>]` |
-| `Co-Authored-By` | **Forbidden** | **Required** (global default) |
+| `Co-authored-by` | **Forbidden** | **Required** (global default; lowercase form — 45/56 in real log) |
 | `Plan:` trailer | N/A | Optional, when implementing a planned feature |
 | `Sites:` trailer | N/A | Optional, when changes span multiple files |
 | Wrap width | ~76 cols | ~76 cols (same) |
@@ -26,6 +26,41 @@ upstream PG style** in `commit-message-style`:
 | Emoji | Forbidden | Forbidden (same) |
 | Ticket numbers | Forbidden | Forbidden (PR # via `(#NN)` from squash-merge is fine) |
 | Bullet lists in body | Forbidden | Tolerated for multi-item commits |
+
+## Side-by-side: same change, two styles
+
+Same conceptual change ("document the lock-then-pin acquire-order
+invariant"), two different homes — and two different commit-message
+shapes:
+
+**`dev/` patch (uses `commit-message-style`, upstream PG):**
+
+```
+Document lock acquire-before-pin invariant
+
+The lock-then-pin sequence is not stated in lmgr.h; spell it out
+here so extension authors do not regress it.
+
+Author: Some One <some@one.example>
+Reviewed-by: Other Person <other@example.com>
+Discussion: https://postgr.es/m/CAB7nPq...
+```
+
+**postgres-claude meta repo (uses this skill):**
+
+```
+ft(corpus): synthesize lock-acquire-then-pin idiom (148 lines, 22 cites)
+
+Distill the lock-then-pin sequencing pattern from
+src/backend/storage/lmgr/ into knowledge/idioms/lock-acquire-then-pin.md.
+22 file:line cites verified at HEAD.
+
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+```
+
+Same intent, two homes, two trailer regimes. R10 ("two-repo
+separation") in `.claude/rules/pg-implement-discipline.md` is what
+makes this split necessary.
 
 ## When to use
 
@@ -42,7 +77,7 @@ Anywhere inside `postgres-claude/` (the meta repo). Examples:
 ## When NOT to use
 
 - Commits inside `dev/` (the mutable PG clone) — use
-  `commit-message-style` (upstream PG style; no `Co-Authored-By`).
+  `commit-message-style` (upstream PG style; no `Co-authored-by`).
 - Generic non-PG project commits.
 
 ## Format
@@ -57,8 +92,15 @@ you accepted, what you considered and rejected.>
 [Plan: planning/<slug>/plan.md (phase <N>: <title>)]
 [Sites: <file:line>, <file:line>, ...]
 
-Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
+
+> **Note on `Co-authored-by:` casing.** Use **lowercase**
+> `Co-authored-by:` (matches git's own canonicalization and the
+> dominant form in this repo's log — 45 lowercase vs 11 GitHub-style
+> uppercase `Co-Authored-By:` in the most-recent 50 commits with a
+> co-author trailer). GitHub renders both identically, but lowercase
+> is the house form here.
 
 ### Prefix vocabulary
 
@@ -68,15 +110,23 @@ Match what's already in `git log` of this repo. The canonical set:
 |---|---|---|
 | `ft(corpus):` | new knowledge doc (subsystem/idiom/data-structure/files) | `ft(corpus): synthesize tcop spine (770 lines, 39 cites)` |
 | `ft(dev):` | new dev-loop infra (commands, dev-cluster tooling) | `ft(dev): MCP + psql skill + ASan profile` |
-| `ft(skill):` | new or revised skill | `ft(skill): add pg-implement skill for plan execution` |
+| `ft(skills):` | new or revised skill (plural — matches real log, 23 occurrences in last 200; 0 singular) | `ft(skills): add pg-implement skill for plan execution` |
+| `ft(meta):` | repo-wide metadata (README, CONTRIBUTING, llms.txt, .github/) | `ft(meta): discoverability quick wins` (anchor: `82ebf2e`) |
 | `ft(cloud):` | new cloud routine or routine infra | `ft(cloud): repoint pg-user-question-harvester to pgsql mailing-list archives` |
 | `ft(plan):` | new planning artifact (brainstorm or plan) | `ft(plan): brainstorm server-side variables` |
 | `hf(<scope>):` | hotfix for an existing thing in <scope> | `hf(corpus): refresh bufferdesc-state for PG18 atomic state-word` |
-| `docs(<scope>):` | docs-only updates (README, STATE.md narrative) | `docs(progress): bump subsystem count to 20` |
+| `docs(<scope>):` | docs-only updates (STATE.md narrative, cloud-routine logs, community digests) | `docs(state): prepend 2026-06-16 entry` (anchor: `b707ab2`); also `docs(cloud):` (8x), `docs(community):` (2x), `docs(queue):`, `docs(progress):` |
 | `[cloud:<routine>]` | auto-generated by a cloud routine (NOT manual) | `[cloud:pg-evening-merger] merge 8 cloud/* PRs` |
 
-If unsure: `ft(corpus):` for any `knowledge/*` write; `ft(skill):` for
-any `.claude/skills/*` write; `ft(dev):` for any other infra.
+If unsure: `ft(corpus):` for any `knowledge/*` write; `ft(skills):`
+(plural) for any `.claude/skills/*` write; `ft(meta):` for repo-wide
+metadata; `ft(dev):` for any other infra.
+
+**Real-log frequency reference** (last 200 commits): `ft(corpus):` 122,
+`ft(skills):` 23, `docs(cloud):` 8, `hf(corpus):` 6, `ft(cloud):` 5,
+`ft(meta):` 2, `docs(community):` 2; plus `[cloud:<routine>]` form
+for routine-generated commits. Match the established vocabulary;
+don't invent new scopes without precedent.
 
 ### Title rules
 
@@ -106,17 +156,28 @@ any `.claude/skills/*` write; `ft(dev):` for any other infra.
 
 Trailers go at the bottom in this order:
 
-1. `Plan:` — if this commit implements a `planning/<slug>/plan.md`
-   phase. Format: `Plan: planning/<slug>/plan.md (phase <N>: <title>)`.
+1. `Plan:` — link back to whatever drove this commit. Two accepted
+   shapes:
+   - **Phased plan (canonical, required when applicable):** `Plan:
+     planning/<slug>/plan.md (phase <N>: <title>)`. Required when
+     this commit implements a phase of a `planning/<slug>/plan.md`
+     per R5 of `.claude/rules/pg-implement-discipline.md`.
+   - **Loose pointer (recipe / trio / one-off):** `Plan: <freeform>`
+     — e.g. `Plan: cloud routine .claude/cloud/pg-quality-auditor.md`,
+     `Plan: catalog trio "trigger system depth"`. Use the canonical
+     form whenever a `planning/<slug>/plan.md` actually exists; the
+     loose form is for commits where the "plan" is a recipe, thread,
+     or session, not a planner artifact.
 2. `Sites:` — if the commit spans multiple non-obvious sites. Format:
    `Sites: <file:line>, <file:line>`. Skip if the diff makes the sites
    obvious (single-file commits, etc.).
 3. `Session:` — optional, link to a session log if the work was
    significant enough to log. Format:
    `Session: sessions/2026-06-02-cf6402-review-validation.md`.
-4. `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`
+4. `Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`
    — **required for every meta-repo commit** (per the user's global
-   default). Always last.
+   default). Always last. **Lowercase** — see the casing note under
+   §"Format" above.
 
 Trailers are separated from the body by a blank line. Each on its own
 line.
@@ -141,13 +202,15 @@ abstraction, HandleFunctionRequest, CommitTag registry. 23 invariants.
 All line numbers verified via grep -n at 4b0bf0788b0.
 
 Sites: knowledge/subsystems/tcop.md, progress/STATE.md, progress/coverage.md
-Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
+
+(real-log anchor: `4925200` — `ft(corpus): memory contexts depth trio …`)
 
 #### Planner suite, multi-file new skill set
 
 ```
-ft(skill): add two-phase planner + pg-implement + meta-commit-style
+ft(skills): add two-phase planner + pg-implement + meta-commit-style
 
 The Phase-D validation run (CF #6402 review) proved the corpus + skills
 compose for review work. This commit adds the upstream pieces of the
@@ -163,8 +226,10 @@ per-phase commits + planning/<slug>/notes.md.
 
 Plan: (none — this is the planner itself)
 Session: sessions/2026-06-02-planner-suite.md
-Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
+
+(real-log anchor: `62da1c2` — `ft(skills): skill-creator heavy pass round 1 …`)
 
 #### Per-phase commit during /pg-implement (this style)
 
@@ -182,15 +247,25 @@ clauses. Type coercion happens at SET time, not at definition.
 Plan: planning/server_side_vars/plan.md (phase 1: catalog table)
 Sites: src/include/catalog/pg_variable.h, src/include/catalog/catversion.h,
        src/backend/catalog/Makefile, src/backend/catalog/genbki.pl
-Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 ```
+
+> Caveat: this example commit would actually live in `dev/`, not the
+> meta repo (it touches `src/...`), so per R5 it'd use the upstream
+> **`commit-message-style`** (no `Co-authored-by`). The shape above is
+> illustrative of the meta-style trailer block; the **per-phase
+> `notes.md` append** in the meta repo is the real meta-repo commit
+> in a phased plan.
 
 ## Forbidden in meta-repo commits
 
 - Conventional-commits flavor `feat:` / `fix:` — we use `ft(scope):`
   / `hf(scope):` instead. The scope is mandatory.
 - Bare title without a prefix.
-- Missing `Co-Authored-By` footer.
+- Missing `Co-authored-by:` footer (lowercase).
+- GitHub-style **uppercase** `Co-Authored-By:` — git canonicalizes to
+  lowercase and the meta-repo log is dominantly lowercase (45 vs 11
+  in last 50 with a co-author trailer). Use lowercase.
 - Inline ticket numbers like `(closes #42)` — let GitHub squash-merge
   append the PR ref.
 - Trailing period on title.
@@ -216,7 +291,7 @@ worktrees, just on feature branches).
 
 ## Cross-references
 
-- `.claude/skills/commit-message-style/SKILL.md` — the *other* style (upstream PG, dev/, no `Co-Authored-By`).
+- `.claude/skills/commit-message-style/SKILL.md` — the *other* style (upstream PG, dev/, no `Co-authored-by`).
 - `.claude/skills/memory-keeping/SKILL.md` — pairs with this skill at session wrap; STATE.md updates land via this style.
 - `.claude/skills/pg-implement/SKILL.md` — invokes this for per-phase notes.md appends; pairs with `commit-message-style` for per-phase dev/ commits.
 - `.claude/skills/pg-feature-plan/SKILL.md` — planning artifacts (brainstorm.md, plan.md) land via this style.
