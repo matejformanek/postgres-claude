@@ -81,7 +81,14 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 [done:c6dcede] pramsey/pgsql-http branch=master files=README.md,http.c,http.control  # 1581★ C; synchronous outbound HTTP via libcurl from a SQL function
 [done:c6dcede] pgroonga/pgroonga branch=main files=README.md,src/pgroonga.c,pgroonga.control  # 730★ C; index AM wrapping the local Groonga FTS engine
 [done:c6dcede] aws/pgactive branch=main files=README.md,src/pgactive.c,src/pgactive.h,pgactive.control  # 1103★ C; multi-master logical replication (BDR lineage)
-[pending] zhparser/zhparser branch=master files=README.md,zhparser.c,zhprs_test.c,zhparser.control  # 858★ C; Chinese full-text search parser (SCWS) via the FTS parser API
-[pending] postgrespro/pg_pathman branch=master files=README.md,src/pg_pathman.c,src/include/pathman.h,pg_pathman.control  # 587★ C; partitioning via CustomScan (RuntimeAppend) + planner hooks
-[pending] supabase/pg_crdt branch=master files=README.md,src/crdt.c,crdt.control  # 646★ C; CRDT type support (experimental)
-[pending] Snowflake-Labs/pg_lake branch=main files=README.md  # 1546★ C; Postgres with Iceberg + data-lake access
+[done:pending-merge] zhparser/zhparser branch=master files=README.md,zhparser.c,zhprs_test.c,zhparser.control  # 858★ C; Chinese full-text search parser (SCWS) via the FTS parser API
+[done:pending-merge] postgrespro/pg_pathman branch=master files=README.md,src/pg_pathman.c,src/include/pathman.h,pg_pathman.control  # 587★ C; partitioning via CustomScan (RuntimeAppend) + planner hooks
+[done:pending-merge] supabase/pg_crdt branch=master files=README.md,src/crdt.c,crdt.control  # 646★ C; CRDT type support (experimental)
+[done:pending-merge] Snowflake-Labs/pg_lake branch=main files=README.md  # 1546★ C; Postgres with Iceberg + data-lake access
+
+# Queue drained as of 2026-06-15 (4 entries processed this run: zhparser, pg_pathman, pg_crdt, pg_lake — the full 2026-06-14 refill backlog is now drained). knowledge/ideologies/ now holds 49 ext docs.
+# --- Refill (seeded 2026-06-15 cloud/pg-extension-anthropologist) ---
+# `topic:postgresql-extension stars:>500` STILL SATURATED (all 14 hits covered). `topic:postgres-extension stars:>400` (5 hits) all covered/skipped (PgQue=pgque, pglite-fusion covered, pgx_ulid≈uuidv47 dup, postgresql-for-doctrine=PHP ORM lib not a loadable ext).
+# Broadened via `pg_ in:name language:C stars:>400` (36 hits). Filtered out non-extensions (poolers pgbouncer/pgagroal/pgbouncer-fast-switchover; backup/copy CLIs pgbackrest/pgcopydb/pg_rman/pg_bulkload-is-borderline; parser/client libs pg_query/pg_query_go/ruby-pg; deprecated pg_shard; archived pg_embedding≈pgvector dup). Two genuine uncovered backend extensions found:
+[pending] aws/pg_tle branch=main files=README.md,src/pg_tle.c,src/tleextension.c,pg_tle.control  # 406★ C; Trusted Language Extensions framework — install extensions as in-DB SQL/PL without filesystem .so/.control (the substrate under PgQue's pgtle.install_extension); reimplements CREATE EXTENSION via hooks + a pg_tle catalog schema. Verify real src paths against the tree.
+[pending] ossc-db/pg_bulkload branch=master files=README.md,lib/pg_bulkload.c,lib/writer_direct.c,lib/pg_btree.c,pg_bulkload.control  # 491★ C; high-speed loader that DIRECT-writes heap+index pages bypassing the normal INSERT/shared-buffer/WAL path (writer_direct), the inverse of the COPY contract — strong divergence case. Verify real src paths (lib/ vs bin/) against the tree.
