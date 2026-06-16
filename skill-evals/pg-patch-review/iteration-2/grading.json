@@ -1,0 +1,64 @@
+{
+  "iteration": 2,
+  "skill": "pg-patch-review",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Drive a mailing-grade review of CF #5912 end-to-end",
+      "assertions": [
+        {"text": "Names the five stages: Stage 0 mechanical, Stage 1 project discovery, Stage 2 critic fan-out, Stage 3 consolidate, Stage 4 synthesize", "with_skill": true, "baseline": false},
+        {"text": "Names ALL FIVE critics by letter and scope (A architecture/invariants, B breaking-change, C test coverage, D style/commit-msg, E reviewer-reflex)", "with_skill": true, "baseline": false},
+        {"text": "States that critics run IN PARALLEL with a single message of parallel tool calls", "with_skill": true, "baseline": false},
+        {"text": "Notes the citation-drift spot-check (3-5 cites against source/, > 10% drift → STOP)", "with_skill": true, "baseline": false},
+        {"text": "Notes that 'mechanical refactor' claim requires Critic A to verify every removed line has an equivalent", "with_skill": true, "baseline": true},
+        {"text": "Identifies that Critic B checks CATALOG_VERSION_NO bump + OIDs + WAL changes + ABI in src/include/", "with_skill": true, "baseline": true},
+        {"text": "Names the deliverable file path pattern: sessions/<date>-cf<N>-review.md with per-critic appendix", "with_skill": true, "baseline": false},
+        {"text": "Names the verdict set INCLUDING REJECT-A/B/C grades for design-level NACKs", "with_skill": true, "baseline": false},
+        {"text": "Notes that the synthesis email uses commit-message-style tone rules (plain text, no HTML, no emoji, ~76 col wrap, imperative)", "with_skill": true, "baseline": false},
+        {"text": "Names at least one knowledge/calibration/gap-catalog.md item that Critic E loads (items 4-11)", "with_skill": true, "baseline": false},
+        {"text": "Distinguishes that Critic E loads gap-catalog #4-11 while #1-3 belong to review-checklist Phase 0", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "BufFile leak on ereport in ReorderBufferIterTXNInit — adversarial",
+      "assertions": [
+        {"text": "Names this as Critic E catalog item #4 (cleanup-on-early-return tracing)", "with_skill": true, "baseline": false},
+        {"text": "Lists BufFile in the resource-handle set the probe triggers on (z_stream/BufFile/FileFd/MemoryContext/Relation/LWLock)", "with_skill": true, "baseline": false},
+        {"text": "Identifies daniel-gustafsson.md errorhandling discipline as the persona driver for catalog #4", "with_skill": true, "baseline": false},
+        {"text": "Rebuts the 'MemoryContext on backend reset cleans up' claim — reorderbuffer's context is long-lived, not per-statement", "with_skill": true, "baseline": true},
+        {"text": "Names PG_TRY/PG_CATCH (or moving BufFileClose before ereport) as the canonical fix per error-handling skill", "with_skill": true, "baseline": true},
+        {"text": "States severity is warning by default, escalates to blocking when COVER does not acknowledge the cleanup question", "with_skill": true, "baseline": false},
+        {"text": "Distinguishes Waiting on Author from REJECT-track: REJECT-track needs 3+ blocking findings AND context-awareness signal (contested engagement OR foreclosed INV-*)", "with_skill": true, "baseline": false},
+        {"text": "Verdict: Waiting on Author (not REJECT-A/B/C) for a correctable lifecycle bug on otherwise sensible feature", "with_skill": true, "baseline": true},
+        {"text": "Names Critic A as the independent flag for the long-lived-context resource lifecycle", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "Tests pass + warning-clean + 'pure refactor' — what else?",
+      "assertions": [
+        {"text": "States Stage 0 passing only qualifies the patch for critic review, does NOT mean it is ready", "with_skill": true, "baseline": false},
+        {"text": "Names the Stage 1 escalation when a touched file has no per-file/subsystem doc (note in 'Testing performed' + file follow-up)", "with_skill": true, "baseline": false},
+        {"text": "Names corpus-drift escalation: spot-check cites, > 10% stale → stop / ask user about hf(corpus): refresh", "with_skill": true, "baseline": false},
+        {"text": "Cites Critic A provenance rule: git log -S <symbol> to check if the refactor target is long-stable or racing an in-flight thread", "with_skill": true, "baseline": false},
+        {"text": "Names ABI surface in src/include/ (inline functions and macros are extension-visible) as a Critic B concern not covered by regress", "with_skill": true, "baseline": true},
+        {"text": "Names the 'pure refactor + existing tests cover' weakness check: git grep for function name in src/test/ — no hit = weak claim", "with_skill": true, "baseline": true},
+        {"text": "Lists Critic E catalog items #4-#11 by number or by name (cleanup-on-early-return / multibyte / subsystem-local cap / third-state / injection_points / hot-path benchmark / symmetric-check / persona-aware backpatch)", "with_skill": true, "baseline": false},
+        {"text": "Names Phase 0 reviewer-reflex gates (HARD) from review-checklist: security@ embargo + test-omission skepticism + install-script immutability", "with_skill": true, "baseline": false},
+        {"text": "Names the three REJECT-track triggers: foreclosed INV-* invariant, Context-awareness probe (April-1/joke/unimplementable), engagement class contested", "with_skill": true, "baseline": false},
+        {"text": "Notes that performance-impacting patches need a pgbench recipe (hardware/build flags/run count/master baseline) — numerical claims without recipe get bounced", "with_skill": true, "baseline": true},
+        {"text": "References the CF #6402 calibration session (sessions/2026-06-02-cf6402-review-validation.md) as the comparison target", "with_skill": true, "baseline": false, "note": "iter-2: with_skill still passes because the skill now marks the session [unverified: session log not preserved] but preserves the calibration intent and the cf6402 reference"},
+        {"text": "Cites Critic E gap-catalog #5 escalation to BLOCKING when text-primitive cap is added without per-encoding analysis (GB18030, EUC_JP, EUC_KR, EUC_CN, EUC_TW)", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 32,
+    "with_skill_total": 32,
+    "baseline_passed": 9,
+    "baseline_total": 32,
+    "with_skill_pass_rate": 1.0,
+    "baseline_pass_rate": 0.281
+  }
+}

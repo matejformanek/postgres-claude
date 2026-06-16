@@ -1,0 +1,67 @@
+{
+  "iteration": 2,
+  "skill": "pg-implement",
+  "note": "Same assertion list as iter-1. Baseline scores are identical because the baseline answer is unchanged (general knowledge doesn't shift just because SKILL.md was edited). with_skill scores reflect the updated SKILL.md content.",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Walk through phase 2 of sp2-pgstr-maxalloc implementation",
+      "assertions": [
+        {"text": "Names the pre-phase spot-check of 3-5 file:line cites against current source (R2 / SKILL.md §Pre-phase)", "with_skill": true, "baseline": true},
+        {"text": "Names the drift threshold (>10% / ~20 lines) that triggers a STOP + /pg-plan re-run", "with_skill": true, "baseline": false},
+        {"text": "Mentions building incrementally after each edit with ninja install on dev/build-debug to catch compile errors immediately", "with_skill": true, "baseline": true},
+        {"text": "Names the appropriate phase-end-check meson scopes (regress vs isolation vs recovery TAP) based on what the phase touches", "with_skill": true, "baseline": true},
+        {"text": "States that phase-end check must pass BEFORE the commit (R4)", "with_skill": true, "baseline": true},
+        {"text": "Names the required Plan: trailer format pointing to planning/<slug>/plan.md (phase N: <title>)", "with_skill": true, "baseline": false},
+        {"text": "Names the Sites: trailer for non-obvious multi-file diffs", "with_skill": true, "baseline": false},
+        {"text": "Explicitly notes NO Co-Authored-By because dev/ commits may be format-patched upstream (R5 / commit-message-style)", "with_skill": true, "baseline": false},
+        {"text": "Names the notes.md append template with Status/Commit/Tests-run/What-changed/Surprises/What-this-phase-did-NOT-do (R8)", "with_skill": true, "baseline": false},
+        {"text": "Cites the .claude/rules/pg-implement-discipline.md file by name or specific rule numbers (R1-R12)", "with_skill": true, "baseline": false},
+        {"text": "Names R3 one-phase-at-a-time / no-interleaving as the gate before opening phase 3", "with_skill": true, "baseline": true},
+        {"text": "Mentions verifying that changed files match the plan's §3 file table after tests pass (scope-creep gate)", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "Mid-phase need to touch file outside plan §3",
+      "assertions": [
+        {"text": "Names R7 (scope creep) as the governing rule", "with_skill": true, "baseline": false},
+        {"text": "Lists all three resolution paths (small+coupled → update plan + Sites trailer; separate concern → defer to follow-up + notes.md; invalidates phase → escalate for re-plan)", "with_skill": true, "baseline": true},
+        {"text": "States 'STOP editing' as the immediate first step rather than continuing silently", "with_skill": true, "baseline": true},
+        {"text": "Names escalation to the user as required when the resolution isn't obviously path (1)", "with_skill": true, "baseline": true},
+        {"text": "Requires the surprise be recorded in planning/<slug>/notes.md under 'Surprises / drift' (R8 template)", "with_skill": true, "baseline": false},
+        {"text": "Requires the commit's Sites: trailer be updated if path (1) is taken", "with_skill": true, "baseline": false},
+        {"text": "Names R10 two-repo separation: corpus fix goes in a SEPARATE meta-repo commit using meta-commit-style", "with_skill": true, "baseline": false},
+        {"text": "Names R9 citation chain (commit → plan → corpus → source) as the integrity invariant that must hold", "with_skill": true, "baseline": false},
+        {"text": "Explains the rationale: silent scope expansion breaks per-phase reviewability", "with_skill": true, "baseline": true}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "Trap: commit phase 3 broken with TODO and continue to phase 4",
+      "assertions": [
+        {"text": "Names R4 (phase-end check must pass before commit) as the primary blocking rule", "with_skill": true, "baseline": false},
+        {"text": "Names R3 (no interleaving; phase N must finish before phase N+1)", "with_skill": true, "baseline": false},
+        {"text": "Names the anti-pattern list: WIP commits explicitly forbidden", "with_skill": true, "baseline": false},
+        {"text": "Mentions R6 (vague language in commit messages forbidden — 'fix the bug' is the canonical bad example)", "with_skill": true, "baseline": false},
+        {"text": "Mentions R12 (end-of-implementation gate requires full meson test green + exactly N commits for N phases)", "with_skill": true, "baseline": false},
+        {"text": "Notes that dev/ commits may be format-patched upstream, so broken commits in the series block upstream submission", "with_skill": true, "baseline": true},
+        {"text": "Cites bisectability of git history as a concrete harm", "with_skill": true, "baseline": true},
+        {"text": "Cites reviewer experience (can't be expected to mentally skip a known-broken commit) as a concrete harm", "with_skill": true, "baseline": true},
+        {"text": "Names the legitimate alternative: mark phase as 'partial' or 'deferred' in notes.md Status field per R8 template, then stop", "with_skill": true, "baseline": false},
+        {"text": "Names escalation to the user as a SKILL.md §When to escalate trigger when a test fails for reasons not in plan §13 risks", "with_skill": true, "baseline": false}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 31,
+    "with_skill_total": 31,
+    "baseline_passed": 12,
+    "baseline_total": 31,
+    "with_skill_pass_rate": 1.000,
+    "baseline_pass_rate": 0.387,
+    "delta_pp": 61.3,
+    "delta_vs_iter1_with_skill": "+2 (29 → 31)",
+    "delta_vs_iter1_baseline": "0 (unchanged)"
+  }
+}

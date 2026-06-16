@@ -1,0 +1,18 @@
+{
+  "iteration": 2,
+  "skill": "psql",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I have a backend running a long query on the local dev cluster. I want to watch its memory-context tree grow (top consumers, parent context, per-level) as the query runs. How do I do that interactively, and how do I dump a SNAPSHOT of another backend's contexts into the server log without restarting that backend?"
+    },
+    {
+      "eval_id": 2,
+      "question": "I want to capture the backend PID running this specific query and hand it off to lldb without the query racing to finish before I attach. The connection is to the local dev cluster I built from source. Walk me through it."
+    },
+    {
+      "eval_id": 3,
+      "question": "The planner is picking a nested loop join, but I want to confirm a hash join is actually faster on this data and see WAL/buffer activity per node. Force the plan shape from psql, explain what I should run, and tell me how to revert without restarting the cluster."
+    }
+  ]
+}

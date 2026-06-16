@@ -46,6 +46,9 @@ constraints the generic `/implement` doesn't enforce:
 ## Inputs
 
 - **Slug** (required): the planning directory under `planning/<slug>/`.
+  Examples in this repo: `sp2-pgstr-maxalloc`, `cb1-pgcrypto-bomb`,
+  `sp7-tablefunc-quoting`. The `dev/` branch mirrors the slug
+  (e.g. `feature_sp2_pgstr_maxalloc`, `feature_server_side_vars`).
 - Must contain `plan.md` produced by `pg-feature-plan`.
 - May contain `brainstorm.md` (Phase 1 sketch); read for context, not
   for procedure.
@@ -69,9 +72,11 @@ Read both. Where they disagree, the rules win. The non-negotiables:
 
 1. **One phase at a time.** No interleaving phases. Each phase is
    self-contained per the plan's "Phase-end check".
-2. **Verify before edit.** Spot-check 3-5 file:line citations from the
-   plan against current source before phase 1. If drift > 10%,
-   stop and re-run `/pg-plan` to refresh.
+2. **Verify before edit (R2).** Spot-check 3-5 file:line citations from
+   the plan against current source before phase 1. **Drift signals:**
+   citations off by more than ~20 lines, or naming a since-removed
+   symbol. If drift > 10% of the spot-checked sample, STOP — re-run
+   `/pg-plan` to refresh; do not push through with a stale plan.
 3. **Phase-end check must pass** before the next phase starts. Don't
    carry breakage forward.
 4. **Per-phase commit.** Each phase ends with a commit using the plan-
@@ -79,9 +84,42 @@ Read both. Where they disagree, the rules win. The non-negotiables:
 5. **Cite or don't claim** applies to commit messages too — any
    "fixes" / "addresses" claim must point to a specific file:line or
    plan-section.
-6. **No scope creep.** If a phase reveals a needed change outside the
-   plan's §3 file table, STOP and either (a) update the plan (re-run
-   `/pg-plan` if material) or (b) defer to a follow-up patch.
+6. **No scope creep (R7).** If a phase reveals a needed change outside
+   the plan's §3 file table, STOP and pick from R7's three paths
+   (small+coupled → update plan + `Sites:` trailer; separate concern →
+   defer to follow-up + record in `notes.md`; invalidates the phase
+   boundary → escalate for re-plan). Never silently expand scope.
+
+### Why per-phase = per-commit + per-test
+
+Two operational reasons every phase ends with a green-tested, plan-
+linked commit (not "WIP" or "TODO"):
+
+1. **Bisectability.** `git bisect` across a multi-phase patch series
+   is only useful if every commit individually builds and passes the
+   declared phase-end check. A broken commit in the middle of the
+   series poisons bisect for the lifetime of this code.
+2. **Per-commit reviewability.** When the series eventually goes to
+   pgsql-hackers via `format-patch`, reviewers read commits one at a
+   time. Upstream PG convention is that **each commit in a posted
+   series compiles and passes tests on its own** — a known-broken
+   "WIP" commit, even one tagged TODO, is grounds for the patch
+   being bounced before review starts.
+
+This is why R3 (no interleaving), R4 (phase-end check before commit),
+and the anti-pattern list (no WIP commits, no `--amend` across
+phases) act as one rule, not three.
+
+### Forbidden patterns (mirrors rules §Anti-patterns)
+
+- **"WIP" commits.** Every commit in `dev/` is a complete phase. No
+  `wip: more of phase 3`.
+- **`--amend` to fix a previous phase's commit.** Use a NEW commit
+  with a `Fixes: <sha>` trailer if you genuinely need to correct.
+- **Committing without a `Plan:` trailer in `dev/`.** If you're
+  committing in `dev/`, you're implementing a plan — name it.
+- **Cherry-picking individual phases.** All phases or none.
+- **Mixing meta-repo + `dev/` writes in one bash invocation** (R10).
 
 ## Method
 
@@ -178,6 +216,14 @@ Sites: <file:line>, <file:line>, ...
     - <items deferred to later phases>
     ```
 
+    **Status field values (R8):**
+    - `done` — phase-end check green, commit landed.
+    - `partial` — phase ended with known follow-ups inside the same
+      phase scope (rare; requires user agreement per R7 path-1).
+    - `deferred` — phase stopped before its phase-end check could run
+      green; branch parks here until the blocker is resolved. The
+      next session reads this status first.
+
 15. Tell the user the phase is done, name the next phase, ask whether
     to continue immediately or pause. Some phases naturally end the
     session.
@@ -226,9 +272,11 @@ defer to follow-up, abandon phase), ask. Don't push through.
 ## Style
 
 - Be terse in `notes.md`. It's a working log, not a write-up.
-- Be specific in commit messages. "fix bug" is forbidden; "set
+- Be specific in commit messages (R6). "fix bug" is forbidden; "set
   `dropPin = false` for non-MVCC scans (plan phase 2, site
-  `nbtree.c:421`)" is right.
+  `nbtree.c:421`)" is right. Any "addresses" / "fixes" / "implements"
+  claim must point to a file:line in `source/` (for plan-cited sites)
+  or a specific plan section (`§4 Catalog impact`, etc.).
 - Cite the plan from the commit; cite the corpus from the plan; cite
   source from the corpus. The full chain stays linked.
 
