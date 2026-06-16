@@ -1,0 +1,61 @@
+# pg-claude
+
+> A meta repo that turns Claude Code into a long-term collaborator on
+> PostgreSQL internals: a cited knowledge corpus (2,580 per-file source
+> notes, 100% strict coverage of the in-scope tree), 30 agent skills,
+> 155 PG-wide idioms, 127 issue registers, and 50+ session logs.
+> Two side-by-side upstream clones are mounted
+> via symlinks: `source/` (read-only reference) and `dev/` (mutable
+> test field). Every concrete claim about PG behavior is cited at
+> `source/<path>:<line>` or tagged `[unverified]`.
+
+## Entry points
+
+- [README.md](README.md): What pg-claude is, who it's for, quickstart.
+- [CLAUDE.md](CLAUDE.md): Project contract — layout, working rules,
+  cite-or-tag, two-repo separation.
+- [CONTRIBUTING.md](CONTRIBUTING.md): Meta-repo vs upstream-PG
+  contribution paths.
+
+## Navigators
+
+- [.claude/skills/pg-claude/SKILL.md](.claude/skills/pg-claude/SKILL.md):
+  The master navigator skill — how a Claude Code session should move
+  through this repo.
+- [progress/STATE.md](progress/STATE.md): Current phase, what's done,
+  what's next. Always re-read at session start.
+
+## Knowledge corpus
+
+- [knowledge/architecture/overview.md](knowledge/architecture/overview.md):
+  Backend architecture overview — postmaster, backends, shared memory,
+  WAL, MVCC.
+- [knowledge/glossary.md](knowledge/glossary.md): PG-internals glossary
+  with cited definitions.
+- [knowledge/community/patch-workflow.md](knowledge/community/patch-workflow.md):
+  Upstream PG patch lifecycle — `format-patch` → `pgsql-hackers` →
+  CommitFest → committer.
+- [knowledge/community/developer-faq-distilled.md](knowledge/community/developer-faq-distilled.md):
+  Distilled FAQ for new PG hackers.
+
+## Slash commands (high-leverage)
+
+- [.claude/commands/setup-pg.md](.claude/commands/setup-pg.md): Configure +
+  build PG into `dev/build-debug`.
+- [.claude/commands/pg-review.md](.claude/commands/pg-review.md): The
+  seven-phase upstream patch review checklist applied to a diff.
+- [.claude/commands/pg-implement.md](.claude/commands/pg-implement.md):
+  Phase-by-phase execution of a `planning/<slug>/plan.md`.
+
+## Discipline
+
+- [.claude/rules/pg-implement-discipline.md](.claude/rules/pg-implement-discipline.md):
+  The 12 implementation rules (R1–R12) — one plan per branch, cite or
+  don't claim, per-phase commits, two-repo separation.
+
+## Sessions & progress
+
+- [sessions/](sessions/): Append-only log of significant working
+  sessions — one file per session, useful as worked examples.
+- [progress/](progress/): `STATE.md`, `coverage.md`, `census.md`,
+  `files-examined.md`.
