@@ -138,11 +138,11 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-15 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked internals.html ToC §51-§70. Pattern this run: the PARENT chapters (fdwhandler §58, custom-scan §60, indexam §63) are already under docs-distilled/, but their callback/struct-heavy LEAF subsections — where the actual interface structs and callback signatures live — had ZERO coverage. Picked the densest of those plus the wire-protocol §54.6 "Message Data Types" page that pg-user-question-harvester repeatedly flagged as a recurring corpus gap. Catalog/view per-object reference pages (§52/§53) and pure-prose intro leaves (geqo-intro/biblio) excluded.)
 
-[done:pending] index-api https://www.postgresql.org/docs/current/index-api.html
-[done:pending] fdw-callbacks https://www.postgresql.org/docs/current/fdw-callbacks.html
-[done:pending] fdw-planning https://www.postgresql.org/docs/current/fdw-planning.html
-[done:pending] custom-scan-plan https://www.postgresql.org/docs/current/custom-scan-plan.html
-[done:pending] custom-scan-execution https://www.postgresql.org/docs/current/custom-scan-execution.html
-[done:pending] tablesample-support-functions https://www.postgresql.org/docs/current/tablesample-support-functions.html
-[done:pending] protocol-message-types https://www.postgresql.org/docs/current/protocol-message-types.html
-[done:pending] multivariate-statistics-examples https://www.postgresql.org/docs/current/multivariate-statistics-examples.html
+[done:d2fd1fc] index-api https://www.postgresql.org/docs/current/index-api.html
+[done:d2fd1fc] fdw-callbacks https://www.postgresql.org/docs/current/fdw-callbacks.html
+[done:d2fd1fc] fdw-planning https://www.postgresql.org/docs/current/fdw-planning.html
+[done:d2fd1fc] custom-scan-plan https://www.postgresql.org/docs/current/custom-scan-plan.html
+[done:d2fd1fc] custom-scan-execution https://www.postgresql.org/docs/current/custom-scan-execution.html
+[done:d2fd1fc] tablesample-support-functions https://www.postgresql.org/docs/current/tablesample-support-functions.html
+[done:d2fd1fc] protocol-message-types https://www.postgresql.org/docs/current/protocol-message-types.html
+[done:d2fd1fc] multivariate-statistics-examples https://www.postgresql.org/docs/current/multivariate-statistics-examples.html

@@ -81,10 +81,10 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 [done:c6dcede] pramsey/pgsql-http branch=master files=README.md,http.c,http.control  # 1581★ C; synchronous outbound HTTP via libcurl from a SQL function
 [done:c6dcede] pgroonga/pgroonga branch=main files=README.md,src/pgroonga.c,pgroonga.control  # 730★ C; index AM wrapping the local Groonga FTS engine
 [done:c6dcede] aws/pgactive branch=main files=README.md,src/pgactive.c,src/pgactive.h,pgactive.control  # 1103★ C; multi-master logical replication (BDR lineage)
-[done:pending-merge] zhparser/zhparser branch=master files=README.md,zhparser.c,zhprs_test.c,zhparser.control  # 858★ C; Chinese full-text search parser (SCWS) via the FTS parser API
-[done:pending-merge] postgrespro/pg_pathman branch=master files=README.md,src/pg_pathman.c,src/include/pathman.h,pg_pathman.control  # 587★ C; partitioning via CustomScan (RuntimeAppend) + planner hooks
-[done:pending-merge] supabase/pg_crdt branch=master files=README.md,src/crdt.c,crdt.control  # 646★ C; CRDT type support (experimental)
-[done:pending-merge] Snowflake-Labs/pg_lake branch=main files=README.md  # 1546★ C; Postgres with Iceberg + data-lake access
+[done:a505f3d] zhparser/zhparser branch=master files=README.md,zhparser.c,zhprs_test.c,zhparser.control  # 858★ C; Chinese full-text search parser (SCWS) via the FTS parser API
+[done:a505f3d] postgrespro/pg_pathman branch=master files=README.md,src/pg_pathman.c,src/include/pathman.h,pg_pathman.control  # 587★ C; partitioning via CustomScan (RuntimeAppend) + planner hooks
+[done:a505f3d] supabase/pg_crdt branch=master files=README.md,src/crdt.c,crdt.control  # 646★ C; CRDT type support (experimental)
+[done:a505f3d] Snowflake-Labs/pg_lake branch=main files=README.md  # 1546★ C; Postgres with Iceberg + data-lake access
 
 # Queue drained as of 2026-06-15 (4 entries processed this run: zhparser, pg_pathman, pg_crdt, pg_lake — the full 2026-06-14 refill backlog is now drained). knowledge/ideologies/ now holds 49 ext docs.
 # --- Refill (seeded 2026-06-15 cloud/pg-extension-anthropologist) ---
