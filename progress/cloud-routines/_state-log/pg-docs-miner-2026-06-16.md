@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-06-16 — 7 distilled LEAF docs draining the §58 FDW (fdw-functions/fdw-helpers/fdw-row-locking), §60 custom-scan (custom-scan-path), §68 BKI (bki-commands/bki-example) parent-chapter leaves + xfunc-internal; docs-distilled 102→109, wiki side EXHAUSTED, protocol-versions 404 (PR #<n>).

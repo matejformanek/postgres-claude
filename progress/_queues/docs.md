@@ -146,3 +146,14 @@ table of contents, exclude chapters whose slug already exists under
 [done:d2fd1fc] tablesample-support-functions https://www.postgresql.org/docs/current/tablesample-support-functions.html
 [done:d2fd1fc] protocol-message-types https://www.postgresql.org/docs/current/protocol-message-types.html
 [done:d2fd1fc] multivariate-statistics-examples https://www.postgresql.org/docs/current/multivariate-statistics-examples.html
+
+## Refill 2026-06-16 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked the §58 FDW / §60 custom-scan / §68 BKI parent chapters for their callback/command LEAF subsections, which were already-distilled-as-parents but had ZERO leaf coverage. The §58 family was missing its handler-entry (§58.1), helper-functions (§58.4), and row-locking (§58.5) leaves; §60 was missing the custom-path stage (§60.1) under custom-scan-plan/-execution; §68 BKI was missing the command reference (§68.3) + example (§68.4) under bki/bki-structure. Also picked the long-neglected xfunc-internal (LANGUAGE internal). 2 candidates 404'd: protocol-versions, gist/spgist-extensibility re-confirmed gone.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-16] fdw-functions https://www.postgresql.org/docs/current/fdw-functions.html
+[in-progress:cloud/pg-docs-miner/2026-06-16] fdw-helpers https://www.postgresql.org/docs/current/fdw-helpers.html
+[in-progress:cloud/pg-docs-miner/2026-06-16] fdw-row-locking https://www.postgresql.org/docs/current/fdw-row-locking.html
+[in-progress:cloud/pg-docs-miner/2026-06-16] custom-scan-path https://www.postgresql.org/docs/current/custom-scan-path.html
+[in-progress:cloud/pg-docs-miner/2026-06-16] bki-commands https://www.postgresql.org/docs/current/bki-commands.html
+[in-progress:cloud/pg-docs-miner/2026-06-16] bki-example https://www.postgresql.org/docs/current/bki-example.html
+[in-progress:cloud/pg-docs-miner/2026-06-16] xfunc-internal https://www.postgresql.org/docs/current/xfunc-internal.html
+[skipped:404-no-such-docs-slug] protocol-versions https://www.postgresql.org/docs/current/protocol-versions.html
