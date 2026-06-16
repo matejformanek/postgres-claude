@@ -1,7 +1,10 @@
 # makefuncs.c
 
-- **Source:** `source/src/backend/nodes/makefuncs.c` (1037 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source:** `source/src/backend/nodes/makefuncs.c` (1038 lines)
+- **Last verified commit:** `b78cd2bda5b1` (re-verified 2026-06-16 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `e18b0cb7344..da1eff08a5be`; only the two trailing JsonTablePath
+  entries drifted +2, rest of the inventory held)
 - **Depth:** read
 
 ## Purpose
@@ -66,8 +69,8 @@ call sites is a real readability cost. `[from-README:99-100]`
 | 954 | `makeJsonBehavior` | |
 | 970 | `makeJsonKeyValue` | |
 | 985 | `makeJsonIsPredicate` | |
-| 1005 | `makeJsonTablePathSpec` | |
-| 1026 | `makeJsonTablePath` | |
+| 1007 | `makeJsonTablePathSpec` | |
+| 1028 | `makeJsonTablePath` | |
 
 ## Notes
 

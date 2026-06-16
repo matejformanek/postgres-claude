@@ -1,7 +1,10 @@
 # parse_coerce.c
 
-- **Source:** `source/src/backend/parser/parse_coerce.c` (3407 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/backend/parser/parse_coerce.c` (3406 lines)
+- **Last verified commit:** `b78cd2bda5b1` (re-verified 2026-06-16 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `e18b0cb7344..da1eff08a5be`; line count −1, all named entries intact —
+  this doc carries no line-level cites)
 - **Depth:** read
 
 ## Purpose

@@ -1,6 +1,8 @@
 # contrib/seg/seg.c
 
-Source pin: `4b0bf0788b066a4ca1d4f959566678e44ec93422`.
+Source pin: `b78cd2bda5b1a306e2877059011933de1d0fb735` (re-verified
+2026-06-16 by pg-quality-auditor AUDIT mode after anchor-bump
+`e18b0cb7344..da1eff08a5be` touched `contrib/seg/seg.c`).
 
 ## Role
 
@@ -12,12 +14,12 @@ opclass via `seg_cmp`, and the GiST opclass support functions
 (`gseg_consistent`, `gseg_union`, `gseg_picksplit`, `gseg_penalty`,
 `gseg_same`, `gseg_compress`, `gseg_decompress`). [verified-by-code]
 `source/contrib/seg/seg.c:31` (PG_MODULE_MAGIC_EXT), `:107` (seg_in),
-`:199` (gseg_consistent), `:323` (gseg_picksplit).
+`:200` (gseg_consistent), `:324` (gseg_picksplit).
 
 ## Public API (SQL-callable)
 
 - I/O: `seg_in`, `seg_out`, `seg_size`, `seg_lower`, `seg_upper`,
-  `seg_center` — `source/contrib/seg/seg.c:107,124,724,165,173,181`.
+  `seg_center` — `source/contrib/seg/seg.c:107,124,724,173,181,165`.
 - GiST methods: `gseg_consistent / _union / _compress / _decompress
   / _penalty / _picksplit / _same` — `:200,228,259,265,275,324,417`.
 - R-tree operators: `seg_same / _contains / _contained / _overlap

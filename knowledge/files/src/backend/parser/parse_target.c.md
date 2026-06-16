@@ -1,7 +1,10 @@
 # parse_target.c
 
 - **Source:** `source/src/backend/parser/parse_target.c` (2048 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Last verified commit:** `b78cd2bda5b1` (re-verified 2026-06-16 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `e18b0cb7344..da1eff08a5be`; line count unchanged and every
+  prototype/entry-point cite below still holds — fully clean)
 - **Depth:** read
 
 ## Purpose

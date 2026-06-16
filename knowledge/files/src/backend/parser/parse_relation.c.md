@@ -1,7 +1,10 @@
 # parse_relation.c
 
-- **Source:** `source/src/backend/parser/parse_relation.c` (4063 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/backend/parser/parse_relation.c` (4095 lines)
+- **Last verified commit:** `b78cd2bda5b1` (re-verified 2026-06-16 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `e18b0cb7344..da1eff08a5be`; line count +32 from deeper insertions —
+  all top-of-file prototype/namespace cites below still hold)
 - **Depth:** read (top + namespace + RTE-building entry points)
 
 ## Purpose
