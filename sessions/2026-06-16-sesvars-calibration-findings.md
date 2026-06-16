@@ -163,6 +163,63 @@ tightened Phase 1's check accordingly.
   the phase-end check MUST run `meson test --suite regress`, not
   just compile + smoke."
 
+### F6 — Catalog removal coupling: `opr_sanity` proc-descr check (caught in Phase 0 in-flight)
+
+**Symptom.** Phase 0 dropped 6 `@` unary entries from
+`pg_operator.dat`. First regress run failed `opr_sanity`'s
+"functions with descriptions" check. The reason: in PG's catalog,
+function descriptions are typically supplied via the operator row's
+`descr => '...'` field, and the operator→proc pointer carries it
+across. Removing the 6 operators ORPHANED the 6 `*abs` functions
+w.r.t. descriptions, which `opr_sanity` checks for completeness.
+
+**Resolution.** R7 path-1 in-flight: added `descr => 'absolute
+value'` directly to the 6 `*abs` rows in `pg_proc.dat`. 245/245
+green after that.
+
+**Why the suite missed it.** Scenario `#11 add-new-sql-keyword.md`
+is focused on ADDITIONS to the catalog, not REMOVALS. The planner
+relaxed §2's catalog lock for "REMOVAL only" without enumerating
+the downstream proc-descr-orphan risk. Plan §3 row 38 didn't
+mention pg_proc.dat at all.
+
+**Fix proposal.**
+- Add a new scenario `knowledge/scenarios/remove-from-catalog.md`
+  covering the inverse direction. Checklist must include:
+  - Audit `pg_proc.dat` for functions whose descriptions came via
+    the operator/aggregate/cast you're removing.
+  - Audit `opr_sanity.sql` and `type_sanity.sql` for queries that
+    enumerate by name and would diff in output.
+  - Audit any extension catalog (`pg_amop`, `pg_amproc`,
+    `pg_opclass`, `pg_opfamily`) for orphaned references.
+- Reference this scenario from existing
+  `add-new-sql-keyword.md` ("if your decision REMOVES an existing
+  operator/keyword as part of reserving the character/keyword for
+  the new use, also pin
+  `[[scenarios/remove-from-catalog]]`").
+
+### F7 — `meson test --suite setup` prerequisite undocumented
+
+**Symptom.** First Phase 0 regress run in the fresh worktree
+build-debug failed with "could not bind / Address already in use"
+and a missing `initdb-template` directory. The fix was running
+`meson test --suite setup` first, which creates the initdb cache
+via `initdb_cache` target.
+
+**Why the suite missed it.** Build-and-run skill at
+`.claude/skills/build-and-run/SKILL.md` doesn't mention the
+`setup` suite as a prerequisite for `regress`. Future phase
+orchestration on fresh build trees will hit this same wall.
+
+**Fix proposal.**
+- Update `.claude/skills/build-and-run/SKILL.md` with: "On a fresh
+  build tree, run `meson test -C build-debug --suite setup` ONCE
+  before `--suite regress` to populate the initdb template cache."
+- Same note in `.claude/skills/testing/SKILL.md` if that skill
+  enumerates suite ordering.
+- `.claude/commands/pg-test.md` (slash-command) should auto-detect
+  a missing `initdb-template` and run setup first.
+
 ### F5 — Two-repo separation (R10) worked but needs a tightening
 
 **Observation.** The implementation agent correctly refused to
@@ -215,12 +272,19 @@ their own commits in `postgres-claude/`:
    parser/executor phases require full regress."
 8. **`pg-implement-discipline.md` v2** — clarify R10 about `planning/`
    files inside `dev/` (calibration runs).
+9. **`knowledge/scenarios/remove-from-catalog.md`** — new scenario
+   covering catalog REMOVAL (F6). Must enumerate proc-descr-orphan
+   risk + opr_sanity/type_sanity diff risk + extension-catalog
+   audit.
+10. **`.claude/skills/build-and-run/SKILL.md`** — document
+    `meson test --suite setup` prerequisite on fresh build trees
+    (F7). Same note in `.claude/commands/pg-test.md`.
 
 These do NOT happen during this run — they get logged here and the
 calibration run continues. Post-calibration, the user can decide
 which to land.
 
-## Pipeline timing (so far)
+## Pipeline timing
 
 | Step | Wall-clock | Token usage (cumulative agent runs) |
 |---|---|---|
@@ -228,15 +292,27 @@ which to land.
 | Step 1 (brainstorm) | done pre-session | — |
 | Step 2 (`/pg-feature-plan`) | ~5 min | ~109k |
 | Step 2 pre-validation (in-context) | ~2 min | — |
-| Step 3 phase 1 (first pass) | ~13 min | ~128k |
-| Step 3 phase 1 amendment + docs | (in progress) | — |
+| Step 3 phase 1 (first pass — escalated) | ~13 min | ~128k |
+| Step 3 phase 1 amendment + docs (in-context) | ~5 min | — |
+| Step 3 phase 0 + phase 1 (final, agent) | ~10 min | ~162k |
+| Step 3 phase 0 + phase 1 docs (in-context) | ~3 min | — |
+
+**Pause point: Phase 1 lands at 5 commits ahead of master, 245/245
+regress green. Phases 2-6 + end-of-implementation gate deferred per
+user direction.**
 
 ## What's next
 
-- Land the plan.md amendment + notes.md Phase 1 entry + this retro
-  in one meta-style commit on `feature_sesvars`.
-- Resume Phase 0 → Phase 1 with the corrected scope.
-- After Phase 1 lands, **STOP** per user direction. Do not proceed
-  to phases 2-6 autonomously.
-- Phases 2-6 + end-of-implementation will resume in a later session
-  once the user is ready.
+Phase 1 has landed (`cc5e7e9647b`). Per user direction, the
+calibration run is **paused** here. Phases 2-6 +
+end-of-implementation gate resume in a later session.
+
+When resuming:
+1. Read `planning/sesvars/plan.md` (v1.1) — Phase 2 spec is §8 phase
+   2 "Per-backend storage + lifecycle".
+2. Read `planning/sesvars/notes.md` for the audit trail.
+3. Read this file's action-item list to decide whether to land any
+   planner-suite improvements (F1-F7) BEFORE continuing, or to
+   continue first and land improvements after.
+4. Refresh R2 spot-check on Phase 2 cites (postinit.c:716,
+   async.c:712/763/788) — may have drifted in the interim.
