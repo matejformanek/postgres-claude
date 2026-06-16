@@ -68,6 +68,16 @@ Phase 2 work prematurely — stop and hand off.
      reference it; otherwise skip (don't bulk-search the list).
    - Corpus: `grep -r '<keyword>' knowledge/` for anything already
      documented. Note any hit.
+   - **Out-of-tree extensions on PGXN / community repos**: search
+     pgxn.org and well-known per-area extension lists for the idea
+     keyword. Many feature requests already have a maintained
+     extension solving 80% of the problem (`pg_partman` for
+     time-bucket retention, `plpgsql_check` for plpgsql static
+     analysis, `pg_cron` for in-DB scheduling, `pgvector` for vector
+     ops before native, …). When this hits, the brainstorm pivots
+     from "design from scratch" to **upstream into core vs harden
+     the extension vs move to contrib** — surface this as the FIRST
+     DECISION: in §7.
    - **Scenarios layer: match against `knowledge/scenarios/_index.md`**.
      If a scenario (or a composite of scenarios) matches the
      brainstormed approach, name it in this section. Phase 2
@@ -76,6 +86,14 @@ Phase 2 work prematurely — stop and hand off.
      user spot a scope mismatch early. Format: `Scenario(s): <slug>`
      or `Scenarios layer gap: <one-line description>` if no scenario
      matches and the change-class is recurring.
+     A brainstormed approach often spans 2-3 scenarios at once;
+     name all of them. The scenarios index documents the common
+     compositions explicitly (see `knowledge/scenarios/_index.md`
+     §"Composite features"). Phase 2 will UNION the file checklists.
+     Heuristic for when to flag a `Scenarios layer gap:` — flag it
+     when the same change-class would plausibly recur in a future
+     brainstorm. If it's truly one-off, just say "no scenario
+     matches" without flagging.
 5. **Candidate approaches** (2-3, no more). For each:
    - One-paragraph description.
    - **Pros** (2-3 bullets).
@@ -94,6 +112,20 @@ Phase 2 work prematurely — stop and hand off.
    - Performance/UX tradeoffs
    - Whether to do this as core or contrib/extension first
    - Whether to target current master or wait for next CF window
+
+   Worked examples at the right level (one per category):
+   - "Are you aware the `<extension>` extension already covers ~80%
+     of this? Does it not meet your need, and if so, why?"
+     (Prior-art reframe; ranks FIRST whenever §4 found a mature
+     out-of-tree extension — see Edit-2 note in §4.)
+   - "Should expired rows be query-invisible *immediately* at the
+     clock crossing, or is autovacuum-eventual acceptable?"
+     (Semantics tradeoff; shapes the user's mental model.)
+   - "Ship as contrib first, or aim for core in one go?"
+     (Path-to-release; cheap-to-revert vs harder-to-iterate.)
+
+   Anti-example (too vague): "What should the GUC name be?" — that
+   is a Phase-2 implementation detail, not a brainstorm DECISION:.
 8. **What this brainstorm explicitly did NOT figure out**. A short list
    so the boundary with Phase 2 is clear. E.g. "did not enumerate
    catalog changes", "did not check WAL impact", "did not propose tests".
@@ -124,8 +156,10 @@ Run this as a tight loop:
    source/.
 
 3. **Run the triage pass:**
-   - `WebFetch` `https://commitfest.postgresql.org/<CF#>/?q=<keyword>` (or
-     the CF search page); skim for relevant entries.
+   - `WebFetch` `https://commitfest.postgresql.org/?text=<keyword>`
+     (cross-CF text search; matches entries from any CommitFest).
+     `https://commitfest.postgresql.org/` shows the current CF's
+     open entries. Skim for matching titles + last activity + status.
    - `git -C source log --oneline --grep='<keyword>' --since='2y'` — top 5.
    - `grep -rli '<keyword>' knowledge/` — note hits, don't read them
      deeply.
@@ -134,6 +168,15 @@ Run this as a tight loop:
    flavors of the same approach). If you can only name one approach,
    say so explicitly — it usually means the design space is narrow OR
    you haven't thought hard enough.
+
+   Distinctness test: two approaches are flavors-of-the-same when
+   they share ALL of (a) the owning subsystem, (b) the invariant
+   footprint, (c) the user-visible surface (SQL vs GUC vs reloption
+   vs extension). If at least one of those differs meaningfully,
+   they're distinct. Example: "TTL via autovacuum extension" vs
+   "TTL via dedicated bgworker" differ on (a) but share (b) and (c)
+   — borderline-flavors. "TTL via autovacuum" vs "TTL via tuple-
+   visibility predicate" differ on all three — genuinely distinct.
 
 5. **Recommend.** Pick one. Default to the smallest approach that meets
    the stated goal. If the user's framing implies they want the bigger
@@ -171,6 +214,32 @@ Run this as a tight loop:
   confident-sounding wrong claim.
 - Cite the corpus when relevant: `[via knowledge/subsystems/X.md]` for
   any subsystem-level claim. Use `[unverified]` for everything else.
+
+## Anti-patterns
+
+- **Designing instead of brainstorming.** If you find yourself naming
+  catalog columns, picking SQLSTATEs, or proposing test files — stop.
+  That's Phase 2. The brainstorm answers "*which* direction" not
+  "*how* exactly".
+- **Three-equivalent-approaches with no recommendation.** A bland
+  brainstorm wastes the user's time. Pick one. If you genuinely
+  can't, that IS the DECISION: — surface it.
+- **Exhaustive prior-art search.** §4 is a triage pass, not a
+  literature review. Top 3 git-log hits + first page of CF + a
+  quick PGXN check is enough. The user can ask for more later.
+- **Skipping the extension-already-exists reframe.** If §4 hits a
+  mature out-of-tree extension covering most of the ask, the
+  candidate approaches MUST be framed against it (upstream vs
+  harden vs move-to-contrib), not designed from scratch. The
+  first DECISION: must surface this — see §Output 7 examples.
+- **Low-leverage DECISION: questions.** "What should the GUC name
+  be?" or "Should we document this?" are Phase-2 implementation
+  details, not brainstorm DECISIONs. A DECISION: is a tradeoff
+  only the user can adjudicate (scope, semantics, target version,
+  core-vs-contrib).
+- **DECISION:-as-deferral.** If the brainstorm offloads every
+  question to the user, you haven't thought hard enough.
+  Recommend a default; let the user override.
 
 ## Where the artifact lives
 

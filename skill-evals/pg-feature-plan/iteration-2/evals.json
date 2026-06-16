@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "pg-feature-plan",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "The brainstorm picked option A — add a new built-in SQL-callable function `pg_advisory_lock_who(int8) returns int4` that returns the PID of the holder of the supplied advisory lock key, or NULL if no backend holds it. Drop the heavy plan. Pin anchor commit ef5f135 (or current HEAD). Slug is `feature_advisory_lock_who`."
+    },
+    {
+      "eval_id": 2,
+      "question": "Plan adding a new SQL keyword `MERGE_THEN` to be used as a future compound DO-block introducer. What files must change to introduce just the keyword (the statement that consumes it is out of scope)? Pin anchor HEAD. Slug is `feature_merge_then_keyword`."
+    },
+    {
+      "eval_id": 3,
+      "question": "Plan rejecting CF NNNN proposal `add money_fx_exchange()`: a built-in function in `cash.c` that calls out to an external HTTP FX-rate API inside `money_out()` to render values in the requester's locale currency. Posted April 1, deadpan reply 'thanks, added to commitfest' is the only engagement. Slug is `reject_money_fx_exchange`."
+    }
+  ]
+}

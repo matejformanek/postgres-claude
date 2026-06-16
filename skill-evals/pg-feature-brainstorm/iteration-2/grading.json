@@ -1,0 +1,69 @@
+{
+  "iteration": 2,
+  "skill": "pg-feature-brainstorm",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question_short": "Row-level TTL — could PG support per-row auto-expire?",
+      "assertions": [
+        {"text": "Output follows the 8-section structure (Problem / Why / Subsystems / Has-this-been-tried / Approaches / Recommend / DECISIONs / NOT-figured-out)", "with_skill": true, "baseline": false},
+        {"text": "Names ≥2 relevant subsystem docs from knowledge/subsystems/*", "with_skill": true, "baseline": false},
+        {"text": "Sketches at least 2 genuinely distinct approaches (not 3 flavors of the same)", "with_skill": true, "baseline": true},
+        {"text": "Each candidate approach has explicit Pros + Cons + Scope (small/medium/large)", "with_skill": true, "baseline": false},
+        {"text": "Names existing prior art (pg_partman / pg_cron / Timescale / Citus, or CommitFest search result) AND in §4 explicitly uses the out-of-tree-extensions category from the skill's Edit-2", "with_skill": true, "baseline": false},
+        {"text": "Consults the scenarios layer and names ≥1 scenario plus uses the composite-features pattern (lists 2+ scenarios it composes)", "with_skill": true, "baseline": false},
+        {"text": "Picks ONE recommended approach with a reason", "with_skill": true, "baseline": true},
+        {"text": "Surfaces ≥3 DECISION: questions only the user can answer", "with_skill": true, "baseline": false},
+        {"text": "Includes a 'What this brainstorm did NOT figure out' section drawing the boundary with Phase 2", "with_skill": true, "baseline": false},
+        {"text": "Stays under ~300 lines AND does NOT drop file:line citations into source/", "with_skill": true, "baseline": true},
+        {"text": "Tags uncertain claims as [unverified] (or equivalent honesty marker)", "with_skill": true, "baseline": false},
+        {"text": "Applies the distinctness test from §Method step 4 (explicit or implicit: approaches differ on subsystem / invariant / surface)", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "question_short": "Online rewind to LSN X without restart",
+      "assertions": [
+        {"text": "Output follows the 8-section structure", "with_skill": true, "baseline": false},
+        {"text": "Names ≥2 relevant subsystems including access-transam and either replication or storage-buffer", "with_skill": true, "baseline": true},
+        {"text": "Identifies existing PITR / recovery_target_lsn machinery as prior art", "with_skill": true, "baseline": true},
+        {"text": "Identifies pg_rewind as an existing tool (and notes it's offline)", "with_skill": true, "baseline": true},
+        {"text": "Sketches at least 2 genuinely distinct approaches", "with_skill": true, "baseline": true},
+        {"text": "Each candidate has Pros + Cons + Scope", "with_skill": true, "baseline": false},
+        {"text": "Notes replication-slot semantics as a hard problem under rewind", "with_skill": true, "baseline": true},
+        {"text": "Picks ONE recommended approach with reasoning + names what would have to be true for the others to win", "with_skill": true, "baseline": false},
+        {"text": "Surfaces ≥3 DECISION: questions", "with_skill": true, "baseline": false},
+        {"text": "Flags scenarios-layer gap ('no scenario covers modifying the live recovery state machine') with the heuristic 'recurring change-class'", "with_skill": true, "baseline": false},
+        {"text": "Stays under ~300 lines AND does not drop file:line cites", "with_skill": true, "baseline": true},
+        {"text": "Names ≥1 commercial / fork prior art (Neon / Aurora) when discussing the branchable-DB approach — uses the broadened §4 lens from Edit-2", "with_skill": true, "baseline": false}
+      ]
+    },
+    {
+      "eval_id": 3,
+      "question_short": "plpgsql_check as core — dead-code analysis at CREATE FUNCTION time",
+      "assertions": [
+        {"text": "IDENTIFIES that the `plpgsql_check` extension already exists in §4 under the out-of-tree-extensions category (Edit-2)", "with_skill": true, "baseline": true},
+        {"text": "Reframes the brainstorm as 'upstream vs make-extension-easier vs move-to-contrib' rather than designing from scratch", "with_skill": true, "baseline": true},
+        {"text": "Names the existing `plpgsql_validator` hook in `pl_handler.c` and the `check_function_bodies` GUC as the existing surface", "with_skill": true, "baseline": false},
+        {"text": "Sketches at least 2 distinct approaches that respect the prior-art reframe", "with_skill": true, "baseline": true},
+        {"text": "Each candidate has Pros + Cons + Scope", "with_skill": true, "baseline": false},
+        {"text": "Names ≥1 relevant scenario from `_index.md` (e.g. #30, #21) or flags a gap with the recurrence heuristic", "with_skill": true, "baseline": false},
+        {"text": "Picks ONE recommendation with reasoning + names conditions for the others to win", "with_skill": true, "baseline": true},
+        {"text": "FIRST DECISION: explicitly surfaces the extension-already-exists reframe (per Anti-patterns 'extension-already-exists' rule + §Output 7 worked example)", "with_skill": true, "baseline": false},
+        {"text": "Surfaces ≥3 DECISION: questions total", "with_skill": true, "baseline": false},
+        {"text": "Stays under ~300 lines AND does not drop file:line cites", "with_skill": true, "baseline": true},
+        {"text": "Output follows the 8-section structure", "with_skill": true, "baseline": false},
+        {"text": "Avoids the 'Designing instead of brainstorming' anti-pattern — no enumeration of catalog columns / SQLSTATEs / test files", "with_skill": true, "baseline": true}
+      ]
+    }
+  ],
+  "summary": {
+    "with_skill_passed": 36,
+    "with_skill_total": 36,
+    "baseline_passed": 15,
+    "baseline_total": 36,
+    "with_skill_pass_rate": 1.0,
+    "baseline_pass_rate": 0.417,
+    "note": "iter-2 rubric is stricter than iter-1: 3 new assertions added (distinctness-test invocation in E1, commercial-prior-art for E2, anti-pattern-avoidance + FIRST-DECISION reframe in E3) to probe the new SKILL.md content. with_skill still saturates; baseline gained 1 hit (anti-pattern-avoidance in E3 is met by any non-Phase-2-style answer)."
+  }
+}

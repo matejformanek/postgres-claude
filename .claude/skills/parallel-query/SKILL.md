@@ -56,6 +56,12 @@ entry; for `CREATE FUNCTION` in an extension SQL: always state it
 explicitly (`PARALLEL SAFE` / `RESTRICTED` / `UNSAFE`) rather than
 relying on the default.
 
+**Index-expression context:** `CREATE INDEX` on btree can run in parallel
+(see `max_parallel_maintenance_workers`); a `SAFE`-marked expression
+function allows the parallel-build path. DML evaluation of the same
+expression runs leader-only regardless of marking, because DML itself is
+parallel-unsafe.
+
 ## 3. ParallelContext lifecycle (extension-author view)
 
 [verified-by-code `source/src/include/access/parallel.h:64-72`]
@@ -91,10 +97,19 @@ DestroyParallelContext(pcxt);
 ExitParallelMode();
 ```
 
-Reserved TOC magic-number range used internally (don't collide):
-`0xFFFFFFFFFFFF0001` .. `0xFFFFFFFFFFFF000F`. Use small integers like
-`0x0001`, `0x0002`, ... for your own keys.
-[verified-by-code `source/src/backend/access/transam/parallel.c:67-81`]
+Reserved TOC magic-number ranges (don't collide):
+
+- `0xFFFFFFFFFFFF0001` .. `0xFFFFFFFFFFFF000F` — used by
+  `access/transam/parallel.c` for fixed state, error queues, GUC state,
+  snapshots, combo CIDs, etc. [verified-by-code
+  `source/src/backend/access/transam/parallel.c:67-81`]
+- `0xE000000000000001` and up — used by `executor/execParallel.c` for
+  `PARALLEL_KEY_EXECUTOR_FIXED`, `PARALLEL_KEY_PLANNEDSTMT`,
+  instrumentation, etc. (see §8). [verified-by-code
+  `source/src/backend/executor/execParallel.c:60-69`]
+
+Use small integers (`0x0001`, `0x0002`, ...) for your own keys to stay
+clear of both ranges.
 
 ## 4. Worker entry point
 
@@ -133,6 +148,48 @@ to decide whether a path is allowed to contain parallelism at all
 (`UNSAFE`), or allowed only in the leader's part of the plan
 (`RESTRICTED`).
 
+## 5b. Leader ↔ worker rendezvous — use DSM primitives, NOT the lock manager
+
+Parallel workers join the leader's **lock group** during startup, via
+`BecomeLockGroupMember(leader_pgproc, leader_pid)` called from
+`ParallelWorkerMain`. [verified-by-code
+`source/src/backend/access/transam/parallel.c:1392-1403`] The lock
+manager's `LockCheckConflicts` then treats locks held by other group
+members as non-conflicting — that's how the leader's already-held
+table/index/catalog locks "inherit" to workers without deadlocking
+against the leader. [verified-by-code
+`source/src/backend/storage/lmgr/lock.c:1610-1614`]
+
+**Consequence — the trap:** heavyweight locks (including
+`LOCKTAG_USERLOCK` advisory locks) are **useless for leader↔worker
+mutual exclusion**. A worker calling `LockAcquire` on a tag the leader
+already holds is granted immediately. Don't try to "wait on the leader"
+via userlocks; the wait won't happen. The one carve-out is
+`LOCKTAG_RELATION_EXTEND`, which conflicts even within a group —
+[verified-by-code `source/src/backend/storage/lmgr/lock.c:1600-1608`] —
+but you can't use that tag from extension code anyway.
+
+**Use these DSM-friendly primitives instead:**
+
+| Need | Primitive | Header |
+|---|---|---|
+| Wait / signal | `ConditionVariable` + `ConditionVariableSleep` / `ConditionVariableBroadcast` | `storage/condition_variable.h` |
+| Streaming bytes | `shm_mq` (already used by parallel infra for per-worker error queue, see `PARALLEL_KEY_ERROR_QUEUE`) | `storage/shm_mq.h` |
+| Short critical section | `LWLock` allocated on DSM memory via `LWLockNewTrancheId` + `LWLockInitialize` | `storage/lwlock.h` |
+| N-way phase sync | `Barrier` (used by parallel hash join) | `storage/barrier.h` |
+| Simple flags | `pg_atomic_uint32` + memory barriers | `port/atomics.h` |
+
+Allocate the primitive's storage inside your shm_toc chunk during
+`InitializeDSM`, then look it up with `shm_toc_lookup` in
+`InitializeWorker`. The standard CV wait loop is:
+
+```c
+ConditionVariablePrepareToSleep(&shared->cv);
+while (!shared->ready)
+    ConditionVariableSleep(&shared->cv, WAIT_EVENT_EXTENSION);
+ConditionVariableCancelSleep();
+```
+
 ## 6. parallel_workers / max_parallel_workers GUC interplay
 
 - `max_parallel_workers_per_gather` — per-Gather upper bound.
@@ -146,6 +203,13 @@ Always check `pcxt->nworkers_launched` after `LaunchParallelWorkers` —
 the postmaster may launch fewer than requested under load. Plan code
 paths for the leader-only case (`nworkers_launched == 0`).
 
+`parallel_leader_participation` (default on) controls whether the
+leader also runs the parallel subplan after launching workers. If off,
+the leader purely coordinates — relevant when sizing `pcxt->nworkers`
+and reading `nworkers_to_launch` vs `nworkers_launched`.
+[verified-by-code
+`source/src/backend/utils/misc/guc_parameters.dat:2312-2317`]
+
 ## 7. Custom GUCs visible to workers
 
 Plain GUCs are inherited by workers via `RestoreGUCState` (called from
@@ -157,17 +221,44 @@ operation error out.
 ## 8. Plumbing into `execParallel.c` (executor-node view)
 
 For a custom executor node that wants to participate in parallel
-execution, override these methods in your `Plan` /`PlanState`:
+execution, set `path->parallel_aware = true` (the resulting `Plan`
+inherits it) so the executor's per-node dispatch fires, then implement
+these five hooks:
 
-- `ExecXXXEstimate` — add to the DSM size estimate.
-- `ExecXXXInitializeDSM` — allocate and initialize per-node shared state.
-- `ExecXXXReInitializeDSM` — reset per-iteration state (rescan).
-- `ExecXXXInitializeWorker` — find and attach to the shared state in a
-  worker.
-- `ExecXXXShutdown` — collect per-worker stats before workers exit.
+- `ExecXXXEstimate(XxxState *node, ParallelContext *pcxt)` — add to the
+  DSM size estimate (call `shm_toc_estimate_chunk` + `_keys`).
+- `ExecXXXInitializeDSM(XxxState *node, ParallelContext *pcxt)` —
+  allocate and initialize per-node shared state; `shm_toc_insert` it.
+- `ExecXXXReInitializeDSM(XxxState *node, ParallelContext *pcxt)` —
+  reset per-iteration state (rescan); the chunk stays in the TOC, just
+  reset its contents.
+- `ExecXXXInitializeWorker(XxxState *node, ParallelWorkerContext *pwcxt)`
+  — find and attach to the shared state in a worker. **Note the second
+  parameter is `ParallelWorkerContext *`, not `ParallelContext *`.**
+- `ExecXXXShutdown(XxxState *node)` — collect per-worker stats before
+  workers exit.
 
-The convention is one entry per `nodeXxx.c`; see `nodeSeqscan.c` /
-`nodeIndexscan.c` for reference shapes. Deep architecture lives in
+**You also have to teach `execParallel.c` about your node.** Three
+`switch (nodeTag(planstate))` blocks dispatch into the per-node hooks —
+one each inside `ExecParallelEstimate`, `ExecParallelInitializeDSM`,
+and `ExecParallelReInitializeDSM`. Add a `case T_FooState:` branch to
+each (gated on `planstate->plan->parallel_aware`). See the
+`T_SeqScanState` branches at execParallel.c:256-263 for the reference
+shape. [verified-by-code
+`source/src/backend/executor/execParallel.c:246-345,480-593`]
+
+**Executor-owned high-magic key range** (don't collide):
+`0xE000000000000001` and up are used by `execParallel.c` for
+`PARALLEL_KEY_EXECUTOR_FIXED`, `PARALLEL_KEY_PLANNEDSTMT`,
+`PARALLEL_KEY_PARAMLISTINFO`, instrumentation, DSA, and friends.
+[verified-by-code
+`source/src/backend/executor/execParallel.c:60-69`] Per-node code
+typically uses the node's `plan_node_id` as its TOC key (an int that
+won't collide with either high-magic range); see
+`ExecSeqScanInitializeDSM` at
+`source/src/backend/executor/nodeSeqscan.c:391-412` for the canonical
+shape (it calls `shm_toc_insert(pcxt->toc,
+node->ss.ps.plan->plan_node_id, pscan)`). Deep architecture lives in
 `executor-and-planner`.
 
 ## 9. Checklist
@@ -212,7 +303,7 @@ The convention is one entry per `nodeXxx.c`; see `nodeSeqscan.c` /
 - `.claude/skills/bgworker-and-extensions/SKILL.md` — non-parallel bgworker side; `BGWORKER_CLASS_PARALLEL` is for internal use only.
 - `.claude/skills/gucs-config/SKILL.md` — `GUC_ALLOW_IN_PARALLEL` flag; GUC state inheritance by workers.
 - `.claude/skills/executor-and-planner/SKILL.md` — per-node parallel hooks (`ExecXXXInitializeDSM` etc.); Gather/GatherMerge node shape.
-- `.claude/skills/locking/SKILL.md` — what locks workers can/can't acquire; predicate-lock implications.
+- `.claude/skills/locking/SKILL.md` — what locks workers can/can't acquire; lock-group conflict bypass (`LockCheckConflicts` group-member rule) and the `LOCKTAG_RELATION_EXTEND` carve-out; predicate-lock implications.
 - `.claude/skills/memory-contexts/SKILL.md` — DSM is not a `MemoryContext`; allocations are explicit shm_toc, not palloc.
 - `knowledge/idioms/bgworker-and-parallel.md` — conceptual model.
 - `knowledge/docs-distilled/parallel-query.md` — SGML-distilled reference.

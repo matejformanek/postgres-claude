@@ -1,0 +1,18 @@
+{
+  "iteration": 1,
+  "skill": "parallel-query",
+  "evals": [
+    {
+      "eval_id": 1,
+      "question": "I'm building a parallel-aware executor node `nodeFoo` (a new scan flavour). What files do I touch, what lifecycle hooks does a Plan/PlanState need to expose for execParallel.c, how do I pick a shm_toc key, and how does the worker side fetch its starting state? Include the order of calls between ExecParallelEstimate / ExecParallelInitializeDSM / ExecParallelReInitializeDSM / ExecParallelInitializeWorker."
+    },
+    {
+      "eval_id": 2,
+      "question": "We want a SQL-callable C function that hashes a row using bcrypt for use in an index expression. Pick PARALLEL SAFE / RESTRICTED / UNSAFE and justify. Now vary it: (a) if the function reads from a temp table, (b) if the function does `SET LOCAL work_mem = '1GB'`, (c) if it calls a pure pl/pgsql wrapper that is itself marked PARALLEL UNSAFE."
+    },
+    {
+      "eval_id": 3,
+      "question": "An extension's parallel worker calls `LockAcquire` on a heavyweight LOCKTAG_USERLOCK in its worker_main and then tries to coordinate with the leader using a second userlock advisory call. The author says 'this works because PG's lock manager treats group members as non-conflicting.' Explain why this design is broken (the lock-group conflict bypass and what it does NOT protect against) and describe the right pattern for leader/worker rendezvous using parallel infrastructure."
+    }
+  ]
+}

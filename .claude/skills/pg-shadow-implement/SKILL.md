@@ -78,6 +78,26 @@ implementation-side counterpart to Phase C's gap-catalog.
 
 Read the COVER message + any reviewer replies in the thread. **Do
 NOT read or fetch the attached `.patch` file yet** — that's Step 4.
+Reading the patch before Step 4 contaminates the calibration signal:
+the shadow loop measures what our planner suite produces from the
+COVER alone, so any patch-derived knowledge poisons the diff. If you
+catch yourself wanting to peek, the answer is no — Steps 3-5 will
+surface the gap explicitly.
+
+**M-finding lineage.** The `M1` … `M5` tags throughout Step 2-5 come
+from the money-fx-exchange shadow run (Phase E run 1), recorded in
+`knowledge/shadow-implementations/money-fx-exchange/skill-gaps.md`.
+They are durable methodology findings:
+
+- **M1** — archive-fetch fallback chain (Step 4).
+- **M2** — posting-date / context-awareness pre-step.
+- **M3** — pre-emit file:line cite verification (consumed by
+  `pg-feature-plan`).
+- **M4** — REJECT as valid plan-stage terminal output.
+- **M5** — thread-engagement classification (`unengaged` / `acked`
+  / `debated` / `contested`).
+
+Future shadow runs may add M6+ to this lineage.
 
 Produce `knowledge/shadow-implementations/<slug>/spec.md` with:
 
@@ -88,10 +108,12 @@ Produce `knowledge/shadow-implementations/<slug>/spec.md` with:
   Context-awareness pre-step (PR #168 adds this). Date, author
   posture, engagement signal.
 - **`## What this does`** — verbatim COVER claim.
-- **`## Touched subsystems`** — from `domain-ownership.md` lookup
-  + inferred from the COVER.
+- **`## Touched subsystems`** — from
+  `knowledge/personas/domain-ownership.md` lookup + inferred from the
+  COVER.
 - **`## Predicted reviewer set`** — top 5-6 names per
-  `domain-ownership.md`'s reviewer column for the touched subsystem.
+  `knowledge/personas/domain-ownership.md`'s reviewer column for the
+  touched subsystem.
 - **`## Author's stated claims`** — files / behavior / backpatch /
   tests.
 - **`## Open questions raised in thread`** — verbatim reviewer
@@ -161,11 +183,50 @@ After our implementation is done:
 
 ### Step 5 — Diff + score
 
-Produce `comparison.md` per the template in the methodology doc.
-Sections: Scope match / Design match / File:line accuracy / Missed
-concerns / Novel concerns / Reviewer-reflex match / Verdict.
+Produce `comparison.md`. The skeleton (matches the template in
+`shadow-implementation-methodology.md`):
 
-**Scoring rubric:**
+```
+---
+slug: <slug>
+comparison-status: <FULL | DESIGN-LEVEL ONLY (M1 fallback)>
+verdict: <grade> (<one-line reason>)
+---
+
+## Scope match
+| Dimension | Ours | Theirs | Match? |
+|---|---|---|---|
+| Files touched | <list> | <list> | ✓/✗ |
+| LOC | N | M | ✓/✗ within 20% |
+| New symbols | <list> | <list> | overlap % |
+| Behavior delta | <our claim> | <their claim> | semantic equiv? |
+
+## Design match
+- Same partitioning? <Y/N>
+- Same data structures / signatures? <Y/N>
+- Same invariants honored (INV-* in knowledge/subsystems/)? <Y/N>
+- Same hook / extension surface? <Y/N>
+
+## File:line accuracy
+- For each file:line cite in our plan: still holds vs upstream? <hit %>
+
+## Missed concerns (theirs raised, ours didn't)
+## Novel concerns (ours raised, theirs didn't)
+## Reviewer-reflex match
+- pg-patch-review Critic E predictions vs actual thread reflexes: diff
+## Verdict
+- Grade: A / B / C / D / F or REJECT-A / REJECT-B / REJECT-C
+- Top 3 skill / corpus gaps surfaced
+```
+
+**Scoring rubric.** Pick exactly one grade. The A-F track applies
+when Step 3 produced an implementation; the REJECT-A/B/C track
+applies when Step 2 terminated at the M4 REJECT decision and the
+deliverable was a thread reply, not a patch. The two tracks are
+**mutually exclusive** (different shadow-output types). Append
+`(design-only)` to any grade when the M1 fallback chain failed and
+Step 5 ran without an upstream patch body — e.g. `B (design-only)`,
+`REJECT-A (design-only)`.
 
 | Grade | Meaning | Threshold |
 |---|---|---|
@@ -174,19 +235,51 @@ concerns / Novel concerns / Reviewer-reflex match / Verdict.
 | **C** | Same scope, materially different design | 40-70% overlap, no missed invariants, 3+ design diffs |
 | **D** | Different scope OR missed invariant | <40% overlap or invariant broken |
 | **F** | Wrong direction | wouldn't pass `review-checklist` |
-| **REJECT-A** | Identified all critical design problems + alternative — equivalent to A on a serious patch |
-| **REJECT-B** | Identified most critical problems but missed one major concern |
-| **REJECT-C** | Rejected for wrong reasons — escalate to user |
+| **REJECT-A** | (M4 track) Identified all critical design problems + proposed correct alternative — equivalent to A on a serious patch |
+| **REJECT-B** | (M4 track) Identified most critical problems but missed one major concern |
+| **REJECT-C** | (M4 track) Rejected for wrong reasons OR rejected a sound proposal — escalate to user |
+
+**Disambiguating A vs B**: "1-2 design choices diverge" is the
+B-threshold. Any single design divergence — even one that doesn't
+break an invariant — moves the grade from A to B. A is reserved for
+runs where the only differences are style or minor variable naming.
 
 ### Step 6 — Skill feedback
 
-For each gap surfaced in `comparison.md`, produce `skill-gaps.md`
-listing:
+For each gap surfaced in `comparison.md`, produce `skill-gaps.md`.
+Skeleton (matches money-fx-exchange/skill-gaps.md):
+
+```
+---
+slug: <slug>
+purpose: Gaps surfaced by this shadow run — input to next skill-creator pass
+---
+
+# Skill gaps surfaced by <slug> shadow run
+
+## Gap M<N> — <one-line title>
+**Where**: <skill or knowledge doc path>
+**Symptom**: <what went wrong / would have gone better>
+**Fix**: <1-2 sentence proposed edit>
+**Owner skill**: <pg-feature-plan | pg-implement | review-checklist | ...>
+
+(repeat per gap; M-ordinals are unique across the whole run lineage,
+not per gap-class — extend the M1-M5 series from money-fx-exchange)
+
+## What this run did NOT surface
+<corpus / persona / scenario gaps that did NOT appear — useful negative
+signal that things are calibrated>
+
+## Recommendation for next skill-creator pass
+<bulleted list keyed to skill-creator-brief.md tiers>
+```
+
+Each gap entry must name:
 
 - Which skill or knowledge doc would have closed the gap if richer.
 - A 1-2 sentence proposed change.
-- Tag with `M<N>` ordinal so future skill-creator passes can
-  reference it (e.g. M1-M5 from the money-fx-exchange run).
+- An `M<N>` ordinal (continues the M1-M5 series from
+  money-fx-exchange — do not reset).
 
 ### Step 7 — Aggregate (after N runs)
 
