@@ -57,6 +57,15 @@ PGINDENT_TYPEDEFS="$DEV_ROOT/src/tools/pgindent/typedefs.list"
 PERLTIDY_PROFILE="$DEV_ROOT/src/tools/pgindent/perltidyrc"
 PERLTIDY_PIN="20230309"
 
+# pg_bsd_indent is built into dev/build-debug/ (not install-debug, not
+# system PATH). Prepend its dir so pgindent's `command -v pg_bsd_indent`
+# resolves. Set PGINDENT too as a belt-and-suspenders fallback.
+BSD_INDENT_DIR="$DEV_ROOT/build-debug/src/tools/pg_bsd_indent"
+if [ -x "$BSD_INDENT_DIR/pg_bsd_indent" ]; then
+  export PATH="$BSD_INDENT_DIR:$PATH"
+  export PGINDENT="$BSD_INDENT_DIR/pg_bsd_indent"
+fi
+
 # --- telemetry helper ---------------------------------------------------------
 # Emits a single-line JSON object on stdout in the shape Claude Code's
 # PostToolUse hook documents as "additionalContext". In --check mode we
@@ -100,6 +109,8 @@ fi
 case "$FILE" in
   "$DEV_ROOT"/src/*|"$DEV_ROOT"/contrib/*) : ;;
   */dev/src/*|*/dev/contrib/*)             : ;;
+  dev/src/*|dev/contrib/*)                 : ;;
+  src/*|contrib/*)                         : ;;
   *)
     exit 0
     ;;
@@ -135,13 +146,17 @@ if [ "$LANG_KIND" = "c" ]; then
     TYPEDEF_ARG=(--typedefs "$PGINDENT_TYPEDEFS")
   fi
 
+  # pgindent only accepts files ending in .c/.h, so tmpfiles need the
+  # right suffix or pgindent silently filters them out.
+  EXT="${FILE##*.}"
+
   if [ "$MODE" = "check" ]; then
     # --check returns 2 on dirty per pgindent:6-10.
     if "$PGINDENT_BIN" "${TYPEDEF_ARG[@]}" --check "$FILE" >/dev/null 2>&1; then
       exit 0
     fi
     # Dirty — produce the diff for the pre-commit error output.
-    TMP="$(mktemp -t pgfmt.XXXXXX)"
+    TMP="$(mktemp -t pgfmt.XXXXXX).$EXT"
     trap 'rm -f "$TMP"' EXIT
     cp "$FILE" "$TMP"
     "$PGINDENT_BIN" "${TYPEDEF_ARG[@]}" "$TMP" >/dev/null 2>&1 || true
@@ -153,7 +168,7 @@ if [ "$LANG_KIND" = "c" ]; then
   # Default (auto-fix) mode — rewrite in place. Capture line counts so
   # Claude knows whether anything actually changed.
   BEFORE_LINES="$(wc -l < "$FILE" | tr -d ' ')"
-  TMP="$(mktemp -t pgfmt.XXXXXX)"
+  TMP="$(mktemp -t pgfmt.XXXXXX).$EXT"
   cp "$FILE" "$TMP"
   if "$PGINDENT_BIN" "${TYPEDEF_ARG[@]}" "$FILE" >/dev/null 2>&1; then
     if ! cmp -s "$TMP" "$FILE"; then
