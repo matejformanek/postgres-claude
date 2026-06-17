@@ -101,7 +101,7 @@ Echo of A3's pg_dump tar findings.
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
 | 2026-06-03 | pg_recvlogical.c:578 | wire-protocol | maybe | Newline-as-record-separator not enforced against plugin output; binary-emitting plugin produces mis-framed file silently | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
-| 2026-06-03 | pg_recvlogical.c | wire-protocol | nit | `-o NAME=VALUE` plugin option not quote-escaped into `START_REPLICATION` command | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
+| 2026-06-03 | pg_recvlogical.c | wire-protocol | nit | `-o NAME=VALUE` plugin option not quote-escaped into `START_REPLICATION` command | landed (a75bd485b5ea, triaged 2026-06-17 — now via `AppendQuotedIdentifier`/`AppendQuotedLiteral`) | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
 | 2026-06-03 | pg_recvlogical.c | state-transition | maybe | No CLI to flip `two_phase`/`failover` on an existing slot — must drop+recreate | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
 | 2026-06-03 | pg_recvlogical.c | undocumented-invariant | nit | SIGINT during stream leaves slot on the server | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
 | 2026-06-03 | pg_recvlogical.c | info-disclosure | nit | Verbose mode prints every flush LSN with slot name | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |

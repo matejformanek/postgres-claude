@@ -1,5 +1,11 @@
 # streamutil.c
 
+- **Last verified commit:** `a75bd485b5ea` (re-verified 2026-06-17; gained
+  the shared frontend quoting helper `AppendQuotedString` (line 750), and
+  `AppendStringCommandOption` switched from `PQescapeStringConn` to
+  `AppendQuotedLiteral`. Key-function cites re-pinned: post-`DropReplicationSlot`
+  funcs shifted ~+27/+31 lines by the inserted helper.)
+
 ## Purpose
 
 Connection-and-replication-command helpers shared by `pg_basebackup`,
@@ -35,7 +41,7 @@ globals then calls `GetConnection()`.
 
 ## Key functions
 
-- `GetConnection()` `streamutil.c:59` — the connection builder. Loops on
+- `GetConnection()` `streamutil.c:60` — the connection builder. Loops on
   `CONNECTION_BAD + PQconnectionNeedsPassword + dbgetpassword != -1`,
   calling `simple_prompt("Password: ", false)` to get a fresh password
   (line 162). Reuses across retries. After connect, runs:
@@ -51,17 +57,23 @@ globals then calls `GetConnection()`.
   `streamutil.c:409`
 - `GetSlotInformation(conn, slot_name, &restart_lsn, &restart_tli)`
   `streamutil.c:490`
-- `CreateReplicationSlot(...)` `streamutil.c:584` — handles old
+- `CreateReplicationSlot(...)` `streamutil.c:585` — handles old
   vs new option syntax based on server version; explicit
   `slot_exists_ok` knob suppresses `ERRCODE_DUPLICATE_OBJECT`.
-- `DropReplicationSlot(conn, slot_name)` `streamutil.c:697`
+- `DropReplicationSlot(conn, slot_name)` `streamutil.c:702`
+- `AppendQuotedString(buf, str, quote)` `streamutil.c:750` — the shared
+  frontend replication-command quoting helper (doubles embedded `quote`);
+  `AppendQuotedIdentifier`/`AppendQuotedLiteral` macros sit on it (in
+  `streamutil.h`). Used by `GetSlotInformation`, `CreateReplicationSlot`,
+  `DropReplicationSlot`, and `receivelog.c`. [verified-by-code @ a75bd485b5ea]
 - `AppendPlainCommandOption` / `AppendStringCommandOption` /
-  `AppendIntegerCommandOption` `streamutil.c:746,767,790` — query
-  builders. `AppendStringCommandOption` runs values through
-  `PQescapeStringConn`.
+  `AppendIntegerCommandOption` `streamutil.c:777,798,817` — query
+  builders. Since `a75bd485b5ea` `AppendStringCommandOption` quotes the
+  value via `AppendQuotedLiteral` (doubling embedded `'`), **not**
+  `PQescapeStringConn` as before — so it no longer needs the global `conn`.
 - `feGetCurrentTimestamp / feTimestampDifference / feTimestampDifferenceExceeds`
-  `streamutil.c:803,822,844` — frontend reimplementations.
-- `fe_sendint64 / fe_recvint64` `streamutil.c:857,868` — used by
+  `streamutil.c:830,849,871` — frontend reimplementations.
+- `fe_sendint64 / fe_recvint64` `streamutil.c:884,895` — used by
   receivelog.c for replication-feedback packets.
 
 ## State / globals
