@@ -49,6 +49,175 @@ Phase 2 work prematurely — stop and hand off.
 
 ### Required sections (in this order)
 
+0. **Concrete usage surface** (REQUIRED, comes FIRST). 20-30
+   enumerated example lines showing what the feature must let the
+   user *write*. Each example is one SQL / PL/pgSQL / DDL line.
+   Group by usage class. Generate this BEFORE answering DECISION
+   questions — every DECISION must take these examples as inputs,
+   not abstractions.
+
+   Why this is §0: the sesvars first calibration (2026-06-17)
+   produced an MVP that covered ~30% of what the user actually
+   wanted, because DECISION questions were phrased so narrowly
+   they excluded entire usage classes (array indirection, composite
+   access, PL/pgSQL direct writes, DDL DEFAULT, SELECT INTO,
+   aggregate semantics). The §0 enumeration prevents that failure
+   mode — if a usage class isn't on the list, the brainstorm has
+   admitted it's out of scope; if it IS on the list, the candidate
+   approaches MUST be able to support it.
+
+   How to generate the examples — **parallel fan-out via subagents**:
+   - Agent A reads `knowledge/scenarios/_index.md` + every pinned
+     scenario; lists usage examples that show up in those scenarios.
+   - Agent B greps `source/src/test/regress/sql/` and
+     `contrib/*/sql/` for similar-shaped features; extracts
+     idiomatic SQL surface lines.
+   - Agent C web-searches pgsql-hackers + CommitFest entries for
+     the feature keyword; extracts examples from recent threads.
+   - Agent D — **if the user has a manual reference implementation**
+     (see §0.7) — reads the reference's regress SQL file as the
+     UPPER BOUND. Every example line that file contains becomes a
+     candidate for §0.
+   - Synthesize the four agent outputs into a deduplicated 20-30
+     line table grouped by usage class.
+
+   Format:
+   ```
+   ## §0 Usage surface (comprehensive)
+
+   ### Reader
+   - SELECT @x
+   - SELECT @arr[2], @arr[2:3]
+   - SELECT (@typ).field
+   - SELECT @js -> 'k'
+   ...
+
+   ### Utility writer (SET)
+   - SET @x := expr
+   - SET @x := expr, @y := expr, @z := expr
+   - SET @x TYPE DATE := expr
+   - SET @arr[2] := v
+   - SET @arr[2:3] := v
+   ...
+
+   ### Inline writer (SELECT :=)
+   - SELECT @x := expr
+   - SELECT @a := 1, @b := 2
+   - SELECT @x := (subquery)
+   - SELECT col, @cum := @cum + col FROM t
+   ...
+
+   ### Cross-feature
+   - PL/pgSQL DO block: BEGIN SET @pl := 3; END
+   - SELECT col INTO @v, @w FROM t
+   - CREATE TABLE t (c INT DEFAULT @v)
+   - EXECUTE FORMAT('SELECT @x := %L', val)
+   ...
+
+   ### Adversarial / edge
+   - Multi-target SET with self-referential type inference
+   - Chained inline := with type-shift across columns
+   - Quoted identifiers @"name with spaces"
+   - WHERE-clause assignment evaluation order
+   ...
+   ```
+
+   The DECISION questions in §7 then say things like "should the
+   feature support the array-indirection examples above (rows 5-8)?"
+   — concrete, bound to specific lines, not abstract.
+
+0.5. **Existing-PG-mechanism survey** (REQUIRED, before
+   candidate approaches). What existing PG nodes / mechanisms /
+   patterns could carry this feature? The default is **REUSE over
+   INVENT**. Inventing a new Expr node, new EEOP step, new
+   parsetree shape is 5× more touch points than reusing an
+   existing one (walker coverage, EEOP_*_EXEC interpreter step,
+   JIT mirror, ruleutils support, copy/equal/out/read funcs
+   regen).
+
+   How to survey — **parallel fan-out via subagents**:
+   - Agent A: grep `source/src/include/nodes/primnodes.h` +
+     `parsenodes.h` for similar-shaped Expr / Stmt nodes. Note
+     `Param` (with `paramkind` discriminator), `SQLValueFunction`
+     (with `op` discriminator), `XmlExpr` (with `op`), etc.
+     Discriminator-bearing existing nodes are PRIME candidates
+     for reuse.
+   - Agent B: grep `source/src/include/executor/execExpr.h` for
+     existing `EEOP_*` steps that could be specialized via a
+     `d.union.*` arm without inventing a new opcode.
+   - Agent C: grep `source/src/include/access/` for RangeTblEntry
+     kinds (`RTE_*`) and FunctionScanState patterns. New row-source
+     features often fit RTE kinds without inventing a Path / Plan
+     node.
+   - Agent D: search the corpus `knowledge/idioms/*.md` and
+     `knowledge/subsystems/*.md` for "existing mechanism" /
+     "reuse" / "PARAM_*" / "RTE_*" patterns. The corpus is built
+     to surface these.
+
+   Output a short matrix in §0.5:
+   ```
+   ## §0.5 Existing PG mechanisms considered for reuse
+
+   | Mechanism | Could it carry this? | Cost of reuse | Cost of invent |
+   |---|---|---|---|
+   | Param + new paramkind | YES — text-named, value-bearing, dynamically-typed | tiny — paramkind enum + paramsesvarid field | 5× more touch points |
+   | SQLValueFunction + new op | NO — designed for parameterless time/role funcs | n/a | n/a |
+   | New T_SessionVar Expr | YES but expensive | nodeFuncs.c 6 cases + parse_collate.c + clauses.c (3 walkers) + ruleutils.c + JIT mirror | baseline |
+   | RTE_*KIND* | NO — sessvars are scalar, not row-source | n/a | n/a |
+   ```
+
+   **The recommended approach in §6 MUST justify its mechanism
+   choice with reference to this matrix.** If §6 picks invent-
+   new, the recommendation has to argue why the existing mechanism
+   doesn't fit — not just "it's cleaner".
+
+   Sesvars-calibration evidence: the user's manual implementation
+   chose `PARAM_SESSION_VARIABLE` (new paramkind on Param). My
+   AI-driven implementation invented `T_SessionVar` +
+   `T_SessionVarAssign`. Mine ended up with 5× more touch points
+   for ~30% less coverage. The §0.5 step exists to prevent that
+   repeat.
+
+0.7. **User-reference-implementation readthrough** (REQUIRED IF
+   one exists). Ask the user explicitly: "do you have a manual
+   reference implementation of this feature?" Look at the
+   conversation history, the working directory, and any prior
+   session logs for hints (e.g. user mentions a thesis, a private
+   branch, a "my version" repo path).
+
+   **If a reference exists, READ IT as the upper-bound spec.** The
+   §2 out-of-scope lock is for features the user EXPLICITLY
+   EXCLUDES, not "things we haven't thought of yet". The reference
+   tells you what the user actually wants; the §0 usage surface
+   becomes the union of (the reference's surface) + (any additions
+   the user calls out).
+
+   This is the R15 default: comprehensive scope, not minimal MVP.
+   If the user has built it once already manually, the planner
+   suite's job is to produce something *comparable to* the
+   reference, not 30% of it.
+
+   How to readthrough:
+   - Read the reference's main regress SQL file in full
+     (`session_variables.sql` for sesvars). This IS the spec.
+   - Read the reference's expected output to confirm semantics.
+   - Skim the reference's main implementation file (the
+     equivalent of `commands/<feature>.c`) just for ARCHITECTURE
+     — what existing PG mechanism did they reuse? (This feeds
+     §0.5.)
+   - Note any features the reference SHIPS that look like scope
+     expansions worth including, AND any features that look
+     genuinely out-of-scope (e.g. experimental / personal-pref).
+   - Surface in §7 as a DECISION: "the reference ships X, Y, Z
+     — should we match all of these or scope down? If scope
+     down, which?"
+
+   Anti-pattern this rule prevents: "I won't read the reference
+   because it might bias me toward their design." Wrong framing.
+   The bias is helpful: the reference encodes the user's real
+   intent. The planner suite's job is to match or exceed it, not
+   reinvent it independently.
+
 1. **Problem statement** (3-5 sentences). What is the user actually
    asking for, in your own words? Restate the goal so misunderstandings
    surface early. Name the user who would benefit (DBA, extension
@@ -101,7 +270,24 @@ Phase 2 work prematurely — stop and hand off.
    - **Approximate scope** (small / medium / large — measured in files
      touched + invariants risked, not lines of code).
    - **Existing PG mechanism it reuses** (a hook? an existing API? a
-     parser pattern? a catalog table?).
+     parser pattern? a catalog table? a PARAM kind? an RTE kind?).
+     **REQUIRED**: cite the §0.5 mechanism survey row this approach
+     came from. If "invent new", explain why §0.5's reuse candidates
+     don't fit.
+   - **Coverage of §0 usage surface** (which usage classes does this
+     approach support? List the §0 example-row numbers explicitly.
+     If an approach covers only rows 1-10 out of 25, it's a 40%-
+     scope approach — say so and flag whether the remaining 60%
+     is in-scope but deferred or genuinely out-of-scope.).
+   - **Citations** (REQUIRED): at least 3 `knowledge/scenarios/*.md`
+     this approach draws on, 2 `knowledge/personas/*.md` whose
+     reviewer reflexes apply, 2 `knowledge/idioms/*.md` whose
+     patterns it follows. Inline format:
+     `[scenarios: #11 add-new-sql-keyword, #15 add-new-expression-eval-step]`
+     `[personas: tom-lane (parse-tree durability), andres-freund (JIT mirror)]`
+     `[idioms: lexer-and-grammar, node-types]`.
+     If any cited file doesn't exist, flag as a corpus gap to fix
+     (don't fake it).
 6. **Recommended approach** (1 paragraph). Pick one. Say why. Name
    what would have to be true for the *other* approaches to win
    (so the user can flag if those conditions hold).
@@ -144,27 +330,91 @@ If you find yourself writing those — stop. Save them for Phase 2.
 
 ## Method
 
-Run this as a tight loop:
+Run as a parallel-fan-out loop (NOT a sequential tight loop —
+the old single-context method under-explored). The fan-out is
+load-bearing.
 
 1. **Set up:** create `planning/<slug>/` if it doesn't exist. Pick the
    slug from the user's idea (snake_case, ≤30 chars). If a brainstorm
    already exists, ask the user if they want to overwrite or revise.
 
-2. **Load minimal corpus:** read the master `knowledge/subsystems/`
-   index (or use the `pg-claude` skill's flowchart) to pick 1-3 subsystem
-   docs to load. Do NOT load per-file docs at this stage. Do NOT walk
-   source/.
+2. **Ask about user reference impl.** Explicit question: "do you
+   have a manual reference implementation of this feature
+   anywhere?" Check conversation history + working dirs + STATE.md
+   for hints. If yes, locate the regress SQL file path before
+   proceeding — Agent D in step 4 needs it.
 
-3. **Run the triage pass:**
-   - `WebFetch` `https://commitfest.postgresql.org/?text=<keyword>`
-     (cross-CF text search; matches entries from any CommitFest).
-     `https://commitfest.postgresql.org/` shows the current CF's
-     open entries. Skim for matching titles + last activity + status.
-   - `git -C source log --oneline --grep='<keyword>' --since='2y'` — top 5.
-   - `grep -rli '<keyword>' knowledge/` — note hits, don't read them
-     deeply.
+3. **Load minimal corpus:** read the master `knowledge/subsystems/`
+   index to pick 1-3 subsystem docs to load. Do NOT load per-file docs
+   at this stage. Do NOT walk source/ in-context (the agents below
+   will).
 
-4. **Sketch 2-3 approaches.** Keep them genuinely distinct (not three
+4. **PARALLEL FAN-OUT — usage surface enumeration (§0).** Spawn
+   4 subagents in the same message (Agent tool, subagent_type
+   general-purpose):
+
+   - **Agent A — scenario mining.** Read
+     `knowledge/scenarios/_index.md` + every plausibly-relevant
+     scenario file. Return 10-15 example usage lines extracted
+     from scenario examples + every scenario slug that matches.
+
+   - **Agent B — source-tree mining.** Grep
+     `source/src/test/regress/sql/` + `contrib/*/sql/` for
+     similar-shaped features (e.g. for sesvars: grep for
+     `Param`, `PREPARE`, `SET`, `:=` patterns). Return 10-15
+     idiomatic SQL lines extracted from PG's own tests.
+
+   - **Agent C — community mining.** WebFetch
+     `https://commitfest.postgresql.org/?text=<keyword>` + the
+     top 5 git log hits for the keyword + a WebSearch for
+     "pgsql-hackers <feature> proposal". Return any recent
+     proposal threads + the SQL surface lines they propose.
+
+   - **Agent D — user-reference mining (if reference impl
+     exists per step 2).** Read the reference's regress SQL
+     file in full. Read its expected output. Skim its main
+     implementation file's TOP-OF-FILE comment for architecture
+     notes. Return: every distinct usage line from the regress
+     file + a one-paragraph architecture summary + the existing
+     PG mechanism the reference reuses (if discernible).
+
+   Synthesize Agents A/B/C/D outputs into the §0 usage surface
+   table (20-30 lines, grouped by usage class — see the §0
+   format in "Required sections" above).
+
+5. **PARALLEL FAN-OUT — existing-PG-mechanism survey (§0.5).**
+   Spawn 4 subagents:
+
+   - **Agent A — primnodes/parsenodes mining.** Grep
+     `source/src/include/nodes/primnodes.h` +
+     `parsenodes.h` for Expr/Stmt nodes with discriminator
+     fields (`paramkind` on Param, `op` on SQLValueFunction,
+     `op` on XmlExpr, etc.). Return a list of nodes that
+     could plausibly be specialized via a new discriminator
+     value.
+
+   - **Agent B — execExpr mining.** Grep
+     `source/src/include/executor/execExpr.h` for `EEOP_*`
+     steps + their `d.union.*` arms. Return a list of steps
+     that handle similar value-domain operations (could a new
+     case fit into an existing step's union?).
+
+   - **Agent C — RTE / FunctionScan mining.** Grep
+     `source/src/include/nodes/parsenodes.h` for `RTE_*`
+     kinds. Grep for FunctionScanState + similar patterns.
+     Return any row-source mechanisms that could carry the
+     feature.
+
+   - **Agent D — corpus pattern mining.** Read
+     `knowledge/idioms/*.md` for "reuse"-pattern docs (e.g.
+     node-types.md, lexer-and-grammar.md). Return a short list
+     of "X is the canonical way to add a Y" patterns.
+
+   Synthesize into the §0.5 matrix (mechanism × can-it-carry-
+   this × cost-of-reuse × cost-of-invent). The recommended
+   approach in §6 must cite one row from this matrix.
+
+6. **Sketch 2-3 approaches.** Keep them genuinely distinct (not three
    flavors of the same approach). If you can only name one approach,
    say so explicitly — it usually means the design space is narrow OR
    you haven't thought hard enough.
@@ -178,21 +428,39 @@ Run this as a tight loop:
    — borderline-flavors. "TTL via autovacuum" vs "TTL via tuple-
    visibility predicate" differ on all three — genuinely distinct.
 
-5. **Recommend.** Pick one. Default to the smallest approach that meets
-   the stated goal. If the user's framing implies they want the bigger
-   approach, name that tradeoff in your recommendation.
+7. **Recommend.** Pick one. **Default to COMPREHENSIVE scope, not
+   minimal MVP** (per R15 in pg-implement-discipline.md). If the
+   user's framing or a reference impl from step 2 implies the
+   comprehensive approach, take it as the default. MVP framing
+   requires the user's EXPLICIT consent — name the tradeoff in the
+   recommendation and let them opt down.
 
-6. **Decisions.** Name 3-5. Be specific — "scope (MVP vs full)" is too
+   The recommendation must:
+   - Cite the §0.5 mechanism row this approach uses (reuse-vs-
+     invent).
+   - Cite the §0 usage-class coverage (row-numbers list).
+   - Name 3 scenarios, 2 personas, 2 idioms the approach draws on
+     (per §5 Citations requirement).
+   - If a reference impl exists from §0.7, explicitly state how the
+     recommendation COMPARES to the reference: "matches reference
+     surface" OR "extends reference by X" OR "scopes down vs
+     reference by dropping Y, see DECISION 2".
+
+8. **Decisions.** Name 3-5. Be specific — "scope (MVP vs full)" is too
    vague; "Should the MVP support DEFAULT clauses or only NOT NULL?" is
-   right.
+   right. Each DECISION must reference §0 example rows by number:
+   "Should we support array-indirection (§0 rows 5-8) in v1?".
 
-7. **Write.** Single file, ~150-300 lines. Resist the urge to be
-   exhaustive.
+9. **Write.** Single file, ~250-450 lines (raised from the old
+   150-300 limit — the §0 + §0.5 + §0.7 + citation requirements
+   make brainstorms LONGER, and that's correct: the cost of going
+   deep at brainstorm time is far less than the cost of
+   under-scoping at plan time).
 
-8. **Hand off.** End with one short paragraph: *"Run `/pg-plan <slug>`
-   when you've picked an approach and answered the DECISION: questions
-   inline above."* Or signal that the brainstorm itself surfaced a
-   blocker that needs resolving before planning makes sense.
+10. **Hand off.** End with one short paragraph: *"Run `/pg-plan <slug>`
+    when you've picked an approach and answered the DECISION: questions
+    inline above."* Or signal that the brainstorm itself surfaced a
+    blocker that needs resolving before planning makes sense.
 
 ## Boundaries vs other skills
 

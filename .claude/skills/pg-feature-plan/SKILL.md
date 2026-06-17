@@ -150,10 +150,74 @@ Full rubric: `.claude/skills/review-checklist/SKILL.md` Phase 0.
 | `REJECT-B` | Identified most critical problems but missed one major concern. |
 | `REJECT-C` | Rejected for the wrong reasons OR rejected when the proposal was actually sound. Self-correct: re-open and run the seven-phase review (or this skill's standard track). |
 
-## Output
+## Output structure — multi-file plan (v1.2 — calibration-driven)
 
-A single file at `planning/<slug>/plan.md` following the structure
-below. Length scales with the feature: ~400 lines for a small change,
+**Old shape (deprecated for non-trivial features):** single
+`planning/<slug>/plan.md` covering all 14 sections.
+
+**New shape:** **orchestrator + per-phase files + supporting docs.**
+The sesvars calibration showed that single-file plans force
+shallow per-phase detail (the 307-line plan could only give each
+of 6 phases ~30 lines, which is why scope leaked). The new shape
+lets each phase be hundreds of lines deep on its own without
+bloating the orchestrator.
+
+```
+planning/<slug>/
+├── plan.md                 — ORCHESTRATOR (§1-§4, §11-§14, phase index)
+├── machinery-survey.md     — §0.5 existing-PG-mechanism analysis (NEW)
+├── tests/
+│   ├── spec.md             — §3.5 test-suite-as-spec draft (NEW)
+│   ├── regress-cases.sql   — drafted regression SQL the impl must pass
+│   └── tap-cases.md        — drafted TAP test scenarios
+├── phase-0/
+│   ├── plan.md             — full §3 / edits / phase-end check for phase 0
+│   └── notes.md            — appended during /pg-implement (R8)
+├── phase-1/
+│   ├── plan.md
+│   └── notes.md
+├── phase-2/ ... phase-N/   — one dir per phase
+└── comparison.md           — written post-implementation by /pg-implement
+                              if a user reference impl exists (R15 calibration)
+```
+
+**When to use the multi-file shape:**
+- Feature touches > 15 files → multi-file required.
+- Feature has > 3 phases → multi-file required.
+- Feature has a user reference impl → multi-file required (§0.5 +
+  tests/spec.md are load-bearing).
+- Otherwise: single-file is fine. Mark it explicitly at the top:
+  `Plan shape: single-file (small feature, < 15 files, ≤ 3 phases).`
+
+**Orchestrator file (`plan.md`) contents** when multi-file is
+used:
+- §1 What this plan is, §2 Scope contract, §3 Files-by-domain
+  SUMMARY table (high-level — full per-phase tables live in
+  `phase-N/plan.md`), §4 Catalog impact, §5 WAL, §6 Locking, §7
+  Memory, then a **§8 Phase index** with a one-line summary per
+  phase and a link to `phase-N/plan.md`, then §9 Test surface
+  pointing at `tests/`, §10 Docs, §11-§14 as usual.
+
+**Per-phase file (`phase-N/plan.md`) contents:**
+- Phase title + one-paragraph why.
+- §3 table for THIS PHASE ONLY (files touched, change type, size,
+  cited concrete edit).
+- Concrete edits (the actual code shape per file).
+- Phase-end check (auto-scoped per R13 based on what files the
+  phase touches — see "Phase-end check scope" below).
+- §13 risks for THIS PHASE.
+- Inline persona + scenario + idiom citations (REQUIRED — see
+  "Citations" below).
+
+Length scales: ~200-400 lines per phase file is normal; large
+phases can be 1000+. The orchestrator itself stays ~300-500 lines
+regardless of feature size.
+
+## Output (legacy single-file shape)
+
+For small features (< 15 files, ≤ 3 phases, no reference impl):
+single `planning/<slug>/plan.md` following the structure below.
+Length scales with the feature: ~400 lines for a small change,
 ~1500 lines for a medium feature, more for a major patch series.
 
 ### Required sections (in this order)
@@ -227,30 +291,86 @@ below. Length scales with the feature: ~400 lines for a small change,
    - Long-lived state (TopMemoryContext, CacheMemoryContext)?
    - `palloc_aligned` / DSA / shmem-resident state?
 
-8. **Phased implementation** (the meat). Break into 3-6 phases. Each
-   phase:
+8. **Phased implementation** (the meat). Break into 3-8 phases (the
+   old 3-6 range was tight for comprehensive features per R15).
+   **For multi-file plan shape, each phase has its own
+   `phase-N/plan.md` with the structure below; the orchestrator
+   only lists the index.** Each phase entry:
+
    - Phase number + title.
    - Files this phase touches (subset of §3).
-   - The 5-10 concrete edits this phase makes (each with file:line where
-     possible).
-   - **Phase-end check**: how `/implement` knows this phase is done
-     (e.g. "regress passes; new test in `src/test/regress/sql/foo.sql`
-     exists and passes").
+   - The 5-15 concrete edits this phase makes (each with file:line
+     where possible). For multi-file shape, list every site —
+     don't truncate to "5-10".
+   - **Inline citations** (REQUIRED — per R14 + R15 + the sesvars
+     calibration F1-F15 findings). Each phase must cite:
+     - ≥1 `knowledge/scenarios/*.md` it follows.
+     - ≥1 `knowledge/personas/*.md` whose reviewer reflex will
+       evaluate this phase.
+     - ≥1 `knowledge/idioms/*.md` whose pattern it uses.
+     - Any prior calibration finding F-N from
+       `sessions/2026-06-16-sesvars-calibration-findings.md` (or
+       successor) that this phase must heed.
+   - **Phase-end check** (auto-scoped per R13 — see "Phase-end
+     check scope ladder" below): how `/pg-implement` knows this
+     phase is done. NOT "regress passes" alone — apply the R13
+     scope ladder.
+   - **Tests covered by this phase**: list the TC-* IDs from
+     `tests/spec.md` that this phase makes pass.
 
    A phase is self-contained enough that you could stop after it and
-   the tree still builds. (This is the `/implement` skill's
-   requirement.)
+   the tree still builds + the declared phase-end check (R13 scope)
+   passes. (This is the `/pg-implement` skill's requirement, R4.)
 
-9. **Test surface** (bulleted with file paths):
-   - **Regress** (`src/test/regress/sql/`): new `.sql`/`.out` pair? Or
-     extend existing? Name the file.
+### Phase-end check scope ladder (R13, applied per-phase)
+
+The phase-end check MUST match the phase's blast radius (R13 in
+pg-implement-discipline.md v1.1):
+
+- **Helper-only changes** → `meson test --suite regress`.
+- **Catalog changes** (`pg_operator.dat`, `pg_proc.dat`, etc.) →
+  `--suite regress` + every `--suite contrib-*`. (Sesvars F12:
+  Phase 0's catalog cleanup broke `pg_stat_statements/squashing.
+  sql`; the regress-only gate missed it.)
+- **Grammar / lexer changes** (`gram.y`, `scan.l`, `pl_gram.y`,
+  ECPG `pgc.l`) → `--suite regress` + `--suite ecpg` + every
+  `contrib/*` suite that may parse SQL.
+- **Executor / planner changes** (`execExpr*.c`, `clauses.c`,
+  `plancache.c`, etc.) → `--suite regress` + `--suite isolation`
+  + every `contrib/*` suite.
+- **WAL / replication / catversion** → above + `--suite recovery`.
+- **Ruleutils / parse-tree formatting** → above + a spot-check
+  on `CREATE VIEW`, `EXPLAIN VERBOSE`, and `pg_get_*def` output.
+  (Sesvars F14: `T_SessionVar` missing from
+  `ruleutils.c get_rule_expr` broke `EXPLAIN VERBOSE` silently.)
+
+Each phase's plan section names the EXACT command line:
+`meson test -C build-debug --suite regress --suite contrib-pg_stat_statements`
+— not a vague "regress passes".
+
+9. **Test surface** (bulleted with file paths). When multi-file
+   shape is used, this section is a SUMMARY that points at
+   `tests/spec.md` for the full draft (Step 1.5).
+
+   - **`tests/spec.md`** — structured test cases drafted from §0
+     usage surface (REQUIRED per R14).
+   - **Regress** (`src/test/regress/sql/`): name the per-phase
+     happy-path file (e.g. `sessvar.sql`) AND the comprehensive
+     own-suite file (e.g. `sessvar_advanced.sql` — REQUIRED by
+     R14: identifier edges, type variety, cross-feature
+     integration, adversarial). The comprehensive suite is what
+     catches gaps the per-phase regress misses (sesvars F14).
    - **Isolation** (`src/test/isolation/specs/`): concurrency races
      this feature could cause? Name the spec file(s).
    - **TAP** (`src/test/recovery/t/` or similar): multi-node /
-     subscriber / replication? Name file(s).
+     subscriber / replication / cross-backend isolation. REQUIRED
+     for features with backend-local state.
    - **`src/test/modules/`**: in-tree C test module needed?
    - **amcheck / `pg_amcheck`**: if AM-related.
    - **pgbench**: if performance-relevant.
+   - **Contrib regression**: name any contrib SQL files that may
+     break from this feature's changes (e.g. catalog-cleanup
+     phases hit `pg_stat_statements/squashing.sql`).
 
 10. **Docs** (bulleted):
     - SGML page(s) to add/update under `doc/src/sgml/`?
@@ -310,6 +430,115 @@ below. Length scales with the feature: ~400 lines for a small change,
   is ADD-only, not subtract.
 
 ## Method
+
+### Step 0.0 — Read the brainstorm's §0 + §0.5 + §0.7 (load-bearing inputs)
+
+Before the scenarios match in Step 0, **read the brainstorm's §0
+usage surface, §0.5 mechanism survey, and §0.7 reference-impl
+notes**. These are LOAD-BEARING:
+
+- §0 usage surface → the spec for `tests/spec.md` (Step 1.5
+  below). Every example row becomes a regression test case.
+- §0.5 mechanism survey → the source for the plan's pre-§3
+  "existing machinery" section. If the brainstorm's recommended
+  approach picked REUSE (e.g. `PARAM_SESSION_VARIABLE` on
+  existing Param node), the plan must INHERIT THAT CHOICE — do
+  not silently invent a new node in §3.
+- §0.7 reference-impl notes → the upper-bound spec. If the
+  brainstorm read a user reference impl, the plan's §3 file
+  table must be COMPARABLE to (or a superset of) the reference's
+  file footprint. Under-scoping vs reference is a R15 violation.
+
+If the brainstorm is from before this skill's v1.2 update and
+doesn't have §0 / §0.5 / §0.7, **escalate**: ask the user
+whether to (a) re-brainstorm with the updated skill, (b) extend
+the existing brainstorm in-place with the missing sections, or
+(c) proceed at the brainstorm's narrow scope with explicit
+consent.
+
+### Step 0.5 — PARALLEL FAN-OUT for §3 file enumeration
+
+The old single-context method greps the source tree linearly
+and misses files because one agent can only hold so much in
+context. The v1.2 method fans out: spawn one subagent per
+source-tree domain in the same message.
+
+Domains to fan out (pick the ones relevant to the feature):
+
+- **Agent A — parser.** Grep `src/backend/parser/` +
+  `src/include/parser/` + `src/pl/plpgsql/src/pl_gram.y` +
+  `src/interfaces/ecpg/preproc/pgc.l` + `src/fe_utils/psqlscan.l`
+  for files the feature would touch. Return a §3-row list per
+  file with cited line numbers.
+- **Agent B — executor + JIT.** Grep `src/backend/executor/` +
+  `src/include/executor/` + `src/backend/jit/llvm/` for new
+  EEOP / case-clause sites. Return §3 rows.
+- **Agent C — planner + clauses.** Grep `src/backend/optimizer/`
+  + `src/backend/nodes/nodeFuncs.c` + `src/backend/parser/
+  parse_collate.c` for walker-coverage sites the new node needs.
+  Return §3 rows.
+- **Agent D — catalog.** Grep `src/include/catalog/` for
+  `*.dat` rows / catversion / pg_proc / pg_operator / pg_type
+  impact. Return §3 rows for catalog edits + catversion bump.
+- **Agent E — PL/pgSQL integration.** Grep `src/pl/plpgsql/src/`
+  for sites that would need updating IF the feature should work
+  inside PL/pgSQL DO blocks / functions. Critical — sesvars
+  calibration missed this entirely.
+- **Agent F — ECPG.** Grep `src/interfaces/ecpg/` for sites
+  that need sync if the grammar changes.
+- **Agent G — Contrib + tests.** Grep `contrib/*/sql/` +
+  `contrib/*/expected/` + `src/test/regress/sql/` +
+  `src/test/recovery/t/` + `src/test/isolation/specs/` for
+  tests that would need updating OR new tests to write.
+- **Agent H — Docs + ruleutils.** Grep
+  `doc/src/sgml/ref/` + `src/backend/utils/adt/ruleutils.c`
+  (the parse-tree pretty-printer — F14 lesson!) for sites.
+  Critical — ruleutils is forgotten by default.
+
+Synthesize the agent outputs into the §3 table as the UNION of
+(scenario checklist rows from Step 0) + (parallel-fan-out rows
+from Step 0.5) + (brainstorm §0.7 reference-impl file table
+rows). Deduplicate by file path.
+
+**The plan's §3 file count MUST be comparable to or larger than
+the brainstorm's §0.7 reference-impl file count.** If the parallel
+fan-out produces fewer files than the reference, the fan-out
+missed something — escalate.
+
+### Step 1.5 — Draft `tests/spec.md` BEFORE §8 phase planning
+
+The sesvars calibration showed that test-suite-as-spec is the
+right shape: the test cases ARE the requirements. Drafting them
+before phase planning forces the planner to think about every
+usage class up-front, instead of discovering gaps phase-by-phase.
+
+Procedure:
+
+1. Take the brainstorm's §0 usage surface (20-30 example lines).
+   Each example becomes one regression test case.
+2. Add cross-cutting tests per R14 (the comprehensive own-test-
+   suite rule): identifier edges, NULL handling, type variety,
+   cross-feature integration (PL/pgSQL DO + CTEs + subqueries +
+   EXPLAIN + savepoints + prepared params), adversarial.
+3. Add cross-backend TAP cases for any feature with backend-
+   local state (lifetime, isolation, reconnect).
+4. Write `tests/spec.md` — a structured list of test cases
+   (NOT yet SQL — the structured cases come first, the SQL
+   transliteration is part of `tests/regress-cases.sql` which
+   the implementation will land).
+
+   Format:
+   ```
+   ## Test category: Reader
+   - TC-R-1: `SELECT @x` of never-set name returns NULL.
+   - TC-R-2: `SELECT @x` after `SET @x := 1` returns 1 (int4).
+   - TC-R-3: `SELECT @x IS NULL` after explicit `SET @x := NULL`
+     returns t.
+   ...
+   ```
+5. The phase planning in §8 then maps each test category to the
+   phase that makes it pass. If a test category has no phase
+   covering it, the plan is incomplete — go back to §3 + §8.
 
 ### Step 0 — Match the brainstorm against `knowledge/scenarios/` (hard integration)
 
