@@ -198,6 +198,37 @@ mention pg_proc.dat at all.
   the new use, also pin
   `[[scenarios/remove-from-catalog]]`").
 
+### F8 — Objective-C keyword collision on macOS clang (caught in Phase 3 in-flight)
+
+**Symptom.** Phase 3 added a `typeid` field to the new `SessionVar`
+Expr node in primnodes.h. The build failed on macOS clang with
+opaque errors about token expectations and reserved word use —
+because **`typeid` is a reserved Objective-C keyword** on macOS
+clang. Renamed everywhere to `vartype`. ~30 min lost.
+
+**Why the suite missed it.** No knowledge corpus / scenario / skill
+warns about Objective-C reserved words. The PG tree's existing
+headers happen to avoid them (the closest precedent, `Param`, uses
+`paramtype` not `typeid`), but newcomers wouldn't know.
+
+**Reserved words to avoid in PG headers/identifiers:**
+- macOS Objective-C: `typeid`, `id`, `Class`, `SEL`, `IMP`, `BOOL`,
+  `nil`, `Nil`, `YES`, `NO`, `self`, `super`, `_cmd`, `IBAction`,
+  `IBOutlet`.
+- Windows (winnt.h): `BOOL`, `BYTE`, `WORD`, `DWORD`, `HANDLE`,
+  `FAR`, `NEAR`, `IN`, `OUT`, `OPTIONAL`.
+- Both: `BOOL` (worst offender).
+
+**Fix proposal.**
+- Add a `knowledge/idioms/portable-identifiers.md` doc enumerating
+  the reserved words to avoid + showing the precedent in existing
+  PG headers (e.g. `paramtype`, `funcname` patterns).
+- Reference from `pg-feature-plan/SKILL.md` §3 file-table emission:
+  when proposing a new typedef field name, the planner should grep
+  the existing tree for the proposed name to detect collision.
+- Add a note to the brainstorm skill for any DECISION that
+  introduces a new C identifier in a backend header.
+
 ### F7 — `meson test --suite setup` prerequisite undocumented
 
 **Symptom.** First Phase 0 regress run in the fresh worktree
@@ -279,6 +310,19 @@ their own commits in `postgres-claude/`:
 10. **`.claude/skills/build-and-run/SKILL.md`** — document
     `meson test --suite setup` prerequisite on fresh build trees
     (F7). Same note in `.claude/commands/pg-test.md`.
+11. **`knowledge/idioms/portable-identifiers.md`** — new doc
+    enumerating reserved words to avoid (F8): Objective-C
+    keywords on macOS clang + Windows winnt.h symbols. Show
+    precedent renames (`paramtype`, `funcname`).
+12. **`pg-feature-plan/SKILL.md`** — when emitting §3 row for a
+    new typedef, grep the proposed field name against the tree to
+    detect collision (F8 prevention).
+13. **Walker-coverage checklist** (Phase 3 surfaced this): any new
+    Expr node needs adds in `nodeFuncs.c` (6 funcs:
+    `exprType/Typmod/Collation/SetCollation/Location/walker/
+    mutator`), `parse_collate.c assign_collations_walker`, and
+    `typedefs.list`. Add to `knowledge/scenarios/add-new-expression-
+    eval-step.md` (#15) as a required-step row.
 
 These do NOT happen during this run — they get logged here and the
 calibration run continues. Post-calibration, the user can decide
