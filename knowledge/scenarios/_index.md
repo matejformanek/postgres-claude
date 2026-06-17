@@ -68,6 +68,17 @@ See `README.md` for the layer's purpose, template, and refresh rules.
 | 30 | [add-new-extension](add-new-extension.md) | New `contrib/<name>/`: `.control` + `--1.0.sql` + `_PG_init` + Makefile/meson + tests. |
 | 31 | [add-new-test-module](add-new-test-module.md) | New `src/test/modules/<name>/`: Makefile + meson + `.c` + `.sql` + expected/ + Cluster.pm TAP. |
 
+### Inverse / composition (the "downstream sweep" scenarios)
+
+These scenarios don't describe a self-contained change-class; they
+describe a *sweep* that another scenario's decision can force. Pin
+them when the trigger scenario's decision matches.
+
+| # | Slug | Trigger |
+|---|---|---|
+| 32 | [remove-from-catalog](remove-from-catalog.md) | I am REMOVING entries from `pg_operator.dat` / `pg_proc.dat` / `pg_aggregate.dat` / `pg_cast.dat` — typically forced by a new keyword/sigil reserving the character. Covers proc-descr-orphan (F6), contrib silently breaking (F12), and `pg_am*` / `pg_op*` reference audits. |
+| 33 | [integrate-with-plpgsql](integrate-with-plpgsql.md) | My new feature (keyword, expression, statement) must work inside PL/pgSQL DO blocks / functions / procedures. Covers the `pl_gram.y` token-sync trap (F2), `pl_scanner.c` hand-written scanner, `pl_exec.c` dispatcher, `pl_handler.c`, `plpgsql.h` enums, and DO-block test coverage. |
+
 ## Decision tree — "which scenario do I want?"
 
 Walk the tree top-down. Stop at the first match.
@@ -121,11 +132,16 @@ What kind of thing are you adding?
 │
 ├─ Catalog plumbing
 │   ├─ New column on an existing catalog       → #9  add-new-system-catalog-column
+│   ├─ REMOVING entries from a catalog         → #32 remove-from-catalog
 │   └─ Just need to bump CATALOG_VERSION_NO    → #1  bump-catversion
 │
-└─ Packaging / tests
-    ├─ New contrib/ extension                  → #30 add-new-extension
-    └─ New src/test/modules/<name>             → #31 add-new-test-module
+├─ Packaging / tests
+│   ├─ New contrib/ extension                  → #30 add-new-extension
+│   └─ New src/test/modules/<name>             → #31 add-new-test-module
+│
+└─ Cross-cutting (compose with the primary scenario)
+    └─ Feature must work inside PL/pgSQL       → #33 integrate-with-plpgsql
+       (DO blocks, function bodies, procs)        (always unions with #11/#12/#13/#15)
 ```
 
 ## Composite features
@@ -145,6 +161,16 @@ the checklists; you don't have to pick one. Common compositions:
 - **"Add MERGE-WHEN-NOT-MATCHED-BY-SOURCE support"**
   = #11 (keyword) ∪ #13 (utility statement extension) ∪ #14 (plan
   node if new) ∪ #19 (WAL if a new sub-record).
+- **"Add session variables (`@x := value`) usable from PL/pgSQL"**
+  (sesvars-shaped composite) = #11 (new lexer rule → keyword/sigil)
+  ∪ #32 (the new sigil clashes with built-in `@` unary ops; remove
+  them) ∪ #12 (new `SessionVar` Expr Node) ∪ #15 (new expr-eval
+  step + walker / collation / ruleutils coverage) ∪ #33 (must work
+  inside DO blocks and function bodies).
+- **"Add a new sigil-prefixed syntax (any of `@x`, `#x`, `$x`)"**
+  = #11 (the lexer rule) ∪ #32 (audit + remove any catalog
+  conflicts on the sigil) ∪ #33 (almost always — PL/pgSQL users
+  expect it to work in DO blocks too).
 
 ## Gaps register
 

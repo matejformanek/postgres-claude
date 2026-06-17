@@ -2,7 +2,7 @@
 scenario: add-new-sql-keyword
 when_to_use: I want to add a new SQL keyword (reserved or unreserved) — the kwlist.h + gram.y + scan-sync sweep, distinct from adding a whole new statement.
 companion_skills: ["parser-and-nodes"]
-related_scenarios: ["add-new-utility-statement", "add-new-node-type"]
+related_scenarios: ["add-new-utility-statement", "add-new-node-type", "remove-from-catalog", "integrate-with-plpgsql"]
 canonical_commit: 0823d061b0b
 last_verified_commit: e18b0cb7344
 ---
@@ -84,6 +84,8 @@ last_verified_commit: e18b0cb7344
 | 14 | `src/test/regress/sql/create_view.sql` + `expected/create_view.out` | The regression test that calls `pg_get_keywords()` lives here — its expected output enumerates the keyword count and a sample [verified-by-code](source/src/test/regress/sql/create_view.sql:806). Adding a keyword will shift counts; re-record expected output. Also `rangefuncs.sql` exercises `pg_get_keywords()` in another way [verified-by-code](source/src/test/regress/sql/rangefuncs.sql:645). | — | testing |
 | 15 | `src/backend/utils/adt/misc.c` | NOT edited — but `pg_get_keywords()` lives here and reads the auto-generated `ScanKeywords` table at runtime [verified-by-code](source/src/backend/utils/adt/misc.c:391). Useful for grep-confirming the wire-up after build. | — | — |
 | 16 | `src/include/catalog/catversion.h` | Bump `CATALOG_VERSION_NO` **only** if your keyword introduces a stored-parsetree change (new Node type, new Stmt) — see `add-new-node-type`. Pure-grammar keyword additions that don't affect on-disk catalogs / parsetree storage typically don't require a bump [from-comment](source/src/include/catalog/catversion.h:26-38). | [catversion.h.md](../files/src/include/catalog/catversion.h.md) | catalog-conventions |
+| 17 | `src/pl/plpgsql/src/pl_gram.y` | **Third sync trap — PL/pgSQL `%token <str>` sibling block.** Lines 247-250 carry a `%token <str>` declaration block prefixed with the in-source comment "Keep this list in sync with backend/parser/gram.y!" [from-comment](source/src/pl/plpgsql/src/pl_gram.y:240-249). Any new core `gram.y` `%token <str>` shifts the numeric token IDs assigned by Bison in `gram.h` (e.g. `COLON_EQUALS` 270→271, `DOT_DOT` 269→270 in the sesvars run). PL/pgSQL's `pl_scanner.c` makes **integer comparisons** against these IDs (`if (tok == COLON_EQUALS)`), so a desync silently breaks PL/pgSQL parsing of `:=` and `1..N` ranges. Not enforced by any build script. Origin: sesvars F2 retro, where adding `SESSION_VAR` to core gram.y without syncing pl_gram.y caused ~30 of 39 phase-1 regression failures. Composite trigger: see also `scenarios/integrate-with-plpgsql.md` for the broader PL/pgSQL surface. | — | parser-and-nodes |
+| 18 | Catalog-conflict audit (REQUIRED before adding new lexer token) | **NOT a single file — a required grep step.** Before introducing a new sigil or character-class lexer rule (`@{ident}`, `#`-prefix, etc.), grep `src/include/catalog/pg_operator.dat`, `src/include/catalog/pg_proc.dat`, and `src/include/catalog/pg_aggregate.dat` for any existing entries that use the proposed sigil/character as an operator name. Origin: sesvars F1 — the brainstorm chose new flex rule `@{ident}` → `SESSION_VAR` with the framing "accept docs incompat for *user-defined* `@`-prefix unary operators." The word "user-defined" was the bug: PG ships **6 built-in `@` unary operators** in `pg_operator.dat` (int2abs / int4abs / int8abs / float4abs / float8abs / numeric_abs). The new `@{ident}` lexer rule hijacked them and regressed the float4 / float8 / opr_sanity tests; Phase 0 had to drop all 6 catalog entries and backfill `descr =>` on the orphaned `*abs` procs (see also `scenarios/remove-from-catalog.md` for the downstream removal sweep). If your audit reveals a conflict, the decision question changes from "accept it" to "remove the existing entries AND audit the contrib + regress fallout" — escalate to brainstorm. | — | parser-and-nodes |
 
 ## Phases — suggested split for `pg-feature-plan`
 
@@ -166,10 +168,29 @@ The tree must build at the end of each phase.
     so for the typical keyword-add this is a non-issue. Note it
     explicitly in the commit message if you DID touch character
     classes.
+  - **Core `gram.y` `%token <str>` block ↔ `src/pl/plpgsql/src/pl_gram.y:247-250`
+    `%token <str>` block.** New core `%token <str>` shifts Bison-assigned
+    numeric IDs in `gram.h`; PL/pgSQL's `pl_scanner.c` compares against
+    those IDs by integer, so desync silently breaks `:=`, `1..N`, and
+    other PL/pgSQL constructs. Not enforced by any script — the
+    in-source comment "Keep this list in sync with backend/parser/gram.y!"
+    [from-comment](source/src/pl/plpgsql/src/pl_gram.y:240-241) is the
+    only warning. Origin: sesvars F2 retro.
   - `kwlist.h` ↔ `create_view.out` / `rangefuncs.out` expected output
     (the row counts shift).
   - kwlist length ↔ `doc/src/sgml/keywords.sgml` regen happens
     automatically; no action needed unless the doc build fails.
+
+- **Catalog-conflict audit BEFORE picking a sigil / character-class
+  lexer rule.** Required pre-flight grep step (row 18 in the checklist):
+  search `pg_operator.dat`, `pg_proc.dat`, `pg_aggregate.dat` for any
+  existing entries that use the proposed sigil. PG ships 6 built-in
+  `@` unary operators that the sesvars `@{ident}` lexer rule hijacked
+  unintentionally (sesvars F1 retro). If you find conflicts, decide
+  whether to (a) abandon the sigil and pick another, (b) remove the
+  existing entries and pin `scenarios/remove-from-catalog.md` for the
+  downstream sweep, or (c) escalate to the user. Do NOT proceed
+  without making that decision explicitly.
 
 ## Verification (exact test invocations)
 

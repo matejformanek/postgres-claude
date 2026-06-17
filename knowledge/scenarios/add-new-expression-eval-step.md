@@ -73,6 +73,9 @@ last_verified_commit: e18b0cb7344
 | 6 | `src/backend/executor/nodeXxx.c` (caller) | Whichever planner-emitted node first uses the new step (e.g. `nodeAgg.c` for an aggregate-flow step, `execGrouping.c` for hashing). The caller invokes `ExecInitExpr` / `ExecBuildXxx` which then pushes the new opcode. Without a caller the step is dead code; the regress run will not exercise it [verified-by-code](source/src/backend/executor/nodeAgg.c). | — | executor-and-planner |
 | 7 | `src/test/regress/sql/<group>.sql` + `expected/<group>.out` | Add a SQL exercise that triggers the new step. Existing groups by domain: `expressions`, `case`, `domain`, `jsonb_jsonpath` (for JSON_EXPR), `aggregates` (for agg-internal steps). [verified-by-code](source/src/test/regress/sql/expressions.sql) | — | testing |
 | 8 | (NEW or existing) JIT smoke under `jit_above_cost = 0` | The standard regress suite doesn't force JIT. To exercise the JIT mirror, either add a `SET jit_above_cost = 0; SET jit_expressions = on; <stmt>` block to an existing test, or rely on the `pg_regress` flag to set those via `PGOPTIONS`. Without this you can ship an unhandled JIT case and CI greens. [verified-by-code](source/src/backend/jit/jit.c:37-42) | — | executor-and-planner |
+| 9 | `src/backend/nodes/nodeFuncs.c` | **Walker coverage (REQUIRED when the new step services a new `Expr` Node).** Every new Expr Node needs 6+ case adds across the walker family in this file: `exprType()`, `exprTypmod()`, `exprCollation()`, `exprSetCollation()`, `exprLocation()`, plus the recursive walks in `expression_tree_walker()` and `expression_tree_mutator()`. Missing any of these manifests as `elog(ERROR, "unrecognized node type")` from a code path that the per-phase regress may not exercise. Origin: sesvars F3. (Compose with `scenarios/add-new-node-type.md` — the Node-add scenario owns the broader walker sweep; this row is the EEOP-side reminder that an `Expr`-bearing step needs the same coverage.) | — | parser-and-nodes |
+| 10 | `src/backend/parser/parse_collate.c` | **Collation walker leaf-case (REQUIRED when the new step services a new `Expr` Node that can produce a TEXT-family result).** `assign_collations_walker()` needs a leaf-Expr case for the new node. Missing this triggers a `SIGABRT` on the first collation-walker pass for any TEXT-resulting expression — the assertion fails before any user-visible error message, so the symptom is a backend crash on a SELECT that mentions the new Expr. The crash happens in parse-analysis, not execution, so JIT-on/JIT-off both crash identically. Origin: sesvars F3. | — | parser-and-nodes |
+| 11 | `src/backend/utils/adt/ruleutils.c` | **Parse-tree pretty-printer (REQUIRED when the new step services a new `Expr` Node).** Both `get_rule_expr()` and `is_simple_node()` need `case T_FooExpr:` entries for the new node. Without these, `EXPLAIN VERBOSE`, `CREATE VIEW`, `pg_get_viewdef()`, `pg_get_ruledef()`, `pg_get_*def()` — every parse-tree-to-text path — error with `unrecognized node type: N` at runtime. Per-phase happy-path regress almost never invokes `EXPLAIN VERBOSE` on the new Expr, so this gap is **invisible to per-phase gates** and only surfaces under a comprehensive own-test-suite (R14). Origin: sesvars F14 — `EXPLAIN VERBOSE SELECT @x` and `CREATE VIEW v AS SELECT @x` errored with `unrecognized node type: 9` because `T_SessionVar` was missing from both functions. Fix shape: `case T_SessionVar: appendStringInfo(buf, "@%s", node->name); break;` plus inclusion in `is_simple_node`'s "no parens needed" list if appropriate. | — | parser-and-nodes |
 
 (Use `—` in the per-file doc column for files whose per-file doc hasn't
 been written yet; otherwise the entry should exist in `knowledge/files/`
@@ -153,6 +156,25 @@ The tree must build at the end of each phase.
   or grep `EEOP_FOO` to confirm at least one `scratch.opcode =`
   assignment exists in `execExpr.c`.
 
+- **Walker coverage drift** — if the new step services a new `Expr`
+  Node, missing cases in `nodeFuncs.c` (6 functions) or
+  `parse_collate.c assign_collations_walker` produce confusing
+  failures far from the edit site: `elog(ERROR, "unrecognized node
+  type")` from a random query, or `SIGABRT` in parse-analysis for any
+  TEXT-resulting expression that mentions the new Node. Origin:
+  sesvars F3 retro.
+- **Ruleutils.c pretty-printer omission** — `EXPLAIN VERBOSE`,
+  `CREATE VIEW`, and `pg_get_*def()` all walk the parse tree through
+  `ruleutils.c get_rule_expr` + `is_simple_node`. Missing a case for
+  the new Expr Node makes those paths error with `unrecognized node
+  type: N`. **Per-phase happy-path regress will not catch this** —
+  the standard test scripts don't `EXPLAIN VERBOSE` arbitrary new
+  expressions. This is the prototypical R14 case ("comprehensive
+  own-test-suite required"): only a feature-specific test that
+  explicitly runs `EXPLAIN (VERBOSE, COSTS OFF) SELECT <new-expr>`
+  and `CREATE VIEW v AS SELECT <new-expr>` will catch the gap before
+  ship. Origin: sesvars F14 retro.
+
 - **Synchronization traps** (sibling files that must change together):
   - `execExpr.h` enum entry ↔ `execExprInterp.c` `dispatch_table[]` row
     (same relative position, every time).
@@ -162,6 +184,11 @@ The tree must build at the end of each phase.
   - Out-of-line `ExecEvalFoo` helper ↔ `execExpr.h` `extern`
     declaration ↔ `llvmjit_types.c` (only if the helper's signature
     needs a new LLVM `FunctionType` mapping; most reuse existing ones).
+  - **`nodeFuncs.c` walker cases (6 functions) ↔ `parse_collate.c
+    assign_collations_walker` leaf case ↔ `ruleutils.c get_rule_expr`
+    + `is_simple_node` cases.** All three sites must gain entries for
+    any new `Expr` Node the step services. Not enforced by any
+    script. Origin: sesvars F3 + F14.
 
 ## Verification (exact test invocations)
 
