@@ -198,6 +198,103 @@ mention pg_proc.dat at all.
   the new use, also pin
   `[[scenarios/remove-from-catalog]]`").
 
+### F14 — Ruleutils gap: `T_SessionVar` missing from parse-tree pretty-printer (caught by comprehensive own-test-suite)
+
+**Symptom.** `EXPLAIN VERBOSE SELECT @x` and `CREATE VIEW v AS
+SELECT @x` (and any other parse-tree-pretty-printing path)
+errored with `unrecognized node type: 9` because
+`src/backend/utils/adt/ruleutils.c` had no `case T_SessionVar:`
+in `get_rule_expr` or `is_simple_node`. Per-phase regress for
+phases 3-5 happens to never invoke `EXPLAIN VERBOSE` on a
+SessionVar expression, so the gap was silently invisible.
+
+**Caught by.** The comprehensive own-test-suite
+`src/test/regress/sql/sessvar_advanced.sql`, which exercises
+`EXPLAIN (VERBOSE, COSTS OFF) SELECT @cte_threshold;` and
+`EXPLAIN (VERBOSE, COSTS OFF) SELECT (@inline_in_explain := 1) +
+1`. Without R14, this gap would have shipped.
+
+**Fix.** Added both `case T_SessionVar:` (emits `@<name>`) and
+`case T_SessionVarAssign:` (emits `@<name> := <expr>`) to
+`ruleutils.c get_rule_expr`, plus `T_SessionVar` to
+`is_simple_node`.
+
+**Fix proposal (planner-suite action item 18).**
+- Walker-coverage checklist (already at item 13) must add
+  `src/backend/utils/adt/ruleutils.c get_rule_expr` +
+  `is_simple_node` as required-step rows. Any new Expr node
+  needs cases in BOTH `nodeFuncs.c` walkers AND `ruleutils.c`
+  pretty-printer — the latter is what makes EXPLAIN/CREATE VIEW
+  work.
+- Scenario `#15 add-new-expression-eval-step.md` should list
+  `ruleutils.c` as a required edit.
+- Direct motivation for R14 ("comprehensive own-test-suite") in
+  the discipline rules — this is the prototypical example.
+
+### F13 — `@x[2]` array-subscript syntax not supported (documented limitation, not a bug)
+
+**Symptom.** `SET @arr = ARRAY[1,2,3]; SELECT @arr[2];` fails
+with `syntax error at or near "["`. The Phase 5 grammar
+production is `a_expr: SESSION_VAR COLON_EQUALS a_expr` only;
+SESSION_VAR doesn't get the `[idx]` suffix treatment that
+`ColId | indirection` arms get.
+
+**Workaround.** `SELECT (@arr)[2]` — parens-then-subscript
+applies the subscript to the expression result. Documented inline
+in `sessvar_advanced.sql`.
+
+**Why this isn't a bug.** Pure-dynamic typing means the parse-time
+type of `@arr` is the type at last assignment; subscripting
+requires that type to be subscriptable at parse time, which the
+current `c_expr: SESSION_VAR` production doesn't carry into. A
+follow-up could add `SESSION_VAR indirection` to mirror
+`ColId indirection`, but it's a feature, not a fix.
+
+**Fix proposal (deferred to follow-up patch — not part of MVP).**
+Document in upstream cover-letter as a known limitation. The
+parens workaround is fine for now.
+
+### F12 — Phase-end check scope misses contrib (caught in R12 end-gate)
+
+**Symptom.** The R12 end-of-implementation `meson test --no-rebuild`
+ran 99 OK + 1 FAIL + 295 SKIP. The single fail was
+`pg_stat_statements/regress` (the `squashing` test) — which uses
+`@ '-N'` forms to exercise the "No constants squashing for OpExpr"
+guarantee. Phase 0 removed the 6 `@` unary operators; those
+expressions now fail with `operator does not exist`.
+
+**Why the suite missed it.** Every Phase 0–6 phase-end check used
+`meson test -C build-debug --suite regress` — which covers
+`src/test/regress` ONLY. **It does NOT cover `contrib/`** (each
+contrib module is its own meson suite). Contrib fallout from a
+core change is silently invisible to the per-phase gate.
+
+**Fix.** Edited `contrib/pg_stat_statements/sql/squashing.sql` to
+use `~ '-N'::int4` (bitwise NOT with explicit cast) instead of
+`@ '-N'`. Still a one-operand OpExpr, exercises the same code
+path. Expected output regenerated. Committed as F12 hotfix on
+the worktree.
+
+**Fix proposal (planner-suite action item 17).**
+- `pg-implement-discipline.md` v2 rule R13 (extending F4): phases
+  that touch the catalog (`pg_operator.dat`, `pg_proc.dat`,
+  `pg_type.dat`, etc.), grammar (`gram.y`, `scan.l`), executor
+  dispatch, or any pg-wide invariant MUST run **both**
+  `--suite regress` AND `--suite contrib-*` (or equivalent
+  glob) in their phase-end check.
+- `pg-feature-plan/SKILL.md` should emit phase-end checks with the
+  appropriate scope based on what files the phase touches. A
+  per-phase scope ladder:
+  - Helper-only changes → `--suite regress` is enough.
+  - Catalog/parser/executor changes → `--suite regress` +
+    `contrib/*` suites + `--suite isolation` (if shared-mem
+    semantics).
+  - WAL/replication → above + `--suite recovery`.
+- Add `pg_stat_statements/squashing.sql` to scenario
+  `#11 add-new-sql-keyword.md` and a new
+  `knowledge/scenarios/remove-from-catalog.md` (F6) as a
+  sync-trap because it exercises operator-by-name behavior.
+
 ### F9 — Walker-flag default mistake: `QTW_EXAMINE_RTES_BEFORE` (caught in Phase 6 in-flight)
 
 **Symptom.** Phase 6's `QueryListHasSessionVar` walker initially
@@ -430,6 +527,22 @@ their own commits in `postgres-claude/`:
     FetchPreparedStatementResultDesc → outer RowDescription` (F11).
     List all consumers of `plansource->resultDesc` so future
     invalidation work can ensure each triggers revalidation.
+17. **Phase-end-check scope ladder** (F12) — codified as R13 in
+    `pg-implement-discipline.md` v1.1. Catalog/grammar/executor
+    phases must check `--suite regress` + `--suite contrib-*` +
+    appropriate sibling suites, not regress alone.
+18. **Walker-coverage checklist extended to ruleutils.c** (F14) —
+    add `src/backend/utils/adt/ruleutils.c get_rule_expr` and
+    `is_simple_node` to scenario #15's required-step rows. Any
+    new Expr node needs cases in BOTH `nodeFuncs.c` AND
+    `ruleutils.c`.
+19. **`pg-implement-discipline.md` R14 (NEW v1.1)** —
+    comprehensive own-test-suite requirement. Every
+    implementation ships its own focused suite covering edge
+    cases, cross-feature integration, and adversarial scenarios
+    beyond per-phase regress. Best-practice corollary: "implementation
+    that breaks existing tests is broken; implementation that
+    doesn't ship its own comprehensive suite is incomplete."
 
 These do NOT happen during this run — they get logged here and the
 calibration run continues. Post-calibration, the user can decide

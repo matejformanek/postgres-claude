@@ -142,6 +142,83 @@ After the last phase:
    `notes.md`.
 5. Invoke `memory-keeping` to update `progress/STATE.md`.
 
+### R13 — Phase-end check scope matches phase blast radius
+
+A phase's phase-end check MUST cover every test suite that could
+plausibly regress from the change. The default `--suite regress`
+covers `src/test/regress` ONLY; contrib modules, isolation tests,
+TAP recovery tests, and ECPG tests are SEPARATE suites and are
+INVISIBLE to a regress-only check.
+
+The scope ladder (apply the broadest matching tier):
+
+- **Helper-only changes** (utility function, new internal API, no
+  cross-cutting impact): `--suite regress` is sufficient.
+- **Catalog changes** (`pg_operator.dat`, `pg_proc.dat`,
+  `pg_type.dat`, `pg_aggregate.dat`, etc.) — REQUIRED:
+  `--suite regress` + `--suite contrib-*` (contrib modules often
+  exercise operators / functions by name and silently regress
+  when entries change). Origin: sesvars F12, where Phase 0's
+  catalog cleanup broke `pg_stat_statements/squashing.sql` and
+  the regress-only gate missed it.
+- **Grammar / lexer changes** (`gram.y`, `scan.l`, `pl_gram.y`,
+  ECPG `pgc.l`) — REQUIRED: `--suite regress` + `--suite ecpg` +
+  every `contrib/*` suite that may parse SQL.
+- **Executor / planner changes** (`execExpr*.c`, `clauses.c`,
+  `plancache.c`, etc.) — REQUIRED: `--suite regress` +
+  `--suite isolation` + every `contrib/*` suite.
+- **WAL / replication / catalog-version-bumping changes** —
+  REQUIRED: above + `--suite recovery`.
+- **Ruleutils / parse-tree formatting** — REQUIRED: above + a
+  spot-check on `CREATE VIEW`, `EXPLAIN VERBOSE`, and
+  `pg_get_*def` output (origin: sesvars F14, where `T_SessionVar`
+  was missing from `ruleutils.c get_rule_expr` and broke
+  `EXPLAIN VERBOSE` silently).
+
+The end-of-implementation gate (R12) ALWAYS runs full
+`meson test --no-rebuild` regardless of phase scope — it's the
+backstop for any phase that under-scoped its check.
+
+### R14 — Comprehensive own-test-suite
+
+Every implementation MUST ship its OWN focused test suite covering
+edge cases, cross-feature integration, and adversarial scenarios
+— beyond the per-phase happy-path regress rows.
+
+A "good implementation" test suite at minimum exercises:
+
+1. **Identifier / boundary edge cases** — long names (near
+   NAMEDATALEN), unusual characters, empty inputs, NULL.
+2. **Type variety** — bool, int, numeric, text, jsonb, array,
+   composite (every type domain the feature spans).
+3. **Cross-feature integration** — PL/pgSQL DO blocks, CTEs,
+   subqueries, EXPLAIN, savepoints, prepared statements with
+   parameter mixing.
+4. **Adversarial behavior** — assignment side-effects in odd
+   positions, volatility marking validation, NULL propagation,
+   ROLLBACK / SAVEPOINT semantics.
+5. **Cross-backend / session-isolation** (TAP) — exit, reconnect,
+   verify isolation invariants.
+
+This separate suite ships AS PART OF the feature, NOT as a
+follow-up. Per-phase regress rows verify the happy path WITHIN
+each phase's commit; the comprehensive suite verifies the
+*completed feature* holds together across edge cases. Reference:
+sesvars ships both `src/test/regress/sql/sessvar.sql` (per-phase
+happy path) AND `src/test/regress/sql/sessvar_advanced.sql`
+(comprehensive own-test-suite) AND
+`src/test/recovery/t/054_sessvar_lifecycle.pl` (cross-backend
+TAP). The comprehensive suite directly surfaced F14 (ruleutils
+gap) which the per-phase gate had missed.
+
+**Best-practice corollary (classic):** an implementation that
+breaks existing tests is broken. The combination of R4 +
+R13 + R14 enforces this end-to-end: R4 says phase-end check must
+pass (no breakage allowed forward); R13 says the check scope
+must match the blast radius (so breakage isn't merely hidden);
+R14 says the implementation's own suite must be comprehensive
+enough to catch what the cross-cutting suites would miss.
+
 ## Anti-patterns (explicitly forbidden)
 
 - **"WIP" commits.** Every commit in `dev/` is a complete phase. No
@@ -179,3 +256,9 @@ These rules are intentionally short and stable. When they change,
 update the version note here and call it out in the commit message.
 
 **Version:** v1 (2026-06-02) — initial.
+**Version:** v1.1 (2026-06-17) — adds R13 (phase-end check scope
+ladder) and R14 (comprehensive own-test-suite). Both motivated by
+the sesvars first end-to-end calibration: F12 (contrib silently
+breaks when catalog changes) → R13; F14 (`EXPLAIN VERBOSE` broken
+because `T_SessionVar` missing from `ruleutils.c`, caught only by
+the comprehensive own-test-suite) → R14.
