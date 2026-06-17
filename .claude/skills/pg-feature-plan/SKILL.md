@@ -463,6 +463,20 @@ and misses files because one agent can only hold so much in
 context. The v1.2 method fans out: spawn one subagent per
 source-tree domain in the same message.
 
+#### Fallback when nested Agent tool is unavailable
+
+If running inside a subagent (the Agent tool may not be in your
+exposed tool set), fall back to PARALLEL Read + Bash tool calls
+in a single message. Same fan-out logic, same coverage — the
+subagent is the "container", and the parallel tool calls inside
+one message are the "fan-out". Document this fallback in your
+output so the orchestrator knows the harness limitation kicked in.
+
+(Why this fallback works: a single message with N parallel tool
+calls is effectively a fan-out of N concurrent reads/greps, and
+the model can synthesize across them in the same context. Sesvars
+F16 calibration logged this approach as effective.)
+
 Domains to fan out (pick the ones relevant to the feature):
 
 - **Agent A — parser.** Grep `src/backend/parser/` +

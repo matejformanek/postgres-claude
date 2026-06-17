@@ -38,6 +38,12 @@ If the user said `--test FOO` without `--suite`, default to `--suite regress`.
 will fail with `copying of initdb template failed` / `tmp_install/initdb-template:
 No such file or directory`. Always include `--suite setup` when filtering.
 
+**Fresh `build-debug/` first-run**: if `build-debug/` was just created
+by `meson setup` (no test has run yet), run `meson test -C dev/build-debug
+--suite setup` ONCE on its own first to populate `tmp_install/initdb-template/`.
+Subsequent runs can fold it back in via `--suite setup --suite regress` as
+normal. Origin: sesvars F7.
+
 ## Common suites
 
 - `regress` — the headline SQL regression tests. Run this first. ~34s on M-series.

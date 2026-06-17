@@ -334,6 +334,20 @@ Run as a parallel-fan-out loop (NOT a sequential tight loop —
 the old single-context method under-explored). The fan-out is
 load-bearing.
 
+### Fallback when nested Agent tool is unavailable
+
+If running inside a subagent (the Agent tool may not be in your
+exposed tool set), fall back to PARALLEL Read + Bash tool calls
+in a single message. Same fan-out logic, same coverage — the
+subagent is the "container", and the parallel tool calls inside
+one message are the "fan-out". Document this fallback in your
+output so the orchestrator knows the harness limitation kicked in.
+
+(Why this fallback works: a single message with N parallel tool
+calls is effectively a fan-out of N concurrent reads/greps, and
+the model can synthesize across them in the same context. Sesvars
+F16 calibration logged this approach as effective.)
+
 1. **Set up:** create `planning/<slug>/` if it doesn't exist. Pick the
    slug from the user's idea (snake_case, ≤30 chars). If a brainstorm
    already exists, ask the user if they want to overwrite or revise.

@@ -171,6 +171,58 @@ Notes:
   ignores `build-debug/`, `install-debug/`, and `data-debug/` so PG-relative
   status is always clean.
 
+### macOS — match the sibling `postgresql-dev/build-debug` config (F7)
+
+On macOS, a fresh `meson setup build-debug` may need explicit ICU include
+flags to match the existing sibling configuration that all the other
+build trees use:
+
+```bash
+meson setup dev/build-debug dev \
+  --buildtype=debug \
+  -Dcassert=true \
+  -Ddebug=true \
+  -Dc_args='-I/opt/homebrew/opt/icu4c/include' \
+  -Dprefix=$PWD/dev/install-debug
+```
+
+The reference configuration to mirror lives at
+`/Users/matej/Work/postgres/postgresql-dev/build-debug` — when in doubt,
+copy its `meson-info/intro-buildoptions.json` settings. Without the ICU
+include path, configure trips when probing for `unicode/ucol.h` on
+homebrew-arm64 setups.
+
+Origin: sesvars calibration F7.
+
+### First-run gotcha: the `setup` suite must run ONCE before `regress` (F7)
+
+On a freshly-created `dev/build-debug/` tree (right after
+`meson setup` + `ninja install`), the test harness has NOT yet built
+`tmp_install/initdb-template/`. That artifact is produced by meson's
+`setup` suite (targets `tmp_install`, `install_test_files`, and
+critically `initdb_cache`). Until those run once, any `--suite regress`
+invocation fails with:
+
+```
+copying of initdb template failed
+... tmp_install/initdb-template: No such file or directory
+... could not bind IPv4 address ...: Address already in use
+```
+
+Run the setup suite once before the first regress run:
+
+```bash
+meson test -C dev/build-debug --suite setup
+# then, normally:
+meson test -C dev/build-debug --suite setup --suite regress --num-processes 4
+```
+
+The `/pg-test` wrapper prepends `--suite setup` for exactly this
+reason, but a manual `meson test --suite regress` outside the wrapper
+will silently fail without it.
+
+Origin: sesvars calibration F7.
+
 ## Initialize a cluster and start it
 
 ```bash
