@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-06-17 — Morning briefing: all 10 routines healthy (OK: 10 · SKIPPED: 0 · FAILED: [] · SILENT: []); 10 cloud PRs merged green (#316–#334), #335 (anchor-refresh) open by design; ~1.27M tokens (~$34); standing decision: pg-file-backfiller scope exhausted (files queue 0) → retire/repurpose (PR #336).
