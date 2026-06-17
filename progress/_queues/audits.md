@@ -94,3 +94,13 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/include/nodes/parsenodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe)
 [pending] knowledge/files/src/include/nodes/primnodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe)
 [pending] knowledge/subsystems/replication.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (7 impacted files via a75bd485 replication-command quoting; Owners/Invariants may need refresh)
+
+## anchor-bump (2026-06-17) — e5f94c4808fe..ab3023ad1e68 (10 commits)
+
+[pending] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (null-treatment reject for non-window funcs 4e5920e6 + error-message typo ab3023ad; prior [done:d3dfc9b] re-anchors)
+[pending] knowledge/files/src/backend/replication/logical/reorderbuffer.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (free speculative-insertion change tuple, f50c329f)
+[pending] knowledge/files/src/backend/commands/repack.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (concurrent repack: reject leftover toast attribs, e2a8cabc)
+[pending] knowledge/files/src/backend/statistics/extended_stats_funcs.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (reject oversized MCV lists in pg_restore_extended_stats, f6e4ec0a)
+[pending] knowledge/files/contrib/ltree/ltree.h.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049)
+[pending] knowledge/files/contrib/ltree/ltree_gist.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049)
+[pending] knowledge/files/contrib/ltree/ltree_op.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049)
