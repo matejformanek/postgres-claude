@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-06-17 — backlinks +0 (saturated: 147 per-file docs / 154 longform pairs all already pointed-to) · glossary +99 (1057→1156 headings, two curated batches, pure insertion, sort-clean) · issues +0 (894/894 issue-bearing docs already mirrored by basename signal) (PR #PENDING).
