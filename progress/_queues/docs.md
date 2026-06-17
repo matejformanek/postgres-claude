@@ -149,11 +149,29 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-16 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked the §58 FDW / §60 custom-scan / §68 BKI parent chapters for their callback/command LEAF subsections, which were already-distilled-as-parents but had ZERO leaf coverage. The §58 family was missing its handler-entry (§58.1), helper-functions (§58.4), and row-locking (§58.5) leaves; §60 was missing the custom-path stage (§60.1) under custom-scan-plan/-execution; §68 BKI was missing the command reference (§68.3) + example (§68.4) under bki/bki-structure. Also picked the long-neglected xfunc-internal (LANGUAGE internal). 2 candidates 404'd: protocol-versions, gist/spgist-extensibility re-confirmed gone.)
 
-[in-progress:cloud/pg-docs-miner/2026-06-16] fdw-functions https://www.postgresql.org/docs/current/fdw-functions.html
-[in-progress:cloud/pg-docs-miner/2026-06-16] fdw-helpers https://www.postgresql.org/docs/current/fdw-helpers.html
-[in-progress:cloud/pg-docs-miner/2026-06-16] fdw-row-locking https://www.postgresql.org/docs/current/fdw-row-locking.html
-[in-progress:cloud/pg-docs-miner/2026-06-16] custom-scan-path https://www.postgresql.org/docs/current/custom-scan-path.html
-[in-progress:cloud/pg-docs-miner/2026-06-16] bki-commands https://www.postgresql.org/docs/current/bki-commands.html
-[in-progress:cloud/pg-docs-miner/2026-06-16] bki-example https://www.postgresql.org/docs/current/bki-example.html
-[in-progress:cloud/pg-docs-miner/2026-06-16] xfunc-internal https://www.postgresql.org/docs/current/xfunc-internal.html
+[done:14c3231] fdw-functions https://www.postgresql.org/docs/current/fdw-functions.html
+[done:14c3231] fdw-helpers https://www.postgresql.org/docs/current/fdw-helpers.html
+[done:14c3231] fdw-row-locking https://www.postgresql.org/docs/current/fdw-row-locking.html
+[done:14c3231] custom-scan-path https://www.postgresql.org/docs/current/custom-scan-path.html
+[done:14c3231] bki-commands https://www.postgresql.org/docs/current/bki-commands.html
+[done:14c3231] bki-example https://www.postgresql.org/docs/current/bki-example.html
+[done:14c3231] xfunc-internal https://www.postgresql.org/docs/current/xfunc-internal.html
 [skipped:404-no-such-docs-slug] protocol-versions https://www.postgresql.org/docs/current/protocol-versions.html
+# 2026-06-17: above 7 [in-progress:cloud/pg-docs-miner/2026-06-16] markers were stale —
+# the docs all shipped in PR #330 (merge 14c3231, "7 docs leaf chapters") but the merger
+# never flipped the markers. Verified outputs present under knowledge/docs-distilled/.
+# Flipped to [done:14c3231] this run.
+
+## Refill 2026-06-17 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. Re-walked Part V "Extending SQL" (§38) + §55 coding-conventions + §41 rule-system + §35 large-objects ToCs for dense internals-prose LEAF chapters not yet under docs-distilled/. Targeted the two biggest UNcovered clusters: the extension-packaging/build pair (extend-extensions §38.17 + extend-pgxs §38.18 — glaring gap given the extension-development skill) and the rule-system data-modification family (rules-update §41.4 / rules-privileges §41.5 / rules-status — only the SELECT-rule side rules-views was covered before). Plus the type-system + SQL-function + overloading Extending-SQL leaves and source-format §55.1 (the canonical pgindent rules behind the coding-style skill) and lo-implementation §35.5. 1 candidate 404'd: geqo-pg (folded into the single-page geqo parent in the current docs tree, matching prior gin/gist-extensibility 404s — do not re-queue). rules-status needed a re-fetch with a corrected prompt — first WebFetch returned a rules-vs-triggers framing that the page doesn't carry; it is "Rules and Command Status".)
+
+[in-progress:cloud/pg-docs-miner/2026-06-17] extend-extensions https://www.postgresql.org/docs/current/extend-extensions.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] extend-pgxs https://www.postgresql.org/docs/current/extend-pgxs.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] extend-type-system https://www.postgresql.org/docs/current/extend-type-system.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] xfunc-sql https://www.postgresql.org/docs/current/xfunc-sql.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] xfunc-overload https://www.postgresql.org/docs/current/xfunc-overload.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] source-format https://www.postgresql.org/docs/current/source-format.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] lo-implementation https://www.postgresql.org/docs/current/lo-implementation.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] rules-update https://www.postgresql.org/docs/current/rules-update.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] rules-privileges https://www.postgresql.org/docs/current/rules-privileges.html
+[in-progress:cloud/pg-docs-miner/2026-06-17] rules-status https://www.postgresql.org/docs/current/rules-status.html
+[skipped:404-no-such-docs-slug] geqo-pg https://www.postgresql.org/docs/current/geqo-pg.html
