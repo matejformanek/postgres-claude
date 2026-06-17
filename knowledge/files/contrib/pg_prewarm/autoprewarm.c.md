@@ -169,3 +169,7 @@ GUCs (`_PG_init`):
 4. [ISSUE-resource: leading <<N>> line drives a dsm_create of 20*N bytes; corrupted file can OOM the leader (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:339-346`
 5. [ISSUE-correctness: stale bgworker_pid after SIGKILL of leader blocks re-start (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:197-205,892-901`
 6. [ISSUE-correctness: <<N>> read as signed %d, negative N silently allowed and propagated to size calculation (maybe)] — `source/contrib/pg_prewarm/autoprewarm.c:339,346`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_prewarm.md](../../../subsystems/contrib-pg_prewarm.md)
