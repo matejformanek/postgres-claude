@@ -191,14 +191,14 @@ PG_END_TRY();
 
 ## Before you commit
 
-```bash
-src/tools/pgindent/pgindent .   # pretty-print
-# inspect git diff; restore mangled files with git checkout
-make -s clean && make -s all    # warnings = bugs
-make check-world                # full regression
-make -s headerscheck            # if you touched a public header
-make -s cpluspluscheck          # ditto
-```
+Format-check (`pgindent` / `pgperltidy`) and a scoped `meson test` run
+**automatically**: the PostToolUse hook (`.claude/hooks/pg-format.sh`)
+rewrites C/H/Perl files on edit, and the git pre-commit hook
+(`.claude/hooks/pg-precommit.sh`) re-verifies on commit and runs an
+R13-scoped suite list. If the hook isn't firing, run
+`/pg-install-hooks` (the marker is `# pg-precommit-guard v1` in
+`dev/.git/hooks/pre-commit`). Manual `headerscheck` / `cpluspluscheck`
+is still the user's call for public-header changes.
 
 If pgindent insists on changes outside your patch:
 1. Did you add a typedef? Put it in

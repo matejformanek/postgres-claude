@@ -246,8 +246,10 @@ fan-out, consolidation, synthesis.
   patch URL directly.
 - **PR exists on a fork (not postgres/postgres)**: `gh pr diff` against
   the fork's URL. Tell the user the patch is unofficial.
-- **`pg_bsd_indent` not installed**: pgindent step gets skipped; the
-  style critic will note "CI handles pgindent".
+- **`pg_bsd_indent` not installed**: pgindent step gets skipped. For
+  patches authored locally, the pre-commit hook (`/pg-install-hooks`)
+  already ran pgindent — the style critic verifies the result rather
+  than re-running pgindent fresh.
 - **Pre-existing macOS flakes**: `recovery/040_standby_failover_slots_sync`
   fails on macOS ~30% of the time independent of patches. If it's the
   only failure and the patch doesn't touch replication code, dismiss

@@ -52,6 +52,11 @@ The cluster is back to a virgin `initdb` state: only `postgres`, `template0`,
 `template1` databases; the default superuser is your OS username. Any test
 data, extensions, roles, or schema changes from before are gone.
 
+`/pg-fresh` only wipes the data dir — the `dev/.git/hooks/pre-commit` hook
+is untouched. If you re-cloned `dev/` earlier (via `/pg-reclone-dev`),
+re-run `/pg-install-hooks` to put the hook back; `/setup-pg` does it
+for you on the standard reclone path.
+
 ## Troubleshooting
 
 - **`pg_ctl: server does not shut down`**: a backend is stuck. Either

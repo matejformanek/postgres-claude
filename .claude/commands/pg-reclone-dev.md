@@ -66,9 +66,12 @@ EOF
 echo ""
 echo "Re-clone complete at /Users/matej/Work/postgres/postgresql-dev/"
 echo "Next steps:"
-echo "  1. /setup-pg     # configure + build + install"
+echo "  1. /setup-pg     # configure + build + install + reinstall pre-commit hook"
 echo "  2. /pg-start     # initdb + start the cluster"
 ```
+
+The re-clone wipes `dev/.git/hooks/`, so the pg-precommit hook is gone
+until `/setup-pg` re-runs `/pg-install-hooks` for you.
 
 ## After running
 

@@ -125,6 +125,16 @@ phases) act as one rule, not three.
 
 For each phase in `planning/<slug>/plan.md` §8 "Phased implementation":
 
+### Step 0 — verify hooks installed (once per session)
+
+Before phase 1, confirm `dev/.git/hooks/pre-commit` exists and contains
+the `# pg-precommit-guard v1` marker. If not, run `/pg-install-hooks`
+(idempotent; safe to re-run). The hook is what enforces R4 +
+R13's format-check + scoped-test gate automatically — without it, the
+per-phase commit step still works but the guarantees in R4 are
+back to "Claude remembers". Re-cloning `dev/` (`/pg-reclone-dev`) wipes
+`dev/.git/hooks/` and the next `/setup-pg` reinstalls automatically.
+
 ### Pre-phase (5 min)
 
 1. Read the phase's "Files this phase touches" + "5-10 concrete edits"
@@ -176,6 +186,16 @@ For each phase in `planning/<slug>/plan.md` §8 "Phased implementation":
     imperative, wrapped at 76 cols) since this commit lives in `dev/`
     and may eventually be format-patched upstream.
 
+    The pre-commit hook runs automatically: stage A runs `pg-format.sh
+    --check` against every staged C/H/Perl file (commit fails on dirty;
+    fix in place with `bash .claude/hooks/pg-format.sh <file>`), then
+    stage B runs `meson test --no-rebuild --suite <X>` for the R13
+    scope `pg-phase-detect.sh` infers from the staged paths and the
+    `Plan-phase` trailer in `notes.md`. On test red, inspect
+    `dev/build-debug/meson-logs/testlog.txt`. Override scope only with
+    `PG_PRECOMMIT_SCOPE=regress` (or rarely `skip`); `--no-verify` is
+    forbidden per R4.
+
 ### Plan-linked commit message format
 
 ```
@@ -214,7 +234,14 @@ Sites: <file:line>, <file:line>, ...
 
     ### What this phase did NOT do
     - <items deferred to later phases>
+
+    Plan-phase: <N>
     ```
+
+    The trailing `Plan-phase: <N>` line is parsed by
+    `.claude/hooks/pg-phase-detect.sh` to identify the current phase
+    when the pre-commit hook scopes its meson test run. Keep the
+    `Plan-phase:` token verbatim — that's the grep target.
 
     **Status field values (R8):**
     - `done` — phase-end check green, commit landed.

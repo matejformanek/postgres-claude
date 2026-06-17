@@ -35,6 +35,10 @@ ninja -C dev/build-debug
 
 # 3. Install into dev/install-debug/
 ninja -C dev/build-debug install
+
+# 4. Install the pg-precommit git hook into dev/.git/hooks/pre-commit.
+#    Idempotent; safe to re-run.
+/pg-install-hooks
 ```
 
 Expected wall-clock on Apple Silicon (M-series, debug build): roughly 15s
@@ -47,6 +51,9 @@ Tell the user:
 - The binaries are now under `dev/install-debug/bin/`.
 - Suggest adding to PATH for this shell: `export PATH=$PWD/dev/install-debug/bin:$PATH`.
 - Suggest `PGDATA=$PWD/dev/data-debug` for the dev cluster.
+- The pre-commit hook is now in place (`dev/.git/hooks/pre-commit`):
+  format-check + R13-scoped meson test on each commit. Bypass with
+  `PG_PRECOMMIT_SCOPE=skip git commit ...` if you need to.
 - Next step is `/pg-start` (which will `initdb` on first run).
 
 ## Toolchain prerequisites (macOS / Homebrew)

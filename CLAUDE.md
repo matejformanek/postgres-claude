@@ -62,6 +62,11 @@ build dir, then `ninja` from there. The per-connection fork model means a fresh
 backend starts on every `psql` connect — surprising if you're used to threaded servers.
 See `.claude/skills/build-and-run/SKILL.md` for the actual commands once you need them.
 
+Code-quality + test gating is automated via hooks installed by `/setup-pg`
+(format-check on edit, R13-scoped `meson test` on commit). Source of truth:
+`.claude/hooks/`; installer: `/pg-install-hooks`. Discipline contract: R4 +
+R13 in `.claude/rules/pg-implement-discipline.md` (v1.3).
+
 ## Where to look
 
 - `pg-claude-plan.md` (in the parent dir) — the master design doc, 15-decision blueprint.

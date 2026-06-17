@@ -46,6 +46,14 @@ The plan's "Phase-end check" for phase N (regress / iso / TAP scope as
 specified) must run green. Failures are this phase's problem; don't
 commit broken state and "follow up".
 
+Format-check (pgindent on C/H; pgperltidy on Perl when the pinned
+20230309 binary is present) is gated automatically at commit time via
+the pre-commit hook installed by `/pg-install-hooks`. The PostToolUse
+hook auto-fixes on edit. Bypassing the pre-commit hook with
+`git commit --no-verify` is forbidden within `/pg-implement` phases —
+it's a guardrail, not a prison; tune the test scope via
+`PG_PRECOMMIT_SCOPE=regress|skip` rather than bypass entirely.
+
 ### R5 — Per-phase commit, plan-linked
 
 Every phase ends with exactly one commit. The commit message has:
@@ -152,12 +160,18 @@ INVISIBLE to a regress-only check.
 
 The scope ladder (apply the broadest matching tier):
 
+- **Format-check tier (ALWAYS runs first)**: every commit runs
+  `pg-format.sh --check` against every staged file via the pre-commit
+  hook. The commit fails if any file is dirty. All test tiers below
+  run only after format passes. This is the cheapest gate and
+  catches the most common cause of upstream-style drift.
 - **Helper-only changes** (utility function, new internal API, no
   cross-cutting impact): `--suite regress` is sufficient.
 - **Catalog changes** (`pg_operator.dat`, `pg_proc.dat`,
-  `pg_type.dat`, `pg_aggregate.dat`, etc.) — REQUIRED:
-  `--suite regress` + `--suite contrib-*` (contrib modules often
-  exercise operators / functions by name and silently regress
+  `pg_type.dat`, `pg_aggregate.dat`, and the corresponding
+  `src/include/catalog/pg_*.h` headers) — REQUIRED:
+  `--suite regress` + `--suite pg_stat_statements` (contrib modules
+  often exercise operators / functions by name and silently regress
   when entries change). Origin: sesvars F12, where Phase 0's
   catalog cleanup broke `pg_stat_statements/squashing.sql` and
   the regress-only gate missed it.
@@ -165,8 +179,9 @@ The scope ladder (apply the broadest matching tier):
   ECPG `pgc.l`) — REQUIRED: `--suite regress` + `--suite ecpg` +
   every `contrib/*` suite that may parse SQL.
 - **Executor / planner changes** (`execExpr*.c`, `clauses.c`,
-  `plancache.c`, etc.) — REQUIRED: `--suite regress` +
-  `--suite isolation` + every `contrib/*` suite.
+  `plancache.c`, `node*.c`, files under `src/backend/optimizer/`) —
+  REQUIRED: `--suite regress` + `--suite isolation` +
+  `--suite pg_stat_statements`.
 - **WAL / replication / catalog-version-bumping changes** —
   REQUIRED: above + `--suite recovery`.
 - **Ruleutils / parse-tree formatting** — REQUIRED: above + a
@@ -174,6 +189,12 @@ The scope ladder (apply the broadest matching tier):
   `pg_get_*def` output (origin: sesvars F14, where `T_SessionVar`
   was missing from `ruleutils.c get_rule_expr` and broke
   `EXPLAIN VERBOSE` silently).
+
+This ladder is implemented as code by
+`.claude/hooks/pg-phase-detect.sh`, which inspects the staged file
+paths and emits the suite list for `pg-precommit.sh` to feed to
+`meson test --no-rebuild --suite <X>`. Authors should not need to
+remember which tier applies — the hook picks.
 
 The end-of-implementation gate (R12) ALWAYS runs full
 `meson test --no-rebuild` regardless of phase scope — it's the
@@ -298,6 +319,12 @@ calibration. Full comparison at
 - **Mixing meta-repo + `dev/` writes in one bash invocation.** Even if
   technically fine, the cognitive split matters; pick one direction
   per phase.
+- **`git commit --no-verify` inside a `/pg-implement` phase.** The
+  pre-commit hook is the R4 + R13 enforcement surface. If a phase
+  legitimately needs a smaller test scope, set
+  `PG_PRECOMMIT_SCOPE=regress` (or `skip`, rare). `--no-verify`
+  silently skips the format-check gate too, which is what we wanted
+  to prevent.
 
 ## Cross-references
 
@@ -335,3 +362,18 @@ final-calibration comparison: my AI-driven implementation shipped
 brainstorm + plan under-scoped. R15 codifies the lesson:
 comprehensive scope is the default; MVP framing requires explicit
 user consent.
+**Version:** v1.3 (2026-06-17) — amends R4, R13, and the
+anti-patterns list to wire in the automated code-quality + test
+gating layer (the three scripts under `.claude/hooks/` plus the
+`/pg-install-hooks` slash command). R4 now treats format-check
+plus scoped tests as automatic gates: edits run pgindent /
+pgperltidy on the touched file, and commits run R13-scoped
+`meson test`. `git commit --no-verify` is forbidden inside
+`/pg-implement` phases. R13 grows a leading "format-check tier"
+(always first), adds the executor / planner tier, and treats
+`pg_*.h` catalog headers as the catalog tier trigger. Motivation:
+R4 and R13 only bind if authors remember them; making the gate a
+hook removes the remembering. The coding-style skill's manual
+"Before you commit" block, `pg-review.md:250`'s "CI handles
+pgindent" exemption, and `patch-submission`'s pre-format step all
+retire in favour of the hook.

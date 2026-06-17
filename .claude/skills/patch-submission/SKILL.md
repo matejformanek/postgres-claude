@@ -49,6 +49,11 @@ git diff --check master..HEAD              # whitespace clean
 A v(N) that doesn't apply against current master is the most common
 reason a CF entry gets bounced back without review.
 
+Confirm the pre-commit hook is installed
+(`grep -q 'pg-precommit-guard' dev/.git/hooks/pre-commit`); if so,
+`pgindent` already ran against every commit in the series and no
+separate pre-format step is needed before `format-patch`.
+
 ### 3. Format-patch the series
 
 ```bash
