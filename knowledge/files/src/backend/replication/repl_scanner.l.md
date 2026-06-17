@@ -19,6 +19,15 @@ SQL execution path. (`walsender.c:2133`) [verified-by-code]
 `fprintf` is redefined to call `fprintf_to_ereport` (`:30-39`) so flex's
 fatal-error path doesn't actually `exit()` the backend.
 
+Since `a75bd485b5ea` the `<xd>` (double-quoted identifier) start condition
+gained a `<xd>{xddouble}` rule (`:200`) that collapses an embedded `""` to a
+single `"` via `addlitchar('"')`, mirroring how the main `scan.l` handles
+quoted identifiers. Before this, an embedded quote inside a replication-command
+identifier was not un-doubled — the companion fix to the
+`appendQuotedIdentifier` quoting rewrite in `libpqwalreceiver.c`, so that a
+slot/publication name round-trips correctly through quote-then-parse.
+[verified-by-code, repl_scanner.l:200-206 @ a75bd485b5ea]
+
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

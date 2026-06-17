@@ -1,6 +1,8 @@
 # `src/bin/pg_basebackup/pg_recvlogical.c`
 
 Source pin: `4b0bf0788b066a4ca1d4f959566678e44ec93422`
+(quote-escaping claim re-verified at `a75bd485b5ea`, 2026-06-17 — see
+"Plugin output trust" below: the `-o` not-escaped issue was fixed there.)
 
 ## Purpose
 
@@ -81,13 +83,16 @@ line 358).
   containing 0x0A will be silently mis-parsed by downstream
   consumers that split on newline.
   `[ISSUE-wire-protocol: assumed newline-delimited output not enforced; binary plugin output mis-frames silently (maybe)]`
-- Plugin name and `-o name=value` options are shipped through
-  `appendPQExpBuffer` with `"%s"` (lines 265-269). Option names and
-  values are wrapped in `"…"` / `'…'` respectively but **not
-  escaped** for embedded `"` or `'`. A malicious `-o` value could
-  break the START_REPLICATION command's syntax, but the attacker
-  here is the local CLI invoker, so this is at most a footgun.
-  `[ISSUE-wire-protocol: -o option name/value not quote-escaped (low)]`
+- **(Resolved upstream in `a75bd485b5ea`.)** The slot name, `-o` option
+  names, and `-o` option values are now quote-escaped: the
+  `START_REPLICATION SLOT` builder calls `AppendQuotedIdentifier(query,
+  replication_slot)` (line 252), `AppendQuotedIdentifier(query,
+  options[i*2])` (line 266) for each option name, and
+  `AppendQuotedLiteral(query, options[i*2+1])` (line 272) for each option
+  value. Previously these were raw `appendPQExpBuffer(query, "\"%s\"" / "
+  '%s'", …)` interpolations with **no** escaping for an embedded `"` / `'`
+  — the footgun this doc used to flag. `[verified-by-code, pg_recvlogical.c:250-273 @ a75bd485b5ea]`
+  `[ISSUE-wire-protocol: -o option name/value not quote-escaped — RESOLVED a75bd485b5ea]`
 
 ### fsync discipline
 
@@ -150,7 +155,7 @@ line 358).
 
 - `[ISSUE-path-traversal: outfile opened without O_NOFOLLOW (maybe)]`
 - `[ISSUE-wire-protocol: newline-as-record-separator not enforced against plugin output (maybe)]`
-- `[ISSUE-wire-protocol: -o NAME=VALUE not quote-escaped into START_REPLICATION (low)]`
+- ~~`[ISSUE-wire-protocol: -o NAME=VALUE not quote-escaped into START_REPLICATION (low)]`~~ — RESOLVED upstream in `a75bd485b5ea` (now via `AppendQuotedIdentifier`/`AppendQuotedLiteral`).
 - `[ISSUE-state-transition: no CLI to alter two_phase/failover on existing slot (maybe)]`
 - `[ISSUE-undocumented-invariant: SIGINT during stream leaves the slot on the server (low)]`
 - `[ISSUE-info-disclosure: verbose mode prints every flush LSN with slot name (low)]`

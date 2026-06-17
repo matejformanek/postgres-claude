@@ -16,6 +16,17 @@
 - `AlterSubscriptionOwner` — owner change; requires DB superuser or membership.
 - Helpers for connection-string handling: `parse_subscription_options`, `check_publications`, `fetch_table_list`.
 
+## Replication-command quoting (since `a75bd485b5ea`)
+
+This file gained the same self-contained quoting helper as
+`libpqwalreceiver.c`: `appendQuotedString(buf, str, quote)` (line 530) plus
+`appendQuotedIdentifier` (`'"'`) and `appendQuotedLiteral` (`'\''`) macros
+(lines 544-545). The helper doubles any embedded quote char; it is used when
+constructing the publisher-side commands the subscriber sends, replacing
+ad-hoc interpolation so slot/publication identifiers with embedded quotes are
+escaped safely. (Pre-existing `quote_literal_cstr` calls for schema/table names
+in the table-list fetch path, lines ~2822/2949, are unchanged.) [verified-by-code, subscriptioncmds.c:530-545 @ a75bd485b5ea]
+
 ## Two-phase commit support (PG 15+)
 
 `WITH (two_phase = on)` makes the subscription replicate PREPARE/COMMIT PREPARED of two-phase commits separately. Only available if the publisher has `wal_level=logical` and the slot is at `LSN >= prepare_LSN`. Once enabled cannot be disabled (would require re-syncing).
