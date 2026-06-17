@@ -89,3 +89,8 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/bin/pg_basebackup/streamutil.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea
 [pending] knowledge/files/src/bin/pg_basebackup/streamutil.h.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea
 [pending] knowledge/files/src/interfaces/libpq/fe-protocol3.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..e0511883cae2 (VALID_LONG_MESSAGE_TYPE += ParameterDescription)
+[pending] knowledge/files/src/bin/pg_dump/pg_backup_archiver.c.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (pg_restore --statistics[-only] inconsistency fix, 0dd93de69e80)
+[pending] knowledge/files/src/include/nodes/nodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe)
+[pending] knowledge/files/src/include/nodes/parsenodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe)
+[pending] knowledge/files/src/include/nodes/primnodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe)
+[pending] knowledge/subsystems/replication.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (7 impacted files via a75bd485 replication-command quoting; Owners/Invariants may need refresh)

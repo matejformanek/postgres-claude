@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-06-16 — anchor b78cd2bda5b1 → e5f94c4808fe; 8 commits; 5 docs queued for audit (4 per-file + replication subsystem); 8 replication/libpq docs already queued by pg-upstream-watcher #312, not re-queued (PR #316).
