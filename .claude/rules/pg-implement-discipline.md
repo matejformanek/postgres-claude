@@ -219,6 +219,72 @@ must match the blast radius (so breakage isn't merely hidden);
 R14 says the implementation's own suite must be comprehensive
 enough to catch what the cross-cutting suites would miss.
 
+### R15 — Default to comprehensive scope, not minimal MVP
+
+Scope decisions made at brainstorm + plan time bind every
+downstream phase. The default at brainstorm MUST be "what is the
+COMPREHENSIVE usage surface this feature must serve?" — NOT
+"what's the smallest thing we can ship?"
+
+**Why this rule exists.** The sesvars first end-to-end
+calibration (2026-06-17) shipped a working 7-phase MVP. The
+user's manual reference implementation
+(`/Users/matej/Work/PostgreSQL/pgsql`) was ~3× more
+comprehensive and ~30% smaller in code (because it reused
+existing PARAM infrastructure). The planner-suite under-scope was
+a brainstorm-skill failure, NOT a code-quality failure: the
+plan faithfully implemented what the brainstorm prescribed, but
+the brainstorm prescribed too little.
+
+Concretely missed scope that should have been on the table at
+brainstorm time:
+- Array indirection (`@arr[2] := v`, `@arr[2:3] := v`).
+- Composite type access (`(@typ).field`).
+- Strict-type declaration (`SET @x TYPE DATE := …`).
+- PL/pgSQL direct `SET @x := …` (no `EXECUTE format(...)`).
+- `SELECT col INTO @x` syntax.
+- DDL `DEFAULT @v` and `DEFAULT @v := 2`.
+- Quoted identifiers `@"name"`.
+- Per-variable collation.
+- Aggregate semantics (`@x := MIN(col)` vs `@x := MIN(col) + …`).
+- Multi-target SET (`SET @a := 1, @b := 2`).
+
+**How to apply.**
+
+1. **Brainstorm must enumerate 20-30 concrete usage examples**
+   BEFORE answering DECISION questions. Each example is one
+   `SET …` or `SELECT …` line the feature must handle. The
+   DECISION questions then take these as inputs, not
+   abstractions.
+2. **If a user-reference implementation exists, READ IT first.**
+   The `pg-feature-brainstorm/SKILL.md` must include a step:
+   "if the user has a manual implementation, parse it as the
+   upper-bound spec; the planner suite produces something
+   *comparable* to it, not 30% of it." The §2 out-of-scope lock
+   is for *features the user explicitly excluded*, not for
+   "things we don't have context on yet."
+3. **Plan §3 must show the comprehensive file table.** If a
+   plan touches only 21 files when the comparable reference
+   touches 35, the plan is under-scoped. Escalate at plan-end.
+4. **MVP framing requires explicit user consent.** "Should we
+   ship a minimal MVP or comprehensive feature?" is a question
+   for the user, not a default for the orchestrator. Default to
+   comprehensive; let the user opt down.
+
+**Anti-patterns this rule forbids.**
+- Brainstorm DECISION questions phrased so narrowly they
+  exclude entire usage surfaces (e.g. asking "what writer
+  syntax?" without asking "do we support array element
+  assignment?").
+- Plan §2 out-of-scope locks justified only by "calibration
+  scope guard" without user confirmation that the lock is real.
+- §13 risks that enumerate *implementation* unknowns without
+  enumerating *scope* unknowns ("does the user want X?").
+
+This rule lands as direct output of the sesvars first end-to-end
+calibration. Full comparison at
+`postgresql-dev-feature-sesvars/planning/sesvars/comparison.md`.
+
 ## Anti-patterns (explicitly forbidden)
 
 - **"WIP" commits.** Every commit in `dev/` is a complete phase. No
@@ -262,3 +328,10 @@ the sesvars first end-to-end calibration: F12 (contrib silently
 breaks when catalog changes) → R13; F14 (`EXPLAIN VERBOSE` broken
 because `T_SessionVar` missing from `ruleutils.c`, caught only by
 the comprehensive own-test-suite) → R14.
+**Version:** v1.2 (2026-06-17) — adds R15 (default to
+comprehensive scope, not minimal MVP). Motivated by the sesvars
+final-calibration comparison: my AI-driven implementation shipped
+~30% of what the user's manual implementation covered, because
+brainstorm + plan under-scoped. R15 codifies the lesson:
+comprehensive scope is the default; MVP framing requires explicit
+user consent.
