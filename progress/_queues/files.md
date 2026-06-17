@@ -565,3 +565,28 @@ the default is "directory-doc coverage".
 > helpers (regress.c, etc.). Recompute the genuine gap from the GitHub tree
 > at the current anchor before refilling — the per-subdir 0% rows in
 > coverage-gaps.md remain unreliable.
+
+## src/tools + src/tutorial close-gap (recomputed against anchor b78cd2bda5b1, 2026-06-16 cloud)
+
+> Phase-A tail. Recomputed the genuine gap by diffing the GitHub tree at the
+> current anchor `b78cd2bda5b1a306e2877059011933de1d0fb735` against
+> `knowledge/files/` with `.c`/`.h` stem-pair collapse. Only 14 files remained
+> uncovered across all of `src/`+`contrib/`: the entire vendored
+> `src/tools/pg_bsd_indent/` indenter (the engine behind `pgindent`),
+> `src/tools/ifaddrs/test_ifaddrs.c`, and the two `src/tutorial/` example
+> modules. This run drains all 14 — Phase A is then genuinely 100%.
+
+[done:CLOUD] src/tools/pg_bsd_indent/indent.c loc=1278 priority=M
+[done:CLOUD] src/tools/pg_bsd_indent/lexi.c loc=721 priority=M
+[done:CLOUD] src/tools/pg_bsd_indent/io.c loc=605 priority=M
+[done:CLOUD] src/tools/pg_bsd_indent/pr_comment.c loc=354 priority=M
+[done:CLOUD] src/tools/pg_bsd_indent/args.c loc=350 priority=M
+[done:CLOUD] src/tools/pg_bsd_indent/parse.c loc=338 priority=M
+[done:CLOUD] src/tools/pg_bsd_indent/indent_globs.h loc=339 priority=M
+[done:CLOUD] src/tools/pg_bsd_indent/indent_codes.h loc=71 priority=L
+[done:CLOUD] src/tools/pg_bsd_indent/err.c loc=67 priority=L
+[done:CLOUD] src/tools/pg_bsd_indent/indent.h loc=53 priority=L
+[done:CLOUD] src/tools/pg_bsd_indent/err.h loc=45 priority=L
+[done:CLOUD] src/tools/ifaddrs/test_ifaddrs.c loc=71 priority=L
+[done:CLOUD] src/tutorial/complex.c loc=209 priority=M
+[done:CLOUD] src/tutorial/funcs.c loc=147 priority=M
