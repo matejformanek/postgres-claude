@@ -198,6 +198,102 @@ mention pg_proc.dat at all.
   the new use, also pin
   `[[scenarios/remove-from-catalog]]`").
 
+### F9 — Walker-flag default mistake: `QTW_EXAMINE_RTES_BEFORE` (caught in Phase 6 in-flight)
+
+**Symptom.** Phase 6's `QueryListHasSessionVar` walker initially
+passed `QTW_EXAMINE_RTES_BEFORE` to `query_tree_walker`, thinking
+it'd give thorough coverage. The walker landed on `RangeTblEntry`
+nodes; the `ScanQueryForSessionVar` callback didn't handle them;
+`expression_tree_walker` errored on "unrecognized node type: 111".
+100+ regress tests failed.
+
+**Fix.** Use flag 0 (default). Session vars only appear in
+expressions inside targetlist/qual/etc., which `query_tree_walker`
+already visits without `QTW_EXAMINE_RTES_BEFORE`.
+
+**Why the suite missed it.** `knowledge/idioms/walkers.md` (if it
+exists; if not, write it) should document the
+`query_tree_walker` flag landscape with examples of when each flag
+is needed. The walkers/`QTW_*` flags are subtle and not obvious from
+the prototype.
+
+**Fix proposal.**
+- New `knowledge/idioms/query-tree-walkers.md` covering the
+  `QTW_*` flag matrix: when to use each, what they make the
+  walker visit, and which walker functions need handlers if the
+  flag is set.
+- Reference from scenarios that involve query-tree walking
+  (#6 add-new-plan-node, #15 add-new-expression-eval-step).
+
+### F10 — `fixed_result` enforcement is too strict for type-changing plans (caught in Phase 6 in-flight)
+
+**Symptom.** Phase 6's plan-cache invalidation re-analyzes a plan
+when a session-var type changes. The new tupdesc differs from the
+cached one (e.g. int4 → text). `RevalidateCachedQuery` at line
+~907 enforces `fixed_result` strictly:
+
+```c
+if (plansource->fixed_result &&
+    !equalTupleDescs(plansource->resultDesc, newdesc))
+    ereport(ERROR, "...");
+```
+
+PREPARE always sets `fixed_result = true`, so this fired on every
+type-change EXECUTE. Result: prepared statements couldn't observe
+type-shifting session vars.
+
+**Fix.** Relax the enforcement when `plansource->has_session_var`:
+`if (plansource->fixed_result && !plansource->has_session_var)
+ereport(ERROR, …)`. Session-var-bearing plans accept tupdesc
+changes; `plansource->resultDesc` updates to the new shape.
+
+**Why the suite missed it.** No existing scenario or knowledge doc
+discusses `fixed_result` and its interaction with plan
+invalidation. The plan's §13 risk 1 sketched the polling-counter
+sidestep but didn't anticipate that the result-tupdesc shape would
+need to evolve.
+
+**Fix proposal.**
+- Add a "plan-cache invalidation contract" section to
+  `knowledge/idioms/plan-cache.md` (or create it) covering
+  `fixed_result`, when it can/can't relax, and how type-changing
+  plans are handled.
+- Document this trade-off in the sesvars upstream submission
+  cover-letter — Tom Lane will want to see the rationale.
+
+### F11 — Wire-RowDescription staleness via `FetchPreparedStatementResultDesc` (caught in Phase 6 in-flight)
+
+**Symptom.** Even after relaxing `fixed_result` (F10), the wire
+`RowDescription` for the first EXECUTE after a type-shift was
+stale. Client received int4 type info while the executor produced
+text — the client interpreted the varlena pointer as int4, yielding
+garbage like `2003791379`. The second EXECUTE was always correct
+because the first had triggered re-analysis as a side effect.
+
+**Root cause.** `UtilityTupleDescriptor` on `T_ExecuteStmt` calls
+`FetchPreparedStatementResultDesc` BEFORE the inner portal's
+`ExecuteQuery → GetCachedPlan` revalidation runs. The outer portal
+publishes `plansource->resultDesc` which is still stale.
+
+**Fix.** Have `FetchPreparedStatementResultDesc` force
+`GetCachedPlan` + immediate `ReleaseCachedPlan` purely for the
+revalidation side effect on `resultDesc` — only when counter drift
+is detected.
+
+**Why the suite missed it.** The wire-protocol path from
+`UtilityTupleDescriptor → FetchPreparedStatementResultDesc → outer
+RowDescription` is not documented in any scenario or skill. It's
+discoverable only by tracing the divergence between the first and
+second EXECUTE of a type-shifted plan.
+
+**Fix proposal.**
+- Document the EXECUTE wire-protocol flow in
+  `knowledge/subsystems/prepared-statements.md` (or extend the
+  existing utility-statement doc).
+- The polling-counter pattern in Phase 6 only works if EVERY
+  consumer of `plansource->resultDesc` triggers revalidation
+  first. List those consumers in the doc.
+
 ### F8 — Objective-C keyword collision on macOS clang (caught in Phase 3 in-flight)
 
 **Symptom.** Phase 3 added a `typeid` field to the new `SessionVar`
@@ -323,6 +419,17 @@ their own commits in `postgres-claude/`:
     mutator`), `parse_collate.c assign_collations_walker`, and
     `typedefs.list`. Add to `knowledge/scenarios/add-new-expression-
     eval-step.md` (#15) as a required-step row.
+14. **`knowledge/idioms/query-tree-walkers.md`** — `QTW_*` flag
+    matrix + when each flag is needed + which walker functions
+    require handlers (F9).
+15. **`knowledge/idioms/plan-cache.md`** — `fixed_result`
+    invariant and when it can/can't relax for type-changing plans
+    (F10). Reference from any scenario involving plan invalidation.
+16. **`knowledge/subsystems/prepared-statements.md`** — document
+    the EXECUTE wire-protocol path from `UtilityTupleDescriptor →
+    FetchPreparedStatementResultDesc → outer RowDescription` (F11).
+    List all consumers of `plansource->resultDesc` so future
+    invalidation work can ensure each triggers revalidation.
 
 These do NOT happen during this run — they get logged here and the
 calibration run continues. Post-calibration, the user can decide
@@ -341,22 +448,36 @@ which to land.
 | Step 3 phase 0 + phase 1 (final, agent) | ~10 min | ~162k |
 | Step 3 phase 0 + phase 1 docs (in-context) | ~3 min | — |
 
-**Pause point: Phase 1 lands at 5 commits ahead of master, 245/245
-regress green. Phases 2-6 + end-of-implementation gate deferred per
-user direction.**
+**MVP COMPLETE: all 7 phases (0-6) landed. 246/246 regress green at
+every phase boundary. End-of-implementation gate ran 2026-06-17.**
 
 ## What's next
 
-Phase 1 has landed (`cc5e7e9647b`). Per user direction, the
-calibration run is **paused** here. Phases 2-6 +
-end-of-implementation gate resume in a later session.
+MVP is done. The calibration run produced **7 commits ahead of
+master** in `dev/`, **6 meta `docs(planning):` commits** in the
+worktree, and **3 retro commits** in the meta repo (this file).
 
-When resuming:
-1. Read `planning/sesvars/plan.md` (v1.1) — Phase 2 spec is §8 phase
-   2 "Per-backend storage + lifecycle".
-2. Read `planning/sesvars/notes.md` for the audit trail.
-3. Read this file's action-item list to decide whether to land any
-   planner-suite improvements (F1-F7) BEFORE continuing, or to
-   continue first and land improvements after.
-4. Refresh R2 spot-check on Phase 2 cites (postinit.c:716,
-   async.c:712/763/788) — may have drifted in the interim.
+Post-calibration backlog (the 16 action items above) is the real
+deliverable for the planner suite. Recommended landing order:
+
+1. **Scenario fixes** (items 1, 2, 9, 13) — these are pure
+   knowledge-corpus updates with no skill-prompt churn. Land them
+   first.
+2. **Idiom docs** (items 4, 5, 11, 14, 15, 16) — new
+   `knowledge/idioms/*.md` files. Cite from the relevant scenarios
+   after writing.
+3. **Skill updates** (items 3, 6, 7, 8, 12) — touch the brainstorm
+   and plan skill prompts. Higher blast radius; do these after the
+   scenario + idiom layer stabilizes.
+4. **Build/test workflow** (item 10) — `build-and-run/SKILL.md` +
+   `pg-test.md` updates.
+
+The sesvars feature itself is upstream-candidate (245+1 regress
+green, JIT mirror in place, walker coverage complete, plan-cache
+invalidation working). Before any pgsql-hackers submission:
+- Restore the SGML docs scope locked out in §2.
+- Run `review-checklist` skill.
+- Open a fresh thread per plan §12.
+- Add the 6 deferred items (DISCARD ALL, pg_session_variables,
+  ACL, pgbouncer reset, benchmarks, EXPR_KIND_SESSION_VAR_*) to
+  the cover-letter as known gaps with follow-up patches.
