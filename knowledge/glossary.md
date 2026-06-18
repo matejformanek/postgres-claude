@@ -14,6 +14,31 @@ Entries are alphabetical (case-insensitive). One `### <term>` heading per term
 so future runs can detect what's already defined and append idempotently.
 
 <!-- glossary:auto -->
+### _bt_search
+The nbtree routine that descends from the root to the leaf page where a given key belongs and returns that buffer; amcheck's `bt_rootdescend` drives it from the root to verify every leaf tuple is still re-findable through the tree. [verified-by-code] (via `knowledge/files/contrib/amcheck/verify_nbtree.md`).
+
+
+
+### _dosmaperr
+The Windows port helper that translates a Win32 `GetLastError()` code into the nearest POSIX `errno`, letting the `src/port` shims present a Unix-like error interface to the rest of the backend. [verified-by-code] (`win32pread.c:42` — via `knowledge/files/src/port/win32pread.c.md`).
+
+
+
+### _fsm
+The filename suffix of a relation's free-space-map fork (e.g. `<relfilenode>_fsm`); the FSM is a separate per-relation fork tracking approximate free space per page, updated after heap redo via `RecordPageWithFreeSpace` when a page's free space changes materially. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heapam_xlog.c.md`).
+
+
+
+### _PG_init
+The conventional entry-point symbol a loadable backend module exports; the backend calls it exactly once per backend that loads the library — at `shared_preload_libraries` time for preloaded modules, or at first `LOAD` / `CREATE EXTENSION` use otherwise — to define GUCs, install hooks, and request shared memory. [from-comment] (`pgcrypto.c:67-83` — via `knowledge/files/contrib/pgcrypto/pgcrypto.md`).
+
+
+
+### _PG_output_plugin_init
+The required entry-point symbol every logical-decoding output plugin exports; `logical.c` locates it by name after loading the plugin's shared library and calls it with an `OutputPluginCallbacks *` so the plugin can fill in its `startup` / `begin` / `change` / `commit` / ... callback vtable. [verified-by-code] (`logical.c:52` — via `knowledge/files/src/backend/replication/logical/logical.c.md`).
+
+
+
 ### AbortTransaction
 The transaction-manager routine that rolls back the current top-level
 transaction — releasing locks and buffer pins via resource owners, running
@@ -102,6 +127,11 @@ Fires the queued deferred (CONSTRAINT) AFTER-trigger events at the end of the
 transaction (or at `SET CONSTRAINTS ... IMMEDIATE`), draining the after-trigger
 event list in order. [verified-by-code] (via
 `knowledge/idioms/prepare-transaction-2pc.md`).
+
+
+
+### afterTriggers
+The backend-global state holding the deferred (AFTER) trigger event queue, structured as a stack of per-(sub)transaction frames (`trans_stack[]`) so each subtransaction's pending events can be committed or rolled back independently. RI foreign-key checks ride this same queue as AFTER triggers. [verified-by-code] (via `knowledge/idioms/trigger-during-error.md`).
 
 
 
@@ -327,6 +357,11 @@ drive it so multiple foreign scans can have I/O in flight at once.
 
 
 
+### AtEOXact_GUC
+The end-of-transaction GUC-stack unwinder: given a nest level returned by `NewGUCNestLevel`, it pops every GUC setting pushed since that level, restoring prior values. It runs on the normal commit/abort path and is also called explicitly (e.g. postgres_fdw's `reset_transmission_modes`) so an error inside a temporarily-forced GUC scope still unwinds correctly. [verified-by-code] (`postgres_fdw.c:4147` — via `knowledge/files/contrib/postgres_fdw/postgres_fdw.c.md`).
+
+
+
 ### AttrNumber
 The 16-bit signed integer type naming a column position within a relation
 (1-based for user columns; system columns like `ctid` use negative numbers, and
@@ -436,6 +471,11 @@ to stream a full copy of the data directory as a tar/plain archive, with options
 for WAL inclusion, checkpoint mode, tablespace mapping, and progress reporting.
 [verified-by-code] (via
 `knowledge/files/src/backend/replication/repl_gram.y.md`).
+
+
+
+### bbs_buffer
+The shared scratch-buffer field on a base-backup streamer (`astreamer`); in the file-extraction path neither writer uses it because the tar extractor keeps its own buffer, so `bbs_buffer` ownership is a per-streamer concern worth checking when chaining streamers. [verified-by-code] (`astreamer_file.c:67` — via `knowledge/files/src/fe_utils/astreamer_file.c.md`).
 
 
 
@@ -733,6 +773,11 @@ null/allnulls flags. [verified-by-code] (via
 
 
 
+### bt_rootdescend
+amcheck's nbtree verification routine that, for each non-pivot leaf tuple, drives `_bt_search` from the root back down to confirm the tuple is reachable through the tree's downlinks; a discrepancy means index corruption and the backend dies. [verified-by-code] (`verify_nbtree.c:3008-3058` — via `knowledge/files/contrib/amcheck/verify_nbtree.md`).
+
+
+
 ### buffer (shared buffer)
 A `BLCKSZ`-sized page slot in the shared buffer pool, the cache between
 backends and the storage manager. Each buffer has a fixed-size `BufferDesc`
@@ -914,6 +959,11 @@ it is a true backend-lifetime leak. [from-comment] (`memutils.h:52-67` — via
 
 
 
+### CallSyscacheCallbacks
+The inval dispatcher that invokes every callback registered with `RegisterSyscacheCallback` for a given syscache when a relevant tuple is invalidated, letting subsystems (planner, typcache, ...) drop derived state. [verified-by-code] (`inval.c:1895` — via `knowledge/files/src/backend/utils/cache/inval.c.md`).
+
+
+
 ### canonicalize_path
 Normalises a filesystem path in place, collapsing `.`/`..` segments and redundant separators; used by frontend tools and by server functions such as `genfile.c` before path-safety checks. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/genfile.c.md`).
 
@@ -1092,6 +1142,11 @@ from `pg_hba.conf` via the parsed `HbaLine` rules) against a newly connected
 client, before the session is allowed to proceed. It is the chokepoint every
 connection passes through during backend startup. [verified-by-code]
 (via `knowledge/files/src/backend/tcop/backend_startup.c.md`).
+
+
+
+### ClientAuthentication_hook
+The hook fired from `auth.c`'s `ClientAuthentication` after the authentication method runs but before the backend proceeds, letting a module (e.g. sepgsql, auth_delay) inspect or veto the connection; modules install it from `_PG_init`. [verified-by-code] (`label.c:421-422` — via `knowledge/files/contrib/sepgsql/label.c.md`).
 
 
 
@@ -1323,6 +1378,11 @@ versions); it is read and written as a single ~8 KiB block guarded by a CRC.
 
 
 
+### conversion_procs
+The `src/backend/utils/mb/conversion_procs/` tree of per-encoding-pair character-set conversion functions; each is a thin glue function that calls the shared `LocalToUtf` / `UtfToLocal` radix-tree drivers in `conv.c` and is registered in `pg_conversion`. [from-README] (via `knowledge/files/src/backend/utils/mb/_conversion_procs.md`).
+
+
+
 ### CopyData
 The protocol message that carries a chunk of COPY payload in either direction
 during COPY IN/OUT. It is one of the few message types libpq lets exceed the
@@ -1492,6 +1552,16 @@ types (text, arrays, composites) are always passed as a pointer disguised in a
 `Datum`, so fmgr-level code unwraps them with `DatumGetPointer` (or a
 type-specific `DatumGet*` wrapper). [verified-by-code] (via
 `knowledge/files/src/include/postgres.h.md`).
+
+
+
+### dbId
+The database OID component carried in shared-invalidation messages and standby WAL descriptions; a catcache invalidation is keyed on `(cacheId, hashValue, dbId)` so receivers in other databases can ignore it (`InvalidOid` means database-wide). [verified-by-code] (`inval.c:64` — via `knowledge/files/src/backend/utils/cache/inval.c.md`).
+
+
+
+### dbOid
+The database-OID field in WAL descriptions and relfilenode locators (`spcOid` / `dbOid` / `relNumber`), identifying which database a logged change belongs to; `InvalidOid` here denotes a shared (cluster-wide) relation. [verified-by-code] (`seqdesc.c:31` — via `knowledge/files/src/backend/access/rmgrdesc/seqdesc.c.md`).
 
 
 
@@ -1709,6 +1779,11 @@ segment or finalizing a control file. [verified-by-code] (via
 
 
 
+### EEOP_
+The prefix of the expression-evaluation opcode enum (`ExprEvalOp`); each compiled expression step built by `execExpr.c` carries an `EEOP_*` op that `execExprInterp.c`'s dispatch loop (or the JIT) switches on — e.g. `EEOP_PARAM_CALLBACK`, `EEOP_HASHED_SCALARARRAYOP`. [verified-by-code] (via `knowledge/files/src/backend/executor/execExprInterp.c.md`).
+
+
+
 ### elog
 The terse error/log macro for internal "can't happen" conditions: `elog(ERROR, "…")` takes only a level and a format string (no SQLSTATE or detail), longjmp'ing on ERROR like `ereport`. Reserved for programming errors, not user-facing messages. [verified-by-code] (via `knowledge/files/contrib/spi/moddatetime.c.md`).
 
@@ -1716,6 +1791,11 @@ The terse error/log macro for internal "can't happen" conditions: `elog(ERROR, "
 
 ### EmitWarningsOnPlaceholders
 The former name of `MarkGUCPrefixReserved` — the call an extension makes after defining its GUCs to claim its `prefix.*` namespace, so unknown `prefix.foo` settings warn instead of silently persisting. [verified-by-code] (`guc.h:418-421` — via `knowledge/files/src/include/utils/guc.h.md`).
+
+
+
+### end_lsn
+The upper bound of a WAL byte range; paired with `start_lsn` it bounds the records a WAL reader such as `pg_walinspect` returns, and a decoded record's own `end_lsn` marks where the next record begins. [verified-by-code] (`pg_walinspect.c:7` — via `knowledge/files/contrib/pg_walinspect/pg_walinspect.c.md`).
 
 
 
@@ -2657,6 +2737,11 @@ posting lists for the matched keys. [from-comment] (via
 
 
 
+### GIN_SEARCH_MODE_ALL
+The GIN scan mode that forces a full scan of the entire index entry space rather than a targeted posting-list probe; a `BooleanSearchStrategy` query with no required value (e.g. intarray's `! 42`) selects it, turning an apparently O(log N) index lookup into O(N) work. [verified-by-code] (`_int_gin.c:32-40` — via `knowledge/files/contrib/intarray/_int_gin.md`).
+
+
+
 ### GinScanEntry
 A single primitive scan stream inside a GIN index scan: the opclass
 `extractQuery` function turns each query into one or more `GinScanEntry`s, each
@@ -2753,6 +2838,16 @@ per group, and spills batches to disk when the hash table exceeds `work_mem`
 
 ### HashJoin
 The executor node that joins two inputs by building an in-memory (or batched, spill-to-disk) hash table on the inner relation's join key and probing it with each outer row; chosen by the planner for equijoins on large unsorted inputs. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeHash.c.md`).
+
+
+
+### hashm_spares
+The hash-index metapage array recording the cumulative count of overflow-page "spares" allocated before each splitpoint group; bucket-number-to-block-number address arithmetic reads it, and because buckets never move once created the array only grows. [from-README] (`README:45-99` — via `knowledge/files/src/backend/access/hash/README.md`).
+
+
+
+### hashValue
+A 32-bit hash of a catalog tuple's cache key computed by `PrepareToInvalidateCacheTuple`; syscache invalidation matches receivers by `hashValue` rather than by tuple TID so VACUUM FULL (which moves tuples) stays correct. It is also the dependency key in `PlanInvalItem`. [verified-by-code] (`inval.c:64` — via `knowledge/files/src/backend/utils/cache/inval.c.md`).
 
 
 
@@ -2863,6 +2958,11 @@ lies even though it is not itself WAL-logged. [verified-by-code]
 
 ### HEAP_XMIN_FROZEN
 The infomask bit-combination (`HEAP_XMIN_COMMITTED | HEAP_XMIN_INVALID`) that marks a tuple's inserting xid as frozen, so the tuple is unconditionally visible regardless of the current xid horizon. Modern freezing sets these bits in place instead of overwriting xmin with `FrozenTransactionId`. [inferred] (`htup_details.h:204` — via `knowledge/idioms/heap-tuple-freeze.md`).
+
+
+
+### heapBlk
+The heap block number a BRIN summary tuple summarizes, stored both in the index tuple (`bt_blkno`) and in the WAL record; BRIN redo asserts the two agree (`tuple->bt_blkno == xlrec->heapBlk`) to catch WAL corruption. [verified-by-code] (`brin_xlog.c:83` — via `knowledge/files/src/backend/access/brin/brin_xlog.c.md`).
 
 
 
@@ -2998,6 +3098,16 @@ HOT chain from the indexed root tuple. [verified-by-code] (`heapam.c:62` — via
 
 
 
+### hstore_recv
+The binary-input (receive) function for the `hstore` type; because it reconstructs the on-disk representation directly from wire bytes rather than from text, it can produce internal shapes the text input syntax cannot, so downstream code must not assume text-only invariants. [verified-by-code] (via `knowledge/files/contrib/hstore/hstore_subs.c.md`).
+
+
+
+### hstoreUpgrade
+The hstore compatibility routine that promotes a pre-9.0 on-disk hstore value to the current format on read; its compat path can in principle produce a value that passes validation yet encodes an unusual shape, so consumers must not over-trust hstore bytes. [verified-by-code] (`hstore_op.c:172` — via `knowledge/files/contrib/hstore/hstore_op.c.md`).
+
+
+
 ### HTAB
 The handle type for PostgreSQL's built-in dynamic hash table (`dynahash`), created by `hash_create` and used pervasively for in-memory and shared-memory hash tables (lock tables, catcache, plan caches, FDW shippability caches). Shared-memory HTABs are fixed-size and partitioned; backend-local ones can grow. [verified-by-code] (via `knowledge/files/contrib/postgres_fdw/shippable.c.md`).
 
@@ -3104,6 +3214,11 @@ The on-disk index entry layout — a header (TID pointing at the heap tuple, inf
 
 
 
+### init_fn
+The shared-memory initialization callback in a registered shmem-startup slot; the shmem bootstrap walks the list of `{size_fn, init_fn}` entries (e.g. `TwoPhaseShmemInit`) after allocating the segment so each subsystem can lay out its region. [verified-by-code] (`twophase.c:196-199` — via `knowledge/files/src/backend/access/transam/twophase.c.md`).
+
+
+
 ### InitMaterializedSRF
 Sets up a set-returning function in materialize mode: it builds the result `Tuplestore` and tuple descriptor and wires them into the `ReturnSetInfo`, so the function can emit all rows up front rather than value-per-call. [verified-by-code] (`verify_heapam.c:325` — via `knowledge/files/contrib/amcheck/verify_heapam.md`).
 
@@ -3144,6 +3259,11 @@ error, or wait. The header defers `dlopen` until first hit; the build-time gate
 is the sole defense against this being an arbitrary-code surface in production.
 [verified-by-code] (via
 `knowledge/files/src/include/utils/injection_point.h.md`).
+
+
+
+### InjectionPointAttach
+The test-infrastructure call that registers a callback at a named injection point: `InjectionPointAttach(name, library, function, private_data, size)`; when a backend reaches the matching `INJECTION_POINT(name)` the callback fires, used to deterministically exercise race windows in TAP tests. [verified-by-code] (`injection_point.c:17` — via `knowledge/files/src/backend/utils/misc/injection_point.c.md`).
 
 
 
@@ -3264,6 +3384,11 @@ hierarchy. [verified-by-code] (via `knowledge/subsystems/foreign.md`).
 Tests whether the backend is in bootstrap mode (initdb building the initial
 catalogs), a state in which many cache/lookup paths are bypassed or specialized.
 [verified-by-code] (via `knowledge/idioms/syscache-invalidation-flow.md`).
+
+
+
+### isCommit
+The boolean parameter threaded through transaction-cleanup routines (`smgrDoPendingDeletes`, `smgrDoPendingSyncs`, xact callbacks) telling them whether the current (sub)transaction is committing or aborting, so one routine can drive both the commit and abort code paths over the same pending list. [verified-by-code] (`storage.c:673` — via `knowledge/files/src/backend/catalog/storage.c.md`).
 
 
 
@@ -3449,6 +3574,11 @@ One element of PostgreSQL's List. Since the v13 rewrite a List is a flat array o
 
 
 
+### LLVMJitContext
+The per-backend JIT session object owned by the LLVM provider; it ties the lifetime of emitted machine code to a resource owner (subxact / xact) and holds the ORC `LLJIT` instances, so compiled expression functions are freed when their transaction ends. [verified-by-code] (`llvmjit.c:152-157` — via `knowledge/files/src/backend/jit/llvm/llvmjit.c.md`).
+
+
+
 ### lo_export
 The counterpart to `lo_import`: writes the contents of a large object out to a file on the server's filesystem. Like the import, it touches server files and so is privilege-restricted. [inferred] (via `knowledge/files/src/bin/psql/large_obj.c.md`).
 
@@ -3456,6 +3586,16 @@ The counterpart to `lo_import`: writes the contents of a large object out to a f
 
 ### lo_import
 The server-side SQL/psql function that reads a file on the server's filesystem and stores it as a new large object, returning its OID. Because it reads server files it is restricted to superusers (or `pg_read_server_files`). [inferred] (via `knowledge/files/src/bin/psql/large_obj.c.md`).
+
+
+
+### lo_open
+The server-side large-object API call that opens an existing LO by OID for reading and/or writing (`INV_READ` / `INV_WRITE`), returning a descriptor used by `lo_read` / `lo_write`; it lives alongside `lo_create` / `lo_unlink` in `inv_api.c`. [verified-by-code] (`inv_api.c:8` — via `knowledge/files/src/backend/storage/large_object/inv_api.c.md`).
+
+
+
+### lo_unlink
+The large-object API call that deletes an LO and all its `pg_largeobject` chunks; the `vacuumlo` utility finds orphaned LOs (no remaining reference) and `lo_unlink`s them. [verified-by-code] (via `knowledge/files/contrib/vacuumlo/vacuumlo.c.md`).
 
 
 
@@ -3661,6 +3801,16 @@ I/O support without repeated catalog scans. [verified-by-code] (via
 
 
 
+### loread
+The server-side large-object read entry point invoked through the fastpath / SQL LO interface; given an LO descriptor from `lo_open(..., INV_READ)` (or `INV_WRITE`) it returns the next chunk of object data. [verified-by-code] (`inv_api.c:162` — via `knowledge/files/src/backend/storage/large_object/inv_api.c.md`).
+
+
+
+### LOWER_NODE
+The compile-time `ltree.h` macro selecting whether ltree label CRCs are computed case-folded (default) or byte-literal (MSVC); it is deliberately frozen because it determines on-disk GiST signature CRCs, so changing it is a pg_upgrade-breaking event. [verified-by-code] (`ltree.h:29` — via `knowledge/files/contrib/ltree/ltree_gist.c.md`).
+
+
+
 ### LP_DEAD
 The line-pointer flag marking an item as dead — its heap/index tuple is known gone — so scans can skip it and page-level cleanup can reclaim its space. In indexes the bit is a dirty *hint* set by scans; actual cleanup happens later (e.g. at insert time via `_hash_vacuum_one_page` / nbtree page-pruning). [verified-by-code] (via `knowledge/files/src/backend/access/hash/hashsearch.c.md`).
 
@@ -3712,6 +3862,11 @@ position". [verified-by-code] (`xlogdefs.h:28` — via
 
 
 
+### ltree_crc32_sz
+ltree's label-hashing CRC32 routine; it is not cryptographic and carries no collision-resistance requirement — it only spreads labels across GiST signature bits — and its case-fold behavior is governed by `LOWER_NODE`. [verified-by-code] (`crc32.h:6-7` — via `knowledge/files/contrib/ltree/ltree_gist.c.md`).
+
+
+
 ### LW_EXCLUSIVE
 The `LWLockAcquire` mode requesting exclusive ownership of a lightweight
 lock, blocking all other shared and exclusive waiters until released;
@@ -3747,6 +3902,11 @@ Releases an LWLock held by the current backend and wakes the next compatible
 waiter(s) on its queue; every `LWLockAcquire` must be balanced by exactly
 one of these (resource owners catch leaks on error). [verified-by-code] (via
 `knowledge/subsystems/storage-lmgr.md`).
+
+
+
+### main_fn
+The entry-function pointer in an auxiliary / background-process registration (e.g. `BackgroundWriterMain`); the postmaster spawns the singleton process and dispatches into its `main_fn`. [verified-by-code] (`bgwriter.c:16` — via `knowledge/files/src/backend/postmaster/bgwriter.c.md`).
 
 
 
@@ -4147,6 +4307,11 @@ A MultiXactId — an identifier standing in for a *set* of transactions, used wh
 
 
 
+### my_level
+The current subtransaction nesting level stamped onto stacked state such as `TransInvalidationInfo` and the AFTER-trigger frame, so that on subxact abort the right frame's invalidation messages / trigger events can be discarded. [verified-by-code] (`inval.c:48` — via `knowledge/files/src/backend/utils/cache/inval.c.md`).
+
+
+
 ### MyDatabaseId
 The global holding the OID of the database the current backend is connected to, set during InitPostgres once the backend latches onto a database; most catalog lookups are implicitly scoped by it. [verified-by-code] (`postinit.c:707` — via `knowledge/files/src/backend/utils/init/postinit.c.md`).
 
@@ -4231,6 +4396,11 @@ pg_upgrade's `ClusterInfo` for the destination installation; the tool freezes it
 
 
 
+### NewGUCNestLevel
+The call that opens a fresh GUC nesting level and returns its handle; code that must temporarily force settings pushes a level, applies overrides, and later passes the handle to `AtEOXact_GUC` to unwind exactly those overrides (used by postgres_fdw's deparse to force `datestyle=ISO` etc.). [verified-by-code] (`postgres_fdw.c:4108` — via `knowledge/files/contrib/postgres_fdw/postgres_fdw.c.md`).
+
+
+
 ### NewRelfrozenXid
 VACUUM's running candidate for the relation's new `relfrozenxid`, initialized
 to `OldestXmin` and ratcheted up as the heap scan observes the oldest unfrozen
@@ -4285,6 +4455,11 @@ Serializes any Node tree into the parenthesized textual representation used to s
 
 
 
+### noError
+The soft-error flag passed to lookup helpers (e.g. composite-type resolution in hstore); when true the callee returns a failure indication instead of `ereport`-ing, letting the caller handle a dropped/renamed dependency gracefully. [verified-by-code] (`hstore_op.c:351` — via `knowledge/files/contrib/hstore/hstore_op.c.md`).
+
+
+
 ### NoLock
 The lock-mode sentinel (value 0) meaning "take no heavyweight lock"; passed to relation_open / table_open when the caller already holds a suitable lock, so the open just builds the relcache entry without re-locking. [verified-by-code] (`relation.c:65` — via `knowledge/files/src/backend/access/common/relation.c.md`).
 
@@ -4330,6 +4505,11 @@ back to the varlena form. [verified-by-code] (via
 
 
 
+### numOR
+In ltree's `parse_lquery`, the total count of `|` alternation operators in the whole query; each level's variant scratch array is over-allocated to `numOR + 1` items — wasteful but bounded by `PG_UINT16_MAX`. [verified-by-code] (`ltree_io.c:322` — via `knowledge/files/contrib/ltree/ltree_io.c.md`).
+
+
+
 ### nworkers_launched
 The field of `ParallelContext` reporting how many parallel workers actually started, which can be fewer than requested when `max_worker_processes` is exhausted. The leader must cope with the shortfall and may run the plan itself. [inferred] (via `knowledge/idioms/parallel-worker-launch-wait-and-errors.md`).
 
@@ -4337,6 +4517,11 @@ The field of `ParallelContext` reporting how many parallel workers actually star
 
 ### O_NOFOLLOW
 The open(2) flag that makes the call fail if the final path component is a symbolic link, used as a TOCTOU/symlink-attack defense when a privileged process opens a path an unprivileged user could influence. Several server-side file paths (file_fdw, the COPY path it shims, pg_rewind targets) have been flagged in corpus issues for *not* setting it. [inferred] (via `knowledge/files/contrib/file_fdw/file_fdw.c.md`).
+
+
+
+### object_access_hook
+The centralized callback in `objectaccess.h` that security / audit modules (e.g. sepgsql) install to be notified of catalog-object events — post-create, drop, truncate, post-alter, namespace-search, function-execute — dispatched from `objectaccess.c`. [verified-by-code] (via `knowledge/files/src/backend/catalog/objectaccess.c.md`).
 
 
 
@@ -4422,6 +4607,11 @@ A grouping of related operator classes (`pg_opfamily`) that lets cross-type
 operators participate in the same index strategy — e.g. int2/int4/int8 share
 one btree family so a mixed-type predicate can still use an index. [inferred]
 (via `knowledge/files/src/backend/access/index/amapi.c.md`).
+
+
+
+### os_info
+A pg_upgrade global aggregating operating-system / cluster discovery state (binary and data directories, found executables, per-database file lists) alongside the `user_opts` options global; the migration driver threads both through its phases. [verified-by-code] (`option.c:14` — via `knowledge/files/src/bin/pg_upgrade/option.c.md`).
 
 
 
@@ -4676,6 +4866,11 @@ the cheapest non-dominated ones, and turns the winner into a `Plan`.
 
 
 
+### path_is_safe_for_extraction
+The guard the base-backup file extractor runs on every archive member path before writing it, rejecting absolute paths and `..` traversal so a malicious tar stream cannot escape the target directory; failure is fatal (`pg_fatal`). [verified-by-code] (`astreamer_file.c:37` — via `knowledge/files/src/fe_utils/astreamer_file.c.md`).
+
+
+
 ### patternToSQLRegex
 The fe_utils sibling of `processSQLNamePattern`, used by pg_amcheck and
 others, that converts a shell-style object-name pattern into an anchored POSIX
@@ -4709,6 +4904,21 @@ two when `pd_lower`/`pd_upper` are set correctly. [verified-by-code] (via
 
 ### pd_upper
 The page-header field giving the byte offset to the start of the upper (tuple) portion of free space; the gap between `pd_lower` and `pd_upper` is the page's free space. New tuples grow `pd_upper` downward while their line pointers grow `pd_lower` upward. [inferred] (via `knowledge/files/src/backend/storage/page/bufpage.c.md`).
+
+
+
+### peer_cert_valid
+The backend `Port` flag recording whether the client presented a valid X.509 certificate over TLS; sslinfo's peer-certificate introspection functions require it (in addition to `ssl_in_use`) before returning DN / extension fields. [verified-by-code] (`sslinfo.c:5` — via `knowledge/files/contrib/sslinfo/sslinfo.c.md`).
+
+
+
+### penalty_num
+The numeric-type GiST penalty macro in btree_gist; it computes how much inserting a key would enlarge a numeric key-range bounding interval, driving GiST's choose-subtree decision. [verified-by-code] (`btree_utils_num.c:25` — via `knowledge/files/contrib/btree_gist/btree_utils_num.c.md`).
+
+
+
+### pendingSyncHash
+The backend-local hash recording relfilenodes of permanent relations created while `wal_level=minimal` (so their pages were not WAL-logged) that must instead be fsync'd at commit; aborts and parallel-worker exits discard it (workers issue no syncs). [verified-by-code] (`storage.c:71-78` — via `knowledge/files/src/backend/catalog/storage.c.md`).
 
 
 
@@ -4860,6 +5070,11 @@ Allocates and initialises a cryptographic-hash context (MD5/SHA-*) over either t
 
 
 
+### pg_cryptohash_ctx
+pgcrypto / backend cryptohash context object holding the in-progress digest state between `init` / `update` / `final`; it is released on every success path by `pg_cryptohash_free`, though the context memory is not explicitly scrubbed (acceptable for plain hashes whose input is application data, not a secret). [verified-by-code] (`cryptohashfuncs.c:128` — via `knowledge/files/src/backend/utils/adt/cryptohashfuncs.c.md`).
+
+
+
 ### pg_cryptohash_free
 Frees a `pg_cryptohash_ctx` created by `pg_cryptohash_create`, releasing the underlying OpenSSL/built-in state; must be called even on the error path to avoid leaking the context. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/cryptohashfuncs.c.md`).
 
@@ -4942,6 +5157,11 @@ record that tells the fmgr its calling convention is the version-1
 
 ### pg_get_viewdef
 The ruleutils function reconstructing a view's defining SELECT (or a rule's action) as SQL text from its stored parse tree, used by `\d`/`psql` and pg_dump. The corpus notes it does not re-emit `WITH (security_barrier/security_invoker/check_option)` view options, so callers relying on it alone can silently lose those clauses. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/ruleutils.c.md`).
+
+
+
+### PG_GETARG
+The fmgr macro family (`PG_GETARG_INT32`, `PG_GETARG_DATUM`, `PG_GETARG_*_PP`, ...) a C-language SQL function uses to fetch its arguments by position from `FunctionCallInfo`; the `_PP` ("packed pointer") variants avoid detoasting / copying a varlena argument unless the body actually needs the flat value. [verified-by-code] (via `knowledge/files/contrib/pgcrypto/pgp-pgsql.md`).
 
 
 
@@ -5096,6 +5316,11 @@ The JSON lexer/parser driver that tokenizes input and invokes a
 and by ad-hoc internal consumers (manifest parsing, statistics import). The
 same parser supports incremental (chunked) parsing. [verified-by-code] (via
 `knowledge/files/src/backend/utils/adt/jsonb.c.md`).
+
+
+
+### pg_popcount
+PostgreSQL's portable population-count (set-bit-count) routine from `port/pg_bitutils.h`, dispatching to a hardware popcount instruction when available; used in hot paths such as GiST signature sizing (`sizebitvec`). [verified-by-code] (`_intbig_gist.c:208-212` — via `knowledge/files/contrib/intarray/_intbig_gist.md`).
 
 
 
@@ -5257,6 +5482,11 @@ signals and is the standard way backend C code waits a short, fixed interval.
 
 
 
+### PG_UTF8
+PostgreSQL's internal encoding identifier for UTF-8; conversion helpers like `pg_any_to_server(..., PG_UTF8)` and `pg_server_to_any(..., PG_UTF8)` use it to transcode between the server encoding and UTF-8, raising on malformed sequences. [verified-by-code] (via `knowledge/files/contrib/fuzzystrmatch/daitch_mokotoff.c.md`).
+
+
+
 ### PG_VERSION_NUM
 The compile-time integer encoding of the server version (e.g. 170004 for 17.4) used by extensions and tools in `#if` guards to conditionally compile against API changes across major versions. It complements the human-readable `PG_VERSION` string. [inferred] (via `knowledge/files/src/fe_utils/version.c.md`).
 
@@ -5331,6 +5561,11 @@ The data directory — the filesystem root of a database cluster holding base/, 
 
 
 
+### PGDLLIMPORT
+The symbol-visibility macro that must annotate every backend global variable an extension may reference, so the symbol is exported from the backend's import library on Windows; without it a global links fine on ELF platforms but fails to resolve in extensions on Windows. [verified-by-code] (via `knowledge/files/src/backend/catalog/objectaccess.c.md`).
+
+
+
 ### PgFdwRelationInfo
 The `fdw_private` struct postgres_fdw attaches to every base/join/upper `RelOptInfo` it plans, caching pushdown decisions, remote conditions, cost estimates, and the user mapping for that relation. [verified-by-code] (via `knowledge/files/contrib/postgres_fdw/postgres_fdw.h.md`).
 
@@ -5395,6 +5630,11 @@ the next `GetCachedPlan`. [verified-by-code] (`plancache.c:2126` — via
 
 
 
+### PlanInvalItem
+A cached-plan dependency record `{int cacheId; uint32 hashValue;}` naming one syscache row a plan depends on; when a matching invalidation arrives, plancache marks the plan stale and forces re-planning. [verified-by-code] (`plancache.c:34` — via `knowledge/files/src/backend/utils/cache/plancache.c.md`).
+
+
+
 ### PlannedStmt
 The top node of a finished plan handed from planner to executor: it wraps the
 plan tree plus the range table, result-relation list, command type, and
@@ -5438,6 +5678,16 @@ The per-execution mutable mirror of a `Plan` node: `ExecInitNode` builds a
 states, and instrumentation, and `ExecProcNode` pulls tuples through it. Plan
 is read-only and shareable; PlanState is per-execution. [inferred] (via
 `knowledge/files/src/include/nodes/execnodes.h.md`).
+
+
+
+### PLpgSQL_expr
+The PL/pgSQL node wrapping one SQL expression or query embedded in a function body; `plpgsql_parser_setup` wires the main parser's param hooks to it so `$n` references resolve to PL/pgSQL variables at parse-analyze time. [verified-by-code] (`pl_comp.c:25` — via `knowledge/files/src/pl/plpgsql/src/pl_comp.md`).
+
+
+
+### PLpgSQL_function
+The compiled in-memory AST of a PL/pgSQL function produced by `pl_comp.c`: the namespace, the `datums[]` variable array, and the statement tree that `exec_stmt_*` walks; the language handler caches it and hands it to `plpgsql_exec_function`. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_comp.md`).
 
 
 
@@ -5582,6 +5832,11 @@ Returns the human-readable text of the most recent error on a `PGconn` (or the m
 
 
 
+### PQescapeStringConn
+The libpq client-side helper that escapes a string for safe interpolation into a SQL literal, honoring the connection's encoding and `standard_conforming_strings`; client programs that build SQL by hand should use it (or `PQescapeLiteral`) rather than ad-hoc quoting. [verified-by-code] (via `knowledge/files/contrib/oid2name/oid2name.c.md`).
+
+
+
 ### PQexec
 The synchronous libpq entry point that submits a command string and blocks until the server finishes, returning a single (last) `PGresult`. It is the simplest query path; the async `PQsendQuery`/`PQgetResult` pair is used when the caller must not block. [inferred] (via `knowledge/files/src/interfaces/libpq/fe-exec.c.md`).
 
@@ -5627,6 +5882,11 @@ The accumulated list of catalog invalidation messages generated by commands
 earlier in the current transaction, held so they can be broadcast at commit and
 replayed on abort cleanup. [verified-by-code] (via
 `knowledge/idioms/syscache-invalidation-flow.md`).
+
+
+
+### private_data
+The opaque per-injection-point payload registered via `InjectionPointAttach(name, library, function, private_data, size)`; the attached callback receives it when the named injection point fires, letting a test carry state to its handler. [verified-by-code] (`injection_point.c:17` — via `knowledge/files/src/backend/utils/misc/injection_point.c.md`).
 
 
 
@@ -5842,6 +6102,11 @@ Querys (applying rules/views); the planner consumes them. [from-comment] (via
 
 
 
+### query_int
+intarray's query type for `int4[]` containment searches (the `@@` operator); the GIN opclass's `ginint4_queryextract` walks a `query_int` to extract indexable values and pick a `GIN_SEARCH_MODE_*`, where a negation such as `! 42` forces a full-index scan. [verified-by-code] (`_int_gin.c:37-40` — via `knowledge/files/contrib/intarray/_int_gin.md`).
+
+
+
 ### query_planner
 The core of the optimizer that, given the FROM-clause relations and join
 restrictions, builds base-relation `RelOptInfo`s and runs join-order search to
@@ -6054,6 +6319,11 @@ one's end. [verified-by-code] (`multixact.c:816-961` — via
 
 
 
+### RecordPageWithFreeSpace
+The routine that updates a relation's free-space map for one heap page after its free space changes; heap redo defers the call until after the buffer is released, and only issues it when the change is material. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heapam_xlog.c.md`).
+
+
+
 ### RecordTransactionCommit
 The routine that makes a transaction durable: it snapshots pending invalidation
 messages, writes (and flushes, per `synchronous_commit`) the commit WAL record,
@@ -6110,6 +6380,11 @@ the runtime counterpart is `RegisterDynamicBackgroundWorker`. [verified-by-code]
 
 
 
+### RegisterCatcacheInvalidation
+The internal inval routine that records a `(cacheId, hashValue, dbId)` catcache invalidation for the current command, queued for broadcast at command end / commit; receivers match by hash, not TID, so VACUUM FULL stays safe. [verified-by-code] (`inval.c:604` — via `knowledge/files/src/backend/utils/cache/inval.c.md`).
+
+
+
 ### RegisterCustomRmgr
 The rmgr.c API (`rmgr.c:107`) an extension calls at load time to claim a custom `RmgrId` and install its `RmgrData` callback table, so its WAL records can be replayed and described. [verified-by-code] (`rmgr.c:107` — via `knowledge/files/src/backend/access/transam/rmgr.c.md`).
 
@@ -6129,6 +6404,11 @@ The count/set of snapshots registered with a resource owner and pinned in the
 backend; while non-empty they hold back the xmin horizon, which is why leaks
 here stall vacuum. [verified-by-code] (via
 `knowledge/data-structures/snapshot-lifecycle.md`).
+
+
+
+### RegisterRelcacheInvalidation
+The internal inval routine that records a relcache invalidation (by relation OID plus database OID) for the current command, queued alongside catcache invalidations for broadcast at command end / commit. [verified-by-code] (`inval.c:632` — via `knowledge/files/src/backend/utils/cache/inval.c.md`).
 
 
 
@@ -6853,6 +7133,11 @@ The postmaster's accept loop after startup: it selects on the listen sockets, ac
 
 
 
+### set_transmission_modes
+postgres_fdw's helper that, before deparsing a `Const` or direct-modify SET clause, pushes a GUC nest level forcing `datestyle=ISO`, `intervalstyle=postgres`, `extra_float_digits=3`, and `search_path=pg_catalog`, so output functions emit a remote-parsable, locale-independent text form; `reset_transmission_modes` unwinds it. [verified-by-code] (`postgres_fdw.c:4108` — via `knowledge/files/contrib/postgres_fdw/deparse.c.md`).
+
+
+
 ### SET_VARSIZE
 The macro that writes the total length (4-byte header plus data) into a
 varlena's header — the standard final step when constructing a varlena datum
@@ -7035,6 +7320,11 @@ unrelated multixact/clog pages can be read concurrently. [verified-by-code]
 
 
 
+### sizebitvec
+intarray's GiST signature helper returning the number of set bits in a signature vector (via `pg_popcount`); distance/penalty math like `hemdist` uses it, e.g. `SIGLENBIT(siglen) - sizebitvec(other)` counts the other signature's unset bits. [verified-by-code] (`_intbig_gist.c:230-244` — via `knowledge/files/contrib/intarray/_intbig_gist.md`).
+
+
+
 ### SlabContext
 A `MemoryContext` type specialized for many same-sized chunks (e.g. reorder-buffer
 tuples); it allocates fixed-size slots from blocks and reclaims whole blocks,
@@ -7080,6 +7370,16 @@ magnetic-disk implementation. [from-comment] (`smgr.c:1` — via
 
 
 
+### smgrDoPendingDeletes
+The load-bearing transaction-cleanup routine that walks the pending-relation-delete list at the current nest level and, for each entry whose `atCommit` matches `isCommit`, unlinks the physical file via `smgrdounlinkall`; it removes a list entry before deleting so a retry cannot double-process. Called from both `CommitTransaction` and `AbortTransaction`. [verified-by-code] (`storage.c:673-735` — via `knowledge/files/src/backend/catalog/storage.c.md`).
+
+
+
+### smgrDoPendingSyncs
+The commit-time counterpart to `smgrDoPendingDeletes`: for every relfilenode still in `pendingSyncHash` (and not also being deleted) it issues `smgrimmedsync(MAIN_FORKNUM)`, durably flushing relations that skipped WAL under `wal_level=minimal`; aborts and parallel workers discard the hash instead. [verified-by-code] (`storage.c:741` — via `knowledge/files/src/backend/catalog/storage.c.md`).
+
+
+
 ### smgropen
 Returns (creating if needed) the `SMgrRelation` handle for a `RelFileLocator`+backend — the entry point to the storage-manager layer. It is cheap and cache-backed, so callers re-open freely rather than stash the handle. [verified-by-code] (via `knowledge/files/src/backend/catalog/storage.c.md`).
 
@@ -7096,6 +7396,11 @@ which buffer reads/writes, extends, and truncates reach the filesystem.
 
 ### smgrwrite
 Writes one already-filled buffer block to a relation fork through the storage manager (`md.c`), without WAL or buffer-pool involvement; used by bulk-write paths and during recovery. [verified-by-code] (via `knowledge/files/src/backend/storage/smgr/bulk_write.c.md`).
+
+
+
+### SN_env
+The Snowball stemmer's per-call environment struct; `dict_snowball` calls the generated `stem(SN_env *)` functions imported from the libstemmer sources to reduce a word to its stem. [verified-by-code] (`dict_snowball.c:16` — via `knowledge/files/src/backend/snowball/dict_snowball.c.md`).
 
 
 
@@ -7278,12 +7583,27 @@ serialization failure. The bookkeeping lives in `predicate.c`. [from-comment]
 
 
 
+### ssl_in_use
+The flag on the backend's `Port` (`MyProcPort->ssl_in_use`) recording whether the current client connection is TLS-encrypted; sslinfo's introspection functions gate every result on it, returning NULL on a non-TLS connection. [verified-by-code] (`sslinfo.c:5` — via `knowledge/files/contrib/sslinfo/sslinfo.c.md`).
+
+
+
+### standard_ProcessUtility
+The default implementation of the utility-statement dispatcher; `ProcessUtility` calls through the `ProcessUtility_hook` chain, and a module that installs the hook typically ends by calling `standard_ProcessUtility` to do the real work (CREATE / DROP / ALTER / COPY / ...). [verified-by-code] (`utility.c:11` — via `knowledge/files/src/backend/tcop/utility.c.md`).
+
+
+
 ### START_CRIT_SECTION
 Opens a critical section in which any `ereport(ERROR)` is promoted to PANIC,
 used to bracket the buffer-modify + WAL-emit sequence so a backend can never
 abort with the page changed but the WAL unwritten. No palloc-failure or
 interrupt may escape until `END_CRIT_SECTION`. [from-comment] (`hio.c:35-38` —
 via `knowledge/subsystems/access-heap.md`).
+
+
+
+### start_lsn
+The inclusive lower bound of a WAL byte range; SQL WAL readers like `pg_walinspect` decode the records between `(start_lsn, end_lsn)`. [verified-by-code] (`pg_walinspect.c:7` — via `knowledge/files/contrib/pg_walinspect/pg_walinspect.c.md`).
 
 
 
@@ -7821,6 +8141,11 @@ authoritative source for XID allocation and horizon decisions. [verified-by-code
 
 
 
+### TransInvalidationInfo
+The per-(sub)transaction invalidation-bookkeeping struct: it carries the command message lists plus `my_level` and a `parent` pointer so subtransaction abort can discard exactly that level's queued invalidations, and `PriorCmdInvalidMsgs` holds messages already folded in by `CommandCounterIncrement`. [verified-by-code] (`inval.c:48` — via `knowledge/files/src/backend/utils/cache/inval.c.md`).
+
+
+
 ### transInvalInfo
 The per-transaction accumulator of pending shared-invalidation messages and relcache-flush requests built up as a backend modifies catalogs; at commit it is handed to `CommandEndInvalidationMessages`/sinval so other backends learn of the changes. Subtransactions stack their own sub-list onto it. [inferred] (`inval.c:1247` — via `knowledge/subsystems/utils-cache.md`).
 
@@ -7928,6 +8253,16 @@ The static dispatch tables mapping each `TwoPhaseRmgrId` (lock manager, predicat
 
 
 
+### TwoPhaseShmemInit
+The shared-memory initializer for the two-phase-commit (prepared-transaction) subsystem; paired with `TwoPhaseShmemSize`, it is registered as an `{size_fn, init_fn}` slot so the shmem bootstrap lays out the `GlobalTransaction` array at startup. [verified-by-code] (`twophase.c:196-199` — via `knowledge/files/src/backend/access/transam/twophase.c.md`).
+
+
+
+### type_id
+The type-OID field of a `TypeCacheEntry`, the key under which `lookup_type_cache` caches a type's resolved metadata (typlen / typbyval / typalign, comparison and hash operators with their `FmgrInfo`s, the tuple descriptor for composites, etc.). [verified-by-code] (via `knowledge/files/src/backend/utils/cache/typcache.c.md`).
+
+
+
 ### TypeCacheEntry
 The per-type cached bundle the typcache builds on demand — comparison/hash operators and procs, btree/hash opclass info, type length/byval/align, and composite tuple descriptors — so hot paths avoid repeated catalog lookups. [verified-by-code] (via `knowledge/files/src/include/utils/typcache.h.md`).
 
@@ -7998,6 +8333,11 @@ The catalog object (pg_user_mapping) binding a local role to remote credentials 
 
 
 
+### UtfToLocal
+One of the two shared character-set conversion drivers in `conv.c` (with `LocalToUtf`); per-encoding glue functions under `conversion_procs/` call it with a radix tree to transcode from UTF-8 to a server-local encoding. [verified-by-code] (via `knowledge/files/src/backend/utils/mb/_conversion_procs.md`).
+
+
+
 ### vacuum
 The maintenance operation that reclaims space from dead tuples, updates the
 free-space and visibility maps, and advances `relfrozenxid` to hold off
@@ -8048,6 +8388,11 @@ tuples are all-visible (and optionally all-frozen) to every transaction. It lets
 index-only scans skip heap fetches and lets `VACUUM` skip clean pages; the bits
 are cleared whenever a page is modified. [from-comment] (via
 `knowledge/files/src/backend/access/heap/visibilitymap.c.md`).
+
+
+
+### vl_len_
+The 4-byte varlena length header that begins every variable-length datum (`struct varlena`, and embedded in types like `cube` and `lquery`); it is set with `SET_VARSIZE` and read with `VARSIZE`, and the type's `typalign` governs how arrays of such varlenas are laid out. [verified-by-code] (`cubedata.h:18` — via `knowledge/files/contrib/cube/cubedata.h.md`).
 
 
 
