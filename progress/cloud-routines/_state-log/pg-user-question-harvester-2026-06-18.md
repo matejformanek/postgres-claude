@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-18 — 37 internals threads harvested (36 pgsql-hackers + 1 pgsql-general), de-duped vs 06-15…06-17. New gap cluster `gap:auth`/`gap:auth-oauth` (#18,#26); persistent uncovered clusters remain pgstat-views, extended-statistics, vacuum-autovacuum. pgsql-performance returned no entries (PR #pending).
