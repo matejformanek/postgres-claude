@@ -1,0 +1,1 @@
+**pg-extension-anthropologist** 2026-06-18 — 2 ideologies: zson (569★, JSONB-compression custom type w/ catalog-table dictionary + wall-clock-TTL per-backend cache) + pipelinedb (2665★, streams-as-FDW + intercepted CREATE VIEW + worker/combiner bgworker tree) → knowledge/ideologies/ now 57 docs; >500★ search space deeply saturated (repmgr left [pending] backlog) (PR #<n>).
