@@ -164,14 +164,14 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-17 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. Re-walked Part V "Extending SQL" (§38) + §55 coding-conventions + §41 rule-system + §35 large-objects ToCs for dense internals-prose LEAF chapters not yet under docs-distilled/. Targeted the two biggest UNcovered clusters: the extension-packaging/build pair (extend-extensions §38.17 + extend-pgxs §38.18 — glaring gap given the extension-development skill) and the rule-system data-modification family (rules-update §41.4 / rules-privileges §41.5 / rules-status — only the SELECT-rule side rules-views was covered before). Plus the type-system + SQL-function + overloading Extending-SQL leaves and source-format §55.1 (the canonical pgindent rules behind the coding-style skill) and lo-implementation §35.5. 1 candidate 404'd: geqo-pg (folded into the single-page geqo parent in the current docs tree, matching prior gin/gist-extensibility 404s — do not re-queue). rules-status needed a re-fetch with a corrected prompt — first WebFetch returned a rules-vs-triggers framing that the page doesn't carry; it is "Rules and Command Status".)
 
-[in-progress:cloud/pg-docs-miner/2026-06-17] extend-extensions https://www.postgresql.org/docs/current/extend-extensions.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] extend-pgxs https://www.postgresql.org/docs/current/extend-pgxs.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] extend-type-system https://www.postgresql.org/docs/current/extend-type-system.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] xfunc-sql https://www.postgresql.org/docs/current/xfunc-sql.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] xfunc-overload https://www.postgresql.org/docs/current/xfunc-overload.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] source-format https://www.postgresql.org/docs/current/source-format.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] lo-implementation https://www.postgresql.org/docs/current/lo-implementation.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] rules-update https://www.postgresql.org/docs/current/rules-update.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] rules-privileges https://www.postgresql.org/docs/current/rules-privileges.html
-[in-progress:cloud/pg-docs-miner/2026-06-17] rules-status https://www.postgresql.org/docs/current/rules-status.html
+[done:b990d12] extend-extensions https://www.postgresql.org/docs/current/extend-extensions.html
+[done:b990d12] extend-pgxs https://www.postgresql.org/docs/current/extend-pgxs.html
+[done:b990d12] extend-type-system https://www.postgresql.org/docs/current/extend-type-system.html
+[done:b990d12] xfunc-sql https://www.postgresql.org/docs/current/xfunc-sql.html
+[done:b990d12] xfunc-overload https://www.postgresql.org/docs/current/xfunc-overload.html
+[done:b990d12] source-format https://www.postgresql.org/docs/current/source-format.html
+[done:b990d12] lo-implementation https://www.postgresql.org/docs/current/lo-implementation.html
+[done:b990d12] rules-update https://www.postgresql.org/docs/current/rules-update.html
+[done:b990d12] rules-privileges https://www.postgresql.org/docs/current/rules-privileges.html
+[done:b990d12] rules-status https://www.postgresql.org/docs/current/rules-status.html
 [skipped:404-no-such-docs-slug] geqo-pg https://www.postgresql.org/docs/current/geqo-pg.html
