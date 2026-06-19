@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-06-19 — 6 docs distilled (logical-decoding §49 family: walsender/sql/writer/example + trigger-definition §39.1 + geqo-intro §61.1), docs-distilled 127→133; flipped 8 stale 06-18 markers to [done:0c7419e] (#347) (PR #PENDING).
