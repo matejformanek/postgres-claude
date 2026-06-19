@@ -1,0 +1,2 @@
+**pg-extension-anthropologist** 2026-06-19 — 4 ext ideology docs: pg_net (async foil to pgsql-http), pg_similarity (operators-as-GUC-thresholds + IMMUTABLE mislabel), pguri (liburiparser-backed type, hash/eq opclass inconsistency), pg_hashids (vendored lib patched to palloc; honest-IMMUTABLE case). Queue refilled at >300★ floor; pg_jieba left [pending]. knowledge/ideologies/ now holds 61 docs (PR #pending).
+</content>
