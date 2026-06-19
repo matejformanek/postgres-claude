@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-06-18 — anchor ab3023ad1e68 → bdae2c20e88d; 16 commits; 19 docs queued for audit (replication.md subsystem already pending; pgstat cluster ≥5 impacted but no core subsystem doc — flagged as coverage gap) (PR #<n>).
