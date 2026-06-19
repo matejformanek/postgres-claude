@@ -13,18 +13,11 @@ than the periodic 30-day refresh: process them first.
 
 ## Entries
 
-[pending] knowledge/subsystems/foreign.md verified=2026-06-10
-[pending] knowledge/subsystems/libpq-backend.md verified=2026-06-10
 [pending] knowledge/subsystems/headers-wave3.md verified=2026-06-10
-[pending] knowledge/subsystems/main.md verified=2026-06-10
-[pending] knowledge/subsystems/port.md verified=2026-06-10
-[pending] knowledge/idioms/locking-overview.md verified=2026-06-11
-[pending] knowledge/idioms/memory-contexts.md verified=2026-06-11
 [pending] knowledge/idioms/catalog-conventions.md verified=2026-06-11
 [pending] knowledge/idioms/error-handling.md verified=2026-06-11
 [pending] knowledge/idioms/fmgr.md verified=2026-06-11
 [pending] knowledge/idioms/spi.md verified=2026-06-11
-[pending] knowledge/data-structures/bufferdesc-state.md verified=2026-06-11
 [pending] knowledge/idioms/parser-pipeline.md verified=2026-06-12
 [pending] knowledge/idioms/node-types-and-lists.md verified=2026-06-12
 [pending] knowledge/idioms/bgworker-and-parallel.md verified=2026-06-12
@@ -97,13 +90,13 @@ than the periodic 30-day refresh: process them first.
 
 ## anchor-bump (2026-06-17) — e5f94c4808fe..ab3023ad1e68 (10 commits)
 
-[pending] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (null-treatment reject for non-window funcs 4e5920e6 + error-message typo ab3023ad; prior [done:d3dfc9b] re-anchors)
+[in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (null-treatment reject for non-window funcs 4e5920e6 + error-message typo ab3023ad; prior [done:d3dfc9b] re-anchors) — AUDIT 2026-06-19: clean, re-anchored to ab3023ad (no line cites; 5 entry points intact)
 [pending] knowledge/files/src/backend/replication/logical/reorderbuffer.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (free speculative-insertion change tuple, f50c329f)
 [pending] knowledge/files/src/backend/commands/repack.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (concurrent repack: reject leftover toast attribs, e2a8cabc)
 [pending] knowledge/files/src/backend/statistics/extended_stats_funcs.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (reject oversized MCV lists in pg_restore_extended_stats, f6e4ec0a)
-[pending] knowledge/files/contrib/ltree/ltree.h.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049)
-[pending] knowledge/files/contrib/ltree/ltree_gist.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049)
-[pending] knowledge/files/contrib/ltree/ltree_op.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049)
+[in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/contrib/ltree/ltree.h.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049) — AUDIT 2026-06-19: DRIFT fixed (new ltree_compare_distance decl @ltree.h:209 shifted decls +1; ltree_op.c cross-refs re-pinned)
+[in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/contrib/ltree/ltree_gist.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049) — AUDIT 2026-06-19: DRIFT fixed (ltree_penalty now calls ltree_compare_distance, not ltree_compare)
+[in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/contrib/ltree/ltree_op.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049) — AUDIT 2026-06-19: DRIFT fixed (full re-cite; ltree_compare/ltree_compare_distance split; +ltree issue register row resolved)
 
 ## anchor-bump 2026-06-18: ab3023ad1e68..bdae2c20e88d (16 commits, pg-anchor-refresh)
 
@@ -126,3 +119,13 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/test/modules/test_custom_stats/test_custom_var_stats.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix PANIC with track_functions due to concurrent drop of pgstats entries, 850b9218c8e4)
 [pending] knowledge/files/src/test/regress/pg_regress.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Silence uninitialized variable warning with some compiler versions, f29299c42b0b)
 [pending] knowledge/files/src/test/regress/regress.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Avoid errors during ALTER SUBSCRIPTION., e5c40584a712)
+
+## audit-clean rotation (2026-06-19, pg-quality-auditor) — re-verified at anchor ab3023ad1e68
+
+[pending] knowledge/subsystems/foreign.md verified=2026-06-19
+[pending] knowledge/subsystems/libpq-backend.md verified=2026-06-19
+[pending] knowledge/subsystems/main.md verified=2026-06-19
+[pending] knowledge/subsystems/port.md verified=2026-06-19
+[pending] knowledge/idioms/locking-overview.md verified=2026-06-19
+[pending] knowledge/idioms/memory-contexts.md verified=2026-06-19
+[pending] knowledge/data-structures/bufferdesc-state.md verified=2026-06-19

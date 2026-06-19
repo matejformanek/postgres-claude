@@ -9,11 +9,12 @@ Central header for the `ltree` / `lquery` / `ltxtquery` types plus the GiST opcl
 Header-only — no functions defined. Declarations:
 
 - `bool ltree_execute(ITEM *curitem, void *checkval, bool calcnot, bool (*chkcond)(void *, ITEM *))` (line 205) — the polish-notation walker, defined in `ltxtquery_op.c:20`.
-- `int ltree_compare(const ltree *a, const ltree *b)` (line 208) — defined in `ltree_op.c:46`.
-- `bool inner_isparent(const ltree *c, const ltree *p)` (line 209) — defined in `ltree_op.c:213`.
-- `bool compare_subnode(ltree_level *t, char *qn, int len, bool prefix, bool ci)` (line 210) — defined in `lquery_op.c:43`.
-- `ltree *lca_inner(ltree **a, int len)` (line 211) — defined in `ltree_op.c:487`.
-- `bool ltree_label_match(...)` (line 212) — defined in `lquery_op.c:80`.
+- `int ltree_compare(const ltree *a, const ltree *b)` (line 208) — defined in `ltree_op.c:49`.
+- `float ltree_compare_distance(const ltree *a, const ltree *b)` (line 209) — **added by `3f328049`** (the int32-overflow fix); carries the magnitude "distance" semantics the old `ltree_compare` returned, as a `float`. Defined in `ltree_op.c:83`.
+- `bool inner_isparent(const ltree *c, const ltree *p)` (line 210) — defined in `ltree_op.c:250`.
+- `bool compare_subnode(ltree_level *t, char *qn, int len, bool prefix, bool ci)` (line 211) — defined in `lquery_op.c:43`.
+- `ltree *lca_inner(ltree **a, int len)` (line 212) — defined in `ltree_op.c:525`.
+- `bool ltree_label_match(...)` (line 213) — defined in `lquery_op.c:80`.
 - `ltree_gist *ltree_gist_alloc(...)` (line 291) — defined in `ltree_gist.c:42`.
 - `PGDLLEXPORT Datum ...` declarations for the operator suite (lines 180-203).
 
@@ -23,7 +24,7 @@ Type-fetch macros:
 
 ## Key invariants
 
-- INV-LTREE-MAXLEVEL: `ltree.numlevel` is `uint16`; `LTREE_MAX_LEVELS = PG_UINT16_MAX = 65535` (line 52). Enforced at parse time (`ltree_io.c:64`), at concat (`ltree_op.c:341`), at lquery `low`/`high` bounds (`ltree_io.c:424,442`). `[verified-by-code]`
+- INV-LTREE-MAXLEVEL: `ltree.numlevel` is `uint16`; `LTREE_MAX_LEVELS = PG_UINT16_MAX = 65535` (line 52). Enforced at parse time (`ltree_io.c:64`), at concat (`ltree_op.c:378`), at lquery `low`/`high` bounds (`ltree_io.c:424,442`). `[verified-by-code]`
 - INV-LQUERY-MAXLEVEL: `lquery.numlevel` is `uint16`; `LQUERY_MAX_LEVELS = PG_UINT16_MAX` (line 125). Enforced at `ltree_io.c:306`. `[verified-by-code]`
 - INV-LABEL-MAX-CHARS: per-label cap is **1000 characters, not bytes** (line 18). The byte-length field is `uint16` (lines 35, 61); character cap is locale/encoding-independent, byte cap is implicit ≤ 65535. `[verified-by-code + from-comment]`
 - INV-LABEL-CHARSET: `ISLABEL(x) == t_isalnum_cstr(x) || t_iseq(x,'_') || t_iseq(x,'-')` (line 130). `t_isalnum_cstr` is the encoding-aware tsearch helper — under non-C locales it accepts UTF-8 letters, not just ASCII `[A-Za-z0-9_-]`. The leading comment "alphanumerics, underscores and hyphens" is misleading w.r.t. ASCII. `[verified-by-code]`
@@ -57,7 +58,7 @@ Type-fetch macros:
 
 - `source/contrib/ltree/ltree_io.c` — parser; enforces `LTREE_MAX_LEVELS`, `LTREE_LABEL_MAX_CHARS`, level-totallen-u16.
 - `source/contrib/ltree/lquery_op.c:43` — `compare_subnode`, `ltree_label_match`.
-- `source/contrib/ltree/ltree_op.c:46` — `ltree_compare`.
+- `source/contrib/ltree/ltree_op.c:49` — `ltree_compare` (and `ltree_op.c:83` — `ltree_compare_distance`, added by 3f328049).
 - `source/contrib/ltree/ltree_gist.c:42` — `ltree_gist_alloc`.
 - `source/contrib/ltree/ltxtquery_op.c:20` — `ltree_execute` polish-notation walker.
 - `source/contrib/ltree/crc32.c` — `ltree_crc32_sz`.

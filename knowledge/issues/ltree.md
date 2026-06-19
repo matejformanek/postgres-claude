@@ -134,23 +134,28 @@ ltree_gist.h is an inline section of ltree.h documented separately).
 
 ### ltree_op.c
 
-- [ISSUE-documentation: ltree_compare magnitude factor `* 10 *
-  (an+1)` looks meaningful but only sign used (nit)] —
-  `source/contrib/ltree/ltree_op.c:60`.
+- [ISSUE-documentation: RESOLVED 2026-06-19 by upstream `3f328049`
+  (anchor-bump `e5f94c4808fe..ab3023ad1e68`). The magnitude factor
+  `* 10 * (an+1)` was removed from the sort comparator `ltree_compare`
+  (now returns small int diffs only, `ltree_op.c:49`) and split into a
+  new `float ltree_compare_distance` (`ltree_op.c:83`) — which both
+  documents the "magnitude" intent and fixes the int32 overflow the
+  deep-tree magnitude could hit. Original A13-2 nit obsolete.] —
+  `source/contrib/ltree/ltree_op.c:49,83`.
 - [ISSUE-correctness: lca_inner excludes last level via
   `num = numlevel - 1`; tree-LCA semantics but surprising (nit)] —
-  `source/contrib/ltree/ltree_op.c:505`.
+  `source/contrib/ltree/ltree_op.c:542`.
 - [ISSUE-defense-in-depth: ltree_index is O(N×M) naive substring;
   no CHECK_FOR_INTERRUPTS (nit)] —
-  `source/contrib/ltree/ltree_op.c:425-446`.
+  `source/contrib/ltree/ltree_op.c:462-476`.
 - [ISSUE-correctness: subpath with start=INT32_MIN relies on
   signed-overflow UB (nit)] —
-  `source/contrib/ltree/ltree_op.c:319-321`.
+  `source/contrib/ltree/ltree_op.c:356-357`.
 - [ISSUE-correctness: subltree silently clips endpos > numlevel but
   errors on startpos >= numlevel; asymmetric (nit)] —
-  `source/contrib/ltree/ltree_op.c:270-276`.
+  `source/contrib/ltree/ltree_op.c:307-313`.
 - [ISSUE-documentation: ltreeparentsel is dead code for extension
-  v1.2+ (nit)] — `source/contrib/ltree/ltree_op.c:633-651`.
+  v1.2+ (nit)] — `source/contrib/ltree/ltree_op.c:671-675`.
 
 ### ltxtquery_io.c
 
