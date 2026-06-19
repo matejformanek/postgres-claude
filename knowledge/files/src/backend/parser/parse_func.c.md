@@ -1,10 +1,14 @@
 # parse_func.c
 
-- **Source:** `source/src/backend/parser/parse_func.c` (2814 lines)
-- **Last verified commit:** `b78cd2bda5b1` (re-verified 2026-06-16 by
+- **Source:** `source/src/backend/parser/parse_func.c` (2816 lines)
+- **Last verified commit:** `ab3023ad1e68` (re-verified 2026-06-19 by
   pg-quality-auditor AUDIT mode after anchor-bump
-  `e18b0cb7344..da1eff08a5be`; line count −2, no line-level cites in
-  this doc, named entry points intact)
+  `e5f94c4808fe..ab3023ad1e68`; +2 lines from 4e5920e6 null-treatment
+  reject + ab3023ad error-message typo fix; no line-level cites in this
+  doc, all 5 named entry points intact — `ParseFuncOrColumn`,
+  `func_select_candidate`, `func_get_detail`, `make_fn_arguments`,
+  `ParseComplexProjection`; "only window functions accept RESPECT/IGNORE
+  NULLS" reject confirmed present)
 - **Depth:** read (top-level entry points + dispatch logic)
 
 ## Purpose

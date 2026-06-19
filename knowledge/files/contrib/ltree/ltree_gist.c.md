@@ -12,7 +12,7 @@ GiST opclass support functions (registered via SQL in `ltree--1.x.sql`):
 - `Datum ltree_decompress(PG_FUNCTION_ARGS)` (line 113) — detoasts the key.
 - `Datum ltree_same(PG_FUNCTION_ARGS)` (line 131) — exact equality of two `ltree_gist` keys.
 - `Datum ltree_union(PG_FUNCTION_ARGS)` (line 192) — computes a covering key for a set; tracks min `left`, max `right`, and OR-of-signatures, with `ALLTRUE` shortcut when bitvec saturates.
-- `Datum ltree_penalty(PG_FUNCTION_ARGS)` (line 261) — penalty = `Max(cmpl, 0) + Max(cmpr, 0)` where `cmpl/cmpr` are ltree_compare on the boundary nodes.
+- `Datum ltree_penalty(PG_FUNCTION_ARGS)` (line 261) — penalty = `Max(cmpl, 0) + Max(cmpr, 0)` (line 273) where `cmpl`/`cmpr` are **`ltree_compare_distance`** (float) on the boundary nodes (lines 270-271). Switched from the int `ltree_compare` to the float `ltree_compare_distance` by `3f328049` — the penalty genuinely needs the divergence *magnitude*, and that magnitude is precisely what was overflowing int32 before the fix split it into a float helper.
 - `Datum ltree_picksplit(PG_FUNCTION_ARGS)` (line 294) — sorts entries by `LTG_GETLNODE` ltree value, splits at midpoint.
 - `Datum ltree_consistent(PG_FUNCTION_ARGS)` (line 617) — main dispatch for 11 strategy numbers (1-5 B-tree-style, 10-17 ltree-specific).
 - `Datum ltree_gist_options(PG_FUNCTION_ARGS)` (line 735) — registers the `siglen` reloption (default 8 bytes, max `GISTMaxIndexKeySize`).
@@ -68,7 +68,7 @@ Internal:
 - `source/contrib/ltree/ltree.h:256-313` — `ltree_gist`, `LTG_*` flags, `LtreeGistOptions`.
 - `source/contrib/ltree/lquery_op.c:263,287` — `ltq_regex`, `lt_q_regex` called at leaves.
 - `source/contrib/ltree/ltxtquery_op.c:82` — `ltxtq_exec` called at leaves.
-- `source/contrib/ltree/ltree_op.c:213,46` — `inner_isparent`, `ltree_compare`.
+- `source/contrib/ltree/ltree_op.c:250,49,83` — `inner_isparent`, `ltree_compare`, `ltree_compare_distance` (the last added by 3f328049, now used in `ltree_penalty`).
 - `source/contrib/ltree/crc32.c` — `ltree_crc32_sz` used by `hashing` and `gist_te`/`gist_qe`.
 - `source/contrib/ltree/_ltree_gist.c` — parallel implementation for `ltree[]`.
 - `source/src/include/access/gist.h` — `GISTMaxIndexKeySize`, `GIST_LEAF`, `GISTENTRY`.
