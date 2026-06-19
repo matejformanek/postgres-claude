@@ -98,6 +98,28 @@ than the periodic 30-day refresh: process them first.
 [in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/contrib/ltree/ltree_gist.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049) — AUDIT 2026-06-19: DRIFT fixed (ltree_penalty now calls ltree_compare_distance, not ltree_compare)
 [in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/contrib/ltree/ltree_op.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049) — AUDIT 2026-06-19: DRIFT fixed (full re-cite; ltree_compare/ltree_compare_distance split; +ltree issue register row resolved)
 
+## anchor-bump 2026-06-18: ab3023ad1e68..bdae2c20e88d (16 commits, pg-anchor-refresh)
+
+[pending] knowledge/files/contrib/jsonb_plperl/jsonb_plperl.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (jsonb_plperl, jsonb_plpython: Fix unguarded recursion and loops., da82fbb8f9a3)
+[pending] knowledge/files/contrib/jsonb_plpython/jsonb_plpython.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (jsonb_plperl, jsonb_plpython: Fix unguarded recursion and loops., da82fbb8f9a3)
+[pending] knowledge/files/src/backend/access/transam/xlogreader.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix pgstat_count_io_op_time() calls passing incorrect information, 3048e81308f9)
+[pending] knowledge/files/src/backend/access/transam/xlogrecovery.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix pgstat_count_io_op_time() calls passing incorrect information, 3048e81308f9)
+[pending] knowledge/files/src/backend/commands/typecmds.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix ALTER DOMAIN VALIDATE CONSTRAINT locking, 64797ad97d6e)
+[pending] knowledge/files/src/backend/replication/logical/slotsync.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Avoid stale slot access after dropping obsolete synced slots., bdae2c20e88d)
+[pending] knowledge/files/src/backend/replication/logical/worker.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Avoid errors during ALTER SUBSCRIPTION., e5c40584a712)
+[pending] knowledge/files/src/backend/replication/walreceiver.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix pgstat_count_io_op_time() calls passing incorrect information, 3048e81308f9)
+[pending] knowledge/files/src/backend/utils/activity/pgstat.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix PANIC with track_functions due to concurrent drop of pgstats entries, 850b9218c8e4)
+[pending] knowledge/files/src/backend/utils/activity/pgstat_function.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix PANIC with track_functions due to concurrent drop of pgstats entries, 850b9218c8e4)
+[pending] knowledge/files/src/backend/utils/activity/pgstat_replslot.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix PANIC with track_functions due to concurrent drop of pgstats entries, 850b9218c8e4)
+[pending] knowledge/files/src/backend/utils/activity/pgstat_shmem.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix PANIC with track_functions due to concurrent drop of pgstats entries, 850b9218c8e4)
+[pending] knowledge/files/src/backend/utils/activity/pgstat_xact.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix PANIC with track_functions due to concurrent drop of pgstats entries, 850b9218c8e4)
+[pending] knowledge/files/src/bin/scripts/vacuuming.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (vacuumdb: Fix --missing-stats-only for partitioned indexes., d2cea63065b3)
+[pending] knowledge/files/src/include/catalog/pg_subscription.h.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Avoid errors during ALTER SUBSCRIPTION., e5c40584a712)
+[pending] knowledge/files/src/interfaces/libpq-oauth/oauth-curl.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (libpq-oauth: Print libcurl version with OAUTHDEBUG_UNSAFE_TRACE, 4bd477dcc619)
+[pending] knowledge/files/src/test/modules/test_custom_stats/test_custom_var_stats.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Fix PANIC with track_functions due to concurrent drop of pgstats entries, 850b9218c8e4)
+[pending] knowledge/files/src/test/regress/pg_regress.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Silence uninitialized variable warning with some compiler versions, f29299c42b0b)
+[pending] knowledge/files/src/test/regress/regress.c.md  reason=anchor-bump 2026-06-18:ab3023ad1e68..bdae2c20e88d (Avoid errors during ALTER SUBSCRIPTION., e5c40584a712)
+
 ## audit-clean rotation (2026-06-19, pg-quality-auditor) — re-verified at anchor ab3023ad1e68
 
 [pending] knowledge/subsystems/foreign.md verified=2026-06-19
