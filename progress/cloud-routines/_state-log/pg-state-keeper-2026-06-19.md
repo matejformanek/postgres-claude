@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-06-19 — Audited 06-18→06-19 cycle: 9/9 cloud PRs merged green (#343–#351), OK: 9 · SILENT: [pg-file-backfiller] (scope-exhausted, retire overdue); pg-quality-auditor recovered (#351). Flagged pg_dump + pgstat subsystem-doc gaps. Briefing at progress/_briefings/2026-06-19.md (PR #353).
