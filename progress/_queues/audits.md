@@ -129,3 +129,19 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/idioms/locking-overview.md verified=2026-06-19
 [pending] knowledge/idioms/memory-contexts.md verified=2026-06-19
 [pending] knowledge/data-structures/bufferdesc-state.md verified=2026-06-19
+
+## anchor-bump 2026-06-19: bdae2c20e88d..dc5116780846 (11 commits, pg-anchor-refresh)
+
+[pending] knowledge/files/src/bin/pg_dump/pg_dump.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Revert non-text output formats for pg_dumpall, 7ca548f23a60)
+[pending] knowledge/files/src/bin/pg_dump/pg_dumpall.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Revert non-text output formats for pg_dumpall, 7ca548f23a60)
+[pending] knowledge/files/src/bin/pg_dump/pg_restore.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Revert non-text output formats for pg_dumpall, 7ca548f23a60)
+[pending] knowledge/files/src/bin/pg_dump/pg_backup_archiver.h.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Revert non-text output formats for pg_dumpall, 7ca548f23a60)
+[pending] knowledge/files/src/bin/pg_dump/pg_backup.h.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Revert non-text output formats for pg_dumpall, 7ca548f23a60)
+[pending] knowledge/files/src/bin/pg_dump/pg_backup_tar.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Revert non-text output formats for pg_dumpall, 7ca548f23a60)
+[pending] knowledge/files/src/bin/pg_dump/parallel.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Revert non-text output formats for pg_dumpall, 7ca548f23a60)
+[pending] knowledge/files/src/backend/storage/ipc/procarray.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Make GetSnapshotData() more resilient on out-of-memory errors, 29fb598b9cad)
+[pending] knowledge/files/src/backend/postmaster/autovacuum.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Avoid division-by-zero when calculating autovacuum MXID score, 1f2297b54879)
+[pending] knowledge/files/src/backend/optimizer/util/clauses.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Silence "may be used uninitialized" compiler warning, f04781df5daf)
+[pending] knowledge/files/src/backend/jit/llvm/llvmjit_deform.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Update JIT tuple deforming code for virtual generated columns, dc5116780846)
+[pending] knowledge/files/src/backend/postmaster/datachecksum_state.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Fix comments on data checksum cost settings, 8d22f5232458)
+[pending] knowledge/files/contrib/hstore_plperl/hstore_plperl.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (hstore_plperl: Add CHECK_FOR_INTERRUPTS() in reference-unwinding loop, c0f17b04d906)
