@@ -175,3 +175,14 @@ table of contents, exclude chapters whose slug already exists under
 [done:b990d12] rules-privileges https://www.postgresql.org/docs/current/rules-privileges.html
 [done:b990d12] rules-status https://www.postgresql.org/docs/current/rules-status.html
 [skipped:404-no-such-docs-slug] geqo-pg https://www.postgresql.org/docs/current/geqo-pg.html
+
+## Refill 2026-06-18 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. Re-walked §47 SPI + §40 event-triggers + §38 Extending-SQL + §15 parallel-query + §55.x protocol-changes ToCs for dense internals-prose LEAF chapters NOT folded into an already-distilled parent. The pattern this run: parent chapters spi/event-trigger-interface/parallel-query/xoper-optimization were covered, but their meatiest interface-rule LEAVES had ZERO coverage — the three SPI footgun leaves (memory §47.3 / visibility §47.5 / transaction §47.4), the event-trigger firing matrix §40.1 (only the §40.4 C-ABI was covered), the CREATE OPERATOR base mechanism §38.14 (only §38.15 optimizer hints covered), the PL SQL-registration side §40.1/40.1-install (only the §57 C handler covered), and the §15.3 parallel-plan node taxonomy (parallel-query.md also_fetched §15.1/§15.4 but NOT §15.3). HEAD-probed ~50 per-AM leaf slugs (gin/gist/spgist/brin -intro/-implementation/-extensibility, row-estimation) — ALL 404, single-page-folded in the current tree, matching prior runs; do not re-queue. Three parent pages render ToC-only via WebFetch (spi-transaction §47.4, xplang §40, protocol-changes partial) — enriched from leaf/function pages (spi-spi-commit, xplang-install) where the prose actually lives, same workaround as the planner-stats-details extraction class. mvcc-intro/mvcc-caveats deliberately SKIPPED: mvcc.md already mined the full §13.1-13.7 index. parallel-safety SKIPPED: already folded into parallel-query.md's also_fetched.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-18] spi-memory https://www.postgresql.org/docs/current/spi-memory.html
+[in-progress:cloud/pg-docs-miner/2026-06-18] spi-visibility https://www.postgresql.org/docs/current/spi-visibility.html
+[in-progress:cloud/pg-docs-miner/2026-06-18] spi-transaction https://www.postgresql.org/docs/current/spi-transaction.html
+[in-progress:cloud/pg-docs-miner/2026-06-18] event-trigger-definition https://www.postgresql.org/docs/current/event-trigger-definition.html
+[in-progress:cloud/pg-docs-miner/2026-06-18] xoper https://www.postgresql.org/docs/current/xoper.html
+[in-progress:cloud/pg-docs-miner/2026-06-18] xplang https://www.postgresql.org/docs/current/xplang.html
+[in-progress:cloud/pg-docs-miner/2026-06-18] protocol-changes https://www.postgresql.org/docs/current/protocol-changes.html
+[in-progress:cloud/pg-docs-miner/2026-06-18] parallel-plans https://www.postgresql.org/docs/current/parallel-plans.html
