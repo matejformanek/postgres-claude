@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-19 — 34 internals threads harvested (June 13–19 window), 8 gap tags; previously-"never tagged" fmgr-and-spi / access-method-apis / gucs-config / extension-development / bgworker-and-extensions cluster all got primary tags this run. pgsql-performance empty all month (PR #<pending>).
