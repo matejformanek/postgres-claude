@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-06-20 — 5 docs distilled (xfunc-optimization §38.11 planner-support-fns, planner-stats-security §70.2, explicit-joins §16.5, dynamic-trace §28.5, logical-replication-architecture §31.10); docs-distilled 133→138; flipped 6 stale 06-19 markers (shipped in #356) to [done:54962de]; wiki side EXHAUSTED, docs-only run (PR #<pending>).
