@@ -178,11 +178,24 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-18 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. Re-walked §47 SPI + §40 event-triggers + §38 Extending-SQL + §15 parallel-query + §55.x protocol-changes ToCs for dense internals-prose LEAF chapters NOT folded into an already-distilled parent. The pattern this run: parent chapters spi/event-trigger-interface/parallel-query/xoper-optimization were covered, but their meatiest interface-rule LEAVES had ZERO coverage — the three SPI footgun leaves (memory §47.3 / visibility §47.5 / transaction §47.4), the event-trigger firing matrix §40.1 (only the §40.4 C-ABI was covered), the CREATE OPERATOR base mechanism §38.14 (only §38.15 optimizer hints covered), the PL SQL-registration side §40.1/40.1-install (only the §57 C handler covered), and the §15.3 parallel-plan node taxonomy (parallel-query.md also_fetched §15.1/§15.4 but NOT §15.3). HEAD-probed ~50 per-AM leaf slugs (gin/gist/spgist/brin -intro/-implementation/-extensibility, row-estimation) — ALL 404, single-page-folded in the current tree, matching prior runs; do not re-queue. Three parent pages render ToC-only via WebFetch (spi-transaction §47.4, xplang §40, protocol-changes partial) — enriched from leaf/function pages (spi-spi-commit, xplang-install) where the prose actually lives, same workaround as the planner-stats-details extraction class. mvcc-intro/mvcc-caveats deliberately SKIPPED: mvcc.md already mined the full §13.1-13.7 index. parallel-safety SKIPPED: already folded into parallel-query.md's also_fetched.)
 
-[in-progress:cloud/pg-docs-miner/2026-06-18] spi-memory https://www.postgresql.org/docs/current/spi-memory.html
-[in-progress:cloud/pg-docs-miner/2026-06-18] spi-visibility https://www.postgresql.org/docs/current/spi-visibility.html
-[in-progress:cloud/pg-docs-miner/2026-06-18] spi-transaction https://www.postgresql.org/docs/current/spi-transaction.html
-[in-progress:cloud/pg-docs-miner/2026-06-18] event-trigger-definition https://www.postgresql.org/docs/current/event-trigger-definition.html
-[in-progress:cloud/pg-docs-miner/2026-06-18] xoper https://www.postgresql.org/docs/current/xoper.html
-[in-progress:cloud/pg-docs-miner/2026-06-18] xplang https://www.postgresql.org/docs/current/xplang.html
-[in-progress:cloud/pg-docs-miner/2026-06-18] protocol-changes https://www.postgresql.org/docs/current/protocol-changes.html
-[in-progress:cloud/pg-docs-miner/2026-06-18] parallel-plans https://www.postgresql.org/docs/current/parallel-plans.html
+# 2026-06-19: below 8 [in-progress:cloud/pg-docs-miner/2026-06-18] markers were stale —
+# all 8 docs shipped in PR #347 (squash 0c7419e, "8 internals-leaf chapters", docs-distilled →127)
+# but the merger never flipped the markers (same class as the 06-16→#330 stale-marker case above).
+# Verified all 8 outputs present under knowledge/docs-distilled/. Flipped to [done:0c7419e] this run.
+[done:0c7419e] spi-memory https://www.postgresql.org/docs/current/spi-memory.html
+[done:0c7419e] spi-visibility https://www.postgresql.org/docs/current/spi-visibility.html
+[done:0c7419e] spi-transaction https://www.postgresql.org/docs/current/spi-transaction.html
+[done:0c7419e] event-trigger-definition https://www.postgresql.org/docs/current/event-trigger-definition.html
+[done:0c7419e] xoper https://www.postgresql.org/docs/current/xoper.html
+[done:0c7419e] xplang https://www.postgresql.org/docs/current/xplang.html
+[done:0c7419e] protocol-changes https://www.postgresql.org/docs/current/protocol-changes.html
+[done:0c7419e] parallel-plans https://www.postgresql.org/docs/current/parallel-plans.html
+
+## Refill 2026-06-19 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; the 8 [in-progress:cloud/pg-docs-miner/2026-06-18] markers above were stale-from-#347 and flipped to [done:0c7419e] this run. Re-walked §49 Logical Decoding + §39 Triggers + §61 GEQO ToCs for dense internals-prose LEAF chapters not yet under docs-distilled/. The logical-decoding family was the biggest remaining coherent gap: the explanation/output-plugin/streaming/synchronous leaves were covered (PR #347-era), but the 4 INTERFACE leaves — streaming-replication-protocol §49.3 (walsender), SQL interface §49.4 (sql), output writers §49.6 (writer), and the worked example §49.1 — had ZERO coverage. Also picked trigger-definition §39.1 (the trigger firing-semantics overview — a glaring gap given trigger-interface §39.4 + trigger-datachanges were the only trigger leaves covered) and geqo-intro §61.1 (the GEQO genetic-algorithm overview behind the already-distilled geqo parent). HEAD-probed btree-behavior/-implementation/-support-funcs/-intro + xindex-opfamily + logicaldecoding-capabilities + trigger-arguments — ALL 404, single-page-folded in the current tree, matching prior per-AM leaf 404s; do not re-queue.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-19] trigger-definition https://www.postgresql.org/docs/current/trigger-definition.html
+[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-walsender https://www.postgresql.org/docs/current/logicaldecoding-walsender.html
+[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-sql https://www.postgresql.org/docs/current/logicaldecoding-sql.html
+[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-writer https://www.postgresql.org/docs/current/logicaldecoding-writer.html
+[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-example https://www.postgresql.org/docs/current/logicaldecoding-example.html
+[in-progress:cloud/pg-docs-miner/2026-06-19] geqo-intro https://www.postgresql.org/docs/current/geqo-intro.html
