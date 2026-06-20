@@ -1,1 +1,1 @@
-**pg-extension-anthropologist** 2026-06-20 — 3 new ideology docs (pg_tracing, lantern, timescaledb-toolkit), knowledge/ideologies/ now 64; >300★ ext space saturated, refilled to >250★/Rust>300/C++>350, pg_jieba left as low-signal backlog (PR #<n>).
+**pg-extension-anthropologist** 2026-06-20 — 3 new ideology docs (pg_tracing, lantern, timescaledb-toolkit), knowledge/ideologies/ now 64; >300★ ext space saturated, refilled to >250★/Rust>300/C++>350, pg_jieba left as low-signal backlog (PR #367).
