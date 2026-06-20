@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-06-20 — anchor dc5116780846 → f25a07b2d94c; 1 commit (pg_mkdir_p concurrent-creation tolerance, Tom Lane); 1 doc queued for audit (src/port/pgmkdirp.c.md); no subsystem ≥5-file threshold (PR #<n>).
