@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-20 — 34 internals threads harvested (pgsql-hackers + pgsql-general, last 7 days), 14 gap tags; recurring gaps auth-oauth/sql-pgq/partitioning-ddl/mvcc-csn; pgsql-performance empty this month (PR #359).
