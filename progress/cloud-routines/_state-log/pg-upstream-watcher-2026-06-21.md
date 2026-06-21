@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-06-21 — 1 new master commit (`9bcb8a69` plpython→funccache.c + bug #19480) deep-dived; 4 buildfarm failures triaged (1 real gencol-corruption cluster, 3 flakes); anchor unchanged (corpus-impact present) (PR #<n>).
