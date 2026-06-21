@@ -1,1 +1,1 @@
-**pg-corpus-maintainer** 2026-06-21 — glossary +78 →1460 (2 cited batches, all 78 via-paths verified, +496/−0 insertion-only), backlinks saturated (116 pairs/962 links, 0 missing/0 broken), issues 894/894 mirrored (no new file docs). (PR #PENDING).
+**pg-corpus-maintainer** 2026-06-21 — glossary +78 →1460 (2 cited batches, all 78 via-paths verified, +496/−0 insertion-only), backlinks saturated (116 pairs/962 links, 0 missing/0 broken), issues 894/894 mirrored (no new file docs). (PR #373).
