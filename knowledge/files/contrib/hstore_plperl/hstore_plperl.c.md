@@ -1,7 +1,7 @@
 # `contrib/hstore_plperl/hstore_plperl.c`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~156
+- **Last verified commit:** `dc5116780846`
+- **Lines:** 165
 - **Source:** `source/contrib/hstore_plperl/hstore_plperl.c`
 
 Transform-extension bridging the `hstore` type and Perl hashes for
@@ -15,19 +15,19 @@ HStore on the fly. [verified-by-code]
 
 ## API / entry points
 
-- `_PG_init(void)` (line 35) — fetches `hstoreUpgrade`,
+- `_PG_init(void)` (line 37) — fetches `hstoreUpgrade`,
   `hstoreUniquePairs`, `hstorePairs`, `hstoreCheckKeyLen`,
   `hstoreCheckValLen` via `load_external_function("$libdir/hstore",
   ...)`. Calls use `missing_ok = true`'s **opposite**: third arg is
   `true` which actually means "report errors" (the bool name in
   `load_external_function` is `signalNotFound`). If hstore is not
   installed the load aborts. [verified-by-code]
-- `hstore_to_plperl(PG_FUNCTION_ARGS)` (line 64) — copies each
+- `hstore_to_plperl(PG_FUNCTION_ARGS)` (line 68) — copies each
   HStore pair, `pnstrdup`s the key and value, builds a Perl HV via
   `hv_store`, returns `PointerGetDatum(newRV((SV *) hv))` (a
   reference to the hash). NULL values map to `newSV(0)` (Perl
   `undef`). [verified-by-code]
-- `plperl_to_hstore(PG_FUNCTION_ARGS)` (line 97) — input is an SV,
+- `plperl_to_hstore(PG_FUNCTION_ARGS)` (line 101) — input is an SV,
   dereferenced through `SvROK` until a non-ref; rejects anything
   other than `SVt_PVHV` with `ERRCODE_FEATURE_NOT_SUPPORTED`.
   Iterates `hv_iternext`, calling `sv2cstr` on each key/value and
@@ -42,7 +42,7 @@ HStore on the fly. [verified-by-code]
   format ever shows up here; since transforms only see decompressed
   Datums, it's effectively dead. [inferred] [ISSUE-dead-path:
   `hstoreUpgrade_p` unused (nit)].
-- `StaticAssertVariableIsOfType` blocks (lines 25-29) catch the
+- `StaticAssertVariableIsOfType` blocks (lines 26-30) catch the
   classic bug where the local typedef drifts from the real hstore
   function signature. This is the right pattern for the
   `load_external_function` indirection — without it a mismatch
@@ -60,17 +60,23 @@ HStore on the fly. [verified-by-code]
   HV after `hv_store`. The Postgres caller treats the SV pointer
   as opaque and frees nothing — refcounts are released when the
   plperl interpreter unwinds. [inferred]
+- The `SvROK` reference-unwinding loop (`:114-122`) can spin forever on a
+  circular Perl reference. `dc5116780846` (commit `c0f17b04d906`) added a
+  `CHECK_FOR_INTERRUPTS()` at the top of the loop (`:121`) so the backend
+  stays cancellable rather than hanging uninterruptibly; the loop is
+  otherwise unchanged (a true cycle detector was judged not worth it).
+  [verified-by-code]
 
 ## Potential issues
 
-- Lines 130-133: `sv2cstr(HeSVKEY_force(he))` palloc's key buffer,
+- Lines 139-142: `sv2cstr(HeSVKEY_force(he))` palloc's key buffer,
   then `pstrdup(key)` allocates again, and `needfree = true` will
   cause `hstoreUniquePairs` to pfree only the second copy. The first
   copy leaks until the caller's memory context resets. [ISSUE-leak:
   duplicate key palloc, both copies live until context reset; in a
   tight loop calling plperl_to_hstore with huge hashes this could
   accumulate (nit)].
-- Lines 145-146: same pattern for values — `sv2cstr` then `pstrdup`.
+- Lines 154-155: same pattern for values — `sv2cstr` then `pstrdup`.
   [ISSUE-leak: same as above for values (nit)].
 - The `signalNotFound = true` argument to `load_external_function`
   is correct but easy to misread because most callers pass `false`
