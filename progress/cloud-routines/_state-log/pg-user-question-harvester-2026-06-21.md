@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-21 — 22 threads · 7 gap tags (thin-NEW day; trailing-3-file coverage dominated the window). Top blank: gap:aio-io_uring (no src/backend/storage/aio doc) + recurring gap:autovacuum/analyze-stats. GH Discussions fallback 404'd (needs GraphQL, not WebFetch). (PR #<pending>).
