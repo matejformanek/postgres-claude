@@ -1,8 +1,8 @@
 # `storage/ipc/procarray.c`
 
-- **Source:** `source/src/backend/storage/ipc/procarray.c` (5299 lines)
+- **Source:** `source/src/backend/storage/ipc/procarray.c` (5307 lines)
 - **Header:** `source/src/include/storage/procarray.h`
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Last verified commit:** `dc5116780846` (2026-06-21)
 - **Depth:** deep-read (spine + locking)
 
 ## Purpose
@@ -36,7 +36,7 @@ Each entry's slot in the parallel arrays `ProcGlobal->xids[]`,
 `ProcGlobal->subxidStates[]`, `ProcGlobal->statusFlags[]` is at the
 same index. Each `PGPROC` carries a `pgxactoff` field giving its
 current offset; the offset can change when other procs are removed.
-`[from-comment] :2218`.
+`[from-comment] :2226`.
 
 ### `KnownAssignedXids` (recovery only)
 
@@ -47,7 +47,7 @@ in the WAL sense). `[from-comment] :22-30`.
 
 `lastOverflowedXid` tracks the highest *subxid* we evicted from
 KnownAssignedXids; if a snapshot's xmin ≤ this, we mark
-`suboverflowed`. `:339, 2339-2340`.
+`suboverflowed`. `:96, 2347-2348`.
 
 ### `GlobalVisState` (`:148+`)
 
@@ -73,51 +73,51 @@ between, the caller may rerun `ComputeXidHorizons()` for accuracy.
   `[from-comment]` `transam/README`. [unverified-here] — not pinned
   in this file.
 
-### `GetSnapshotData` (`:2113`) — the lock-free read protocol
+### `GetSnapshotData` (`:2114`) — the lock-free read protocol
 
 This is the hottest read path in PG. Walked end-to-end:
 
-1. **Take `ProcArrayLock` SHARED.** `:2170`.
-2. **`GetSnapshotDataReuse`** (`:2033`) — short-circuit if
+1. **Take `ProcArrayLock` SHARED.** `:2178`.
+2. **`GetSnapshotDataReuse`** (`:2034`) — short-circuit if
    `TransamVariables->xactCompletionCount` is unchanged since the
    snapshot was last built. This counter is bumped (under exclusive
    ProcArrayLock) every time a transaction with an xid completes
    (`ProcArrayEndTransactionInternal:768`). If unchanged, the set of
    running xids hasn't changed, so the snapshot contents would be
    identical — return the existing snapshot, re-installing
-   `MyProc->xmin = snapshot->xmin`. `:2043-2078`.
+   `MyProc->xmin = snapshot->xmin`. `:2044-2079`.
 3. Otherwise: read `TransamVariables->latestCompletedXid` →
-   `xmax = latestCompleted + 1`. `:2178-2188`.
+   `xmax = latestCompleted + 1`. `:2186-2196`.
 4. **Walk `pgprocnos[0..numProcs)`.** For each:
    - `xid = UINT32_ACCESS_ONCE(other_xids[pgxactoff])` — single
      volatile read; the writer (xact start in `GetNewTransactionId`)
-     publishes with a barrier. `:2215`. `[from-comment]` cross-refs
+     publishes with a barrier. `:2223`. `[from-comment]` cross-refs
      `transam/README`.
    - Skip `xid == InvalidTransactionId`, our own xid, xid ≥ xmax,
      and backends with `PROC_IN_LOGICAL_DECODING | PROC_IN_VACUUM`
      (logical decoders track xmin separately; vacuums don't need
-     snapshot inclusion). `:2224-2257`.
+     snapshot inclusion). `:2232-2265`.
    - `xip[count++] = xid`; possibly extend xmin downward.
    - If `subxidStates[pgxactoff].overflowed` → `suboverflowed = true`.
      Else `memcpy(subxip, proc->subxids.xids, nsubxids*4)`. The
-     `pg_read_barrier()` at `:2294` pairs with the writer's
+     `pg_read_barrier()` at `:2302` pairs with the writer's
      `pg_write_barrier()` in `GetNewTransactionId`. `[from-comment]`.
 5. If hot-standby, instead call `KnownAssignedXidsGetAndSetXmin` to
-   fill `subxip[]` (top + sub xids merged). `:2336-2340`.
+   fill `subxip[]` (top + sub xids merged). `:2344-2348`.
 6. Read `replication_slot_xmin` / `_catalog_xmin` while still holding
-   the lock. `:2349-2350`.
+   the lock. `:2357-2358`.
 7. **Install `MyProc->xmin = TransactionXmin = xmin`** if not already set.
-   `:2352-2353`.
+   `:2361-2362`.
 8. **Release `ProcArrayLock`.** The release is a full memory barrier
-   that publishes our xmin. `:2355`.
+   that publishes our xmin. `:2363`.
 9. Update `GlobalVis*Rels.definitely_needed` / `maybe_needed`
-   unlocked but using values gathered under the lock. `:2358-2435`.
+   unlocked but using values gathered under the lock. `:2366-2443`.
 10. Fill snapshot fields and return.
 
 **Key invariant**: setting `MyProc->xmin` while holding ProcArrayLock
 SHARED is safe because each backend only writes its own slot; the
 shared lock prevents *other* backends from removing themselves from
-the array (which would change xmin). `[from-comment] :2167-2168`.
+the array (which would change xmin). `[from-comment] :2175-2176`.
 
 ### `ProcArrayEndTransaction` (`:663`) — commit/abort exit
 
@@ -162,7 +162,7 @@ doesn't wake to a stale `procArrayGroupNext`. `:873-887`.
   cannot resolve a maybe-needed xid.
 - `KnownAssignedXids*` (`:4435-5328`) — circular-buffer ops used only
   on hot standby. The buffer can hold both top and sub xids
-  interleaved; the comments at `:2310-2334` explain why xips are
+  interleaved; the comments at `:2318-2342` explain why xips are
   stored in `subxip[]` not `xip[]` during recovery.
 
 ## `xactCompletionCount` — the lock-free reuse key
@@ -173,7 +173,7 @@ commit/abort under `ProcArrayLock` EXCLUSIVE. Read under
 stored in `snapshot->snapXactCompletionCount`. Because the increment is
 inside the lock, two concurrent snapshot reads holding SHARED cannot
 miss it: any commit that changed the running set *must* have bumped
-the counter visibly. `[from-comment] :2049-2058`. This is the trick
+the counter visibly. `[from-comment] :2050-2059`. This is the trick
 that makes back-to-back `GetSnapshotData` calls O(1) on an idle system.
 
 ## Cross-references
@@ -190,7 +190,7 @@ that makes back-to-back `GetSnapshotData` calls O(1) on an idle system.
 
 ## Open questions
 
-1. **The `pg_read_barrier()` at `:2294` is documented as pairing with
+1. **The `pg_read_barrier()` at `:2302` is documented as pairing with
    `GetNewTransactionId`** in `transam/varsup.c`. The exact write-side
    barrier wasn't re-verified in this read. `[unverified-here]`.
 2. **Acquisition order of `XidGenLock` and `ProcArrayLock`.** Stated

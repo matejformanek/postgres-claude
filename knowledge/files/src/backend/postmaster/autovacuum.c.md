@@ -1,7 +1,7 @@
 # autovacuum.c
 
-- **Source:** `source/src/backend/postmaster/autovacuum.c` (3706 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/backend/postmaster/autovacuum.c` (3711 lines)
+- **Last verified commit:** `dc5116780846` (2026-06-21)
 - **Depth:** read (top comment + entry-point survey)
 
 ## Purpose
@@ -40,8 +40,8 @@ decision). [from-comment] `:5-13`
 | 1402 | `AutoVacWorkerFailed` | launcher-side flag set when postmaster's fork failed |
 | 1424 | `AutoVacWorkerMain` | worker main (`main_fn` for `B_AUTOVAC_WORKER`); connects to DB, calls `do_autovacuum` |
 | 1926 | `do_autovacuum` | actual table-scan + VACUUM/ANALYZE dispatch |
-| 3530 | `AutoVacuumShmemRequest` / 3553 `AutoVacuumShmemInit` | shmem allocation |
-| 3459 | `AutoVacuumingActive` | helper for callers checking the GUC |
+| 3535 | `AutoVacuumShmemRequest` / 3558 `AutoVacuumShmemInit` | shmem allocation |
+| 3464 | `AutoVacuumingActive` | helper for callers checking the GUC |
 
 ## Signals on the launcher
 
@@ -49,7 +49,7 @@ decision). [from-comment] `:5-13`
 
 ## Shared memory
 
-- `AutoVacuumShmem` struct (see `:3530-3580`) holds the worker-coordination
+- `AutoVacuumShmem` struct (see `:3535-3585`) holds the worker-coordination
   flags, the "next worker target DB", and the wakeup flag.
 - Workers' currently-vacuuming table id is published to a per-worker shmem
   slot so peers can skip it.
