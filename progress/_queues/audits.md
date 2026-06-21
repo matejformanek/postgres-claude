@@ -148,3 +148,7 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/backend/jit/llvm/llvmjit_deform.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Update JIT tuple deforming code for virtual generated columns, dc5116780846)
 [pending] knowledge/files/src/backend/postmaster/datachecksum_state.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (Fix comments on data checksum cost settings, 8d22f5232458)
 [pending] knowledge/files/contrib/hstore_plperl/hstore_plperl.c.md  reason=anchor-bump 2026-06-19:bdae2c20e88d..dc5116780846 (hstore_plperl: Add CHECK_FOR_INTERRUPTS() in reference-unwinding loop, c0f17b04d906)
+
+## anchor-bump 2026-06-20: dc5116780846..f25a07b2d94c (1 commit, pg-anchor-refresh)
+
+[pending] knowledge/files/src/port/pgmkdirp.c.md  reason=anchor-bump 2026-06-20:dc5116780846..f25a07b2d94c (Make pg_mkdir_p() tolerant of a concurrent directory creation, f25a07b2d94c)
