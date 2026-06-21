@@ -193,9 +193,22 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-19 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; the 8 [in-progress:cloud/pg-docs-miner/2026-06-18] markers above were stale-from-#347 and flipped to [done:0c7419e] this run. Re-walked §49 Logical Decoding + §39 Triggers + §61 GEQO ToCs for dense internals-prose LEAF chapters not yet under docs-distilled/. The logical-decoding family was the biggest remaining coherent gap: the explanation/output-plugin/streaming/synchronous leaves were covered (PR #347-era), but the 4 INTERFACE leaves — streaming-replication-protocol §49.3 (walsender), SQL interface §49.4 (sql), output writers §49.6 (writer), and the worked example §49.1 — had ZERO coverage. Also picked trigger-definition §39.1 (the trigger firing-semantics overview — a glaring gap given trigger-interface §39.4 + trigger-datachanges were the only trigger leaves covered) and geqo-intro §61.1 (the GEQO genetic-algorithm overview behind the already-distilled geqo parent). HEAD-probed btree-behavior/-implementation/-support-funcs/-intro + xindex-opfamily + logicaldecoding-capabilities + trigger-arguments — ALL 404, single-page-folded in the current tree, matching prior per-AM leaf 404s; do not re-queue.)
 
-[in-progress:cloud/pg-docs-miner/2026-06-19] trigger-definition https://www.postgresql.org/docs/current/trigger-definition.html
-[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-walsender https://www.postgresql.org/docs/current/logicaldecoding-walsender.html
-[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-sql https://www.postgresql.org/docs/current/logicaldecoding-sql.html
-[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-writer https://www.postgresql.org/docs/current/logicaldecoding-writer.html
-[in-progress:cloud/pg-docs-miner/2026-06-19] logicaldecoding-example https://www.postgresql.org/docs/current/logicaldecoding-example.html
-[in-progress:cloud/pg-docs-miner/2026-06-19] geqo-intro https://www.postgresql.org/docs/current/geqo-intro.html
+# 2026-06-20: below 6 [in-progress:cloud/pg-docs-miner/2026-06-19] markers were stale —
+# all 6 docs shipped in PR #356 (merge 54962de, "6 docs — logical-decoding §49 family +
+# trigger §39.1 + geqo §61.1", docs-distilled →133) but the merger never flipped the markers
+# (same recurring class as 06-16→#330 and 06-18→#347). Verified all 6 outputs present under
+# knowledge/docs-distilled/. Flipped to [done:54962de] this run.
+[done:54962de] trigger-definition https://www.postgresql.org/docs/current/trigger-definition.html
+[done:54962de] logicaldecoding-walsender https://www.postgresql.org/docs/current/logicaldecoding-walsender.html
+[done:54962de] logicaldecoding-sql https://www.postgresql.org/docs/current/logicaldecoding-sql.html
+[done:54962de] logicaldecoding-writer https://www.postgresql.org/docs/current/logicaldecoding-writer.html
+[done:54962de] logicaldecoding-example https://www.postgresql.org/docs/current/logicaldecoding-example.html
+[done:54962de] geqo-intro https://www.postgresql.org/docs/current/geqo-intro.html
+
+## Refill 2026-06-20 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; the 6 [in-progress:cloud/pg-docs-miner/2026-06-19] markers above were stale-from-#356 and flipped to [done:54962de] this run. Re-walked §16 planner-control + §28 monitoring + §31 logical-replication + §38 Extending-SQL + §70 planner-stats ToCs for the densest internals/developer-prose LEAF chapters with ZERO docs-distilled coverage. The standout gap was the planner SUPPORT-function interface §38.11 xfunc-optimization — the SupportRequestSimplify/Selectivity/Cost/Rows/IndexCondition protocol behind every smart builtin, completely uncovered despite deep executor/planner corpus. Also: planner-stats-security §70.2 (the leakproof / statistics-leakage rules a security reviewer needs), explicit-joins §16.5 (join_collapse_limit / from_collapse_limit planner control — the join-reordering knobs), dynamic-trace §28.5 (the backend's static DTrace probe points — a genuine internals instrumentation surface), and logical-replication-architecture §31.10 (the launcher / apply-worker / tablesync-worker process model behind built-in pub/sub, distinct from the already-covered §49 low-level logical-decoding plugin API). HEAD-probed catalog-pg-control / xfunc-tablefunc / xindex-opfamily — ALL 404 (reference-only or folded), do not re-queue. spi-examples is a worked-example page (skip-class, like other -examples leaves), not distilled.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-20] xfunc-optimization https://www.postgresql.org/docs/current/xfunc-optimization.html
+[in-progress:cloud/pg-docs-miner/2026-06-20] planner-stats-security https://www.postgresql.org/docs/current/planner-stats-security.html
+[in-progress:cloud/pg-docs-miner/2026-06-20] explicit-joins https://www.postgresql.org/docs/current/explicit-joins.html
+[in-progress:cloud/pg-docs-miner/2026-06-20] dynamic-trace https://www.postgresql.org/docs/current/dynamic-trace.html
+[in-progress:cloud/pg-docs-miner/2026-06-20] logical-replication-architecture https://www.postgresql.org/docs/current/logical-replication-architecture.html

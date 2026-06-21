@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-06-20 — 12 hackers threads; CF59 Committed 88→89 (5th straight land-day, pace tapering +3+3+3+2+1), NR 324→322 (first decline), RfC 50→51, total +1 (intake near-stopped); planet 8 (PG19 sequence logical-rep) (PR pending).
