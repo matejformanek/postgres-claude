@@ -207,8 +207,8 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-20 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; the 6 [in-progress:cloud/pg-docs-miner/2026-06-19] markers above were stale-from-#356 and flipped to [done:54962de] this run. Re-walked §16 planner-control + §28 monitoring + §31 logical-replication + §38 Extending-SQL + §70 planner-stats ToCs for the densest internals/developer-prose LEAF chapters with ZERO docs-distilled coverage. The standout gap was the planner SUPPORT-function interface §38.11 xfunc-optimization — the SupportRequestSimplify/Selectivity/Cost/Rows/IndexCondition protocol behind every smart builtin, completely uncovered despite deep executor/planner corpus. Also: planner-stats-security §70.2 (the leakproof / statistics-leakage rules a security reviewer needs), explicit-joins §16.5 (join_collapse_limit / from_collapse_limit planner control — the join-reordering knobs), dynamic-trace §28.5 (the backend's static DTrace probe points — a genuine internals instrumentation surface), and logical-replication-architecture §31.10 (the launcher / apply-worker / tablesync-worker process model behind built-in pub/sub, distinct from the already-covered §49 low-level logical-decoding plugin API). HEAD-probed catalog-pg-control / xfunc-tablefunc / xindex-opfamily — ALL 404 (reference-only or folded), do not re-queue. spi-examples is a worked-example page (skip-class, like other -examples leaves), not distilled.)
 
-[in-progress:cloud/pg-docs-miner/2026-06-20] xfunc-optimization https://www.postgresql.org/docs/current/xfunc-optimization.html
-[in-progress:cloud/pg-docs-miner/2026-06-20] planner-stats-security https://www.postgresql.org/docs/current/planner-stats-security.html
-[in-progress:cloud/pg-docs-miner/2026-06-20] explicit-joins https://www.postgresql.org/docs/current/explicit-joins.html
-[in-progress:cloud/pg-docs-miner/2026-06-20] dynamic-trace https://www.postgresql.org/docs/current/dynamic-trace.html
-[in-progress:cloud/pg-docs-miner/2026-06-20] logical-replication-architecture https://www.postgresql.org/docs/current/logical-replication-architecture.html
+[done:1c89485] xfunc-optimization https://www.postgresql.org/docs/current/xfunc-optimization.html
+[done:1c89485] planner-stats-security https://www.postgresql.org/docs/current/planner-stats-security.html
+[done:1c89485] explicit-joins https://www.postgresql.org/docs/current/explicit-joins.html
+[done:1c89485] dynamic-trace https://www.postgresql.org/docs/current/dynamic-trace.html
+[done:1c89485] logical-replication-architecture https://www.postgresql.org/docs/current/logical-replication-architecture.html
