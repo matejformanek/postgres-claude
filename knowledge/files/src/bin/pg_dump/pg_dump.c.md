@@ -1,6 +1,6 @@
 ---
 path: src/bin/pg_dump/pg_dump.c
-anchor_sha: 4b0bf0788b0
+anchor_sha: f25a07b2d94c
 loc: 21102
 depth: deep
 ---
@@ -8,7 +8,16 @@ depth: deep
 # pg_dump.c
 
 - **Source path:** `source/src/bin/pg_dump/pg_dump.c`
-- **Last verified commit:** `4b0bf0788b0`
+- **Last verified commit:** `f25a07b2d94c`
+
+> **Anchor note (2026-06-22, pg-quality-auditor AUDIT mode):** re-pinned
+> `4b0bf0788b0`→`f25a07b2d94c`. The `7ca548f23a60` revert ("Revert
+> non-text output formats for pg_dumpall") restored pg_dump.c to a state
+> matching this doc — LOC unchanged at 21102, no `archAppend`/`-Fa`
+> append-mode helpers present. Spot-checked cites (main:418,
+> set_restrict_relation_kind:1523, getRoleName:10798,
+> getAdditionalACLs:10869, dumpUserMappings:16384, dumpACL:16570,
+> dumpSequenceData:19723) all hold. AUDIT clean.
 - **LOC:** 21102 (largest single C file in pg_dump; ~½ the project's
   bin/pg_dump LOC)
 

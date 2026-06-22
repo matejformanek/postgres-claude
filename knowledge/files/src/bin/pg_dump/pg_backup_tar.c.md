@@ -1,6 +1,6 @@
 ---
 path: src/bin/pg_dump/pg_backup_tar.c
-anchor_sha: 4b0bf0788b0
+anchor_sha: f25a07b2d94c
 loc: 1197
 depth: deep
 ---
@@ -9,7 +9,13 @@ depth: deep
 
 - **Source path:** `source/src/bin/pg_dump/pg_backup_tar.c`
 - **Lines:** 1197
-- **Last verified commit:** `4b0bf0788b0`
+- **Last verified commit:** `f25a07b2d94c`
+
+> **Anchor note (2026-06-22, pg-quality-auditor AUDIT mode):** re-pinned
+> `4b0bf0788b0`→`f25a07b2d94c`. The `7ca548f23a60` pg_dumpall revert left
+> the tar format module untouched (LOC 1197). Verified cites:
+> InitArchiveFmt_Tar 120, _CloseArchive 768, _tarAddFile 988, compression
+> fatal 194. AUDIT clean.
 - **Companion files:** `pg_backup_archiver.h` (`READ_ERROR_EXIT`, `WRITE_ERROR_EXIT`), `pg_backup_archiver.c` (`WriteHead`, `WriteToc`, `WriteDataChunks`, `RestoreArchive`), `pg_backup_tar.h` (just the `InitArchiveFmt_Tar` extern), `pgtar.c`/`pgtar.h` (`tarCreateHeader`, `tarChecksum`, `read_tar_number`, `tarPaddingBytesRequired`, `TAR_BLOCK_SIZE`, `TAR_OFFSET_NAME`, `TAR_OFFSET_SIZE`, `TAR_OFFSET_CHECKSUM`, `isValidTarHeader`).
 
 ## Purpose

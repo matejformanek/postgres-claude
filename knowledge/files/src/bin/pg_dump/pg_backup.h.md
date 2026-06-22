@@ -1,6 +1,6 @@
 ---
 path: src/bin/pg_dump/pg_backup.h
-anchor_sha: 4b0bf0788b0
+anchor_sha: f25a07b2d94c
 loc: 347
 depth: deep
 ---
@@ -9,7 +9,13 @@ depth: deep
 
 - **Source path:** `source/src/bin/pg_dump/pg_backup.h`
 - **Lines:** 347
-- **Last verified commit:** `4b0bf0788b0`
+- **Last verified commit:** `f25a07b2d94c`
+
+> **Anchor note (2026-06-22, pg-quality-auditor AUDIT mode):** re-pinned
+> `4b0bf0788b0`→`f25a07b2d94c`. The `7ca548f23a60` pg_dumpall revert left
+> this public header untouched (LOC 347). Verified cites: ArchiveFormat
+> 39-46, ArchiveMode 48-53, CatalogId 278-283, DumpId 285-287,
+> `restrict_key` still in RestoreOptions. AUDIT clean.
 - **Companion files:** `pg_backup_archiver.h` (private ArchiveHandle layered on top), `pg_backup_archiver.c` (implementation), `pg_dump.c` (primary consumer), `pg_restore.c` (also consumes), `pg_dumpall.c`.
 
 ## Purpose

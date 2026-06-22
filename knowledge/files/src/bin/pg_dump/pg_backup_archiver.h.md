@@ -1,15 +1,22 @@
 ---
 path: src/bin/pg_dump/pg_backup_archiver.h
-anchor_sha: 4b0bf0788b0
-loc: 477
+anchor_sha: f25a07b2d94c
+loc: 476
 depth: deep
 ---
 
 # pg_backup_archiver.h
 
 - **Source path:** `source/src/bin/pg_dump/pg_backup_archiver.h`
-- **Lines:** 477
-- **Last verified commit:** `4b0bf0788b0`
+- **Lines:** 476
+- **Last verified commit:** `f25a07b2d94c`
+
+> **Anchor note (2026-06-22, pg-quality-auditor AUDIT mode):** re-pinned
+> `4b0bf0788b0`→`f25a07b2d94c` (LOC 477→476, cosmetic). The `7ca548f23a60`
+> pg_dumpall revert did not alter the private archiver interface. Verified
+> cites: K_VERS_MAX 82, worker exit codes 90-97, `_archiveHandle` 215-217,
+> `_tocEntry` 348, REQ_* flags 210-213, K_VERS list through 1.16. AUDIT
+> clean.
 - **Companion files:** `pg_backup.h` (public part exposed to pg_dump), `pg_backup_archiver.c` (implementation), `parallel.h` (`ParallelState`), `pg_backup_custom.c`/`pg_backup_directory.c`/`pg_backup_tar.c`/`pg_backup_null.c` (per-format `Init…` callbacks declared at lines 463-466).
 
 ## Purpose
