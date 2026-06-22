@@ -152,3 +152,9 @@ than the periodic 30-day refresh: process them first.
 ## anchor-bump 2026-06-20: dc5116780846..f25a07b2d94c (1 commit, pg-anchor-refresh)
 
 [pending] knowledge/files/src/port/pgmkdirp.c.md  reason=anchor-bump 2026-06-20:dc5116780846..f25a07b2d94c (Make pg_mkdir_p() tolerant of a concurrent directory creation, f25a07b2d94c)
+
+## anchor-bump 2026-06-21: f25a07b2d94c..031904048aa2 (4 commits, pg-anchor-refresh)
+
+[pending] knowledge/files/src/backend/replication/logical/sequencesync.c.md  reason=anchor-bump 2026-06-21:f25a07b2d94c..031904048aa2 (Fix misreporting of publisher sequence permissions during sync, d4a657b0a4db)
+[pending] knowledge/files/src/backend/utils/cache/typcache.c.md  reason=anchor-bump 2026-06-21:f25a07b2d94c..031904048aa2 (Make type cache initialization more resilient on re-entry after OOM, 73dab12719ee)
+[pending] knowledge/files/src/backend/storage/ipc/standby.c.md  reason=anchor-bump 2026-06-21:f25a07b2d94c..031904048aa2 (Make StandbyAcquireAccessExclusiveLock() more resilent with OOMs, b85f9c00fb88)
