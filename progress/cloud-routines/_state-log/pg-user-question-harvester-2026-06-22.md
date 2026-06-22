@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-22 — Harvested 34 internals questions (32 hackers / 2 general) for the 06-15→06-22 window; 12 gap tags led by recurring gap:autovacuum + gap:vacuum-bloat/vacuum-stats and gap:numa; pgsql-performance empty (PR #<n>).
