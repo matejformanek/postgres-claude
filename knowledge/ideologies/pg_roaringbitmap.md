@@ -338,5 +338,4 @@ the omission here signals the type is a payload, not a key. `[verified-by-code]`
 - `roaringbitmap64.c` and `roaring64_buffer_reader.*` were not fetched; the
   64-bit type is characterized from the SQL DDL and README only
   (`[verified-by-code]` for the DDL, `[from-README]` for the format).
-</content>
-</invoke>
+

@@ -302,4 +302,4 @@ generation (`HEADLINE = pg_catalog.prsd_headline`)
 - `pg_jieba.control` resolved at the repo root (NOT a `*.control.in`).
 - Test surface (`sql/`/`expected/` golden pairs) not fetched — not load-bearing
   for the divergence doc.
-</content>
+
