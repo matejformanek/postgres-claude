@@ -139,6 +139,9 @@ usually run as superuser).
 | 2026-06-03 | pg_restore.c | undocumented-invariant | maybe | Probe order tar→dmp→dir | open | knowledge/files/src/bin/pg_dump/pg_restore.c.md |
 | 2026-06-03 | pg_restore.c | question | maybe | `txn_size = 0` override | open | knowledge/files/src/bin/pg_dump/pg_restore.c.md |
 | 2026-06-03 | pg_restore.c | question | maybe | restrict-key verification | open | knowledge/files/src/bin/pg_dump/pg_restore.c.md |
+| 2026-06-22 | pg_dump.c:2495,2505,2514 | correctness | nit | Raw server-supplied `dbname`/`tablename` spliced into `pg_fatal`/`pg_log_warning`; a relname containing `\n` can spoof an extra log line (log-only, not SQL output) | open | knowledge/files/src/bin/pg_dump/pg_dump.c.md §Potential issues |
+| 2026-06-22 | pg_dumpall.c:1745-1746 | question | nit | `runPgDump` passes the undocumented `-Fa` plain-append pg_dump format when writing to a file — internal hand-off worth a cross-ref to the pg_dump side implementing `archAppend` | open | knowledge/files/src/bin/pg_dump/pg_dumpall.c.md §Potential issues |
+| 2026-06-22 | pg_restore.c:440-445 | style | nit | The three-way `dumpData`/`dumpSchema`/`dumpStatistics` boolean expressions each pack several precedence rules into one, relying on the earlier conflict checks (380-433); correct but hard to audit in isolation | open | knowledge/files/src/bin/pg_dump/pg_restore.c.md §Potential issues |
 
 ---
 
