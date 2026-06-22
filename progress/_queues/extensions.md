@@ -131,7 +131,7 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 [done:c3ac08c] eulerto/pg_similarity branch=master files=README.md,pg_similarity.h,pg_similarity.c,pg_similarity.control  # 2026-06-19 cloud/pg-extension-anthropologist refill; 400★ C; set of string-similarity functions + operators (cosine/jaccard/jaro-winkler/levenshtein/soundex). → knowledge/ideologies/pg_similarity.md
 [done:c3ac08c] petere/pguri branch=master files=README.md,uri.c,uri.control,uri--1.20151224.sql  # 2026-06-19 cloud/pg-extension-anthropologist refill; 323★ C; custom `uri` base type wrapping the external liburiparser library. → knowledge/ideologies/pguri.md
 [done:c3ac08c] iCyberon/pg_hashids branch=master files=README.md,pg_hashids.c,pg_hashids.control,hashids.c,hashids.h  # 2026-06-19 cloud/pg-extension-anthropologist refill; 322★ C; SQL-callable hashids id obfuscator, vendored hashids.c. → knowledge/ideologies/pg_hashids.md
-[pending] jaiminpan/pg_jieba branch=master files=README.md,pg_jieba.cpp,pg_jieba.control  # 412★ C++; Chinese FTS parser (cppjieba) ≈zhparser (covered, SCWS engine) — backlog, lower divergence-signal
+[done:placeholder] jaiminpan/pg_jieba branch=master files=README.md,pg_jieba.c,jieba.cpp,jieba.h,jieba_token.h,pg_jieba.sql,pg_jieba.control  # 2026-06-21 cloud/pg-extension-anthropologist; manifest pg_jieba.cpp is 404 (rename relic — PG-facing source is pg_jieba.c) → resolved via tree API, fetched the C glue + C++ cppjieba shim (jieba.cpp/.h) + jieba_token.h POS table + install SQL. Direct twin of zhparser: cppjieba C++ vs SCWS C; process-global engine (no per-call fork); POS-string unordered_map lookup; **NO C++ exception/cleanup firewall** across the extern "C" boundary (cleanest negative example vs pgrouting/pgrx); MemoryContextSwitchTo around C++ `new` is a no-op; `unsigned char` token-len truncation footgun; dead (commented-out) assign hook. → knowledge/ideologies/pg_jieba.md
 
 # --- Refill (seeded 2026-06-20 cloud/pg-extension-anthropologist) ---
 # Re-ran the saturated topic searches (`topic:postgresql-extension stars:>300` 24 hits — all covered/known-skip) +
@@ -148,3 +148,28 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 
 # Queue drained as of 2026-06-20 (3 entries processed this run: pg_tracing, lantern, timescaledb-toolkit). knowledge/ideologies/ now holds 64 ext docs. The [done:placeholder] markers above are rewritten with the merge SHA by pg-evening-merger.
 # Refill rule: >300★ extension search space is now deeply SATURATED against knowledge/ideologies/ (this run's broad sweep — `topic:postgresql-extension stars:>300` 24 hits, `pg_ in:name C >250` 40 hits, Rust >300 4 hits, C++ >350 0 hits — surfaced only these 3 uncovered backend extensions). One [pending] backlog item remains: jaiminpan/pg_jieba (412★ C++, ≈zhparser dup, low divergence-signal — line 134). Next runs: drop the star floor to >200, try language:Go / language:Zig, `topic:postgres` + `extension` name/desc combos, and FDW/timeseries/jsonb/queue niche queries. Known-skipped (don't re-add): PolarDB/agensgraph/IvorySQL (forked distros), pg_top (client binary), pgx_ulid+pg_uuidv7 (≈uuidv47 dups), pg_embedding (archived ≈pgvector), pg_query/pg_query_go/libpg_query (parser libs), pgbouncer/pgagroal/pgpool2/odyssey (poolers), pgbackrest/pgcopydb/pg_rman (backup CLIs), pspg (pager), pg_shard (deprecated), pgquarrel (DDL-diff client), pg_plugins (template collection), pg_gpt (thin OpenAI bridge), pg_plan_inspector (ML-perf client framework), age-viewer (JS UI).
+
+# --- Refill (seeded 2026-06-21 cloud/pg-extension-anthropologist) ---
+# Drained the lone [pending] backlog item (pg_jieba, line 134 → [done] above), then refilled at the >200★ floor per
+# the standing next-run note. Sweep: `topic:postgresql-extension stars:>200` (34 hits) + `pg_ in:name language:C stars:>200`
+# (59 hits) + `postgres extension in:name,description language:Go stars:>200` (0 hits). Filtered out non-extensions
+# (poolers pgbouncer/pgagroal/pgpool2/pgbouncer-fast-switchover; backup/copy CLIs pgbackrest/pgcopydb/pg_rman/pgmoneta;
+# parser/client libs pg_query/pg_query_go/ruby-pg/sequel_pg; DDL-diff pgquarrel; template pg_plugins; pgxman = ext
+# package manager; pg_plan_inspector/pgreplay = perf/replay tooling; pgpemu = ESP32 toy, name false-positive) and
+# known-skips (pg_uuidv7≈uuidv47, pg_embedding archived≈pgvector, pg_shard/pg_paxos deprecated/archived,
+# pg_prometheus archived). Three genuinely-uncovered high-divergence backend extensions PROCESSED this run (parallel
+# sub-agent fanout): pg_tde (storage/TDE), pljava (JVM PL handler), pg_roaringbitmap (custom type + parallel agg).
+[in-progress:cloud/pg-extension-anthropologist/2026-06-21] percona/pg_tde branch=main files=README.md,*.control,src/(smgr+encryption+keymgmt+rmgr)  # 214★ C; Transparent Data Encryption — at-rest page encryption via smgr interception + custom rmgr for WAL + principal-key/key-provider hierarchy. Highest divergence-signal of the >200★ refill. → knowledge/ideologies/pg_tde.md
+[in-progress:cloud/pg-extension-anthropologist/2026-06-21] tada/pljava branch=master files=README.md,pljava-so/src/main/c/*.c,pljava/src/main/java/*  # 269★ Java+C; PL/Java — embeds a whole JVM in the backend via JNI Invocation API, Datum↔jobject marshalling, Java-exception↔ereport/longjmp bridge, jars stored in sqlj.* catalog. Extends the PL sweep (plv8/plperl/plpython/pltcl). → knowledge/ideologies/pljava.md
+[in-progress:cloud/pg-extension-anthropologist/2026-06-21] ChenHuajun/pg_roaringbitmap branch=master files=README.md,*.control,roaringbitmap--*.sql,src/*.c  # 284★ C; RoaringBitmap custom type wrapping vendored CRoaring — varlena portable-serialize format, malloc-vs-MemoryContext allocator boundary, internal-typed parallel-safe aggregate (combine/serialize/deserialize). Custom-type sibling of postgresql-hll/pguri/uuidv47. → knowledge/ideologies/pg_roaringbitmap.md
+
+# Backlog left [pending] for next runs (>200★, uncovered, lower priority / niche):
+[pending] Florents-Tselai/pgJQ branch=main files=README.md,*.control,*.sql,src/*.c  # 204★ C; embeds jq DSL as a SQL-callable engine over jsonb — custom operator, vendored libjq boundary
+[pending] Florents-Tselai/pgpdf branch=main files=README.md,*.control,*.sql,src/*.c  # 224★ C; `pdf` custom type, text extraction via vendored poppler/pdfium — foreign-lib type sibling
+[pending] vladich/pg_jitter branch=master files=README.md,*.control,src/*.c  # 203★ C; alternative JIT provider for PG (vs core LLVM jit) — JIT-provider-hook divergence, young
+[pending] vibhorkum/pg_background branch=master files=README.md,*.control,*.sql,*.c  # 251★ C/PLpgSQL; dynamic bgworkers running arbitrary SQL w/ autonomous-txn + cookie handles — bgworker-API divergence
+[pending] omniti-labs/pg_amqp branch=master files=README.md,*.control,*.sql,src/*.c  # 214★ C; AMQP publish from inside PG via RegisterXactCallback transactional delivery — ≈pg_net/pgsql-http messaging-bridge sibling
+# Next runs: drop floor to >150, try language:Zig / language:C++,
+# FDW niche (pg_clickhouse 243★, parquet_s3_fdw, sqlite_fdw, pgsql-ogr-fdw), and the type cluster (pgpdf, pgJQ, pg_roaringbitmap done).
+# Known-skipped (don't re-add): see the 2026-06-20 list above + pgxman (pkg mgr), pgmoneta (backup), pgreplay (replay tool),
+# pgpemu (ESP32 toy — `pgp` name false-positive), sequel_pg (Ruby client accel), pg_prometheus (archived).
