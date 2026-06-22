@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-06-22 — Audited 2026-06-21→06-22 cycle: OK 9 · SKIPPED 0 · FAILED 0 · SILENT [pg-file-backfiller, 6th idle night]; 9 PRs merged (#370–#378), 0 red; corpus 3,424 md (glossary 1,461 / docs-distilled 145 / ideologies 68 / files steady 2,594); ≈1.50M tokens (≈$38). Briefing 2026-06-22 (PR pending).
