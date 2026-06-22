@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-06-17 — 18 commits in window (12 new, 7 deep dives); buildfarm surfaced a real virtual-generated-column tuple-deformation bug (1f7dfe8c, c=0 vs 42, 4 animals); anchor held at e5f94c48 (7 impacted corpus docs) (PR #340).

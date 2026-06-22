@@ -70,7 +70,7 @@ For every iteration:
 7. dispatch on (asyncStatus, id)
 ```
 
-`VALID_LONG_MESSAGE_TYPE` lives in libpq-int.h and limits the "huge message" allowance to message types that are legitimately large (DataRow, RowDescription, CopyData, ErrorResponse, NoticeResponse, FunctionCallResponse, NotificationResponse). Other message types capped at 30000 bytes — this is the **client-side defense against a runaway server message length**. [verified-by-code, fe-protocol3.c:90-105]
+`VALID_LONG_MESSAGE_TYPE` is defined at the top of fe-protocol3.c itself (not libpq-int.h, as an earlier draft of this doc claimed) and limits the "huge message" allowance to message types that are legitimately large (DataRow, RowDescription, CopyData, ErrorResponse, NoticeResponse, FunctionCallResponse, NotificationResponse, and — since commit `e0511883cae2` — ParameterDescription, so a `PQdescribePrepared` result describing >7498 parameters can exceed the 30 KB cap). Other message types capped at 30000 bytes — this is the **client-side defense against a runaway server message length**. [verified-by-code, fe-protocol3.c:38-46 (macro), :102 (usage gate) @ e0511883cae2]
 
 ### Dispatch matrix
 
@@ -133,7 +133,7 @@ Outgoing: builds a 'F' message with function OID, arg formats, arg values, resul
 ## Invariants & gotchas
 
 - **`inCursor = inStart` at every message start** — required so partial-parse failure (returning to the outer loop after a `pqGet*` returned EOF) doesn't lose bytes. The rewind is the foundation of the resume-on-more-data pattern. [verified-by-code, fe-protocol3.c:84-88]
-- **Length-validation gate `msgLength > 30000 && !VALID_LONG_MESSAGE_TYPE(id)`** caps memory exposure to a malicious or buggy server. Without it, a single bad 'B' (BindComplete, should be 4 bytes) claiming `msgLength = 2^31` would force a 2 GiB allocation. [verified-by-code, fe-protocol3.c:99-104]
+- **Length-validation gate `msgLength > 30000 && !VALID_LONG_MESSAGE_TYPE(id)`** caps memory exposure to a malicious or buggy server. Without it, a single bad 'B' (BindComplete, should be 4 bytes) claiming `msgLength = 2^31` would force a 2 GiB allocation. [verified-by-code, fe-protocol3.c:102 @ e0511883cae2]
 - **Length consistency check** at the end of dispatch (lines 460-475) verifies the parser consumed exactly `5 + msgLength` bytes. Mismatch triggers a synthesized error result with status READY, and the cursor is force-advanced by the wire-declared length. This is a **defense against protocol bugs in libpq itself** and the only safe recovery: trust the server's length field over libpq's per-field parsing. [verified-by-code, fe-protocol3.c:455-475]
 - **Notify and Notice in any state**: 'A' and 'N' never wait. This is required because the server may emit notifications between an idle backend's SIGHUP-driven ParameterStatus and the next query. [verified-by-code, fe-protocol3.c:152-165]
 - **Error in IDLE state → notice processor**: an Error arriving when libpq thinks the conn is idle is treated as a notice rather than a result, because there's no PGresult slot for it. The notice still surfaces to the application via `noticeHooks.noticeReceiver`. Often this is the server's swan song ("FATAL: terminating connection due to administrator command"). [from-comment, fe-protocol3.c:168-182]

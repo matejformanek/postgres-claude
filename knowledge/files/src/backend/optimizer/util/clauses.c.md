@@ -1,6 +1,6 @@
 # clauses.c — expression-tree utilities + eval_const_expressions
 
-- **Source:** 6345 lines · **Last verified commit:** `ef6a95c7c64`
+- **Source:** 6348 lines · **Last verified commit:** `dc5116780846`
 - **Depth:** read
 
 ## Purpose
@@ -14,19 +14,19 @@ and — most importantly — `eval_const_expressions`, the constant-folding
 
 | Line | Function |
 |---|---|
-| 193 | `contain_agg_clause` |
-| 230 | `contain_window_function` |
-| 342 | `contain_subplans` |
-| 382 | `contain_mutable_functions` |
-| 502 | `contain_mutable_functions_after_planning` (post-eval_const_expressions) |
-| 550 | `contain_volatile_functions` |
-| 671 | `contain_nonstrict_functions` |
-| 685 | `contain_context_dependent_node` |
-| 765 | `contain_leaked_vars` |
-| 1005 | `is_pseudo_constant_clause` |
-| 1151 | `is_parallel_safe` |
+| 194 | `contain_agg_clause` |
+| 231 | `contain_window_function` |
+| 343 | `contain_subplans` |
+| 383 | `contain_mutable_functions` |
+| 503 | `contain_mutable_functions_after_planning` (post-eval_const_expressions) |
+| 551 | `contain_volatile_functions` |
+| 766 | `is_parallel_safe` |
+| 1006 | `contain_nonstrict_functions` |
+| 1194 | `contain_context_dependent_node` |
+| 1278 | `contain_leaked_vars` |
+| 2333 | `is_pseudo_constant_clause` |
 
-`double expression_returns_set_rows(...)` (301) — estimate the row-set
+`double expression_returns_set_rows(...)` (302) — estimate the row-set
 cardinality of a SRF-bearing expression.
 
 ## Heavy hitters

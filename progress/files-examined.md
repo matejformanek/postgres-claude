@@ -2641,3 +2641,17 @@ grep '| deep-read |' progress/files-examined.md
 | src/test/regress/pg_regress.h | 2026-06-15 | e18b0cb7344 | read | A23-100pct-sweep | knowledge/files/src/test/regress/pg_regress.h.md | Phase A close-out 100% sweep |
 | src/test/regress/pg_regress_main.c | 2026-06-15 | e18b0cb7344 | read | A23-100pct-sweep | knowledge/files/src/test/regress/pg_regress_main.c.md | Phase A close-out 100% sweep |
 | src/test/regress/regress.c | 2026-06-15 | e18b0cb7344 | read | A23-100pct-sweep | knowledge/files/src/test/regress/regress.c.md | Phase A close-out 100% sweep |
+| src/tutorial/complex.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tutorial/complex.c.md | Phase A tail: canonical user-defined-type example |
+| src/tutorial/funcs.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tutorial/funcs.c.md | Phase A tail: canonical C-function example |
+| src/tools/ifaddrs/test_ifaddrs.c | 2026-06-16 | b78cd2bda5b1 | read | cloud-pg-file-backfiller | knowledge/files/src/tools/ifaddrs/test_ifaddrs.c.md | Phase A tail: pg_foreach_ifaddr smoke test |
+| src/tools/pg_bsd_indent/indent.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/indent.c.md | Phase A tail: indenter driver + token switch |
+| src/tools/pg_bsd_indent/lexi.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/lexi.c.md | Phase A tail: tokenizer |
+| src/tools/pg_bsd_indent/io.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/io.c.md | Phase A tail: dump_line/fill_buffer/lookahead |
+| src/tools/pg_bsd_indent/pr_comment.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/pr_comment.c.md | Phase A tail: comment reflow |
+| src/tools/pg_bsd_indent/args.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/args.c.md | Phase A tail: option table + 1 issue |
+| src/tools/pg_bsd_indent/parse.c | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/parse.c.md | Phase A tail: shift-reduce indent stack |
+| src/tools/pg_bsd_indent/indent_globs.h | 2026-06-16 | b78cd2bda5b1 | deep | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/indent_globs.h.md | Phase A tail: globals + parser_state |
+| src/tools/pg_bsd_indent/indent_codes.h | 2026-06-16 | b78cd2bda5b1 | read | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/indent_codes.h.md | Phase A tail: token-code constants |
+| src/tools/pg_bsd_indent/indent.h | 2026-06-16 | b78cd2bda5b1 | read | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/indent.h.md | Phase A tail: prototypes + nitems |
+| src/tools/pg_bsd_indent/err.c | 2026-06-16 | b78cd2bda5b1 | read | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/err.c.md | Phase A tail: cut-down err/errx (covers err.h) |
+| src/tools/pg_bsd_indent/err.h | 2026-06-16 | b78cd2bda5b1 | read | cloud-pg-file-backfiller | knowledge/files/src/tools/pg_bsd_indent/err.c.md | Phase A tail: covered within err.c.md |

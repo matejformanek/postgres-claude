@@ -1,7 +1,10 @@
 # `src/backend/replication/libpqwalreceiver/libpqwalreceiver.c`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~1060 (file is ~33 KB)
+- **Last verified commit:** `a75bd485b5ea` (re-verified 2026-06-17; the
+  replication-command quoting rewrite landed here — see "Replication-command
+  quoting" below. Early-function cites unchanged; `libpqrcv_startstreaming`/
+  `_endstreaming`/`_receive` and the disconnect path shifted +20/+27 lines.)
+- **Lines:** ~1250 (file is ~37 KB)
 - **Source:** `source/src/backend/replication/libpqwalreceiver/libpqwalreceiver.c`
 
 libpq-backed implementation of the abstract `WalReceiverFunctions`
@@ -76,7 +79,7 @@ options and empty values. [verified-by-code]
 - `libpqrcv_identify_system(conn, *primary_tli)` (line 423) —
   sends `IDENTIFY_SYSTEM`, validates `nfields >= 3 && ntuples == 1`,
   returns the system_id string and timeline. [verified-by-code]
-- `libpqrcv_startstreaming(conn, opts)` (line 535) — builds
+- `libpqrcv_startstreaming(conn, opts)` (line 562) — builds
   `START_REPLICATION SLOT "name" LOGICAL X/Y (proto_version 'N',
   streaming 'X', two_phase 'on', origin 'X', publication_names
   'pubs', binary 'true')` or the physical equivalent with
@@ -85,14 +88,36 @@ options and empty values. [verified-by-code]
   `PGRES_COPY_BOTH`, false on bare `PGRES_COMMAND_OK` (server
   switched to another timeline at/before our start LSN).
   [verified-by-code]
-- `libpqrcv_endstreaming(conn, *next_tli)` (line 638) — graceful
+- `libpqrcv_endstreaming(conn, *next_tli)` (line 658) — graceful
   COPY shutdown; reads the trailing `PGRES_TUPLES_OK` to get the
   next-TLI value, or handles the abort-in-mid-copy case.
   [verified-by-code]
-- `libpqrcv_receive(conn, **buffer, *wait_fd)` (line 783) — try
+- `libpqrcv_receive(conn, **buffer, *wait_fd)` (line 803) — try
   `PQgetCopyData` async; on rawlen==0 do one `PQconsumeInput` +
   retry; if still empty, return 0 and surface `PQsocket` to the
   caller. -1 on end-of-stream. [verified-by-code]
+
+## Replication-command quoting (`appendQuotedString`, since `a75bd485b5ea`)
+
+The command builders no longer interpolate identifiers/literals with bare
+`appendStringInfo(&cmd, " SLOT \"%s\"", slotname)`. A self-contained helper
+`appendQuotedString(buf, str, quote)` (line 534) wraps the value in `quote`
+and doubles any embedded `quote` char; two macros sit on top:
+`appendQuotedIdentifier` (`'"'`) and `appendQuotedLiteral` (`'\''`) (lines
+548-549). `libpqrcv_startstreaming` (slot name, line 578) and
+`libpqrcv_create_slot` (slot name, lines 922/1029) now route through these.
+The header comment cautions the logic is sufficient for the replication
+grammar **but not regular SQL** — a literal would be mis-quoted if
+`standard_conforming_strings` is off. [verified-by-code, libpqwalreceiver.c:526-549 @ a75bd485b5ea]
+
+This also changed a signature: `stringlist_to_identifierstr` dropped its
+leading `PGconn *conn` parameter (it used to need the conn for
+`PQescapeStringConn`; now it uses the internal `appendQuotedIdentifier`).
+Old: `stringlist_to_identifierstr(PGconn *conn, List *strings)`; new:
+`stringlist_to_identifierstr(List *strings)` (definition line 1230, call
+site line 618). Any out-of-tree caller of this static would not be
+affected (it's file-local), but the mirror helper in
+`subscriptioncmds.c` / `pg_basebackup` made the same change. [verified-by-code, libpqwalreceiver.c:119,618,1230 @ a75bd485b5ea]
 
 ## Replication-slot management
 
@@ -108,7 +133,7 @@ options and empty values. [verified-by-code]
 
 - The conn struct's `recvBuf` is a malloc'd libpq buffer, NOT a
   palloc'd block; `PQfreemem(conn->recvBuf)` is required, not
-  `pfree`. Disconnect path at line 759 honours this.
+  `pfree`. Disconnect path at line 782 honours this.
   [verified-by-code]
 - Wait events used: `LIBPQWALRECEIVER_CONNECT`,
   `LIBPQWALRECEIVER_RECEIVE`. Both feed `pg_stat_activity` so

@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-06-18 — 12 hackers threads (nbtree standby TID-recycle race, deadlock detector inert on hot standby, CSN visibility, io_uring fd leak=CF#6617, virtual-generated NOT NULL deform). CF59: Committed 83→86 (3rd straight +3 land-day), RfC 49→51 (+2 — breaks the 5-snap 49-flat streak), Total 535→547. Planet: 1 new post (low-volume day). (PR #345).

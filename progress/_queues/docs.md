@@ -146,3 +146,80 @@ table of contents, exclude chapters whose slug already exists under
 [done:d2fd1fc] tablesample-support-functions https://www.postgresql.org/docs/current/tablesample-support-functions.html
 [done:d2fd1fc] protocol-message-types https://www.postgresql.org/docs/current/protocol-message-types.html
 [done:d2fd1fc] multivariate-statistics-examples https://www.postgresql.org/docs/current/multivariate-statistics-examples.html
+
+## Refill 2026-06-16 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; re-walked the §58 FDW / §60 custom-scan / §68 BKI parent chapters for their callback/command LEAF subsections, which were already-distilled-as-parents but had ZERO leaf coverage. The §58 family was missing its handler-entry (§58.1), helper-functions (§58.4), and row-locking (§58.5) leaves; §60 was missing the custom-path stage (§60.1) under custom-scan-plan/-execution; §68 BKI was missing the command reference (§68.3) + example (§68.4) under bki/bki-structure. Also picked the long-neglected xfunc-internal (LANGUAGE internal). 2 candidates 404'd: protocol-versions, gist/spgist-extensibility re-confirmed gone.)
+
+[done:14c3231] fdw-functions https://www.postgresql.org/docs/current/fdw-functions.html
+[done:14c3231] fdw-helpers https://www.postgresql.org/docs/current/fdw-helpers.html
+[done:14c3231] fdw-row-locking https://www.postgresql.org/docs/current/fdw-row-locking.html
+[done:14c3231] custom-scan-path https://www.postgresql.org/docs/current/custom-scan-path.html
+[done:14c3231] bki-commands https://www.postgresql.org/docs/current/bki-commands.html
+[done:14c3231] bki-example https://www.postgresql.org/docs/current/bki-example.html
+[done:14c3231] xfunc-internal https://www.postgresql.org/docs/current/xfunc-internal.html
+[skipped:404-no-such-docs-slug] protocol-versions https://www.postgresql.org/docs/current/protocol-versions.html
+# 2026-06-17: above 7 [in-progress:cloud/pg-docs-miner/2026-06-16] markers were stale —
+# the docs all shipped in PR #330 (merge 14c3231, "7 docs leaf chapters") but the merger
+# never flipped the markers. Verified outputs present under knowledge/docs-distilled/.
+# Flipped to [done:14c3231] this run.
+
+## Refill 2026-06-17 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. Re-walked Part V "Extending SQL" (§38) + §55 coding-conventions + §41 rule-system + §35 large-objects ToCs for dense internals-prose LEAF chapters not yet under docs-distilled/. Targeted the two biggest UNcovered clusters: the extension-packaging/build pair (extend-extensions §38.17 + extend-pgxs §38.18 — glaring gap given the extension-development skill) and the rule-system data-modification family (rules-update §41.4 / rules-privileges §41.5 / rules-status — only the SELECT-rule side rules-views was covered before). Plus the type-system + SQL-function + overloading Extending-SQL leaves and source-format §55.1 (the canonical pgindent rules behind the coding-style skill) and lo-implementation §35.5. 1 candidate 404'd: geqo-pg (folded into the single-page geqo parent in the current docs tree, matching prior gin/gist-extensibility 404s — do not re-queue). rules-status needed a re-fetch with a corrected prompt — first WebFetch returned a rules-vs-triggers framing that the page doesn't carry; it is "Rules and Command Status".)
+
+[done:b990d12] extend-extensions https://www.postgresql.org/docs/current/extend-extensions.html
+[done:b990d12] extend-pgxs https://www.postgresql.org/docs/current/extend-pgxs.html
+[done:b990d12] extend-type-system https://www.postgresql.org/docs/current/extend-type-system.html
+[done:b990d12] xfunc-sql https://www.postgresql.org/docs/current/xfunc-sql.html
+[done:b990d12] xfunc-overload https://www.postgresql.org/docs/current/xfunc-overload.html
+[done:b990d12] source-format https://www.postgresql.org/docs/current/source-format.html
+[done:b990d12] lo-implementation https://www.postgresql.org/docs/current/lo-implementation.html
+[done:b990d12] rules-update https://www.postgresql.org/docs/current/rules-update.html
+[done:b990d12] rules-privileges https://www.postgresql.org/docs/current/rules-privileges.html
+[done:b990d12] rules-status https://www.postgresql.org/docs/current/rules-status.html
+[skipped:404-no-such-docs-slug] geqo-pg https://www.postgresql.org/docs/current/geqo-pg.html
+
+## Refill 2026-06-18 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. Re-walked §47 SPI + §40 event-triggers + §38 Extending-SQL + §15 parallel-query + §55.x protocol-changes ToCs for dense internals-prose LEAF chapters NOT folded into an already-distilled parent. The pattern this run: parent chapters spi/event-trigger-interface/parallel-query/xoper-optimization were covered, but their meatiest interface-rule LEAVES had ZERO coverage — the three SPI footgun leaves (memory §47.3 / visibility §47.5 / transaction §47.4), the event-trigger firing matrix §40.1 (only the §40.4 C-ABI was covered), the CREATE OPERATOR base mechanism §38.14 (only §38.15 optimizer hints covered), the PL SQL-registration side §40.1/40.1-install (only the §57 C handler covered), and the §15.3 parallel-plan node taxonomy (parallel-query.md also_fetched §15.1/§15.4 but NOT §15.3). HEAD-probed ~50 per-AM leaf slugs (gin/gist/spgist/brin -intro/-implementation/-extensibility, row-estimation) — ALL 404, single-page-folded in the current tree, matching prior runs; do not re-queue. Three parent pages render ToC-only via WebFetch (spi-transaction §47.4, xplang §40, protocol-changes partial) — enriched from leaf/function pages (spi-spi-commit, xplang-install) where the prose actually lives, same workaround as the planner-stats-details extraction class. mvcc-intro/mvcc-caveats deliberately SKIPPED: mvcc.md already mined the full §13.1-13.7 index. parallel-safety SKIPPED: already folded into parallel-query.md's also_fetched.)
+
+# 2026-06-19: below 8 [in-progress:cloud/pg-docs-miner/2026-06-18] markers were stale —
+# all 8 docs shipped in PR #347 (squash 0c7419e, "8 internals-leaf chapters", docs-distilled →127)
+# but the merger never flipped the markers (same class as the 06-16→#330 stale-marker case above).
+# Verified all 8 outputs present under knowledge/docs-distilled/. Flipped to [done:0c7419e] this run.
+[done:0c7419e] spi-memory https://www.postgresql.org/docs/current/spi-memory.html
+[done:0c7419e] spi-visibility https://www.postgresql.org/docs/current/spi-visibility.html
+[done:0c7419e] spi-transaction https://www.postgresql.org/docs/current/spi-transaction.html
+[done:0c7419e] event-trigger-definition https://www.postgresql.org/docs/current/event-trigger-definition.html
+[done:0c7419e] xoper https://www.postgresql.org/docs/current/xoper.html
+[done:0c7419e] xplang https://www.postgresql.org/docs/current/xplang.html
+[done:0c7419e] protocol-changes https://www.postgresql.org/docs/current/protocol-changes.html
+[done:0c7419e] parallel-plans https://www.postgresql.org/docs/current/parallel-plans.html
+
+## Refill 2026-06-19 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; the 8 [in-progress:cloud/pg-docs-miner/2026-06-18] markers above were stale-from-#347 and flipped to [done:0c7419e] this run. Re-walked §49 Logical Decoding + §39 Triggers + §61 GEQO ToCs for dense internals-prose LEAF chapters not yet under docs-distilled/. The logical-decoding family was the biggest remaining coherent gap: the explanation/output-plugin/streaming/synchronous leaves were covered (PR #347-era), but the 4 INTERFACE leaves — streaming-replication-protocol §49.3 (walsender), SQL interface §49.4 (sql), output writers §49.6 (writer), and the worked example §49.1 — had ZERO coverage. Also picked trigger-definition §39.1 (the trigger firing-semantics overview — a glaring gap given trigger-interface §39.4 + trigger-datachanges were the only trigger leaves covered) and geqo-intro §61.1 (the GEQO genetic-algorithm overview behind the already-distilled geqo parent). HEAD-probed btree-behavior/-implementation/-support-funcs/-intro + xindex-opfamily + logicaldecoding-capabilities + trigger-arguments — ALL 404, single-page-folded in the current tree, matching prior per-AM leaf 404s; do not re-queue.)
+
+# 2026-06-20: below 6 [in-progress:cloud/pg-docs-miner/2026-06-19] markers were stale —
+# all 6 docs shipped in PR #356 (merge 54962de, "6 docs — logical-decoding §49 family +
+# trigger §39.1 + geqo §61.1", docs-distilled →133) but the merger never flipped the markers
+# (same recurring class as 06-16→#330 and 06-18→#347). Verified all 6 outputs present under
+# knowledge/docs-distilled/. Flipped to [done:54962de] this run.
+[done:54962de] trigger-definition https://www.postgresql.org/docs/current/trigger-definition.html
+[done:54962de] logicaldecoding-walsender https://www.postgresql.org/docs/current/logicaldecoding-walsender.html
+[done:54962de] logicaldecoding-sql https://www.postgresql.org/docs/current/logicaldecoding-sql.html
+[done:54962de] logicaldecoding-writer https://www.postgresql.org/docs/current/logicaldecoding-writer.html
+[done:54962de] logicaldecoding-example https://www.postgresql.org/docs/current/logicaldecoding-example.html
+[done:54962de] geqo-intro https://www.postgresql.org/docs/current/geqo-intro.html
+
+## Refill 2026-06-20 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; the 6 [in-progress:cloud/pg-docs-miner/2026-06-19] markers above were stale-from-#356 and flipped to [done:54962de] this run. Re-walked §16 planner-control + §28 monitoring + §31 logical-replication + §38 Extending-SQL + §70 planner-stats ToCs for the densest internals/developer-prose LEAF chapters with ZERO docs-distilled coverage. The standout gap was the planner SUPPORT-function interface §38.11 xfunc-optimization — the SupportRequestSimplify/Selectivity/Cost/Rows/IndexCondition protocol behind every smart builtin, completely uncovered despite deep executor/planner corpus. Also: planner-stats-security §70.2 (the leakproof / statistics-leakage rules a security reviewer needs), explicit-joins §16.5 (join_collapse_limit / from_collapse_limit planner control — the join-reordering knobs), dynamic-trace §28.5 (the backend's static DTrace probe points — a genuine internals instrumentation surface), and logical-replication-architecture §31.10 (the launcher / apply-worker / tablesync-worker process model behind built-in pub/sub, distinct from the already-covered §49 low-level logical-decoding plugin API). HEAD-probed catalog-pg-control / xfunc-tablefunc / xindex-opfamily — ALL 404 (reference-only or folded), do not re-queue. spi-examples is a worked-example page (skip-class, like other -examples leaves), not distilled.)
+
+[done:1c89485] xfunc-optimization https://www.postgresql.org/docs/current/xfunc-optimization.html
+[done:1c89485] planner-stats-security https://www.postgresql.org/docs/current/planner-stats-security.html
+[done:1c89485] explicit-joins https://www.postgresql.org/docs/current/explicit-joins.html
+[done:1c89485] dynamic-trace https://www.postgresql.org/docs/current/dynamic-trace.html
+[done:1c89485] logical-replication-architecture https://www.postgresql.org/docs/current/logical-replication-architecture.html
+
+## Refill 2026-06-21 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. Re-walked the full internals.html ToC (§54-§68) for the dense internals-prose LEAF chapters that survived prior sweeps without a docs-distilled/<slug>.md, plus the Extending-SQL §38.1 conceptual root. Standout finds this run: the GEQO implementation pair geqo-pg-intro §61.3 (the TSP/Genitor encoding + edge-recombination machinery — the ACTUAL PG implementation, where only the geqo.html parent + §61.1 intro were covered before) and geqo-intro2 §61.2 (the GA-vocabulary chapter §61.3 reuses); the BKI lexical layer bki-format §68.2 (the tokenizer rules, distinct from the already-covered bki-commands §68.3 + bki-structure §68.4); the NLS translator workflow nls-translator §57.1 (gettext PO/POT/MO + the %n$ positional-arg rule that constrains errmsg() authoring — only nls.md parent + nls-programmer §57.2 were covered); the catalog-system orientation pair catalogs-overview §54.1 (the shared-vs-per-database split — verified the 11-catalog shared list against IsSharedRelation() in catalog.c @ f25a07b2d94c) + views-overview §53.1 (the system-view taxonomy + the hacker-relevant pg_backend_memory_contexts/pg_shmem_allocations/pg_aios/pg_wait_events runtime-introspection views); and the extensibility thesis extend-how §38.1 (PG-is-catalog-driven — the conceptual root of all of Part V). indextypes §64 was probed and is ToC-only (chapter intro, no distillable prose — skip-class, like planner-stats-details); the per-AM intro/implementation/extensibility leaves and per-catalog/per-view reference pages remain excluded (reference, not internals prose). Markers left [in-progress:cloud/pg-docs-miner/2026-06-21] for the merger to flip to the squash SHA.)
+
+[done:db0bf1b] geqo-pg-intro https://www.postgresql.org/docs/current/geqo-pg-intro.html
+[done:db0bf1b] geqo-intro2 https://www.postgresql.org/docs/current/geqo-intro2.html
+[done:db0bf1b] bki-format https://www.postgresql.org/docs/current/bki-format.html
+[done:db0bf1b] nls-translator https://www.postgresql.org/docs/current/nls-translator.html
+[done:db0bf1b] catalogs-overview https://www.postgresql.org/docs/current/catalogs-overview.html
+[done:db0bf1b] views-overview https://www.postgresql.org/docs/current/views-overview.html
+[done:db0bf1b] extend-how https://www.postgresql.org/docs/current/extend-how.html
+[skipped:toc-only-no-prose] indextypes https://www.postgresql.org/docs/current/indextypes.html  # 2026-06-21: chapter intro / ToC only — six AM names + section links, zero distillable prose (the per-AM detail lives in btree/gist/spgist/gin/brin/hash-index, all already distilled). Same skip-class as planner-stats-details. Do not re-queue.

@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-06-20 — 4 master commits (3 OOM/perm hardening fixes b85f9c00 standby.c · 73dab127 typcache.c · d4a657b0 sequencesync.c REMOTE_SEQ_COL_COUNT 10→11 + doc 03190404), all deep-dived; anchor held (3 per-file crossrefs queued for audit); buildfarm flake-only (goldfish timedout / fairywren Windows / pgsql-Git mirror), no regression (PR #TBD).

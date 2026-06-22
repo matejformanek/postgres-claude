@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-06-20 — backlinks 0 (saturated, 116 pairs / 1051 links clean) · glossary +103 (1279→1382: index-AM API, heap/MVCC/TOAST, WAL/replication, nbtree, locking, memory/error/SPI, catalogs) · issues +0 (894/894 mirrored) (PR #364).

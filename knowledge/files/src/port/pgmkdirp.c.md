@@ -1,11 +1,20 @@
 ---
 path: src/port/pgmkdirp.c
-anchor_sha: 4b0bf0788b066a4ca1d4f959566678e44ec93422
-loc: 148
+anchor_sha: f25a07b2d94c
+loc: 169
 depth: deep
 ---
 
 # src/port/pgmkdirp.c
+
+> **Anchor note (2026-06-22, pg-quality-auditor AUDIT mode):** re-pinned
+> `4b0bf0788b0`→`f25a07b2d94c` (the doc for that exact commit, "Make
+> pg_mkdir_p() tolerant of a concurrent directory creation"). LOC 148→169
+> (+21). The commit **restructured the component walk** from "stat the
+> prefix first, then mkdir" to "mkdir first, tolerate EEXIST when the path
+> is already a directory" — concurrency-safe. The old stat-first
+> "Component walk" description is now wrong; rewritten below, plus the new
+> Windows-specific `GetFileAttributes` probe.
 
 ## Purpose
 
@@ -25,15 +34,27 @@ tablespace creation, and anywhere PG must materialize a directory tree.
 
 - WIN32 prefix skip (`pgmkdirp.c:69-91`) — steps over `//network` and `C:`
   drive specifiers so they aren't treated as path components.
-- **umask dance** (`:103-105`, `:119-120`, `:144-145`) — temporarily sets umask
-  so intermediate parents get created with `u+wx` forced on (guaranteeing PG can
-  descend), while the *final* component gets the caller's exact `omode`. Restores
-  the original umask at the end. The header explains the POSIX equivalence to
-  `mkdir -p -m $(umask -S),u+wx` (`:93-101`).
-- Component walk (`:109-142`) — null-terminates at each `/`, `stat`s the prefix;
-  if it exists and is a directory, continue; if it exists and is *not* a
-  directory, fail `EEXIST`/`ENOTDIR`; else `mkdir` it (final component with
-  `omode`, parents with `0777`).
+- **umask dance** (`:102-104`, `:118-119`, `:166`) — `oumask = umask(0)` then
+  `numask = oumask & ~(S_IWUSR | S_IXUSR)` so intermediate parents get created
+  with `u+wx` forced on (guaranteeing PG can descend); the original umask is
+  restored just before the *final* component's `mkdir` (`:118-119`) so the leaf
+  gets the caller's exact `omode`, and unconditionally restored at the end
+  (`:166`). The header explains the POSIX equivalence to
+  `mkdir -p -m $(umask -S),u+wx` (`:92-101`).
+- **Component walk — mkdir-first, tolerate-EEXIST** (`:108-163`) — null-
+  terminates `path` at each `/`, then `mkdir(path, last ? omode : S_IRWXU |
+  S_IRWXG | S_IRWXO)` (`:121`). If `mkdir` fails it does NOT fail blindly:
+  - **non-WIN32** (`:127-139`): if `errno == EEXIST` AND `stat(path)` says it's
+    a directory, the level is tolerated and the walk continues; otherwise it
+    restores `mkdir`'s errno and breaks with `retval = -1`.
+  - **WIN32** (`:140-158`): `stat()` opens a handle and can transiently fail on
+    a directory another process is concurrently creating, so the probe uses
+    `GetFileAttributes(path)` (requests only `FILE_READ_ATTRIBUTES`, exempt from
+    share-mode denial) and tolerates the level only if `errno == EEXIST` and the
+    attribute reports `FILE_ATTRIBUTE_DIRECTORY`.
+  This stat/mkdir ordering (mkdir first, check on failure) is what makes the
+  routine safe against two backends racing to create the same tree.
+  [verified-by-code, pgmkdirp.c:108-163]
 
 ## Invariants & gotchas
 
@@ -48,6 +69,13 @@ tablespace creation, and anywhere PG must materialize a directory tree.
   `mkdir -p`.
 - `omode` is declared `int` (not `mode_t`) "to minimize dependencies for
   port.h" (`:49`).
+- **Concurrent-creation tolerance (since `f25a07b2d94c`).** Two processes
+  racing to create the same directory tree no longer make one of them fail:
+  a level that `mkdir` reports `EEXIST` for is accepted as long as it really
+  is a directory. On Windows the existence probe deliberately avoids `stat()`
+  (which opens a handle and can transiently fail under share-mode denial while
+  another process is mid-create) in favour of `GetFileAttributes()`
+  (`:140-158`). [verified-by-code, pgmkdirp.c:121-158]
 
 ## Cross-refs
 
