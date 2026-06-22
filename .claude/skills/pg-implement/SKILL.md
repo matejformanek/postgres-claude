@@ -296,6 +296,47 @@ Sites: <file:line>, <file:line>, ...
 In every escalation: stop, propose the resolution path (update plan,
 defer to follow-up, abandon phase), ask. Don't push through.
 
+## Agent rate-limit recovery (when delegating phases)
+
+For long multi-phase runs, each phase is often delegated to a focused
+subagent (Agent tool with a tight per-phase brief; main loop verifies
+the commit + writes notes). Subagents can hit Anthropic rate / quota
+limits mid-phase, leaving partial uncommitted work in the worktree.
+This is recoverable — treat it as a routine signal, not a failure.
+
+Recovery protocol when a subagent reports a rate-limit or returns
+without a commit:
+
+1. **Check `git status` in the worktree immediately.** Staged but
+   uncommitted state is the agent's progress — it's a recoverable
+   asset. Files in the staging area + the agent's prior context are
+   enough to finish.
+2. **Inspect the diff with `git diff --cached --stat` + key file
+   diffs.** Decide whether the agent's approach is sound. If yes:
+   either resume the agent, or finish the work yourself (use the
+   staged state as the starting point — the agent's intent is encoded
+   there).
+3. **Resume the agent via `SendMessage`** to the agent ID returned in
+   the prior spawn. The agent's prior context is preserved; pass a
+   "continue from the staged state — here's what's left" message that
+   names the specific remaining edits + the acceptance criteria. This
+   is faster than starting a new agent from scratch.
+4. **Finish manually if the remaining work is bounded.** When the
+   agent has done ~70-80% of a phase and the remaining edits are
+   well-scoped (e.g. just the executor side of a parser+executor
+   phase), driving the rest from the main loop is often faster than
+   round-tripping through another agent. Verify the build + run the
+   phase-end check + commit per the normal R5 + R8 protocol.
+5. **Don't roll back staged work without inspection.** Even if the
+   agent's approach has issues, the staged edits typically encode a
+   sound design — fix the specific problem, don't blow it away.
+
+Origin: sesvars_v3 phases 8 + FU#1, where both implementation agents
+rate-limited mid-phase. Phase 8 finished manually from the agent's
+~100-line gram.y staging; FU#1 resumed via SendMessage. Both landed
+clean commits without re-planning. See F24 in
+`sessions/2026-06-22-sesvars-v3-retro.md`.
+
 ## Style
 
 - Be terse in `notes.md`. It's a working log, not a write-up.

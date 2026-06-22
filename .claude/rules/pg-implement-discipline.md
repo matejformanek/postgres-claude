@@ -310,9 +310,42 @@ brainstorm time:
 - §13 risks that enumerate *implementation* unknowns without
   enumerating *scope* unknowns ("does the user want X?").
 
+**R15a — Name the load-bearing row at brainstorm time.**
+
+The §0 usage-surface enumeration MUST flag 1-2 specific rows as
+"the architecturally novel row this feature exists for" — the row
+that would NOT work in a naive MVP and that drives the architectural
+choices. Subsequent phases anchor on this row: every phase plan
+references it; the phase that lands it is marked as the
+*architectural centerpiece* in the orchestrator's phase dependency
+graph; the R14 own-test-suite ships a TC explicitly for it; the R12
+end-gate canary exercises it before claiming success.
+
+Why this works in practice: it prevents scope drift across long
+phase chains. When phase N's R7 escalation tempts an "and we should
+also handle X" detour, the test is "does X make the load-bearing
+row work?" — if no, the detour defers to follow-up. Sesvars_v3
+TC-W-8 (`SET @c := '5', @ci := @c + 3, @m := @c * @ci → 5|8|40`)
+named at brainstorm time scoped phases 1-4 exactly: those four
+phases were "everything needed for TC-W-8 to pass". Phases 5-9
+became feature-additive polish on top of a working foundation. Zero
+re-plans across 11 phases + 3 follow-ups.
+
+How to apply at brainstorm:
+- Read §0 of the brainstorm with the question "if I shipped a
+  minimal MVP that omitted everything except the simplest rows,
+  what's the row that PROVES the architecture works?"
+- If multiple rows compete, prefer the one that's testable in a
+  single SQL statement (easier to make a canary out of).
+- Name it explicitly: "TC-X-N is the load-bearing row this rewrite
+  exists for. Every phase plan must reference it. The phase that
+  lands it is the architectural centerpiece."
+
 This rule lands as direct output of the sesvars first end-to-end
 calibration. Full comparison at
 `postgresql-dev-feature-sesvars/planning/sesvars/comparison.md`.
+R15a codifies what sesvars_v3 did right; see
+`sessions/2026-06-22-sesvars-v3-retro.md` §L1.
 
 ## Anti-patterns (explicitly forbidden)
 
@@ -402,3 +435,22 @@ routine escape. Verified end-to-end: sesvars_v3 follow-up notes
 commit `9b06fb679a6` landed through the live hook with no
 override. F23 (in `sessions/2026-06-22-sesvars-v3-retro.md`) is
 the full incident write-up.
+**Version:** v1.5 (2026-06-22) — adds R15a (name the load-bearing
+row at brainstorm). Codifies the L1 lesson from the sesvars_v3
+run: when one or two §0 rows are flagged as architecturally
+load-bearing at brainstorm time, every downstream phase anchors
+on those rows, R7 detours self-cancel ("does it make the
+load-bearing row work? no? defer."), and 11-phase chains land
+zero-re-plan. Sesvars_v3 TC-W-8 (`5|8|40` chained self-assign) is
+the canonical example. The rule lives as a sub-rule under R15
+because it operationalizes R15's "default comprehensive" stance
+— comprehensive scope is the default, AND the comprehensive scope
+is anchored on a specific row that makes the architecture
+provably necessary.
+**Version:** v1.5 (2026-06-22, companion) — `pg-implement`
+SKILL.md gains an "Agent rate-limit recovery" section codifying
+the L4 lesson (subagent rate-limits mid-phase are recoverable via
+`git status` inspection + SendMessage continuation or main-loop
+finish; sesvars_v3 phases 8 and FU#1 both landed clean after
+mid-phase rate-limits). Pure procedure addition, no rule change;
+recorded here for the cross-reference trail.
