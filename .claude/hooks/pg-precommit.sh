@@ -22,7 +22,19 @@ if [ -z "${CLAUDE_PROJECT_DIR:-}" ]; then
 fi
 export CLAUDE_PROJECT_DIR
 
-DEV_ROOT="$CLAUDE_PROJECT_DIR/dev"
+# Worktree-aware DEV_ROOT discovery.  When invoked as a pre-commit hook
+# git fires us with $PWD = the working tree root (which is the worktree
+# for worktree commits, not the main clone), so `git rev-parse
+# --show-toplevel` returns the correct path.  Fall back to the canonical
+# main clone for out-of-context direct invocations.  $PG_HOOK_DEV_ROOT
+# wins over both, for the rare manual override.
+if [ -n "${PG_HOOK_DEV_ROOT:-}" ]; then
+  DEV_ROOT="$PG_HOOK_DEV_ROOT"
+elif DEV_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" && [ -n "$DEV_ROOT" ]; then
+  : # discovered the worktree (or main clone) we're committing in
+else
+  DEV_ROOT="$CLAUDE_PROJECT_DIR/dev"
+fi
 BUILD_DIR="$DEV_ROOT/build-debug"
 HOOK_DIR="$CLAUDE_PROJECT_DIR/.claude/hooks"
 

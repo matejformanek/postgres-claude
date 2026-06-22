@@ -14,14 +14,24 @@ if [ -z "${CLAUDE_PROJECT_DIR:-}" ]; then
   CLAUDE_PROJECT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 fi
 
-DEV_ROOT="$CLAUDE_PROJECT_DIR/dev"
+# Worktree-aware DEV_ROOT discovery (see pg-precommit.sh for rationale).
+# When called from pg-precommit.sh stage B, $PWD is the working tree
+# root that git fired the pre-commit hook in; for a worktree commit
+# this is the worktree's own root, not the canonical main clone.
+if [ -n "${PG_HOOK_DEV_ROOT:-}" ]; then
+  DEV_ROOT="$PG_HOOK_DEV_ROOT"
+elif DEV_ROOT="$(git rev-parse --show-toplevel 2>/dev/null)" && [ -n "$DEV_ROOT" ]; then
+  :
+else
+  DEV_ROOT="$CLAUDE_PROJECT_DIR/dev"
+fi
 PLANNING_ROOT="$CLAUDE_PROJECT_DIR/planning"
 
 # --- staged file list --------------------------------------------------------
-STAGED=""
-if [ -d "$DEV_ROOT/.git" ] || [ -d "$DEV_ROOT/../.git" ]; then
-  STAGED="$(git -C "$DEV_ROOT" diff --cached --name-only --diff-filter=ACM 2>/dev/null || true)"
-fi
+# `git rev-parse --git-dir` works for both regular clones and worktrees,
+# so a simple `git -C "$DEV_ROOT" diff --cached` always indexes the
+# right ref store regardless of whether DEV_ROOT is main or a worktree.
+STAGED="$(git -C "$DEV_ROOT" diff --cached --name-only --diff-filter=ACM 2>/dev/null || true)"
 
 # --- phase number from notes.md (informational) ------------------------------
 # The pg-implement skill appends a "Plan-phase: N" trailer to each phase
