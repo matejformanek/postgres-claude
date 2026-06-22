@@ -49,10 +49,18 @@ commit broken state and "follow up".
 Format-check (pgindent on C/H; pgperltidy on Perl when the pinned
 20230309 binary is present) is gated automatically at commit time via
 the pre-commit hook installed by `/pg-install-hooks`. The PostToolUse
-hook auto-fixes on edit. Bypassing the pre-commit hook with
-`git commit --no-verify` is forbidden within `/pg-implement` phases —
-it's a guardrail, not a prison; tune the test scope via
-`PG_PRECOMMIT_SCOPE=regress|skip` rather than bypass entirely.
+hook auto-fixes on edit. As of 2026-06-22 (sesvars_v3 follow-up #3,
+meta-repo commit `d89efca`) the hook is **worktree-aware**: it
+discovers `DEV_ROOT` via `git rev-parse --show-toplevel` so commits
+from any `postgresql-dev-*` worktree go through the live R13-scoped
+gate without manual setup. Bypassing the pre-commit hook with
+`git commit --no-verify` is forbidden within `/pg-implement` phases.
+Tune the test scope via `PG_PRECOMMIT_SCOPE=regress` (broader →
+narrower) when a phase legitimately needs a smaller scope.
+`PG_PRECOMMIT_SCOPE=skip` is reserved for **genuine emergencies** (a
+miscompiled build, a flake-only test, a hook bug that prevents work
+from landing); it is **not** the routine escape it was during
+sesvars_v3 phases 2-10 before F23 was fixed.
 
 ### R5 — Per-phase commit, plan-linked
 
@@ -322,9 +330,11 @@ calibration. Full comparison at
 - **`git commit --no-verify` inside a `/pg-implement` phase.** The
   pre-commit hook is the R4 + R13 enforcement surface. If a phase
   legitimately needs a smaller test scope, set
-  `PG_PRECOMMIT_SCOPE=regress` (or `skip`, rare). `--no-verify`
-  silently skips the format-check gate too, which is what we wanted
-  to prevent.
+  `PG_PRECOMMIT_SCOPE=regress` (rare) or `PG_PRECOMMIT_SCOPE=skip`
+  (emergencies only — the hook is now worktree-aware as of 2026-06-22,
+  so worktree commits no longer need `skip` as a routine escape).
+  `--no-verify` silently skips the format-check gate too, which is
+  what we wanted to prevent.
 
 ## Cross-references
 
@@ -377,3 +387,18 @@ hook removes the remembering. The coding-style skill's manual
 "Before you commit" block, `pg-review.md:250`'s "CI handles
 pgindent" exemption, and `patch-submission`'s pre-format step all
 retire in favour of the hook.
+**Version:** v1.4 (2026-06-22) — closes the
+`PG_PRECOMMIT_SCOPE=skip` loophole exposed by sesvars_v3 phases
+2-10. The hook scripts (`pg-precommit.sh` + `pg-phase-detect.sh`)
+were not worktree-aware: they hard-coded `DEV_ROOT =
+$CLAUDE_PROJECT_DIR/dev` (always the main clone) so worktree
+commits saw an empty staged-file list and silently passed. Every
+sesvars_v3 code commit had to set `PG_PRECOMMIT_SCOPE=skip` to
+keep moving. Meta-repo commit `d89efca` adds three-tier `DEV_ROOT`
+resolution (`$PG_HOOK_DEV_ROOT` → `git rev-parse --show-toplevel`
+→ `$CLAUDE_PROJECT_DIR/dev` fallback). R4 and the anti-patterns
+block now reflect that `skip` is for genuine emergencies, not a
+routine escape. Verified end-to-end: sesvars_v3 follow-up notes
+commit `9b06fb679a6` landed through the live hook with no
+override. F23 (in `sessions/2026-06-22-sesvars-v3-retro.md`) is
+the full incident write-up.
