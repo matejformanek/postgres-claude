@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-06-22 — 2 master commits deep-dived (9a60f295 analyzejoins PHV-strip, 80bb0ebc pgcrypto resowner); analyzejoins.c.md flagged stale; anchor held at 031904048aa2; buildfarm quiet (goldfish timeout flakes + 1 fairywren pg_upgradeCheck) (PR #384).

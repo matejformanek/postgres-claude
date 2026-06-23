@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-06-22 — Both queues drained; refilled by re-walking the docs ToC. Distilled 10 developer-prose leaves in two coherent uncovered families: §33 Regression Tests (regress-run/evaluation/variant/tap/coverage) + §10 Type Conversion (overview/func/oper/query/union-case). docs-distilled 145→155. Source paths HEAD-verified at anchor 031904048aa2 (PR #383).
