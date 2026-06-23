@@ -78,6 +78,7 @@ them when the trigger scenario's decision matches.
 |---|---|---|
 | 32 | [remove-from-catalog](remove-from-catalog.md) | I am REMOVING entries from `pg_operator.dat` / `pg_proc.dat` / `pg_aggregate.dat` / `pg_cast.dat` — typically forced by a new keyword/sigil reserving the character. Covers proc-descr-orphan (F6), contrib silently breaking (F12), and `pg_am*` / `pg_op*` reference audits. |
 | 33 | [integrate-with-plpgsql](integrate-with-plpgsql.md) | My new feature (keyword, expression, statement) must work inside PL/pgSQL DO blocks / functions / procedures. Covers the `pl_gram.y` token-sync trap (F2), `pl_scanner.c` hand-written scanner, `pl_exec.c` dispatcher, `pl_handler.c`, `plpgsql.h` enums, and DO-block test coverage. |
+| 34 | [fix-memory-leak](fix-memory-leak.md) | I want to fix a memory leak in a backend code path. Methodology scenario (not change-class): brings up the two-toolchain detection harness (macOS ASan+UBSan+`leaks` + Linux Valgrind container), runs the trilogy (brainstorm + plan + implement + compare), and codifies the 6 pitfalls L1-L5 + F26-F30 from the jsonpath_leak calibration (2026-06-23). |
 
 ## Decision tree — "which scenario do I want?"
 
@@ -88,6 +89,13 @@ Are you adding code that runs in postgres -- the backend?
 ├─ No → you're either writing user SQL (no scenario) or a client app
 │       (no scenario) or a tool in src/bin (no scenario yet).
 └─ Yes ↓
+
+Adding new functionality, or fixing an existing bug?
+├─ Fixing a bug ↓
+│   ├─ Memory leak (transient or unbounded growth)  → #34 fix-memory-leak
+│   └─ Other bug shapes — no scenario yet; cite + patch via
+│       pg-implement directly. Add a scenario if the shape recurs.
+└─ Adding new functionality ↓
 
 What kind of thing are you adding?
 
