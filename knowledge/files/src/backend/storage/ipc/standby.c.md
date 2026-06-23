@@ -3,7 +3,7 @@
 - **Source:** `source/src/backend/storage/ipc/standby.c` (1528 lines)
 - **Header:** `source/src/include/storage/standby.h`,
   `source/src/include/storage/standbydefs.h`
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Last verified commit:** `031904048aa2` (re-pinned 2026-06-23)
 - **Depth:** read
 
 ## Purpose
@@ -62,17 +62,30 @@ backend holding the buffer pin the startup process needs.
 
 The primary WAL-logs `xl_standby_lock` records every time someone
 acquires AccessExclusiveLock on a relation. On the standby:
-1. `StandbyAcquireAccessExclusiveLock` stores the lock in the
-   `RecoveryLockHash` HTAB (keyed by xl_standby_lock) and chains via
-   `RecoveryLockXidHash` (keyed by xid). The lock is acquired in the
-   actual heavyweight lock table by a dummy PGPROC representing the
-   primary's transaction.
+1. `StandbyAcquireAccessExclusiveLock` (`:988`) first creates the
+   `RecoveryLockXidHash` entry (keyed by xid) and the `RecoveryLockHash`
+   entry (keyed by `xl_standby_lock` = xid/dbOid/relOid) via
+   `HASH_ENTER`, and **only `if (!found)`** does it call
+   `LockAcquire(&locktag, AccessExclusiveLock, true /*sessionLock*/,
+   false /*dontWait*/)` and then link the new lockentry into the xid's
+   chain (`:1008-1029`). The lock is acquired in the actual heavyweight
+   lock table by a dummy PGPROC representing the primary's transaction.
 2. On the primary's commit/abort record, `StandbyReleaseLockTree`
    walks the xid's chain and releases all of them.
 
 This is **the only place** the lock table is fed by something other
 than a backend taking its own lock — recovery uses a dummy PGPROC.
 `[from-comment]` `:45-53`.
+
+**OOM-resilience (b85f9c00fb88, in this anchor batch).** The function
+now creates both hash entries *before* acquiring the heavyweight lock
+and uses the ordinary throwing `LockAcquire` (which is
+`LockAcquireExtended(..., reportMemoryError=true, ...)`), **not** the
+old `reportMemoryError=false` form. Because the entries exist and the
+`lockentry` is linked into the xid chain only after the lock succeeds,
+an OOM thrown by `LockAcquire` leaves consistent state that a retry can
+recover, rather than silently swallowing the error mid-replay.
+[verified-by-code, `:1008-1029` @ `031904048aa2`]
 
 ## RunningXacts snapshot
 
@@ -90,7 +103,8 @@ record.
 - `access/transam/xlogrecovery.c` — feeds standby records here.
 - `replication/walreceiver.c` — receives the WAL.
 - `lmgr.c` — `LockAcquire` ultimately for the dummy-PGPROC locks
-  via `LockAcquireExtended(reportMemoryError=false)`.
+  (the ordinary throwing form, `reportMemoryError=true`, since
+  b85f9c00fb88 — see OOM-resilience note above).
 
 ## Open questions
 

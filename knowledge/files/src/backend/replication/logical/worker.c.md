@@ -1,6 +1,6 @@
 # `src/backend/replication/logical/worker.c`
 
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `031904048aa2`
 - **Lines:** 6435 (largest in subsystem; the apply-worker behemoth)
 - **Source:** `source/src/backend/replication/logical/worker.c`
 

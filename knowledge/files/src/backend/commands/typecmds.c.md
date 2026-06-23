@@ -1,8 +1,8 @@
 # typecmds.c
 
 - **Source path:** `source/src/backend/commands/typecmds.c`
-- **Lines:** 4757
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 4747
+- **Last verified commit:** `031904048aa2`
 
 ## Purpose
 
