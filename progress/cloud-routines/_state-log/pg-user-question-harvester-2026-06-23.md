@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-23 — 26 NEW pgsql-hackers internals threads harvested + skill-tagged (10 distinct gap topics, led by recurring gap:pgstat / gap:vacuum-bloat / gap:aio-io_uring); pgsql-performance had no in-window posts, pgsql-general in-window threads already covered 06-22 (PR #pending).
