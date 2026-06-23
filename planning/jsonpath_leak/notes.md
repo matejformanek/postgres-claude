@@ -143,3 +143,22 @@
     `JsonTableResetRowPattern`'s two `Clear` → `Free` rename calls
     from Phase 1 (lines 4306, 4323).  Net 17 sites + struct + 9
     helpers + new Free + 6 caller updates touching one file.
+
+## Phase 3 — regress tests
+
+- **Status:** done.
+- **Commit:** `e92433395ff` on `feature_jsonpath_leak`.
+- **Title:** *jsonpath: regress coverage for memory-bounded predicate eval*
+- **Test scope:** pre-commit hook ran `--suite regress` clean.  Full
+  R13 executor tier independently verified at 385 subtests (387
+  with the new TC rows).
+- **Files modified:**
+  - `src/test/regress/sql/jsonb_jsonpath.sql` (+34 lines): four
+    `SELECT count(*) FROM (jsonb_path_query(...))` rows at
+    N ∈ {10, 100, 1000, 10000}.
+  - `src/test/regress/expected/jsonb_jsonpath.out` (+53 lines):
+    pinned counts 9, 99, 999, 9999.
+- **Surprises / drift:**
+  - First commit attempt failed regress with a one-line diff
+    because the heredoc-appended `\n\n-- ====` produced one too
+    many blank lines compared to actual output.  Trimmed.
