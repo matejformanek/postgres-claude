@@ -1,1 +1,1 @@
-**pg-community-pulse** 2026-06-23 — hackers 12 internals threads (200 in 24h window) · CF59 diff NR +2/RfC +1/Committed flat 91/Total +3 (562→565), land streak paused 2nd zero-land day · planet 6 fresh posts. All 3 sources 200 OK (PR #pending).
+**pg-community-pulse** 2026-06-23 — hackers 12 internals threads (200 in 24h window) · CF59 diff NR +2/RfC +1/Committed flat 91/Total +3 (562→565), land streak paused 2nd zero-land day · planet 6 fresh posts. All 3 sources 200 OK (PR #389).
