@@ -1,7 +1,7 @@
 # `src/backend/replication/logical/slotsync.c`
 
-- **Last verified commit:** `ef6a95c7c64`
-- **Lines:** 2099
+- **Last verified commit:** `031904048aa2`
+- **Lines:** 2102
 - **Source:** `source/src/backend/replication/logical/slotsync.c`
 - **Note:** Lives under `logical/` but its header is `replication/slotsync.h`.
 
@@ -45,8 +45,19 @@ concurrent syncs), `last_start_time` (restart throttle).
   RS_TEMPORARY/RS_PERSISTENT.
 - `wait_for_slot_activity` — adaptive sleep: shorter if any slot was
   updated last cycle.
-- `drop_local_obsolete_slots` — drop locally-synced slots no longer
-  present on the primary.
+- `drop_local_obsolete_slots` (`:535`) — drop locally-synced slots no
+  longer present on the primary. **Stale-slot guard (`:555-585`, added
+  by bdae2c20e88d "Avoid stale slot access after dropping obsolete
+  synced slots"):** it takes `LockSharedObject(DatabaseRelationId, …,
+  AccessShareLock)` to serialize against `ReplicationSlotsDropDBSlots()`
+  during a concurrent DROP DATABASE, then **re-checks under the slot
+  mutex** that `local_slot->in_use && local_slot->data.synced` before
+  dropping — because in the window between picking the slot and locking
+  the database, the startup process could drop the database and a user
+  could create a new slot reusing the same shmem `ReplicationSlot`. The
+  `slot_name`/`slot_database` are copied into locals so the drop uses no
+  stale pointer into the (possibly recycled) slot. [verified-by-code,
+  `:535-589` @ `031904048aa2`; from-comment]
 - `HandleSlotSyncMessageInterrupt` / `ProcessSlotSyncMessage` — signal
   handling (PROCSIG_SLOTSYNC_MESSAGE).
 - `ShutDownSlotSync` — promotion-time tear-down by startup process.

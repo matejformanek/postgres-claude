@@ -1,8 +1,8 @@
 # typcache.c
 
 - **Source path:** `source/src/backend/utils/cache/typcache.c`
-- **Lines:** 3226
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 3228
+- **Last verified commit:** `031904048aa2`
 - **Companion files:** `typcache.h`, `lsyscache.c` (basic pg_type lookups), `relcache.c` (relid→composite-typid link), `executor/spi.c` and `array.c`/`record.c` (heavy users), `lib/dshash.c` (shared rowtype typmod registry for parallel workers).
 
 ## Purpose
@@ -18,9 +18,9 @@ Type cache. Memoizes things that pg_type alone doesn't give you: default btree/h
 ## Public surface
 
 - **Core**: `lookup_type_cache` (389) — flag-driven lazy fill of a `TypeCacheEntry`.
-- **Rowtype/typmod**: `lookup_rowtype_tupdesc` (1947), `lookup_rowtype_tupdesc_noerror` (1964), `lookup_rowtype_tupdesc_copy` (1981), `lookup_rowtype_tupdesc_domain` (2003), `assign_record_type_typmod` (2067), `SharedRecordTypmodRegistryInit` (2222).
-- **Domain constraints**: `InitDomainConstraintRef` (1404), `UpdateDomainConstraintRef` (1442), `DomainHasConstraints` (1495).
-- **Inval callbacks (static)**: `TypeCacheRelCallback` (2445), `TypeCacheTypCallback` (2541), `TypeCacheOpcCallback` (2598), `TypeCacheConstrCallback` (2636).
+- **Rowtype/typmod**: `lookup_rowtype_tupdesc` (1949), `lookup_rowtype_tupdesc_noerror` (1966), `lookup_rowtype_tupdesc_copy` (1983), `lookup_rowtype_tupdesc_domain` (2005), `assign_record_type_typmod` (2069), `SharedRecordTypmodRegistryInit` (2224).
+- **Domain constraints**: `InitDomainConstraintRef` (1406), `UpdateDomainConstraintRef` (1444), `DomainHasConstraints` (1497).
+- **Inval callbacks (static)**: `TypeCacheRelCallback` (2447), `TypeCacheTypCallback` (2543), `TypeCacheOpcCallback` (2600), `TypeCacheConstrCallback` (2638).
 
 ## Key types / structs
 
@@ -34,22 +34,23 @@ Type cache. Memoizes things that pg_type alone doesn't give you: default btree/h
 - **Pointer stability is a contract.** Because entries are never freed, callers may cache `TypeCacheEntry *` pointers in long-lived places (planner state, executor state). [from-comment, typcache.c:19-23]
 - **Flags-driven lazy fill.** `lookup_type_cache(type_id, flags)` does the cheap hashtable lookup then only computes the bits the caller asked for; flags like `TYPECACHE_EQ_OPR`, `TYPECACHE_BTREE_OPFAMILY`, `TYPECACHE_HASH_PROC`, etc. drive which fields to populate. Cached "I tried and there isn't one" results use a `TCFLAGS_CHECKED_*` flag to avoid recomputation. [verified-by-code, typcache.c:389ff]
 - **Inval scheme**: three-callback design.
-  1. `TypeCacheTypCallback` (2541) — pg_type row changed → clear `TCFLAGS_HAVE_PG_TYPE_DATA` (and domain-constraint-checked flag if applicable). Drives by hash_value; uses `hash_seq_init_with_hash_value` to skip non-matching entries. Hashvalue 0 = full sweep. [verified-by-code]
-  2. `TypeCacheOpcCallback` (2598) — pg_opclass row changed → clear `TCFLAGS_OPERATOR_FLAGS` on ALL entries. Coarse but pg_opclass updates are rare. **Does not watch pg_amop/pg_amproc** — comment explains why this is safe (cross-type ops can be added/dropped but primary ops cannot). [from-comment, typcache.c:2591-2595]
-  3. `TypeCacheRelCallback` (2445) — relcache event for `relid` → invalidate composite type whose `typrelid == relid` (via `RelIdToTypeIdCacheHash`). Also visits every domain entry (linked-listed via `firstDomainTypeEntry`/`nextDomain`) and resets operator flags if the domain is over a composite. `relid == InvalidOid` sweeps all composites + domain-over-composite. This is **how composite-type caches stay in sync with ALTER TABLE**. [verified-by-code, typcache.c:2445-2530; from-comment]
-  4. `TypeCacheConstrCallback` (2636) — pg_constraint changed → walk only the threaded domain list. "It's slightly annoying that we can't tell whether the inval event was for a domain constraint record or not." [from-comment]
+  1. `TypeCacheTypCallback` (2543) — pg_type row changed → clear `TCFLAGS_HAVE_PG_TYPE_DATA` (and domain-constraint-checked flag if applicable). Drives by hash_value; uses `hash_seq_init_with_hash_value` to skip non-matching entries. Hashvalue 0 = full sweep. [verified-by-code]
+  2. `TypeCacheOpcCallback` (2600) — pg_opclass row changed → clear `TCFLAGS_OPERATOR_FLAGS` on ALL entries. Coarse but pg_opclass updates are rare. **Does not watch pg_amop/pg_amproc** — comment explains why this is safe (cross-type ops can be added/dropped but primary ops cannot). [from-comment, typcache.c:2595-2596]
+  3. `TypeCacheRelCallback` (2447) — relcache event for `relid` → invalidate composite type whose `typrelid == relid` (via `RelIdToTypeIdCacheHash`). Also visits every domain entry (linked-listed via `firstDomainTypeEntry`/`nextDomain`) and resets operator flags if the domain is over a composite. `relid == InvalidOid` sweeps all composites + domain-over-composite. This is **how composite-type caches stay in sync with ALTER TABLE**. [verified-by-code, typcache.c:2447-2532; from-comment]
+  4. `TypeCacheConstrCallback` (2638) — pg_constraint changed → walk only the threaded domain list. "It's slightly annoying that we can't tell whether the inval event was for a domain constraint record or not." [from-comment]
 - **Composite-type relcache linkage.** When you `lookup_type_cache` on a composite typid, the secondary `RelIdToTypeIdCacheHash` gets a row keyed by `typrelid → composite_typid` so future `TypeCacheRelCallback(relid)` events can find the typcache entry in O(1). Entries are deleted when typcache entry no longer has anything to clean (`delete_rel_type_cache_if_needed`).
 - **Anonymous RECORD typmods.** `assign_record_type_typmod` allocates a fresh typmod for an ad-hoc tupdesc; the registry is per-backend but with `SharedRecordTypmodRegistry` parallel workers can share it. [verified-by-code, typcache.c:2067ff, 2222ff]
-- **Domain constraint freshness.** `InitDomainConstraintRef` returns a `DomainConstraintRef` (caller's handle); the constraint list pointer is filled by `UpdateDomainConstraintRef`, which respects `TCFLAGS_CHECKED_DOMAIN_CONSTRAINTS`. Constraints expressions are stored as ready-to-run expression states in long-lived memory. [verified-by-code, typcache.c:1404-1495]
+- **Domain constraint freshness.** `InitDomainConstraintRef` returns a `DomainConstraintRef` (caller's handle); the constraint list pointer is filled by `UpdateDomainConstraintRef`, which respects `TCFLAGS_CHECKED_DOMAIN_CONSTRAINTS`. Constraints expressions are stored as ready-to-run expression states in long-lived memory. [verified-by-code, typcache.c:1406-1497]
+- **OOM-resilient lazy initialization (re-entry safe).** `lookup_type_cache`'s first-time setup is split into independent `if (X == NULL)` steps — `TypeCacheHash`, `RelIdToTypeIdCacheHash`, `CacheMemoryContext`, then the `in_progress_list` allocation (deliberately *last* of the allocations), and finally the four SI-invalidation callback registrations (which "can fail only with a FATAL error"). If any allocation throws (e.g. OOM), a later re-entry finds the already-done steps intact and completes the rest, rather than leaving the cache half-initialized. The static `in_progress_list` (`:226-228`, reserved 4 slots, doubled via `repalloc` when full at `:453-460`) records the `type_id`s currently mid-lookup so invalidations arriving *during* a fill can be applied to in-progress entries. [verified-by-code, typcache.c:395-460 @ `031904048aa2`; added by 73dab12719ee "Make type cache initialization more resilient on re-entry after OOM", in this anchor batch]
 
 ## Functions of note
 
 1. **`lookup_type_cache`** (389) — the entry point. Big function that, depending on flags, fetches pg_type row, fills typbyval/typlen, resolves default btree/hash opclass via `GetDefaultOpClass`, then looks up the comparison/equality/hash operators and functions via syscache, threads domains and ranges onto their respective lists.
-2. **`assign_record_type_typmod`** (2067) — given a fresh anonymous tupdesc, search the registry for a match; if none, allocate a new typmod and insert. Critical for RECORD function returns and composite literals.
-3. **`lookup_rowtype_tupdesc_internal`** (1853) — resolve `(type_id, typmod) → TupleDesc`. For named composites uses relcache; for anonymous RECORD uses the typmod registry; for domain over composite recurses.
-4. **`TypeCacheRelCallback`** (2445) — see above. Most surprising part: domain entries iterated through `nextDomain` chain rather than full hash scan, for perf.
-5. **`TypeCacheTypCallback`** (2541) — uses `hash_seq_init_with_hash_value` for targeted iteration — only the buckets a given hashvalue could land in get visited. [verified-by-code, typcache.c:2553-2556]
-6. **`DomainHasConstraints`** (1495) — drives volatility analysis in the optimizer; populates `*has_volatile` for caller.
+2. **`assign_record_type_typmod`** (2069) — given a fresh anonymous tupdesc, search the registry for a match; if none, allocate a new typmod and insert. Critical for RECORD function returns and composite literals.
+3. **`lookup_rowtype_tupdesc_internal`** (1855) — resolve `(type_id, typmod) → TupleDesc`. For named composites uses relcache; for anonymous RECORD uses the typmod registry; for domain over composite recurses.
+4. **`TypeCacheRelCallback`** (2447) — see above. Most surprising part: domain entries iterated through `nextDomain` chain rather than full hash scan, for perf.
+5. **`TypeCacheTypCallback`** (2543) — uses `hash_seq_init_with_hash_value` for targeted iteration — only the buckets a given hashvalue could land in get visited. [verified-by-code, typcache.c:2558]
+6. **`DomainHasConstraints`** (1497) — drives volatility analysis in the optimizer; populates `*has_volatile` for caller.
 
 ## Cross-references
 
@@ -63,7 +64,7 @@ Type cache. Memoizes things that pg_type alone doesn't give you: default btree/h
 
 ## Confidence tag tally
 
-verified-by-code: 9 — from-comment: 7 — from-readme: 0 — inferred: 0 — unverified: 2
+verified-by-code: 10 — from-comment: 7 — from-readme: 0 — inferred: 0 — unverified: 2
 
 ## Synthesized by
 <!-- backlinks:auto -->
