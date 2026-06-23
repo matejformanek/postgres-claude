@@ -236,3 +236,19 @@ table of contents, exclude chapters whose slug already exists under
 [done:2605b54] typeconv-oper https://www.postgresql.org/docs/current/typeconv-oper.html
 [done:2605b54] typeconv-query https://www.postgresql.org/docs/current/typeconv-query.html
 [done:2605b54] typeconv-union-case https://www.postgresql.org/docs/current/typeconv-union-case.html
+
+## Refill 2026-06-23 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. The Part VII internals leaves are saturated, so this run mined the SEED-EXTENSION cluster the routine had never touched: the **backend-introspection contrib modules** (Appendix F). These are official-docs chapters, dense, and the single most directly-useful family for the `debugging` / `wal-and-xlog` / `storage-buffer` / `locking` skills — yet had ZERO docs-distilled coverage. HEAD-probed 21 candidate slugs; the 8 introspection modules + progress-reporting returned 200, while the per-AM `*-extensibility` slugs (gist/spgist/brin/gin) re-confirmed 404 (single-page-folded, matching every prior run — do not re-queue). Picked: pageinspect (raw page + t_infomask decode + per-AM page formats), pg_walinspect (SQL pg_waldump — rmgr/FPI/block-ref decode), amcheck (B-tree/GIN/heap invariant verification — the AccessShareLock-vs-ShareLock production-safety boundary), pg_buffercache (lock-free BufferDescriptor scan + PG18 NUMA view + eviction-for-testing), pgstattuple (full-scan vs VM/FSM-approx bloat), pg_visibility (VM-bit lies → IOS/wraparound danger + pg_check_frozen/visible), pg_freespacemap (FSM 1/256·BLCKSZ quantization gotcha), pgrowlocks (xmax/multixact → row-lock-mode decode), and progress-reporting §27.4 (the CIC/VACUUM phase state machines + st_progress_param PgBackendStatus mechanism). All claims source-cite into existing storage/index docs-distilled siblings + subsystems/storage-buffer.md + subsystems/storage-lmgr.md. progress-reporting's backend-C mechanism names (pgstat_progress_update_param etc.) are doc-referenced only — the doc flags the exact C signatures as [unverified] pending a source check. Markers left [in-progress:cloud/pg-docs-miner/2026-06-23] for the merger to flip to the squash SHA.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-23] pageinspect https://www.postgresql.org/docs/current/pageinspect.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] pgwalinspect https://www.postgresql.org/docs/current/pgwalinspect.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] amcheck https://www.postgresql.org/docs/current/amcheck.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] pgbuffercache https://www.postgresql.org/docs/current/pgbuffercache.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] pgstattuple https://www.postgresql.org/docs/current/pgstattuple.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] pgvisibility https://www.postgresql.org/docs/current/pgvisibility.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] pgfreespacemap https://www.postgresql.org/docs/current/pgfreespacemap.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] pgrowlocks https://www.postgresql.org/docs/current/pgrowlocks.html
+[in-progress:cloud/pg-docs-miner/2026-06-23] progress-reporting https://www.postgresql.org/docs/current/progress-reporting.html
+[skipped:404-no-such-docs-slug] gist-extensibility https://www.postgresql.org/docs/current/gist-extensibility.html  # re-confirmed 404 this run; single-page-folded, do not re-queue
+[skipped:404-no-such-docs-slug] spgist-extensibility https://www.postgresql.org/docs/current/spgist-extensibility.html  # re-confirmed 404
+[skipped:404-no-such-docs-slug] brin-extensibility https://www.postgresql.org/docs/current/brin-extensibility.html  # 404
+[skipped:404-no-such-docs-slug] gin-extensibility https://www.postgresql.org/docs/current/gin-extensibility.html  # re-confirmed 404
