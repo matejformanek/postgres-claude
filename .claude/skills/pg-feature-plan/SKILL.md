@@ -290,6 +290,34 @@ Length scales with the feature: ~400 lines for a small change,
    - Per-query or per-tuple allocations?
    - Long-lived state (TopMemoryContext, CacheMemoryContext)?
    - `palloc_aligned` / DSA / shmem-resident state?
+   - **Ownership invariants** (REQUIRED when any "X is owned by Y"
+     claim appears in this section). For every ownership claim, run
+     a **grep-pass data-flow verification** and record its result
+     inline:
+     1. Identify every code site that produces an X — `palloc`,
+        `copyObject`, `copyJsonbValue`, `pstrdup`, `makeNode`,
+        constructor calls, etc.
+     2. For each producer, confirm the path that hands the X to Y
+        — direct assignment, append to a Y-owned collection, or
+        function-call argument transfer.
+     3. If ANY producer hands X to something other than Y (e.g.
+        appends to Y but also retains a copy elsewhere; passes by
+        borrowed reference; mixes copy-vs-borrow semantics like
+        `JsonValueListAppend(found, copy ? copyJsonbValue(v) : v)`),
+        the ownership claim is FALSE as stated — refine the claim
+        or refine the data flow before continuing.
+     4. Record the grep command(s) you ran and the file:line list
+        you walked, e.g.
+        `Grep "JsonValueListAppend\\|copyJsonbValue" jsonpath_exec.c → 3 producers verified to hand ownership to the surrounding JsonValueList; 1 mixed-ownership site flagged at line 1741.`
+     Anchored in `planning/jsonpath_leak/comparison.md` §F30: our
+     plan asserted "JsonValueListFree releases only the values[]
+     array, JsonbValue elements remain owned by the input jsonb"
+     — but `executeAnyItem` palloc's per-element JsonbValues via
+     `copyJsonbValue` that the ownership claim missed. The leak
+     was 4.9 GB even after Phase 2 freed the arrays. A 30-second
+     grep-pass would have shown 3 producer sites and one mixed
+     copy-vs-borrow site, surfacing the wrong invariant at plan
+     time rather than at R4 phase-end check time.
 
 8. **Phased implementation** (the meat). Break into 3-8 phases (the
    old 3-6 range was tight for comprehensive features per R15).

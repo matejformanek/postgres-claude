@@ -274,6 +274,32 @@ Phase 2 work prematurely — stop and hand off.
      **REQUIRED**: cite the §0.5 mechanism survey row this approach
      came from. If "invent new", explain why §0.5's reuse candidates
      don't fit.
+   - **Storage representation** (REQUIRED when the approach involves
+     a collection, accumulator, sequence, batch, queue, or any
+     other lifecycle-managed data structure). For the data structure
+     the approach centers on, enumerate the representation choices
+     **explicitly**:
+     - **by-value inline** (elements stored directly in struct or
+       palloc'd chunk — e.g. `JsonbValue items[N]` in a chunked list);
+     - **by-pointer** (elements palloc'd separately, pointer array
+       holds references — e.g. `JsonbValue **values`);
+     - **by-reference-to-shared-pool** (elements live in some
+       longer-lived context / arena, struct just holds pointers to
+       borrowed memory).
+     Each choice has different lifetime + ownership consequences:
+     by-value makes the struct's free / clear release everything
+     atomically; by-pointer requires per-element ownership tracking
+     OR a per-call MemoryContext; shared-pool requires the pool
+     outlive the struct. The recommended approach must state which
+     it picks and why. **Do NOT take "by-pointer" as a given just
+     because the parent code does it** — the brainstorm should
+     consider the alternative explicitly. Anchored in
+     `planning/jsonpath_leak/comparison.md` §L5: our jsonpath_leak
+     trilogy missed Tom Lane's `5a2043bf713` "inline chunked list"
+     design (by-value) because we inherited the parent's pointer-
+     based JsonValueList without questioning it; the inline storage
+     would have eliminated the ownership question Phase 2's R7
+     escalation had to absorb.
    - **Coverage of §0 usage surface** (which usage classes does this
      approach support? List the §0 example-row numbers explicitly.
      If an approach covers only rows 1-10 out of 25, it's a 40%-
@@ -441,6 +467,24 @@ F16 calibration logged this approach as effective.)
    "TTL via dedicated bgworker" differ on (a) but share (b) and (c)
    — borderline-flavors. "TTL via autovacuum" vs "TTL via tuple-
    visibility predicate" differ on all three — genuinely distinct.
+
+   **Adversarial-pass for collection / accumulator / lifecycle-
+   managed types (L5).** Before locking the approach list, run one
+   adversarial question: *"For the data structure this approach
+   centers on, have I considered by-value inline storage vs
+   by-pointer vs by-reference-to-shared-pool?"*  Default failure
+   mode: when the parent code already uses one representation
+   (e.g. PG's `List*` of pointers), the brainstorm inherits it
+   without questioning, and the alternative (which may eliminate
+   downstream ownership / lifetime / leak questions) never enters
+   the candidate set. This was the jsonpath_leak trilogy's miss:
+   approaches A/B/C/D all assumed pointer-based JsonValueList;
+   Tom Lane's actual fix `5a2043bf713` redesigned to by-value
+   inline-chunked storage, which made Clear pfreeing the chunks
+   release everything atomically — no per-call MemoryContext
+   needed. See `planning/jsonpath_leak/comparison.md` §L5. The
+   sub-question goes in EVERY approach's "Storage representation"
+   field (per §5 of the output template).
 
 7. **Recommend.** Pick one. **Default to COMPREHENSIVE scope, not
    minimal MVP** (per R15 in pg-implement-discipline.md). If the
