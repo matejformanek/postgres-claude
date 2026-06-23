@@ -226,13 +226,13 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-06-22 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note. The Part VII internals leaves are now near-saturated, so this run mined two coherent DEVELOPER-prose families with ZERO docs-distilled coverage. (1) §33 Regression Tests — the entire chapter family (run/evaluation/variant/tap/coverage) was uncovered despite the repo's `testing` skill + R13 phase-end-check ladder being a direct downstream of it; regress-evaluation §33.2 (the spurious-failure taxonomy: locale/timezone/float8/row-order/random) and regress-variant §33.3 (resultmap format + numbered best-match `testname_N.out` selection) are the two non-obvious ones. (2) §10 Type Conversion — the parser's four overload/coercion resolution algorithms (func §10.3 / oper §10.2 / value-storage §10.4 / union-case §10.5 + overview §10.1), the exact numbered tie-break ladders behind `parse_func.c`/`parse_oper.c`/`parse_coerce.c`, uncovered despite deep parser/fmgr corpus. Source paths cited were HEAD-verified at anchor 031904048aa2 via raw.githubusercontent.com: resultmap, parallel_schedule, perl/PostgreSQL/Test/Cluster.pm + Utils.pm, expected/char_1.out — all 200. regress-tap §33.4 module-API detail (PostgreSQL::Test::Cluster/Utils) is code-verified not docs-quoted, flagged as such in the doc. Markers left [in-progress:cloud/pg-docs-miner/2026-06-22] for the merger to flip to the squash SHA.)
 
-[in-progress:cloud/pg-docs-miner/2026-06-22] regress-run https://www.postgresql.org/docs/current/regress-run.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] regress-evaluation https://www.postgresql.org/docs/current/regress-evaluation.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] regress-variant https://www.postgresql.org/docs/current/regress-variant.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] regress-tap https://www.postgresql.org/docs/current/regress-tap.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] regress-coverage https://www.postgresql.org/docs/current/regress-coverage.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] typeconv-overview https://www.postgresql.org/docs/current/typeconv-overview.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] typeconv-func https://www.postgresql.org/docs/current/typeconv-func.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] typeconv-oper https://www.postgresql.org/docs/current/typeconv-oper.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] typeconv-query https://www.postgresql.org/docs/current/typeconv-query.html
-[in-progress:cloud/pg-docs-miner/2026-06-22] typeconv-union-case https://www.postgresql.org/docs/current/typeconv-union-case.html
+[done:2605b54] regress-run https://www.postgresql.org/docs/current/regress-run.html
+[done:2605b54] regress-evaluation https://www.postgresql.org/docs/current/regress-evaluation.html
+[done:2605b54] regress-variant https://www.postgresql.org/docs/current/regress-variant.html
+[done:2605b54] regress-tap https://www.postgresql.org/docs/current/regress-tap.html
+[done:2605b54] regress-coverage https://www.postgresql.org/docs/current/regress-coverage.html
+[done:2605b54] typeconv-overview https://www.postgresql.org/docs/current/typeconv-overview.html
+[done:2605b54] typeconv-func https://www.postgresql.org/docs/current/typeconv-func.html
+[done:2605b54] typeconv-oper https://www.postgresql.org/docs/current/typeconv-oper.html
+[done:2605b54] typeconv-query https://www.postgresql.org/docs/current/typeconv-query.html
+[done:2605b54] typeconv-union-case https://www.postgresql.org/docs/current/typeconv-union-case.html

@@ -164,11 +164,11 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 [done:bea6750] ChenHuajun/pg_roaringbitmap branch=master files=README.md,*.control,roaringbitmap--*.sql,src/*.c  # 284★ C; RoaringBitmap custom type wrapping vendored CRoaring — varlena portable-serialize format, malloc-vs-MemoryContext allocator boundary, internal-typed parallel-safe aggregate (combine/serialize/deserialize). Custom-type sibling of postgresql-hll/pguri/uuidv47. → knowledge/ideologies/pg_roaringbitmap.md
 
 # Backlog left [pending] for next runs (>200★, uncovered, lower priority / niche):
-[done:pending-merge] Florents-Tselai/pgJQ branch=main files=README.md,*.control,*.sql,src/*.c  # 204★ C; embeds jq DSL as a SQL-callable engine over jsonb — custom operator, vendored libjq boundary
-[done:pending-merge] Florents-Tselai/pgpdf branch=main files=README.md,*.control,*.sql,src/*.c  # 224★ C; `pdf` custom type, text extraction via vendored poppler/pdfium — foreign-lib type sibling
-[done:pending-merge] vladich/pg_jitter branch=master files=README.md,*.control,src/*.c  # 203★ C; alternative JIT provider for PG (vs core LLVM jit) — JIT-provider-hook divergence, young
-[done:pending-merge] vibhorkum/pg_background branch=master files=README.md,*.control,*.sql,*.c  # 251★ C/PLpgSQL; dynamic bgworkers running arbitrary SQL w/ autonomous-txn + cookie handles — bgworker-API divergence
-[done:pending-merge] omniti-labs/pg_amqp branch=master files=README.md,*.control,*.sql,*.c  # 214★ C; AMQP publish from inside PG via RegisterXactCallback transactional delivery — ≈pg_net/pgsql-http messaging-bridge sibling
+[done:aeca415] Florents-Tselai/pgJQ branch=main files=README.md,*.control,*.sql,src/*.c  # 204★ C; embeds jq DSL as a SQL-callable engine over jsonb — custom operator, vendored libjq boundary
+[done:aeca415] Florents-Tselai/pgpdf branch=main files=README.md,*.control,*.sql,src/*.c  # 224★ C; `pdf` custom type, text extraction via vendored poppler/pdfium — foreign-lib type sibling
+[done:aeca415] vladich/pg_jitter branch=master files=README.md,*.control,src/*.c  # 203★ C; alternative JIT provider for PG (vs core LLVM jit) — JIT-provider-hook divergence, young
+[done:aeca415] vibhorkum/pg_background branch=master files=README.md,*.control,*.sql,*.c  # 251★ C/PLpgSQL; dynamic bgworkers running arbitrary SQL w/ autonomous-txn + cookie handles — bgworker-API divergence
+[done:aeca415] omniti-labs/pg_amqp branch=master files=README.md,*.control,*.sql,*.c  # 214★ C; AMQP publish from inside PG via RegisterXactCallback transactional delivery — ≈pg_net/pgsql-http messaging-bridge sibling
 # Next runs: drop floor to >150, try language:Zig / language:C++,
 # FDW niche (pg_clickhouse 243★, parquet_s3_fdw, sqlite_fdw, pgsql-ogr-fdw), and the type cluster (pgpdf, pgJQ, pg_roaringbitmap done).
 # Known-skipped (don't re-add): see the 2026-06-20 list above + pgxman (pkg mgr), pgmoneta (backup), pgreplay (replay tool),
