@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-06-23 — 8 master commits (6 code + 2 docs) since anchor 9a60f295bcb1; deltas + 6-doc crossref written, anchor held (corpus impact); buildfarm quiet (goldfish chronic timeout, no regression) (PR #PENDING).
