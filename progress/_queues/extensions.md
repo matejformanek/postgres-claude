@@ -173,3 +173,25 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # FDW niche (pg_clickhouse 243★, parquet_s3_fdw, sqlite_fdw, pgsql-ogr-fdw), and the type cluster (pgpdf, pgJQ, pg_roaringbitmap done).
 # Known-skipped (don't re-add): see the 2026-06-20 list above + pgxman (pkg mgr), pgmoneta (backup), pgreplay (replay tool),
 # pgpemu (ESP32 toy — `pgp` name false-positive), sequel_pg (Ruby client accel), pg_prometheus (archived).
+
+# --- Refill (seeded 2026-06-23 cloud/pg-extension-anthropologist) ---
+# Queue was fully drained (last run 2026-06-21 pgJQ/pgpdf/pg_jitter/pg_background/pg_amqp → #385).
+# Re-ran `topic:postgresql-extension stars:>150` (41 hits) + `fdw in:name postgres` per the standing
+# next-run note (drop floor to >150, FDW niche). Filtered out covered (pgrx/age/orioledb/hydra/
+# pg_partman/plv8/pgaudit/pgrouting/pg_auto_failover/wrappers/plpgsql_check/uuidv47/pg_squeeze/orafce/
+# pggraph/wasmer-postgres/tds_fdw/pg_tle/onesparse/pg_net/pguri/pg_hashids/pljava/pg_background) and
+# known-skips (pg_uuidv7≈uuidv47, AgensGraph-Extension archived, age-viewer JS UI, pgxman pkg-mgr,
+# pg_ai_query≈pg_gpt thin-AI-bridge low-signal, plgo moved-to-gitlab/stale). Four genuinely-uncovered
+# high-divergence backend extensions PROCESSED this run (parallel sub-agent fanout):
+[done:placeholder] CrystallineCore/Biscuit branch=main files=README.md,docs/source/architecture.md,biscuit.control,src/biscuit.c,src/biscuit_index.c,src/biscuit_index.h,src/biscuit_bitmap.c,src/biscuit_scan.c,src/biscuit_tid.c,src/biscuit_pattern.c,src/biscuit_cache.c  # 293★ C; bitmap-based deterministic wildcard INDEX AM
+[done:placeholder] pgspider/sqlite_fdw branch=master files=README.md,sqlite_fdw.control,sqlite_fdw.h,sqlite_fdw.c,connection.c,deparse.c,option.c,sqlite_query.c,sqlite_data_norm.c  # 261★ C; SQLite FDW, embedded-engine foreign tables
+[done:placeholder] pgsentinel/pgsentinel branch=master files=README.md,src/pgsentinel.control,src/pgsentinel.h,src/pgsentinel.c,src/get_parsedinfo.c,src/pgsentinel--1.0.sql  # 189★ C; Active Session History sampler (bgworker + shmem ring + PGPROC reach)
+[done:placeholder] petere/plsh branch=master files=README.md,plsh.control,plsh.c,plsh--1--2.sql  # 179★ C; PL/sh shell-script procedural-language handler (system() + tempfile)
+# Backlog left [pending] for next runs (>150★, uncovered):
+[pending] cybertec-postgresql/pg_show_plans branch=master files=README.md,*.control,*.c  # 208★ C; live query-plan dump via executor hooks + shmem
+[pending] pgspider/parquet_s3_fdw branch=main files=README.md,*.control,src/*.cpp  # 241★ C++; Parquet+S3 FDW
+[pending] xataio/deltax branch=main files=README.md,*.control,src/*.rs  # 243★ Rust/pgrx; time-series compression ext
+[pending] Brick-Abode/pldotnet branch=master files=README.md,*.control,src/*  # 164★ C#/C; PL/.NET (C#/F#) CLR-embedding PL handler
+[pending] chimpler/postgres-aws-s3 branch=master files=README.md,*.control,*.sql  # 178★ PLpgSQL; aws_s3 import/export via plpython3u+boto3
+# Next runs: drop floor to >120, try language:Zig / language:Go (plgo moved to gitlab — check liveness),
+# the FDW cluster (parquet_s3_fdw, more pgspider FDWs), monitoring (pg_show_plans, pgsentinel done).
