@@ -1,8 +1,8 @@
 # subscriptioncmds.c
 
 - **Source path:** `source/src/backend/commands/subscriptioncmds.c`
-- **Lines:** 3429
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 3530
+- **Last verified commit:** `9a60f295bcb1`
 
 ## Purpose
 

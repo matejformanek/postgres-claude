@@ -1,8 +1,8 @@
 # xlogutils.c
 
 - **Source path:** `source/src/backend/access/transam/xlogutils.c`
-- **Lines:** 1034
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 1046
+- **Last verified commit:** `9a60f295bcb1`
 - **Companion files:** `source/src/include/access/xlogutils.h`,
   `xlogreader.c`, `xlogrecovery.c`, every redo handler.
 
@@ -72,7 +72,7 @@ Reader callbacks for non-startup readers:
 - `wal_segment_close(state)` — `xlogutils.c:831` [verified-by-code]
 - `read_local_xlog_page` / `_no_wait` / `_guts` —
   `xlogutils.c:845, 857, 869` [verified-by-code]
-- `WALReadRaiseError(WALReadError *)` — `xlogutils.c:1011`
+- `WALReadRaiseError(WALReadError *)` — `xlogutils.c:1023`
   [verified-by-code]
 
 ## Key invariants and locking

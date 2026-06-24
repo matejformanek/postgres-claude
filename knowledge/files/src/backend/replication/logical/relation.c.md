@@ -1,7 +1,7 @@
 # `src/backend/replication/logical/relation.c`
 
-- **Last verified commit:** `ef6a95c7c64`
-- **Lines:** 962
+- **Last verified commit:** `9a60f295bcb1`
+- **Lines:** 961
 - **Source:** `source/src/backend/replication/logical/relation.c`
 
 ## Purpose

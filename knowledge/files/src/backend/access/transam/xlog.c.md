@@ -1,8 +1,8 @@
 # xlog.c
 
 - **Source path:** `source/src/backend/access/transam/xlog.c`
-- **Lines:** 10195
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 10197
+- **Last verified commit:** `9a60f295bcb1`
 - **Companion files:** `xloginsert.c` (record assembly), `xlogrecovery.c` (replay),
   `xlogreader.c` (record decode), `xlogutils.c` (redo helpers),
   `source/src/include/access/{xlog.h,xlog_internal.h,xlogdefs.h}`,
@@ -64,21 +64,21 @@ Startup + recovery transition (driven by startup process):
 - `LocalProcessControlFile` — `xlog.c:5270` [verified-by-code]
 - `BootStrapXLOG` — `xlog.c:5454` [verified-by-code]
 - `XLogInitNewTimeline` — `xlog.c:5631` [verified-by-code]
-- `SwitchIntoArchiveRecovery` — `xlog.c:6709` [verified-by-code]
-- `ReachedEndOfBackup` — `xlog.c:6747` [verified-by-code]
-- `ShutdownXLOG` — `xlog.c:7102` [verified-by-code]
+- `SwitchIntoArchiveRecovery` — `xlog.c:6711` [verified-by-code]
+- `ReachedEndOfBackup` — `xlog.c:6749` [verified-by-code]
+- `ShutdownXLOG` — `xlog.c:7104` [verified-by-code]
 
 State queries:
 
-- `RecoveryInProgress` — `xlog.c:6834` [verified-by-code]
-- `GetRecoveryState` — `xlog.c:6870` [verified-by-code]
-- `XLogInsertAllowed` — `xlog.c:6889` [verified-by-code]
-- `LocalSetXLogInsertAllowed` — `xlog.c:6922` [verified-by-code]
-- `GetRedoRecPtr` — `xlog.c:6937` [verified-by-code]
-- `GetFullPageWriteInfo` — `xlog.c:6967` [verified-by-code]
-- `GetInsertRecPtr` — `xlog.c:6982` [verified-by-code]
-- `GetFlushRecPtr` — `xlog.c:6999` [verified-by-code]
-- `GetLastImportantRecPtr` — `xlog.c:7056` [verified-by-code]
+- `RecoveryInProgress` — `xlog.c:6836` [verified-by-code]
+- `GetRecoveryState` — `xlog.c:6872` [verified-by-code]
+- `XLogInsertAllowed` — `xlog.c:6891` [verified-by-code]
+- `LocalSetXLogInsertAllowed` — `xlog.c:6924` [verified-by-code]
+- `GetRedoRecPtr` — `xlog.c:6939` [verified-by-code]
+- `GetFullPageWriteInfo` — `xlog.c:6969` [verified-by-code]
+- `GetInsertRecPtr` — `xlog.c:6984` [verified-by-code]
+- `GetFlushRecPtr` — `xlog.c:7001` [verified-by-code]
+- `GetLastImportantRecPtr` — `xlog.c:7058` [verified-by-code]
 
 Segment-file lifecycle:
 
@@ -263,7 +263,7 @@ loop to `xlogrecovery.c:PerformWalRecovery`. After recovery: invokes
 README §"Transaction Emulation during Recovery" for what other
 subsystems do during this loop.)
 
-### `RecoveryInProgress` — `xlog.c:6834` [verified-by-code]
+### `RecoveryInProgress` — `xlog.c:6836` [verified-by-code]
 
 The function every backend uses to gate WAL writes. Three-state local
 cache (`LocalRecoveryInProgress`): once it observes `RECOVERY_STATE_DONE`,
