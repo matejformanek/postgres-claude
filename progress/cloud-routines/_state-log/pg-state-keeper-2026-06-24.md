@@ -1,1 +1,1 @@
-**pg-state-keeper** 2026-06-24 — morning briefing for the 06-23→06-24 cycle; 7/7 cloud PRs merged (#388–#394), audit OK:8 / SKIPPED:0 / FAILED:0 / SILENT:[pg-corpus-maintainer (NEW, 1st miss), pg-file-backfiller (8th idle night)] (PR #pending).
+**pg-state-keeper** 2026-06-24 — morning briefing for the 06-23→06-24 cycle; 7/7 cloud PRs merged (#388–#394), audit OK:8 / SKIPPED:0 / FAILED:0 / SILENT:[pg-corpus-maintainer (NEW, 1st miss), pg-file-backfiller (8th idle night)] (PR #396).
