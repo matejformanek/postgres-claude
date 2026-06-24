@@ -162,3 +162,7 @@ than the periodic 30-day refresh: process them first.
 ## anchor-bump 2026-06-22: 031904048aa2..9a60f295bcb1 (2 commits, pg-anchor-refresh)
 
 [pending] knowledge/files/src/backend/optimizer/plan/analyzejoins.c.md  reason=anchor-bump 2026-06-22:031904048aa2..9a60f295bcb1 (Strip removed-relation references from PlaceHolderVars at join removal, 9a60f295bcb1)
+
+## anchor-bump 2026-06-23: 9a60f295bcb1..f0a4f280b4d3 (3 commits, pg-anchor-refresh)
+
+[pending] knowledge/files/src/backend/utils/resowner/resowner.c.md  reason=anchor-bump 2026-06-23:9a60f295bcb1..f0a4f280b4d3 (Fix unsafe order of operations in ResourceOwnerReleaseAll(), ef01ca6dbca5)
