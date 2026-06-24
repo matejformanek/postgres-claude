@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-24 — 28 NEW internals threads (27 hackers/1 general) harvested + skill-tagged, ~25 de-duped against prior 3 days; 9 gap:logical-replication hits (strongest recurring cluster, dedicated skill now justified) + 2 new gaps (gap:postmaster-startup, gap:temp-tables) (PR #393).
