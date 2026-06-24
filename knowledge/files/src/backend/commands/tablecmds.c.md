@@ -1,8 +1,8 @@
 # tablecmds.c
 
 - **Source path:** `source/src/backend/commands/tablecmds.c`
-- **Lines:** 23907 (the largest single file in the backend after the parser)
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 23884 (the largest single file in the backend after the parser)
+- **Last verified commit:** `9a60f295bcb1`
 - **Companion files:** `tablecmds.h`, `catalog/heap.c` (low-level catalog munging), `catalog/index.c`, `catalog/partition.c`, `commands/typecmds.c` (composite-type recursion), `commands/trigger.c`, `commands/repack.c` (rewrite mechanics), `commands/event_trigger.c` (start/end hooks).
 
 ## Purpose

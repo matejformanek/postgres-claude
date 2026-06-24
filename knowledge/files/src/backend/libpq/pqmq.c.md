@@ -1,15 +1,15 @@
 ---
 path: src/backend/libpq/pqmq.c
-anchor_sha: 4b0bf0788b0
-loc: 343
+anchor_sha: 9a60f295bcb1
+loc: 342
 depth: medium
 ---
 
 # pqmq.c
 
 - **Source path:** `source/src/backend/libpq/pqmq.c`
-- **Last verified commit:** `4b0bf0788b0`
-- **LOC:** 343
+- **Last verified commit:** `9a60f295bcb1`
+- **LOC:** 342
 
 ## Purpose
 
@@ -25,7 +25,7 @@ vtable just like `pqcomm.c` does for sockets. [from-comment, pqmq.c:1-12]
 |---|---|---|
 | 56 | `pq_redirect_to_shm_mq(seg, mqh)` | Replace `PqCommMethods` with the shm_mq vtable; register a `dsm_detach` callback. |
 | 85 | `pq_set_parallel_leader(pid, procNumber)` | After redirect, name the leader to SIGUSR1 on each putmessage. |
-| 229 | `pq_parse_errornotice(msg, edata)` | Reverse of `send_message_to_frontend` — turn an ErrorResponse/NoticeResponse payload back into an `ErrorData` on the leader side. |
+| 228 | `pq_parse_errornotice(msg, edata)` | Reverse of `send_message_to_frontend` — turn an ErrorResponse/NoticeResponse payload back into an `ErrorData` on the leader side. |
 
 ## Internal landmarks
 
@@ -70,7 +70,7 @@ vtable just like `pqcomm.c` does for sockets. [from-comment, pqmq.c:1-12]
 - `mq_putmessage_noblock` is **not supported** — calls `elog(ERROR)`.
   shm_mq's "begin non-blocking send" API doesn't permit partial commits.
   [from-comment, pqmq.c:213-221]
-- `pq_parse_errornotice` (229) is the *receiver* side. Severity is parsed
+- `pq_parse_errornotice` (228) is the *receiver* side. Severity is parsed
   from `PG_DIAG_SEVERITY_NONLOCALIZED`; the localised severity is ignored
   (trusting the worker speaks the leader's protocol version). The
   function ereports `ERROR` on unrecognised severity / bad SQLSTATE / bad
