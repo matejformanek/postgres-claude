@@ -2,9 +2,12 @@
 
 Combined issue register for the small include subdirectories not
 big enough to warrant their own register:
-`portability/`, `datatype/`, `mb/`, `archive/`, `bootstrap/`.
+`portability/`, `datatype/`, `mb/`, `archive/`, `bootstrap/`,
+plus the top-level `src/include/miscadmin.h` (which names this
+register in its own cross-ref block).
 
-**Parent docs:** `knowledge/files/src/include/{portability,datatype,mb,archive,bootstrap}/*.h.md`.
+**Parent docs:** `knowledge/files/src/include/{portability,datatype,mb,archive,bootstrap}/*.h.md`
+and `knowledge/files/src/include/miscadmin.h.md`.
 
 ## Open / Triaged
 
@@ -57,6 +60,22 @@ big enough to warrant their own register:
 |---|---|---|---|---|---|---|
 | 2026-06-11 | src/include/bootstrap/bootstrap.h:26 | undocumented-invariant | likely | `MAXATTR = 40` is a silent ceiling for system-table column counts | open | files/.../bootstrap/bootstrap.h.md |
 | 2026-06-11 | src/include/bootstrap/bootstrap.h:33 | question | nit | `attrtypes[MAXATTR]` is statically sized; is there ereport on overflow in DefineAttr? | open | files/.../bootstrap/bootstrap.h.md |
+
+### miscadmin.h (top-level)
+
+| Date | File:line | Type | Severity | Summary | Status | Linked doc |
+|---|---|---|---|---|---|---|
+| 2026-06-16 | src/include/miscadmin.h:81-84 | defense-in-depth | likely | No header-level guidance on "should this be a critical section?"; only XLOG insertion uses one today, and a recoverable error inside a crit section turns ERROR into PANIC — the answer is almost always no. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h | undocumented-invariant | maybe | `MyDatabaseHasLoginEventTriggers` is a per-backend cached flag set at InitPostgres; it goes stale across `CREATE EVENT TRIGGER`, so a connection restart is needed to observe login-event-trigger changes. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:319-323 | style | nit | `SECURITY_*` flags use 3 of ~32 bits with no `SECURITY_MAX_BIT` constant and no comment on reserved bits; the bit-allocation policy is comment-only. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:198-199 | doc-drift | nit | `MyCancelKey[]` cancel-key buffer size is opaque at the header (the fixed size lives in the implementation); the header gives no size hint. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:269-273 | defense-in-depth | nit | Tuning GUCs (`work_mem` etc.) are exposed as mutable `PGDLLIMPORT int`; an extension can scribble on them mid-query with no protection. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:340-381 | api-shape | likely | `BackendType` is a hard-coded enum; pluggable extension worker types (e.g. logical-replication apply workers) all lump into `B_BG_WORKER`, and new entries must also update `child_process_kinds` in launch_backend.c plus `NUM_AUXILIARY_PROCS`. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:438-440 | security | likely | `InitializeSessionUserId(..., bypass_login_check)` is a bare bool; passing `true` bypasses NOLOGIN checks — a security-sensitive flag with no enum naming. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:506-510 | security | likely | `INIT_PG_OVERRIDE_ROLE_LOGIN = 0x0004` bypasses the LOGIN check (used by pg_upgrade); no "INTERNAL USE ONLY" marker warns off new callers. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:544 | defense-in-depth | likely | `shmem_request_hook` is a single-global mutable `PGDLLIMPORT`; multi-extension installs must chain, and an extension that overwrites rather than chains silently loses the prior subscriber (no header-level chaining idiom). | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:128 | style | nit | `CHECK_FOR_INTERRUPTS()` is a do/while macro; the `if (cond) CHECK_FOR_INTERRUPTS(); else ...` semicolon hazard is real but caught by `-Wempty-body`. Already mitigated. | open | files/src/include/miscadmin.h.md |
+| 2026-06-16 | src/include/miscadmin.h:108,154-156 | correctness | maybe | `CritSectionCount` is `volatile uint32`; a mis-paired `END_CRIT_SECTION` without `START` underflows to `0xFFFFFFFF`, silently enabling crit-section semantics globally. The cassert Assert catches it but release builds wrap. | open | files/src/include/miscadmin.h.md |
 
 ## Wontfix / Submitted / Landed
 
