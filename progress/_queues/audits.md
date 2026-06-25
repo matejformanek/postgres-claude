@@ -166,3 +166,17 @@ than the periodic 30-day refresh: process them first.
 ## anchor-bump 2026-06-23: 9a60f295bcb1..f0a4f280b4d3 (3 commits, pg-anchor-refresh)
 
 [pending] knowledge/files/src/backend/utils/resowner/resowner.c.md  reason=anchor-bump 2026-06-23:9a60f295bcb1..f0a4f280b4d3 (Fix unsafe order of operations in ResourceOwnerReleaseAll(), ef01ca6dbca5)
+
+## anchor-bump 2026-06-24: f0a4f280b4d3..419ce13b7019 (8 commits, pg-anchor-refresh)
+
+[pending] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Refine error reporting for null treatment on non-window functions, 419ce13b7019; prior re-anchored [in-progress] 2026-06-19 follows the same parse_func_call null-treatment path)
+[pending] knowledge/files/src/pl/plperl/plperl.c.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (plperl: Fix NULL pointer dereference for forged array object, 4015abe14bb0)
+[pending] knowledge/files/src/backend/commands/explain.c.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Re-index ModifyTable FDW arrays when pruning result relations, b43f8aa4cb30)
+[pending] knowledge/files/src/backend/executor/nodeModifyTable.c.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Re-index ModifyTable FDW arrays when pruning result relations, b43f8aa4cb30)
+[pending] knowledge/files/src/include/nodes/execnodes.h.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Re-index ModifyTable FDW arrays when pruning result relations, b43f8aa4cb30)
+[pending] knowledge/files/src/backend/utils/cache/catcache.c.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Nail pg_parameter_acl in relcache, 4cc02b80774e)
+[pending] knowledge/files/src/backend/utils/cache/relcache.c.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Nail pg_parameter_acl in relcache, 4cc02b80774e)
+[pending] knowledge/files/src/include/catalog/pg_parameter_acl.h.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Nail pg_parameter_acl in relcache, 4cc02b80774e)
+[pending] knowledge/files/src/include/catalog/catversion.h.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (2 catversion bumps: pg_parameter_acl relcache-nailing 4cc02b80774e + variadic pg_get_*_ddl() declaration fix 2af70e937478)
+[pending] knowledge/files/src/include/fe_utils/psqlscan_int.h.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (psql: Tighten heuristics for BEGIN/END within CREATE SCHEMA, 049b742daad0)
+[pending] knowledge/files/src/backend/catalog/objectaddress.c.md  reason=anchor-bump 2026-06-24:f0a4f280b4d3..419ce13b7019 (Readable identity strings for property graph objects, 2a7e95b659df)
