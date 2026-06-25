@@ -69,12 +69,12 @@ than the periodic 30-day refresh: process them first.
 [done:089661b] knowledge/files/src/backend/replication/logical/relation.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-24
 [done:089661b] knowledge/files/src/backend/replication/walsender.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-24
 [done:089661b] knowledge/files/src/backend/utils/adt/ri_triggers.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-24
-[in-progress:cloud/pg-quality-auditor/2026-06-25] knowledge/files/src/backend/utils/adt/xml.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [drift-fixed: xpath ~4400→4572, XmlTable* ~4750→4933/4978, loc 5167→5169]
+[done:38d62e6] knowledge/files/src/backend/utils/adt/xml.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [drift-fixed: xpath ~4400→4572, XmlTable* ~4750→4933/4978, loc 5167→5169]
 [done:d3dfc9b] knowledge/files/src/backend/utils/cache/inval.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be verified=2026-06-16
-[in-progress:cloud/pg-quality-auditor/2026-06-25] knowledge/files/src/backend/utils/init/postinit.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [drift-fixed: all InitPostgres-pipeline + public-surface cites shifted +6/+7, loc 1553→1567]
-[in-progress:cloud/pg-quality-auditor/2026-06-25] knowledge/files/src/bin/psql/describe.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [clean: file unchanged, exact cites hold; tightened 2 "area" cites to 6823/7089]
-[in-progress:cloud/pg-quality-auditor/2026-06-25] knowledge/files/src/include/miscadmin.h.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [clean: all major cites hold ±2, loc ~553→555]
-[in-progress:cloud/pg-quality-auditor/2026-06-25] knowledge/files/src/include/parser/parse_relation.h.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [clean: all category fn prototypes present, loc ~140→141]
+[done:38d62e6] knowledge/files/src/backend/utils/init/postinit.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [drift-fixed: all InitPostgres-pipeline + public-surface cites shifted +6/+7, loc 1553→1567]
+[done:38d62e6] knowledge/files/src/bin/psql/describe.c.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [clean: file unchanged, exact cites hold; tightened 2 "area" cites to 6823/7089]
+[done:38d62e6] knowledge/files/src/include/miscadmin.h.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [clean: all major cites hold ±2, loc ~553→555]
+[done:38d62e6] knowledge/files/src/include/parser/parse_relation.h.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be re-pinned=f0a4f280b4d3 [clean: all category fn prototypes present, loc ~140→141]
 [pending] knowledge/subsystems/parser-and-rewrite.md  reason=anchor-bump 2026-06-14:e18b0cb7344..da1eff08a5be (6 impacted parser files)
 [pending] knowledge/files/contrib/postgres_fdw/postgres_fdw.c.md  reason=anchor-bump 2026-06-15:da1eff08a5be..b78cd2bda5b1
 [in-progress:cloud/pg-quality-auditor/2026-06-17] knowledge/files/src/backend/replication/libpqwalreceiver/libpqwalreceiver.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea (sig change + escaping rewrite)
@@ -86,8 +86,8 @@ than the periodic 30-day refresh: process them first.
 [in-progress:cloud/pg-quality-auditor/2026-06-17] knowledge/files/src/bin/pg_basebackup/streamutil.h.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..a75bd485b5ea
 [in-progress:cloud/pg-quality-auditor/2026-06-17] knowledge/files/src/interfaces/libpq/fe-protocol3.c.md  reason=upstream-delta 2026-06-15:b78cd2bda5b1..e0511883cae2 (VALID_LONG_MESSAGE_TYPE += ParameterDescription)
 [pending] knowledge/files/src/bin/pg_dump/pg_backup_archiver.c.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (pg_restore --statistics[-only] inconsistency fix, 0dd93de69e80)
-[in-progress:cloud/pg-quality-auditor/2026-06-25] knowledge/files/src/include/nodes/nodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe) re-pinned=f0a4f280b4d3 [clean: enum/macro cites hold ±2, loc 446→444]
-[in-progress:cloud/pg-quality-auditor/2026-06-25] knowledge/files/src/include/nodes/parsenodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe) re-pinned=f0a4f280b4d3 [clean: struct cites hold ±3, loc ~5000→4599]
+[done:38d62e6] knowledge/files/src/include/nodes/nodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe) re-pinned=f0a4f280b4d3 [clean: enum/macro cites hold ±2, loc 446→444]
+[done:38d62e6] knowledge/files/src/include/nodes/parsenodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe) re-pinned=f0a4f280b4d3 [clean: struct cites hold ±3, loc ~5000→4599]
 [pending] knowledge/files/src/include/nodes/primnodes.h.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (query jumble comment fixes, e5f94c4808fe)
 [pending] knowledge/subsystems/replication.md  reason=anchor-bump 2026-06-16:b78cd2bda5b1..e5f94c4808fe (7 impacted files via a75bd485 replication-command quoting; Owners/Invariants may need refresh)
 
