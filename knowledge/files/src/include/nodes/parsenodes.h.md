@@ -1,7 +1,7 @@
 # parsenodes.h
 
-- **Source:** `source/src/include/nodes/parsenodes.h` (~5000 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source:** `source/src/include/nodes/parsenodes.h` (4599 lines)
+- **Last verified commit:** `f0a4f280b4d3` (2026-06-25; clean re-pin — struct cites hold within ±3, doc convention cites the struct's leading comment line)
 - **Depth:** skim (top comment + struct inventory)
 
 ## Purpose
