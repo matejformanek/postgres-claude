@@ -1,6 +1,6 @@
 ---
 path: src/bin/psql/describe.c
-anchor_sha: 4b0bf0788b0
+anchor_sha: f0a4f280b4d3
 loc: 7699
 depth: deep
 ---
@@ -8,7 +8,7 @@ depth: deep
 # describe.c
 
 - **Source path:** `source/src/bin/psql/describe.c`
-- **Last verified commit:** `4b0bf0788b0`
+- **Last verified commit:** `f0a4f280b4d3` (2026-06-25; clean re-pin — file unchanged, exact cites 1503/1588/4237/6631 hold)
 - **LOC:** 7699 (largest file in `src/bin/psql/` by a wide margin)
 
 ## Purpose
@@ -55,8 +55,8 @@ cursor here, results are buffered server-side and pulled in full.
 | `\dP` | `listPartitionedTables` | |
 | `\dn` | `listSchemas` | |
 | `\dx` | `listExtensions` | |
-| `\dRp+` | `describePublications` | 6843 area |
-| `\dRs` | `describeSubscriptions` | 7103 area |
+| `\dRp+` | `describePublications` | 6823 |
+| `\dRs` | `describeSubscriptions` | 7089 |
 | (helper, file-static) | `validateSQLNamePattern` | 6631 |
 | (helper, file-static) | `map_typename_pattern` | (early) |
 

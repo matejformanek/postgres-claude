@@ -1,0 +1,1 @@
+**pg-quality-auditor** 2026-06-25 — ISSUE queue empty (rotated to AUDIT per _loader §5); re-pinned 7 anchor-bump per-file docs at f0a4f280b4d3 (2 drift-fixed: postinit.c +6/+7 pipeline cites, xml.c xpath/XMLTABLE +170/+180; 5 clean: nodes.h/parse_relation.h/parsenodes.h/miscadmin.h/describe.c) (PR #400).

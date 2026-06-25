@@ -4,7 +4,9 @@
 
 Implements the SQL `xml` type and bridges into libxml2 for parsing, XPath evaluation, XSLT-adjacent operations, `XMLTABLE`, `xpath()`, and the SQL/XML standard's transformation functions. Compiled only when `USE_LIBXML` is defined. The most security-sensitive file in the batch — XML parsing on user input is classic XXE territory.
 
-Source: `source/src/backend/utils/adt/xml.c` (5167 lines).
+Source: `source/src/backend/utils/adt/xml.c` (5169 lines).
+
+- **Last verified commit:** `f0a4f280b4d3` (2026-06-25; anchor-bump re-pin — precise cites hold, two approximate function-location cites in the xpath/XMLTABLE region re-pinned +170/+180)
 
 ## Key functions (indexed)
 
@@ -12,9 +14,9 @@ Source: `source/src/backend/utils/adt/xml.c` (5167 lines).
 - `pg_xml_init_library` (line 1208), `pg_xml_init` (line 1254) — set up libxml allocator hooks, error handler, and the entity loader. Every entry point that calls into libxml must wrap work in `PG_TRY` + `pg_xml_done`. [verified-by-code xml.c:1197-1370]
 - `xmlSetExternalEntityLoader(xmlPgEntityLoader)` at xml.c:1319 — installs the PG entity loader globally. [verified-by-code]
 - `xmlPgEntityLoader` at xml.c:2046 — the entity loader callback. Returns `xmlNewStringInputStream(ctxt, "")` for **every** external entity URL/ID, effectively replacing external entities with the empty string. [verified-by-code xml.c:2046-2051]
-- `xml_parse` (line ~1810+) — the document/content parser. Uses `xmlNewParserCtxt` + `xmlCtxtReadDoc` with options `XML_PARSE_NOENT | XML_PARSE_DTDATTR` (+ `XML_PARSE_NOBLANKS` if requested). [verified-by-code xml.c:1872-1892]
-- `xpath` (line ~4400) — XPath evaluation; uses `xmlCtxtReadMemory` then `xmlXPathCtxtCompile` + `xmlXPathCompiledEval`. Carefully uses the `Ctxt`-flavored compile to defend against stack overflow in libxml ≤ 2.13.3 (per comment, ref to libxml2 gitlab issue 799). [verified-by-code xml.c:4502-4511]
-- `XmlTableFetchRow` / `XmlTableGetValue` (line ~4750+) — XMLTABLE row source. Per-row XPath eval, namespaces honored. [verified-by-code xml.c:4751-4805]
+- `xml_parse` (line 1791) — the document/content parser. Uses `xmlNewParserCtxt` + `xmlCtxtReadDoc` with options `XML_PARSE_NOENT | XML_PARSE_DTDATTR` (+ `XML_PARSE_NOBLANKS` if requested). [verified-by-code xml.c:1886]
+- `xpath` (line 4572) — XPath evaluation; uses `xmlCtxtReadMemory` then `xmlXPathCtxtCompile` + `xmlXPathCompiledEval`. Carefully uses the `Ctxt`-flavored compile to defend against stack overflow in libxml ≤ 2.13.3 (per comment, ref to libxml2 gitlab issue 799). [verified-by-code xml.c:4504-4510]
+- `XmlTableFetchRow` (line 4933) / `XmlTableGetValue` (line 4978) — XMLTABLE row source. Per-row XPath eval (`xmlXPathCtxtCompile` at 4884/4918), namespaces honored. [verified-by-code xml.c:4933-4990]
 
 ## XXE / external entity stance
 
@@ -47,7 +49,7 @@ This is a defensible design — `XML_PARSE_NONET` would only block `http://` URL
 - `[ISSUE-trust-boundary: xml.c emits libxml-generated DETAIL strings; if libxml ever includes attacker-controlled URL content in error text, that text becomes part of the SQL error and could leak through logs (low)]`.
 - `[ISSUE-stale-todo: comment at xml.c:2042 says "we would prefer to allow loading entities that exist in the system's global XML catalog; but ... For now, just shut down all external access" — open future-work flag (low)]`.
 - `[ISSUE-dos: xml_in on a 1 GiB XML document parses fully; no streaming. By design (low)]`.
-- `[ISSUE-correctness: xpath() in non-UTF8 databases skips xml-decl parsing and is documented as "non-ASCII bug-compatible with historical behavior" at xml.c:4444-4448 (low; documented)]`.
+- `[ISSUE-correctness: xpath() in non-UTF8 databases skips xml-decl parsing and is documented as "non-ASCII bug-compatible with historical behavior" at xml.c:4449-4451 (low; documented)]`.
 
 Confidence: XXE answer `[verified-by-code]`; amplification claim `[unverified]`.
 

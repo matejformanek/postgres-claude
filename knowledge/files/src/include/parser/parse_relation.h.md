@@ -1,7 +1,7 @@
 # parse_relation.h
 
-- **Source:** `source/src/include/parser/parse_relation.h` (~140 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/include/parser/parse_relation.h` (141 lines)
+- **Last verified commit:** `f0a4f280b4d3` (2026-06-25; clean re-pin, all category fn prototypes present incl. addRangeTableEntryForGraphTable :86)
 - **Depth:** read
 
 ## Purpose

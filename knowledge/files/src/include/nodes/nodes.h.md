@@ -1,7 +1,7 @@
 # nodes.h
 
-- **Source:** `source/src/include/nodes/nodes.h` (446 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source:** `source/src/include/nodes/nodes.h` (444 lines)
+- **Last verified commit:** `f0a4f280b4d3` (2026-06-25; clean re-pin, all enum/macro cites hold ±2)
 - **Depth:** deep-read
 
 ## Purpose

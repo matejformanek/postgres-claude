@@ -1,7 +1,7 @@
 # `src/include/miscadmin.h`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~553
+- **Last verified commit:** `f0a4f280b4d3` (2026-06-25; clean re-pin — all major cites hold ±2: InterruptPending :90, CHECK_FOR_INTERRUPTS :125, SECURITY_* :321-323, BackendType :340, ProcessingMode :477, INIT_PG flags :508-510, shmem_request_hook :546)
+- **Lines:** 555
 - **Source:** `source/src/include/miscadmin.h`
 
 The process-wide globals + signal handlers + initialization API
