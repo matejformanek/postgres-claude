@@ -1,1 +1,1 @@
-**pg-anchor-refresh** 2026-06-28 — anchor 4abf411e2328 → 02f699c14163; 18 commits; 15 docs queued for audit (FOR PORTION OF feature surface dominant; 1 catversion bump 202606232→202606251 via uuid-to-bytea leakproof cast; no subsystem ≥5) (PR #pending).
+**pg-anchor-refresh** 2026-06-28 — anchor 4abf411e2328 → 02f699c14163; 18 commits; 15 docs queued for audit (FOR PORTION OF feature surface dominant; 1 catversion bump 202606232→202606251 via uuid-to-bytea leakproof cast; no subsystem ≥5) (PR #409).
