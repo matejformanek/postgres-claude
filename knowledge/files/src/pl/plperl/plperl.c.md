@@ -1,13 +1,26 @@
 ---
 path: src/pl/plperl/plperl.c
-anchor_sha: 4b0bf0788b0
+anchor_sha: 419ce13b7019f906ebc010af3be09a9deffc2a47
 loc: 4254
 ---
 
 # plperl.c
 
 - **Source path:** `source/src/pl/plperl/plperl.c`
-- **Last verified commit:** `4b0bf0788b0`
+- **Last verified commit:** `419ce13b7019` (re-anchored 2026-06-28 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `f0a4f280b4d3..419ce13b7019`. Triggering commit `4015abe14bb0`
+  ("plperl: Fix NULL pointer dereference for forged array object") is
+  **line-neutral** — LOC unchanged 4254 — and localized to
+  `get_perl_array_ref` (:1144); see the array-conversion note below.
+  Sampled ~12 function cites across the file: most are exact
+  (`plperl_sv_to_datum` :1329, `plperl_hash_from_tuple` :3030,
+  `plperl_trigger_build_args` :1637) or ±1–3 (`_PG_init` :385,
+  `plperl_call_handler` :1860, `plperl_inline_handler` :1902); the one
+  genuinely-stale cite (`plperl_init_interp` "606-650") is corrected
+  below. A full per-cite re-pin of this ~80-cite doc was NOT done — the
+  sampled set is within tolerance; flag for a dedicated re-pin pass only
+  if a future sample shows wider drift. Prior pin `4b0bf0788b0`.)
 - **LOC:** 4254
 
 ## One-line summary
@@ -130,7 +143,9 @@ interpreter and finishes initializing it as either trusted
 (`plperl_trusted_init`, plperl.c:962-1036) or untrusted
 (`plperl_untrusted_init`, plperl.c:1042-1059); subsequent
 interpreters in the same backend are built fresh via
-`plperl_init_interp` (plperl.c:606-650). This means:
+`plperl_init_interp` (plperl.c:710; the trust/MULTIPLICITY dispatch
+that calls it lives in `select_perl_context` :558, whose
+non-MULTIPLICITY reject is at :627-648). This means:
 
 - `plperl.on_init` always runs in a *not-yet-locked* interpreter.
   It can use arbitrary Perl features, load XS modules, etc. (which is
@@ -276,6 +291,19 @@ hashref → tuple (composite or domain over composite, with
 `SvPVutf8` and then `pg_any_to_server` (`utf_u2e`). Embedded NULs are
 preserved through `len` and rejected by typinput functions that don't
 expect them.
+
+**Forged-array hardening** (`get_perl_array_ref`, plperl.c:1144): the
+helper that decides whether an SV is array-like — used by
+`array_to_datum_internal` (:1191), `plperl_sv_to_datum` (:1364) and the
+return path (:2473) — special-cases a `PostgreSQL::InServer::ARRAY`
+blessed object by fetching its `array` hash slot. `4015abe14bb0`
+("Fix NULL pointer dereference for forged array object") added the guard
+`if (sav && *sav && SvOK(*sav) && SvROK(*sav) && SvTYPE(SvRV(*sav)) ==
+SVt_PVAV)` before returning `*sav`, with an explicit `elog(ERROR, "could
+not get array reference from PostgreSQL::InServer::ARRAY object")`
+fallback. Previously a hand-forged object whose `array` slot was missing
+or non-array would be dereferenced unchecked, crashing the backend.
+[verified-by-code, plperl.c:1144-1164]
 
 `plperl_hash_from_tuple` (plperl.c:3030-3109) skips dropped attributes
 and (unless include_generated) generated columns; uses

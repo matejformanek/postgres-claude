@@ -1,7 +1,16 @@
 # execnodes.h
 
-- **Source:** `source/src/include/nodes/execnodes.h` (~3500 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source:** `source/src/include/nodes/execnodes.h` (2816 lines)
+- **Last verified commit:** `419ce13b7019` (re-verified + re-pinned
+  2026-06-28 by pg-quality-auditor AUDIT mode after anchor-bump
+  `f0a4f280b4d3..419ce13b7019`; doc had been pinned at `ef6a95c7c64`.
+  Triggering commit `b43f8aa4cb30` extended `ModifyTableState` (:1440)
+  re-indexing of FDW arrays on result-relation pruning — that struct is
+  not line-cited in this skim. Struct cites here were exact through
+  `JunkFilter` :429; a uniform +1 drift past line ~500 re-pinned
+  (`ResultRelInfo` 505→506, `EState` 690→691, `ExecRowMark` 831→832,
+  `ExecAuxRowMark` 855→856, `TupleHashEntry`/`TupleHashTable`
+  880/881→881/882). LOC estimate ~3500 corrected to 2816.)
 - **Depth:** skim (top comment + struct inventory)
 
 ## Purpose
@@ -34,12 +43,12 @@ gen_node_support.pl:80-85` `[from-comment]`
 
 ### Result-relation machinery
 
-- `ResultRelInfo` `:505` — per-target-relation execution state for
+- `ResultRelInfo` `:506` — per-target-relation execution state for
   INSERT/UPDATE/DELETE/MERGE.
 - `OnConflictActionState` `:443`, `MergeActionState` `:460`,
   `ForPortionOfState` `:475`.
 
-### EState — the top-level executor state `:690`
+### EState — the top-level executor state `:691`
 
 Per-query state: snapshot, range table, query env, ParamListInfo,
 TupleTable, result rel info array, transition-tuple support,
@@ -47,13 +56,13 @@ async-request queue, parallel-mode flags.
 
 ### Row marking
 
-- `ExecRowMark` `:831`, `ExecAuxRowMark` `:855` — FOR UPDATE/SHARE
+- `ExecRowMark` `:832`, `ExecAuxRowMark` `:856` — FOR UPDATE/SHARE
   bookkeeping.
 
 ### Tuple-hash table
 
-- `TupleHashEntryData *TupleHashEntry` `:880`,
-  `TupleHashTableData *TupleHashTable` `:881`. Used by `Agg` and
+- `TupleHashEntryData *TupleHashEntry` `:881`,
+  `TupleHashTableData *TupleHashTable` `:882`. Used by `Agg` and
   `SetOp` for hashing on a subset of attributes.
 
 ### PlanState — base for every executor node

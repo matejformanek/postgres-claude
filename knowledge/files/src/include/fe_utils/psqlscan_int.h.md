@@ -1,14 +1,20 @@
 ---
 path: src/include/fe_utils/psqlscan_int.h
-anchor_sha: 4b0bf0788b066a4ca1d4f959566678e44ec93422
-loc: 155
+anchor_sha: 419ce13b7019f906ebc010af3be09a9deffc2a47
+loc: 158
 depth: read
 ---
 
 # `src/include/fe_utils/psqlscan_int.h`
 
-- **File:** `source/src/include/fe_utils/psqlscan_int.h` (155 lines)
-- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (2026-06-05)
+- **File:** `source/src/include/fe_utils/psqlscan_int.h` (158 lines)
+- **Last verified commit:** `419ce13b7019` (re-verified + re-pinned
+  2026-06-28 by pg-quality-auditor AUDIT mode after anchor-bump
+  `f0a4f280b4d3..419ce13b7019`; doc had been pinned at `4b0bf0788b0`.
+  Triggering commit `049b742daad0` ("psql: Tighten heuristics for
+  BEGIN/END within CREATE SCHEMA") is a **semantic** change to the
+  BEGIN/END block-tracking state, not just line drift — see the
+  rewritten "BEGIN/END heuristic" section below. LOC 155→158.)
 
 ## Purpose
 
@@ -27,13 +33,13 @@ validity checks. The public-facing API is in [[knowledge/files/src/include/fe_ut
 | `YY_BUFFER_STATE` / `yyscan_t` (stubs) | :54-55 | Standalone-compile placeholders for flex types. |
 | `StackElem` | :63 | One frame of the psql-variable-expansion buffer stack. |
 | `PsqlScanStateData` | :78 | The entire re-entrant lexer state (see below). |
-| `psqlscan_push_new_buffer` / `_pop_buffer_stack` | :137-139 | Push/pop a variable-expansion buffer. |
-| `psqlscan_select_top_buffer` | :140 | Re-point flex at the top stacked buffer. |
-| `psqlscan_var_is_current_source` | :141 | Recursion guard: is `varname` already being expanded? |
-| `psqlscan_prepare_buffer` | :143 | Wrap a string in a flex buffer (FF-substitution for unsafe encodings). |
-| `psqlscan_emit` | :146 | Emit scanned text, undoing FF-substitution. |
-| `psqlscan_extract_substring` | :147 | Pull a substring back out (FF-aware). |
-| `psqlscan_escape_variable` / `_test_variable` | :149-152 | Variable-substitution callbacks. |
+| `psqlscan_push_new_buffer` / `_pop_buffer_stack` | :140-142 | Push/pop a variable-expansion buffer. |
+| `psqlscan_select_top_buffer` | :143 | Re-point flex at the top stacked buffer. |
+| `psqlscan_var_is_current_source` | :144 | Recursion guard: is `varname` already being expanded? |
+| `psqlscan_prepare_buffer` | :146 | Wrap a string in a flex buffer (FF-substitution for unsafe encodings). |
+| `psqlscan_emit` | :149 | Emit scanned text, undoing FF-substitution. |
+| `psqlscan_extract_substring` | :150 | Pull a substring back out (FF-aware). |
+| `psqlscan_escape_variable` / `_test_variable` | :152-155 | Variable-substitution callbacks. |
 
 ## Internal landmarks
 
@@ -50,8 +56,12 @@ validity checks. The public-facing API is in [[knowledge/files/src/include/fe_ut
 - `buffer_stack` (`:84`) of `StackElem` implements psql variable expansion: each `:var`
   reference pushes the variable's text as a new flex buffer; popping resumes the outer buffer
   (`scanbufhandle`). `[verified-by-code]`
-- BEGIN…END block tracking (`:116-122`): `identifier_count`, `identifiers[4]`, `begin_depth`
-  let the lexer avoid ending a query at a semicolon inside a function-body `BEGIN … END`. `[from-comment]` (:116-119)
+- BEGIN…END block tracking (`:115-125`): `begin_depth` (:120) plus **two** 4-slot
+  identifier windows — `init_idents_count`/`init_idents[4]` (:121-122, identifiers since
+  start of statement) and `sub_idents_count`/`sub_idents[4]` (:123-125, identifiers since
+  start of a CREATE SCHEMA element) — let the lexer avoid ending a query at a semicolon
+  inside a function-body `BEGIN … END`. The `sub_*` pair was added by `049b742daad0` so the
+  same BEGIN/END detection works for function bodies nested inside `CREATE SCHEMA`. `[from-comment]` (:115-125)
 
 ## Invariants & gotchas
 
@@ -64,11 +74,15 @@ validity checks. The public-facing API is in [[knowledge/files/src/include/fe_ut
 
 ## Invariants & gotchas — BEGIN/END heuristic
 
-- `identifiers[4]` (`:121`) records only the **first few** identifiers of a statement to guess
-  whether a `BEGIN` opens a transaction vs a PL block. A fixed 4-slot buffer is a heuristic,
-  not a parser — it can misclassify unusual statement shapes. This is the same class of
-  "documented-fragile lexer heuristic" the A9 plpgsql sweep flagged (the `pl_gram.y` INTO /
-  integer-FOR / PERFORM heuristics). `[verified-by-code]`
+- `init_idents[4]` (`:122`) and `sub_idents[4]` (`:125`) each record only the **first few**
+  identifiers — of the statement, and of the current CREATE SCHEMA element respectively — to
+  guess whether a `BEGIN` opens a transaction vs a PL block. A fixed 4-slot buffer is a
+  heuristic, not a parser — it can misclassify unusual statement shapes. `049b742daad0`
+  added the `sub_idents` window precisely because the single statement-level window
+  misfired on BEGIN/END inside `CREATE SCHEMA`; the second window narrows but does not
+  eliminate the class. This is the same class of "documented-fragile lexer heuristic" the
+  A9 plpgsql sweep flagged (the `pl_gram.y` INTO / integer-FOR / PERFORM heuristics).
+  `[verified-by-code]`
 
 ## Cross-refs
 
@@ -82,9 +96,12 @@ validity checks. The public-facing API is in [[knowledge/files/src/include/fe_ut
 
 ## Potential issues
 
-- **[ISSUE-question: BEGIN/END detection uses a fixed 4-identifier window]**
-  `psqlscan_int.h:121` — `identifiers[4]` records only the first few identifiers to decide
-  whether a `BEGIN` is transactional or a PL block boundary; a heuristic that can misfire on
-  unusual statement prefixes. Benign (worst case is a mis-split at a semicolon, surfaced as a
-  syntax error to the user), but a known-fragile lexer heuristic in the same family as the A9
-  plpgsql grammar heuristics. Severity `nit`. Mirrored to `knowledge/issues/fe_utils.md`.
+- **[ISSUE-question: BEGIN/END detection uses fixed 4-identifier windows]**
+  `psqlscan_int.h:122,125` — `init_idents[4]` (statement) and `sub_idents[4]` (CREATE SCHEMA
+  element) each record only the first few identifiers to decide whether a `BEGIN` is
+  transactional or a PL block boundary; a heuristic that can misfire on unusual statement
+  prefixes. `049b742daad0` (2026-06) added the `sub_idents` window to fix the CREATE SCHEMA
+  case, confirming the single-window form was genuinely fragile. Benign (worst case is a
+  mis-split at a semicolon, surfaced as a syntax error to the user), but a known-fragile
+  lexer heuristic in the same family as the A9 plpgsql grammar heuristics. Severity `nit`.
+  Mirrored to `knowledge/issues/fe_utils.md`.

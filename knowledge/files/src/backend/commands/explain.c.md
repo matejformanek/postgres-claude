@@ -2,7 +2,15 @@
 
 - **Source path:** `source/src/backend/commands/explain.c`
 - **Lines:** 5324
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `419ce13b7019` (re-verified 2026-06-28 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `f0a4f280b4d3..419ce13b7019`; clean re-pin. Triggering commit
+  `b43f8aa4cb30` (ModifyTable FDW-array re-index on result-relation
+  pruning) touched this file but was line-neutral — LOC unchanged 5324,
+  top comment :3-4 intact, all named entry points present
+  (`ExplainQuery` :181, `ExplainOneQuery` :299, `ExplainOnePlan` :500,
+  `ExplainPrintPlan` :767, `ExplainNode` :1363). Prior pin
+  `ef6a95c7c64`.)
 - **Companion files:** `explain_format.c` (text/JSON/YAML/XML writers), `explain_state.c` (ExplainState lifecycle), `explain_dr.h`+`explain_dr.c` (the `(SERIALIZE)` option's DestReceiver).
 
 ## Purpose

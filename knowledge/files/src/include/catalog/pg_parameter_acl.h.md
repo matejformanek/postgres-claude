@@ -1,7 +1,13 @@
 # pg_parameter_acl.h
 
 - **Source path:** `source/src/include/catalog/pg_parameter_acl.h`
-- **Last verified commit:** `4b0bf0788b0`
+- **Last verified commit:** `419ce13b7019` (re-verified 2026-06-28 by
+  pg-quality-auditor AUDIT mode after anchor-bump
+  `f0a4f280b4d3..419ce13b7019`; clean re-pin — all 11 cites hold
+  exactly. Triggering commit `4cc02b80774e` ("Nail pg_parameter_acl in
+  relcache") changed `relcache.c`'s nailed-relation handling, NOT this
+  header; the catalog definition here is unchanged. Prior pin
+  `4b0bf0788b0`.)
 
 ## Purpose
 
