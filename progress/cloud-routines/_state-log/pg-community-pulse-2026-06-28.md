@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-06-28 — 12 hackers threads (VM/WAL corruption pair, standby deadlock/buffer-pin lock cluster, logical-rep conflict log, SPLIT/MERGE partition) · CF59 3-day delta: zero-land stall broken (Committed 92→95 +3, RfC flat 55, Total 578→587 +9) 3d before Jul-1 transition · planet 8 (PR #TBD).
