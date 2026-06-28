@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-28 — 33 questions (31 hackers / 2 general) — 25 skill-tagged + 21 gap-tagged; top gaps gap:pgstat ×9, gap:vacuum-autovacuum ×7 (5th+ day), gap:progress-reporting ×5, gap:logical-replication ×4; pgsql-performance empty (PR #<pending>).
