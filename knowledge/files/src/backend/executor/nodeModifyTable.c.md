@@ -1,7 +1,15 @@
 # nodeModifyTable.c
 
-- **Source:** `source/src/backend/executor/nodeModifyTable.c` (≈5500 lines, 186 KB)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/backend/executor/nodeModifyTable.c` (5951 lines, 194 KB)
+- **Last verified commit:** `419ce13b7019` (re-verified + re-pinned
+  2026-06-28 by pg-quality-auditor AUDIT mode after anchor-bump
+  `f0a4f280b4d3..419ce13b7019`; doc had been pinned at `ef6a95c7c64`
+  2026-06-01, so all line cites had drifted — mostly −13, `ExecInsert`
+  +2 — and are re-pinned below. Triggering commit `b43f8aa4cb30`
+  ("Re-index ModifyTable FDW arrays when pruning result relations")
+  lands in `ExecInitModifyTable`: the result-relation pruning block at
+  `:5123-5223` now re-indexes `fdwPrivLists`/`fdwDirectModifyPlans` to
+  match the unpruned `resultRelations` — see comment at `:5194`.)
 - **Depth:** deep-read (entry points + per-op pro/act/epi triplet)
 
 ## Purpose
@@ -13,7 +21,7 @@ and applies the operation against the appropriate result relation
 (possibly a partition, possibly a foreign table, possibly via INSTEAD OF
 triggers on a view). [from-comment] `:15-60`
 
-## The driver: `ExecModifyTable(pstate)` `:4619`
+## The driver: `ExecModifyTable(pstate)` `:4606`
 
 A loop that:
 1. Pulls one row from `outerPlanState(mtstate)`.
@@ -32,18 +40,18 @@ checks (Prologue) from the actual heap-API call (Act) from the index-update
 
 ## Per-operation flow
 
-### INSERT (`ExecInsert` `:872`)
+### INSERT (`ExecInsert` `:874`)
 
 - BEFORE ROW triggers; if they returned NULL skip.
-- BEFORE STATEMENT (fired once per stmt; `fireBSTriggers` `:4448` at top).
+- BEFORE STATEMENT (fired once per stmt; `fireBSTriggers` `:4435` at top).
 - `ExecCheckIndexConstraints` (for ON CONFLICT path) to find an existing
   conflict TID before the heap insert.
 - `table_tuple_insert` (with `HEAP_INSERT_SPECULATIVE` if ON CONFLICT).
 - `ExecInsertIndexTuples` — returns conflict list; if conflict and ON
-  CONFLICT, `heap_abort_speculative` + go to `ExecOnConflictUpdate` `:3134`.
+  CONFLICT, `heap_abort_speculative` + go to `ExecOnConflictUpdate` `:3121`.
 - AFTER ROW triggers, queue RETURNING projection.
 
-### UPDATE (`ExecUpdatePrologue` `:2383` / `Act` `:2461` / `Epilogue` `:2614`)
+### UPDATE (`ExecUpdatePrologue` `:2370` / `Act` `:2448` / `Epilogue` `:2601`)
 
 - Prologue: BEFORE ROW UPDATE triggers, generate-by-storage default fill,
   RLS check.
@@ -55,7 +63,7 @@ checks (Prologue) from the actual heap-API call (Act) from the index-update
 - Epilogue: `ExecUpdateIndexTuples` for indexes that touched changed columns
   only (the "summarizing" check), AFTER triggers.
 
-### CROSS-partition UPDATE: `ExecCrossPartitionUpdate` `:2218`
+### CROSS-partition UPDATE: `ExecCrossPartitionUpdate` `:2205`
 
 When the new partition key sends the row to a different partition: turn
 the UPDATE into a DELETE on the old + INSERT on the new (via
@@ -64,33 +72,33 @@ old partition only**, not the new one; INSERT row triggers do NOT fire on
 the new partition for this case (this is debated; current PG behavior is
 that BEFORE/AFTER UPDATE row triggers on the new-partition target are
 skipped, and INSERT triggers also fire). See the long comment block at
-`:2218+`. Foreign-key checks are handled specially in
-`ExecCrossPartitionUpdateForeignKey` `:2669`.
+`:2205+`. Foreign-key checks are handled specially in
+`ExecCrossPartitionUpdateForeignKey` `:2656`.
 
-### DELETE (`ExecDeletePrologue` `:1739` / `Act` `:1771` / `Epilogue` `:1798`)
+### DELETE (`ExecDeletePrologue` `:1726` / `Act` `:1758` / `Epilogue` `:1785`)
 
 Same shape as UPDATE; concurrency handling identical.
 
-### MERGE (`ExecMerge` `:3394`)
+### MERGE (`ExecMerge` `:3381`)
 
 For each row from the source-vs-target join:
 - If target side is NULL (LEFT join unmatched) → `ExecMergeNotMatched`
-  `:4065`: evaluate each WHEN NOT MATCHED clause's qual; first matching
+  `:4052`: evaluate each WHEN NOT MATCHED clause's qual; first matching
   drives action.
-- Else → `ExecMergeMatched` `:3520`: evaluate WHEN MATCHED clauses; first
+- Else → `ExecMergeMatched` `:3507`: evaluate WHEN MATCHED clauses; first
   match drives action. On TM_Updated/Deleted concurrent change → EvalPlanQual
   reloads the row and re-starts the WHEN MATCHED clause loop (per SQL spec /
   the executor README's MERGE section).
 
 DO NOTHING is a valid action that simply skips.
 
-### ON CONFLICT … DO UPDATE: `ExecOnConflictUpdate` `:3134`
+### ON CONFLICT … DO UPDATE: `ExecOnConflictUpdate` `:3121`
 
 Re-fetches the conflicting tuple from heap by the CTID returned by index
 check, locks it (`table_tuple_lock(LockTupleExclusive)`), runs WHERE
 predicate, then ExecUpdate against it.
 
-## Init: `ExecInitModifyTable` `:5101`
+## Init: `ExecInitModifyTable` `:5098`
 
 Builds `ResultRelInfo` per relation (top-level plus partitions if any),
 compiles projection ExprStates for INSERT TLIST / UPDATE new-value
@@ -101,9 +109,9 @@ transition tables.
 
 ## Statement-level triggers
 
-- `fireBSTriggers` `:4448` — before-stmt; runs once per per-statement
+- `fireBSTriggers` `:4435` — before-stmt; runs once per per-statement
   flush across all partitions (uses the root rel for BEFORE STMT).
-- `fireASTriggers` `:4485` — after-stmt; queued during the run, fired at
+- `fireASTriggers` `:4472` — after-stmt; queued during the run, fired at
   ExecModifyTable's exit / `ExecPostprocessPlan`.
 
 ## Tags

@@ -1,14 +1,17 @@
 # parse_func.c
 
-- **Source:** `source/src/backend/parser/parse_func.c` (2816 lines)
-- **Last verified commit:** `ab3023ad1e68` (re-verified 2026-06-19 by
+- **Source:** `source/src/backend/parser/parse_func.c` (2821 lines)
+- **Last verified commit:** `419ce13b7019` (re-verified 2026-06-28 by
   pg-quality-auditor AUDIT mode after anchor-bump
-  `e5f94c4808fe..ab3023ad1e68`; +2 lines from 4e5920e6 null-treatment
-  reject + ab3023ad error-message typo fix; no line-level cites in this
-  doc, all 5 named entry points intact — `ParseFuncOrColumn`,
-  `func_select_candidate`, `func_get_detail`, `make_fn_arguments`,
-  `ParseComplexProjection`; "only window functions accept RESPECT/IGNORE
-  NULLS" reject confirmed present)
+  `f0a4f280b4d3..419ce13b7019`; clean re-pin. 419ce13b7019 refined the
+  null-treatment error reporting for non-window functions — the reject
+  now reads `errmsg("%s specified, but %s is not a window function",
+  "RESPECT/IGNORE NULLS", …)` at parse_func.c:357-359. No line-level
+  cites in this doc; all 5 named entry points intact —
+  `ParseFuncOrColumn` :92, `func_select_candidate` :1130,
+  `func_get_detail` :1523, `make_fn_arguments` :1958,
+  `ParseComplexProjection` :2045. Prior re-verify 2026-06-19 against
+  `ab3023ad1e68`.)
 - **Depth:** read (top-level entry points + dispatch logic)
 
 ## Purpose
