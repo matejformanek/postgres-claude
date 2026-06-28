@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-06-28 — 7 master commits (4 DEEP: char-collation selfuncs fix, named-bool pg_get_*_ddl + catversion bump, inherited-CHECK NOT-ENFORCED guard, COPY-TO-JSON column order); buildfarm 1 real signal (koel indent-check self-healed by 02f699c) + chronic noise; anchor unchanged (PR #PENDING).
