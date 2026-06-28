@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-06-28 — 10 contrib reference-impl/hook-example docs distilled (bloom, postgres_fdw, auto_explain, pg_prewarm, pg_stat_statements, test_decoding, passwordcheck, basic_archive, auth_delay, pg_surgery); docs-distilled 164→174; all source-cited at anchor 4abf411e2328 (PR pending).
