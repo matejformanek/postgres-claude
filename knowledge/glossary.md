@@ -15,6 +15,7 @@ so future runs can detect what's already defined and append idempotently.
 
 <!-- glossary:auto -->
 
+
 ### _bt_compare
 The nbtree key-comparison primitive comparing a scan/insertion key against an index tuple on a page; binary search within a page and downlink choice both call it. [verified-by-code] (`nbtsearch.c` — via `knowledge/files/src/backend/access/nbtree/nbtsearch.c.md`).
 
@@ -27,6 +28,11 @@ The nbtree routine that positions a scan at the first matching tuple: it descend
 
 ### _bt_killitems
 The nbtree optimisation that marks index tuples LP_DEAD when a scan has proven the referenced heap tuples are dead, letting later scans and `_bt_vacuum_one_page` skip or reclaim them without a full VACUUM. [verified-by-code] (`nbtutils.c` — via `knowledge/files/src/backend/access/nbtree/nbtutils.c.md`).
+
+
+
+### _bt_moveright
+The Lehman-&-Yao right-walk in nbtree (`nbtsearch.c`) — when a descent lands on a page that a concurrent split has narrowed, it follows the right-link until the target key is in range, the mechanism that lets nbtree search without holding locks down the tree. [verified-by-code] (via `knowledge/files/src/backend/access/nbtree/nbtsearch.c.md`).
 
 
 
@@ -52,6 +58,16 @@ The Windows port helper that translates a Win32 `GetLastError()` code into the n
 
 ### _fsm
 The filename suffix of a relation's free-space-map fork (e.g. `<relfilenode>_fsm`); the FSM is a separate per-relation fork tracking approximate free space per page, updated after heap redo via `RecordPageWithFreeSpace` when a page's free space changes materially. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heapam_xlog.c.md`).
+
+
+
+### _hash_doinsert
+The hash-index per-row insert path (`hashinsert.c`) — hashes the key to a bucket, takes the bucket's lock, and adds the index tuple, opportunistically clearing LP_DEAD items via `_hash_vacuum_one_page` and triggering a split when the fill factor is exceeded. [from-comment] (via `knowledge/files/src/backend/access/hash/hashinsert.c.md`).
+
+
+
+### _hash_expandtable
+The hash-index split engine (`hashpage.c`) — decides whether to grow the table, picks which bucket to split, and performs the cleanup-lock dance before `_hash_splitbucket` redistributes tuples. Hash grows one bucket at a time, not by doubling. [from-comment] (via `knowledge/files/src/backend/access/hash/hashpage.c.md`).
 
 
 
@@ -142,6 +158,11 @@ new path is kept only if nothing already there dominates it, and it evicts any
 existing path it dominates. This add-and-prune discipline is what keeps the
 path space from exploding during join enumeration. [verified-by-code] (via
 `knowledge/files/src/backend/optimizer/util/pathnode.c.md`).
+
+
+
+### add_paths_to_joinrel
+Adds join paths (`joinpath.c`) to a join `RelOptInfo` for one pair of input rels — enumerates nestloop, mergejoin, and hashjoin variants in both join orders, subject to outer-join and semi/anti-join legality. Called from `make_join_rel`. [from-comment] (via `knowledge/files/src/backend/optimizer/path/joinrels.c.md`).
 
 
 
@@ -1029,6 +1050,11 @@ The B-tree opclass support-function slot number (2) for an optional sort-support
 
 
 
+### btvacuumscan
+The nbtree index-vacuum scan (`nbtree.c`) — `btbulkdelete` wraps it in `PG_ENSURE_ERROR_CLEANUP` and it walks every block calling `btvacuumpage` to delete index tuples pointing at dead heap TIDs and reclaim empty pages. [verified-by-code] (via `knowledge/files/src/backend/access/nbtree/nbtree.c.md`).
+
+
+
 ### buffer (shared buffer)
 A `BLCKSZ`-sized page slot in the shared buffer pool, the cache between
 backends and the storage manager. Each buffer has a fixed-size `BufferDesc`
@@ -1469,12 +1495,27 @@ ever storing it. [verified-by-code] (`auth-scram.c:1147` — via
 
 
 
+### ClockSweepTick
+Advances the buffer-pool clock hand by one slot (`freelist.c`), decrementing the victim candidate's `usage_count`; `StrategyGetBuffer` sweeps with it until it can CAS-pin an unpinned, zero-usage-count buffer to evict. [verified-by-code] (via `knowledge/files/src/backend/storage/buffer/freelist.c.md`).
+
+
+
+### CLOG
+The *commit log* (on disk as `pg_xact`) — a dense SLRU-backed array of two status bits per transaction id recording in-progress / committed / aborted / sub-committed. Visibility checks consult it through `TransactionIdDidCommit` / `TransactionIdDidAbort`; new pages are extended under `XidGenLock` via `ExtendCLOG`. [verified-by-code] (via `knowledge/files/src/backend/access/transam/clog.c.md`).
+
+
+
 ### clog (CLOG / pg_xact)
 The commit-log SLRU that stores two status bits per transaction (in-progress /
 committed / aborted / sub-committed), consulted by visibility checks to resolve
 whether a tuple's xmin/xmax committed. It lives under `pg_xact/` and is driven
 through `TransactionIdSetTreeStatus` / `TransactionIdGetStatus`. [from-comment]
 (via `knowledge/files/src/backend/access/transam/clog.c.md`).
+
+
+
+### clog_redo
+The CLOG resource manager's WAL redo routine (`clog.c::clog_redo`) — replays `CLOG_ZEROPAGE` and `CLOG_TRUNCATE` records so a recovering standby keeps its `pg_xact` SLRU in step with the primary. Per-record commit-status bit changes are *not* WAL-logged here; they ride the transaction's own commit record. [verified-by-code] (via `knowledge/files/src/backend/access/rmgrdesc/clogdesc.c.md`).
 
 
 
@@ -1488,6 +1529,11 @@ The enum tagging a query/plan's operation — `CMD_SELECT`, `CMD_INSERT`,
 `CMD_UPDATE`, `CMD_DELETE`, `CMD_MERGE`, `CMD_UTILITY`, `CMD_NOTHING` — that
 drives executor and rewriter dispatch. [verified-by-code] (via
 `knowledge/idioms/trigger-transition-tables.md`).
+
+
+
+### coerce_type
+The parse-analysis routine (`parse_coerce.c`) that returns an expression converted to a requested target type — inserting a cast, a `CoerceViaIO`, or a relabel as the cast catalog dictates; `can_coerce_type` is the predicate-only counterpart. [verified-by-code] (via `knowledge/files/src/backend/parser/parse_coerce.c.md`).
 
 
 
@@ -1656,6 +1702,11 @@ Wakes every backend sleeping on a condition variable; the broadcast counterpart 
 
 
 
+### ConditionVariableSignal
+Wakes exactly one backend sleeping in `ConditionVariableSleep` on a given condition variable (`condition_variable.c:261`); `ConditionVariableBroadcast` wakes all. CVs let backends wait on an arbitrary predicate without holding an LWLock across the wait. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/condition_variable.c.md`).
+
+
+
 ### ConditionVariableSleep
 The blocking primitive of the condition-variable API: after
 `ConditionVariablePrepareToSleep`, a backend calls `ConditionVariableSleep(cv,
@@ -1738,11 +1789,26 @@ Deep-copies an arbitrary `Node` tree by dispatching on `nodeTag`; the generated 
 
 
 
+### copyObjectImpl
+The implementation behind the `copyObject` macro (`copyfuncs.c`) — a giant node-type switch (mostly generated by `gen_node_support.pl`) that deep-copies any parse/plan tree node, recursing through its sub-nodes and Lists. [verified-by-code] (via `knowledge/files/src/backend/nodes/copyfuncs.c.md`).
+
+
+
 ### CopySnapshot
 Makes a palloc'd copy of a snapshot in the current memory context so it can
 outlive the source (e.g. when registering it), since snapshots are otherwise
 backed by transient `xip` arrays. [verified-by-code] (via
 `knowledge/idioms/snapshot-active-stack-and-registered.md`).
+
+
+
+### create_gather_path
+Builds a `GatherPath` (`pathnode.c`) that collects tuples from parallel workers running a partial subpath into the leader; the boundary where a parallel plan becomes serial again. [verified-by-code] (via `knowledge/files/src/backend/optimizer/util/pathnode.c.md`).
+
+
+
+### create_index_paths
+Generates `IndexPath`s for a base relation (`indxpath.c`, reached from `allpaths.c`) — matches restriction and join clauses to index columns, builds bitmap-OR combinations, and costs each candidate index scan. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/allpaths.c.md`).
 
 
 
@@ -1753,6 +1819,11 @@ The public entry into createplan.c that turns the chosen best `Path` tree into a
 
 ### CREATE_REPLICATION_SLOT
 A replication-protocol command (parsed in the walsender replication grammar) that creates a named physical or logical replication slot, optionally naming an output plugin for logical slots. It sits alongside the other slot commands `DROP_REPLICATION_SLOT`, `ALTER_REPLICATION_SLOT`, and `READ_REPLICATION_SLOT`. [verified-by-code] (`repl_gram.y` — via `knowledge/files/src/backend/replication/repl_gram.y.md`).
+
+
+
+### create_sort_path
+Wraps a subpath in an explicit `SortPath` (`pathnode.c`), pricing the sort with `cost_sort` and recording the resulting pathkeys so an upper node can rely on the ordering. [verified-by-code] (via `knowledge/files/src/backend/optimizer/util/pathnode.c.md`).
 
 
 
@@ -2338,6 +2409,11 @@ XIDs or perform other operations unsafe to replicate to workers; balanced by
 
 
 
+### eqsel
+The built-in selectivity estimator for the `=` operator — looks up the constant in the column's most-common-values list (and otherwise falls back to `1/ndistinct`) to estimate the fraction of rows an equality qual passes. One of the per-operator estimators dispatched from `clausesel.c`. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/clausesel.c.md`).
+
+
+
 ### EquivalenceClass
 The planner structure grouping expressions known to be mutually equal (via
 equality clauses and constants), enabling transitive predicate derivation,
@@ -2493,6 +2569,11 @@ tree. [verified-by-code] (via `knowledge/subsystems/executor.md`).
 
 
 
+### estimate_rel_size
+Reads `pg_class.relpages`/`reltuples` and scales them to the relation's actual current file size (`plancat.c`) to estimate row count, page count, and all-visible fraction for planning. [verified-by-code] (via `knowledge/files/src/backend/optimizer/util/plancat.c.md`).
+
+
+
 ### EUC_CN
 The Simplified Chinese Extended Unix Code encoding, supported via the `utf8_and_euc_cn.c` conversion proc that backs the `euc_cn_to_utf8` and `utf8_to_euc_cn` rows in `pg_conversion`, using radix-tree maps generated by `UCS_to_EUC_CN.pl`. EUC_CN ↔ Unicode is one-to-one (NULL combined-character map), so conversion routes through `LocalToUtf` / `UtfToLocal` with no per-encoding helper callback. [verified-by-code] (`utf8_and_euc_cn.c.md` — via `knowledge/files/src/backend/utils/mb/conversion_procs/utf8_and_euc_cn/utf8_and_euc_cn.c.md`).
 
@@ -2550,6 +2631,11 @@ triggering statement. [verified-by-code] (via
 
 
 
+### examine_variable
+The selectivity-estimation helper (`selfuncs.c`) that, given one side of an operator clause, locates the underlying column and fetches its `pg_statistic` row (via `get_attstatsslot`) — the entry point every estimator uses to reach MCV lists and histograms. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/rangetypes_selfuncs.c.md`).
+
+
+
 ### ExceptionalCondition
 The crash handler invoked by a failed `Assert()`: it writes a one-line `TRAP: failed Assert(...)` to stderr, optionally dumps a backtrace and sleeps for debugger attach, then `abort()`s — deliberately bypassing the elog machinery so reporting an assertion failure needs minimal working infrastructure. The `Assert` macro family in `c.h` expands to call it when `USE_ASSERT_CHECKING` is on, and it is always compiled into the backend (gated `!FRONTEND`) so cassert-built extensions can link against a non-cassert backend. [verified-by-code] (`assert.c:29` — via `knowledge/files/src/backend/utils/error/assert.c.md`).
 
@@ -2579,6 +2665,21 @@ The tcop routine that handles a simple-query (`'Q'`) protocol message, running t
 
 ### exec_stmt_dynexecute
 The PL/pgSQL executor routine behind `EXECUTE` of a dynamically built command string: it evaluates the string expression, runs the SQL via SPI, and optionally captures the result into a target — the primary dynamic-SQL path in `pl_exec.c`. [from-comment] (`pl_exec.c:4541` — via `knowledge/issues/plpgsql.md`).
+
+
+
+### ExecAgg
+The executor entry (`ExecProcNode`) for an Agg plan node (`nodeAgg.c:2247`). It dispatches to `agg_retrieve_direct` for sorted/plain aggregation or `agg_fill_hash_table` + `agg_retrieve_hash_table` for hashed grouping, walking each active `Aggref`'s transition function over the input rows. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeAgg.c.md`).
+
+
+
+### ExecAppend
+The Append node executor (`nodeAppend.c`) — concatenates the output of several child subplans (e.g. partitions of a UNION ALL or an inheritance tree), draining each in turn, with parallel-append and run-time partition-pruning support layered on top. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeAppend.c.md`).
+
+
+
+### ExecBitmapHeapScan
+The bitmap-heap-scan executor — consumes a TID bitmap built by a lower BitmapIndexScan/BitmapAnd/BitmapOr node and fetches the heap pages it names in physical order, rechecking lossy pages. Driven by `BitmapHeapNext`. [verified-by-code] (via `knowledge/idioms/bitmap-heap-scan-flow.md`).
 
 
 
@@ -2621,6 +2722,16 @@ into partitioned tables. [verified-by-code] (via
 
 
 
+### ExecHashJoin
+The hash-join node executor (`nodeHashjoin.c:802`) — builds the inner hash table once, then probes it with each outer tuple, handling batching to disk when the table exceeds `work_mem`. A parallel variant shares one hash table across workers. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeHashjoin.c.md`).
+
+
+
+### ExecIndexScan
+The index-scan node executor (`nodeIndexscan.c`) — repeatedly calls `index_getnext_slot`, applying any non-indexable recheck quals before emitting. Its `ExecIndexScanInitializeDSM` wires up `index_parallelscan_initialize` for a shared parallel scan. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeIndexscan.c.md`).
+
+
+
 ### ExecInitExpr
 Compiles an expression tree (`Expr`) into an executable `ExprState` for a given plan node, resolving function lookups and building the step program once so per-tuple evaluation is cheap. plpgsql hooks here to install its param-eval callbacks. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_exec.md`).
 
@@ -2655,6 +2766,21 @@ The executor's principal expression-evaluation worker (`execExprInterp.c:470`): 
 
 
 
+### ExecMergeJoin
+The merge-join executor (`nodeMergejoin.c:596`), a state machine that advances two sorted inputs in lockstep, emitting matches where the merge keys are equal and using mark/restore to replay the inner side across duplicate outer keys. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeMergejoin.c.md`).
+
+
+
+### ExecModifyTable
+The driver (`nodeModifyTable.c:4606`) for INSERT/UPDATE/DELETE/MERGE — pulls tuples from its subplan, applies the per-row operation through the table AM, and fires BEFORE/AFTER triggers, RETURNING projection, and ON CONFLICT handling. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeModifyTable.c.md`).
+
+
+
+### ExecNestLoop
+The nested-loop join executor (`nodeNestloop.c:60`) — a `for(;;)` loop that pulls one outer tuple, rescans the entire inner plan against it, and emits matches (plus unmatched outers for left joins). The inner side is re-executed once per outer row. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeNestloop.c.md`).
+
+
+
 ### ExecProcNode
 The volcano-style "pull one tuple" entry point of a plan node. Rather than a
 central switch, each `PlanState` stores its own `ExecProcNode` function pointer
@@ -2666,6 +2792,11 @@ calling `node->ExecProcNode(node)`. [verified-by-code] (via
 
 ### ExecProcNodeFirst
 The wrapper installed as a plan node's `ExecProcNode` on first execution; it performs the one-time `check_stack_depth` and then swaps itself out for the node's real per-tuple routine to avoid the check on every subsequent call. [verified-by-code] (via `knowledge/files/src/backend/executor/execProcnode.c.md`).
+
+
+
+### ExecProject
+Evaluates a node's target list against the current tuple and stores the result into the node's projection slot, returning that slot. Nodes call it (or skip it when projection is unnecessary) on every row before returning. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeResult.c.md`).
 
 
 
@@ -2688,6 +2819,16 @@ paired with an `ExecAuxRowMark` and set up during plan initialization.
 
 ### ExecScan
 The shared executor helper that drives a scan node's main loop — fetch the next tuple via an access-method callback, apply the node's qual, project, and return the slot — reused by SeqScan, IndexScan, ForeignScan and friends. [verified-by-code] (via `knowledge/subsystems/executor.md`).
+
+
+
+### ExecSeqScan
+The sequential-scan node executor (`nodeSeqscan.c`). PG18 splits the old single `ExecSeqScan` into specialized variants (no-qual/no-projection, etc.) chosen at init so the hot path skips dead branches; each drives the table AM's `scan_getnextslot`. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeSeqscan.c.md`).
+
+
+
+### ExecSort
+The Sort node executor (`nodeSort.c`) — feeds every input tuple into a `tuplesort` on first call, then returns them in order; parallel sorts share state set up by `ExecSortEstimate`/`InitializeDSM`/`InitializeWorker` to do a final merge. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeSort.c.md`).
 
 
 
@@ -2858,6 +2999,11 @@ The modern bufmgr API for growing a relation by one or more new blocks in the bu
 
 
 
+### ExtendCLOG
+Allocates and zeroes the next CLOG page when a freshly assigned xid crosses a page boundary. It runs under `XidGenLock` (held across `ExtendCommitTs` and `ExtendSUBTRANS` too) so the SLRUs grow in lockstep with xid assignment. [from-comment] (via `knowledge/files/src/backend/access/transam/varsup.c.md`).
+
+
+
 ### extractQuery
 The GIN opclass support procedure that decomposes a query datum into the set of individual key entries GIN must look up, returning per-entry search modes; `ginscan.c` calls it during scan setup. [from-comment] (`ginscan.c:1-13` — via `knowledge/files/src/backend/access/gin/ginscan.c.md`).
 
@@ -2894,6 +3040,11 @@ A named set of temporary files shared among cooperating backends (e.g. parallel 
 
 ### filter_by_origin_cb
 The optional logical-decoding output-plugin callback that lets a plugin skip changes originating from a given replication origin, the mechanism that breaks infinite loops in bi-directional replication. Returning true drops the change before the row callbacks see it. [inferred] (via `knowledge/idioms/output-plugin-callbacks.md`).
+
+
+
+### final_cost_hashjoin
+The second-phase hash-join cost estimate (`costsize.c`) — refines the `initial_cost_hashjoin` lower bound with batch count, bucket fill, and parallel-hash sharing once the specific inner/outer paths are known. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/costsize.c.md`).
 
 
 
@@ -3221,6 +3372,11 @@ The pgcrypto SQL function that produces a random salt string for `crypt()`, enco
 
 
 
+### generate_join_implied_equalities
+Derives the join-level equality clauses implied by an equivalence class (`equivclass.c`) — e.g. from `a=b` and `b=c` it can supply `a=c` across a join, with the OJ-introduced relids folded into `join_relids` so outer-join semantics stay correct. [from-comment] (via `knowledge/files/src/backend/optimizer/path/equivclass.c.md`).
+
+
+
 ### GenerationContext
 The MemoryContext type tuned for FIFO/queue allocation lifetimes: each block
 tracks `nchunks`/`nfree`, and an emptied block either parks in the single-slot
@@ -3314,6 +3470,11 @@ for transaction-scoped cleanup. [verified-by-code] (via
 
 
 
+### GetCurrentCommandId
+Returns the current *command id* (`CommandId`) for the active transaction, optionally marking it `used` so the next `CommandCounterIncrement` allocates a fresh one. Tuples stamp `cmin`/`cmax` with it so a statement cannot see rows its own later commands insert. [verified-by-code] (via `knowledge/data-structures/estate.md`).
+
+
+
 ### GetCurrentSubTransactionId
 The transaction-manager call returning the `SubTransactionId` of the currently active subtransaction. It is part of the subtransaction API used alongside `BeginInternalSubTransaction`, `ReleaseCurrentSubTransaction`, and `RollbackAndReleaseCurrentSubTransaction`. [verified-by-code] (`xact.h` — via `knowledge/idioms/subtransaction-stack.md`).
 
@@ -3351,6 +3512,11 @@ Takes a fresh MVCC snapshot reflecting the most recently committed transactions,
 used (e.g. by `RETURNING` and some DDL) where the command must see rows newer
 than the statement's original snapshot. [verified-by-code] (via
 `knowledge/idioms/snapshot-static-and-current.md`).
+
+
+
+### GetLockConflicts
+Returns the list of VXIDs holding heavyweight locks that conflict with a given `LOCKTAG`/mode (`lock.c:3077`). It is how `CREATE INDEX CONCURRENTLY`, DDL, and recovery conflict handling find exactly which transactions they must wait out. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/lock.c.md`).
 
 
 
@@ -3473,6 +3639,21 @@ The GIN scan mode that forces a full scan of the entire index entry space rather
 
 
 
+### ginEntryInsert
+Inserts one key into GIN's entry tree, creating or extending the posting list / posting tree of heap TIDs for that key. It is the merge target both for direct inserts and for `ginInsertCleanup` draining the pending list. [verified-by-code] (via `knowledge/files/src/backend/access/gin/gininsert.c.md`).
+
+
+
+### gininsert
+The GIN per-row insert AM slot: with `fastupdate=on` it appends the row's keys to the metapage pending list (`ginHeapTupleFastInsert`); otherwise it extracts keys via the opclass `extractValue` and calls `ginEntryInsert` once per key. [from-comment] (via `knowledge/files/src/backend/access/gin/gininsert.c.md`).
+
+
+
+### ginInsertCleanup
+Drains GIN's fastupdate pending list into the main entry tree: it scans the list pages head-to-tail, accumulates entries in a `BuildAccumulator`, calls `ginEntryInsert` per merged group, then `shiftList`-deletes the consumed head pages. [from-comment] (via `knowledge/files/src/backend/access/gin/ginfast.c.md`).
+
+
+
 ### GinPostingList
 GIN's compressed, varbyte-encoded representation of a sorted list of heap TIDs for one index key, stored SHORTALIGN'd in the posting tree/lists; decoding it yields the TIDs a key matches. [verified-by-code] (via `knowledge/files/src/include/access/gin_tuple.h.md`).
 
@@ -3509,8 +3690,18 @@ function cannot rule out. [from-comment] (via
 
 
 
+### gistdoinsert
+The top-level GiST insertion path (`gist.c`) — descends from the root choosing the subtree whose key needs least enlargement (`gistchoose`), then calls `gistplacetopage`, "the workhorse that performs one step of the insertion", splitting via the opclass `picksplit` when the leaf overflows. [from-readme] (via `knowledge/files/src/backend/access/gist/gist.c.md`).
+
+
+
 ### GISTMaxIndexKeySize
 The hard upper bound on the size of a single GiST index key (derived from what fits on an index page with required overhead); signature-based opclasses like ltree's expose a `siglen` reloption tunable up to this limit. [verified-by-code] (`ltree_gist.c:735` — via `knowledge/files/contrib/ltree/ltree.h.md`).
+
+
+
+### GlobalVisState
+The cached *visibility horizon* a backend carries (field `vistest` on the vacuum/prune state) describing which xids are definitely dead to all sessions. Pruning and HOT-cleanup test tuples against it instead of recomputing `RecentXmin`, so a single snapshot of the global horizon drives a whole page scan. [verified-by-code] (via `knowledge/idioms/vacuum-hot-prune.md`).
 
 
 
@@ -3686,8 +3877,18 @@ The heap-AM sequential-scan accessor that returns the next `HeapTuple` from a sc
 
 
 
+### heap_getsysattr
+Returns a *system* attribute of a heap tuple (`ctid`, `xmin`, `xmax`, `cmin`, `tableoid`, …) by negative attribute number, packaging the header field as a `Datum`. Used when a query references a system column. [verified-by-code] (via `knowledge/files/src/backend/access/common/heaptuple.c.md`).
+
+
+
 ### HEAP_HASNULL
 A heap-tuple `t_infomask` data-shape bit (`0x0001`, low byte) set when the tuple contains at least one SQL NULL, signalling that the t_bits null bitmap following the HeapTupleHeader is present and must be consulted when deforming attributes. [verified-by-code] (`htup_details.h` — via `knowledge/files/src/include/access/htup_details.h.md`).
+
+
+
+### heap_hot_search_buffer
+Follows a HOT chain on an already-pinned buffer starting from a root TID, returning the one chain member visible to the snapshot (or none). Shared by the index-fetch path and other callers that must resolve a HOT chain to a live tuple. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heapam_indexscan.c.md`).
 
 
 
@@ -3758,6 +3959,11 @@ Examines a single heap tuple during VACUUM and computes (without yet applying) t
 
 
 
+### heap_prune_chain
+The pruning core (`pruneheap.c`, line 1483) that walks one HOT chain from its root line pointer and decides each member's fate — redirect, mark dead, or keep. It enforces the HOT-chain rules (root is non-HOT-only; members carry `HEAP_ONLY_TUPLE`; the chain ends at a self-`t_ctid`, aborted xmin, or off-page pointer). [verified-by-code] (via `knowledge/files/src/backend/access/heap/pruneheap.c.md`).
+
+
+
 ### heap_toast_insert_or_update
 The heap-AM entry point that, on insert/update of a tuple too wide for a page, compresses and/or pushes out-of-line the largest TOAST-able attributes until the tuple fits, writing chunks to the relation's TOAST table. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heaptoast.c.md`).
 
@@ -3814,6 +4020,11 @@ A heap-tuple `t_infomask` visibility hint bit (`0x0200`) indicating the tuple's 
 
 ### heapBlk
 The heap block number a BRIN summary tuple summarizes, stored both in the index tuple (`bt_blkno`) and in the WAL record; BRIN redo asserts the two agree (`tuple->bt_blkno == xlrec->heapBlk`) to catch WAL corruption. [verified-by-code] (`brin_xlog.c:83` — via `knowledge/files/src/backend/access/brin/brin_xlog.c.md`).
+
+
+
+### heapgettup_pagemode
+The page-at-a-time heap scan iterator (`heapam.c:1073`): for each new block it locks the buffer once, calls `heap_prepare_pagescan` to populate `rs_vistuples[]` via `HeapTupleSatisfiesMVCCBatch`, then unlocks and walks the visible-tuple array without re-locking. This is the modern MVCC path; the older `heapgettup` holds the lock across the whole page. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heapam.c.md`).
 
 
 
@@ -3875,6 +4086,11 @@ combo-CID machinery. [from-comment] (via
 
 ### HeapTupleHeaderGetCmin
 The accessor returning a tuple's real insert command id (cmin); it asserts the tuple's xmin is the current transaction and, when `HEAP_COMBOCID` is set, indirects through the combo-CID map rather than reading `t_cid` directly. MVCC visibility uses it (e.g. comparing against `snapshot->curcid`) so a command does not see rows inserted by a later command in the same transaction; callers must never read `t_cid` directly. [verified-by-code] (`combocid.c:104` — via `knowledge/files/src/backend/utils/time/combocid.c.md`).
+
+
+
+### HeapTupleHeaderGetUpdateXid
+Returns the updating xid of a heap tuple, transparently resolving the `HEAP_XMAX_IS_MULTI` case by reading the MultiXact members. Because that lookup can `palloc`, callers inside critical sections must avoid it (the `GetCmax` assert is deliberately weakened for this reason). [verified-by-code] (via `knowledge/files/src/backend/utils/time/combocid.c.md`).
 
 
 
@@ -4040,6 +4256,11 @@ The catalog backend for `CREATE INDEX`: inserts the index's `pg_class` row, `pg_
 
 
 
+### index_fetch_heap
+The indexam wrapper that, given a TID returned by `index_getnext_tid`, fetches the heap tuple through the table AM and follows the HOT chain (`xs_heap_continue` tells it to keep walking the same chain). `index_getnext_slot` loops `index_getnext_tid` + `index_fetch_heap`. [verified-by-code] (via `knowledge/files/src/backend/access/index/indexam.c.md`).
+
+
+
 ### index_form_tuple
 The convenience constructor that builds an `IndexTuple` from a `TupleDesc` plus values/nulls arrays, allocating the result in `CurrentMemoryContext` and handling null bitmap and TOAST-compression of index attributes. [verified-by-code] (`indextuple.c:44` — via `knowledge/files/src/backend/access/common/indextuple.c.md`).
 
@@ -4047,6 +4268,11 @@ The convenience constructor that builds an `IndexTuple` from a `TupleDesc` plus 
 
 ### index_getnext_slot
 The generic-index scan driver that returns the next matching heap tuple into a slot: it loops calling `index_getnext_tid` then `index_fetch_heap`, honoring `xs_heap_continue` to keep walking a single HOT chain before advancing the index. [verified-by-code] (`indexam.c:698` — via `knowledge/files/src/backend/access/index/indexam.c.md`).
+
+
+
+### index_getnext_tid
+The indexam per-tuple primitive (`indexam.c:599`) that asks the index AM for the next matching TID via its `amgettuple` callback, returning just the pointer; the caller then uses `index_fetch_heap` to materialize the heap row. [verified-by-code] (via `knowledge/files/src/backend/access/index/indexam.c.md`).
 
 
 
@@ -4155,6 +4381,11 @@ The `AllocSet`/`GenerationContext` field giving the size of the first malloc'd b
 
 
 
+### initial_cost_nestloop
+The cheap first-phase nestloop cost estimate (`costsize.c`) computed before the inner path is fixed, giving `add_path` a lower bound to prune dominated joins; `final_cost_nestloop` then prices the chosen inner, using `has_indexed_join_quals` for inner-rescan cost. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/costsize.c.md`).
+
+
+
 ### InitializeParallelDSM
 The parallel-infrastructure step (after `CreateParallelContext`, before `LaunchParallelWorkers`) that sizes and creates the dynamic-shared-memory segment, lays out its table-of-contents, and serializes the leader's state (GUCs, snapshot, libraries) for workers to restore. [from-comment] (via `knowledge/files/src/include/access/parallel.h.md`).
 
@@ -4230,6 +4461,11 @@ One of the `HEAPTUPLE_*` results returned by the vacuum-oriented visibility rout
 
 ### instr_time
 PostgreSQL's portable high-precision interval-timing type and `INSTR_TIME_*` macro family, used for EXPLAIN ANALYZE timings, pg_stat_statements, and other instrumentation. The non-inline part sets a global ticks-per-nanosecond factor; the clock source is `clock_gettime(CLOCK_MONOTONIC)` (or a platform equivalent). [verified-by-code] (via `knowledge/files/src/common/instr_time.c.md`).
+
+
+
+### InstrStartNode
+Starts the per-node instrumentation timer wrapped around a plan node's `ExecProcNode` when `EXPLAIN ANALYZE` (or auto_explain) is active; the matching `InstrStopNode` accumulates rows and elapsed time. The wrapping is installed at `ExecProcNodeFirst` so the hot path stays untouched when instrumentation is off. [verified-by-code] (via `knowledge/files/src/backend/executor/execProcnode.c.md`).
 
 
 
@@ -4548,6 +4784,11 @@ The step that asks the postmaster to start the background workers registered in
 a `ParallelContext`; fewer than requested may start, and the plan must cope with
 zero workers. [verified-by-code] (via
 `knowledge/idioms/bgworker-and-parallel.md`).
+
+
+
+### lazy_scan_heap
+The phase-I driver of heap vacuum (`vacuumlazy.c`, line 1279) — scans every block, prunes HOT chains, records dead-item TIDs into the dead-items TID store, and updates the visibility map, deferring index cleanup to later phases. Driven by `heap_vacuum_rel`, which sets up the `LVRelState` and cutoffs first. [verified-by-code] (via `knowledge/files/src/backend/access/heap/vacuumlazy.c.md`).
 
 
 
@@ -4911,6 +5152,11 @@ contrast `LW_SHARED`. [verified-by-code] (via
 
 
 
+### LWLock
+A *lightweight lock* — the mid-weight shared-memory lock between a spinlock and the heavyweight lock manager, used to serialize access to shared structures (buffer headers, SLRU pools, the proc array). Acquired in `LW_SHARED` or `LW_EXCLUSIVE` mode via `LWLockAcquire`; backends queue on a waitlist and are woken by the releaser rather than spinning. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/s_lock.c.md`).
+
+
+
 ### LWLock (lightweight lock)
 The in-memory lock used to guard shared-memory data structures, offering
 exclusive and shared modes but no deadlock detection. LWLocks are cheap
@@ -4966,6 +5212,16 @@ psql's REPL: the function `MainLoop(FILE *source)` reads lines, feeds them to th
 
 ### MainLWLockArray
 The shared-memory array holding all individually-named LWLocks plus the slices handed out by `RequestNamedLWLockTranche`; the named locks are declared via `PG_LWLOCK` macros in `lwlocklist.h`. [verified-by-code] (`lwlocklist.h:34-91` — via `knowledge/idioms/locking-overview.md`).
+
+
+
+### make_one_rel
+The join-search entry point (`planmain.c` → `allpaths.c`): given the list of base relations it first sizes and paths each baserel, then drives the dynamic-programming join enumeration up to the single `RelOptInfo` for the whole FROM clause. [verified-by-code] (via `knowledge/files/src/backend/optimizer/plan/planmain.c.md`).
+
+
+
+### make_pathkeys_for_sortclauses
+Builds the list of `PathKey`s describing the ordering required by an ORDER BY / GROUP BY clause list (`pathkeys.c`), the canonical form the planner compares against a path's existing sort order to decide whether an explicit Sort is needed. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/pathkeys.c.md`).
 
 
 
@@ -5108,6 +5364,21 @@ allocation return `NULL` on failure instead of the usual
 `ereport(ERROR)`-on-OOM behavior, for the rare caller that wants to handle
 out-of-memory itself. [verified-by-code] (`mcxt.c:1200-1214` — via
 `knowledge/subsystems/utils-mmgr.md`).
+
+
+
+### mdextend
+The magnetic-disk (md) smgr single-block extend (`md.c:487`) — writes one new block at the end of a relation fork, growing the segment file (and rolling to a new 1GB segment at `RELSEG_SIZE`). The bulk path is `mdzeroextend`. [verified-by-code] (via `knowledge/files/src/backend/storage/smgr/md.c.md`).
+
+
+
+### mdreadv
+The md smgr vectored synchronous read (`md.c:858`) — reads one or more consecutive blocks of a relation fork into caller buffers in a single `preadv`, the modern replacement for the old per-block `mdread`. [verified-by-code] (via `knowledge/files/src/backend/storage/smgr/md.c.md`).
+
+
+
+### mdwritev
+The md smgr vectored synchronous write (`md.c:1070`), the mirror of `mdreadv` — writes consecutive blocks of a relation fork with a single `pwritev` and registers an fsync request with the checkpointer. [verified-by-code] (via `knowledge/files/src/backend/storage/smgr/md.c.md`).
 
 
 
@@ -5552,6 +5823,11 @@ most internal structures are Node trees. [from-comment] (via
 
 
 
+### nodeRead
+The node-tree deserializer (`readfuncs.c`) that reconstructs a Node from its `outfuncs.c` text form — used to ship plan trees to parallel workers and to read stored rules/views back from the catalog. [verified-by-code] (via `knowledge/files/src/backend/nodes/readfuncs.c.md`).
+
+
+
 ### NodeTag
 The integer enum stamped as the first field of every `Node` so the copy/equal/
 out/read machinery and `IsA()` can recognize a node's concrete type at runtime.
@@ -5802,6 +6078,11 @@ The bufpage macro (a wrapper over `PageAddItemExtended`) that inserts a new item
 
 
 
+### PageGetHeapFreeSpace
+Returns the usable free space on a heap page for a *new* tuple, accounting for the line-pointer that would have to be allocated and the `MaxHeapTuplesPerPage` cap — stricter than the raw `PageGetFreeSpace`. The FSM is fed from this. [verified-by-code] (via `knowledge/files/src/backend/storage/page/bufpage.c.md`).
+
+
+
 ### PageGetItem
 The page-access macro returning a pointer to the tuple/item referenced by a given line pointer on a buffer page, the standard way AM code reads an item after `PageGetItemId`. Hardened wrappers (e.g. amcheck's `PageGetItemIdCareful`) bounds- and flag-check the line pointer first to avoid following corruption. [verified-by-code] (via `knowledge/files/contrib/amcheck/verify_nbtree.md`).
 
@@ -5847,6 +6128,11 @@ The predicate that reports whether a page has never been initialised
 read and run their page-init routine before use; bloom does
 `PageIsNew || BloomPageIsDeleted` to decide a page needs reinitialising.
 [verified-by-code] (via `knowledge/files/contrib/bloom/blinsert.c.md`).
+
+
+
+### PageRepairFragmentation
+Compacts a heap page during pruning/vacuum: it slides live tuples together to coalesce free space into one contiguous hole between the line-pointer array and the tuples, and `ERROR`s if it detects a corrupt item layout. [verified-by-code] (via `knowledge/files/src/backend/storage/page/bufpage.c.md`).
 
 
 
@@ -7389,6 +7675,11 @@ invalidation machinery. [verified-by-code] (via
 
 
 
+### preprocess_targetlist
+Early planner pass (`preptlist.c`) that expands and normalizes the query's target list — adding junk columns for `FOR UPDATE`/`ctid`, resjunk sort/group entries, and the columns an UPDATE/DELETE needs — before path generation. [verified-by-code] (via `knowledge/files/src/backend/optimizer/prep/preptlist.c.md`).
+
+
+
 ### primary_conninfo
 The standby-side GUC holding the libpq connection string the walreceiver uses to
 reach the primary for streaming replication; `pg_basebackup -R` and
@@ -7950,6 +8241,11 @@ The routine that updates a relation's free-space map for one heap page after its
 
 
 
+### RecordTransactionAbort
+The xact.c routine that stamps a transaction's CLOG status as aborted at rollback; together with `RecordTransactionCommit` it is the only writer of final commit-status bits, calling `TransactionIdSetTreeStatus` so the xid and all its subxids flip atomically. [verified-by-code] (via `knowledge/files/src/backend/access/transam/clog.c.md`).
+
+
+
 ### RecordTransactionCommit
 The routine that makes a transaction durable: it snapshots pending invalidation
 messages, writes (and flushes, per `synchronous_commit`) the commit WAL record,
@@ -8347,6 +8643,11 @@ A single decoded WAL event (insert/update/delete/message/...) buffered inside lo
 
 
 
+### ReorderBufferCommit
+Replays a logical transaction at COMMIT time (`reorderbuffer.c:2882`): it streams the transaction's buffered changes, in order, through the output plugin via `ReorderBufferReplay`, having stitched sub-transactions onto the top-level one first. [verified-by-code] (via `knowledge/files/src/backend/replication/logical/reorderbuffer.c.md`).
+
+
+
 ### ReorderBufferTXN
 The per-xid container inside the reorder buffer holding a transaction's decoded `ReorderBufferChange`s plus bookkeeping (commit time, base snapshot, subtxns, invalidation messages); one exists per in-flight top-level or sub transaction. [verified-by-code] (via `knowledge/files/src/include/replication/reorderbuffer.h.md`).
 
@@ -8696,6 +8997,11 @@ every entry in a query's range table. [verified-by-code] (via
 
 
 
+### s_lock
+The spinlock *slow path* in `storage/lmgr/s_lock.c` — `SpinLockAcquire` first tries an inline test-and-set (the `s_lock.h` hardware-TAS macros); only on contention does it fall back to `s_lock()`, which spins with exponential backoff and eventually `PANIC`s on a stuck-spinlock timeout. Spinlocks guard only a handful of instructions and must never block or `ereport`. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/s_lock.c.md`).
+
+
+
 ### SaltedPassword
 In SCRAM, `PBKDF2-HMAC-SHA-256(password, salt, iterations)` — the iterated
 hash from which the client/server keys derive. libpq computes it once during
@@ -8924,6 +9230,11 @@ The postmaster's accept loop after startup: it selects on the listen sockets, ac
 
 
 
+### set_base_rel_sizes
+The planner pass (`allpaths.c`) that estimates each base relation's row count and width (applying restriction selectivities and partition pruning) before `set_base_rel_pathlists` generates its access paths. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/allpaths.c.md`).
+
+
+
 ### set_cheapest
 The optimizer step that, after all paths for a `RelOptInfo` have been added, selects the cheapest-total and cheapest-startup paths (and cheapest parameterized variants) into the rel's `cheapest_*` fields for the join search to build on. [inferred] (via `knowledge/files/src/backend/optimizer/util/pathnode.c.md`).
 
@@ -9092,6 +9403,11 @@ each other. `shm_mq_send`/`shm_mq_receive` block on the peer's latch and report
 
 
 
+### shm_mq_receive
+Reads the next message from a shared-memory message queue, returning a pointer directly into the ring buffer (zero-copy when the message doesn't wrap). Parallel workers use `shm_mq` pairs to stream tuples and errors back to the leader. [verified-by-code] (via `knowledge/files/src/backend/storage/ipc/shm_mq.c.md`).
+
+
+
 ### shm_toc
 The shared-memory table-of-contents: a magic number, spinlock, and key→offset entry array laid over a DSM segment so cooperating processes can publish and find named sub-allocations by integer key — the addressing layer beneath parallel query. [verified-by-code] (`shm_toc.c:29` — via `knowledge/subsystems/storage-ipc.md`).
 
@@ -9171,8 +9487,18 @@ unrelated multixact/clog pages can be read concurrently. [verified-by-code]
 
 
 
+### SimpleLruReadPage
+The SLRU read primitive (`slru.c:550`) — finds or evicts a buffer slot, reads the requested page from the segment file if not resident, and returns the slot holding it; used by CLOG, multixact, subtrans, commit-ts, and async. [verified-by-code] (via `knowledge/files/src/backend/access/transam/slru.c.md`).
+
+
+
 ### SimpleLruTruncate
 The slru.c routine that removes obsolete SLRU segment files older than a given `cutoffPage` (the highest page to keep), using `TransactionIdPrecedes`-style 32-bit modular comparison via the SLRU's `PagePrecedes` callback. VACUUM advancing the xmin/oldest horizon drives it on clog, subtrans, and multixact-offsets SLRUs; SLRUs that call it must pass `SlruPagePrecedesUnitTests` (the multixact members SLRU truncates through a custom directory-scan path instead). [verified-by-code] (`slru.c:1458` — via `knowledge/files/src/backend/access/transam/slru.c.md`).
+
+
+
+### SimpleLruWritePage
+The SLRU write primitive (`slru.c:781`) that flushes one buffer slot's page back to its segment file, used at checkpoint and during buffer eviction in any SLRU pool. [verified-by-code] (via `knowledge/files/src/backend/access/transam/slru.c.md`).
 
 
 
@@ -9212,6 +9538,11 @@ The generic tuple-deforming routine that walks a `HeapTuple`'s attributes left-t
 
 
 
+### slot_getsomeattrs
+Deconstructs columns 1..`attnum` of a `TupleTableSlot` into its `tts_values` / `tts_isnull` arrays, calling the slot's `getsomeattrs` callback so only the attributes a plan actually references get deformed. Expression evaluation emits it lazily before reading a Var. [verified-by-code] (via `knowledge/files/src/backend/executor/execTuples.c.md`).
+
+
+
 ### SLRU
 Simple LRU — the fixed-size, page-buffered cache layer for the dense numbered logs that don't live in the main buffer pool (clog/xact-status, commit_ts, multixact, subtrans, notify), with its own simple replacement and fsync logic. [verified-by-code] (`commit_ts.c:150` — via `knowledge/subsystems/access-transam.md`).
 
@@ -9224,6 +9555,11 @@ parents, multixact, and similar. Clients drive it through the
 `SlruCtl`/`SlruShared` interface declared in `slru.h` and implemented in
 `slru.c`. [from-comment] (`slru.h:12` — via
 `knowledge/files/src/include/access/slru.h.md`).
+
+
+
+### SlruSharedData
+The shared-memory control block of an SLRU pool (`slru.h:48-106`) — the buffer page array, per-slot page numbers and status, LRU counters, and the per-bank lock array that lets different page ranges be locked independently. [verified-by-code] (via `knowledge/files/src/include/access/slru.h.md`).
 
 
 
@@ -9284,6 +9620,11 @@ consistent point during slot creation, so a client can `SET TRANSACTION
 SNAPSHOT` and read a base copy of the data consistent with where streaming will
 begin. [verified-by-code] (`snapbuild.c:542` — via
 `knowledge/subsystems/replication.md`).
+
+
+
+### SnapBuildProcessChange
+The snapshot-builder hook (`snapbuild.c:642`) called before each decoded change; it decides whether the current historic snapshot can yet see the change's transaction and so whether decoding has reached a consistent point. [verified-by-code] (via `knowledge/files/src/backend/replication/logical/snapbuild.c.md`).
 
 
 
@@ -10064,6 +10405,11 @@ The module implementing the pluggable TOAST compression methods — historic PGL
 
 
 
+### toast_fetch_datum
+Reassembles an out-of-line TOAST value: given a `varatt_external` pointer it opens the toast relation and index, builds a `SnapshotToast`, and runs an ordered index scan on `chunk_id`, `memcpy`-ing each chunk into a flat varlena. Called by `detoast_attr` for EXTERNAL data. [verified-by-code] (via `knowledge/files/src/backend/access/common/detoast.c.md`).
+
+
+
 ### TOAST_MAX_CHUNK_SIZE
 The maximum number of payload bytes stored per row in a TOAST table, chosen so four toast chunks plus headers fit one page. An out-of-line value is sliced into chunks of this size, numbered sequentially, and reassembled on detoast. [inferred] (`heaptoast.h:82` — via `knowledge/files/src/include/access/heaptoast.md`).
 
@@ -10126,6 +10472,11 @@ without ambiguity. [verified-by-code] (`transam.h:3-4` — via
 
 ### TransactionIdCommitTree
 The clog routine that atomically marks a top-level xid and all its committed subtransaction xids as committed in pg_xact; called from the commit path after the WAL commit record is durable. [verified-by-code] (via `knowledge/files/src/backend/access/transam/xact.c.md`).
+
+
+
+### TransactionIdDidAbort
+Reports whether an xid is *recorded* aborted in CLOG. It is deliberately unusable on its own for visibility, because a backend that crashed while running leaves no abort record — abortedness is inferred by elimination (not in progress AND not committed). [from-comment] (via `knowledge/files/src/backend/access/heap/heapam_visibility.c.md`).
 
 
 
@@ -10459,6 +10810,11 @@ transaction-id wraparound. Lazy `VACUUM` runs concurrently with normal access;
 
 
 
+### vacuum_rel
+The per-relation entry point inside `commands/vacuum.c` (`vacuum_rel`, line 2012) — opens the relation, runs sanity/permission checks, dispatches to the table AM via `table_relation_vacuum`, then recurses into the relation's TOAST table. The outer `vacuum()` loop calls it once per target relation. [verified-by-code] (via `knowledge/files/src/backend/commands/vacuum.c.md`).
+
+
+
 ### ValuePerCall
 One of the two set-returning-function (SRF) return modes (the other being Materialize), in which the function returns one row per call using the `FuncCallContext`/`SRF_*` machinery. Because a ValuePerCall SRF may not be run to completion (e.g. a LIMIT can stop it short), it MUST NOT hold non-memory resources such as file descriptors or locks between calls. [from-comment] (`funcapi.h` — via `knowledge/files/src/include/funcapi.h.md`).
 
@@ -10510,6 +10866,11 @@ the short or long header form; the companion of `VARDATA_ANY`.
 
 ### varstr_cmp
 The backend's collation-aware variable-length string comparator (driving `text`/`varchar` ordering); it dispatches to `strcoll`/ICU under the given collation OID. citext is the cautionary case: its ordering operators call `varstr_cmp` (so sorting is collation-aware) while its equality functions deliberately use `strcmp` after downcasing. [verified-by-code] (`citext.c:56-58` — via `knowledge/files/contrib/citext/citext.md`).
+
+
+
+### VirtualXID
+A *virtual transaction id* (`VirtualTransactionId` = `procNumber + localTransactionId`) that names a backend's current transaction without burning a real `TransactionId`. Read-only transactions never assign a real xid, so locks and waits key on the VXID; `VirtualXactLockTableInsert` lets others `VirtualXactLock`-wait on a backend until it ends. [verified-by-code] (via `knowledge/subsystems/access-transam.md`).
 
 
 
@@ -10879,6 +11240,11 @@ Called while building a WAL record to associate a pinned buffer with a block-ref
 
 ### XLogRegisterData
 Attaches a chunk of "main data" (not tied to any buffer) to the WAL record currently being assembled between `XLogBeginInsert` and `XLogInsert`. Redo reads it back with `XLogRecGetData`. [inferred] (`xloginsert.h:44` — via `knowledge/scenarios/add-new-wal-record.md`).
+
+
+
+### XLogSetRecordFlags
+Sets per-record flags on the WAL insertion currently being assembled (`xloginsert.c:464`) — e.g. `XLOG_MARK_UNIMPORTANT` (skip for synchronous-commit purposes) or `XLOG_INCLUDE_ORIGIN` — before the matching `XLogInsert`. [verified-by-code] (via `knowledge/files/src/backend/access/transam/xloginsert.c.md`).
 
 
 
