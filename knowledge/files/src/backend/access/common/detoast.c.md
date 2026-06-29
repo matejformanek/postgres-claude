@@ -57,3 +57,6 @@ Read side of TOAST: given a possibly-EXTERNAL, possibly-COMPRESSED varlena point
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/detoast-stream-consumption.md](../../../../../idioms/detoast-stream-consumption.md)
+- [idioms/heap-tuple-decompression-pattern.md](../../../../../idioms/heap-tuple-decompression-pattern.md)
+

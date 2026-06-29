@@ -105,3 +105,7 @@ None defined here. Consumes `HeapTupleData`, `Snapshot`, `Buffer`. `TM_Result` (
 - [architecture/mvcc.md](../../../../../architecture/mvcc.md)
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/heap-tuple-visibility-mvcc.md](../../../../../idioms/heap-tuple-visibility-mvcc.md)
+- [idioms/hint-bits-setbufferdirty.md](../../../../../idioms/hint-bits-setbufferdirty.md)
+- [idioms/snapshot-static-and-current.md](../../../../../idioms/snapshot-static-and-current.md)
+

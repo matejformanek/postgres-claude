@@ -80,3 +80,7 @@ Unrecognized parameter → `ERRCODE_INVALID_PARAMETER_VALUE`. [verified-by-code]
   ERRCODE_INVALID_TEXT_REPRESENTATION distinguishes bad input from
   out-of-range] (very low)` —
   `source/contrib/dict_int/dict_int.c:52-57`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-dict_int.md](../../../subsystems/contrib-dict_int.md)

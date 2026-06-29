@@ -76,6 +76,108 @@ and `knowledge/files/src/include/miscadmin.h.md`.
 | 2026-06-16 | src/include/miscadmin.h:544 | defense-in-depth | likely | `shmem_request_hook` is a single-global mutable `PGDLLIMPORT`; multi-extension installs must chain, and an extension that overwrites rather than chains silently loses the prior subscriber (no header-level chaining idiom). | open | files/src/include/miscadmin.h.md |
 | 2026-06-16 | src/include/miscadmin.h:128 | style | nit | `CHECK_FOR_INTERRUPTS()` is a do/while macro; the `if (cond) CHECK_FOR_INTERRUPTS(); else ...` semicolon hazard is real but caught by `-Wempty-body`. Already mitigated. | open | files/src/include/miscadmin.h.md |
 | 2026-06-16 | src/include/miscadmin.h:108,154-156 | correctness | maybe | `CritSectionCount` is `volatile uint32`; a mis-paired `END_CRIT_SECTION` without `START` underflows to `0xFFFFFFFF`, silently enabling crit-section semantics globally. The cassert Assert catches it but release builds wrap. | open | files/src/include/miscadmin.h.md |
+| 2026-06-29 | c.h:988 | style | nit | `ExceptionalCondition` extern at `c.h:988` is gated by `!FRONTEND` per the contract; new extern declarations routinely miss this gate | open | knowledge/files/src/include/c.h.md §Potential issues |
+| 2026-06-29 | c.h | undocumented-invariant | nit | `Min`/`Max` multi-eval not flagged at definition site | open | knowledge/files/src/include/c.h.md §Potential issues |
+| 2026-06-29 | c.h | undocumented-invariant | nit | `MemSet`'s `Size _len = (len)` truncates if caller passes wider int | open | knowledge/files/src/include/c.h.md §Potential issues |
+| 2026-06-29 | c.h | correctness | likely | `pg_unreachable` codegen differs between cassert and release; a flow that hits `abort()` in cassert may UB silently in release | open | knowledge/files/src/include/c.h.md §Potential issues |
+| 2026-06-29 | c.h | doc-drift | nit | `HAVE_INT128` gate not mentioned beside `int128` typedef | open | knowledge/files/src/include/c.h.md §Potential issues |
+| 2026-06-29 | c.h | doc-drift | nit | `PGDLLEXPORT` visibility-attribute requirement not loud enough | open | knowledge/files/src/include/c.h.md §Potential issues |
+| 2026-06-29 | c.h | stale-todo | nit | MinGW-64 setjmp workaround could be removed once buildfarm drops mingw-w64-x86_64 | open | knowledge/files/src/include/c.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | undocumented-invariant | likely | no compile-time `StaticAssert(sizeof(Pg_abi_values) == expected_packed_size)`; future field additions could silently break ABI compatibility detection | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | security | likely | fmgr_hook is unrestricted by superuser — any preloaded library can install it | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | api-shape | likely | stack allocation of `FunctionCallInfoBaseData` by sizeof silently under-allocates `args[]` | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | undocumented-invariant | maybe | isnull reset on re-use is comment-only; no Assert | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | api-shape | nit | PG_GETARG_FLOATx has no type-system protection | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | api-shape | nit | PG_MODULE_MAGIC placement contract not enforced | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | style | nit | abi_extra should be ASCII-printable | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | api-shape | nit | DirectFunctionCall family limited to 9 args | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | defense-in-depth | likely | fmgr_hook lacks chained-hook idiom in header docs | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | fmgr.h | style | nit | `load_file` restricted parameter is bare bool | open | knowledge/files/src/include/fmgr.h.md §Potential issues |
+| 2026-06-29 | funcapi.h | undocumented-invariant | likely | SRF non-memory resource leakage on early-exit is comment-only | open | knowledge/files/src/include/funcapi.h.md §Potential issues |
+| 2026-06-29 | funcapi.h | api-shape | likely | SRF_IS_FIRSTCALL conflates `fn_extra` usage | open | knowledge/files/src/include/funcapi.h.md §Potential issues |
+| 2026-06-29 | funcapi.h | correctness | likely | SRF_RETURN_NEXT assumes resultinfo is ReturnSetInfo | open | knowledge/files/src/include/funcapi.h.md §Potential issues |
+| 2026-06-29 | funcapi.h | style | nit | flag bits should be enum | open | knowledge/files/src/include/funcapi.h.md §Potential issues |
+| 2026-06-29 | funcapi.h | correctness | nit | HeapTupleGetDatum has no NULL-`t_data` guard | open | knowledge/files/src/include/funcapi.h.md §Potential issues |
+| 2026-06-29 | funcapi.h | style | nit | bare bool api parameter | open | knowledge/files/src/include/funcapi.h.md §Potential issues |
+| 2026-06-29 | getopt_long.h | style | nit | no static-assert that `sizeof(struct option)` matches expected | open | knowledge/files/src/include/getopt_long.h.md §Potential issues |
+| 2026-06-29 | getopt_long.h | doc-drift | nit | getopt_long porting requirements not documented at header | open | knowledge/files/src/include/getopt_long.h.md §Potential issues |
+| 2026-06-29 | getopt_long.h | style | nit | bare global macro names from POSIX | open | knowledge/files/src/include/getopt_long.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | correctness | likely | MAXPGPATH = 1024 < Linux PATH_MAX = 4096 silently truncates long paths | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | api-shape | likely | NAMEDATALEN = 64 is a hard limit for forks with long identifiers | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | api-shape | nit | FUNC_MAX_ARGS in ABI block means forks need custom backend | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | correctness | likely | MAXPGPATH = 1024 silently truncates | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | security | confirmed | DEFAULT_PGSOCKET_DIR `/tmp` is a known socket-squatting hazard | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | stale-todo | nit | PG_CACHE_LINE_SIZE could be configure-detected | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | correctness | maybe | PG_IO_ALIGN_SIZE = 4 KB may be insufficient for 16 KB sector NVMe | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | stale-todo | likely | SLRU_PAGES_PER_SEGMENT could be made GUC-tunable | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | stale-todo | nit | VG client requests slow non-VG runs | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_config_manual.h | style | nit | auto-enable hides perf cost | open | knowledge/files/src/include/pg_config_manual.h.md §Potential issues |
+| 2026-06-29 | pg_getopt.h | style | nit | portability of optind declaration on Windows is fragile | open | knowledge/files/src/include/pg_getopt.h.md §Potential issues |
+| 2026-06-29 | pg_getopt.h | style | nit | optreset branch grows linearly with platforms | open | knowledge/files/src/include/pg_getopt.h.md §Potential issues |
+| 2026-06-29 | pg_getopt.h | correctness | nit | no signature compatibility check at link | open | knowledge/files/src/include/pg_getopt.h.md §Potential issues |
+| 2026-06-29 | pg_trace.h | stale-todo | nit | pg_trace.h is a one-line stub; consider direct include of probes.h or merging | open | knowledge/files/src/include/pg_trace.h.md §Potential issues |
+| 2026-06-29 | pg_trace.h | api-shape | nit | no probe-name namespace allocation | open | knowledge/files/src/include/pg_trace.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | undocumented-invariant | likely | PGSTAT_FILE_FORMAT_ID bump is comment-only; no static-assert on struct sizes | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | undocumented-invariant | likely | pg_memory_is_all_zeros pattern constrains struct layout; new field additions silently break it if non-zero by default | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | style | nit | pgstat_track_functions GUC declared as `int` not enum | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | style | nit | pgstat.h fan-in too broad | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | correctness | maybe | PGSTAT_FILE_FORMAT_ID discipline is comment-only (confirmed echo of A15 ISSUE pattern) | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | api-shape | nit | PgStat_StatDBEntry has no version field | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | doc-drift | nit | slotsync_skip_count is single bucket | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | defense-in-depth | nit | timing counters mutable via PGDLLIMPORT | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | style | nit | pgstat GUCs declared as int | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | style | nit | side-effect in pgstat_should_count_relation | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | leak | maybe | pgstat_acquire/drop_replslot pairing not enforced | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgstat.h | doc-drift | nit | xl_xact_stats_item layout opaque at header | open | knowledge/files/src/include/pgstat.h.md §Potential issues |
+| 2026-06-29 | pgtar.h | style | nit | no StaticAssert anchoring tarHeaderOffset values | open | knowledge/files/src/include/pgtar.h.md §Potential issues |
+| 2026-06-29 | pgtar.h | api-shape | nit | tarCreateHeader partial-failure mutation not flagged | open | knowledge/files/src/include/pgtar.h.md §Potential issues |
+| 2026-06-29 | pgtar.h | security | likely | isValidTarHeader does not validate against path traversal | open | knowledge/files/src/include/pgtar.h.md §Potential issues |
+| 2026-06-29 | pgtar.h | correctness | nit | isValidTarHeader has no length parameter | open | knowledge/files/src/include/pgtar.h.md §Potential issues |
+| 2026-06-29 | pgtar.h | doc-drift | nit | no provision for future PG-specific tar extensions | open | knowledge/files/src/include/pgtar.h.md §Potential issues |
+| 2026-06-29 | pgtime.h | resource | maybe | `pg_tzset_offset` cache unbounded | open | knowledge/files/src/include/pgtime.h.md §Potential issues |
+| 2026-06-29 | pgtime.h | correctness | likely | pg_tm convention mismatch is comment-only; no static helper to convert | open | knowledge/files/src/include/pgtime.h.md §Potential issues |
+| 2026-06-29 | pgtime.h | defense-in-depth | nit | session/log_timezone are PGDLLIMPORT-mutable | open | knowledge/files/src/include/pgtime.h.md §Potential issues |
+| 2026-06-29 | pgtime.h | documentation | nit | pg_tz_acceptable contract opaque | open | knowledge/files/src/include/pgtime.h.md §Potential issues |
+| 2026-06-29 | pgtime.h | doc-drift | nit | timezone-abbreviation function family is duplicative | open | knowledge/files/src/include/pgtime.h.md §Potential issues |
+| 2026-06-29 | port.h | security | confirmed | `pg_disable_aslr` deliberately weakens process ASLR; only intended for EXEC_BACKEND devs | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | security | likely | pg_disable_aslr should be more loudly marked dev-only | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | stale-todo | nit | libintl printf-replacement undef list is hand-maintained against libintl ABI | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | api-shape | likely | `&printf` function pointer silently bypasses pg_printf | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | api-shape | nit | `qsort` macro override is sticky | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | documentation | maybe | pg_strong_random init contract not in header | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | correctness | nit | pg_localeconv_r failure mode opaque | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | style | nit | pg_backend_random alias misleading | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | defense-in-depth | likely | pqsignal vs libc signal not flagged at header | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | port.h | style | nit | HAVE_* unconditional on Unix; documentation trust-the-platform | open | knowledge/files/src/include/port.h.md §Potential issues |
+| 2026-06-29 | postgres.h | undocumented-invariant | nit | callers that round-trip `BoolGetDatum(DatumGetBool(x))` lose the "any nonzero" property; a custom Datum holding `0x42` becomes `0x01` | open | knowledge/files/src/include/postgres.h.md §Potential issues |
+| 2026-06-29 | postgres.h | undocumented-invariant | nit | PointerGetDatum-macro contract not flagged at the alternative inline-function-form rejected at `postgres.h:340-351` | open | knowledge/files/src/include/postgres.h.md §Potential issues |
+| 2026-06-29 | postgres.h | defense-in-depth | nit | NON_EXEC_STATIC turns module-private state into linker-visible symbols under `EXEC_BACKEND`; a load-time attacker on Windows can locate them | open | knowledge/files/src/include/postgres.h.md §Potential issues |
+| 2026-06-29 | postgres.h | stale-todo | nit | SIZEOF_DATUM is vestigial; should be `#define DEPRECATED 1` or commented hostilely | open | knowledge/files/src/include/postgres.h.md §Potential issues |
+| 2026-06-29 | postgres.h | api-shape | nit | asymmetric GetDatum/DatumGet pair for MultiXactId | open | knowledge/files/src/include/postgres.h.md §Potential issues |
+| 2026-06-29 | postgres.h | api-shape | nit | `pg_ternary` "unset" easy to miss in switch | open | knowledge/files/src/include/postgres.h.md §Potential issues |
+| 2026-06-29 | postgres_ext.h | doc-drift | nit | `Oid8` is backend-only but the comment at `c.h:755` doesn't explain why it's not in `postgres_ext.h` | open | knowledge/files/src/include/postgres_ext.h.md §Potential issues |
+| 2026-06-29 | postgres_ext.h | undocumented-invariant | nit | no static assert that `sizeof(Oid) == 4` at the public-ABI boundary | open | knowledge/files/src/include/postgres_ext.h.md §Potential issues |
+| 2026-06-29 | postgres_ext.h | correctness | maybe | `atooid` silently truncates inputs > 2^32 on 64-bit `long` platforms | open | knowledge/files/src/include/postgres_ext.h.md §Potential issues |
+| 2026-06-29 | postgres_ext.h | api-shape | nit | PG_DIAG_* namespace is single-char ASCII with no allocation discipline document | open | knowledge/files/src/include/postgres_ext.h.md §Potential issues |
+| 2026-06-29 | postgres_fe.h | style | nit | defensive `#ifndef FRONTEND` guard accepts non-1 values | open | knowledge/files/src/include/postgres_fe.h.md §Potential issues |
+| 2026-06-29 | postgres_fe.h | undocumented-invariant | nit | omitting postgres_fe.h fails at link time, not compile time | open | knowledge/files/src/include/postgres_fe.h.md §Potential issues |
+| 2026-06-29 | varatt.h | undocumented-invariant | likely | no `StaticAssert(sizeof(varatt_external) == 16)` to catch accidental padding | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | undocumented-invariant | nit | vartag_external numbering scheme is load-bearing for `VARTAG_IS_EXPANDED` macro | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | correctness | maybe | only 2 compression-method bits available; zstd + pglz + lz4 + 1 more would need an on-disk-format break | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | correctness | confirmed | unaligned `varatt_external` access (read or write) silently SIGBUS on alignment-strict platforms | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | correctness | maybe | pad-byte-zero invariant has no validity check | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | style | nit | vartag_external numbering scheme is undocumented for future additions | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | correctness | likely | `VARDATA_ANY` on external/compressed silently garbage | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | correctness | nit | compression-method bits not validated in release builds | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | doc-drift | nit | 2 GB vs 1 GB limit mismatch not flagged | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | stale-todo | likely | compression-method bit budget tight | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | varatt.h | style | nit | `sizeof(varattrib_1b_e)` semantics not documented | open | knowledge/files/src/include/varatt.h.md §Potential issues |
+| 2026-06-29 | windowapi.h | api-shape | likely | NULL TREATMENT support requires explicit window-function opt-in | open | knowledge/files/src/include/windowapi.h.md §Potential issues |
+| 2026-06-29 | windowapi.h | style | nit | window seek type is bare int not enum | open | knowledge/files/src/include/windowapi.h.md §Potential issues |
+| 2026-06-29 | windowapi.h | undocumented-invariant | likely | WinSetMarkPosition usage is performance-only, not correctness; hidden hazard | open | knowledge/files/src/include/windowapi.h.md §Potential issues |
+| 2026-06-29 | windowapi.h | api-shape | likely | window-frame mode opaque to extensions | open | knowledge/files/src/include/windowapi.h.md §Potential issues |
+| 2026-06-29 | windowapi.h | api-shape | nit | per-partition memory size contract | open | knowledge/files/src/include/windowapi.h.md §Potential issues |
+| 2026-06-29 | windowapi.h | documentation | nit | windowapi.h delegates almost all semantic docs to .c file | open | knowledge/files/src/include/windowapi.h.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 

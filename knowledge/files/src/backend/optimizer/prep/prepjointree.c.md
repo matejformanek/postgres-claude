@@ -61,3 +61,5 @@ break invariants other modules rely on.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/security-barrier-views.md](../../../../../idioms/security-barrier-views.md)
+

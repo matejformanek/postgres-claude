@@ -101,6 +101,8 @@ runs ~150 statement types).
 <!-- backlinks:auto -->
 - [idioms/parser-pipeline.md](../../../../idioms/parser-pipeline.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+- [idioms/node-types.md](../../../../idioms/node-types.md)
+- [idioms/security-barrier-views.md](../../../../idioms/security-barrier-views.md)
 
 ## Appears in scenarios
 
@@ -110,3 +112,4 @@ runs ~150 statement types).
 - [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
 
 <!-- scenarios:auto:end -->
+

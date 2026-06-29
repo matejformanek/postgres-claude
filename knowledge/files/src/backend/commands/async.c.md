@@ -35,3 +35,5 @@
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/notify-listen-coordination.md](../../../../idioms/notify-listen-coordination.md)
+

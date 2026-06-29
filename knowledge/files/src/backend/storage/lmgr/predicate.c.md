@@ -166,3 +166,5 @@ Releases the per-sxact local hash; moves the SERIALIZABLEXACT to the finished li
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)
+- [idioms/predicate-locks.md](../../../../../idioms/predicate-locks.md)
+

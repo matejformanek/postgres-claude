@@ -44,3 +44,7 @@ The header explicitly notes `roname` is variable-length but direct-access is per
 ## Tally
 
 `[verified-by-code]=5 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/replication-origin-tracking.md](../../../../idioms/replication-origin-tracking.md)

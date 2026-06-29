@@ -96,3 +96,7 @@ zero-fills unused fields to ensure `memcmp` equality.
   fit.)
 - ISSUE-PHASE-D: `pg_locks` LOCKTAG fields reveal activity to
   unprivileged users; same cluster as A11/A14. (Informational.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/locktag.md](../../../../data-structures/locktag.md)

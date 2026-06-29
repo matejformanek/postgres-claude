@@ -57,3 +57,7 @@ critical section, no WAL.
 ## Issues
 
 1. [ISSUE-audit-gap: no C-side privilege check, only SQL grant to pg_stat_scan_tables (nit)] — `source/contrib/pg_freespacemap/pg_freespacemap.c:27-53`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_freespacemap.md](../../../subsystems/contrib-pg_freespacemap.md)

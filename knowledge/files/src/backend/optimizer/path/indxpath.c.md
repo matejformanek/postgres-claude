@@ -42,3 +42,5 @@ underlying heap scan. [inferred from include set + standard PG architecture]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/bitmap-and-or-heap-executor.md](../../../../../idioms/bitmap-and-or-heap-executor.md)
+

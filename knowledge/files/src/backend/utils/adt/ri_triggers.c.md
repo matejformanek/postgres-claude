@@ -72,3 +72,10 @@ Confidence: SQL-building paths `[verified-by-code]` via spot-check; quoteOneName
 <!-- issues:auto:begin -->
 - [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/ri-fkey-cascade.md](../../../../../idioms/ri-fkey-cascade.md)
+- [idioms/ri-fkey-check.md](../../../../../idioms/ri-fkey-check.md)
+- [idioms/ri-fkey-setnull-setdefault.md](../../../../../idioms/ri-fkey-setnull-setdefault.md)
+- [idioms/trigger-constraint-deferral.md](../../../../../idioms/trigger-constraint-deferral.md)

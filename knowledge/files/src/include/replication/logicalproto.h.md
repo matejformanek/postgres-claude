@@ -219,3 +219,7 @@ for the trust posture.
 <!-- issues:auto:begin -->
 - [Issue register — `include-replication`](../../../../issues/include-replication.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/apply-worker-loop-and-dispatch.md](../../../../idioms/apply-worker-loop-and-dispatch.md)

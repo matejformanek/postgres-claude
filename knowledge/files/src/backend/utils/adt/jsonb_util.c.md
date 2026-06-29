@@ -137,3 +137,5 @@ constructors. The I/O layer (`jsonb.c`) and the operators
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/jsonbvalue.md](../../../../../data-structures/jsonbvalue.md)
+

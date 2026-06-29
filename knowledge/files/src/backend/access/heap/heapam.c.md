@@ -106,3 +106,8 @@ This file does not define many top-level structs (the scan descs live in heapam.
 - [data-structures/heap-tuple-layout.md](../../../../../data-structures/heap-tuple-layout.md)
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/heap-tuple-freeze.md](../../../../../idioms/heap-tuple-freeze.md)
+- [idioms/heaptuple-update-chain.md](../../../../../idioms/heaptuple-update-chain.md)
+- [idioms/tuple-locking-modes.md](../../../../../idioms/tuple-locking-modes.md)
+- [idioms/wal-record-construction.md](../../../../../idioms/wal-record-construction.md)
+

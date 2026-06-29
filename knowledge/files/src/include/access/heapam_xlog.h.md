@@ -72,3 +72,5 @@ See "WAL record structs" above. Notable shapes:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../subsystems/access-heap.md)
+- [idioms/vacuum-hot-prune.md](../../../../idioms/vacuum-hot-prune.md)
+

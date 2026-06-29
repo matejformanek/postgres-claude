@@ -104,3 +104,7 @@ without libxslt". DEPRECATED alongside the rest of `contrib/xml2`.
 <!-- issues:auto:begin -->
 - [Issue register — `xml2`](../../../issues/xml2.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-xml2.md](../../../subsystems/contrib-xml2.md)

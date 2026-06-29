@@ -49,3 +49,7 @@ Row-Level Security (RLS) policy definitions. One row per `CREATE POLICY` stateme
 ## Tally
 
 `[verified-by-code]=11 [from-comment]=2 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/row-security-policy-application.md](../../../../idioms/row-security-policy-application.md)

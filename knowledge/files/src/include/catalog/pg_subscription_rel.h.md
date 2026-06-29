@@ -53,3 +53,7 @@
 ## Tally
 
 `[verified-by-code]=8 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/tablesync-initial-copy.md](../../../../idioms/tablesync-initial-copy.md)

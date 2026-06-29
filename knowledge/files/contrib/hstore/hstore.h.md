@@ -180,3 +180,7 @@ Source pin: `4b0bf0788b0`.
   pre-namespace names (fetchval, exists, delete, ...) are registered as
   SQL-visible C symbols even in modern installs; restoring an ancient dump
   is the stated rationale, but every new install pays for it (maybe)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore.md](../../../subsystems/contrib-hstore.md)

@@ -32,3 +32,7 @@ Defines `TupleDesc` (the backend's canonical rowtype descriptor) plus the auxili
 
 ## Confidence tag tally
 `[verified-by-code]=2 [from-comment]=6 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/tupledesc.md](../../../../data-structures/tupledesc.md)

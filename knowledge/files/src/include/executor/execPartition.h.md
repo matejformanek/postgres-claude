@@ -33,3 +33,7 @@ by `nodeModifyTable.c`, `nodeAppend.c`, `nodeMergeAppend.c`.
 ## Tags
 
 - [verified-by-code] full surface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/partition-tuple-routing.md](../../../../idioms/partition-tuple-routing.md)

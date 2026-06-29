@@ -78,3 +78,5 @@ The hashtable owns:
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/parallel-hash-join.md](../../../../idioms/parallel-hash-join.md)
+

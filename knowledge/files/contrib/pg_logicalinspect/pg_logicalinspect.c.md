@@ -137,3 +137,7 @@ arrays, …). Access is restricted to `pg_read_server_files` via the
 <!-- issues:auto:begin -->
 - [Issue register — `pg_logicalinspect`](../../../issues/pg_logicalinspect.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_logicalinspect.md](../../../subsystems/contrib-pg_logicalinspect.md)

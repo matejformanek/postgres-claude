@@ -77,3 +77,6 @@ Per header: varlena fields are NOT present in tuple descriptors. `[from-comment]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
+- [data-structures/pg_attribute-form.md](../../../../data-structures/pg_attribute-form.md)
+- [idioms/toast-storage-strategies.md](../../../../idioms/toast-storage-strategies.md)
+

@@ -104,3 +104,7 @@ later in the file).
 - `[verified-by-code]`: 9
 - `[from-comment]`: 5
 - `[unverified]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/xlogreaderstate.md](../../../../data-structures/xlogreaderstate.md)

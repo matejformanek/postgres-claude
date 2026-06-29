@@ -121,6 +121,11 @@ decides so, swaps `state->evalfunc` for compiled native code.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/aggregate-grouping-sets.md](../../../../idioms/aggregate-grouping-sets.md)
+- [idioms/expression-evaluator-flow.md](../../../../idioms/expression-evaluator-flow.md)
+- [idioms/exprevalstep-shape.md](../../../../idioms/exprevalstep-shape.md)
+- [idioms/jit-expression-codegen.md](../../../../idioms/jit-expression-codegen.md)
+- [idioms/utility-stmt-planning.md](../../../../idioms/utility-stmt-planning.md)
 
 ## Appears in scenarios
 
@@ -129,3 +134,4 @@ decides so, swaps `state->evalfunc` for compiled native code.
 - [Scenario — Add a new expression-eval step](../../../../scenarios/add-new-expression-eval-step.md)
 
 <!-- scenarios:auto:end -->
+

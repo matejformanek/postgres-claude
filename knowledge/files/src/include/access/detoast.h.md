@@ -25,3 +25,7 @@ Declares the public TOAST read API plus the `VARATT_EXTERNAL_GET_POINTER` macro 
 
 ## Confidence tag tally
 `[verified-by-code]=1 [from-comment]=2 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/heap-tuple-decompression-pattern.md](../../../../idioms/heap-tuple-decompression-pattern.md)

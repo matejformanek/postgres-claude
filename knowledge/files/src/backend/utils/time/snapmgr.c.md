@@ -102,3 +102,10 @@ Five overlapping sets of snapshots a backend may hold; each has a different free
 - [architecture/mvcc.md](../../../../../architecture/mvcc.md)
 - [data-structures/snapshot-lifecycle.md](../../../../../data-structures/snapshot-lifecycle.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/heap-tuple-visibility-mvcc.md](../../../../../idioms/heap-tuple-visibility-mvcc.md)
+- [idioms/snapshot-acquisition.md](../../../../../idioms/snapshot-acquisition.md)
+- [idioms/snapshot-active-stack-and-registered.md](../../../../../idioms/snapshot-active-stack-and-registered.md)
+- [idioms/snapshot-export-historic-parallel.md](../../../../../idioms/snapshot-export-historic-parallel.md)
+- [idioms/snapshot-static-and-current.md](../../../../../idioms/snapshot-static-and-current.md)
+- [idioms/subxact-visibility-and-overflow.md](../../../../../idioms/subxact-visibility-and-overflow.md)
+

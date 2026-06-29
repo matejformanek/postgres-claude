@@ -31,3 +31,6 @@ plus `config_group_names[]`. [from-comment] (`guc_tables.c:1-10`)
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/cost-parallel-adjustments.md](../../../../../idioms/cost-parallel-adjustments.md)
+- [idioms/predicate-locks.md](../../../../../idioms/predicate-locks.md)
+

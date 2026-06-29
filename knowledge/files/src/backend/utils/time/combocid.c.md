@@ -61,3 +61,5 @@ Backend-private mapping that lets a single 32-bit field in the tuple header (`t_
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/combocid-handling.md](../../../../../idioms/combocid-handling.md)
+

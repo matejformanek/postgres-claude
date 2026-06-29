@@ -125,3 +125,5 @@ There is also `foreach_ptr`, `foreach_int`, `foreach_oid`,
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/list-traversal-conventions.md](../../../../idioms/list-traversal-conventions.md)
+

@@ -102,3 +102,9 @@ copy/out for debugging.
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/plannerinfo.md](../../../../data-structures/plannerinfo.md)
+- [data-structures/reloptinfo.md](../../../../data-structures/reloptinfo.md)
+- [data-structures/restrictinfo.md](../../../../data-structures/restrictinfo.md)

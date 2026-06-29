@@ -35,3 +35,9 @@ Public types for the heavyweight lock manager. Defines `LOCKTAG`, `LOCKMODE`, `L
 - `[verified-by-code]`: 5
 - `[from-README]`: 1
 - `[from-comment]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/locallock.md](../../../../data-structures/locallock.md)
+- [data-structures/lock-struct.md](../../../../data-structures/lock-struct.md)
+- [data-structures/proclock.md](../../../../data-structures/proclock.md)

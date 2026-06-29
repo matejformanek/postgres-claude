@@ -148,3 +148,8 @@ MAIN-externalise) is the heart of `heap_toast_insert_or_update`.
 <!-- issues:auto:begin -->
 - [Issue register — `access`](../../../../../issues/access.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/toast-chunk-write.md](../../../../../idioms/toast-chunk-write.md)
+- [idioms/toast-storage-strategies.md](../../../../../idioms/toast-storage-strategies.md)

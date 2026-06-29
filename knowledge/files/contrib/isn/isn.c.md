@@ -160,3 +160,7 @@ session-mutator helpers.
   documenting.
 - **ISSUE-D3 (info, hygiene)** — `extern void initialize(void);` in
   isn.h has no definition (also raised in `isn.h.md`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-isn.md](../../../subsystems/contrib-isn.md)

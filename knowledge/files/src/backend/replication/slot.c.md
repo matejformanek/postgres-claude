@@ -109,3 +109,6 @@ on release/crash), `RS_TEMPORARY` (session-bound). (`slot.h:43-48`)
 - [architecture/replication.md](../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../subsystems/replication.md)
+- [idioms/replication-slot-advance.md](../../../../idioms/replication-slot-advance.md)
+- [idioms/xmin-horizon-management.md](../../../../idioms/xmin-horizon-management.md)
+

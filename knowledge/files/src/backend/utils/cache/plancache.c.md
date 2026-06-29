@@ -76,3 +76,8 @@ verified-by-code: 11 — from-comment: 8 — from-readme: 0 — inferred: 0 — 
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)
+- [idioms/cached-plan-invalidation.md](../../../../../idioms/cached-plan-invalidation.md)
+- [idioms/generic-vs-custom-plan.md](../../../../../idioms/generic-vs-custom-plan.md)
+- [idioms/plan-cache.md](../../../../../idioms/plan-cache.md)
+- [idioms/prepared-statement-plancache.md](../../../../../idioms/prepared-statement-plancache.md)
+

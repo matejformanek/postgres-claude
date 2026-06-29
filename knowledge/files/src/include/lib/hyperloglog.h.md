@@ -51,3 +51,7 @@ oracle). [inferred — no current exploit demonstrated]
 
 - ISSUE-TRUST: stats-import path is a planner oracle vector; HLL
   is a small part of that but worth tagging. (Low.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/aggregate-hash-vs-sort.md](../../../../idioms/aggregate-hash-vs-sort.md)

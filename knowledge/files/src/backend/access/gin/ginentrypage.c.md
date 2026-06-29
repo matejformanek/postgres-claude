@@ -38,3 +38,5 @@ Tags: [from-comment, ginentrypage.c:1-50]; structure cross-confirmed against REA
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/gin-tree-structure.md](../../../../../idioms/gin-tree-structure.md)
+

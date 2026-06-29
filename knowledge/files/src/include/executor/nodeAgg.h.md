@@ -43,3 +43,8 @@ for parallel.
 - [verified-by-code] struct field list + FIELDNO_* macros for JIT.
 - [from-comment] AggStatePerGroupData's `noTransValue` vs `transValueIsNull`
   distinction (header comment is the only place this is spelled out).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/aggregate-grouping-sets.md](../../../../idioms/aggregate-grouping-sets.md)
+- [idioms/aggregate-hash-vs-sort.md](../../../../idioms/aggregate-hash-vs-sort.md)

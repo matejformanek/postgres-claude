@@ -177,3 +177,6 @@ Low-level read into the reader's segment file via the
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/xlogreaderstate.md](../../../../../data-structures/xlogreaderstate.md)
+- [idioms/wal-page-format.md](../../../../../idioms/wal-page-format.md)
+

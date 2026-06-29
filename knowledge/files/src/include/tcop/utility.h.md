@@ -23,3 +23,5 @@
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/tcop.md](../../../../subsystems/tcop.md)
+- [idioms/process-utility-hook-chain.md](../../../../idioms/process-utility-hook-chain.md)
+

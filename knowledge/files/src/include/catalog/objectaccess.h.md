@@ -17,3 +17,7 @@
 ## Tally
 
 `[verified-by-code]=1 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../../subsystems/contrib-sepgsql.md)

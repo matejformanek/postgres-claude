@@ -71,6 +71,7 @@ The transaction lock ensures that wait is visible.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/apply-streaming-and-parallel.md](../../../../../idioms/apply-streaming-and-parallel.md)
 
 ## Appears in scenarios
 
@@ -79,3 +80,4 @@ The transaction lock ensures that wait is visible.
 - [Scenario — Add a new replication / logical-decoding message](../../../../../scenarios/add-new-replication-message.md)
 
 <!-- scenarios:auto:end -->
+

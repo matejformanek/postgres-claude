@@ -170,3 +170,6 @@ doesn't survive crash anyway).
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/hint-bits-setbufferdirty.md](../../../../../idioms/hint-bits-setbufferdirty.md)
+- [idioms/wal-record-construction.md](../../../../../idioms/wal-record-construction.md)
+

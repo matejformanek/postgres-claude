@@ -14,3 +14,7 @@
 - `AnalyzeAttrFetchFunc` / `AnalyzeAttrComputeStatsFunc` — callbacks each typanalyze plugs in.
 - `ParallelVacuumState` — opaque struct for the parallel-vacuum coordinator.
 - Prototypes: the public surface of vacuum.c (`vacuum`, `ExecVacuum`, `vac_open_indexes`, `vac_close_indexes`, `vacuum_xid_failsafe_check`, `vacuum_delay_point`, `vacuum_get_cutoffs`, `vac_update_relstats`, `vac_update_datfrozenxid`, `vac_truncate_clog`, `vacuum_is_permitted_for_relation`), analyze.c (`analyze_rel`, `std_typanalyze`), and the parallel-vacuum API (`parallel_vacuum_init`/`end`/`bulkdel_all_indexes`/`cleanup_all_indexes`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/analyze-mcv-histogram-correlation.md](../../../../idioms/analyze-mcv-histogram-correlation.md)

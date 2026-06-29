@@ -195,3 +195,5 @@ System view:
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/tcop.md](../../../../../subsystems/tcop.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)
+- [idioms/cursor-and-portal.md](../../../../../idioms/cursor-and-portal.md)
+

@@ -74,3 +74,7 @@ processing.
   the WAL (recovery / inplace updates).
 - `LocalExecuteInvalidationMessage` — single-message dispatch (used
   inside `inval.c`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/syscache-invalidation-flow.md](../../../../idioms/syscache-invalidation-flow.md)

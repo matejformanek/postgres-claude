@@ -94,3 +94,7 @@ Cross-link: `knowledge/subsystems/storage-lmgr.md`.
 - ISSUE-PHASE-D: `pg_locks` exposes per-tuple LOCKTAG info to
   unprivileged users; covered by A11/A14 monitoring-as-oracle
   cluster. (Informational.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/relation-extension-lock.md](../../../../idioms/relation-extension-lock.md)

@@ -37,3 +37,7 @@ Defines the low-level catcache structs (`CatCache`, `CatCTup`, `CatCList`, `CatC
 ## Confidence tag tally
 
 verified-by-code: 1 — from-comment: 6 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/syscache-catcache-internals.md](../../../../idioms/syscache-catcache-internals.md)

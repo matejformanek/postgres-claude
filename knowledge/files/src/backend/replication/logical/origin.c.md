@@ -65,3 +65,5 @@ suppresses re-replication of changes originating from elsewhere.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/replication-origin-tracking.md](../../../../../idioms/replication-origin-tracking.md)
+

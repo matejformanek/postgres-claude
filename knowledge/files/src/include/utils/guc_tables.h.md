@@ -152,3 +152,7 @@ record for SET / SET LOCAL inside a transaction).
    `source/src/include/utils/guc_tables.h:314`.
 6. [ISSUE-resource: `GucStack` chain depth unbounded (nit)] —
    `source/src/include/utils/guc_tables.h:121-134`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/guc-variables.md](../../../../idioms/guc-variables.md)

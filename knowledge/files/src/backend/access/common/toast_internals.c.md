@@ -52,3 +52,6 @@ The TOAST storage layer: compress, save and delete out-of-line values in a TOAST
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/heap-tuple-decompression-pattern.md](../../../../../idioms/heap-tuple-decompression-pattern.md)
+- [idioms/toast-chunk-write.md](../../../../../idioms/toast-chunk-write.md)
+

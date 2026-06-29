@@ -25,3 +25,7 @@ plumbing between `sinval.c` (the API users see) and the impl in
 Header says nothing else. **Don't call these directly** — use the
 `sinval.c` API instead, unless you're inside core invalidation/recovery
 code that needs the lower-level interface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/sinvaladt-broadcast.md](../../../../idioms/sinvaladt-broadcast.md)

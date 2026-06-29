@@ -259,3 +259,5 @@ Checkpoint / recovery surface:
 <!-- backlinks:auto -->
 - [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/prepare-transaction-2pc.md](../../../../../idioms/prepare-transaction-2pc.md)
+

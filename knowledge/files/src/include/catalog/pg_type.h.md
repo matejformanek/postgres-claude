@@ -89,3 +89,7 @@
 - [Scenario — Add a new built-in scalar data type](../../../../scenarios/add-new-data-type.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/toast-chunk-write.md](../../../../idioms/toast-chunk-write.md)

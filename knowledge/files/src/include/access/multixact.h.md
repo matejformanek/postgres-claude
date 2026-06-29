@@ -107,3 +107,8 @@ oldestOffset; }`.
 
 - `[verified-by-code]`: 26
 - `[from-comment]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/multixactid.md](../../../../data-structures/multixactid.md)
+- [idioms/multixact-slru.md](../../../../idioms/multixact-slru.md)

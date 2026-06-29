@@ -34,3 +34,5 @@ Tags: [from-comment, ginpostinglist.c:1-44]; structure [verified-by-code].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/gin-tree-structure.md](../../../../../idioms/gin-tree-structure.md)
+

@@ -127,3 +127,7 @@ in `pg_xml_error_occurred → xml_ereport` doesn't lose track of them.
 <!-- issues:auto:begin -->
 - [Issue register — `xml2`](../../../issues/xml2.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-xml2.md](../../../subsystems/contrib-xml2.md)

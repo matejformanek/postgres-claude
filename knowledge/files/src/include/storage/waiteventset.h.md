@@ -68,3 +68,7 @@ typedef struct WaitEvent {
 
 The `user_data` pointer is how a caller maps a wake-up back to its
 own per-fd state (e.g. walsender per-replica state).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/latch-waiteventset.md](../../../../data-structures/latch-waiteventset.md)

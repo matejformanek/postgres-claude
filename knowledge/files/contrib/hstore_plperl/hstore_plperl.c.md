@@ -88,3 +88,7 @@ HStore on the fly. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `hstore_plperl`](../../../issues/hstore_plperl.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore_plperl.md](../../../subsystems/contrib-hstore_plperl.md)

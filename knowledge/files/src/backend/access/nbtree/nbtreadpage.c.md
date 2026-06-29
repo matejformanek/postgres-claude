@@ -111,3 +111,7 @@ hottest code paths in the entire backend on indexed read workloads.
 <!-- issues:auto:begin -->
 - [Issue register — `access`](../../../../../issues/access.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)

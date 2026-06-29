@@ -439,3 +439,8 @@ the comments around lines 200-400.
 <!-- backlinks:auto -->
 - [data-structures/bufferdesc-state.md](../../../../../data-structures/bufferdesc-state.md)
 - [subsystems/storage-buffer.md](../../../../../subsystems/storage-buffer.md)
+- [data-structures/buffertag.md](../../../../../data-structures/buffertag.md)
+- [idioms/hint-bits-setbufferdirty.md](../../../../../idioms/hint-bits-setbufferdirty.md)
+- [idioms/vacuum-truncate-relation.md](../../../../../idioms/vacuum-truncate-relation.md)
+- [subsystems/contrib-pg_buffercache.md](../../../../../subsystems/contrib-pg_buffercache.md)
+

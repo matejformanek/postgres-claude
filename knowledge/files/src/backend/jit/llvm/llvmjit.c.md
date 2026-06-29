@@ -77,3 +77,9 @@ Core of the loadable LLVM JIT provider. Owns the per-backend LLVM session: creat
 
 ## Confidence tag tally
 `[verified-by-code]=13`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/jit-expression-codegen.md](../../../../../idioms/jit-expression-codegen.md)
+- [idioms/jit-provider-and-context.md](../../../../../idioms/jit-provider-and-context.md)
+- [idioms/jit-tuple-deform-and-inline.md](../../../../../idioms/jit-tuple-deform-and-inline.md)

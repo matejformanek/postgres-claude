@@ -232,3 +232,6 @@ Line 644-832 walks every RTE type and disqualifies it if any of:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/plannerinfo.md](../../../../../data-structures/plannerinfo.md)
+- [data-structures/reloptinfo.md](../../../../../data-structures/reloptinfo.md)
+

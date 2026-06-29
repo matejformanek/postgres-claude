@@ -160,3 +160,9 @@ Used by CREATE INDEX CONCURRENTLY and similar to enumerate `VirtualTransactionId
 - [data-structures/pgproc-fields.md](../../../../../data-structures/pgproc-fields.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)
+- [data-structures/locallock.md](../../../../../data-structures/locallock.md)
+- [data-structures/lock-struct.md](../../../../../data-structures/lock-struct.md)
+- [data-structures/locktag.md](../../../../../data-structures/locktag.md)
+- [data-structures/proclock.md](../../../../../data-structures/proclock.md)
+- [idioms/fastpath-locks.md](../../../../../idioms/fastpath-locks.md)
+

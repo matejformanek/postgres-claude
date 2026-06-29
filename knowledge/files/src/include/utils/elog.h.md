@@ -118,3 +118,4 @@ Defined later in the header (around line 380+). Built on `sigsetjmp` writing to 
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/error-handling.md](../../../../idioms/error-handling.md)
+- [idioms/error-context-callbacks.md](../../../../idioms/error-context-callbacks.md)

@@ -77,3 +77,9 @@ recorded in ExprState->flags after first prep.
 - [Scenario — Add a new expression-eval step](../../../../scenarios/add-new-expression-eval-step.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/expression-evaluator-flow.md](../../../../idioms/expression-evaluator-flow.md)
+- [idioms/exprevalstep-shape.md](../../../../idioms/exprevalstep-shape.md)
+- [idioms/jit-expression-codegen.md](../../../../idioms/jit-expression-codegen.md)

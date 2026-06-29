@@ -118,3 +118,7 @@ state and metapage, allocates pages, and — crucially — implements
 - **ISSUE-D1 (info)** — `signValue` is deterministic; attacker can
   craft colliding signatures, only inflating false-positive rate.
   Heap recheck prevents data leak.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-bloom.md](../../../subsystems/contrib-bloom.md)

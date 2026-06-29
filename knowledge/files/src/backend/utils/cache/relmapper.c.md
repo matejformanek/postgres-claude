@@ -118,3 +118,8 @@ Internal I/O:
 <!-- issues:auto:begin -->
 - [Issue register — `utils`](../../../../../issues/utils.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/parallel-state-propagation.md](../../../../../idioms/parallel-state-propagation.md)
+- [idioms/relcache-build.md](../../../../../idioms/relcache-build.md)

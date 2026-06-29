@@ -144,6 +144,7 @@ recovery via the sigsetjmp landing.
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
 - [subsystems/tcop.md](../../../../subsystems/tcop.md)
 - [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)
+- [idioms/utility-stmt-planning.md](../../../../idioms/utility-stmt-planning.md)
 
 ## Appears in scenarios
 
@@ -152,3 +153,4 @@ recovery via the sigsetjmp landing.
 - [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
 
 <!-- scenarios:auto:end -->
+

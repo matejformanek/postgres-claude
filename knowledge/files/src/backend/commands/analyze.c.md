@@ -59,3 +59,7 @@ When a partitioned/inherited table is analysed, the parent's `pg_statistic` rows
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/analyze-block-and-reservoir-sampling.md](../../../../idioms/analyze-block-and-reservoir-sampling.md)
+- [idioms/analyze-mcv-histogram-correlation.md](../../../../idioms/analyze-mcv-histogram-correlation.md)
+- [idioms/extended-statistics-statext.md](../../../../idioms/extended-statistics-statext.md)
+

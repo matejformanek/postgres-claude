@@ -89,3 +89,6 @@ registration on ExprContext shutdown. [from-comment] `:14-50`
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [data-structures/estate.md](../../../../data-structures/estate.md)
+- [data-structures/exprcontext.md](../../../../data-structures/exprcontext.md)
+

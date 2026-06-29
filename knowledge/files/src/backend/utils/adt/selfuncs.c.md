@@ -230,6 +230,7 @@ catalog)
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/analyze-mcv-histogram-correlation.md](../../../../../idioms/analyze-mcv-histogram-correlation.md)
 
 ## Appears in scenarios
 
@@ -238,3 +239,4 @@ catalog)
 - [Scenario — Add a new index access method](../../../../../scenarios/add-new-index-am.md)
 
 <!-- scenarios:auto:end -->
+

@@ -30,3 +30,5 @@ Tags: [from-comment]; [from-README, README:385-453].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/hash-bucket-split.md](../../../../../idioms/hash-bucket-split.md)
+

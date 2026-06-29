@@ -39,3 +39,4 @@ verified-by-code: 0 — from-comment: 3 — from-readme: 0 — inferred: 0 — u
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
+- [idioms/syscache-catcache-internals.md](../../../../idioms/syscache-catcache-internals.md)

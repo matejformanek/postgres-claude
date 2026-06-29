@@ -101,3 +101,7 @@ numeric I/O). [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `jsonb_plperl`](../../../issues/jsonb_plperl.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-jsonb_plperl.md](../../../subsystems/contrib-jsonb_plperl.md)

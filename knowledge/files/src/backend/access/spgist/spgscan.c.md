@@ -35,3 +35,6 @@ Tags: [from-README, README:252-289]; [verified-by-code at function structure].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/spgist-scan-and-consistent.md](../../../../../idioms/spgist-scan-and-consistent.md)
+- [idioms/spgist-tree-and-tuples.md](../../../../../idioms/spgist-tree-and-tuples.md)
+

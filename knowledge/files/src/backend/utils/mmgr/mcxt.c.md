@@ -249,3 +249,5 @@ headers.
 - [idioms/memory-contexts.md](../../../../../idioms/memory-contexts.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)
+- [idioms/memory-context-api-and-dispatch.md](../../../../../idioms/memory-context-api-and-dispatch.md)
+

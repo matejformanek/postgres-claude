@@ -44,3 +44,7 @@ across workers via DSA — see PG 12+ parallel-aware BitmapIndexScan).
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/bitmap-and-or-heap-executor.md](../../../../idioms/bitmap-and-or-heap-executor.md)
+- [idioms/bitmap-heap-scan-flow.md](../../../../idioms/bitmap-heap-scan-flow.md)
+- [idioms/parallel-bitmap-heap.md](../../../../idioms/parallel-bitmap-heap.md)
+

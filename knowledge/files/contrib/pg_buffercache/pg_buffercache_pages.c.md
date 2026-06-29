@@ -144,3 +144,7 @@ in `pg_buffercache--1.6--1.7.sql:5-12` [verified-by-code].
 3. [ISSUE-resource: evict_all / mark_dirty_all are O(NBuffers) with no rate limit (nit)] — `source/contrib/pg_buffercache/pg_buffercache_pages.c:729-757,845-873`
 4. [ISSUE-documentation: mark_dirty_relation comment understates WAL amplification (nit)] — `source/contrib/pg_buffercache/pg_buffercache_pages.c:794-839`
 5. [ISSUE-nit: LockBufHdr/UnlockBufHdr around lone bufferid read in os_pages_internal (nit)] — `source/contrib/pg_buffercache/pg_buffercache_pages.c:405-408`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_buffercache.md](../../../subsystems/contrib-pg_buffercache.md)

@@ -77,3 +77,7 @@ checks consult that map instead of the tuple. (`:40-53`) [from-comment]
 - [data-structures/snapshot-lifecycle.md](../../../../../data-structures/snapshot-lifecycle.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/logical-decoding-snapshot.md](../../../../../idioms/logical-decoding-snapshot.md)
+- [idioms/snapshot-export-historic-parallel.md](../../../../../idioms/snapshot-export-historic-parallel.md)
+- [subsystems/contrib-pg_logicalinspect.md](../../../../../subsystems/contrib-pg_logicalinspect.md)
+

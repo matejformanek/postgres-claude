@@ -102,3 +102,7 @@ values used in `pg_stat_activity.query_id` paths.
 - [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

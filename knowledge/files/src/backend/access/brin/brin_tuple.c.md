@@ -34,3 +34,5 @@ Tags: [from-comment, brin_tuple.c:1-23]; functions enumerated [verified-by-code]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/brin-tuple-format.md](../../../../../idioms/brin-tuple-format.md)
+

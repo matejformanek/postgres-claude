@@ -42,3 +42,5 @@ and lookup (`find_base_rel`, `find_join_rel`) lives here. This is the
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/reloptinfo.md](../../../../../data-structures/reloptinfo.md)
+

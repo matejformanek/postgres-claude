@@ -84,6 +84,7 @@ smallest LSN in each substream. [from-comment] (`reorderbuffer.c:13-31`)
 - [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/memory-context-slab-generation-bump.md](../../../../../idioms/memory-context-slab-generation-bump.md)
 
 ## Appears in scenarios
 
@@ -92,3 +93,4 @@ smallest LSN in each substream. [from-comment] (`reorderbuffer.c:13-31`)
 - [Scenario — Add a new replication / logical-decoding message](../../../../../scenarios/add-new-replication-message.md)
 
 <!-- scenarios:auto:end -->
+

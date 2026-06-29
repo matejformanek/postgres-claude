@@ -52,3 +52,7 @@
 ## Tally
 
 `[verified-by-code]=6 [from-comment]=1 [inferred]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/event-trigger-firing.md](../../../../idioms/event-trigger-firing.md)

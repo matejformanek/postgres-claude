@@ -31,3 +31,7 @@ contrib module uses this header to register a `shell:cmd` target.
   `next_sink` (see basebackup_sink.h §Forwarding helpers); the
   comment "the sink created by this function should always forward
   to this sink" makes that explicit. [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-basebackup_to_shell.md](../../../../subsystems/contrib-basebackup_to_shell.md)

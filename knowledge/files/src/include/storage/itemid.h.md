@@ -83,3 +83,7 @@ single `unsigned`).
   `(off < BLCKSZ && len <= BLCKSZ)` at the macro entry would
   catch overflow during development. (Low — current callers
   always derive `off` from in-page positions.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/vacuum-hot-prune.md](../../../../idioms/vacuum-hot-prune.md)

@@ -97,3 +97,7 @@ zombies.
   "LO 0 does not exist" error instead of a clear "column had garbage".
 - **ISSUE-D2 (info)** — uses `SPI_*` helpers without `SPI_connect()`.
   Legal but easy to misread as a bug.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-lo.md](../../../subsystems/contrib-lo.md)

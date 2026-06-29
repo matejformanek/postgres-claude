@@ -143,3 +143,7 @@ None significant.
 
 - `[verified-by-code]`: 22
 - `[from-comment]`: 3
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/subtransaction-stack.md](../../../../idioms/subtransaction-stack.md)

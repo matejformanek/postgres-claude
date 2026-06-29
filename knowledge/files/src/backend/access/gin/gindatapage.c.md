@@ -53,3 +53,5 @@ Tags: [from-comment, gindatapage.c:1-37], [verified-by-code for WAL action mappi
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/gin-tree-structure.md](../../../../../idioms/gin-tree-structure.md)
+

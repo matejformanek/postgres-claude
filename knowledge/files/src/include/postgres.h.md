@@ -130,3 +130,7 @@ The TOC splits the file into (1) Datum type + support functions and
 <!-- issues:auto:begin -->
 - [Issue register — `include-misc`](../../../issues/include-misc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/datum-nullabledatum.md](../../../data-structures/datum-nullabledatum.md)

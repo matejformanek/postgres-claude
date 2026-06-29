@@ -65,3 +65,6 @@ decision). [from-comment] `:5-13`
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [data-structures/latch-waiteventset.md](../../../../data-structures/latch-waiteventset.md)
+- [idioms/autovacuum-launcher.md](../../../../idioms/autovacuum-launcher.md)
+

@@ -119,3 +119,6 @@ Each `PgStat_KindInfo`:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/pgstat-counter.md](../../../../../data-structures/pgstat-counter.md)
+- [idioms/pgstat-flush-timing.md](../../../../../idioms/pgstat-flush-timing.md)
+

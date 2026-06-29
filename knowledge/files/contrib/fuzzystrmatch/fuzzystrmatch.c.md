@@ -115,3 +115,7 @@ Note: `dmetaphone` / `dmetaphone_alt` live in the sibling
   property (low)] — source/contrib/fuzzystrmatch/fuzzystrmatch.c:63-70,
   313-323 — soundex/metaphone silently ignore non-ASCII letters;
   could surprise users with non-English data.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-fuzzystrmatch.md](../../../subsystems/contrib-fuzzystrmatch.md)

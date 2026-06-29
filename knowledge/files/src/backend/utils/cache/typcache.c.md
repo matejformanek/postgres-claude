@@ -70,3 +70,7 @@ verified-by-code: 10 — from-comment: 7 — from-readme: 0 — inferred: 0 — 
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
+- [idioms/typcache-domain-and-invalidation.md](../../../../../idioms/typcache-domain-and-invalidation.md)
+- [idioms/typcache-entry-and-lookup.md](../../../../../idioms/typcache-entry-and-lookup.md)
+- [idioms/typcache-record-typmod-and-shared.md](../../../../../idioms/typcache-record-typmod-and-shared.md)
+

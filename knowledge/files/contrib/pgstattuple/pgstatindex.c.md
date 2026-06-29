@@ -213,3 +213,7 @@ when called on a partitioned index parent.
   symbol (nit; documented in extension control files)]**.
 - **[ISSUE-correctness: GIN pending-list stats reflect a moment in
   time; concurrent inserts immediately invalidate (nit)]** — `:574-577`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgstattuple.md](../../../subsystems/contrib-pgstattuple.md)

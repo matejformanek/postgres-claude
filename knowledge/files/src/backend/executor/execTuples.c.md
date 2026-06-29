@@ -86,3 +86,5 @@ materialize/copyslot/get_heap_tuple/get_minimal_tuple/copy_heap_tuple/copy_minim
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [data-structures/tupletableslot.md](../../../../data-structures/tupletableslot.md)
+

@@ -74,3 +74,7 @@ on this. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `archive`](../../../../issues/archive.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-basic_archive.md](../../../../subsystems/contrib-basic_archive.md)

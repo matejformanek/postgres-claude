@@ -305,3 +305,7 @@ link. [verified-by-code] [from-comment]
 <!-- issues:auto:begin -->
 - [Issue register — `utils`](../../../../../issues/utils.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/fmgrinfo.md](../../../../../data-structures/fmgrinfo.md)

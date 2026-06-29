@@ -87,3 +87,8 @@ backend and the C++ files implementing the provider.
   gate.
 - `source/src/backend/jit/llvm/llvmjit.c` — implementation of all the
   `llvm_*` entry points declared here.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/jit-expression-codegen.md](../../../../idioms/jit-expression-codegen.md)
+- [idioms/jit-provider-and-context.md](../../../../idioms/jit-provider-and-context.md)

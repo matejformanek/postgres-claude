@@ -234,3 +234,7 @@ See above inline ISSUEs. Headlines:
 <!-- issues:auto:begin -->
 - [Issue register — `include-misc`](../../../issues/include-misc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/portable-identifiers.md](../../../idioms/portable-identifiers.md)

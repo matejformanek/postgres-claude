@@ -146,3 +146,9 @@ leader if any worker reported an error.
 <!-- backlinks:auto -->
 - [idioms/bgworker-and-parallel.md](../../../../../idioms/bgworker-and-parallel.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/parallel-context-and-dsm.md](../../../../../idioms/parallel-context-and-dsm.md)
+- [idioms/parallel-state-propagation.md](../../../../../idioms/parallel-state-propagation.md)
+- [idioms/parallel-worker-coordination.md](../../../../../idioms/parallel-worker-coordination.md)
+- [idioms/parallel-worker-launch-wait-and-errors.md](../../../../../idioms/parallel-worker-launch-wait-and-errors.md)
+- [idioms/snapshot-export-historic-parallel.md](../../../../../idioms/snapshot-export-historic-parallel.md)
+

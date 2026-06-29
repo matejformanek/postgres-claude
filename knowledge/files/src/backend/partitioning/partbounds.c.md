@@ -195,3 +195,7 @@ merging, converts bound specs to executable predicate expressions
 <!-- issues:auto:begin -->
 - [Issue register — `partitioning`](../../../../issues/partitioning.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/partition-bound-comparison.md](../../../../idioms/partition-bound-comparison.md)

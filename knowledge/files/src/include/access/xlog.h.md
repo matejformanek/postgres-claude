@@ -119,3 +119,8 @@ exposed for `xlogrecovery.c` callbacks. Backup: `do_pg_backup_start`,
 - `[verified-by-code]`: 22
 - `[from-comment]`: 2
 - `[unverified]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/checkpoint-coordination.md](../../../../idioms/checkpoint-coordination.md)
+- [idioms/wal-buffer-state.md](../../../../idioms/wal-buffer-state.md)

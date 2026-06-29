@@ -163,3 +163,7 @@ SQL gating: `REVOKE EXECUTE ... FROM PUBLIC` in
 2. [ISSUE-correctness: force-freeze on aborted-xact tuple silently makes it visible to ALL snapshots (likely)] — `source/contrib/pg_surgery/heap_surgery.c:289-308`
 3. [ISSUE-resource: log_newpage_buffer FPI per affected page; undocumented WAL amplification (nit)] — `source/contrib/pg_surgery/heap_surgery.c:319-328`
 4. [ISSUE-correctness: force-freeze on HOT-chain root leaves successors dangling (maybe)] — `source/contrib/pg_surgery/heap_surgery.c:289-308`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_surgery.md](../../../subsystems/contrib-pg_surgery.md)

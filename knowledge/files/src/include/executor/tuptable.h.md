@@ -50,3 +50,7 @@ allocate the right struct subtype.
 - [verified-by-code] struct/ops shapes.
 - [from-comment] the "tuple table is a List of independent slots" framing at
   top of file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/tupletableslot.md](../../../../data-structures/tupletableslot.md)

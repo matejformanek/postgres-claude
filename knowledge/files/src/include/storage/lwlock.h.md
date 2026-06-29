@@ -69,3 +69,6 @@ Wait-event names in `src/backend/utils/activity/wait_event_names.txt` must stay 
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/locking-overview.md](../../../../idioms/locking-overview.md)
+- [data-structures/lwlock-struct.md](../../../../data-structures/lwlock-struct.md)
+- [idioms/lwlock-rank-discipline.md](../../../../idioms/lwlock-rank-discipline.md)
+

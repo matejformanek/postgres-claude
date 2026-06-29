@@ -48,3 +48,6 @@ Symmetric story for DROP: the queued entry has `atCommit=true`, and commit proce
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/abort-transaction-cleanup.md](../../../../idioms/abort-transaction-cleanup.md)
+- [idioms/vacuum-truncate-relation.md](../../../../idioms/vacuum-truncate-relation.md)
+

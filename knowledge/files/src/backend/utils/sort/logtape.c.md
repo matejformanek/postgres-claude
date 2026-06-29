@@ -166,3 +166,5 @@ I/O:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/aggregate-hash-vs-sort.md](../../../../../idioms/aggregate-hash-vs-sort.md)
+

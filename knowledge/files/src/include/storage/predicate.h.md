@@ -100,3 +100,7 @@ the implementation in `predicate.c`.
   can induce serialization-failure rollback on victims by
   contention patterns. Documented behaviour but worth tagging
   for completeness. (Low.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/predicate-locks.md](../../../../idioms/predicate-locks.md)

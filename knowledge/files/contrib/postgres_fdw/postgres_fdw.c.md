@@ -247,3 +247,8 @@ Cannot reuse. The cache is keyed by umid — different umids cannot share a PGco
 - [ISSUE-correctness: `postgresExplainDirectModify` (line 3180) only emits "Remote SQL" if `es->verbose`. EXPLAIN without VERBOSE shows nothing — could surprise users debugging direct-modify plans. (nit — UX)] — `source/contrib/postgres_fdw/postgres_fdw.c:3186`.
 - [ISSUE-correctness: `postgresExecForeignTruncate` builds a single TRUNCATE command for all rels (line 3281). If `rels` contains tables from DIFFERENT foreign servers, the function `Assert(table->serverid == serverid)` (line 3250) would fail in cassert; in release builds, the wrong server's connection is used. Core normally calls this per-server, so the assert is defensive. (resolved)] — `source/contrib/postgres_fdw/postgres_fdw.c:3247-3250`.
 - [ISSUE-defense-in-depth: ForeignScan `fdw_scan_tlist` rebuilt for direct-modify with RETURNING (line 2843) — `rebuild_fdw_scan_tlist`. The remote query's RETURNING is computed against the remote table; local RETURNING is computed by `apply_returning_filter`. **If remote has different columns than expected (e.g. column dropped), the filter returns surprising values**. Validated by `conversion_error_callback` only on type-mismatch. (nit)] — `source/contrib/postgres_fdw/postgres_fdw.c:2843`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/fdw-iterate-scan.md](../../../idioms/fdw-iterate-scan.md)
+- [idioms/fdw-routine-callbacks.md](../../../idioms/fdw-routine-callbacks.md)

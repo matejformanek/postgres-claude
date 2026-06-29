@@ -80,3 +80,7 @@ Implements heap page pruning and HOT-chain management: on-access pruning (`heap_
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/heap-tuple-freeze.md](../../../../../idioms/heap-tuple-freeze.md)
+- [idioms/heaptuple-update-chain.md](../../../../../idioms/heaptuple-update-chain.md)
+- [idioms/vacuum-hot-prune.md](../../../../../idioms/vacuum-hot-prune.md)
+

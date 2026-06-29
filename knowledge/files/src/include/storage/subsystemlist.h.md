@@ -110,3 +110,7 @@ order) is:
 <!-- issues:auto:begin -->
 - [Issue register — `include-storage`](../../../../issues/include-storage.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/process-model.md](../../../../architecture/process-model.md)

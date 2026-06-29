@@ -41,6 +41,7 @@
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/jit-provider-and-context.md](../../../../idioms/jit-provider-and-context.md)
 
 ## Appears in scenarios
 
@@ -49,3 +50,4 @@
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+

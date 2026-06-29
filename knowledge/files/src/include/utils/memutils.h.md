@@ -192,3 +192,4 @@ Caller must ensure `ptr != NULL` — documented but not asserted
 <!-- backlinks:auto -->
 - [idioms/memory-contexts.md](../../../../idioms/memory-contexts.md)
 - [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)
+- [idioms/memory-context-allocset-internals.md](../../../../idioms/memory-context-allocset-internals.md)

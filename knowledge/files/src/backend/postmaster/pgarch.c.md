@@ -50,3 +50,6 @@ tree only `pgarch.c` exists, and it is what implements `B_ARCHIVER`
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/archive-command-fallback.md](../../../../idioms/archive-command-fallback.md)
+- [subsystems/contrib-basic_archive.md](../../../../subsystems/contrib-basic_archive.md)
+

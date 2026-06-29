@@ -239,3 +239,7 @@ pgstat_xact.c, pgstat_wal.c). Highlights:
 <!-- issues:auto:begin -->
 - [Issue register — `include-misc`](../../../issues/include-misc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/pgstat-counter.md](../../../data-structures/pgstat-counter.md)

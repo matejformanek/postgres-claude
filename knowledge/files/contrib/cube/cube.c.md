@@ -158,3 +158,7 @@ indicated by a header bit). [verified-by-code]
 - `[ISSUE-robustness: g_cube_picksplit is Guttman O(N²) — DoS surface
   on pathological GiST page splits with many cubes] (low)` —
   `source/contrib/cube/cube.c:516-660`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-cube.md](../../../subsystems/contrib-cube.md)

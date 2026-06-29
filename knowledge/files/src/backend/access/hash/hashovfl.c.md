@@ -58,3 +58,5 @@ Tags: [from-README, README:454-560]; [verified-by-code for sequencing].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/hash-overflow-pages.md](../../../../../idioms/hash-overflow-pages.md)
+

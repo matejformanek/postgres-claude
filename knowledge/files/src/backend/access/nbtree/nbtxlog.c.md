@@ -70,3 +70,5 @@ The reuse record does **not** register a buffer — see explanatory comment at `
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/access-nbtree.md](../../../../../subsystems/access-nbtree.md)
+- [idioms/xlog-region-replay.md](../../../../../idioms/xlog-region-replay.md)
+

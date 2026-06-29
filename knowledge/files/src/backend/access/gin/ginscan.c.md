@@ -28,3 +28,5 @@ Tags: [from-comment]; specifics [verified-by-code].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/gin-scan-and-consistent.md](../../../../../idioms/gin-scan-and-consistent.md)
+

@@ -32,3 +32,5 @@ SQL surface for GUCs: `SET`/`SET LOCAL`/`SET SESSION`, `RESET`, `SHOW`,
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/utility-stmt-planning.md](../../../../../idioms/utility-stmt-planning.md)
+

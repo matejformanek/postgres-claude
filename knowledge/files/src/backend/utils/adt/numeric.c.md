@@ -208,3 +208,5 @@ arithmetic kernels short-circuit on special inputs.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/numeric-type.md](../../../../../data-structures/numeric-type.md)
+

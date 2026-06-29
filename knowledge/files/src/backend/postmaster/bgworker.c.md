@@ -59,6 +59,8 @@ the postmaster's no-shmem-lock rule)
 <!-- backlinks:auto -->
 - [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/background-worker-startup.md](../../../../idioms/background-worker-startup.md)
+- [idioms/parallel-worker-launch-wait-and-errors.md](../../../../idioms/parallel-worker-launch-wait-and-errors.md)
 
 ## Appears in scenarios
 
@@ -67,3 +69,4 @@ the postmaster's no-shmem-lock rule)
 - [Scenario — Add a new background worker](../../../../scenarios/add-new-bgworker.md)
 
 <!-- scenarios:auto:end -->
+

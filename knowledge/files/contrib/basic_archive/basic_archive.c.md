@@ -98,3 +98,7 @@ content-equality short-circuit when `dest` already exists.
   path-safety. By design; operator's responsibility.
 - **ISSUE-D2 (low)** — TOCTOU between `stat` and `durable_rename` allows
   silent overwrite if another writer beats us; acknowledged in comment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-basic_archive.md](../../../subsystems/contrib-basic_archive.md)

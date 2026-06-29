@@ -23,3 +23,7 @@ Tiny header exposing only the parallel-worker / xact-end interface of combocid.c
 ## Confidence tag tally
 
 `[verified-by-code]=1 [from-comment]=1 [from-readme]=0 [inferred]=0 [unverified]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/combocid-handling.md](../../../../idioms/combocid-handling.md)

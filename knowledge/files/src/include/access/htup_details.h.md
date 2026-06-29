@@ -81,3 +81,11 @@ Defines the on-disk layout of a heap tuple's fixed header (`HeapTupleHeaderData`
 - [architecture/mvcc.md](../../../../architecture/mvcc.md)
 - [data-structures/heap-tuple-layout.md](../../../../data-structures/heap-tuple-layout.md)
 - [subsystems/access-heap.md](../../../../subsystems/access-heap.md)
+- [idioms/combocid-handling.md](../../../../idioms/combocid-handling.md)
+- [idioms/heap-tuple-freeze.md](../../../../idioms/heap-tuple-freeze.md)
+- [idioms/heap-tuple-visibility-mvcc.md](../../../../idioms/heap-tuple-visibility-mvcc.md)
+- [idioms/heaptuple-update-chain.md](../../../../idioms/heaptuple-update-chain.md)
+- [idioms/hint-bits-setbufferdirty.md](../../../../idioms/hint-bits-setbufferdirty.md)
+- [idioms/tuple-locking-modes.md](../../../../idioms/tuple-locking-modes.md)
+- [idioms/vacuum-hot-prune.md](../../../../idioms/vacuum-hot-prune.md)
+

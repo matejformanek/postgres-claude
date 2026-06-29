@@ -26,3 +26,5 @@ trivial heap scan via BitmapHeapScan above.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/bitmap-and-or-heap-executor.md](../../../../idioms/bitmap-and-or-heap-executor.md)
+

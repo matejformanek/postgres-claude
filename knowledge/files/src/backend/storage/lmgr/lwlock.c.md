@@ -140,3 +140,6 @@ Initialises a fresh `LWLock`: `state = LW_FLAG_RELEASE_OK` (no — actually just
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)
+- [data-structures/lwlock-struct.md](../../../../../data-structures/lwlock-struct.md)
+- [idioms/lwlock-rank-discipline.md](../../../../../idioms/lwlock-rank-discipline.md)
+

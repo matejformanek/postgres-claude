@@ -47,3 +47,6 @@ enum. (`conflict.h:25-30`)
 - [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/apply-conflict-resolution.md](../../../../../idioms/apply-conflict-resolution.md)
+- [idioms/apply-handlers-insert-update-delete.md](../../../../../idioms/apply-handlers-insert-update-delete.md)
+

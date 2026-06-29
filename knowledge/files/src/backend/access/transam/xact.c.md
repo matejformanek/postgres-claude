@@ -323,3 +323,13 @@ records.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)
+- [idioms/abort-transaction-cleanup.md](../../../../../idioms/abort-transaction-cleanup.md)
+- [idioms/commit-transaction-sequence.md](../../../../../idioms/commit-transaction-sequence.md)
+- [idioms/parallel-state-propagation.md](../../../../../idioms/parallel-state-propagation.md)
+- [idioms/prepare-transaction-2pc.md](../../../../../idioms/prepare-transaction-2pc.md)
+- [idioms/subtransaction-stack.md](../../../../../idioms/subtransaction-stack.md)
+- [idioms/subxact-visibility-and-overflow.md](../../../../../idioms/subxact-visibility-and-overflow.md)
+- [idioms/subxact-xidcache-and-pgproc.md](../../../../../idioms/subxact-xidcache-and-pgproc.md)
+- [idioms/trigger-constraint-deferral.md](../../../../../idioms/trigger-constraint-deferral.md)
+- [idioms/trigger-during-error.md](../../../../../idioms/trigger-during-error.md)
+

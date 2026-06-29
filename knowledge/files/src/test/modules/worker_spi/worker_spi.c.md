@@ -86,3 +86,8 @@ sleep idiom. `[verified-by-code]` `worker_spi.c:1-22`
 - `source/src/include/postmaster/interrupt.h` —
   `SignalHandlerForConfigReload`, `ConfigReloadPending`.
 - `source/src/include/executor/spi.h` — SPI manager API.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/bgworker-and-parallel.md](../../../../../idioms/bgworker-and-parallel.md)
+- [idioms/guc-variables.md](../../../../../idioms/guc-variables.md)

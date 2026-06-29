@@ -57,3 +57,7 @@ Defines `PGPROC` (the per-process shared-memory state) and `PROC_HDR` (the globa
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/pgproc-fields.md](../../../../data-structures/pgproc-fields.md)
+- [idioms/clog-slru.md](../../../../idioms/clog-slru.md)
+- [idioms/fastpath-locks.md](../../../../idioms/fastpath-locks.md)
+- [idioms/subxact-xidcache-and-pgproc.md](../../../../idioms/subxact-xidcache-and-pgproc.md)
+

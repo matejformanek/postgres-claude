@@ -70,3 +70,5 @@ adding a new pass needs to slot it into this list. [inferred]
 <!-- backlinks:auto -->
 - [architecture/planner.md](../../../../../architecture/planner.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/plannerinfo.md](../../../../../data-structures/plannerinfo.md)
+

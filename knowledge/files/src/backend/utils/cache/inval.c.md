@@ -92,3 +92,7 @@ verified-by-code: 12 — from-comment: 14 — from-readme: 0 — inferred: 0 —
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
+- [idioms/cache-invalidation-registration.md](../../../../../idioms/cache-invalidation-registration.md)
+- [idioms/sinvaladt-broadcast.md](../../../../../idioms/sinvaladt-broadcast.md)
+- [idioms/syscache-invalidation-flow.md](../../../../../idioms/syscache-invalidation-flow.md)
+

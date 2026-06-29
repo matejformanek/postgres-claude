@@ -95,3 +95,7 @@ file's own functions do no locking. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `storage-buffer`](../../../../../issues/storage-buffer.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/buffertag.md](../../../../../data-structures/buffertag.md)

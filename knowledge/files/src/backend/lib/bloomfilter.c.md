@@ -55,3 +55,7 @@ parallel CREATE INDEX bloom filtering. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `lib`](../../../../issues/lib.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-amcheck.md](../../../../subsystems/contrib-amcheck.md)

@@ -66,3 +66,7 @@ use the public functions.
 
 `waiteventset.h` — the underlying multi-event primitive. Long-lived
 event sets are more efficient than `WaitLatch` / `WaitLatchOrSocket`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/latch-waiteventset.md](../../../../data-structures/latch-waiteventset.md)

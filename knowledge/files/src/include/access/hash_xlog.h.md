@@ -39,3 +39,7 @@ XLOG_HASH_VACUUM_ONE_PAGE     0xC0
 - `xl_hash_update_meta_page` — `ntuples`.
 - `xl_hash_init_meta_page` — full metapage contents replay.
 - `xl_hash_init_bitmap_page` — bitmap size.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/hash-overflow-pages.md](../../../../idioms/hash-overflow-pages.md)

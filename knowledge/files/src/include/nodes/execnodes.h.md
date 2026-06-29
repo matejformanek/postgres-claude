@@ -101,3 +101,9 @@ TupleTableSlot, TupleTableSlotOps, …).
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/estate.md](../../../../data-structures/estate.md)
+- [data-structures/exprcontext.md](../../../../data-structures/exprcontext.md)
+- [data-structures/planstate.md](../../../../data-structures/planstate.md)

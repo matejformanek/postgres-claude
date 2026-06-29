@@ -46,3 +46,5 @@ and `conflict.c` (to identify arbiter indexes).
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/apply-handlers-insert-update-delete.md](../../../../../idioms/apply-handlers-insert-update-delete.md)
+

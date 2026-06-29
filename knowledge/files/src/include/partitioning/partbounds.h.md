@@ -122,3 +122,7 @@ NULL for joinrels. [from-comment]
 <!-- issues:auto:begin -->
 - [Issue register — `include-partitioning`](../../../../issues/include-partitioning.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/partition-bound-comparison.md](../../../../idioms/partition-bound-comparison.md)

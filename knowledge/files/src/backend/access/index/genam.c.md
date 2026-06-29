@@ -61,3 +61,5 @@ The "general index AM" facade with two distinct roles:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/indexamroutine.md](../../../../../data-structures/indexamroutine.md)
+

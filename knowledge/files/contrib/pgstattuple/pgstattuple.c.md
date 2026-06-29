@@ -220,3 +220,7 @@ security issue.
   acquired just to call `RelationGetNumberOfBlocks` in
   `pgstat_index`; heavy for a stat read (nit; intentional but
   worth noting)]** — `:552-554`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgstattuple.md](../../../subsystems/contrib-pgstattuple.md)

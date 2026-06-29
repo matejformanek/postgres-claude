@@ -73,3 +73,7 @@ Public wrappers: `expression_tree_walker`, `expression_tree_mutator`,
 ## Cross-references
 
 - Implementation: `source/src/backend/nodes/nodeFuncs.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/query-tree-walkers.md](../../../../idioms/query-tree-walkers.md)

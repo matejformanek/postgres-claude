@@ -51,3 +51,5 @@ Reusable helpers for table-AM implementations that need to TOAST varlena attribu
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/toast-chunk-write.md](../../../../../idioms/toast-chunk-write.md)
+

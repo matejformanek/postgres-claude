@@ -272,3 +272,7 @@ wrapper:
 - `[ISSUE-api-shape: sepgsql_setcon takes text and stores nothing
   about who called it or when — the pending label list does not
   record subid for client visibility (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

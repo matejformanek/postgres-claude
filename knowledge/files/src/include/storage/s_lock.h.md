@@ -72,3 +72,7 @@ NEVER include directly — `spin.h` is the public face.
 ## Issues
 
 None at header level.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/spinlock-discipline.md](../../../../idioms/spinlock-discipline.md)

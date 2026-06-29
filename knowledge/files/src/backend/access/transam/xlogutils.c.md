@@ -160,3 +160,5 @@ process uses different callbacks in `xlogrecovery.c`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/xlog-region-replay.md](../../../../../idioms/xlog-region-replay.md)
+

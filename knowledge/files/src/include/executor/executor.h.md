@@ -59,3 +59,7 @@ provided by the corresponding node*.c files.
 
 - [verified-by-code] symbols + ordering of declarations.
 - [from-comment] eflags semantics at top of file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/epq-state-init.md](../../../../idioms/epq-state-init.md)

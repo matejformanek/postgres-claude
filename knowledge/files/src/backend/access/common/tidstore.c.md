@@ -56,3 +56,6 @@ An in-memory set of `ItemPointerData` (block + offset), organised as a radix tre
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/memory-context-slab-generation-bump.md](../../../../../idioms/memory-context-slab-generation-bump.md)
+- [idioms/vacuum-tid-store.md](../../../../../idioms/vacuum-tid-store.md)
+

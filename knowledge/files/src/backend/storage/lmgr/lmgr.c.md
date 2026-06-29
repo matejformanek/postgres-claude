@@ -119,3 +119,5 @@ Takes `LOCKTAG_RELATION_EXTEND`. `lock.c:LockAcquireExtended` knows this tag is 
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)
+- [idioms/relation-extension-lock.md](../../../../../idioms/relation-extension-lock.md)
+

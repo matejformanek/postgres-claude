@@ -122,3 +122,5 @@ five parallel switch-statements stacked end to end.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/query-tree-walkers.md](../../../../idioms/query-tree-walkers.md)
+

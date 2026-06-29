@@ -82,3 +82,7 @@ the rest of the backend includes to *use* JIT; it knows nothing about LLVM.
   side (GUC plumbing, dlopen-the-provider).
 - `source/src/backend/jit/llvm/llvmjit.c` — `_PG_jit_provider_init` lives
   here for the LLVM provider.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/jit-provider-and-context.md](../../../../idioms/jit-provider-and-context.md)

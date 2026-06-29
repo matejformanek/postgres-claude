@@ -211,3 +211,9 @@ that makes back-to-back `GetSnapshotData` calls O(1) on an idle system.
 - [data-structures/pgproc-fields.md](../../../../../data-structures/pgproc-fields.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)
+- [idioms/commit-transaction-sequence.md](../../../../../idioms/commit-transaction-sequence.md)
+- [idioms/snapshot-static-and-current.md](../../../../../idioms/snapshot-static-and-current.md)
+- [idioms/subxact-visibility-and-overflow.md](../../../../../idioms/subxact-visibility-and-overflow.md)
+- [idioms/subxact-xidcache-and-pgproc.md](../../../../../idioms/subxact-xidcache-and-pgproc.md)
+- [idioms/xmin-horizon-management.md](../../../../../idioms/xmin-horizon-management.md)
+

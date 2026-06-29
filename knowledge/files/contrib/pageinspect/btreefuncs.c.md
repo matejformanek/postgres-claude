@@ -193,3 +193,7 @@ at `:548-549` for tuple length.
 - **[ISSUE-correctness: !heapkeyspace heuristic at `:568` may
   mis-classify pivot vs non-pivot tuples; comment at `:519-541`
   acknowledges (nit, pre-PG12 only)]**.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)
