@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-06-29 — Harvested 29 internals questions (06-23..06-29 window); heaviest tag executor-and-planner (7); flagged a 3-question vacuum-horizon gap cluster as a candidate subsystem doc/skill (PR #pending).
