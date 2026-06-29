@@ -1,0 +1,2 @@
+**pg-upstream-watcher** 2026-06-29 — 13 new master commits since `02f699c14163`; headline = master stamped 19beta1→20devel (PG 19 branched); 7 deep explainers, 8 corpus paths flagged (anchor NOT bumped), catversion 202606251→202606281; buildfarm: 4 non-flake candidates (recurring unicorn pg_amcheckCheck) + git-stage flake cluster (PR #__).
+</content>
