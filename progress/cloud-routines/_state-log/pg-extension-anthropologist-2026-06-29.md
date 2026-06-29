@@ -1,0 +1,1 @@
+**pg-extension-anthropologist** 2026-06-29 — 4 ideologies (synchdb/pg_ducklake/pgfincore/pg-safeupdate →89); refilled extensions queue at >100★ floor (saturated, decoderbufs left [pending]) (PR #<pending>).
