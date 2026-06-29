@@ -252,3 +252,16 @@ table of contents, exclude chapters whose slug already exists under
 [skipped:404-no-such-docs-slug] spgist-extensibility https://www.postgresql.org/docs/current/spgist-extensibility.html  # re-confirmed 404
 [skipped:404-no-such-docs-slug] brin-extensibility https://www.postgresql.org/docs/current/brin-extensibility.html  # 404
 [skipped:404-no-such-docs-slug] gin-extensibility https://www.postgresql.org/docs/current/gin-extensibility.html  # re-confirmed 404
+
+## Refill 2026-06-28 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; Part VII internals leaves are saturated. Re-walked Appendix F (contrib modules) for the SECOND coherent contrib family: the **reference-implementation / hook-example modules** — the canonical "how to do X" example code for the extension/AM/FDW/hook skills, distinct from the 06-23 backend-INTROSPECTION family. Each picked module maps to an existing skill or subsystem doc: bloom→access-method-apis (the canonical custom index AM), postgres_fdw→fdw-* (the FDW reference impl), auto_explain→executor-and-planner + bgworker-and-extensions hooks (ExecutorStart/Run/Finish/End hook example), pg_prewarm→storage-buffer + bgworker (autoprewarm bgworker), pg_stat_statements→testing + R13 contrib gate (query jumbling/normalization — the contrib R13 specifically requires for catalog/executor phases), test_decoding→logicaldecoding-* (the output-plugin example), passwordcheck→bgworker-and-extensions (check_password_hook example), basic_archive→archive-module-callbacks (the archive_library example). All 8 HEAD-probed 200 this run; the user-facing function/opclass contrib refs (dblink/pg_trgm/btree_gin — also 200) were excluded as reference, not internals/example prose. Markers left [in-progress:cloud/pg-docs-miner/2026-06-28] for the merger to flip to the squash SHA.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-28] bloom https://www.postgresql.org/docs/current/bloom.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] postgres-fdw https://www.postgresql.org/docs/current/postgres-fdw.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] auto-explain https://www.postgresql.org/docs/current/auto-explain.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] pgprewarm https://www.postgresql.org/docs/current/pgprewarm.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] pgstatstatements https://www.postgresql.org/docs/current/pgstatstatements.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] test-decoding https://www.postgresql.org/docs/current/test-decoding.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] passwordcheck https://www.postgresql.org/docs/current/passwordcheck.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] basic-archive https://www.postgresql.org/docs/current/basic-archive.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] auth-delay https://www.postgresql.org/docs/current/auth-delay.html
+[in-progress:cloud/pg-docs-miner/2026-06-28] pgsurgery https://www.postgresql.org/docs/current/pgsurgery.html
