@@ -1,7 +1,7 @@
 # `src/backend/utils/activity/pgstat_relation.c`
 
-- **Last verified commit:** `ef6a95c7c64`
-- **Lines:** ~1000
+- **Last verified commit:** `4abf411e2328`
+- **Lines:** ~1013
 - **Source:** `source/src/backend/utils/activity/pgstat_relation.c`
 
 The largest per-kind file. Backs `pg_stat_user_tables`,

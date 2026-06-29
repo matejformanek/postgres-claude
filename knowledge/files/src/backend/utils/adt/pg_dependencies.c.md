@@ -1,7 +1,7 @@
 # `src/backend/utils/adt/pg_dependencies.c`
 
-- **File:** `source/src/backend/utils/adt/pg_dependencies.c` (873 lines)
-- **Last verified commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422` (2026-06-03)
+- **File:** `source/src/backend/utils/adt/pg_dependencies.c` (872 lines)
+- **Last verified commit:** `4abf411e2328` (re-pinned 2026-06-29 from `4b0bf0788b0`)
 
 ## Purpose
 
@@ -28,11 +28,11 @@ walked by `pg_parse_json` via these callbacks:
 - which together accept the schema
   `[{"attributes": [a1,a2,...], "dependency": k, "degree": d}, ...]`
   (`:741-744` [from-comment]).
-- `build_mvdependencies(parse_state, str)` (~`:680+`) — after
+- `build_mvdependencies(parse_state, str)` (`:647`) — after
   successful parse, builds an `MVDependency *` per item, checks no
-  two items have duplicate attribute lists (`:706-723`), then calls
+  two items have duplicate attribute lists (`:702-720`), then calls
   `statext_dependencies_serialize` to produce the bytea
-  (`:726`). [verified-by-code]
+  (`:725`). [verified-by-code]
 
 ### fmgr entry points
 

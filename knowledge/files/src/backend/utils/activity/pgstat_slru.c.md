@@ -1,7 +1,7 @@
 # `src/backend/utils/activity/pgstat_slru.c`
 
-- **Last verified commit:** `ef6a95c7c64`
-- **Lines:** ~220
+- **Last verified commit:** `4abf411e2328`
+- **Lines:** ~241
 - **Source:** `source/src/backend/utils/activity/pgstat_slru.c`
 
 Backs `pg_stat_slru`. Fixed-amount per known SLRU pool (CommitTs,

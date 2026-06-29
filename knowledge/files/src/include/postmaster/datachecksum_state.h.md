@@ -1,8 +1,18 @@
 # `src/include/postmaster/datachecksum_state.h`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~54
+- **Last verified commit:** `4abf411e2328`
+- **Lines:** ~28
 - **Source:** `source/src/include/postmaster/datachecksum_state.h`
+
+> **AUDIT 2026-06-29 (MAJOR drift).** The `datachecksum_state.[ch]`
+> cleanup cluster (`a4f02cab4b97` + `c48e7b2c8bd0` + `c008b7ea10a5` +
+> `0edbf72f7683`, Heikki Linnakangas, in the `419ce13b7019..4abf411e2328`
+> window) **gutted this header from ~54 to 28 lines.** Both enums
+> (`DataChecksumsWorkerOperation`, `DataChecksumsWorkerResult`) and
+> `StartDataChecksumsWorkerLauncher` are no longer declared here — they
+> moved INTO `datachecksum_state.c` (the enums at `:280`/`:286`,
+> `StartDataChecksumsWorkerLauncher` is now a `static` function at
+> `:603`). The header now exposes only the four prototypes below.
 
 API for the **DataChecksumsWorker** background-worker pair that
 enables/disables page checksums online (PG18-era feature). One
@@ -14,33 +24,37 @@ state change in lockstep. [from-comment] [inferred]
 
 ## API / declarations
 
-### Enums
-- `DataChecksumsWorkerOperation { ENABLE_DATACHECKSUMS,
-  DISABLE_DATACHECKSUMS }` — direction the worker is processing. [verified-by-code]
-- `DataChecksumsWorkerResult { DATACHECKSUMSWORKER_SUCCESSFUL = 0,
-  DATACHECKSUMSWORKER_ABORTED, DATACHECKSUMSWORKER_FAILED,
-  DATACHECKSUMSWORKER_DROPDB }` — outcome per database. Comment
-  explicitly notes this is exported here so injection-point tests can
-  reference it. [verified-by-code] [from-comment]
+The header `#include`s `storage/procsignal.h` (for
+`ProcSignalBarrierType`) and declares exactly four prototypes.
 
 ### Barrier API
-- `AbsorbDataChecksumsBarrier(ProcSignalBarrierType barrier)` —
+- `bool AbsorbDataChecksumsBarrier(ProcSignalBarrierType barrier)` —
   invoked from a backend's barrier-absorption path when the postmaster
   raises a "data checksums state changed" barrier; returns true on
   success. [verified-by-code] [inferred]
-- `EmitAndWaitDataChecksumsBarrier(uint32 state)` — issue a
+- `void EmitAndWaitDataChecksumsBarrier(uint32 state)` — issue a
   ProcSignalBarrier carrying the new global state, then wait for
   every backend to absorb. [verified-by-code]
 
 ### Background-worker lifecycle
-- `StartDataChecksumsWorkerLauncher(DataChecksumsWorkerOperation op,
-  int cost_delay, int cost_limit)` — invoked from SQL (`pg_enable_
-  data_checksums` / `pg_disable_data_checksums` style functions) to
-  spawn the launcher with vacuum-style throttling. [verified-by-code]
-- `DataChecksumsWorkerLauncherMain(Datum arg)` — bgw_main_arg
+- `void DataChecksumsWorkerLauncherMain(Datum arg)` — bgw_main_arg
   entrypoint for the launcher. [verified-by-code]
-- `DataChecksumsWorkerMain(Datum arg)` — bgw_main_arg entrypoint for
-  per-database workers. [verified-by-code]
+- `void DataChecksumsWorkerMain(Datum arg)` — bgw_main_arg entrypoint
+  for per-database workers. [verified-by-code]
+
+### No longer in this header (moved to `datachecksum_state.c`)
+- The two enums `DataChecksumsWorkerOperation` (`{ ENABLE_DATACHECKSUMS,
+  DISABLE_DATACHECKSUMS }`) and `DataChecksumsWorkerResult`
+  (`{ DATACHECKSUMSWORKER_SUCCESSFUL = 0, ..._ABORTED, ..._FAILED,
+  ..._DROPDB }`) are now defined privately in `datachecksum_state.c`
+  (`:280` / `:286`). The cleanup cluster removed the "exported here so
+  injection-point tests can reference it" comment along with the
+  declarations. [verified-by-code]
+- `StartDataChecksumsWorkerLauncher(op, cost_delay, cost_limit)` is now
+  a `static` function in `datachecksum_state.c` (`:603`), called only
+  by the in-file SQL wrappers `enable_data_checksums` /
+  `disable_data_checksums`. It is no longer part of the public API.
+  [verified-by-code]
 
 ## Notable invariants / details
 
@@ -65,36 +79,35 @@ state change in lockstep. [from-comment] [inferred]
 
 ## Potential issues
 
-- Lines 40-41. The barrier functions take/return raw `uint32` /
-  `ProcSignalBarrierType`. There is no documented contract for what
-  values of `state` are legal at `EmitAndWaitDataChecksumsBarrier`
-  call sites. An out-of-range value would be silently propagated to
-  every backend. [verified-by-code]
+- **`EmitAndWaitDataChecksumsBarrier(uint32 state)`.** The barrier
+  functions take/return raw `uint32` / `ProcSignalBarrierType`. There
+  is no documented contract for what values of `state` are legal at
+  call sites; an out-of-range value would be silently propagated to
+  every backend. (The legal transitions are enforced in
+  `datachecksum_state.c`'s `checksum_barriers[9]` table, not here.)
+  [verified-by-code]
   [ISSUE-api-shape: `state` parameter is `uint32` with no enum;
   legal values are implicit (maybe)]
-- Lines 46-48. `StartDataChecksumsWorkerLauncher` is publicly
-  declared but has no documented privilege requirement at this layer.
-  The actual SQL-callable wrapper presumably restricts to superuser;
-  if a third caller (e.g. an extension) used this directly without
-  the wrapper, the throttling-bypass + cluster-wide-rewrite combo
-  would be a privilege-elevation footgun. [unverified]
-  [ISSUE-security: `StartDataChecksumsWorkerLauncher` exposes a
-  cluster-wide rewrite primitive; doc string should pin the
-  caller-side privilege contract (maybe)]
-- Lines 21-25. `DataChecksumsWorkerOperation` has only enable/disable
-  with no "verify-only" option. A read-only verification mode would
-  be useful (currently the only ways to verify are amcheck and a full
-  base backup). [inferred]
+- **`StartDataChecksumsWorkerLauncher` is no longer header-exposed.**
+  The 2026-06-29 audit confirms the cleanup cluster made it `static`
+  in `datachecksum_state.c`, so the prior privilege-elevation-footgun
+  concern (a third caller bypassing the SQL wrapper) is now moot at the
+  ABI level: only the in-file `enable/disable_data_checksums` wrappers
+  reach it. [verified-by-code]
+  [ISSUE-resolved: launcher entry no longer publicly callable]
+- **`DataChecksumsWorkerOperation` (now in `.c`)** has only
+  enable/disable with no "verify-only" option. A read-only verification
+  mode would be useful (currently the only ways to verify are amcheck
+  and a full base backup). [inferred]
   [ISSUE-question: should there be a `VERIFY_DATACHECKSUMS` operation
   for an online integrity scan without rewriting? (nit)]
-- Lines 30-37. The result enum starts at 0 with
-  `DATACHECKSUMSWORKER_SUCCESSFUL` and grows; the only ABI commitment
-  in the comment is that injection-point tests reference it. The
-  values are not stored on disk or in WAL, so reordering is safe, but
-  if a future test serializes the value it becomes an implicit ABI.
+- **`DataChecksumsWorkerResult` ABI (now in `.c`).** The result enum
+  starts at 0 with `DATACHECKSUMSWORKER_SUCCESSFUL` and grows; values
+  are not stored on disk or in WAL, so reordering is safe. With the
+  enum no longer exported from the header, the prior "injection-point
+  tests reference it" ABI note no longer applies at this layer.
   [verified-by-code]
-  [ISSUE-undocumented-invariant: enum ordinals are not currently
-  serialized but may become so if tests start logging them (nit)]
+  [ISSUE-undocumented-invariant: enum ordinals are not serialized (nit)]
 
 ## Cross-references
 

@@ -1,6 +1,6 @@
 # `contrib/pg_stash_advice/stashfuncs.c`
 
-- **Last verified commit:** `e18b0cb7344`
+- **Last verified commit:** `4abf411e2328`
 - **Lines:** 347
 - **Source:** `source/contrib/pg_stash_advice/stashfuncs.c`
 

@@ -1,6 +1,6 @@
 # `src/include/tsearch/ts_type.h`
 
-- **Last verified commit:** `e18b0cb7344`
+- **Last verified commit:** `4abf411e2328`
 - **Lines:** ~273
 - **Source:** `source/src/include/tsearch/ts_type.h`
 
