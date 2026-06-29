@@ -1,7 +1,7 @@
 # `src/backend/utils/activity/pgstat_io.c`
 
-- **Last verified commit:** `ef6a95c7c64`
-- **Lines:** ~540
+- **Last verified commit:** `4abf411e2328`
+- **Lines:** ~558
 - **Source:** `source/src/backend/utils/activity/pgstat_io.c`
 
 Backs `pg_stat_io` (PG16+): a 3-D matrix of counters keyed by
@@ -25,6 +25,16 @@ For each cell: count + accumulated time (when `track_io_timing` on).
   bgwriter writing temp_relation in bulkread context) ERROR if updated.
 
 Flushed via `pgstat_io_flush_cb` (fixed-amount). [from-comment]
+
+The validity matrix lives in two helpers, both still at their cited
+shape: `pgstat_tracks_io_object` (`pgstat_io.c:404`) and
+`pgstat_tracks_io_op` (`pgstat_io.c:479`). Commit `4abf411e2328`
+("pg_stat_io: Don't flag extends by autovacuum launcher", Melanie
+Plageman) refined `pgstat_tracks_io_object`: a `B_AUTOVAC_LAUNCHER`
+in `IOCONTEXT_VACUUM` (`:460`) or either autovac type in
+`IOCONTEXT_BULKWRITE` (`:463`) now returns false, so the launcher no
+longer surfaces (and no longer ERRORs on) spurious `extend` rows in
+those contexts. [verified-by-code]
 
 ## Synthesized by
 <!-- backlinks:auto -->

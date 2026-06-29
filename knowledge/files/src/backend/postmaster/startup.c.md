@@ -1,7 +1,7 @@
 # startup.c
 
 - **Source:** `source/src/backend/postmaster/startup.c` (377 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Last verified commit:** `4abf411e2328` (re-pinned 2026-06-29; cites point to decl/return-type lines, all hold)
 - **Depth:** read (entire file)
 
 ## Purpose

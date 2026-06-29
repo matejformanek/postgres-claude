@@ -1,8 +1,8 @@
 # xlogprefetcher.c
 
 - **Source path:** `source/src/backend/access/transam/xlogprefetcher.c`
-- **Lines:** 1106
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 1107
+- **Last verified commit:** `4abf411e2328`
 - **Companion files:** `source/src/include/access/xlogprefetcher.h`,
   `xlogreader.c` (wrapped), `xlogrecovery.c` (the consumer),
   `storage/buffer/bufmgr.c` (`PrefetchBuffer`).
@@ -43,9 +43,9 @@ something useful (mainly Linux).
   [verified-by-code]
 - `XLogPrefetcherGetReader(prefetcher)` — `xlogprefetcher.c:406`
   [verified-by-code]
-- `XLogPrefetcherBeginRead(prefetcher, recPtr)` — `xlogprefetcher.c:967`
+- `XLogPrefetcherBeginRead(prefetcher, recPtr)` — `xlogprefetcher.c:968`
   [verified-by-code]
-- `XLogPrefetcherReadRecord(prefetcher, **errmsg)` — `xlogprefetcher.c:986`
+- `XLogPrefetcherReadRecord(prefetcher, **errmsg)` — `xlogprefetcher.c:987`
   [verified-by-code]
 - `XLogPrefetcherComputeStats(prefetcher)` — `xlogprefetcher.c:415`
   [verified-by-code]
@@ -54,17 +54,18 @@ something useful (mainly Linux).
 - Shmem + GUC hooks: `XLogPrefetchShmemRequest`,
   `XLogPrefetchShmemInit`, `XLogPrefetchResetStats`,
   `XLogPrefetchReconfigure`, `check_recovery_prefetch`,
-  `assign_recovery_prefetch` — `xlogprefetcher.c:305-1100`
+  `assign_recovery_prefetch` — `xlogprefetcher.c:305-1101`
   [verified-by-code]
 - `pg_stat_get_recovery_prefetch(PG_FUNCTION_ARGS)` —
-  `xlogprefetcher.c:829` [verified-by-code]
+  `xlogprefetcher.c:830` [verified-by-code]
 
 ## Key types
 
 - `XLogPrefetcher` — wraps an `XLogReaderState *`, a
   `LsnReadQueue` of in-flight prefetches, per-block filters
   (relations / forks to skip), and stats counters.
-  [verified-by-code] `xlogprefetcher.c:962-…`.
+  [verified-by-code] `xlogprefetcher.c:127-161` (struct def; prior
+  cite `:962` was stale — corrected 2026-06-29).
 - `LsnReadQueue` — fixed-size circular buffer of LSN→prefetched
   buffer hints. Helpers: `lrq_alloc`, `lrq_inflight`,
   `lrq_completed`, `lrq_prefetch`, `lrq_complete_lsn`.
@@ -80,16 +81,16 @@ something useful (mainly Linux).
    or truncated.** `XLogPrefetcherAddFilter` /
    `XLogPrefetcherIsFiltered` / `XLogPrefetcherCompleteFilters`
    suppress prefetch for blocks that will be invalid until a later
-   record. [verified-by-code] `xlogprefetcher.c:861-957`.
+   record. [verified-by-code] `xlogprefetcher.c:862-958`.
 
 3. **Distance and completion bookkeeping** are GUC-driven
    (`recovery_prefetch`, `maintenance_io_concurrency`).
    `XLogPrefetchReconfigure` rebuilds the queue on GUC change.
-   [verified-by-code] `xlogprefetcher.c:345-365, 1086-1100`.
+   [verified-by-code] `xlogprefetcher.c:345-365, 1087-1101`.
 
 ## Functions of note
 
-### `XLogPrefetcherReadRecord` — `xlogprefetcher.c:986`
+### `XLogPrefetcherReadRecord` — `xlogprefetcher.c:987`
 [verified-by-code]
 
 The drop-in replacement: calls `XLogReadAhead` to decode further
@@ -103,7 +104,7 @@ The callback `lrq_prefetch` uses to find the next block worth
 prefetching: looks at each registered buffer in upcoming records,
 checks filters, dispatches `PrefetchBuffer`.
 
-### `pg_stat_get_recovery_prefetch` — `xlogprefetcher.c:829`
+### `pg_stat_get_recovery_prefetch` — `xlogprefetcher.c:830`
 [verified-by-code]
 
 Exposes counters: `prefetch`, `hit`, `skip_init`, `skip_new`,

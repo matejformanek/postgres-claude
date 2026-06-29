@@ -2,7 +2,7 @@
 
 - **Source path:** `source/src/backend/access/transam/xact.c`
 - **Lines:** 6503
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `4abf411e2328`
 - **Companion files:** `source/src/include/access/xact.h`, `README` (this directory),
   `source/src/backend/access/transam/parallel.c`,
   `source/src/backend/access/transam/twophase.c`,

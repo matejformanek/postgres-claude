@@ -1,8 +1,8 @@
 # `src/backend/utils/adt/float.c`
 
-- **File:** `source/src/backend/utils/adt/float.c` (4321 lines)
+- **File:** `source/src/backend/utils/adt/float.c` (4389 lines)
 - **Header:** `source/src/include/utils/float.h` (inline helpers)
-- **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)
+- **Last verified commit:** `4abf411e2328` (re-pinned 2026-06-29 from `ef6a95c7c64`)
 
 ## Purpose
 
@@ -90,7 +90,8 @@ infrastructure.
   `"-Infinity"` case-insensitively.
 - **`float8_accum`** (`:3090`) — classical Welford-Knuth running
   Sx / Sxx accumulator, stored as a float8[3] array (`{N, Sx, Sxx}`)
-  via `check_float8_array` (`:3015`). The 3-element shape is
+  via `check_float8_array` (defined `:2974`; called from `float8_accum`
+  at `:3100`). The 3-element shape is
   the implicit ABI between `_accum`, `_combine`, `_var_*`,
   `_stddev_*` finalfns.
 - **`float8_combine`** (`:2998`) — used by parallel aggregation.

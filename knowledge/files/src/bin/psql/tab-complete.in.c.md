@@ -1,15 +1,28 @@
 ---
 path: src/bin/psql/tab-complete.in.c
-anchor_sha: 4b0bf0788b0
-loc: 7341
+anchor_sha: 4abf411e2328
+loc: 7343
 depth: deep
 ---
 
 # tab-complete.in.c
 
 - **Source path:** `source/src/bin/psql/tab-complete.in.c`
-- **Last verified commit:** `4b0bf0788b0`
-- **LOC:** 7341
+- **Last verified commit:** `4abf411e2328` (re-pinned 2026-06-29 from `4b0bf0788b0`)
+- **LOC:** 7343
+
+> **AUDIT 2026-06-29.** Anchor-bump trigger: `56b2792cf84f` (Fujii
+> Masao) added tab completion for the subscription `wal_receiver_timeout`
+> option — the new `"wal_receiver_timeout"` entries land in the
+> CREATE/ALTER SUBSCRIPTION option lists at `:2384` and `:3970` (a
+> region this doc does not cite by line). Re-pinning from the long-stale
+> `4b0bf0788b0` also surfaced an accumulated **~+2/+3 downward drift** in
+> the identifier-round-trip / exec_query region (6700-7100): `make_like_pattern`
+> encodings comment `:6793→:6797`, `parse_identifier` `:6826→:6829`,
+> `requote_identifier` `:6926→:6928`, `exec_query` `:7041→:7043`. The
+> SQL-building interpolation cites (`:6128`–`:6224`) and catalog-suppression
+> cites (`:6157-6164`, `:6182-6184`) are block landmarks accurate to ±2 and
+> were left as-is.
 
 ## Purpose
 
@@ -50,7 +63,7 @@ the interactive session — see "Phase D notes" for the implications.
 | `escape_string(text)` | `PQescapeStringConn` wrapper | 6758 |
 | `requote_identifier(nsp, item, …)` | quote-aware identifier rejoiner | 6926 |
 | `parse_identifier(ident, …)` | quote-aware splitter for `schema.name` | 6826 |
-| `exec_query(query)` | `PQexec` wrapper that silently swallows errors | 7041 |
+| `exec_query(query)` | `PQexec` wrapper that silently swallows errors | 7043 |
 | `get_previous_words(point, …)` | parse `rl_line_buffer` (+ buffered multi-line) into words | 7080 |
 | `initialize_readline` | startup hook | 1537 |
 | `SchemaQuery` (struct) | declarative catalog query for a class of names | 129 |
@@ -77,8 +90,8 @@ Inputs are the partial word from readline (`text`) plus context
   `PQmblenBounded(word, pset.encoding)`, appends `%`, then
   funnels through `escape_string`. The multibyte handling is
   explicitly there "to avoid getting confused in unsafe client
-  encodings." [from-comment, tab-complete.in.c:6793-6795;
-  verified-by-code, 6781-6811]
+  encodings." [from-comment, tab-complete.in.c:6797-6799;
+  verified-by-code, 6783-6813]
 - **SQL building**: all the `'%s'` interpolations at 6128, 6137,
   6175, 6212, 6215, 6220, 6224 take ONLY pre-escaped strings
   (`e_object_like`, `e_schemaname`, `e_ref_object`, `e_ref_schema`).
@@ -94,15 +107,15 @@ Inputs are the partial word from readline (`text`) plus context
   args. Same trust model. [verified-by-code]
 - **Hard LIMIT 1000** appended at 6244 from `completion_max_records`
   (set in `initialize_readline`). Caps result rows; no time cap.
-  [verified-by-code, tab-complete.in.c:6243-6245, 1575]
+  [verified-by-code, tab-complete.in.c:6245-6247, 1575]
 - **`exec_query` uses `PQexec`, not `PQexecParams`.** Errors are
-  swallowed silently (the `#ifdef NOT_USED` block at 7057-7060
+  swallowed silently (the `#ifdef NOT_USED` block at 7059-7062
   shows where a `pg_log_error` would go). [verified-by-code,
-  tab-complete.in.c:7041-7066]
+  tab-complete.in.c:7043-7068]
 
 ### Identifier round-trip path — `parse_identifier` / `requote_identifier`
 
-When the user types `"foo'; DROP --"`<Tab>, `parse_identifier` (6826)
+When the user types `"foo'; DROP --"`<Tab>, `parse_identifier` (6829)
 walks the input; the `inquotes` flag flips on `"`, doubles `""`, and
 the unquoted-vs-quoted state is propagated to `objectquoted` /
 `schemaquoted` booleans. The dequoted name string is then fed through
@@ -111,12 +124,12 @@ quote characters reach the server only as the LIKE-pattern value
 inside a `'…'` string literal — they cannot escape it because
 `PQescapeStringConn` doubles embedded single quotes per the
 connection's `standard_conforming_strings` and encoding state.
-[verified-by-code, tab-complete.in.c:6826 ff., 6758-6769]
+[verified-by-code, tab-complete.in.c:6829 ff., 6760-6771]
 
-`requote_identifier` (6926) does the inverse on the way back: takes
+`requote_identifier` (6928) does the inverse on the way back: takes
 the server-returned (schema, name) and re-quotes the visible string
 the user sees in the completion list, with `identifier_needs_quotes`
-checking whether the name actually requires quoting (6293-6296: if the
+checking whether the name actually requires quoting (6295-6298: if the
 user did NOT type a quote, completion never inserts one for a name
 that would need quoting — to avoid surprise).
 
@@ -227,7 +240,7 @@ All three use the same escape pipeline. [verified-by-code, 2104-2123]
   next cycle leaks the previous values. [verified-by-code,
   2141-2149]
 - **No SSL / connection-status check inside `exec_query`** beyond
-  `PQstatus(pset.db) != CONNECTION_OK` (7045-7046). If the connection
+  `PQstatus(pset.db) != CONNECTION_OK` (7047-7048). If the connection
   is in a TLS-renegotiation state, `PQexec` blocks the readline UI
   thread. Practical impact: visible UI freeze, not a security
   issue. [verified-by-code]
@@ -235,24 +248,24 @@ All three use the same escape pipeline. [verified-by-code, 2104-2123]
 ## Potential issues
 
 - **[ISSUE-trust-boundary: Tab queries join the user's open
-  transaction with no savepoint]** `tab-complete.in.c:7041-7066` —
+  transaction with no savepoint]** `tab-complete.in.c:7043-7068` —
   a catalog query error inside an explicit `BEGIN` aborts the
   user's transaction silently. The error is swallowed at 7057
   (`#ifdef NOT_USED`). Severity: maybe (debug-pain class; rare in
   practice but real).
 - **[ISSUE-undocumented-invariant: `completion_max_records = 1000`
-  silently truncates]** `tab-complete.in.c:1575, 218, 6244` — if the
+  silently truncates]** `tab-complete.in.c:1575, 218, 6246` — if the
   matching catalog object count exceeds 1000, the user sees an
   arbitrary subset. No order-by clause, so the subset is
   server-implementation-dependent. Severity: nit (UX, not security).
 - **[ISSUE-info-disclosure: server-supplied identifiers used to
-  build the next completion-list display]** `tab-complete.in.c:6305,
-  requote_identifier:6926` — output is to readline, which renders to
+  build the next completion-list display]** `tab-complete.in.c:6307,
+  requote_identifier:6928` — output is to readline, which renders to
   the terminal. A relname with ANSI escapes would corrupt the
   completion display, similar to the `\d` title hazard. Severity:
   maybe (terminal-spoof class).
 - **[ISSUE-dos: no per-second cap on Tab firing]**
-  `tab-complete.in.c:7041` — a held-down Tab key issues one PQexec per
+  `tab-complete.in.c:7043` — a held-down Tab key issues one PQexec per
   press. Cluster-side rate limiting (pg_stat_statements throttle, role
   connection limits) is the only mitigation. Severity: nit (user
   controls own keyboard).
@@ -261,7 +274,7 @@ All three use the same escape pipeline. [verified-by-code, 2104-2123]
   acknowledges. No reentrancy guard; readline is single-threaded in
   psql. Severity: nit.
 - **[ISSUE-stale-todo: `#ifdef NOT_USED` debug log path for
-  exec_query failures]** `tab-complete.in.c:7057-7060` — perpetually
+  exec_query failures]** `tab-complete.in.c:7059-7062` — perpetually
   compiled-out. A `\set DEBUG_TAB_COMPLETE` GUC-style toggle would
   be useful for troubleshooting; today the only debug path is the
   server log via `log_min_messages`. Severity: nit.
@@ -271,12 +284,12 @@ All three use the same escape pipeline. [verified-by-code, 2104-2123]
   noticeable. Severity: nit (perf, not security).
 - **[ISSUE-undocumented-invariant: `parse_identifier` accepts
   partially-quoted names per "psql metacommand tradition"]**
-  `tab-complete.in.c:6815-6824` — `"foo".bar` AND `foo."bar"` both
+  `tab-complete.in.c:6817-6826` — `"foo".bar` AND `foo."bar"` both
   parse. Backend parser doesn't. Edge cases where psql tab-completes
   to a form the server then rejects exist. Severity: nit (cited in
   the function header comment as deliberate).
 - **[ISSUE-trust-boundary: `exec_query` returns NULL on any error
-  including connection loss]** `tab-complete.in.c:7045-7064` — psql
+  including connection loss]** `tab-complete.in.c:7047-7066` — psql
   user sees Tab "doing nothing" instead of "your connection
   dropped". The next real query then fails with a confusing error.
   Severity: nit.
