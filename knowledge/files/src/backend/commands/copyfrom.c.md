@@ -2,7 +2,7 @@
 
 - **Source path:** `source/src/backend/commands/copyfrom.c`
 - **Lines:** 1996
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** pinned `02f699c14163`, re-verified + re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump `4abf411e2328..02f699c14163` (triggering commit: a40fdf658862 "Reject child partition FDWs in FOR PORTION OF", Peter Eisentraut — no documented cite region shifted). Previously `ef6a95c7c64`.
 - **Companion files:** `copyfromparse.c` (the parser), `copy.c` (options), `commands/trigger.c` (BEFORE INSERT/INSTEAD OF triggers), `executor/execPartition.c` (partition routing), `executor/nodeModifyTable.c` (some shared helpers).
 
 ## Purpose

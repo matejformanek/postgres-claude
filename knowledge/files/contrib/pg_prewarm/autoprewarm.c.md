@@ -1,6 +1,8 @@
 # `pg_prewarm/autoprewarm.c` — background-worker dump-and-reload prewarmer
 
-**Verified against source pin `4b0bf0788b0`** (path: `source/contrib/pg_prewarm/autoprewarm.c`)
+**Last verified commit:** `02f699c14163` — re-verified + re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump `4abf411e2328..02f699c14163` (triggering commit: dac36601fd77 "Fix out-of-bounds access in autoprewarm worker", Tomas Vondra). Prior pin `4b0bf0788b0` (path: `source/contrib/pg_prewarm/autoprewarm.c`)
+
+- **Source:** 1019 LOC
 
 ## Role
 
@@ -16,8 +18,8 @@ Also exposes two SQL functions to launch / dump explicitly.
 
 ## Public API
 
-- `autoprewarm_start_worker() -> void` — `source/contrib/pg_prewarm/autoprewarm.c:814`
-- `autoprewarm_dump_now() -> int8` (blocks dumped) — `source/contrib/pg_prewarm/autoprewarm.c:846`
+- `autoprewarm_start_worker() -> void` — `source/contrib/pg_prewarm/autoprewarm.c:824`
+- `autoprewarm_dump_now() -> int8` (blocks dumped) — `source/contrib/pg_prewarm/autoprewarm.c:856`
 
 Plus two bgworker entrypoints (called via the bgworker framework, not
 SQL): `autoprewarm_main`, `autoprewarm_database_main`.
@@ -38,36 +40,36 @@ GUCs (`_PG_init`):
 - A `pid_using_dumpfile` LWLock-protected field ensures exactly one
   reader/writer of the dump file at a time
   (`source/contrib/pg_prewarm/autoprewarm.c:305-316,
-   676-693`).
+   686-704`).
 - Leader uses `BGWORKER_SHMEM_ACCESS` only (no DB connection); per-DB
   worker adds `BGWORKER_BACKEND_DATABASE_CONNECTION`
-  (`source/contrib/pg_prewarm/autoprewarm.c:914,953-954`).
+  (`source/contrib/pg_prewarm/autoprewarm.c:924,963-964`).
 - Per-DB worker `bgw_restart_time = BGW_NEVER_RESTART` so a crash
   doesn't loop [verified-by-code]
-  (`source/contrib/pg_prewarm/autoprewarm.c:956`).
+  (`source/contrib/pg_prewarm/autoprewarm.c:966`).
 - Leader is started either via `RegisterBackgroundWorker` (in
   postmaster) or `RegisterDynamicBackgroundWorker` (from the SQL
   function) [verified-by-code]
-  (`source/contrib/pg_prewarm/autoprewarm.c:921-934`).
+  (`source/contrib/pg_prewarm/autoprewarm.c:931-940`).
 - Dump caps records at `NBuffers` (sized for `MCXT_ALLOC_HUGE`)
-  (`source/contrib/pg_prewarm/autoprewarm.c:702-703`).
+  (`source/contrib/pg_prewarm/autoprewarm.c:712-713`).
 - `apw_state` is a `GetNamedDSMSegment("autoprewarm", ...)` — relies on
   the DSM registry to give the same segment to all workers
-  (`source/contrib/pg_prewarm/autoprewarm.c:881-887`).
+  (`source/contrib/pg_prewarm/autoprewarm.c:891-895`).
 
 ## Notable internals
 
 - The dump-file format is plain text:
   `<<N>>\n` followed by `%u,%u,%u,%u,%u\n` per record
   (database, tablespace, filenumber, forknum, blocknum)
-  (`source/contrib/pg_prewarm/autoprewarm.c:339-361, 745-768`).
+  (`source/contrib/pg_prewarm/autoprewarm.c:339-363, 755-778`).
 - Reading is via `fscanf("%u,%u,...")` — narrow trust boundary because
   the file lives under PGDATA and is written by the same module, but
   any byte that doesn't match emits an `ERROR` "block dump file is
   corrupted at line %d" (line 358).
 - Records are sorted by (database, tablespace, filenumber, forknum,
   blocknum) and dispatched per database
-  (`source/contrib/pg_prewarm/autoprewarm.c:366-438`). Records with
+  (`source/contrib/pg_prewarm/autoprewarm.c:366-451`). Records with
   `database == InvalidOid` (global objects, e.g. shared catalogs) are
   merged into the first per-DB worker's batch.
 - Per-DB worker connects via `BackgroundWorkerInitializeConnectionByOid`
@@ -76,13 +78,13 @@ GUCs (`_PG_init`):
   (`source/contrib/pg_prewarm/autoprewarm.c:519`).
 - Read-stream callback fast-forwards through invalid blocks (out-of-
   range), tracking position so the outer loop knows where the next
-  relation/fork starts (`source/contrib/pg_prewarm/autoprewarm.c:458-494`).
+  relation/fork starts (`source/contrib/pg_prewarm/autoprewarm.c:459-493`).
 - `try_relation_open` lets the worker silently skip relations that have
   been dropped between dump and load
   (`source/contrib/pg_prewarm/autoprewarm.c:546`).
 - Final dump (on shutdown) is suppressed if `apw_load_buffers` was
   interrupted by a shutdown request — to avoid truncating the file
-  to a partial state [from-comment lines 215-221].
+  to a partial state [from-comment lines 219-221].
 
 ## Trust-boundary / Phase D surface
 
@@ -108,7 +110,7 @@ GUCs (`_PG_init`):
    not validated as a regular file; if PGDATA is breached, replacing
    autoprewarm.blocks with a crafted file lets you steer prewarm I/O
    patterns. Already requires PGDATA write — low marginal impact
-   (nit)] (`source/contrib/pg_prewarm/autoprewarm.c:53,322,737-738`).
+   (nit)] (`source/contrib/pg_prewarm/autoprewarm.c:53,322,747-748`).
 3. **`fscanf` on the dump file does no overflow check on `%u`** beyond
    what the type allows. Maximum well-formed input is the line count
    `N` at top; if `N` is set huge, the `dsm_create(sizeof(BlockInfoRecord) * num_elements)`
@@ -127,7 +129,7 @@ GUCs (`_PG_init`):
    have no permission check at C or SQL level — any logged-in user can
    trigger a full NBuffers dump, holding the dump-file lock and
    competing for header spinlocks across all buffers (likely)]
-   (`source/contrib/pg_prewarm/autoprewarm.c:814,846`).
+   (`source/contrib/pg_prewarm/autoprewarm.c:824,856`).
 5. **`apw_detach_shmem` is registered with `before_shmem_exit`** because
    "DSM segments are detached before calling the on_shmem_exit callbacks"
    [from-comment lines 184-191] — correct, but if the autoprewarm
@@ -136,12 +138,15 @@ GUCs (`_PG_init`):
    [ISSUE-correctness: stale bgworker_pid possible after SIGKILL of
    leader; restart will refuse with "already running under PID %d"
    even though the worker is dead (nit)]
-   (`source/contrib/pg_prewarm/autoprewarm.c:197-205,892-901`).
-6. **Per-DB worker's outer while loop** (lines 575-649) re-runs
+   (`source/contrib/pg_prewarm/autoprewarm.c:197-205,903-911`).
+6. **Per-DB worker's outer while loop** (lines 575-663) re-runs
    `read_stream_begin_relation` etc. for each (tablespace, filenumber,
    forknum) tuple; the loop variable `i` is advanced inside the read
-   stream callback via `p.pos`, which is then copied back at line 647.
-   Subtle but appears correct [verified-by-code].
+   stream callback via `p.pos`, which is then copied back at line 658.
+   The callback now fast-forwards `p->pos` past out-of-range blocks so
+   the copy-back lands on the next relation/fork rather than reading
+   `block_info[i]` out of bounds (dac36601fd77). Subtle but appears
+   correct [verified-by-code].
 7. **`fscanf("<<%d>>\n", ...)`** uses `%d` (signed int) for a count that
    could be unsigned. Negative values get into `num_elements` and skip
    the loop or trigger `dsm_create(negative)` via signed→size_t
@@ -163,11 +168,11 @@ GUCs (`_PG_init`):
 
 ## Issues
 
-1. [ISSUE-audit-gap: autoprewarm_start_worker / autoprewarm_dump_now have NO permission check (PUBLIC by default) (likely)] — `source/contrib/pg_prewarm/autoprewarm.c:814,846` and `pg_prewarm/pg_prewarm--1.1.sql` (no REVOKE)
+1. [ISSUE-audit-gap: autoprewarm_start_worker / autoprewarm_dump_now have NO permission check (PUBLIC by default) (likely)] — `source/contrib/pg_prewarm/autoprewarm.c:824,856` and `pg_prewarm/pg_prewarm--1.1.sql` (no REVOKE)
 2. [ISSUE-defense-in-depth: per-DB worker connects with InvalidOid user; cached blocks survive role-perm changes across restart (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:519`
-3. [ISSUE-defense-in-depth: dump file path is unvalidated; symlink/replace attack on PGDATA can steer prewarm I/O (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:53,322,737-738`
+3. [ISSUE-defense-in-depth: dump file path is unvalidated; symlink/replace attack on PGDATA can steer prewarm I/O (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:53,322,747-748`
 4. [ISSUE-resource: leading <<N>> line drives a dsm_create of 20*N bytes; corrupted file can OOM the leader (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:339-346`
-5. [ISSUE-correctness: stale bgworker_pid after SIGKILL of leader blocks re-start (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:197-205,892-901`
+5. [ISSUE-correctness: stale bgworker_pid after SIGKILL of leader blocks re-start (nit)] — `source/contrib/pg_prewarm/autoprewarm.c:197-205,903-911`
 6. [ISSUE-correctness: <<N>> read as signed %d, negative N silently allowed and propagated to size calculation (maybe)] — `source/contrib/pg_prewarm/autoprewarm.c:339,346`
 
 ## Synthesized by

@@ -1,9 +1,11 @@
 ---
 path: src/interfaces/ecpg/preproc/type.c
-anchor_sha: e18b0cb7344cb4bd28468f6c0aeeb9b9241d30aa
+anchor_sha: 02f699c14163
 loc: 730
 depth: deep
 ---
+
+**Last verified commit:** `02f699c14163` — re-verified + re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump `4abf411e2328..02f699c14163` (triggering commit: 7f5e0b22e5ea "Fix null-pointer crash in ECPG compiler", Tom Lane). Prior pin `e18b0cb7344cb4bd28468f6c0aeeb9b9241d30aa`.
 
 # `type.c` — ECPG preprocessor host-variable type model and C-code emitter
 
@@ -23,38 +25,42 @@ identifiers in the output, plus the matching type-tree teardown
 ## Public symbols
 | Symbol | Site | Notes |
 |---|---|---|
-| `ECPGstruct_member_dup` | `type.c:12` | Deep-copies a member list; recurses into nested struct/union/array members `[verified-by-code]` `type.c:21-46` |
-| `ECPGmake_struct_member` | `type.c:52` | Appends a `{name(copied), type(pointer kept)}` node to the end of `*start`; name is `mm_strdup`'d, type stored by pointer `[from-comment]` `type.c:51`, `type.c:59-68` |
-| `ECPGmake_simple_type` | `type.c:71` | Allocates a leaf `ECPGtype`; `counter` only meaningful for varchar/bytea `[from-comment]` `type.c:81` |
-| `ECPGmake_array_type` | `type.c:86` | Wraps an element type as `ECPGt_array`, storing element in `u.element` `[verified-by-code]` `type.c:89-91` |
-| `ECPGmake_struct_type` | `type.c:96` | Builds `ECPGt_struct`/`ECPGt_union` node; dups member list, records `type_name` and `struct_sizeof` `[verified-by-code]` `type.c:100-104` |
-| `ECPGdump_a_type` | `type.c:218` | Top-level type dumper; does hidden-variable shadowing checks then dispatches on `type->type` (array/struct/union/char_variable/descriptor/default) `[verified-by-code]` `type.c:227-382` |
-| `ECPGfree_struct_member` | `type.c:620` | Walks and frees a member list, freeing each `name` and recursing via `ECPGfree_type` `[verified-by-code]` `type.c:623-631` |
-| `ECPGfree_type` | `type.c:634` | Recursive type-tree teardown; frees `type_name`, `size`, `struct_sizeof`, then the node `[verified-by-code]` `type.c:637-671` |
-| `get_dtype` | `type.c:674` | Translates `ECPGdtype` (descriptor item code) to its `ECPGd_*` string; used by descriptor.c emit paths `[verified-by-code]` `type.c:677-727` |
+| `ECPGstruct_member_dup` | `type.c:13` | Deep-copies a member list; recurses into nested struct/union/array members `[verified-by-code]` `type.c:22-47` |
+| `ECPGmake_struct_member` | `type.c:53` | Appends a `{name(copied), type(pointer kept)}` node to the end of `*start`; name is `mm_strdup`'d, type stored by pointer `[from-comment]` `type.c:51`, `type.c:60-69` |
+| `ECPGmake_simple_type` | `type.c:72` | Allocates a leaf `ECPGtype`; `counter` only meaningful for varchar/bytea `[from-comment]` `type.c:81` |
+| `ECPGmake_array_type` | `type.c:87` | Wraps an element type as `ECPGt_array`, storing element in `u.element` `[verified-by-code]` `type.c:89-91` |
+| `ECPGmake_struct_type` | `type.c:97` | Builds `ECPGt_struct`/`ECPGt_union` node; dups member list, records `type_name` and `struct_sizeof` `[verified-by-code]` `type.c:100-104` |
+| `ECPGdump_a_type` | `type.c:219` | Top-level type dumper; does hidden-variable shadowing checks then dispatches on `type->type` (array/struct/union/char_variable/descriptor/default) `[verified-by-code]` `type.c:227-382` |
+| `ECPGfree_struct_member` | `type.c:621` | Walks and frees a member list, freeing each `name` and recursing via `ECPGfree_type` `[verified-by-code]` `type.c:623-631` |
+| `ECPGfree_type` | `type.c:635` | Recursive type-tree teardown; frees `type_name`, `size`, `struct_sizeof`, then the node `[verified-by-code]` `type.c:637-671` |
+| `get_dtype` | `type.c:675` | Translates `ECPGdtype` (descriptor item code) to its `ECPGd_*` string; used by descriptor.c emit paths `[verified-by-code]` `type.c:677-727` |
 
 `ECPGdump_a_type` is the only `ECPGdump_a_*` symbol with external linkage; the
 two recursive helpers (`ECPGdump_a_simple`, `ECPGdump_a_struct`) are `static`
 (forward-declared at `type.c:212-216`).
+<!-- def-line cites in this doc shifted +1 vs prior pin: 7f5e0b22e5ea added one
+line inside ECPGstruct_member_dup's ECPGt_array arm (null-pointer crash fix);
+only symbol-def lines and the dup/make_struct_member bodies moved, interior cites
+from type.c:51 onward are unchanged. -->
 
 ## Internal landmarks
-- **The output-format contract** — the block comment at `type.c:197-211`
+- **The output-format contract** — the block comment at `type.c:198-211`
   documents the 5-field tuple every leaf emits: `type-tag, reference, size,
   arrsize, offset`. This is the wire contract with ecpglib's variadic reader.
-- **`ECPGdump_a_simple`** `type.c:390` — the leaf emitter. Three early-out tags
+- **`ECPGdump_a_simple`** `type.c:391` — the leaf emitter. Three early-out tags
   (`ECPGt_NO_INDICATOR` `type.c:398`, `ECPGt_descriptor` `type.c:402`,
   `ECPGt_sqlda` `type.c:404`) print canned tuples; everything else builds a
   `variable` reference string and an `offset` (sizeof) string in a big `switch`
   on type `type.c:411-535`. The pointer-vs-`&` decision for char/varchar/bytea/
   default hinges on `arrsize`/`varcharsize` being a positive (or non-"0")
   literal and `size == NULL` `type.c:425-431`, `type.c:457-475`, `type.c:526-531`.
-- **`ECPGdump_a_struct`** `type.c:560` — "penetrate a struct and dump the
+- **`ECPGdump_a_struct`** `type.c:561` — "penetrate a struct and dump the
   contents." Chooses `.` vs `->` member access by `atoi(arrsize) == 1`
   `type.c:572-575`; builds parallel prefixes for the data struct and the
   indicator struct, then loops members calling `ECPGdump_a_type` at brace level
   `-1` `type.c:592-609`. Member-count mismatch between data and indicator structs
-  is reported (too few `type.c:603-607`, too many `type.c:611-614`).
-- **`get_type`** `type.c:109` — enum→string for `ECPGttype`; default arm raises
+  is reported (too few `type.c:605-607`, too many `type.c:611-613`).
+- **`get_type`** `type.c:110` — enum→string for `ECPGttype`; default arm raises
   `unrecognized variable type code` `type.c:191`.
 - **`struct_no_indicator`** `type.c:9` — file-static sentinel member used when an
   indicator struct runs short, so the data walk can continue emitting

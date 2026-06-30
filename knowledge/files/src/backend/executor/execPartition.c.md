@@ -1,7 +1,14 @@
 # execPartition.c
 
 - **Source:** `source/src/backend/executor/execPartition.c` (2804 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Last verified commit:** pinned at `02f699c14163` (re-verified +
+  re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump
+  `4abf411e2328..02f699c14163`; clean re-pin — all 7 entry-point cites
+  held (`:221`, `:268`, `:564`, `:1275`, `:1412`, `:1995`, `:2667`), LOC
+  unchanged. Triggering commit `a40fdf658862` ("Reject child partition
+  FDWs in FOR PORTION OF", Peter Eisentraut) does the FOR PORTION OF
+  child-partition-FDW rejection in `execMain.c`; it did not shift this
+  file's documented routing/pruning entry points.)
 - **Depth:** deep-read (routing + pruning entry points)
 
 ## Purpose

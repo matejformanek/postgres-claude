@@ -1,7 +1,11 @@
 # `src/bin/pg_test_timing/pg_test_timing.c`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~457
+- **Last verified commit:** `02f699c14163` (re-verified + re-pinned
+  2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump
+  `4abf411e2328..02f699c14163`; triggering commit `3277e69b8eb0`
+  "Fix options listing of pg_test_timing --cutoff" moved the `--cutoff`
+  strtod / range-check region — cites updated. Prior pin `e18b0cb7344`.)
+- **Lines:** 457
 - **Source:** `source/src/bin/pg_test_timing/pg_test_timing.c`
 
 Microbenchmark of the platform's clock source(s). For a configurable
@@ -63,7 +67,7 @@ calibrated TSC frequency drifts more than 10 % from the in-use value.
 
 ## Potential issues
 
-- `pg_test_timing.c:309-315` — negative diff exits 1 immediately,
+- `pg_test_timing.c:310-314` — negative diff exits 1 immediately,
   losing any partial histogram data. Single-event clock regressions
   (NTP slew under load) thus require multiple runs to characterize.
   [ISSUE-correctness: even a single backwards step aborts the run
@@ -73,22 +77,22 @@ calibrated TSC frequency drifts more than 10 % from the in-use value.
   staff to *diagnose* drift refuses to print the histogram once drift
   is confirmed. Arguably surprising. [ISSUE-style: exit-on-drift fights
   the diagnostic use case (nit)]
-- `pg_test_timing.c:402-407` — uses `%lld` and `%llu` formatters on
-  `long long` casts. The casts at line 403 and line 452 use `(long long)
-  largest_diff` but lines 402, 451 use `%llu` and rely on `1ULL <<` and
+- `pg_test_timing.c:402-406` — uses `%lld` and `%llu` formatters on
+  `long long` casts. The cast at line 452 uses `(long long)
+  largest_diff` but lines 402, 451 use `%llu`/`%lld` and rely on `1ULL <<` and
   `histogram[i]` being `long long int`. Consistent on standard ILP64
   platforms but a `PRId64` style would be cleaner.
   [ISSUE-style: mixed %lld and PRI macros (nit)]
 - `pg_test_timing.c:154-157` — `printf(ngettext("%u second per test"...
   test_duration))` — `ngettext` matches the singular `1` only;
   any other duration uses plural, which is what we want. [verified-by-code]
-- `pg_test_timing.c:118` — `errno = 0; max_rprct = strtod(optarg,
-  &endptr);` — strtod's errno reporting is platform-flaky for overflow
-  to infinity. The range check at 128 catches negatives and >100 but a
-  parsed Inf passes through 0..100 range trivially. Wait, Inf > 100 so
+- `pg_test_timing.c:96` — `max_rprct = strtod(optarg, &endptr);` (errno
+  cleared just above) — strtod's errno reporting is platform-flaky for
+  overflow to infinity. The range check at 106 catches negatives and >100
+  but a parsed Inf passes through 0..100 range trivially. Wait, Inf > 100 so
   is caught. [verified-by-code]
 - The histogram-bottom row `(1ULL << 0) - 1 = 0` is labelled "<= 0 ns"
-  in the header (line 391-392); fine but worth noting that the bucket
+  in the header (line 390-391); fine but worth noting that the bucket
   semantics mean "less than 2^i ns" so the smallest bucket is "0 ns".
   [verified-by-code]
 

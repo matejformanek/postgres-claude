@@ -1,15 +1,15 @@
 # nodeModifyTable.c
 
 - **Source:** `source/src/backend/executor/nodeModifyTable.c` (5951 lines, 194 KB)
-- **Last verified commit:** `419ce13b7019` (re-verified + re-pinned
-  2026-06-28 by pg-quality-auditor AUDIT mode after anchor-bump
-  `f0a4f280b4d3..419ce13b7019`; doc had been pinned at `ef6a95c7c64`
-  2026-06-01, so all line cites had drifted — mostly −13, `ExecInsert`
-  +2 — and are re-pinned below. Triggering commit `b43f8aa4cb30`
-  ("Re-index ModifyTable FDW arrays when pruning result relations")
-  lands in `ExecInitModifyTable`: the result-relation pruning block at
-  `:5123-5223` now re-indexes `fdwPrivLists`/`fdwDirectModifyPlans` to
-  match the unpruned `resultRelations` — see comment at `:5194`.)
+- **Last verified commit:** pinned at `02f699c14163` (re-verified +
+  re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump
+  `4abf411e2328..02f699c14163`; clean re-pin — all line cites held, no
+  drift from the prior `419ce13b7019` pin. Triggering commit
+  `a40fdf658862` ("Reject child partition FDWs in FOR PORTION OF", Peter
+  Eisentraut) lands the FOR PORTION OF child-partition-FDW rejection in
+  `execMain.c`/`execPartition.c`, not in this file's documented cite
+  regions; the result-relation pruning block at `:5123-5223` (re-indexing
+  `fdwPrivLists`/`fdwDirectModifyPlans`, comment at `:5194`) is unchanged.)
 - **Depth:** deep-read (entry points + per-op pro/act/epi triplet)
 
 ## Purpose
