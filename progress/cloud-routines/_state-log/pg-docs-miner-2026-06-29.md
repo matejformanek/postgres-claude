@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-06-29 — Refilled drained docs queue + distilled 11 WAL/control-file/recovery + streaming-client developer-tool chapters (pg_waldump/pg_controldata/pg_resetwal/pg_checksums/pg_rewind/pg_test_fsync/pg_test_timing/pg_verifybackup/pg_basebackup/pg_receivewal/pg_recvlogical); docs-distilled 174→185 (PR #<pending>).
