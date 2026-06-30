@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-06-30 — 22 master commits explained (REL_19 branch cut + 20devel stamp; 2 backpatched data-integrity fixes; per-backend lock-stats series), 5 buildfarm failures triaged incl. a current master build break on 2ef57e6 (c.h CPU-macro #error); 32 corpus docs flagged for refresh, anchor held (PR #pending).
