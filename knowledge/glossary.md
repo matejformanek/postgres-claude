@@ -686,6 +686,16 @@ The raw flex scanner entry point (exposed by `pgc.l`/`scan.l`) that the higher-l
 
 
 
+### basebackup_to_shell
+A contrib server module that adds a `shell` target to the replication `BASE_BACKUP ... TARGET` command, piping each base-backup tarball to an operator-configured shell command (`basebackup_to_shell.command`) instead of streaming it back to the client. It is the reference consumer of the `BaseBackupAddTarget` extensibility hook, showing how a `bbsink` can redirect backup output. [verified-by-code] (via `knowledge/files/contrib/basebackup_to_shell/basebackup_to_shell.c.md`).
+
+
+
+### basic_archive
+The reference contrib archive module demonstrating the `archive_library` callback API: `_PG_archive_module_init` returns an `ArchiveModuleCallbacks` struct wiring `check_configured_cb` and `archive_file_cb`. It copies each completed WAL segment to a target directory durably via a temp file plus `durable_rename`, the template real archive libraries follow. [verified-by-code] (via `knowledge/files/contrib/basic_archive/basic_archive.c.md`).
+
+
+
 ### bbs_buffer
 The shared scratch-buffer field on a base-backup streamer (`astreamer`); in the file-extraction path neither writer uses it because the tar extractor keeps its own buffer, so `bbs_buffer` ownership is a per-streamer concern worth checking when chaining streamers. [verified-by-code] (`astreamer_file.c:67` — via `knowledge/files/src/fe_utils/astreamer_file.c.md`).
 
@@ -1072,6 +1082,11 @@ The B-tree opclass support-function slot number (2) for an optional sort-support
 
 ### btvacuumscan
 The nbtree index-vacuum scan (`nbtree.c`) — `btbulkdelete` wraps it in `PG_ENSURE_ERROR_CLEANUP` and it walks every block calling `btvacuumpage` to delete index tuples pointing at dead heap TIDs and reclaim empty pages. [verified-by-code] (via `knowledge/files/src/backend/access/nbtree/nbtree.c.md`).
+
+
+
+### buf_internals
+`src/include/storage/buf_internals.h` — the private buffer-manager header defining `BufferDesc`, the atomic packed `state` field (reference count + usage count + flag bits in one `pg_atomic_uint32`), `BufferTag`, and the buffer-mapping hash-table interface. Included only by buffer-manager internals (`bufmgr.c`, `freelist.c`, `localbuf.c`), not by general backend code. [verified-by-code] (via `knowledge/files/src/include/storage/buf_internals.h.md`).
 
 
 
@@ -1674,6 +1689,16 @@ The plancache routine (`plancache.c:393`) that "completes" a `CachedPlanSource` 
 
 
 
+### compress_io
+`src/bin/pg_dump/compress_io.c` — pg_dump's compression abstraction layer, exposing the `CompressFileHandle` and `CompressorState` interfaces so archive readers and writers stay compression-agnostic. Concrete backends (none, gzip, lz4, zstd) plug in behind a function-pointer table selected from the `--compress` method. [verified-by-code] (via `knowledge/files/src/bin/pg_dump/compress_io.c.md`).
+
+
+
+### compress_zstd
+`src/bin/pg_dump/compress_zstd.c` — the zstd backend of pg_dump's `compress_io` abstraction, implementing streaming and file-handle compression on top of libzstd. It is one of the pluggable `CompressFileHandle` implementations, chosen when the dump is created with `--compress=zstd`. [verified-by-code] (via `knowledge/files/src/bin/pg_dump/compress_zstd.c.md`).
+
+
+
 ### CompressFileHandle
 pg_dump's abstraction over a possibly-compressed output file — a vtable of read/write/getc/gets/close ops so the archiver code is agnostic to whether the underlying stream is plain, gzip, lz4, or zstd. [verified-by-code] (via `knowledge/files/src/bin/pg_dump/pg_backup_directory.c.md`).
 
@@ -2017,6 +2042,11 @@ The permission mask (`PG_DIR_MODE_OWNER`, 0700) the server applies to the data d
 
 ### DatabaseRelationId
 The compile-time OID (1262) of the shared `pg_database` system catalog, assigned via the `CATALOG(pg_database,1262,DatabaseRelationId)` BKI macro. It is the relation identifier passed to `LockSharedObject(DatabaseRelationId, dboid, ...)` to serialize CREATE/DROP/RENAME DATABASE and new-connection setup against the same DB OID, and to `object_aclcheck(DatabaseRelationId, dboid, ...)` for per-database ACL checks. [verified-by-code] (`pg_database.h:12` — via `knowledge/files/src/include/catalog/pg_database.h.md`).
+
+
+
+### datachecksum_state
+`src/backend/postmaster/datachecksum_state.c` — the PG18 online data-checksum enable/disable engine. It holds both the four-state (`off` / `inprogress-on` / `inprogress-off` / `on`) transition logic driven by ProcSignalBarriers that every backend absorbs, and the launcher/worker background processes that rewrite every page in the cluster while the database stays online (so `pg_checksums` no longer needs a shutdown). [verified-by-code] (via `knowledge/files/src/backend/postmaster/datachecksum_state.c.md`).
 
 
 
@@ -2769,11 +2799,26 @@ Runs a compiled `ExprState` against the current tuple/econtext, returning the re
 
 
 
+### execExpr
+`src/backend/executor/execExpr.c` — the expression *compiler*: `ExecInitExpr` and friends flatten an expression tree into a linear `ExprState` step program (an array of `ExprEvalStep`, each an `ExprEvalOp` opcode plus operands) that the interpreter or JIT then runs. This compile-once / run-many design is what replaced the old recursive `ExecEvalExpr` tree-walk. [verified-by-code] (via `knowledge/files/src/backend/executor/execExpr.c.md`).
+
+
+
+### execExprInterp
+`src/backend/executor/execExprInterp.c` — the expression *interpreter* that executes the `ExprState` step program built by `execExpr.c`. `ExecInterpExpr` is a computed-goto dispatch loop over the `ExprEvalOp` opcodes; when JIT is enabled `llvmjit_expr.c` emits native code for the same opcode set instead. [verified-by-code] (via `knowledge/files/src/backend/executor/execExprInterp.c.md`).
+
+
+
 ### ExecFindPartition
 Maps a tuple to its target leaf partition during tuple routing, walking the
 `PartitionDispatch` tree and applying the partition key, used by INSERT/COPY/UPDATE
 into partitioned tables. [verified-by-code] (via
 `knowledge/idioms/partition-tuple-routing.md`).
+
+
+
+### execGrouping
+`src/backend/executor/execGrouping.c` — the shared hash-table machinery for grouping/duplicate-elimination executor nodes. It builds `TupleHashTable`s keyed on grouping columns (used by HashAgg, hashed `SubPlan`, `RecursiveUnion`, `SetOp`), wiring per-column equality and hash `FmgrInfo`s into a `simplehash`-backed table. [verified-by-code] (via `knowledge/files/src/backend/executor/execGrouping.c.md`).
 
 
 
@@ -2818,6 +2863,11 @@ The executor routine that, after a heap insert/update, adds index entries for th
 
 ### ExecInterpExpr
 The executor's principal expression-evaluation worker (`execExprInterp.c:470`): a single function with every opcode body inlined that walks an `ExprState`'s flat `steps[]` array using direct-threaded computed gotos (or a switch fallback). It is the fast-path of expression execution — every expression in the system runs through it or its JIT mirror, which is why `ExprEvalStep` is hard-capped at 64 bytes. A first-call wrapper `ExecInterpExprStillValid` revalidates `VAR` steps against the slot's TupleDesc before installing `ExecInterpExpr` for subsequent calls. [verified-by-code] (`execExprInterp.c:470` — via `knowledge/files/src/backend/executor/execExprInterp.c.md`).
+
+
+
+### execMain
+`src/backend/executor/execMain.c` — the executor's top-level driver: `ExecutorStart` (build the `EState`/`PlanState` tree), `ExecutorRun` (pull tuples via `ExecutePlan`), `ExecutorFinish`, and `ExecutorEnd`, plus permission checking (`ExecCheckRTPerms`) and result-relation setup. These four entry points are the hook-points wrapped by extensions like `pg_stat_statements` and `auto_explain`. [verified-by-code] (via `knowledge/files/src/backend/executor/execMain.c.md`).
 
 
 
@@ -3095,6 +3145,11 @@ hard-coding any wrapper. [verified-by-code]
 
 ### fe_utils
 The shared frontend-utility library (`src/fe_utils`) holding code common to the client programs — connection helpers, the table/`printTable` query-output formatter, string and cancel handling — so `psql`, `pg_dump`, and friends don't each reimplement it. [verified-by-code] (via `knowledge/files/src/include/fe_utils/print.h.md`).
+
+
+
+### file_utils
+`src/common/file_utils.c` — durability and directory helpers shared by backend and frontend: `fsync_pgdata` / `fsync_dir_recurse` (the crash-safety sync sweep run by initdb, pg_rewind, pg_basebackup), `durable_rename`, and `pg_pwrite_*` wrappers. [verified-by-code] (via `knowledge/files/src/common/file_utils.c.md`).
 
 
 
@@ -3809,6 +3864,11 @@ The GUC subsystem's own allocator wrapper used for string-valued GUCs: it alloca
 
 
 
+### guc_tables
+`src/backend/utils/misc/guc_tables.c` — the static arrays (`ConfigureNamesBool`, `...Int`, `...Real`, `...String`, `...Enum`) that declare every built-in GUC: its name, context, group, default, bounds, and check/assign/show hooks. The GUC machinery in `guc.c` walks these tables at startup to build the runtime hash; adding a built-in setting means adding a row here. [verified-by-code] (via `knowledge/files/src/backend/utils/misc/guc_tables.c.md`).
+
+
+
 ### HandleFunctionRequest
 The fastpath.c server-side handler for the legacy `PQfn()` fast-path protocol message, which invokes a function by OID directly without going through the parser/planner. [from-comment] (via `knowledge/subsystems/tcop.md`).
 
@@ -4093,6 +4153,16 @@ A heap-tuple `t_infomask` visibility hint bit (`0x0200`) indicating the tuple's 
 
 
 
+### heapam_visibility
+`src/backend/access/heap/heapam_visibility.c` — the home of the `HeapTupleSatisfies*` visibility routines (`...MVCC`, `...Self`, `...Dirty`, `...Vacuum`, `...HistoricMVCC`, etc.) that decide, against a given snapshot, whether a heap tuple version is visible. It also sets hint bits (`HEAP_XMIN_COMMITTED` / `HEAP_XMAX_COMMITTED`) as a side effect of resolving xmin/xmax commit status via CLOG. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heapam_visibility.c.md`).
+
+
+
+### heapam_xlog
+`src/backend/access/heap/heapam_xlog.c` — the WAL redo half of the heap access method: `heap_redo` / `heap2_redo` dispatch on the xl_info opcode and replay `XLOG_HEAP_INSERT`, `_UPDATE`, `_DELETE`, `_HOT_UPDATE`, `_LOCK`, vacuum/prune, and freeze records, mirroring the write-side WAL generated in `heapam.c`. [verified-by-code] (via `knowledge/files/src/backend/access/heap/heapam_xlog.c.md`).
+
+
+
 ### heapBlk
 The heap block number a BRIN summary tuple summarizes, stored both in the index tuple (`bt_blkno`) and in the WAL record; BRIN redo asserts the two agree (`tuple->bt_blkno == xlrec->heapBlk`) to catch WAL corruption. [verified-by-code] (`brin_xlog.c:83` — via `knowledge/files/src/backend/access/brin/brin_xlog.c.md`).
 
@@ -4277,6 +4347,11 @@ The hstore compatibility routine that promotes a pre-9.0 on-disk hstore value to
 
 ### HTAB
 The handle type for PostgreSQL's built-in dynamic hash table (`dynahash`), created by `hash_create` and used pervasively for in-memory and shared-memory hash tables (lock tables, catcache, plan caches, FDW shippability caches). Shared-memory HTABs are fixed-size and partitioned; backend-local ones can grow. [verified-by-code] (via `knowledge/files/contrib/postgres_fdw/shippable.c.md`).
+
+
+
+### htup_details
+`src/include/access/htup_details.h` — the header defining the on-disk heap-tuple layout: `HeapTupleHeaderData` (xmin/xmax/cid/ctid, the `t_infomask` / `t_infomask2` flag words, the null bitmap), plus the macros that read and set those fields (`HeapTupleHeaderGetXmin`, `...GetUpdateXid`, the `HEAP_*` infomask bits). The single most-cited header for MVCC and tuple-visibility code. [verified-by-code] (via `knowledge/files/src/include/access/htup_details.h.md`).
 
 
 
@@ -4913,6 +4988,11 @@ The `compile_expr` slot of the JIT provider: it JIT-compiles a fully-built `Expr
 
 ### llvm_get_function
 The JIT late-binding trampoline: on an expression's first call (not first emit) it triggers LLVM emission and overwrites `state->evalfunc` with the native function pointer, so subsequent calls run native code directly. Its `emission_counter` is what EXPLAIN attributes to the "JIT > Emission" line. [verified-by-code] (`llvmjit_expr.c:2987-3005` — via `knowledge/files/src/backend/jit/llvm/llvmjit_expr.c.md`).
+
+
+
+### llvmjit_expr
+`src/backend/jit/llvm/llvmjit_expr.c` — the LLVM JIT expression compiler. `llvm_compile_expr` walks an already-built `ExprState` step program and emits one LLVM IR function, handling 121 cases of `ExprEvalOp`; the result becomes the `ExprState`'s native `evalfunc`, replacing the `execExprInterp.c` dispatch loop for hot expressions. [verified-by-code] (`llvmjit_expr.c:1009-2949` — via `knowledge/files/src/backend/jit/llvm/llvmjit_expr.c.md`).
 
 
 
@@ -5933,6 +6013,16 @@ most internal structures are Node trees. [from-comment] (via
 
 
 
+### nodeAgg
+`src/backend/executor/nodeAgg.c` — the Agg executor node implementing both plain/sorted aggregation and HashAgg, including grouping sets, `DISTINCT`/`ORDER BY` inside aggregates, partial/finalize aggregation for parallel query, and the spill-to-disk path when a hash table exceeds `work_mem` (`hash_agg_enter_spill_mode`). [verified-by-code] (via `knowledge/files/src/backend/executor/nodeAgg.c.md`).
+
+
+
+### nodeFuncs
+`src/backend/nodes/nodeFuncs.c` — generic helpers over expression `Node`s: `expression_tree_walker` / `expression_tree_mutator` (the recursion engines most planner passes build on), `exprType` / `exprTypmod` / `exprCollation`, and `exprLocation`. Distinct from the auto-generated copy/equal/out/read functions; these are the hand-written tree-traversal utilities. [verified-by-code] (via `knowledge/files/src/backend/nodes/nodeFuncs.c.md`).
+
+
+
 ### nodeRead
 The node-tree deserializer (`readfuncs.c`) that reconstructs a Node from its `outfuncs.c` text form — used to ship plan trees to parallel workers and to read stored rules/views back from the catalog. [verified-by-code] (via `knowledge/files/src/backend/nodes/readfuncs.c.md`).
 
@@ -5993,6 +6083,11 @@ split into, each with its own LWLock, to spread contention. A backend needing
 more than one partition lock must take them in partition-number order — a
 deadlock-avoidance rule enforced in `CheckDeadLock`. [from-README] (via
 `knowledge/files/src/backend/storage/lmgr/README.md`).
+
+
+
+### NUMA
+Non-Uniform Memory Access — a multi-socket memory architecture where a core's access latency depends on which node owns the page. PG18 surfaces NUMA awareness through `pg_buffercache_numa` and `pg_shmem_allocations_numa`, which report the NUMA node backing each shared-buffer / shmem allocation so DBAs can diagnose cross-node traffic. [verified-by-code] (via `knowledge/files/contrib/pg_buffercache/pg_buffercache_pages.c.md`).
 
 
 
@@ -6421,6 +6516,16 @@ analysis. [verified-by-code] (`plpy_spi.c:105` — via
 
 
 
+### partbounds
+`src/backend/partitioning/partbounds.c` — the partition-bound arithmetic: building and comparing `PartitionBoundInfo` for LIST/RANGE/HASH partitioning, binary-searching a datum to its partition index, and the partition-wise-join bound-matching logic. The canonical home for “which partition does this key fall into”. [verified-by-code] (via `knowledge/files/src/backend/partitioning/partbounds.c.md`).
+
+
+
+### partdesc
+`src/backend/partitioning/partdesc.c` — builds and caches the `PartitionDesc` for a partitioned table: the relcache-attached array of child OIDs plus the `PartitionBoundInfo` mapping bounds to partitions. It is rebuilt on relcache invalidation and underpins both planning-time pruning and tuple routing. [verified-by-code] (via `knowledge/files/src/backend/partitioning/partdesc.c.md`).
+
+
+
 ### PartitionBoundInfo
 The canonicalized, sorted representation of a partitioned table's bounds (list /
 range / hash) used for binary-search partition lookup and for comparing two
@@ -6727,6 +6832,11 @@ A SQL-callable function (wrapper in `slotfuncs.c`, real work in `slot.c`) that c
 
 
 
+### pg_createsubscriber
+`src/bin/pg_basebackup/pg_createsubscriber.c` — the frontend tool that converts a running physical standby into a logical-replication subscriber: it creates publications/subscriptions on the upstream, sets up the standby's replication slots, and finalizes promotion so the new node continues via logical decoding instead of streaming WAL. [verified-by-code] (via `knowledge/files/src/bin/pg_basebackup/pg_createsubscriber.c.md`).
+
+
+
 ### pg_cryptohash_create
 Allocates and initialises a cryptographic-hash context (MD5/SHA-*) over either the built-in or the OpenSSL backend; each call palloc's a context, so hot callers should reuse one. Paired with `pg_cryptohash_free`. [verified-by-code] (via `knowledge/files/contrib/uuid-ossp/uuid-ossp.c.md`).
 
@@ -6908,6 +7018,11 @@ for application-level signalling over logical replication. [verified-by-code]
 
 
 
+### pg_logicalinspect
+A PG17 contrib extension that opens serialized logical-decoding snapshot files (`pg_logical/snapshots/*.snap`) on disk and surfaces their contents as SQL rows via `pg_get_logical_snapshot_meta()` and `pg_get_logical_snapshot_info()` — an inspection aid for debugging logical-replication snapshot state. [verified-by-code] (via `knowledge/files/contrib/pg_logicalinspect/pg_logicalinspect.c.md`).
+
+
+
 ### pg_lzcompress
 PostgreSQL's built-in LZ-family compressor (`pglz`), the default TOAST
 compression method and the codec behind `pglz_compress`/`pglz_decompress`. It is
@@ -7007,6 +7122,11 @@ The system catalog grouping related operator classes that can interoperate withi
 
 
 
+### pg_overexplain
+A contrib extension adding two `EXPLAIN` options, `DEBUG` and `RANGE_TABLE`, that dump planner-internal fields normally hidden: disabled-node counts, the parallel_safe flag, plan_node_id, extParam/allParam bitmapsets, and per-RTE metadata. It is the reference consumer of the `explain_per_node_hook` / `explain_per_plan_hook` EXPLAIN extensibility points. [verified-by-code] (via `knowledge/files/contrib/pg_overexplain/pg_overexplain.c.md`).
+
+
+
 ### pg_parse_json
 The JSON lexer/parser driver that tokenizes input and invokes a
 `JsonSemAction` callback table, used both by the `json`/`jsonb` input functions
@@ -7018,6 +7138,11 @@ same parser supports incremental (chunked) parsing. [verified-by-code] (via
 
 ### pg_parse_query
 The tcop entry that runs raw SQL text through the lexer/grammar to a list of raw parse trees, before analysis and planning; the first stage of the parse → analyze → plan → execute pipeline. [verified-by-code] (via `knowledge/architecture/query-lifecycle.md`).
+
+
+
+### pg_plan_advice
+A contrib extension implementing a “plan advice” mini-language for steering planner decisions: it can round-trip *generate* advice from a finished plan and *enforce* advice during a later planning cycle. It registers an `EXPLAIN (PLAN_ADVICE)` option, installs planner hooks, and exposes five custom GUCs; the heavy lifting (join/scan advice parsing and matching) lives in sibling `pgpa_*` files. [verified-by-code] [from-README] (via `knowledge/files/contrib/pg_plan_advice/pg_plan_advice.c.md`).
 
 
 
@@ -7130,6 +7255,11 @@ The system catalog storing `SECURITY LABEL` assignments for per-database objects
 
 ### pg_shdepend
 The cluster-wide system catalog recording dependencies on *shared* objects (roles, tablespaces, databases) — e.g. that a role owns or has privileges on objects in some database. It is the only dependency catalog keyed by both `dbid` and the local object, so DROP ROLE/OWNED BY can find references across all databases. [verified-by-code] (via `knowledge/files/src/backend/catalog/pg_shdepend.c.md`).
+
+
+
+### pg_stash_advice
+A companion contrib extension to `pg_plan_advice` that persists captured plan advice across restarts: a background worker serializes the in-shmem advice “stash” to a TSV file (`pg_stash_advice.tsv`) and reloads it at startup, parsing the whole file in private memory and only applying to shared memory on success. [verified-by-code] (via `knowledge/files/contrib/pg_stash_advice/stashpersist.c.md`).
 
 
 
@@ -7474,6 +7604,36 @@ pin before touching the page. [verified-by-code] (`bufmgr.c:3280-3372` — via
 
 
 
+### pl_comp
+`src/pl/plpgsql/src/pl_comp.c` — the PL/pgSQL function *compiler*: `plpgsql_compile` parses a function body once (driving `pl_gram.y`), resolves variable/type/row datums, and caches the resulting `PLpgSQL_function` keyed on function OID + argument types, so later calls skip re-parsing. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_comp.md`).
+
+
+
+### pl_exec
+`src/pl/plpgsql/src/pl_exec.c` — the PL/pgSQL statement *executor*: it walks the compiled `PLpgSQL_stmt` tree (`exec_stmt` dispatch), evaluates expressions via SPI, manages the variable estate and `FOUND`/diagnostics, and implements `EXCEPTION` blocks through internal subtransactions. The largest file in the PL/pgSQL handler. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_exec.md`).
+
+
+
+### pl_funcs
+`src/pl/plpgsql/src/pl_funcs.c` — PL/pgSQL support utilities: namespace (`ns_*`) push/pop and name lookup used during compilation, statement-type name strings, and the `free_function` memory teardown. The plumbing the compiler and executor lean on rather than a parse or execution stage itself. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_funcs.md`).
+
+
+
+### pl_gram
+`src/pl/plpgsql/src/pl_gram.y` — the Bison grammar for the PL/pgSQL procedural language: it parses a function body into the `PLpgSQL_stmt` tree, treating embedded SQL/expressions as opaque token runs handed to the main SQL parser later. Paired with the `pl_scanner.c` lexer. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_gram.md`).
+
+
+
+### pl_handler
+`src/pl/plpgsql/src/pl_handler.c` — the PL/pgSQL language glue: `plpgsql_call_handler` (the `LANGUAGE plpgsql` entry point that compiles then executes), `plpgsql_inline_handler` (DO blocks), `plpgsql_validator` (CREATE FUNCTION checking), and `_PG_init` defining the `plpgsql.*` GUCs. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_handler.md`).
+
+
+
+### pl_scanner
+`src/pl/plpgsql/src/pl_scanner.c` — the PL/pgSQL lexer wrapper around the core SQL flex scanner, adding PL/pgSQL-only keyword recognition and the pushback buffer that `pl_gram.y` uses to look ahead. It reuses `scan.l` token rules so PL/pgSQL and SQL stay lexically consistent. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_scanner.md`).
+
+
+
 ### Plan
 The finished, executable tree produced by `create_plan` from the chosen Path —
 a tree of plan nodes (`SeqScan`, `HashJoin`, `Agg`, …) carrying target lists,
@@ -7565,6 +7725,31 @@ The PL/pgSQL routine that releases a compiled `PLpgSQL_function`'s memory — it
 
 ### PLpgSQL_function
 The compiled in-memory AST of a PL/pgSQL function produced by `pl_comp.c`: the namespace, the `datums[]` variable array, and the statement tree that `exec_stmt_*` walks; the language handler caches it and hands it to `plpgsql_exec_function`. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_comp.md`).
+
+
+
+### plpy_elog
+`src/pl/plpython/plpy_elog.c` — PL/Python's error bridge: it converts a thrown PG `ErrorData` into a Python exception (and back), builds the `plpy.SPIError` hierarchy carrying SQLSTATE/detail/hint, and formats Python tracebacks into PG `errcontext` lines. [verified-by-code] (via `knowledge/files/src/pl/plpython/plpy_elog.md`).
+
+
+
+### plpy_main
+`src/pl/plpython/plpy_main.c` — the PL/Python call handler entry points (`plpython3_call_handler`, `plpython3_inline_handler`, `plpython3_validator`) plus `_PG_init`, interpreter initialization, and the per-session execution-context stack that tracks the currently executing PL/Python procedure. [verified-by-code] (via `knowledge/files/src/pl/plpython/plpy_main.md`).
+
+
+
+### plpy_procedure
+`src/pl/plpython/plpy_procedure.c` — builds and caches the `PLyProcedure` for a function: it compiles the Python source into a code object once, records argument/return type I/O routines, and keys the cache on function OID so subsequent calls reuse the compiled procedure. [verified-by-code] (via `knowledge/files/src/pl/plpython/plpy_procedure.md`).
+
+
+
+### plpy_spi
+`src/pl/plpython/plpy_spi.c` — the SPI bridge backing `plpy.execute`, `plpy.prepare`, `plpy.commit`, and `plpy.rollback`. Every PG-throwing SPI call is wrapped in `BeginInternalSubTransaction` so a thrown `ereport` becomes a catchable Python exception instead of a longjmp through the Python C stack. [verified-by-code] (via `knowledge/files/src/pl/plpython/plpy_spi.md`).
+
+
+
+### plpy_typeio
+`src/pl/plpython/plpy_typeio.c` — the type-conversion layer between PG `Datum`s and Python objects: input/output routines per PG type (scalars, arrays, composites, and bytea/`bytes`), built from cached `FmgrInfo`s, used whenever arguments cross into Python or results cross back out. [verified-by-code] (via `knowledge/files/src/pl/plpython/plpy_typeio.md`).
 
 
 
@@ -9029,11 +9214,21 @@ The number of `ItemPointerData` slots in a BRIN revmap page's contents area (`Re
 
 
 
+### rewriteHandler
+`src/backend/rewrite/rewriteHandler.c` — the query rewriter (rule system): `QueryRewrite` applies `pg_rewrite` rules, expanding views into their underlying queries, processing `INSTEAD`/`ALSO` rules, and handling `INSERT/UPDATE/DELETE` on updatable views plus row-level-security qualifiers. It runs between parse-analysis and planning in the query pipeline. [verified-by-code] (via `knowledge/files/src/backend/rewrite/rewriteHandler.c.md`).
+
+
+
 ### RewriteQuery
 The rule-rewriter driver that applies INSTEAD/ALSO rules and view expansion to
 a parse-analyzed `Query`, potentially producing several result queries from
 one input. [verified-by-code] (`rewriteHandler.c:4044` — via
 `knowledge/subsystems/parser-and-rewrite.md`).
+
+
+
+### ri_triggers
+`src/backend/utils/adt/ri_triggers.c` — the C implementation of referential-integrity enforcement: the built-in trigger functions (`RI_FKey_check_ins`, `...cascade_del`, `...restrict_upd`, etc.) that a `FOREIGN KEY` constraint fires, run as parameterized SPI queries against the referenced/referencing tables, with a per-session query-plan cache. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/ri_triggers.c.md`).
 
 
 
@@ -9148,6 +9343,11 @@ hash from which the client/server keys derive. libpq computes it once during
 authentication and keeps it in the SCRAM state for reuse when verifying the
 server signature. [verified-by-code] (`fe-auth-scram.c:792-797` — via
 `knowledge/files/src/interfaces/libpq/fe-auth-scram.c.md`).
+
+
+
+### SAOP
+ScalarArrayOpExpr — a “scalar array operation” expression of the form `expr op ANY (array)` / `op ALL (array)` (e.g. `x = ANY('{1,2,3}')`). Since PG17 nbtree executes a SAOP natively inside a single index scan via array-key preprocessing (`_bt_preprocess_array_keys`), advancing through the array elements in index order rather than relying on a BitmapOr of separate scans. [verified-by-code] (via `knowledge/files/src/backend/access/nbtree/nbtpreprocesskeys.c.md`).
 
 
 
@@ -10188,6 +10388,11 @@ A logical-replication streaming protocol message that ends a chunk of an in-prog
 
 
 
+### string_utils
+`src/fe_utils/string_utils.c` — the frontend (client/utility) string helpers: SQL identifier and literal quoting (`fmtId`, `appendStringLiteralConn`), `PQExpBuffer` building, and shell-argument escaping shared by psql, pg_dump, and the other `src/bin` tools so they emit correctly quoted SQL. [verified-by-code] (via `knowledge/files/src/fe_utils/string_utils.c.md`).
+
+
+
 ### StringInfo
 The resizable string/byte buffer (`StringInfoData`: data, len, maxlen, cursor)
 used everywhere PostgreSQL builds up text or binary output — error messages,
@@ -10582,6 +10787,11 @@ The module implementing the pluggable TOAST compression methods — historic PGL
 
 ### toast_fetch_datum
 Reassembles an out-of-line TOAST value: given a `varatt_external` pointer it opens the toast relation and index, builds a `SnapshotToast`, and runs an ordered index scan on `chunk_id`, `memcpy`-ing each chunk into a flat varlena. Called by `detoast_attr` for EXTERNAL data. [verified-by-code] (via `knowledge/files/src/backend/access/common/detoast.c.md`).
+
+
+
+### toast_internals
+`src/backend/access/common/toast_internals.c` — the low-level TOAST machinery shared by heap and other table AMs: chunking an oversized varlena into the TOAST relation (`toast_save_datum`), deleting toasted values (`toast_delete_datum`), fetching/decompressing them back, and the per-value compression dispatch. [verified-by-code] (via `knowledge/files/src/backend/access/common/toast_internals.c.md`).
 
 
 
@@ -11049,6 +11259,16 @@ The backend's collation-aware variable-length string comparator (driving `text`/
 
 
 
+### verify_heapam
+`contrib/amcheck/verify_heapam.c` — amcheck's heap corruption checker exposed as `verify_heapam()`: it scans a heap relation page by page validating line pointers, tuple header sanity, xmin/xmax against CLOG/clog bounds, TOAST pointer consistency, and HOT-chain invariants, returning one row per detected problem. [verified-by-code] (via `knowledge/files/contrib/amcheck/verify_heapam.md`).
+
+
+
+### verify_nbtree
+`contrib/amcheck/verify_nbtree.c` — amcheck's B-tree checker behind `bt_index_check()` / `bt_index_parent_check()`: it walks an nbtree validating per-page key ordering, sibling-link coherence, and (with `heapallindexed`) that every heap tuple is reachable through the index, optionally re-descending from the root (`bt_rootdescend`). [verified-by-code] (via `knowledge/files/contrib/amcheck/verify_nbtree.md`).
+
+
+
 ### VirtualXID
 A *virtual transaction id* (`VirtualTransactionId` = `procNumber + localTransactionId`) that names a backend's current transaction without burning a real `TransactionId`. Read-only transactions never assign a real xid, so locks and waits key on the VXID; `VirtualXactLockTableInsert` lets others `VirtualXactLock`-wait on a backend until it ends. [verified-by-code] (via `knowledge/subsystems/access-transam.md`).
 
@@ -11243,6 +11463,11 @@ The GUC bounding the memory a single query operation (sort, hash, hash-join buil
 
 
 
+### worker_spi
+`src/test/modules/worker_spi/worker_spi.c` — the canonical background-worker example module: it both statically registers workers at `shared_preload_libraries` time and launches them dynamically, demonstrates `BackgroundWorkerInitializeConnection`, the `WaitLatch` main loop with `WL_EXIT_ON_PM_DEATH`, and the `SIGHUP`/`SIGTERM` handler skeleton plus an SPI query each cycle. The reference any new bgworker is cloned from. [verified-by-code] (via `knowledge/files/src/test/modules/worker_spi/worker_spi.c.md`).
+
+
+
 ### WorkTableScan
 The executor node that scans the working table of a recursive CTE
 (`WITH RECURSIVE`), feeding each iteration's new rows back into the recursive
@@ -11323,6 +11548,11 @@ cancel conflicting queries before the page changes identity.
 
 ### XLOG_FPI_FOR_HINT
 A special WAL record emitted by `MarkBufferDirtyHint()` when it dirties an otherwise-clean page for a hint-bit-only write while data checksums or `wal_log_hints` are enabled. The full-page image it carries protects the hint-bit write against torn-page hazards; during recovery no WAL is written so such hint updates are simply skipped. [verified-by-code] (`xlog.c` — via `knowledge/architecture/wal.md`).
+
+
+
+### xlog_internal
+`src/include/access/xlog_internal.h` — the private WAL header defining the physical log format: `XLogPageHeaderData` / `XLogLongPageHeaderData`, the `XLogRecPtr`↔segment/file-name macros (`XLByteToSeg`, `XLogFileName`), `XLOG_BLCKSZ`, and the `XLogRecord` on-disk struct. Included by WAL internals rather than general backend code. [verified-by-code] (via `knowledge/files/src/include/access/xlog_internal.h.md`).
 
 
 
