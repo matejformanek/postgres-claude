@@ -191,3 +191,7 @@ verified-by-code, auth.c:374-675]
 ## Tally
 
 `[verified-by-code]=22 [from-comment]=8 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-auth_delay.md](../../../../subsystems/contrib-auth_delay.md)

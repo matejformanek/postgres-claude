@@ -21,3 +21,5 @@ methods in `access/tablesample/`. [from-comment]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/analyze-block-and-reservoir-sampling.md](../../../../../idioms/analyze-block-and-reservoir-sampling.md)
+

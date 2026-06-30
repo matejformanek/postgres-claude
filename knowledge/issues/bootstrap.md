@@ -16,6 +16,8 @@ database.
 | 2026-06-11 | bootstrap/bootstrap.c:1042,1072 | undocumented-invariant | likely | Two near-identical "XXX this logic must match getTypeIOParam()" blocks for the Typ-list and TypInfo-fallback cases in `boot_get_type_io_data`. Any change to `getTypeIOParam` requires updating both | open | knowledge/files/src/backend/bootstrap/bootstrap.c.md §Potential issues |
 | 2026-06-11 | bootstrap/bootstrap.c:1138-1141 | stale-todo | nit | "XXX mao 10/31/92" — the oldest XXX in the file. The `nogc` `MemoryContext` for index-register info is never reset; dates from before MemoryContext existed | open | knowledge/files/src/backend/bootstrap/bootstrap.c.md §Potential issues |
 | 2026-06-11 | bootstrap/bootstrap.c:803-804 | undocumented-invariant | maybe | `InsertOneProargdefaultsValue` raises ERROR if `array_count > pronargs` but doesn't assert alignment between leading NULLs and non-default args; relies on caller (initdb-generated BKI) to get it right | open | knowledge/files/src/backend/bootstrap/bootstrap.c.md §Potential issues |
+| 2026-06-29 | bootstrap.h | undocumented-invariant | likely | MAXATTR is a hard ceiling that catalog reviewers must respect | open | knowledge/files/src/include/bootstrap/bootstrap.h.md §Potential issues |
+| 2026-06-29 | bootstrap.h | question | nit | is there an assert/ereport on overflow? | open | knowledge/files/src/include/bootstrap/bootstrap.h.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 

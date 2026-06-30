@@ -83,3 +83,7 @@ Macro `InHotStandby = (standbyState >= STANDBY_SNAPSHOT_PENDING)`.
 
 - `[verified-by-code]`: 16
 - `[from-comment]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/xlog-region-replay.md](../../../../idioms/xlog-region-replay.md)

@@ -65,3 +65,5 @@ Reset → reclaim everything but the context struct itself.
 <!-- backlinks:auto -->
 - [idioms/memory-contexts.md](../../../../idioms/memory-contexts.md)
 - [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)
+- [idioms/memory-context-api-and-dispatch.md](../../../../idioms/memory-context-api-and-dispatch.md)
+

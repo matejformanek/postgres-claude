@@ -155,3 +155,9 @@ file is the runtime mechanism.
 - [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [data-structures/estate.md](../../../../data-structures/estate.md)
+- [idioms/epq-multi-table.md](../../../../idioms/epq-multi-table.md)
+- [idioms/epq-recheck-flow.md](../../../../idioms/epq-recheck-flow.md)
+- [idioms/epq-state-init.md](../../../../idioms/epq-state-init.md)
+- [idioms/subplan-and-initplan.md](../../../../idioms/subplan-and-initplan.md)
+

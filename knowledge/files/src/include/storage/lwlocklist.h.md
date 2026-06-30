@@ -96,3 +96,7 @@ For tranches the same applies (lines 93-99).
 - [Scenario — Add a new LWLock tranche](../../../../scenarios/add-new-lwlock-tranche.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/lwlock-rank-discipline.md](../../../../idioms/lwlock-rank-discipline.md)

@@ -64,3 +64,7 @@ Provider-independent JIT dispatcher for the backend. The whole file does three j
 
 ## Confidence tag tally
 `[from-README]=1 [verified-by-code]=8`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/jit-provider-and-context.md](../../../../idioms/jit-provider-and-context.md)

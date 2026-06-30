@@ -25,3 +25,7 @@ The implementation-internal API of GIN: shared by every file in `src/backend/acc
 ## Prototypes
 
 Hundreds of function prototypes spanning ginutil/ginbtree/ginentrypage/gindatapage/gininsert/ginscan/ginget/ginvacuum/ginfast/ginlogic/ginpostinglist.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/gin-scan-and-consistent.md](../../../../idioms/gin-scan-and-consistent.md)

@@ -99,3 +99,7 @@ to break a header dep cycle with `proc.h`. [from-comment]
 <!-- issues:auto:begin -->
 - [Issue register — `include-storage`](../../../../issues/include-storage.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/lwlock-struct.md](../../../../data-structures/lwlock-struct.md)

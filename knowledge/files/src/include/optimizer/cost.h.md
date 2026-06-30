@@ -24,3 +24,7 @@ these constants" — DEFAULTS are for postgresql.conf seeding only.
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/cost-units-gucs.md](../../../../idioms/cost-units-gucs.md)

@@ -78,3 +78,7 @@ Type-fetch macros:
 - [ISSUE-API-shape: `LTG_RNODE` (line 286) returns `LTG_LNODE` when `LTG_NORIGHT` is set — i.e. the same pointer for both. Code that mutates through `LTG_RNODE` would corrupt the left node. All current callers treat keys read-only, but the macro is a footgun. (nit)] — `source/contrib/ltree/ltree.h:284-286`.
 - [ISSUE-doc: `LQUERY_HASNOT` (line 127) is set in `parse_lquery` but never read anywhere in the source tree. Inspecting callers: only `parse_lquery` writes it. Appears to be dead flag retained for on-disk compatibility. (nit)] — `source/contrib/ltree/ltree.h:127`.
 - [ISSUE-cost: `lquery_level.numvar` is `uint16`, so `a|b|c|...` levels can carry up to 65535 alternatives. `checkLevel` (`lquery_op.c:161`) iterates all of them; with a 65535-level ltree this gives a 4-billion-op worst case for a single recursive call — and `checkCond` adds backtracking on top. (likely — see `lquery_op.c.md` headline)] — `source/contrib/ltree/ltree.h:92`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

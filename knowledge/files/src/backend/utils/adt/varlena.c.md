@@ -180,3 +180,6 @@ This file is the busiest non-toast-mgmt consumer of TOAST helpers:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/detoast-stream-consumption.md](../../../../../idioms/detoast-stream-consumption.md)
+- [idioms/heap-tuple-decompression-pattern.md](../../../../../idioms/heap-tuple-decompression-pattern.md)
+

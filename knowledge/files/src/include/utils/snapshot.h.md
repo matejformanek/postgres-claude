@@ -56,3 +56,7 @@ Canonical definition of `SnapshotData` and the `SnapshotType` enum that drives t
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/snapshot-lifecycle.md](../../../../data-structures/snapshot-lifecycle.md)
+- [idioms/heap-tuple-visibility-mvcc.md](../../../../idioms/heap-tuple-visibility-mvcc.md)
+- [idioms/snapshot-active-stack-and-registered.md](../../../../idioms/snapshot-active-stack-and-registered.md)
+- [idioms/snapshot-static-and-current.md](../../../../idioms/snapshot-static-and-current.md)
+- [idioms/subxact-visibility-and-overflow.md](../../../../idioms/subxact-visibility-and-overflow.md)

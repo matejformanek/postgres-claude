@@ -111,6 +111,7 @@ standby's flushes. (`:3092-3099`) [verified-by-code]
 - [architecture/replication.md](../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../subsystems/replication.md)
+- [idioms/walsender-state-machine.md](../../../../idioms/walsender-state-machine.md)
 
 ## Appears in scenarios
 
@@ -120,3 +121,4 @@ standby's flushes. (`:3092-3099`) [verified-by-code]
 - [Scenario — Add a new replication / logical-decoding message](../../../../scenarios/add-new-replication-message.md)
 
 <!-- scenarios:auto:end -->
+

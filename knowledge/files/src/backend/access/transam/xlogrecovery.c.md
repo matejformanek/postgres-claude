@@ -219,6 +219,7 @@ the redo result, panic on mismatch. The masking is per-rmgr.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/crash-recovery-startup.md](../../../../../idioms/crash-recovery-startup.md)
 
 ## Appears in scenarios
 
@@ -227,3 +228,4 @@ the redo result, panic on mismatch. The masking is per-rmgr.
 - [Scenario — Add a new WAL record](../../../../../scenarios/add-new-wal-record.md)
 
 <!-- scenarios:auto:end -->
+

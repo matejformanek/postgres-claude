@@ -283,3 +283,5 @@ Thin partitioned-hash wrapper; caller must hold the right partition lock.
 <!-- backlinks:auto -->
 - [data-structures/bufferdesc-state.md](../../../../data-structures/bufferdesc-state.md)
 - [subsystems/storage-buffer.md](../../../../subsystems/storage-buffer.md)
+- [data-structures/buffertag.md](../../../../data-structures/buffertag.md)
+

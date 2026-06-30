@@ -65,3 +65,8 @@ The last two live in `#ifdef CATALOG_VARLEN`. [verified-by-code]
 - [Scenario — Add a new built-in aggregate](../../../../scenarios/add-new-aggregate-function.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/aggregate-partial-finalize.md](../../../../idioms/aggregate-partial-finalize.md)
+- [idioms/aggregate-trans-state.md](../../../../idioms/aggregate-trans-state.md)

@@ -429,3 +429,7 @@ the post-query one. OK in practice.
 - [ISSUE-memory: storeInfo.tmpcontext deleted only on PG_TRY success
   path; on PG_CATCH (`:1084-1093`) it's leaked into the parent
   context until that resets (nit)] — `:1077-1083` vs `:1084-1093`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-dblink.md](../../../subsystems/contrib-dblink.md)

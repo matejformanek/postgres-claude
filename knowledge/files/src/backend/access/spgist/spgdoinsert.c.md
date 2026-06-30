@@ -62,3 +62,6 @@ The restart is `goto`-driven: a label at the top of the descent loop. Comments w
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/spgist-insert-and-picksplit.md](../../../../../idioms/spgist-insert-and-picksplit.md)
+- [idioms/spgist-tree-and-tuples.md](../../../../../idioms/spgist-tree-and-tuples.md)
+

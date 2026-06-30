@@ -285,3 +285,8 @@ Stack-depth (`miscadmin.h:295-308`):
 <!-- issues:auto:begin -->
 - [Issue register — `include-misc`](../../../issues/include-misc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [architecture/overview.md](../../../architecture/overview.md)
+- [architecture/process-model.md](../../../architecture/process-model.md)

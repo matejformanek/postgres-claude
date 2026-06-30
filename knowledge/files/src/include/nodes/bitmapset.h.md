@@ -76,3 +76,7 @@ Hash-table support:
 - Used pervasively in `pathnodes.h` (RelOptInfo.relids,
   required_outer, eclass_indexes, …) and `parsenodes.h`
   (selectedCols, updatedCols, etc.).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/bitmapset.md](../../../../data-structures/bitmapset.md)

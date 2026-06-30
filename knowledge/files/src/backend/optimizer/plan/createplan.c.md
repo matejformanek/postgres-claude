@@ -198,6 +198,8 @@ at 6328, `materialize_finished_plan` at 6509) are public.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/aggregate-partial-finalize.md](../../../../../idioms/aggregate-partial-finalize.md)
+- [idioms/epq-multi-table.md](../../../../../idioms/epq-multi-table.md)
 
 ## Appears in scenarios
 
@@ -206,3 +208,4 @@ at 6328, `materialize_finished_plan` at 6509) are public.
 - [Scenario — Add a new plan node](../../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+

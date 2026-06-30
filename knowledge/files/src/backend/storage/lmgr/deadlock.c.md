@@ -147,3 +147,5 @@ Fast-path "two procs, same object, mutually conflicting" deadlock detected insid
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-lmgr.md](../../../../../subsystems/storage-lmgr.md)
+- [idioms/deadlock-detection.md](../../../../../idioms/deadlock-detection.md)
+

@@ -170,3 +170,7 @@ All three are session-local floats; the prefix is reserved via
 - [ISSUE-Phase-D: missing CHECK_FOR_INTERRUPTS in make_trigrams (low)] —
   source/contrib/pg_trgm/trgm_op.c:399-483 — extracting trigrams
   from a multi-MB string runs without yield.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_trgm.md](../../../subsystems/contrib-pg_trgm.md)

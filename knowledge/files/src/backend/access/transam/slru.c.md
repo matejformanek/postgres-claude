@@ -173,3 +173,5 @@ optional `io_error_detail` callback.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/slru-page-replacement.md](../../../../../idioms/slru-page-replacement.md)
+

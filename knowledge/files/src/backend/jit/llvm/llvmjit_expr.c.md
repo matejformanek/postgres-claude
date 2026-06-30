@@ -86,3 +86,8 @@ The big one. JIT-compiles a fully-formed `ExprState` step program (built by `exe
 - [Scenario — Add a new expression-eval step](../../../../../scenarios/add-new-expression-eval-step.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/jit-expression-codegen.md](../../../../../idioms/jit-expression-codegen.md)
+- [idioms/jit-tuple-deform-and-inline.md](../../../../../idioms/jit-tuple-deform-and-inline.md)

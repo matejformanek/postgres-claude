@@ -116,3 +116,7 @@ internal API has historical compat code. Worth a follow-up read.
   pg_upgrade silently relies on. Any future change to the group
   layout must be coordinated with pg_upgrade and any `_read_v*`
   shim files.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/multixact-slru.md](../../../../idioms/multixact-slru.md)

@@ -45,3 +45,5 @@ sets `walRcvState = WALRCV_STOPPED`, inits the condition variable
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../subsystems/replication.md)
+- [idioms/wal-receiver-loop.md](../../../../idioms/wal-receiver-loop.md)
+

@@ -199,3 +199,9 @@ SRF-free targets and SRF-bearing levels. The `targets` /
 <!-- backlinks:auto -->
 - [idioms/parser-pipeline.md](../../../../../idioms/parser-pipeline.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/plannerinfo.md](../../../../../data-structures/plannerinfo.md)
+- [idioms/aggregate-grouping-sets.md](../../../../../idioms/aggregate-grouping-sets.md)
+- [idioms/aggregate-partial-finalize.md](../../../../../idioms/aggregate-partial-finalize.md)
+- [idioms/jit-provider-and-context.md](../../../../../idioms/jit-provider-and-context.md)
+- [idioms/utility-stmt-planning.md](../../../../../idioms/utility-stmt-planning.md)
+

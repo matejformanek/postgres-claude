@@ -39,6 +39,8 @@ Constants in `logicalproto.h:40-45`.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/apply-handlers-insert-update-delete.md](../../../../../idioms/apply-handlers-insert-update-delete.md)
+- [idioms/apply-worker-loop-and-dispatch.md](../../../../../idioms/apply-worker-loop-and-dispatch.md)
 
 ## Appears in scenarios
 
@@ -47,3 +49,4 @@ Constants in `logicalproto.h:40-45`.
 - [Scenario — Add a new replication / logical-decoding message](../../../../../scenarios/add-new-replication-message.md)
 
 <!-- scenarios:auto:end -->
+

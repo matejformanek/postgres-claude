@@ -27,3 +27,9 @@ Internal SP-GiST types shared across `src/backend/access/spgist/*.c`. [from-comm
 - `SPGIST_METAPAGE_BLKNO = 0`.
 - `SPGIST_ROOT_BLKNO = 1` (main tree).
 - `SPGIST_NULL_BLKNO = 2` (nulls tree).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/spgist-insert-and-picksplit.md](../../../../idioms/spgist-insert-and-picksplit.md)
+- [idioms/spgist-scan-and-consistent.md](../../../../idioms/spgist-scan-and-consistent.md)
+- [idioms/spgist-tree-and-tuples.md](../../../../idioms/spgist-tree-and-tuples.md)

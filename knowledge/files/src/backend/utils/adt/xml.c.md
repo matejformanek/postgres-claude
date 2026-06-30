@@ -58,3 +58,7 @@ Confidence: XXE answer `[verified-by-code]`; amplification claim `[unverified]`.
 <!-- issues:auto:begin -->
 - [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-xml2.md](../../../../../subsystems/contrib-xml2.md)

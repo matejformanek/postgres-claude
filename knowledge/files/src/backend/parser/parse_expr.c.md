@@ -83,3 +83,5 @@ FROM` on rows.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+- [idioms/node-types.md](../../../../idioms/node-types.md)
+

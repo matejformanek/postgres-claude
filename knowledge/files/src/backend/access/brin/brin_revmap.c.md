@@ -78,3 +78,5 @@ Requires `ShareUpdateExclusiveLock` on index (so no concurrent summarization). L
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/brin-revmap.md](../../../../../idioms/brin-revmap.md)
+

@@ -47,3 +47,8 @@ Important: GIN deliberately does **not** include a `gin_page_id` word — the 8-
 - `GinPostingList` struct: `{ first: ItemPointerData, nbytes: uint16, bytes[FLEX] }`.
 - `PostingItem` (internal-page child): `{ key: ItemPointerData rightBound, child_blkno: BlockIdData }`.
 - `GinSetDownlink(itup, blkno)`, `GinGetDownlink(itup)`, `GinSetPostingTree(itup, blkno)`, `GinGetPostingOffset(itup)`, etc. — t_tid abuse macros.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/gin-fastupdate-pending.md](../../../../idioms/gin-fastupdate-pending.md)
+- [idioms/gin-tree-structure.md](../../../../idioms/gin-tree-structure.md)

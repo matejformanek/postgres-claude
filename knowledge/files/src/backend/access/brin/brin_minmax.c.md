@@ -28,3 +28,6 @@ Tags: [from-comment, brin_minmax.c:1-10], [verified-by-code, brin_minmax.c:22-30
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/brin-summarize-and-scan.md](../../../../../idioms/brin-summarize-and-scan.md)
+- [idioms/brin-tuple-format.md](../../../../../idioms/brin-tuple-format.md)
+

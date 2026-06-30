@@ -100,3 +100,7 @@ Options accepted (`:165-192`): `matchorig`, `keeporig`, `matchsynonyms`,
 - `[ISSUE-robustness-low: no upper bound on d->len; admin-supplied
   100M-line rules file fills heap before any error is raised] (low)`
   — `source/contrib/dict_xsyn/dict_xsyn.c:108-115`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-dict_xsyn.md](../../../subsystems/contrib-dict_xsyn.md)

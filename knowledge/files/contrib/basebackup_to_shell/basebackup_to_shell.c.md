@@ -142,3 +142,7 @@ sets the GUC, and the role who triggers a backup):
   safety depends on a fragile convention that future `%`-escapes will
   either be internally generated or alphanumeric-validated. Not enforced
   by a per-escape contract.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-basebackup_to_shell.md](../../../subsystems/contrib-basebackup_to_shell.md)

@@ -47,3 +47,6 @@ CSV mode handles: quoted fields (`"`), doubled-quote escape (`""` → `"`), embe
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/error-context-callbacks.md](../../../../idioms/error-context-callbacks.md)
+- [subsystems/contrib-file_fdw.md](../../../../subsystems/contrib-file_fdw.md)
+

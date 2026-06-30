@@ -148,3 +148,5 @@ authoritative architectural overview; read it before diving in.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/jsonbvalue.md](../../../../../data-structures/jsonbvalue.md)
+

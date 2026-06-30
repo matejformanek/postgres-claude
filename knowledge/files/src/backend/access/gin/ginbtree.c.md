@@ -81,3 +81,5 @@ Crucially **the child remains exclusive-locked while the parent is locked** (lin
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/gin-tree-structure.md](../../../../../idioms/gin-tree-structure.md)
+

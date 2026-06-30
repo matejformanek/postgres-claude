@@ -155,6 +155,7 @@ combine input rows" blocks propagation. [from-comment] `:962-967`
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [data-structures/planstate.md](../../../../data-structures/planstate.md)
 
 ## Appears in scenarios
 
@@ -163,3 +164,4 @@ combine input rows" blocks propagation. [from-comment] `:962-967`
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+

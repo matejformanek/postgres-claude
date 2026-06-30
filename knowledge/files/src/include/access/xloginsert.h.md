@@ -71,3 +71,4 @@ None.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [architecture/wal.md](../../../../architecture/wal.md)
+- [idioms/wal-record-construction.md](../../../../idioms/wal-record-construction.md)

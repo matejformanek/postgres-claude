@@ -90,3 +90,5 @@ A `per-range` AllocSet (`perRangeCxt`) is reset each iteration to bound memory. 
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/brin-summarize-and-scan.md](../../../../../idioms/brin-summarize-and-scan.md)
+

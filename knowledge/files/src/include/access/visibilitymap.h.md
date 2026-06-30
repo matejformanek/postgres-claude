@@ -54,3 +54,7 @@ None — uses `Buffer`, `BlockNumber`, `Relation` from elsewhere; bit constants 
 
 ## Confidence tag tally
 `[verified-by-code]=4 [from-comment]=6 [from-readme]=0 [inferred]=2 [unverified]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/visibility-map-update.md](../../../../idioms/visibility-map-update.md)

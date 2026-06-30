@@ -100,6 +100,9 @@ performs dispatch. [from-README] / `:206-215`
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/expression-evaluator-flow.md](../../../../idioms/expression-evaluator-flow.md)
+- [idioms/exprevalstep-shape.md](../../../../idioms/exprevalstep-shape.md)
+- [idioms/jit-expression-codegen.md](../../../../idioms/jit-expression-codegen.md)
 
 ## Appears in scenarios
 
@@ -108,3 +111,4 @@ performs dispatch. [from-README] / `:206-215`
 - [Scenario — Add a new expression-eval step](../../../../scenarios/add-new-expression-eval-step.md)
 
 <!-- scenarios:auto:end -->
+

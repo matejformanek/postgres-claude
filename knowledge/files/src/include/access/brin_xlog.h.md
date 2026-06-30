@@ -32,3 +32,7 @@ WAL record format definitions for BRIN. Each `XLOG_BRIN_*` info bit is paired wi
 Sizeof macros (`SizeOfBrinInsert` etc.) use `offsetof` to avoid padding.
 
 See `brin_xlog.c.md`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/brin-revmap.md](../../../../idioms/brin-revmap.md)

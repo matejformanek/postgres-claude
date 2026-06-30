@@ -180,3 +180,4 @@ and child callbacks run before parent callbacks (`mcxt.c:636-651, 533`
 <!-- backlinks:auto -->
 - [idioms/memory-contexts.md](../../../../idioms/memory-contexts.md)
 - [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)
+- [idioms/memory-context-api-and-dispatch.md](../../../../idioms/memory-context-api-and-dispatch.md)

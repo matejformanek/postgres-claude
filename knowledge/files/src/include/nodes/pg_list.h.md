@@ -126,3 +126,7 @@ Three big buckets — full enumeration in
 
 - Implementation: `source/src/backend/nodes/list.c`
 - Idiom doc: `knowledge/idioms/node-types-and-lists.md`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/list-traversal-conventions.md](../../../../idioms/list-traversal-conventions.md)

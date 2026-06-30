@@ -65,3 +65,7 @@ subscription change `ApplyLauncherWakeup` (`:1195`) sets the latch.
 - [architecture/replication.md](../../../../../architecture/replication.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/apply-worker-loop-and-dispatch.md](../../../../../idioms/apply-worker-loop-and-dispatch.md)
+- [idioms/apply-worker-loop.md](../../../../../idioms/apply-worker-loop.md)
+- [idioms/tablesync-initial-copy.md](../../../../../idioms/tablesync-initial-copy.md)
+

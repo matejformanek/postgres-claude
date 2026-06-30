@@ -133,3 +133,7 @@ extension EXPLAIN options live here. The module is loaded via
 <!-- issues:auto:begin -->
 - [Issue register — `auto_explain`](../../../issues/auto_explain.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-auto_explain.md](../../../subsystems/contrib-auto_explain.md)

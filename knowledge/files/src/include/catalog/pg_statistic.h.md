@@ -52,3 +52,7 @@ Definition of the "statistics" system catalog (`pg_statistic`) — per-(relation
 ## Tally
 
 `[verified-by-code]=9 [from-comment]=2 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/analyze-mcv-histogram-correlation.md](../../../../idioms/analyze-mcv-histogram-correlation.md)

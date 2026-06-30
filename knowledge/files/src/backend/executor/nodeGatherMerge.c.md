@@ -45,3 +45,5 @@ GatherMerge generally rescans by tearing down and re-launching workers
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/parallel-gather-merge.md](../../../../idioms/parallel-gather-merge.md)
+

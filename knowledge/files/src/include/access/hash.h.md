@@ -38,3 +38,9 @@ HASHNProcs             3
 
 - `HASH_MAX_SPLITPOINTS = 32` — limits index size to ~2^32 buckets.
 - `HASH_MAX_BITMAPS = 1024`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/hash-bucket-split.md](../../../../idioms/hash-bucket-split.md)
+- [idioms/hash-overflow-pages.md](../../../../idioms/hash-overflow-pages.md)
+- [idioms/hash-page-layout.md](../../../../idioms/hash-page-layout.md)

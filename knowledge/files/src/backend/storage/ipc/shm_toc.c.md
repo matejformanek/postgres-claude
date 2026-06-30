@@ -74,3 +74,5 @@ the file justifies the design choice explicitly.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)
+- [idioms/parallel-context-and-dsm.md](../../../../../idioms/parallel-context-and-dsm.md)
+

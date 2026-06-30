@@ -19,3 +19,7 @@ BrinMemTuple / BrinValues types and `brin_form_tuple` / `brin_deform_tuple` API.
 - `SizeOfBrinTuple`, `BRIN_OFFSET_MASK`, `BRIN_NULLS_MASK`, etc. — flag-bit and offset macros.
 
 See `brin_tuple.c.md`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/brin-tuple-format.md](../../../../idioms/brin-tuple-format.md)

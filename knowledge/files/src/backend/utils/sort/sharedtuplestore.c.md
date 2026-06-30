@@ -164,3 +164,7 @@ claiming. [from-comment] [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `utils`](../../../../../issues/utils.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/parallel-hash-join.md](../../../../../idioms/parallel-hash-join.md)

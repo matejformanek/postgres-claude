@@ -241,3 +241,7 @@ This file is the *entire activation surface* of sepgsql.
   on default (hooks.c:282) — a newly-added OAT_* value would crash all
   catalog ops in a sepgsql-loaded cluster until the module is patched
   (likely)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

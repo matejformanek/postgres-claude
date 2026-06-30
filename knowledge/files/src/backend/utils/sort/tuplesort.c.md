@@ -280,3 +280,5 @@ quicksort on tiebreaks (`:2618-2976`). Adapted from Malte Skarupke's
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/memory-context-slab-generation-bump.md](../../../../../idioms/memory-context-slab-generation-bump.md)
+

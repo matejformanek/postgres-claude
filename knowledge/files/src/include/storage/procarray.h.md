@@ -41,3 +41,7 @@ full mental model.
 `PGPROC` itself is in `proc.h`. `KnownAssignedXids` operations are
 pure functions over the shared array, callable from recovery code in
 `xlogrecovery.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/xmin-horizon-management.md](../../../../idioms/xmin-horizon-management.md)

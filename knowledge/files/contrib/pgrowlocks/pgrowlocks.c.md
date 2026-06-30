@@ -114,3 +114,7 @@ SQL gating: `REVOKE ALL FROM PUBLIC` is in `pgrowlocks--1.2.sql`
 3. [ISSUE-nit: mixed palloc'd / string-literal pointers in values[] array (nit)] — `source/contrib/pgrowlocks/pgrowlocks.c:164-166`
 4. [ISSUE-defense-in-depth: pg_stat_scan_tables grants beyond ACL_SELECT (nit)] — `source/contrib/pgrowlocks/pgrowlocks.c:108-115`
 5. [ISSUE-concurrency: buffer share-lock held across GetMultiXactIdMembers; introduces buffer→SLRU lock-ordering constraint (maybe)] — `source/contrib/pgrowlocks/pgrowlocks.c:132-265`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgrowlocks.md](../../../subsystems/contrib-pgrowlocks.md)

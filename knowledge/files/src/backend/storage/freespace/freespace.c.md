@@ -92,3 +92,5 @@ Tree depth:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [subsystems/contrib-pg_freespacemap.md](../../../../../subsystems/contrib-pg_freespacemap.md)
+

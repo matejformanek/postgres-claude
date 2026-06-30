@@ -114,6 +114,7 @@ appears as the first field. `nodetag_only` is **not** inherited.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/node-types-and-lists.md](../../../../idioms/node-types-and-lists.md)
+- [idioms/aggregate-partial-finalize.md](../../../../idioms/aggregate-partial-finalize.md)
 
 ## Appears in scenarios
 
@@ -122,3 +123,4 @@ appears as the first field. `nodetag_only` is **not** inherited.
 - [Scenario — Add a new Node type](../../../../scenarios/add-new-node-type.md)
 
 <!-- scenarios:auto:end -->
+

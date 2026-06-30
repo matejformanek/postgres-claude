@@ -83,3 +83,5 @@ unset. In parallel, this is done by one elected backend per batch (the
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/parallel-hash-join.md](../../../../idioms/parallel-hash-join.md)
+

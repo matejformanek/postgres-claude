@@ -128,3 +128,7 @@ concurrently re-parse `synchronous_standby_names`. [from-comment]
 <!-- issues:auto:begin -->
 - [Issue register — `include-replication`](../../../../issues/include-replication.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/walsender-state-machine.md](../../../../idioms/walsender-state-machine.md)

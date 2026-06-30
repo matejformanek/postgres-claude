@@ -44,3 +44,7 @@ None directly.
 ## Issues
 
 None.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/spinlock-discipline.md](../../../../idioms/spinlock-discipline.md)

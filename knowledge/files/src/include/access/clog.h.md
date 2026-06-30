@@ -66,3 +66,7 @@ PostgreSQL transaction-commit-log manager
 
 - `[verified-by-code]`: 8
 - `[from-comment]`: 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/clog-slru.md](../../../../idioms/clog-slru.md)

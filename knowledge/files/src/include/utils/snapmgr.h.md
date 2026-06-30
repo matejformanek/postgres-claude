@@ -57,3 +57,4 @@ Declarations for snapmgr.c plus the three statically allocated special snapshots
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/snapshot-lifecycle.md](../../../../data-structures/snapshot-lifecycle.md)
+- [idioms/snapshot-acquisition.md](../../../../idioms/snapshot-acquisition.md)

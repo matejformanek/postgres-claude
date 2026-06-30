@@ -123,3 +123,8 @@ inserts an enum value mid-list. [from-comment]
 <!-- issues:auto:begin -->
 - [Issue register — `include-replication`](../../../../issues/include-replication.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/apply-conflict-resolution.md](../../../../idioms/apply-conflict-resolution.md)
+- [idioms/apply-handlers-insert-update-delete.md](../../../../idioms/apply-handlers-insert-update-delete.md)

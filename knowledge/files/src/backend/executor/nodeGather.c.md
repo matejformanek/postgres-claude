@@ -56,3 +56,5 @@ for workers to exit, accumulate their BufferUsage/WalUsage/instr.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/parallel-gather-merge.md](../../../../idioms/parallel-gather-merge.md)
+

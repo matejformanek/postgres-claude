@@ -185,3 +185,9 @@ safety contracts).
 <!-- issues:auto:begin -->
 - [Issue register — `include-foreign`](../../../../issues/include-foreign.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/fdw-iterate-scan.md](../../../../idioms/fdw-iterate-scan.md)
+- [idioms/fdw-routine-callbacks.md](../../../../idioms/fdw-routine-callbacks.md)
+- [subsystems/contrib-file_fdw.md](../../../../subsystems/contrib-file_fdw.md)

@@ -86,6 +86,8 @@ verified-by-code: 18 — from-comment: 9 — from-readme: 0 — inferred: 0 — 
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
+- [idioms/relcache-build.md](../../../../../idioms/relcache-build.md)
+- [idioms/relfilenumber-rewrite.md](../../../../../idioms/relfilenumber-rewrite.md)
 
 ## Appears in scenarios
 
@@ -94,3 +96,4 @@ verified-by-code: 18 — from-comment: 9 — from-readme: 0 — inferred: 0 — 
 - [Scenario — Add a column to an existing system catalog](../../../../../scenarios/add-new-system-catalog-column.md)
 
 <!-- scenarios:auto:end -->
+

@@ -79,3 +79,7 @@ Cross-link: `knowledge/subsystems/storage-aio.md`.
 - ISSUE-COMMENT: the batchmode constraints (lines 45-62) are
   load-bearing for correctness; a static-analysis tag would
   help. (Informational.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/read-stream-prefetch.md](../../../../idioms/read-stream-prefetch.md)

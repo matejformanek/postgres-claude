@@ -69,3 +69,7 @@ trust model applies; ilist itself adds nothing.
 ## Issues
 
 None — pristine.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/dlist-node.md](../../../../data-structures/dlist-node.md)

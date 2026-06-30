@@ -205,3 +205,4 @@ work. `unlikely()` hint plus inline keeps the success path tight.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/utils-mmgr.md](../../../../subsystems/utils-mmgr.md)
+- [idioms/memory-context-api-and-dispatch.md](../../../../idioms/memory-context-api-and-dispatch.md)

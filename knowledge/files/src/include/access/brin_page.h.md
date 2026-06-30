@@ -27,3 +27,7 @@ Page-layout constants and macros for BRIN, exposed for `pageinspect`-style tools
 - `BrinPageFlags(page)` / `BrinPageType(page)` — accessors into the special area.
 
 Tags: [from-comment, brin_page.h:11-15]; constants [verified-by-code].
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/brin-revmap.md](../../../../idioms/brin-revmap.md)

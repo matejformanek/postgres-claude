@@ -227,3 +227,7 @@ Three families × N-argument variants × Coll suffix:
 <!-- issues:auto:begin -->
 - [Issue register — `include-misc`](../../../issues/include-misc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/fmgrinfo.md](../../../data-structures/fmgrinfo.md)

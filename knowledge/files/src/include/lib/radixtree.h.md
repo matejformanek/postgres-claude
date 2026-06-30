@@ -84,3 +84,7 @@ gather. [from-comment]
 - ISSUE-COMMENT: header TODO at lines 83-87 admits the current
   rwlock is sub-optimal for mixed read-write; track for future
   work. (Informational.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/vacuum-tid-store.md](../../../../idioms/vacuum-tid-store.md)

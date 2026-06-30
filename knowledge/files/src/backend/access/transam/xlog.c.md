@@ -334,6 +334,11 @@ until the file is fully allocated.
 - [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/checkpoint-coordination.md](../../../../../idioms/checkpoint-coordination.md)
+- [idioms/crash-recovery-startup.md](../../../../../idioms/crash-recovery-startup.md)
+- [idioms/wal-buffer-state.md](../../../../../idioms/wal-buffer-state.md)
+- [idioms/wal-page-write-flush.md](../../../../../idioms/wal-page-write-flush.md)
+- [idioms/xloginsertlock-partitioning.md](../../../../../idioms/xloginsertlock-partitioning.md)
 
 ## Appears in scenarios
 
@@ -343,3 +348,4 @@ until the file is fully allocated.
 - [Scenario — Bump CATALOG_VERSION_NO](../../../../../scenarios/bump-catversion.md)
 
 <!-- scenarios:auto:end -->
+

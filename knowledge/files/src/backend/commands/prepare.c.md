@@ -28,3 +28,5 @@ A prepared statement starts with custom plans (replan with the actual parameter 
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/plan-cache.md](../../../../idioms/plan-cache.md)
+

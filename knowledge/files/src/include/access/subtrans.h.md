@@ -36,3 +36,7 @@ PostgreSQL subtransaction-log manager
 ## Confidence tag tally
 
 - `[verified-by-code]`: 5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/subxact-subtrans-slru.md](../../../../idioms/subxact-subtrans-slru.md)

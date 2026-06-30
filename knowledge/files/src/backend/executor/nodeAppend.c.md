@@ -58,3 +58,5 @@ it); some pruning can shed children entirely.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/partition-runtime-pruning.md](../../../../idioms/partition-runtime-pruning.md)
+

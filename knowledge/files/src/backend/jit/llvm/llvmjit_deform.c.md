@@ -76,3 +76,7 @@ JIT-compile a per-`TupleDesc`, per-slot-type heap-tuple deformer. The single exp
 
 ## Confidence tag tally
 `[verified-by-code]=9`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/jit-tuple-deform-and-inline.md](../../../../../idioms/jit-tuple-deform-and-inline.md)

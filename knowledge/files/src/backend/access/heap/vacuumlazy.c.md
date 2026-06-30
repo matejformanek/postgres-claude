@@ -83,3 +83,8 @@ The lazy ("concurrent", non-blocking) VACUUM driver for heap relations. Drives t
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/heap-tuple-freeze.md](../../../../../idioms/heap-tuple-freeze.md)
+- [idioms/vacuum-skip-pages.md](../../../../../idioms/vacuum-skip-pages.md)
+- [idioms/vacuum-truncate-relation.md](../../../../../idioms/vacuum-truncate-relation.md)
+- [idioms/vacuum-two-pass-heap.md](../../../../../idioms/vacuum-two-pass-heap.md)
+

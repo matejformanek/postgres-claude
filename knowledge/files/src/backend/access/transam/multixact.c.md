@@ -208,3 +208,6 @@ it re-registers; on commit/abort it cleans up.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/multixactid.md](../../../../../data-structures/multixactid.md)
+- [idioms/multixact-slru.md](../../../../../idioms/multixact-slru.md)
+

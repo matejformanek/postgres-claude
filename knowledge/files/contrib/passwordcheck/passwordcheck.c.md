@@ -106,3 +106,7 @@ production use. Optionally links cracklib for dictionary checks via
 <!-- issues:auto:begin -->
 - [Issue register — `passwordcheck`](../../../issues/passwordcheck.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-passwordcheck.md](../../../subsystems/contrib-passwordcheck.md)

@@ -60,3 +60,7 @@ I/O:
 
 - `[verified-by-code]` × 4
 - `[from-comment]` × 2
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/aggregate-hash-vs-sort.md](../../../../idioms/aggregate-hash-vs-sort.md)

@@ -96,3 +96,6 @@ FKs are stored as `pg_constraint` rows with a paired trigger pair (one on each s
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/partition-attach-detach.md](../../../../idioms/partition-attach-detach.md)
+- [idioms/ri-fkey-cascade.md](../../../../idioms/ri-fkey-cascade.md)
+

@@ -124,3 +124,6 @@ transition tables.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/epq-recheck-flow.md](../../../../idioms/epq-recheck-flow.md)
+- [idioms/trigger-transition-tables.md](../../../../idioms/trigger-transition-tables.md)
+

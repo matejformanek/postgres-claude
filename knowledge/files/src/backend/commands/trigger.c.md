@@ -33,3 +33,8 @@ A trigger declared `REFERENCING OLD TABLE AS o NEW TABLE AS n` gets statement-le
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/trigger-constraint-deferral.md](../../../../idioms/trigger-constraint-deferral.md)
+- [idioms/trigger-during-error.md](../../../../idioms/trigger-during-error.md)
+- [idioms/trigger-firing-order.md](../../../../idioms/trigger-firing-order.md)
+- [idioms/trigger-transition-tables.md](../../../../idioms/trigger-transition-tables.md)
+

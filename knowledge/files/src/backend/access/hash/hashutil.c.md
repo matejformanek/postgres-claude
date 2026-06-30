@@ -20,3 +20,5 @@ Tags: [from-comment, hashutil.c:1-13]; [verified-by-code for `CALC_NEW_BUCKET`].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/hash-page-layout.md](../../../../../idioms/hash-page-layout.md)
+

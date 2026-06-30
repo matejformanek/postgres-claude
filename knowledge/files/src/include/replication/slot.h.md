@@ -159,9 +159,11 @@ the replication subsystem doc.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../architecture/replication.md)
+- [idioms/replication-slot-advance.md](../../../../idioms/replication-slot-advance.md)
 
 ## Cross-references
 
 <!-- issues:auto:begin -->
 - [Issue register — `include-replication`](../../../../issues/include-replication.md)
 <!-- issues:auto:end -->
+

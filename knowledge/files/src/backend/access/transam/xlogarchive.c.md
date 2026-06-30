@@ -100,3 +100,5 @@ marker, segment is older than required, or archiving is disabled.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/wal-page-write-flush.md](../../../../../idioms/wal-page-write-flush.md)
+

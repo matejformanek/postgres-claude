@@ -95,6 +95,7 @@ DSM area.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/parallel-gather-merge.md](../../../../idioms/parallel-gather-merge.md)
 
 ## Appears in scenarios
 
@@ -103,3 +104,4 @@ DSM area.
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+

@@ -82,6 +82,7 @@
 <!-- backlinks:auto -->
 - [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
+- [idioms/security-barrier-views.md](../../../../idioms/security-barrier-views.md)
 
 ## Appears in scenarios
 
@@ -98,3 +99,4 @@
 - [Scenario — Add a new system view](../../../../scenarios/add-new-system-view.md)
 
 <!-- scenarios:auto:end -->
+

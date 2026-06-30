@@ -122,3 +122,7 @@ opclass via `seg_cmp`, and the GiST opclass support functions
 - `[ISSUE-robustness: seg_out builds output with sprintf into a
   fixed 40-byte buffer; safe today only because restore() caps digits
   at FLT_DIG] (low)` — `source/contrib/seg/seg.c:130-159`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-seg.md](../../../subsystems/contrib-seg.md)

@@ -120,3 +120,5 @@ parents, …).
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [data-structures/bitmapset.md](../../../../data-structures/bitmapset.md)
+

@@ -68,3 +68,5 @@ b". The second is the independence assumption residual.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/extended-statistics-statext.md](../../../../idioms/extended-statistics-statext.md)
+

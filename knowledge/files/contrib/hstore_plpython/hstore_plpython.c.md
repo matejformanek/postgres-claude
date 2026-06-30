@@ -92,3 +92,7 @@ the Python side even if `PLyObject_AsString` ereports. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `hstore_plpython`](../../../issues/hstore_plpython.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore_plpython.md](../../../subsystems/contrib-hstore_plpython.md)

@@ -242,3 +242,7 @@ goes through this header.
 10. [ISSUE-correctness: PGC_S_TEST "be forgiving" is a convention easily
     broken by new check hooks (maybe)] —
     `source/src/include/utils/guc.h:95-102`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/guc-variables.md](../../../../idioms/guc-variables.md)

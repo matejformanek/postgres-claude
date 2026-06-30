@@ -48,3 +48,5 @@ Convert a tuple from one TupleDesc to a logically-equivalent but differently-ord
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/partition-tuple-routing.md](../../../../../idioms/partition-tuple-routing.md)
+

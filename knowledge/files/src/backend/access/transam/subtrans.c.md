@@ -124,3 +124,6 @@ crash-recovery need).
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/subtransaction-stack.md](../../../../../idioms/subtransaction-stack.md)
+- [idioms/subxact-subtrans-slru.md](../../../../../idioms/subxact-subtrans-slru.md)
+

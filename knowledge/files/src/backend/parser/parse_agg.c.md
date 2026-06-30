@@ -50,3 +50,5 @@ spec compliance matrix.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+- [idioms/aggregate-grouping-sets.md](../../../../idioms/aggregate-grouping-sets.md)
+

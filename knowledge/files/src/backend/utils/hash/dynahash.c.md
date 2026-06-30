@@ -100,3 +100,5 @@ tables are fixed-directory at creation. [from-comment] (`dynahash.c:3-29`)
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/dynahash-hashctl.md](../../../../../data-structures/dynahash-hashctl.md)
+

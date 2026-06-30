@@ -111,6 +111,7 @@ uint32 xlp_xlog_blcksz; }`. First page of every segment has this.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [architecture/wal.md](../../../../architecture/wal.md)
+- [idioms/wal-page-format.md](../../../../idioms/wal-page-format.md)
 
 ## Appears in scenarios
 
@@ -120,3 +121,4 @@ uint32 xlp_xlog_blcksz; }`. First page of every segment has this.
 - [Scenario — Add a new WAL record](../../../../scenarios/add-new-wal-record.md)
 
 <!-- scenarios:auto:end -->
+

@@ -111,3 +111,5 @@ This ordering is asymmetric: a FATAL inside a CRIT becomes PANIC; an ERROR with 
 <!-- backlinks:auto -->
 - [idioms/error-handling.md](../../../../../idioms/error-handling.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/error-context-callbacks.md](../../../../../idioms/error-context-callbacks.md)
+

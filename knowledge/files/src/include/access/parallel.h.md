@@ -84,3 +84,5 @@ signature looked up by name via `LookupParallelWorkerFunction`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/bgworker-and-parallel.md](../../../../idioms/bgworker-and-parallel.md)
+- [idioms/parallel-context-and-dsm.md](../../../../idioms/parallel-context-and-dsm.md)
+- [idioms/parallel-worker-coordination.md](../../../../idioms/parallel-worker-coordination.md)

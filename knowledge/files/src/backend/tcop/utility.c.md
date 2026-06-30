@@ -73,3 +73,6 @@ Calls every `commands/*` module. Header: `tcop/utility.h`.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/tcop.md](../../../../subsystems/tcop.md)
+- [idioms/plan-cache.md](../../../../idioms/plan-cache.md)
+- [idioms/process-utility-hook-chain.md](../../../../idioms/process-utility-hook-chain.md)
+

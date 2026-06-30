@@ -83,3 +83,6 @@ Everything else in this file is `static` and slotted into `heapam_methods` by fu
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/tableam-index-fetch.md](../../../../../idioms/tableam-index-fetch.md)
+- [idioms/tableam-vtable-lifecycle.md](../../../../../idioms/tableam-vtable-lifecycle.md)
+

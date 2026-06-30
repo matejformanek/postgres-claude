@@ -97,3 +97,6 @@ order. [from-comment] (`resowner.c:1-9`)
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/resourceowner.md](../../../../../data-structures/resourceowner.md)
+- [idioms/snapshot-active-stack-and-registered.md](../../../../../idioms/snapshot-active-stack-and-registered.md)
+

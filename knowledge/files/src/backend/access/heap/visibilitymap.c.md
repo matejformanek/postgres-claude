@@ -58,3 +58,6 @@ None defined here; the bit constants `VISIBILITYMAP_ALL_VISIBLE = 0x01` / `VISIB
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/visibility-map-update.md](../../../../../idioms/visibility-map-update.md)
+- [subsystems/contrib-pg_visibility.md](../../../../../subsystems/contrib-pg_visibility.md)
+

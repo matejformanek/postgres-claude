@@ -91,3 +91,5 @@ call sites is a real readability cost. `[from-README:99-100]`
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [data-structures/var-const-nodes.md](../../../../data-structures/var-const-nodes.md)
+

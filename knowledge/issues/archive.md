@@ -13,6 +13,7 @@ built-in shell_archive module backing `archive_command`.
 |---|---|---|---|---|---|---|
 | 2026-06-11 | archive/shell_archive.c:79 | style | nit | `fflush(NULL)` flushes ALL stdio streams before every `system()` call. Necessary to avoid double-flush across fork, but a perf nit in heavy-archiving workloads | open | knowledge/files/src/backend/archive/shell_archive.c.md §Potential issues |
 | 2026-06-11 | archive/shell_archive.c:129,133 | style | nit | Both error paths in `shell_archive_file` `pfree(xlogarchcmd)` — could collapse to one trailing `pfree` after the if-else | open | knowledge/files/src/backend/archive/shell_archive.c.md §Potential issues |
+| 2026-06-29 | shell_archive.h | doc-drift | nit | archive_library = '' semantics not in header | open | knowledge/files/src/include/archive/shell_archive.h.md §Potential issues |
 
 ## Wontfix / Submitted / Landed
 

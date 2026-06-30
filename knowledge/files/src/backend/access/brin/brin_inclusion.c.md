@@ -38,3 +38,5 @@ Tags: [from-comment, brin_inclusion.c:1-23]; procnum semantics [inferred from BR
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/brin-tuple-format.md](../../../../../idioms/brin-tuple-format.md)
+

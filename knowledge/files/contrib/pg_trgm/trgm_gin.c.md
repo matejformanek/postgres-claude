@@ -87,3 +87,7 @@ trigram extraction (in `trgm_op.c`) and NFA-based regex extraction
   source/contrib/pg_trgm/trgm_gin.c:90-144,190-258,286-356 —
   maintenance risk: adding strategies needs three coordinated
   edits.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_trgm.md](../../../subsystems/contrib-pg_trgm.md)

@@ -58,3 +58,5 @@ qualification, joininfo initialization routines". [from-comment:3-4]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/restrictinfo.md](../../../../../data-structures/restrictinfo.md)
+

@@ -251,3 +251,8 @@ The query macros (all `static inline`, take `const void *PTR`):
 <!-- issues:auto:begin -->
 - [Issue register — `include-misc`](../../../issues/include-misc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/varatt-varlena.md](../../../data-structures/varatt-varlena.md)
+- [idioms/heap-tuple-decompression-pattern.md](../../../idioms/heap-tuple-decompression-pattern.md)

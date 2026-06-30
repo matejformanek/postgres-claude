@@ -246,6 +246,11 @@ is applied. Significantly fixes the n-way join blowup for star schemas.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/aggregate-hash-vs-sort.md](../../../../../idioms/aggregate-hash-vs-sort.md)
+- [idioms/cost-join-paths.md](../../../../../idioms/cost-join-paths.md)
+- [idioms/cost-parallel-adjustments.md](../../../../../idioms/cost-parallel-adjustments.md)
+- [idioms/cost-scan-paths.md](../../../../../idioms/cost-scan-paths.md)
+- [idioms/cost-units-gucs.md](../../../../../idioms/cost-units-gucs.md)
 
 ## Appears in scenarios
 
@@ -255,3 +260,4 @@ is applied. Significantly fixes the n-way join blowup for star schemas.
 - [Scenario — Add a new plan node](../../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+

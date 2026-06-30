@@ -79,3 +79,7 @@ Internal:
 - `[ISSUE-robustness: longdiff > 2pi not normalized; if caller passes
   longitude in radians instead of degrees the math silently degrades]
   (low)` — `source/contrib/earthdistance/earthdistance.c:71-73`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-earthdistance.md](../../../subsystems/contrib-earthdistance.md)

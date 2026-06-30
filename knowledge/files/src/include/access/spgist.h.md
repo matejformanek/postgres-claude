@@ -31,3 +31,8 @@ SPGISTNRequiredProc             5
 ## SPGIST_MAX_PREFIX_LENGTH
 
 Bounds prefix-tuple size to fit on a page (radix opclasses).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/spgist-insert-and-picksplit.md](../../../../idioms/spgist-insert-and-picksplit.md)
+- [idioms/spgist-scan-and-consistent.md](../../../../idioms/spgist-scan-and-consistent.md)

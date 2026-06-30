@@ -122,3 +122,7 @@ prototype surface implemented by `jsonb.c` and `jsonb_util.c`.
 - `[from-comment]` × 9
 - `[verified-by-code]` × 0
 - `[unverified]` × 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/jsonbvalue.md](../../../../data-structures/jsonbvalue.md)

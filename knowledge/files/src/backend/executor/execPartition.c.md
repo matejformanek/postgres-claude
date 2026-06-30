@@ -95,3 +95,6 @@ that survive pruning.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/partition-runtime-pruning.md](../../../../idioms/partition-runtime-pruning.md)
+- [idioms/partition-tuple-routing.md](../../../../idioms/partition-tuple-routing.md)
+

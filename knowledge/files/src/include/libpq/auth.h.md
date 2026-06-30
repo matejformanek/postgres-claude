@@ -54,3 +54,7 @@ used across the auth code [from-comment].
 ## Tally
 
 `[verified-by-code]=2 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-auth_delay.md](../../../../subsystems/contrib-auth_delay.md)

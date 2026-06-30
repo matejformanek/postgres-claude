@@ -142,3 +142,7 @@ TO foo` and hand `foo` the ability to:
 3. [ISSUE-defense-in-depth: pg_truncate_visibility_map accepts system-catalog OIDs (only relkind filter applied) (maybe)] — `source/contrib/pg_visibility/pg_visibility.c:925-933`
 4. [ISSUE-concurrency: manual LWLockRelease(ProcArrayLock) + LWLockRelease(XidGenLock) after GetRunningTransactionData is fragile but currently correct (nit)] — `source/contrib/pg_visibility/pg_visibility.c:622-638`
 5. [ISSUE-resource: collect_visibility_data palloc0s up to ~MaxBlockNumber bytes without huge-alloc flag (maybe)] — `source/contrib/pg_visibility/pg_visibility.c:500-501`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_visibility.md](../../../subsystems/contrib-pg_visibility.md)

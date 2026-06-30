@@ -41,3 +41,8 @@ Public surface for the plan cache: defines `CachedPlanSource`, `CachedPlan`, `Ca
 ## Confidence tag tally
 
 verified-by-code: 1 — from-comment: 7 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/plan-cache.md](../../../../idioms/plan-cache.md)
+- [idioms/prepared-statement-plancache.md](../../../../idioms/prepared-statement-plancache.md)

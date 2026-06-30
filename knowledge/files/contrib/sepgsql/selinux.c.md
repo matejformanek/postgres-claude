@@ -190,3 +190,7 @@ design — `ausearch` and `audit2allow` can consume it.
 - `[ISSUE-error-handling: no retry on transient libselinux errors from
   security_compute_av_flags_raw — only policy-reload races are retried,
   in uavc.c (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

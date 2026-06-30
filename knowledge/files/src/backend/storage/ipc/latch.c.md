@@ -152,3 +152,5 @@ to wake them.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)
+- [data-structures/latch-waiteventset.md](../../../../../data-structures/latch-waiteventset.md)
+

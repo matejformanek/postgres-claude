@@ -143,3 +143,5 @@ comment is just `"I/O routines for jsonb type"` (`jsonb.c:3-4`
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/jsonbvalue.md](../../../../../data-structures/jsonbvalue.md)
+

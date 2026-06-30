@@ -62,3 +62,5 @@ Both `brin_doupdate` and `brin_doinsert` `ereport(ERROR)` if `itemsz > BrinMaxIt
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/brin-summarize-and-scan.md](../../../../../idioms/brin-summarize-and-scan.md)
+

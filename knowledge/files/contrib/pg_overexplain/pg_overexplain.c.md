@@ -110,3 +110,7 @@ different form, plus some bitmapsets of RTIs.
 ## Issues
 
 1. [ISSUE-correctness: range-table loop has no CHECK_FOR_INTERRUPTS; partition-heavy plans with thousands of RTEs cancel-slow under EXPLAIN (RANGE_TABLE) (nit)] — `source/contrib/pg_overexplain/pg_overexplain.c:454-777`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_overexplain.md](../../../subsystems/contrib-pg_overexplain.md)

@@ -57,3 +57,5 @@ serve many sibling expressions.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/subplan-and-initplan.md](../../../../idioms/subplan-and-initplan.md)
+

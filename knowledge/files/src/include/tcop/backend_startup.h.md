@@ -97,3 +97,7 @@ a child, passes a `BackendStartupData` blob, and the child runs
 - `[ISSUE-TRUST: A2 echo — log_connections SETUP_DURATIONS publishes per-phase auth timing; user-existence timing side-channel; not flagged in header (medium)] — source/src/include/tcop/backend_startup.h:74-118`
 - `[ISSUE-DOC: CAC_* enum order is wire-significant (each maps to a fixed error); changing order would be ABI break, not commented (low)] — source/src/include/tcop/backend_startup.h:33-41`
 - `[ISSUE-CODE: BackendStartupData uses two TimestampTz fields conditionally ("only used for client and wal sender connections") — unused for autovacuum / bgworker but always allocated (low)] — source/src/include/tcop/backend_startup.h:48-60`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

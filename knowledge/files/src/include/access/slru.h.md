@@ -108,3 +108,7 @@ Per-backend handle: `options`, `shared`, `nbanks`.
 
 - `[verified-by-code]`: 17
 - `[from-comment]`: 5
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/slru-page-replacement.md](../../../../idioms/slru-page-replacement.md)

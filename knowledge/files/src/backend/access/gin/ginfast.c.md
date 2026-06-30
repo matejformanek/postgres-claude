@@ -35,3 +35,5 @@ Tags: [from-comment, ginfast.c:1-15], [from-README, README:97-105, 501-508]; spe
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/gin-fastupdate-pending.md](../../../../../idioms/gin-fastupdate-pending.md)
+

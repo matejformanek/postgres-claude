@@ -115,3 +115,5 @@ fallback loop, so the corrected value is not double-counted. [verified-by-code]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/extended-statistics-statext.md](../../../../idioms/extended-statistics-statext.md)
+

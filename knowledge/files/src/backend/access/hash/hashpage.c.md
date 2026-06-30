@@ -56,3 +56,6 @@ Tags: [from-README, README:338-383]; [verified-by-code for `_hash_splitbucket` m
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/hash-bucket-split.md](../../../../../idioms/hash-bucket-split.md)
+- [idioms/hash-page-layout.md](../../../../../idioms/hash-page-layout.md)
+

@@ -164,3 +164,6 @@ outlive the columns they refer to. `:103-146`
 - [architecture/overview.md](../../../../architecture/overview.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
+- [idioms/security-barrier-views.md](../../../../idioms/security-barrier-views.md)
+- [idioms/view-pushdown-via-rewriter.md](../../../../idioms/view-pushdown-via-rewriter.md)
+

@@ -57,3 +57,6 @@ Build, copy, compare, ref-count and free `TupleDesc` objects. A `TupleDesc` is t
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [data-structures/pg_attribute-form.md](../../../../../data-structures/pg_attribute-form.md)
+- [data-structures/tupledesc.md](../../../../../data-structures/tupledesc.md)
+

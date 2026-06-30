@@ -73,3 +73,8 @@ RelFileLocator {
 ## Issues
 
 None.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/relfilelocator.md](../../../../data-structures/relfilelocator.md)
+- [idioms/relfilenumber-rewrite.md](../../../../idioms/relfilenumber-rewrite.md)

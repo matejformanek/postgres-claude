@@ -74,3 +74,10 @@ into a separate header lets each of those layers depend only on
 - Sibling: `parsenodes.h` (parse-time-only nodes), `plannodes.h`
   (plan-time-only).
 - Idiom: `knowledge/idioms/node-types-and-lists.md`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/var-const-nodes.md](../../../../data-structures/var-const-nodes.md)
+- [idioms/node-types.md](../../../../idioms/node-types.md)
+- [idioms/portable-identifiers.md](../../../../idioms/portable-identifiers.md)
+- [idioms/subplan-and-initplan.md](../../../../idioms/subplan-and-initplan.md)

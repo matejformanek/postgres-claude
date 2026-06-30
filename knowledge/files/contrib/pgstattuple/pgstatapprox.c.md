@@ -214,3 +214,7 @@ This is the buffer-management subtlety that read-stream's
   recently; admins should pair pgstattuple_approx with periodic
   `VACUUM (DISABLE_PAGE_SKIPPING)` to catch VM drift (nit;
   operational concern)]**.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgstattuple.md](../../../subsystems/contrib-pgstattuple.md)

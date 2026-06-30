@@ -162,3 +162,7 @@ frequently asked-about AIO file. [from-comment, read_stream.c:1-73]
 ## Tally
 
 `[verified-by-code]=9 [from-comment]=6 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/read-stream-prefetch.md](../../../../../idioms/read-stream-prefetch.md)

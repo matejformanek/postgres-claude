@@ -53,6 +53,7 @@ streaming and/or two_phase.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../../subsystems/replication.md)
+- [idioms/output-plugin-callbacks.md](../../../../../idioms/output-plugin-callbacks.md)
 
 ## Appears in scenarios
 
@@ -61,3 +62,4 @@ streaming and/or two_phase.
 - [Scenario — Add a new replication / logical-decoding message](../../../../../scenarios/add-new-replication-message.md)
 
 <!-- scenarios:auto:end -->
+

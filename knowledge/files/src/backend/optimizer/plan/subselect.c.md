@@ -59,3 +59,6 @@ go through `subquery_planner` recursion in planner.c). [from-comment:6-8]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/subplan-and-initplan.md](../../../../../idioms/subplan-and-initplan.md)
+- [idioms/utility-stmt-planning.md](../../../../../idioms/utility-stmt-planning.md)
+

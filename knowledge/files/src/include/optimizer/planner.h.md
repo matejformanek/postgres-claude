@@ -8,3 +8,7 @@ internal-to-optimizer surface. [from-comment:5-9]
 
 Exposes `subquery_planner`, `standard_planner`, `grouping_planner`
 helpers, plus internal pieces of the upper-rel pipeline.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_plan_advice.md](../../../../subsystems/contrib-pg_plan_advice.md)

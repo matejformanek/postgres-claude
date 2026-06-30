@@ -258,3 +258,7 @@ cstate = BeginCopyFrom(NULL,                       /* no ParseState */
 - `[ISSUE-api-shape: FileFdwPlanState->filename overloaded with shell-command-or-path; only the is_program flag disambiguates; a small struct rename to source / source_kind would reduce confusion (nit)]`
 - `[ISSUE-audit-gap: no event-trigger / pgaudit-friendly emission of which file/program was read; pg_stat_statements records the query, but the actual filename behind the FT is only visible via pg_foreign_table.ftoptions which requires catalog SELECT (maybe)]`
 - `[ISSUE-correctness: file_acquire_sample_rows tupcontext is reset every row; if a CopyFromErrorCallback longjmps mid-row, the error_context_stack restoration at line 1311 is unreachable, but the executor's setjmp catches that level (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-file_fdw.md](../../../subsystems/contrib-file_fdw.md)

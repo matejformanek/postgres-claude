@@ -88,3 +88,8 @@ context so workers can `tbm_attach_shared_iterate`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/bitmap-heap-scan-flow.md](../../../../idioms/bitmap-heap-scan-flow.md)
+- [idioms/parallel-bitmap-heap.md](../../../../idioms/parallel-bitmap-heap.md)
+- [idioms/tidbitmap-build-and-iterate.md](../../../../idioms/tidbitmap-build-and-iterate.md)
+- [idioms/tidbitmap-structure-and-lossy.md](../../../../idioms/tidbitmap-structure-and-lossy.md)
+

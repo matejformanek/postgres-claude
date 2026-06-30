@@ -244,3 +244,5 @@ Method-table entries (declared in `memutils_internal.h`, wired in
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-mmgr.md](../../../../../subsystems/utils-mmgr.md)
+- [idioms/memory-context-allocset-internals.md](../../../../../idioms/memory-context-allocset-internals.md)
+

@@ -53,3 +53,5 @@ Returns a palloc'd `MVNDistinct` in `CurrentMemoryContext`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/extended-statistics-statext.md](../../../../idioms/extended-statistics-statext.md)
+

@@ -205,3 +205,7 @@ risk vxid reuse). `[from-comment] :689-700`.
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)
+- [idioms/plan-cache.md](../../../../../idioms/plan-cache.md)
+- [idioms/sinvaladt-broadcast.md](../../../../../idioms/sinvaladt-broadcast.md)
+- [idioms/syscache-invalidation-flow.md](../../../../../idioms/syscache-invalidation-flow.md)
+

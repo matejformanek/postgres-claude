@@ -84,3 +84,10 @@ require a CATALOG_VERSION bump. `nodes/README:113-115` `[from-README]`
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/aggregate-grouping-sets.md](../../../../idioms/aggregate-grouping-sets.md)
+- [idioms/aggregate-hash-vs-sort.md](../../../../idioms/aggregate-hash-vs-sort.md)
+- [idioms/epq-multi-table.md](../../../../idioms/epq-multi-table.md)
+- [idioms/subplan-and-initplan.md](../../../../idioms/subplan-and-initplan.md)

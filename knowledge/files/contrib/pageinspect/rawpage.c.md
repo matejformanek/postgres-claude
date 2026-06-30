@@ -152,3 +152,7 @@ hard superuser-only debug surface. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `pageinspect`](../../../issues/pageinspect.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

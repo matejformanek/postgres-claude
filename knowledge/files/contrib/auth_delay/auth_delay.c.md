@@ -59,3 +59,7 @@ A 75-line `shared_preload_libraries` extension that sleeps `auth_delay.milliseco
 - `[ISSUE-documentation: interaction with client connect_timeout / TCP user-timeout is undocumented in README (nit)]`
 - `[ISSUE-audit-gap: no logging — silently sleeping on every failure leaves no signal of brute-force in progress for fail2ban-style log scrapers; relies on caller's own `log_connections=on` (maybe)]`
 - `[ISSUE-api-shape: 75 lines of code is fine, but no public C API to chain a same-pattern "delay on successful auth" or "delay on specific error codes" — extending this requires a fork (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-auth_delay.md](../../../subsystems/contrib-auth_delay.md)

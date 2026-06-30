@@ -77,3 +77,5 @@ verified-by-code: 10 — from-comment: 10 — from-readme: 0 — inferred: 0 —
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)
+- [idioms/syscache-catcache-internals.md](../../../../../idioms/syscache-catcache-internals.md)
+

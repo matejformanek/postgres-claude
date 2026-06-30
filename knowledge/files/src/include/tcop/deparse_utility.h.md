@@ -100,3 +100,8 @@ canonical string in `pg_event_trigger_ddl_commands()`.
 - `[ISSUE-TRUST: A8 — CollectedCommand carries publisher-side OIDs; downstream re-resolution by name can bind wrong object (high)] — source/src/include/tcop/deparse_utility.h:44-106`
 - `[ISSUE-TRUST: A11 echo — parsetree retains PASSWORD literals; event-trigger handlers see cleartext (medium)] — source/src/include/tcop/deparse_utility.h:49`
 - `[ISSUE-DOC: no comment on how to keep parsetree alive — implicit MemoryContext discipline (medium)] — source/src/include/tcop/deparse_utility.h:44-49`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/ddl-deparse-via-event-triggers.md](../../../../idioms/ddl-deparse-via-event-triggers.md)
+- [subsystems/tcop.md](../../../../subsystems/tcop.md)

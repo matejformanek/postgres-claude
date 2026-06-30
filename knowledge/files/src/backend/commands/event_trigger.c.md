@@ -26,3 +26,6 @@ The `login` event fires once per backend after authentication, inside the connec
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/ddl-deparse-via-event-triggers.md](../../../../idioms/ddl-deparse-via-event-triggers.md)
+- [idioms/event-trigger-firing.md](../../../../idioms/event-trigger-firing.md)
+

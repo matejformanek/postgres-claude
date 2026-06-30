@@ -99,3 +99,9 @@ table per set in parallel.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/aggregate-grouping-sets.md](../../../../idioms/aggregate-grouping-sets.md)
+- [idioms/aggregate-hash-vs-sort.md](../../../../idioms/aggregate-hash-vs-sort.md)
+- [idioms/aggregate-partial-finalize.md](../../../../idioms/aggregate-partial-finalize.md)
+- [idioms/aggregate-trans-state.md](../../../../idioms/aggregate-trans-state.md)
+- [idioms/memory-context-slab-generation-bump.md](../../../../idioms/memory-context-slab-generation-bump.md)
+

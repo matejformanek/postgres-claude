@@ -46,3 +46,5 @@ needs no coordination.
 <!-- backlinks:auto -->
 - [subsystems/executor.md](../../../../subsystems/executor.md)
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/index-only-scan-vm-check.md](../../../../idioms/index-only-scan-vm-check.md)
+

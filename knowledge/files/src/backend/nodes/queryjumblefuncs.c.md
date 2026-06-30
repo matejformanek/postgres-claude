@@ -84,3 +84,5 @@ specific statement, for pg_stat_statements display.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [subsystems/contrib-pg_stat_statements.md](../../../../subsystems/contrib-pg_stat_statements.md)
+

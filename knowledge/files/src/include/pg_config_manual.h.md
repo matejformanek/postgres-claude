@@ -194,3 +194,7 @@ Commented-out by default; uncomment for diagnostic builds:
 <!-- issues:auto:begin -->
 - [Issue register — `include-misc`](../../../issues/include-misc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/slru-page-replacement.md](../../../idioms/slru-page-replacement.md)

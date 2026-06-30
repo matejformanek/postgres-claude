@@ -208,3 +208,7 @@ ALTER TABLE could change the tupledesc; results decode against the
 - **[ISSUE-correctness: `t_infomask2 & HEAP_NATTS_MASK` lower than
   tupdesc natts silently truncates to ADD-COLUMN-style NULL fill
   (maybe)]** — `source/contrib/pageinspect/heapfuncs.c:346-355`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

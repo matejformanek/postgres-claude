@@ -56,3 +56,5 @@ their request. [from-comment] `:74-92`
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+- [idioms/checkpoint-coordination.md](../../../../idioms/checkpoint-coordination.md)
+

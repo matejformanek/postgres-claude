@@ -45,3 +45,7 @@ Definition of the "rewrite rule" system catalog (`pg_rewrite`) — one row per C
 ## Tally
 
 `[verified-by-code]=10 [from-comment]=1 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/view-pushdown-via-rewriter.md](../../../../idioms/view-pushdown-via-rewriter.md)

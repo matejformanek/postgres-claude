@@ -140,6 +140,7 @@ walsender.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [architecture/replication.md](../../../../architecture/replication.md)
+- [idioms/output-plugin-callbacks.md](../../../../idioms/output-plugin-callbacks.md)
 
 ## Appears in scenarios
 
@@ -154,3 +155,4 @@ walsender.
 <!-- issues:auto:begin -->
 - [Issue register — `include-replication`](../../../../issues/include-replication.md)
 <!-- issues:auto:end -->
+

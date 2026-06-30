@@ -151,3 +151,7 @@ crypt.c:30).
 ## Tally
 
 `[verified-by-code]=14 [from-comment]=5 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-passwordcheck.md](../../../../subsystems/contrib-passwordcheck.md)

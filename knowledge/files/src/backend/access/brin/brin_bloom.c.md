@@ -39,3 +39,5 @@ Tags: [from-comment, brin_bloom.c:1-50]; reloption defaults [verified-by-code].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/brin-tuple-format.md](../../../../../idioms/brin-tuple-format.md)
+

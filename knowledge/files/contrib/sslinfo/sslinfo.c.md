@@ -135,3 +135,7 @@ Internal helpers:
 - `[ISSUE-correctness: missing defensive NULL checks on X509_NAME_get_entry / X509_NAME_ENTRY_get_data return values; OpenSSL contract guarantees non-NULL but malformed certs have surprised callers historically (nit)]`
 - `[ISSUE-memory: ssl_extension_info allocates a fresh BIO_new per row; cheap but unnecessary — could hoist to firstcall (nit)]`
 - `[ISSUE-api-shape: ssl_client_dn() returns the full DN via NAMEDATALEN=64 buffer; long DNs silently truncated by be_tls_get_peer_subject_name without any indication (maybe)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sslinfo.md](../../../subsystems/contrib-sslinfo.md)

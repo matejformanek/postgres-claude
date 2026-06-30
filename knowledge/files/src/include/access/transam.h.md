@@ -163,3 +163,4 @@ LWLocks.").
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
+- [idioms/heap-tuple-freeze.md](../../../../idioms/heap-tuple-freeze.md)

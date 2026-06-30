@@ -36,3 +36,5 @@ Tags: [from-comment, ginget.c:1-13]; [from-README] for locking pattern.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+- [idioms/gin-scan-and-consistent.md](../../../../../idioms/gin-scan-and-consistent.md)
+

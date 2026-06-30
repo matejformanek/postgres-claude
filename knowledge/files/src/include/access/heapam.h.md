@@ -85,3 +85,5 @@ Public API of the heap table access method: scan descriptors, insert/update/dele
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-heap.md](../../../../subsystems/access-heap.md)
+- [idioms/heap-tuple-freeze.md](../../../../idioms/heap-tuple-freeze.md)
+

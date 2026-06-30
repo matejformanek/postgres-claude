@@ -69,3 +69,9 @@ Per-page tuple extraction:
 - Implementation: `source/src/backend/nodes/tidbitmap.c`
 - Consumers: `nodeBitmapHeapscan.c`, `nodeBitmapIndexscan.c`,
   `nodeBitmapAnd.c`, `nodeBitmapOr.c`, BRIN.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/bitmap-heap-scan-flow.md](../../../../idioms/bitmap-heap-scan-flow.md)
+- [idioms/tidbitmap-build-and-iterate.md](../../../../idioms/tidbitmap-build-and-iterate.md)
+- [idioms/tidbitmap-structure-and-lossy.md](../../../../idioms/tidbitmap-structure-and-lossy.md)
