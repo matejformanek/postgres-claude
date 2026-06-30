@@ -1,5 +1,13 @@
 # check.c
 
+- **Source path:** `source/src/bin/pg_upgrade/check.c`
+- **Lines:** 2646
+- **Last verified commit:** `02f699c14163` (re-verified + re-pinned
+  2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump
+  `4abf411e2328..02f699c14163`; triggering commit `cae90d747969`
+  "Message and comment wording fixes" touched message/comment text only —
+  no documented region shifted materially; a few cites drifted ±1 line.)
+
 ## Purpose
 
 The pre-upgrade compatibility checker — **THE** security boundary
@@ -155,7 +163,7 @@ Lines 742-801:
   Compares `unicode_version()` on the cluster vs `PG_UNICODE_VERSION`
   compiled into the new pg_upgrade. If different, runs an
   elaborate CTE-based pg_node_tree-pattern-match query (lines
-  2098-2172) over `pg_constraint.conbin`,
+  2100-2168) over `pg_constraint.conbin`,
   `pg_index.indexprs/indpred`,
   `pg_partitioned_table.partexprs`, and `pg_rewrite.ev_action` for
   matviews. WARNING only (not fatal). [verified-by-code]
@@ -192,7 +200,7 @@ Maintains no module-private state.
 [ISSUE-trust-boundary: every "old cluster" check connects via
 libpq to a postmaster that pg_upgrade itself just started against
 the old `$PGDATA` (high)] — `check_and_dump_old_cluster` runs
-inside the start/stop fence (line 597/736). If the old data dir is
+inside the start/stop fence (line 598/737). If the old data dir is
 compromised (e.g. attacker-controlled `pg_class`, malicious
 extensions in `shared_preload_libraries` via `pgopts`), the
 backend that pg_upgrade talks to is running attacker code. The
@@ -230,7 +238,7 @@ the new cluster. See function.c (separate batch) for details.
 [ISSUE-state-transition: `setup()` in pg_upgrade.c silently flips
 `live_check=true` when `--check` AND old postmaster.pid exists
 AND the stale-pid restart probe fails — `check_and_dump_old_cluster`
-then skips `start_postmaster(&old_cluster, true)` (line 597) (low)] —
+then skips `start_postmaster(&old_cluster, true)` (line 598) (low)] —
 Already noted in pg_upgrade.c doc; relevant here because all
 old-cluster checks then talk to the live production server. The
 live server's data is presumed trusted (the operator started it),
@@ -320,9 +328,9 @@ applies to upgrades from ≤905; given we are now several major
 versions past, the path is rarely exercised but kept for old-
 version support.]
 
-[ISSUE-stale-todo: comment at line 113 "The cutoff OID here should
+[ISSUE-stale-todo: comment at line 110 "The cutoff OID here should
 match the source cluster's value of FirstNormalObjectId. We
-hardcode it rather than using that C #define..." — note line 116
+hardcode it rather than using that C #define..." — note line 113-114
 suggests "Eventually we may need a test on the source cluster's
 version to select the correct value." That eventuality has not
 arrived.]

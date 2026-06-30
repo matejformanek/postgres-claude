@@ -1,7 +1,16 @@
 # execMain.c
 
-- **Source:** `source/src/backend/executor/execMain.c` (3268 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/backend/executor/execMain.c` (3277 lines)
+- **Last verified commit:** pinned at `02f699c14163` (re-verified +
+  re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump
+  `4abf411e2328..02f699c14163`; doc had been pinned at `ef6a95c7c64`
+  2026-06-01, so cites from `ExecPostprocessPlan` onward had drifted +9
+  lines — everything through `InitPlan` `:847` held. Triggering commit
+  `a40fdf658862` ("Reject child partition FDWs in FOR PORTION OF", Peter
+  Eisentraut) added the FOR PORTION OF FDW rejection inside `InitPlan` at
+  `:1130-1134`, which is past the documented InitPlan walkthrough (ends at
+  the JunkFilter step `:1013-1042`) — no documented cite region was touched
+  by that commit; the +9 drift is from other commits in the bump range.)
 - **Depth:** deep-read (top-level executor lifecycle + EvalPlanQual)
 
 ## Purpose
@@ -38,15 +47,15 @@ back to the `standard_*` implementation. Plugins (`auto_explain`,
 | `standard_ExecutorEnd` | `:486` | `ExecEndPlan` + `UnregisterSnapshot` + `FreeExecutorState` |
 | `ExecutorRewind` | `:547` | `ExecReScan` from the top (SELECT only) |
 | `InitPlan` | `:847` | Set up range table, row marks, initPlans/subPlans, then `ExecInitNode` on root |
-| `ExecPostprocessPlan` | `:1519` | Drain `es_auxmodifytables` so secondary ModifyTable nodes complete |
-| `ExecEndPlan` | `:1565` | `ExecEndNode(root)` + `ExecEndNode` over `es_subplanstates` + close rels |
-| `ExecutePlan` | `:1685` | The `for(;;)` loop that pulls tuples from the root planstate |
-| `EvalPlanQual` | `:2678` | Public EPQ recheck entry — re-run quals against an updated row version |
-| `EvalPlanQualInit` | `:2747` | Init EPQState at plan-state node creation |
-| `EvalPlanQualBegin` | `:2960` | Lazy materialization of the EPQ recheck plan tree |
-| `EvalPlanQualNext` | `:2944` | Run one EPQ ExecProcNode |
-| `EvalPlanQualStart` | `:3027` | Build the parallel EPQ EState + planstate tree |
-| `EvalPlanQualEnd` | `:3208` | Tear down EPQ recheck state |
+| `ExecPostprocessPlan` | `:1528` | Drain `es_auxmodifytables` so secondary ModifyTable nodes complete |
+| `ExecEndPlan` | `:1574` | `ExecEndNode(root)` + `ExecEndNode` over `es_subplanstates` + close rels |
+| `ExecutePlan` | `:1694` | The `for(;;)` loop that pulls tuples from the root planstate |
+| `EvalPlanQual` | `:2687` | Public EPQ recheck entry — re-run quals against an updated row version |
+| `EvalPlanQualInit` | `:2756` | Init EPQState at plan-state node creation |
+| `EvalPlanQualBegin` | `:2969` | Lazy materialization of the EPQ recheck plan tree |
+| `EvalPlanQualNext` | `:2953` | Run one EPQ ExecProcNode |
+| `EvalPlanQualStart` | `:3036` | Build the parallel EPQ EState + planstate tree |
+| `EvalPlanQualEnd` | `:3217` | Tear down EPQ recheck state |
 
 ## InitPlan walkthrough `:847`
 
@@ -75,24 +84,24 @@ The result tuple descriptor is then stored on the QueryDesc.
 SubPlan trees referenced by `$n` Param expressions; `InitPlan` iterates
 it into `estate->es_subplanstates`. Per-PlanState `initPlan` lists are
 handled in `execProcnode.c`'s `ExecInitNode`, not here — see that file's
-doc. `ExecEndPlan :1565` symmetrically calls `ExecEndNode` on root +
+doc. `ExecEndPlan :1574` symmetrically calls `ExecEndNode` on root +
 every entry of `es_subplanstates`.
 
-## ExecutePlan loop `:1685`
+## ExecutePlan loop `:1694`
 
 The hot loop is small and shape-stable: `ResetPerTupleExprContext` →
 `ExecProcNode(planstate)` → optional `ExecFilterJunk` → `dest->receiveSlot`
-→ count + check `numberTuples` limit + loop. `:1728-1787`
+→ count + check `numberTuples` limit + loop. `:1740-1797`
 
 After the loop, if `!(es_top_eflags & EXEC_FLAG_BACKWARD)`, calls
 `ExecShutdownNode` to release resources eagerly (parallel workers,
-foreign scan handles, hash table memory). `:1793`
+foreign scan handles, hash table memory). `:1803`
 
 Parallel mode is entered/exited around the loop, but is suppressed if
 `already_executed || numberTuples != 0` (i.e. partial execution forces
-serial). `:1715-1723`, `:1796`
+serial). `:1724-1732`, `:1806`
 
-## EvalPlanQual entry `:2678`
+## EvalPlanQual entry `:2687`
 
 The READ COMMITTED row-recheck protocol. When a `table_tuple_update /
 delete / lock` returns `TM_Updated`, the caller (typically
@@ -102,14 +111,14 @@ delete / lock` returns `TM_Updated`, the caller (typically
    `TUPLE_LOCK_FLAG_FIND_LAST_VERSION`).
 2. Pass the locked slot into `EvalPlanQual(epqstate, rel, rti, slot)`.
 3. EvalPlanQual runs a *parallel* mini-plan (built by
-   `EvalPlanQualStart` `:3027`) that re-tests the row against the
+   `EvalPlanQualStart` `:3036`) that re-tests the row against the
    query's quals using the new version, and returns the slot if it
    still qualifies, else NULL (skip).
 
 Key detail: each EPQState has `relsubs_done[]` / `relsubs_blocked[]`
 parallel to the range table — only the rti being rechecked has a tuple
 available; all other result relations are marked `blocked` so they
-return EOS. `:2700-2728`
+return EOS. `:2709-2737`
 
 EPQ state is lazy: `EvalPlanQualInit` is cheap, the mini-EState +
 planstate tree are only built on first `EvalPlanQualBegin`. See the
@@ -121,12 +130,12 @@ file is the runtime mechanism.
 - `EState->es_snapshot` must be the `ActiveSnapshot` before
   `standard_ExecutorStart` / `Run` — checked by Asserts at `:153, 336`. [verified-by-code]
 - Parallel mode requires complete execution: any `numberTuples != 0`
-  or repeat `ExecutorRun` call forces serial. `:1715` [verified-by-code]
+  or repeat `ExecutorRun` call forces serial. `:1724` [verified-by-code]
 - `ExecutorFinish` must have run before `ExecutorEnd`, except in
   EXPLAIN-only mode. Assert at `:507`. [verified-by-code]
 - `ExecEndPlan` only closes relations + drops pins — it does NOT free
   per-node memory. That comes from `FreeExecutorState` which destroys
-  the per-query memory context. [from-comment] `:1556-1561`
+  the per-query memory context. [from-comment] `:1565-1570`
 - Read-only / parallel-mode write check at `ExecCheckXactReadOnly` runs
   in `standard_ExecutorStart` before InitPlan. [verified-by-code]
 

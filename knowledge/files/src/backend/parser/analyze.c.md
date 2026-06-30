@@ -1,7 +1,7 @@
 # analyze.c
 
-- **Source:** `source/src/backend/parser/analyze.c` (4103 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/backend/parser/analyze.c` (4090 lines)
+- **Last verified commit:** pinned `02f699c14163`, re-verified + re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump `4abf411e2328..02f699c14163` (triggering commits: a40fdf658862 "Reject child partition FDWs in FOR PORTION OF" + a272a58b9424 "Move FOR PORTION OF volatile check into planner", Peter Eisentraut — entry points shifted +1; FOR PORTION OF analysis is in transformFromClause-side helpers, not the documented dispatcher/entry cites). Previously `ef6a95c7c64` (2026-06-01).
 - **Depth:** deep-read (entry points + dispatcher; per-kind transforms skim)
 
 ## Purpose
@@ -16,11 +16,11 @@ re-analyzed at execution time by `parse_utilcmd.c`. [from-comment] `:6-14`
 
 | Line | Symbol | Used by |
 |---|---|---|
-| 126 | `parse_analyze_fixedparams` | tcop / SPI when `$n` types are known upfront |
-| 166 | `parse_analyze_varparams` | `PREPARE` / extended protocol when types must be deduced |
-| 207 | `parse_analyze_withcb` | callers (e.g. PL/pgSQL) supplying their own param resolver |
-| 243 | `parse_sub_analyze` | recursion into sub-statements (CTE bodies, INSERT-from-SELECT, etc.) |
-| 270 | `transformTopLevelStmt` | thin wrapper: stash `stmt_location` / `stmt_len` and dispatch |
+| 127 | `parse_analyze_fixedparams` | tcop / SPI when `$n` types are known upfront |
+| 167 | `parse_analyze_varparams` | `PREPARE` / extended protocol when types must be deduced |
+| 208 | `parse_analyze_withcb` | callers (e.g. PL/pgSQL) supplying their own param resolver |
+| 244 | `parse_sub_analyze` | recursion into sub-statements (CTE bodies, INSERT-from-SELECT, etc.) |
+| 271 | `transformTopLevelStmt` | thin wrapper: stash `stmt_location` / `stmt_len` and dispatch |
 | 334 | `transformStmt` | the dispatcher — switch on `nodeTag(parseTree)` |
 
 All four public `parse_analyze_*` flavors do the same three things: build a
@@ -30,7 +30,7 @@ All four public `parse_analyze_*` flavors do the same three things: build a
 
 ## The dispatcher
 
-`transformStmt` `:334-444` switches on `nodeTag` and routes to one of:
+`transformStmt` `:334-451` switches on `nodeTag` and routes to one of:
 
 | Node | Handler | What it builds |
 |---|---|---|
@@ -43,24 +43,24 @@ All four public `parse_analyze_*` flavors do the same three things: build a
 | `T_DeclareCursorStmt` / `T_ExplainStmt` / `T_CreateTableAsStmt` / `T_CallStmt` | each has a dedicated transformer because they *wrap* an optimizable stmt | mixed |
 | default | utility shortcut: wrap raw stmt in `Query{commandType=CMD_UTILITY, utilityStmt=parseTree}` | utility |
 
-[verified-by-code] `:368-444`. Caution comment at `:363-367` mandates that
+[verified-by-code] `:368-451`. Caution comment at `:363-367` mandates that
 any change here must also update `stmt_requires_parse_analysis()` and
 `analyze_requires_snapshot()`.
 
 ## Companion predicates
 
-- `stmt_requires_parse_analysis(RawStmt *)` `:468-505` — true when
+- `stmt_requires_parse_analysis(RawStmt *)` `:469-505` — true when
   `transformStmt` does more than the utility wrap. Used by tcop/plancache to
   decide whether re-analysis is needed.
-- `analyze_requires_snapshot(RawStmt *)` `:512-529` — currently delegates to
+- `analyze_requires_snapshot(RawStmt *)` `:513-529` — currently delegates to
   the above; documented as "same conditions, different reason" so callers
   read better.
-- `query_requires_rewrite_plan(Query *)` `:541-…` — one step further down:
+- `query_requires_rewrite_plan(Query *)` `:542-…` — one step further down:
   is rewriting/planning non-trivial for this already-analyzed Query?
 
 ## SELECT-INTO trick
 
-`transformOptionalSelectInto` `:294-327` runs *before* `transformStmt` and
+`transformOptionalSelectInto` `:295-327` runs *before* `transformStmt` and
 rewrites a top-level `SELECT ... INTO t` into a `CreateTableAsStmt`. Only
 the top-level call (`transformTopLevelStmt`) takes this path; recursive
 `parse_sub_analyze` does not, because a `SELECT INTO` is illegal as a

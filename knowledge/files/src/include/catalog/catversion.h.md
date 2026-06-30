@@ -1,12 +1,12 @@
 # catversion.h
 
 - **Source path:** `source/src/include/catalog/catversion.h`
-- **Last verified commit:** `419ce13b7019` (re-verified 2026-06-28 by
-  pg-quality-auditor AUDIT mode after anchor-bump
-  `f0a4f280b4d3..419ce13b7019`; the anchor carried 2 catversion bumps
-  — pg_parameter_acl relcache-nailing `4cc02b80774e` + variadic
-  `pg_get_*_ddl()` declaration fix `2af70e937478` — so the value drifted.
-  Prior pin `4b0bf0788b0`.)
+- **Last verified commit:** `02f699c14163` (re-verified + re-pinned
+  2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump
+  `4abf411e2328..02f699c14163`; triggering commit `6468f7a853c3`
+  "catversion bump: Mark uuid-to-bytea cast as leakproof" bumped the
+  value `202606232` → `202606251` (still at `catversion.h:60`).
+  Prior pin `419ce13b7019`.)
 
 ## Purpose
 
@@ -18,7 +18,7 @@ No `CATALOG(...)` declaration. The entire functional content of this file is a s
 
 ## Key macro
 
-- `CATALOG_VERSION_NO 202606232` — YYYYMMDDN convention (date + sequence-on-that-day). [verified-by-code] `catversion.h:60`
+- `CATALOG_VERSION_NO 202606251` — YYYYMMDDN convention (date + sequence-on-that-day). [verified-by-code] `catversion.h:60`
 
 ## The bump rule
 

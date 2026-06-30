@@ -1,7 +1,14 @@
 # executor.h
 
-- **Source:** `source/src/include/executor/executor.h` (820 lines)
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Source:** `source/src/include/executor/executor.h` (818 lines)
+- **Last verified commit:** pinned at `02f699c14163` (re-verified +
+  re-pinned 2026-06-30 by pg-quality-auditor AUDIT mode after anchor-bump
+  `4abf411e2328..02f699c14163`; clean re-pin — doc carries no `:NNNN`
+  line cites (symbol-only), all documented symbols still present
+  (`EXEC_FLAG_*`, `ExecGetRangeTableRelation`, `ExecCheckPermissions`,
+  etc.); LOC 820→818. Triggering commit `a40fdf658862` ("Reject child
+  partition FDWs in FOR PORTION OF", Peter Eisentraut) did not touch the
+  documented declarations.)
 - **Depth:** read (fresh pass; supersedes earlier touch)
 
 ## Purpose
