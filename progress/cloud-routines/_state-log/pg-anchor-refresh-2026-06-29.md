@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-06-29 — anchor 02f699c14163 → b7e4e3e7fa73; 6 commits; 6 docs queued for audit (2 skipped as already-pending); 1 catversion bump 202606251→202606281 (d6ed87d19890); no subsystem ≥5 (PR #__).
