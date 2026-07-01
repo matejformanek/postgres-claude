@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-06-30 — hackers 12 threads (VM/FSM/buffer-cleanup correctness cluster, per-backend lock stats, planner wrong-results) · CF59 final open-day diff (NR +7, Committed +1, Withdrawn −1, RfC flat 55 → clean Jul-1 transition) · planet 8 posts (PR pending).
