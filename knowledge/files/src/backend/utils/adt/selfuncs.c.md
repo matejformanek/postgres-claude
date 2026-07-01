@@ -1,9 +1,12 @@
 # `src/backend/utils/adt/selfuncs.c`
 
-- **File:** `source/src/backend/utils/adt/selfuncs.c` (9240 lines —
+- **File:** `source/src/backend/utils/adt/selfuncs.c` (9250 lines —
   one of the top-5 biggest files in `utils/adt/`)
 - **Header:** `source/src/include/utils/selfuncs.h`
-- **Last verified commit:** `ef6a95c7c64de07dff4dd1f1da88ffae7b086ef3` (2026-06-01)
+- **Last verified commit:** `b7e4e3e7fa73` (2026-07-01; re-pinned from
+  `ef6a95c7c64`. Cites ≤ line 2385 hold; +2 through the mid-file and
+  +10 from `examine_variable` onward after b574fec00f27 char-collation
+  fix. `selfuncs.h` header cites unchanged.)
 
 ## Purpose
 
@@ -40,10 +43,10 @@ source of bad plans — see the long top-of-file comment block at
 - `scalarltsel` / `scalarlesel` / `scalargtsel` / `scalargesel`
   (`:1544, 1553, 1562, 1571`) — `<`, `<=`, `>`, `>=`; all call
   `scalarineqsel_wrapper` → `scalarineqsel`.
-- `eqjoinsel` / `neqjoinsel` (`:2385, 3181`) — join versions.
-- `scalarltjoinsel` etc. (`:3259-3286`) — ordered-comparison joins;
+- `eqjoinsel` / `neqjoinsel` (`:2385, 3183`) — join versions.
+- `scalarltjoinsel` etc. (`:3261-3288`) — ordered-comparison joins;
   currently all return `DEFAULT_INEQ_SEL`. Yes, really.
-- `matchingsel` / `matchingjoinsel` (`:3631, 3649`) — generic estimator
+- `matchingsel` / `matchingjoinsel` (`:3633, 3651`) — generic estimator
   for pattern-match operators (`~`, `~~*`, `@@`, …). Returns
   `DEFAULT_MATCHING_SEL` (0.010).
 - `boolvarsel`, `booltestsel`, `nulltestsel`, `scalararraysel`,
@@ -66,33 +69,33 @@ source of bad plans — see the long top-of-file comment block at
 
 ### Index cost estimators
 
-- `genericcostestimate` (`:7410`) — shared base for all built-in AM
+- `genericcostestimate` (`:7420`) — shared base for all built-in AM
   cost functions.
-- `btcostestimate` (`:7703`), `hashcostestimate` (`:8175`),
-  `gistcostestimate` (`:8220`), plus SP-GiST, GIN, BRIN further down.
+- `btcostestimate` (`:7713`), `hashcostestimate` (`:8185`),
+  `gistcostestimate` (`:8230`), plus SP-GiST, GIN, BRIN further down.
 
 ### Group / hash estimators (called by planner directly, not via
 catalog)
 
-- `estimate_num_groups` (`:3800`) — for `GROUP BY` / `DISTINCT` /
+- `estimate_num_groups` (`:3802`) — for `GROUP BY` / `DISTINCT` /
   sort-merge cardinality.
-- `estimate_hash_bucket_stats` (`:4420`),
-  `estimate_hashagg_tablesize` (`:4526`),
-  `estimate_multivariate_bucketsize` (`:4152`),
-  `estimate_multivariate_ndistinct` (`:4567`).
+- `estimate_hash_bucket_stats` (`:4422`),
+  `estimate_hashagg_tablesize` (`:4528`),
+  `estimate_multivariate_bucketsize` (`:4154`),
+  `estimate_multivariate_ndistinct` (`:4569`).
 
 ### Variable-statistics fetch layer
 
-- `examine_variable` (`:5641`), `examine_simple_variable` (`:6037`),
-  `examine_indexcol_variable` (`:6508`) — produce a
+- `examine_variable` (`:5651`), `examine_simple_variable` (`:6047`),
+  `examine_indexcol_variable` (`:6518`) — produce a
   `VariableStatData` with the `pg_statistic` tuple, the source
   RelOptInfo, type info, and uniqueness/ACL flags.
-- `get_variable_numdistinct` (`:6611`) — interprets `stadistinct`
+- `get_variable_numdistinct` (`:6621`) — interprets `stadistinct`
   (negative = fraction of rel, positive = absolute count).
 - `get_variable_range` / `get_actual_variable_range` /
-  `get_actual_variable_endpoint` (`:6744, 6934, 7123`) — fetch min/max
+  `get_actual_variable_endpoint` (`:6754, 6944, 7133`) — fetch min/max
   from histograms *or* an index.
-- `statistic_proc_security_check` (`:6582`) — the gate that demands
+- `statistic_proc_security_check` (`:6592`) — the gate that demands
   leakproof comparison when the user lacks SELECT on all rows. **This
   is what makes RLS / column-level security safe against statistics
   leakage.**
@@ -143,7 +146,7 @@ catalog)
   guard with `statistic_proc_security_check(&vardata, opfunc)` —
   `var_eq_const` at `:408`, `ineq_histogram_selectivity` at `:1138`,
   etc. `stanullfrac` is the only field freely available regardless
-  of security (`:386-387, 2447` [from-comment]).
+  of security (`:386-387, 2449` [from-comment]).
 - **Unique-index optimization.** If `vardata->isunique && tuples ≥ 1`,
   `var_eq_const` short-circuits to `1.0 / tuples` regardless of MCVs
   (`:403-406` [verified-by-code]).
@@ -164,32 +167,32 @@ catalog)
   via a live index scan, so estimates don't go badly wrong when the
   min/max has drifted since the last ANALYZE (`:1157-1163`
   [from-comment]).
-- **`eqjoinsel_inner`** (`:2588`) — the classic algorithm: probabilistic
+- **`eqjoinsel_inner`** (`:2590`) — the classic algorithm: probabilistic
   match between two MCV lists (count how much mass on each side
   matches the other), plus a `(1 − match) × (1 − match) / max(nd1, nd2)`
   term for the unmatched remainder. Uses `MCVHashTable` (simplehash
   template instantiation at `:277-288`) when both lists are large.
-- **`estimate_num_groups`** (`:3800`) — heart of GROUP BY cost
+- **`estimate_num_groups`** (`:3802`) — heart of GROUP BY cost
   estimation. For each grouping expression: try `examine_variable`,
   if statistics-bearing → use ndistinct; if boolean → factor 2; SRFs
   → multiply at the end (the largest SRF expansion). Multivariate
   ndistinct via `estimate_multivariate_ndistinct` is consulted to
   reduce overcounting when correlated columns are grouped together.
-- **`get_actual_variable_range`** (`:6934`) — the "go look at the
+- **`get_actual_variable_range`** (`:6944`) — the "go look at the
   index" escape hatch. Finds an ordering index, opens it with
   `index_open(... NoLock)` (assumes caller already holds a lock),
   builds a 1-key `SK_ISNULL | SK_SEARCHNOTNULL` scankey, runs
   `get_actual_variable_endpoint` to grab the literal min or max.
   Skips partial indexes, partitioned tables, hypothetical indexes,
-  and indexes that can't return the column (`:6962-6984`
+  and indexes that can't return the column (`:6972-6994`
   [verified-by-code]). Bounded by `effort` cap inside the endpoint
   helper.
-- **`statistic_proc_security_check`** (`:6582`) — returns true if (a)
+- **`statistic_proc_security_check`** (`:6592`) — returns true if (a)
   `vardata->acl_ok` is already true (user can see all rows), or
   (b) the function in question is marked LEAKPROOF. Combined with
-  `all_rows_selectable` (`:6313`) this is the defense against RLS /
+  `all_rows_selectable` (`:6323`) this is the defense against RLS /
   per-column-privilege bypass via selectivity estimation.
-- **`btcostestimate` + `btcost_correlation`** (`:7703, 7666`) — adds
+- **`btcostestimate` + `btcost_correlation`** (`:7713, 7676`) — adds
   the btree-specific physical-vs-logical-order correlation factor
   on top of `genericcostestimate`. Pulls
   `STATISTIC_KIND_CORRELATION` from pg_statistic.
@@ -213,7 +216,7 @@ catalog)
 ## Open questions
 
 - `scalarltjoinsel` and family currently return only the default
-  inequality selectivity (`:3259+`). Is there an active TODO upstream
+  inequality selectivity (`:3261+`). Is there an active TODO upstream
   to use histogram joins for ordered comparisons? `[unverified]`
 - `EQJOINSEL_MCV_HASH_THRESHOLD = 200` is "simplistic but seems to
   work" (`:148-152` [from-comment]) — no calibration data referenced.

@@ -1,5 +1,9 @@
 # src/backend/utils/adt/ddlutils.c
 
+- **Last verified commit:** `b7e4e3e7fa73` (cites re-pinned after
+  d6ed87d19890 replaced `parse_ddl_options` VARIADIC parsing with
+  named boolean parameters; 977 lines)
+
 ## Purpose
 
 Generates DDL statements that recreate cluster-level objects (roles,
@@ -19,33 +23,33 @@ in this version").
 
 ## Key functions
 
-Public SQL entry points (all SRFs returning `text` per statement):
-- `pg_get_role_ddl(roleid, pretty default false, memberships default
-  true)` (`:595-647`). One CREATE ROLE plus optional ALTER ROLE …
-  IN DATABASE … SET … and optional GRANT memberships.
-- `pg_get_tablespace_ddl_oid(oid, pretty, no_owner)` /
-  `pg_get_tablespace_ddl_name(name, pretty, no_owner)` (`:813-855`).
+Public SQL entry points (all SRFs returning `text` per statement).
+As of d6ed87d19890 (2026-06-29) the option arguments are **named
+boolean parameters**, not a `VARIADIC any[]` list — the former
+`parse_ddl_options` helper is gone:
+- `pg_get_role_ddl(roleid, pretty, memberships)` (`:426`). One
+  CREATE ROLE plus optional ALTER ROLE … IN DATABASE … SET … and
+  optional GRANT memberships.
+- `pg_get_tablespace_ddl_oid(oid, pretty, no_owner)` (`:626`) /
+  `pg_get_tablespace_ddl_name(name, pretty, no_owner)` (`:638`).
   CREATE TABLESPACE plus optional ALTER TABLESPACE SET (reloptions).
-- `pg_get_database_ddl(dbid, pretty, no_owner)` (`:1133`). CREATE
+- `pg_get_database_ddl(dbid, pretty, no_owner)` (`:932`). CREATE
   DATABASE WITH … plus per-database GUCs from pg_db_role_setting.
 
 Internal helpers:
-- `parse_ddl_options(fcinfo, variadic_start, opts, nopts)` (`:101`) —
-  consumes the `VARIADIC any[]` option array against a name/type
-  table.
-- `append_ddl_option`, `append_guc_value` (`:233-316`) — pretty-print
-  glue.
-- `pg_get_role_ddl_internal(roleid, pretty, memberships) → List` (`:317`).
-  Permission gate at `:341`:
+- `append_ddl_option` (`:65`), `append_guc_value` (`:102`) —
+  pretty-print glue.
+- `pg_get_role_ddl_internal(roleid, pretty, memberships) → List` (`:149`).
+  Permission gate at `:172`:
   `pg_class_aclcheck(AuthIdRelationId, GetUserId(), ACL_SELECT) !=
   ACLCHECK_OK` → `ERRCODE_INSUFFICIENT_PRIVILEGE`. I.e. SELECT on
   pg_authid (effectively superuser or pg_read_server_files-flavour
   membership) is required.
-- `pg_get_tablespace_ddl_internal(tsid, pretty, no_owner)` (`:657`).
-  Permission gate at `:681`: `pg_class_aclcheck(TableSpaceRelationId,
-  GetUserId(), ACL_SELECT)`.
-- `pg_get_database_ddl_internal(dbid, pretty, no_owner)` (`:856`).
-  Permission gate at `:882`: `object_aclcheck(DatabaseRelationId,
+- `pg_get_tablespace_ddl_internal(tsid, pretty, no_owner)` (`:479`).
+  Permission gate at `:502`: `pg_class_aclcheck(TableSpaceRelationId,
+  GetUserId(), ACL_SELECT)` → `aclcheck_error(...)` at `:505`.
+- `pg_get_database_ddl_internal(dbid, pretty, no_owner)` (`:655`).
+  Permission gate at `:680`: `object_aclcheck(DatabaseRelationId,
   dbid, GetUserId(), ACL_CONNECT)` — i.e. CONNECT privilege on the
   named database.
 
@@ -56,12 +60,12 @@ None.
 ## Phase D notes
 
 - **Three different privilege models** in one file:
-  - Roles: SELECT on `pg_authid` (`:341`). Pretty restrictive; default
+  - Roles: SELECT on `pg_authid` (`:172`). Pretty restrictive; default
     is `pg_read_all_settings`/`pg_read_server_files`-class roles or
     explicit GRANT.
-  - Tablespaces: SELECT on `pg_tablespace` (`:681`). Default PG ACL
+  - Tablespaces: SELECT on `pg_tablespace` (`:502`). Default PG ACL
     on `pg_tablespace` is `pg_read_all_settings` + superuser.
-  - Databases: CONNECT on the database (`:882`). Weakest — anyone
+  - Databases: CONNECT on the database (`:680`). Weakest — anyone
     who can log in can dump the DDL.
 - Output may include **passwords** if a role has an encrypted
   password (`pg_get_role_ddl` re-emits `PASSWORD '…'`). Anyone
@@ -84,11 +88,12 @@ None.
   on pg_authid. Hashes are normally already accessible to that
   caller via direct query; this isn't new leakage but worth knowing
   (low)]
-- [ISSUE-undocumented-invariant: option parsing uses
-  `VARIADIC ANY[]`; if pg_proc declares the function `PARALLEL UNSAFE`
-  by default this is OK, but if it's later marked SAFE the per-call
-  ACL check would happen in every worker. Not currently an issue
-  (low)]
+- [ISSUE-undocumented-invariant: option arguments are now named
+  boolean parameters (d6ed87d19890 replaced the earlier
+  `VARIADIC ANY[]` parsing); if pg_proc declares the function
+  `PARALLEL UNSAFE` by default this is OK, but if it's later marked
+  SAFE the per-call ACL check would happen in every worker. Not
+  currently an issue (low)]
 
 ## Cross-references
 

@@ -1,7 +1,7 @@
 # `contrib/hstore_plpython/hstore_plpython.c`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~194
+- **Last verified commit:** `b7e4e3e7fa73`
+- **Lines:** 210
 - **Source:** `source/contrib/hstore_plpython/hstore_plpython.c`
 
 Transform-extension bridging `hstore` and Python dicts for `plpython3u`
@@ -26,12 +26,16 @@ the Python side even if `PLyObject_AsString` ereports. [verified-by-code]
   → `Py_None`). `Py_XDECREF` after each `SetItem` because
   `PyDict_SetItem` itself takes a ref. Returns `PointerGetDatum(dict)`.
   [verified-by-code]
-- `plpython_to_hstore(PG_FUNCTION_ARGS)` (line 123) — guards
+- `plpython_to_hstore(PG_FUNCTION_ARGS)` (line 125) — guards
   against sequences masquerading as mappings: `PySequence_Check(dict)
-  || !PyMapping_Check(dict)` ereports `ERRCODE_WRONG_OBJECT_TYPE`.
-  `PyMapping_Items(dict)` returns a Python list of `(key, value)`
-  tuples; loop fills `Pairs[]`; `PG_FINALLY` drops the items ref.
-  [verified-by-code]
+  || !PyMapping_Check(dict)` ereports `ERRCODE_WRONG_OBJECT_TYPE`
+  (`not a Python mapping`, line 140-143). `PyMapping_Size` is now
+  NULL-checked (`pcount < 0`, 146-149) and `PyMapping_Items(dict)`
+  is NULL-checked (152-155) — both hardened by 8612f0b7ce09. The
+  returned Python list of `(key, value)` tuples fills `Pairs[]`;
+  each tuple is validated (`tuple == NULL || !PyTuple_Check(tuple)
+  || PyTuple_Size(tuple) < 2`, 174-177) before use; `PG_FINALLY`
+  drops the items ref. [verified-by-code]
 
 ## Notable invariants / details
 
@@ -40,14 +44,14 @@ the Python side even if `PLyObject_AsString` ereports. [verified-by-code]
   trusted/untrusted parallel-extension split for the
   `*_plpython` family. The single transform is registered against
   `plpython3u`. [inferred from PG history]
-- Lines 138-140 comment explicitly calls out the Python-3.10
+- Lines 135-139 comment explicitly calls out the Python-3.10
   `PyMapping_Check`-reliable threshold: prior to 3.10
   `PyMapping_Check` returns true for sequences. The fallback is to
-  check `PySequence_Check` first. Once PG drops support for Python
-  < 3.10 this guard can be deleted. [verified-by-code]
+  check `PySequence_Check` first (line 140). Once PG drops support
+  for Python < 3.10 this guard can be deleted. [verified-by-code]
   [ISSUE-stale-todo: future cleanup once `python_requires >= 3.10`
   (nit)].
-- `PG_FINALLY` (line 187) ensures `Py_DECREF(items)` runs even if
+- `PG_FINALLY` (line 203) ensures `Py_DECREF(items)` runs even if
   any `PLyObject_AsString` / `hstoreCheckKeyLen` / `hstorePairs`
   ereports. The `volatile` qualifier on `items` and `out` (lines
   129, 131) protects against longjmp clobbering across the
@@ -68,19 +72,23 @@ the Python side even if `PLyObject_AsString` ereports. [verified-by-code]
   `PyDict_SetItem` with `key=NULL` is undefined behaviour.
   [ISSUE-correctness: missing NULL-check on Py-side allocations
   (maybe)].
-- Line 166: `pairs[i].key = PLyObject_AsString(key)` — note
-  `needfree = true` (line 168). `PLyObject_AsString` palloc's; the
+- Line 182: `pairs[i].key = PLyObject_AsString(key)` — note
+  `needfree = true` (line 184). `PLyObject_AsString` palloc's; the
   pfree responsibility transfers to `hstoreUniquePairs` which
   takes `needfree` as ownership transfer. [verified-by-code]
 - Line 145: `PyMapping_Size(dict)` is called before
   `PyMapping_Items(dict)`. If the mapping's `__len__` and
   `__iter__` disagree (custom Python class) the loop bounds and
-  the `items` list size could mismatch. The code uses `pcount`
-  for both, so `PyList_GetItem` past the end returns NULL → crash
-  in `PyTuple_GetItem(NULL, 0)`. [ISSUE-security: malicious
-  Python class with mismatched `__len__` / `__iter__` could
-  reach NULL deref (maybe — only reachable from plpython3u code,
-  which is already untrusted superuser-only)].
+  the `items` list size could mismatch. **RESOLVED upstream by
+  8612f0b7ce09** ("plpython: Fix NULL pointer dereferences for
+  broken sequence and mapping", 2026-06-29): `PyList_GetItem` past
+  the end is now guarded — each `tuple` is checked for
+  `NULL || !PyTuple_Check || PyTuple_Size < 2` (lines 174-177)
+  before `PyTuple_GetItem`, and both `PyMapping_Size` and
+  `PyMapping_Items` NULL returns are checked (146-149, 152-155).
+  The former [ISSUE-security] NULL-deref from a malicious Python
+  class with mismatched `__len__` / `__iter__` no longer reaches.
+  [verified-by-code]
 - Line 96: `errmsg("out of memory")` should typically use the
   PG_RE_THROW style — `PyDict_New` failure here would be a real
   Python interpreter error, not necessarily OOM. The error

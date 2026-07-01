@@ -4,7 +4,11 @@
 
 Implements the C-level trigger functions that enforce SQL FOREIGN KEY constraints: `RI_FKey_check_ins`, `RI_FKey_check_upd`, `RI_FKey_noaction_del`, `RI_FKey_restrict_del`, `RI_FKey_cascade_del`, `RI_FKey_setnull_del`, `RI_FKey_setdefault_del`, and the matching `_upd` variants — plus the cached query-plan machinery (per-(fk,pk,action) SPI plans) and constraint-info hashtable.
 
-Source: `source/src/backend/utils/adt/ri_triggers.c` (4390 lines). Last verified commit: `9a60f295bcb1`. One of the most security-sensitive files in the backend: builds SQL fragments from catalog data on the hot path.
+Source: `source/src/backend/utils/adt/ri_triggers.c` (4416 lines). Last verified commit: `b7e4e3e7fa73`. One of the most security-sensitive files in the backend: builds SQL fragments from catalog data on the hot path.
+
+> Note: 6f4bac854fb7 (2026-06-29) hardwired the RI fast-path end-of-xact
+> cleanup into `xact.c`; `AtEOXact_RI(bool isCommit)` (`:4301`) now resets
+> the static RI state from the xact machinery (declared in `commands/trigger.h`).
 
 ## SQL fragment building — quoting discipline
 
@@ -24,7 +28,7 @@ while (*name) {
 ```
 
 Every catalog-name → SQL-fragment path uses these. The SQL construction
-lives in `RI_FKey_check` (627) and the `ri_restrict` / cascade / setnull /
+lives in `RI_FKey_check` (365) and the `ri_restrict` / cascade / setnull /
 setdefault helpers. Examples:
 - ri_triggers.c:526-590 (RI_FKey_check builds SELECT...FROM "schema"."pktable" WHERE "schema"."pktable"."col1" = $1 ... FOR KEY SHARE).
 - ri_triggers.c:697-759 (NOT EXISTS / temporal variant).
