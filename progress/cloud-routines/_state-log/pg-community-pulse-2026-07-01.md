@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-07-01 — hackers 12 threads (standby recovery-conflict lock fragility + local-buffer/VM correctness + logrep publication races); CF59 open→in-progress transition = +7 Committed land burst (98→105), RfC drained 55→52, predicted "Moved" sweep did NOT fire (flat 24), first cycle Rejection (1→2); planet 6 fresh (PR #TBD).
