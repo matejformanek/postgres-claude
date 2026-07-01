@@ -1,0 +1,34 @@
+INFO:  vacuuming "postgres.public.big"
+INFO:  launched 4 parallel vacuum workers for index vacuuming (planned: 4)
+INFO:  finished vacuuming "postgres.public.big": index scans: 1
+pages: 0 removed, 185186 remain, 185186 scanned (100.00% of total), 0 eagerly scanned
+tuples: 1428571 removed, 8571429 remain, 0 are dead but not yet removable
+removable cutoff: 725, which was 0 XIDs old when operation ended
+new relfrozenxid: 725, which is 32 XIDs ahead of previous value
+frozen: 66050 pages from table (35.67% of total) had 4435708 tuples frozen
+visibility map: 185186 pages set all-visible, 185186 pages set all-frozen (0 were all-visible)
+index scan needed: 185186 pages from table (100.00% of total) had 6428571 dead item identifiers removed
+parallel workers: index vacuum: 4 planned, 4 launched in total
+index "big_c1": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c2": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c3": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c4": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c5": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c6": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c7": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c8": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c9": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c10": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c11": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c12": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c13": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c14": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c15": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c16": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+delay time: 94258.763 ms
+avg read rate: 156.424 MB/s, avg write rate: 164.432 MB/s
+buffer usage: 249330 hits, 1184128 reads, 1244748 dirtied
+WAL usage: 1429943 records, 1244750 full page images, 4794455254 bytes, 4703205316 full page image bytes, 46282 buffers full
+memory usage: dead item storage 11.00 MB accumulated across 1 reset (limit 256.00 MB each)
+system usage: CPU: user: 17.44 s, system: 3.13 s, elapsed: 59.14 s
+VACUUM

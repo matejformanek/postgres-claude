@@ -1,0 +1,168 @@
+=== meson setup + build ===
+Commit: unknown
+Date:   2026-06-23T10:22:27Z
+waiting for server to start.... done
+server started
+=== prepare big table with many indexes ===
+ total_size 
+------------
+ 4393 MB
+(1 row)
+
+=== generate dead rows ===
+UPDATE 5000000
+DELETE 1428571
+=== launching parallel VACUUM (background) ===
+psql pid: 9445
+VACUUM finished after ~126 samples (~63s wall)
+=== VACUUM output (last 15 lines) ===
+index "big_c9": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c10": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c11": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c12": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c13": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c14": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c15": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+index "big_c16": pages: 54840 in total, 0 newly deleted, 0 currently deleted, 0 reusable
+delay time: 112584.437 ms
+avg read rate: 147.278 MB/s, avg write rate: 154.820 MB/s
+buffer usage: 249345 hits, 1184113 reads, 1244747 dirtied
+WAL usage: 1420711 records, 1244750 full page images, 4788738700 bytes, 4698077668 full page image bytes, 46335 buffers full
+memory usage: dead item storage 11.00 MB accumulated across 1 reset (limit 256.00 MB each)
+system usage: CPU: user: 13.84 s, system: 3.29 s, elapsed: 62.81 s
+VACUUM
+=== per-worker RSS trajectory (max RSS per worker over time) ===
+worker pid=9967  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9963  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9959  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9955  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9951  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9947  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9943  first_rss=1856  peak_rss=1856  delta=0 KB
+worker pid=9939  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9935  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9930  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9926  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9922  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9918  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9914  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9910  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9906  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9902  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9898  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9894  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9890  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9886  first_rss=1864  peak_rss=1864  delta=0 KB
+worker pid=9882  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9878  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9874  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9870  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9866  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9862  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9858  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9854  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9850  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9846  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9842  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9838  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9834  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9830  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9826  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9822  first_rss=1864  peak_rss=1864  delta=0 KB
+worker pid=9818  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9814  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9810  first_rss=1856  peak_rss=1856  delta=0 KB
+worker pid=9806  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9802  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9798  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9794  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9790  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9786  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9782  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9778  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9774  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9770  first_rss=1864  peak_rss=1864  delta=0 KB
+worker pid=9766  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9762  first_rss=1864  peak_rss=1864  delta=0 KB
+worker pid=9758  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9754  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9750  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9746  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9742  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9738  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9734  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9730  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9726  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9722  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9718  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9714  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9710  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9706  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9702  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9698  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9694  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9689  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9685  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9681  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9677  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9673  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9669  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9665  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9661  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9657  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9652  first_rss=1864  peak_rss=1864  delta=0 KB
+worker pid=9648  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9644  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9639  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9635  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9631  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9626  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9622  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9618  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9614  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9610  first_rss=1864  peak_rss=1864  delta=0 KB
+worker pid=9606  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9602  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9598  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9594  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9590  first_rss=1860  peak_rss=1860  delta=0 KB
+worker pid=9586  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9582  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9580  first_rss=21208  peak_rss=38620  delta=17412 KB
+worker pid=9579  first_rss=20920  peak_rss=38536  delta=17616 KB
+worker pid=9578  first_rss=21192  peak_rss=39196  delta=18004 KB
+worker pid=9577  first_rss=21132  peak_rss=38708  delta=17576 KB
+worker pid=9574  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9570  first_rss=1932  peak_rss=1932  delta=0 KB
+worker pid=9566  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9562  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9548  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9544  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9540  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9536  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9532  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9528  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9524  first_rss=1856  peak_rss=1856  delta=0 KB
+worker pid=9520  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9516  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9512  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9508  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9504  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9500  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9496  first_rss=1856  peak_rss=1856  delta=0 KB
+worker pid=9492  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9488  first_rss=1852  peak_rss=1852  delta=0 KB
+worker pid=9484  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9480  first_rss=1864  peak_rss=1864  delta=0 KB
+worker pid=9476  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9472  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9468  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9464  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9460  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9456  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9452  first_rss=1868  peak_rss=1868  delta=0 KB
+worker pid=9447  first_rss=1868  peak_rss=1868  delta=0 KB
+=== max worker RSS across the whole run ===
+peak rss_kb=39196  at t=86  worker_pid=9578
+waiting for server to shut down.... done
+server stopped
