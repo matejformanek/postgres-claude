@@ -1,8 +1,8 @@
 # xact.c
 
 - **Source path:** `source/src/backend/access/transam/xact.c`
-- **Lines:** 6503
-- **Last verified commit:** `4abf411e2328`
+- **Lines:** 6506
+- **Last verified commit:** `b7e4e3e7fa73`
 - **Companion files:** `source/src/include/access/xact.h`, `README` (this directory),
   `source/src/backend/access/transam/parallel.c`,
   `source/src/backend/access/transam/twophase.c`,
@@ -32,17 +32,17 @@ State accessors and mainloop hooks (called by `postgres.c`):
 
 - `IsTransactionState` — `xact.c:388-401` [verified-by-code]
 - `IsAbortedTransactionBlockState` — `xact.c:409` [verified-by-code]
-- `StartTransactionCommand` — `xact.c:3109` [verified-by-code]
-- `CommitTransactionCommand` — `xact.c:3207` [verified-by-code]
-- `AbortCurrentTransaction` — `xact.c:3501` [verified-by-code]
+- `StartTransactionCommand` — `xact.c:3112` [verified-by-code]
+- `CommitTransactionCommand` — `xact.c:3210` [verified-by-code]
+- `AbortCurrentTransaction` — `xact.c:3504` [verified-by-code]
 - `CommandCounterIncrement` — `xact.c:1130` [verified-by-code]
 
 SQL block handlers (called by `tcop/utility.c`):
 
-- `BeginTransactionBlock` `xact.c:3975`, `EndTransactionBlock` `xact.c:4095`,
-  `UserAbortTransactionBlock` `xact.c:4255`, `PrepareTransactionBlock`
-  `xact.c:4043`, `DefineSavepoint` `xact.c:4424`, `ReleaseSavepoint`
-  `xact.c:4509`, `RollbackToSavepoint` `xact.c:4618`. [verified-by-code]
+- `BeginTransactionBlock` `xact.c:3978`, `EndTransactionBlock` `xact.c:4098`,
+  `UserAbortTransactionBlock` `xact.c:4258`, `PrepareTransactionBlock`
+  `xact.c:4046`, `DefineSavepoint` `xact.c:4427`, `ReleaseSavepoint`
+  `xact.c:4512`, `RollbackToSavepoint` `xact.c:4621`. [verified-by-code]
 
 XID/snapshot accessors:
 
@@ -54,16 +54,16 @@ XID/snapshot accessors:
 
 Internal subtransactions (e.g. PL/pgSQL):
 
-- `BeginInternalSubTransaction` — `xact.c:4745` [verified-by-code]
-- `ReleaseCurrentSubTransaction` — `xact.c:4819` [verified-by-code]
-- `RollbackAndReleaseCurrentSubTransaction` — `xact.c:4847`
+- `BeginInternalSubTransaction` — `xact.c:4748` [verified-by-code]
+- `ReleaseCurrentSubTransaction` — `xact.c:4822` [verified-by-code]
+- `RollbackAndReleaseCurrentSubTransaction` — `xact.c:4850`
   [verified-by-code]
 
 Callback registries:
 
-- `RegisterXactCallback`/`UnregisterXactCallback` — `xact.c:3855-3886`
+- `RegisterXactCallback`/`UnregisterXactCallback` — `xact.c:3858-3889`
   [verified-by-code]
-- `RegisterSubXactCallback`/`UnregisterSubXactCallback` — `xact.c:3915-3946`
+- `RegisterSubXactCallback`/`UnregisterSubXactCallback` — `xact.c:3918-3949`
   [verified-by-code]
 
 Parallel-mode bridge:
@@ -72,13 +72,13 @@ Parallel-mode bridge:
   `xact.c:1081-1129` [verified-by-code]
 - `EstimateTransactionStateSpace`, `SerializeTransactionState`,
   `StartParallelWorkerTransaction`, `EndParallelWorkerTransaction` —
-  `xact.c:5568-5701` [verified-by-code]
+  `xact.c:5571-5704` [verified-by-code]
 
 WAL record build + redo (exported for `twophase.c` and recovery):
 
-- `XactLogCommitRecord` — `xact.c:5870` [verified-by-code]
-- `XactLogAbortRecord` — `xact.c:6042` [verified-by-code]
-- `xact_redo` — `xact.c:6419` [verified-by-code]
+- `XactLogCommitRecord` — `xact.c:5873` [verified-by-code]
+- `XactLogAbortRecord` — `xact.c:6045` [verified-by-code]
+- `xact_redo` — `xact.c:6422` [verified-by-code]
 
 ## Key types / structs
 
@@ -239,7 +239,7 @@ invalidations are flushed. If yes:
   protocol; see `clog.c` doc and README §pg_xact).
 - `SyncRepWaitForLSN` for synchronous replication.
 
-### `AbortTransaction` — `xact.c:2853-3057` [verified-by-code]
+### `AbortTransaction` — `xact.c:2855-3060` [verified-by-code]
 
 Phase 1 of the README's "abort divided in two phases". Releases shared
 resources (locks, buffer pins) but does *not* destroy
@@ -247,12 +247,12 @@ resources (locks, buffer pins) but does *not* destroy
 `RecordTransactionAbort` (`xact.c:1796`). Idempotent against repeated
 calls — important because abort can recur during cleanup.
 
-### `CleanupTransaction` — `xact.c:3059-3107` [verified-by-code]
+### `CleanupTransaction` — `xact.c:3062-3110` [verified-by-code]
 
 Phase 2 of abort. Pops to the top and destroys `TopTransactionContext`.
 Only called on the toplevel transaction.
 
-### `XactLogCommitRecord` — `xact.c:5870-6033` [verified-by-code]
+### `XactLogCommitRecord` — `xact.c:5873-6036` [verified-by-code]
 
 Assembles the `XLOG_XACT_COMMIT` (or `_COMMIT_PREPARED`) WAL record.
 Variable structure: header + optional `xl_xact_xinfo` flags +
@@ -260,13 +260,13 @@ Variable structure: header + optional `xl_xact_xinfo` flags +
 `xl_xact_stats_items`, `xl_xact_invals`, `xl_xact_twophase`,
 `xl_xact_origin`. Sub-records are conditionally appended via
 `XLogRegisterData`. Sets `XLR_SPECIAL_REL_UPDATE` info bit when files
-will be dropped. [verified-by-code] `xact.c:5939`.
+will be dropped. [verified-by-code] `xact.c:5942`.
 
-### `xact_redo` — `xact.c:6419-…` [verified-by-code]
+### `xact_redo` — `xact.c:6422-…` [verified-by-code]
 
 Recovery dispatch for RM_XACT_ID records. Parses commit/abort/prepare/
-assignment subtypes; calls `xact_redo_commit` (`xact.c:6186`) /
-`xact_redo_abort` (`xact.c:6340`) which in turn apply the same effects
+assignment subtypes; calls `xact_redo_commit` (`xact.c:6189`) /
+`xact_redo_abort` (`xact.c:6343`) which in turn apply the same effects
 (clog, commit_ts, file unlinks, invalidations) as live commit/abort.
 
 ### `AssignTransactionId` — `xact.c:637-…` [verified-by-code]
