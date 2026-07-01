@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-06-30 — anchor b7e4e3e7fa73 → c776550e4662; 13 commits; 13 docs queued for audit (4 already-pending skipped; catversion 202606281→202606301; HEAD stamped 20devel — PG 19 branched; no subsystem ≥5) (PR #427).
