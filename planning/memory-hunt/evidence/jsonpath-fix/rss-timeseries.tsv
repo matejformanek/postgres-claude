@@ -1,0 +1,46 @@
+t	pid	rss_kb	cmd
+0	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+0	9262	10636	postgres: autovacuum launcher
+0	9263	9804	postgres: logical replication launcher
+1	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+1	9272	20976	postgres: pg postgres [local] SELECT
+1	9262	10636	postgres: autovacuum launcher
+2	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+2	9272	21296	postgres: pg postgres [local] SELECT
+2	9262	10636	postgres: autovacuum launcher
+3	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+3	9272	21168	postgres: pg postgres [local] SELECT
+3	9262	10636	postgres: autovacuum launcher
+4	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+4	9272	21040	postgres: pg postgres [local] SELECT
+4	9262	10636	postgres: autovacuum launcher
+5	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+5	9272	21168	postgres: pg postgres [local] SELECT
+5	9262	10636	postgres: autovacuum launcher
+6	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+6	9272	21296	postgres: pg postgres [local] SELECT
+6	9262	10636	postgres: autovacuum launcher
+7	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+7	9272	21168	postgres: pg postgres [local] SELECT
+7	9262	10636	postgres: autovacuum launcher
+8	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+8	9272	21296	postgres: pg postgres [local] SELECT
+8	9262	10636	postgres: autovacuum launcher
+9	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+9	9272	21168	postgres: pg postgres [local] SELECT
+9	9262	10636	postgres: autovacuum launcher
+10	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+10	9272	21296	postgres: pg postgres [local] SELECT
+10	9262	10636	postgres: autovacuum launcher
+11	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+11	9272	21296	postgres: pg postgres [local] SELECT
+11	9262	10636	postgres: autovacuum launcher
+12	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+12	9272	21300	postgres: pg postgres [local] SELECT
+12	9262	10636	postgres: autovacuum launcher
+13	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+13	9272	21428	postgres: pg postgres [local] SELECT
+13	9262	10636	postgres: autovacuum launcher
+14	9254	32160	/home/pg/install/bin/postgres -D /home/pg/data -k /tmp
+14	9272	21428	postgres: pg postgres [local] SELECT
+14	9262	10636	postgres: autovacuum launcher

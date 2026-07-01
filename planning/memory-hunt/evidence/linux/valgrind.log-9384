@@ -1,0 +1,22 @@
+==9384== Memcheck, a memory error detector
+==9384== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==9384== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==9384== Command: /home/pg/install/bin/postgres -D /home/pg/data -p 5433 -k /tmp
+==9384== Parent PID: 9352
+==9384== 
+==9384== 
+==9384== HEAP SUMMARY:
+==9384==     in use at exit: 1,454,199 bytes in 268 blocks
+==9384==   total heap usage: 423,460 allocs, 12,414 frees, 122,408,853 bytes allocated
+==9384== 
+==9384== LEAK SUMMARY:
+==9384==    definitely lost: 0 bytes in 0 blocks
+==9384==    indirectly lost: 0 bytes in 0 blocks
+==9384==      possibly lost: 0 bytes in 0 blocks
+==9384==    still reachable: 840,947 bytes in 2,399 blocks
+==9384==         suppressed: 0 bytes in 0 blocks
+==9384== Reachable blocks (those to which a pointer was found) are not shown.
+==9384== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==9384== 
+==9384== For lists of detected and suppressed errors, rerun with: -s
+==9384== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

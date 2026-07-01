@@ -1,0 +1,9 @@
+Build date: 2026-06-22T19:35:21Z
+Source commit: (unknown — not a git tree)
+Linux kernel: 6.10.14-linuxkit
+Arch: aarch64
+Valgrind: valgrind-3.22.0
+Compiler: gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+USE_VALGRIND: yes
+MEMORY_CONTEXT_CHECKING: yes
+cassert: yes

@@ -1,0 +1,61 @@
+Process:         postgres [54112]
+Path:            /Users/USER/*/postgres
+Load Address:    0x1000e8000
+Identifier:      postgres
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  postgres [53259]
+Target Type:     live task
+
+Date/Time:       2026-06-22 21:14:04.711 +0200
+Launch Time:     2026-06-22 21:14:04.186 +0200
+OS Version:      macOS 26.5.1 (25F80)
+Report Version:  7
+Analysis Tool:   /usr/bin/leaks
+
+Physical footprint:         6576K
+Physical footprint (peak):  6576K
+Idle exit:                  untracked
+----
+
+leaks Report Version: 4.0
+Process 54112: 5926 nodes malloced for 2084 KB
+Process 54112: 29 leaks for 6400 total leaked bytes.
+
+    29 (6.25K) << TOTAL >>
+
+      7 (1.06K) ROOT LEAK: 0xbd1038000 [320]
+         1 (128 bytes) 0xbd0c34080 [128]
+         1 (128 bytes) 0xbd0c34100 [128]
+         1 (128 bytes) 0xbd0c34180 [128]
+         1 (128 bytes) 0xbd0c34200 [128]
+         1 (128 bytes) 0xbd0c34280 [128]
+         1 (128 bytes) 0xbd0c34300 [128]
+
+      7 (704 bytes) ROOT LEAK: 0xbd1068500 [320]
+         1 (64 bytes) 0xbd0c18280 [64]
+         1 (64 bytes) 0xbd0c182c0 [64]
+         1 (64 bytes) 0xbd0c18580 [64]
+         1 (64 bytes) 0xbd0c185c0 [64]
+         1 (64 bytes) 0xbd0c18680 [64]
+         1 (64 bytes) 0xbd0c186c0 [64]
+
+      1 (640 bytes) ROOT LEAK: 0x678010280 [640]
+
+      3 (576 bytes) ROOT LEAK: 0xbd1098000 [512]
+         1 (32 bytes) 0xbd1094240 [32]  length: 18  "XPC_SERVICE_NAME=0"
+         1 (32 bytes) 0xbd10942a0 [32]  length: 14  "LC_CTYPE=UTF-8"
+
+      1 (512 bytes) ROOT LEAK: 0x1025d5150 [512]
+      1 (320 bytes) ROOT LEAK: 0xbd1038140 [320]
+      1 (320 bytes) ROOT LEAK: 0xbd1038280 [320]
+      1 (320 bytes) ROOT LEAK: 0xbd10383c0 [320]
+      1 (320 bytes) ROOT LEAK: 0xbd1038500 [320]
+      1 (320 bytes) ROOT LEAK: 0xbd1068640 [320]
+      1 (256 bytes) ROOT LEAK: 0x1025d4c50 [256]
+      1 (256 bytes) ROOT LEAK: 0x1025d4d50 [256]
+      1 (256 bytes) ROOT LEAK: 0x1025d4e50 [256]
+      1 (256 bytes) ROOT LEAK: 0x1025d4f50 [256]
+      1 (256 bytes) ROOT LEAK: 0x1025d5050 [256]
+

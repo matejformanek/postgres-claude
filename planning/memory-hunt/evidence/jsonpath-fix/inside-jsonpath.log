@@ -1,0 +1,31 @@
+=== meson setup + build ===
+Commit: unknown — worktree git pointer broken inside container
+Date:   2026-06-22T19:59:43Z
+waiting for server to start.... done
+server started
+=== launching reproducer in background ===
+reproducer host pid: 9265
+reproducer exit: 0 after ~15s
+=== reproducer output ===
+9999
+Time: 3067.647 ms (00:03.068)
+=== RSS peak observed ===
+peak rss_kb=32160  at t=0s  pid=9254
+=== RSS timeline ===
+t=0s  pid=9263  max_rss_kb=32160
+t=1s  pid=9262  max_rss_kb=32160
+t=2s  pid=9262  max_rss_kb=32160
+t=3s  pid=9262  max_rss_kb=32160
+t=4s  pid=9262  max_rss_kb=32160
+t=5s  pid=9262  max_rss_kb=32160
+t=6s  pid=9262  max_rss_kb=32160
+t=7s  pid=9262  max_rss_kb=32160
+t=8s  pid=9262  max_rss_kb=32160
+t=9s  pid=9262  max_rss_kb=32160
+t=10s  pid=9262  max_rss_kb=32160
+t=11s  pid=9262  max_rss_kb=32160
+t=12s  pid=9262  max_rss_kb=32160
+t=13s  pid=9262  max_rss_kb=32160
+t=14s  pid=9262  max_rss_kb=32160
+waiting for server to shut down.... done
+server stopped

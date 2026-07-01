@@ -1,0 +1,78 @@
+=== meson setup + build ===
+Commit: unknown — worktree git pointer broken inside container
+Date:   2026-06-22T19:58:44Z
+waiting for server to start.... done
+server started
+=== launching reproducer in background ===
+reproducer host pid: 9265
+reproducer exit: 0 after ~62s
+=== reproducer output ===
+9999
+Time: 12831.341 ms (00:12.831)
+=== RSS peak observed ===
+peak rss_kb=5686688  at t=50s  pid=9272
+=== RSS timeline ===
+t=0s  pid=9263  max_rss_kb=32284
+t=1s  pid=9262  max_rss_kb=276640
+t=2s  pid=9262  max_rss_kb=532384
+t=3s  pid=9262  max_rss_kb=778016
+t=4s  pid=9262  max_rss_kb=981920
+t=5s  pid=9262  max_rss_kb=1109664
+t=6s  pid=9262  max_rss_kb=1229984
+t=7s  pid=9262  max_rss_kb=1386528
+t=8s  pid=9262  max_rss_kb=1566880
+t=9s  pid=9262  max_rss_kb=1754272
+t=10s  pid=9262  max_rss_kb=1911456
+t=11s  pid=9262  max_rss_kb=2013984
+t=12s  pid=9262  max_rss_kb=2092320
+t=13s  pid=9262  max_rss_kb=2168096
+t=14s  pid=9262  max_rss_kb=2229664
+t=15s  pid=9262  max_rss_kb=2285728
+t=16s  pid=9262  max_rss_kb=2394784
+t=17s  pid=9262  max_rss_kb=2443552
+t=18s  pid=9262  max_rss_kb=2524576
+t=19s  pid=9262  max_rss_kb=2585760
+t=20s  pid=9262  max_rss_kb=2677152
+t=21s  pid=9262  max_rss_kb=2780064
+t=22s  pid=9262  max_rss_kb=2894496
+t=23s  pid=9262  max_rss_kb=2963104
+t=24s  pid=9262  max_rss_kb=3020832
+t=25s  pid=9262  max_rss_kb=3088672
+t=26s  pid=9262  max_rss_kb=3137056
+t=27s  pid=9262  max_rss_kb=3202592
+t=28s  pid=9262  max_rss_kb=3255328
+t=29s  pid=9262  max_rss_kb=3321632
+t=30s  pid=9262  max_rss_kb=3385888
+t=31s  pid=9262  max_rss_kb=3444640
+t=32s  pid=9262  max_rss_kb=3531680
+t=33s  pid=9262  max_rss_kb=3654816
+t=34s  pid=9262  max_rss_kb=3800992
+t=35s  pid=9262  max_rss_kb=3963040
+t=36s  pid=9262  max_rss_kb=4104992
+t=37s  pid=9262  max_rss_kb=4243872
+t=38s  pid=9262  max_rss_kb=4387104
+t=39s  pid=9262  max_rss_kb=4536352
+t=40s  pid=9262  max_rss_kb=4692256
+t=41s  pid=9262  max_rss_kb=4823456
+t=42s  pid=9262  max_rss_kb=4918304
+t=43s  pid=9262  max_rss_kb=5018272
+t=44s  pid=9262  max_rss_kb=5125280
+t=45s  pid=9262  max_rss_kb=5218208
+t=46s  pid=9262  max_rss_kb=5335840
+t=47s  pid=9262  max_rss_kb=5461664
+t=48s  pid=9262  max_rss_kb=5560992
+t=49s  pid=9262  max_rss_kb=5673376
+t=50s  pid=9262  max_rss_kb=5686688
+t=51s  pid=9262  max_rss_kb=5686688
+t=52s  pid=9262  max_rss_kb=5686688
+t=53s  pid=9262  max_rss_kb=5686688
+t=54s  pid=9262  max_rss_kb=5686688
+t=55s  pid=9262  max_rss_kb=5686688
+t=56s  pid=9262  max_rss_kb=5686688
+t=57s  pid=9262  max_rss_kb=5686688
+t=58s  pid=9262  max_rss_kb=5686688
+t=59s  pid=9262  max_rss_kb=5686688
+t=60s  pid=9262  max_rss_kb=3968516
+t=61s  pid=9262  max_rss_kb=1375448
+waiting for server to shut down.... done
+server stopped

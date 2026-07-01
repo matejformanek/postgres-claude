@@ -1,0 +1,290 @@
+=== pre-workload pg_backend_memory_contexts ===
+                      name                      |                     ident                      |    type    | level | total_bytes | total_nblocks | used_bytes | free_bytes | free_chunks 
+------------------------------------------------+------------------------------------------------+------------+-------+-------------+---------------+------------+------------+-------------
+ CacheMemoryContext                             |                                                | AllocSet   |     2 |      524288 |             7 |     504016 |      20272 |           0
+ Caller tuples                                  |                                                | Bump       |     7 |        8080 |             1 |         40 |       8040 |           0
+ ErrorContext                                   |                                                | AllocSet   |     2 |        8192 |             1 |        240 |       7952 |           0
+ ExecutorState                                  |                                                | AllocSet   |     4 |       49216 |             4 |      38144 |      11072 |           4
+ ExprContext                                    |                                                | AllocSet   |     5 |       65536 |             4 |      32176 |      33360 |          12
+ GUC hash table                                 |                                                | AllocSet   |     3 |       65536 |             4 |      40760 |      24776 |          11
+ GUCMemoryContext                               |                                                | AllocSet   |     2 |       24576 |             2 |      12376 |      12200 |           5
+ LOCALLOCK hash                                 |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ Map from relid to OID of cached composite type |                                                | AllocSet   |     2 |        8192 |             1 |       5680 |       2512 |           0
+ MdSmgr                                         |                                                | AllocSet   |     2 |        8192 |             1 |        744 |       7448 |           0
+ MessageContext                                 |                                                | AllocSet   |     2 |      131072 |             5 |      37528 |      93544 |          10
+ Operator class cache                           |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ PgStat Pending                                 |                                                | AllocSet   |     2 |       16384 |             5 |       7200 |       9184 |           8
+ PgStat Shared Ref                              |                                                | AllocSet   |     2 |        4096 |             3 |       3360 |        736 |           2
+ PgStat Shared Ref Hash                         |                                                | AllocSet   |     2 |        9280 |             2 |       8576 |        704 |           0
+ Portal hash                                    |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ PortalContext                                  | <unnamed>                                      | AllocSet   |     3 |        1024 |             1 |        432 |        592 |           0
+ Record information cache                       |                                                | AllocSet   |     2 |        8192 |             1 |       6592 |       1600 |           0
+ Relcache by OID                                |                                                | AllocSet   |     2 |       32768 |             3 |      18016 |      14752 |           7
+ RowDescriptionContext                          |                                                | AllocSet   |     2 |        8192 |             1 |       1280 |       6912 |           0
+ Table function arguments                       |                                                | AllocSet   |     5 |        8192 |             1 |        288 |       7904 |           0
+ Timezones                                      |                                                | AllocSet   |     2 |      112328 |             2 |     109688 |       2640 |           0
+ TopMemoryContext                               |                                                | AllocSet   |     1 |      132256 |             6 |      96128 |      36128 |          74
+ TopPortalContext                               |                                                | AllocSet   |     2 |        8192 |             1 |        512 |       7680 |           0
+ TopTransactionContext                          |                                                | AllocSet   |     2 |        8192 |             1 |        432 |       7760 |           2
+ TransactionAbortContext                        |                                                | AllocSet   |     2 |       32768 |             1 |        240 |      32528 |           0
+ TupleSort main                                 |                                                | AllocSet   |     5 |       41024 |             3 |      32584 |       8440 |           8
+ TupleSort sort                                 |                                                | AllocSet   |     6 |        8192 |             1 |        240 |       7952 |           0
+ Type information cache                         |                                                | AllocSet   |     2 |       24648 |             2 |      22008 |       2640 |           0
+ WAL record construction                        |                                                | AllocSet   |     2 |       50216 |             2 |      43832 |       6384 |           0
+ index info                                     | pg_db_role_setting_databaseid_rol_index        | AllocSet   |     3 |        3072 |             2 |       1768 |       1304 |           2
+ index info                                     | pg_opclass_am_name_nsp_index                   | AllocSet   |     3 |        3072 |             2 |       1840 |       1232 |           2
+ index info                                     | pg_propgraph_element_oid_index                 | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_foreign_data_wrapper_name_index             | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_publication_pubname_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_statistic_relid_att_inh_index               | AllocSet   |     3 |        3072 |             2 |       1712 |       1360 |           3
+ index info                                     | pg_cast_source_target_index                    | AllocSet   |     3 |        3072 |             2 |       1816 |       1256 |           1
+ index info                                     | pg_language_name_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_transform_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_collation_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_amop_fam_strat_index                        | AllocSet   |     3 |        2240 |             2 |       2216 |         24 |           0
+ index info                                     | pg_index_indexrelid_index                      | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_ts_template_tmplname_index                  | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_ts_config_map_index                         | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_propgraph_property_oid_index                | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_opclass_oid_index                           | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_foreign_data_wrapper_oid_index              | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_propgraph_label_graph_name_index            | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_publication_namespace_oid_index             | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_propgraph_element_label_element_label_index | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_event_trigger_evtname_index                 | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_statistic_ext_name_index                    | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_publication_oid_index                       | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_ts_dict_oid_index                           | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_propgraph_label_oid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_event_trigger_oid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_conversion_default_index                    | AllocSet   |     3 |        2240 |             2 |       1816 |        424 |           0
+ index info                                     | pg_operator_oprname_l_r_n_index                | AllocSet   |     3 |        2240 |             2 |       1816 |        424 |           0
+ index info                                     | pg_trigger_tgrelid_tgname_index                | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_extension_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_enum_typid_label_index                      | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_ts_config_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_user_mapping_oid_index                      | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_opfamily_am_name_nsp_index                  | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_foreign_table_relid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_type_oid_index                              | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_aggregate_fnoid_index                       | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_constraint_oid_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_rewrite_rel_rulename_index                  | AllocSet   |     3 |        3072 |             2 |       1736 |       1336 |           1
+ index info                                     | pg_ts_parser_prsname_index                     | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_propgraph_property_name_index               | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_ts_config_cfgname_index                     | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_ts_parser_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_publication_rel_prrelid_prpubid_index       | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_operator_oid_index                          | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_namespace_nspname_index                     | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_ts_template_oid_index                       | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_amop_opr_fam_index                          | AllocSet   |     3 |        3072 |             2 |       1840 |       1232 |           2
+ index info                                     | pg_propgraph_label_property_label_prop_index   | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_default_acl_role_nsp_obj_index              | AllocSet   |     3 |        3072 |             2 |       1712 |       1360 |           3
+ index info                                     | pg_collation_name_enc_nsp_index                | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_publication_rel_oid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_range_rngtypid_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_ts_dict_dictname_index                      | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_type_typname_nsp_index                      | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_opfamily_oid_index                          | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_statistic_ext_oid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_statistic_ext_data_stxoid_inh_index         | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_class_oid_index                             | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_proc_proname_args_nsp_index                 | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_partitioned_table_partrelid_index           | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_range_rngmultitypid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_transform_type_lang_index                   | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_attribute_relid_attnum_index                | AllocSet   |     3 |        3072 |             2 |       1816 |       1256 |           1
+ index info                                     | pg_proc_oid_index                              | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_language_oid_index                          | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_namespace_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_amproc_fam_proc_index                       | AllocSet   |     3 |        2240 |             2 |       2216 |         24 |           0
+ index info                                     | pg_foreign_server_name_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_attribute_relid_attnam_index                | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_publication_namespace_pnnspid_pnpubid_index | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_conversion_oid_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_user_mapping_user_server_index              | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_subscription_rel_srrelid_srsubid_index      | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_sequence_seqrelid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_extension_name_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_conversion_name_nsp_index                   | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_authid_oid_index                            | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_auth_members_member_role_index              | AllocSet   |     3 |        3072 |             2 |       1712 |       1360 |           3
+ index info                                     | pg_subscription_oid_index                      | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_parameter_acl_oid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_tablespace_oid_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_parameter_acl_parname_index                 | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_shseclabel_object_index                     | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_replication_origin_roname_index             | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_database_datname_index                      | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_subscription_subname_index                  | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_replication_origin_roiident_index           | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_auth_members_role_member_index              | AllocSet   |     3 |        3072 |             2 |       1712 |       1360 |           3
+ index info                                     | pg_database_oid_index                          | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_authid_rolname_index                        | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_propgraph_element_alias_index               | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_class_relname_nsp_index                     | AllocSet   |     3 |        3072 |             2 |       1816 |       1256 |           1
+ index info                                     | pg_enum_oid_index                              | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_foreign_server_oid_index                    | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ pg_get_backend_memory_contexts                 |                                                | AllocSet   |     6 |       32768 |             3 |      15952 |      16816 |           7
+ printtup                                       |                                                | AllocSet   |     5 |        8192 |             1 |        240 |       7952 |           0
+ relation rules                                 | pg_backend_memory_contexts                     | AllocSet   |     3 |        8192 |             4 |       4720 |       3472 |           4
+ search_path processing cache                   |                                                | AllocSet   |     2 |        8192 |             1 |       2544 |       5648 |           8
+ smgr relation table                            |                                                | AllocSet   |     2 |       40960 |             3 |      24112 |      16848 |           9
+ tuplestore tuples                              |                                                | Generation |     5 |       32768 |             3 |      21064 |      11704 |           0
+(131 rows)
+
+Time: 362.133 ms
+=== starting 100-iter loop ===
+Time: 2359.194 ms (00:02.359)
+=== post-workload pg_backend_memory_contexts ===
+                      name                      |                     ident                      |    type    | level | total_bytes | total_nblocks | used_bytes | free_bytes | free_chunks 
+------------------------------------------------+------------------------------------------------+------------+-------+-------------+---------------+------------+------------+-------------
+ CFuncHash                                      |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ CacheMemoryContext                             |                                                | AllocSet   |     2 |     1048576 |             8 |     545512 |     503064 |           0
+ Caller tuples                                  |                                                | Bump       |     7 |        8080 |             1 |         40 |       8040 |           0
+ ErrorContext                                   |                                                | AllocSet   |     2 |        8192 |             1 |        240 |       7952 |           0
+ ExecutorState                                  |                                                | AllocSet   |     4 |       49216 |             4 |      38144 |      11072 |           3
+ ExprContext                                    |                                                | AllocSet   |     5 |       65536 |             4 |      33552 |      31984 |          13
+ GUC hash table                                 |                                                | AllocSet   |     3 |       65536 |             4 |      40760 |      24776 |          11
+ GUCMemoryContext                               |                                                | AllocSet   |     2 |       24576 |             2 |      14144 |      10432 |           3
+ LOCALLOCK hash                                 |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ Map from relid to OID of cached composite type |                                                | AllocSet   |     2 |        8192 |             1 |       5680 |       2512 |           0
+ MdSmgr                                         |                                                | AllocSet   |     2 |        8192 |             1 |       1128 |       7064 |           0
+ MessageContext                                 |                                                | AllocSet   |     2 |       65536 |             4 |      37040 |      28496 |           2
+ Operator class cache                           |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ PLpgSQL cast expressions                       |                                                | AllocSet   |     2 |        8192 |             1 |       6592 |       1600 |           0
+ PgStat Pending                                 |                                                | AllocSet   |     2 |       16384 |             5 |        400 |      15984 |          48
+ PgStat Shared Ref                              |                                                | AllocSet   |     2 |        8192 |             4 |       4440 |       3752 |           2
+ PgStat Shared Ref Hash                         |                                                | AllocSet   |     2 |        9280 |             2 |       8576 |        704 |           0
+ Portal hash                                    |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ PortalContext                                  | <unnamed>                                      | AllocSet   |     3 |        1024 |             1 |        432 |        592 |           0
+ Record information cache                       |                                                | AllocSet   |     2 |        8192 |             1 |       6592 |       1600 |           0
+ Relcache by OID                                |                                                | AllocSet   |     2 |       32768 |             3 |      18016 |      14752 |           7
+ Rendezvous variable hash                       |                                                | AllocSet   |     2 |        8192 |             1 |       7616 |        576 |           0
+ RowDescriptionContext                          |                                                | AllocSet   |     2 |        8192 |             1 |       1280 |       6912 |           0
+ Table function arguments                       |                                                | AllocSet   |     5 |        8192 |             1 |        288 |       7904 |           0
+ TableSpace cache                               |                                                | AllocSet   |     2 |        8192 |             1 |       6592 |       1600 |           0
+ Timezones                                      |                                                | AllocSet   |     2 |      112328 |             2 |     109688 |       2640 |           0
+ TopMemoryContext                               |                                                | AllocSet   |     1 |      132256 |             6 |      98288 |      33968 |          76
+ TopPortalContext                               |                                                | AllocSet   |     2 |        8192 |             1 |        512 |       7680 |           0
+ TopTransactionContext                          |                                                | AllocSet   |     2 |        8192 |             1 |        432 |       7760 |           0
+ TransactionAbortContext                        |                                                | AllocSet   |     2 |       32768 |             1 |        240 |      32528 |           0
+ TupleSort main                                 |                                                | AllocSet   |     5 |       32832 |             2 |      32544 |        288 |           0
+ TupleSort sort                                 |                                                | AllocSet   |     6 |        8192 |             1 |        240 |       7952 |           0
+ Type information cache                         |                                                | AllocSet   |     2 |       24648 |             2 |      22008 |       2640 |           0
+ WAL record construction                        |                                                | AllocSet   |     2 |       50216 |             2 |      43832 |       6384 |           0
+ index info                                     | pg_statistic_ext_relid_index                   | AllocSet   |     3 |        2048 |             2 |       1104 |        944 |           1
+ index info                                     | pg_class_tblspc_relfilenode_index              | AllocSet   |     3 |        3072 |             2 |       1688 |       1384 |           2
+ index info                                     | pg_index_indrelid_index                        | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_db_role_setting_databaseid_rol_index        | AllocSet   |     3 |        3072 |             2 |       1768 |       1304 |           2
+ index info                                     | pg_propgraph_element_alias_index               | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_class_relname_nsp_index                     | AllocSet   |     3 |        3072 |             2 |       1816 |       1256 |           1
+ index info                                     | pg_foreign_server_oid_index                    | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_publication_pubname_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_statistic_relid_att_inh_index               | AllocSet   |     3 |        3072 |             2 |       2032 |       1040 |           2
+ index info                                     | pg_cast_source_target_index                    | AllocSet   |     3 |        3072 |             2 |       1816 |       1256 |           1
+ index info                                     | pg_language_name_index                         | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_transform_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_collation_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_amop_fam_strat_index                        | AllocSet   |     3 |        2240 |             2 |       2216 |         24 |           0
+ index info                                     | pg_index_indexrelid_index                      | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_ts_template_tmplname_index                  | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_ts_config_map_index                         | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_propgraph_property_oid_index                | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_opclass_oid_index                           | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_foreign_data_wrapper_oid_index              | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_propgraph_label_graph_name_index            | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_publication_namespace_oid_index             | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_propgraph_element_label_element_label_index | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_event_trigger_evtname_index                 | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_statistic_ext_name_index                    | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_publication_oid_index                       | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_ts_dict_oid_index                           | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_propgraph_label_oid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_event_trigger_oid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_conversion_default_index                    | AllocSet   |     3 |        2240 |             2 |       1816 |        424 |           0
+ index info                                     | pg_operator_oprname_l_r_n_index                | AllocSet   |     3 |        2240 |             2 |       1816 |        424 |           0
+ index info                                     | pg_trigger_tgrelid_tgname_index                | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_extension_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_enum_typid_label_index                      | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_ts_config_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_user_mapping_oid_index                      | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_opfamily_am_name_nsp_index                  | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_foreign_table_relid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_type_oid_index                              | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_aggregate_fnoid_index                       | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_constraint_oid_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_rewrite_rel_rulename_index                  | AllocSet   |     3 |        3072 |             2 |       1736 |       1336 |           1
+ index info                                     | pg_ts_parser_prsname_index                     | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_propgraph_property_name_index               | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_ts_config_cfgname_index                     | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_ts_parser_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_publication_rel_prrelid_prpubid_index       | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_operator_oid_index                          | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_namespace_nspname_index                     | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_ts_template_oid_index                       | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_amop_opr_fam_index                          | AllocSet   |     3 |        3072 |             2 |       1840 |       1232 |           2
+ index info                                     | pg_propgraph_label_property_label_prop_index   | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_default_acl_role_nsp_obj_index              | AllocSet   |     3 |        3072 |             2 |       1712 |       1360 |           3
+ index info                                     | pg_collation_name_enc_nsp_index                | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_publication_rel_oid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_range_rngtypid_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_ts_dict_dictname_index                      | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_type_typname_nsp_index                      | AllocSet   |     3 |        3072 |             2 |       1816 |       1256 |           1
+ index info                                     | pg_opfamily_oid_index                          | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_statistic_ext_oid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_statistic_ext_data_stxoid_inh_index         | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_class_oid_index                             | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_proc_proname_args_nsp_index                 | AllocSet   |     3 |        3072 |             2 |       1840 |       1232 |           2
+ index info                                     | pg_partitioned_table_partrelid_index           | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_range_rngmultitypid_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_transform_type_lang_index                   | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_attribute_relid_attnum_index                | AllocSet   |     3 |        3072 |             2 |       1816 |       1256 |           1
+ index info                                     | pg_proc_oid_index                              | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_language_oid_index                          | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_namespace_oid_index                         | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_amproc_fam_proc_index                       | AllocSet   |     3 |        2240 |             2 |       2216 |         24 |           0
+ index info                                     | pg_foreign_server_name_index                   | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_attribute_relid_attnam_index                | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_publication_namespace_pnnspid_pnpubid_index | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_conversion_oid_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_user_mapping_user_server_index              | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_subscription_rel_srrelid_srsubid_index      | AllocSet   |     3 |        3072 |             2 |       1608 |       1464 |           3
+ index info                                     | pg_sequence_seqrelid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_extension_name_index                        | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_conversion_name_nsp_index                   | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_authid_oid_index                            | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_auth_members_member_role_index              | AllocSet   |     3 |        3072 |             2 |       1712 |       1360 |           3
+ index info                                     | pg_subscription_oid_index                      | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_parameter_acl_oid_index                     | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_tablespace_oid_index                        | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_parameter_acl_parname_index                 | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_shseclabel_object_index                     | AllocSet   |     3 |        3072 |             2 |       1680 |       1392 |           2
+ index info                                     | pg_replication_origin_roname_index             | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_database_datname_index                      | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_subscription_subname_index                  | AllocSet   |     3 |        3072 |             2 |       1576 |       1496 |           1
+ index info                                     | pg_replication_origin_roiident_index           | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_auth_members_role_member_index              | AllocSet   |     3 |        3072 |             2 |       1712 |       1360 |           3
+ index info                                     | pg_database_oid_index                          | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_authid_rolname_index                        | AllocSet   |     3 |        2048 |             2 |       1184 |        864 |           1
+ index info                                     | pg_enum_oid_index                              | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ index info                                     | pg_opclass_am_name_nsp_index                   | AllocSet   |     3 |        3072 |             2 |       1840 |       1232 |           2
+ index info                                     | pg_foreign_data_wrapper_name_index             | AllocSet   |     3 |        1024 |             1 |       1016 |          8 |           0
+ index info                                     | pg_propgraph_element_oid_index                 | AllocSet   |     3 |        1024 |             1 |        984 |         40 |           0
+ pg_get_backend_memory_contexts                 |                                                | AllocSet   |     6 |       32768 |             3 |      15952 |      16816 |           7
+ printtup                                       |                                                | AllocSet   |     5 |        8192 |             1 |        240 |       7952 |           0
+ relation rules                                 | pg_backend_memory_contexts                     | AllocSet   |     3 |        8192 |             4 |       4720 |       3472 |           4
+ search_path processing cache                   |                                                | AllocSet   |     2 |        8192 |             1 |       2544 |       5648 |           8
+ smgr relation table                            |                                                | AllocSet   |     2 |       40960 |             3 |      24112 |      16848 |           9
+ tuplestore tuples                              |                                                | Generation |     5 |       32768 |             3 |      22200 |      10568 |           0
+(138 rows)
+
+Time: 46.272 ms
+=== backend pid for external leak probe ===
+ pg_backend_pid 
+----------------
+           9387
+(1 row)
+
+Time: 6.044 ms

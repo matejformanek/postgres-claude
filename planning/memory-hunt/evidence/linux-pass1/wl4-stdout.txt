@@ -1,0 +1,16 @@
+ count 
+-------
+  5000
+(1 row)
+
+ count 
+-------
+  3000
+(1 row)
+
+=== workload complete; sleeping 25s for leaks probe ===
+ pg_sleep 
+----------
+ 
+(1 row)
+

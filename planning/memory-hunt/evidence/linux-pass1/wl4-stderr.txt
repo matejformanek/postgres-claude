@@ -1,0 +1,12 @@
+psql:/tmp/wl4.sql:24: ERROR:  invalid input syntax for type json
+DETAIL:  Token "t" is invalid.
+CONTEXT:  JSON data, line 1: t
+PL/pgSQL function inline_code_block line 5 at SQL statement
+psql:/tmp/wl4.sql:61: ERROR:  there is no parameter $1
+LINE 1: EXECUTE pq1($1)
+                    ^
+QUERY:  EXECUTE pq1($1)
+CONTEXT:  PL/pgSQL function inline_code_block line 5 at EXECUTE
+psql:/tmp/wl4.sql:70: ERROR:  syntax error at or near "LIMIT"
+LINE 4: ...cket, sum(x), avg(x), array_agg(x ORDER BY x DESC LIMIT 5) F...
+                                                             ^

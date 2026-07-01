@@ -1,0 +1,63 @@
+Process 52077 is not debuggable. Due to security restrictions, leaks can only show or save contents of readonly memory of restricted processes.
+
+Process:         postgres [52077]
+Path:            /Users/USER/*/postgres
+Load Address:    0x100a70000
+Identifier:      postgres
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  postgres [51465]
+Target Type:     live task
+
+Date/Time:       2026-06-22 21:10:48.210 +0200
+Launch Time:     2026-06-22 21:10:47.681 +0200
+OS Version:      macOS 26.5.1 (25F80)
+Report Version:  7
+Analysis Tool:   /usr/bin/leaks
+
+Physical footprint:         8448K
+Physical footprint (peak):  8448K
+Idle exit:                  untracked
+----
+
+leaks Report Version: 4.0
+Process 52077: 6386 nodes malloced for 2851 KB
+Process 52077: 29 leaks for 6400 total leaked bytes.
+
+    29 (6.25K) << TOTAL >>
+
+      7 (1.06K) ROOT LEAK: 0x70ec9c280 [320]
+         1 (128 bytes) 0x70ec60180 [128]
+         1 (128 bytes) 0x70ec60200 [128]
+         1 (128 bytes) 0x70ec60280 [128]
+         1 (128 bytes) 0x70ec60300 [128]
+         1 (128 bytes) 0x70ec60380 [128]
+         1 (128 bytes) 0x70ec60400 [128]
+
+      7 (704 bytes) ROOT LEAK: 0x70ec9c140 [320]
+         1 (64 bytes) 0x70ec34340 [64]
+         1 (64 bytes) 0x70ec34380 [64]
+         1 (64 bytes) 0x70ec343c0 [64]
+         1 (64 bytes) 0x70ec34400 [64]
+         1 (64 bytes) 0x70ec34440 [64]
+         1 (64 bytes) 0x70ec34480 [64]
+
+      1 (640 bytes) ROOT LEAK: 0xa4a010280 [640]
+
+      3 (576 bytes) ROOT LEAK: 0x70eca8200 [512]
+         1 (32 bytes) 0x70ec54240 [32]
+         1 (32 bytes) 0x70ec542a0 [32]
+
+      1 (512 bytes) ROOT LEAK: 0x102e5d0f0 [512]
+      1 (320 bytes) ROOT LEAK: 0x70ec9c3c0 [320]
+      1 (320 bytes) ROOT LEAK: 0x70ec9c500 [320]
+      1 (320 bytes) ROOT LEAK: 0x70ec9c640 [320]
+      1 (320 bytes) ROOT LEAK: 0x70ec9c780 [320]
+      1 (320 bytes) ROOT LEAK: 0x70ec9c8c0 [320]
+      1 (256 bytes) ROOT LEAK: 0x102e5cbf0 [256]
+      1 (256 bytes) ROOT LEAK: 0x102e5ccf0 [256]
+      1 (256 bytes) ROOT LEAK: 0x102e5cdf0 [256]
+      1 (256 bytes) ROOT LEAK: 0x102e5cef0 [256]
+      1 (256 bytes) ROOT LEAK: 0x102e5cff0 [256]
+
