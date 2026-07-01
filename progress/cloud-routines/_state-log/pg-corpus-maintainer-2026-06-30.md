@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-06-30 — Pass 2 glossary 1777→1823 (+46 grounded PG-internals identifiers; +230 lines, 0 deletions, idempotent). Pass 1 (backlinks) and Pass 3 (issue-register) genuine no-ops: no `knowledge/{architecture,subsystems,idioms,data-structures}/` or `knowledge/files/` delta since the 06-29 full sweep (#421) merged (PR #430).
