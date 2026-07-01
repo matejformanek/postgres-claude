@@ -279,3 +279,14 @@ table of contents, exclude chapters whose slug already exists under
 [done:758a8039] app-pgbasebackup https://www.postgresql.org/docs/current/app-pgbasebackup.html
 [done:758a8039] app-pgreceivewal https://www.postgresql.org/docs/current/app-pgreceivewal.html
 [done:758a8039] app-pgrecvlogical https://www.postgresql.org/docs/current/app-pgrecvlogical.html
+
+## Refill 2026-06-30 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; Part VII internals leaves saturated (185 docs-distilled). After three contrib/dev-tool families (06-23 introspection, 06-28 reference-impl/hook-example, 06-29 WAL/control-file/recovery tools), this run completes the **§29/§31 Logical Replication chapter** — the user-facing/operator + semantics leaves that pair with the already-distilled §x.10 architecture leaf (logical-replication-architecture.md, 06-20). Direct response to the harvester's strongest standing gaps: replication-overview is the heaviest skill (×8 per #425) and gap:logical-replication has recurred ×9/×4 across multiple nights (#393/#399). Each leaf maps to replication-overview + the §49 logicaldecoding-*.md family + protocol-logical-replication.md. HEAD-probed this run: all 8 leaf slugs 200 (logical-replication / -publication / -subscription / -conflicts / -row-filter / -col-lists / -restrictions / -failover); vacuum-for-* subsection slugs all 404 (folded into routine-vacuuming.html as anchors, recorded so future runs don't re-probe). Chapter renumbered 31→29 in current docs — same chapter; cite by slug not number. Markers left [in-progress:cloud/pg-docs-miner/2026-06-30] for the merger to flip to the squash SHA.)
+
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication https://www.postgresql.org/docs/current/logical-replication.html
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication-publication https://www.postgresql.org/docs/current/logical-replication-publication.html
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication-subscription https://www.postgresql.org/docs/current/logical-replication-subscription.html
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication-conflicts https://www.postgresql.org/docs/current/logical-replication-conflicts.html
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication-row-filter https://www.postgresql.org/docs/current/logical-replication-row-filter.html
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication-col-lists https://www.postgresql.org/docs/current/logical-replication-col-lists.html
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication-restrictions https://www.postgresql.org/docs/current/logical-replication-restrictions.html
+[in-progress:cloud/pg-docs-miner/2026-06-30] logical-replication-failover https://www.postgresql.org/docs/current/logical-replication-failover.html
