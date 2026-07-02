@@ -293,12 +293,12 @@ table of contents, exclude chapters whose slug already exists under
 
 ## Refill 2026-07-01 (both queues drained at run start — wiki side exhausted per wiki-index.md EXHAUSTED note; Part VII internals leaves saturated (193 docs-distilled). After the §29 logical-replication chapter (06-30), this run mines the **Server Configuration (runtime-config-*) GUC-reference family + the §25 routine-maintenance internals** — the half-covered §20 series (only runtime-config-wal + runtime-config-replication were distilled before) completed toward the harvester's strongest standing corpus gaps: gap:vacuum-autovacuum ×7 + the vacuum-horizon candidate-subsystem cluster, gap:pgstat ×9 (heaviest recurring), and the executor-and-planner skill surface. Each chapter maps to an existing skill/subsystem: runtime-config-query→executor-and-planner/optimizer.md, runtime-config-resource→memory-contexts/storage-buffer.md, runtime-config-statistics→pgstat gap/monitoring-stats.md, runtime-config-vacuum + routine-vacuuming→vacuum gap/access-heap+access-transam, runtime-config-locks→locking/storage-lmgr.md, runtime-config-error-handling→error-handling/wal-reliability, routine-reindex→access-method-apis. HEAD-probed this run: runtime-config-autovacuum.html 301-REDIRECTS → runtime-config-vacuum.html (autovacuum GUCs merged into the vacuum config page in current docs — recorded so future runs use the new slug); all other slugs 200. Non-obvious harvest this run: freeze-age knobs are silently clamped to 50%/95% of autovacuum_freeze_max_age (a user value can be ignored); work_mem is per-node not per-query; max_locks_per_transaction is a shared-pool size not a per-xact cap; data_sync_retry=off PANICs on fsync failure by design (fsyncgate); io_method is the new PG18 async-I/O front door. Markers left [in-progress:cloud/pg-docs-miner/2026-07-01] for the merger to flip to the squash SHA. docs-distilled 193→201.)
 
-[in-progress:cloud/pg-docs-miner/2026-07-01] runtime-config-query https://www.postgresql.org/docs/current/runtime-config-query.html
-[in-progress:cloud/pg-docs-miner/2026-07-01] runtime-config-resource https://www.postgresql.org/docs/current/runtime-config-resource.html
-[in-progress:cloud/pg-docs-miner/2026-07-01] runtime-config-statistics https://www.postgresql.org/docs/current/runtime-config-statistics.html
-[in-progress:cloud/pg-docs-miner/2026-07-01] runtime-config-vacuum https://www.postgresql.org/docs/current/runtime-config-vacuum.html
-[in-progress:cloud/pg-docs-miner/2026-07-01] runtime-config-locks https://www.postgresql.org/docs/current/runtime-config-locks.html
-[in-progress:cloud/pg-docs-miner/2026-07-01] runtime-config-error-handling https://www.postgresql.org/docs/current/runtime-config-error-handling.html
-[in-progress:cloud/pg-docs-miner/2026-07-01] routine-vacuuming https://www.postgresql.org/docs/current/routine-vacuuming.html
-[in-progress:cloud/pg-docs-miner/2026-07-01] routine-reindex https://www.postgresql.org/docs/current/routine-reindex.html
+[done:bd648ec] runtime-config-query https://www.postgresql.org/docs/current/runtime-config-query.html
+[done:bd648ec] runtime-config-resource https://www.postgresql.org/docs/current/runtime-config-resource.html
+[done:bd648ec] runtime-config-statistics https://www.postgresql.org/docs/current/runtime-config-statistics.html
+[done:bd648ec] runtime-config-vacuum https://www.postgresql.org/docs/current/runtime-config-vacuum.html
+[done:bd648ec] runtime-config-locks https://www.postgresql.org/docs/current/runtime-config-locks.html
+[done:bd648ec] runtime-config-error-handling https://www.postgresql.org/docs/current/runtime-config-error-handling.html
+[done:bd648ec] routine-vacuuming https://www.postgresql.org/docs/current/routine-vacuuming.html
+[done:bd648ec] routine-reindex https://www.postgresql.org/docs/current/routine-reindex.html
 [redirect:301→runtime-config-vacuum] runtime-config-autovacuum https://www.postgresql.org/docs/current/runtime-config-autovacuum.html  # autovacuum GUCs merged into runtime-config-vacuum.html in current docs; do not re-queue the old slug
