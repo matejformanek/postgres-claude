@@ -1,8 +1,8 @@
 # xlogutils.h
 
 - **Source path:** `source/src/include/access/xlogutils.h`
-- **Lines:** 121
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 123
+- **Last verified commit:** `c776550e4662` (re-pinned 2026-07-02; was `ef6a95c7c64`). 8e684ce11dda ("Fix unlogged sequence corruption after standby promotion") added the `XLogFlushBufferForRedoIfInit` prototype at `:90-91`, shifting all cites below it +2.
 - **Companion files:** `xlogutils.c`, `xlogreader.h`.
 
 ## Purpose
@@ -56,17 +56,25 @@ Macro `InHotStandby = (standbyState >= STANDBY_SNAPSHOT_PENDING)`.
 - Drop forwarding: `XLogDropRelation`, `XLogDropDatabase`,
   `XLogTruncateRelation`. [verified-by-code] `xlogutils.h:66-69`.
 - Redo buffer helpers: `XLogReadBufferForRedo`,
-  `XLogInitBufferForRedo`, `XLogReadBufferForRedoExtended`,
-  `XLogReadBufferExtended`. [verified-by-code] `xlogutils.h:87-97`.
+  `XLogInitBufferForRedo`, `XLogFlushBufferForRedoIfInit` (**new** in
+  8e684ce11dda — if `block_id`'s fork is `INIT_FORKNUM`, immediately
+  `FlushOneBuffer(buffer)`. At end of crash recovery the init forks of
+  unlogged relations are copied to the main fork *directly from disk*,
+  bypassing shared buffers; so a redo routine that updates an init fork
+  without a full-page image must flush after `PageSetLSN` +
+  `MarkBufferDirty`, else the change is lost. This is the unlogged
+  sequence-corruption fix; `seq_redo` and the hash-index redo handlers
+  now call it), `XLogReadBufferForRedoExtended`,
+  `XLogReadBufferExtended`. [verified-by-code] `xlogutils.h:87-99`.
 - Fake relcache: `CreateFakeRelcacheEntry`, `FreeFakeRelcacheEntry`.
-  [verified-by-code] `xlogutils.h:99-100`.
+  [verified-by-code] `xlogutils.h:101-102`.
 - Local-reader callbacks: `read_local_xlog_page`,
   `read_local_xlog_page_no_wait`, `wal_segment_open`,
-  `wal_segment_close`. [verified-by-code] `xlogutils.h:102-112`.
+  `wal_segment_close`. [verified-by-code] `xlogutils.h:104-114`.
 - Timeline helper: `XLogReadDetermineTimeline`.
-  [verified-by-code] `xlogutils.h:114-117`.
+  [verified-by-code] `xlogutils.h:116-119`.
 - Error reporter: `WALReadRaiseError`. [verified-by-code]
-  `xlogutils.h:119`.
+  `xlogutils.h:121`.
 
 ## Key invariants
 

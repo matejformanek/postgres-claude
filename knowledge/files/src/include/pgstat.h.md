@@ -1,7 +1,7 @@
 # `src/include/pgstat.h`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~881
+- **Last verified commit:** `c776550e4662` (re-pinned 2026-07-02; was `e18b0cb7344`. Clean: all region cites — `:71` PgStat_Counter, `:221` PGSTAT_FILE_FORMAT_ID, `:325` ioop-in-bytes macro, `:636` pgstat_lock.c protos, `:712` rel-counter macros, `:840`/`:869` globals — hold within ±1; LOC ~881→882.)
+- **Lines:** ~882
 - **Source:** `source/src/include/pgstat.h`
 
 The cumulative-statistics subsystem master header. Defines every
@@ -87,7 +87,11 @@ re-includes for backward compatibility (`pgstat.h:19-20`).
 - `PgStat_PendingIO` — same dims with instr_time for pending times.
 - `PgStat_IO { stat_reset_timestamp, stats[BACKEND_NUM_TYPES] }` —
   one BktypeIO per BackendType.
-- `PgStat_LockEntry { waits, wait_time, fastpath_exceeded }`.
+- `PgStat_LockEntry { waits, wait_time, fastpath_exceeded }`
+  (`pgstat.h:349-354`). `wait_time` is `PgStat_Counter` (int64) counting
+  **microseconds** (comment `pgstat.h:352`); the pg_stat_lock SQL view
+  exposes it as `double precision` (c776550e4662) — the internal
+  counter stays int64 μs.
 - `PgStat_PendingLock { stats[LOCKTAG_LAST_TYPE+1] }`,
   `PgStat_Lock { stat_reset_timestamp, stats[LOCKTAG_LAST_TYPE+1] }`.
 - `PgStat_StatDBEntry` — the big per-database row visible via

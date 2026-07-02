@@ -1,10 +1,10 @@
 # `storage/buffer/bufmgr.c`
 
-- **Source:** `source/src/backend/storage/buffer/bufmgr.c` (8 967 lines)
+- **Source:** `source/src/backend/storage/buffer/bufmgr.c` (8 993 lines)
 - **Header:** `source/src/include/storage/bufmgr.h` (public),
   `source/src/include/storage/buf_internals.h` (private)
 - **README:** `source/src/backend/storage/buffer/README`
-- **Last verified commit:** `ef6a95c7c64` (2026-06-01)
+- **Last verified commit:** `c776550e4662` (re-pinned 2026-07-02; was `ef6a95c7c64` 2026-06-01). LOC 8 967→8 993 (+26); the growth is concentrated in `LockBufferForCleanup`, which 8d85cb889a39 restructured to fix a missed-wakeup race (see §3.11). Cite deltas vary by region: `WakePinCountWaiter` +1, cleanup-lock functions shifted (LockBufferForCleanup 6678→6679; ConditionalLockBufferForCleanup 6852→6878, +26).
 
 ## 1. Purpose
 
@@ -37,7 +37,7 @@ and the AIO read-stream callbacks (`shared_buffer_readv_*` + helpers).
 | Prefetch | `PrefetchBuffer`, `PrefetchSharedBuffer` (`bufmgr.c:697-787`) |
 | Release | `ReleaseBuffer`, `UnlockReleaseBuffer`, `ReleaseAndReadBuffer`, `IncrBufferRefCount` (`bufmgr.c:3220-, 5595-, 5679-`) |
 | Dirtying | `MarkBufferDirty`, `MarkBufferDirtyHint`, `BufferBeginSetHintBits`, `BufferFinishSetHintBits`, `BufferSetHintBits16` (`bufmgr.c:3156, 5830, 7051-7148`) |
-| Locking | `LockBufferInternal` (wrapped by `LockBuffer` macro), `UnlockBuffer`, `ConditionalLockBuffer`, `LockBufferForCleanup`, `ConditionalLockBufferForCleanup`, `IsBufferCleanupOK`, `CheckBufferIsPinnedOnce` (`bufmgr.c:6567-6910`) |
+| Locking | `LockBufferInternal` (wrapped by `LockBuffer` macro), `UnlockBuffer`, `ConditionalLockBuffer`, `LockBufferForCleanup`, `ConditionalLockBufferForCleanup`, `IsBufferCleanupOK`, `CheckBufferIsPinnedOnce` (`bufmgr.c:6583-6975`) |
 | Tag / introspection | `BufferGetBlockNumber`, `BufferGetTag`, `BufferIsPermanent`, `BufferGetLSNAtomic`, `BufferIsDirty`, `BufferIsLockedByMe{,InMode}`, `DebugPrintBufferRefcount` (`bufmgr.c:3069-3122, 4398, 4455-, 4686-, 4722-`) |
 | Bulk drop / flush | `DropRelationBuffers`, `DropRelationsAllBuffers`, `DropDatabaseBuffers`, `FlushRelationBuffers`, `FlushRelationsAllBuffers`, `FlushDatabaseBuffers`, `FlushOneBuffer`, `CreateAndCopyRelationData` (`bufmgr.c:4774-, 4894-, 5124-, 5171-, 5259-, 5471-, 5535-, 5575-`) |
 | Checkpointer / bgwriter | `CheckPointBuffers`, `BufferSync` (static), `BgBufferSync`, `SyncOneBuffer` (static) (`bufmgr.c:4441, 3561, 3840, 4138`) |
@@ -173,7 +173,7 @@ WAL-before-data writer:
 4. **Only if `BM_PERMANENT`**: `XLogFlush(recptr)`. Unlogged rels have
    "fake LSNs" from `XLogGetFakeLSN` that can outrun the WAL insert
    pointer, so flushing them would `PANIC` `[from-comment]`
-   (`bufmgr.c:4553-4569`).
+   (`bufmgr.c:4569-4571`).
 5. `PageSetChecksum`, `smgrwrite(reln, fork, blockNum, bufBlock, false)`,
    `pgstat_count_io_op_time`, `pgBufferUsage.shared_blks_written++`.
 6. `TerminateBufferIO(buf, true, 0, true, false)` — clears `BM_DIRTY` and
@@ -234,33 +234,51 @@ called by the `LockBuffer` macro with `mode` passed as a literal so the
 compiler specialises per-mode), `ConditionalLockBuffer` (`6625`, hard-codes
 `BUFFER_LOCK_EXCLUSIVE`).
 
-### 3.11 Cleanup-lock dance — `LockBufferForCleanup` (`bufmgr.c:6678-6818`)
+### 3.11 Cleanup-lock dance — `LockBufferForCleanup` (`bufmgr.c:6679-6845`)
 
 "Items may be deleted from a disk page only when the caller (a) holds an
 exclusive lock on the buffer and (b) has observed that no other backend
-holds a pin on the buffer" `[from-comment]` (`bufmgr.c:6664-6671`).
+holds a pin on the buffer" `[from-comment]` (`bufmgr.c:6665-6672`).
 
 Loop:
 
 1. `LockBuffer(buffer, BUFFER_LOCK_EXCLUSIVE)`.
 2. `LockBufHdr(bufHdr)` — read `state`.
 3. If `BUF_STATE_GET_REFCOUNT(buf_state) == 1` — we're the only pinner,
-   `UnlockBufHdr` and return.
-4. Otherwise: if `BM_PIN_COUNT_WAITER` already set,
-   `ERROR "multiple backends attempting to wait for pincount 1"`
-   `[verified-by-code]` (`bufmgr.c:6738-6743`). Write `MyProcNumber` to
-   `wait_backend_pgprocno`, `UnlockBufHdrExt(..., BM_PIN_COUNT_WAITER, 0, 0)`,
-   release the content lock, `ProcWaitForSignal(WAIT_EVENT_BUFFER_CLEANUP)`
-   (or `ResolveRecoveryConflictWithBufferPin` in hot standby).
-5. On wake: retake the header spinlock; if we're still the waiter, clear
-   `BM_PIN_COUNT_WAITER`. Loop back to step 1.
+   `UnlockBufHdr` and `goto cleanup_lock_acquired` (label at `:6826`).
+4. Otherwise: if `BM_PIN_COUNT_WAITER` already set, `UnlockBufHdr`, release
+   the content lock, `ERROR "multiple backends attempting to wait for
+   pincount 1"` `[verified-by-code]` (`bufmgr.c:6725`).
+5. Publish intent to wait: write `MyProcNumber` to `wait_backend_pgprocno`,
+   set `PinCountWaitBuf`, then set the flag with
+   `pg_atomic_fetch_or_u64(&bufHdr->state, BM_PIN_COUNT_WAITER)` **while
+   still holding the header lock** — the comment notes the shared refcount
+   can be decremented while `BM_LOCKED` is set, so an atomic OR (not a
+   plain store) is required to preserve concurrent refcount changes
+   (`bufmgr.c:6727-6733`). `[verified-by-code]` [from-comment]
+6. **Race fix (8d85cb889a39):** *recheck the refcount after publishing the
+   waiter flag* — `buf_state = pg_atomic_read_u64(&bufHdr->state)`; if it is
+   now 1, the last other pin was dropped in the window between the initial
+   read and the flag publish, so clear `BM_PIN_COUNT_WAITER` via
+   `UnlockBufHdrExt`, reset `PinCountWaitBuf = NULL`, and
+   `goto cleanup_lock_acquired` **without sleeping** (`bufmgr.c:6735-6752`).
+   Before this fix a concurrent `UnpinBuffer` could drop the last pin
+   before the waiter flag was visible, leaving the waiter to sleep forever
+   (missed wakeup). `[verified-by-code]` [from-comment]
+7. Otherwise `UnlockBufHdr`, release the content lock, and
+   `ProcWaitForSignal(WAIT_EVENT_BUFFER_PIN)` (or
+   `ResolveRecoveryConflictWithBufferPin` in hot standby). On wake, loop
+   back to step 1.
 
-`UnpinBuffer` calls `WakePinCountWaiter` (`bufmgr.c:3428-3456`) when the
-unpinned buffer's `BM_PIN_COUNT_WAITER` is set and the post-unpin refcount
-is 1; that helper re-reads `wait_backend_pgprocno` under header spinlock,
-clears the flag in one CAS, and `ProcSendSignal(pgprocno)`.
+`UnpinBuffer` (via `UnpinBufferNoOwner`) calls `WakePinCountWaiter`
+(`bufmgr.c:3429-3456`) when the unpinned buffer's `BM_PIN_COUNT_WAITER` is
+set and the post-unpin refcount is 1; that helper re-reads
+`wait_backend_pgprocno` under the header lock, clears the flag with
+`UnlockBufHdrExt`, and `ProcSendSignal(pgprocno)`. It re-checks the waiter
+flag + refcount under the lock because another backend may already have
+woken the waiter. `[verified-by-code]`
 
-`ConditionalLockBufferForCleanup` (`bufmgr.c:6852-6899`): single-shot
+`ConditionalLockBufferForCleanup` (`bufmgr.c:6878-6925`): single-shot
 non-blocking version. Used by VACUUM where it must give up if cleanup
 isn't immediately available.
 
@@ -359,7 +377,7 @@ the comments around lines 200-400.
    asserted at `bufmgr.c:4520-4521`.
 5. **`FlushBuffer` only `XLogFlush`es if `BM_PERMANENT`** — fake LSNs on
    unlogged rels could `PANIC` otherwise `[from-comment]`
-   (`bufmgr.c:4553-4569`).
+   (`bufmgr.c:4569-4571`).
 6. **`LockBufferForCleanup` allows only one waiter per buffer** — second
    waiter `ERROR`s rather than silently replacing the first's procnumber
    `[verified-by-code]` (`bufmgr.c:6738-6743`).

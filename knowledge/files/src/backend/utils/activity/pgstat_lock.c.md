@@ -1,23 +1,28 @@
 # `src/backend/utils/activity/pgstat_lock.c`
 
-- **Last verified commit:** `e18b0cb7344`
+- **Last verified commit:** `c776550e4662`
 - **Lines:** ~150
 - **Source:** `source/src/backend/utils/activity/pgstat_lock.c`
 
 Implements the lock-statistics flavor of the pgstat shared-memory
 counter machinery. Tracks, per locktag type, the number of waits,
-total wait time (ms), and the count of fastpath-exceeded events. Kept
+total wait time (microseconds; `PgStat_LockEntry.wait_time` is a
+`PgStat_Counter`/int64 counting μs, per `pgstat.h:352`), and the count
+of fastpath-exceeded events. The pg_stat_lock view exposes the wait
+time as SQL `double precision` (c776550e4662); the internal counter
+stays int64 μs. Kept
 in its own file (separate from `pgstat.c`) to enforce the boundary
 between generic stats infra and the per-kind accumulator details.
 [from-comment] [verified-by-code]
 
 ## API / entry points
 
-- `pgstat_count_lock_waits(uint8 locktag_type, long msecs)` —
-  increment the per-type wait count and add the elapsed wait time.
-  Comment notes: "should not be called in performance-sensitive
-  paths" (called when a lock genuinely waited, not on every
-  acquisition). [verified-by-code] [from-comment]
+- `pgstat_count_lock_waits(uint8 locktag_type, PgStat_Counter usecs)`
+  (`pgstat_lock.c:142-150`, prototype `pgstat.h:641-643`) — increment
+  the per-type wait count and add the elapsed wait time in
+  microseconds. Comment notes: "should not be called in
+  performance-sensitive paths" (called when a lock genuinely waited,
+  not on every acquisition). [verified-by-code] [from-comment]
 - `pgstat_count_lock_fastpath_exceeded(uint8 locktag_type)` —
   increment when a backend wanted a fast-path lock slot but the
   per-backend slot table was full (FP_LOCK_SLOTS_PER_BACKEND
@@ -78,12 +83,13 @@ between generic stats infra and the per-kind accumulator details.
   Existing call sites in `lock.c` are trusted, but a new pgstat
   hook chain could regress this. [ISSUE-correctness: release-build
   bounds check missing on locktag_type (nit)]
-- File-line: pgstat_lock.c:147. `(PgStat_Counter) msecs` cast — if
-  `msecs` is negative (shouldn't be) we silently get a huge unsigned-ish
-  accumulator on platforms where `PgStat_Counter` is unsigned.
-  In practice `long` is signed and PgStat_Counter is int64, so the
-  cast is benign, but worth a clamp. [ISSUE-style: no clamp on
-  negative `msecs` input (nit)]
+- File-line: pgstat_lock.c:147. `wait_time += usecs` — the parameter
+  is now `PgStat_Counter usecs` directly (no `(PgStat_Counter) msecs`
+  cast; the earlier ms→μs / `long`→`PgStat_Counter` signature change
+  removed it). If a caller ever passed a negative `usecs` the signed
+  int64 accumulator would go backwards, but all call sites feed a
+  non-negative elapsed-time delta. [verified-by-code] [ISSUE-style:
+  no clamp on negative `usecs` input (nit)]
 - File-line: pgstat_lock.c:78-82. `memset(&PendingLockStats, 0, ...)`
   clears state but **does not** reset `pgstat_report_fixed` —
   fine because that flag is owned globally and other kinds may
