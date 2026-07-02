@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-07-02 — 15 master commits (flagship: logrep conflict-log-table a5918fddf10d + pg_stat_kind_info 3b066de6c0a1; catversion→202607022) + 7 buildfarm failures (standout: longfin/sifaka REL_17/18 Node-typedef-redefinition build break). 43 corpus files impacted; anchor held. (PR #pending).
