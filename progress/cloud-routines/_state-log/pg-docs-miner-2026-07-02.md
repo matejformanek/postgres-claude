@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-07-02 — Completed the §20 Server-Configuration GUC-reference family (developer/custom/preset/client/connection/logging) + errcodes-appendix; 7 docs, docs-distilled 201→208; queue markers →[in-progress:cloud/pg-docs-miner/2026-07-02] (PR #<pending>).
