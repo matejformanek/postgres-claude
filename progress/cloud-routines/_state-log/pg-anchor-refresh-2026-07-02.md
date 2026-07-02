@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-02 — anchor b542d5566705 → 6b41bd1a459c; 19 commits; 85 docs queued for audit (11 already pending); catversion 202606302→202607022 (uuid min/max agg + pg_stat_kind_info view + logical-replication conflict-log-to-table).
