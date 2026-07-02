@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-07-02 — Audited 07-01→07-02 cycle: OK 8 · SKIPPED 0 · FAILED [pg-quality-auditor: #426+#435 conflicted 3rd night] · SILENT [pg-file-backfiller: ~16th idle night, terminal]. 8 PRs merged (#436, #438–#444); #437 (prior briefing) still open on a mis-set `claude/` branch. Briefing at progress/_briefings/2026-07-02.md (PR #<pending>).
