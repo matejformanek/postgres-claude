@@ -1,7 +1,7 @@
 # hash_xlog.c
 
-- **Source path:** `source/src/backend/access/hash/hash_xlog.c` (1154 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source path:** `source/src/backend/access/hash/hash_xlog.c` (1131 lines)
+- **Last verified commit:** `c776550e4662` (re-pinned 2026-07-02; was `ef6a95c7c64`. LOC 1154→1131, −23: 8e684ce11dda replaced inline init-fork flush logic in the INIT handlers with 3 calls to the new `XLogFlushBufferForRedoIfInit` helper — `hash_xlog_init_meta_page` `:43`, `hash_xlog_init_bitmap_page` `:71` + its metapage `:92`. The record-type table and README cross-refs below are unaffected; top-of-file banner `hash_xlog.c:1-13` holds.)
 - **Companion files:** `access/hash_xlog.h` (record formats), all emitter files.
 
 ## Purpose

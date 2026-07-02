@@ -1,5 +1,14 @@
 # src/backend/utils/adt/pgstatfuncs.c
 
+- **Last verified commit:** `c776550e4662` (audited 2026-07-02). Clean:
+  `HAS_PGSTAT_PERMISSIONS` `:39`, `pg_stat_get_function_calls` `:177`,
+  `pg_stat_get_progress_info` `:278`, `pg_stat_get_activity` `:356`,
+  `pg_backend_pid` `:715` all hold within ±1; LOC ~2360→2363. The
+  c776550e4662 lock-stats change lives in `pg_stat_get_lock` (`:1741`),
+  which this doc does not cover: `wait_time` is now returned as SQL
+  `double precision` via `Float8GetDatum(pg_stat_us_to_ms(...))`
+  (`:1764`) instead of an int64 ms count.
+
 ## Purpose
 
 The SQL surface over `pgstat` — every column of every `pg_stat_*` system

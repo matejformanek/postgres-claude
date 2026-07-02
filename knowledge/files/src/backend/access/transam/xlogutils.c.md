@@ -1,8 +1,8 @@
 # xlogutils.c
 
 - **Source path:** `source/src/backend/access/transam/xlogutils.c`
-- **Lines:** 1046
-- **Last verified commit:** `9a60f295bcb1`
+- **Lines:** 1070
+- **Last verified commit:** `c776550e4662` (re-pinned 2026-07-02; was `9a60f295bcb1`). 8e684ce11dda ("Fix unlogged sequence corruption after standby promotion") added `XLogFlushBufferForRedoIfInit` at `:334`; all cites below it shift **+24** (XLogReadBufferForRedoExtended +22, the fix also grew that function's body). LOC 1046→1070.
 - **Companion files:** `source/src/include/access/xlogutils.h`,
   `xlogreader.c`, `xlogrecovery.c`, every redo handler.
 
@@ -37,10 +37,19 @@ Redo-helper buffer fetch:
   [verified-by-code]
 - `XLogInitBufferForRedo(record, block_id)` — `xlogutils.c:315`
   [verified-by-code]
+- `XLogFlushBufferForRedoIfInit(record, block_id, buffer)` —
+  `xlogutils.c:334` [verified-by-code]. **New** in 8e684ce11dda: if
+  `block_id`'s fork is `INIT_FORKNUM`, `FlushOneBuffer(buffer)`
+  immediately. Init forks of unlogged relations are copied to the main
+  fork *directly from disk* at end of crash recovery (bypassing shared
+  buffers), so a redo routine that reinitialises an init-fork page
+  without a full-page image must flush it after `PageSetLSN` +
+  `MarkBufferDirty`, else the change is lost on promotion. Called by
+  `seq_redo` and the hash-index INIT redo handlers.
 - `XLogReadBufferForRedoExtended(record, …, mode, get_cleanup_lock,
-  *buf)` — `xlogutils.c:340` [verified-by-code]
+  *buf)` — `xlogutils.c:362` [verified-by-code]
 - `XLogReadBufferExtended(rlocator, forknum, blkno, mode, recent_buffer)`
-  — `xlogutils.c:460` [verified-by-code]
+  — `xlogutils.c:484` [verified-by-code]
 
 Invalid-page tracking:
 
@@ -52,27 +61,27 @@ Invalid-page tracking:
 
 Drop forwarding:
 
-- `XLogDropRelation` — `xlogutils.c:630` [verified-by-code]
-- `XLogDropDatabase` — `xlogutils.c:641` [verified-by-code]
-- `XLogTruncateRelation` — `xlogutils.c:660` [verified-by-code]
+- `XLogDropRelation` — `xlogutils.c:654` [verified-by-code]
+- `XLogDropDatabase` — `xlogutils.c:665` [verified-by-code]
+- `XLogTruncateRelation` — `xlogutils.c:684` [verified-by-code]
 
 Fake relcache:
 
-- `CreateFakeRelcacheEntry(rlocator)` — `xlogutils.c:571`
+- `CreateFakeRelcacheEntry(rlocator)` — `xlogutils.c:595`
   [verified-by-code]
-- `FreeFakeRelcacheEntry(fakerel)` — `xlogutils.c:618`
+- `FreeFakeRelcacheEntry(fakerel)` — `xlogutils.c:642`
   [verified-by-code]
 
 Reader callbacks for non-startup readers:
 
-- `XLogReadDetermineTimeline(state, wantPage)` — `xlogutils.c:707`
+- `XLogReadDetermineTimeline(state, wantPage)` — `xlogutils.c:731`
   [verified-by-code]
-- `wal_segment_open(state, nextSegNo, …)` — `xlogutils.c:806`
+- `wal_segment_open(state, nextSegNo, …)` — `xlogutils.c:830`
   [verified-by-code]
-- `wal_segment_close(state)` — `xlogutils.c:831` [verified-by-code]
+- `wal_segment_close(state)` — `xlogutils.c:855` [verified-by-code]
 - `read_local_xlog_page` / `_no_wait` / `_guts` —
-  `xlogutils.c:845, 857, 869` [verified-by-code]
-- `WALReadRaiseError(WALReadError *)` — `xlogutils.c:1023`
+  `xlogutils.c:869, 881, 893` [verified-by-code]
+- `WALReadRaiseError(WALReadError *)` — `xlogutils.c:1047`
   [verified-by-code]
 
 ## Key invariants and locking

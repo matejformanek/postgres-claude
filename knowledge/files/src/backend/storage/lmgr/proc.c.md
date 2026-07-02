@@ -1,8 +1,8 @@
 # `storage/lmgr/proc.c`
 
-- **Source:** `source/src/backend/storage/lmgr/proc.c` (2 139 lines)
+- **Source:** `source/src/backend/storage/lmgr/proc.c` (2 140 lines)
 - **Header:** `source/src/include/storage/proc.h`
-- **Last verified commit:** `ef6a95c` (2026-06-01)
+- **Last verified commit:** `c776550e4662` (re-pinned 2026-07-02; was `ef6a95c` 2026-06-01). Uniform **+1** shift on all cites below ~:1613 — one line added in the `ProcSleep` lock-stats block by c776550e4662, which now passes microseconds `(PgStat_Counter) secs * 1000000 + usecs` to `pgstat_count_lock_waits` (`proc.c:1613-1614`) matching that function's ms→μs signature change.
 
 ## 1. Purpose
 
@@ -17,13 +17,13 @@ Also owns the deadlock-timeout SIGALRM handler (`CheckDeadLockAlert`) and the de
 
 Per-process init/exit: `InitProcess`, `InitProcessPhase2`, `InitAuxiliaryProcess`, `ProcReleaseLocks` (`proc.c:392, 583, 618, 896`). `ProcKill` / `AuxiliaryProcKill` are registered as `on_shmem_exit` callbacks (`proc.c:924, 1079`).
 
-Lock-wait protocol: `JoinWaitQueue(locallock, lockMethodTable, dontWait)`, `ProcSleep(locallock)`, `ProcWakeup(proc, waitStatus)`, `ProcLockWakeup(lockMethodTable, lock)` (`proc.c:1179, 1348, 1781, 1809`). `LockErrorCleanup` at `proc.c:818` is invoked from `AbortTransaction` to dequeue a still-waiting backend.
+Lock-wait protocol: `JoinWaitQueue(locallock, lockMethodTable, dontWait)`, `ProcSleep(locallock)`, `ProcWakeup(proc, waitStatus)`, `ProcLockWakeup(lockMethodTable, lock)` (`proc.c:1179, 1348, 1782, 1810`). `LockErrorCleanup` at `proc.c:818` is invoked from `AbortTransaction` to dequeue a still-waiting backend.
 
-Deadlock: `CheckDeadLock` (static, `proc.c:1856`), `CheckDeadLockAlert` (signal handler, `proc.c:1947`).
+Deadlock: `CheckDeadLock` (static, `proc.c:1857`), `CheckDeadLockAlert` (signal handler, `proc.c:1948`).
 
-Group locking: `BecomeLockGroupLeader`, `BecomeLockGroupMember(leader, pid)` (`proc.c:2075, 2105`). The PID check at member-join time defends against PGPROC recycling, per `README:669-678`.
+Group locking: `BecomeLockGroupLeader`, `BecomeLockGroupMember(leader, pid)` (`proc.c:2076, 2106`). The PID check at member-join time defends against PGPROC recycling, per `README:669-678`.
 
-Misc: `ProcWaitForSignal`, `ProcSendSignal`, `HaveNFreeProcs`, `AuxiliaryPidGetProc`, `GetStartupBufferPinWaitBufId`, `GetLockHoldersAndWaiters` (`proc.c:2048, 2060, 787, 1130, 771, 1974`).
+Misc: `ProcWaitForSignal`, `ProcSendSignal`, `HaveNFreeProcs`, `AuxiliaryPidGetProc`, `GetStartupBufferPinWaitBufId`, `GetLockHoldersAndWaiters` (`proc.c:2049, 2061, 787, 1130, 771, 1975`).
 
 Shmem callbacks: `ProcGlobalShmemRequest`, `ProcGlobalShmemInit` (`proc.c:147, 221`).
 
@@ -43,28 +43,28 @@ Shmem callbacks: `ProcGlobalShmemRequest`, `ProcGlobalShmemInit` (`proc.c:147, 2
 
 ### Deadlock-detector partition-lock order — **canonical statement**
 
-`CheckDeadLock` (`proc.c:1856-1939`) acquires *all 16* lock-partition LWLocks in partition-number order and releases in reverse:
+`CheckDeadLock` (`proc.c:1857-1940`) acquires *all 16* lock-partition LWLocks in partition-number order and releases in reverse:
 
 ```c
 for (i = 0; i < NUM_LOCK_PARTITIONS; i++)
-    LWLockAcquire(LockHashPartitionLockByIndex(i), LW_EXCLUSIVE);   // 1871-1872
+    LWLockAcquire(LockHashPartitionLockByIndex(i), LW_EXCLUSIVE);   // 1872-1873
 ...
 for (i = NUM_LOCK_PARTITIONS; --i >= 0;)
-    LWLockRelease(LockHashPartitionLockByIndex(i));                 // 1935-1936
+    LWLockRelease(LockHashPartitionLockByIndex(i));                 // 1936-1937
 ```
 
-The comment at `proc.c:1862-1869` is the **authoritative statement** of the partition-number-order rule (also stated less formally in `README:239-244`):
+The comment at `proc.c:1862-1870` is the **authoritative statement** of the partition-number-order rule (also stated less formally in `README:239-244`):
 
 > "Acquire exclusive lock on the entire shared lock data structures. Must grab LWLocks in partition-number order to avoid LWLock deadlock. Note that the deadlock check interrupt had better not be enabled anywhere that this process itself holds lock partition locks, else this will wait forever."
 
 `[from-comment]` `[verified-by-code]`. This is rule #1 in the §2 of `knowledge/idioms/locking-overview.md`.
 
-The reverse-order release at `proc.c:1928-1933` has two stated reasons `[from-comment]`: (1) keeps another waiter that needs >1 lock unblocked atomically; (2) avoids O(N²) behavior inside `LWLockRelease`'s wakeup scan.
+The reverse-order release at `proc.c:1928-1937` has two stated reasons `[from-comment]`: (1) keeps another waiter that needs >1 lock unblocked atomically; (2) avoids O(N²) behavior inside `LWLockRelease`'s wakeup scan.
 
 ### Wait-queue mutation requires partition LWLock
 
 - `JoinWaitQueue` is called from `LockAcquireExtended` with the partition LWLock held EXCLUSIVE; asserted at `proc.c:1193`. `[verified-by-code]`.
-- `ProcLockWakeup` (`proc.c:1809-1855`) and `RemoveFromWaitQueue` (`lock.c:2054`) both require the partition LWLock EXCLUSIVE.
+- `ProcLockWakeup` (`proc.c:1810-1856`) and `RemoveFromWaitQueue` (`lock.c:2054`) both require the partition LWLock EXCLUSIVE.
 
 ### Wait/signal protocol (`ProcSleep`)
 
@@ -87,7 +87,7 @@ Called from `AbortTransaction` if we error out while waiting. Must:
 
 ### Group-locking PID interlock
 
-`BecomeLockGroupMember` (`proc.c:2105`) takes the partition LWLock for the leader, then verifies the leader still has the expected PID and is still a leader before linking the member in. This is the precaution against PID-reuse described in `README:669-678` `[from-README]`.
+`BecomeLockGroupMember` (`proc.c:2106`) takes the partition LWLock for the leader, then verifies the leader still has the expected PID and is still a leader before linking the member in. This is the precaution against PID-reuse described in `README:669-678` `[from-README]`.
 
 ## 5. Functions of note
 
@@ -106,15 +106,15 @@ Called with the partition LWLock EXCLUSIVE. Decides where the requester sits in 
 
 Group-locking subtlety at lines 1214-1227: other group members' `holdMask`s are unioned into `myHeldLocks` so the "I already hold conflicting locks" check covers the group.
 
-### 5.3 `ProcSleep` (`proc.c:1348-1780`)
+### 5.3 `ProcSleep` (`proc.c:1348-1781`)
 
 Main sleep loop. Arms `STATEMENT_TIMEOUT`, `LOCK_TIMEOUT`, `DEADLOCK_TIMEOUT`. On each wake: check `MyProc->waitStatus`, on `WAITING` re-loop; on `OK` return success; on `ERROR` return error. Runs `CheckRecoveryConflictDeadlock` before the loop if in Hot Standby. Inside, when `got_deadlock_timeout` is set, the timer handler has signaled — `ProcSleep` clears the flag and calls `CheckDeadLock` (which takes all 16 partition LWLocks). If `CheckDeadLock` returns `DS_BLOCKED_BY_AUTOVACUUM`, sends a cancel signal to the autovacuum worker (the README:581-588 "abuse the deadlock detector" hook). On hard deadlock, `CheckDeadLock` already called `RemoveFromWaitQueue(MyProc, …)`, so we just return ERROR.
 
-### 5.4 `CheckDeadLock` (`proc.c:1856-1939`)
+### 5.4 `CheckDeadLock` (`proc.c:1857-1940`)
 
 Documented above. Calls `DeadLockCheck(MyProc)` from `deadlock.c`; on hard deadlock removes us from the wait queue; in all cases releases all 16 partition LWLocks in reverse order.
 
-### 5.5 `ProcLockWakeup` (`proc.c:1809-1855`)
+### 5.5 `ProcLockWakeup` (`proc.c:1810-1856`)
 
 Walks the lock's `waitProcs` dlist. For each waiter: if their request conflicts with neither `grantMask` nor the requests of un-wakable predecessors, grant + dequeue + `ProcWakeup`. Maintains the per-mode "blocked waiters" mask so a sequence of compatible requests can be granted in arrival order without re-checking from scratch.
 
@@ -126,7 +126,7 @@ Walks the lock's `waitProcs` dlist. For each waiter: if their request conflicts 
 
 Backend exit handler. Releases all LWLocks (`LWLockReleaseAll`), then all heavyweight locks, then group-locking links (under the leader's partition LWLock), then puts PGPROC back on the appropriate freelist. **Must run with no other backend able to see this PGPROC as still-living** — the ProcArray detach in `InitProcessPhase2`'s symmetric exit step happens earlier.
 
-### 5.8 `BecomeLockGroupMember` (`proc.c:2105-2138`)
+### 5.8 `BecomeLockGroupMember` (`proc.c:2106-2139`)
 
 PID-revalidation interlock for parallel-worker group join: take leader's partition LWLock, check `leader->pid == expected_pid && leader->lockGroupLeader == leader`, link us in, release.
 
