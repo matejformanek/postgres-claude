@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-07-02 — Pass 1 (backlinks) 0 · Pass 2 (glossary) +70 (1901→1971) · Pass 3 (issues) 0. Glossary is the sole productive lever (no long-form-note delta since #430; the 9 files/ docs changed since are pg-quality-auditor anchor re-pins already mirrored). All passes idempotent, 0 deletions. (PR #448)
