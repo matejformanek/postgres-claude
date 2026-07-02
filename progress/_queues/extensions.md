@@ -279,3 +279,31 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # pgagroal/pgpool2/odyssey, backup CLIs pgbackrest/pgcopydb/pg_rman/pgmoneta, pager pspg, deprecated pg_shard, DDL-diff
 # pgquarrel, template pg_plugins, thin-AI pg_gpt/pg_ai_query, perf/replay pg_plan_inspector/pgreplay, JS UI age-viewer,
 # ESP32 toy pgpemu, Ruby accel sequel_pg, pkg-mgr pgxman, Zed MCP postgres-context-server).
+
+# --- Refill (seeded 2026-07-02 cloud/pg-extension-anthropologist) ---
+# Broke saturation by dropping the floor to >60★ per the 2026-07-01 next-runs note. Refill sweep this run
+# (GitHub MCP search_repositories — gh CLI absent in cloud):
+#   `topic:postgresql-extension stars:>60` (62 hits) — mostly covered/known-skip; surfaced supautils, mimeo, pg_turso,
+#     uids-postgres(dup), MorphingDB, pg_duckpipe, steampipe-postgres-fdw, pg-libphonenumber, bgworker as uncovered.
+#   `postgres extension in:name,description language:C++ stars:>80` (2 hits) — postgres-protobuf (uncovered), hhvm-pgsql (client).
+#   `postgres extension in:name,description language:Go stars:>60` (1 hit) — steampipe-postgres-fdw (uncovered, Go FDW).
+#   `postgres extension access method/type/index stars:>90 pushed:>2025-06-01` (0 hits).
+# Filtered out: uids-postgres (≈uuidv47/pgx_ulid v7-UUID-family dup), pg_uuidv7 (same dup, already known-skip),
+#   mimeo (pure-PLpgSQL per-table replication, low divergence-signal — left [pending] backlog), bgworker (Go bgworker
+#   template, ≈plgo framework — [pending] backlog), pg-libphonenumber (partial C++ libphonenumber type wrapper —
+#   [pending] backlog), pg_ai_query / pg_stat_ch / pg_statviz / pgcalendar / pgddl (prior known-skips), hhvm-pgsql (HHVM
+#   client driver, not a loadable ext). FOUR genuinely-uncovered backend extensions PROCESSED this run (parallel fanout),
+#   each a distinct divergence axis: a privilege/SUPERUSER-emulation hook layer (C), a protobuf base type (C++), a Zig
+#   logical-decoding output plugin, and a Rust CDC/HTAP streaming pipe into DuckDB.
+[done:placeholder] supabase/supautils branch=master files=README.md,supautils.control,src/supautils.c,src/privileged_extensions.c,src/reserved_roles.c,src/reserved_memberships.c,Makefile  # 84★ C — SUPERUSER-emulation / privilege-guard hook layer
+[done:placeholder] mpartel/postgres-protobuf branch=master files=README.md,protobuf.control,protobuf_common.h,protobuf_op.cc,protobuf_op.h,Makefile  # 130★ C++ — protobuf base type + accessor functions
+[done:placeholder] tursodatabase/pg_turso branch=main files=README.md,build.zig,src/main.zig,pg_turso.control,Makefile  # 75★ Zig (archived) — logical-decoding OUTPUT-PLUGIN in Zig
+[done:placeholder] relytcloud/pg_duckpipe branch=main files=README.md,Cargo.toml,src/lib.rs,pg_duckpipe.control,Makefile  # 62★ Rust/pgrx — CDC/HTAP streaming ingestion into DuckDB (relytcloud lakehouse trio w/ pg_ducklake+pg_lake)
+# Backlog left [pending] for next runs (lower divergence-signal): mimeo (79★ PLpgSQL per-table replication),
+# steampipe-postgres-fdw (85★ Go zero-ETL FDW → cloud APIs), bgworker (92★ Go bgworker template), pg-libphonenumber
+# (96★ partial C++ libphonenumber type), MorphingDB (63★ Python/libtorch in-DB DL inference + vector storage).
+[pending] omniti-labs/mimeo branch=master files=README.md,mimeo.control,sql/functions/,doc/mimeo.md  # 79★ PLpgSQL per-table replication
+[pending] turbot/steampipe-postgres-fdw branch=develop files=README.md,fdw/fdw.go,fdw/init.go,Makefile  # 85★ Go zero-ETL FDW
+[pending] prest/bgworker branch=main files=README.md,worker.go,worker.c,Makefile  # 92★ Go bgworker template
+[pending] blm768/pg-libphonenumber branch=master files=README.md,pg_libphonenumber.control,src/,Makefile  # 96★ C++ libphonenumber type
+[pending] MorphingDB/MorphingDB branch=master files=README.md,src/,control  # 63★ Python/libtorch in-DB DL inference
