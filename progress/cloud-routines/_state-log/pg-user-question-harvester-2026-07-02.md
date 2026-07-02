@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-02 — 37 new internals questions harvested (34 pgsql-hackers + 3 pgsql-general); skill-tag tally + gap roll-up; gap:pgstat-framework hit 3× (strongest new-skill candidate) (PR pending).
