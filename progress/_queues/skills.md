@@ -16,7 +16,7 @@ last-rerun date in this file is > 30 days old go back to `[pending]`.
 [done:2026-06-09] review-checklist last_passrate=100% reran=2026-06-09
 [done:2026-06-09] testing last_passrate=100% reran=2026-06-09
 [done:2026-06-09] wal-and-xlog last_passrate=100% reran=2026-06-09
-[done:2026-06-03] access-method-apis last_passrate=100% reran=2026-06-03
+[done:2026-07-03] access-method-apis last_passrate=100% reran=2026-07-03 [cites re-verified @b542d5566705: tableamapi.c 37 Assert(routine->), amapi.h callbacks, vacuum.h VACUUM_OPTION_NO_PARALLEL=0, genam.c:58-59 "kinda ugly"]
 [done:2026-06-06] build-and-run last_passrate=100% reran=2026-06-06
 [done:2026-06-06] catalog-conventions last_passrate=100% reran=2026-06-06
 [done:2026-06-06] coding-style last_passrate=100% reran=2026-06-06
