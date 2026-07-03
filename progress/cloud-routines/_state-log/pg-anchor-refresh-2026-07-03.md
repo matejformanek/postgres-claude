@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-03 — anchor 6b41bd1a459c → a5422fe3bd7e; 15 commits; 19 docs queued for audit (8 already-pending skipped); 0 catversion; flagship = Nathan Bossart pre-v10 removal trilogy (pg_dump/pg_upgrade/psql) + Fujii Masao log_statement_max_length GUC (PR #<n>).
