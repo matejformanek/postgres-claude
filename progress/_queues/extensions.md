@@ -295,10 +295,10 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 #   client driver, not a loadable ext). FOUR genuinely-uncovered backend extensions PROCESSED this run (parallel fanout),
 #   each a distinct divergence axis: a privilege/SUPERUSER-emulation hook layer (C), a protobuf base type (C++), a Zig
 #   logical-decoding output plugin, and a Rust CDC/HTAP streaming pipe into DuckDB.
-[done:placeholder] supabase/supautils branch=master files=README.md,supautils.control,src/supautils.c,src/privileged_extensions.c,src/reserved_roles.c,src/reserved_memberships.c,Makefile  # 84★ C — SUPERUSER-emulation / privilege-guard hook layer
-[done:placeholder] mpartel/postgres-protobuf branch=master files=README.md,protobuf.control,protobuf_common.h,protobuf_op.cc,protobuf_op.h,Makefile  # 130★ C++ — protobuf base type + accessor functions
-[done:placeholder] tursodatabase/pg_turso branch=main files=README.md,build.zig,src/main.zig,pg_turso.control,Makefile  # 75★ Zig (archived) — logical-decoding OUTPUT-PLUGIN in Zig
-[done:placeholder] relytcloud/pg_duckpipe branch=main files=README.md,Cargo.toml,src/lib.rs,pg_duckpipe.control,Makefile  # 62★ Rust/pgrx — CDC/HTAP streaming ingestion into DuckDB (relytcloud lakehouse trio w/ pg_ducklake+pg_lake)
+[done:e6a2a957] supabase/supautils branch=master files=README.md,supautils.control,src/supautils.c,src/privileged_extensions.c,src/reserved_roles.c,src/reserved_memberships.c,Makefile  # 84★ C — SUPERUSER-emulation / privilege-guard hook layer
+[done:e6a2a957] mpartel/postgres-protobuf branch=master files=README.md,protobuf.control,protobuf_common.h,protobuf_op.cc,protobuf_op.h,Makefile  # 130★ C++ — protobuf base type + accessor functions
+[done:e6a2a957] tursodatabase/pg_turso branch=main files=README.md,build.zig,src/main.zig,pg_turso.control,Makefile  # 75★ Zig (archived) — logical-decoding OUTPUT-PLUGIN in Zig
+[done:e6a2a957] relytcloud/pg_duckpipe branch=main files=README.md,Cargo.toml,src/lib.rs,pg_duckpipe.control,Makefile  # 62★ Rust/pgrx — CDC/HTAP streaming ingestion into DuckDB (relytcloud lakehouse trio w/ pg_ducklake+pg_lake)
 # Backlog left [pending] for next runs (lower divergence-signal): mimeo (79★ PLpgSQL per-table replication),
 # steampipe-postgres-fdw (85★ Go zero-ETL FDW → cloud APIs), bgworker (92★ Go bgworker template), pg-libphonenumber
 # (96★ partial C++ libphonenumber type), MorphingDB (63★ Python/libtorch in-DB DL inference + vector storage).
