@@ -140,6 +140,15 @@ process can only have ONE active receive loop at a time
 refactor tries to multiplex streams, the code will silently corrupt.
 [verified-by-code]
 
+[ISSUE-stale-todo: `FIXME: we might send it ok, but get an error`
+(line 541) on the `TIMELINE_HISTORY` command error path — the comment
+notes the send may succeed yet the result be an error, but the code
+just `pg_log_error`s the result. Not security; minor error-message
+infidelity. Mis-cited as `pg_basebackup.c:542` in the pg_basebackup
+issue register at seed (2026-06-03); re-anchored here 2026-07-04 —
+the FIXME lives in receivelog.c, not pg_basebackup.c. (low)]
+[verified-by-code]
+
 `existsTimeLineHistoryFile` returns true for timeline 1 without
 checking — comment "Timeline 1 never has a history file" (line 263).
 Server can never make us write a `00000001.history` file, which is

@@ -30,11 +30,11 @@ local filesystem permissions of the running user are the only filter.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | pg_basebackup.c:1145-1150 | trust-boundary | likely | Server-controlled `spclocation` becomes an output directory; only `-T olddir=newdir` user mapping filters it. If the user has no matching `-T` for a tablespace, a hostile/buggy server announcing `/etc/...` would extract there | open | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
-| 2026-06-03 | pg_basebackup.c:1357 | trust-boundary | maybe | `archive_name` sanitized for `..`/`/`/`\`/leading-`.`, but the actual member-name validation in the tar stream is delegated to `fe_utils/astreamer_tar.c` — out of scope for this batch | open | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
-| 2026-06-03 | streamutil.c:367-394 | trust-boundary | likely | Server-reported `data_directory_mode` (via `SHOW data_directory_mode`) sets the local umask for ALL files pg_basebackup creates; a server announcing `0777` would produce world-readable backups; validation is only `sscanf` success | open | knowledge/files/src/bin/pg_basebackup/streamutil.c.md |
+| 2026-06-03 | pg_basebackup.c:1145-1150 | trust-boundary | likely | Server-controlled `spclocation` becomes an output directory; only `-T olddir=newdir` user mapping filters it. If the user has no matching `-T` for a tablespace, a hostile/buggy server announcing `/etc/...` would extract there | open · triaged 2026-07-04 | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
+| 2026-06-03 | pg_basebackup.c:1357 | trust-boundary | maybe | `archive_name` sanitized for `..`/`/`/`\`/leading-`.`, but the actual member-name validation in the tar stream is delegated to `fe_utils/astreamer_tar.c` — out of scope for this batch | open · triaged 2026-07-04 | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
+| 2026-06-03 | streamutil.c:367-394 | trust-boundary | likely | Server-reported `data_directory_mode` (via `SHOW data_directory_mode`) sets the local umask for ALL files pg_basebackup creates; a server announcing `0777` would produce world-readable backups; validation is only `sscanf` success | open · triaged 2026-07-04 | knowledge/files/src/bin/pg_basebackup/streamutil.c.md |
 | 2026-06-03 | streamutil.c | trust-boundary | maybe | Server-reported `wal_segment_size` becomes the local WAL framing assumption — capped by `IsValidWalSegSize` to 1 GiB (cap mitigates) | open | knowledge/files/src/bin/pg_basebackup/streamutil.c.md |
-| 2026-06-03 | pg_basebackup.c:2858 | path-traversal | maybe | `--waldir` value is NOT validated as absolute before `symlink(xlog_dir, linkloc)` | open | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
+| 2026-06-03 | pg_basebackup.c:2858 | path-traversal | maybe | `--waldir` value is NOT validated as absolute before `symlink(xlog_dir, linkloc)` | open · triaged 2026-07-04 | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
 | 2026-06-03 | pg_basebackup.c | trust-boundary | nit | Server-driven progress messages contain server-supplied text — terminal-escape injection echo | open | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
 | 2026-06-03 | astreamer_inject.c | trust-boundary | maybe | Server-controlled tar member name decides where injected content lands (recovery signal files); receives tablespace map + recovery conf injection | open | knowledge/files/src/bin/pg_basebackup/astreamer_inject.c.md |
 | 2026-06-03 | astreamer_inject.c | undocumented-invariant | nit | Hard-coded `uid=04000`, `gid=02000` in injected tar headers | open | knowledge/files/src/bin/pg_basebackup/astreamer_inject.c.md |
@@ -61,7 +61,7 @@ Same gap as libpq and psql.
 | 2026-06-03 | streamutil.c | secret-scrub | likely | `password` stored in process-global static; freed without `explicit_bzero` | open | knowledge/files/src/bin/pg_basebackup/streamutil.c.md |
 | 2026-06-03 | streamutil.c | undocumented-invariant | nit | `simple_prompt(prompt, echo=false)` is the only password capture path | open | knowledge/files/src/bin/pg_basebackup/streamutil.c.md |
 | 2026-06-03 | pg_basebackup.c | secret-scrub | likely | `recoveryconfcontents` (PQExpBuffer) contains generated `primary_conninfo` including password if user passes one; injected into tar stream and written to recovery configuration in the new cluster | open | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
-| 2026-06-03 | pg_createsubscriber.c:1460,214,47-48 | secret-scrub | likely | Publisher conninfo (may include password) written to `pg_createsubscriber.conf` inside subscriber data dir; on exit renamed to `.disabled` but NOT shredded — intentionally retained "for debugging" | open | knowledge/files/src/bin/pg_basebackup/pg_createsubscriber.c.md |
+| 2026-06-03 | pg_createsubscriber.c:1460,214,47-48 | secret-scrub | likely | Publisher conninfo (may include password) written to `pg_createsubscriber.conf` inside subscriber data dir; on exit renamed to `.disabled` but NOT shredded — intentionally retained "for debugging" | open · triaged 2026-07-04 | knowledge/files/src/bin/pg_basebackup/pg_createsubscriber.c.md |
 
 ### pg_createsubscriber state-transition risks
 
@@ -100,7 +100,7 @@ Echo of A3's pg_dump tar findings.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | pg_recvlogical.c:578 | wire-protocol | maybe | Newline-as-record-separator not enforced against plugin output; binary-emitting plugin produces mis-framed file silently | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
+| 2026-06-03 | pg_recvlogical.c:582 | wire-protocol | maybe | Newline-as-record-separator not enforced against plugin output; binary-emitting plugin produces mis-framed file silently | open · triaged 2026-07-04 | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
 | 2026-06-03 | pg_recvlogical.c | wire-protocol | nit | `-o NAME=VALUE` plugin option not quote-escaped into `START_REPLICATION` command | landed (a75bd485b5ea, triaged 2026-06-17 — now via `AppendQuotedIdentifier`/`AppendQuotedLiteral`) | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
 | 2026-06-03 | pg_recvlogical.c | state-transition | maybe | No CLI to flip `two_phase`/`failover` on an existing slot — must drop+recreate | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
 | 2026-06-03 | pg_recvlogical.c | undocumented-invariant | nit | SIGINT during stream leaves slot on the server | open | knowledge/files/src/bin/pg_basebackup/pg_recvlogical.c.md |
@@ -118,7 +118,7 @@ Echo of A3's pg_dump tar findings.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | pg_basebackup.c:542 | stale-todo | nit | `FIXME` comment from upstream still present | open | knowledge/files/src/bin/pg_basebackup/pg_basebackup.c.md |
+| 2026-06-03 | receivelog.c:541 | stale-todo | nit | `FIXME: we might send it ok, but get an error` on the TIMELINE_HISTORY error path (mis-cited as pg_basebackup.c:542 at seed — the FIXME is in receivelog.c, absent from pg_basebackup.c at seed anchor 4b0bf0788b0 and current) | open · triaged 2026-07-04 | knowledge/files/src/bin/pg_basebackup/receivelog.c.md |
 
 ---
 
