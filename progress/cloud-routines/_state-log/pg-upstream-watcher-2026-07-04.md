@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-07-04 — Quiet window: 2 new master commits since anchor a5422fe3 (a8c2547e rule-rename `_RETURN` guard, e0ff7fd9 propgraph description i18n; 16 above-anchor commits already covered 07-03), 8 buildfarm failures triaged with 0 confirmed master regressions; anchor not bumped (corpus impact present) (PR pending).
