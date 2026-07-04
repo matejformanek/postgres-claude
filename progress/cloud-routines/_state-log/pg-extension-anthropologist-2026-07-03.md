@@ -1,0 +1,1 @@
+**pg-extension-anthropologist** 2026-07-03 — 5 ideologies, backlog fully drained: mimeo [PL/pgSQL replication over dblink], steampipe_postgres_fdw [Go/cgo FdwRoutine], prest_bgworker [Go bgworker skeleton], pg-libphonenumber [C++ packed type], morphingdb [libtorch in-DB inference] → 104. Queue now empty; refill next run (PR #TBD).
