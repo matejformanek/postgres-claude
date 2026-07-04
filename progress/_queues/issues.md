@@ -56,34 +56,52 @@ least-recently-triaged).
 [done:2026-07-03] pg_upgrade.md option.c:286 | dead-code/nit | still-present@b542d5566705
 [done:2026-07-03] pg_upgrade.md relfilenumber.c:308 | dead-code/nit | still-present@b542d5566705
 
-[pending] pg_rewind.md file_ops.c:65,225,201,285,302,268 | trust-boundary/likely | seeded=2026-07-03
-[pending] pg_rewind.md file_ops.c:285 | trust-boundary/likely | seeded=2026-07-03
-[pending] pg_rewind.md file_ops.c:478 | path-traversal/likely | seeded=2026-07-03
-[pending] pg_rewind.md pg_rewind.c | trust-boundary/likely | seeded=2026-07-03
-[pending] pg_rewind.md parsexlog.c:324 | trust-boundary/maybe | seeded=2026-07-03
-[pending] pg_rewind.md filemap.c:846 | stale-todo/nit | seeded=2026-07-03
-[pending] pg_rewind.md libpq_source.c:562 | trust-boundary/likely | seeded=2026-07-03
-[pending] pg_rewind.md libpq_source.c:583 | trust-boundary/maybe | seeded=2026-07-03
-[pending] pg_rewind.md pg_rewind.c:529 | state-transition/likely | seeded=2026-07-03
-[pending] pg_rewind.md pg_rewind.c:746 | stale-todo/nit | seeded=2026-07-03
-[pending] pg_rewind.md filemap.c:112 | undocumented-invariant/maybe | seeded=2026-07-03
-[pending] pg_rewind.md filemap.c:761 | dead-code/nit | seeded=2026-07-03
-[pending] pg_rewind.md filemap.c:588 | undocumented-invariant/nit | seeded=2026-07-03
-[pending] pg_rewind.md libpq_source.c:363 | undocumented-invariant/nit | seeded=2026-07-03
-[pending] pg_rewind.md pg_rewind.c:998 | dead-code/nit | seeded=2026-07-03
-[pending] pg_basebackup.md pg_basebackup.c:1145-1150 | trust-boundary/likely | seeded=2026-07-03
-[pending] pg_basebackup.md pg_basebackup.c:1357 | trust-boundary/maybe | seeded=2026-07-03
-[pending] pg_basebackup.md streamutil.c:367-394 | trust-boundary/likely | seeded=2026-07-03
-[pending] pg_basebackup.md pg_basebackup.c:2858 | path-traversal/maybe | seeded=2026-07-03
-[pending] pg_basebackup.md pg_createsubscriber.c:1460,214,47-48 | secret-scrub/likely | seeded=2026-07-03
-[pending] pg_basebackup.md pg_recvlogical.c:578 | wire-protocol/maybe | seeded=2026-07-03
-[pending] pg_basebackup.md pg_basebackup.c:542 | stale-todo/nit | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:585-594 | state-transition/likely | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:207,1719 | state-transition/maybe | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:547-564 | state-transition/maybe | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:1062-1083,1088-1097,1156-1166,1305 | info-disclosure/maybe | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:719-723,816 | correctness/maybe | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:978-980 | undocumented-invariant/nit | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:1086 | undocumented-invariant/nit | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:677-683 | correctness/nit | seeded=2026-07-03
-[pending] pg_amcheck.md pg_amcheck.c:2167,2208 | dead-code/nit | seeded=2026-07-03
+[done:2026-07-04] pg_rewind.md file_ops.c:65,225,201,285,302,268 | trust-boundary/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md file_ops.c:285 | trust-boundary/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md file_ops.c:478 | path-traversal/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md pg_rewind.c | trust-boundary/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md parsexlog.c:324 | trust-boundary/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md filemap.c:846 | stale-todo/nit | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md libpq_source.c:562 | trust-boundary/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md libpq_source.c:583 | trust-boundary/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md pg_rewind.c:531 | state-transition/likely | drifted+2@a5422fe3bd7e (was :529; re-anchored register+per-file doc)
+[done:2026-07-04] pg_rewind.md pg_rewind.c:748 | stale-todo/nit | drifted+2@a5422fe3bd7e (was :746)
+[done:2026-07-04] pg_rewind.md filemap.c:112 | undocumented-invariant/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md filemap.c:761 | dead-code/nit | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md filemap.c:588 | undocumented-invariant/nit | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md libpq_source.c:363 | undocumented-invariant/nit | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_rewind.md pg_rewind.c:1000 | dead-code/nit | drifted+2@a5422fe3bd7e (was :998)
+[done:2026-07-04] pg_basebackup.md pg_basebackup.c:1145-1150 | trust-boundary/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_basebackup.md pg_basebackup.c:1357 | trust-boundary/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_basebackup.md streamutil.c:367-394 | trust-boundary/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_basebackup.md pg_basebackup.c:2858 | path-traversal/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_basebackup.md pg_createsubscriber.c:1460,214,47-48 | secret-scrub/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_basebackup.md pg_recvlogical.c:582 | wire-protocol/maybe | drifted+4@a5422fe3bd7e (was :578; re-anchored register+per-file doc)
+[done:2026-07-04] pg_basebackup.md receivelog.c:541 | stale-todo/nit | mis-cite-fixed@a5422fe3bd7e (was pg_basebackup.c:542; FIXME actually in receivelog.c:541 — re-anchored register+both per-file docs)
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:585-594 | state-transition/likely | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:207,1719 | state-transition/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:547-564 | state-transition/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:1062-1083,1088-1097,1156-1166,1305 | info-disclosure/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:719-723,816 | correctness/maybe | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:978-980 | undocumented-invariant/nit | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:1086 | undocumented-invariant/nit | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:677-683 | correctness/nit | still-present@a5422fe3bd7e
+[done:2026-07-04] pg_amcheck.md pg_amcheck.c:2167,2208 | dead-code/nit | still-present@a5422fe3bd7e
+
+## Refill 2026-07-04 (pg-quality-auditor) — libpq register, 15 line-cited open rows
+
+[pending] libpq.md fe-auth.c:941 | correctness/likely | seeded=2026-07-04
+[pending] libpq.md fe-auth.c:1219 | correctness/likely | seeded=2026-07-04
+[pending] libpq.md pqmq.c:255-263 | question/maybe | seeded=2026-07-04
+[pending] libpq.md pqmq.c:205-207 | correctness/nit | seeded=2026-07-04
+[pending] libpq.md pqmq.c:172-194 | undocumented-invariant/nit | seeded=2026-07-04
+[pending] libpq.md pqformat.c:413-441 | correctness/maybe | seeded=2026-07-04
+[pending] libpq.md pqformat.c:511-550 | correctness/maybe | seeded=2026-07-04
+[pending] libpq.md pqformat.c:97 | undocumented-invariant/nit | seeded=2026-07-04
+[pending] libpq.md pqexpbuffer.c:213 | correctness/maybe | seeded=2026-07-04
+[pending] libpq.md libpq-be-fe.h:244-257 | correctness/maybe | seeded=2026-07-04
+[pending] libpq.md libpq-be-fe.h:69-119 | undocumented-invariant/maybe | seeded=2026-07-04
+[pending] libpq.md pqformat.h:99-124 | undocumented-invariant/maybe | seeded=2026-07-04
+[pending] libpq.md pqformat.h:170-187 | stale-todo/nit | seeded=2026-07-04
+[pending] libpq.md hba.h:117 | leak/maybe | seeded=2026-07-04
+[pending] libpq.md hba.h:42 | undocumented-invariant/maybe | seeded=2026-07-04

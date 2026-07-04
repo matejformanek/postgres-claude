@@ -166,9 +166,12 @@ they could indirectly write to that location via the bg-WAL
 receiver. `is_absolute_path` is NOT checked for `--waldir` in this
 file (search for `xlog_dir` shows no validation). [verified-by-code]
 
-[ISSUE-stale-todo: comment at line 542 "FIXME: we might send it ok,
-but get an error" on TIMELINE_HISTORY error path] — Not security
-per se; minor error-message infidelity. [verified-by-code]
+[ISSUE-stale-todo: the "FIXME: we might send it ok, but get an error"
+comment on the TIMELINE_HISTORY error path lives in `receivelog.c:541`,
+NOT this file — mis-cited as pg_basebackup.c:542 at seed (2026-06-03).
+No FIXME exists in pg_basebackup.c at seed anchor 4b0bf0788b0 or at
+current. Re-anchored to receivelog.c:541 and its per-file doc on
+2026-07-04.] [verified-by-code]
 
 [ISSUE-tar-parsing: 8 GiB tar member size cap inherited from the
 ustar header. Per-tablespace tar at format=t can exceed this if a

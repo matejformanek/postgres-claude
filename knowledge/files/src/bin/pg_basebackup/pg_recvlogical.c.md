@@ -76,8 +76,8 @@ line 358).
 - pg_recvlogical never parses the WALData payload contents. It only
   reads the 25-byte CopyData header (lines 521-527: msgtype +
   dataStart + walEnd + sendTime) and writes the remainder verbatim
-  followed by a literal `'\n'` (lines 558-583). `[verified-by-code]`
-- That trailing `'\n'` (line 578) means the on-disk format assumes
+  followed by a literal `'\n'` (lines 562-587). `[verified-by-code]`
+- That trailing `'\n'` (line 582) means the on-disk format assumes
   the plugin's record itself contains no embedded LF — true for
   `test_decoding` but **not enforced**. A plugin emitting binary
   containing 0x0A will be silently mis-parsed by downstream

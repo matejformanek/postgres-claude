@@ -64,14 +64,14 @@ files (line 484), and stream chunks from `perform_rewind()`.
   pg_control version match, checksums OR `wal_log_hints`, target
   must be `DB_SHUTDOWNED` or `DB_SHUTDOWNED_IN_RECOVERY`, local
   source must also be shut down. NOTE: `backup_label` presence is
-  a `TODO` (line 746). [verified-by-code]
+  a `TODO` (line 748). [verified-by-code]
 - `findCommonAncestorTimeline()` — `pg_rewind.c:929-964`. Linear
   scan over the two history arrays; bails out at first
   `tli`-or-`begin` mismatch. [verified-by-code]
 - `createBackupLabel()` — `pg_rewind.c:971-1009`. Writes a synthetic
   `backup_label` with `BACKUP METHOD: pg_rewind`,
   `BACKUP FROM: standby`. NOTE: the LABEL line is intentionally
-  omitted (line 998). The buffer is 1000 bytes and `pg_fatal`s on
+  omitted (line 1000). The buffer is 1000 bytes and `pg_fatal`s on
   overflow. [verified-by-code]
 - `digestControlFile()` — `pg_rewind.c:1033-1058`. Validates
   control-file size, copies into a `ControlFileData`, sets
@@ -148,7 +148,7 @@ cleanly shut down, the subsequent `sanityChecks()` will fail with
 is mostly a "trust me, I already ran crash recovery" knob, not a
 silent corruption vector.
 
-**Crash mid-rewind = inconsistent target.** Line 529 comment ("This
+**Crash mid-rewind = inconsistent target.** Line 531 comment ("This
 is the point of no return.") is honest: there is no rewind marker
 file. If pg_rewind is killed between (a) the first overwriting write
 and (b) the final `update_controlfile()`, the target has an arbitrary
@@ -181,11 +181,11 @@ bug.
 - `[ISSUE-state-transition: no marker file or atomic switch; a crash between first overwrite and final update_controlfile() leaves the target in an inconsistent state with pg_control still claiming a clean shutdown (medium)]`
 - `[ISSUE-secret-scrub: connstr_source (which may contain password=...) is held in memory the entire run and is passed verbatim to GetDbnameFromConnectionOptions and may end up in primary_conninfo via GenerateRecoveryConfig. No explicit scrub or warn-on-cleartext (maybe)]`
 - `[ISSUE-trust-boundary: local-source pg_control change is fatal, but mid-run modification of any other local-source file is silently tolerated (filemap was built from a stale snapshot). The XXX at pg_rewind.c:656-659 acknowledges this (low)]`
-- `[ISSUE-stale-todo: pg_rewind.c:746 "TODO Check that there's no backup_label in either cluster" — sanityChecks does not check despite the comment; filemap.c excludeFiles only suppresses copying not the existence-check (low)]`
+- `[ISSUE-stale-todo: pg_rewind.c:748 "TODO Check that there's no backup_label in either cluster" — sanityChecks does not check despite the comment; filemap.c excludeFiles only suppresses copying not the existence-check (low)]`
 - `[ISSUE-undocumented-invariant: ensureCleanShutdown invokes postgres in single-user mode by passing template1 on stdin via /dev/null; if the cluster has a custom locale or auth that makes single-user fail, the failure path exits with a generic error and the user must retry with --no-ensure-shutdown (low)]`
 - `[ISSUE-wire-protocol: pg_current_wal_insert_lsn() is read after copying files for a live primary, so the target replays past that LSN. If the source crashes between the file copy and this query, pg_rewind aborts; if the source advances WAL by a record between the file copy and this query that touches files we already copied, those changes are caught only by WAL replay (assumed full_page_writes=on, checked at libpq_source.c:139-141) (low)]`
 - `[ISSUE-trust-boundary: server-controlled symlink target (source_link_target) flows into symlink(2) at file_ops.c:285 with no validation that the target is absolute, points outside the data dir, or is not a relative path that escapes via .. (low)]`
-- `[ISSUE-dead-code: createBackupLabel deliberately omits the LABEL: line (pg_rewind.c:998 comment "omit LABEL: line"). This may confuse tools that parse backup_label expecting a LABEL line (low)]`
+- `[ISSUE-dead-code: createBackupLabel deliberately omits the LABEL: line (pg_rewind.c:1000 comment "omit LABEL: line"). This may confuse tools that parse backup_label expecting a LABEL line (low)]`
 
 ## Appears in scenarios
 
