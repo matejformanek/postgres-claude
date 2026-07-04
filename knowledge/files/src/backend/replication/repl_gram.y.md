@@ -32,6 +32,7 @@ no memory. (`:33-43`) [from-comment]
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
 - [subsystems/replication.md](../../../../subsystems/replication.md)
+- [architecture/replication.md](../../../../architecture/replication.md)
 
 ## Appears in scenarios
 
