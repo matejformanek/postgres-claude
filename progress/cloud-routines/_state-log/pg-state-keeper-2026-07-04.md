@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-07-04 — morning briefing: OK 9 · SKIPPED 0 · FAILED [] · SILENT [pg-file-backfiller ~18th idle night, terminal]. 7 cloud PRs merged (#456–#462), 0 conflicts; #463 anchor-refresh open by design. 5 producer queues drained; audits 210 single-consumer imbalance worsening. ≈$41 for the cycle (PR #TBD).
