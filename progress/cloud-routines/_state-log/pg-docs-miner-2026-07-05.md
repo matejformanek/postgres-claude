@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-07-05 — Opened uncovered §43 PL/pgSQL chapter: 8 internals-dense leaves distilled (implementation/overview/expressions/statements/structure/cursors/transactions/trigger), 5 tutorial leaves skipped; 3 load-bearing claims code-verified @e0ff7fd9aa2e (pl_exec.c PARAM subst + non-atomic SPI txn + refcursor=portal-name); docs-distilled 227→235 (PR #<n>).
