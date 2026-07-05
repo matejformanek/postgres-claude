@@ -1,0 +1,1 @@
+**pg-evening-merger** 2026-07-05 — Merged 8 cloud PRs #463–#470 (0 yellow / 0 red); #471 quality-auditor carried over on a mechanical audits.md conflict vs #463 (rebase-needed comment). Queue markers finalized: docs.md 12×→b0253c3, extensions.md 4×→782ae6a. anchor now e0ff7fd9aa2e (#463). Digest: progress/cloud-routines/_digest/2026-07-05.md.
