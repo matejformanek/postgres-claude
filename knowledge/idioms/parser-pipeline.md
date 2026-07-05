@@ -117,7 +117,7 @@ State for the whole transformation lives in `ParseState`, allocated by
 through every helper so they can look up column references, register
 namespace entries, track aggregate-vs-windowfunc context, etc.
 
-Output is a `Query` (defined at `parsenodes.h:117`), which is the contract
+Output is a `Query` (defined at `parsenodes.h:120`), which is the contract
 between the parser and everything downstream.
 
 The `post_parse_analyze_hook` (`analyze.c:74`) lets extensions like

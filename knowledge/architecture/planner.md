@@ -114,11 +114,11 @@ the pipeline:
    (SEMI → INNER when inner is unique for the clauses), then
    `remove_useless_self_joins` (SJE, gated by
    `enable_self_join_elimination`). [verified-by-code `analyzejoins.c:92-130,
-   874-895, 2539-2553`; `planmain.c:218-243`]
+   961-974, 2603-2639`; `planmain.c:218-243`]
 4. **EC-driven SemiJoin reduction** — `reduce_unique_semijoins` rides on
    the EquivalenceClass machinery built by `deconstruct_jointree`; it
    deletes the SpecialJoinInfo entry rather than mutating jointree
-   jointype. [from-comment `analyzejoins.c:862-873`]
+   jointype. [from-comment `analyzejoins.c:961-972`]
 
 Conceptually they're all "make the join graph smaller / simpler", but they
 live in two different source files, run at two different pipeline points,
