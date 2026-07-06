@@ -596,6 +596,10 @@ The GUC (added in PG 15) naming a loadable archive module `.so` that implements 
 
 
 
+### archive_timeout
+GUC forcing a WAL segment switch after the interval so a low-traffic cluster's unarchived data can't sit indefinitely; it only fires when there is unarchived WAL to flush out. [from-README] (via `knowledge/docs-distilled/runtime-config-wal.md`).
+
+
 ### ArchiveHandle
 The central pg_dump/pg_restore state object representing an open archive plus
 its connection and format-specific method pointers (custom, directory, tar,
@@ -622,6 +626,10 @@ The varlena header struct for a PostgreSQL array value, recording the number of 
 ### as_snap
 Field of an `ActiveSnapshotElt` holding the snapshot itself; the element also carries `as_level` and `as_next`, forming the active-snapshot stack whose invariant is `as_level` non-increasing toward the bottom and a NULL-terminated list. [from-comment] (`snapmgr.c:173` — via `knowledge/files/src/backend/utils/time/snapmgr.c.md`).
 
+
+
+### assign_hook
+The GUC callback invoked after a proposed value passes its `check_hook`, to install the parsed value into the backend's C-level state; the `check_hook`/`assign_hook`/`show_hook` trio backs GUCs with non-trivial semantics (DateStyle, TimeZone, client_encoding, role, transaction_isolation), implemented in `variable.c`. [verified-by-code] (via `knowledge/files/src/backend/commands/variable.c.md`).
 
 
 ### assign_record_type_typmod
@@ -691,6 +699,10 @@ tables whose dead-tuple or modification counters cross per-table thresholds. An
 transaction-id wraparound. [from-comment] (via
 `knowledge/files/src/backend/postmaster/autovacuum.c.md`).
 
+
+
+### autovacuum_naptime
+GUC (default 1 min) setting how often the autovacuum launcher wakes; it tries to visit each database once per naptime, so with N databases a given database is considered roughly every `autovacuum_naptime / N`. [from-README] (via `knowledge/docs-distilled/routine-vacuuming.md`).
 
 
 ### backend
@@ -893,14 +905,42 @@ The background writer's per-cycle scan that cleans a bounded number of dirty sha
 
 
 
+### bgw_extra
+A fixed `BGW_EXTRALEN`-byte opaque scratch buffer in the `BackgroundWorker` struct that the registrant fills before registration and the worker reads back via `MyBgworkerEntry->bgw_extra`; worker_spi packs `Oid + Oid + uint32` into it. Because it is raw memory, `sizeof(payload) <= BGW_EXTRALEN` must hold or the next worker slot is corrupted. [verified-by-code] (via `knowledge/scenarios/add-new-bgworker.md`).
+
+
+### bgw_flags
+The capability bitmask field of the `BackgroundWorker` struct declaring what the worker needs — e.g. `BGWORKER_SHMEM_ACCESS` and `BGWORKER_BACKEND_DATABASE_CONNECTION`; the postmaster consults it when deciding connection setup and start eligibility. [verified-by-code] (via `knowledge/files/src/include/postmaster/bgworker.h.md`).
+
+
+### bgw_function_name
+The name of the worker's entry-point function (resolved inside `bgw_library_name`) that the postmaster calls to launch a background worker; each logical-replication `*Main` is the `bgw_function_name` for its flavor, and worker_spi uses `"worker_main"`. [verified-by-code] (via `knowledge/files/src/include/postmaster/bgworker.h.md`).
+
+
+### bgw_library_name
+The shared library the postmaster loads to find `bgw_function_name` (a `$libdir`-relative name with no `.so` suffix); worker_spi sets it via `sprintf(worker.bgw_library_name, "worker_spi")`. [verified-by-code] (via `knowledge/scenarios/add-new-bgworker.md`).
+
+
+### bgw_main_arg
+The single `Datum` argument passed to the worker's main function at start; e.g. test_shm_mq sets `bgw_main_arg = dsm_segment_handle(seg)` so the worker can attach the shared DSM segment. [verified-by-code] (via `knowledge/files/src/test/modules/test_shm_mq/setup.c.md`).
+
+
 ### BGW_NEVER_RESTART
 The `bgw_restart_time` sentinel value telling the postmaster never to restart a background worker once it exits or crashes (as opposed to a restart interval in seconds). [verified-by-code] (via `knowledge/idioms/bgworker-and-parallel.md`).
 
 
 
+### bgw_notify_pid
+The PID the postmaster signals (SIGUSR1) on the worker's start/stop state changes; a registrant sets `bgw_notify_pid = MyProcPid` so `WaitForBackgroundWorkerStartup` can wake it, and the worker can look the registrant up via `MyBgworkerEntry->bgw_notify_pid`. [verified-by-code] (via `knowledge/files/src/test/modules/worker_spi/worker_spi.c.md`).
+
+
 ### bgw_restart_time
 The `BackgroundWorker` field giving the seconds the postmaster waits before restarting the worker after a crash, or `BGW_NEVER_RESTART` to leave it dead. One-shot or on-demand workers set the never-restart sentinel to avoid a crash loop. [inferred] (`bgworker.h:84` — via `knowledge/scenarios/add-new-bgworker.md`).
 
+
+
+### bgw_start_time
+The `BgWorkerStart_*` enum controlling how far into startup the postmaster waits before launching the worker — e.g. `BgWorkerStart_RecoveryFinished` starts it only after recovery reaches consistency. [verified-by-code] (via `knowledge/files/src/include/postmaster/bgworker.h.md`).
 
 
 ### BGWORKER_BACKEND_DATABASE_CONNECTION
@@ -920,6 +960,10 @@ checkpointer find clean victims more often. It runs `BackgroundWriterMain`,
 sleeping on a latch between rounds, and never writes WAL itself. [from-comment]
 (via `knowledge/files/src/backend/postmaster/bgwriter.c.md`).
 
+
+
+### bgwriter_delay
+GUC (default 200 ms, the `BgWriterDelay` global) setting how long the background writer sleeps between rounds of flushing dirty shared buffers ahead of backend demand. [verified-by-code] (via `knowledge/files/src/backend/postmaster/bgwriter.c.md`).
 
 
 ### BgWriterStats
@@ -1681,6 +1725,10 @@ un-cancellable. [verified-by-code] (`pl_exec.c:2026` — via
 
 
 
+### check_function_bodies
+GUC that, when on (default), makes a language validator test-compile a new function's body at `CREATE FUNCTION` time; `plpgsql_validator` sets up a fake fcinfo and calls `plpgsql_compile(..., true)` only when it is on. pg_dump emits `SET check_function_bodies = false` so restores don't fail on forward references. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_handler.md`).
+
+
 ### check_hook
 The optional validation callback in the GUC check/assign/show trio: it runs on a proposed new value, can reject it (returning false) or normalize/cook it into an `extra` blob, before `assign_hook` installs it. Custom GUCs supply one to enforce cross-setting constraints. [inferred] (`guc.c:5049` — via `knowledge/scenarios/add-new-guc.md`).
 
@@ -1689,6 +1737,10 @@ The optional validation callback in the GUC check/assign/show trio: it runs on a
 ### check_loadable_libraries
 The pg_upgrade preflight check that, for every loadable library referenced by the old cluster, verifies the corresponding `.so` actually loads in the new cluster before the upgrade proceeds; community proposals have pitched extending it into a plugin-name whitelist. [inferred] (via `knowledge/issues/include-replication.md`).
 
+
+
+### check_password_hook
+A pluggable global hook (`check_password_hook_type`) invoked from `CreateRole`/`AlterRole` to vet a new password's strength; the `passwordcheck` contrib module chains it. Exported alongside the `Password_encryption` GUC in `user.h`. [verified-by-code] (via `knowledge/files/src/backend/commands/user.c.md`).
 
 
 ### check_stack_depth
@@ -1734,6 +1786,14 @@ bounds how much WAL recovery must scan. [from-comment] (via
 
 
 
+### checkpoint_completion_target
+GUC (default 0.9) spreading a checkpoint's buffer writes across that fraction of the `checkpoint_timeout` interval to smooth I/O; the buffer manager throttles the checkpoint write loop against it. [verified-by-code] (via `knowledge/files/src/backend/storage/buffer/bufmgr.c.md`).
+
+
+### checkpoint_timeout
+GUC setting the maximum time between automatic (time-driven) checkpoints; the checkpointer starts a checkpoint when this elapses, distinct from WAL-volume-driven and backend-requested checkpoints. [verified-by-code] (via `knowledge/files/src/backend/postmaster/checkpointer.c.md`).
+
+
 ### checkpointer
 The dedicated auxiliary process that performs checkpoints (and restartpoints on
 standbys), spreading the buffer flush over time per
@@ -1761,6 +1821,10 @@ The optimizer routine that estimates the combined selectivity of a list of restr
 ### client_encoding
 The session GUC naming the character-set encoding of data exchanged with the client; the backend transcodes between it and the database (server) encoding on input and output. Functions that synthesize text (e.g. pgcrypto decrypt) must produce bytes valid in the client encoding or risk encoding-violation errors at send time. [verified-by-code] (via `knowledge/files/contrib/pgcrypto/pgp-pgsql.md`).
 
+
+
+### client_min_messages
+GUC setting the minimum elevel sent to the client; during authentication `ClientAuthInProgress` overrides it so only `>= ERROR` reaches the client (many clients can't handle NOTICE mid-auth, and it is a security consideration). [from-comment] (via `knowledge/files/src/backend/utils/error/elog.c.md`).
 
 
 ### ClientAuthentication
@@ -1935,6 +1999,14 @@ The logical-decoding output-plugin callback `commit_cb(ctx, txn, commit_lsn)` in
 
 
 
+### commit_delay
+A microsecond sleep taken by the group-commit leader inside `XLogFlush` before flushing WAL, batching concurrent commits into a single fsync; default 0. Paired with `commit_siblings`. [verified-by-code] (via `knowledge/docs-distilled/wal-configuration.md`).
+
+
+### commit_siblings
+The minimum number of concurrently-active transactions required before `commit_delay`'s group-commit sleep engages (default 5); together they form PostgreSQL's group-commit tuning pair. [from-README] (via `knowledge/docs-distilled/runtime-config-wal.md`).
+
+
 ### commit_ts
 The SLRU-backed subsystem that stores, per committed transaction, its commit timestamp and originating `ReplOriginId`; active only when `track_commit_timestamp` is on. It is the backing store for `pg_xact_commit_timestamp()` and feeds last-update-wins conflict resolution in logical replication. [verified-by-code] (`commit_ts.c` — via `knowledge/files/src/backend/access/transam/commit_ts.c.md`).
 
@@ -2002,6 +2074,10 @@ pg_dump's abstraction over a possibly-compressed output file — a vtable of rea
 ### CompressorState
 The pg_dump compression vtable allocated by `AllocateCompressor` and specialized by `InitCompressor{None,Gzip,LZ4,Zstd}`; it carries the read / write / end callbacks so the archiver stays compression-method agnostic (a build lacking a method leaves the callbacks NULL). [verified-by-code] (`compress_io.c:122-142` — via `knowledge/files/src/bin/pg_dump/compress_io.c.md`).
 
+
+
+### compute_query_id
+GUC (`off`/`auto`/`on`/`regress`) controlling whether the core query-id (jumble hash) is computed; pg_stat_statements calls `EnableQueryId()` so `compute_query_id = auto` lights up, and it records nothing when the id is off and no other module requested one. [verified-by-code] (via `knowledge/files/contrib/pg_stat_statements/pg_stat_statements.c.md`).
 
 
 ### compute_scalar_stats
@@ -2138,6 +2214,10 @@ versions); it is read and written as a single ~8 KiB block guarded by a CRC.
 ### conversion_procs
 The `src/backend/utils/mb/conversion_procs/` tree of per-encoding-pair character-set conversion functions; each is a thin glue function that calls the shared `LocalToUtf` / `UtfToLocal` radix-tree drivers in `conv.c` and is registered in `pg_conversion`. [from-README] (via `knowledge/files/src/backend/utils/mb/_conversion_procs.md`).
 
+
+
+### copy_file_range
+The Linux syscall pg_combinebackup can use to copy file extents without pulling data through userspace; `copy_file.c` loops `copy_file_range(2)` with `SSIZE_MAX` until it returns 0, one of several copy methods (clone, hardlink, plain copy) it selects between. [verified-by-code] (via `knowledge/files/src/bin/pg_combinebackup/copy_file.c.md`).
 
 
 ### CopyData
@@ -2410,6 +2490,10 @@ The compile-time OID (1262) of the shared `pg_database` system catalog, assigned
 
 
 
+### DataChecksumsNeedWrite
+The predicate that data-page checksums are enabled for writes; one of the two disjuncts of `XLogHintBitIsNeeded()`, so enabling checksums forces hint-bit updates to be WAL-logged even when `wal_log_hints` is off. [verified-by-code] (via `knowledge/files/src/include/access/xlog.h.md`).
+
+
 ### DataDir
 The global C string holding the absolute path of the running cluster's data
 directory (`PGDATA`), set during postmaster startup. Security-sensitive
@@ -2489,6 +2573,10 @@ A hard cycle aborts the youngest waiter with a deadlock error; soft edges let
 it re-order the wait queue instead. [from-comment] (via
 `knowledge/files/src/backend/storage/lmgr/deadlock.c.md`).
 
+
+
+### deadlock_timeout
+The wait duration (default 1 s) after which a lock waiter triggers PostgreSQL's optimistic deadlock detector; `ProcSleep` arms `DEADLOCK_TIMEOUT` and, when `got_deadlock_timeout` fires, calls `CheckDeadLock`, which walks the waits-for graph in `deadlock.c`. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/deadlock.c.md`).
 
 
 ### DeadLockCheck
@@ -2801,6 +2889,10 @@ segment or finalizing a control file. [verified-by-code] (via
 
 
 
+### dynamic_library_path
+The search path `expand_dynamic_library_name()` walks to resolve a loadable module's name to a `.so`; output-plugin loading also searches it, and any library on the path exporting the required symbol is loaded (no whitelist). [verified-by-code] (via `knowledge/files/src/backend/utils/fmgr/dfmgr.c.md`).
+
+
 ### ECPG
 Embedded SQL in C — PostgreSQL's preprocessor (`ecpg`) that turns `EXEC SQL ...` directives in a `.pgc` source file into libpq calls plus a C file the normal compiler can build. The preproc grammar mirrors the backend grammar, which is why grammar changes often need a matching ECPG update. [verified-by-code] (via `knowledge/files/src/interfaces/ecpg/preproc/ecpg_keywords.c.md`).
 
@@ -2826,6 +2918,10 @@ An expression-evaluation interpreter opcode that evaluates a strict function cal
 
 
 
+### effective_io_concurrency
+A planner/executor GUC (also a per-tablespace option cached in `spccache.c`) hinting how many concurrent I/O requests the storage can service, used to size prefetch depth; a tablespace field `< 0` falls back to the GUC default. [verified-by-code] (via `knowledge/files/src/backend/utils/cache/spccache.c.md`).
+
+
 ### elog
 The terse error/log macro for internal "can't happen" conditions: `elog(ERROR, "…")` takes only a level and a format string (no SQLSTATE or detail), longjmp'ing on ERROR like `ereport`. Reserved for programming errors, not user-facing messages. [verified-by-code] (via `knowledge/files/contrib/spi/moddatetime.c.md`).
 
@@ -2844,6 +2940,10 @@ The procsignal mechanism (`procsignal.c`) for global state changes that must be 
 ### EmitWarningsOnPlaceholders
 The former name of `MarkGUCPrefixReserved` — the call an extension makes after defining its GUCs to claim its `prefix.*` namespace, so unknown `prefix.foo` settings warn instead of silently persisting. [verified-by-code] (`guc.h:418-421` — via `knowledge/files/src/include/utils/guc.h.md`).
 
+
+
+### EnableQueryId
+The call that turns on core query jumbling so a query-id is computed; pg_stat_statements (and pg_stash_advice) invoke it because the module is useless without a query-id, which makes `compute_query_id = auto` effectively active. [verified-by-code] (via `knowledge/files/contrib/pg_stat_statements/pg_stat_statements.c.md`).
 
 
 ### EncodeDateOnly
@@ -3102,6 +3202,10 @@ A multi-byte Japanese encoding (extended Unix code) handled by PostgreSQL's enco
 ### EUC_KR
 The Korean Extended Unix Code encoding (the KS X 1001 / Wansung subset, not the larger UHC superset), supported via the `utf8_and_euc_kr.c` conversion proc that backs the `euc_kr_to_utf8` and `utf8_to_euc_kr` rows in `pg_conversion`. The EUC_KR ↔ Unicode mapping is one-to-one (NULL combined-character map), and the proc dispatches through `LocalToUtf` / `UtfToLocal` with a generated radix tree. [verified-by-code] (`utf8_and_euc_kr.c.md` — via `knowledge/files/src/backend/utils/mb/conversion_procs/utf8_and_euc_kr/utf8_and_euc_kr.c.md`).
 
+
+
+### eval_const_expressions
+The optimizer pass (`clauses.c`) that constant-folds and simplifies an expression tree — inlining strict functions, collapsing constant sub-expressions, simplifying CASE — run during `preprocess_qual_conditions` in the planner. [verified-by-code] (via `knowledge/files/src/backend/optimizer/util/clauses.c.md`).
 
 
 ### EvalPlanQual
@@ -3614,6 +3718,10 @@ Grows the `pg_subtrans` SLRU so it covers a newly assigned XID; it is called und
 
 
 
+### extra_float_digits
+GUC governing how many significant digits float output emits; postgres_fdw's `set_transmission_modes()` forces `extra_float_digits=3` (plus `datestyle=ISO`, `intervalstyle=postgres`) under a GUC nestlevel while deparsing Consts so the remote round-trips floats losslessly. [verified-by-code] (via `knowledge/files/contrib/postgres_fdw/deparse.c.md`).
+
+
 ### extractQuery
 The GIN opclass support procedure that decomposes a query datum into the set of individual key entries GIN must look up, returning per-entry search modes; `ginscan.c` calls it during scan setup. [from-comment] (`ginscan.c:1-13` — via `knowledge/files/src/backend/access/gin/ginscan.c.md`).
 
@@ -3969,6 +4077,10 @@ The `src/common/file_utils.c` durability helper that fsyncs a single file or dir
 
 
 
+### full_page_writes
+GUC that makes the first modification of a page after a checkpoint log a full-page image in WAL, guarding against torn pages; pg_rewind and pg_upgrade assume/require it, and disabling it is only safe on hardware with atomic page writes. [verified-by-code] (via `knowledge/files/src/bin/pg_rewind/pg_rewind.c.md`).
+
+
 ### FullTransactionId
 A 64-bit transaction id that carries the wraparound epoch in its high 32 bits
 alongside the ordinary 32-bit `TransactionId`, so it never wraps and can be
@@ -4083,6 +4195,14 @@ The Generic WAL facility that lets extensions (and some core AMs) WAL-log arbitr
 ### GEQO
 The Genetic Query Optimizer — the fallback join-order search used when a query's FROM-list size reaches `geqo_threshold`, replacing the exhaustive dynamic-programming search with a randomized genetic algorithm to keep planning time bounded. It registers its own RelOptInfo-building path under the name `"geqo"`. [verified-by-code] (via `knowledge/files/src/backend/optimizer/util/extendplan.c.md`; see `knowledge/subsystems/optimizer.md`).
 
+
+
+### geqo_threshold
+The join count (default 12) at or above which the planner switches from exhaustive dynamic-programming join search to the genetic query optimizer (GEQO); one of the `geqo_*` GUC family driven from `geqo_main.c`. [verified-by-code] (via `knowledge/files/src/backend/optimizer/geqo/geqo_main.c.md`).
+
+
+### get_actual_variable_range
+The selectivity-estimation routine (`selfuncs.c`) that, instead of trusting the histogram, opens the index to read a column's actual current min/max; long runs of dead index entries can slow it, a known planner hotspot. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/selfuncs.c.md`).
 
 
 ### get_attname
@@ -5030,6 +5150,10 @@ HOT chain from the indexed root tuple. [verified-by-code] (`heapam.c:62` — via
 
 
 
+### hot_standby_feedback
+GUC that makes a hot standby report its oldest xmin back to the primary so the primary's VACUUM won't remove rows the standby's queries still need — at the cost of delaying cleanup on the primary. [from-README] (via `knowledge/docs-distilled/hot-standby.md`).
+
+
 ### hstore_recv
 The binary-input (receive) function for the `hstore` type; because it reconstructs the on-disk representation directly from wire bytes rather than from text, it can produce internal shapes the text input syntax cannot, so downstream code must not assume text-only invariants. [verified-by-code] (via `knowledge/files/contrib/hstore/hstore_subs.c.md`).
 
@@ -5066,6 +5190,10 @@ with the system identifier, current timeline, current WAL flush position, and
 default database, which the client uses to set up streaming. [verified-by-code]
 (via `knowledge/files/src/backend/replication/repl_gram.y.md`).
 
+
+
+### idle_in_transaction_session_timeout
+GUC terminating a session that sits idle inside an open transaction longer than the limit, releasing the locks and xmin such a session pins; measured in ms and declared with the other timeout GUCs in `proc.h`. [verified-by-code] (via `knowledge/files/src/include/storage/proc.h.md`).
 
 
 ### in_progress_list
@@ -5470,6 +5598,10 @@ The AIO method-abstraction vtable (`aio_internal.h`): each I/O method (`worker`,
 
 
 
+### IOOP_EXTEND
+The pgstat I/O-operation enum value for relation extension; it is the first bytes-tracked `IOOp` entry (the enum splits into not-bytes-tracked and bytes-tracked ranges, and code relies on `IOOP_EXTEND` marking that boundary). [verified-by-code] (via `knowledge/files/src/include/pgstat.h.md`).
+
+
 ### IPC
 Inter-Process Communication — the shared-memory-plus-signals mechanisms tying together PostgreSQL's per-connection backend processes: the shared-memory segment, latches, signals, and the `on_shmem_exit`/`before_shmem_exit` cleanup callback stacks that run at backend exit. [verified-by-code] (via `knowledge/files/src/backend/storage/ipc/ipc.c.md`).
 
@@ -5581,6 +5713,18 @@ the supplied slot, or an empty slot at end-of-scan; called once per row by
 the executor. [verified-by-code] (via
 `knowledge/subsystems/contrib-file_fdw.md`).
 
+
+
+### jit_above_cost
+The estimated plan-cost threshold above which JIT compilation of a query's expressions is triggered; one of the `jit_*` GUCs in `jit.h`, checked at node init (e.g. hot VALUES scans) alongside `jit_inline_above_cost` / `jit_optimize_above_cost`. [verified-by-code] (via `knowledge/files/src/include/jit/jit.h.md`).
+
+
+### jit_inline_above_cost
+The plan-cost threshold above which the JIT provider inlines small functions into the generated code; one of the `jit_*` cost gates (`jit_above_cost`, `jit_inline_above_cost`, `jit_optimize_above_cost`) the executor compares against per query. [verified-by-code] (via `knowledge/files/src/include/jit/jit.h.md`).
+
+
+### jit_optimize_above_cost
+The plan-cost threshold above which the JIT provider runs the optimizer over generated code; passed as part of the OR-bitmask of JIT flags the provider receives, alongside `jit_above_cost` and `jit_inline_above_cost`. [verified-by-code] (via `knowledge/files/src/include/jit/jit.h.md`).
 
 
 ### JitContext
@@ -5837,6 +5981,10 @@ conversion procedures call it from their `conv_proc` entry points. [verified-by-
 
 
 
+### lock_timeout
+GUC aborting a statement that waits longer than the limit to acquire any lock; `ProcSleep` arms it as `LOCK_TIMEOUT` alongside `STATEMENT_TIMEOUT` and `DEADLOCK_TIMEOUT` in its main sleep loop. pg_dump sets it to 0 for restores. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/proc.c.md`).
+
+
 ### LockAcquire
 The heavyweight (regular) lock-manager entry point: it finds or creates the
 shared `LOCK`/`PROCLOCK` for a lock tag, checks conflicts via
@@ -5972,6 +6120,18 @@ The enum naming the strength of a row-level lock
 tuple and re-lock it in the requested `LockTupleMode`. [verified-by-code] (via
 `knowledge/files/src/backend/executor/execReplication.c.md`).
 
+
+
+### log_lock_waits
+GUC that logs a message when a backend has waited longer than `deadlock_timeout` for a lock (the deadlock check runs, and if no deadlock is found the long wait is logged); one of the ms-valued lock GUCs referenced from `proc.h`. [verified-by-code] (via `knowledge/files/src/include/storage/proc.h.md`).
+
+
+### log_min_messages
+GUC setting the minimum elevel written to the server log; `is_log_level_output()` implements its comparison with special ordering for LOG (sorted between ERROR and FATAL for the server-log test) and never sends `*_CLIENT_ONLY` messages to the log regardless of the setting. [verified-by-code] (via `knowledge/files/src/backend/utils/error/elog.c.md`).
+
+
+### log_parameter_max_length
+GUC bounding how many bytes of each bound parameter value are rendered when a statement's parameters are logged; `-1` means unlimited and it gates a data-leak surface in auto_explain's parameter logging. [verified-by-code] (via `knowledge/files/contrib/auto_explain/auto_explain.c.md`).
 
 
 ### logical decoding
@@ -6210,6 +6370,14 @@ The shared-memory array holding all individually-named LWLocks plus the slices h
 
 
 
+### maintenance_work_mem
+The memory budget (default 65536 kB) for maintenance operations such as VACUUM and index build; VACUUM's TID store grows until it hits this cap, then pauses phase I to drain dead items before resuming. [from-comment] (via `knowledge/files/src/backend/access/heap/vacuumlazy.c.md`).
+
+
+### make_join_rel
+The optimizer routine that builds (or finds) the `RelOptInfo` joining two relation sets and adds candidate join paths to it; the core join-search levels and GEQO's tour evaluation both call it repeatedly. [verified-by-code] (via `knowledge/files/src/include/optimizer/paths.h.md`).
+
+
 ### make_one_rel
 The join-search entry point (`planmain.c` → `allpaths.c`): given the list of base relations it first sizes and paths each baserel, then drives the dynamic-programming join enumeration up to the single `RelOptInfo` for the whole FROM clause. [verified-by-code] (via `knowledge/files/src/backend/optimizer/plan/planmain.c.md`).
 
@@ -6283,9 +6451,37 @@ The maximum number of backend processes, defined in `procnumber.h` as `(1U << 18
 
 
 
+### max_connections
+GUC capping concurrent backends (default 100); it sizes many shared-memory structures via `CalculateShmemSize`, interacts with the OS per-process FD limit (e.g. io_uring's `RLIMIT_NOFILE` needs), and is recorded in `pg_control` for hot-standby compatibility. [verified-by-code] (via `knowledge/files/src/include/catalog/pg_control.h.md`).
+
+
 ### MAX_LOCKMODES
 The maximum number of heavyweight lock modes (10) in a lock method's conflict table; it bounds the `LOCKMODE` range and the per-mode arrays in a `LOCK`. [verified-by-code] (via `knowledge/files/src/include/storage/lock.h.md`).
 
+
+
+### max_locks_per_transaction
+GUC (default 64, restart-only) that sizes the shared lock table as `max_locks_per_transaction × (max_connections + prepared xacts)`; it bounds the whole table, NOT the locks any single transaction may take. [from-README] (via `knowledge/docs-distilled/runtime-config-locks.md`).
+
+
+### max_prepared_transactions
+GUC capping concurrently-prepared two-phase transactions; it also enlarges the shared lock table sizing (`max_connections + max_prepared_transactions`) and is one of the settings recorded for hot-standby compatibility. [from-README] (via `knowledge/docs-distilled/hot-standby.md`).
+
+
+### max_slot_wal_keep_size
+GUC capping how much WAL a replication slot may pin before the slot is invalidated (`max_slot_wal_keep_size_mb`, default `-1` = unbounded); at the default, one abandoned slot can fill the WAL volume — a documented DoS surface. [verified-by-code] (via `knowledge/files/src/include/replication/slot.h.md`).
+
+
+### max_stack_depth
+GUC (default ~2 MB) that `check_stack_depth()` enforces to abort runaway C recursion before a true stack overflow; recursive parsers/evaluators (ltree, intarray, jsonpath) rely on it, and a query parsed under a large `max_stack_depth` can fail to evaluate on a backend with a smaller one. [verified-by-code] (via `knowledge/files/contrib/intarray/_int_bool.md`).
+
+
+### max_wal_senders
+GUC sizing the shared array of `WalSnd` slots for replication connections; `SyncRepRequested()` is `max_wal_senders > 0 && synchronous_standby_names` set, and the value is recorded in `pg_control` for standby compatibility. [verified-by-code] (via `knowledge/files/src/include/replication/walsender_private.h.md`).
+
+
+### max_worker_processes
+GUC (default 8) capping the total background-worker slots the postmaster reserves at startup (shared by parallel workers, logical apply, and extension workers); recorded in `pg_control` for standby compatibility. [verified-by-code] (via `knowledge/files/src/backend/utils/init/globals.c.md`).
 
 
 ### MAXALIGN
@@ -6762,6 +6958,10 @@ The current subtransaction nesting level stamped onto stacked state such as `Tra
 ### MyBackendType
 The global recording the current process's backend type (e.g. `B_STANDALONE_BACKEND`), whose storage lives in `miscinit.c`; `GetBackendTypeDesc` translates the enum to a description string via the proctype x-macro list. It is set during process startup, for instance by `InitStandaloneProcess`. [verified-by-code] (`miscinit.c` — via `knowledge/files/src/backend/utils/init/miscinit.c.md`).
 
+
+
+### MyBgworkerEntry
+The current background worker's own `BackgroundWorker` entry, from which a worker reads the arguments the registrant packed — e.g. `MyBgworkerEntry->bgw_extra` for the payload and `->bgw_notify_pid` to signal the registrant back. [verified-by-code] (via `knowledge/files/src/test/modules/worker_spi/worker_spi.c.md`).
 
 
 ### MyClientConnectionInfo
@@ -7333,6 +7533,10 @@ Type-safe allocation macro: `palloc_array(Type, n)` palloc's room for `n` elemen
 ### palloc_extended
 The flags-taking allocation entry point: `MCXT_ALLOC_HUGE` allows sizes up to `MaxAllocHugeSize`, `MCXT_ALLOC_NO_OOM` returns NULL instead of ereporting on OOM, and `MCXT_ALLOC_ZERO` zero-fills. Used where the standard palloc contract (ereport-on-OOM, ≤1 GB) does not fit. [verified-by-code] (via `knowledge/subsystems/utils-mmgr.md`).
 
+
+
+### palloc_object
+A typed allocation macro that `palloc`s `sizeof(T)` and returns a `T*` — e.g. `palloc_object(ControlFileData)`; it does NOT zero the memory, so relying on uninitialized fields (as `pgpa_trove.c` was noted to) is a bug. [verified-by-code] (via `knowledge/files/src/common/controldata_utils.c.md`).
 
 
 ### PANIC
@@ -8583,6 +8787,10 @@ The header at the start of the main shared-memory segment recording its total si
 
 
 
+### pgstat_count_io_op
+The fast inline path that bumps a backend's per-`(object, context, op)` I/O counters; `pgstat_count_io_op_time` additionally records timing, called from `bufmgr.c` around reads/writes/extends. [verified-by-code] (via `knowledge/files/src/backend/utils/activity/pgstat_io.c.md`).
+
+
 ### pgstat_count_io_op_time
 The timing-aware variant of `pgstat_count_io_op` that records an I/O operation against a given (`io_object`, `io_context`, `io_op`) along with elapsed time measured from a start timestamp, plus operation count and byte total. Its timing brackets pair with `pgstat_prepare_io_time` / `pgstat_get_io_time_now`. [verified-by-code] (`pgstat_io.c` — via `knowledge/files/src/backend/utils/activity/pgstat_io.c.md`).
 
@@ -8608,9 +8816,21 @@ The minimum interval (1 s) between flushes of pending cumulative statistics to s
 
 
 
+### pgstat_register_kind
+The extension entry point (`pgstat.c:1508`) that registers a custom cumulative-statistics kind with its shmem/flush callbacks, letting out-of-core code participate in the pgstat framework (see test_custom_stats). [verified-by-code] (via `knowledge/files/src/backend/utils/activity/pgstat.c.md`).
+
+
 ### pgstat_report_stat
 The cumulative-statistics flush workhorse: it pushes a backend's pending stats into shared memory, requires being outside a transaction, and is throttled — returning the number of milliseconds until the next call is due. [verified-by-code] (`pgstat.c:723` — via `knowledge/files/src/backend/utils/activity/pgstat.c.md`).
 
+
+
+### pgstat_report_wait_end
+Clears the current backend's wait event after a sleep/IO/lock completes; paired with `pgstat_report_wait_start`, and called in auxiliary-process cleanup (`LWLockReleaseAll`, `ConditionVariableCancelSleep`, `pgstat_report_wait_end`). [verified-by-code] (via `knowledge/files/src/backend/utils/activity/wait_event.c.md`).
+
+
+### pgstat_report_wait_start
+Sets the current backend's wait event (visible in `pg_stat_activity.wait_event`); `perform_spin_delay` calls `pgstat_report_wait_start(WAIT_EVENT_SPIN_DELAY)` only once it is actually sleeping, since reporting every busy spin would dominate profiling overhead. [from-comment] (via `knowledge/files/src/backend/utils/activity/wait_event.c.md`).
 
 
 ### pgtypes_fmt_replace
@@ -8866,6 +9086,10 @@ execution strategy, creates the executor state (for an optimizable query), and
 pushes the active snapshot, before `PortalRun` pulls tuples.
 [verified-by-code] (`pquery.c:430` — via `knowledge/subsystems/tcop.md`).
 
+
+
+### posix_fadvise
+The kernel page-cache hint PostgreSQL uses (`POSIX_FADV_DONTNEED`/`WILLNEED`); `pre_sync_fname` uses `sync_file_range` if available else `posix_fadvise` as a best-effort writeback hint, and the buffer manager coalesces writeback hints through it. [verified-by-code] (via `knowledge/files/src/common/file_utils.c.md`).
 
 
 ### post_parse_analyze_hook
@@ -9306,6 +9530,10 @@ Duplicates a NUL-terminated string into the current memory context via palloc; t
 
 
 
+### publish_via_partition_root
+A publication option that makes logical replication publish partitioned-table changes as the root table rather than the leaf partition; `pg_publication.c`'s partition-tree resolution (`GetTopMostAncestorInPublication`, `filter_partitions`) and tablesync honor it. [verified-by-code] (via `knowledge/files/src/backend/catalog/pg_publication.c.md`).
+
+
 ### pull_up_subqueries
 The planner-prep pass (in `prepjointree.c`) that flattens eligible subqueries in `FROM` up into the parent query's jointree, letting their relations participate directly in join-order search instead of being planned as opaque subplans. [inferred] (via `knowledge/community/user-questions/2026-06-17.md`).
 
@@ -9670,6 +9898,10 @@ backends never see the commit before its catalog effects. [from-comment]
 
 
 
+### recovery_min_apply_delay
+GUC delaying replay on a standby by a fixed interval; it delays only COMMIT records (other WAL is replayed immediately), so the standby lags the primary by roughly this amount for visible changes. [from-README] (via `knowledge/docs-distilled/runtime-config-replication.md`).
+
+
 ### RecoveryInProgress
 The cheap check that returns true while the server is still replaying WAL
 (crash or archive/standby recovery) and has not yet reached a consistent,
@@ -9833,6 +10065,10 @@ Drops the reference (and optionally the lock) on a relcache entry opened with `r
 ### relation_open
 Takes the requested lock then resolves a relcache entry via `RelationIdGetRelation`, asserting that some lock is held when `lockmode == NoLock` (outside bootstrap); the low-level open that `table_open`/`index_open` build on. [verified-by-code] (`relation.c:47` — via `knowledge/files/src/backend/access/common/relation.c.md`).
 
+
+
+### relation_openrv
+Opens a relation named by a `RangeVar`: resolves it via `RangeVarGetRelid` (namespace search) then calls `relation_open`. It calls `AcceptInvalidationMessages()` first when locking, because GRANT/REVOKE update ACLs without taking a relation lock. [from-comment] (via `knowledge/files/src/backend/access/common/relation.c.md`).
 
 
 ### RelationBuildDesc
@@ -10308,6 +10544,10 @@ The resource-owner registration call (`resowner.h:148-150`) that records a resou
 
 
 
+### restart_after_crash
+GUC (default on) making the postmaster reinitialize and restart the cluster after a backend crash rather than exiting; turning it off is used by supervisors that prefer to manage restarts externally. [from-README] (via `knowledge/docs-distilled/runtime-config-error-handling.md`).
+
+
 ### restart_lsn
 The replication-slot field marking the oldest WAL location the slot still requires, so the server must retain WAL from this point forward; advancing consumers move it forward and free older segments. A stalled or abandoned slot pins `restart_lsn`, causing unbounded WAL retention. [verified-by-code] (via `knowledge/files/src/backend/replication/walsender.c.md`; see `knowledge/subsystems/replication.md`).
 
@@ -10370,6 +10610,10 @@ The executor's per-target-relation state for INSERT/UPDATE/DELETE/MERGE — the 
 ### RESUME_INTERRUPTS
 The macro paired with `HOLD_INTERRUPTS()` that decrements `InterruptHoldoffCount`; when all three hold counts reach zero (`INTERRUPTS_CAN_BE_PROCESSED()`), pending interrupts may again be serviced. It re-enables interrupt processing previously suspended by a matching `HOLD_INTERRUPTS()`. [verified-by-code] (`miscadmin.h` — via `knowledge/files/src/include/miscadmin.h.md`).
 
+
+
+### retain_dead_tuples
+A subscription option that makes the logical-replication apply worker retain dead tuples (advertising a conflict-detection horizon) so update/delete conflicts can be detected; pg_upgrade preserves `sub_retain_dead_tuples` across upgrades. [verified-by-code] (via `knowledge/files/src/backend/replication/logical/worker.c.md`).
 
 
 ### RETURNING
@@ -10477,6 +10721,10 @@ exception blocks and `plpy.subtransaction()`/SPI subxact rollback.
 ### ROW_MARK_REFERENCE
 An ExecRowMark markType for a row that is merely referenced (not locked) and must be re-fetched by TID during EvalPlanQual, including the FDW RefetchForeignRow path. [verified-by-code] (via `knowledge/idioms/epq-multi-table.md`).
 
+
+
+### row_security
+GUC (`on`/`off`/`force`) controlling whether row-level security policies are applied; `off` errors rather than silently bypassing policies for non-owners. rls.h notes the result must be three-state to stay correct under `row_security=off`. [verified-by-code] (via `knowledge/files/src/include/utils/rls.h.md`).
 
 
 ### RowDescription
@@ -10795,6 +11043,10 @@ The planner pass (`allpaths.c`) that estimates each base relation's row count an
 
 
 
+### set_baserel_size_estimates
+The optimizer routine (costsize.c) that fills a base relation's row-count and width estimates from statistics and restriction-clause selectivity, run per base rel during `set_rel_size` in the size-estimation pass. [verified-by-code] (via `knowledge/subsystems/optimizer.md`).
+
+
 ### set_cheapest
 The optimizer step that, after all paths for a `RelOptInfo` have been added, selects the cheapest-total and cheapest-startup paths (and cheapest parameterized variants) into the rel's `cheapest_*` fields for the join search to build on. [inferred] (via `knowledge/files/src/backend/optimizer/util/pathnode.c.md`).
 
@@ -10913,6 +11165,10 @@ verifier — checked against the client's response during password
 authentication. Never the cleartext password. [verified-by-code] (via
 `knowledge/files/src/backend/libpq/crypt.c.md`).
 
+
+
+### shared_buffers
+GUC sizing the main shared buffer pool (`NBuffers` 8 KB pages, default 128 MB); SLRU buffer counts auto-size from it when left at 0, and pg_prewarm repopulates it after a restart. [verified-by-code] (via `knowledge/files/src/backend/utils/init/globals.c.md`).
 
 
 ### shared_preload_libraries
@@ -11601,6 +11857,10 @@ brings the cluster to a consistent state before normal operation begins.
 
 
 
+### statement_timeout
+GUC aborting a statement that runs longer than the limit; it is armed as `STATEMENT_TIMEOUT` alongside `LOCK_TIMEOUT` in `ProcSleep`, and is the last-resort backstop for pathological CPU-bound operators (e.g. ltree backtracking) that `check_stack_depth` cannot catch. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/proc.c.md`).
+
+
 ### StaticAssert
 A compile-time assertion (`StaticAssertDecl` / `StaticAssertStmt`) that
 fails the build if a constant condition is false; used to pin struct sizes
@@ -11854,9 +12114,21 @@ user/SecContext so the switch is reliably undone. [verified-by-code] (via
 
 
 
+### synchronized_standby_slots
+GUC naming physical slots that must confirm WAL receipt before a logical walsender may send changes downstream, preventing logical subscribers from getting ahead of physical standbys; `StandbySlotsHaveCaughtup` gates the wakeup. [verified-by-code] (via `knowledge/files/src/backend/replication/slot.c.md`).
+
+
 ### synchronous_commit
 The transaction-level GUC deciding whether commit waits for WAL durability: when on, `RecordTransactionCommit` calls `XLogFlush(XactLastRecEnd)` (and, for the sync-replication levels, waits for standby ack) before returning; when off, commit returns before the flush. [verified-by-code] (via `knowledge/subsystems/access-transam.md`).
 
+
+
+### synchronous_standby_names
+GUC listing the standbys (and quorum/priority rules) required for synchronous commit; a dedicated Bison grammar (`syncrep_gram.y`) parses it, `SYNC_STANDBY_DEFINED` marks it non-empty, and check/assign hooks validate it. [verified-by-code] (via `knowledge/files/src/backend/replication/syncrep_gram.y.md`).
+
+
+### SyncRepRequested
+The macro `max_wal_senders > 0 && synchronous_standby_names` non-empty, telling a committing backend whether it must wait for synchronous-standby acknowledgement before returning. [verified-by-code] (via `knowledge/files/src/include/replication/syncrep.h.md`).
 
 
 ### SyncRepWaitForLSN
@@ -12031,6 +12303,10 @@ A typcache entry flag indicating the cached pg_type fields are populated; a rele
 ### TCFLAGS_OPERATOR_FLAGS
 A composite bitmask in the type cache (`typcache.c:122-125`) covering all the operator- and support-proc-related flag bits — defined as the complement of the basic flags (`~(HAVE_PG_TYPE_DATA | CHECKED_DOMAIN_CONSTRAINTS | DOMAIN_BASE_IS_COMPOSITE)`). On a `pg_opclass` invalidation, `TypeCacheOpcCallback` clears this mask on every cache entry, wiping everything operator-related while preserving the basic pg_type and domain data. [verified-by-code] (`typcache-entry-and-lookup.md` — via `knowledge/idioms/typcache-entry-and-lookup.md`).
 
+
+
+### temp_buffers
+GUC sizing a backend's local buffer pool for temporary-table pages; `localbuf.c` derives a per-backend pin limit of `num_temp_buffers / 4` and rejects `SET temp_buffers` once local buffers have been allocated in the session. [verified-by-code] (via `knowledge/files/src/backend/storage/buffer/localbuf.c.md`).
 
 
 ### TerminateBackgroundWorker
@@ -12236,6 +12512,18 @@ The field of a `Path` holding the planner's estimate of the cost to return the e
 
 
 
+### track_commit_timestamp
+GUC enabling recording of each transaction's commit timestamp in the commit_ts SLRU (queryable via `pg_xact_commit_timestamp`); recorded in `pg_control`, with a precise point at which reads become safe after an off→on transition. [verified-by-code] (via `knowledge/files/src/backend/access/transam/commit_ts.c.md`).
+
+
+### track_io_timing
+GUC enabling per-operation I/O timing (built on `instr_time`) that feeds `pg_stat_statements`, `EXPLAIN (ANALYZE, BUFFERS)`, and the pgstat I/O view; when off, the pgstat I/O cells record counts but not accumulated time. [verified-by-code] (via `knowledge/files/src/backend/utils/activity/pgstat_io.c.md`).
+
+
+### transaction_timeout
+GUC aborting any transaction (idle or active) that runs longer than the limit — a stricter bound than `statement_timeout` or `idle_in_transaction_session_timeout` alone; one of the ms-valued timeout GUCs in `proc.h`. pg_dump sets it to 0. [verified-by-code] (via `knowledge/files/src/include/storage/proc.h.md`).
+
+
 ### TransactionId
 A 32-bit transaction identifier (XID) stamped into each tuple's xmin/xmax to drive MVCC visibility; XIDs are assigned lazily on first write and wrap around, so they are compared modulo-2^31 and frozen by vacuum to stay ahead of wraparound. [verified-by-code] (`varsup.c:299` — via `knowledge/files/src/backend/access/transam/varsup.c.md`).
 
@@ -12385,6 +12673,14 @@ transition tables. The trigger reads it to learn what fired and returns the
 (possibly modified) tuple. [from-comment] (via
 `knowledge/docs-distilled/trigger-interface.md`).
 
+
+
+### try_relation_open
+The lock-first-then-check variant of `relation_open`: it takes the lock, tests existence via `SearchSysCacheExists1(RELOID, ...)`, and on a miss releases the now-useless lock and returns NULL instead of erroring. It backs `try_table_open`. [verified-by-code] (via `knowledge/files/src/backend/access/common/relation.c.md`).
+
+
+### try_table_open
+The soft-failure table open: `try_relation_open` (lock-first, return NULL on a missing relation) plus `validate_relation_as_table`; returns NULL instead of erroring when the OID no longer names a table. [verified-by-code] (via `knowledge/files/src/backend/access/table/table.c.md`).
 
 
 ### TsmRoutine
@@ -12645,9 +12941,25 @@ transaction-id wraparound. Lazy `VACUUM` runs concurrently with normal access;
 
 
 
+### vacuum_cost_delay
+The sleep duration applied when a VACUUM's `VacuumCostBalance` exceeds `vacuum_cost_limit`; default 0 (disabled) for manual VACUUM, while autovacuum uses `autovacuum_vacuum_cost_delay` (default 2 ms) out of the box. [from-README] (via `knowledge/docs-distilled/runtime-config-vacuum.md`).
+
+
+### vacuum_cost_limit
+The accumulated cost budget after which a cost-delayed VACUUM sleeps; `vacuum_delay_point` compares `VacuumCostBalance` against it and sleeps when exceeded (default 200, honoring the failsafe disable). [verified-by-code] (via `knowledge/files/src/backend/commands/vacuum.c.md`).
+
+
+### vacuum_delay_point
+The cost-based-delay checkpoint called inside VACUUM's scan loops: it reads `VacuumCostBalance` accumulated by the buffer manager and sleeps when it exceeds `vacuum_cost_limit` (honoring the failsafe). It must be called only while no buffer lock is held. [verified-by-code] (via `knowledge/files/src/backend/commands/vacuum.c.md`).
+
+
 ### vacuum_rel
 The per-relation entry point inside `commands/vacuum.c` (`vacuum_rel`, line 2012) — opens the relation, runs sanity/permission checks, dispatches to the table AM via `table_relation_vacuum`, then recurses into the relation's TOAST table. The outer `vacuum()` loop calls it once per target relation. [verified-by-code] (via `knowledge/files/src/backend/commands/vacuum.c.md`).
 
+
+
+### VacuumCostBalance
+The accumulating cost counter the buffer manager increments on each VACUUM page hit/miss/dirty; when it exceeds `vacuum_cost_limit`, `vacuum_delay_point` sleeps for `vacuum_cost_delay`. Initialized among the VACUUM-costing globals. [verified-by-code] (via `knowledge/files/src/backend/commands/vacuum.c.md`).
 
 
 ### ValuePerCall
@@ -12690,6 +13002,10 @@ transparently handling both the 1-byte (short) and 4-byte (long) header
 layouts; pair with `VARSIZE_ANY_EXHDR` for the length. [verified-by-code]
 (via `knowledge/subsystems/contrib-citext.md`).
 
+
+
+### variable_conflict
+The plpgsql GUC (`PGC_SUSET` enum `error|use_variable|use_column`, default `error`) resolving the ambiguity when a PL/pgSQL variable name matches a query column; superuser-only because changing it can silently alter query meaning, overridable per-function via `#variable_conflict`. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_handler.md`).
 
 
 ### varlena
@@ -12867,6 +13183,22 @@ reproduce the original page change. [verified-by-code] (via
 ### wal_level
 The GUC controlling how much information is written to WAL (`minimal`, `replica`, `logical`), trading log volume against the features it enables — archiving/streaming need `replica`, logical decoding needs `logical`. Under `minimal`, certain operations (e.g. a permanent relation created in the same transaction) skip WAL and instead fsync the file at commit, tracked via `pendingSyncHash`. [verified-by-code] (via `knowledge/files/src/backend/catalog/storage.c.md`).
 
+
+
+### wal_log_hints
+GUC forcing hint-bit updates to be WAL-logged (via full-page images) so they are safe under replication/checksums; `XLogHintBitIsNeeded() = (wal_log_hints || DataChecksumsNeedWrite())`, and it is recorded in `pg_control`. [verified-by-code] (via `knowledge/files/src/include/access/xlog.h.md`).
+
+
+### wal_segment_size
+The size of a single WAL segment file (fixed at initdb); clients like pg_basebackup learn it via `SHOW wal_segment_size` (`RetrieveWalSegSize`), and trusting the server-reported value is a noted trust boundary. [verified-by-code] (via `knowledge/files/src/bin/pg_basebackup/streamutil.c.md`).
+
+
+### wal_sync_method
+GUC selecting the syscall used to flush WAL to disk (`fdatasync` default on Linux, plus `open_datasync`, `fsync`, etc.); pg_test_fsync measures each so operators can pick, and platform shims (win32fdatasync) back the choices. [verified-by-code] (via `knowledge/files/src/bin/pg_test_fsync/pg_test_fsync.c.md`).
+
+
+### wal_writer_delay
+GUC setting the WAL writer's sleep between flush rounds; async-commit transactions are guaranteed to reach disk within roughly `3 × wal_writer_delay`. Declared in `walwriter.h` with `wal_writer_flush_after`. [verified-by-code] (via `knowledge/files/src/backend/postmaster/walwriter.c.md`).
 
 
 ### WALBufMappingLock
@@ -13134,6 +13466,10 @@ the barrier a backend must cross before reporting a commit or evicting a
 dirty buffer whose WAL isn't yet flushed (WAL-before-data).
 [verified-by-code] (via `knowledge/subsystems/access-transam.md`).
 
+
+
+### XLogHintBitIsNeeded
+The macro `(wal_log_hints || DataChecksumsNeedWrite())` deciding whether a hint-bit change must be WAL-logged (as a full-page image) to be crash/replica safe; the first hint-write on a page after a checkpoint therefore emits WAL when true. [verified-by-code] (via `knowledge/files/src/include/access/xlog.h.md`).
 
 
 ### XLogInitBufferForRedo
