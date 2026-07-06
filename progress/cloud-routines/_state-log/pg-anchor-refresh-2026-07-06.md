@@ -1,1 +1,1 @@
-**pg-anchor-refresh** 2026-07-06 — anchor a8c2547eaac7 → 9d1188f29865; 6 commits; 2 docs newly queued for audit (method_worker.c + dict_xsyn.c; 3 more impacted already [pending], not re-queued); 0 catversion; no subsystem ≥5 impacted (PR #<n>).
+**pg-anchor-refresh** 2026-07-06 — anchor a8c2547eaac7 → 9d1188f29865; 6 commits; 2 docs newly queued for audit (method_worker.c + dict_xsyn.c; 3 more impacted already [pending], not re-queued); 0 catversion; no subsystem ≥5 impacted (PR #481).
