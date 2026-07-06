@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-05 — anchor e0ff7fd9aa2e → a8c2547eaac7; 1 commit (rule-rename `_RETURN` guard, Tom Lane, bug #19543); 0 docs newly queued (the 1 impacted doc rewriteDefine.c.md already `[pending]`); 0 catversion (PR #<n>).
