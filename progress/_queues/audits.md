@@ -13,14 +13,6 @@ than the periodic 30-day refresh: process them first.
 
 ## Entries
 
-[pending] knowledge/idioms/parser-pipeline.md verified=2026-06-12
-[pending] knowledge/idioms/node-types-and-lists.md verified=2026-06-12
-[pending] knowledge/architecture/planner.md verified=2026-06-13
-[pending] knowledge/data-structures/snapshot-lifecycle.md verified=2026-06-13 [drift-fixed: heapam_visibility.c cite 177-191→13-35]
-[pending] knowledge/architecture/executor.md verified=2026-06-13 [drift-fixed: nodeModifyTable.c §8a cites +13 lines]
-[pending] knowledge/architecture/overview.md verified=2026-06-14
-[pending] knowledge/architecture/access-methods.md verified=2026-06-14
-[pending] knowledge/architecture/process-model.md verified=2026-06-14
 [pending] knowledge/architecture/replication.md verified=2026-06-14
 [pending] knowledge/subsystems/access-heap.md verified=2026-06-14
 [pending] knowledge/subsystems/access-transam.md verified=2026-06-14
@@ -387,3 +379,14 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/bin/psql/tab-complete.in.c.md  reason=anchor-bump 2026-07-04:a5422fe3bd7e..e0ff7fd9aa2e (psql: Fix \df tab completion for procedures, 6d4ca6de9777, Fujii Masao) — prior [in-progress:cloud/pg-quality-auditor/2026-06-29] row (06-25 anchor-bump) still open; re-touched here
 [pending] knowledge/files/src/interfaces/libpq/fe-trace.c.md  reason=anchor-bump 2026-07-04:a5422fe3bd7e..e0ff7fd9aa2e (Fix tracing of BackendKeyData and CancelRequest, b22b619056e8, Heikki Linnakangas)
 [pending] knowledge/subsystems/contrib-btree_gist.md  reason=anchor-bump 2026-07-04:a5422fe3bd7e..e0ff7fd9aa2e (25 impacted btree_gist files — encoding-aware-truncation removal b82d69abf64f + truncated-bounds tightening fea9c1884b20 + signature sync 4b808ed77cd9 + NotEqual internal-page crash fix eef644e57c38, Tom Lane); >=5-impacted-file subsystem threshold
+
+## audit-clean/drift rotation (2026-07-05, pg-quality-auditor) — AUDIT mode, 8 long-form docs re-verified @a5422fe3bd7e (4 clean, 4 drift-fixed)
+
+[pending] knowledge/idioms/parser-pipeline.md verified=2026-07-05 [clean: 10 cites hold @a5422fe3bd7e — parser.c:35-42/scan.l:13-22/gram.y:13629-13631+13649-13706/analyze.c:127+334-433+8-14+74/parse_node.c:38-50; tightened parsenodes.h Query typedef 117→120]
+[pending] knowledge/idioms/node-types-and-lists.md verified=2026-07-05 [clean: 19 cites exact — nodes.h/pg_list.h/value.h/gen_node_support.pl/nodes-README all hold]
+[pending] knowledge/data-structures/snapshot-lifecycle.md verified=2026-07-05 [clean: 9 cites hold — snapmgr.c 785-787/898-902/937-955/499/554-577/1862-1868 + heapam_visibility.c 13-35 all exact]
+[pending] knowledge/architecture/access-methods.md verified=2026-07-05 [clean: no file:line cites (bare filenames + symbol/commit refs only) — vacuously clean]
+[pending] knowledge/architecture/overview.md verified=2026-07-05 [drift-fixed: postgres.c dispatch switch 4838+→4933 (switch(firstchar)); postinit.c InitPostgres 716→722, ClientAuthentication call 262→268; nav path optimizer/planner.c→optimizer/plan/planner.c]
+[pending] knowledge/architecture/planner.md verified=2026-07-05 [drift-fixed: analyzejoins.c reduce_unique_semijoins 874-895→961-974 + comment 862-873→961-972, remove_useless_self_joins 2539-2553→2603-2639 (~+90/+100 shift); planner.c/pathnode.c/costsize.c/setrefs.c/allpaths.c cites all hold]
+[pending] knowledge/architecture/executor.md verified=2026-07-05 [drift-fixed: execGrouping.c §7b additionalsize mechanism refactored — pad-bytes-after-TupleHashEntryData (502 / (char*)entry+MAXALIGN) → co-located-with-MinimalTuple via ExecCopySlotMinimalTupleExtra:585-586 + TupleHashEntryGetAdditional (executor.h:193); 58/59 other cites exact incl. 2026-06-13 nodeModifyTable §8a]
+[pending] knowledge/architecture/process-model.md verified=2026-07-05 [drift-fixed: procsignal_sigusr1_handler misattributed to tcop/postgres.c → defined procsignal.c:696, registered postgres.c:4427; 27/28 other cites hold @a5422fe3bd7e]

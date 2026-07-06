@@ -237,13 +237,20 @@ them.
 HashAgg, Hashjoin, hashed Subplan IN, SetOp(hash), Memoize, and Recursive
 Union all share the simplehash-based `TupleHashTable` in `execGrouping.c`.
 The trick that makes HashAgg fast: `BuildTupleHashTable` takes an
-`additionalsize` argument, and the hash table allocates that many pad
-bytes immediately after each `TupleHashEntryData` so HashAgg's per-group
-**transition values live inline in the hash entry** rather than being
-reached via a pointer to a separately palloc'd struct [verified-by-code
-`execGrouping.c:184, 502`]. One cache line, one allocation per group, and
-`((char*)entry) + MAXALIGN(sizeof(TupleHashEntryData))` recovers the
-per-group state.
+`additionalsize` argument (maxalign'd at `execGrouping.c:222-223`), and
+`LookupTupleHashEntry` co-locates that many extra bytes **in the same
+allocation as the entry's copied `MinimalTuple`** — `entry->firstTuple` is
+built by `ExecCopySlotMinimalTupleExtra(slot, hashtable->additionalsize)`,
+which reserves `additionalsize` bytes ahead of the tuple data so HashAgg's
+per-group **transition values ride along with the group's tuple** rather
+than being reached via a pointer to a separately palloc'd struct
+[verified-by-code `execGrouping.c:184-193, 577-586`]. The caller recovers
+the per-group state with `TupleHashEntryGetAdditional(hashtable, entry)`
+(`executor.h:193`); packing the tuple + extra data in one chunk avoids both
+an extra pointer in `TupleHashEntryData` and a second allocation per group.
+(Earlier PG placed the pad bytes immediately after `TupleHashEntryData` and
+recovered them via `((char*)entry) + MAXALIGN(sizeof(TupleHashEntryData))`;
+that layout was replaced by the co-located-tuple scheme.)
 
 ## 8. Async execution (Append over ForeignScan)
 

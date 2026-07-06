@@ -169,7 +169,8 @@ comment at `:596-599`, the `if (... || stateP->sendOnly) continue;` skip at
   `pss_signalFlags[]` and dispatches (catchup, recovery conflict,
   parallel-message, barriers, log memory context, log backtrace, …).
   [verified-by-code] `procsignal.c:295-313` (`SendProcSignal`),
-  `tcop/postgres.c::procsignal_sigusr1_handler`.
+  `procsignal.c:696` (`procsignal_sigusr1_handler`, registered via
+  `pqsignal(SIGUSR1, ...)` at `tcop/postgres.c:4427`).
 - Other signals: `SIGHUP` for config reload, `SIGTERM`/`SIGINT` for
   terminate/cancel, `SIGCHLD` to the postmaster.
 

@@ -52,7 +52,7 @@ directory under `source/src/backend/`.
 loop, dispatches `Q` (simple query) / `P` (parse) / `B` (bind) / `E` (execute)
 / etc., and is responsible for transaction state.
 [from-comment] `source/src/backend/tcop/postgres.c:13-15`
-[verified-by-code] dispatch switch at `postgres.c:4838+`.
+[verified-by-code] dispatch switch (`switch (firstchar)`) at `postgres.c:4933`.
 
 ### Parser → Analyzer is a hard split
 The raw parser (`gram.y`, Bison) does **no catalog access** and must be safe to
@@ -170,8 +170,8 @@ Initial bootstrap (the very first `template1`) is done by a special mode in
 | Parse | `tcop/postgres.c:616` | `pg_parse_query` |
 | Analyze | `parser/analyze.c` | `parse_analyze_fixedparams` |
 | Rewrite | `rewrite/rewriteHandler.c:4781` | `QueryRewrite` |
-| Plan | `tcop/postgres.c:899` | `pg_plan_query` → `optimizer/planner.c:planner` |
+| Plan | `tcop/postgres.c:899` | `pg_plan_query` → `optimizer/plan/planner.c:planner` |
 | Execute | `executor/execMain.c` | `ExecutorStart/Run/Finish/End` |
-| Init backend | `utils/init/postinit.c:716` | `InitPostgres` |
-| Auth | `utils/init/postinit.c:262` | `ClientAuthentication` |
+| Init backend | `utils/init/postinit.c:722` | `InitPostgres` |
+| Auth | `utils/init/postinit.c:268` | `ClientAuthentication` (call site) |
 | Startup packet | `tcop/backend_startup.c:486` | `ProcessStartupPacket` |
