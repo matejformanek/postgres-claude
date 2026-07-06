@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-07-05 — Watchdog audit of the 07-04→07-05 cycle: OK 8 · SKIPPED 0 · FAILED [pg-quality-auditor #471 conflict-left-open on audits.md vs merged #463] · SILENT [pg-file-backfiller ~19th idle night, terminal]. Morning briefing at progress/_briefings/2026-07-05.md (PR to follow).
