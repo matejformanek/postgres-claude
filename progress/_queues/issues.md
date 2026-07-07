@@ -90,18 +90,48 @@ least-recently-triaged).
 
 ## Refill 2026-07-04 (pg-quality-auditor) — libpq register, 15 line-cited open rows
 
-[pending] libpq.md fe-auth.c:941 | correctness/likely | seeded=2026-07-04
-[pending] libpq.md fe-auth.c:1219 | correctness/likely | seeded=2026-07-04
-[pending] libpq.md pqmq.c:255-263 | question/maybe | seeded=2026-07-04
-[pending] libpq.md pqmq.c:205-207 | correctness/nit | seeded=2026-07-04
-[pending] libpq.md pqmq.c:172-194 | undocumented-invariant/nit | seeded=2026-07-04
-[pending] libpq.md pqformat.c:413-441 | correctness/maybe | seeded=2026-07-04
-[pending] libpq.md pqformat.c:511-550 | correctness/maybe | seeded=2026-07-04
-[pending] libpq.md pqformat.c:97 | undocumented-invariant/nit | seeded=2026-07-04
-[pending] libpq.md pqexpbuffer.c:213 | correctness/maybe | seeded=2026-07-04
-[pending] libpq.md libpq-be-fe.h:244-257 | correctness/maybe | seeded=2026-07-04
-[pending] libpq.md libpq-be-fe.h:69-119 | undocumented-invariant/maybe | seeded=2026-07-04
-[pending] libpq.md pqformat.h:99-124 | undocumented-invariant/maybe | seeded=2026-07-04
-[pending] libpq.md pqformat.h:170-187 | stale-todo/nit | seeded=2026-07-04
-[pending] libpq.md hba.h:117 | leak/maybe | seeded=2026-07-04
-[pending] libpq.md hba.h:42 | undocumented-invariant/maybe | seeded=2026-07-04
+[done:2026-07-07] libpq.md fe-auth.c:941 | correctness/likely | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md fe-auth.c:1219 | correctness/likely | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqmq.c:255-263 | question/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqmq.c:205-207 | correctness/nit | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqmq.c:172-194 | undocumented-invariant/nit | still-present@a8c2547eaac7 (range holds; +AmRepackWorker/PROCSIG_REPACK branch inserted since seed, pattern intact)
+[done:2026-07-07] libpq.md pqformat.c:413-441 | correctness/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqformat.c:511-550 | correctness/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqformat.c:97 | undocumented-invariant/nit | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqexpbuffer.c:213 | correctness/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md libpq-be-fe.h:244-257 | correctness/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md libpq-be-fe.h:69-119 | undocumented-invariant/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqformat.h:99-124 | undocumented-invariant/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md pqformat.h:170-187 | stale-todo/nit | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md hba.h:117 | leak/maybe | still-present@a8c2547eaac7
+[done:2026-07-07] libpq.md hba.h:42 | undocumented-invariant/maybe | still-present@a8c2547eaac7
+
+## Refill 2026-07-07 (pg-quality-auditor) — common register, 21 line-cited open rows
+
+libpq register fully drained this run (15 rows all still-present@a8c2547eaac7).
+Next security-relevant frontend/shared register: `common` (src/common +
+src/include/common) — the Phase D data-leak surface continues here (checksum,
+manifest, compression, crypto, secret-scrub). All rows dated 2026-06-03, well
+past the 30-day staleness threshold.
+
+[pending] common.md md5_common.c:151,170 | secret-scrub/likely | seeded=2026-07-07
+[pending] common.md blkreftable.c:595-601,652-655 | trust-boundary/likely | seeded=2026-07-07
+[pending] common.md blkreftable.c:666-672 | dos/maybe | seeded=2026-07-07
+[pending] common.md blkreftable.c:907 | trust-boundary/likely | seeded=2026-07-07
+[pending] common.md parse_manifest.c:811-878 | trust-boundary/likely | seeded=2026-07-07
+[pending] common.md checksum_helper.h:20-27 | trust-boundary/maybe | seeded=2026-07-07
+[pending] common.md controldata_utils.c:209-252 | state-transition/maybe | seeded=2026-07-07
+[pending] common.md pg_lzcompress.c:255-256 | undocumented-invariant/maybe | seeded=2026-07-07
+[pending] common.md jsonapi.c:431-432,952-953,983-984 | dos/maybe | seeded=2026-07-07
+[pending] common.md jsonapi.c:1400-1407 | dos/nit | seeded=2026-07-07
+[pending] common.md archive.c:53-54 | trust-boundary/maybe | seeded=2026-07-07
+[pending] common.md file_utils.c:301-340 | correctness/maybe | seeded=2026-07-07
+[pending] common.md file_perm.c:37 | undocumented-invariant/maybe | seeded=2026-07-07
+[pending] common.md checksum_helper.c:96-134 | undocumented-invariant/nit | seeded=2026-07-07
+[pending] common.md checksum_helper.c:200-227 | undocumented-invariant/nit | seeded=2026-07-07
+[pending] common.md restricted_token.c:151 | trust-boundary/maybe | seeded=2026-07-07
+[pending] common.md compression.c,compression.h:17-20 | undocumented-invariant/likely | seeded=2026-07-07
+[pending] common.md compression.c:304-327 | trust-boundary/maybe | seeded=2026-07-07
+[pending] common.md compression.c:191,318,468 | correctness/nit | seeded=2026-07-07
+[pending] common.md cryptohash.c:78-83 | stale-todo/nit | seeded=2026-07-07
+[pending] common.md instr_time.c:411 | stale-todo/nit | seeded=2026-07-07
