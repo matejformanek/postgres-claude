@@ -171,7 +171,6 @@ if a static initializer can produce it. [from-README
 | `source/src/backend/utils/misc/guc.c:5178-5228` | targeted (`MarkGUCPrefixReserved`) | §"Namespacing" + SKILL.md §1.4 |
 | `source/src/test/modules/worker_spi/worker_spi.c:303-360` | targeted (custom-GUC defs + MarkGUCPrefixReserved) | SKILL.md §1.3 |
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -191,7 +190,6 @@ if a static initializer can produce it. [from-README
 | [`src/test/modules/worker_spi/worker_spi.c`](../files/src/test/modules/worker_spi/worker_spi.c.md) | 303 | \| -360 \| targeted (custom-GUC defs + MarkGUCPrefixReserved) \| SKILL.md §1.3 \| |
 
 <!-- /callsites:auto -->
-
 
 ## Scenarios that use me
 <!-- scenarios:auto -->

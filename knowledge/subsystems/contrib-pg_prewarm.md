@@ -102,7 +102,6 @@ Touched by Andres Freund (read-stream conversion), Thomas Munro
 - Concurrent autoprewarm workers must NOT exist — the function
   asserts that only one is running. Don't break that assertion.
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -116,7 +115,6 @@ Touched by Andres Freund (read-stream conversion), Thomas Munro
 | [`contrib/pg_prewarm/pg_prewarm.c`](../files/contrib/pg_prewarm/pg_prewarm.c.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/bgworker-and-extensions/SKILL.md` — `autoprewarm.c` is a canonical static-registration bgworker example.

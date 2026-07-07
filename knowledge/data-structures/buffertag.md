@@ -177,7 +177,6 @@ of the subtle bugs the tag prevents.
 - All tag-mutating call sites:
   `grep -RIn 'InitBufferTag\|ClearBufferTag\|BufTagSetRelForkDetails' source/src/backend`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -193,7 +192,6 @@ of the subtle bugs the tag prevents.
 | [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | — | definition + helper inlines |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/storage-buffer.md` — the buffer manager

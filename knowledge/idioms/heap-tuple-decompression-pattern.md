@@ -162,8 +162,6 @@ The relation's column default is governed by the
 - LZ4 conditional code:
   `grep -RIn 'USE_LZ4' source/src/backend`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -181,8 +179,6 @@ The relation's column default is governed by the
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -192,7 +188,6 @@ The relation's column default is governed by the
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/fmgr-and-spi/SKILL.md` — `PG_GETARG_*_PP` vs `_P` (preserve-packed semantics).

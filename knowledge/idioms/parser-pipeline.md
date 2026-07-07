@@ -153,8 +153,6 @@ about queries uniformly — plan cache, `pg_stat_statements`, parallel-worker
 serialization, rule storage all operate on `Query` (parse) or `PlannedStmt`
 (plan) without caring whether the source SQL was DML or DDL.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -176,8 +174,9 @@ serialization, rule storage all operate on `Query` (parse) or `PlannedStmt`
 *Auto-derived from direct references + transitive file-overlap.*
 *Refresh via `scripts/build-scenario-idiom-matrix.py`.*
 
-- [`add-new-hook`](../scenarios/add-new-hook.md)
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+- [`add-new-shared-memory-region`](../scenarios/add-new-shared-memory-region.md)
 - [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md)
-- [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
+- [`add-startup-hook`](../scenarios/add-startup-hook.md)
 
 <!-- /scenarios:auto -->

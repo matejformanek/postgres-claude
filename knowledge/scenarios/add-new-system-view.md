@@ -104,8 +104,6 @@ self-contained chunk; the tree must build at the end of each phase.
    Phase-end check: `meson test -C dev/build-debug --suite regress` is
    green.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -121,7 +119,6 @@ self-contained chunk; the tree must build at the end of each phase.
 | [`security-barrier-views`](../idioms/security-barrier-views.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **`REVOKE ... FROM PUBLIC` on the view is not enough** if the

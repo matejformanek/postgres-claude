@@ -555,8 +555,6 @@ grep -n "case SNAPSHOT_MVCC\|case SNAPSHOT_SELF\|case SNAPSHOT_ANY\|case SNAPSHO
     source/src/backend/access/heap/heapam_visibility.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -571,8 +569,6 @@ grep -n "case SNAPSHOT_MVCC\|case SNAPSHOT_SELF\|case SNAPSHOT_ANY\|case SNAPSHO
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -582,7 +578,6 @@ grep -n "case SNAPSHOT_MVCC\|case SNAPSHOT_SELF\|case SNAPSHOT_ANY\|case SNAPSHO
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[snapshot-active-stack-and-registered]] —

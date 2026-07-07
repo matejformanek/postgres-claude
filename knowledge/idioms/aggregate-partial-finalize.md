@@ -476,8 +476,6 @@ grep -rn "is_foreign_grouping\|deparse_agg" \
        source/contrib/postgres_fdw/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -497,8 +495,6 @@ grep -rn "is_foreign_grouping\|deparse_agg" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -512,7 +508,6 @@ grep -rn "is_foreign_grouping\|deparse_agg" \
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[aggregate-trans-state]] — transfunc/finalfunc machinery.

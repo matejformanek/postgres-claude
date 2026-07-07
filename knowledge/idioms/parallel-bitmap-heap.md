@@ -253,8 +253,6 @@ the last detacher frees the shared iterator.
 - Heap-AM bitmap path:
   `grep -RIn 'table_beginscan_bm\|table_scan_bitmap_next_block\|table_scan_bitmap_next_tuple' source/src/backend/access/heap | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -274,8 +272,6 @@ the last detacher frees the shared iterator.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -285,7 +281,6 @@ the last detacher frees the shared iterator.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/parallel-gather-merge.md` — Gather above.

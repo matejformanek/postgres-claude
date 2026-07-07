@@ -236,7 +236,6 @@ type list, etc.
 - eq_classes users:
   `grep -RIn 'eq_classes' source/src/backend/optimizer/path | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -254,7 +253,6 @@ type list, etc.
 | [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | — | full struct |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/reloptinfo.md` —

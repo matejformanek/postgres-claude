@@ -569,8 +569,6 @@ grep -n "apply_spooled_messages\|stream_write_change\|stream_open_file\|subxact_
     source/src/backend/replication/logical/worker.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -584,8 +582,6 @@ grep -n "apply_spooled_messages\|stream_write_change\|stream_open_file\|subxact_
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -595,7 +591,6 @@ grep -n "apply_spooled_messages\|stream_write_change\|stream_open_file\|subxact_
 - [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[apply-worker-loop-and-dispatch]] — `apply_dispatch` is

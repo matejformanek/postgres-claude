@@ -505,8 +505,6 @@ grep -nE "eager_scan|EAGER_SCAN_REGION_SIZE|MAX_EAGER_FREEZE_SUCCESS_RATE|vacuum
        source/src/backend/access/heap/vacuumlazy.c | head -15
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -528,8 +526,6 @@ grep -nE "eager_scan|EAGER_SCAN_REGION_SIZE|MAX_EAGER_FREEZE_SUCCESS_RATE|vacuum
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -539,7 +535,6 @@ grep -nE "eager_scan|EAGER_SCAN_REGION_SIZE|MAX_EAGER_FREEZE_SUCCESS_RATE|vacuum
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[vacuum-hot-prune]] — heap_page_prune_and_freeze (Phase I per-page work).

@@ -180,8 +180,6 @@ the spread.
 - The checkpointer process:
   `grep -n 'CheckpointerMain\|HandleCheckpointerInterrupts' source/src/backend/postmaster/checkpointer.c | head -15`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -196,8 +194,6 @@ the spread.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -208,7 +204,6 @@ the spread.
 - [`bump-catversion`](../scenarios/bump-catversion.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/crash-recovery-startup.md` — recovery

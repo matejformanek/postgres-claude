@@ -259,8 +259,6 @@ when I queued you".
 - Flag check at event save:
   `grep -n 'AFTER_TRIGGER_DEFERRABLE\|AFTER_TRIGGER_INITDEFERRED' source/src/backend/commands/trigger.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -279,8 +277,6 @@ when I queued you".
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -290,7 +286,6 @@ when I queued you".
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/trigger-transition-tables.md` — why

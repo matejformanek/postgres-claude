@@ -196,8 +196,6 @@ core but the wiring through pgoutput is recent.
 - pg_event_trigger_ddl_commands:
   `grep -n 'pg_event_trigger_ddl_commands' source/src/backend/commands/event_trigger.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -212,8 +210,6 @@ core but the wiring through pgoutput is recent.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -223,7 +219,6 @@ core but the wiring through pgoutput is recent.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/event-trigger-firing.md` — companion

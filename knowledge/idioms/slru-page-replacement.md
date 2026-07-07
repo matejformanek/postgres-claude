@@ -305,8 +305,6 @@ grep -n "SimpleLruTruncate\|SlruScanDirCbDeleteCutoff" \
      source/src/backend/access/transam/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -327,8 +325,6 @@ grep -n "SimpleLruTruncate\|SlruScanDirCbDeleteCutoff" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -338,7 +334,6 @@ grep -n "SimpleLruTruncate\|SlruScanDirCbDeleteCutoff" \
 - [`add-new-lwlock-tranche`](../scenarios/add-new-lwlock-tranche.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[clog-slru]] — how CLOG sits on top of this layer.

@@ -147,8 +147,6 @@ designing the callback table. Per-file docs already exist for each.)
    prominent. Phase-end check: `meson compile -C dev/build-debug
    docs` clean.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -160,9 +158,10 @@ designing the callback table. Per-file docs already exist for each.)
 | [`locking`](../idioms/locking.md) | direct reference |
 | [`lwlock-rank-discipline`](../idioms/lwlock-rank-discipline.md) | shares files: `src/backend/storage/lmgr/lwlock.c` |
 | [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+| [`node-types-and-lists`](../idioms/node-types-and-lists.md) | shares files: `contrib/pg_stat_statements/pg_stat_statements.c` |
+| [`parser-pipeline`](../idioms/parser-pipeline.md) | shares files: `contrib/pg_stat_statements/pg_stat_statements.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Not in `shared_preload_libraries`.** The `_PG_init` of a

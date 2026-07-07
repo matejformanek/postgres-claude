@@ -129,8 +129,6 @@ exists yet.)
    the call-site comment from `xfunc.sgml`. Phase-end check: `meson
    compile -C dev/build-debug docs` is clean.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -141,10 +139,11 @@ exists yet.)
 |---|---|
 | [`background-worker-startup`](../idioms/background-worker-startup.md) | direct reference |
 | [`guc-variables`](../idioms/guc-variables.md) | direct reference |
+| [`node-types-and-lists`](../idioms/node-types-and-lists.md) | shares files: `contrib/pg_stat_statements/pg_stat_statements.c` |
+| [`parser-pipeline`](../idioms/parser-pipeline.md) | shares files: `contrib/pg_stat_statements/pg_stat_statements.c` |
 | [`process-utility-hook-chain`](../idioms/process-utility-hook-chain.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Wrong ring slot = wrong invariants.** Calling `RequestAddinShmemSpace`

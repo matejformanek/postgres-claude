@@ -206,8 +206,6 @@ holder" of a lock cycle forever; only manual
 - Victim error path:
   `grep -RIn 'deadlock detected' source/src/backend/storage/lmgr/deadlock.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -221,8 +219,6 @@ holder" of a lock cycle forever; only manual
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -232,7 +228,6 @@ holder" of a lock cycle forever; only manual
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/lwlock-rank-discipline.md` — the

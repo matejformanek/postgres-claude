@@ -103,8 +103,6 @@ The tree must build at the end of each phase.
 (If your function genuinely needs a new `.c` file, fold its creation +
 meson/Makefile wiring into Phase 1.)
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -119,7 +117,6 @@ meson/Makefile wiring into Phase 1.)
 | [`security-barrier-views`](../idioms/security-barrier-views.md) | shares files: `src/include/catalog/pg_proc.h` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Forgotten catversion bump** — symptom: `FATAL: database files are

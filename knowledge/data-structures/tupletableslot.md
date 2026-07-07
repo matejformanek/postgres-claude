@@ -175,7 +175,6 @@ freed memory.
 - The four built-in op tables:
   `grep -n 'const TupleTableSlotOps TTSOps' source/src/backend/executor/execTuples.c`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -190,7 +189,6 @@ freed memory.
 | [`src/include/executor/tuptable.h`](../files/src/include/executor/tuptable.h.md) | — | struct + vtable + op signatures |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/executor.md` — the executor pipeline

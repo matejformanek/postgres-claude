@@ -207,7 +207,6 @@ connections, etc.) without per-resource tracking.
 - CurrentResourceOwner save/restore patterns:
   `grep -RIn 'CurrentResourceOwner =' source/src/backend | head -20`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -221,7 +220,6 @@ connections, etc.) without per-resource tracking.
 | [`src/include/utils/resowner.h`](../files/src/include/utils/resowner.md) | — | public API + descriptor type |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/utils-mmgr.md` — memory contexts;

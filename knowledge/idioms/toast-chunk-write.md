@@ -244,8 +244,6 @@ rollback paths to use speculative deletes.
 - attstorage classes:
   `grep -n 'TYPSTORAGE_PLAIN\|TYPSTORAGE_EXTERNAL\|TYPSTORAGE_EXTENDED\|TYPSTORAGE_MAIN' source/src/include/catalog/pg_type.h | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -264,8 +262,6 @@ rollback paths to use speculative deletes.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -275,7 +271,6 @@ rollback paths to use speculative deletes.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/varatt-varlena.md` — the

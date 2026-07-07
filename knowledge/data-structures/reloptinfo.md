@@ -233,7 +233,6 @@ planner is careful to apply ≤ one of them per plan.
 - reloptkind switches:
   `grep -RIn 'reloptkind ==\|reloptkind !=' source/src/backend/optimizer | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -251,7 +250,6 @@ planner is careful to apply ≤ one of them per plan.
 | [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | — | full struct |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/plannerinfo.md` — parent;

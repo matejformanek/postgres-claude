@@ -232,8 +232,6 @@ that loosen this set explicit GUCs.
 - Parallel-mode enforcement:
   `grep -RIn 'IsInParallelMode\|es_use_parallel_mode' source/src/backend | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -254,8 +252,6 @@ that loosen this set explicit GUCs.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -265,7 +261,6 @@ that loosen this set explicit GUCs.
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/parallel-hash-join.md` —

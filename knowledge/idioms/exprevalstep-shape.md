@@ -274,8 +274,6 @@ brought the union back under budget.
 
 Full retro: `sessions/2026-06-22-sesvars-v3-retro.md` §F22.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -298,8 +296,6 @@ Full retro: `sessions/2026-06-22-sesvars-v3-retro.md` §F22.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -309,7 +305,6 @@ Full retro: `sessions/2026-06-22-sesvars-v3-retro.md` §F22.
 - [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/expression-evaluator-flow.md` — surrounding

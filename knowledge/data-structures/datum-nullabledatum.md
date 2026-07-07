@@ -213,7 +213,6 @@ for the full decode pattern.]
 - JIT layout markers:
   `grep -n 'FIELDNO_' source/src/include/postgres.h`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -227,7 +226,6 @@ for the full decode pattern.]
 | [`src/include/postgres.h`](../files/src/include/postgres.h.md) | — | type + macros |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/fmgrinfo.md` — `FunctionCallInfo`

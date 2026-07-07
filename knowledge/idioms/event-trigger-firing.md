@@ -205,8 +205,6 @@ triggers won't catch it.
 - Catalog:
   `grep -n 'pg_event_trigger' source/src/include/catalog/pg_event_trigger.h | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -224,8 +222,6 @@ triggers won't catch it.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -235,7 +231,6 @@ triggers won't catch it.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/process-utility-hook-chain.md` —

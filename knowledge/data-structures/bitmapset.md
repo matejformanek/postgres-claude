@@ -167,7 +167,6 @@ a `Bitmapset *` is talking about a set of baserel indices.
   `grep -n '_copyBitmapset\|_equalBitmapset\|_outBitmapset\|_readBitmapset' source/src/backend/nodes/*.c`
 - The canonical word-width macro: `grep -n 'BITS_PER_BITMAPWORD' source/src/include/nodes/bitmapset.h`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -181,7 +180,6 @@ a `Bitmapset *` is talking about a set of baserel indices.
 | [`src/include/nodes/bitmapset.h`](../files/src/include/nodes/bitmapset.h.md) | — | Source path |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `.claude/skills/parser-and-nodes/SKILL.md` — `Bitmapset` is a Node-tagged type that flows through copy/equal/out/read; `pg_node_attr(custom_copy_equal)` rule.

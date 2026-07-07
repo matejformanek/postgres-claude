@@ -338,8 +338,6 @@ grep -rn "TransactionIdGetStatus\|TransactionLogFetch" \
        source/src/backend/access/transam/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -362,8 +360,6 @@ grep -rn "TransactionIdGetStatus\|TransactionLogFetch" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -373,7 +369,6 @@ grep -rn "TransactionIdGetStatus\|TransactionLogFetch" \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[slru-page-replacement]] — buffer cache + group-LSN WAL barrier on write.

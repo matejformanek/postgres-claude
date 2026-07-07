@@ -214,8 +214,6 @@ the synthetic ID; SetCmax just stamps the result.
 - The cleanup hook:
   `grep -n 'AtEOXact_ComboCid' source/src/backend`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -231,8 +229,6 @@ the synthetic ID; SetCmax just stamps the result.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -242,7 +238,6 @@ the synthetic ID; SetCmax just stamps the result.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/heap-tuple-layout.md` — tuple

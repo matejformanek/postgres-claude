@@ -127,8 +127,6 @@ The tree must build at the end of each phase.
    must be *explained* in the commit message — "X moved from
    index-scan to seq-scan because the new knob penalises Y by Z%".
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -145,7 +143,6 @@ The tree must build at the end of each phase.
 | [`jit-provider-and-context`](../idioms/jit-provider-and-context.md) | shares files: `src/backend/jit/jit.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **`extern` in the wrong header.** Putting `extern PGDLLIMPORT double

@@ -497,8 +497,6 @@ grep -RnE 'ProcArrayApplyXidAssignment|XLOG_XACT_ASSIGNMENT' source/src/backend
 grep -RnE 'ParallelCurrentXids|SerializeTransactionState' source/src
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -515,8 +513,6 @@ grep -RnE 'ParallelCurrentXids|SerializeTransactionState' source/src
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -526,7 +522,6 @@ grep -RnE 'ParallelCurrentXids|SerializeTransactionState' source/src
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[subxact-xidcache-and-pgproc]] — the in-PGPROC cache that

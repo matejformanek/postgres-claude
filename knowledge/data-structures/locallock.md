@@ -189,7 +189,6 @@ Most workloads use a tiny fraction of the budget; the default
 - ResourceOwner integration:
   `grep -n 'ResourceOwnerRememberLock' source/src/backend/storage/lmgr/lock.c`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -203,7 +202,6 @@ Most workloads use a tiny fraction of the budget; the default
 | [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | — | definitions |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/fastpath-locks.md` — the fast-path subsystem

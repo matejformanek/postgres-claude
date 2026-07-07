@@ -511,8 +511,6 @@ grep -n "Estimate.*Space\|EstimateSnapshotSpace\|EstimateGUCStateSpace\|Estimate
 grep -rn "GetSessionDsmHandle\|PARALLEL_KEY_SESSION_DSM" source/src/backend/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -527,8 +525,6 @@ grep -rn "GetSessionDsmHandle\|PARALLEL_KEY_SESSION_DSM" source/src/backend/
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -538,7 +534,6 @@ grep -rn "GetSessionDsmHandle\|PARALLEL_KEY_SESSION_DSM" source/src/backend/
 - [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[parallel-worker-launch-wait-and-errors]] — how the context

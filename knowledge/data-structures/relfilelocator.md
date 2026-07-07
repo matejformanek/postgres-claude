@@ -187,7 +187,6 @@ on the field most likely to mismatch is the standard fast-path.
 - Equality usage:
   `grep -RIn 'RelFileLocatorEquals' source/src/backend | head -20`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -201,7 +200,6 @@ on the field most likely to mismatch is the standard fast-path.
 | [`src/include/storage/relfilelocator.h`](../files/src/include/storage/relfilelocator.h.md) | — | definition + helpers |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/buffertag.md` — embeds the same

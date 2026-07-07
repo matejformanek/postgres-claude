@@ -181,8 +181,6 @@ tuples through the Gather node.
 - AM hooks:
   `grep -n 'bitmap_next_block\|bitmap_next_tuple' source/src/include/access/tableam.h | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -199,8 +197,6 @@ tuples through the Gather node.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -210,7 +206,6 @@ tuples through the Gather node.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/index-only-scan-vm-check.md` —

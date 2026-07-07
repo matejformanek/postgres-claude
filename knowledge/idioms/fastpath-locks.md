@@ -190,8 +190,6 @@ lock acquisition.
 - PGPROC fields:
   `grep -n 'fpLockBits\|fpRelId' source/src/include/storage/proc.h`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -205,8 +203,6 @@ lock acquisition.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -216,7 +212,6 @@ lock acquisition.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` — heavyweight-lock decision tree; this fast-path is one of the optimizations applied to relation locks.

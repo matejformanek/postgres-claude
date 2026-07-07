@@ -512,8 +512,6 @@ sed -n '120,150p;240,260p;700,810p' source/src/backend/utils/mmgr/aset.c
 #   (gdb) call MemoryContextStats(TopMemoryContext)
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -535,8 +533,6 @@ sed -n '120,150p;240,260p;700,810p' source/src/backend/utils/mmgr/aset.c
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -546,7 +542,6 @@ sed -n '120,150p;240,260p;700,810p' source/src/backend/utils/mmgr/aset.c
 - [`fix-memory-leak`](../scenarios/fix-memory-leak.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[memory-context-api-and-dispatch]] — the abstract MemoryContext API

@@ -169,8 +169,6 @@ bloat-causer. Fix it before re-VACUUM.
 - Replication-slot xmin pinning:
   `grep -n 'ReplicationSlotsComputeRequiredXmin' source/src/backend/replication/slot.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -184,8 +182,6 @@ bloat-causer. Fix it before re-VACUUM.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -195,7 +191,6 @@ bloat-causer. Fix it before re-VACUUM.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/snapshot-acquisition.md` — snapshot acq

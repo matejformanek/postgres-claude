@@ -213,8 +213,6 @@ worker's own AbortTransaction is mostly local cleanup.
 - Smgr rollback:
   `grep -n 'smgrDoPendingDeletes' source/src/backend/catalog/storage.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -230,8 +228,6 @@ worker's own AbortTransaction is mostly local cleanup.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -241,7 +237,6 @@ worker's own AbortTransaction is mostly local cleanup.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/commit-transaction-sequence.md` —

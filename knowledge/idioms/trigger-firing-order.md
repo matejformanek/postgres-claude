@@ -201,8 +201,6 @@ mass-action case.
 - BEFORE → AFTER → deferred logic:
   `grep -n 'pg_trigger\.tgdeferrable\|AfterTriggerExecute' source/src/backend/commands/trigger.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -216,8 +214,6 @@ mass-action case.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -227,7 +223,6 @@ mass-action case.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

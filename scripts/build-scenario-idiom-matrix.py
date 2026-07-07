@@ -67,11 +67,11 @@ FRONTMATTER = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 COMPANION_SKILLS = re.compile(r"^companion_skills:\s*\[(.*?)\]\s*$", re.M)
 
 IDIOMS_INVOKED_BLOCK = re.compile(
-    r"\n?## Idioms invoked\s*\n<!-- idioms-invoked:auto -->.*?<!-- /idioms-invoked:auto -->\n?",
+    r"\n*## Idioms invoked\s*\n<!-- idioms-invoked:auto -->.*?<!-- /idioms-invoked:auto -->\n*",
     re.DOTALL,
 )
 SCENARIOS_USING_BLOCK = re.compile(
-    r"\n?## Scenarios that use me\s*\n<!-- scenarios:auto -->.*?<!-- /scenarios:auto -->\n?",
+    r"\n*## Scenarios that use me\s*\n<!-- scenarios:auto -->.*?<!-- /scenarios:auto -->\n*",
     re.DOTALL,
 )
 

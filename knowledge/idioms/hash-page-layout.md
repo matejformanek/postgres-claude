@@ -377,8 +377,6 @@ grep -rn "hashm_mapp\|hashm_nmaps\|hashm_bmsize\|hashm_bmshift" source/src/backe
 grep -rn "low.*number.*bucket.*first\|lock.*lower" source/src/backend/access/hash/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -396,8 +394,6 @@ grep -rn "low.*number.*bucket.*first\|lock.*lower" source/src/backend/access/has
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -407,7 +403,6 @@ grep -rn "low.*number.*bucket.*first\|lock.*lower" source/src/backend/access/has
 - [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[hash-bucket-split]] — the split mechanism that grows the table.

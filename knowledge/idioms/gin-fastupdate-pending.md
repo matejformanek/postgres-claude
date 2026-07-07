@@ -426,8 +426,6 @@ grep -rn "scanPendingInsert\|GinScanOpaque.*pendingList" \
 grep -rn "gin_clean_pending_list\|gin_pending_list_limit" source/src/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -448,8 +446,6 @@ grep -rn "gin_clean_pending_list\|gin_pending_list_limit" source/src/
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -459,7 +455,6 @@ grep -rn "gin_clean_pending_list\|gin_pending_list_limit" source/src/
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[gin-tree-structure]] — what the cleanup eventually inserts into.

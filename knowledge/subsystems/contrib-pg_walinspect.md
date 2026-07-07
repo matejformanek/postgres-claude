@@ -130,7 +130,6 @@ All functions are SRFs returning rowsets. From
   privilege creep here means information disclosure of any
   arbitrary table's WAL records).
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -143,7 +142,6 @@ All functions are SRFs returning rowsets. From
 | [`contrib/pg_walinspect/pg_walinspect.c`](../files/contrib/pg_walinspect/pg_walinspect.c.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/wal-and-xlog/SKILL.md` — `XLogReaderState`,

@@ -190,8 +190,6 @@ Default: 2.
 - Launcher coordination:
   `grep -n 'AtEOXact_ApplyLauncher\|logicalrep_sync_worker' source/src/backend/replication/logical/launcher.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -207,8 +205,6 @@ Default: 2.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -218,7 +214,6 @@ Default: 2.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/apply-worker-loop.md` — main apply

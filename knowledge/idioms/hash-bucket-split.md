@@ -465,8 +465,6 @@ grep -n "hashso_split_bucket_buf\|hashso_buc_split\|hashso_buc_populated" source
 grep -n "hashbucketcleanup" source/src/backend/access/hash/hash.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -484,8 +482,6 @@ grep -n "hashbucketcleanup" source/src/backend/access/hash/hash.c
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -495,7 +491,6 @@ grep -n "hashbucketcleanup" source/src/backend/access/hash/hash.c
 - [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[hash-page-layout]] — the addressing this mutates.

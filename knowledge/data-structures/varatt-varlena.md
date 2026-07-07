@@ -235,7 +235,6 @@ non-zero for any non-empty datum. So zero in the first byte means
 - VARATT_IS_* tests:
   `grep -n 'VARATT_IS_EXTERNAL\|VARATT_IS_COMPRESSED\|VARATT_IS_SHORT' source/src/include/varatt.h | head -15`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -254,7 +253,6 @@ non-zero for any non-empty datum. So zero in the first byte means
 | [`src/include/varatt.h`](../files/src/include/varatt.h.md) | — | full header |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/toast-chunk-write.md` — how

@@ -237,8 +237,6 @@ Compile as a shared library; `CREATE PUBLICATION` then use
 - Invocation site:
   `grep -RIn 'startup_cb\|change_cb\|commit_cb' source/src/backend/replication/logical/logical.c | head -15`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -254,8 +252,6 @@ Compile as a shared library; `CREATE PUBLICATION` then use
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -265,7 +261,6 @@ Compile as a shared library; `CREATE PUBLICATION` then use
 - [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/logical-decoding-snapshot.md` — supplies

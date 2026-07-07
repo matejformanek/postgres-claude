@@ -433,8 +433,6 @@ grep -nE "REVMAP_PAGE_MAXITEMS|HEAPBLK_TO_REVMAP|BRIN_META" \
        source/src/backend/access/brin/brin_revmap.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -455,8 +453,6 @@ grep -nE "REVMAP_PAGE_MAXITEMS|HEAPBLK_TO_REVMAP|BRIN_META" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -466,7 +462,6 @@ grep -nE "REVMAP_PAGE_MAXITEMS|HEAPBLK_TO_REVMAP|BRIN_META" \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[brin-tuple-format]] — the BrinTuple layout the revmap points at.

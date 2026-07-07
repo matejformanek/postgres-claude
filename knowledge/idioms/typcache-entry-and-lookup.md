@@ -486,8 +486,6 @@ grep -nE 'CacheRegister(Relcache|Syscache)Callback' \
 #   gdb> p TypeCacheHash->hctl->nentries
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -506,8 +504,6 @@ grep -nE 'CacheRegister(Relcache|Syscache)Callback' \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -517,7 +513,6 @@ grep -nE 'CacheRegister(Relcache|Syscache)Callback' \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[typcache-record-typmod-and-shared]] — `RecordCacheArray` keyed by

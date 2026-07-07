@@ -469,8 +469,6 @@ grep -n "elog(ERROR, \"unexpected SPGiST tuple state" \
     source/src/backend/access/spgist/*.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -486,8 +484,6 @@ grep -n "elog(ERROR, \"unexpected SPGiST tuple state" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -497,7 +493,6 @@ grep -n "elog(ERROR, \"unexpected SPGiST tuple state" \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[spgist-insert-and-picksplit]] — how `spgdoinsert` consumes these

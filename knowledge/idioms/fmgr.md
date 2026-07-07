@@ -362,8 +362,6 @@ trap entry/exit.
 - Error reporting: `knowledge/idioms/error-handling.md`
 - Manual: <https://www.postgresql.org/docs/current/xfunc-c.html> [from-docs]
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -396,10 +394,12 @@ trap entry/exit.
 - [`add-new-builtin-function`](../scenarios/add-new-builtin-function.md)
 - [`add-new-cast`](../scenarios/add-new-cast.md)
 - [`add-new-data-type`](../scenarios/add-new-data-type.md)
+- [`add-new-error-code`](../scenarios/add-new-error-code.md)
 - [`add-new-extension`](../scenarios/add-new-extension.md)
 - [`add-new-operator`](../scenarios/add-new-operator.md)
 - [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
 - [`add-new-pg-stat-view`](../scenarios/add-new-pg-stat-view.md)
+- [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md)
 - [`add-new-system-view`](../scenarios/add-new-system-view.md)
 - [`add-new-table-am`](../scenarios/add-new-table-am.md)
 

@@ -187,7 +187,6 @@ have identical bytes.
 - The struct + enum:
   `sed -n '35,75p' source/src/include/storage/locktag.h`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -202,7 +201,6 @@ have identical bytes.
 | [`src/include/storage/locktag.h`](../files/src/include/storage/locktag.h.md) | — | full file |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/lock-struct.md` — the LOCK hash

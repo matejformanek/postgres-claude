@@ -222,8 +222,6 @@ polling.
 - The main-function pattern:
   `grep -RIn 'BackgroundWorkerInitializeConnection' source/src/backend source/contrib | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -238,8 +236,6 @@ polling.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -251,7 +247,6 @@ polling.
 - [`add-startup-hook`](../scenarios/add-startup-hook.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/bgworker-and-extensions/SKILL.md` —

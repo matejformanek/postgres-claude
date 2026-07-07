@@ -393,8 +393,6 @@ grep -n "ginbtree\|ginEntry" source/src/backend/access/gin/ginentrypage.c | head
 grep -n "ginbtree\|ginData" source/src/backend/access/gin/gindatapage.c | head
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -416,8 +414,6 @@ grep -n "ginbtree\|ginData" source/src/backend/access/gin/gindatapage.c | head
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -427,7 +423,6 @@ grep -n "ginbtree\|ginData" source/src/backend/access/gin/gindatapage.c | head
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[gin-fastupdate-pending]] — the pending-list buffer between inserter and entry tree.

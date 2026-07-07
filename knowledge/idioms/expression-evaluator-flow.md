@@ -216,8 +216,6 @@ optimization pays.
 - JIT compilation:
   `grep -RIn 'llvm_compile_expr\|jit_compile_expr' source/src/backend/jit | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -233,8 +231,6 @@ optimization pays.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -245,7 +241,6 @@ optimization pays.
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/tupletableslot.md` — slots

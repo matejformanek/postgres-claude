@@ -576,8 +576,6 @@ grep -n "apply_handle_tuple_routing\|ExecFindPartition" \
     source/src/backend/replication/logical/worker.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -593,8 +591,6 @@ grep -n "apply_handle_tuple_routing\|ExecFindPartition" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -604,7 +600,6 @@ grep -n "apply_handle_tuple_routing\|ExecFindPartition" \
 - [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[apply-worker-loop-and-dispatch]] — calls these handlers

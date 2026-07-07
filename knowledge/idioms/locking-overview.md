@@ -239,7 +239,6 @@ PostgreSQL is MVCC: reads never block writes, writes never block reads — inste
 - **Group locking** — locks held by processes in the same parallel-query lock group don't conflict (except RELATION_EXTEND). `[from-README]` (`README:589-650`).
 - **DeadlockTimeout** — GUC, default 1000 ms, before a waiter runs the deadlock check. `[verified-by-code]` (`proc.c:62`).
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -253,7 +252,6 @@ PostgreSQL is MVCC: reads never block writes, writes never block reads — inste
 | [`src/include/port/atomics.h`](../files/src/include/port/atomics.md) | — | Source paths: source/src/backend/storage/lmgr/,... |
 
 <!-- /callsites:auto -->
-
 
 ## Scenarios that use me
 <!-- scenarios:auto -->

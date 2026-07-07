@@ -523,8 +523,6 @@ grep -nE 'shared_record_typmod_registry_detach' \
     source/src/backend/utils/cache/typcache.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -544,8 +542,6 @@ grep -nE 'shared_record_typmod_registry_detach' \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -555,7 +551,6 @@ grep -nE 'shared_record_typmod_registry_detach' \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[typcache-entry-and-lookup]] — the typed-by-OID path. Named

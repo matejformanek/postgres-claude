@@ -127,8 +127,6 @@ self-contained; the tree must build at the end of each phase.
    `meson test --suite regress` green including opr_sanity and
    type_sanity.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -141,7 +139,6 @@ self-contained; the tree must build at the end of each phase.
 | [`fmgr`](../idioms/fmgr.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Implicit-cast contagion.** Adding a new `i` cast widens the

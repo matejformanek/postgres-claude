@@ -171,8 +171,6 @@ inspection.
 - Callback registration:
   `grep -RIn 'CacheRegisterSyscacheCallback\|CacheRegisterRelcacheCallback' source/src source/contrib`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -188,8 +186,6 @@ inspection.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -199,7 +195,6 @@ inspection.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/catalog-conventions/SKILL.md` — catalog changes must register sinval invalidations via `CacheInvalidate*`.

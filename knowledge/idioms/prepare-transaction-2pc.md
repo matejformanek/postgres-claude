@@ -213,8 +213,6 @@ workers still running.
 - Recovery:
   `grep -n 'RecoverPreparedTransactions' source/src/backend/access/transam/twophase.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -230,8 +228,6 @@ workers still running.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -241,7 +237,6 @@ workers still running.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/commit-transaction-sequence.md` —

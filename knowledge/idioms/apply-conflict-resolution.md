@@ -215,8 +215,6 @@ violation.
 - Conflict-detection callers:
   `grep -RIn 'ReportApplyConflict' source/src/backend/replication/logical | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -232,8 +230,6 @@ violation.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -243,7 +239,6 @@ violation.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/apply-worker-loop.md` — companion;

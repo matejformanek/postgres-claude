@@ -240,7 +240,6 @@ must be freed before the underlying Jsonb is.
 - jbvBinary navigation patterns:
   `grep -RIn 'jbvBinary' source/src/backend/utils/adt | head -15`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -257,7 +256,6 @@ must be freed before the underlying Jsonb is.
 | [`src/include/utils/jsonb.h`](../files/src/include/utils/jsonb.h.md) | — | public type + struct definitions |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/parser-and-rewrite.md` — JSON

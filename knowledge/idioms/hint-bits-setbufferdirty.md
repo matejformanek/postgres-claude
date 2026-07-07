@@ -391,8 +391,6 @@ grep -n "XLOG_FPI_FOR_HINT\|XLogSaveBufferForHint" \
 grep -rn "XLogHintBitIsNeeded\|wal_log_hints" source/src/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -415,8 +413,6 @@ grep -rn "XLogHintBitIsNeeded\|wal_log_hints" source/src/
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -426,7 +422,6 @@ grep -rn "XLogHintBitIsNeeded\|wal_log_hints" source/src/
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[heap-tuple-visibility-mvcc]] — the caller; when each hint gets set.

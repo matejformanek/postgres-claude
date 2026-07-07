@@ -601,8 +601,6 @@ sed -n '209,310p' source/src/backend/utils/mmgr/slab.c
 grep -Rn 'BumpContextCreate' source/src/backend
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -638,8 +636,6 @@ grep -Rn 'BumpContextCreate' source/src/backend
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -651,7 +647,6 @@ grep -Rn 'BumpContextCreate' source/src/backend
 - [`fix-memory-leak`](../scenarios/fix-memory-leak.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[memory-context-api-and-dispatch]] — the abstract API and the 4-bit

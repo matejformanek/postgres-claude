@@ -215,8 +215,6 @@ match. The `unknownEqFalse` flag selects the SQL semantics.
 - Planner side:
   `grep -RIn 'SS_process_sublinks\|SS_finalize_plan' source/src/backend/optimizer | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -234,8 +232,6 @@ match. The `unknownEqFalse` flag selects the SQL semantics.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -246,7 +242,6 @@ match. The `unknownEqFalse` flag selects the SQL semantics.
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/plannerinfo.md` —

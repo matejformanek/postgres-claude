@@ -175,8 +175,6 @@ without the original WAL.
 - Signal-file handling:
   `grep -n 'recovery.signal\|standby.signal' source/src/backend/access/transam/xlogrecovery.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -190,8 +188,6 @@ without the original WAL.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -202,7 +198,6 @@ without the original WAL.
 - [`bump-catversion`](../scenarios/bump-catversion.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/xlog-region-replay.md` — what each rmgr's

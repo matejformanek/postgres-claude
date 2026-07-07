@@ -278,8 +278,6 @@ EINTR retry [`xlog.c:2466-2467`] is the only retryable case.
 - fsync methods:
   `grep -RIn 'wal_sync_method\|WAL_SYNC_METHOD' source/src/backend/access/transam/xlog.c source/src/backend/utils/misc | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -298,8 +296,6 @@ EINTR retry [`xlog.c:2466-2467`] is the only retryable case.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -310,7 +306,6 @@ EINTR retry [`xlog.c:2466-2467`] is the only retryable case.
 - [`bump-catversion`](../scenarios/bump-catversion.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/xloginsertlock-partitioning.md` — produces

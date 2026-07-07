@@ -203,8 +203,6 @@ COMMIT (post-WAL-flush, no errors allowed).
 - ProcArray:
   `grep -n 'ProcArrayEndTransaction' source/src/backend/storage/ipc/procarray.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -220,8 +218,6 @@ COMMIT (post-WAL-flush, no errors allowed).
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -231,7 +227,6 @@ COMMIT (post-WAL-flush, no errors allowed).
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/abort-transaction-cleanup.md` —

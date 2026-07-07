@@ -266,8 +266,6 @@ exactly this — it wraps the BEGIN block in an internal subxact.
 - PL/pgSQL subxact pattern:
   `grep -n 'BeginInternalSubTransaction\|RollbackAndReleaseCurrentSubTransaction' source/src/pl/plpgsql/src/pl_exec.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -286,8 +284,6 @@ exactly this — it wraps the BEGIN block in an internal subxact.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -297,7 +293,6 @@ exactly this — it wraps the BEGIN block in an internal subxact.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/trigger-constraint-deferral.md` —

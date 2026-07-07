@@ -213,8 +213,6 @@ resets between Gather batches.
 - TM_Result values:
   `grep -n 'TM_Result\|TM_Ok\|TM_Updated\|TM_Deleted' source/src/include/access/tableam.h | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -229,8 +227,6 @@ resets between Gather batches.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -240,7 +236,6 @@ resets between Gather batches.
 - [`add-new-table-am`](../scenarios/add-new-table-am.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/indexamroutine.md` — companion

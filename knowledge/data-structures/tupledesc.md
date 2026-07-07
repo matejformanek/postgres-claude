@@ -226,7 +226,6 @@ shape programmatically (SRFs returning RECORD).
 - The compact attribute optimization:
   `grep -n 'CompactAttribute\|compact_attrs' source/src/backend/access/common/tupdesc.c | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -240,7 +239,6 @@ shape programmatically (SRFs returning RECORD).
 | [`src/include/access/tupdesc.h`](../files/src/include/access/tupdesc.h.md) | — | full type + inline accessors |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/tupletableslot.md` — slot

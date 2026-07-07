@@ -166,8 +166,6 @@ AM whose shmem hash uses its own tranche) unions both.
    regress` and (extension) `meson test … --suite <test-module-name>`
    pass.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -181,7 +179,6 @@ AM whose shmem hash uses its own tranche) unions both.
 | [`slru-page-replacement`](../idioms/slru-page-replacement.md) | shares files: `src/backend/access/transam/slru.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **List-order drift between `lwlocklist.h` and `wait_event_names.txt`**

@@ -217,7 +217,6 @@ ergonomic — without it, every iteration would need bespoke
 - dclist (counted) usage:
   `grep -RIn 'dclist_head\|dclist_count' source/src/backend | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -231,7 +230,6 @@ ergonomic — without it, every iteration would need bespoke
 | [`src/include/lib/ilist.h`](../files/src/include/lib/ilist.h.md) | — | full API + macros |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/pgproc-fields.md` — PGPROC

@@ -134,8 +134,6 @@ The tree must build at the end of each phase.
    `meson test -C dev/build-debug --suite regress` clean, including
    the new test; EXPLAIN shows the node name correctly.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -156,10 +154,10 @@ The tree must build at the end of each phase.
 | [`node-types-and-lists`](../idioms/node-types-and-lists.md) | direct reference |
 | [`parallel-gather-merge`](../idioms/parallel-gather-merge.md) | shares files: `src/backend/executor/execParallel.c` |
 | [`parallel-state-propagation`](../idioms/parallel-state-propagation.md) | direct reference |
+| [`parser-pipeline`](../idioms/parser-pipeline.md) | shares files: `src/include/nodes/plannodes.h` |
 | [`subplan-and-initplan`](../idioms/subplan-and-initplan.md) | shares files: `src/include/nodes/plannodes.h` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Dispatch-site amnesia** — the worst trap: `ExecInitNode` is

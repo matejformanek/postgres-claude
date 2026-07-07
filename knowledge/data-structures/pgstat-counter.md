@@ -207,7 +207,6 @@ checklist includes this; it's a frequent review catch.
 - Per-table struct sites:
   `grep -RIn 'PgStat_TableCounts\|PgStat_TableStatus' source/src/backend | head -20`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -222,7 +221,6 @@ checklist includes this; it's a frequent review catch.
 | [`src/include/pgstat.h`](../files/src/include/pgstat.h.md) | — | public type + struct family |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/utils-mmgr.md` — memory-context

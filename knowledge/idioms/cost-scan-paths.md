@@ -245,8 +245,6 @@ breaking ties by cost.
 - Per-tablespace cost lookup:
   `grep -n 'get_tablespace_page_costs' source/src/backend/optimizer/path/costsize.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -265,8 +263,6 @@ breaking ties by cost.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -277,7 +273,6 @@ breaking ties by cost.
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/cost-units-gucs.md` — the seq/random/cpu

@@ -293,8 +293,6 @@ because subplans aren't executed until referenced.
 - FDW row mark callbacks:
   `grep -RIn 'GetForeignRowMarkType\|RefetchForeignRow' source/src/include/foreign source/src/backend/executor | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -313,8 +311,6 @@ because subplans aren't executed until referenced.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -325,7 +321,6 @@ because subplans aren't executed until referenced.
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/epq-state-init.md` — EPQState lifecycle.

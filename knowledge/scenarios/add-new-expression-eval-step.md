@@ -115,8 +115,6 @@ The tree must build at the end of each phase.
    break the JIT mirror surface in CI. Phase-end check: both JIT-on and
    JIT-off regress runs are green.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -139,7 +137,6 @@ The tree must build at the end of each phase.
 | [`utility-stmt-planning`](../idioms/utility-stmt-planning.md) | shares files: `src/backend/executor/execExpr.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Enum / dispatch_table order drift** — `execExpr.h` enum order MUST

@@ -420,8 +420,6 @@ grep -n "XLOG_HEAP2_PRUNE\|xl_heap_prune\b" \
 grep -rn "PageSetPrunable\|PageGetPruneXid\|pd_prune_xid" source/src/backend/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -442,8 +440,6 @@ grep -rn "PageSetPrunable\|PageGetPruneXid\|pd_prune_xid" source/src/backend/
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -453,7 +449,6 @@ grep -rn "PageSetPrunable\|PageGetPruneXid\|pd_prune_xid" source/src/backend/
 - [`add-new-wal-record`](../scenarios/add-new-wal-record.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[heap-tuple-freeze]] — same plan-then-execute model, applied in the same critical section.

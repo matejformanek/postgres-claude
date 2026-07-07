@@ -504,8 +504,6 @@ grep -n "rd_isnailed" source/src/backend/utils/cache/relcache.c
 grep -rn "RelationMapUpdateMap\|RelationMapLookup" source/src/backend/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -528,8 +526,6 @@ grep -rn "RelationMapUpdateMap\|RelationMapLookup" source/src/backend/
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -539,7 +535,6 @@ grep -rn "RelationMapUpdateMap\|RelationMapLookup" source/src/backend/
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[syscache-catcache-internals]] — catcache layer; relcache builds on hundreds of catcache lookups.

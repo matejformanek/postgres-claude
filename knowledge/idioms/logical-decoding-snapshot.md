@@ -193,8 +193,6 @@ re-loaded on walsender startup.
 - Historic visibility:
   `grep -RIn 'SNAPSHOT_HISTORIC_MVCC\|HistoricMVCC' source/src/backend | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -210,8 +208,6 @@ re-loaded on walsender startup.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -221,7 +217,6 @@ re-loaded on walsender startup.
 - [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/snapshot-acquisition.md` — regular

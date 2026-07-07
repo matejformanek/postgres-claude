@@ -431,8 +431,6 @@ grep -n "catcache_in_progress_stack\|CatCInProgress" \
        source/src/backend/utils/cache/catcache.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -455,8 +453,6 @@ grep -n "catcache_in_progress_stack\|CatCInProgress" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -466,7 +462,6 @@ grep -n "catcache_in_progress_stack\|CatCInProgress" \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[syscache-invalidation-flow]] — how `CatCacheInvalidate` gets called from inval queue.

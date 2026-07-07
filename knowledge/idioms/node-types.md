@@ -292,8 +292,6 @@ SELECT pg_get_viewdef('v');
 If either deparse path returns garbage or errors, `ruleutils.c` is
 missing an arm.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -314,8 +312,6 @@ missing an arm.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -328,7 +324,6 @@ missing an arm.
 - [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/node-types-and-lists.md` — the underlying NodeTag

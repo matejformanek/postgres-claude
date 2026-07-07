@@ -177,8 +177,6 @@ per-record CRCs cover the data.
 - The reader's CONTRECORD logic:
   `grep -n 'XLP_FIRST_IS_CONTRECORD' source/src/backend/access/transam/xlogreader.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -193,8 +191,6 @@ per-record CRCs cover the data.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -205,7 +201,6 @@ per-record CRCs cover the data.
 - [`add-new-wal-record`](../scenarios/add-new-wal-record.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/wal-record-construction.md` — records

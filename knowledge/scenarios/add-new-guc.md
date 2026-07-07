@@ -140,8 +140,6 @@ patches that ship a built-in GUC plus a demo extension use both.
    Phase-end check: `meson test -C dev/build-debug` green; the new
    regress/TAP test runs and passes.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -156,7 +154,6 @@ patches that ship a built-in GUC plus a demo extension use both.
 | [`walsender-state-machine`](../idioms/walsender-state-machine.md) | shares files: `src/backend/replication/walsender.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Generated `guc_tables.c` looks editable but isn't.** It's listed in

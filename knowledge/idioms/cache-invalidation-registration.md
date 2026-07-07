@@ -160,8 +160,6 @@ inval.c itself).
 - The dispatch hub:
   `grep -n 'LocalExecuteInvalidationMessage' source/src/backend/utils/cache/inval.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -175,8 +173,6 @@ inval.c itself).
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -186,7 +182,6 @@ inval.c itself).
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/sinvaladt-broadcast.md` — the underlying

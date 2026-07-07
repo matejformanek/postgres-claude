@@ -453,8 +453,6 @@ grep -n "GroupingFunc\|GROUPING_ID\|grouping_func" \
        source/src/backend/executor/execExpr.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -477,8 +475,6 @@ grep -n "GroupingFunc\|GROUPING_ID\|grouping_func" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -490,7 +486,6 @@ grep -n "GroupingFunc\|GROUPING_ID\|grouping_func" \
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[aggregate-hash-vs-sort]] — strategy machinery in single-set mode.

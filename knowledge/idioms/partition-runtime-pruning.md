@@ -222,8 +222,6 @@ won't be queried.
 - Append/MergeAppend pruning calls:
   `grep -RIn 'find_matching_subplans' source/src/backend/executor/nodeAppend.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -238,8 +236,6 @@ won't be queried.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -249,7 +245,6 @@ won't be queried.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

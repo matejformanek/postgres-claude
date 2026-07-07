@@ -170,8 +170,6 @@ relfilenumber.
 - Buffer drop:
   `grep -n 'AtTruncate_RelationBuffers' source/src/backend/storage/buffer/bufmgr.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -186,8 +184,6 @@ relfilenumber.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -197,7 +193,6 @@ relfilenumber.
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/relation-extension-lock.md` — extension

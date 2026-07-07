@@ -172,8 +172,6 @@ The tree must build at the end of each phase.
    to lint the SGML. `[verified-by-code]`
    (`doc/src/sgml/Makefile`).
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -194,7 +192,6 @@ The tree must build at the end of each phase.
 | [`walsender-state-machine`](../idioms/walsender-state-machine.md) | shares files: `src/backend/replication/walsender.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Tag collision in the same direction.** `protocol.h` lets you

@@ -139,8 +139,6 @@ The tree must build at the end of each phase.
    dev/build-debug --suite regress` is green; `--suite recovery` too if
    the kind is persistent.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -154,7 +152,6 @@ The tree must build at the end of each phase.
 | [`pgstat-flush-timing`](../idioms/pgstat-flush-timing.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **The two-stage flush.** A backend accumulates counters in

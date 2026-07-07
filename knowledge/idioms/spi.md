@@ -328,8 +328,6 @@ snapshot.
 - Error reporting and PG_TRY/PG_CATCH: `knowledge/idioms/error-handling.md`
 - Manual chapter: <https://www.postgresql.org/docs/current/spi.html> [from-docs]
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 

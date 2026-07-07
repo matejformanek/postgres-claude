@@ -264,8 +264,6 @@ inserter can flush past it without waiting.
 - Flusher wait:
   `grep -n 'WaitXLogInsertionsToFinish\|LWLockWaitForVar' source/src/backend/access/transam/xlog.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -284,8 +282,6 @@ inserter can flush past it without waiting.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -296,7 +292,6 @@ inserter can flush past it without waiting.
 - [`bump-catversion`](../scenarios/bump-catversion.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/wal-buffer-state.md` — the buffer pool that

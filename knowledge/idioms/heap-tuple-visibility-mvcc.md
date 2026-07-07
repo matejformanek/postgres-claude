@@ -399,8 +399,6 @@ grep -n "XidInMVCCSnapshot" source/src/backend/utils/time/snapmgr.c
 grep -rn "HeapTupleSatisfiesUpdate\b" source/src/backend/access/heap/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -421,8 +419,6 @@ grep -rn "HeapTupleSatisfiesUpdate\b" source/src/backend/access/heap/
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -432,7 +428,6 @@ grep -rn "HeapTupleSatisfiesUpdate\b" source/src/backend/access/heap/
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[hint-bits-setbufferdirty]] — `SetHintBits`/`SetHintBitsExt` machinery, the WAL-flush precondition.

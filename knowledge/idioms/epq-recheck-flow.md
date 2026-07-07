@@ -266,8 +266,6 @@ out when every level either qualifies or NULLs.
 - ExecScanFetch dispatch:
   `grep -RIn 'ExecScanFetch' source/src/backend/executor | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -286,8 +284,6 @@ out when every level either qualifies or NULLs.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -297,7 +293,6 @@ out when every level either qualifies or NULLs.
 - [`add-new-hook`](../scenarios/add-new-hook.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/epq-state-init.md` — EPQState lifecycle.

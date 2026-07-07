@@ -219,7 +219,6 @@ ExecutorEnd by the caller (utility.c, SPI, portal).
 - InitPlan:
   `grep -n '^InitPlan' source/src/backend/executor/execMain.c | head -5`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -236,7 +235,6 @@ ExecutorEnd by the caller (utility.c, SPI, portal).
 | [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | — | full struct |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/planstate.md` — every PlanState

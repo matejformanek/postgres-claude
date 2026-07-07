@@ -146,8 +146,6 @@ self-contained chunk; the tree must build at the end of each phase.
    Phase-end check: `meson test -C dev/build-debug --suite contrib
    --test <myam>` is green, docs build clean.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -163,7 +161,6 @@ self-contained chunk; the tree must build at the end of each phase.
 | [`tableam-vtable-lifecycle`](../idioms/tableam-vtable-lifecycle.md) | shares files: `src/backend/access/heap/heapam_handler.c`, `src/include/access/tableam.h` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **`heap_tableam_handler` is the spec.** The TableAmRoutine documentation

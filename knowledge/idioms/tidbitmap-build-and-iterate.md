@@ -642,8 +642,6 @@ grep -n "pg_atomic_init_u32\|pg_atomic_add_fetch_u32\|pg_atomic_sub_fetch_u32" \
 grep -rn "tbm_add_tuples\|tbm_add_page" source/src/backend/access/ | head
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -657,8 +655,6 @@ grep -rn "tbm_add_tuples\|tbm_add_page" source/src/backend/access/ | head
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -668,7 +664,6 @@ grep -rn "tbm_add_tuples\|tbm_add_page" source/src/backend/access/ | head
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[tidbitmap-structure-and-lossy]] — `PagetableEntry`, the

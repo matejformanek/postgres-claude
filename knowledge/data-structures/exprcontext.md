@@ -256,7 +256,6 @@ per-tuple memory context detached from any EState.
 - Callback users:
   `grep -RIn 'RegisterExprContextCallback' source/src/backend | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -272,7 +271,6 @@ per-tuple memory context detached from any EState.
 | [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 328 | ecxt_estate link back |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/estate.md` — ecxt_estate points

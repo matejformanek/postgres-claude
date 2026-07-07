@@ -230,8 +230,6 @@ EXPLAIN ANALYZE output aggregates total cascade time.
 - The parent-side trigger creation:
   `grep -n 'createForeignKeyActionTriggers\|RI_FKey_cascade' source/src/backend/commands/tablecmds.c source/src/backend/utils/adt/ri_triggers.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -250,8 +248,6 @@ EXPLAIN ANALYZE output aggregates total cascade time.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -261,7 +257,6 @@ EXPLAIN ANALYZE output aggregates total cascade time.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/ri-fkey-check.md` — child-side check the

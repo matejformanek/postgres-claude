@@ -208,8 +208,6 @@ message catalog, not the ereport caller's.
 - The dispatch loop:
   `grep -n 'error_context_stack' source/src/backend/utils/error/elog.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -227,8 +225,6 @@ message catalog, not the ereport caller's.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -239,7 +235,6 @@ message catalog, not the ereport caller's.
 - [`integrate-with-plpgsql`](../scenarios/integrate-with-plpgsql.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/error-handling/SKILL.md` — ereport + PG_TRY

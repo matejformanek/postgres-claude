@@ -385,7 +385,6 @@ for the impl + `pg_amop.dat` if it's indexable + …).
   [catalogs.html](https://www.postgresql.org/docs/current/catalogs.html)
   [from-docs](https://www.postgresql.org/docs/current/bki.html)
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -423,7 +422,6 @@ for the impl + `pg_amop.dat` if it's indexable + …).
 | [`src/include/utils/syscache.h`](../files/src/include/utils/syscache.h.md) | 30 | Use the numbered variants (SearchSysCache1 etc.) — they're faster and insulate callers from... |
 
 <!-- /callsites:auto -->
-
 
 ## Scenarios that use me
 <!-- scenarios:auto -->

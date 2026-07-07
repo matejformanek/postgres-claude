@@ -111,8 +111,6 @@ short phases.
    regression test for this — the verification *is* the failing-old /
    succeeding-new initdb pair. Phase-end check: see Verification below.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -129,7 +127,6 @@ short phases.
 | [`xloginsertlock-partitioning`](../idioms/xloginsertlock-partitioning.md) | shares files: `src/backend/access/transam/xlog.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Silent self-test** — your local dev loop typically runs `initdb`

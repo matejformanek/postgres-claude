@@ -678,8 +678,6 @@ grep -n "snapshot_resowner_desc\|ResourceOwnerRememberSnapshot\|ResourceOwnerFor
     source/src/backend/utils/time/snapmgr.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -694,8 +692,6 @@ grep -n "snapshot_resowner_desc\|ResourceOwnerRememberSnapshot\|ResourceOwnerFor
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -705,7 +701,6 @@ grep -n "snapshot_resowner_desc\|ResourceOwnerRememberSnapshot\|ResourceOwnerFor
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[snapshot-static-and-current]] — the six static slots that

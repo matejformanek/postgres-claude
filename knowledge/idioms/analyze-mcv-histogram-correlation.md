@@ -516,8 +516,6 @@ grep -rn "STATISTIC_KIND_MCV\|STATISTIC_KIND_HISTOGRAM\|STATISTIC_KIND_CORRELATI
     source/src/backend/utils/adt/selfuncs.c | head
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -532,8 +530,6 @@ grep -rn "STATISTIC_KIND_MCV\|STATISTIC_KIND_HISTOGRAM\|STATISTIC_KIND_CORRELATI
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -543,7 +539,6 @@ grep -rn "STATISTIC_KIND_MCV\|STATISTIC_KIND_HISTOGRAM\|STATISTIC_KIND_CORRELATI
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[analyze-block-and-reservoir-sampling]] — where the sample

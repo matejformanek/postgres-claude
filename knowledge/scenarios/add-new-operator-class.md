@@ -102,8 +102,6 @@ self-contained chunk; the tree must build at the end of each phase.
    dev/build-debug --suite regress` green, with `opr_sanity` and the
    new test both passing.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -121,7 +119,6 @@ self-contained chunk; the tree must build at the end of each phase.
 | [`spgist-scan-and-consistent`](../idioms/spgist-scan-and-consistent.md) | shares files: `src/include/access/spgist.h` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Missing required support procs** — the AM's `<am>validate.c`

@@ -236,8 +236,6 @@ incompatible combinations.
 - Plan cache keys:
   `grep -n 'RI_PLAN_SETNULL\|RI_PLAN_SETDEFAULT' source/src/backend/utils/adt/ri_triggers.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -257,8 +255,6 @@ incompatible combinations.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -268,7 +264,6 @@ incompatible combinations.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/ri-fkey-check.md` — child-side check.

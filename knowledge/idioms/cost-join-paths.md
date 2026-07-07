@@ -278,8 +278,6 @@ cheap-rescan inner (small, indexed by parameterization).
 - inner_unique flag:
   `grep -RIn 'inner_unique\|innerunique' source/src/backend/optimizer | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -298,8 +296,6 @@ cheap-rescan inner (small, indexed by parameterization).
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -310,7 +306,6 @@ cheap-rescan inner (small, indexed by parameterization).
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/cost-units-gucs.md` — base GUCs.

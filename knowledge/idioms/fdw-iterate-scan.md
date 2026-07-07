@@ -216,8 +216,6 @@ call returns at a time). However:
 - Executor caller:
   `grep -RIn 'fdwroutine->IterateForeignScan' source/src/backend/executor | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -232,8 +230,6 @@ call returns at a time). However:
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -243,7 +239,6 @@ call returns at a time). However:
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/fdw-routine-callbacks.md` — full

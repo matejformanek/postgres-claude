@@ -195,8 +195,6 @@ static bool my_walker(Node *node, void *context)
 The recursive-self pattern is the convention; almost every walker in
 PG is shaped this way.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -216,8 +214,6 @@ PG is shaped this way.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -228,7 +224,6 @@ PG is shaped this way.
 - [`add-new-node-type`](../scenarios/add-new-node-type.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/node-types-and-lists.md` — the NodeTag machinery

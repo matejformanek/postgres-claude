@@ -114,8 +114,6 @@ last_verified_commit: e18b0cb7344
    siblings if the removed entry was user-documented.
    Phase-end check: `meson test --suite docs` is green.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -127,7 +125,6 @@ last_verified_commit: e18b0cb7344
 | [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **`opr_sanity` "functions with descriptions" check.** The most

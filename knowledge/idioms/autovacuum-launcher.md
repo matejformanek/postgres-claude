@@ -203,8 +203,6 @@ prioritize attention.
 - Wraparound logic:
   `grep -n 'wraparound\|EmergencyMode' source/src/backend/postmaster/autovacuum.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -219,8 +217,6 @@ prioritize attention.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -230,7 +226,6 @@ prioritize attention.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/vacuum-skip-pages.md` — what VACUUM
