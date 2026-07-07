@@ -24,7 +24,7 @@ actual merge outcomes and every sibling routine has already had its slot:
    morning. It **leads** with the audit's `🔧 Needs fix` section, then the
    rest.
 
-## Routine roster (the 10 siblings this watchdog must account for)
+## Routine roster (the 11 siblings this watchdog must account for)
 
 By 05:43 all of these have had their slot. Compare this roster against the
 run logs actually present for the cycle — any routine on the roster with no
@@ -34,7 +34,7 @@ log is `SILENT` (a failure to investigate, not an absence to shrug at):
 pg-extension-anthropologist 22:07 · pg-file-backfiller 22:53 ·
 pg-quality-auditor 23:31 · pg-corpus-maintainer 00:13 ·
 pg-user-question-harvester 00:47 · pg-evening-merger 02:11 ·
-pg-anchor-refresh 03:37`
+pg-anchor-refresh 03:37 · pg-corpus-graph-refresh 04:17`
 
 **Verdict definitions** (assign exactly one per sibling):
 - `OK` — run log present, `exit_reason: ok`, PR opened (or cleanly merged).
