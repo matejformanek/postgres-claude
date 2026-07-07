@@ -61,6 +61,28 @@ The optimizer + contrib (`pg_plan_advice` + `pg_stash_advice`) concentration is 
 - **Test additions in `src/test/regress/` are heavy.** 90 file touches in regress is one of the highest among feature committers (only Korotkov is comparable). Plus a new `test_plan_advice` module (`12444183e40`, `e0e4c132ef2`).
 - **Bounds-checking discipline.** `c98ad086ad9` ("Bounds-check access to `TupleDescAttr` with an Assert") — small defensive commit characteristic of his style.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none — persona has no owned paths that overlap any scenario's files)_
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`contrib-pg_plan_advice`](../subsystems/contrib-pg_plan_advice.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer / collaborator partners
 
 Top reviewers credited on his 117 24mo commits:

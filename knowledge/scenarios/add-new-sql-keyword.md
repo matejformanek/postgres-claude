@@ -120,6 +120,24 @@ The tree must build at the end of each phase.
    the bareword (e.g. `SELECT … AS system_user`) will now fail and
    needs quoting. This phase exists to bound the blast radius.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/interfaces` (+3) |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/bin` (+2) |
+| [`tom-lane`](../personas/tom-lane.md) | `src/pl`, `src/backend/utils` (+2) |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/bin/psql`, `src/backend/utils` (+1) |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` |
+| [`david-rowley`](../personas/david-rowley.md) | `src/test/regress` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

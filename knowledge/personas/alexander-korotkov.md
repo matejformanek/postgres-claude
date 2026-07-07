@@ -56,6 +56,30 @@ The dominance of `src/test/recovery/` is unusual — driven by his WAIT FOR LSN 
 - **`Reviewed-by: Alexander Korotkov` (self) appears 44/141 times.** Lower self-credit rate than Amit Kapila (~50%) but still substantial — consistent with him driving the review of patches he ultimately commits.
 - **Top author cross-cut: Xuneng Zhou (26).** Xuneng is flagged in `contributor-map.md` as a "new author 2025" with top reviewer Alexander Korotkov (35) and Michael Paquier (24). The Zhou ↔ Korotkov pairing is the strongest in his 24mo data, suggesting an apprenticing collaboration on test stabilization / small fixes.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-operator-class`](../scenarios/add-new-operator-class.md) | `src/backend/access/gin` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`access-transam`](../subsystems/access-transam.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer / collaborator partners
 
 Top reviewers credited on his 141 24mo commits:

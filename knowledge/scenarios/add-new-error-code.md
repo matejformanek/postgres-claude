@@ -115,6 +115,23 @@ truth are rows 1, 7, 8, 9, 10.)
    `meson compile -C dev/build-debug alldocs` (or `docs`) succeed and
    `errcodes-table.sgml` contains the new row.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/backend/utils` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/pl` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/pl`, `src/backend/utils` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/backend/utils` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

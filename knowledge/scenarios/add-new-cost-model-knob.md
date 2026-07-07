@@ -127,6 +127,25 @@ The tree must build at the end of each phase.
    must be *explained* in the commit message — "X moved from
    index-scan to seq-scan because the new knob penalises Y by Z%".
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` (+1) |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/backend/utils`, `src/backend/access` (+1) |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/backend/utils` (+1) |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/optimizer`, `src/backend/utils` (+1) |
+| [`richard-guo`](../personas/richard-guo.md) | `src/backend/optimizer`, `src/include/optimizer` |
+| [`david-rowley`](../personas/david-rowley.md) | `src/test/regress` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

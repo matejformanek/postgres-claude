@@ -124,6 +124,46 @@ This contrasts sharply with Andres's lowercase `area:` style.
   (14), Michael Paquier (8), Andres Freund (4) — than for Fujii or Daniel.
   His work is often reviewed by 1-2 named reviewers + himself.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md) | `src/test/regress` |
+| [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md) | `src/test/regress` |
+| [`add-new-builtin-function`](../scenarios/add-new-builtin-function.md) | `src/test/regress` |
+| [`add-new-cast`](../scenarios/add-new-cast.md) | `src/test/regress` |
+| [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md) | `src/test/regress` |
+| [`add-new-data-type`](../scenarios/add-new-data-type.md) | `src/test/regress` |
+| [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md) | `src/test/regress` |
+| [`add-new-guc`](../scenarios/add-new-guc.md) | `src/test/regress` |
+| [`add-new-index-am`](../scenarios/add-new-index-am.md) | `src/test/regress` |
+| [`add-new-operator-class`](../scenarios/add-new-operator-class.md) | `src/test/regress` |
+| [`add-new-pg-stat-view`](../scenarios/add-new-pg-stat-view.md) | `src/test/regress` |
+| [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md) | `src/test/regress` |
+| [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md) | `src/test/regress` |
+| [`add-new-system-view`](../scenarios/add-new-system-view.md) | `src/test/regress` |
+| [`add-new-table-am`](../scenarios/add-new-table-am.md) | `src/test/regress` |
+| [`integrate-with-plpgsql`](../scenarios/integrate-with-plpgsql.md) | `src/test/regress` |
+| [`remove-from-catalog`](../scenarios/remove-from-catalog.md) | `src/test/regress` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none)_
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer / collaborator partners
 
 Reviewers of his commits (24mo):

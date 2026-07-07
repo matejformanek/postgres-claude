@@ -99,6 +99,34 @@ Source: `git log --since='24 months ago' --author='Richard Guo'
   `Backpatch-through:` lines when relevant (e.g. 8b6c89e377b5
   "Fix integer overflow in nodeWindowAgg.c"). [from-comment]
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md) | `src/backend/optimizer` |
+| [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md) | `src/backend/optimizer`, `src/include/optimizer` |
+| [`add-new-hook`](../scenarios/add-new-hook.md) | `src/backend/optimizer`, `src/include/optimizer` |
+| [`add-new-operator`](../scenarios/add-new-operator.md) | `src/backend/optimizer` |
+| [`add-new-plan-node`](../scenarios/add-new-plan-node.md) | `src/backend/optimizer`, `src/include/optimizer` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`optimizer`](../subsystems/optimizer.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer/collaborator partners
 
 From `Reviewed-by:` trailers inside his own commits (24mo):

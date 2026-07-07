@@ -58,6 +58,30 @@ The concentration in `src/backend/access/` + `src/include/access/` is sharper th
 - **Test stabilization is a constant.** `62407d26b7c` (stabilize btree_gist test against on-access VM), `85ae8ab0533` (stabilize plancache test), `4a99ef1a0d1` (fix flakiness in pg_visibility VM-only vacuum test), `8519251ee97` (fix test_aio without cassert). She owns the BF response loop for her own work.
 - **`pgindent` self-discipline.** 9 file touches in `src/tools/pgindent/` — runs the indent and commits cleanly.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md) | `src/backend/access/heap/vacuumlazy.c` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`access-heap`](../subsystems/access-heap.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer / collaborator partners
 
 Top reviewers credited on her 121 24mo commits:

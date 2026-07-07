@@ -113,6 +113,59 @@ He self-credits as `Reviewed-by: Tom Lane` on **86 of his own 661 commits = 13%*
 
 Searched subjects for `^Revert ` / `^Re-` / `oops`-style: found in 24mo only ~10 revert subjects, several of which are reverting OTHER people's commits (e.g. revert of a problematic patch he caught in beta). Self-fixup pattern is rare; he tends to get it right the first time or land follow-ups under non-fixup-styled subjects.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md) | `src/backend/optimizer`, `src/backend/utils` (+1) |
+| [`add-new-bgworker`](../scenarios/add-new-bgworker.md) | `src/backend/utils` |
+| [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md) | `src/backend/utils`, `src/test/regress` (+1) |
+| [`add-new-builtin-function`](../scenarios/add-new-builtin-function.md) | `src/backend/utils`, `src/test/regress` |
+| [`add-new-cast`](../scenarios/add-new-cast.md) | `src/test/regress` |
+| [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md) | `src/backend/optimizer`, `src/backend/utils` (+1) |
+| [`add-new-data-type`](../scenarios/add-new-data-type.md) | `src/backend/utils`, `src/test/regress` |
+| [`add-new-error-code`](../scenarios/add-new-error-code.md) | `src/pl`, `src/backend/utils` |
+| [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md) | `src/backend/utils`, `src/backend/executor` (+1) |
+| [`add-new-guc`](../scenarios/add-new-guc.md) | `src/backend/utils`, `src/test/regress` |
+| [`add-new-hook`](../scenarios/add-new-hook.md) | `src/backend/optimizer`, `src/backend/executor` |
+| [`add-new-index-am`](../scenarios/add-new-index-am.md) | `src/backend/utils`, `src/test/regress` |
+| [`add-new-lwlock-tranche`](../scenarios/add-new-lwlock-tranche.md) | `src/backend/utils` |
+| [`add-new-node-type`](../scenarios/add-new-node-type.md) | `src/backend/utils` |
+| [`add-new-operator`](../scenarios/add-new-operator.md) | `src/backend/optimizer`, `src/backend/utils` |
+| [`add-new-operator-class`](../scenarios/add-new-operator-class.md) | `src/test/regress` |
+| [`add-new-pg-stat-view`](../scenarios/add-new-pg-stat-view.md) | `src/backend/utils`, `src/test/regress` |
+| [`add-new-plan-node`](../scenarios/add-new-plan-node.md) | `src/backend/optimizer`, `src/backend/utils` (+2) |
+| [`add-new-shared-memory-region`](../scenarios/add-new-shared-memory-region.md) | `src/backend/utils` |
+| [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md) | `src/pl`, `src/backend/utils` (+2) |
+| [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md) | `src/backend/utils`, `src/test/regress` (+1) |
+| [`add-new-system-view`](../scenarios/add-new-system-view.md) | `src/backend/utils`, `src/test/regress` |
+| [`add-new-table-am`](../scenarios/add-new-table-am.md) | `src/test/regress` |
+| [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md) | `src/backend/commands` |
+| [`add-startup-hook`](../scenarios/add-startup-hook.md) | `src/backend/utils` |
+| [`integrate-with-plpgsql`](../scenarios/integrate-with-plpgsql.md) | `src/pl`, `src/test/regress` |
+| [`remove-from-catalog`](../scenarios/remove-from-catalog.md) | `src/test/regress` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`executor`](../subsystems/executor.md)
+- [`optimizer`](../subsystems/optimizer.md)
+- [`utils-cache`](../subsystems/utils-cache.md)
+- [`utils-mmgr`](../subsystems/utils-mmgr.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer/collaborator partners
 
 From his commits (top reviewers credited on commits **he pushed**, 24mo):

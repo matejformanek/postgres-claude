@@ -110,6 +110,23 @@ last_verified_commit: e18b0cb7344
 3. **Phase 3 — Tests + docs.** Files: [10, 11, 15 if needed, 17 if needed]. Edits: TAP test that loads the module via `shared_preload_libraries`, verifies the static worker started, calls the dynamic launcher, exercises terminate path. Phase-end check: `meson test -C dev/build-debug --suite <name>` passes; `make check-world` green.
 4. **Phase 4 (optional) — Shmem-region piggyback.** If the worker shares state with backends, this is where you union with `add-new-shared-memory-region`. Files: add `shmem_request_hook` + `shmem_startup_hook` registered from `_PG_init`. Phase-end check: regress + TAP still pass; `pg_shmem_allocations` shows the new region.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/postmaster` (+1) |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/backend/postmaster` (+1) |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/test/modules`, `src/backend/utils` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/utils` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

@@ -59,6 +59,28 @@ The Reviewed-by number is the most distinctive: **2 out of 168 commits carry any
 - **High-fan-out single commits.** The annual copyright bump (`Update copyright for 2026` = `451c439`) is the single highest-fan-out commit in the repo — thousands of file touches in one go. This skews any "top directories" analysis if you don't filter it out.
 - **Self-correcting follow-up pattern on release notes.** Notes get a first draft (mid-Q2 of a release cycle), then 50-100 small "various corrections", "update to current", "merge items", "add missing X" commits over the following weeks as the community reads the draft and emails him fixes. He commits these batched into 1-5-line edits.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none — persona has no owned paths that overlap any scenario's files)_
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none)_
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer / collaborator partners
 
 - Effectively **none**. Across 168 24mo commits there are 2 Reviewed-by trailers (Laurenz Albe, Erik Wienhold; one each, both on doc-substance commits). No `Author:` or `Co-authored-by:` trailers in the substantive set.

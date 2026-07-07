@@ -61,6 +61,25 @@ last_verified_commit: e18b0cb7344
 
 4. **Phase 4 — Docs.** Files: [8, 9]. Edits: add the aggregate to the appropriate SGML table with signature, description, and (if non-obvious) a note on partial-aggregation support. Phase-end check: `meson compile -C dev/build-debug docs` renders without xmllint errors.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/backend/utils` (+1) |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/optimizer`, `src/backend/utils` (+1) |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/backend/utils`, `src/test/regress` |
+| [`david-rowley`](../personas/david-rowley.md) | `src/test/regress` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include` |
+| [`richard-guo`](../personas/richard-guo.md) | `src/backend/optimizer` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

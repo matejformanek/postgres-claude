@@ -102,6 +102,24 @@ The tree must build cleanly at the end of each phase.
    exercised. Phase-end check: `meson test -C dev/build-debug --suite
    regress` green; `psql -c "\do+ <opname>"` shows the new operator.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/backend/utils` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/backend/catalog` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/optimizer`, `src/backend/utils` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/backend/utils` |
+| [`richard-guo`](../personas/richard-guo.md) | `src/backend/optimizer` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

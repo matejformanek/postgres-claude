@@ -99,6 +99,32 @@ slot handling across upgrades. [verified-by-code]
   and slot activation. Treat any patch touching those areas as
   likely to come under his lens.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-guc`](../scenarios/add-new-guc.md) | `src/backend/replication`, `src/include/replication` |
+| [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md) | `src/backend/replication` |
+| [`add-new-replication-message`](../scenarios/add-new-replication-message.md) | `src/backend/replication`, `src/include/replication` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`replication`](../subsystems/replication.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer/collaborator partners
 
 `Reviewed-by:` trailers inside his own commits (24mo):

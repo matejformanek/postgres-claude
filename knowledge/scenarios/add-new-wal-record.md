@@ -158,6 +158,22 @@ when the answer is "nothing, but here's where your code is consumed".)
    green; for the paranoia pass, run with `wal_consistency_checking=all`
    set in the cluster's `postgresql.conf`.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/access` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/test/modules`, `src/backend/access` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/bin` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/bin` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

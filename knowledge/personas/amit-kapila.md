@@ -57,6 +57,28 @@ The shape is sharply concentrated: `replication/` + adjacent test/doc/catalog di
 - **Doc + test discipline.** Every behavior change includes a `doc/src/sgml/` hunk (131 files touched in 24mo) and a `src/test/subscription/` or `src/test/regress/` hunk (61 + 51 file-touches). Almost no "code-only" commits in the feature work.
 - **No squash, no fixup.** Follow-up fixes get their own SHA and the original commit is referenced by hash in the body ("Fix BF failure introduced in commit 2bf6c9ff71." → 2bf6c9ff71 is from 2 days earlier).
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none — persona has no owned paths that overlap any scenario's files)_
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none)_
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer / collaborator partners
 
 This is the most distinctive thing about Kapila's commit stream — **the tightest reviewer subteam in the entire PG project** (confirmed in `contributor-map.md` and `domain-ownership.md` §2).

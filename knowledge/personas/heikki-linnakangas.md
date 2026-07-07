@@ -110,6 +110,77 @@ Top-churn 12mo commits are dominated by **refactors and API conversions**:
 
 Six of his top 10 12mo commits are explicit refactors. This is **noticeably more refactor-leaning than Michael (mostly Add/Fix) or Tom (Fix-leaning)**.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md) | `src/include`, `src/backend/utils` |
+| [`add-new-bgworker`](../scenarios/add-new-bgworker.md) | `src/include`, `src/backend/postmaster` (+1) |
+| [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md) | `src/include`, `src/backend/utils` (+3) |
+| [`add-new-builtin-function`](../scenarios/add-new-builtin-function.md) | `src/include`, `src/backend/utils` |
+| [`add-new-cast`](../scenarios/add-new-cast.md) | `src/include` |
+| [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-data-type`](../scenarios/add-new-data-type.md) | `src/include`, `src/backend/utils` |
+| [`add-new-error-code`](../scenarios/add-new-error-code.md) | `src/include`, `src/backend/utils` |
+| [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md) | `src/include`, `src/backend/utils` |
+| [`add-new-extension`](../scenarios/add-new-extension.md) | `src/include` |
+| [`add-new-guc`](../scenarios/add-new-guc.md) | `src/include`, `src/backend/utils` |
+| [`add-new-hook`](../scenarios/add-new-hook.md) | `src/include`, `src/backend/tcop` |
+| [`add-new-index-am`](../scenarios/add-new-index-am.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-lwlock-tranche`](../scenarios/add-new-lwlock-tranche.md) | `src/include`, `src/backend/utils` (+3) |
+| [`add-new-node-type`](../scenarios/add-new-node-type.md) | `src/include`, `src/backend/utils` |
+| [`add-new-operator`](../scenarios/add-new-operator.md) | `src/include`, `src/backend/utils` |
+| [`add-new-operator-class`](../scenarios/add-new-operator-class.md) | `src/include`, `src/backend/access` |
+| [`add-new-pg-stat-view`](../scenarios/add-new-pg-stat-view.md) | `src/include`, `src/backend/utils` |
+| [`add-new-plan-node`](../scenarios/add-new-plan-node.md) | `src/include`, `src/backend/utils` |
+| [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md) | `src/include`, `src/backend/access` (+1) |
+| [`add-new-replication-message`](../scenarios/add-new-replication-message.md) | `src/include` |
+| [`add-new-shared-memory-region`](../scenarios/add-new-shared-memory-region.md) | `src/include`, `src/backend/utils` (+2) |
+| [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md) | `src/include`, `src/backend/utils` |
+| [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-system-view`](../scenarios/add-new-system-view.md) | `src/include`, `src/backend/utils` |
+| [`add-new-table-am`](../scenarios/add-new-table-am.md) | `src/include`, `src/backend/access` |
+| [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md) | `src/include`, `src/backend/tcop` |
+| [`add-new-wal-record`](../scenarios/add-new-wal-record.md) | `src/include`, `src/backend/access` |
+| [`add-startup-hook`](../scenarios/add-startup-hook.md) | `src/include`, `src/backend/postmaster` (+2) |
+| [`bump-catversion`](../scenarios/bump-catversion.md) | `src/include`, `src/backend/access` |
+| [`remove-from-catalog`](../scenarios/remove-from-catalog.md) | `src/include` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`access-heap`](../subsystems/access-heap.md)
+- [`access-nbtree`](../subsystems/access-nbtree.md)
+- [`access-transam`](../subsystems/access-transam.md)
+- [`executor`](../subsystems/executor.md)
+- [`foreign`](../subsystems/foreign.md)
+- [`jit`](../subsystems/jit.md)
+- [`libpq-backend`](../subsystems/libpq-backend.md)
+- [`optimizer`](../subsystems/optimizer.md)
+- [`parser-and-rewrite`](../subsystems/parser-and-rewrite.md)
+- [`partitioning`](../subsystems/partitioning.md)
+- [`port`](../subsystems/port.md)
+- [`replication`](../subsystems/replication.md)
+- [`storage-buffer`](../subsystems/storage-buffer.md)
+- [`storage-ipc`](../subsystems/storage-ipc.md)
+- [`storage-lmgr`](../subsystems/storage-lmgr.md)
+- [`tcop`](../subsystems/tcop.md)
+- [`utils-cache`](../subsystems/utils-cache.md)
+- [`utils-mmgr`](../subsystems/utils-mmgr.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer/collaborator partners
 
 Top reviewers credited on commits Heikki pushed (24mo):

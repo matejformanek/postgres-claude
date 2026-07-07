@@ -108,6 +108,28 @@ above:
   there's a `WaitBufHdrUnlocked(buf)` immediately after which introduces a race"
   — narrating exactly why the obvious version is wrong. `[verified-by-code]`.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none — persona has no owned paths that overlap any scenario's files)_
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none)_
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer / collaborator partners
 
 Reviewers of his commits (24mo, his commits only):

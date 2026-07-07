@@ -120,6 +120,24 @@ The tree must build at the end of each phase.
    applies. Phase-end check: `meson test -C dev/build-debug --suite
    docs`.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/tcop` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/backend/parser` |
+| [`richard-guo`](../personas/richard-guo.md) | `src/backend/optimizer`, `src/include/optimizer` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/optimizer`, `src/backend/executor` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/test/modules` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

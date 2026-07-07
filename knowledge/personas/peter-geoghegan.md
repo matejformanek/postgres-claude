@@ -94,6 +94,30 @@ Counts via `rtk proxy git -C source/ log --since='24 months ago'
   code rather than copying. This is a strong style signal — expect
   refactoring patches around any nbtree feature.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-operator-class`](../scenarios/add-new-operator-class.md) | `src/include/access/nbtree.h`, `src/backend/access/nbtree` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`access-nbtree`](../subsystems/access-nbtree.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer/collaborator partners
 
 `Reviewed-by:` trailers inside his own commits (24mo) were sparse —

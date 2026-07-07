@@ -170,6 +170,22 @@ Marked **(A)** = Surface A only (output-plugin callback). Marked **(B)**
    subscription` + `meson test -C dev/build-debug --suite test_decoding`
    all green. `make -C doc/src/sgml` clean.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`masahiko-sawada`](../personas/masahiko-sawada.md) | `src/backend/replication`, `src/include/replication` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/backend/replication` |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
