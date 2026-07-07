@@ -393,3 +393,18 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/architecture/planner.md verified=2026-07-05 [drift-fixed: analyzejoins.c reduce_unique_semijoins 874-895→961-974 + comment 862-873→961-972, remove_useless_self_joins 2539-2553→2603-2639 (~+90/+100 shift); planner.c/pathnode.c/costsize.c/setrefs.c/allpaths.c cites all hold]
 [pending] knowledge/architecture/executor.md verified=2026-07-05 [drift-fixed: execGrouping.c §7b additionalsize mechanism refactored — pad-bytes-after-TupleHashEntryData (502 / (char*)entry+MAXALIGN) → co-located-with-MinimalTuple via ExecCopySlotMinimalTupleExtra:585-586 + TupleHashEntryGetAdditional (executor.h:193); 58/59 other cites exact incl. 2026-06-13 nodeModifyTable §8a]
 [pending] knowledge/architecture/process-model.md verified=2026-07-05 [drift-fixed: procsignal_sigusr1_handler misattributed to tcop/postgres.c → defined procsignal.c:696, registered postgres.c:4427; 27/28 other cites hold @a5422fe3bd7e]
+
+## anchor-bump 2026-07-07 (pg-anchor-refresh) — anchor 9d1188f29865..4c75cc786301, 12 commits, 12 docs queued
+
+[pending] knowledge/files/src/backend/parser/parse_expr.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Enforce RETURNING typmod on SQL/JSON DEFAULT behavior expressions, 4c75cc786301, Amit Langote)
+[pending] knowledge/files/contrib/pg_plan_advice/pg_plan_advice.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Use PG_MODULE_MAGIC_EXT in newly introduced modules, 4c8454506782, Robert Haas)
+[pending] knowledge/files/contrib/pg_stash_advice/pg_stash_advice.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Use PG_MODULE_MAGIC_EXT in newly introduced modules, 4c8454506782, Robert Haas)
+[pending] knowledge/files/src/backend/replication/pgrepack/pgrepack.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Use PG_MODULE_MAGIC_EXT in newly introduced modules, 4c8454506782, Robert Haas)
+[pending] knowledge/files/src/backend/utils/adt/like_match.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix mishandling of leading '\' in nondeterministic LIKE + Fix LIKE matching with nondeterministic collations and backslashes, 42b7ff3aaefa/d6ffcae32a10, Tom Lane)
+[pending] knowledge/files/src/backend/utils/adt/like_support.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix LIKE/regex optimization for indexscan with exact-match pattern, 2d7808e6fc2c, Tom Lane)
+[pending] knowledge/files/src/backend/partitioning/partbounds.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Prevent satisfies_hash_partition from crashing with VARIADIC NULL, e8914ec22f8f, Robert Haas)
+[pending] knowledge/files/src/fe_utils/cancel.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Add comment to describe the various frontend cancel methods, cde6ede7137e, Heikki Linnakangas)
+[pending] knowledge/files/src/backend/optimizer/path/allpaths.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix qual pushdown past grouping with mismatched equivalence, 44fb59fc605e, Richard Guo)
+[pending] knowledge/files/src/backend/optimizer/util/clauses.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix qual pushdown past grouping with mismatched equivalence, 44fb59fc605e, Richard Guo)
+[pending] knowledge/files/src/backend/utils/cache/lsyscache.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix qual pushdown past grouping with mismatched equivalence, 44fb59fc605e, Richard Guo)
+[pending] knowledge/files/src/include/optimizer/clauses.h.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix qual pushdown past grouping with mismatched equivalence, 44fb59fc605e, Richard Guo)
