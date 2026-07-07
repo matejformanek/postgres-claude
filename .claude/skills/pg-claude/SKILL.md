@@ -80,6 +80,24 @@ didn't trigger.
 | IndexAmRoutine / TableAmRoutine | `access-method-apis` | any new AM or AM-pluggable code |
 | Replication overview (physical + logical) | `replication-overview` | walsender/walreceiver/slot/logical-decoding work |
 
+### Subsystem-focused reference (per-family deep-dives)
+
+Each fills a `gap:*` signal from `pg-user-question-harvester` — reach for these when working in the named family.
+
+| Topic | Skill | Trigger |
+|---|---|---|
+| COPY FROM / COPY TO internals (`copy*.c`) | `copy-family` | any COPY internals / new option / new format / ON_ERROR |
+| Cumulative-stats + progress + wait events (`utils/activity/`) | `pgstat-framework` | pg_stat_* view work, pending-vs-shared flush surprises, wait events |
+| Postmaster + backend + aux + bgworker + signals | `process-lifecycle` | fork-model questions, aux processes, ProcessInterrupts, startup hooks |
+| AIO + read_stream API (`storage/aio/`, PG 17/18) | `aio-readstream` | migrating scans to read_stream, io_method tuning, AIO consumer |
+| VACUUM engine + autovacuum daemon | `vacuum-autovacuum` | vacuumlazy.c orchestration, autovac thresholds, TidStore, wraparound |
+| Logical decoding + apply (`replication/logical/`) | `logical-replication` | publications/subscriptions, output plugins, reorderbuffer, apply worker |
+| Row-Level Security policies + security barriers + leakproof | `row-level-security` | CREATE POLICY, security_barrier views, leakproof qualification pushdown |
+| Free Space Map (`storage/freespace/`) | `free-space-map` | FSM tree, category encoding, INSERT free-space search |
+| MultiXactId + tuple-locking modes + wraparound | `multixact` | HEAP_XMAX_IS_MULTI, FOR SHARE/UPDATE, multixact SLRU exhaustion |
+| Collation providers (builtin / ICU / libc) + encoding | `collation-provider` | pg_locale.c, collversion tracking, glibc-upgrade index issues |
+| Frontend/backend wire protocol (`libpq/pqcomm*` + `tcop/postgres.c`) | `wire-protocol` | new protocol message, Simple vs Extended query, pq_beginmessage lifecycle |
+
 ### Running / testing / debugging
 
 | Topic | Skill | Notes |
