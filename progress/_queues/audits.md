@@ -380,6 +380,9 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/interfaces/libpq/fe-trace.c.md  reason=anchor-bump 2026-07-04:a5422fe3bd7e..e0ff7fd9aa2e (Fix tracing of BackendKeyData and CancelRequest, b22b619056e8, Heikki Linnakangas)
 [pending] knowledge/subsystems/contrib-btree_gist.md  reason=anchor-bump 2026-07-04:a5422fe3bd7e..e0ff7fd9aa2e (25 impacted btree_gist files — encoding-aware-truncation removal b82d69abf64f + truncated-bounds tightening fea9c1884b20 + signature sync 4b808ed77cd9 + NotEqual internal-page crash fix eef644e57c38, Tom Lane); >=5-impacted-file subsystem threshold
 
+[pending] knowledge/files/src/backend/storage/aio/method_worker.c.md  reason=anchor-bump 2026-07-06:a8c2547eaac7..9d1188f29865 (Emit a warning when io_min_workers exceeds io_max_workers, 9d1188f29865, Michael Paquier)
+[pending] knowledge/files/contrib/dict_xsyn/dict_xsyn.c.md  reason=anchor-bump 2026-07-06:a8c2547eaac7..9d1188f29865 (Simplify dxsyn_lexize(), 9f03dab4574b, Tom Lane)
+
 ## audit-clean/drift rotation (2026-07-05, pg-quality-auditor) — AUDIT mode, 8 long-form docs re-verified @a5422fe3bd7e (4 clean, 4 drift-fixed)
 
 [pending] knowledge/idioms/parser-pipeline.md verified=2026-07-05 [clean: 10 cites hold @a5422fe3bd7e — parser.c:35-42/scan.l:13-22/gram.y:13629-13631+13649-13706/analyze.c:127+334-433+8-14+74/parse_node.c:38-50; tightened parsenodes.h Query typedef 117→120]
