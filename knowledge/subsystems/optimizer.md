@@ -1046,3 +1046,95 @@ intelligible at all — every cross-cutting concern (orderings, equivalences,
 parameterisation, parallelism, subqueries, lateral) is expressed by *one*
 data structure and *one* construction phase. The pitfall list (§16) is
 mostly violations of that single-source-of-truth discipline.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**80 files.**
+
+| File |
+|---|
+| [`src/backend/optimizer/geqo/geqo_copy.c`](../files/src/backend/optimizer/geqo/geqo_copy.c.md) |
+| [`src/backend/optimizer/geqo/geqo_cx.c`](../files/src/backend/optimizer/geqo/geqo_cx.c.md) |
+| [`src/backend/optimizer/geqo/geqo_erx.c`](../files/src/backend/optimizer/geqo/geqo_erx.c.md) |
+| [`src/backend/optimizer/geqo/geqo_eval.c`](../files/src/backend/optimizer/geqo/geqo_eval.c.md) |
+| [`src/backend/optimizer/geqo/geqo_main.c`](../files/src/backend/optimizer/geqo/geqo_main.c.md) |
+| [`src/backend/optimizer/geqo/geqo_misc.c`](../files/src/backend/optimizer/geqo/geqo_misc.c.md) |
+| [`src/backend/optimizer/geqo/geqo_mutation.c`](../files/src/backend/optimizer/geqo/geqo_mutation.c.md) |
+| [`src/backend/optimizer/geqo/geqo_ox1.c`](../files/src/backend/optimizer/geqo/geqo_ox1.c.md) |
+| [`src/backend/optimizer/geqo/geqo_ox2.c`](../files/src/backend/optimizer/geqo/geqo_ox2.c.md) |
+| [`src/backend/optimizer/geqo/geqo_pmx.c`](../files/src/backend/optimizer/geqo/geqo_pmx.c.md) |
+| [`src/backend/optimizer/geqo/geqo_pool.c`](../files/src/backend/optimizer/geqo/geqo_pool.c.md) |
+| [`src/backend/optimizer/geqo/geqo_px.c`](../files/src/backend/optimizer/geqo/geqo_px.c.md) |
+| [`src/backend/optimizer/geqo/geqo_random.c`](../files/src/backend/optimizer/geqo/geqo_random.c.md) |
+| [`src/backend/optimizer/geqo/geqo_recombination.c`](../files/src/backend/optimizer/geqo/geqo_recombination.c.md) |
+| [`src/backend/optimizer/geqo/geqo_selection.c`](../files/src/backend/optimizer/geqo/geqo_selection.c.md) |
+| [`src/backend/optimizer/path/allpaths.c`](../files/src/backend/optimizer/path/allpaths.c.md) |
+| [`src/backend/optimizer/path/clausesel.c`](../files/src/backend/optimizer/path/clausesel.c.md) |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) |
+| [`src/backend/optimizer/path/equivclass.c`](../files/src/backend/optimizer/path/equivclass.c.md) |
+| [`src/backend/optimizer/path/indxpath.c`](../files/src/backend/optimizer/path/indxpath.c.md) |
+| [`src/backend/optimizer/path/joinpath.c`](../files/src/backend/optimizer/path/joinpath.c.md) |
+| [`src/backend/optimizer/path/joinrels.c`](../files/src/backend/optimizer/path/joinrels.c.md) |
+| [`src/backend/optimizer/path/pathkeys.c`](../files/src/backend/optimizer/path/pathkeys.c.md) |
+| [`src/backend/optimizer/path/tidpath.c`](../files/src/backend/optimizer/path/tidpath.c.md) |
+| [`src/backend/optimizer/plan/analyzejoins.c`](../files/src/backend/optimizer/plan/analyzejoins.c.md) |
+| [`src/backend/optimizer/plan/createplan.c`](../files/src/backend/optimizer/plan/createplan.c.md) |
+| [`src/backend/optimizer/plan/initsplan.c`](../files/src/backend/optimizer/plan/initsplan.c.md) |
+| [`src/backend/optimizer/plan/planagg.c`](../files/src/backend/optimizer/plan/planagg.c.md) |
+| [`src/backend/optimizer/plan/planmain.c`](../files/src/backend/optimizer/plan/planmain.c.md) |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) |
+| [`src/backend/optimizer/plan/setrefs.c`](../files/src/backend/optimizer/plan/setrefs.c.md) |
+| [`src/backend/optimizer/plan/subselect.c`](../files/src/backend/optimizer/plan/subselect.c.md) |
+| [`src/backend/optimizer/prep/prepagg.c`](../files/src/backend/optimizer/prep/prepagg.c.md) |
+| [`src/backend/optimizer/prep/prepjointree.c`](../files/src/backend/optimizer/prep/prepjointree.c.md) |
+| [`src/backend/optimizer/prep/prepqual.c`](../files/src/backend/optimizer/prep/prepqual.c.md) |
+| [`src/backend/optimizer/prep/preptlist.c`](../files/src/backend/optimizer/prep/preptlist.c.md) |
+| [`src/backend/optimizer/prep/prepunion.c`](../files/src/backend/optimizer/prep/prepunion.c.md) |
+| [`src/backend/optimizer/util/appendinfo.c`](../files/src/backend/optimizer/util/appendinfo.c.md) |
+| [`src/backend/optimizer/util/clauses.c`](../files/src/backend/optimizer/util/clauses.c.md) |
+| [`src/backend/optimizer/util/extendplan.c`](../files/src/backend/optimizer/util/extendplan.c.md) |
+| [`src/backend/optimizer/util/inherit.c`](../files/src/backend/optimizer/util/inherit.c.md) |
+| [`src/backend/optimizer/util/joininfo.c`](../files/src/backend/optimizer/util/joininfo.c.md) |
+| [`src/backend/optimizer/util/orclauses.c`](../files/src/backend/optimizer/util/orclauses.c.md) |
+| [`src/backend/optimizer/util/paramassign.c`](../files/src/backend/optimizer/util/paramassign.c.md) |
+| [`src/backend/optimizer/util/pathnode.c`](../files/src/backend/optimizer/util/pathnode.c.md) |
+| [`src/backend/optimizer/util/placeholder.c`](../files/src/backend/optimizer/util/placeholder.c.md) |
+| [`src/backend/optimizer/util/plancat.c`](../files/src/backend/optimizer/util/plancat.c.md) |
+| [`src/backend/optimizer/util/predtest.c`](../files/src/backend/optimizer/util/predtest.c.md) |
+| [`src/backend/optimizer/util/relnode.c`](../files/src/backend/optimizer/util/relnode.c.md) |
+| [`src/backend/optimizer/util/restrictinfo.c`](../files/src/backend/optimizer/util/restrictinfo.c.md) |
+| [`src/backend/optimizer/util/tlist.c`](../files/src/backend/optimizer/util/tlist.c.md) |
+| [`src/backend/optimizer/util/var.c`](../files/src/backend/optimizer/util/var.c.md) |
+| [`src/include/optimizer/appendinfo.h`](../files/src/include/optimizer/appendinfo.h.md) |
+| [`src/include/optimizer/clauses.h`](../files/src/include/optimizer/clauses.h.md) |
+| [`src/include/optimizer/cost.h`](../files/src/include/optimizer/cost.h.md) |
+| [`src/include/optimizer/extendplan.h`](../files/src/include/optimizer/extendplan.h.md) |
+| [`src/include/optimizer/geqo.h`](../files/src/include/optimizer/geqo.h.md) |
+| [`src/include/optimizer/geqo_copy.h`](../files/src/include/optimizer/geqo_copy.h.md) |
+| [`src/include/optimizer/geqo_gene.h`](../files/src/include/optimizer/geqo_gene.h.md) |
+| [`src/include/optimizer/geqo_misc.h`](../files/src/include/optimizer/geqo_misc.h.md) |
+| [`src/include/optimizer/geqo_mutation.h`](../files/src/include/optimizer/geqo_mutation.h.md) |
+| [`src/include/optimizer/geqo_pool.h`](../files/src/include/optimizer/geqo_pool.h.md) |
+| [`src/include/optimizer/geqo_random.h`](../files/src/include/optimizer/geqo_random.h.md) |
+| [`src/include/optimizer/geqo_recombination.h`](../files/src/include/optimizer/geqo_recombination.h.md) |
+| [`src/include/optimizer/geqo_selection.h`](../files/src/include/optimizer/geqo_selection.h.md) |
+| [`src/include/optimizer/inherit.h`](../files/src/include/optimizer/inherit.h.md) |
+| [`src/include/optimizer/joininfo.h`](../files/src/include/optimizer/joininfo.h.md) |
+| [`src/include/optimizer/optimizer.h`](../files/src/include/optimizer/optimizer.h.md) |
+| [`src/include/optimizer/orclauses.h`](../files/src/include/optimizer/orclauses.h.md) |
+| [`src/include/optimizer/paramassign.h`](../files/src/include/optimizer/paramassign.h.md) |
+| [`src/include/optimizer/pathnode.h`](../files/src/include/optimizer/pathnode.h.md) |
+| [`src/include/optimizer/paths.h`](../files/src/include/optimizer/paths.h.md) |
+| [`src/include/optimizer/placeholder.h`](../files/src/include/optimizer/placeholder.h.md) |
+| [`src/include/optimizer/plancat.h`](../files/src/include/optimizer/plancat.h.md) |
+| [`src/include/optimizer/planmain.h`](../files/src/include/optimizer/planmain.h.md) |
+| [`src/include/optimizer/planner.h`](../files/src/include/optimizer/planner.h.md) |
+| [`src/include/optimizer/prep.h`](../files/src/include/optimizer/prep.h.md) |
+| [`src/include/optimizer/restrictinfo.h`](../files/src/include/optimizer/restrictinfo.h.md) |
+| [`src/include/optimizer/subselect.h`](../files/src/include/optimizer/subselect.h.md) |
+| [`src/include/optimizer/tlist.h`](../files/src/include/optimizer/tlist.h.md) |
+
+<!-- /files-owned:auto -->

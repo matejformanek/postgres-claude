@@ -155,3 +155,16 @@ type.
 - `source/src/include/libpq/auth.h` — hook type declaration.
 - `source/contrib/auth_delay/auth_delay.c` — full 75-LOC
   implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/auth_delay/auth_delay.c`](../files/contrib/auth_delay/auth_delay.c.md) |
+
+<!-- /files-owned:auto -->

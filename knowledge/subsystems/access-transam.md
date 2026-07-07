@@ -707,3 +707,71 @@ Carried forward from per-file docs. Highest risk first.
   bits for several queued concurrent committers under a single SLRU
   bank-lock acquisition. Only enabled when subxids fit on the parent's
   page.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**56 files.**
+
+| File |
+|---|
+| [`src/backend/access/transam/README`](../files/src/backend/access/transam/README.md) |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) |
+| [`src/backend/access/transam/commit_ts.c`](../files/src/backend/access/transam/commit_ts.c.md) |
+| [`src/backend/access/transam/generic_xlog.c`](../files/src/backend/access/transam/generic_xlog.c.md) |
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) |
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) |
+| [`src/backend/access/transam/rmgr.c`](../files/src/backend/access/transam/rmgr.c.md) |
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) |
+| [`src/backend/access/transam/subtrans.c`](../files/src/backend/access/transam/subtrans.c.md) |
+| [`src/backend/access/transam/timeline.c`](../files/src/backend/access/transam/timeline.c.md) |
+| [`src/backend/access/transam/transam.c`](../files/src/backend/access/transam/transam.c.md) |
+| [`src/backend/access/transam/twophase.c`](../files/src/backend/access/transam/twophase.c.md) |
+| [`src/backend/access/transam/twophase_rmgr.c`](../files/src/backend/access/transam/twophase_rmgr.c.md) |
+| [`src/backend/access/transam/varsup.c`](../files/src/backend/access/transam/varsup.c.md) |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) |
+| [`src/backend/access/transam/xlogarchive.c`](../files/src/backend/access/transam/xlogarchive.c.md) |
+| [`src/backend/access/transam/xlogbackup.c`](../files/src/backend/access/transam/xlogbackup.c.md) |
+| [`src/backend/access/transam/xlogfuncs.c`](../files/src/backend/access/transam/xlogfuncs.c.md) |
+| [`src/backend/access/transam/xloginsert.c`](../files/src/backend/access/transam/xloginsert.c.md) |
+| [`src/backend/access/transam/xlogprefetcher.c`](../files/src/backend/access/transam/xlogprefetcher.c.md) |
+| [`src/backend/access/transam/xlogreader.c`](../files/src/backend/access/transam/xlogreader.c.md) |
+| [`src/backend/access/transam/xlogrecovery.c`](../files/src/backend/access/transam/xlogrecovery.c.md) |
+| [`src/backend/access/transam/xlogstats.c`](../files/src/backend/access/transam/xlogstats.c.md) |
+| [`src/backend/access/transam/xlogutils.c`](../files/src/backend/access/transam/xlogutils.c.md) |
+| [`src/backend/access/transam/xlogwait.c`](../files/src/backend/access/transam/xlogwait.c.md) |
+| [`src/include/access/brin_xlog.h`](../files/src/include/access/brin_xlog.h.md) |
+| [`src/include/access/clog.h`](../files/src/include/access/clog.h.md) |
+| [`src/include/access/commit_ts.h`](../files/src/include/access/commit_ts.h.md) |
+| [`src/include/access/generic_xlog.h`](../files/src/include/access/generic_xlog.h.md) |
+| [`src/include/access/ginxlog.h`](../files/src/include/access/ginxlog.h.md) |
+| [`src/include/access/gistxlog.h`](../files/src/include/access/gistxlog.h.md) |
+| [`src/include/access/hash_xlog.h`](../files/src/include/access/hash_xlog.h.md) |
+| [`src/include/access/heapam_xlog.h`](../files/src/include/access/heapam_xlog.h.md) |
+| [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) |
+| [`src/include/access/multixact_internal.h`](../files/src/include/access/multixact_internal.h.md) |
+| [`src/include/access/nbtxlog.h`](../files/src/include/access/nbtxlog.h.md) |
+| [`src/include/access/spgxlog.h`](../files/src/include/access/spgxlog.h.md) |
+| [`src/include/access/subtrans.h`](../files/src/include/access/subtrans.h.md) |
+| [`src/include/access/transam.h`](../files/src/include/access/transam.h.md) |
+| [`src/include/access/twophase.h`](../files/src/include/access/twophase.h.md) |
+| [`src/include/access/twophase_rmgr.h`](../files/src/include/access/twophase_rmgr.h.md) |
+| [`src/include/access/xact.h`](../files/src/include/access/xact.h.md) |
+| [`src/include/access/xlog.h`](../files/src/include/access/xlog.h.md) |
+| [`src/include/access/xlog_internal.h`](../files/src/include/access/xlog_internal.h.md) |
+| [`src/include/access/xlogarchive.h`](../files/src/include/access/xlogarchive.h.md) |
+| [`src/include/access/xlogbackup.h`](../files/src/include/access/xlogbackup.h.md) |
+| [`src/include/access/xlogdefs.h`](../files/src/include/access/xlogdefs.h.md) |
+| [`src/include/access/xloginsert.h`](../files/src/include/access/xloginsert.h.md) |
+| [`src/include/access/xlogprefetcher.h`](../files/src/include/access/xlogprefetcher.h.md) |
+| [`src/include/access/xlogreader.h`](../files/src/include/access/xlogreader.h.md) |
+| [`src/include/access/xlogrecord.h`](../files/src/include/access/xlogrecord.h.md) |
+| [`src/include/access/xlogrecovery.h`](../files/src/include/access/xlogrecovery.h.md) |
+| [`src/include/access/xlogstats.h`](../files/src/include/access/xlogstats.h.md) |
+| [`src/include/access/xlogutils.h`](../files/src/include/access/xlogutils.h.md) |
+| [`src/include/access/xlogwait.h`](../files/src/include/access/xlogwait.h.md) |
+
+<!-- /files-owned:auto -->

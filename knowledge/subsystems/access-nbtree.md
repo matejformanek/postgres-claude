@@ -904,3 +904,31 @@ in the wider index-AM landscape, [[knowledge/subsystems/storage-buffer.md]]
 for the buffer-cache primitives underneath, and
 [[knowledge/subsystems/access-transam.md]] for the WAL infrastructure
 that nbtree feeds into.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**16 files.**
+
+| File |
+|---|
+| [`src/backend/access/nbtree/README`](../files/src/backend/access/nbtree/README.md) |
+| [`src/backend/access/nbtree/nbtcompare.c`](../files/src/backend/access/nbtree/nbtcompare.c.md) |
+| [`src/backend/access/nbtree/nbtdedup.c`](../files/src/backend/access/nbtree/nbtdedup.c.md) |
+| [`src/backend/access/nbtree/nbtinsert.c`](../files/src/backend/access/nbtree/nbtinsert.c.md) |
+| [`src/backend/access/nbtree/nbtpage.c`](../files/src/backend/access/nbtree/nbtpage.c.md) |
+| [`src/backend/access/nbtree/nbtpreprocesskeys.c`](../files/src/backend/access/nbtree/nbtpreprocesskeys.c.md) |
+| [`src/backend/access/nbtree/nbtreadpage.c`](../files/src/backend/access/nbtree/nbtreadpage.c.md) |
+| [`src/backend/access/nbtree/nbtree.c`](../files/src/backend/access/nbtree/nbtree.c.md) |
+| [`src/backend/access/nbtree/nbtsearch.c`](../files/src/backend/access/nbtree/nbtsearch.c.md) |
+| [`src/backend/access/nbtree/nbtsort.c`](../files/src/backend/access/nbtree/nbtsort.c.md) |
+| [`src/backend/access/nbtree/nbtsplitloc.c`](../files/src/backend/access/nbtree/nbtsplitloc.c.md) |
+| [`src/backend/access/nbtree/nbtutils.c`](../files/src/backend/access/nbtree/nbtutils.c.md) |
+| [`src/backend/access/nbtree/nbtvalidate.c`](../files/src/backend/access/nbtree/nbtvalidate.c.md) |
+| [`src/backend/access/nbtree/nbtxlog.c`](../files/src/backend/access/nbtree/nbtxlog.c.md) |
+| [`src/include/access/nbtree.h`](../files/src/include/access/nbtree.h.md) |
+| [`src/include/access/nbtxlog.h`](../files/src/include/access/nbtxlog.h.md) |
+
+<!-- /files-owned:auto -->

@@ -176,3 +176,23 @@ columns. Without estimators, planner would default to
 - `.claude/skills/access-method-apis.md` — index-AM
   contracts.
 - `source/contrib/intarray/` — implementation directory.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**8 files.**
+
+| File |
+|---|
+| [`contrib/intarray/_int`](../files/contrib/intarray/_int.md) |
+| [`contrib/intarray/_int_bool`](../files/contrib/intarray/_int_bool.md) |
+| [`contrib/intarray/_int_gin`](../files/contrib/intarray/_int_gin.md) |
+| [`contrib/intarray/_int_gist`](../files/contrib/intarray/_int_gist.md) |
+| [`contrib/intarray/_int_op`](../files/contrib/intarray/_int_op.md) |
+| [`contrib/intarray/_int_selfuncs`](../files/contrib/intarray/_int_selfuncs.md) |
+| [`contrib/intarray/_int_tool.c`](../files/contrib/intarray/_int_tool.c.md) |
+| [`contrib/intarray/_intbig_gist`](../files/contrib/intarray/_intbig_gist.md) |
+
+<!-- /files-owned:auto -->

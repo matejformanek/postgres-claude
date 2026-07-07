@@ -147,3 +147,17 @@ performance.
 - `.claude/skills/access-method-apis.md` — index-AM
   contracts.
 - `source/contrib/cube/cube.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**2 files.**
+
+| File |
+|---|
+| [`contrib/cube/cube.c`](../files/contrib/cube/cube.c.md) |
+| [`contrib/cube/cubedata.h`](../files/contrib/cube/cubedata.h.md) |
+
+<!-- /files-owned:auto -->

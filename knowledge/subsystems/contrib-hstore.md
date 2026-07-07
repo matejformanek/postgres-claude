@@ -108,6 +108,26 @@ Andrew Dunstan, Daniel Gustafsson.
 - Any pg_upgrade-affecting change: walk `hstore_compat.c` and
   the install SQL versioning carefully.
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**7 files.**
+
+| File |
+|---|
+| [`contrib/hstore/hstore.h`](../files/contrib/hstore/hstore.h.md) |
+| [`contrib/hstore/hstore_compat.c`](../files/contrib/hstore/hstore_compat.c.md) |
+| [`contrib/hstore/hstore_gin.c`](../files/contrib/hstore/hstore_gin.c.md) |
+| [`contrib/hstore/hstore_gist.c`](../files/contrib/hstore/hstore_gist.c.md) |
+| [`contrib/hstore/hstore_io.c`](../files/contrib/hstore/hstore_io.c.md) |
+| [`contrib/hstore/hstore_op.c`](../files/contrib/hstore/hstore_op.c.md) |
+| [`contrib/hstore/hstore_subs.c`](../files/contrib/hstore/hstore_subs.c.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — GIN / GiST opclass contracts.

@@ -197,3 +197,16 @@ text path may be preferable to avoid precision loss.
   registration.
 - `source/contrib/jsonb_plperl/jsonb_plperl.c` —
   implementation (309 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/jsonb_plperl/jsonb_plperl.c`](../files/contrib/jsonb_plperl/jsonb_plperl.c.md) |
+
+<!-- /files-owned:auto -->

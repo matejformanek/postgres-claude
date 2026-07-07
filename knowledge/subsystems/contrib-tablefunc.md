@@ -180,3 +180,16 @@ cycles or unbounded depth.
 - `knowledge/subsystems/executor.md` — set-returning
   functions in the executor.
 - `source/contrib/tablefunc/tablefunc.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/tablefunc/tablefunc`](../files/contrib/tablefunc/tablefunc.md) |
+
+<!-- /files-owned:auto -->

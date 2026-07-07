@@ -151,3 +151,16 @@ operators in `pg_opclass`.
 - `.claude/skills/fmgr-and-spi/SKILL.md` — function override
   pattern.
 - `source/contrib/citext/citext.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/citext/citext`](../files/contrib/citext/citext.md) |
+
+<!-- /files-owned:auto -->

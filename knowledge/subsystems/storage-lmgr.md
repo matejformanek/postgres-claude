@@ -222,3 +222,42 @@ Additional items from the file-level pass:
 - **DeadlockTimeout** — GUC, default 1000 ms, before a waiter arms `CheckDeadLockAlert`. `[verified-by-code]` (`proc.c:62`).
 - **Group locking** — locks held by procs in the same parallel group don't conflict *except* `LOCKTAG_RELATION_EXTEND` (which conflicts even between group members — see `lock.c:1603-1608`). `[from-README]` (`README:589-650`).
 - **Stuck spinlock** — `NUM_DELAYS = 1000` (~2 minute) cap; `s_lock_stuck` PANICs. `[verified-by-code]` (`s_lock.c:78-92`).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**27 files.**
+
+| File |
+|---|
+| [`src/backend/storage/lmgr/README`](../files/src/backend/storage/lmgr/README.md) |
+| [`src/backend/storage/lmgr/README-SSI`](../files/src/backend/storage/lmgr/README-SSI.md) |
+| [`src/backend/storage/lmgr/condition_variable.c`](../files/src/backend/storage/lmgr/condition_variable.c.md) |
+| [`src/backend/storage/lmgr/deadlock.c`](../files/src/backend/storage/lmgr/deadlock.c.md) |
+| [`src/backend/storage/lmgr/lmgr.c`](../files/src/backend/storage/lmgr/lmgr.c.md) |
+| [`src/backend/storage/lmgr/lock.c`](../files/src/backend/storage/lmgr/lock.c.md) |
+| [`src/backend/storage/lmgr/lwlock.c`](../files/src/backend/storage/lmgr/lwlock.c.md) |
+| [`src/backend/storage/lmgr/predicate.c`](../files/src/backend/storage/lmgr/predicate.c.md) |
+| [`src/backend/storage/lmgr/proc.c`](../files/src/backend/storage/lmgr/proc.c.md) |
+| [`src/backend/storage/lmgr/s_lock.c`](../files/src/backend/storage/lmgr/s_lock.c.md) |
+| [`src/include/storage/block.h`](../files/src/include/storage/block.h.md) |
+| [`src/include/storage/checksum_block_internal.h`](../files/src/include/storage/checksum_block_internal.h.md) |
+| [`src/include/storage/lmgr.h`](../files/src/include/storage/lmgr.h.md) |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) |
+| [`src/include/storage/lockdefs.h`](../files/src/include/storage/lockdefs.h.md) |
+| [`src/include/storage/locktag.h`](../files/src/include/storage/locktag.h.md) |
+| [`src/include/storage/lwlock.h`](../files/src/include/storage/lwlock.h.md) |
+| [`src/include/storage/lwlocklist.h`](../files/src/include/storage/lwlocklist.h.md) |
+| [`src/include/storage/predicate.h`](../files/src/include/storage/predicate.h.md) |
+| [`src/include/storage/predicate_internals.h`](../files/src/include/storage/predicate_internals.h.md) |
+| [`src/include/storage/proc.h`](../files/src/include/storage/proc.h.md) |
+| [`src/include/storage/procarray.h`](../files/src/include/storage/procarray.h.md) |
+| [`src/include/storage/proclist.h`](../files/src/include/storage/proclist.h.md) |
+| [`src/include/storage/proclist_types.h`](../files/src/include/storage/proclist_types.h.md) |
+| [`src/include/storage/procnumber.h`](../files/src/include/storage/procnumber.h.md) |
+| [`src/include/storage/procsignal.h`](../files/src/include/storage/procsignal.h.md) |
+| [`src/include/storage/s_lock.h`](../files/src/include/storage/s_lock.h.md) |
+
+<!-- /files-owned:auto -->

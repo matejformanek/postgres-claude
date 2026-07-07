@@ -176,3 +176,24 @@ page regardless of AM.
   entry point.
 - `source/contrib/pageinspect/heapfuncs.c` — heap decoders.
 - `source/contrib/pageinspect/btreefuncs.c` — B-tree decoders.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**9 files.**
+
+| File |
+|---|
+| [`contrib/pageinspect/brinfuncs.c`](../files/contrib/pageinspect/brinfuncs.c.md) |
+| [`contrib/pageinspect/btreefuncs.c`](../files/contrib/pageinspect/btreefuncs.c.md) |
+| [`contrib/pageinspect/fsmfuncs.c`](../files/contrib/pageinspect/fsmfuncs.c.md) |
+| [`contrib/pageinspect/ginfuncs.c`](../files/contrib/pageinspect/ginfuncs.c.md) |
+| [`contrib/pageinspect/gistfuncs.c`](../files/contrib/pageinspect/gistfuncs.c.md) |
+| [`contrib/pageinspect/hashfuncs.c`](../files/contrib/pageinspect/hashfuncs.c.md) |
+| [`contrib/pageinspect/heapfuncs.c`](../files/contrib/pageinspect/heapfuncs.c.md) |
+| [`contrib/pageinspect/pageinspect`](../files/contrib/pageinspect/pageinspect.md) |
+| [`contrib/pageinspect/rawpage.c`](../files/contrib/pageinspect/rawpage.c.md) |
+
+<!-- /files-owned:auto -->

@@ -118,6 +118,46 @@ both kinds of keys.
 - Install-SQL change: confirm `gist_<type>_ops` and any new
   support functions are linked in the right opfamily.
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**27 files.**
+
+| File |
+|---|
+| [`contrib/btree_gist/btree_bit.c`](../files/contrib/btree_gist/btree_bit.c.md) |
+| [`contrib/btree_gist/btree_bool.c`](../files/contrib/btree_gist/btree_bool.c.md) |
+| [`contrib/btree_gist/btree_bytea.c`](../files/contrib/btree_gist/btree_bytea.c.md) |
+| [`contrib/btree_gist/btree_cash.c`](../files/contrib/btree_gist/btree_cash.c.md) |
+| [`contrib/btree_gist/btree_date.c`](../files/contrib/btree_gist/btree_date.c.md) |
+| [`contrib/btree_gist/btree_enum.c`](../files/contrib/btree_gist/btree_enum.c.md) |
+| [`contrib/btree_gist/btree_float4.c`](../files/contrib/btree_gist/btree_float4.c.md) |
+| [`contrib/btree_gist/btree_float8.c`](../files/contrib/btree_gist/btree_float8.c.md) |
+| [`contrib/btree_gist/btree_gist.c`](../files/contrib/btree_gist/btree_gist.c.md) |
+| [`contrib/btree_gist/btree_gist.h`](../files/contrib/btree_gist/btree_gist.h.md) |
+| [`contrib/btree_gist/btree_inet.c`](../files/contrib/btree_gist/btree_inet.c.md) |
+| [`contrib/btree_gist/btree_int2.c`](../files/contrib/btree_gist/btree_int2.c.md) |
+| [`contrib/btree_gist/btree_int4.c`](../files/contrib/btree_gist/btree_int4.c.md) |
+| [`contrib/btree_gist/btree_int8.c`](../files/contrib/btree_gist/btree_int8.c.md) |
+| [`contrib/btree_gist/btree_interval.c`](../files/contrib/btree_gist/btree_interval.c.md) |
+| [`contrib/btree_gist/btree_macaddr.c`](../files/contrib/btree_gist/btree_macaddr.c.md) |
+| [`contrib/btree_gist/btree_macaddr8.c`](../files/contrib/btree_gist/btree_macaddr8.c.md) |
+| [`contrib/btree_gist/btree_numeric.c`](../files/contrib/btree_gist/btree_numeric.c.md) |
+| [`contrib/btree_gist/btree_oid.c`](../files/contrib/btree_gist/btree_oid.c.md) |
+| [`contrib/btree_gist/btree_text.c`](../files/contrib/btree_gist/btree_text.c.md) |
+| [`contrib/btree_gist/btree_time.c`](../files/contrib/btree_gist/btree_time.c.md) |
+| [`contrib/btree_gist/btree_ts.c`](../files/contrib/btree_gist/btree_ts.c.md) |
+| [`contrib/btree_gist/btree_utils_num.c`](../files/contrib/btree_gist/btree_utils_num.c.md) |
+| [`contrib/btree_gist/btree_utils_num.h`](../files/contrib/btree_gist/btree_utils_num.h.md) |
+| [`contrib/btree_gist/btree_utils_var.c`](../files/contrib/btree_gist/btree_utils_var.c.md) |
+| [`contrib/btree_gist/btree_utils_var.h`](../files/contrib/btree_gist/btree_utils_var.h.md) |
+| [`contrib/btree_gist/btree_uuid.c`](../files/contrib/btree_gist/btree_uuid.c.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — GiST opclass contracts (`amopclass`, `amproc`, `amop`).

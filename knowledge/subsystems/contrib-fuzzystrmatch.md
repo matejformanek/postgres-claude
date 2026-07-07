@@ -171,3 +171,18 @@ Match on any-element-overlap.
 - `.claude/skills/fmgr-and-spi/SKILL.md` — SQL-callable C
   functions (the model fuzzystrmatch follows).
 - `source/contrib/fuzzystrmatch/` — implementation directory.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**3 files.**
+
+| File |
+|---|
+| [`contrib/fuzzystrmatch/daitch_mokotoff.c`](../files/contrib/fuzzystrmatch/daitch_mokotoff.c.md) |
+| [`contrib/fuzzystrmatch/dmetaphone.c`](../files/contrib/fuzzystrmatch/dmetaphone.c.md) |
+| [`contrib/fuzzystrmatch/fuzzystrmatch.c`](../files/contrib/fuzzystrmatch/fuzzystrmatch.c.md) |
+
+<!-- /files-owned:auto -->

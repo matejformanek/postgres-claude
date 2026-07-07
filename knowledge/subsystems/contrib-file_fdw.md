@@ -169,3 +169,16 @@ into a real table first.
   underlying CSV / text parser file_fdw uses.
 - `source/contrib/file_fdw/file_fdw.c` — implementation
   (1340 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/file_fdw/file_fdw.c`](../files/contrib/file_fdw/file_fdw.c.md) |
+
+<!-- /files-owned:auto -->

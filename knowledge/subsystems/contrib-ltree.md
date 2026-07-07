@@ -118,6 +118,31 @@ bug fixes around input validation, encoding edge cases.
   `pg_amop.dat` (or the `ltree--*.sql` install script if it's an
   extension-defined opclass).
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**12 files.**
+
+| File |
+|---|
+| [`contrib/ltree/_ltree_gist.c`](../files/contrib/ltree/_ltree_gist.c.md) |
+| [`contrib/ltree/_ltree_op.c`](../files/contrib/ltree/_ltree_op.c.md) |
+| [`contrib/ltree/crc32.c`](../files/contrib/ltree/crc32.c.md) |
+| [`contrib/ltree/crc32.h`](../files/contrib/ltree/crc32.h.md) |
+| [`contrib/ltree/lquery_op.c`](../files/contrib/ltree/lquery_op.c.md) |
+| [`contrib/ltree/ltree.h`](../files/contrib/ltree/ltree.h.md) |
+| [`contrib/ltree/ltree_gist.c`](../files/contrib/ltree/ltree_gist.c.md) |
+| [`contrib/ltree/ltree_gist.h`](../files/contrib/ltree/ltree_gist.h.md) |
+| [`contrib/ltree/ltree_io.c`](../files/contrib/ltree/ltree_io.c.md) |
+| [`contrib/ltree/ltree_op.c`](../files/contrib/ltree/ltree_op.c.md) |
+| [`contrib/ltree/ltxtquery_io.c`](../files/contrib/ltree/ltxtquery_io.c.md) |
+| [`contrib/ltree/ltxtquery_op.c`](../files/contrib/ltree/ltxtquery_op.c.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — GiST `picksplit` / `consistent` / `union` contracts.

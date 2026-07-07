@@ -167,3 +167,33 @@ Useful for extension authors learning the planner: this is
 - `source/contrib/pg_plan_advice/` — implementation directory.
 - `source/src/include/optimizer/planner.h` — planner_hook
   declaration.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**18 files.**
+
+| File |
+|---|
+| [`contrib/pg_plan_advice/pg_plan_advice.c`](../files/contrib/pg_plan_advice/pg_plan_advice.c.md) |
+| [`contrib/pg_plan_advice/pg_plan_advice.h`](../files/contrib/pg_plan_advice/pg_plan_advice.h.md) |
+| [`contrib/pg_plan_advice/pgpa_ast.c`](../files/contrib/pg_plan_advice/pgpa_ast.c.md) |
+| [`contrib/pg_plan_advice/pgpa_ast.h`](../files/contrib/pg_plan_advice/pgpa_ast.h.md) |
+| [`contrib/pg_plan_advice/pgpa_identifier.c`](../files/contrib/pg_plan_advice/pgpa_identifier.c.md) |
+| [`contrib/pg_plan_advice/pgpa_identifier.h`](../files/contrib/pg_plan_advice/pgpa_identifier.h.md) |
+| [`contrib/pg_plan_advice/pgpa_join.c`](../files/contrib/pg_plan_advice/pgpa_join.c.md) |
+| [`contrib/pg_plan_advice/pgpa_join.h`](../files/contrib/pg_plan_advice/pgpa_join.h.md) |
+| [`contrib/pg_plan_advice/pgpa_output.c`](../files/contrib/pg_plan_advice/pgpa_output.c.md) |
+| [`contrib/pg_plan_advice/pgpa_output.h`](../files/contrib/pg_plan_advice/pgpa_output.h.md) |
+| [`contrib/pg_plan_advice/pgpa_planner.c`](../files/contrib/pg_plan_advice/pgpa_planner.c.md) |
+| [`contrib/pg_plan_advice/pgpa_planner.h`](../files/contrib/pg_plan_advice/pgpa_planner.h.md) |
+| [`contrib/pg_plan_advice/pgpa_scan.c`](../files/contrib/pg_plan_advice/pgpa_scan.c.md) |
+| [`contrib/pg_plan_advice/pgpa_scan.h`](../files/contrib/pg_plan_advice/pgpa_scan.h.md) |
+| [`contrib/pg_plan_advice/pgpa_trove.c`](../files/contrib/pg_plan_advice/pgpa_trove.c.md) |
+| [`contrib/pg_plan_advice/pgpa_trove.h`](../files/contrib/pg_plan_advice/pgpa_trove.h.md) |
+| [`contrib/pg_plan_advice/pgpa_walker.c`](../files/contrib/pg_plan_advice/pgpa_walker.c.md) |
+| [`contrib/pg_plan_advice/pgpa_walker.h`](../files/contrib/pg_plan_advice/pgpa_walker.h.md) |
+
+<!-- /files-owned:auto -->

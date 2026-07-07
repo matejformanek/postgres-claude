@@ -187,3 +187,16 @@ Run when:
   snapshot builder.
 - `source/contrib/pg_logicalinspect/pg_logicalinspect.c` —
   207 LOC implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_logicalinspect/pg_logicalinspect.c`](../files/contrib/pg_logicalinspect/pg_logicalinspect.c.md) |
+
+<!-- /files-owned:auto -->

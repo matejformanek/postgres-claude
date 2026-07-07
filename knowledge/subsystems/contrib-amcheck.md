@@ -172,3 +172,19 @@ verifies key order and child pointers. Read-only-lock semantics
   for heapallindexed mode.
 - `source/contrib/amcheck/verify_nbtree.c` — primary verifier.
 - `source/contrib/amcheck/verify_heapam.c` — heap verifier.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**4 files.**
+
+| File |
+|---|
+| [`contrib/amcheck/verify_common`](../files/contrib/amcheck/verify_common.md) |
+| [`contrib/amcheck/verify_gin`](../files/contrib/amcheck/verify_gin.md) |
+| [`contrib/amcheck/verify_heapam`](../files/contrib/amcheck/verify_heapam.md) |
+| [`contrib/amcheck/verify_nbtree`](../files/contrib/amcheck/verify_nbtree.md) |
+
+<!-- /files-owned:auto -->

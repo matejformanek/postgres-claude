@@ -135,3 +135,16 @@ to support upgrade from 1.0
 - `source/src/backend/storage/buffer/bufmgr.c` — `EvictUnpinnedBuffer`,
   the underlying eviction primitive.
 - `source/contrib/pg_buffercache/pg_buffercache_pages.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_buffercache/pg_buffercache_pages.c`](../files/contrib/pg_buffercache/pg_buffercache_pages.c.md) |
+
+<!-- /files-owned:auto -->

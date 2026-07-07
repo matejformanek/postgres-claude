@@ -130,6 +130,25 @@ reference implementation for the `FdwRoutine` API
 - Any new connection lifecycle event: the xact callback
   registration in `connection.c` must understand it.
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**6 files.**
+
+| File |
+|---|
+| [`contrib/postgres_fdw/connection.c`](../files/contrib/postgres_fdw/connection.c.md) |
+| [`contrib/postgres_fdw/deparse.c`](../files/contrib/postgres_fdw/deparse.c.md) |
+| [`contrib/postgres_fdw/option.c`](../files/contrib/postgres_fdw/option.c.md) |
+| [`contrib/postgres_fdw/postgres_fdw.c`](../files/contrib/postgres_fdw/postgres_fdw.c.md) |
+| [`contrib/postgres_fdw/postgres_fdw.h`](../files/contrib/postgres_fdw/postgres_fdw.h.md) |
+| [`contrib/postgres_fdw/shippable.c`](../files/contrib/postgres_fdw/shippable.c.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — sibling tableam side (heap is in-tree; FDW is the pluggable counterpart).

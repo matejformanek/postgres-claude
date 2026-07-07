@@ -144,3 +144,17 @@ chemistry-data legacy.
 - `.claude/skills/access-method-apis.md` — index-AM
   contracts.
 - `source/contrib/seg/seg.c` — implementation (1106 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**2 files.**
+
+| File |
+|---|
+| [`contrib/seg/seg.c`](../files/contrib/seg/seg.c.md) |
+| [`contrib/seg/segdata.h`](../files/contrib/seg/segdata.h.md) |
+
+<!-- /files-owned:auto -->

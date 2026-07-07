@@ -175,3 +175,16 @@ Each log line is prefixed by the standard logger metadata
   contracts; what the hook callbacks see.
 - `source/contrib/auto_explain/auto_explain.c` — single-file
   implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/auto_explain/auto_explain.c`](../files/contrib/auto_explain/auto_explain.c.md) |
+
+<!-- /files-owned:auto -->

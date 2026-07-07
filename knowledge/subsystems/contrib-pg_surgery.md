@@ -158,3 +158,16 @@ DBA-only operation done in single-user mode.
   last-resort tool after amcheck + pg_visibility confirm
   corruption.
 - `source/contrib/pg_surgery/heap_surgery.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_surgery/heap_surgery.c`](../files/contrib/pg_surgery/heap_surgery.c.md) |
+
+<!-- /files-owned:auto -->

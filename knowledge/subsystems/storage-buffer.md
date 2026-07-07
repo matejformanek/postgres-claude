@@ -173,3 +173,25 @@ There is no `src/test/modules/test_buffer*` at this commit; coverage is via the 
 - **Strategy ring** — small fixed cycle of buffers reused across a bulk scan to avoid cache pollution. `[from-README]` (`README:206-247`).
 - **`nextVictimBuffer`** — atomic monotonically-increasing clock hand; physical buffer index is `nextVictimBuffer % NBuffers`. `[verified-by-code]` (`freelist.c:38-42, 109-166`).
 - **`BM_PIN_COUNT_WAITER`** — flag indicating one backend is waiting for refcount to drop to 1 (cleanup lock); only one waiter per buffer allowed. `[from-README]` (`README:103-107`).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**10 files.**
+
+| File |
+|---|
+| [`src/backend/storage/buffer/buf_init.c`](../files/src/backend/storage/buffer/buf_init.c.md) |
+| [`src/backend/storage/buffer/buf_table.c`](../files/src/backend/storage/buffer/buf_table.c.md) |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) |
+| [`src/backend/storage/buffer/freelist.c`](../files/src/backend/storage/buffer/freelist.c.md) |
+| [`src/backend/storage/buffer/localbuf.c`](../files/src/backend/storage/buffer/localbuf.c.md) |
+| [`src/include/storage/buf.h`](../files/src/include/storage/buf.h.md) |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) |
+| [`src/include/storage/buffile.h`](../files/src/include/storage/buffile.h.md) |
+| [`src/include/storage/bufmgr.h`](../files/src/include/storage/bufmgr.h.md) |
+| [`src/include/storage/bufpage.h`](../files/src/include/storage/bufpage.h.md) |
+
+<!-- /files-owned:auto -->

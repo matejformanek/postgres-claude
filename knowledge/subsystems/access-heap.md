@@ -226,3 +226,38 @@ Carried forward from the per-file docs:
 - **FSM (free space map)** — Auxiliary fork tracking per-page free space; consulted by `RelationGetBufferForTuple` and updated by pruning/vacuum. [verified-by-code, hio.c]
 - **`PRUNE_VACUUM_CLEANUP`** — Second-pass mode in `heap_page_prune_and_freeze` used by `lazy_vacuum_heap_page`: converts `LP_DEAD → LP_UNUSED` for offsets in the dead-items TID store. No data movement; exclusive lock suffices. [from-comment, heapam_xlog.h]
 - **`LOCKTAG_TUPLE`** — Heavyweight lock used purely to serialise tuple-lock waiters in FIFO order; not the lock itself (the lock state lives in xmax+infomask). [from-README, README.tuplock]
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**23 files.**
+
+| File |
+|---|
+| [`src/backend/access/heap/README`](../files/src/backend/access/heap/README.md) |
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) |
+| [`src/backend/access/heap/heapam_handler.c`](../files/src/backend/access/heap/heapam_handler.c.md) |
+| [`src/backend/access/heap/heapam_indexscan.c`](../files/src/backend/access/heap/heapam_indexscan.c.md) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) |
+| [`src/backend/access/heap/heapam_xlog.c`](../files/src/backend/access/heap/heapam_xlog.c.md) |
+| [`src/backend/access/heap/heaptoast.c`](../files/src/backend/access/heap/heaptoast.c.md) |
+| [`src/backend/access/heap/hio.c`](../files/src/backend/access/heap/hio.c.md) |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) |
+| [`src/backend/access/heap/rewriteheap.c`](../files/src/backend/access/heap/rewriteheap.c.md) |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) |
+| [`src/backend/access/heap/visibilitymap.c`](../files/src/backend/access/heap/visibilitymap.c.md) |
+| [`src/include/access/brin_tuple.h`](../files/src/include/access/brin_tuple.h.md) |
+| [`src/include/access/gin_tuple.h`](../files/src/include/access/gin_tuple.h.md) |
+| [`src/include/access/heapam.h`](../files/src/include/access/heapam.h.md) |
+| [`src/include/access/heapam_xlog.h`](../files/src/include/access/heapam_xlog.h.md) |
+| [`src/include/access/heaptoast`](../files/src/include/access/heaptoast.md) |
+| [`src/include/access/hio.h`](../files/src/include/access/hio.h.md) |
+| [`src/include/access/htup.h`](../files/src/include/access/htup.h.md) |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) |
+| [`src/include/access/rewriteheap.h`](../files/src/include/access/rewriteheap.h.md) |
+| [`src/include/access/visibilitymap.h`](../files/src/include/access/visibilitymap.h.md) |
+| [`src/include/access/visibilitymapdefs.h`](../files/src/include/access/visibilitymapdefs.h.md) |
+
+<!-- /files-owned:auto -->

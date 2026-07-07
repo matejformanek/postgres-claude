@@ -211,3 +211,22 @@ For:
 - `source/contrib/bloom/` — implementation directory.
 - `source/src/include/access/amapi.h` — IndexAmRoutine
   definition.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**7 files.**
+
+| File |
+|---|
+| [`contrib/bloom/blcost.c`](../files/contrib/bloom/blcost.c.md) |
+| [`contrib/bloom/blinsert.c`](../files/contrib/bloom/blinsert.c.md) |
+| [`contrib/bloom/bloom.h`](../files/contrib/bloom/bloom.h.md) |
+| [`contrib/bloom/blscan.c`](../files/contrib/bloom/blscan.c.md) |
+| [`contrib/bloom/blutils.c`](../files/contrib/bloom/blutils.c.md) |
+| [`contrib/bloom/blvacuum.c`](../files/contrib/bloom/blvacuum.c.md) |
+| [`contrib/bloom/blvalidate.c`](../files/contrib/bloom/blvalidate.c.md) |
+
+<!-- /files-owned:auto -->

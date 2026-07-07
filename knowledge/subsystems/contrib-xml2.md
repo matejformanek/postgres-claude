@@ -160,3 +160,17 @@ remains a risk: don't apply user-supplied stylesheets.
 - `source/contrib/xml2/` — implementation directory.
 - `source/src/backend/utils/adt/xml.c` — the modern core
   `xml` type + SQL/XML functions.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**2 files.**
+
+| File |
+|---|
+| [`contrib/xml2/xpath.c`](../files/contrib/xml2/xpath.c.md) |
+| [`contrib/xml2/xslt_proc.c`](../files/contrib/xml2/xslt_proc.c.md) |
+
+<!-- /files-owned:auto -->

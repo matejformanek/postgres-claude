@@ -197,3 +197,18 @@ pending list) is overdue.
 - `source/contrib/pgstattuple/pgstattuple.c` — exact-heap.
 - `source/contrib/pgstattuple/pgstatapprox.c` — VM-aware sample.
 - `source/contrib/pgstattuple/pgstatindex.c` — index-specific.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**3 files.**
+
+| File |
+|---|
+| [`contrib/pgstattuple/pgstatapprox.c`](../files/contrib/pgstattuple/pgstatapprox.c.md) |
+| [`contrib/pgstattuple/pgstatindex.c`](../files/contrib/pgstattuple/pgstatindex.c.md) |
+| [`contrib/pgstattuple/pgstattuple.c`](../files/contrib/pgstattuple/pgstattuple.c.md) |
+
+<!-- /files-owned:auto -->

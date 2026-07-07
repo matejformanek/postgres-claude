@@ -266,3 +266,25 @@ sections ([from-README] `README:158-165`).
   the JIT actually does for this query.
 - **Sticky failure** — once provider load fails in a backend, JIT
   is disabled for the rest of the backend's life.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**10 files.**
+
+| File |
+|---|
+| [`src/backend/jit/jit.c`](../files/src/backend/jit/jit.c.md) |
+| [`src/backend/jit/llvm/llvmjit.c`](../files/src/backend/jit/llvm/llvmjit.c.md) |
+| [`src/backend/jit/llvm/llvmjit_deform.c`](../files/src/backend/jit/llvm/llvmjit_deform.c.md) |
+| [`src/backend/jit/llvm/llvmjit_expr.c`](../files/src/backend/jit/llvm/llvmjit_expr.c.md) |
+| [`src/backend/jit/llvm/llvmjit_types.c`](../files/src/backend/jit/llvm/llvmjit_types.c.md) |
+| [`src/include/jit/SectionMemoryManager.h`](../files/src/include/jit/SectionMemoryManager.h.md) |
+| [`src/include/jit/jit.h`](../files/src/include/jit/jit.h.md) |
+| [`src/include/jit/llvmjit.h`](../files/src/include/jit/llvmjit.h.md) |
+| [`src/include/jit/llvmjit_backport.h`](../files/src/include/jit/llvmjit_backport.h.md) |
+| [`src/include/jit/llvmjit_emit.h`](../files/src/include/jit/llvmjit_emit.h.md) |
+
+<!-- /files-owned:auto -->

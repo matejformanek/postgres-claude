@@ -323,3 +323,52 @@ relevant invariants are about *lifetimes* and *ordering*:
 - **Implicit reject** — no `pg_hba.conf` line matched. Different error
   message from explicit `reject` so the DBA can tell which case it is
   ([from-comment] `auth.c:428-438`).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**37 files.**
+
+| File |
+|---|
+| [`src/backend/libpq/auth-oauth.c`](../files/src/backend/libpq/auth-oauth.c.md) |
+| [`src/backend/libpq/auth-sasl.c`](../files/src/backend/libpq/auth-sasl.c.md) |
+| [`src/backend/libpq/auth-scram.c`](../files/src/backend/libpq/auth-scram.c.md) |
+| [`src/backend/libpq/auth.c`](../files/src/backend/libpq/auth.c.md) |
+| [`src/backend/libpq/be-fsstubs.c`](../files/src/backend/libpq/be-fsstubs.c.md) |
+| [`src/backend/libpq/be-gssapi-common.c`](../files/src/backend/libpq/be-gssapi-common.c.md) |
+| [`src/backend/libpq/be-secure-common.c`](../files/src/backend/libpq/be-secure-common.c.md) |
+| [`src/backend/libpq/be-secure-gssapi.c`](../files/src/backend/libpq/be-secure-gssapi.c.md) |
+| [`src/backend/libpq/be-secure-openssl.c`](../files/src/backend/libpq/be-secure-openssl.c.md) |
+| [`src/backend/libpq/be-secure.c`](../files/src/backend/libpq/be-secure.c.md) |
+| [`src/backend/libpq/crypt.c`](../files/src/backend/libpq/crypt.c.md) |
+| [`src/backend/libpq/hba.c`](../files/src/backend/libpq/hba.c.md) |
+| [`src/backend/libpq/ifaddr.c`](../files/src/backend/libpq/ifaddr.c.md) |
+| [`src/backend/libpq/pqcomm.c`](../files/src/backend/libpq/pqcomm.c.md) |
+| [`src/backend/libpq/pqformat.c`](../files/src/backend/libpq/pqformat.c.md) |
+| [`src/backend/libpq/pqmq.c`](../files/src/backend/libpq/pqmq.c.md) |
+| [`src/backend/libpq/pqsignal.c`](../files/src/backend/libpq/pqsignal.c.md) |
+| [`src/include/libpq/auth.h`](../files/src/include/libpq/auth.h.md) |
+| [`src/include/libpq/be-fsstubs.h`](../files/src/include/libpq/be-fsstubs.h.md) |
+| [`src/include/libpq/be-gssapi-common.h`](../files/src/include/libpq/be-gssapi-common.h.md) |
+| [`src/include/libpq/crypt.h`](../files/src/include/libpq/crypt.h.md) |
+| [`src/include/libpq/hba.h`](../files/src/include/libpq/hba.h.md) |
+| [`src/include/libpq/ifaddr.h`](../files/src/include/libpq/ifaddr.h.md) |
+| [`src/include/libpq/libpq-be-fe-helpers.h`](../files/src/include/libpq/libpq-be-fe-helpers.h.md) |
+| [`src/include/libpq/libpq-be-fe.h`](../files/src/include/libpq/libpq-be-fe.h.md) |
+| [`src/include/libpq/libpq-be.h`](../files/src/include/libpq/libpq-be.h.md) |
+| [`src/include/libpq/libpq-fs.h`](../files/src/include/libpq/libpq-fs.h.md) |
+| [`src/include/libpq/libpq.h`](../files/src/include/libpq/libpq.h.md) |
+| [`src/include/libpq/oauth.h`](../files/src/include/libpq/oauth.h.md) |
+| [`src/include/libpq/pg-gssapi.h`](../files/src/include/libpq/pg-gssapi.h.md) |
+| [`src/include/libpq/pqcomm.h`](../files/src/include/libpq/pqcomm.h.md) |
+| [`src/include/libpq/pqformat.h`](../files/src/include/libpq/pqformat.h.md) |
+| [`src/include/libpq/pqmq.h`](../files/src/include/libpq/pqmq.h.md) |
+| [`src/include/libpq/pqsignal.h`](../files/src/include/libpq/pqsignal.h.md) |
+| [`src/include/libpq/protocol.h`](../files/src/include/libpq/protocol.h.md) |
+| [`src/include/libpq/sasl.h`](../files/src/include/libpq/sasl.h.md) |
+| [`src/include/libpq/scram.h`](../files/src/include/libpq/scram.h.md) |
+
+<!-- /files-owned:auto -->

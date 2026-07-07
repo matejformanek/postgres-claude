@@ -178,3 +178,16 @@ trigger context — `CalledAsTrigger(fcinfo)` check.
 - `source/contrib/lo/lo.c` — the single 114-LOC file.
 - `source/contrib/vacuumlo/` — the orphan-cleanup utility
   (sibling).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/lo/lo.c`](../files/contrib/lo/lo.c.md) |
+
+<!-- /files-owned:auto -->

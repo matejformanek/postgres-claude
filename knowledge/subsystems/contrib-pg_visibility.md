@@ -151,3 +151,16 @@ used internally is global, not the caller's MVCC snapshot.
   implementation. `visibilitymap_get_status` is the read primitive
   this extension wraps.
 - `source/contrib/pg_visibility/pg_visibility.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_visibility/pg_visibility.c`](../files/contrib/pg_visibility/pg_visibility.c.md) |
+
+<!-- /files-owned:auto -->

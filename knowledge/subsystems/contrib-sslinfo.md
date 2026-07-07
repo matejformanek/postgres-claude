@@ -175,3 +175,16 @@ to the pooler. Plan auditing accordingly.
 - `.claude/skills/catalog-conventions/SKILL.md` — function
   registration in pg_proc.
 - `source/contrib/sslinfo/sslinfo.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/sslinfo/sslinfo.c`](../files/contrib/sslinfo/sslinfo.c.md) |
+
+<!-- /files-owned:auto -->
