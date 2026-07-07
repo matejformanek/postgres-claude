@@ -1,0 +1,1 @@
+**pg-quality-auditor** 2026-07-07 — ISSUE mode: triaged 15 line-cited libpq register rows @a8c2547eaac7, all still-present (0 drift, 0 fixed-upstream); noted new REPACK-CONCURRENTLY branch inserted at pqmq.c:172-194 (pattern+range intact). libpq register drained; refilled issues.md with 21 common-register rows (PR #489).
