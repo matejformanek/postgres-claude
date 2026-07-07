@@ -43,6 +43,7 @@ scripts/corpus-chain.py --scenario <slug>     # e.g. add-new-wal-record
 scripts/corpus-chain.py --idiom <slug>         # e.g. memory-contexts
 scripts/corpus-chain.py --file <src-path>      # e.g. src/backend/access/heap/heapam.c
 scripts/corpus-chain.py --keywords "..."       # free-text search
+scripts/corpus-chain.py --scenario <slug> --depth 2  # pattern-siblings + 2nd-order context
 ```
 
 Output is markdown to stdout — read it, don't dump it wholesale into a plan.
@@ -55,6 +56,9 @@ Output is markdown to stdout — read it, don't dump it wholesale into a plan.
 - **Idioms invoked** — for each, tagged *direct* (named in scenario prose) or *transitive* (found because of file overlap). Direct-only for pure evidence; use transitive as "you'll probably also touch these patterns".
 - **Adjacent scenarios** — related_scenarios frontmatter + scenarios sharing many files. If a scenario shares 5+ files, expect the two changes to conflict at review time; either bundle or sequence.
 - **Subsystems** — which subsystem docs already cite these files. Cross-cutting features hit ≥ 2 subsystems.
+- **Data structures involved** — DS docs whose Call sites overlap this scenario's files.
+- **Likely reviewers (personas)** — from `progress/persona-scenario-matrix.md`. Reflect who might catch this on hackers-list.
+- **Depth-2 pattern-siblings** (only with `--depth 2`) — idioms whose Call sites share ≥2 files with any invoked idiom. Second-order context ("you'll probably also touch these patterns while implementing the primary"). Useful for planning + risk enumeration.
 - **Analogous past features** — planning slugs + session logs with keyword or file overlap. Read the top-2 before starting; they carry the design decisions you'll re-litigate.
 
 ### For an `--idiom` chain:
