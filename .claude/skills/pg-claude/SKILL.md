@@ -110,6 +110,8 @@ Each fills a `gap:*` signal from `pg-user-question-harvester` — reach for thes
 | MVCC snapshots + visibility + isolation levels | `snapshot-management` | Register/Push snapshots, historic (logical decoding), pg_export_snapshot |
 | Base backup + WAL archiving + PITR | `backup-and-recovery` | pg_basebackup internals, archive_command/library, recovery_target_*, PG 17+ incremental |
 | Custom Scan / Custom Path — pluggable executor node interface | `custom-scan-api` | CustomPath registration, executor callbacks, parallel-safe custom nodes |
+| Node type system + gen_node_support.pl + walker/mutator | `node-infrastructure` | new Node type, T_ enum, generated copy/equal/out/read |
+| pg_upgrade — in-place major-version upgrader | `pg-upgrade-internals` | --link/--copy/--clone tradeoffs, relfilenumber preservation, upgrade blockers |
 
 ### Running / testing / debugging
 
