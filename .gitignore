@@ -63,3 +63,4 @@ dev
 # Skill-creator workspaces — eval iteration outputs are ephemeral;
 # only final evals.json + benchmark.json summaries check in (see plan).
 .claude/skill-creator-workspaces/
+.claude/skills/*-workspace/
