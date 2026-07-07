@@ -97,6 +97,15 @@ Each fills a `gap:*` signal from `pg-user-question-harvester` — reach for thes
 | MultiXactId + tuple-locking modes + wraparound | `multixact` | HEAP_XMAX_IS_MULTI, FOR SHARE/UPDATE, multixact SLRU exhaustion |
 | Collation providers (builtin / ICU / libc) + encoding | `collation-provider` | pg_locale.c, collversion tracking, glibc-upgrade index issues |
 | Frontend/backend wire protocol (`libpq/pqcomm*` + `tcop/postgres.c`) | `wire-protocol` | new protocol message, Simple vs Extended query, pq_beginmessage lifecycle |
+| PL/pgSQL parser + compiler + interpreter + trust boundary | `plpgsql-internals` | pl_exec.c 268K, plan cache in PL/pgSQL, EXECUTE injection |
+| Foreign Data Wrapper + postgres_fdw + pushdown | `fdw-development` | writing a new FDW, extending pushdown, password_required pattern |
+| jsonb + jsonpath + SQL/JSON | `jsonpath-and-jsonb` | jsonpath_exec.c, jsonb GIN opclass, JSON_TABLE, `->` vs `->>` |
+| Per-backend TypeCache + composite/domain/record | `type-cache` | lookup_type_cache flags, RECORD typmod registry, SharedRecordTypmodRegistry |
+| ResourceOwner tree + release phases + callback API | `resource-owners` | pin/ref leaks, PG 17+ resource-kind extension seam |
+| Extended statistics — CREATE STATISTICS + planner integration | `extended-statistics` | dependencies/ndistinct/mcv/expressions kinds, bad estimates on correlated cols |
+| TOAST out-of-line + compressed varlena storage | `toast-storage` | storage strategies, 2 KB rule, pglz vs lz4, chunk_id wrap |
+| Shared buffer manager + BufferAccessStrategy rings | `buffer-manager` | pin/unpin discipline, clock-sweep, add-new-buffer-strategy |
+| SLRU (bank-locked LRU) infrastructure — CLOG/MultiXact/etc. | `slru-infrastructure` | new SLRU consumer, PG 17+ per-SLRU GUCs, bank-lock design |
 
 ### Running / testing / debugging
 
