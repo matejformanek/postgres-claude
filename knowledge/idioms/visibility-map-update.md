@@ -164,8 +164,6 @@ backward-scan paths.
 - Any change to the SET / CLEAR sequence — extremely rare.
 - Any new WAL record family in `RM_HEAP2_ID` related to VM.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -180,8 +178,6 @@ backward-scan paths.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -191,7 +187,6 @@ backward-scan paths.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` — buffer-pin + content-lock ordering; WAL-before-data invariant.

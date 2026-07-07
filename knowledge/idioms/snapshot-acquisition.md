@@ -182,8 +182,6 @@ the MVCC snapshot family above; catalog code paths use
 - Register/Unregister patterns:
   `grep -RIn 'RegisterSnapshot' source/src/backend | head -20`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -198,8 +196,6 @@ the MVCC snapshot family above; catalog code paths use
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -209,7 +205,6 @@ the MVCC snapshot family above; catalog code paths use
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/snapshot-lifecycle.md` — the

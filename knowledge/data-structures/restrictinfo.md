@@ -268,7 +268,6 @@ These get filled by `process_implied_equality` /
 - Clone handling:
   `grep -RIn 'has_clone\|is_clone\|rinfo_serial' source/src/backend/optimizer | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -284,7 +283,6 @@ These get filled by `process_implied_equality` /
 | [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | — | full struct |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/reloptinfo.md` —

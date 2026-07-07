@@ -108,7 +108,6 @@ Andrew Dunstan, Daniel Gustafsson.
 - Any pg_upgrade-affecting change: walk `hstore_compat.c` and
   the install SQL versioning carefully.
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -127,7 +126,6 @@ Andrew Dunstan, Daniel Gustafsson.
 | [`contrib/hstore/hstore_subs.c`](../files/contrib/hstore/hstore_subs.c.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — GIN / GiST opclass contracts.

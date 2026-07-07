@@ -193,8 +193,6 @@ index gave it the TID. The contract is the TID + snapshot.
 - Executor callers:
   `grep -RIn 'table_index_fetch_tuple' source/src/backend/executor | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -209,8 +207,6 @@ index gave it the TID. The contract is the TID + snapshot.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -220,7 +216,6 @@ index gave it the TID. The contract is the TID + snapshot.
 - [`add-new-table-am`](../scenarios/add-new-table-am.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/bitmap-heap-scan-flow.md` — bitmap scan

@@ -413,8 +413,6 @@ grep -rn "InstrJitAgg\|JIT:\|jit_instrument" \
        source/src/backend/commands/explain.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -435,8 +433,6 @@ grep -rn "InstrJitAgg\|JIT:\|jit_instrument" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -448,7 +444,6 @@ grep -rn "InstrJitAgg\|JIT:\|jit_instrument" \
 - [`add-new-hook`](../scenarios/add-new-hook.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[jit-expression-codegen]] — IR generation from `EEOP_*` ops in `llvmjit_expr.c`.

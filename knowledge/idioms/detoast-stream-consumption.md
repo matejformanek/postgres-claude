@@ -233,8 +233,6 @@ underlying engine.
 - substring on text as canonical caller:
   `grep -n 'detoast_attr_slice\|text_substring' source/src/backend/utils/adt/varlena.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -253,8 +251,6 @@ underlying engine.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -264,7 +260,6 @@ underlying engine.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/varatt-varlena.md` — the

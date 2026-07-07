@@ -183,8 +183,6 @@ broadcast mechanism.]
 - Orphan-file cleanup:
   `grep -RIn 'RemoveOrphanedFiles\|smgrdounlink' source/src/backend | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -199,8 +197,6 @@ broadcast mechanism.]
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -210,7 +206,6 @@ broadcast mechanism.]
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/relfilelocator.md` — the

@@ -178,7 +178,6 @@ start LSN.
 - Per-block-id helpers:
   `grep -n 'XLogRecHasBlockRef\|XLogRecGetBlockTag\|XLogRecGetBlockData' source/src/include/access/xlogreader.h`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -191,7 +190,6 @@ start LSN.
 | [`src/include/access/xlogreader.h`](../files/src/include/access/xlogreader.h.md) | — | Source path |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `.claude/skills/wal-and-xlog/SKILL.md` — XLogInsert (writer) is the counterpart; rmgr design.

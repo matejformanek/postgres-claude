@@ -208,7 +208,6 @@ Conversion to/from on-disk Numeric is fast:
 - NumericVar manipulation:
   `grep -n 'init_var\|free_var\|set_var_from_num' source/src/backend/utils/adt/numeric.c | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -222,7 +221,6 @@ Conversion to/from on-disk Numeric is fast:
 | [`src/include/utils/numeric.h`](../files/src/include/utils/numeric.md) | — | public API |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/datum-nullabledatum.md` —

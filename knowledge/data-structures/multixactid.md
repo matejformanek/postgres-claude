@@ -178,7 +178,6 @@ into the SLRU buffer pool. The relevant LWLocks:
 - Status enum changes (cross-version migration risk):
   `git -C source log -S 'MultiXactStatus' --oneline`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -195,7 +194,6 @@ into the SLRU buffer pool. The relevant LWLocks:
 | [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) | — | Source path |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` §2.6 — MultiXact interaction with tuple locks; HEAP_XMAX_IS_MULTI dispatch rule.

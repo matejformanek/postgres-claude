@@ -158,8 +158,6 @@ when the answer is "nothing, but here's where your code is consumed".)
    green; for the paranoia pass, run with `wal_consistency_checking=all`
    set in the cluster's `postgresql.conf`.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -179,7 +177,6 @@ when the answer is "nothing, but here's where your code is consumed".)
 | [`xloginsertlock-partitioning`](../idioms/xloginsertlock-partitioning.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **`XLOG_PAGE_MAGIC` is not bumped automatically.** Reviewers

@@ -185,8 +185,6 @@ fails, the row is rolled back via ereport(ERROR).
 - securityQuals consumers:
   `grep -RIn 'securityQuals' source/src/backend | head -15`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -202,8 +200,6 @@ fails, the row is rolled back via ereport(ERROR).
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -213,7 +209,6 @@ fails, the row is rolled back via ereport(ERROR).
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/view-pushdown-via-rewriter.md` —

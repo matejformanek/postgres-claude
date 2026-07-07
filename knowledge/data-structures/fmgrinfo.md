@@ -201,7 +201,6 @@ For directly-invoked functions (e.g. `OidFunctionCall1`),
 - LOCAL_FCINFO callers:
   `grep -RIn 'LOCAL_FCINFO' source/src/backend | head -20`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -216,7 +215,6 @@ For directly-invoked functions (e.g. `OidFunctionCall1`),
 | [`src/include/fmgr.h`](../files/src/include/fmgr.h.md) | — | public API + struct definitions |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `.claude/skills/fmgr-and-spi/SKILL.md` — the skill covering

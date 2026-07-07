@@ -530,8 +530,6 @@ grep -n "recheck\|tbmres->recheck\|tbmres->lossy" \
     source/src/backend/nodes/tidbitmap.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -545,8 +543,6 @@ grep -n "recheck\|tbmres->recheck\|tbmres->lossy" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -556,7 +552,6 @@ grep -n "recheck\|tbmres->recheck\|tbmres->lossy" \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[tidbitmap-build-and-iterate]] — the dynamic half: insert,

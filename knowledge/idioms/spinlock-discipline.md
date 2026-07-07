@@ -184,8 +184,6 @@ the macros may need its own barriers.
 - BufferDesc spinlock pattern:
   `grep -RIn 'LockBufHdr\|UnlockBufHdr' source/src/backend/storage/buffer | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -200,8 +198,6 @@ the macros may need its own barriers.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -211,7 +207,6 @@ the macros may need its own barriers.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/lwlock-rank-discipline.md` — the heavier

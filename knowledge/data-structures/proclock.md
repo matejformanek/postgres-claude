@@ -193,7 +193,6 @@ same partition; releases don't cross partitions).
 - LockReleaseAll:
   `grep -n 'LockReleaseAll' source/src/backend/storage/lmgr/lock.c | head -5`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -208,7 +207,6 @@ same partition; releases don't cross partitions).
 | [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 200 | PROCLOCK struct |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/locktag.md` — accessed via

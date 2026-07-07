@@ -121,8 +121,6 @@ manager and this scenario doesn't cover that.)
    check: `meson test -C dev/build-debug --suite regress --test
    stats` is green.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -139,7 +137,6 @@ manager and this scenario doesn't cover that.)
 | [`wal-record-construction`](../idioms/wal-record-construction.md) | shares files: `src/backend/access/heap/heapam.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Forgot the paired IOContext.** The comment at `bufmgr.h:31-33`

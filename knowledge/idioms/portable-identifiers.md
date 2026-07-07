@@ -167,8 +167,6 @@ collision) is much more expensive: every walker, every `_outNode` /
 references the field by name via macros from `gen_node_support.pl`, and
 extensions on PGXN reference it too. Get the name right at birth.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -191,8 +189,6 @@ extensions on PGXN reference it too. Get the name right at birth.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -202,7 +198,6 @@ extensions on PGXN reference it too. Get the name right at birth.
 - [`add-new-node-type`](../scenarios/add-new-node-type.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/node-types.md` — what shape the new struct should

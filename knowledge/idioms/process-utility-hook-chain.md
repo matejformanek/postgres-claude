@@ -231,8 +231,6 @@ For client-issued SQL: always goes through ProcessUtility.
 - ProcessUtilityContext switch:
   `grep -n 'PROCESS_UTILITY_TOPLEVEL\|PROCESS_UTILITY_QUERY' source/src/backend | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -249,8 +247,6 @@ For client-issued SQL: always goes through ProcessUtility.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -263,7 +259,6 @@ For client-issued SQL: always goes through ProcessUtility.
 - [`add-startup-hook`](../scenarios/add-startup-hook.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/event-trigger-firing.md` — fires from

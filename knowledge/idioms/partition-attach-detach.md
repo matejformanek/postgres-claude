@@ -192,8 +192,6 @@ When DETACH:
 - Partition-bound validation:
   `grep -n 'ValidatePartitionConstraints\|check_new_partition_bound' source/src/backend | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -209,8 +207,6 @@ When DETACH:
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -220,7 +216,6 @@ When DETACH:
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

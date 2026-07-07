@@ -243,8 +243,6 @@ GUC.
 - Tablespace cost lookup:
   `grep -RIn 'get_tablespace_page_costs' source/src/backend | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -263,8 +261,6 @@ GUC.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -276,7 +272,6 @@ GUC.
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/cost-scan-paths.md` —

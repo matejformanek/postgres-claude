@@ -200,8 +200,6 @@ crash.
 - Catalog row:
   `grep -n 'pg_replication_origin' source/src/include/catalog/pg_replication_origin.h | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -218,8 +216,6 @@ crash.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -229,7 +225,6 @@ crash.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/output-plugin-callbacks.md` —

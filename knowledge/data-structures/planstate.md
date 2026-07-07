@@ -231,7 +231,6 @@ specialized opcodes if `*opsfixed` is true.
 - ExecProcNode wrapping:
   `grep -n 'ExecProcNodeFirst\|ExecProcNodeInstr' source/src/backend/executor/execProcnode.c | head -5`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -247,7 +246,6 @@ specialized opcodes if `*opsfixed` is true.
 | [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | — | full struct + subclasses |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/estate.md` — every PlanState

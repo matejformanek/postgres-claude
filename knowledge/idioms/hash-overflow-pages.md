@@ -438,8 +438,6 @@ grep -n "XLOG_HASH_ADD_OVFL_PAGE\|XLOG_HASH_DELETE\|XLH_FREE" \
        source/src/include/access/hash_xlog.h
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -459,8 +457,6 @@ grep -n "XLOG_HASH_ADD_OVFL_PAGE\|XLOG_HASH_DELETE\|XLH_FREE" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -470,7 +466,6 @@ grep -n "XLOG_HASH_ADD_OVFL_PAGE\|XLOG_HASH_DELETE\|XLH_FREE" \
 - [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[hash-page-layout]] — `hashm_spares[]` array and splitpoint addressing the bit-to-block conversion relies on.

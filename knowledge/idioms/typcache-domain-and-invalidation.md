@@ -599,8 +599,6 @@ grep -nE 'CacheRegister(Relcache|Syscache)Callback' \
 sed -n '1110,1260p' source/src/backend/utils/cache/typcache.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -622,8 +620,6 @@ sed -n '1110,1260p' source/src/backend/utils/cache/typcache.c
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -633,7 +629,6 @@ sed -n '1110,1260p' source/src/backend/utils/cache/typcache.c
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[typcache-entry-and-lookup]] — `TypeCacheEntry`, the `flags`

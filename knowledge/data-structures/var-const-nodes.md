@@ -234,7 +234,6 @@ t WHERE b = 2` produce the same query identifier.
 - Special varno usage:
   `grep -RIn 'INNER_VAR\|OUTER_VAR\|INDEX_VAR\|ROWID_VAR' source/src/backend | head -20`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -249,7 +248,6 @@ t WHERE b = 2` produce the same query identifier.
 | [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | — | full type definitions |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/datum-nullabledatum.md` —

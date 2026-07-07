@@ -164,8 +164,6 @@ already structures.
    the run produced a new L/F; append session retro;
    `memory-keeping` updates `progress/STATE.md`.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -180,7 +178,6 @@ already structures.
 | [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Trap 1 — Generic workloads on a clean master produce zero

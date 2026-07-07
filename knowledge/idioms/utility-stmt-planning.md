@@ -219,8 +219,6 @@ is invisible next to the cost of debugging a runtime
   the EXPLAIN path too; pass `boundParams = NULL` rather than gating
   the call, otherwise `EXPLAIN VERBOSE` may emit raw SubLinks.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -244,8 +242,6 @@ is invisible next to the cost of debugging a runtime
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -257,7 +253,6 @@ is invisible next to the cost of debugging a runtime
 - [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/node-types.md` — parse-tree vs Expr-flavored

@@ -212,7 +212,6 @@ and there's no per-LWLock overhead for tracking.
 - Tranche registration:
   `grep -RIn 'LWLockNewTrancheId\|LWLockRegisterTranche' source/src/backend`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -228,7 +227,6 @@ and there's no per-LWLock overhead for tracking.
 | [`src/include/storage/proclist.h`](../files/src/include/storage/proclist.h.md) | — | proclist primitive used for waiters |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/lwlock-rank-discipline.md` — companion;

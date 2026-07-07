@@ -197,8 +197,6 @@ DO INSTEAD rules), but only one ON SELECT rule.
 - Subquery pullup:
   `grep -RIn 'pull_up_subqueries\|pull_up_simple_subquery' source/src/backend/optimizer/prep | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -215,8 +213,6 @@ DO INSTEAD rules), but only one ON SELECT rule.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -226,7 +222,6 @@ DO INSTEAD rules), but only one ON SELECT rule.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/row-security-policy-application.md` —

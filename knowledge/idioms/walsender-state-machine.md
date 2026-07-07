@@ -210,8 +210,6 @@ Receivers must send keepalives at least this often.
 - The keepalive logic:
   `grep -n 'wal_sender_timeout\|XLogSendKeepalive' source/src/backend/replication/walsender.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -226,8 +224,6 @@ Receivers must send keepalives at least this often.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -239,7 +235,6 @@ Receivers must send keepalives at least this often.
 - [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/wal-receiver-loop.md` — companion;

@@ -501,8 +501,6 @@ grep -n "compare_path_costs\|selectivity" \
     source/src/backend/optimizer/path/indxpath.c | head
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -519,8 +517,6 @@ grep -n "compare_path_costs\|selectivity" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -530,7 +526,6 @@ grep -n "compare_path_costs\|selectivity" \
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[tidbitmap-structure-and-lossy]] — `PagetableEntry`,

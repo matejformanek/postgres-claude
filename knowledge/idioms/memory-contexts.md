@@ -247,8 +247,6 @@ to its server log [verified-by-code] (`memutils.h:104-105`).
 - Need cleanup of a non-PG resource tied to a context lifetime →
   `MemoryContextRegisterResetCallback`.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -263,8 +261,6 @@ to its server log [verified-by-code] (`memutils.h:104-105`).
 | [`src/include/utils/palloc.h`](../files/src/include/utils/palloc.h.md) | — | allocation API |
 
 <!-- /callsites:auto -->
-
-
 
 ## Scenarios that use me
 <!-- scenarios:auto -->
@@ -282,7 +278,6 @@ to its server log [verified-by-code] (`memutils.h:104-105`).
 - [`fix-memory-leak`](../scenarios/fix-memory-leak.md)
 
 <!-- /scenarios:auto -->
-
 ## Open questions / unverified
 
 - Exact behavior of `MemoryContextSetParent` when the new parent is in a

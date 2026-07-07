@@ -118,7 +118,6 @@ bug fixes around input validation, encoding edge cases.
   `pg_amop.dat` (or the `ltree--*.sql` install script if it's an
   extension-defined opclass).
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -142,7 +141,6 @@ bug fixes around input validation, encoding edge cases.
 | [`contrib/ltree/ltxtquery_op.c`](../files/contrib/ltree/ltxtquery_op.c.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — GiST `picksplit` / `consistent` / `union` contracts.

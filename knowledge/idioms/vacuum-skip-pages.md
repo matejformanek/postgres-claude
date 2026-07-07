@@ -174,8 +174,6 @@ may go through multiple index-cleanup passes per VACUUM.
 - The eager-freeze caps:
   `grep -n 'EAGER_SCAN_REGION_SIZE\|MAX_EAGER_FREEZE_SUCCESS_RATE' source/src/backend/access/heap/vacuumlazy.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -189,8 +187,6 @@ may go through multiple index-cleanup passes per VACUUM.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -200,7 +196,6 @@ may go through multiple index-cleanup passes per VACUUM.
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/visibility-map-update.md` — the VM bits

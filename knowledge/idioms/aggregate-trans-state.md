@@ -218,8 +218,6 @@ shortcut, manages tmpcontext / aggcontext.
 - Hashagg spill:
   `grep -n 'hashagg_spill\|hash_disk_used' source/src/backend/executor/nodeAgg.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -238,8 +236,6 @@ shortcut, manages tmpcontext / aggcontext.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -250,7 +246,6 @@ shortcut, manages tmpcontext / aggcontext.
 - [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/datum-nullabledatum.md` —

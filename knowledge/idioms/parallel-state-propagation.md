@@ -708,8 +708,6 @@ grep -n "ParallelWorkerReportLastRecEnd\|last_xlog_end" \
     source/src/backend/access/transam/parallel.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -725,8 +723,6 @@ grep -n "ParallelWorkerReportLastRecEnd\|last_xlog_end" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -738,7 +734,6 @@ grep -n "ParallelWorkerReportLastRecEnd\|last_xlog_end" \
 - [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[parallel-context-and-dsm]] — the leader-side serialization

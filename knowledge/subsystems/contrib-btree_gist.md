@@ -118,7 +118,6 @@ both kinds of keys.
 - Install-SQL change: confirm `gist_<type>_ops` and any new
   support functions are linked in the right opfamily.
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -157,7 +156,6 @@ both kinds of keys.
 | [`contrib/btree_gist/btree_uuid.c`](../files/contrib/btree_gist/btree_uuid.c.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — GiST opclass contracts (`amopclass`, `amproc`, `amop`).

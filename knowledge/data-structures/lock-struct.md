@@ -191,7 +191,6 @@ partition LWLock as a prelude to hash search.
 - Grant + wait machinery:
   `grep -n 'LockAcquire\|LockRelease\|ProcLockWakeup' source/src/backend/storage/lmgr/lock.c | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -207,7 +206,6 @@ partition LWLock as a prelude to hash search.
 | [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 148 | waitProcs queue |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/locktag.md` — the LOCKTAG hash

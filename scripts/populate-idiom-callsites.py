@@ -60,11 +60,11 @@ MARKER_OPEN = "<!-- callsites:auto -->"
 MARKER_CLOSE = "<!-- /callsites:auto -->"
 
 BLOCK_RE = re.compile(
-    r"\n?## Call sites\s*\n"
+    r"\n*## Call sites\s*\n"
     + re.escape(MARKER_OPEN)
     + r".*?"
     + re.escape(MARKER_CLOSE)
-    + r"\n?",
+    + r"\n*",
     re.DOTALL,
 )
 

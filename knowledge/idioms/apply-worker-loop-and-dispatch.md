@@ -506,8 +506,6 @@ grep -n "store_flush_position\|get_flush_position\|lsn_mapping" \
     source/src/backend/replication/logical/worker.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -523,8 +521,6 @@ grep -n "store_flush_position\|get_flush_position\|lsn_mapping" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -534,7 +530,6 @@ grep -n "store_flush_position\|get_flush_position\|lsn_mapping" \
 - [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[apply-handlers-insert-update-delete]] — the row-event

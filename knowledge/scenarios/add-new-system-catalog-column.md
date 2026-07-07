@@ -119,8 +119,6 @@ tree buildable. Re-`initdb` between phases when the catversion changes.
 For a column with no producer logic (purely seed/static), Phases 1+2
 collapse into one.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -140,7 +138,6 @@ collapse into one.
 | [`vacuum-two-pass-heap`](../idioms/vacuum-two-pass-heap.md) | shares files: `src/backend/access/heap/vacuumlazy.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **`replaces[N]` array sized by hand.** Patterns like

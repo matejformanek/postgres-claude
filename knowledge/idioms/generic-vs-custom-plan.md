@@ -226,8 +226,6 @@ adaptive heuristic; the forced modes bypass it.
 - CURSOR_OPT flags:
   `grep -n 'CURSOR_OPT_GENERIC_PLAN\|CURSOR_OPT_CUSTOM_PLAN' source/src/include | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -242,8 +240,6 @@ adaptive heuristic; the forced modes bypass it.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -253,7 +249,6 @@ adaptive heuristic; the forced modes bypass it.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/prepared-statement-plancache.md` —

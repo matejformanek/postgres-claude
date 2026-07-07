@@ -54,7 +54,7 @@ MARKER_OPEN = "<!-- files-owned:auto -->"
 MARKER_CLOSE = "<!-- /files-owned:auto -->"
 
 BLOCK_RE = re.compile(
-    r"\n?## Files owned\s*\n" + re.escape(MARKER_OPEN) + r".*?" + re.escape(MARKER_CLOSE) + r"\n?",
+    r"\n*## Files owned\s*\n" + re.escape(MARKER_OPEN) + r".*?" + re.escape(MARKER_CLOSE) + r"\n*",
     re.DOTALL,
 )
 

@@ -252,8 +252,6 @@ errors out, the next subxact-end reset reclaims everything.
 - ExecAR* signatures:
   `grep -n 'TransitionCaptureState' source/src/include/commands/trigger.h | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -271,8 +269,6 @@ errors out, the next subxact-end reset reclaims everything.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -282,7 +278,6 @@ errors out, the next subxact-end reset reclaims everything.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/trigger-constraint-deferral.md` — why

@@ -170,8 +170,6 @@ Marked **(A)** = Surface A only (output-plugin callback). Marked **(B)**
    subscription` + `meson test -C dev/build-debug --suite test_decoding`
    all green. `make -C doc/src/sgml` clean.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -190,7 +188,6 @@ Marked **(A)** = Surface A only (output-plugin callback). Marked **(B)**
 | [`walsender-state-machine`](../idioms/walsender-state-machine.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Proto-version gate omission.** A subscriber connecting with an

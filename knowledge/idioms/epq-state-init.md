@@ -298,8 +298,6 @@ to the EPQ slot at recheck time.
 - epqParam:
   `grep -RIn 'epqParam\|ExecScanFetch' source/src/backend/executor | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -318,8 +316,6 @@ to the EPQ slot at recheck time.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -329,7 +325,6 @@ to the EPQ slot at recheck time.
 - [`add-new-hook`](../scenarios/add-new-hook.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/epq-recheck-flow.md` —

@@ -428,8 +428,6 @@ grep -n "brin_form_tuple\|brin_deform_tuple\|brin_new_memtuple\|brin_form_placeh
 grep -A 20 "static const BrinOpcInfo" source/src/backend/access/brin/brin_*.c | head -40
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -449,8 +447,6 @@ grep -A 20 "static const BrinOpcInfo" source/src/backend/access/brin/brin_*.c | 
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -460,7 +456,6 @@ grep -A 20 "static const BrinOpcInfo" source/src/backend/access/brin/brin_*.c | 
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[brin-revmap]] — the index that points at these tuples.

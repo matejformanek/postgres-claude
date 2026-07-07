@@ -187,8 +187,6 @@ capability.
 - Invalidation logic:
   `grep -RIn 'InvalidateObsoleteReplicationSlots\|wal_removed\|rows_removed' source/src/backend/replication`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -203,8 +201,6 @@ capability.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -214,7 +210,6 @@ capability.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/replication.md` — the surrounding

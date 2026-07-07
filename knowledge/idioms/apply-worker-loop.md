@@ -191,8 +191,6 @@ with `BGWORKER_BACKEND_DATABASE_CONNECTION` set.
 - Launcher:
   `grep -n 'logicalrep_worker_launch\|ApplyLauncherMain' source/src/backend/replication/logical/launcher.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -207,8 +205,6 @@ with `BGWORKER_BACKEND_DATABASE_CONNECTION` set.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -218,7 +214,6 @@ with `BGWORKER_BACKEND_DATABASE_CONNECTION` set.
 - [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/output-plugin-callbacks.md` — publisher

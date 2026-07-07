@@ -184,8 +184,6 @@ replication.
 - XLogInitBufferForRedo sites:
   `grep -RIn 'XLogInitBufferForRedo' source/src/backend/access`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -201,8 +199,6 @@ replication.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -212,7 +208,6 @@ replication.
 - [`add-new-wal-record`](../scenarios/add-new-wal-record.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/wal-record-construction.md` — companion:

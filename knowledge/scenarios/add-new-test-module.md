@@ -129,8 +129,6 @@ The tree must build at the end of each phase.
    `get_option(...)` guard in `meson.build`. Verify the tree builds
    with the flag both on and off.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -143,7 +141,6 @@ The tree must build at the end of each phase.
 | [`process-utility-hook-chain`](../idioms/process-utility-hook-chain.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Build-system divergence.** Forgetting one of `src/test/modules/Makefile`

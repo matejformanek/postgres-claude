@@ -161,8 +161,6 @@ memory beyond their own duration — see
 - Pool-budget GUCs:
   `grep -n 'max_pred_locks' source/src/backend/utils/misc/guc_tables.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -176,8 +174,6 @@ memory beyond their own duration — see
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -187,7 +183,6 @@ memory beyond their own duration — see
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` — heavyweight locks (the other

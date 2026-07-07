@@ -237,8 +237,6 @@ preventing concurrent FK column changes in the parent.
 - NULL handling:
   `grep -n 'ri_NullCheck\|RI_KEYS_\|FKCONSTR_MATCH' source/src/backend/utils/adt/ri_triggers.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -257,8 +255,6 @@ preventing concurrent FK column changes in the parent.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -268,7 +264,6 @@ preventing concurrent FK column changes in the parent.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/ri-fkey-cascade.md` — DELETE / UPDATE

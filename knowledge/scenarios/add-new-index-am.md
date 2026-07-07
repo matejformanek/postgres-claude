@@ -145,8 +145,6 @@ tree buildable.
    --test <am>` green + `meson test -C dev/build-debug --suite
    regress` full pass + `make -C doc/src/sgml` clean.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -161,7 +159,6 @@ tree buildable.
 | [`wal-record-construction`](../idioms/wal-record-construction.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **`rmgrlist.h` append-only** — inserting in the middle renumbers

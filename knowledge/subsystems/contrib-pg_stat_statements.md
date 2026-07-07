@@ -128,7 +128,6 @@ depend on it.
   truncating the query-text file under a concurrent reader is
   the classic bug.
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -141,7 +140,6 @@ depend on it.
 | [`contrib/pg_stat_statements/pg_stat_statements.c`](../files/contrib/pg_stat_statements/pg_stat_statements.c.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/bgworker-and-extensions/SKILL.md` — hook chaining (`prev_ExecutorEnd_hook` pattern); shmem hooks registration in `_PG_init`.

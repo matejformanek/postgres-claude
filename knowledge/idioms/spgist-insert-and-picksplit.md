@@ -452,8 +452,6 @@ grep -n "numNoProgressCycles\|bestLeafSize" \
     source/src/backend/access/spgist/spgdoinsert.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -468,8 +466,6 @@ grep -n "numNoProgressCycles\|bestLeafSize" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -479,7 +475,6 @@ grep -n "numNoProgressCycles\|bestLeafSize" \
 - [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[spgist-tree-and-tuples]] — the structs (inner / leaf / node /

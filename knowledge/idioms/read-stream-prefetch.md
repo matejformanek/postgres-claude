@@ -220,8 +220,6 @@ slow storage; minor improvement on fast storage.
 - The look-ahead logic:
   `grep -n 'distance\|max_pinned_buffers' source/src/backend/storage/aio/read_stream.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -236,8 +234,6 @@ slow storage; minor improvement on fast storage.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -247,7 +243,6 @@ slow storage; minor improvement on fast storage.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/vacuum-skip-pages.md` — canonical

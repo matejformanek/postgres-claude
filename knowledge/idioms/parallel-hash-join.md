@@ -238,8 +238,6 @@ present at it.
 - SharedTuplestore for spill:
   `grep -RIn 'sts_init\|sts_begin_write\|sts_puttuple' source/src/backend/utils/sort/sharedtuplestore.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -260,8 +258,6 @@ present at it.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -271,7 +267,6 @@ present at it.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/parallel-gather-merge.md` — the Gather above.

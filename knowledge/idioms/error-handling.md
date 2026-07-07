@@ -253,8 +253,6 @@ memory" can itself be reported as an ERROR rather than crashing the backend
   and consider FATAL via `PG_ENSURE_ERROR_CLEANUP`.
 - Input function reporting "bad value" without aborting xact → `errsave`/`ereturn`.
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -268,8 +266,6 @@ memory" can itself be reported as an ERROR rather than crashing the backend
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -281,7 +277,6 @@ memory" can itself be reported as an ERROR rather than crashing the backend
 - [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
 
 <!-- /scenarios:auto -->
-
 ## Open questions / unverified
 
 - Exact gettext extraction script behavior with multi-line literals

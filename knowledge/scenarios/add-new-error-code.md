@@ -115,8 +115,6 @@ truth are rows 1, 7, 8, 9, 10.)
    `meson compile -C dev/build-debug alldocs` (or `docs`) succeed and
    `errcodes-table.sgml` contains the new row.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -128,9 +126,9 @@ truth are rows 1, 7, 8, 9, 10.)
 | [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
 | [`error-context-callbacks`](../idioms/error-context-callbacks.md) | shares files: `src/backend/utils/error/elog.c` |
 | [`error-handling`](../idioms/error-handling.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | shares files: `src/backend/utils/error/elog.c` |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Subclass collisions with the standard.** Classes `0-4` and `A-H`

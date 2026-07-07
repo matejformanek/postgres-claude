@@ -165,8 +165,6 @@ strategy.
 - attstorage handling:
   `grep -RIn 'attstorage' source/src/backend | head -20`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -182,8 +180,6 @@ strategy.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -193,7 +189,6 @@ strategy.
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/heap-tuple-decompression-pattern.md` —

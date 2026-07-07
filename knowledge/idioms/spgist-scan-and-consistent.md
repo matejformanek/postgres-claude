@@ -546,8 +546,6 @@ grep -n "force all children to be visited\|/\* force \"match\"" \
     source/src/backend/access/spgist/spg*.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -562,8 +560,6 @@ grep -n "force all children to be visited\|/\* force \"match\"" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -573,7 +569,6 @@ grep -n "force all children to be visited\|/\* force \"match\"" \
 - [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[spgist-tree-and-tuples]] — the structs this scan walks; the

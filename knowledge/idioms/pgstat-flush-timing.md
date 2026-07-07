@@ -195,8 +195,6 @@ state.
 - The persistence layer:
   `grep -n 'pgstat_write_statsfile\|pgstat_read_statsfile' source/src/backend/utils/activity/pgstat.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -211,8 +209,6 @@ state.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -222,7 +218,6 @@ state.
 - [`add-new-pg-stat-view`](../scenarios/add-new-pg-stat-view.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/pgstat-counter.md` — companion;

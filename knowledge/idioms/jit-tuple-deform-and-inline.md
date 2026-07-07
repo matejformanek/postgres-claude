@@ -450,8 +450,6 @@ grep -n "slot_compile_deform\|EEOP_SCAN_FETCHSOME\|EEOP_OUTER_FETCHSOME\|EEOP_IN
 grep -rn "with_llvm\|BITCODE\|\.bc:" source/src/Makefile.global.in source/src/Makefile.shlib source/meson.build | head
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -470,8 +468,6 @@ grep -rn "with_llvm\|BITCODE\|\.bc:" source/src/Makefile.global.in source/src/Ma
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -481,7 +477,6 @@ grep -rn "with_llvm\|BITCODE\|\.bc:" source/src/Makefile.global.in source/src/Ma
 - [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[jit-provider-and-context]] — JitContext lifecycle + cost gates that enable PGJIT_DEFORM / PGJIT_INLINE.

@@ -408,8 +408,6 @@ grep -n "FreezePageRelfrozenXid\|NoFreezePageRelfrozenXid\|freeze_required" \
        source/src/backend/access/heap/vacuumlazy.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -433,8 +431,6 @@ grep -n "FreezePageRelfrozenXid\|NoFreezePageRelfrozenXid\|freeze_required" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -444,7 +440,6 @@ grep -n "FreezePageRelfrozenXid\|NoFreezePageRelfrozenXid\|freeze_required" \
 - [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[heap-tuple-visibility-mvcc]] — visibility consumes `HEAP_XMIN_FROZEN`.

@@ -221,7 +221,6 @@ path that would require the feature.
 - The amapi types:
   `grep -n 'typedef.*amfunction\|typedef struct IndexAmRoutine' source/src/include/access/amapi.h`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -236,7 +235,6 @@ path that would require the feature.
 | [`src/include/access/amapi.h`](../files/src/include/access/amapi.md) | — | full type |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/contrib-bloom.md` — reference

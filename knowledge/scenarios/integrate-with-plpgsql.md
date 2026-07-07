@@ -133,8 +133,6 @@ PL/pgSQL-specific add-on; core-side phases run first.
    full regress green, including `--suite regress` and the
    feature-specific tests.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -147,7 +145,6 @@ PL/pgSQL-specific add-on; core-side phases run first.
 | [`spi`](../idioms/spi.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **F2 — pl_gram.y token-block desync.** This is the single most

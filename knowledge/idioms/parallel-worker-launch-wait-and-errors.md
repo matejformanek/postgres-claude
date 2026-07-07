@@ -603,8 +603,6 @@ grep -rn "BecomeLockGroupLeader\|BecomeLockGroupMember\|lockGroupLeader" source/
 grep -rn "BGWH_NOT_YET_STARTED\|BGWH_STARTED\|BGWH_STOPPED\|BGWH_POSTMASTER_DIED" source/src/include/postmaster/
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -619,8 +617,6 @@ grep -rn "BGWH_NOT_YET_STARTED\|BGWH_STARTED\|BGWH_STOPPED\|BGWH_POSTMASTER_DIED
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -631,7 +627,6 @@ grep -rn "BGWH_NOT_YET_STARTED\|BGWH_STARTED\|BGWH_STOPPED\|BGWH_POSTMASTER_DIED
 - [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[parallel-context-and-dsm]] — the `ParallelContext` setup

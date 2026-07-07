@@ -198,8 +198,6 @@ ResultRelInfo when no explicit partition matches.
 - TupleDesc-conversion map:
   `grep -n 'convert_tuples_by_name' source/src/backend/access/common/tupconvert.c`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -214,8 +212,6 @@ ResultRelInfo when no explicit partition matches.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -225,7 +221,6 @@ ResultRelInfo when no explicit partition matches.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/subsystems/partitioning.md` — partitioning

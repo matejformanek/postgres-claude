@@ -188,8 +188,6 @@ is via the standard parallel-scan position counter.
 - The cost model:
   `grep -RIn 'relallvisible\|enable_indexonlyscan' source/src/backend/optimizer | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -202,8 +200,6 @@ is via the standard parallel-scan position counter.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -213,7 +209,6 @@ is via the standard parallel-scan position counter.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/visibility-map-update.md` — VM bits

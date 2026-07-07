@@ -417,8 +417,6 @@ grep -n "#define l_\|static inline.*l_struct_gep\|l_bb_append" \
        source/src/backend/jit/llvm/llvmjit_emit.h
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -438,8 +436,6 @@ grep -n "#define l_\|static inline.*l_struct_gep\|l_bb_append" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -449,7 +445,6 @@ grep -n "#define l_\|static inline.*l_struct_gep\|l_bb_append" \
 - [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[jit-provider-and-context]] — JitContext lifecycle + lazy emit.

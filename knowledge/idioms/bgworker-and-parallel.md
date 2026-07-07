@@ -226,7 +226,6 @@ corruption.
 | `source/src/backend/access/transam/parallel.c:1-120` | targeted (reserved keys, FixedParallelState) | §"DSM and the TOC" |
 | `source/src/include/catalog/pg_proc.h:79` | targeted (proparallel default) | §"Parallel query" + SKILL.md §3.2 |
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -249,7 +248,6 @@ corruption.
 | [`src/test/modules/worker_spi/worker_spi.c`](../files/src/test/modules/worker_spi/worker_spi.c.md) | 151 | bgw_extra. 128 bytes of opaque payload usable however you like. worker_spi encodes a (database OID, role... |
 
 <!-- /callsites:auto -->
-
 
 ## Scenarios that use me
 <!-- scenarios:auto -->

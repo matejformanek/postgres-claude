@@ -533,8 +533,6 @@ grep -n "appendStringInfo.*\"vxid\\|\"xmin\\|\"xmax\\|\"xcnt\\|\"sof\\|\"sxcnt\\
     source/src/backend/utils/time/snapmgr.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -549,8 +547,6 @@ grep -n "appendStringInfo.*\"vxid\\|\"xmin\\|\"xmax\\|\"xcnt\\|\"sof\\|\"sxcnt\\
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -560,7 +556,6 @@ grep -n "appendStringInfo.*\"vxid\\|\"xmin\\|\"xmax\\|\"xcnt\\|\"sof\\|\"sxcnt\\
 - [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[snapshot-static-and-current]] — the static slots that

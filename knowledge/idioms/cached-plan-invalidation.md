@@ -222,8 +222,6 @@ backend B; A re-analyzes on next EXECUTE.
 - RevalidateCachedQuery:
   `grep -n 'RevalidateCachedQuery' source/src/backend/utils/cache/plancache.c | head -5`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -237,8 +235,6 @@ backend B; A re-analyzes on next EXECUTE.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -248,7 +244,6 @@ backend B; A re-analyzes on next EXECUTE.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/prepared-statement-plancache.md` —

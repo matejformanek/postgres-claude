@@ -586,8 +586,6 @@ grep -nE "RelationCacheInitFilePreInvalidate|RelationCacheInitFilePostInvalidate
 grep -n "SHAREDINVAL" source/src/include/storage/sinval.h
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -611,8 +609,6 @@ grep -n "SHAREDINVAL" source/src/include/storage/sinval.h
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -622,7 +618,6 @@ grep -n "SHAREDINVAL" source/src/include/storage/sinval.h
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[syscache-catcache-internals]] — `SysCacheInvalidate` → `CatCacheInvalidate` target.

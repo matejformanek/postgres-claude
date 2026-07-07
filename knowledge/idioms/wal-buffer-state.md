@@ -251,8 +251,6 @@ write spikes but consume shared memory.
 - Page header writers:
   `grep -n 'xlp_magic\|XLP_LONG_HEADER\|XLogLongPageHeader' source/src/backend/access/transam/xlog.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -271,8 +269,6 @@ write spikes but consume shared memory.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -283,7 +279,6 @@ write spikes but consume shared memory.
 - [`bump-catversion`](../scenarios/bump-catversion.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/xloginsertlock-partitioning.md` —

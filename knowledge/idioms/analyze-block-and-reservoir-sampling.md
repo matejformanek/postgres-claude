@@ -499,8 +499,6 @@ grep -n "block_sampling_read_stream_next\|read_stream_begin_relation" \
     source/src/backend/commands/analyze.c
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -515,8 +513,6 @@ grep -n "block_sampling_read_stream_next\|read_stream_begin_relation" \
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -526,7 +522,6 @@ grep -n "block_sampling_read_stream_next\|read_stream_begin_relation" \
 - [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[analyze-mcv-histogram-correlation]] — what the sample rows are

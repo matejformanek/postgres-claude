@@ -165,8 +165,6 @@ requires a copy.
 - `lappend` callers (volume; this is one of the most-used backend APIs):
   `grep -RIn 'lappend' source/src/backend | wc -l`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -180,8 +178,6 @@ requires a copy.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -191,7 +187,6 @@ requires a copy.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `.claude/skills/parser-and-nodes/SKILL.md` §"Walker / mutator quick reference" — interaction with `expression_tree_walker` etc.

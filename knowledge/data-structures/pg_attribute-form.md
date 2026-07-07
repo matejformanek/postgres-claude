@@ -221,7 +221,6 @@ full.
 - The compact form generation:
   `grep -n 'populate_compact_attribute' source/src/backend/access/common/tupdesc.c`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -234,7 +233,6 @@ full.
 | [`src/include/catalog/pg_attribute.h`](../files/src/include/catalog/pg_attribute.h.md) | — | full struct + comments |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/tupledesc.md` — TupleDesc

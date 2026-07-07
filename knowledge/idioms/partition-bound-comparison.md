@@ -218,8 +218,6 @@ interpreted per strategy.
 - Overlap detection at ATTACH:
   `grep -n 'check_new_partition_bound\|partition_bounds_equal' source/src/backend/partitioning/partbounds.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -236,8 +234,6 @@ interpreted per strategy.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -247,7 +243,6 @@ interpreted per strategy.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

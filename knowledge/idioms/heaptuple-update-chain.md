@@ -189,8 +189,6 @@ If any of the three fails, the chain ends here.
 - The flag bits:
   `grep -n 'HEAP_HOT_UPDATED\|HEAP_ONLY_TUPLE\|HEAP_UPDATED' source/src/include/access/htup_details.h`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -206,8 +204,6 @@ If any of the three fails, the chain ends here.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -217,7 +213,6 @@ If any of the three fails, the chain ends here.
 - [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/heap-tuple-layout.md` — tuple

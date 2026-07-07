@@ -243,8 +243,6 @@ pool pressure).
 - Worker count caps:
   `grep -n 'max_parallel_workers_per_gather\|max_parallel_workers' source/src/backend/utils/misc/guc_tables.c | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -262,8 +260,6 @@ pool pressure).
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -274,7 +270,6 @@ pool pressure).
 - [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/cost-units-gucs.md` — base cost GUCs.

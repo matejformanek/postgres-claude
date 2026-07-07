@@ -130,7 +130,6 @@ reference implementation for the `FdwRoutine` API
 - Any new connection lifecycle event: the xact callback
   registration in `connection.c` must understand it.
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -148,7 +147,6 @@ reference implementation for the `FdwRoutine` API
 | [`contrib/postgres_fdw/shippable.c`](../files/contrib/postgres_fdw/shippable.c.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/access-method-apis/SKILL.md` — sibling tableam side (heap is in-tree; FDW is the pluggable counterpart).

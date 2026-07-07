@@ -117,7 +117,6 @@ Defined in `pgcrypto--1.3.sql` + upgrade scripts. Major categories:
   cryptographic primitives — be doubly careful with any SQL that
   could leak side-channel info (timing, error-message-shape).
 
-
 ## Files owned
 <!-- files-owned:auto -->
 
@@ -154,7 +153,6 @@ Defined in `pgcrypto--1.3.sql` + upgrade scripts. Major categories:
 | [`contrib/pgcrypto/px-hmac`](../files/contrib/pgcrypto/px-hmac.md) |
 
 <!-- /files-owned:auto -->
-
 ## Cross-references
 
 - `.claude/skills/fmgr-and-spi/SKILL.md` — SQL-callable C-function conventions.

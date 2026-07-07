@@ -399,8 +399,6 @@ grep -nE 'subxidStates\[' source/src/backend/storage/ipc/procarray.c
 grep -RnE 'XLOG_XACT_ASSIGNMENT|ProcArrayApplyXidAssignment' source/src/backend
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -419,8 +417,6 @@ grep -RnE 'XLOG_XACT_ASSIGNMENT|ProcArrayApplyXidAssignment' source/src/backend
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -430,7 +426,6 @@ grep -RnE 'XLOG_XACT_ASSIGNMENT|ProcArrayApplyXidAssignment' source/src/backend
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[subxact-subtrans-slru]] — the on-disk pg_subtrans that takes

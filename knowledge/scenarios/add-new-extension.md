@@ -132,8 +132,6 @@ The tree must build at the end of each phase.
    test -C dev/build-debug --suite docs` passes and `meson test -C
    dev/build-debug --suite contrib` runs every test you wired up.
 
-
-
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
@@ -147,7 +145,6 @@ The tree must build at the end of each phase.
 | [`fmgr`](../idioms/fmgr.md) | direct reference |
 
 <!-- /idioms-invoked:auto -->
-
 ## Pitfalls
 
 - **Forgot `contrib/meson.build` `subdir()` entry** — `meson

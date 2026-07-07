@@ -159,8 +159,6 @@ spillover rmgr for additional heap record types when
 - The critical-section wrappers around WAL emission:
   `grep -B1 -A3 'XLogInsert' source/src/backend/access/heap/heapam.c | head -30`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -175,8 +173,6 @@ spillover rmgr for additional heap record types when
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -188,7 +184,6 @@ spillover rmgr for additional heap record types when
 - [`add-new-wal-record`](../scenarios/add-new-wal-record.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/xlog-region-replay.md` — companion: the

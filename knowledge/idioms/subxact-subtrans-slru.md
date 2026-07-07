@@ -423,8 +423,6 @@ grep -nE 'SimpleLruAutotuneBuffers' source/src/backend/access/transam/subtrans.c
 ls source/src/test/isolation/specs/subxid-overflow.spec
 ```
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -445,8 +443,6 @@ ls source/src/test/isolation/specs/subxid-overflow.spec
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -456,7 +452,6 @@ ls source/src/test/isolation/specs/subxid-overflow.spec
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - [[subxact-xidcache-and-pgproc]] — the in-PGPROC cache; pg_subtrans

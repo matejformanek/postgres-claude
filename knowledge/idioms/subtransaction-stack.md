@@ -183,8 +183,6 @@ the fix is "don't do that" — flatten the structure.
 - The TransactionStateData struct:
   `grep -A30 'typedef struct TransactionStateData' source/src/backend/access/transam/xact.c | head -35`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -200,8 +198,6 @@ the fix is "don't do that" — flatten the structure.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -211,7 +207,6 @@ the fix is "don't do that" — flatten the structure.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/resourceowner.md` — per-subxact

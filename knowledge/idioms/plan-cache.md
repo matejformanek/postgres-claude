@@ -397,8 +397,6 @@ Skipping any of these → leaks, stale reads, or missed invalidation.
 - `grep -n 'CacheRegisterSyscacheCallback\|CacheRegisterRelcacheCallback' source/src/backend/utils/cache/plancache.c`
 - `grep -n 'FetchPreparedStatementResultDesc\|UtilityTupleDescriptor' source/src/backend/`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -424,8 +422,6 @@ Skipping any of these → leaks, stale reads, or missed invalidation.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -436,7 +432,6 @@ Skipping any of these → leaks, stale reads, or missed invalidation.
 - [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/prepared-statement-plancache.md` — PREPARE/EXECUTE

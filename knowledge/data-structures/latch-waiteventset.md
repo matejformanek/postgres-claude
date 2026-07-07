@@ -188,7 +188,6 @@ SIGALRM handler rather than per-call timeouts.
 - Shared latch ownership:
   `grep -RIn 'OwnLatch\|InitSharedLatch' source/src/backend`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -204,7 +203,6 @@ SIGALRM handler rather than per-call timeouts.
 | [`src/include/storage/waiteventset.h`](../files/src/include/storage/waiteventset.h.md) | — | multiplexer API + event-flag bitmask |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/pgproc-fields.md` — every PGPROC

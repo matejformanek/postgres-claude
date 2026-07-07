@@ -217,7 +217,6 @@ shared table that another backend created — skip init.
 - HASH_BLOBS canonical patterns:
   `grep -RIn 'HASH_BLOBS' source/src/backend | head -10`
 
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -232,7 +231,6 @@ shared table that another backend created — skip init.
 | [`src/include/utils/hsearch.h`](../files/src/include/utils/hsearch.md) | — | public API |
 
 <!-- /callsites:auto -->
-
 ## Cross-references
 
 - `knowledge/data-structures/buffertag.md` — buffer-mapping

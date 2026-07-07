@@ -218,8 +218,6 @@ join path.
 - Callers in core:
   `grep -RIn 'GetFdwRoutine\|fdwroutine->IterateForeignScan' source/src/backend | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -235,8 +233,6 @@ join path.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -246,7 +242,6 @@ join path.
 _(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/fdw-iterate-scan.md` — IterateForeignScan

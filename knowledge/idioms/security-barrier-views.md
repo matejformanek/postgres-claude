@@ -198,8 +198,6 @@ defined comparators or report input details.
 - security_level tracking:
   `grep -RIn 'security_level' source/src/backend/optimizer | head -10`
 
-
-
 ## Call sites
 <!-- callsites:auto -->
 
@@ -215,8 +213,6 @@ defined comparators or report input details.
 
 <!-- /callsites:auto -->
 
-
-
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
@@ -229,7 +225,6 @@ defined comparators or report input details.
 - [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
 
 <!-- /scenarios:auto -->
-
 ## Cross-references
 
 - `knowledge/idioms/view-pushdown-via-rewriter.md` —
