@@ -154,6 +154,22 @@ serialization, rule storage all operate on `Query` (parse) or `PlannedStmt`
 (plan) without caring whether the source SQL was DML or DDL.
 
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted via glossary cross-reference of backticked C identifiers in this doc.*
+*Refresh via `scripts/populate-idiom-callsites-v2.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`contrib/pg_stat_statements/pg_stat_statements.c`](../files/contrib/pg_stat_statements/pg_stat_statements.c.md) | — | `pg_stat_statements` — The contrib extension that hooks the planner, executor, and ProcessUtility paths to aggregate per-(userid, dbid, quer |
+| [`src/backend/storage/lmgr/lock.c`](../files/src/backend/storage/lmgr/lock.c.md) | — | `AccessShareLock` — The weakest table-level lock mode, acquired by a plain `SELECT` for the duration it reads a relation |
+| [`src/include/nodes/plannodes.h`](../files/src/include/nodes/plannodes.h.md) | — | `Plan` — The finished, executable tree produced by `create_plan` from the chosen Path — a tree of plan nodes (`SeqScan`, `Hash |
+| [`src/pl/plpgsql/src/pl_exec`](../files/src/pl/plpgsql/src/pl_exec.md) | — | `TargetEntry` — A node in a query or plan's target list: an expression paired with its output resno, column name, and `resjunk` flag |
+
+<!-- /callsites:auto -->
+
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
