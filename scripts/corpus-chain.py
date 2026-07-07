@@ -55,6 +55,7 @@ SCENARIOS = KNOWLEDGE / "scenarios"
 IDIOMS = KNOWLEDGE / "idioms"
 SUBSYSTEMS = KNOWLEDGE / "subsystems"
 DATA_STRUCTURES = KNOWLEDGE / "data-structures"
+PERSONAS = KNOWLEDGE / "personas"
 FILES_DOCS = KNOWLEDGE / "files"
 PLANNING = ROOT / "planning"
 SESSIONS = ROOT / "sessions"
@@ -141,11 +142,21 @@ def load_scenarios():
                     for x in rm.group(1).split(",")
                     if x.strip()
                 }
+        # Likely reviewers (from persona-scenario matrix)
+        reviewers = set()
+        rm = re.search(
+            r"## Likely reviewers\s*\n<!-- persona-reviewers:auto -->(.*?)<!-- /persona-reviewers:auto -->",
+            text,
+            re.DOTALL,
+        )
+        if rm:
+            reviewers = set(re.findall(r"\[`([a-z][a-z0-9-]+)`\]", rm.group(1)))
         data[p.stem] = {
             "path": p,
             "files": files,
             "idioms": idioms,
             "related": related,
+            "reviewers": reviewers,
             "title": _first_heading(text),
         }
     return data
@@ -296,6 +307,7 @@ def chain_from_scenario(
         "adjacent_scenarios": adj_scenarios,
         "subsystems": subs,
         "data_structures": {k: sorted(v) for k, v in ds_hits.items()},
+        "reviewers": sorted(node.get("reviewers", set())),
     }
 
 
@@ -480,6 +492,13 @@ def render(chain, past=None) -> str:
             lines.append("## Data structures involved")
             for name, files in sorted(ds.items()):
                 lines.append(f"- [`{name}`](knowledge/data-structures/{name}.md) — {len(files)} file(s)")
+            lines.append("")
+
+        reviewers = chain.get("reviewers", [])
+        if reviewers:
+            lines.append("## Likely reviewers (personas)")
+            for r in reviewers:
+                lines.append(f"- [`{r}`](knowledge/personas/{r}.md)")
             lines.append("")
 
     elif kind == "idiom":
