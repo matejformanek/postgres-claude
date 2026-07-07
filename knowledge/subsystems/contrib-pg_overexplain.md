@@ -194,3 +194,16 @@ load order.
   extension API this module uses.
 - `source/contrib/pg_overexplain/pg_overexplain.c` —
   implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_overexplain/pg_overexplain.c`](../files/contrib/pg_overexplain/pg_overexplain.c.md) |
+
+<!-- /files-owned:auto -->

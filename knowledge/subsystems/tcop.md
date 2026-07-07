@@ -782,3 +782,31 @@ parser → rewriter → planner → executor, and
 [[knowledge/subsystems/parser-and-rewrite.md]],
 [[knowledge/subsystems/optimizer.md]],
 [[knowledge/subsystems/executor.md]] for the layers tcop calls into.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**16 files.**
+
+| File |
+|---|
+| [`src/backend/tcop/backend_startup.c`](../files/src/backend/tcop/backend_startup.c.md) |
+| [`src/backend/tcop/cmdtag.c`](../files/src/backend/tcop/cmdtag.c.md) |
+| [`src/backend/tcop/dest.c`](../files/src/backend/tcop/dest.c.md) |
+| [`src/backend/tcop/fastpath.c`](../files/src/backend/tcop/fastpath.c.md) |
+| [`src/backend/tcop/postgres.c`](../files/src/backend/tcop/postgres.c.md) |
+| [`src/backend/tcop/pquery.c`](../files/src/backend/tcop/pquery.c.md) |
+| [`src/backend/tcop/utility.c`](../files/src/backend/tcop/utility.c.md) |
+| [`src/include/tcop/backend_startup.h`](../files/src/include/tcop/backend_startup.h.md) |
+| [`src/include/tcop/cmdtag.h`](../files/src/include/tcop/cmdtag.h.md) |
+| [`src/include/tcop/cmdtaglist.h`](../files/src/include/tcop/cmdtaglist.h.md) |
+| [`src/include/tcop/deparse_utility.h`](../files/src/include/tcop/deparse_utility.h.md) |
+| [`src/include/tcop/dest.h`](../files/src/include/tcop/dest.h.md) |
+| [`src/include/tcop/fastpath.h`](../files/src/include/tcop/fastpath.h.md) |
+| [`src/include/tcop/pquery.h`](../files/src/include/tcop/pquery.h.md) |
+| [`src/include/tcop/tcopprot.h`](../files/src/include/tcop/tcopprot.h.md) |
+| [`src/include/tcop/utility.h`](../files/src/include/tcop/utility.h.md) |
+
+<!-- /files-owned:auto -->

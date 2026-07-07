@@ -394,3 +394,42 @@ From the per-file pass:
 - **`CacheMemoryContext`** — singleton parent context for all backend cache memory. Created by `CreateCacheMemoryContext`. [verified-by-code, `catcache.c:725`]
 - **`PrepareToInvalidateCacheTuple`** — producer-side hash-computation entry called by inval.c on catalog DML. UPDATE produces up to two pending entries (old + new hash). [from-comment, `catcache.c:2368-2401`]
 - **`RegisterSyscacheCallback` / `RegisterRelcacheCallback`** — subscription API for derivative caches (typcache, plancache, ts_cache, evtcache, attoptcache, spccache, relfilenumbermap). Called from `LocalExecuteInvalidationMessage` after the underlying catcache flush.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**27 files.**
+
+| File |
+|---|
+| [`src/backend/utils/cache/attoptcache.c`](../files/src/backend/utils/cache/attoptcache.c.md) |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) |
+| [`src/backend/utils/cache/evtcache.c`](../files/src/backend/utils/cache/evtcache.c.md) |
+| [`src/backend/utils/cache/funccache.c`](../files/src/backend/utils/cache/funccache.c.md) |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) |
+| [`src/backend/utils/cache/lsyscache.c`](../files/src/backend/utils/cache/lsyscache.c.md) |
+| [`src/backend/utils/cache/partcache.c`](../files/src/backend/utils/cache/partcache.c.md) |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) |
+| [`src/backend/utils/cache/relfilenumbermap.c`](../files/src/backend/utils/cache/relfilenumbermap.c.md) |
+| [`src/backend/utils/cache/relmapper.c`](../files/src/backend/utils/cache/relmapper.c.md) |
+| [`src/backend/utils/cache/spccache.c`](../files/src/backend/utils/cache/spccache.c.md) |
+| [`src/backend/utils/cache/syscache.c`](../files/src/backend/utils/cache/syscache.c.md) |
+| [`src/backend/utils/cache/ts_cache.c`](../files/src/backend/utils/cache/ts_cache.c.md) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) |
+| [`src/include/utils/attoptcache.h`](../files/src/include/utils/attoptcache.h.md) |
+| [`src/include/utils/catcache.h`](../files/src/include/utils/catcache.h.md) |
+| [`src/include/utils/evtcache.h`](../files/src/include/utils/evtcache.h.md) |
+| [`src/include/utils/funccache`](../files/src/include/utils/funccache.md) |
+| [`src/include/utils/inval.h`](../files/src/include/utils/inval.h.md) |
+| [`src/include/utils/lsyscache.h`](../files/src/include/utils/lsyscache.h.md) |
+| [`src/include/utils/partcache.h`](../files/src/include/utils/partcache.h.md) |
+| [`src/include/utils/plancache.h`](../files/src/include/utils/plancache.h.md) |
+| [`src/include/utils/relcache.h`](../files/src/include/utils/relcache.h.md) |
+| [`src/include/utils/spccache.h`](../files/src/include/utils/spccache.h.md) |
+| [`src/include/utils/syscache.h`](../files/src/include/utils/syscache.h.md) |
+| [`src/include/utils/typcache.h`](../files/src/include/utils/typcache.h.md) |
+
+<!-- /files-owned:auto -->

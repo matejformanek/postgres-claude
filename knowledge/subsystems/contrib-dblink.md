@@ -164,3 +164,16 @@ dblink for one-shot or async patterns.
 - `.claude/skills/fmgr-and-spi.md` — dblink uses SPI patterns
   internally to expose remote results as record sets.
 - `source/contrib/dblink/dblink.c` — implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/dblink/dblink.c`](../files/contrib/dblink/dblink.c.md) |
+
+<!-- /files-owned:auto -->

@@ -117,6 +117,44 @@ Defined in `pgcrypto--1.3.sql` + upgrade scripts. Major categories:
   cryptographic primitives — be doubly careful with any SQL that
   could leak side-channel info (timing, error-message-shape).
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**25 files.**
+
+| File |
+|---|
+| [`contrib/pgcrypto/crypt-blowfish`](../files/contrib/pgcrypto/crypt-blowfish.md) |
+| [`contrib/pgcrypto/crypt-des`](../files/contrib/pgcrypto/crypt-des.md) |
+| [`contrib/pgcrypto/crypt-gensalt`](../files/contrib/pgcrypto/crypt-gensalt.md) |
+| [`contrib/pgcrypto/crypt-md5`](../files/contrib/pgcrypto/crypt-md5.md) |
+| [`contrib/pgcrypto/crypt-sha`](../files/contrib/pgcrypto/crypt-sha.md) |
+| [`contrib/pgcrypto/mbuf`](../files/contrib/pgcrypto/mbuf.md) |
+| [`contrib/pgcrypto/openssl`](../files/contrib/pgcrypto/openssl.md) |
+| [`contrib/pgcrypto/pgcrypto`](../files/contrib/pgcrypto/pgcrypto.md) |
+| [`contrib/pgcrypto/pgp`](../files/contrib/pgcrypto/pgp.md) |
+| [`contrib/pgcrypto/pgp-armor`](../files/contrib/pgcrypto/pgp-armor.md) |
+| [`contrib/pgcrypto/pgp-cfb`](../files/contrib/pgcrypto/pgp-cfb.md) |
+| [`contrib/pgcrypto/pgp-compress`](../files/contrib/pgcrypto/pgp-compress.md) |
+| [`contrib/pgcrypto/pgp-decrypt`](../files/contrib/pgcrypto/pgp-decrypt.md) |
+| [`contrib/pgcrypto/pgp-encrypt`](../files/contrib/pgcrypto/pgp-encrypt.md) |
+| [`contrib/pgcrypto/pgp-info`](../files/contrib/pgcrypto/pgp-info.md) |
+| [`contrib/pgcrypto/pgp-mpi`](../files/contrib/pgcrypto/pgp-mpi.md) |
+| [`contrib/pgcrypto/pgp-mpi-openssl`](../files/contrib/pgcrypto/pgp-mpi-openssl.md) |
+| [`contrib/pgcrypto/pgp-pgsql`](../files/contrib/pgcrypto/pgp-pgsql.md) |
+| [`contrib/pgcrypto/pgp-pubdec`](../files/contrib/pgcrypto/pgp-pubdec.md) |
+| [`contrib/pgcrypto/pgp-pubenc`](../files/contrib/pgcrypto/pgp-pubenc.md) |
+| [`contrib/pgcrypto/pgp-pubkey`](../files/contrib/pgcrypto/pgp-pubkey.md) |
+| [`contrib/pgcrypto/pgp-s2k`](../files/contrib/pgcrypto/pgp-s2k.md) |
+| [`contrib/pgcrypto/px`](../files/contrib/pgcrypto/px.md) |
+| [`contrib/pgcrypto/px-crypt`](../files/contrib/pgcrypto/px-crypt.md) |
+| [`contrib/pgcrypto/px-hmac`](../files/contrib/pgcrypto/px-hmac.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/fmgr-and-spi/SKILL.md` — SQL-callable C-function conventions.

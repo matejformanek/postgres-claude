@@ -139,3 +139,16 @@ TAP infra.
 - **fork/exec child** — under `EXEC_BACKEND`, the child runs
   `main()` again with `--forkchild …`, which dispatches to
   `SubPostmasterMain`.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`src/backend/main/main.c`](../files/src/backend/main/main.c.md) |
+
+<!-- /files-owned:auto -->

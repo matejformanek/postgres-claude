@@ -778,3 +778,80 @@ This synthesis distills the per-file corpus under
 See [[knowledge/idioms/parser-pipeline.md]] for the end-to-end narrative
 and [[knowledge/subsystems/optimizer.md]] for what consumes this stage's
 output.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**65 files.**
+
+| File |
+|---|
+| [`src/backend/parser/README`](../files/src/backend/parser/README.md) |
+| [`src/backend/parser/analyze.c`](../files/src/backend/parser/analyze.c.md) |
+| [`src/backend/parser/gram.y`](../files/src/backend/parser/gram.y.md) |
+| [`src/backend/parser/gramparse.h`](../files/src/backend/parser/gramparse.h.md) |
+| [`src/backend/parser/parse_agg.c`](../files/src/backend/parser/parse_agg.c.md) |
+| [`src/backend/parser/parse_clause.c`](../files/src/backend/parser/parse_clause.c.md) |
+| [`src/backend/parser/parse_coerce.c`](../files/src/backend/parser/parse_coerce.c.md) |
+| [`src/backend/parser/parse_collate.c`](../files/src/backend/parser/parse_collate.c.md) |
+| [`src/backend/parser/parse_cte.c`](../files/src/backend/parser/parse_cte.c.md) |
+| [`src/backend/parser/parse_enr.c`](../files/src/backend/parser/parse_enr.c.md) |
+| [`src/backend/parser/parse_expr.c`](../files/src/backend/parser/parse_expr.c.md) |
+| [`src/backend/parser/parse_func.c`](../files/src/backend/parser/parse_func.c.md) |
+| [`src/backend/parser/parse_graphtable.c`](../files/src/backend/parser/parse_graphtable.c.md) |
+| [`src/backend/parser/parse_jsontable.c`](../files/src/backend/parser/parse_jsontable.c.md) |
+| [`src/backend/parser/parse_merge.c`](../files/src/backend/parser/parse_merge.c.md) |
+| [`src/backend/parser/parse_node.c`](../files/src/backend/parser/parse_node.c.md) |
+| [`src/backend/parser/parse_oper.c`](../files/src/backend/parser/parse_oper.c.md) |
+| [`src/backend/parser/parse_param.c`](../files/src/backend/parser/parse_param.c.md) |
+| [`src/backend/parser/parse_relation.c`](../files/src/backend/parser/parse_relation.c.md) |
+| [`src/backend/parser/parse_target.c`](../files/src/backend/parser/parse_target.c.md) |
+| [`src/backend/parser/parse_type.c`](../files/src/backend/parser/parse_type.c.md) |
+| [`src/backend/parser/parse_utilcmd.c`](../files/src/backend/parser/parse_utilcmd.c.md) |
+| [`src/backend/parser/parser.c`](../files/src/backend/parser/parser.c.md) |
+| [`src/backend/parser/scan.l`](../files/src/backend/parser/scan.l.md) |
+| [`src/backend/parser/scansup.c`](../files/src/backend/parser/scansup.c.md) |
+| [`src/backend/rewrite/rewriteDefine.c`](../files/src/backend/rewrite/rewriteDefine.c.md) |
+| [`src/backend/rewrite/rewriteGraphTable.c`](../files/src/backend/rewrite/rewriteGraphTable.c.md) |
+| [`src/backend/rewrite/rewriteHandler.c`](../files/src/backend/rewrite/rewriteHandler.c.md) |
+| [`src/backend/rewrite/rewriteManip.c`](../files/src/backend/rewrite/rewriteManip.c.md) |
+| [`src/backend/rewrite/rewriteRemove.c`](../files/src/backend/rewrite/rewriteRemove.c.md) |
+| [`src/backend/rewrite/rewriteSearchCycle.c`](../files/src/backend/rewrite/rewriteSearchCycle.c.md) |
+| [`src/backend/rewrite/rewriteSupport.c`](../files/src/backend/rewrite/rewriteSupport.c.md) |
+| [`src/backend/rewrite/rowsecurity.c`](../files/src/backend/rewrite/rowsecurity.c.md) |
+| [`src/include/parser/analyze.h`](../files/src/include/parser/analyze.h.md) |
+| [`src/include/parser/kwlist.h`](../files/src/include/parser/kwlist.h.md) |
+| [`src/include/parser/parse_agg.h`](../files/src/include/parser/parse_agg.h.md) |
+| [`src/include/parser/parse_clause.h`](../files/src/include/parser/parse_clause.h.md) |
+| [`src/include/parser/parse_coerce.h`](../files/src/include/parser/parse_coerce.h.md) |
+| [`src/include/parser/parse_collate.h`](../files/src/include/parser/parse_collate.h.md) |
+| [`src/include/parser/parse_cte.h`](../files/src/include/parser/parse_cte.h.md) |
+| [`src/include/parser/parse_enr.h`](../files/src/include/parser/parse_enr.h.md) |
+| [`src/include/parser/parse_expr.h`](../files/src/include/parser/parse_expr.h.md) |
+| [`src/include/parser/parse_func.h`](../files/src/include/parser/parse_func.h.md) |
+| [`src/include/parser/parse_graphtable.h`](../files/src/include/parser/parse_graphtable.h.md) |
+| [`src/include/parser/parse_merge.h`](../files/src/include/parser/parse_merge.h.md) |
+| [`src/include/parser/parse_node.h`](../files/src/include/parser/parse_node.h.md) |
+| [`src/include/parser/parse_oper.h`](../files/src/include/parser/parse_oper.h.md) |
+| [`src/include/parser/parse_param.h`](../files/src/include/parser/parse_param.h.md) |
+| [`src/include/parser/parse_relation.h`](../files/src/include/parser/parse_relation.h.md) |
+| [`src/include/parser/parse_target.h`](../files/src/include/parser/parse_target.h.md) |
+| [`src/include/parser/parse_type.h`](../files/src/include/parser/parse_type.h.md) |
+| [`src/include/parser/parse_utilcmd.h`](../files/src/include/parser/parse_utilcmd.h.md) |
+| [`src/include/parser/parser.h`](../files/src/include/parser/parser.h.md) |
+| [`src/include/parser/parsetree.h`](../files/src/include/parser/parsetree.h.md) |
+| [`src/include/parser/scanner.h`](../files/src/include/parser/scanner.h.md) |
+| [`src/include/parser/scansup.h`](../files/src/include/parser/scansup.h.md) |
+| [`src/include/rewrite/prs2lock.h`](../files/src/include/rewrite/prs2lock.h.md) |
+| [`src/include/rewrite/rewriteDefine.h`](../files/src/include/rewrite/rewriteDefine.h.md) |
+| [`src/include/rewrite/rewriteGraphTable.h`](../files/src/include/rewrite/rewriteGraphTable.h.md) |
+| [`src/include/rewrite/rewriteHandler.h`](../files/src/include/rewrite/rewriteHandler.h.md) |
+| [`src/include/rewrite/rewriteManip.h`](../files/src/include/rewrite/rewriteManip.h.md) |
+| [`src/include/rewrite/rewriteRemove.h`](../files/src/include/rewrite/rewriteRemove.h.md) |
+| [`src/include/rewrite/rewriteSearchCycle.h`](../files/src/include/rewrite/rewriteSearchCycle.h.md) |
+| [`src/include/rewrite/rewriteSupport.h`](../files/src/include/rewrite/rewriteSupport.h.md) |
+| [`src/include/rewrite/rowsecurity.h`](../files/src/include/rewrite/rowsecurity.h.md) |
+
+<!-- /files-owned:auto -->

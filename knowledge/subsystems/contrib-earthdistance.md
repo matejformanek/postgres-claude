@@ -160,3 +160,16 @@ precision-engineering, use PostGIS's geodetic types.
   based C implementation (108 LOC).
 - `source/contrib/earthdistance/earthdistance--1.0.sql` —
   the cube-based SQL implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/earthdistance/earthdistance.c`](../files/contrib/earthdistance/earthdistance.c.md) |
+
+<!-- /files-owned:auto -->

@@ -130,6 +130,20 @@ All functions are SRFs returning rowsets. From
   privilege creep here means information disclosure of any
   arbitrary table's WAL records).
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_walinspect/pg_walinspect.c`](../files/contrib/pg_walinspect/pg_walinspect.c.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/wal-and-xlog/SKILL.md` — `XLogReaderState`,

@@ -158,3 +158,16 @@ restrict which details are acceptable.
   target API.
 - `source/contrib/basebackup_to_shell/basebackup_to_shell.c` —
   implementation (376 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/basebackup_to_shell/basebackup_to_shell.c`](../files/contrib/basebackup_to_shell/basebackup_to_shell.c.md) |
+
+<!-- /files-owned:auto -->

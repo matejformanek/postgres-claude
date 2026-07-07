@@ -191,3 +191,20 @@ LIMIT N` becomes an index scan with the GiST opclass.
 - `.claude/skills/access-method-apis/SKILL.md` — index AM
   contracts.
 - `source/contrib/pg_trgm/` — implementation directory.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**5 files.**
+
+| File |
+|---|
+| [`contrib/pg_trgm/trgm.h`](../files/contrib/pg_trgm/trgm.h.md) |
+| [`contrib/pg_trgm/trgm_gin.c`](../files/contrib/pg_trgm/trgm_gin.c.md) |
+| [`contrib/pg_trgm/trgm_gist.c`](../files/contrib/pg_trgm/trgm_gist.c.md) |
+| [`contrib/pg_trgm/trgm_op.c`](../files/contrib/pg_trgm/trgm_op.c.md) |
+| [`contrib/pg_trgm/trgm_regexp.c`](../files/contrib/pg_trgm/trgm_regexp.c.md) |
+
+<!-- /files-owned:auto -->

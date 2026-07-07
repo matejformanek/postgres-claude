@@ -167,3 +167,16 @@ rarely workable.
 - `source/src/include/commands/user.h` — `PasswordType` enum.
 - `source/contrib/passwordcheck/passwordcheck.c` — implementation
   (167 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/passwordcheck/passwordcheck.c`](../files/contrib/passwordcheck/passwordcheck.c.md) |
+
+<!-- /files-owned:auto -->

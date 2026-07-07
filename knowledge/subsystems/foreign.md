@@ -221,3 +221,18 @@ for `EvalPlanQual` rechecks.
   update; FDWs must supply an alternate-local-plan path.
 - **Upper relation** — planner term for post-scan/join layers (agg,
   window). `GetForeignUpperPaths` is the pushdown hook for those.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**3 files.**
+
+| File |
+|---|
+| [`src/backend/foreign/foreign.c`](../files/src/backend/foreign/foreign.c.md) |
+| [`src/include/foreign/fdwapi.h`](../files/src/include/foreign/fdwapi.h.md) |
+| [`src/include/foreign/foreign.h`](../files/src/include/foreign/foreign.h.md) |
+
+<!-- /files-owned:auto -->

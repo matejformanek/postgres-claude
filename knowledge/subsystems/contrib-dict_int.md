@@ -198,3 +198,16 @@ You'd write a custom dictionary when:
 - `source/contrib/dict_int/dict_int.c` — implementation
   (~150 LOC).
 - `source/src/backend/tsearch/` — the TS subsystem.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/dict_int/dict_int.c`](../files/contrib/dict_int/dict_int.c.md) |
+
+<!-- /files-owned:auto -->

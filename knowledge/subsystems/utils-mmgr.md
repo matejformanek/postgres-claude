@@ -299,3 +299,31 @@ Aggregated from per-file open-questions:
 ---
 
 **Document maintenance.** This synthesis follows the same shape as `access-heap.md`, `access-transam.md`, `storage-lmgr.md`, `storage-ipc.md`. Per-file docs are the citation-bearing primary corpus; when source changes, update the per-file doc first, then re-verify the cross-cites here. Last full verification against the commit at the top of this file: 2026-06-01.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**16 files.**
+
+| File |
+|---|
+| [`src/backend/utils/mmgr/README`](../files/src/backend/utils/mmgr/README.md) |
+| [`src/backend/utils/mmgr/alignedalloc.c`](../files/src/backend/utils/mmgr/alignedalloc.c.md) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) |
+| [`src/backend/utils/mmgr/bump.c`](../files/src/backend/utils/mmgr/bump.c.md) |
+| [`src/backend/utils/mmgr/dsa.c`](../files/src/backend/utils/mmgr/dsa.c.md) |
+| [`src/backend/utils/mmgr/freepage.c`](../files/src/backend/utils/mmgr/freepage.c.md) |
+| [`src/backend/utils/mmgr/generation.c`](../files/src/backend/utils/mmgr/generation.c.md) |
+| [`src/backend/utils/mmgr/mcxt.c`](../files/src/backend/utils/mmgr/mcxt.c.md) |
+| [`src/backend/utils/mmgr/memdebug.c`](../files/src/backend/utils/mmgr/memdebug.c.md) |
+| [`src/backend/utils/mmgr/portalmem.c`](../files/src/backend/utils/mmgr/portalmem.c.md) |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) |
+| [`src/include/nodes/memnodes.h`](../files/src/include/nodes/memnodes.h.md) |
+| [`src/include/utils/memutils.h`](../files/src/include/utils/memutils.h.md) |
+| [`src/include/utils/memutils_internal.h`](../files/src/include/utils/memutils_internal.h.md) |
+| [`src/include/utils/memutils_memorychunk.h`](../files/src/include/utils/memutils_memorychunk.h.md) |
+| [`src/include/utils/palloc.h`](../files/src/include/utils/palloc.h.md) |
+
+<!-- /files-owned:auto -->

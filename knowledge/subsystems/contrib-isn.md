@@ -165,3 +165,23 @@ hyphenation falls back to the generic pattern.
 - `source/contrib/isn/isn.c` — implementation.
 - `source/contrib/isn/isn-ranges.c` — the prefix-to-
   hyphen-position lookup table.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**8 files.**
+
+| File |
+|---|
+| [`contrib/isn/EAN13.h`](../files/contrib/isn/EAN13.h.md) |
+| [`contrib/isn/ISBN.h`](../files/contrib/isn/ISBN.h.md) |
+| [`contrib/isn/ISMN.h`](../files/contrib/isn/ISMN.h.md) |
+| [`contrib/isn/ISSN.h`](../files/contrib/isn/ISSN.h.md) |
+| [`contrib/isn/UPC.h`](../files/contrib/isn/UPC.h.md) |
+| [`contrib/isn/isn.c`](../files/contrib/isn/isn.c.md) |
+| [`contrib/isn/isn.h`](../files/contrib/isn/isn.h.md) |
+| [`contrib/isn/isn_data_headers`](../files/contrib/isn/isn_data_headers.md) |
+
+<!-- /files-owned:auto -->

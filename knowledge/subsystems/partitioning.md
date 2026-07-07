@@ -306,3 +306,22 @@ reference run-time `Param`s; the resulting Bitmapset is used by
 - **Interleaved partition** — list partition whose value set
   isn't disjoint enough from its neighbors to allow ordering
   optimizations.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**7 files.**
+
+| File |
+|---|
+| [`src/backend/partitioning/partbounds.c`](../files/src/backend/partitioning/partbounds.c.md) |
+| [`src/backend/partitioning/partdesc.c`](../files/src/backend/partitioning/partdesc.c.md) |
+| [`src/backend/partitioning/partprune.c`](../files/src/backend/partitioning/partprune.c.md) |
+| [`src/include/partitioning/partbounds.h`](../files/src/include/partitioning/partbounds.h.md) |
+| [`src/include/partitioning/partdefs.h`](../files/src/include/partitioning/partdefs.h.md) |
+| [`src/include/partitioning/partdesc.h`](../files/src/include/partitioning/partdesc.h.md) |
+| [`src/include/partitioning/partprune.h`](../files/src/include/partitioning/partprune.h.md) |
+
+<!-- /files-owned:auto -->

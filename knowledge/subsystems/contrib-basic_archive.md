@@ -187,3 +187,16 @@ its callbacks run there, not in user backends.
   process implementation.
 - `source/contrib/basic_archive/basic_archive.c` — the
   reference implementation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/basic_archive/basic_archive.c`](../files/contrib/basic_archive/basic_archive.c.md) |
+
+<!-- /files-owned:auto -->

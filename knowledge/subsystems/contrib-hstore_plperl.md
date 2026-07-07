@@ -152,3 +152,16 @@ what differentiates them at CREATE EXTENSION time.
   cross-extension dependencies.
 - `source/contrib/hstore_plperl/hstore_plperl.c` —
   implementation (156 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/hstore_plperl/hstore_plperl.c`](../files/contrib/hstore_plperl/hstore_plperl.c.md) |
+
+<!-- /files-owned:auto -->

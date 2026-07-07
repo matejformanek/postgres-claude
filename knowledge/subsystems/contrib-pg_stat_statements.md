@@ -128,6 +128,20 @@ depend on it.
   truncating the query-text file under a concurrent reader is
   the classic bug.
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_stat_statements/pg_stat_statements.c`](../files/contrib/pg_stat_statements/pg_stat_statements.c.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/bgworker-and-extensions/SKILL.md` — hook chaining (`prev_ExecutorEnd_hook` pattern); shmem hooks registration in `_PG_init`.

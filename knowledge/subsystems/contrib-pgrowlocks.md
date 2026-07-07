@@ -164,3 +164,16 @@ for a periodic `cron` job on a large hot table.
   topic; xmax semantics on chain members.
 - `source/contrib/pgrowlocks/pgrowlocks.c` — full
   implementation (280 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pgrowlocks/pgrowlocks.c`](../files/contrib/pgrowlocks/pgrowlocks.c.md) |
+
+<!-- /files-owned:auto -->

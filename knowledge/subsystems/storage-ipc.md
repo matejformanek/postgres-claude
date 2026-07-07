@@ -680,3 +680,46 @@ Carried forward from per-file docs and consolidated here.
   `UNUSED→ASSIGNED→ACTIVE→…` per-child state machine; how postmaster
   detects "child died after attaching to shmem ⇒ crash restart".
   `pmsignal.c:14-65`.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**31 files.**
+
+| File |
+|---|
+| [`src/backend/storage/ipc/barrier.c`](../files/src/backend/storage/ipc/barrier.c.md) |
+| [`src/backend/storage/ipc/dsm.c`](../files/src/backend/storage/ipc/dsm.c.md) |
+| [`src/backend/storage/ipc/dsm_impl.c`](../files/src/backend/storage/ipc/dsm_impl.c.md) |
+| [`src/backend/storage/ipc/dsm_registry.c`](../files/src/backend/storage/ipc/dsm_registry.c.md) |
+| [`src/backend/storage/ipc/ipc.c`](../files/src/backend/storage/ipc/ipc.c.md) |
+| [`src/backend/storage/ipc/ipci.c`](../files/src/backend/storage/ipc/ipci.c.md) |
+| [`src/backend/storage/ipc/latch.c`](../files/src/backend/storage/ipc/latch.c.md) |
+| [`src/backend/storage/ipc/pmsignal.c`](../files/src/backend/storage/ipc/pmsignal.c.md) |
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) |
+| [`src/backend/storage/ipc/procsignal.c`](../files/src/backend/storage/ipc/procsignal.c.md) |
+| [`src/backend/storage/ipc/shm_mq.c`](../files/src/backend/storage/ipc/shm_mq.c.md) |
+| [`src/backend/storage/ipc/shm_toc.c`](../files/src/backend/storage/ipc/shm_toc.c.md) |
+| [`src/backend/storage/ipc/shmem.c`](../files/src/backend/storage/ipc/shmem.c.md) |
+| [`src/backend/storage/ipc/shmem_hash.c`](../files/src/backend/storage/ipc/shmem_hash.c.md) |
+| [`src/backend/storage/ipc/signalfuncs.c`](../files/src/backend/storage/ipc/signalfuncs.c.md) |
+| [`src/backend/storage/ipc/sinval.c`](../files/src/backend/storage/ipc/sinval.c.md) |
+| [`src/backend/storage/ipc/sinvaladt.c`](../files/src/backend/storage/ipc/sinvaladt.c.md) |
+| [`src/backend/storage/ipc/standby.c`](../files/src/backend/storage/ipc/standby.c.md) |
+| [`src/backend/storage/ipc/waiteventset.c`](../files/src/backend/storage/ipc/waiteventset.c.md) |
+| [`src/include/storage/ipc.h`](../files/src/include/storage/ipc.h.md) |
+| [`src/include/storage/latch.h`](../files/src/include/storage/latch.h.md) |
+| [`src/include/storage/pg_shmem.h`](../files/src/include/storage/pg_shmem.h.md) |
+| [`src/include/storage/pmsignal.h`](../files/src/include/storage/pmsignal.h.md) |
+| [`src/include/storage/procarray.h`](../files/src/include/storage/procarray.h.md) |
+| [`src/include/storage/procsignal.h`](../files/src/include/storage/procsignal.h.md) |
+| [`src/include/storage/shm_mq.h`](../files/src/include/storage/shm_mq.h.md) |
+| [`src/include/storage/shm_toc.h`](../files/src/include/storage/shm_toc.h.md) |
+| [`src/include/storage/shmem.h`](../files/src/include/storage/shmem.h.md) |
+| [`src/include/storage/shmem_internal.h`](../files/src/include/storage/shmem_internal.h.md) |
+| [`src/include/storage/sinval.h`](../files/src/include/storage/sinval.h.md) |
+| [`src/include/storage/sinvaladt.h`](../files/src/include/storage/sinvaladt.h.md) |
+
+<!-- /files-owned:auto -->

@@ -157,3 +157,16 @@ my_xsyn produces gets stemmed by english_stem.
 - `source/contrib/dict_xsyn/dict_xsyn.c` — 264-LOC
   implementation.
 - `source/src/backend/tsearch/` — the TS subsystem.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/dict_xsyn/dict_xsyn.c`](../files/contrib/dict_xsyn/dict_xsyn.c.md) |
+
+<!-- /files-owned:auto -->

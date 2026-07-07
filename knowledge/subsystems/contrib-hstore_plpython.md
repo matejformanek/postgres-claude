@@ -148,3 +148,16 @@ PL/v8 or pl/lua. Both have trusted versions.
   cross-extension dependencies.
 - `source/contrib/hstore_plpython/hstore_plpython.c` —
   implementation (194 LOC).
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/hstore_plpython/hstore_plpython.c`](../files/contrib/hstore_plpython/hstore_plpython.c.md) |
+
+<!-- /files-owned:auto -->

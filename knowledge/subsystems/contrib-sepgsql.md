@@ -184,3 +184,25 @@ control, both are configured.
 - `source/src/include/catalog/objectaccess.h` —
   ObjectAccessHook API.
 - `source/contrib/sepgsql/` — implementation directory.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**10 files.**
+
+| File |
+|---|
+| [`contrib/sepgsql/database.c`](../files/contrib/sepgsql/database.c.md) |
+| [`contrib/sepgsql/dml.c`](../files/contrib/sepgsql/dml.c.md) |
+| [`contrib/sepgsql/hooks.c`](../files/contrib/sepgsql/hooks.c.md) |
+| [`contrib/sepgsql/label.c`](../files/contrib/sepgsql/label.c.md) |
+| [`contrib/sepgsql/proc.c`](../files/contrib/sepgsql/proc.c.md) |
+| [`contrib/sepgsql/relation.c`](../files/contrib/sepgsql/relation.c.md) |
+| [`contrib/sepgsql/schema.c`](../files/contrib/sepgsql/schema.c.md) |
+| [`contrib/sepgsql/selinux.c`](../files/contrib/sepgsql/selinux.c.md) |
+| [`contrib/sepgsql/sepgsql.h`](../files/contrib/sepgsql/sepgsql.h.md) |
+| [`contrib/sepgsql/uavc.c`](../files/contrib/sepgsql/uavc.c.md) |
+
+<!-- /files-owned:auto -->

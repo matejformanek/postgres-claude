@@ -137,3 +137,16 @@ VACUUM recover what I expected?" probe.
   implementation.
 - `source/contrib/pg_freespacemap/pg_freespacemap.c` — the
   53-LOC SQL shim.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**1 files.**
+
+| File |
+|---|
+| [`contrib/pg_freespacemap/pg_freespacemap.c`](../files/contrib/pg_freespacemap/pg_freespacemap.c.md) |
+
+<!-- /files-owned:auto -->

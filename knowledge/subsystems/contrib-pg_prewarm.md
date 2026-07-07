@@ -102,6 +102,21 @@ Touched by Andres Freund (read-stream conversion), Thomas Munro
 - Concurrent autoprewarm workers must NOT exist — the function
   asserts that only one is running. Don't break that assertion.
 
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**2 files.**
+
+| File |
+|---|
+| [`contrib/pg_prewarm/autoprewarm.c`](../files/contrib/pg_prewarm/autoprewarm.c.md) |
+| [`contrib/pg_prewarm/pg_prewarm.c`](../files/contrib/pg_prewarm/pg_prewarm.c.md) |
+
+<!-- /files-owned:auto -->
+
 ## Cross-references
 
 - `.claude/skills/bgworker-and-extensions/SKILL.md` — `autoprewarm.c` is a canonical static-registration bgworker example.

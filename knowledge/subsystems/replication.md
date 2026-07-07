@@ -991,3 +991,69 @@ header doc at `knowledge/files/src/include/replication/headers.md`. See
 architecture narrative, [[knowledge/subsystems/access-transam.md]] for
 the WAL infrastructure this builds on, and the
 [[replication-overview]] skill for the operational orientation.
+
+## Files owned
+<!-- files-owned:auto -->
+
+*Files under this subsystem's owned paths (by slug derivation + include-header filters). Auto-refreshed by `scripts/populate-subsystem-files.py`.*
+
+**54 files.**
+
+| File |
+|---|
+| [`src/backend/replication/README`](../files/src/backend/replication/README.md) |
+| [`src/backend/replication/libpqwalreceiver/libpqwalreceiver.c`](../files/src/backend/replication/libpqwalreceiver/libpqwalreceiver.c.md) |
+| [`src/backend/replication/logical/applyparallelworker.c`](../files/src/backend/replication/logical/applyparallelworker.c.md) |
+| [`src/backend/replication/logical/conflict.c`](../files/src/backend/replication/logical/conflict.c.md) |
+| [`src/backend/replication/logical/decode.c`](../files/src/backend/replication/logical/decode.c.md) |
+| [`src/backend/replication/logical/launcher.c`](../files/src/backend/replication/logical/launcher.c.md) |
+| [`src/backend/replication/logical/logical.c`](../files/src/backend/replication/logical/logical.c.md) |
+| [`src/backend/replication/logical/logicalctl.c`](../files/src/backend/replication/logical/logicalctl.c.md) |
+| [`src/backend/replication/logical/logicalfuncs.c`](../files/src/backend/replication/logical/logicalfuncs.c.md) |
+| [`src/backend/replication/logical/message.c`](../files/src/backend/replication/logical/message.c.md) |
+| [`src/backend/replication/logical/origin.c`](../files/src/backend/replication/logical/origin.c.md) |
+| [`src/backend/replication/logical/proto.c`](../files/src/backend/replication/logical/proto.c.md) |
+| [`src/backend/replication/logical/relation.c`](../files/src/backend/replication/logical/relation.c.md) |
+| [`src/backend/replication/logical/reorderbuffer.c`](../files/src/backend/replication/logical/reorderbuffer.c.md) |
+| [`src/backend/replication/logical/sequencesync.c`](../files/src/backend/replication/logical/sequencesync.c.md) |
+| [`src/backend/replication/logical/slotsync.c`](../files/src/backend/replication/logical/slotsync.c.md) |
+| [`src/backend/replication/logical/snapbuild.c`](../files/src/backend/replication/logical/snapbuild.c.md) |
+| [`src/backend/replication/logical/syncutils.c`](../files/src/backend/replication/logical/syncutils.c.md) |
+| [`src/backend/replication/logical/tablesync.c`](../files/src/backend/replication/logical/tablesync.c.md) |
+| [`src/backend/replication/logical/worker.c`](../files/src/backend/replication/logical/worker.c.md) |
+| [`src/backend/replication/pgoutput/pgoutput.c`](../files/src/backend/replication/pgoutput/pgoutput.c.md) |
+| [`src/backend/replication/pgrepack/pgrepack.c`](../files/src/backend/replication/pgrepack/pgrepack.c.md) |
+| [`src/backend/replication/repl_gram.y`](../files/src/backend/replication/repl_gram.y.md) |
+| [`src/backend/replication/repl_scanner.l`](../files/src/backend/replication/repl_scanner.l.md) |
+| [`src/backend/replication/slot.c`](../files/src/backend/replication/slot.c.md) |
+| [`src/backend/replication/slotfuncs.c`](../files/src/backend/replication/slotfuncs.c.md) |
+| [`src/backend/replication/syncrep.c`](../files/src/backend/replication/syncrep.c.md) |
+| [`src/backend/replication/syncrep_gram.y`](../files/src/backend/replication/syncrep_gram.y.md) |
+| [`src/backend/replication/walreceiver.c`](../files/src/backend/replication/walreceiver.c.md) |
+| [`src/backend/replication/walreceiverfuncs.c`](../files/src/backend/replication/walreceiverfuncs.c.md) |
+| [`src/backend/replication/walsender.c`](../files/src/backend/replication/walsender.c.md) |
+| [`src/include/replication/conflict.h`](../files/src/include/replication/conflict.h.md) |
+| [`src/include/replication/decode.h`](../files/src/include/replication/decode.h.md) |
+| [`src/include/replication/headers`](../files/src/include/replication/headers.md) |
+| [`src/include/replication/logical.h`](../files/src/include/replication/logical.h.md) |
+| [`src/include/replication/logicalctl.h`](../files/src/include/replication/logicalctl.h.md) |
+| [`src/include/replication/logicallauncher.h`](../files/src/include/replication/logicallauncher.h.md) |
+| [`src/include/replication/logicalproto.h`](../files/src/include/replication/logicalproto.h.md) |
+| [`src/include/replication/logicalrelation.h`](../files/src/include/replication/logicalrelation.h.md) |
+| [`src/include/replication/logicalworker.h`](../files/src/include/replication/logicalworker.h.md) |
+| [`src/include/replication/message.h`](../files/src/include/replication/message.h.md) |
+| [`src/include/replication/origin.h`](../files/src/include/replication/origin.h.md) |
+| [`src/include/replication/output_plugin.h`](../files/src/include/replication/output_plugin.h.md) |
+| [`src/include/replication/pgoutput.h`](../files/src/include/replication/pgoutput.h.md) |
+| [`src/include/replication/reorderbuffer.h`](../files/src/include/replication/reorderbuffer.h.md) |
+| [`src/include/replication/slot.h`](../files/src/include/replication/slot.h.md) |
+| [`src/include/replication/slotsync.h`](../files/src/include/replication/slotsync.h.md) |
+| [`src/include/replication/snapbuild.h`](../files/src/include/replication/snapbuild.h.md) |
+| [`src/include/replication/snapbuild_internal.h`](../files/src/include/replication/snapbuild_internal.h.md) |
+| [`src/include/replication/syncrep.h`](../files/src/include/replication/syncrep.h.md) |
+| [`src/include/replication/walreceiver.h`](../files/src/include/replication/walreceiver.h.md) |
+| [`src/include/replication/walsender.h`](../files/src/include/replication/walsender.h.md) |
+| [`src/include/replication/walsender_private.h`](../files/src/include/replication/walsender_private.h.md) |
+| [`src/include/replication/worker_internal.h`](../files/src/include/replication/worker_internal.h.md) |
+
+<!-- /files-owned:auto -->
