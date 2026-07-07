@@ -296,8 +296,23 @@ def chain_from_scenario(
             if f in meta["callsites"]:
                 ds_hits[ds].add(f)
 
+    # Depth-2: idioms whose call sites overlap with the L1 idioms' call sites,
+    # but that we haven't already surfaced. These are "pattern-siblings" —
+    # patterns often co-located with what this scenario invokes.
+    sibling_idioms: dict[str, set[str]] = defaultdict(set)
+    if depth >= 2:
+        seed_files = set(files)
+        for idm in all_idioms:
+            seed_files |= idioms.get(idm, {}).get("callsites", set())
+        for other, meta in idioms.items():
+            if other in all_idioms:
+                continue
+            shared = seed_files & meta["callsites"]
+            if len(shared) >= 2:  # threshold — 1 hit is too noisy
+                sibling_idioms[other] = shared
+
     return {
-        "anchor": {"kind": "scenario", "slug": slug, "title": node["title"]},
+        "anchor": {"kind": "scenario", "slug": slug, "title": node["title"], "depth": depth},
         "files": sorted(files),
         "idioms_direct": sorted(direct_idioms),
         "idioms_transitive": {
@@ -308,6 +323,7 @@ def chain_from_scenario(
         "subsystems": subs,
         "data_structures": {k: sorted(v) for k, v in ds_hits.items()},
         "reviewers": sorted(node.get("reviewers", set())),
+        "sibling_idioms": {k: sorted(v)[:3] for k, v in sibling_idioms.items()},
     }
 
 
@@ -499,6 +515,17 @@ def render(chain, past=None) -> str:
             lines.append("## Likely reviewers (personas)")
             for r in reviewers:
                 lines.append(f"- [`{r}`](knowledge/personas/{r}.md)")
+            lines.append("")
+
+        siblings = chain.get("sibling_idioms", {})
+        if siblings:
+            lines.append(f"## Depth-2 pattern-siblings (idioms co-located with invoked ones, ≥2 shared files)")
+            ranked = sorted(siblings.items(), key=lambda kv: -len(kv[1]))
+            for other, shared in ranked[:12]:
+                preview = ", ".join(f"`{s}`" for s in shared[:2])
+                lines.append(f"- [`{other}`](knowledge/idioms/{other}.md) — {len(shared)} shared: {preview}")
+            if len(ranked) > 12:
+                lines.append(f"- _... +{len(ranked)-12} more_")
             lines.append("")
 
     elif kind == "idiom":
