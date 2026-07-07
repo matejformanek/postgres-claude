@@ -164,6 +164,23 @@ already structures.
    the run produced a new L/F; append session retro;
    `memory-keeping` updates `progress/STATE.md`.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`memory-context-allocset-internals`](../idioms/memory-context-allocset-internals.md) | direct reference |
+| [`memory-context-api-and-dispatch`](../idioms/memory-context-api-and-dispatch.md) | direct reference |
+| [`memory-context-slab-generation-bump`](../idioms/memory-context-slab-generation-bump.md) | direct reference |
+| [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Trap 1 — Generic workloads on a clean master produce zero

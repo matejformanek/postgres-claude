@@ -424,6 +424,19 @@ Skipping any of these → leaks, stale reads, or missed invalidation.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-hook`](../scenarios/add-new-hook.md)
+- [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/prepared-statement-plancache.md` — PREPARE/EXECUTE

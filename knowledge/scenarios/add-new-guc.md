@@ -140,6 +140,23 @@ patches that ship a built-in GUC plus a demo extension use both.
    Phase-end check: `meson test -C dev/build-debug` green; the new
    regress/TAP test runs and passes.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`cost-units-gucs`](../idioms/cost-units-gucs.md) | direct reference |
+| [`guc-variables`](../idioms/guc-variables.md) | direct reference |
+| [`parallel-state-propagation`](../idioms/parallel-state-propagation.md) | shares files: `src/backend/utils/misc/guc.c` |
+| [`walsender-state-machine`](../idioms/walsender-state-machine.md) | shares files: `src/backend/replication/walsender.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Generated `guc_tables.c` looks editable but isn't.** It's listed in

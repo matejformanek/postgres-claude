@@ -132,6 +132,22 @@ The tree must build at the end of each phase.
    test -C dev/build-debug --suite docs` passes and `meson test -C
    dev/build-debug --suite contrib` runs every test you wired up.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`extension-loading`](../idioms/extension-loading.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Forgot `contrib/meson.build` `subdir()` entry** — `meson

@@ -110,6 +110,23 @@ last_verified_commit: e18b0cb7344
 3. **Phase 3 — Tests + docs.** Files: [10, 11, 15 if needed, 17 if needed]. Edits: TAP test that loads the module via `shared_preload_libraries`, verifies the static worker started, calls the dynamic launcher, exercises terminate path. Phase-end check: `meson test -C dev/build-debug --suite <name>` passes; `make check-world` green.
 4. **Phase 4 (optional) — Shmem-region piggyback.** If the worker shares state with backends, this is where you union with `add-new-shared-memory-region`. Files: add `shmem_request_hook` + `shmem_startup_hook` registered from `_PG_init`. Phase-end check: regress + TAP still pass; `pg_shmem_allocations` shows the new region.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`background-worker-startup`](../idioms/background-worker-startup.md) | direct reference |
+| [`bgworker-and-parallel`](../idioms/bgworker-and-parallel.md) | direct reference |
+| [`guc-variables`](../idioms/guc-variables.md) | shares files: `src/test/modules/worker_spi/worker_spi.c` |
+| [`parallel-worker-launch-wait-and-errors`](../idioms/parallel-worker-launch-wait-and-errors.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`bgw_library_name = "postgres"` for in-tree workers.** When the worker

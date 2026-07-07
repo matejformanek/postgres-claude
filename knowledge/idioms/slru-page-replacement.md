@@ -327,6 +327,18 @@ grep -n "SimpleLruTruncate\|SlruScanDirCbDeleteCutoff" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-lwlock-tranche`](../scenarios/add-new-lwlock-tranche.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[clog-slru]] — how CLOG sits on top of this layer.

@@ -108,6 +108,22 @@ If the new type is **typmod-bearing** (`varchar(n)` style), add two more:
    green AND `meson test ... --test opr_sanity` passes (it cross-checks
    `pg_proc` vs `pg_operator` vs `pg_amop` for every type).
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+| [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **opr_sanity is the safety net.** `src/test/regress/sql/opr_sanity.sql`

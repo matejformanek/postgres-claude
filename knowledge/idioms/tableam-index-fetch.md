@@ -209,6 +209,18 @@ index gave it the TID. The contract is the TID + snapshot.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-table-am`](../scenarios/add-new-table-am.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/bitmap-heap-scan-flow.md` — bitmap scan

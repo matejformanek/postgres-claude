@@ -139,6 +139,22 @@ The tree must build at the end of each phase.
    dev/build-debug --suite regress` is green; `--suite recovery` too if
    the kind is persistent.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+| [`pgstat-flush-timing`](../idioms/pgstat-flush-timing.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **The two-stage flush.** A backend accumulates counters in

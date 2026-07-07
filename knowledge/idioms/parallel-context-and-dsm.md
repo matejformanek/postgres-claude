@@ -527,6 +527,18 @@ grep -rn "GetSessionDsmHandle\|PARALLEL_KEY_SESSION_DSM" source/src/backend/
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[parallel-worker-launch-wait-and-errors]] — how the context

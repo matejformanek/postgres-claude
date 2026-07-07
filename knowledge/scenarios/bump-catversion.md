@@ -111,6 +111,25 @@ short phases.
    regression test for this — the verification *is* the failing-old /
    succeeding-new initdb pair. Phase-end check: see Verification below.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`checkpoint-coordination`](../idioms/checkpoint-coordination.md) | shares files: `src/backend/access/transam/xlog.c` |
+| [`crash-recovery-startup`](../idioms/crash-recovery-startup.md) | shares files: `src/backend/access/transam/xlog.c` |
+| [`wal-buffer-state`](../idioms/wal-buffer-state.md) | shares files: `src/backend/access/transam/xlog.c` |
+| [`wal-page-write-flush`](../idioms/wal-page-write-flush.md) | shares files: `src/backend/access/transam/xlog.c` |
+| [`xloginsertlock-partitioning`](../idioms/xloginsertlock-partitioning.md) | shares files: `src/backend/access/transam/xlog.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Silent self-test** — your local dev loop typically runs `initdb`

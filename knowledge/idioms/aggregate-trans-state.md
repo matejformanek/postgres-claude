@@ -238,6 +238,19 @@ shortcut, manages tmpcontext / aggcontext.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md)
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/datum-nullabledatum.md` —

@@ -104,6 +104,24 @@ self-contained chunk; the tree must build at the end of each phase.
    Phase-end check: `meson test -C dev/build-debug --suite regress` is
    green.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+| [`memory-context-api-and-dispatch`](../idioms/memory-context-api-and-dispatch.md) | shares files: `src/backend/utils/mmgr/mcxt.c` |
+| [`memory-contexts`](../idioms/memory-contexts.md) | shares files: `src/backend/utils/mmgr/mcxt.c` |
+| [`security-barrier-views`](../idioms/security-barrier-views.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`REVOKE ... FROM PUBLIC` on the view is not enough** if the

@@ -268,6 +268,20 @@ memory" can itself be reported as an ERROR rather than crashing the backend
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-error-code`](../scenarios/add-new-error-code.md)
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+- [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
+
+<!-- /scenarios:auto -->
+
 ## Open questions / unverified
 
 - Exact gettext extraction script behavior with multi-line literals

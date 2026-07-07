@@ -227,6 +227,19 @@ message catalog, not the ereport caller's.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-error-code`](../scenarios/add-new-error-code.md)
+- [`integrate-with-plpgsql`](../scenarios/integrate-with-plpgsql.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `.claude/skills/error-handling/SKILL.md` — ereport + PG_TRY

@@ -488,6 +488,19 @@ sed -n '20,60p' source/src/include/utils/memutils_memorychunk.h
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-system-view`](../scenarios/add-new-system-view.md)
+- [`fix-memory-leak`](../scenarios/fix-memory-leak.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[memory-context-allocset-internals]] — AllocSet (`MCTX_ASET_ID`),

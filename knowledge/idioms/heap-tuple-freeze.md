@@ -433,6 +433,18 @@ grep -n "FreezePageRelfrozenXid\|NoFreezePageRelfrozenXid\|freeze_required" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[heap-tuple-visibility-mvcc]] — visibility consumes `HEAP_XMIN_FROZEN`.

@@ -249,6 +249,21 @@ For client-issued SQL: always goes through ProcessUtility.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-hook`](../scenarios/add-new-hook.md)
+- [`add-new-test-module`](../scenarios/add-new-test-module.md)
+- [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
+- [`add-startup-hook`](../scenarios/add-startup-hook.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/event-trigger-firing.md` — fires from

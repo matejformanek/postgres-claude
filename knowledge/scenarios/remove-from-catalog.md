@@ -114,6 +114,20 @@ last_verified_commit: e18b0cb7344
    siblings if the removed entry was user-documented.
    Phase-end check: `meson test --suite docs` is green.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`opr_sanity` "functions with descriptions" check.** The most

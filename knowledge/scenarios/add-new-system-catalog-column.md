@@ -119,6 +119,28 @@ tree buildable. Re-`initdb` between phases when the catversion changes.
 For a column with no producer logic (purely seed/static), Phases 1+2
 collapse into one.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`analyze-block-and-reservoir-sampling`](../idioms/analyze-block-and-reservoir-sampling.md) | shares files: `src/backend/commands/analyze.c` |
+| [`analyze-mcv-histogram-correlation`](../idioms/analyze-mcv-histogram-correlation.md) | shares files: `src/backend/commands/analyze.c`, `src/include/commands/vacuum.h` |
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`relcache-build`](../idioms/relcache-build.md) | shares files: `src/backend/utils/cache/relcache.c` |
+| [`relfilenumber-rewrite`](../idioms/relfilenumber-rewrite.md) | shares files: `src/backend/utils/cache/relcache.c` |
+| [`toast-storage-strategies`](../idioms/toast-storage-strategies.md) | shares files: `src/include/catalog/pg_attribute.h` |
+| [`vacuum-skip-pages`](../idioms/vacuum-skip-pages.md) | shares files: `src/backend/access/heap/vacuumlazy.c` |
+| [`vacuum-truncate-relation`](../idioms/vacuum-truncate-relation.md) | shares files: `src/backend/access/heap/vacuumlazy.c` |
+| [`vacuum-two-pass-heap`](../idioms/vacuum-two-pass-heap.md) | shares files: `src/backend/access/heap/vacuumlazy.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`replaces[N]` array sized by hand.** Patterns like

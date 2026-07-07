@@ -532,6 +532,18 @@ grep -rn "STATISTIC_KIND_MCV\|STATISTIC_KIND_HISTOGRAM\|STATISTIC_KIND_CORRELATI
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[analyze-block-and-reservoir-sampling]] — where the sample

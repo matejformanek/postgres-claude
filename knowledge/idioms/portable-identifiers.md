@@ -191,6 +191,18 @@ extensions on PGXN reference it too. Get the name right at birth.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-node-type`](../scenarios/add-new-node-type.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/node-types.md` — what shape the new struct should

@@ -535,6 +535,18 @@ sed -n '120,150p;240,260p;700,810p' source/src/backend/utils/mmgr/aset.c
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`fix-memory-leak`](../scenarios/fix-memory-leak.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[memory-context-api-and-dispatch]] — the abstract MemoryContext API

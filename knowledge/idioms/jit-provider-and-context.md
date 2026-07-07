@@ -435,6 +435,20 @@ grep -rn "InstrJitAgg\|JIT:\|jit_instrument" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md)
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+- [`add-new-hook`](../scenarios/add-new-hook.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[jit-expression-codegen]] — IR generation from `EEOP_*` ops in `llvmjit_expr.c`.

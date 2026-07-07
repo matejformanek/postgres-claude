@@ -134,6 +134,32 @@ The tree must build at the end of each phase.
    `meson test -C dev/build-debug --suite regress` clean, including
    the new test; EXPLAIN shows the node name correctly.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`aggregate-grouping-sets`](../idioms/aggregate-grouping-sets.md) | shares files: `src/include/nodes/plannodes.h` |
+| [`aggregate-partial-finalize`](../idioms/aggregate-partial-finalize.md) | shares files: `src/backend/optimizer/plan/createplan.c`, `src/include/nodes/nodes.h` |
+| [`cost-join-paths`](../idioms/cost-join-paths.md) | shares files: `src/backend/optimizer/path/costsize.c` |
+| [`cost-parallel-adjustments`](../idioms/cost-parallel-adjustments.md) | shares files: `src/backend/optimizer/path/costsize.c` |
+| [`cost-scan-paths`](../idioms/cost-scan-paths.md) | shares files: `src/backend/optimizer/path/costsize.c` |
+| [`cost-units-gucs`](../idioms/cost-units-gucs.md) | shares files: `src/backend/optimizer/path/costsize.c`, `src/include/optimizer/cost.h` |
+| [`epq-multi-table`](../idioms/epq-multi-table.md) | shares files: `src/backend/optimizer/plan/createplan.c` |
+| [`expression-evaluator-flow`](../idioms/expression-evaluator-flow.md) | direct reference |
+| [`node-types`](../idioms/node-types.md) | shares files: `src/backend/nodes/gen_node_support.pl` |
+| [`node-types-and-lists`](../idioms/node-types-and-lists.md) | direct reference |
+| [`parallel-gather-merge`](../idioms/parallel-gather-merge.md) | shares files: `src/backend/executor/execParallel.c` |
+| [`parallel-state-propagation`](../idioms/parallel-state-propagation.md) | direct reference |
+| [`subplan-and-initplan`](../idioms/subplan-and-initplan.md) | shares files: `src/include/nodes/plannodes.h` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Dispatch-site amnesia** — the worst trap: `ExecInitNode` is

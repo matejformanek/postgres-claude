@@ -147,6 +147,22 @@ designing the callback table. Per-file docs already exist for each.)
    prominent. Phase-end check: `meson compile -C dev/build-debug
    docs` clean.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`locking`](../idioms/locking.md) | direct reference |
+| [`lwlock-rank-discipline`](../idioms/lwlock-rank-discipline.md) | shares files: `src/backend/storage/lmgr/lwlock.c` |
+| [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Not in `shared_preload_libraries`.** The `_PG_init` of a

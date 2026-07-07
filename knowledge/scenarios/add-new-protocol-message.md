@@ -172,6 +172,29 @@ The tree must build at the end of each phase.
    to lint the SGML. `[verified-by-code]`
    (`doc/src/sgml/Makefile`).
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`bgworker-and-parallel`](../idioms/bgworker-and-parallel.md) | shares files: `src/backend/access/transam/parallel.c` |
+| [`error-handling`](../idioms/error-handling.md) | direct reference |
+| [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+| [`parallel-context-and-dsm`](../idioms/parallel-context-and-dsm.md) | shares files: `src/backend/access/transam/parallel.c` |
+| [`parallel-state-propagation`](../idioms/parallel-state-propagation.md) | shares files: `src/backend/access/transam/parallel.c` |
+| [`parallel-worker-coordination`](../idioms/parallel-worker-coordination.md) | shares files: `src/backend/access/transam/parallel.c` |
+| [`parallel-worker-launch-wait-and-errors`](../idioms/parallel-worker-launch-wait-and-errors.md) | shares files: `src/backend/access/transam/parallel.c` |
+| [`snapshot-export-historic-parallel`](../idioms/snapshot-export-historic-parallel.md) | shares files: `src/backend/access/transam/parallel.c` |
+| [`utility-stmt-planning`](../idioms/utility-stmt-planning.md) | shares files: `src/backend/tcop/postgres.c` |
+| [`walsender-state-machine`](../idioms/walsender-state-machine.md) | shares files: `src/backend/replication/walsender.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Tag collision in the same direction.** `protocol.h` lets you

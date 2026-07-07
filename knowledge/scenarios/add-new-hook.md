@@ -120,6 +120,29 @@ The tree must build at the end of each phase.
    applies. Phase-end check: `meson test -C dev/build-debug --suite
    docs`.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`aggregate-grouping-sets`](../idioms/aggregate-grouping-sets.md) | shares files: `src/backend/optimizer/plan/planner.c` |
+| [`aggregate-partial-finalize`](../idioms/aggregate-partial-finalize.md) | shares files: `src/backend/optimizer/plan/planner.c` |
+| [`epq-multi-table`](../idioms/epq-multi-table.md) | shares files: `src/backend/executor/execMain.c` |
+| [`epq-recheck-flow`](../idioms/epq-recheck-flow.md) | shares files: `src/backend/executor/execMain.c` |
+| [`epq-state-init`](../idioms/epq-state-init.md) | shares files: `src/backend/executor/execMain.c` |
+| [`jit-provider-and-context`](../idioms/jit-provider-and-context.md) | shares files: `src/backend/optimizer/plan/planner.c` |
+| [`parser-pipeline`](../idioms/parser-pipeline.md) | shares files: `src/backend/optimizer/plan/planner.c`, `src/backend/parser/analyze.c` |
+| [`plan-cache`](../idioms/plan-cache.md) | shares files: `src/backend/tcop/utility.c` |
+| [`process-utility-hook-chain`](../idioms/process-utility-hook-chain.md) | direct reference |
+| [`utility-stmt-planning`](../idioms/utility-stmt-planning.md) | shares files: `src/backend/optimizer/plan/planner.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Missing `PGDLLIMPORT`** — the build is green on Linux/macOS but

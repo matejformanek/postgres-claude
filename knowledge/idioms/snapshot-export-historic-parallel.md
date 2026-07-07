@@ -549,6 +549,18 @@ grep -n "appendStringInfo.*\"vxid\\|\"xmin\\|\"xmax\\|\"xcnt\\|\"sof\\|\"sxcnt\\
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[snapshot-static-and-current]] — the static slots that

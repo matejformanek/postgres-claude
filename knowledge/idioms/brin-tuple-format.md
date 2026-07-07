@@ -449,6 +449,18 @@ grep -A 20 "static const BrinOpcInfo" source/src/backend/access/brin/brin_*.c | 
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+_(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[brin-revmap]] — the index that points at these tuples.

@@ -396,6 +396,18 @@ grep -rn "low.*number.*bucket.*first\|lock.*lower" source/src/backend/access/has
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[hash-bucket-split]] — the split mechanism that grows the table.

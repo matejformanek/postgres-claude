@@ -314,6 +314,21 @@ missing an arm.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-node-type`](../scenarios/add-new-node-type.md)
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+- [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md)
+- [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/node-types-and-lists.md` — the underlying NodeTag

@@ -298,6 +298,19 @@ cheap-rescan inner (small, indexed by parameterization).
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md)
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/cost-units-gucs.md` — base GUCs.

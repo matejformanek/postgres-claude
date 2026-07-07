@@ -148,6 +148,27 @@ and `src/include/nodes/nodetags.h`. Driven by
    `meson test -C dev/build-debug --suite regress` and any TAP
    suite added pass.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`error-handling`](../idioms/error-handling.md) | direct reference |
+| [`node-types`](../idioms/node-types.md) | shares files: `src/backend/nodes/gen_node_support.pl`, `src/include/nodes/parsenodes.h` |
+| [`node-types-and-lists`](../idioms/node-types-and-lists.md) | shares files: `src/backend/nodes/gen_node_support.pl` |
+| [`parser-pipeline`](../idioms/parser-pipeline.md) | shares files: `src/include/nodes/parsenodes.h` |
+| [`plan-cache`](../idioms/plan-cache.md) | shares files: `src/backend/tcop/utility.c` |
+| [`process-utility-hook-chain`](../idioms/process-utility-hook-chain.md) | shares files: `src/backend/tcop/utility.c` |
+| [`security-barrier-views`](../idioms/security-barrier-views.md) | shares files: `src/include/nodes/parsenodes.h` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **The four-switch trap.** `utility.c` has FOUR independent

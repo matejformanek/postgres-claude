@@ -523,6 +523,18 @@ grep -n "store_flush_position\|get_flush_position\|lsn_mapping" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[apply-handlers-insert-update-delete]] — the row-event

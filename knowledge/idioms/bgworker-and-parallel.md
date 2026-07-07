@@ -249,3 +249,16 @@ corruption.
 | [`src/test/modules/worker_spi/worker_spi.c`](../files/src/test/modules/worker_spi/worker_spi.c.md) | 151 | bgw_extra. 128 bytes of opaque payload usable however you like. worker_spi encodes a (database OID, role... |
 
 <!-- /callsites:auto -->
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-bgworker`](../scenarios/add-new-bgworker.md)
+- [`add-new-builtin-function`](../scenarios/add-new-builtin-function.md)
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+
+<!-- /scenarios:auto -->

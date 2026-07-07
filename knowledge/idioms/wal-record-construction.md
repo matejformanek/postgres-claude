@@ -175,6 +175,20 @@ spillover rmgr for additional heap record types when
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md)
+- [`add-new-index-am`](../scenarios/add-new-index-am.md)
+- [`add-new-wal-record`](../scenarios/add-new-wal-record.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/xlog-region-replay.md` — companion: the

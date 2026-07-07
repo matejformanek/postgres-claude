@@ -264,6 +264,25 @@ to its server log [verified-by-code] (`memutils.h:104-105`).
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md)
+- [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md)
+- [`add-new-data-type`](../scenarios/add-new-data-type.md)
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+- [`add-new-shared-memory-region`](../scenarios/add-new-shared-memory-region.md)
+- [`add-new-system-view`](../scenarios/add-new-system-view.md)
+- [`add-new-table-am`](../scenarios/add-new-table-am.md)
+- [`fix-memory-leak`](../scenarios/fix-memory-leak.md)
+
+<!-- /scenarios:auto -->
+
 ## Open questions / unverified
 
 - Exact behavior of `MemoryContextSetParent` when the new parent is in a

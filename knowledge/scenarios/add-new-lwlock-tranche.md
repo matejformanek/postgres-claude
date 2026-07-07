@@ -166,6 +166,22 @@ AM whose shmem hash uses its own tranche) unions both.
    regress` and (extension) `meson test … --suite <test-module-name>`
    pass.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`locking-overview`](../idioms/locking-overview.md) | direct reference |
+| [`lwlock-rank-discipline`](../idioms/lwlock-rank-discipline.md) | direct reference |
+| [`slru-page-replacement`](../idioms/slru-page-replacement.md) | shares files: `src/backend/access/transam/slru.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **List-order drift between `lwlocklist.h` and `wait_event_names.txt`**
