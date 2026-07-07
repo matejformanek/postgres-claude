@@ -178,6 +178,24 @@ into the SLRU buffer pool. The relevant LWLocks:
 - Status enum changes (cross-version migration risk):
   `git -C source log -S 'MultiXactStatus' --oneline`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/README.tuplock`](../files/src/backend/access/heap/README.md) | — | canonical tuple-lock + multixact discussion |
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) | — | Source path |
+| [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) | 25 | [verified-by-code -30] |
+| [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) | 36 | — |
+| [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) | 53 | [verified-by-code -58] |
+| [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) | — | Source path |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` §2.6 — MultiXact interaction with tuple locks; HEAP_XMAX_IS_MULTI dispatch rule.

@@ -231,6 +231,23 @@ specialized opcodes if `*opsfixed` is true.
 - ExecProcNode wrapping:
   `grep -n 'ExecProcNodeFirst\|ExecProcNodeInstr' source/src/backend/executor/execProcnode.c | head -5`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execProcnode.c`](../files/src/backend/executor/execProcnode.c.md) | — | ExecInitNode / ExecEndNode dispatch |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 1196 | PlanState struct head |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 1198 | pg_node_attr(abstract) (designed for inheritance) |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 1208 | ExecProcNode function pointer |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | — | full struct + subclasses |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/estate.md` — every PlanState

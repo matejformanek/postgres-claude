@@ -240,6 +240,24 @@ must be freed before the underlying Jsonb is.
 - jbvBinary navigation patterns:
   `grep -RIn 'jbvBinary' source/src/backend/utils/adt | head -15`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/adt/jsonb.c`](../files/src/backend/utils/adt/jsonb.c.md) | — | input/output |
+| [`src/backend/utils/adt/jsonb_util.c`](../files/src/backend/utils/adt/jsonb_util.c.md) | — | iterators + on-disk conversion |
+| [`src/backend/utils/adt/jsonpath_exec.c`](../files/src/backend/utils/adt/jsonpath_exec.c.md) | — | heavy user (jsonpath evaluation) |
+| [`src/include/utils/jsonb.h`](../files/src/include/utils/jsonb.h.md) | 227 | jbvType enum |
+| [`src/include/utils/jsonb.h`](../files/src/include/utils/jsonb.h.md) | 255 | JsonbValue struct |
+| [`src/include/utils/jsonb.h`](../files/src/include/utils/jsonb.h.md) | — | public type + struct definitions |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/parser-and-rewrite.md` — JSON

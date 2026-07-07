@@ -43,8 +43,9 @@ def _repo_root() -> Path:
 
 
 ROOT = _repo_root()
-IDIOMS = ROOT / "knowledge" / "idioms"
 FILES_DOCS = ROOT / "knowledge" / "files"
+# Default target layer; can be overridden via --layer on the CLI.
+IDIOMS = ROOT / "knowledge" / "idioms"
 
 CITE_WITH_LINE = re.compile(
     r"`?source/([A-Za-z0-9_./+-]+?\.[A-Za-z0-9_+-]+):(\d+)`?"
@@ -212,8 +213,21 @@ def upsert(text: str, section: str) -> str:
 
 
 def main() -> int:
+    import argparse
+
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument(
+        "--layer",
+        default="idioms",
+        help="knowledge/ subdirectory to process (default: idioms). Also valid: data-structures.",
+    )
+    args = ap.parse_args()
+
+    global IDIOMS
+    IDIOMS = ROOT / "knowledge" / args.layer
+
     if not IDIOMS.exists():
-        print(f"idioms dir not found: {IDIOMS}")
+        print(f"target dir not found: {IDIOMS}")
         return 1
     total = 0
     updated = 0

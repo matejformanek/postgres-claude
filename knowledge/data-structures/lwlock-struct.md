@@ -212,6 +212,23 @@ and there's no per-LWLock overhead for tracking.
 - Tranche registration:
   `grep -RIn 'LWLockNewTrancheId\|LWLockRegisterTranche' source/src/backend`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/lwlock.c`](../files/src/backend/storage/lmgr/lwlock.c.md) | 96 | state bit layout |
+| [`src/backend/storage/lmgr/lwlock.c`](../files/src/backend/storage/lmgr/lwlock.c.md) | — | atomic state manipulation |
+| [`src/include/storage/lwlock.h`](../files/src/include/storage/lwlock.h.md) | 75 | struct definition |
+| [`src/include/storage/lwlock.h`](../files/src/include/storage/lwlock.h.md) | — | struct definition |
+| [`src/include/storage/proclist.h`](../files/src/include/storage/proclist.h.md) | — | proclist primitive used for waiters |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/lwlock-rank-discipline.md` — companion;

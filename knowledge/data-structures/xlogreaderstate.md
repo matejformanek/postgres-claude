@@ -178,6 +178,20 @@ start LSN.
 - Per-block-id helpers:
   `grep -n 'XLogRecHasBlockRef\|XLogRecGetBlockTag\|XLogRecGetBlockData' source/src/include/access/xlogreader.h`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xlogreader.c`](../files/src/backend/access/transam/xlogreader.c.md) | — | implementation |
+| [`src/include/access/xlogreader.h`](../files/src/include/access/xlogreader.h.md) | — | Source path |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/wal-and-xlog/SKILL.md` — XLogInsert (writer) is the counterpart; rmgr design.

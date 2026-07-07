@@ -317,3 +317,51 @@ the need for an explicit re-dirty flag.
 <!-- backlinks:auto -->
 - [files/src/include/storage/buf_internals.h.md](../files/src/include/storage/buf_internals.h.md)
 - [files/src/backend/storage/buffer/bufmgr.c.md](../files/src/backend/storage/buffer/bufmgr.c.md)
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 680 | BufferLockHeldByMe(buf_hdr) / BufferLockHeldByMeInMode(buf_hdr, mode) — interrogate the backend-local... |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 3156 | [verified-by-code -3205] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 3280 | [verified-by-code -3372] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 3429 | 5661] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 4520 | 4628]. Because a |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 4553 | BM_PERMANENT distinguishes logged rels from unlogged / init-fork rels; FlushBuffer only XLogFlushes when... |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 5907 | BufferLockAcquire(buffer, buf_hdr, mode) — CAS-attempts via BufferLockAttempt; on contention queues self... |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 6022 | BufferLockRelease / BufferLockReleaseSub — atomically subtract the mode-specific value; on contention... |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 6051 | BufferLockConditional(buffer, buf_hdr, mode) — single-shot CAS; refuses if this backend already holds the... |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 6678 | [verified-by-code -6818 |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 6738 | 6743] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7165 | 7170] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7250 | 7322] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7366 | 7413] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7527 | 7593] |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7531 | ]; local buffers manipulate |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 33 | [verified-by-code -86] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 49 | 55] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 58 | BUF_REFCOUNT_ONE = 1 and BUF_STATE_GET_REFCOUNT(state) = state & BUF_REFCOUNT_MASK [verified-by-code -91] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 62 | BUF_USAGECOUNT_ONE = 1 << BUF_REFCOUNT_BITS and BUF_STATE_GET_USAGECOUNT(state) = (state &... |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 77 | Content-lock sub-bits: BM_LOCK_VAL_SHARED (one per shared holder, low 18 bits of the lock field),... |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 98 | BM_TAG_VALID "essentially means that there is a buffer hashtable entry associated with the buffer's tag"... |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 102 | Flag macros emitted by BUF_DEFINE_FLAG(n) = (1 << (BUF_FLAG_SHIFT + n)) [verified-by-code -103] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 105 | [verified-by-code -127] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 106 | [verified-by-code -127] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 130 | 133] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 144 | [verified-by-code -147] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 281 | tag may only be changed under header spinlock, but may be read without it if the buffer is pinned (a... |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 283 | Pin release is permitted while another backend holds the header spinlock — done via atomic subtraction... |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 303 | 310] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 322 | principle [from-comment -324]) |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 326 | [verified-by-code -359] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 346 | wait_backend_pgprocno and lock_waiters require the header spinlock [from-comment -358] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 381 | 387]. The pointed-at |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 457 | [verified-by-code -497 |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 469 | [from-comment -471] |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | — | Source path |
+
+<!-- /callsites:auto -->

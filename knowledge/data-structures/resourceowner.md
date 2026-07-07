@@ -207,6 +207,21 @@ connections, etc.) without per-resource tracking.
 - CurrentResourceOwner save/restore patterns:
   `grep -RIn 'CurrentResourceOwner =' source/src/backend | head -20`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/resowner/resowner.c`](../files/src/backend/utils/resowner/resowner.c.md) | — | implementation |
+| `src/backend/utils/resowner/resowner_test.c` | — | small example using the API |
+| [`src/include/utils/resowner.h`](../files/src/include/utils/resowner.md) | — | public API + descriptor type |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/utils-mmgr.md` — memory contexts;

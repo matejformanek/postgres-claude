@@ -256,6 +256,23 @@ per-tuple memory context detached from any EState.
 - Callback users:
   `grep -RIn 'RegisterExprContextCallback' source/src/backend | head -10`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execUtils.c`](../files/src/backend/executor/execUtils.c.md) | — | CreateExprContext, ResetExprContext |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 281 | ExprContext struct head |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 285 | scantuple/innertuple/outertuple |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 293 | per_query_memory + per_tuple_memory |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 328 | ecxt_estate link back |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/estate.md` — ecxt_estate points

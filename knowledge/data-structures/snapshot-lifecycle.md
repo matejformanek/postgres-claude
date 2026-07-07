@@ -182,3 +182,16 @@ from `xl_running_xacts` records during decoding — see
 - **MyProc->xmin**: the floor below which `pg_xact` can be truncated and
   dead tuples can be reclaimed. Held back by registered snapshots and
   the active stack.
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/time/snapmgr.c`](../files/src/backend/utils/time/snapmgr.c.md) | — | Source path: , combocid.c |
+| [`src/include/utils/snapmgr.h`](../files/src/include/utils/snapmgr.h.md) | — | Header: , snapshot.h |
+
+<!-- /callsites:auto -->

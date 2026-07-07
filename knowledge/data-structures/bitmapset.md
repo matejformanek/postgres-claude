@@ -167,6 +167,21 @@ a `Bitmapset *` is talking about a set of baserel indices.
   `grep -n '_copyBitmapset\|_equalBitmapset\|_outBitmapset\|_readBitmapset' source/src/backend/nodes/*.c`
 - The canonical word-width macro: `grep -n 'BITS_PER_BITMAPWORD' source/src/include/nodes/bitmapset.h`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/nodes/bitmapset.c`](../files/src/backend/nodes/bitmapset.c.md) | — | implementation (~1100 LOC) |
+| [`src/include/nodes/bitmapset.h`](../files/src/include/nodes/bitmapset.h.md) | 48 | [verified-by-code -54] |
+| [`src/include/nodes/bitmapset.h`](../files/src/include/nodes/bitmapset.h.md) | — | Source path |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/parser-and-nodes/SKILL.md` — `Bitmapset` is a Node-tagged type that flows through copy/equal/out/read; `pg_node_attr(custom_copy_equal)` rule.
