@@ -329,6 +329,23 @@ snapshot.
 - Manual chapter: <https://www.postgresql.org/docs/current/spi.html> [from-docs]
 
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted via glossary cross-reference of backticked C identifiers in this doc.*
+*Refresh via `scripts/populate-idiom-callsites-v2.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`contrib/lo/lo.c`](../files/contrib/lo/lo.c.md) | — | `SPI_finish` — The Server Programming Interface call that tears down the SPI session opened by `SPI_connect`, freeing the SPI memory |
+| [`contrib/spi/refint.c`](../files/contrib/spi/refint.c.md) | — | `SPI_connect` — Opens a Server Programming Interface session for the current backend, setting up the SPI memory context and procedure |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | — | `SaveCachedPlan` — Hands a freshly built generic `CachedPlan` to the plancache for caching under its `CachedPlanSource`, moving it into |
+| [`src/pl/plpgsql/src/pl_exec`](../files/src/pl/plpgsql/src/pl_exec.md) | — | `ExecEvalExpr` — Runs a compiled `ExprState` against the current tuple/econtext, returning the result Datum and null flag; the per-tup; `... |
+| [`src/pl/plpgsql/src/plpgsql`](../files/src/pl/plpgsql/src/plpgsql.md) | — | `ParamListInfo` — The runtime parameter list (`params |
+
+<!-- /callsites:auto -->
+
 ## Scenarios that use me
 <!-- scenarios:auto -->
 

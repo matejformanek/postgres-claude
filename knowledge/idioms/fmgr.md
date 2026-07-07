@@ -363,6 +363,29 @@ trap entry/exit.
 - Manual: <https://www.postgresql.org/docs/current/xfunc-c.html> [from-docs]
 
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted via glossary cross-reference of backticked C identifiers in this doc.*
+*Refresh via `scripts/populate-idiom-callsites-v2.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`contrib/amcheck/verify_heapam`](../files/contrib/amcheck/verify_heapam.md) | — | `InitMaterializedSRF` — Sets up a set-returning function in materialize mode: it builds the result `Tuplestore` and tuple descriptor and... |
+| [`contrib/intarray/_int_op`](../files/contrib/intarray/_int_op.md) | — | `PG_MODULE_MAGIC_EXT` — The extended form of `PG_MODULE_MAGIC` (PG 18) that additionally embeds the extension's name and version into the... |
+| [`contrib/postgres_fdw/postgres_fdw.c`](../files/contrib/postgres_fdw/postgres_fdw.c.md) | — | `InputFunctionCall` — The fmgr wrapper that invokes a type's text-input function (cstring → Datum), handling the three-argument convention |
+| [`src/backend/access/common/scankey.c`](../files/src/backend/access/common/scankey.c.md) | — | `fmgr_info` — Fills an `FmgrInfo` lookup cache for a function OID — resolving the C entry point, argument count, and strictness — s |
+| [`src/backend/catalog/pg_proc.c`](../files/src/backend/catalog/pg_proc.c.md) | — | `pg_proc` — The system catalog with one row per function, procedure, and aggregate (the latter pairs with `pg_aggregate`), holdin |
+| [`src/backend/parser/parse_expr.c`](../files/src/backend/parser/parse_expr.c.md) | — | `FuncExpr` — The `primnodes |
+| [`src/backend/utils/adt/misc.c`](../files/src/backend/utils/adt/misc.c.md) | — | `PG_ARGISNULL` — Macro a SQL-callable C function uses to test whether argument N was passed SQL NULL before touching it; mandatory for |
+| [`src/backend/utils/error/elog.c`](../files/src/backend/utils/error/elog.c.md) | — | `FlushErrorState` — The elog |
+| [`src/include/fmgr.h`](../files/src/include/fmgr.h.md) | — | `FUNC_MAX_ARGS` — The hard cap on the number of arguments a function may take, defined as 100 in `pg_config_manual |
+| [`src/include/pg_config_manual.h`](../files/src/include/pg_config_manual.h.md) | — | `INDEX_MAX_KEYS` — A compile-time constant (default 32, set in `pg_config_manual |
+| [`src/pl/plpython/plpy_exec`](../files/src/pl/plpython/plpy_exec.md) | — | `multi_call_memory_ctx` — The longer-lived memory context a set-returning function uses across its value-per-call invocations (set up via... |
+
+<!-- /callsites:auto -->
+
 ## Scenarios that use me
 <!-- scenarios:auto -->
 

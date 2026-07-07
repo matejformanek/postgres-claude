@@ -157,6 +157,23 @@ literals; the parser passes them around. Once upon a time there was a single
 `Value` union — hence the filename — but it was split into per-type structs.
 
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted via glossary cross-reference of backticked C identifiers in this doc.*
+*Refresh via `scripts/populate-idiom-callsites-v2.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`contrib/pg_stat_statements/pg_stat_statements.c`](../files/contrib/pg_stat_statements/pg_stat_statements.c.md) | — | `pg_stat_statements` — The contrib extension that hooks the planner, executor, and ProcessUtility paths to aggregate per-(userid, dbid, quer |
+| [`src/backend/access/transam/varsup.c`](../files/src/backend/access/transam/varsup.c.md) | — | `TransactionId` — A 32-bit transaction identifier (XID) stamped into each tuple's xmin/xmax to drive MVCC visibility; XIDs are assigned |
+| [`src/include/catalog/pg_rewrite.h`](../files/src/include/catalog/pg_rewrite.h.md) | — | `pg_rewrite` — The system catalog with one row per rewrite rule (CREATE RULE), holding the rule's event type, enable flag, INSTEAD f |
+| [`src/include/nodes/pg_list.h`](../files/src/include/nodes/pg_list.h.md) | — | `ListCell` — One element of PostgreSQL's List |
+| [`src/include/nodes/plannodes.h`](../files/src/include/nodes/plannodes.h.md) | — | `Plan` — The finished, executable tree produced by `create_plan` from the chosen Path — a tree of plan nodes (`SeqScan`, `Hash |
+
+<!-- /callsites:auto -->
+
 ## Scenarios that use me
 <!-- scenarios:auto -->
 
