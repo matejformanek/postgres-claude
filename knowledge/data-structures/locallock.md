@@ -189,6 +189,21 @@ Most workloads use a tiny fraction of the budget; the default
 - ResourceOwner integration:
   `grep -n 'ResourceOwnerRememberLock' source/src/backend/storage/lmgr/lock.c`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/lock.c`](../files/src/backend/storage/lmgr/lock.c.md) | — | implementation |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 239 | struct definitions |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | — | definitions |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/fastpath-locks.md` — the fast-path subsystem

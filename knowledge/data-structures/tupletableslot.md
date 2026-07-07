@@ -175,6 +175,22 @@ freed memory.
 - The four built-in op tables:
   `grep -n 'const TupleTableSlotOps TTSOps' source/src/backend/executor/execTuples.c`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execTuples.c`](../files/src/backend/executor/execTuples.c.md) | — | implementation of all 4 built-in vtables |
+| [`src/include/executor/tuptable.h`](../files/src/include/executor/tuptable.h.md) | 120 | the base struct |
+| [`src/include/executor/tuptable.h`](../files/src/include/executor/tuptable.h.md) | 147 | the TupleTableSlotOps vtable |
+| [`src/include/executor/tuptable.h`](../files/src/include/executor/tuptable.h.md) | — | struct + vtable + op signatures |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/executor.md` — the executor pipeline

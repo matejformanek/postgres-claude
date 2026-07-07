@@ -235,6 +235,26 @@ non-zero for any non-empty datum. So zero in the first byte means
 - VARATT_IS_* tests:
   `grep -n 'VARATT_IS_EXTERNAL\|VARATT_IS_COMPRESSED\|VARATT_IS_SHORT' source/src/include/varatt.h | head -15`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/utils/expandeddatum.h`](../files/src/include/utils/expandeddatum.md) | — | ExpandedObjectHeader API |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | 32 | varatt_external struct |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | 57 | varatt_indirect |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | 74 | varatt_expanded |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | 84 | vartag_external enum |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | 126 | varattrib_4b / 1b / 1b_e |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | 228 | little-endian header bit-layout macros |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | — | full header |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/toast-chunk-write.md` — how

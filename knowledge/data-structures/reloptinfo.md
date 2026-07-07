@@ -233,6 +233,25 @@ planner is careful to apply ≤ one of them per plan.
 - reloptkind switches:
   `grep -RIn 'reloptkind ==\|reloptkind !=' source/src/backend/optimizer | head -10`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/optimizer/path/allpaths.c`](../files/src/backend/optimizer/path/allpaths.c.md) | — | set__pathlist populates pathlist |
+| [`src/backend/optimizer/util/relnode.c`](../files/src/backend/optimizer/util/relnode.c.md) | — | build_simple_rel, build_join_rel |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 803 | design commentary for fields |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 1009 | RelOptInfo struct head |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 1050 | pathlist family |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 1142 | baserestrictinfo + joininfo |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | — | full struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/plannerinfo.md` — parent;

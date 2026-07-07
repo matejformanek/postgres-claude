@@ -187,6 +187,21 @@ on the field most likely to mismatch is the standard fast-path.
 - Equality usage:
   `grep -RIn 'RelFileLocatorEquals' source/src/backend | head -20`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/smgr/smgr.c`](../files/src/backend/storage/smgr/smgr.c.md) | — | smgr layer that uses RelFileLocatorBackend |
+| [`src/include/storage/relfilelocator.h`](../files/src/include/storage/relfilelocator.h.md) | 58 | the structs |
+| [`src/include/storage/relfilelocator.h`](../files/src/include/storage/relfilelocator.h.md) | — | definition + helpers |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/buffertag.md` — embeds the same

@@ -191,6 +191,23 @@ partition LWLock as a prelude to hash search.
 - Grant + wait machinery:
   `grep -n 'LockAcquire\|LockRelease\|ProcLockWakeup' source/src/backend/storage/lmgr/lock.c | head -10`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/lock.c`](../files/src/backend/storage/lmgr/lock.c.md) | — | LockAcquire + LockRelease + ProcLockWakeup |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 139 | LOCK struct |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 142 | tag field (the LOCKTAG hash key) |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 147 | procLocks list |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 148 | waitProcs queue |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/locktag.md` — the LOCKTAG hash

@@ -234,6 +234,22 @@ t WHERE b = 2` produce the same query identifier.
 - Special varno usage:
   `grep -RIn 'INNER_VAR\|OUTER_VAR\|INDEX_VAR\|ROWID_VAR' source/src/backend | head -20`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/nodes/makefuncs.c`](../files/src/backend/nodes/makefuncs.c.md) | — | makeVar / makeConst constructors |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 262 | Var struct |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 324 | Const struct |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | — | full type definitions |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/datum-nullabledatum.md` —

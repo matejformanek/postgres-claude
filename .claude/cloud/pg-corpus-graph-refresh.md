@@ -20,15 +20,18 @@ The graph edges maintained here:
 1. **Idiom → file (primary)** — `## Call sites` blocks in
    `knowledge/idioms/*.md`, extracted from inline `source/<path>:<line>`
    cites. Script: `scripts/populate-idiom-callsites.py`.
-2. **Idiom → file (v2, glossary-based)** — for the 4 identifier-only
+2. **Data-structure → file** — same script with `--layer
+   data-structures`; populates `## Call sites` in
+   `knowledge/data-structures/*.md` from the same evidence format.
+3. **Idiom → file (v2, glossary-based)** — for the 4 identifier-only
    idioms (fmgr, node-types-and-lists, parser-pipeline, spi) where
    the primary extractor finds zero cites. Script:
    `scripts/populate-idiom-callsites-v2.py`.
-3. **Subsystem → file** — `## Files owned` blocks in
+4. **Subsystem → file** — `## Files owned` blocks in
    `knowledge/subsystems/*.md`, derived from slug → directory
    mapping + include-header filters. Script:
    `scripts/populate-subsystem-files.py`.
-4. **Scenario ↔ idiom** — `## Idioms invoked` (scenarios) +
+5. **Scenario ↔ idiom** — `## Idioms invoked` (scenarios) +
    `## Scenarios that use me` (idioms) + central
    `progress/scenario-idiom-matrix.md`. Union of direct refs +
    transitive file-overlap. Script:
@@ -64,13 +67,14 @@ quality-audit run sees the freshly refreshed graph.
 
 1. **Setup.** Confirm on `main`, no local changes. Run `git pull`.
 
-2. **Run all five refreshers.**
+2. **Run all refreshers.**
 
    ```bash
    python3 scripts/populate-idiom-callsites.py > /tmp/refresh-1.log
-   python3 scripts/populate-idiom-callsites-v2.py > /tmp/refresh-2.log
-   python3 scripts/populate-subsystem-files.py > /tmp/refresh-3.log
-   python3 scripts/build-scenario-idiom-matrix.py > /tmp/refresh-4.log
+   python3 scripts/populate-idiom-callsites.py --layer data-structures > /tmp/refresh-2.log
+   python3 scripts/populate-idiom-callsites-v2.py > /tmp/refresh-3.log
+   python3 scripts/populate-subsystem-files.py > /tmp/refresh-4.log
+   python3 scripts/build-scenario-idiom-matrix.py > /tmp/refresh-5.log
    ```
 
    Capture each script's stdout for the run log.

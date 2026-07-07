@@ -219,6 +219,24 @@ ExecutorEnd by the caller (utility.c, SPI, portal).
 - InitPlan:
   `grep -n '^InitPlan' source/src/backend/executor/execMain.c | head -5`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | — | ExecutorStart / InitPlan / ExecutorEnd |
+| [`src/backend/executor/execUtils.c`](../files/src/backend/executor/execUtils.c.md) | — | CreateExecutorState / FreeExecutorState |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 691 | EState struct head |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 694 | basic-state fields (direction, snapshot, range_table) |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | 719 | output CID + result relations |
+| [`src/include/nodes/execnodes.h`](../files/src/include/nodes/execnodes.h.md) | — | full struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/planstate.md` — every PlanState

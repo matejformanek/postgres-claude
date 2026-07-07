@@ -221,6 +221,22 @@ path that would require the feature.
 - The amapi types:
   `grep -n 'typedef.*amfunction\|typedef struct IndexAmRoutine' source/src/include/access/amapi.h`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/index/genam.c`](../files/src/backend/access/index/genam.c.md) | — | generic AM driver (dispatches via the vtable) |
+| [`src/include/access/amapi.h`](../files/src/include/access/amapi.md) | 113 | per-function typedefs |
+| [`src/include/access/amapi.h`](../files/src/include/access/amapi.md) | 233 | full struct |
+| [`src/include/access/amapi.h`](../files/src/include/access/amapi.md) | — | full type |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/contrib-bloom.md` — reference

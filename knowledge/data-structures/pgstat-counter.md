@@ -207,6 +207,22 @@ checklist includes this; it's a frequent review catch.
 - Per-table struct sites:
   `grep -RIn 'PgStat_TableCounts\|PgStat_TableStatus' source/src/backend | head -20`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/activity/pgstat.c`](../files/src/backend/utils/activity/pgstat.c.md) | — | flush / reset / shared-state management |
+| [`src/include/pgstat.h`](../files/src/include/pgstat.h.md) | 71 | typedef |
+| [`src/include/pgstat.h`](../files/src/include/pgstat.h.md) | 85 | the per-counter family structs (TableCounts, BgWriterStats, etc.) |
+| [`src/include/pgstat.h`](../files/src/include/pgstat.h.md) | — | public type + struct family |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/utils-mmgr.md` — memory-context

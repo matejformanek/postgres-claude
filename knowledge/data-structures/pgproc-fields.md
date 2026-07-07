@@ -198,3 +198,15 @@ grep -n 'fpInfoLock\|fpRelId\|FAST_PATH' source/src/backend/storage/lmgr/lock.c
   `max_locks_per_transaction`); was a fixed 16 per backend in older releases.
 - **Lock group**: leader + parallel workers sharing relation locks.
 - **PGXACT**: legacy hot-field array; merged back into PGPROC in PG14.
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/storage/proc.h`](../files/src/include/storage/proc.h.md) | — | Source path |
+
+<!-- /callsites:auto -->

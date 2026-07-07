@@ -236,6 +236,25 @@ type list, etc.
 - eq_classes users:
   `grep -RIn 'eq_classes' source/src/backend/optimizer/path | head -10`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/optimizer/path/allpaths.c`](../files/src/backend/optimizer/path/allpaths.c.md) | — | set__pathlist functions that populate simple_rel_array |
+| [`src/backend/optimizer/plan/planmain.c`](../files/src/backend/optimizer/plan/planmain.c.md) | — | query_planner entry |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 300 | PlannerInfo forward + struct header |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 346 | simple_rel_array |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 394 | join_rel_list comment + field |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | 436 | eq_classes |
+| [`src/include/nodes/pathnodes.h`](../files/src/include/nodes/pathnodes.h.md) | — | full struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/reloptinfo.md` —

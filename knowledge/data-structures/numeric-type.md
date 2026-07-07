@@ -208,6 +208,21 @@ Conversion to/from on-disk Numeric is fast:
 - NumericVar manipulation:
   `grep -n 'init_var\|free_var\|set_var_from_num' source/src/backend/utils/adt/numeric.c | head -10`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/adt/numeric.c`](../files/src/backend/utils/adt/numeric.c.md) | 111 | format + header constants |
+| [`src/backend/utils/adt/numeric.c`](../files/src/backend/utils/adt/numeric.c.md) | — | implementation |
+| [`src/include/utils/numeric.h`](../files/src/include/utils/numeric.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/datum-nullabledatum.md` —

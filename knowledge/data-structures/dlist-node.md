@@ -217,6 +217,21 @@ ergonomic — without it, every iteration would need bespoke
 - dclist (counted) usage:
   `grep -RIn 'dclist_head\|dclist_count' source/src/backend | head -10`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/lib/ilist.h`](../files/src/include/lib/ilist.h.md) | 130 | struct + iterator types |
+| [`src/include/lib/ilist.h`](../files/src/include/lib/ilist.h.md) | 300 | operations (init / push / delete / iterate) |
+| [`src/include/lib/ilist.h`](../files/src/include/lib/ilist.h.md) | — | full API + macros |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/pgproc-fields.md` — PGPROC

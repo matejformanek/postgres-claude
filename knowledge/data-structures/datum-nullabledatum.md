@@ -213,6 +213,21 @@ for the full decode pattern.]
 - JIT layout markers:
   `grep -n 'FIELDNO_' source/src/include/postgres.h`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/postgres.h`](../files/src/include/postgres.h.md) | 60 | typedef + conversion functions |
+| [`src/include/postgres.h`](../files/src/include/postgres.h.md) | 84 | NullableDatum struct |
+| [`src/include/postgres.h`](../files/src/include/postgres.h.md) | — | type + macros |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/fmgrinfo.md` — `FunctionCallInfo`

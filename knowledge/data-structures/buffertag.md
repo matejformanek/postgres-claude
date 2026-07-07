@@ -177,6 +177,23 @@ of the subtle bugs the tag prevents.
 - All tag-mutating call sites:
   `grep -RIn 'InitBufferTag\|ClearBufferTag\|BufTagSetRelForkDetails' source/src/backend`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/buffer/buf_table.c`](../files/src/backend/storage/buffer/buf_table.c.md) | — | buffer mapping hashtable implementation |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | — | primary consumer (every read / write) |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 161 | the struct definition |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | 170 | the helper inlines (Init / Get / Equal / Match) |
+| [`src/include/storage/buf_internals.h`](../files/src/include/storage/buf_internals.h.md) | — | definition + helper inlines |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/storage-buffer.md` — the buffer manager

@@ -188,6 +188,23 @@ SIGALRM handler rather than per-call timeouts.
 - Shared latch ownership:
   `grep -RIn 'OwnLatch\|InitSharedLatch' source/src/backend`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/ipc/latch.c`](../files/src/backend/storage/ipc/latch.c.md) | — | Latch implementation |
+| [`src/backend/storage/ipc/waiteventset.c`](../files/src/backend/storage/ipc/waiteventset.c.md) | — | multiplexer implementation |
+| [`src/include/storage/latch.h`](../files/src/include/storage/latch.h.md) | — | Latch API |
+| [`src/include/storage/waiteventset.h`](../files/src/include/storage/waiteventset.h.md) | 34 | event-flag bitmask |
+| [`src/include/storage/waiteventset.h`](../files/src/include/storage/waiteventset.h.md) | — | multiplexer API + event-flag bitmask |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/pgproc-fields.md` — every PGPROC

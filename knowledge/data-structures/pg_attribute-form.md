@@ -221,6 +221,20 @@ full.
 - The compact form generation:
   `grep -n 'populate_compact_attribute' source/src/backend/access/common/tupdesc.c`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/catalog/pg_attribute.h`](../files/src/include/catalog/pg_attribute.h.md) | 30 | the FormData_pg_attribute struct |
+| [`src/include/catalog/pg_attribute.h`](../files/src/include/catalog/pg_attribute.h.md) | — | full struct + comments |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/tupledesc.md` — TupleDesc

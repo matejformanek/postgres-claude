@@ -171,3 +171,17 @@ When you're touching tuple memory in C code, in order:
 - **t_ctid**: pointer to the next tuple in a chain — usually the next version
   via UPDATE, or self for the latest version.
 - **MAXALIGN**: alignment of `Datum`/`double` on the platform, typically 8.
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/access/htup.h`](../files/src/include/access/htup.h.md) | 62 | HeapTupleData — a thin in-memory wrapper. Carries the TID (t_self), the heap relation's OID (t_tableOid),... |
+| [`src/include/access/htup.h`](../files/src/include/access/htup.h.md) | — | Source path: , htup_details.h |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | 153 | HeapTupleHeaderData — the on-disk header. Always followed in memory by a null bitmap (optional) + an OID... |
+
+<!-- /callsites:auto -->

@@ -187,6 +187,22 @@ have identical bytes.
 - The struct + enum:
   `sed -n '35,75p' source/src/include/storage/locktag.h`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/storage/locktag.h`](../files/src/include/storage/locktag.h.md) | 35 | LockTagType enum |
+| [`src/include/storage/locktag.h`](../files/src/include/storage/locktag.h.md) | 65 | LOCKTAG struct |
+| [`src/include/storage/locktag.h`](../files/src/include/storage/locktag.h.md) | 81 | SET_LOCKTAG_RELATION macro |
+| [`src/include/storage/locktag.h`](../files/src/include/storage/locktag.h.md) | — | full file |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/lock-struct.md` — the LOCK hash

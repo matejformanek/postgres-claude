@@ -193,6 +193,22 @@ same partition; releases don't cross partitions).
 - LockReleaseAll:
   `grep -n 'LockReleaseAll' source/src/backend/storage/lmgr/lock.c | head -5`
 
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/lock.c`](../files/src/backend/storage/lmgr/lock.c.md) | — | lifecycle |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 178 | "any lock waited on has a PROCLOCK" invariant |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 193 | PROCLOCKTAG struct |
+| [`src/include/storage/lock.h`](../files/src/include/storage/lock.h.md) | 200 | PROCLOCK struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/locktag.md` — accessed via
