@@ -103,6 +103,7 @@ didn't trigger.
 
 | Topic | Skill | Trigger |
 |---|---|---|
+| Phase 0: query the corpus graph (which scenarios/idioms/files apply?) | `corpus-chain` | "what does this touch?", "/pg-chain <args>", auto-fired by brainstorm §2.5 + plan §0.4 |
 | Phase 1: explore an idea, sketch 2-3 approaches | `pg-feature-brainstorm` | "let's brainstorm X", "/pg-brainstorm" |
 | Phase 2: heavy plan with file:line cites | `pg-feature-plan` | "plan this", "/pg-plan <slug>" |
 | Phase 3: execute plan phase-by-phase, plan-linked commits | `pg-implement` | "/pg-implement <slug>" |
@@ -160,6 +161,22 @@ planning/           # forward-looking design docs for features in-flight (Phase 
 - "What's odd / suspect / undocumented in subsystem X?" → `issues/X.md`.
 - "What's the current state of pg-claude itself?" → `progress/STATE.md`.
 - "Where can I help close the corpus gap?" → `progress/coverage-gaps.md` (Phase A work queue).
+- **"Give me the whole chain for feature X" / "what does this file/idiom touch?"** → `/pg-chain <args>` (invokes `corpus-chain` — traverses the graph across scenarios / idioms / data-structures / subsystems / files / past planning runs).
+
+## Corpus graph — the interconnection layer
+
+Six auto-populated edge layers link the corpus into a queryable graph. Read what's there, then re-query via `corpus-chain`:
+
+| Edge | Where it lives | Refreshed by |
+|---|---|---|
+| Idiom → file | `## Call sites` in `knowledge/idioms/*.md` | `scripts/populate-idiom-callsites.py` |
+| Idiom → file (v2, glossary-based) | same block | `scripts/populate-idiom-callsites-v2.py` (4 identifier-only idioms) |
+| Data-structure → file | `## Call sites` in `knowledge/data-structures/*.md` | `scripts/populate-idiom-callsites.py --layer data-structures` |
+| Subsystem → file | `## Files owned` in `knowledge/subsystems/*.md` | `scripts/populate-subsystem-files.py` |
+| Scenario ↔ idiom | `## Idioms invoked` / `## Scenarios that use me` + `progress/scenario-idiom-matrix.md` | `scripts/build-scenario-idiom-matrix.py` |
+| File → subsystem/idiom | `<!-- backlinks:auto -->` in `knowledge/files/**/*.md` | `pg-corpus-maintainer` cloud routine |
+
+Refresh runs nightly via `pg-corpus-graph-refresh` (04:17). Query via `scripts/corpus-chain.py --scenario/--idiom/--file/--keywords`. `pg-feature-brainstorm` and `pg-feature-plan` invoke the chain automatically at their §2.5 / §0.4 steps.
 
 ## Progress files — the ledger
 
