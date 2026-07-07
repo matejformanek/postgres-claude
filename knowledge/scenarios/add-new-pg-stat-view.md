@@ -139,6 +139,24 @@ The tree must build at the end of each phase.
    dev/build-debug --suite regress` is green; `--suite recovery` too if
    the kind is persistent.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/backend/utils` (+1) |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/backend/utils`, `src/test/regress` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/backend/catalog` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/utils`, `src/test/regress` |
+| [`david-rowley`](../personas/david-rowley.md) | `src/test/regress` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

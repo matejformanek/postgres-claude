@@ -96,6 +96,78 @@ Patches involving CPU-feature detection, AVX-512, ARM CRC, or build-time archite
 
 The `pg_upgrade:` subject tag appears 20 times in 24mo. `committer-map.md`'s headline landmark `626d723` "pg_upgrade: Add --swap for faster file transfer" is his. Patches to `src/bin/pg_upgrade/` typically reach him; he is the primary pg_upgrade reviewer/committer.
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Scenario | Via path(s) |
+|---|---|
+| [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-bgworker`](../scenarios/add-new-bgworker.md) | `src/include`, `src/backend/postmaster` (+1) |
+| [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-builtin-function`](../scenarios/add-new-builtin-function.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-cast`](../scenarios/add-new-cast.md) | `src/include`, `src/test/regress` |
+| [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-data-type`](../scenarios/add-new-data-type.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-error-code`](../scenarios/add-new-error-code.md) | `src/include`, `src/backend/utils` |
+| [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-extension`](../scenarios/add-new-extension.md) | `src/include` |
+| [`add-new-guc`](../scenarios/add-new-guc.md) | `src/include`, `src/bin` (+2) |
+| [`add-new-hook`](../scenarios/add-new-hook.md) | `src/include` |
+| [`add-new-index-am`](../scenarios/add-new-index-am.md) | `src/include`, `src/bin` (+2) |
+| [`add-new-lwlock-tranche`](../scenarios/add-new-lwlock-tranche.md) | `src/include`, `src/backend/utils` |
+| [`add-new-node-type`](../scenarios/add-new-node-type.md) | `src/include`, `src/backend/utils` |
+| [`add-new-operator`](../scenarios/add-new-operator.md) | `src/include`, `src/backend/utils` |
+| [`add-new-operator-class`](../scenarios/add-new-operator-class.md) | `src/include`, `src/test/regress` |
+| [`add-new-pg-stat-view`](../scenarios/add-new-pg-stat-view.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-plan-node`](../scenarios/add-new-plan-node.md) | `src/include`, `src/backend/utils` |
+| [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md) | `src/include` |
+| [`add-new-replication-message`](../scenarios/add-new-replication-message.md) | `src/include` |
+| [`add-new-shared-memory-region`](../scenarios/add-new-shared-memory-region.md) | `src/include`, `src/backend/utils` |
+| [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md) | `src/include`, `src/bin` (+2) |
+| [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md) | `src/include`, `src/backend/utils` (+1) |
+| [`add-new-system-view`](../scenarios/add-new-system-view.md) | `src/include`, `src/bin` (+2) |
+| [`add-new-table-am`](../scenarios/add-new-table-am.md) | `src/include`, `src/test/regress` |
+| [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md) | `src/include`, `src/bin` |
+| [`add-new-wal-record`](../scenarios/add-new-wal-record.md) | `src/include`, `src/bin` |
+| [`add-startup-hook`](../scenarios/add-startup-hook.md) | `src/include`, `src/backend/postmaster` (+1) |
+| [`bump-catversion`](../scenarios/bump-catversion.md) | `src/include`, `src/bin` |
+| [`integrate-with-plpgsql`](../scenarios/integrate-with-plpgsql.md) | `src/test/regress` |
+| [`remove-from-catalog`](../scenarios/remove-from-catalog.md) | `src/include`, `src/test/regress` |
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`access-heap`](../subsystems/access-heap.md)
+- [`access-nbtree`](../subsystems/access-nbtree.md)
+- [`access-transam`](../subsystems/access-transam.md)
+- [`executor`](../subsystems/executor.md)
+- [`foreign`](../subsystems/foreign.md)
+- [`jit`](../subsystems/jit.md)
+- [`libpq-backend`](../subsystems/libpq-backend.md)
+- [`optimizer`](../subsystems/optimizer.md)
+- [`parser-and-rewrite`](../subsystems/parser-and-rewrite.md)
+- [`partitioning`](../subsystems/partitioning.md)
+- [`port`](../subsystems/port.md)
+- [`replication`](../subsystems/replication.md)
+- [`storage-buffer`](../subsystems/storage-buffer.md)
+- [`storage-ipc`](../subsystems/storage-ipc.md)
+- [`storage-lmgr`](../subsystems/storage-lmgr.md)
+- [`tcop`](../subsystems/tcop.md)
+- [`utils-cache`](../subsystems/utils-cache.md)
+- [`utils-mmgr`](../subsystems/utils-mmgr.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## Common reviewer/collaborator partners
 
 Top reviewers credited on commits Nathan pushed (24mo):

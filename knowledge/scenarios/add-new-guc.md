@@ -140,6 +140,25 @@ patches that ship a built-in GUC plus a demo extension use both.
    Phase-end check: `meson test -C dev/build-debug` green; the new
    regress/TAP test runs and passes.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/bin` (+2) |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/test/modules`, `src/backend/utils` (+1) |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/bin` (+1) |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` |
+| [`masahiko-sawada`](../personas/masahiko-sawada.md) | `src/backend/replication`, `src/include/replication` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/utils`, `src/test/regress` |
+| [`david-rowley`](../personas/david-rowley.md) | `src/test/regress` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

@@ -111,6 +111,22 @@ short phases.
    regression test for this — the verification *is* the failing-old /
    succeeding-new initdb pair. Phase-end check: see Verification below.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/access` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/bin` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/bin` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/backend/access` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

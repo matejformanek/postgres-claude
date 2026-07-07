@@ -132,6 +132,21 @@ The tree must build at the end of each phase.
    test -C dev/build-debug --suite docs` passes and `meson test -C
    dev/build-debug --suite contrib` runs every test you wired up.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include` |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

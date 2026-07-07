@@ -74,6 +74,29 @@ inferences (all `[inferred]`):
   if pgsql-hackers archive mining (#2) ever happens, his thread
   participation would clarify.**
 
+
+## Scenarios I'd review
+<!-- persona-scenarios:auto -->
+
+*Derived from Domain-ownership paths overlapping each scenario's §Files section. If this persona claims a directory and a scenario mentions any file under it, they're a likely reviewer.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none — persona has no owned paths that overlap any scenario's files)_
+
+<!-- /persona-scenarios:auto -->
+
+
+## Subsystems I know
+<!-- persona-subsystems:auto -->
+
+*Derived from Domain-ownership paths overlapping each subsystem's `## Files owned` block.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+- [`contrib-btree_gist`](../subsystems/contrib-btree_gist.md)
+- [`contrib-postgres_fdw`](../subsystems/contrib-postgres_fdw.md)
+
+<!-- /persona-subsystems:auto -->
+
 ## What to expect on a patch he would review
 
 Honest answer: **he will probably add his `Reviewed-by:` trailer**

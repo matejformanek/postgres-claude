@@ -172,6 +172,23 @@ The tree must build at the end of each phase.
    to lint the SGML. `[verified-by-code]`
    (`doc/src/sgml/Makefile`).
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/access` (+1) |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/interfaces` (+1) |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/test/modules`, `src/backend/access` |
+| [`masahiko-sawada`](../personas/masahiko-sawada.md) | `src/backend/replication` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

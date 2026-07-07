@@ -127,6 +127,24 @@ self-contained; the tree must build at the end of each phase.
    `meson test --suite regress` green including opr_sanity and
    type_sanity.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/backend/parser` (+1) |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/test/regress` |
+| [`david-rowley`](../personas/david-rowley.md) | `src/test/regress` |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/test/regress` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/test/regress` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

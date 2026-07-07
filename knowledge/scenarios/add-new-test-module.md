@@ -129,6 +129,19 @@ The tree must build at the end of each phase.
    `get_option(...)` guard in `meson.build`. Verify the tree builds
    with the flag both on and off.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/test/modules` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

@@ -119,6 +119,25 @@ tree buildable. Re-`initdb` between phases when the catversion changes.
 For a column with no producer logic (purely seed/static), Phases 1+2
 collapse into one.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/backend/utils`, `src/backend/access` (+2) |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/utils` (+1) |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/backend/utils` (+1) |
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/backend/catalog` (+1) |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/utils`, `src/test/regress` (+1) |
+| [`david-rowley`](../personas/david-rowley.md) | `src/test/regress` |
+| [`melanie-plageman`](../personas/melanie-plageman.md) | `src/backend/access/heap/vacuumlazy.c` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

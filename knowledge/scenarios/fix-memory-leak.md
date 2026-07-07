@@ -164,6 +164,17 @@ already structures.
    the run produced a new L/F; append session retro;
    `memory-keeping` updates `progress/STATE.md`.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+_(none — no domain-ownership overlap detected)_
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 

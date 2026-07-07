@@ -148,6 +148,23 @@ and `src/include/nodes/nodetags.h`. Driven by
    `meson test -C dev/build-debug --suite regress` and any TAP
    suite added pass.
 
+
+## Likely reviewers
+<!-- persona-reviewers:auto -->
+
+*Personas whose Domain-ownership paths overlap this scenario's §Files. Reflect who might catch this on hackers-list.*
+*Refresh via `scripts/build-persona-scenario-matrix.py`.*
+
+| Persona | Overlapping path(s) |
+|---|---|
+| [`peter-eisentraut`](../personas/peter-eisentraut.md) | `src/include`, `src/backend/nodes` (+3) |
+| [`heikki-linnakangas`](../personas/heikki-linnakangas.md) | `src/include`, `src/backend/tcop` |
+| [`nathan-bossart`](../personas/nathan-bossart.md) | `src/include`, `src/bin` |
+| [`michael-paquier`](../personas/michael-paquier.md) | `src/bin/psql` |
+| [`tom-lane`](../personas/tom-lane.md) | `src/backend/commands` |
+
+<!-- /persona-reviewers:auto -->
+
 ## Idioms invoked
 <!-- idioms-invoked:auto -->
 
