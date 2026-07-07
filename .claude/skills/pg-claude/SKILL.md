@@ -108,6 +108,8 @@ Each fills a `gap:*` signal from `pg-user-question-harvester` — reach for thes
 | SLRU (bank-locked LRU) infrastructure — CLOG/MultiXact/etc. | `slru-infrastructure` | new SLRU consumer, PG 17+ per-SLRU GUCs, bank-lock design |
 | Physical streaming replication + syncrep + hot standby | `physical-replication` | walsender/walreceiver state machine, synchronous_standby_names, hot_standby_feedback |
 | MVCC snapshots + visibility + isolation levels | `snapshot-management` | Register/Push snapshots, historic (logical decoding), pg_export_snapshot |
+| Base backup + WAL archiving + PITR | `backup-and-recovery` | pg_basebackup internals, archive_command/library, recovery_target_*, PG 17+ incremental |
+| Custom Scan / Custom Path — pluggable executor node interface | `custom-scan-api` | CustomPath registration, executor callbacks, parallel-safe custom nodes |
 
 ### Running / testing / debugging
 
