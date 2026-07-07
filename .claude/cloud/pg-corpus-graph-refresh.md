@@ -36,6 +36,12 @@ The graph edges maintained here:
    `progress/scenario-idiom-matrix.md`. Union of direct refs +
    transitive file-overlap. Script:
    `scripts/build-scenario-idiom-matrix.py`.
+6. **Persona ↔ scenario/subsystem** — `## Scenarios I'd review`
+   + `## Subsystems I know` (personas) + `## Likely reviewers`
+   (scenarios) + central `progress/persona-scenario-matrix.md`.
+   Derived from each persona's `## Domain ownership` paths
+   overlapping scenario §Files and subsystem `## Files owned`.
+   Script: `scripts/build-persona-scenario-matrix.py`.
 
 The `corpus-chain` query engine (`scripts/corpus-chain.py`) reads
 these blocks live — it doesn't need its own generator step.
@@ -75,9 +81,12 @@ quality-audit run sees the freshly refreshed graph.
    python3 scripts/populate-idiom-callsites-v2.py > /tmp/refresh-3.log
    python3 scripts/populate-subsystem-files.py > /tmp/refresh-4.log
    python3 scripts/build-scenario-idiom-matrix.py > /tmp/refresh-5.log
+   python3 scripts/build-persona-scenario-matrix.py > /tmp/refresh-6.log
    ```
 
-   Capture each script's stdout for the run log.
+   Capture each script's stdout for the run log. The persona matrix
+   (step 6) MUST run after step 4 — it reads the subsystem `##
+   Files owned` blocks that step 4 writes.
 
 3. **Diff check.** Run `git status --short`. If empty, log
    `exit_reason: no-change` and exit clean.
