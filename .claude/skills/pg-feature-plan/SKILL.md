@@ -484,12 +484,52 @@ the existing brainstorm in-place with the missing sections, or
 (c) proceed at the brainstorm's narrow scope with explicit
 consent.
 
+### Step 0.4 — Corpus-chain scenario expansion (cheap, load-bearing)
+
+After Step 0 matched the brainstorm against a scenario slug, run
+
+```
+python3 scripts/corpus-chain.py --scenario <picked-slug>
+```
+
+The output gives you:
+
+- **Files touched** — the DRAFT §3 file table before the fan-out
+  greps anything. This is the evidence-derived starting point;
+  the fan-out expands and verifies it.
+- **Idioms invoked** — direct + transitive. Every idiom in the
+  chain becomes a candidate for §8's per-phase "≥1 idiom" link.
+  Read each idiom's `## Call sites` block before writing §5
+  (related infrastructure) — those files are examples of the
+  pattern already in the tree.
+- **Adjacent scenarios** — if a scenario shares 5+ files with
+  this one, EXPECT a §12 (conflict risk) entry. Either bundle
+  or sequence with that scenario's work.
+- **Subsystems** — owning subsystems. Each becomes a §5 entry
+  and each corresponding `knowledge/subsystems/<slug>.md` MUST
+  be read before the fan-out (its `## Files owned` block feeds
+  the fan-out target list per domain).
+- **Analogous past features** — planning slugs + session logs
+  with keyword or file overlap. Read the top-2 comparison.md
+  files (if present) BEFORE writing §7 (memory/resource) and
+  §11 (risks). Past runs encode decisions worth inheriting.
+
+Skip this step ONLY if there's no scenario match (brainstorm is
+truly novel) — then run `--keywords` mode instead. Log the chain
+map into the plan's §14 (references) so the reviewer can trace it.
+
 ### Step 0.5 — PARALLEL FAN-OUT for §3 file enumeration
 
 The old single-context method greps the source tree linearly
 and misses files because one agent can only hold so much in
 context. The v1.2 method fans out: spawn one subagent per
 source-tree domain in the same message.
+
+The fan-out EXPANDS on the corpus-chain draft (Step 0.4) —
+if a domain agent finds zero files but the chain named files
+under that domain, the agent under-searched; if the chain
+was empty but an agent finds files, the chain is thin (log
+as a corpus gap in `progress/coverage-gaps.md`).
 
 #### Fallback when nested Agent tool is unavailable
 

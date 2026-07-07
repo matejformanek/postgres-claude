@@ -384,10 +384,36 @@ F16 calibration logged this approach as effective.)
    for hints. If yes, locate the regress SQL file path before
    proceeding — Agent D in step 4 needs it.
 
+2.5. **Corpus-chain keyword discovery** (REQUIRED, cheap). Run
+
+   ```
+   python3 scripts/corpus-chain.py --keywords "<the user's feature description>"
+   ```
+
+   The output surfaces:
+   - candidate `knowledge/scenarios/` slugs matching the feature
+   - candidate `knowledge/idioms/` slugs matching the pattern class
+   - analogous past runs from `planning/` + `sessions/` ranked by
+     keyword-hit + shared-file overlap
+
+   Read the top 2-3 hits BEFORE step 3. Two effects:
+   - If a past `planning/<slug>/` doc exists, it encodes design
+     decisions you'd re-litigate blindly otherwise. Read at least
+     the brainstorm + comparison files.
+   - The scenario hits become candidates for the `## Companion
+     skills` frontmatter later; the idiom hits become candidates
+     for the DECISION-question phrasing.
+
+   If the chain returns nothing useful, proceed anyway — this is a
+   discovery step, not a gate. Log "corpus-chain returned no
+   matches; brainstorm proceeds with fresh scope" in the doc.
+
 3. **Load minimal corpus:** read the master `knowledge/subsystems/`
-   index to pick 1-3 subsystem docs to load. Do NOT load per-file docs
-   at this stage. Do NOT walk source/ in-context (the agents below
-   will).
+   index to pick 1-3 subsystem docs to load. **After step 2.5**, prefer
+   the subsystems named in the top scenario/idiom hits' `## Files
+   owned` / `## Call sites` sections — that's an evidence-backed pick.
+   Do NOT load per-file docs at this stage. Do NOT walk source/
+   in-context (the agents below will).
 
 4. **PARALLEL FAN-OUT — usage surface enumeration (§0).** Spawn
    4 subagents in the same message (Agent tool, subagent_type
