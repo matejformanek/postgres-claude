@@ -197,6 +197,24 @@ DO INSTEAD rules), but only one ON SELECT rule.
 - Subquery pullup:
   `grep -RIn 'pull_up_subqueries\|pull_up_simple_subquery' source/src/backend/optimizer/prep | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/rewrite/rewriteHandler.c`](../files/src/backend/rewrite/rewriteHandler.c.md) | 1759 | ApplyRetrieveRule |
+| [`src/backend/rewrite/rewriteHandler.c`](../files/src/backend/rewrite/rewriteHandler.c.md) | 1885 | recursive fireRIRrules on rule action |
+| [`src/backend/rewrite/rewriteHandler.c`](../files/src/backend/rewrite/rewriteHandler.c.md) | 1899 | rtekind = RTE_SUBQUERY swap |
+| [`src/backend/rewrite/rewriteHandler.c`](../files/src/backend/rewrite/rewriteHandler.c.md) | 1901 | security_barrier flag set |
+| [`src/include/catalog/pg_rewrite.h`](../files/src/include/catalog/pg_rewrite.h.md) | — | catalog row |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/row-security-policy-application.md` —

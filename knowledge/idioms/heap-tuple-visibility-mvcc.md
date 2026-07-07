@@ -399,6 +399,28 @@ grep -n "XidInMVCCSnapshot" source/src/backend/utils/time/snapmgr.c
 grep -rn "HeapTupleSatisfiesUpdate\b" source/src/backend/access/heap/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 1 | module banner: the race rule (TransactionIdIsInProgress before TransactionIdDidCommit) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 38 | summary of all seven Satisfies routines |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 939 | HeapTupleSatisfiesMVCC (the gauntlet itself) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 1113 | HeapTupleSatisfiesVacuum / …VacuumHorizon (the vacuum oracle) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 1504 | HeapTupleSatisfiesHistoricMVCC (logical decoding) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 1689 | HeapTupleSatisfiesMVCCBatch (amortized hint-bit overhead) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 1731 | HeapTupleSatisfiesVisibility (the dispatcher) |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | 204 | the infomask bit definitions (HEAP_XMIN_COMMITTED/_INVALID/_FROZEN, HEAP_XMAX_) |
+| [`src/include/utils/snapshot.h`](../files/src/include/utils/snapshot.h.md) | — | SnapshotData and snapshot_type enum |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[hint-bits-setbufferdirty]] — `SetHintBits`/`SetHintBitsExt` machinery, the WAL-flush precondition.

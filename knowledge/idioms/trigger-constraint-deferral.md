@@ -259,6 +259,26 @@ when I queued you".
 - Flag check at event save:
   `grep -n 'AFTER_TRIGGER_DEFERRABLE\|AFTER_TRIGGER_INITDEFERRED' source/src/backend/commands/trigger.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 3608 | SetConstraintTriggerData + SetConstraintStateData structs |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 5329 | AfterTriggerFireDeferred (commit-time drain) |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 5796 | SetConstraintStateAddItem |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 5826 | AfterTriggerSetState (SET CONSTRAINTS entry point) |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | — | whole AFTER trigger machinery |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | — | RI as canonical deferrable-trigger user |
+| [`src/include/commands/trigger.h`](../files/src/include/commands/trigger.h.md) | 109 | AFTER_TRIGGER_DEFERRABLE / INITDEFERRED flags |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/trigger-transition-tables.md` — why

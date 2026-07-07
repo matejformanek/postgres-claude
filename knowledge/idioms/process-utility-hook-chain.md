@@ -231,6 +231,24 @@ For client-issued SQL: always goes through ProcessUtility.
 - ProcessUtilityContext switch:
   `grep -n 'PROCESS_UTILITY_TOPLEVEL\|PROCESS_UTILITY_QUERY' source/src/backend | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/tcop/utility.c`](../files/src/backend/tcop/utility.c.md) | 72 | ProcessUtility_hook global |
+| [`src/backend/tcop/utility.c`](../files/src/backend/tcop/utility.c.md) | 504 | ProcessUtility entry + hook dispatch |
+| [`src/backend/tcop/utility.c`](../files/src/backend/tcop/utility.c.md) | 548 | standard_ProcessUtility |
+| [`src/backend/tcop/utility.c`](../files/src/backend/tcop/utility.c.md) | 1094 | ProcessUtilitySlow |
+| [`src/include/tcop/utility.h`](../files/src/include/tcop/utility.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/event-trigger-firing.md` — fires from

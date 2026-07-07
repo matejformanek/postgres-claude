@@ -213,6 +213,23 @@ worker's own AbortTransaction is mostly local cleanup.
 - Smgr rollback:
   `grep -n 'smgrDoPendingDeletes' source/src/backend/catalog/storage.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2853 | AbortTransaction entry |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2858 | HOLD_INTERRUPTS |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2877 | LWLockReleaseAll |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2892 | XLogResetInsertion |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/commit-transaction-sequence.md` —

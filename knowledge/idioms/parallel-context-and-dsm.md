@@ -511,6 +511,22 @@ grep -n "Estimate.*Space\|EstimateSnapshotSpace\|EstimateGUCStateSpace\|Estimate
 grep -rn "GetSessionDsmHandle\|PARALLEL_KEY_SESSION_DSM" source/src/backend/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | — | entire infrastructure |
+| [`src/backend/storage/ipc/shm_toc.c`](../files/src/backend/storage/ipc/shm_toc.c.md) | — | table-of-contents allocator |
+| [`src/include/access/parallel.h`](../files/src/include/access/parallel.h.md) | — | ParallelContext struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[parallel-worker-launch-wait-and-errors]] — how the context

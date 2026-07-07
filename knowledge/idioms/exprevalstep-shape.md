@@ -274,6 +274,30 @@ brought the union back under budget.
 
 Full retro: `sessions/2026-06-22-sesvars-v3-retro.md` §F22.
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execExpr.c`](../files/src/backend/executor/execExpr.c.md) | 770 | [verified-by-code -776] |
+| [`src/backend/executor/execExpr.c`](../files/src/backend/executor/execExpr.c.md) | — | ExecInitExprRec, fills the steps array |
+| [`src/backend/executor/execExprInterp.c`](../files/src/backend/executor/execExprInterp.c.md) | — | ExecInterpExpr, the dispatch loop that reads op->d.<opcode> |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | 300 | ExprEvalStep outer struct (opcode + resvalue + resnull + d union) |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | 313 | > [from-comment -317] |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | 334 | d.var, the canonical small inline payload (3 fields, fits trivially) |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | 565 | the two sbsref d-union entries, each carrying only struct SubscriptingRefState state (the canonical... |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | 780 | the StaticAssertDecl itself |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | 784 | convention [verified-by-code -812] |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | 785 | the SubscriptingRefState struct itself (lives in the SAME header as ExprEvalStep, immediately after the... |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | — | ExprEvalStep, the assert, SubscriptingRefState, every d-union member |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/expression-evaluator-flow.md` — surrounding

@@ -419,6 +419,30 @@ grep -rn "relminmxid\|MultiXactCutoff\|FreezeMultiXactId" \
        source/src/backend/access/heap/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) | 1 | file banner: "two SLRU areas … this trick allows us to store variable length arrays of TransactionIds." |
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) | 816 | RecordNewMultiXact (writes both offsets + the member rows; bank-hops as needed) |
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) | 1171 | GetMultiXactIdMembers (two-stage lookup, length = next-offset − offset) |
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) | 1785 | SimpleLruRequest for both SLRUs; members uses long_segment_names = true |
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) | 2677 | TruncateMultiXact (members-first, then offsets, in a critical section) |
+| [`src/backend/access/transam/multixact.c`](../files/src/backend/access/transam/multixact.c.md) | 2810 | MultiXactOffsetPagePrecedes (modular) vs MultiXactMemberPagePrecedes (plain <) |
+| [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) | 36 | MultiXactStatus enum (ForKeyShare … Update) |
+| [`src/include/access/multixact.h`](../files/src/include/access/multixact.h.md) | 55 | MultiXactMember { xid; status } |
+| [`src/include/access/multixact_internal.h`](../files/src/include/access/multixact_internal.h.md) | 26 | offsets-page macros (MULTIXACT_OFFSETS_PER_PAGE = BLCKSZ/8) |
+| [`src/include/access/multixact_internal.h`](../files/src/include/access/multixact_internal.h.md) | 52 | members-page macros (MULTIXACT_MEMBERGROUP_SIZE = 20, MULTIXACT_MEMBERGROUPS_PER_PAGE = 409) |
+| [`src/include/access/multixact_internal.h`](../files/src/include/access/multixact_internal.h.md) | 93 | MXOffsetToFlagsOffset / MXOffsetToMemberOffset / MXOffsetToFlagsBitShift |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[slru-page-replacement]] — buffer cache + bank-lock dance under both SLRUs.

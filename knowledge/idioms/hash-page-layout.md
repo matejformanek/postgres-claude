@@ -377,6 +377,25 @@ grep -rn "hashm_mapp\|hashm_nmaps\|hashm_bmsize\|hashm_bmshift" source/src/backe
 grep -rn "low.*number.*bucket.*first\|lock.*lower" source/src/backend/access/hash/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/hash/hashpage.c`](../files/src/backend/access/hash/hashpage.c.md) | — | _hash_getbucketbuf_from_hashkey, _hash_init_metabuffer |
+| [`src/backend/access/hash/hashutil.c`](../files/src/backend/access/hash/hashutil.c.md) | — | _hash_spareindex decoding |
+| [`src/include/access/hash.h`](../files/src/include/access/hash.h.md) | 30 | Bucket type, BUCKET_TO_BLKNO |
+| [`src/include/access/hash.h`](../files/src/include/access/hash.h.md) | 53 | LH_ page-type flags, HashPageOpaqueData |
+| [`src/include/access/hash.h`](../files/src/include/access/hash.h.md) | 198 | HASH_METAPAGE = 0, HASH_MAGIC, HASH_VERSION, HashMetaPageData |
+| [`src/include/access/hash.h`](../files/src/include/access/hash.h.md) | 232 | HASH_SPLITPOINT_ constants |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[hash-bucket-split]] — the split mechanism that grows the table.

@@ -293,6 +293,26 @@ because subplans aren't executed until referenced.
 - FDW row mark callbacks:
   `grep -RIn 'GetForeignRowMarkType\|RefetchForeignRow' source/src/include/foreign source/src/backend/executor | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2833 | EvalPlanQualFetchRowMark |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2845 | child-rel partition discriminator |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2870 | ROW_MARK_REFERENCE + FDW RefetchForeignRow path |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 3155 | relsubs_rowmark array build |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 3168 | relsubs_done / blocked per-rel init |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | — | full EPQ |
+| [`src/backend/optimizer/plan/createplan.c`](../files/src/backend/optimizer/plan/createplan.c.md) | — | LockRows generation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/epq-state-init.md` — EPQState lifecycle.

@@ -214,6 +214,23 @@ the synthetic ID; SetCmax just stamps the result.
 - The cleanup hook:
   `grep -n 'AtEOXact_ComboCid' source/src/backend`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/time/combocid.c`](../files/src/backend/utils/time/combocid.c.md) | — | implementation |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | 195 | HEAP_COMBOCID flag |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | — | HEAP_COMBOCID flag + decoder inlines |
+| [`src/include/utils/combocid.h`](../files/src/include/utils/combocid.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/heap-tuple-layout.md` — tuple

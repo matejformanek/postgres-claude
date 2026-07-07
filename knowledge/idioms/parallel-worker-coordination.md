@@ -214,6 +214,22 @@ SAFE leaves can appear below a Gather node.
 - Parallel-safe declarations:
   `grep -RIn 'PARALLEL_SAFE\|PARALLEL_RESTRICTED\|PARALLEL_UNSAFE' source/src/backend | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | — | implementation |
+| [`src/include/access/parallel.h`](../files/src/include/access/parallel.h.md) | 33 | full API |
+| [`src/include/access/parallel.h`](../files/src/include/access/parallel.h.md) | — | full API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/storage-ipc.md` — DSM + shm_mq

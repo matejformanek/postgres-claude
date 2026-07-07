@@ -453,6 +453,30 @@ grep -n "GroupingFunc\|GROUPING_ID\|grouping_func" \
        source/src/backend/executor/execExpr.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 113 | banner section "Grouping sets" |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 149 | banner section "Plan structure" (chain field) |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 180 | banner "Memory and ExprContext usage" |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 458 | select_current_set |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 472 | initialize_phase (tuplesort chaining) |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 549 | fetch_input_tuple |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 1249 | prepare_projection_slot (NULL out non-grouped cols) |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) | — | make_grouping_sets_plans is the planner-side construction |
+| [`src/backend/parser/parse_agg.c`](../files/src/backend/parser/parse_agg.c.md) | — | transformGroupingFunc |
+| [`src/include/executor/nodeAgg.h`](../files/src/include/executor/nodeAgg.h.md) | — | AggStatePerPhaseData, AggStatePerGroupData |
+| [`src/include/nodes/plannodes.h`](../files/src/include/nodes/plannodes.h.md) | — | Agg.groupingSets, Agg.chain |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[aggregate-hash-vs-sort]] — strategy machinery in single-set mode.

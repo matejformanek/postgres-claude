@@ -215,6 +215,23 @@ violation.
 - Conflict-detection callers:
   `grep -RIn 'ReportApplyConflict' source/src/backend/replication/logical | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/replication/logical/conflict.c`](../files/src/backend/replication/logical/conflict.c.md) | 105 | ReportApplyConflict |
+| [`src/backend/replication/logical/conflict.c`](../files/src/backend/replication/logical/conflict.c.md) | — | full module |
+| [`src/include/replication/conflict.h`](../files/src/include/replication/conflict.h.md) | 30 | ConflictType enum |
+| [`src/include/replication/conflict.h`](../files/src/include/replication/conflict.h.md) | — | ConflictType + structs |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/apply-worker-loop.md` — companion;

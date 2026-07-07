@@ -245,6 +245,26 @@ breaking ties by cost.
 - Per-tablespace cost lookup:
   `grep -n 'get_tablespace_page_costs' source/src/backend/optimizer/path/costsize.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 270 | cost_seqscan |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 299 | disk_run_cost = spc_seq_page_cost baserel->pages |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 545 | cost_index |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 609 | amcostestimate dispatch |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 1012 | cost_bitmap_heap_scan |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 1251 | cost_tidscan |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | — | full module |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/cost-units-gucs.md` — the seq/random/cpu

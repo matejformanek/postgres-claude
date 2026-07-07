@@ -601,6 +601,43 @@ sed -n '209,310p' source/src/backend/utils/mmgr/slab.c
 grep -Rn 'BumpContextCreate' source/src/backend
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 181 | Bump for radix- tree nodes |
+| [`src/backend/access/gist/gistvacuum.c`](../files/src/backend/access/gist/gistvacuum.c.md) | 167 | Generation for per-page state during vacuum |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 2045 | Bump for hashagg spill-out tuples |
+| [`src/backend/replication/logical/reorderbuffer.c`](../files/src/backend/replication/logical/reorderbuffer.c.md) | 345 | Slab for change/txn, Generation for tup |
+| [`src/backend/utils/mmgr/bump.c`](../files/src/backend/utils/mmgr/bump.c.md) | 1 | banner |
+| [`src/backend/utils/mmgr/bump.c`](../files/src/backend/utils/mmgr/bump.c.md) | 68 | context + block |
+| [`src/backend/utils/mmgr/bump.c`](../files/src/backend/utils/mmgr/bump.c.md) | 122 | create |
+| [`src/backend/utils/mmgr/bump.c`](../files/src/backend/utils/mmgr/bump.c.md) | 517 | BumpAlloc hot path |
+| [`src/backend/utils/mmgr/bump.c`](../files/src/backend/utils/mmgr/bump.c.md) | 641 | the unsupported operations and their elog(ERROR) stubs |
+| [`src/backend/utils/mmgr/generation.c`](../files/src/backend/utils/mmgr/generation.c.md) | 1 | banner |
+| [`src/backend/utils/mmgr/generation.c`](../files/src/backend/utils/mmgr/generation.c.md) | 61 | context + block |
+| [`src/backend/utils/mmgr/generation.c`](../files/src/backend/utils/mmgr/generation.c.md) | 152 | create |
+| [`src/backend/utils/mmgr/generation.c`](../files/src/backend/utils/mmgr/generation.c.md) | 282 | reset |
+| [`src/backend/utils/mmgr/generation.c`](../files/src/backend/utils/mmgr/generation.c.md) | 552 | alloc hot path |
+| [`src/backend/utils/mmgr/generation.c`](../files/src/backend/utils/mmgr/generation.c.md) | 718 | GenerationFree (and the recycle/keeper logic) |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) | 1 | banner comment, structure |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) | 101 | SlabContext struct |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) | 146 | SlabBlock struct |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) | 209 | blocklist indexing |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) | 321 | SlabContextCreate |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) | 658 | SlabAlloc |
+| [`src/backend/utils/mmgr/slab.c`](../files/src/backend/utils/mmgr/slab.c.md) | 728 | SlabFree |
+| [`src/backend/utils/sort/tuplesort.c`](../files/src/backend/utils/sort/tuplesort.c.md) | 673 | Bump for sort tuples |
+| [`src/backend/utils/sort/tuplestore.c`](../files/src/backend/utils/sort/tuplestore.c.md) | 277 | Generation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[memory-context-api-and-dispatch]] — the abstract API and the 4-bit

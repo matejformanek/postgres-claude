@@ -423,6 +423,30 @@ grep -nE "DSA_DEFAULT_INIT_SEGMENT_SIZE|DSA_MAX_SEGMENT_SIZE|DSA_MIN_SEGMENT_SIZ
        source/src/include/utils/dsa.h
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 1 | banner |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 31 | BlocktableEntry layout + MaxBlocktableEntrySize |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 90 | two RT_PREFIX template instantiations (local_ts, shared_ts) |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 113 | TidStore struct + TidStoreIsShared macro |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 161 | TidStoreCreateLocal |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 207 | TidStoreCreateShared + TidStoreAttach |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 344 | TidStoreSetBlockOffsets |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 420 | TidStoreIsMember |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 470 | iterator (Begin/Next/End) |
+| [`src/backend/access/common/tidstore.c`](../files/src/backend/access/common/tidstore.c.md) | 565 | TidStoreGetBlockOffsets |
+| [`src/include/lib/radixtree.h`](../files/src/include/lib/radixtree.h.md) | — | radix-tree template (read sparingly; it's a generic header) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[vacuum-hot-prune]] — heap-pass-1 produces the sorted offset list `TidStoreSetBlockOffsets` consumes.

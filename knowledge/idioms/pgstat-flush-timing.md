@@ -195,6 +195,22 @@ state.
 - The persistence layer:
   `grep -n 'pgstat_write_statsfile\|pgstat_read_statsfile' source/src/backend/utils/activity/pgstat.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/activity/pgstat.c`](../files/src/backend/utils/activity/pgstat.c.md) | 127 | interval constants |
+| [`src/backend/utils/activity/pgstat.c`](../files/src/backend/utils/activity/pgstat.c.md) | 191 | pgstat_flush_pending_entries |
+| [`src/backend/utils/activity/pgstat.c`](../files/src/backend/utils/activity/pgstat.c.md) | — | primary implementation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/pgstat-counter.md` — companion;

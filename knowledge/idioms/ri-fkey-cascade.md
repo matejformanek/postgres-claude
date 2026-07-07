@@ -230,6 +230,26 @@ EXPLAIN ANALYZE output aggregates total cascade time.
 - The parent-side trigger creation:
   `grep -n 'createForeignKeyActionTriggers\|RI_FKey_cascade' source/src/backend/commands/tablecmds.c source/src/backend/utils/adt/ri_triggers.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/tablecmds.c`](../files/src/backend/commands/tablecmds.c.md) | — | ALTER TABLE ADD FK creates the triggers |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1046 | RI_FKey_cascade_del |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1068 | fk_rel = table_open(..., RowExclusiveLock) |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1087 | cascade-DELETE query template |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1148 | RI_FKey_cascade_upd |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1194 | cascade-UPDATE query template |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | — | full RI module |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/ri-fkey-check.md` — child-side check the

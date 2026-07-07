@@ -201,6 +201,21 @@ mass-action case.
 - BEFORE → AFTER → deferred logic:
   `grep -n 'pg_trigger\.tgdeferrable\|AfterTriggerExecute' source/src/backend/commands/trigger.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | — | trigger registration + firing |
+| [`src/include/commands/trigger.h`](../files/src/include/commands/trigger.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

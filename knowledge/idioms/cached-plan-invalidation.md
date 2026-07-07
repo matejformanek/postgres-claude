@@ -222,6 +222,21 @@ backend B; A re-analyzes on next EXECUTE.
 - RevalidateCachedQuery:
   `grep -n 'RevalidateCachedQuery' source/src/backend/utils/cache/plancache.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 2126 | PlanCacheRelCallback |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 2319 | PlanCacheSysCallback |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/prepared-statement-plancache.md` —

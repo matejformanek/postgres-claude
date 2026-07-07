@@ -225,3 +225,27 @@ corruption.
 | `source/src/include/access/parallel.h` | full read | SKILL.md §3 |
 | `source/src/backend/access/transam/parallel.c:1-120` | targeted (reserved keys, FixedParallelState) | §"DSM and the TOC" |
 | `source/src/include/catalog/pg_proc.h:79` | targeted (proparallel default) | §"Parallel query" + SKILL.md §3.2 |
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | 1 | \| -120 \| targeted (reserved keys, FixedParallelState) \| §"DSM and the TOC" \| |
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | 64 | [verified-by-code -81] |
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | 174 | [verified-by-code |
+| [`src/backend/postmaster/bgworker.c`](../files/src/backend/postmaster/bgworker.c.md) | 1 | \| -100 \| targeted (top + slot protocol) \| §"Background worker lifecycle" \| |
+| [`src/backend/postmaster/bgworker.c`](../files/src/backend/postmaster/bgworker.c.md) | 45 | it). [verified-by-code -86] |
+| [`src/include/access/parallel.h`](../files/src/include/access/parallel.h.md) | 64 | 72] |
+| [`src/include/catalog/pg_proc.h`](../files/src/include/catalog/pg_proc.h.md) | 79 | [verified-by-code ] |
+| [`src/include/postmaster/bgworker.h`](../files/src/include/postmaster/bgworker.h.md) | 18 | [from-comment -23] |
+| [`src/include/postmaster/bgworker.h`](../files/src/include/postmaster/bgworker.h.md) | 69 | [verified-by-code -75] |
+| [`src/include/postmaster/bgworker.h`](../files/src/include/postmaster/bgworker.h.md) | 84 | [verified-by-code -89] |
+| [`src/test/modules/worker_spi/worker_spi.c`](../files/src/test/modules/worker_spi/worker_spi.c.md) | 134 | \| -225, 303-385 \| targeted \| SKILL.md §2.2, §2.6 \| |
+| [`src/test/modules/worker_spi/worker_spi.c`](../files/src/test/modules/worker_spi/worker_spi.c.md) | 151 | bgw_extra. 128 bytes of opaque payload usable however you like. worker_spi encodes a (database OID, role... |
+
+<!-- /callsites:auto -->

@@ -191,6 +191,22 @@ with `BGWORKER_BACKEND_DATABASE_CONNECTION` set.
 - Launcher:
   `grep -n 'logicalrep_worker_launch\|ApplyLauncherMain' source/src/backend/replication/logical/launcher.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/replication/logical/launcher.c`](../files/src/backend/replication/logical/launcher.c.md) | — | worker launcher |
+| [`src/backend/replication/logical/worker.c`](../files/src/backend/replication/logical/worker.c.md) | 4003 | LogicalRepApplyLoop |
+| [`src/backend/replication/logical/worker.c`](../files/src/backend/replication/logical/worker.c.md) | 6003 | apply worker entry |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/output-plugin-callbacks.md` — publisher

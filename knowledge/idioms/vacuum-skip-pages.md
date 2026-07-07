@@ -174,6 +174,21 @@ may go through multiple index-cleanup passes per VACUUM.
 - The eager-freeze caps:
   `grep -n 'EAGER_SCAN_REGION_SIZE\|MAX_EAGER_FREEZE_SUCCESS_RATE' source/src/backend/access/heap/vacuumlazy.c`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 40 | design comment |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | — | primary implementation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/visibility-map-update.md` — the VM bits

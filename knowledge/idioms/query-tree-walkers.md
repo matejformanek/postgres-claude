@@ -195,6 +195,27 @@ static bool my_walker(Node *node, void *context)
 The recursive-self pattern is the convention; almost every walker in
 PG is shaped this way.
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/nodes/nodeFuncs.c`](../files/src/backend/nodes/nodeFuncs.c.md) | 2731 | the elog(ERROR, "unrecognized node type") default arm |
+| [`src/backend/nodes/nodeFuncs.c`](../files/src/backend/nodes/nodeFuncs.c.md) | 2862 | range_table_walker / range_table_entry_walker |
+| [`src/backend/nodes/nodeFuncs.c`](../files/src/backend/nodes/nodeFuncs.c.md) | 2884 | [verified-by-code -2952] |
+| [`src/backend/nodes/nodeFuncs.c`](../files/src/backend/nodes/nodeFuncs.c.md) | 2889 | > [from-comment -2893] |
+| [`src/backend/nodes/nodeFuncs.c`](../files/src/backend/nodes/nodeFuncs.c.md) | 2891 | Whether passing both QTW_EXAMINE_RTES_BEFORE and QTW_EXAMINE_RTES_AFTER is ever useful — comment in... |
+| [`src/backend/nodes/nodeFuncs.c`](../files/src/backend/nodes/nodeFuncs.c.md) | — | walkers |
+| [`src/include/nodes/nodeFuncs.h`](../files/src/include/nodes/nodeFuncs.h.md) | 22 | QTW_ defines |
+| [`src/include/nodes/nodeFuncs.h`](../files/src/include/nodes/nodeFuncs.h.md) | — | flag defines |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/node-types-and-lists.md` — the NodeTag machinery

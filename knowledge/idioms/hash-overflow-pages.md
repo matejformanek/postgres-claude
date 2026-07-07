@@ -438,6 +438,27 @@ grep -n "XLOG_HASH_ADD_OVFL_PAGE\|XLOG_HASH_DELETE\|XLH_FREE" \
        source/src/include/access/hash_xlog.h
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/hash/hashovfl.c`](../files/src/backend/access/hash/hashovfl.c.md) | 1 | banner |
+| [`src/backend/access/hash/hashovfl.c`](../files/src/backend/access/hash/hashovfl.c.md) | 35 | bitno_to_blkno |
+| [`src/backend/access/hash/hashovfl.c`](../files/src/backend/access/hash/hashovfl.c.md) | 62 | _hash_ovflblkno_to_bitno |
+| [`src/backend/access/hash/hashovfl.c`](../files/src/backend/access/hash/hashovfl.c.md) | 112 | _hash_addovflpage |
+| [`src/backend/access/hash/hashovfl.c`](../files/src/backend/access/hash/hashovfl.c.md) | 492 | _hash_freeovflpage |
+| [`src/backend/access/hash/hashovfl.c`](../files/src/backend/access/hash/hashovfl.c.md) | 777 | _hash_initbitmapbuffer |
+| [`src/include/access/hash.h`](../files/src/include/access/hash.h.md) | 230 | HASH_MAX_BITMAPS = min(BLCKSZ/8, 1024) |
+| [`src/include/access/hash.h`](../files/src/include/access/hash.h.md) | 301 | BMPG_SHIFT, BMPG_MASK, BITS_PER_MAP, HashPageGetBitmap |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[hash-page-layout]] — `hashm_spares[]` array and splitpoint addressing the bit-to-block conversion relies on.

@@ -196,6 +196,22 @@ core but the wiring through pgoutput is recent.
 - pg_event_trigger_ddl_commands:
   `grep -n 'pg_event_trigger_ddl_commands' source/src/backend/commands/event_trigger.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/event_trigger.c`](../files/src/backend/commands/event_trigger.c.md) | 1679 | pg_ddl_command commentary |
+| [`src/backend/commands/event_trigger.c`](../files/src/backend/commands/event_trigger.c.md) | 2095 | deparse Oid-based reconstruction |
+| [`src/include/tcop/deparse_utility.h`](../files/src/include/tcop/deparse_utility.h.md) | — | deparse API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/event-trigger-firing.md` — companion

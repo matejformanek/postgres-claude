@@ -191,6 +191,22 @@ benchmarking on a high-concurrency workload.
 - Conditional-acquire patterns:
   `grep -RIn 'LWLockConditionalAcquire' source/src/backend | head -20`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/lwlock.c`](../files/src/backend/storage/lmgr/lwlock.c.md) | — | implementation |
+| [`src/include/storage/lwlock.h`](../files/src/include/storage/lwlock.h.md) | — | LWLock API |
+| [`src/include/storage/lwlocklist.h`](../files/src/include/storage/lwlocklist.h.md) | — | built-in lock + tranche registry |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` — the skill covering

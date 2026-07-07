@@ -420,6 +420,28 @@ grep -n "XLOG_HEAP2_PRUNE\|xl_heap_prune\b" \
 grep -rn "PageSetPrunable\|PageGetPruneXid\|pd_prune_xid" source/src/backend/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 1 | banner |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 34 | PruneState struct |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 269 | heap_page_prune_opt (the on-access entry) |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 1089 | heap_page_prune_and_freeze (the unified entry) |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 1483 | heap_prune_chain (per-HOT-chain walker) |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 2064 | heap_page_prune_execute (the in-crit-section applier) |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 2240 | page_verify_redirects (assert-only redirect sanity) |
+| [`src/include/access/heapam_xlog.h`](../files/src/include/access/heapam_xlog.h.md) | — | XLOG_HEAP2_PRUNE_ record types |
+| [`src/include/storage/itemid.h`](../files/src/include/storage/itemid.h.md) | — | LP_NORMAL / LP_REDIRECT / LP_DEAD / LP_UNUSED line-pointer states |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[heap-tuple-freeze]] — same plan-then-execute model, applied in the same critical section.

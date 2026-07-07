@@ -450,6 +450,26 @@ grep -n "slot_compile_deform\|EEOP_SCAN_FETCHSOME\|EEOP_OUTER_FETCHSOME\|EEOP_IN
 grep -rn "with_llvm\|BITCODE\|\.bc:" source/src/Makefile.global.in source/src/Makefile.shlib source/meson.build | head
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/jit/llvm/llvmjit.c`](../files/src/backend/jit/llvm/llvmjit.c.md) | 541 | llvm_function_reference (the call site that decides direct vs through-fmgr) |
+| [`src/backend/jit/llvm/llvmjit_deform.c`](../files/src/backend/jit/llvm/llvmjit_deform.c.md) | 1 | banner: "Fixed column widths, NOT NULLness, etc can be taken advantage of." |
+| [`src/backend/jit/llvm/llvmjit_deform.c`](../files/src/backend/jit/llvm/llvmjit_deform.c.md) | 34 | slot_compile_deform (the entire function) |
+| `src/backend/jit/llvm/llvmjit_inline.cpp` | 1 | banner |
+| `src/backend/jit/llvm/llvmjit_inline.cpp` | 99 | cost constants, module + summary caches |
+| `src/backend/jit/llvm/llvmjit_inline.cpp` | 155 | llvm_inline_reset_caches, llvm_inline entry |
+| `src/backend/jit/llvm/llvmjit_inline.cpp` | 182 | llvm_build_inline_plan (the worklist algorithm) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[jit-provider-and-context]] — JitContext lifecycle + cost gates that enable PGJIT_DEFORM / PGJIT_INLINE.

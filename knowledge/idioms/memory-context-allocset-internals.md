@@ -512,6 +512,29 @@ sed -n '120,150p;240,260p;700,810p' source/src/backend/utils/mmgr/aset.c
 #   (gdb) call MemoryContextStats(TopMemoryContext)
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 1 | whole AllocSet implementation, ~1500 lines |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 158 | AllocSetContext struct (the per-set bookkeeping) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 187 | AllocBlockData struct (the per-block bookkeeping) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 267 | AllocSetFreeIndex (the size→freelist hash, hot enough to hand-tune) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 346 | AllocSetContextCreateInternal (context creation, including the freelist-recycle path) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 733 | AllocSetAllocLarge (oversized chunks, dedicated block) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 859 | AllocSetAllocFromNewBlock (out-of-space-in-active-block path, with the free-space scavenging trick) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 1011 | AllocSetAlloc (the hot path — freelist hit or block-carve) |
+| [`src/backend/utils/mmgr/aset.c`](../files/src/backend/utils/mmgr/aset.c.md) | 1106 | AllocSetFree (freelist push or external-block immediate free) |
+| [`src/include/utils/memutils.h`](../files/src/include/utils/memutils.h.md) | 1 | ALLOCSET_DEFAULT_SIZES, ALLOCSET_SMALL_SIZES, ALLOCSET_SEPARATE_THRESHOLD |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[memory-context-api-and-dispatch]] — the abstract MemoryContext API

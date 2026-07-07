@@ -305,6 +305,28 @@ grep -n "SimpleLruTruncate\|SlruScanDirCbDeleteCutoff" \
      source/src/backend/access/transam/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) | 11 | header banner explaining bank locks + per-buffer locks + deadlock-free I/O dance |
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) | 138 | SLRU_BANK_SIZE = 16 (1<<4); SlotGetBankNumber(slotno) = slotno >> 4 |
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) | 549 | SimpleLruReadPage (miss path; cooperates with SlruSelectLRUPage) |
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) | 653 | SimpleLruReadPage_ReadOnly (shared-lock fast path) |
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) | 925 | SlruPhysicalWritePage (WAL-flush via group_lsn before disk write) |
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) | 1170 | SlruRecentlyUsed (lru-count bump, deliberately race-tolerant) |
+| [`src/backend/access/transam/slru.c`](../files/src/backend/access/transam/slru.c.md) | 1218 | SlruSelectLRUPage (victim search; the heart of the policy) |
+| [`src/include/access/slru.h`](../files/src/include/access/slru.h.md) | 48 | SlruSharedData struct (status array, lru-count arrays, group_lsn, latest_page_number atomic) |
+| [`src/include/pg_config_manual.h`](../files/src/include/pg_config_manual.h.md) | 30 | SLRU_PAGES_PER_SEGMENT = 32 (so one segment file = 32 × 8 KiB = 256 KiB) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[clog-slru]] — how CLOG sits on top of this layer.

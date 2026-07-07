@@ -185,6 +185,23 @@ fails, the row is rolled back via ereport(ERROR).
 - securityQuals consumers:
   `grep -RIn 'securityQuals' source/src/backend | head -15`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/rewrite/rowsecurity.c`](../files/src/backend/rewrite/rowsecurity.c.md) | 98 | get_row_security_policies entry |
+| [`src/backend/rewrite/rowsecurity.c`](../files/src/backend/rewrite/rowsecurity.c.md) | 715 | add_security_quals injection |
+| [`src/backend/rewrite/rowsecurity.c`](../files/src/backend/rewrite/rowsecurity.c.md) | — | + helpers |
+| [`src/include/catalog/pg_policy.h`](../files/src/include/catalog/pg_policy.h.md) | — | catalog schema |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/view-pushdown-via-rewriter.md` —

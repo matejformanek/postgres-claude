@@ -486,6 +486,26 @@ grep -nE 'CacheRegister(Relcache|Syscache)Callback' \
 #   gdb> p TypeCacheHash->hctl->nentries
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 1 | banner, design notes ("typcache entries are good permanently allows caching pointers to them in long-lived... |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 78 | module globals and the private TCFLAGS_ bitmap |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 389 | lookup_type_cache, the workhorse |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 962 | load_typcache_tupdesc, load_rangetype_info, load_multirangetype_info (the per-section loaders called from... |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 3093 | insert_rel_type_cache_if_needed, delete_rel_type_cache_if_needed, finalize_in_progress_typentries,... |
+| [`src/include/utils/typcache.h`](../files/src/include/utils/typcache.h.md) | 31 | TypeCacheEntry struct definition |
+| [`src/include/utils/typcache.h`](../files/src/include/utils/typcache.h.md) | 138 | the 16 TYPECACHE_ flag bits |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[typcache-record-typmod-and-shared]] — `RecordCacheArray` keyed by

@@ -216,6 +216,22 @@ call returns at a time). However:
 - Executor caller:
   `grep -RIn 'fdwroutine->IterateForeignScan' source/src/backend/executor | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`contrib/postgres_fdw/postgres_fdw.c`](../files/contrib/postgres_fdw/postgres_fdw.c.md) | — | reference implementation |
+| [`src/include/foreign/fdwapi.h`](../files/src/include/foreign/fdwapi.h.md) | 46 | IterateForeignScan_function signature |
+| [`src/include/foreign/fdwapi.h`](../files/src/include/foreign/fdwapi.h.md) | 213 | BeginForeignScan / IterateForeignScan / ReScanForeignScan / EndForeignScan |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/fdw-routine-callbacks.md` — full

@@ -548,6 +548,25 @@ grep -n "estimate_ndistinct\|Duj1" \
     source/src/backend/commands/analyze.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| `src/backend/statistics/README.dependencies` | — | soft dep algorithm |
+| `src/backend/statistics/README.mcv` | — | multivariate MCV |
+| [`src/backend/statistics/dependencies.c`](../files/src/backend/statistics/dependencies.c.md) | — | STATS_EXT_DEPENDENCIES |
+| [`src/backend/statistics/extended_stats.c`](../files/src/backend/statistics/extended_stats.c.md) | — | BuildRelationExtStatistics dispatcher |
+| [`src/backend/statistics/mcv.c`](../files/src/backend/statistics/mcv.c.md) | — | STATS_EXT_MCV |
+| [`src/backend/statistics/mvdistinct.c`](../files/src/backend/statistics/mvdistinct.c.md) | — | STATS_EXT_NDISTINCT |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[analyze-block-and-reservoir-sampling]] — produces the

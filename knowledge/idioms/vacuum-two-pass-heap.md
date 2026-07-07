@@ -505,6 +505,29 @@ grep -nE "eager_scan|EAGER_SCAN_REGION_SIZE|MAX_EAGER_FREEZE_SUCCESS_RATE|vacuum
        source/src/backend/access/heap/vacuumlazy.c | head -15
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 1 | banner with the three-phase + state-machine + eager-scan policy |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 623 | heap_vacuum_rel (top-level entry) |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 1279 | lazy_scan_heap main loop |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 1648 | heap_vac_scan_next_block (ReadStream callback; eager-scan + skip-with-VM policy) |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 2021 | lazy_scan_prune (per-page cleanup-lock path) |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 2157 | lazy_scan_noprune (share-lock fallback) |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 2369 | lazy_vacuum (drain decision tree) |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 2494 | lazy_vacuum_all_indexes |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 2640 | lazy_vacuum_heap_rel (Phase III) |
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | 3549 | + — lazy_truncate_heap (post-vacuum truncation) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[vacuum-hot-prune]] — heap_page_prune_and_freeze (Phase I per-page work).

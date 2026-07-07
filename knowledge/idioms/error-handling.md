@@ -253,6 +253,21 @@ memory" can itself be reported as an ERROR rather than crashing the backend
   and consider FATAL via `PG_ENSURE_ERROR_CLEANUP`.
 - Input function reporting "bad value" without aborting xact → `errsave`/`ereturn`.
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/error/elog.c`](../files/src/backend/utils/error/elog.c.md) | — | (the engine) |
+| [`src/include/utils/elog.h`](../files/src/include/utils/elog.h.md) | — | (the API) |
+
+<!-- /callsites:auto -->
+
 ## Open questions / unverified
 
 - Exact gettext extraction script behavior with multi-line literals

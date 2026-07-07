@@ -200,6 +200,24 @@ crash.
 - Catalog row:
   `grep -n 'pg_replication_origin' source/src/include/catalog/pg_replication_origin.h | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/replication/logical/origin.c`](../files/src/backend/replication/logical/origin.c.md) | 928 | replorigin_advance |
+| [`src/backend/replication/logical/origin.c`](../files/src/backend/replication/logical/origin.c.md) | 1329 | session-local advance commentary |
+| [`src/backend/replication/logical/origin.c`](../files/src/backend/replication/logical/origin.c.md) | 1603 | replorigin_advance use in WAL replay |
+| [`src/backend/replication/logical/origin.c`](../files/src/backend/replication/logical/origin.c.md) | — | full module |
+| [`src/include/catalog/pg_replication_origin.h`](../files/src/include/catalog/pg_replication_origin.h.md) | — | catalog row |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/output-plugin-callbacks.md` —

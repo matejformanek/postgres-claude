@@ -393,6 +393,29 @@ grep -n "ginbtree\|ginEntry" source/src/backend/access/gin/ginentrypage.c | head
 grep -n "ginbtree\|ginData" source/src/backend/access/gin/gindatapage.c | head
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/gin/ginbtree.c`](../files/src/backend/access/gin/ginbtree.c.md) | — | generic B-tree primitives (used by both entry tree and posting tree) |
+| [`src/backend/access/gin/gindatapage.c`](../files/src/backend/access/gin/gindatapage.c.md) | — | posting-tree-specific page ops |
+| [`src/backend/access/gin/ginentrypage.c`](../files/src/backend/access/gin/ginentrypage.c.md) | — | entry-tree-specific page ops |
+| [`src/backend/access/gin/ginpostinglist.c`](../files/src/backend/access/gin/ginpostinglist.c.md) | — | varbyte codec |
+| [`src/backend/access/gin/ginutil.c`](../files/src/backend/access/gin/ginutil.c.md) | — | GinFormTuple builder |
+| [`src/include/access/ginblock.h`](../files/src/include/access/ginblock.h.md) | 30 | GinPageOpaqueData, page-type flags (GIN_DATA, GIN_LEAF, GIN_META, GIN_LIST, GIN_COMPRESSED) |
+| [`src/include/access/ginblock.h`](../files/src/include/access/ginblock.h.md) | 55 | GinMetaPageData (head/tail of pending list + version + page counts) |
+| [`src/include/access/ginblock.h`](../files/src/include/access/ginblock.h.md) | 228 | entry-tuple t_tid abuse macros (GinGetPostingOffset, GinIsPostingTree, GinSetPostingTree) |
+| [`src/include/access/ginblock.h`](../files/src/include/access/ginblock.h.md) | 262 | data-page (posting tree) layout |
+| [`src/include/access/ginblock.h`](../files/src/include/access/ginblock.h.md) | 336 | GinPostingList compressed-segment struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[gin-fastupdate-pending]] — the pending-list buffer between inserter and entry tree.

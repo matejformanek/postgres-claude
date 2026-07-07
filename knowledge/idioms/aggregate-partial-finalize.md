@@ -476,6 +476,27 @@ grep -rn "is_foreign_grouping\|deparse_agg" \
        source/contrib/postgres_fdw/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| `src/backend/catalog/system_functions.sql` | — | aggregate creation syntax |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 16 | banner: "Other behaviors can be selected by the aggsplit mode." |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 1148 | finalize_partialaggregate (serializefn invocation) |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 3762 | ExecInitAgg serial/deserial fn resolution |
+| [`src/backend/optimizer/plan/createplan.c`](../files/src/backend/optimizer/plan/createplan.c.md) | — | create_agg_plan + Path-to-Plan conversion sets aggsplit |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) | — | make_partial_grouping_target + parallel-agg path generation |
+| [`src/include/catalog/pg_aggregate.h`](../files/src/include/catalog/pg_aggregate.h.md) | — | Form_pg_aggregate with aggcombinefn, aggserialfn, aggdeserialfn |
+| [`src/include/nodes/nodes.h`](../files/src/include/nodes/nodes.h.md) | 370 | AggSplit enum + AGGSPLITOP_ bit definitions + DO_AGGSPLIT_ predicates |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[aggregate-trans-state]] — transfunc/finalfunc machinery.

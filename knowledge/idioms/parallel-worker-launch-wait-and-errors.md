@@ -603,6 +603,22 @@ grep -rn "BecomeLockGroupLeader\|BecomeLockGroupMember\|lockGroupLeader" source/
 grep -rn "BGWH_NOT_YET_STARTED\|BGWH_STARTED\|BGWH_STOPPED\|BGWH_POSTMASTER_DIED" source/src/include/postmaster/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | — | launch / wait / signal handler |
+| [`src/backend/postmaster/bgworker.c`](../files/src/backend/postmaster/bgworker.c.md) | — | RegisterDynamicBackgroundWorker |
+| [`src/backend/storage/lmgr/proc.c`](../files/src/backend/storage/lmgr/proc.c.md) | — | BecomeLockGroupLeader |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[parallel-context-and-dsm]] — the `ParallelContext` setup

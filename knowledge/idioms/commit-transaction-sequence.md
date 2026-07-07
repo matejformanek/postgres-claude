@@ -203,6 +203,23 @@ COMMIT (post-WAL-flush, no errors allowed).
 - ProcArray:
   `grep -n 'ProcArrayEndTransaction' source/src/backend/storage/ipc/procarray.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2270 | CommitTransaction entry |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2298 | pre-commit trigger loop |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2322 | CallXactCallbacks(XACT_EVENT_PRE_COMMIT) |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2354 | smgrDoPendingSyncs |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/abort-transaction-cleanup.md` —

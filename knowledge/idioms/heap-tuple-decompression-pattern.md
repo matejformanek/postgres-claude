@@ -162,6 +162,25 @@ The relation's column default is governed by the
 - LZ4 conditional code:
   `grep -RIn 'USE_LZ4' source/src/backend`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | 106 | [verified-by-code -160] |
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | — | detoast_attr, the dispatcher |
+| [`src/backend/access/common/toast_internals.c`](../files/src/backend/access/common/toast_internals.c.md) | — | in-place / external compression paths |
+| [`src/backend/utils/adt/varlena.c`](../files/src/backend/utils/adt/varlena.c.md) | — | many users |
+| [`src/include/access/detoast.h`](../files/src/include/access/detoast.h.md) | — | public API |
+| [`src/include/varatt.h`](../files/src/include/varatt.h.md) | — | VARATT_ predicates |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/fmgr-and-spi/SKILL.md` — `PG_GETARG_*_PP` vs `_P` (preserve-packed semantics).

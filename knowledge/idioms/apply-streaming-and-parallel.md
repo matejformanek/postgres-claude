@@ -569,6 +569,21 @@ grep -n "apply_spooled_messages\|stream_write_change\|stream_open_file\|subxact_
     source/src/backend/replication/logical/worker.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/replication/logical/applyparallelworker.c`](../files/src/backend/replication/logical/applyparallelworker.c.md) | — | ParallelApplyWorkerInfo, the deadlock-detection lock graph |
+| [`src/backend/replication/logical/worker.c`](../files/src/backend/replication/logical/worker.c.md) | — | apply_handle_stream_, the action machine |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[apply-worker-loop-and-dispatch]] — `apply_dispatch` is

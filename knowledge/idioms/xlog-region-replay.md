@@ -184,6 +184,23 @@ replication.
 - XLogInitBufferForRedo sites:
   `grep -RIn 'XLogInitBufferForRedo' source/src/backend/access`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/nbtree/nbtxlog.c`](../files/src/backend/access/nbtree/nbtxlog.c.md) | — | canonical per-AM redo function set |
+| [`src/backend/access/transam/xlogutils.c`](../files/src/backend/access/transam/xlogutils.c.md) | — | implementation |
+| [`src/include/access/xlogutils.h`](../files/src/include/access/xlogutils.h.md) | 71 | the API + return codes |
+| [`src/include/access/xlogutils.h`](../files/src/include/access/xlogutils.h.md) | — | public API + return codes |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/wal-record-construction.md` — companion:

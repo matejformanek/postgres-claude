@@ -298,6 +298,26 @@ to the EPQ slot at recheck time.
 - epqParam:
   `grep -RIn 'epqParam\|ExecScanFetch' source/src/backend/executor | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2747 | EvalPlanQualInit |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2788 | EvalPlanQualSetPlan |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2804 | EvalPlanQualSlot |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2960 | EvalPlanQualBegin |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 3027 | EvalPlanQualStart |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 3208 | EvalPlanQualEnd |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | — | EPQ entry points |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/epq-recheck-flow.md` —

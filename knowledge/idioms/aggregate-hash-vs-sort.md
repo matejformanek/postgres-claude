@@ -455,6 +455,31 @@ grep -rn "ExecBuildAggTrans\b" source/src/backend/executor/
 grep -n "cost_agg\b" source/src/backend/optimizer/path/costsize.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 1 | banner with all four strategies + spill-to-disk explanation |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 281 | HashAggSpill struct + partition constants |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 298 | HASHAGG_PARTITION_FACTOR, HASHAGG_MIN/MAX_PARTITIONS, HASHAGG_HLL_BIT_WIDTH |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 1467 | build_hash_tables / build_hash_table |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 1807 | hash_agg_set_limits / hash_agg_check_limits |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 1910 | hash_agg_enter_spill_mode + partition layout |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 2184 | lookup_hash_entries (the hot path for hashed aggregation) |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 2629 | agg_fill_hash_table / agg_retrieve_hash_table (output) |
+| [`src/backend/utils/sort/logtape.c`](../files/src/backend/utils/sort/logtape.c.md) | — | tape multiplexing |
+| [`src/include/executor/nodeAgg.h`](../files/src/include/executor/nodeAgg.h.md) | — | AggState struct definitions |
+| [`src/include/lib/hyperloglog.h`](../files/src/include/lib/hyperloglog.h.md) | — | HLL sketch primitives |
+| [`src/include/utils/logtape.h`](../files/src/include/utils/logtape.h.md) | — | LogicalTape set used for spill |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[aggregate-trans-state]] — transfunc / finalfunc model.

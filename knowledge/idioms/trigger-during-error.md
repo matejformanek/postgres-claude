@@ -266,6 +266,26 @@ exactly this — it wraps the BEGIN block in an internal subxact.
 - PL/pgSQL subxact pattern:
   `grep -n 'BeginInternalSubTransaction\|RollbackAndReleaseCurrentSubTransaction' source/src/pl/plpgsql/src/pl_exec.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | — | AbortTransaction / AbortSubTransaction call sites |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 3684 | AFTER_TRIGGER_DONE / IN_PROGRESS flag bits |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 5392 | AfterTriggerEndXact |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 5446 | AfterTriggerBeginSubXact (snapshot push) |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 5494 | AfterTriggerEndSubXact (commit & abort branches) |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | 5546 | abort-side event-list restore + flag clear |
+| [`src/backend/commands/trigger.c`](../files/src/backend/commands/trigger.c.md) | — | full machinery |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/trigger-constraint-deferral.md` —

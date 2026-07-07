@@ -182,6 +182,21 @@ use the new.
 - The archive_library load:
   `grep -RIn 'LoadArchiveLibrary\|_PG_archive_module_init' source/src/backend`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/postmaster/pgarch.c`](../files/src/backend/postmaster/pgarch.c.md) | 884 | the "both set is error" check |
+| [`src/backend/postmaster/pgarch.c`](../files/src/backend/postmaster/pgarch.c.md) | — | archiver process |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/contrib-basic_archive.md` — reference

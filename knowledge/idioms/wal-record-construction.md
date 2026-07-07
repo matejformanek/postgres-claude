@@ -159,6 +159,22 @@ spillover rmgr for additional heap record types when
 - The critical-section wrappers around WAL emission:
   `grep -B1 -A3 'XLogInsert' source/src/backend/access/heap/heapam.c | head -30`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | — | canonical user (heap_insert, heap_update, heap_delete) |
+| [`src/backend/access/transam/xloginsert.c`](../files/src/backend/access/transam/xloginsert.c.md) | — | implementation |
+| [`src/include/access/xloginsert.h`](../files/src/include/access/xloginsert.h.md) | — | public API + REGBUF flags |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/xlog-region-replay.md` — companion: the

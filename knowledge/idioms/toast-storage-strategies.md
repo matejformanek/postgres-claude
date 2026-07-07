@@ -165,6 +165,23 @@ strategy.
 - attstorage handling:
   `grep -RIn 'attstorage' source/src/backend | head -20`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heaptoast.c`](../files/src/backend/access/heap/heaptoast.c.md) | — | toast decision engine |
+| [`src/include/access/heaptoast.h`](../files/src/include/access/heaptoast.md) | 30 | TOAST_TUPLE_THRESHOLD definitions |
+| [`src/include/access/heaptoast.h`](../files/src/include/access/heaptoast.md) | — | thresholds + macros |
+| [`src/include/catalog/pg_attribute.h`](../files/src/include/catalog/pg_attribute.h.md) | 105 | attstorage field |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/heap-tuple-decompression-pattern.md` —

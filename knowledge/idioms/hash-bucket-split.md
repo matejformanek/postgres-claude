@@ -465,6 +465,25 @@ grep -n "hashso_split_bucket_buf\|hashso_buc_split\|hashso_buc_populated" source
 grep -n "hashbucketcleanup" source/src/backend/access/hash/hash.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/hash/hash.c`](../files/src/backend/access/hash/hash.c.md) | — | hashbucketcleanup (the deferred cleanup pass) |
+| [`src/backend/access/hash/hashpage.c`](../files/src/backend/access/hash/hashpage.c.md) | 613 | _hash_expandtable |
+| [`src/backend/access/hash/hashpage.c`](../files/src/backend/access/hash/hashpage.c.md) | 993 | _hash_alloc_buckets (extend file for new splitpoint) |
+| [`src/backend/access/hash/hashpage.c`](../files/src/backend/access/hash/hashpage.c.md) | 1075 | _hash_splitbucket |
+| [`src/backend/access/hash/hashpage.c`](../files/src/backend/access/hash/hashpage.c.md) | 1360 | _hash_finish_split |
+| [`src/include/access/hash.h`](../files/src/include/access/hash.h.md) | 58 | LH_BUCKET_BEING_POPULATED, _BEING_SPLIT, _NEEDS_SPLIT_CLEANUP |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[hash-page-layout]] — the addressing this mutates.

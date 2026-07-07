@@ -192,6 +192,21 @@ the "wake up" signal.
 - The signal handler:
   `grep -n 'HandleNotifyInterrupt' source/src/backend/commands/async.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/async.c`](../files/src/backend/commands/async.c.md) | — | implementation |
+| [`src/include/commands/async.h`](../files/src/include/commands/async.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/cache-invalidation-registration.md` —

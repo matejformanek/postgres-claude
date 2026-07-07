@@ -187,6 +187,22 @@ capability.
 - Invalidation logic:
   `grep -RIn 'InvalidateObsoleteReplicationSlots\|wal_removed\|rows_removed' source/src/backend/replication`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/replication/slot.c`](../files/src/backend/replication/slot.c.md) | — | implementation |
+| [`src/include/replication/slot.h`](../files/src/include/replication/slot.h.md) | 120 | 332-358 — API + slot data fields |
+| [`src/include/replication/slot.h`](../files/src/include/replication/slot.h.md) | — | slot struct + API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/replication.md` — the surrounding

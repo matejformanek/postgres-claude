@@ -399,6 +399,26 @@ grep -nE 'subxidStates\[' source/src/backend/storage/ipc/procarray.c
 grep -RnE 'XLOG_XACT_ASSIGNMENT|ProcArrayApplyXidAssignment' source/src/backend
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2200 | RecordTransactionCommit and the path that flushes subxids on parent commit |
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) | 1304 | ProcArrayApplyXidAssignment (XLOG_XACT_ASSIGNMENT replay on standby) |
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) | 1366 | TransactionIdIsInProgress (the cache's primary reader on primary) |
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) | 3982 | XidCacheRemoveRunningXids (subxact abort path) |
+| [`src/include/storage/proc.h`](../files/src/include/storage/proc.h.md) | 30 | PGPROC_MAX_CACHED_SUBXIDS, XidCacheStatus, XidCache |
+| [`src/include/storage/proc.h`](../files/src/include/storage/proc.h.md) | 170 | PGPROC struct showing subxids + subxidStatus + pgxactoff |
+| [`src/include/storage/proc.h`](../files/src/include/storage/proc.h.md) | 270 | PROC_HDR (alias ProcGlobal), with the mirrored subxidStates[]/xids[] arrays used by hot-path scans |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[subxact-subtrans-slru]] — the on-disk pg_subtrans that takes

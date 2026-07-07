@@ -183,6 +183,23 @@ the fix is "don't do that" — flatten the structure.
 - The TransactionStateData struct:
   `grep -A30 'typedef struct TransactionStateData' source/src/backend/access/transam/xact.c | head -35`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/subtrans.c`](../files/src/backend/access/transam/subtrans.c.md) | — | pg_subtrans SLRU |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | — | TransactionState struct + push/pop machinery |
+| [`src/include/access/xact.h`](../files/src/include/access/xact.h.md) | 440 | public API |
+| [`src/include/access/xact.h`](../files/src/include/access/xact.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/resourceowner.md` — per-subxact

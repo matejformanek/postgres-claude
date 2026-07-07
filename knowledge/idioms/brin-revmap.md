@@ -433,6 +433,28 @@ grep -nE "REVMAP_PAGE_MAXITEMS|HEAPBLK_TO_REVMAP|BRIN_META" \
        source/src/backend/access/brin/brin_revmap.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 1 | banner |
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 40 | HEAPBLK→revmap arithmetic macros |
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 46 | BrinRevmap struct |
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 69 | brinRevmapInitialize |
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 154 | brinSetHeapBlockItemptr (writer) |
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 194 | brinGetTupleForHeapBlock (reader; the hot path) |
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 322 | brinRevmapDesummarizeRange |
+| [`src/backend/access/brin/brin_revmap.c`](../files/src/backend/access/brin/brin_revmap.c.md) | 500 | revmap_physical_extend |
+| [`src/include/access/brin_page.h`](../files/src/include/access/brin_page.h.md) | 51 | page-type constants, BrinMetaPageData, RevmapContents, REVMAP_PAGE_MAXITEMS |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[brin-tuple-format]] — the BrinTuple layout the revmap points at.

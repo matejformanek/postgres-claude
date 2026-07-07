@@ -167,6 +167,30 @@ collision) is much more expensive: every walker, every `_outNode` /
 references the field by name via macros from `gen_node_support.pl`, and
 extensions on PGXN reference it too. Get the name right at birth.
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/c.h`](../files/src/include/c.h.md) | 589 | PG's bool handling, deliberately via <stdbool.h> so it doesn't fight Win32 BOOL |
+| [`src/include/c.h`](../files/src/include/c.h.md) | — | bool definition and the comment block explaining why PG uses <stdbool.h> |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 391 | Param node, the canonical precedent for "I want a type OID field on an Expr node" |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 396 | paramkind on Param (not kind) [verified-by-code ] |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 398 | paramtype on Param (not typeid) [verified-by-code ] |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 400 | paramtypmod on Param (not typmod) [verified-by-code ] |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 402 | paramcollid on Param (not collid) [verified-by-code ] |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 1409 | array_typeid / element_typeid on ArrayExpr (qualified, not bare typeid) [verified-by-code , 1413] |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 1453 | row_typeid on RowExpr (qualified) [verified-by-code ] |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | — | consttype, consttypmod, constcollid on Const (qualified with the node name as prefix) [verified-by-code ] |
+| [`src/include/port/win32_port.h`](../files/src/include/port/win32_port.md) | — | Windows porting shim |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/node-types.md` — what shape the new struct should

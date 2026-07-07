@@ -678,6 +678,22 @@ grep -n "snapshot_resowner_desc\|ResourceOwnerRememberSnapshot\|ResourceOwnerFor
     source/src/backend/utils/time/snapmgr.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/resowner/resowner.c`](../files/src/backend/utils/resowner/resowner.c.md) | — | ResourceOwner integration |
+| [`src/backend/utils/time/snapmgr.c`](../files/src/backend/utils/time/snapmgr.c.md) | — | stack + heap + refcount logic |
+| [`src/include/utils/snapshot.h`](../files/src/include/utils/snapshot.h.md) | — | active_count, regd_count, ph_node |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[snapshot-static-and-current]] — the six static slots that

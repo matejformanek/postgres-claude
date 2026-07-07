@@ -236,6 +236,25 @@ drop.
 - choose_custom_plan:
   `grep -n 'choose_custom_plan\|cached_plan_cost' source/src/backend/utils/cache/plancache.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 185 | CreateCachedPlan |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 265 | CreateCachedPlanForQuery |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 393 | CompleteCachedPlan |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 1297 | GetCachedPlan |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | — | full module |
+| [`src/include/utils/plancache.h`](../files/src/include/utils/plancache.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/generic-vs-custom-plan.md` — the

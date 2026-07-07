@@ -431,6 +431,30 @@ grep -n "catcache_in_progress_stack\|CatCInProgress" \
        source/src/backend/utils/cache/catcache.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 1 | banner + module setup |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 44 | CatCInProgress stack (race-detection for in-build entries) |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 642 | CatCacheInvalidate (the sinval callback target) |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 895 | InitCatCache (constructor) |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 1147 | CatalogCacheInitializeCache (phase-2 setup; runs lazily on first use) |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 1371 | SearchCatCacheInternal (the hot path) |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 1530 | SearchCatCacheMiss (slow path with retry) |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 1718 | GetCatCacheHashValue |
+| [`src/backend/utils/cache/catcache.c`](../files/src/backend/utils/cache/catcache.c.md) | 1750 | SearchCatCacheList (partial-key result) |
+| [`src/include/utils/catcache.h`](../files/src/include/utils/catcache.h.md) | 44 | struct definitions (CatCache, CatCTup, CatCList) |
+| [`src/include/utils/syscache.h`](../files/src/include/utils/syscache.h.md) | — | SysCacheIdentifier enum, declarations of SearchSysCache |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[syscache-invalidation-flow]] — how `CatCacheInvalidate` gets called from inval queue.

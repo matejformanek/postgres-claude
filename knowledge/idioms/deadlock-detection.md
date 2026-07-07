@@ -206,6 +206,21 @@ holder" of a lock cycle forever; only manual
 - Victim error path:
   `grep -RIn 'deadlock detected' source/src/backend/storage/lmgr/deadlock.c`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/deadlock.c`](../files/src/backend/storage/lmgr/deadlock.c.md) | 80 | recursive cycle-find functions |
+| [`src/backend/storage/lmgr/deadlock.c`](../files/src/backend/storage/lmgr/deadlock.c.md) | — | implementation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/lwlock-rank-discipline.md` — the

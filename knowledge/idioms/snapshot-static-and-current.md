@@ -555,6 +555,22 @@ grep -n "case SNAPSHOT_MVCC\|case SNAPSHOT_SELF\|case SNAPSHOT_ANY\|case SNAPSHO
     source/src/backend/access/heap/heapam_visibility.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) | — | GetSnapshotData |
+| [`src/backend/utils/time/snapmgr.c`](../files/src/backend/utils/time/snapmgr.c.md) | — | all entry points + static slots |
+| [`src/include/utils/snapshot.h`](../files/src/include/utils/snapshot.h.md) | — | SnapshotData struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[snapshot-active-stack-and-registered]] —

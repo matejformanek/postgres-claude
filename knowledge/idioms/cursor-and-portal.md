@@ -205,6 +205,22 @@ held resources.
 - WITH HOLD materialization:
   `grep -RIn 'HoldablePortal\|PersistHoldablePortal' source/src/backend | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/mmgr/portalmem.c`](../files/src/backend/utils/mmgr/portalmem.c.md) | — | implementation |
+| [`src/include/utils/portal.h`](../files/src/include/utils/portal.md) | 107 | 115 — states + struct |
+| [`src/include/utils/portal.h`](../files/src/include/utils/portal.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/tcop.md` — the surrounding

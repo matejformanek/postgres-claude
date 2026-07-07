@@ -219,6 +219,31 @@ is invisible next to the cost of debugging a runtime
   the EXPLAIN path too; pass `boundParams = NULL` rather than gating
   the call, otherwise `EXPLAIN VERBOSE` may emit raw SubLinks.
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execExpr.c`](../files/src/backend/executor/execExpr.c.md) | 2657 | ExecInitExprRec default arm: elog(ERROR, "unrecognized node type: %d", ...) |
+| [`src/backend/executor/execExpr.c`](../files/src/backend/executor/execExpr.c.md) | — | ExecInitExprRec default arm |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) | 7061 | "Currently, we disallow sublinks in standalone expressions, so there's no real 'planning' involved here" |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) | 7080 | expression_planner definition; the comment explicitly says "we disallow sublinks in standalone expressions" |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) | 7108 | expression_planner_with_deps ( ) shares the SubLink limitation — its body is "identical to... |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) | — | expression_planner, expression_planner_with_deps |
+| [`src/backend/optimizer/plan/subselect.c`](../files/src/backend/optimizer/plan/subselect.c.md) | 2208 | SS_process_sublinks, the SubLink → SubPlan/Param(PARAM_EXEC) rewrite, only reachable from inside... |
+| [`src/backend/optimizer/plan/subselect.c`](../files/src/backend/optimizer/plan/subselect.c.md) | — | SS_process_sublinks |
+| [`src/backend/tcop/postgres.c`](../files/src/backend/tcop/postgres.c.md) | 898 | pg_plan_query, thin wrapper around planner(); refuses CMD_UTILITY Querys |
+| [`src/backend/tcop/postgres.c`](../files/src/backend/tcop/postgres.c.md) | 904 | [verified-by-code -906] |
+| [`src/backend/tcop/postgres.c`](../files/src/backend/tcop/postgres.c.md) | — | pg_plan_query |
+| [`src/backend/utils/misc/guc_funcs.c`](../files/src/backend/utils/misc/guc_funcs.c.md) | 45 | at |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/node-types.md` — parse-tree vs Expr-flavored
