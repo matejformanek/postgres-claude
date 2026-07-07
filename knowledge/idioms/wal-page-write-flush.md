@@ -298,6 +298,19 @@ EINTR retry [`xlog.c:2466-2467`] is the only retryable case.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-wal-record`](../scenarios/add-new-wal-record.md)
+- [`bump-catversion`](../scenarios/bump-catversion.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/xloginsertlock-partitioning.md` — produces

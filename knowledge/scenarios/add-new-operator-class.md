@@ -102,6 +102,26 @@ self-contained chunk; the tree must build at the end of each phase.
    dev/build-debug --suite regress` green, with `opr_sanity` and the
    new test both passing.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+| [`hash-bucket-split`](../idioms/hash-bucket-split.md) | shares files: `src/include/access/hash.h` |
+| [`hash-overflow-pages`](../idioms/hash-overflow-pages.md) | shares files: `src/include/access/hash.h` |
+| [`hash-page-layout`](../idioms/hash-page-layout.md) | shares files: `src/include/access/hash.h` |
+| [`spgist-insert-and-picksplit`](../idioms/spgist-insert-and-picksplit.md) | shares files: `src/include/access/spgist.h` |
+| [`spgist-scan-and-consistent`](../idioms/spgist-scan-and-consistent.md) | shares files: `src/include/access/spgist.h` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Missing required support procs** — the AM's `<am>validate.c`

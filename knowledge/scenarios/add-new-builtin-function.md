@@ -103,6 +103,23 @@ The tree must build at the end of each phase.
 (If your function genuinely needs a new `.c` file, fold its creation +
 meson/Makefile wiring into Phase 1.)
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`bgworker-and-parallel`](../idioms/bgworker-and-parallel.md) | shares files: `src/include/catalog/pg_proc.h` |
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+| [`security-barrier-views`](../idioms/security-barrier-views.md) | shares files: `src/include/catalog/pg_proc.h` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Forgotten catversion bump** — symptom: `FATAL: database files are

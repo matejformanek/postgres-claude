@@ -152,3 +152,16 @@ The "everything is a Query" funnel is why the rest of the backend can talk
 about queries uniformly — plan cache, `pg_stat_statements`, parallel-worker
 serialization, rule storage all operate on `Query` (parse) or `PlannedStmt`
 (plan) without caring whether the source SQL was DML or DDL.
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-hook`](../scenarios/add-new-hook.md)
+- [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md)
+- [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
+
+<!-- /scenarios:auto -->

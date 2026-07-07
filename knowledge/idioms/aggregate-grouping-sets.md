@@ -477,6 +477,20 @@ grep -n "GroupingFunc\|GROUPING_ID\|grouping_func" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+- [`add-new-hook`](../scenarios/add-new-hook.md)
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[aggregate-hash-vs-sort]] — strategy machinery in single-set mode.

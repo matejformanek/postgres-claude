@@ -129,6 +129,22 @@ exists yet.)
    the call-site comment from `xfunc.sgml`. Phase-end check: `meson
    compile -C dev/build-debug docs` is clean.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`background-worker-startup`](../idioms/background-worker-startup.md) | direct reference |
+| [`guc-variables`](../idioms/guc-variables.md) | direct reference |
+| [`process-utility-hook-chain`](../idioms/process-utility-hook-chain.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Wrong ring slot = wrong invariants.** Calling `RequestAddinShmemSpace`

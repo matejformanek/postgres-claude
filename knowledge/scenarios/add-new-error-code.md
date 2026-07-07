@@ -115,6 +115,22 @@ truth are rows 1, 7, 8, 9, 10.)
    `meson compile -C dev/build-debug alldocs` (or `docs`) succeed and
    `errcodes-table.sgml` contains the new row.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`error-context-callbacks`](../idioms/error-context-callbacks.md) | shares files: `src/backend/utils/error/elog.c` |
+| [`error-handling`](../idioms/error-handling.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Subclass collisions with the standard.** Classes `0-4` and `A-H`

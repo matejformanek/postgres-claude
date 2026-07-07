@@ -146,6 +146,24 @@ self-contained chunk; the tree must build at the end of each phase.
    Phase-end check: `meson test -C dev/build-debug --suite contrib
    --test <myam>` is green, docs build clean.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+| [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+| [`tableam-index-fetch`](../idioms/tableam-index-fetch.md) | shares files: `src/backend/access/heap/heapam_handler.c`, `src/include/access/tableam.h` |
+| [`tableam-vtable-lifecycle`](../idioms/tableam-vtable-lifecycle.md) | shares files: `src/backend/access/heap/heapam_handler.c`, `src/include/access/tableam.h` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`heap_tableam_handler` is the spec.** The TableAmRoutine documentation

@@ -207,6 +207,18 @@ with `BGWORKER_BACKEND_DATABASE_CONNECTION` set.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/output-plugin-callbacks.md` — publisher

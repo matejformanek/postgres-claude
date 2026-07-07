@@ -254,6 +254,18 @@ that loosen this set explicit GUCs.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/parallel-hash-join.md` —

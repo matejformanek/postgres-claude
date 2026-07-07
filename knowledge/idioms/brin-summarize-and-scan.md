@@ -538,6 +538,18 @@ grep -n "brin_doinsert\|brin_doupdate\|brin_evacuate_page" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-index-am`](../scenarios/add-new-index-am.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[brin-revmap]] — revmap traversal and the bt_blkno cross-check.

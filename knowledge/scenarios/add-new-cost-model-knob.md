@@ -127,6 +127,25 @@ The tree must build at the end of each phase.
    must be *explained* in the commit message — "X moved from
    index-scan to seq-scan because the new knob penalises Y by Z%".
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`cost-join-paths`](../idioms/cost-join-paths.md) | direct reference |
+| [`cost-parallel-adjustments`](../idioms/cost-parallel-adjustments.md) | direct reference |
+| [`cost-scan-paths`](../idioms/cost-scan-paths.md) | direct reference |
+| [`cost-units-gucs`](../idioms/cost-units-gucs.md) | direct reference |
+| [`guc-variables`](../idioms/guc-variables.md) | direct reference |
+| [`jit-provider-and-context`](../idioms/jit-provider-and-context.md) | shares files: `src/backend/jit/jit.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`extern` in the wrong header.** Putting `extern PGDLLIMPORT double

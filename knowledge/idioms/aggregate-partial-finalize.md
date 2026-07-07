@@ -497,6 +497,22 @@ grep -rn "is_foreign_grouping\|deparse_agg" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md)
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+- [`add-new-hook`](../scenarios/add-new-hook.md)
+- [`add-new-node-type`](../scenarios/add-new-node-type.md)
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[aggregate-trans-state]] — transfunc/finalfunc machinery.

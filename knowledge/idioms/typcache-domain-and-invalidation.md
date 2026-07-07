@@ -622,6 +622,18 @@ sed -n '1110,1260p' source/src/backend/utils/cache/typcache.c
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+_(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[typcache-entry-and-lookup]] — `TypeCacheEntry`, the `flags`

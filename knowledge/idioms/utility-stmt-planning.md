@@ -244,6 +244,20 @@ is invisible next to the cost of debugging a runtime
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+- [`add-new-hook`](../scenarios/add-new-hook.md)
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/node-types.md` — parse-tree vs Expr-flavored

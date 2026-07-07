@@ -133,6 +133,21 @@ PL/pgSQL-specific add-on; core-side phases run first.
    full regress green, including `--suite regress` and the
    feature-specific tests.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`error-context-callbacks`](../idioms/error-context-callbacks.md) | shares files: `src/pl/plpgsql/src/pl_exec.c` |
+| [`spi`](../idioms/spi.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **F2 — pl_gram.y token-block desync.** This is the single most

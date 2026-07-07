@@ -189,6 +189,18 @@ may go through multiple index-cleanup passes per VACUUM.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/visibility-map-update.md` — the VM bits

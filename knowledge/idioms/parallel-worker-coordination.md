@@ -230,6 +230,18 @@ SAFE leaves can appear below a Gather node.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/storage-ipc.md` — DSM + shm_mq

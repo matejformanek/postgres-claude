@@ -170,6 +170,27 @@ Marked **(A)** = Surface A only (output-plugin callback). Marked **(B)**
    subscription` + `meson test -C dev/build-debug --suite test_decoding`
    all green. `make -C doc/src/sgml` clean.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`apply-handlers-insert-update-delete`](../idioms/apply-handlers-insert-update-delete.md) | shares files: `src/backend/replication/logical/proto.c`, `src/backend/replication/logical/worker.c` |
+| [`apply-streaming-and-parallel`](../idioms/apply-streaming-and-parallel.md) | shares files: `src/backend/replication/logical/applyparallelworker.c`, `src/backend/replication/logical/worker.c` |
+| [`apply-worker-loop`](../idioms/apply-worker-loop.md) | shares files: `src/backend/replication/logical/worker.c` |
+| [`apply-worker-loop-and-dispatch`](../idioms/apply-worker-loop-and-dispatch.md) | direct reference |
+| [`logical-decoding-snapshot`](../idioms/logical-decoding-snapshot.md) | direct reference |
+| [`memory-context-slab-generation-bump`](../idioms/memory-context-slab-generation-bump.md) | shares files: `src/backend/replication/logical/reorderbuffer.c` |
+| [`output-plugin-callbacks`](../idioms/output-plugin-callbacks.md) | direct reference |
+| [`walsender-state-machine`](../idioms/walsender-state-machine.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Proto-version gate omission.** A subscriber connecting with an

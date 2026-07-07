@@ -619,6 +619,19 @@ grep -rn "BGWH_NOT_YET_STARTED\|BGWH_STARTED\|BGWH_STOPPED\|BGWH_POSTMASTER_DIED
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-bgworker`](../scenarios/add-new-bgworker.md)
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[parallel-context-and-dsm]] — the `ParallelContext` setup

@@ -121,6 +121,25 @@ manager and this scenario doesn't cover that.)
    check: `meson test -C dev/build-debug --suite regress --test
    stats` is green.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`heap-tuple-freeze`](../idioms/heap-tuple-freeze.md) | shares files: `src/backend/access/heap/heapam.c` |
+| [`heaptuple-update-chain`](../idioms/heaptuple-update-chain.md) | shares files: `src/backend/access/heap/heapam.c` |
+| [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+| [`tuple-locking-modes`](../idioms/tuple-locking-modes.md) | shares files: `src/backend/access/heap/heapam.c` |
+| [`wal-record-construction`](../idioms/wal-record-construction.md) | shares files: `src/backend/access/heap/heapam.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Forgot the paired IOContext.** The comment at `bufmgr.h:31-33`

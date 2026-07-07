@@ -238,6 +238,20 @@ polling.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-bgworker`](../scenarios/add-new-bgworker.md)
+- [`add-new-test-module`](../scenarios/add-new-test-module.md)
+- [`add-startup-hook`](../scenarios/add-startup-hook.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `.claude/skills/bgworker-and-extensions/SKILL.md` —

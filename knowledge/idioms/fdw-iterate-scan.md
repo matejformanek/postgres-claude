@@ -232,6 +232,18 @@ call returns at a time). However:
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+_(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/fdw-routine-callbacks.md` — full

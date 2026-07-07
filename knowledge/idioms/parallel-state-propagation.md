@@ -725,6 +725,20 @@ grep -n "ParallelWorkerReportLastRecEnd\|last_xlog_end" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-guc`](../scenarios/add-new-guc.md)
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+- [`add-new-protocol-message`](../scenarios/add-new-protocol-message.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[parallel-context-and-dsm]] — the leader-side serialization

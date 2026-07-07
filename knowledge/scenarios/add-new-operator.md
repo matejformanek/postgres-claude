@@ -102,6 +102,21 @@ The tree must build cleanly at the end of each phase.
    exercised. Phase-end check: `meson test -C dev/build-debug --suite
    regress` green; `psql -c "\do+ <opname>"` shows the new operator.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 1. **`oprcanhash` is a hard contract, `oprcanmerge` is a hint.**

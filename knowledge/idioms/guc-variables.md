@@ -191,3 +191,17 @@ if a static initializer can produce it. [from-README
 | [`src/test/modules/worker_spi/worker_spi.c`](../files/src/test/modules/worker_spi/worker_spi.c.md) | 303 | \| -360 \| targeted (custom-GUC defs + MarkGUCPrefixReserved) \| SKILL.md §1.3 \| |
 
 <!-- /callsites:auto -->
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-bgworker`](../scenarios/add-new-bgworker.md)
+- [`add-new-cost-model-knob`](../scenarios/add-new-cost-model-knob.md)
+- [`add-new-guc`](../scenarios/add-new-guc.md)
+- [`add-startup-hook`](../scenarios/add-startup-hook.md)
+
+<!-- /scenarios:auto -->

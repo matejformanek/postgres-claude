@@ -484,6 +484,18 @@ grep -n "hashbucketcleanup" source/src/backend/access/hash/hash.c
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[hash-page-layout]] — the addressing this mutates.

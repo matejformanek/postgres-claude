@@ -480,6 +480,18 @@ grep -n "cost_agg\b" source/src/backend/optimizer/path/costsize.c
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[aggregate-trans-state]] — transfunc / finalfunc model.

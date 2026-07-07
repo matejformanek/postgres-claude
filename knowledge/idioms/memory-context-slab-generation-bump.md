@@ -638,6 +638,20 @@ grep -Rn 'BumpContextCreate' source/src/backend
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+- [`add-new-replication-message`](../scenarios/add-new-replication-message.md)
+- [`fix-memory-leak`](../scenarios/fix-memory-leak.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[memory-context-api-and-dispatch]] — the abstract API and the 4-bit

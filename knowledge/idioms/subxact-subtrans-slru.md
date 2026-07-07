@@ -445,6 +445,18 @@ ls source/src/test/isolation/specs/subxid-overflow.spec
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+_(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[subxact-xidcache-and-pgproc]] — the in-PGPROC cache; pg_subtrans

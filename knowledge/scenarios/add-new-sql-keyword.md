@@ -120,6 +120,24 @@ The tree must build at the end of each phase.
    the bareword (e.g. `SELECT … AS system_user`) will now fail and
    needs quoting. This phase exists to bound the blast radius.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | shares files: `src/include/catalog/catversion.h`, `src/include/catalog/pg_proc.dat` |
+| [`node-types`](../idioms/node-types.md) | shares files: `src/include/nodes/parsenodes.h` |
+| [`node-types-and-lists`](../idioms/node-types-and-lists.md) | direct reference |
+| [`parser-pipeline`](../idioms/parser-pipeline.md) | direct reference |
+| [`security-barrier-views`](../idioms/security-barrier-views.md) | shares files: `src/include/nodes/parsenodes.h` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **kwlist.h sort order.** `gen_keywordlist.pl` requires ASCII order;

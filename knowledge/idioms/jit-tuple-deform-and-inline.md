@@ -470,6 +470,18 @@ grep -rn "with_llvm\|BITCODE\|\.bc:" source/src/Makefile.global.in source/src/Ma
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-expression-eval-step`](../scenarios/add-new-expression-eval-step.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[jit-provider-and-context]] — JitContext lifecycle + cost gates that enable PGJIT_DEFORM / PGJIT_INLINE.

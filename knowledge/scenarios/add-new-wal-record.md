@@ -158,6 +158,28 @@ when the answer is "nothing, but here's where your code is consumed".)
    green; for the paranoia pass, run with `wal_consistency_checking=all`
    set in the cluster's `postgresql.conf`.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`checkpoint-coordination`](../idioms/checkpoint-coordination.md) | shares files: `src/backend/access/transam/xlog.c` |
+| [`crash-recovery-startup`](../idioms/crash-recovery-startup.md) | direct reference |
+| [`vacuum-hot-prune`](../idioms/vacuum-hot-prune.md) | shares files: `src/include/access/heapam_xlog.h` |
+| [`wal-buffer-state`](../idioms/wal-buffer-state.md) | shares files: `src/backend/access/transam/xlog.c` |
+| [`wal-page-format`](../idioms/wal-page-format.md) | direct reference |
+| [`wal-page-write-flush`](../idioms/wal-page-write-flush.md) | shares files: `src/backend/access/transam/xlog.c` |
+| [`wal-record-construction`](../idioms/wal-record-construction.md) | direct reference |
+| [`xlog-region-replay`](../idioms/xlog-region-replay.md) | direct reference |
+| [`xloginsertlock-partitioning`](../idioms/xloginsertlock-partitioning.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`XLOG_PAGE_MAGIC` is not bumped automatically.** Reviewers

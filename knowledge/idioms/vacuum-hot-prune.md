@@ -442,6 +442,18 @@ grep -rn "PageSetPrunable\|PageGetPruneXid\|pd_prune_xid" source/src/backend/
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-wal-record`](../scenarios/add-new-wal-record.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[heap-tuple-freeze]] — same plan-then-execute model, applied in the same critical section.

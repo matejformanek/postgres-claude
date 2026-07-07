@@ -234,6 +234,19 @@ match. The `unknownEqFalse` flag selects the SQL semantics.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-node-type`](../scenarios/add-new-node-type.md)
+- [`add-new-plan-node`](../scenarios/add-new-plan-node.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/plannerinfo.md` —

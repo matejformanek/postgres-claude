@@ -423,3 +423,32 @@ for the impl + `pg_amop.dat` if it's indexable + …).
 | [`src/include/utils/syscache.h`](../files/src/include/utils/syscache.h.md) | 30 | Use the numbered variants (SearchSysCache1 etc.) — they're faster and insulate callers from... |
 
 <!-- /callsites:auto -->
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-aggregate-function`](../scenarios/add-new-aggregate-function.md)
+- [`add-new-buffer-strategy`](../scenarios/add-new-buffer-strategy.md)
+- [`add-new-builtin-function`](../scenarios/add-new-builtin-function.md)
+- [`add-new-cast`](../scenarios/add-new-cast.md)
+- [`add-new-data-type`](../scenarios/add-new-data-type.md)
+- [`add-new-error-code`](../scenarios/add-new-error-code.md)
+- [`add-new-extension`](../scenarios/add-new-extension.md)
+- [`add-new-index-am`](../scenarios/add-new-index-am.md)
+- [`add-new-node-type`](../scenarios/add-new-node-type.md)
+- [`add-new-operator`](../scenarios/add-new-operator.md)
+- [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
+- [`add-new-pg-stat-view`](../scenarios/add-new-pg-stat-view.md)
+- [`add-new-sql-keyword`](../scenarios/add-new-sql-keyword.md)
+- [`add-new-system-catalog-column`](../scenarios/add-new-system-catalog-column.md)
+- [`add-new-system-view`](../scenarios/add-new-system-view.md)
+- [`add-new-table-am`](../scenarios/add-new-table-am.md)
+- [`add-new-utility-statement`](../scenarios/add-new-utility-statement.md)
+- [`bump-catversion`](../scenarios/bump-catversion.md)
+- [`remove-from-catalog`](../scenarios/remove-from-catalog.md)
+
+<!-- /scenarios:auto -->

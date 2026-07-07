@@ -327,3 +327,14 @@ snapshot.
 - Memory contexts: `knowledge/idioms/memory-contexts.md`
 - Error reporting and PG_TRY/PG_CATCH: `knowledge/idioms/error-handling.md`
 - Manual chapter: <https://www.postgresql.org/docs/current/spi.html> [from-docs]
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`integrate-with-plpgsql`](../scenarios/integrate-with-plpgsql.md)
+
+<!-- /scenarios:auto -->

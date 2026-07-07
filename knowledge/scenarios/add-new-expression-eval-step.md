@@ -115,6 +115,31 @@ The tree must build at the end of each phase.
    break the JIT mirror surface in CI. Phase-end check: both JIT-on and
    JIT-off regress runs are green.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`aggregate-grouping-sets`](../idioms/aggregate-grouping-sets.md) | shares files: `src/backend/executor/nodeAgg.c` |
+| [`aggregate-hash-vs-sort`](../idioms/aggregate-hash-vs-sort.md) | shares files: `src/backend/executor/nodeAgg.c` |
+| [`aggregate-partial-finalize`](../idioms/aggregate-partial-finalize.md) | shares files: `src/backend/executor/nodeAgg.c` |
+| [`aggregate-trans-state`](../idioms/aggregate-trans-state.md) | shares files: `src/backend/executor/nodeAgg.c` |
+| [`expression-evaluator-flow`](../idioms/expression-evaluator-flow.md) | direct reference |
+| [`exprevalstep-shape`](../idioms/exprevalstep-shape.md) | shares files: `src/backend/executor/execExpr.c`, `src/backend/executor/execExprInterp.c`, `src/include/executor/execExpr.h` |
+| [`jit-expression-codegen`](../idioms/jit-expression-codegen.md) | direct reference |
+| [`jit-provider-and-context`](../idioms/jit-provider-and-context.md) | shares files: `src/backend/jit/jit.c` |
+| [`jit-tuple-deform-and-inline`](../idioms/jit-tuple-deform-and-inline.md) | direct reference |
+| [`memory-context-slab-generation-bump`](../idioms/memory-context-slab-generation-bump.md) | shares files: `src/backend/executor/nodeAgg.c` |
+| [`query-tree-walkers`](../idioms/query-tree-walkers.md) | shares files: `src/backend/nodes/nodeFuncs.c` |
+| [`utility-stmt-planning`](../idioms/utility-stmt-planning.md) | shares files: `src/backend/executor/execExpr.c` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Enum / dispatch_table order drift** — `execExpr.h` enum order MUST

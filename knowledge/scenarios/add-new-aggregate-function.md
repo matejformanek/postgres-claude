@@ -61,6 +61,24 @@ last_verified_commit: e18b0cb7344
 
 4. **Phase 4 — Docs.** Files: [8, 9]. Edits: add the aggregate to the appropriate SGML table with signature, description, and (if non-obvious) a note on partial-aggregation support. Phase-end check: `meson compile -C dev/build-debug docs` renders without xmllint errors.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`aggregate-partial-finalize`](../idioms/aggregate-partial-finalize.md) | shares files: `src/include/catalog/pg_aggregate.h` |
+| [`aggregate-trans-state`](../idioms/aggregate-trans-state.md) | shares files: `src/include/catalog/pg_aggregate.h` |
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | direct reference |
+| [`fmgr`](../idioms/fmgr.md) | shares files: `src/include/fmgr.h` |
+| [`memory-contexts`](../idioms/memory-contexts.md) | direct reference |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **`aggtranstype = internal` requires explicit serial/deserial for parallel.** If `aggtranstype` is `'internal'` (state is a pointer to a struct palloc'd in the aggregate memory context), the planner refuses to use partial aggregation across workers unless both `aggserialfn` and `aggdeserialfn` are present. Symptom: no parallel plan, no error message. Reference: `array_agg` / `string_agg` parallelisation in commit `16fd03e9565` [verified-by-code](source/src/include/catalog/pg_aggregate.dat:563).

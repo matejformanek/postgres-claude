@@ -416,6 +416,18 @@ grep -n "ginbtree\|ginData" source/src/backend/access/gin/gindatapage.c | head
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+_(none detected — this idiom is either cross-cutting infrastructure or an internal helper pattern)_
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[gin-fastupdate-pending]] — the pending-list buffer between inserter and entry tree.

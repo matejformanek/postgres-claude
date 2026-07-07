@@ -562,6 +562,18 @@ grep -n "force all children to be visited\|/\* force \"match\"" \
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-operator-class`](../scenarios/add-new-operator-class.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - [[spgist-tree-and-tuples]] — the structs this scan walks; the

@@ -130,6 +130,26 @@ either auto-regenerated or "verify but don't touch".
    plan → out → read for round-trip). Phase-end check: full
    `meson test -C dev/build-debug` green with round-trip GUCs on.
 
+
+
+## Idioms invoked
+<!-- idioms-invoked:auto -->
+
+*Auto-derived from direct references + transitive file-overlap with idiom Call sites.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+| Idiom | Evidence |
+|---|---|
+| [`aggregate-partial-finalize`](../idioms/aggregate-partial-finalize.md) | shares files: `src/include/nodes/nodes.h` |
+| [`catalog-conventions`](../idioms/catalog-conventions.md) | shares files: `src/include/catalog/catversion.h` |
+| [`node-types`](../idioms/node-types.md) | shares files: `src/backend/nodes/gen_node_support.pl`, `src/include/nodes/primnodes.h` |
+| [`node-types-and-lists`](../idioms/node-types-and-lists.md) | shares files: `src/backend/nodes/gen_node_support.pl`, `src/include/nodes/nodes.h` |
+| [`portable-identifiers`](../idioms/portable-identifiers.md) | shares files: `src/include/nodes/primnodes.h` |
+| [`query-tree-walkers`](../idioms/query-tree-walkers.md) | shares files: `src/backend/nodes/nodeFuncs.c` |
+| [`subplan-and-initplan`](../idioms/subplan-and-initplan.md) | shares files: `src/include/nodes/primnodes.h` |
+
+<!-- /idioms-invoked:auto -->
+
 ## Pitfalls
 
 - **Trap 1 — Adding an Expr subtype but forgetting `nodeFuncs.c`.**

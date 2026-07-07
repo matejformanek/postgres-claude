@@ -229,6 +229,18 @@ resets between Gather batches.
 
 <!-- /callsites:auto -->
 
+
+
+## Scenarios that use me
+<!-- scenarios:auto -->
+
+*Auto-derived from direct references + transitive file-overlap.*
+*Refresh via `scripts/build-scenario-idiom-matrix.py`.*
+
+- [`add-new-table-am`](../scenarios/add-new-table-am.md)
+
+<!-- /scenarios:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/indexamroutine.md` — companion
