@@ -3,7 +3,22 @@
 **Date:** 2026-07-07
 **Mode:** interactive, user prompt: "focus on the ctx of the files & mainly some useful skills that should be baked into it so that we have good understanding and interconnections between different parts of the system which should allow us to easily create new parts as we will get the whole chained link connection when adding some feature"
 
-## Ship list (9 PRs, all merged)
+## Ship list summary
+
+**43 PRs merged across 3 phases:**
+
+**Phase 1 — Graph interconnection (11 PRs #492-#502, plus #504 gitignore, #508 idempotency fix):**
+Corpus graph edge layers materialized + query engine + planner integration + cloud routine.
+
+**Phase 2 — 20 subsystem-focused skills (PRs #503, #505-#507, #509-#519, #525-#530, #532-#533):**
+Every top harvester `gap:*` addressed with a compact reference skill (~150-200 lines each).
+
+**Phase 3 — Persona edge + depth-2 chain traversal (PRs #520-#524):**
+7th graph edge (persona ↔ scenario) + depth-2 pattern-siblings + query engine surfacing.
+
+**Bookkeeping (PRs #501, #521, #531, #534):** master nav + session log + STATE.md + cloud routine updates.
+
+## Ship list (initial 9 PRs, 2026-07-07 morning)
 
 | # | PR | Landed |
 |---|---|---|
@@ -114,16 +129,55 @@ plan §8 auto-satisfies "≥1 idiom per phase" from the chain
 
 Every arrow is a materialized block in the corpus. No manual grepping in the middle. The user's "whole chained link connection" is now the default flow.
 
+## Phase 2 — Subsystem skills (20 new)
+
+Every top harvester `gap:*` fills a compact reference skill (~150-200 lines each), dogfooding the corpus graph via `corpus-chain --keywords` at the start.
+
+| PR | Skill | Fills |
+|---|---|---|
+| #503 | `copy-family` | gap:copy-command (3×) |
+| #505 | `pgstat-framework` | gap:pgstat-cumulative-stats (5×) |
+| #506 | `process-lifecycle` | gap:process-lifecycle (2×) |
+| #507 | `aio-readstream` | gap:aio-readstream |
+| #509 | `vacuum-autovacuum` | gap:vacuum-autovacuum (3×) |
+| #510 | `logical-replication` | gap:logical-replication (8×) |
+| #511 | `row-level-security` | gap:rls (2×) |
+| #512 | `free-space-map` | gap:fsm (2×) |
+| #513 | `multixact` | gap:multixact |
+| #514 | `collation-provider` | gap:collation-provider |
+| #515 | `wire-protocol` | gap:wire-protocol |
+| #517 | `plpgsql-internals` | gap:plpgsql-internals |
+| #518 | `fdw-development` | gap:fdw |
+| #519 | `jsonpath-and-jsonb` | gap:jsonpath |
+| #525 | `type-cache` | typcache infrastructure |
+| #526 | `resource-owners` | ResourceOwner + release phases + callback API |
+| #527 | `extended-statistics` | CREATE STATISTICS + 4 kinds |
+| #528 | `toast-storage` | out-of-line + compressed varlena |
+| #529 | `buffer-manager` | shared_buffers + BufferAccessStrategy |
+| #530 | `slru-infrastructure` | bank-locked LRU under CLOG etc. |
+| #532 | `physical-replication` | streaming to physical standby |
+| #533 | `snapshot-management` | MVCC snapshots + visibility + isolation |
+
+## Phase 3 — 7th edge (personas) + depth-2
+
+- **#520** `build-persona-scenario-matrix.py` — 22 personas × 34 scenarios = 181 real edges via Domain-ownership overlap.
+- **#521** persona step wired into `pg-corpus-graph-refresh` (04:17 nightly).
+- **#522** corpus-chain surfaces `Likely reviewers (personas)` in scenario queries.
+- **#523** `--depth 2` implemented (pattern-sibling idioms via ≥2 shared-file threshold).
+- **#524** corpus-chain skill doc updated.
+
 ## Outstanding follow-ups
 
-- Update `progress/STATE.md` with a Phase E entry documenting this sweep (memory-keeping pass — deferred to next session).
-- Handle the 2 untracked skill workspaces (`pg-feature-brainstorm-workspace/`, `pg-feature-plan-workspace/`) from Jun-17 skill-creator runs — either `.gitignore` them or delete.
-- The COPY-family skill gap flagged by `pg-user-question-harvester` (#434) — still open.
-- `headers-wave3` subsystem: empty Files owned block; unclear what it should map to. Ask user or retire the doc.
-- Depth-2 traversal in corpus-chain for cases where the 1-hop neighborhood is insufficient.
+- STATE.md structural refactor (Phase A content still points at closed 06-15 queue).
+- `headers-wave3` subsystem investigation.
+- More skills possible: node-infrastructure (gen_node_support), planner-cost-model, custom-scan-api, executor-node-lifecycle, backup-and-recovery.
+- Real feature attempt using the newly-wired trilogy (dogfooding validation).
 
 ## References
 
-- PRs: #492, #493, #494, #495, #496, #497, #498, #499, #500
+- **Phase 1 PRs:** #492-#502, #504, #508 (13 PRs — graph + query engine + integration + fixes).
+- **Phase 2 PRs:** #503, #505-#507, #509-#519, #525-#530, #532-#533 (22 PRs — new subsystem skills).
+- **Phase 3 PRs:** #520-#524 (5 PRs — personas + depth-2).
+- **Nav / bookkeeping:** #501, #516, #521, #531, #534 (5 PRs).
 - Prior interconnection audit: earlier this session (turn 3).
 - Related past work: `sessions/2026-06-16-scenarios-layer.md` (built the scenarios layer that this sweep interconnects).
