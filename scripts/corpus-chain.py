@@ -54,6 +54,7 @@ KNOWLEDGE = ROOT / "knowledge"
 SCENARIOS = KNOWLEDGE / "scenarios"
 IDIOMS = KNOWLEDGE / "idioms"
 SUBSYSTEMS = KNOWLEDGE / "subsystems"
+DATA_STRUCTURES = KNOWLEDGE / "data-structures"
 FILES_DOCS = KNOWLEDGE / "files"
 PLANNING = ROOT / "planning"
 SESSIONS = ROOT / "sessions"
@@ -150,6 +151,33 @@ def load_scenarios():
     return data
 
 
+def load_data_structures():
+    """ds_slug → {'callsites': set[path], 'title': str}"""
+    data: dict[str, dict] = {}
+    if not DATA_STRUCTURES.exists():
+        return data
+    for p in sorted(DATA_STRUCTURES.glob("*.md")):
+        if not _slug_ok(p.name):
+            continue
+        text = p.read_text()
+        callsites = set()
+        m = re.search(
+            r"## Call sites\s*\n<!-- callsites:auto -->(.*?)<!-- /callsites:auto -->",
+            text,
+            re.DOTALL,
+        )
+        if m:
+            callsites = _paths_in(m.group(1))
+        else:
+            callsites = _paths_in(text)
+        data[p.stem] = {
+            "path": p,
+            "callsites": callsites,
+            "title": _first_heading(text),
+        }
+    return data
+
+
 def load_subsystems():
     """subsystem_slug → {'path': …, 'title': …, 'refs_files': set[path]}"""
     data: dict[str, dict] = {}
@@ -218,7 +246,7 @@ def resolve_keyword_anchors(keywords: str, scenarios, idioms):
 
 
 def chain_from_scenario(
-    slug: str, scenarios, idioms, subsystems, depth: int = 1
+    slug: str, scenarios, idioms, subsystems, data_structures, depth: int = 1
 ):
     if slug not in scenarios:
         return None
@@ -250,6 +278,13 @@ def chain_from_scenario(
     # Subsystems: infer from file paths
     subs = _map_files_to_subsystems(files, subsystems)
 
+    # Data-structures reachable via file overlap
+    ds_hits: dict[str, set[str]] = defaultdict(set)
+    for f in files:
+        for ds, meta in data_structures.items():
+            if f in meta["callsites"]:
+                ds_hits[ds].add(f)
+
     return {
         "anchor": {"kind": "scenario", "slug": slug, "title": node["title"]},
         "files": sorted(files),
@@ -260,10 +295,11 @@ def chain_from_scenario(
         "all_idioms": sorted(all_idioms),
         "adjacent_scenarios": adj_scenarios,
         "subsystems": subs,
+        "data_structures": {k: sorted(v) for k, v in ds_hits.items()},
     }
 
 
-def chain_from_idiom(slug: str, scenarios, idioms, subsystems, depth: int = 1):
+def chain_from_idiom(slug: str, scenarios, idioms, subsystems, data_structures, depth: int = 1):
     if slug not in idioms:
         return None
     node = idioms[slug]
@@ -281,20 +317,30 @@ def chain_from_idiom(slug: str, scenarios, idioms, subsystems, depth: int = 1):
 
     subs = _map_files_to_subsystems(callsites, subsystems)
 
+    # Data-structures reachable via file overlap
+    ds_hits: dict[str, set[str]] = defaultdict(set)
+    for f in callsites:
+        for ds, meta in data_structures.items():
+            if f in meta["callsites"]:
+                ds_hits[ds].add(f)
+
     return {
         "anchor": {"kind": "idiom", "slug": slug, "title": node["title"]},
         "callsites": sorted(callsites),
         "scenarios_using": sorted(scenarios_using),
         "sibling_idioms": {k: sorted(v)[:5] for k, v in sibling_idioms.items()},
         "subsystems": subs,
+        "data_structures": {k: sorted(v) for k, v in ds_hits.items()},
     }
 
 
-def chain_from_file(path: str, scenarios, idioms, subsystems):
+def chain_from_file(path: str, scenarios, idioms, subsystems, data_structures):
     # Owner subsystem: via path prefix
     subs = _map_files_to_subsystems({path}, subsystems)
     # Idioms citing this file
     citing = sorted(slug for slug, m in idioms.items() if path in m["callsites"])
+    # Data-structures citing this file
+    ds_citing = sorted(slug for slug, m in data_structures.items() if path in m["callsites"])
     # Scenarios touching this file
     touching = sorted(slug for slug, m in scenarios.items() if path in m["files"])
     # File doc pointer
@@ -307,6 +353,7 @@ def chain_from_file(path: str, scenarios, idioms, subsystems):
         "anchor": {"kind": "file", "path": path, "doc": str(doc.relative_to(ROOT)) if doc else None},
         "subsystems": subs,
         "idioms_citing": citing,
+        "data_structures_citing": ds_citing,
         "scenarios_touching": touching,
     }
 
@@ -428,6 +475,13 @@ def render(chain, past=None) -> str:
             lines.append("_(subsystem docs don't cite these files directly — path-prefix map may be needed)_")
         lines.append("")
 
+        ds = chain.get("data_structures", {})
+        if ds:
+            lines.append("## Data structures involved")
+            for name, files in sorted(ds.items()):
+                lines.append(f"- [`{name}`](knowledge/data-structures/{name}.md) — {len(files)} file(s)")
+            lines.append("")
+
     elif kind == "idiom":
         slug = chain["anchor"]["slug"]
         title = chain["anchor"]["title"] or slug
@@ -461,6 +515,13 @@ def render(chain, past=None) -> str:
             lines.append(f"- [`{sub}`](knowledge/subsystems/{sub}.md) — {len(files)} file(s)")
         lines.append("")
 
+        ds = chain.get("data_structures", {})
+        if ds:
+            lines.append("## Data structures involved")
+            for name, files in sorted(ds.items()):
+                lines.append(f"- [`{name}`](knowledge/data-structures/{name}.md) — {len(files)} file(s)")
+            lines.append("")
+
     elif kind == "file":
         path = chain["anchor"]["path"]
         lines.append(f"# Chain map: file `{path}`")
@@ -474,6 +535,12 @@ def render(chain, past=None) -> str:
         for idm in chain["idioms_citing"]:
             lines.append(f"- [`{idm}`](knowledge/idioms/{idm}.md)")
         lines.append("")
+        ds = chain.get("data_structures_citing", [])
+        if ds:
+            lines.append(f"## Data structures documented here ({len(ds)})")
+            for name in ds:
+                lines.append(f"- [`{name}`](knowledge/data-structures/{name}.md)")
+            lines.append("")
         lines.append(f"## Scenarios touching this file ({len(chain['scenarios_touching'])})")
         for sc in chain["scenarios_touching"]:
             lines.append(f"- [`{sc}`](knowledge/scenarios/{sc}.md)")
@@ -541,23 +608,24 @@ def main() -> int:
     scenarios = load_scenarios()
     idioms = load_idioms()
     subsystems = load_subsystems()
+    data_structures = load_data_structures()
 
     if args.scenario:
-        chain = chain_from_scenario(args.scenario, scenarios, idioms, subsystems, args.depth)
+        chain = chain_from_scenario(args.scenario, scenarios, idioms, subsystems, data_structures, args.depth)
         if not chain:
             print(f"_(scenario `{args.scenario}` not found — available: {', '.join(sorted(scenarios)[:8])}, ...)_")
             return 1
         past = past_features_for(chain["files"], [args.scenario])
         print(render(chain, past))
     elif args.idiom:
-        chain = chain_from_idiom(args.idiom, scenarios, idioms, subsystems, args.depth)
+        chain = chain_from_idiom(args.idiom, scenarios, idioms, subsystems, data_structures, args.depth)
         if not chain:
             print(f"_(idiom `{args.idiom}` not found — available: {', '.join(sorted(idioms)[:8])}, ...)_")
             return 1
         past = past_features_for(chain["callsites"], [args.idiom])
         print(render(chain, past))
     elif args.file:
-        chain = chain_from_file(args.file, scenarios, idioms, subsystems)
+        chain = chain_from_file(args.file, scenarios, idioms, subsystems, data_structures)
         past = past_features_for({args.file}, [Path(args.file).stem])
         print(render(chain, past))
     elif args.keywords:
