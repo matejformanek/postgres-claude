@@ -170,3 +170,24 @@ if a static initializer can produce it. [from-README
 | `source/src/include/utils/guc_tables.h` | scanned (lines 22-209 for structs) | conceptual model |
 | `source/src/backend/utils/misc/guc.c:5178-5228` | targeted (`MarkGUCPrefixReserved`) | §"Namespacing" + SKILL.md §1.4 |
 | `source/src/test/modules/worker_spi/worker_spi.c:303-360` | targeted (custom-GUC defs + MarkGUCPrefixReserved) | SKILL.md §1.3 |
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/misc/guc.c`](../files/src/backend/utils/misc/guc.c.md) | 5178 | [verified-by-code -5228] |
+| [`src/include/utils/guc.h`](../files/src/include/utils/guc.h.md) | 37 | guc.h:37. [verified-by-code ] |
+| [`src/include/utils/guc.h`](../files/src/include/utils/guc.h.md) | 71 | a context (PGC_INTERNAL .. PGC_USERSET) controlling who can change it and when — [verified-by-code -80] |
+| [`src/include/utils/guc.h`](../files/src/include/utils/guc.h.md) | 88 | [verified-by-code -127] |
+| [`src/include/utils/guc.h`](../files/src/include/utils/guc.h.md) | 111 | a source tracker (PGC_S_DEFAULT .. PGC_S_SESSION) recording where the current value came from, so a... |
+| [`src/include/utils/guc.h`](../files/src/include/utils/guc.h.md) | 222 | [verified-by-code -228] |
+| [`src/include/utils/guc.h`](../files/src/include/utils/guc.h.md) | 223 | [verified-by-code ] |
+| [`src/include/utils/guc_tables.h`](../files/src/include/utils/guc_tables.h.md) | 22 | a type (PGC_BOOL / PGC_INT / PGC_REAL / PGC_STRING / PGC_ENUM) — [verified-by-code -27] |
+| [`src/test/modules/worker_spi/worker_spi.c`](../files/src/test/modules/worker_spi/worker_spi.c.md) | 303 | \| -360 \| targeted (custom-GUC defs + MarkGUCPrefixReserved) \| SKILL.md §1.3 \| |
+
+<!-- /callsites:auto -->

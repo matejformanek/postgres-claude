@@ -171,6 +171,23 @@ inspection.
 - Callback registration:
   `grep -RIn 'CacheRegisterSyscacheCallback\|CacheRegisterRelcacheCallback' source/src source/contrib`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/ipc/sinvaladt.c`](../files/src/backend/storage/ipc/sinvaladt.c.md) | — | shared invalidation array + queue |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | — | message creation + per-backend consumption |
+| [`src/include/storage/sinvaladt.h`](../files/src/include/storage/sinvaladt.h.md) | — | public API |
+| [`src/include/utils/inval.h`](../files/src/include/utils/inval.h.md) | — | message-kind constants |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/catalog-conventions/SKILL.md` — catalog changes must register sinval invalidations via `CacheInvalidate*`.

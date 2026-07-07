@@ -216,6 +216,23 @@ optimization pays.
 - JIT compilation:
   `grep -RIn 'llvm_compile_expr\|jit_compile_expr' source/src/backend/jit | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execExpr.c`](../files/src/backend/executor/execExpr.c.md) | 1 | design overview |
+| [`src/backend/executor/execExpr.c`](../files/src/backend/executor/execExpr.c.md) | — | init + main interpreter |
+| [`src/backend/executor/execExprInterp.c`](../files/src/backend/executor/execExprInterp.c.md) | — | interpreter loop |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | — | opcodes |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/tupletableslot.md` — slots

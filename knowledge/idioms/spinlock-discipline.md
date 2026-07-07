@@ -184,6 +184,22 @@ the macros may need its own barriers.
 - BufferDesc spinlock pattern:
   `grep -RIn 'LockBufHdr\|UnlockBufHdr' source/src/backend/storage/buffer | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/include/storage/s_lock.h`](../files/src/include/storage/s_lock.h.md) | 1 | design comments + implementation contract |
+| [`src/include/storage/s_lock.h`](../files/src/include/storage/s_lock.h.md) | — | implementation contract + architecture dispatch |
+| [`src/include/storage/spin.h`](../files/src/include/storage/spin.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/lwlock-rank-discipline.md` — the heavier

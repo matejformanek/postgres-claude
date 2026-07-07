@@ -208,6 +208,25 @@ message catalog, not the ereport caller's.
 - The dispatch loop:
   `grep -n 'error_context_stack' source/src/backend/utils/error/elog.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/copyfromparse.c`](../files/src/backend/commands/copyfromparse.c.md) | — | canonical consumer (COPY emits per-line context) |
+| [`src/backend/utils/error/elog.c`](../files/src/backend/utils/error/elog.c.md) | 519 | dispatch loop |
+| [`src/backend/utils/error/elog.c`](../files/src/backend/utils/error/elog.c.md) | — | implementation; the EmitErrorReport dispatch loop |
+| [`src/include/utils/elog.h`](../files/src/include/utils/elog.h.md) | 311 | the struct + global head |
+| [`src/include/utils/elog.h`](../files/src/include/utils/elog.h.md) | — | public API + struct |
+| [`src/pl/plpgsql/src/pl_exec.c`](../files/src/pl/plpgsql/src/pl_exec.md) | — | heavy user (per-function-frame context) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/error-handling/SKILL.md` — ereport + PG_TRY

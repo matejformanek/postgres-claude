@@ -523,6 +523,30 @@ grep -n "scanPendingInsert" source/src/backend/access/gin/
 grep -n "ItemPointerIsLossyPage\|ItemPointerSetLossyPage" source/src/backend/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/gin/ginget.c`](../files/src/backend/access/gin/ginget.c.md) | 69 | scanPostingTree (descend into a posting tree for a key) |
+| [`src/backend/access/gin/ginget.c`](../files/src/backend/access/gin/ginget.c.md) | 319 | startScanEntry |
+| [`src/backend/access/gin/ginget.c`](../files/src/backend/access/gin/ginget.c.md) | 507 | startScanKey |
+| [`src/backend/access/gin/ginget.c`](../files/src/backend/access/gin/ginget.c.md) | 605 | startScan + scanPendingInsert |
+| [`src/backend/access/gin/ginget.c`](../files/src/backend/access/gin/ginget.c.md) | 1005 | keyGetItem (per-key advancement + consistentFn call) |
+| [`src/backend/access/gin/ginget.c`](../files/src/backend/access/gin/ginget.c.md) | 1300 | scanGetItem (N-way merge across keys) |
+| [`src/backend/access/gin/ginget.c`](../files/src/backend/access/gin/ginget.c.md) | 1931 | gingetbitmap (top-level entry) |
+| [`src/backend/access/gin/ginlogic.c`](../files/src/backend/access/gin/ginlogic.c.md) | — | tri-valued consistency shim |
+| [`src/backend/access/gin/ginscan.c`](../files/src/backend/access/gin/ginscan.c.md) | 156 | ginNewScanKey (initialize scan keys from index quals) |
+| [`src/include/access/gin_private.h`](../files/src/include/access/gin_private.h.md) | 80 | GinState (per-relation cached FmgrInfo for the four support fns) |
+| [`src/include/access/gin_private.h`](../files/src/include/access/gin_private.h.md) | 255 | GinScanKey / GinScanEntry structs |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[gin-tree-structure]] — entry tree + posting tree the scan walks.

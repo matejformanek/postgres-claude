@@ -183,6 +183,22 @@ broadcast mechanism.]
 - Orphan-file cleanup:
   `grep -RIn 'RemoveOrphanedFiles\|smgrdounlink' source/src/backend | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 3761 | 3775 RelationSetNewRelfilenumber |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | — | RelationSetNewRelfilenumber implementation |
+| [`src/include/storage/relfilelocator.h`](../files/src/include/storage/relfilelocator.h.md) | — | RelFileNumber type |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/relfilelocator.md` — the

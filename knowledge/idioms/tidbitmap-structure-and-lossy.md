@@ -530,6 +530,21 @@ grep -n "recheck\|tbmres->recheck\|tbmres->lossy" \
     source/src/backend/nodes/tidbitmap.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/nodes/tidbitmap.c`](../files/src/backend/nodes/tidbitmap.c.md) | — | entire implementation |
+| [`src/include/nodes/tidbitmap.h`](../files/src/include/nodes/tidbitmap.h.md) | — | public API + TBMIterateResult |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[tidbitmap-build-and-iterate]] — the dynamic half: insert,

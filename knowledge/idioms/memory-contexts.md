@@ -247,6 +247,23 @@ to its server log [verified-by-code] (`memutils.h:104-105`).
 - Need cleanup of a non-PG resource tied to a context lifetime →
   `MemoryContextRegisterResetCallback`.
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/mmgr/mcxt.c`](../files/src/backend/utils/mmgr/mcxt.c.md) | — | type-independent management |
+| [`src/include/nodes/memnodes.h`](../files/src/include/nodes/memnodes.h.md) | — | MemoryContextData struct |
+| [`src/include/utils/memutils.h`](../files/src/include/utils/memutils.h.md) | — | context creation + globals |
+| [`src/include/utils/palloc.h`](../files/src/include/utils/palloc.h.md) | — | allocation API |
+
+<!-- /callsites:auto -->
+
 ## Open questions / unverified
 
 - Exact behavior of `MemoryContextSetParent` when the new parent is in a

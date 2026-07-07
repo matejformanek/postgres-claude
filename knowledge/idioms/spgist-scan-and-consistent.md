@@ -546,6 +546,22 @@ grep -n "force all children to be visited\|/\* force \"match\"" \
     source/src/backend/access/spgist/spg*.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/spgist/spgscan.c`](../files/src/backend/access/spgist/spgscan.c.md) | — | whole scan path |
+| [`src/include/access/spgist.h`](../files/src/include/access/spgist.h.md) | — | spgInnerConsistentIn/Out, spgLeafConsistentIn/Out |
+| [`src/include/access/spgist_private.h`](../files/src/include/access/spgist_private.h.md) | 165 | SpGistSearchItem, SpGistScanOpaqueData |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[spgist-tree-and-tuples]] — the structs this scan walks; the

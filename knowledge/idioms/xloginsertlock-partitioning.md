@@ -264,6 +264,26 @@ inserter can flush past it without waiting.
 - Flusher wait:
   `grep -n 'WaitXLogInsertionsToFinish\|LWLockWaitForVar' source/src/backend/access/transam/xlog.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 157 | NUM_XLOGINSERT_LOCKS = 8 |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 374 | WALInsertLock struct |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 388 | WALInsertLockPadded (cache-line padding) |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 1149 | ReserveXLogInsertLocation (the spinlock window) |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 1412 | WALInsertLockAcquire |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 1456 | WALInsertLockAcquireExclusive (all 8) |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | — | full module |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/wal-buffer-state.md` — the buffer pool that

@@ -161,6 +161,21 @@ memory beyond their own duration — see
 - Pool-budget GUCs:
   `grep -n 'max_pred_locks' source/src/backend/utils/misc/guc_tables.c`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/predicate.c`](../files/src/backend/storage/lmgr/predicate.c.md) | — | implementation |
+| [`src/include/storage/predicate.h`](../files/src/include/storage/predicate.h.md) | — | public API header |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` — heavyweight locks (the other

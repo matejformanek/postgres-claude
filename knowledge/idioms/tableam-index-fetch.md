@@ -193,6 +193,22 @@ index gave it the TID. The contract is the TID + snapshot.
 - Executor callers:
   `grep -RIn 'table_index_fetch_tuple' source/src/backend/executor | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam_handler.c`](../files/src/backend/access/heap/heapam_handler.c.md) | 2695 | heapam's tuple_fetch_row_version assignment |
+| [`src/include/access/tableam.h`](../files/src/include/access/tableam.md) | 509 | tuple_fetch_row_version (the simpler sibling) |
+| [`src/include/access/tableam.h`](../files/src/include/access/tableam.md) | 1243 | index_fetch_tuple commentary |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/bitmap-heap-scan-flow.md` — bitmap scan

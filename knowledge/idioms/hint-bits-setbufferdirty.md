@@ -391,6 +391,30 @@ grep -n "XLOG_FPI_FOR_HINT\|XLogSaveBufferForHint" \
 grep -rn "XLogHintBitIsNeeded\|wal_log_hints" source/src/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 6 | module banner on hint-bit safety + the race rule |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 82 | SetHintBitsState enum (SHB_INITIAL / SHB_DISABLED / SHB_ENABLED) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 101 | SetHintBitsExt (the WAL-flush check + batched/non-batched dispatch) |
+| [`src/backend/access/heap/heapam_visibility.c`](../files/src/backend/access/heap/heapam_visibility.c.md) | 198 | SetHintBits (single-tuple wrapper) |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 5697 | MarkSharedBufferDirtyHint (the WAL-log-FPI-for-hint logic) |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 5829 | MarkBufferDirtyHint (top-level entry) |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 6952 | SharedBufferBeginSetHintBits (lock-mode upgrade dance) |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7050 | BufferBeginSetHintBits (acquire right to set hints) |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7078 | BufferFinishSetHintBits |
+| [`src/backend/storage/buffer/bufmgr.c`](../files/src/backend/storage/buffer/bufmgr.c.md) | 7101 | BufferSetHintBits16 (single-write fast path) |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | 204 | hint-bit definitions |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[heap-tuple-visibility-mvcc]] — the caller; when each hint gets set.

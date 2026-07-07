@@ -218,6 +218,26 @@ shortcut, manages tmpcontext / aggcontext.
 - Hashagg spill:
   `grep -n 'hashagg_spill\|hash_disk_used' source/src/backend/executor/nodeAgg.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 5 | the transvalue model |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 16 | aggsplit / combinefunc / serialize |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 37 | strict transfunc handling |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 61 | aggcontext + tmpcontext discipline |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | 709 | advance_transition_function |
+| [`src/backend/executor/nodeAgg.c`](../files/src/backend/executor/nodeAgg.c.md) | — | full source |
+| [`src/include/catalog/pg_aggregate.h`](../files/src/include/catalog/pg_aggregate.h.md) | — | catalog schema |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/datum-nullabledatum.md` —

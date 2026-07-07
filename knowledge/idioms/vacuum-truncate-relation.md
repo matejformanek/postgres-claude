@@ -170,6 +170,22 @@ relfilenumber.
 - Buffer drop:
   `grep -n 'AtTruncate_RelationBuffers' source/src/backend/storage/buffer/bufmgr.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/vacuumlazy.c`](../files/src/backend/access/heap/vacuumlazy.c.md) | — | lazy_truncate_heap caller |
+| [`src/backend/catalog/storage.c`](../files/src/backend/catalog/storage.c.md) | 282 | RelationTruncate entry |
+| [`src/backend/catalog/storage.c`](../files/src/backend/catalog/storage.c.md) | 422 | smgrtruncate call |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/relation-extension-lock.md` — extension

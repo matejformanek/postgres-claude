@@ -165,6 +165,21 @@ requires a copy.
 - `lappend` callers (volume; this is one of the most-used backend APIs):
   `grep -RIn 'lappend' source/src/backend | wc -l`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/nodes/list.c`](../files/src/backend/nodes/list.c.md) | — | implementation (~1100 LOC) |
+| [`src/include/nodes/pg_list.h`](../files/src/include/nodes/pg_list.h.md) | — | List struct, ListCell, the traversal macros |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/parser-and-nodes/SKILL.md` §"Walker / mutator quick reference" — interaction with `expression_tree_walker` etc.

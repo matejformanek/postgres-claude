@@ -501,6 +501,24 @@ grep -n "compare_path_costs\|selectivity" \
     source/src/backend/optimizer/path/indxpath.c | head
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/nodeBitmapAnd.c`](../files/src/backend/executor/nodeBitmapAnd.c.md) | — | N-way intersect |
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | — | fetch + recheck |
+| [`src/backend/executor/nodeBitmapIndexscan.c`](../files/src/backend/executor/nodeBitmapIndexscan.c.md) | — | AM-call entry |
+| [`src/backend/executor/nodeBitmapOr.c`](../files/src/backend/executor/nodeBitmapOr.c.md) | — | N-way union |
+| [`src/backend/optimizer/path/indxpath.c`](../files/src/backend/optimizer/path/indxpath.c.md) | — | selectivity ordering |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[tidbitmap-structure-and-lossy]] — `PagetableEntry`,

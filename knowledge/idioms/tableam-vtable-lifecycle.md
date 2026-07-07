@@ -213,6 +213,22 @@ resets between Gather batches.
 - TM_Result values:
   `grep -n 'TM_Result\|TM_Ok\|TM_Updated\|TM_Deleted' source/src/include/access/tableam.h | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam_handler.c`](../files/src/backend/access/heap/heapam_handler.c.md) | — | heap AM handler |
+| [`src/include/access/tableam.h`](../files/src/include/access/tableam.md) | 321 | TableAmRoutine struct |
+| [`src/include/access/tableam.h`](../files/src/include/access/tableam.md) | — | full type |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/indexamroutine.md` — companion

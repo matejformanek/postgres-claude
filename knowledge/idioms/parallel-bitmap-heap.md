@@ -253,6 +253,27 @@ the last detacher frees the shared iterator.
 - Heap-AM bitmap path:
   `grep -RIn 'table_beginscan_bm\|table_scan_bitmap_next_block\|table_scan_bitmap_next_tuple' source/src/backend/access/heap | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | 87 | ParallelBitmapHeapState |
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | 102 | BitmapTableScanSetup |
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | 115 | leader-builds, others-wait |
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | 136 | tbm_begin_iterate with shared dsa_pointer |
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | 174 | BitmapHeapNext |
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | 229 | BitmapDoneInitializingSharedState |
+| [`src/backend/executor/nodeBitmapHeapscan.c`](../files/src/backend/executor/nodeBitmapHeapscan.c.md) | — | full module |
+| [`src/backend/nodes/tidbitmap.c`](../files/src/backend/nodes/tidbitmap.c.md) | — | TBM implementation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/parallel-gather-merge.md` — Gather above.

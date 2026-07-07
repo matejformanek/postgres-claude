@@ -203,6 +203,22 @@ prioritize attention.
 - Wraparound logic:
   `grep -n 'wraparound\|EmergencyMode' source/src/backend/postmaster/autovacuum.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/postmaster/autovacuum.c`](../files/src/backend/postmaster/autovacuum.c.md) | 378 | do_autovacuum (worker main) |
+| [`src/backend/postmaster/autovacuum.c`](../files/src/backend/postmaster/autovacuum.c.md) | 413 | AutoVacLauncherMain |
+| [`src/backend/postmaster/autovacuum.c`](../files/src/backend/postmaster/autovacuum.c.md) | — | launcher + worker implementation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/vacuum-skip-pages.md` — what VACUUM

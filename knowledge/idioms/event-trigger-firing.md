@@ -205,6 +205,25 @@ triggers won't catch it.
 - Catalog:
   `grep -n 'pg_event_trigger' source/src/include/catalog/pg_event_trigger.h | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/event_trigger.c`](../files/src/backend/commands/event_trigger.c.md) | 727 | EventTriggerDDLCommandStart |
+| [`src/backend/commands/event_trigger.c`](../files/src/backend/commands/event_trigger.c.md) | 778 | EventTriggerDDLCommandEnd |
+| [`src/backend/commands/event_trigger.c`](../files/src/backend/commands/event_trigger.c.md) | 826 | EventTriggerSQLDrop |
+| [`src/backend/commands/event_trigger.c`](../files/src/backend/commands/event_trigger.c.md) | 1013 | EventTriggerTableRewrite |
+| [`src/backend/commands/event_trigger.c`](../files/src/backend/commands/event_trigger.c.md) | — | full module |
+| [`src/include/catalog/pg_event_trigger.h`](../files/src/include/catalog/pg_event_trigger.h.md) | — | catalog row |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/process-utility-hook-chain.md` —

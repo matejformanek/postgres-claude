@@ -417,6 +417,27 @@ grep -n "#define l_\|static inline.*l_struct_gep\|l_bb_append" \
        source/src/backend/jit/llvm/llvmjit_emit.h
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execExpr.c`](../files/src/backend/executor/execExpr.c.md) | — | ExecBuildAggTrans etc. (the producer of the ExprState) |
+| [`src/backend/executor/execExprInterp.c`](../files/src/backend/executor/execExprInterp.c.md) | — | interpreter, opcode-by-opcode |
+| [`src/backend/jit/llvm/llvmjit_expr.c`](../files/src/backend/jit/llvm/llvmjit_expr.c.md) | 1 | banner + helper macros |
+| [`src/backend/jit/llvm/llvmjit_expr.c`](../files/src/backend/jit/llvm/llvmjit_expr.c.md) | 80 | llvm_compile_expr preamble |
+| [`src/backend/jit/llvm/llvmjit_expr.c`](../files/src/backend/jit/llvm/llvmjit_expr.c.md) | 321 | 2000+ — the per-opcode switch |
+| [`src/backend/jit/llvm/llvmjit_expr.c`](../files/src/backend/jit/llvm/llvmjit_expr.c.md) | 666 | EEOP_FUNCEXPR_STRICT example |
+| [`src/include/executor/execExpr.h`](../files/src/include/executor/execExpr.h.md) | — | EEOP_ enum + ExprEvalStep struct |
+| [`src/include/jit/llvmjit.h`](../files/src/include/jit/llvmjit.h.md) | — | Struct LLVM type refs and Attribute templates |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[jit-provider-and-context]] — JitContext lifecycle + lazy emit.

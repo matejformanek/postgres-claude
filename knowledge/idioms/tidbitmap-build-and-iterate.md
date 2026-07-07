@@ -642,6 +642,21 @@ grep -n "pg_atomic_init_u32\|pg_atomic_add_fetch_u32\|pg_atomic_sub_fetch_u32" \
 grep -rn "tbm_add_tuples\|tbm_add_page" source/src/backend/access/ | head
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/nodes/tidbitmap.c`](../files/src/backend/nodes/tidbitmap.c.md) | 366 | all build + iterate APIs |
+| [`src/include/nodes/tidbitmap.h`](../files/src/include/nodes/tidbitmap.h.md) | — | TBMIterateResult |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[tidbitmap-structure-and-lossy]] — `PagetableEntry`, the

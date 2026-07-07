@@ -397,6 +397,33 @@ Skipping any of these → leaks, stale reads, or missed invalidation.
 - `grep -n 'CacheRegisterSyscacheCallback\|CacheRegisterRelcacheCallback' source/src/backend/utils/cache/plancache.c`
 - `grep -n 'FetchPreparedStatementResultDesc\|UtilityTupleDescriptor' source/src/backend/`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/prepare.c`](../files/src/backend/commands/prepare.c.md) | 467 | FetchPreparedStatementResultDesc reads resultDesc directly |
+| [`src/backend/commands/prepare.c`](../files/src/backend/commands/prepare.c.md) | — | PreparedStatement layer |
+| [`src/backend/storage/ipc/sinvaladt.c`](../files/src/backend/storage/ipc/sinvaladt.c.md) | — | Add a new sinval message kind. See |
+| [`src/backend/tcop/utility.c`](../files/src/backend/tcop/utility.c.md) | 2100 | UtilityTupleDescriptor is the wire-RowDescription consumer |
+| [`src/backend/tcop/utility.c`](../files/src/backend/tcop/utility.c.md) | — | UtilityTupleDescriptor |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 147 | 158 |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 148 | InitPlanCache, registers the rel/sys/func callbacks |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 483 | plansource->fixed_result and plansource->resultDesc are set [verified-by-code -500] |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 684 | RevalidateCachedQuery entry point |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 860 | the fixed_result enforcement block |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | 865 | [verified-by-code -884] |
+| [`src/backend/utils/cache/plancache.c`](../files/src/backend/utils/cache/plancache.c.md) | — | implementation |
+| [`src/include/utils/plancache.h`](../files/src/include/utils/plancache.h.md) | 105 | CachedPlanSource struct definition |
+| [`src/include/utils/plancache.h`](../files/src/include/utils/plancache.h.md) | — | struct definitions |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/prepared-statement-plancache.md` — PREPARE/EXECUTE

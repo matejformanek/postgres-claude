@@ -233,6 +233,26 @@ underlying engine.
 - substring on text as canonical caller:
   `grep -n 'detoast_attr_slice\|text_substring' source/src/backend/utils/adt/varlena.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | 116 | detoast_attr |
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | 205 | detoast_attr_slice |
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | 254 | pglz_maximum_compressed_size partial decompression |
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | 343 | toast_fetch_datum |
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | 396 | toast_fetch_datum_slice |
+| [`src/backend/access/common/detoast.c`](../files/src/backend/access/common/detoast.c.md) | — | full reader |
+| [`src/backend/utils/adt/varlena.c`](../files/src/backend/utils/adt/varlena.c.md) | — | text_substring + other toast-slice consumers |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/varatt-varlena.md` — the

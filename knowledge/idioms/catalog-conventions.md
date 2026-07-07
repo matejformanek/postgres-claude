@@ -384,3 +384,42 @@ for the impl + `pg_amop.dat` if it's indexable + …).
   [system-catalog-declarations.html](https://www.postgresql.org/docs/current/system-catalog-declarations.html),
   [catalogs.html](https://www.postgresql.org/docs/current/catalogs.html)
   [from-docs](https://www.postgresql.org/docs/current/bki.html)
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| `src/backend/catalog/genbki.pl` | 1 | Top-of-file comment (-14) |
+| `src/backend/catalog/genbki.pl` | 53 | Skeleton flow (-100) |
+| [`src/include/access/transam.h`](../files/src/include/access/transam.h.md) | 195 | 12000 ≤ OID < 16384 — bootstrap-created but unpinned; user can drop them. Boundary controlled by... |
+| [`src/include/catalog/catversion.h`](../files/src/include/catalog/catversion.h.md) | 7 | (-14) |
+| [`src/include/catalog/catversion.h`](../files/src/include/catalog/catversion.h.md) | 26 | Bump rule (-29) |
+| [`src/include/catalog/catversion.h`](../files/src/include/catalog/catversion.h.md) | 35 | Change the external representation of stored parsetrees (primnodes.h / parsenodes.h edits) (-38) |
+| [`src/include/catalog/catversion.h`](../files/src/include/catalog/catversion.h.md) | 51 | (-57). Stored in |
+| [`src/include/catalog/catversion.h`](../files/src/include/catalog/catversion.h.md) | 60 | () |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 42 | (-66) |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 57 | BKI_LOOKUP(catalog) / BKI_LOOKUP_OPT(catalog) — column holds an OID reference to another catalog;... |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 68 | DECLARE_TOAST(name, toastoid, indexoid) — pin a TOAST table's OIDs (required because shared catalogs need... |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 85 | DECLARE_UNIQUE_INDEX_PKEY(name, oid, oidmacro, tbl, decl) / DECLARE_UNIQUE_INDEX / DECLARE_INDEX — emit a... |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 107 | DECLARE_OID_DEFINING_MACRO(name, oid) — claim an OID that isn't a row but should still be globally unique... |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 115 | DECLARE_FOREIGN_KEY / DECLARE_ARRAY_FOREIGN_KEY — documentary FK relationships beyond what BKI_LOOKUP... |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 142 | MAKE_SYSCACHE(name, idxname, nbuckets) — register a syscache built on the given unique index (-146) |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 148 | #ifdef CATALOG_VARLEN ... #endif — hides varlena fields from the C struct (you can't access them via... |
+| [`src/include/catalog/genbki.h`](../files/src/include/catalog/genbki.h.md) | 158 | #ifdef EXPOSE_TO_CLIENT_CODE — copy this block verbatim into the generated _d.h so frontend code can use... |
+| [`src/include/catalog/pg_attribute.h`](../files/src/include/catalog/pg_attribute.h.md) | 6 | (-8) |
+| [`src/include/catalog/pg_class.h`](../files/src/include/catalog/pg_class.h.md) | 34 | () |
+| `src/include/catalog/pg_proc.dat` | 14 | (-38) |
+| `src/include/catalog/pg_proc.dat` | 36 | Order: roughly group new entries near related existing ones, not at random (-38) |
+| `src/include/catalog/pg_proc.dat` | 42 | pg_proc.dat:42 (-45) |
+| [`src/include/catalog/pg_proc.h`](../files/src/include/catalog/pg_proc.h.md) | 60 | (-130) |
+| [`src/include/catalog/pg_proc.h`](../files/src/include/catalog/pg_proc.h.md) | 99 | #ifdef CATALOG_VARLEN ... #endif — hides varlena fields from the C struct (you can't access them via... |
+| [`src/include/catalog/pg_proc.h`](../files/src/include/catalog/pg_proc.h.md) | 147 | (-148) |
+| [`src/include/utils/syscache.h`](../files/src/include/utils/syscache.h.md) | 25 | API (-58) |
+| [`src/include/utils/syscache.h`](../files/src/include/utils/syscache.h.md) | 30 | Use the numbered variants (SearchSysCache1 etc.) — they're faster and insulate callers from... |
+
+<!-- /callsites:auto -->

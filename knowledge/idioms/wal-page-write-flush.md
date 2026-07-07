@@ -278,6 +278,26 @@ EINTR retry [`xlog.c:2466-2467`] is the only retryable case.
 - fsync methods:
   `grep -RIn 'wal_sync_method\|WAL_SYNC_METHOD' source/src/backend/access/transam/xlog.c source/src/backend/utils/misc | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 2325 | XLogWrite |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 2452 | pgstat_report_wait_start(WAIT_EVENT_WAL_WRITE) + pg_pwrite |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 2473 | PANIC on write failure |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 2486 | end-of-segment fsync + archive notify |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 2801 | XLogFlush |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | — | full module |
+| [`src/backend/access/transam/xlogarchive.c`](../files/src/backend/access/transam/xlogarchive.c.md) | — | XLogArchiveNotify |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/xloginsertlock-partitioning.md` — produces

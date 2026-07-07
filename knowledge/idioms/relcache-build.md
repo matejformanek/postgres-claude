@@ -504,6 +504,30 @@ grep -n "rd_isnailed" source/src/backend/utils/cache/relcache.c
 grep -rn "RelationMapUpdateMap\|RelationMapLookup" source/src/backend/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 1 | banner + interface routine summary |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 527 | RelationBuildTupleDesc (pg_attribute scan) |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 1055 | RelationBuildDesc (top-level builder) |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 1885 | formrdesc (the hand-built fallback) |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 2089 | RelationIdGetRelation (the public entry) |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 2546 | RelationClearRelation (eviction) |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 2585 | RelationRebuildRelation (in-place rebuild for refcounted entries) |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 2938 | RelationCacheInvalidateEntry / RelationCacheInvalidate |
+| [`src/backend/utils/cache/relcache.c`](../files/src/backend/utils/cache/relcache.c.md) | 4004 | RelationCacheInitialize / Phase2 / Phase3 (startup) |
+| [`src/backend/utils/cache/relmapper.c`](../files/src/backend/utils/cache/relmapper.c.md) | — | pg_filenode.map mapped-relation indirection |
+| [`src/include/utils/rel.h`](../files/src/include/utils/rel.md) | — | RelationData struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[syscache-catcache-internals]] — catcache layer; relcache builds on hundreds of catcache lookups.

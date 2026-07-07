@@ -192,6 +192,23 @@ When DETACH:
 - Partition-bound validation:
   `grep -n 'ValidatePartitionConstraints\|check_new_partition_bound' source/src/backend | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/tablecmds.c`](../files/src/backend/commands/tablecmds.c.md) | 20537 | ATExecAttachPartition |
+| [`src/backend/commands/tablecmds.c`](../files/src/backend/commands/tablecmds.c.md) | 21227 | ATExecDetachPartition |
+| [`src/backend/commands/tablecmds.c`](../files/src/backend/commands/tablecmds.c.md) | 21400 | DetachPartitionFinalize |
+| [`src/backend/commands/tablecmds.c`](../files/src/backend/commands/tablecmds.c.md) | 21734 | ATExecDetachPartitionFinalize |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

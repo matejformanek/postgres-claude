@@ -497,6 +497,24 @@ grep -RnE 'ProcArrayApplyXidAssignment|XLOG_XACT_ASSIGNMENT' source/src/backend
 grep -RnE 'ParallelCurrentXids|SerializeTransactionState' source/src
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 938 | TransactionIdIsCurrentTransactionId (local stack walk) |
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) | 1305 | ProcArrayApplyXidAssignment (standby-side XLOG_XACT_ASSIGNMENT replay) |
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) | 1366 | TransactionIdIsInProgress (the 4-path fallback chain) |
+| [`src/backend/utils/time/snapmgr.c`](../files/src/backend/utils/time/snapmgr.c.md) | 1859 | XidInMVCCSnapshot (snapshot-time visibility) |
+| [`src/include/utils/snapshot.h`](../files/src/include/utils/snapshot.h.md) | 1 | Snapshot struct showing xip/subxip/xcnt/subxcnt/suboverflowed/ takenDuringRecovery |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[subxact-xidcache-and-pgproc]] — the in-PGPROC cache that

@@ -222,6 +222,22 @@ won't be queried.
 - Append/MergeAppend pruning calls:
   `grep -RIn 'find_matching_subplans' source/src/backend/executor/nodeAppend.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execPartition.c`](../files/src/backend/executor/execPartition.c.md) | 2410 | InitPartitionPruneContext |
+| [`src/backend/executor/execPartition.c`](../files/src/backend/executor/execPartition.c.md) | 2700 | find_matching_subplans_recurse |
+| [`src/backend/executor/execPartition.c`](../files/src/backend/executor/execPartition.c.md) | — | full module |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

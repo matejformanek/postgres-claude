@@ -243,6 +243,26 @@ GUC.
 - Tablespace cost lookup:
   `grep -RIn 'get_tablespace_page_costs' source/src/backend | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 7 | the "what these mean" header comment |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 131 | global double declarations |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 142 | disable_cost = 1.0e10 |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 146 | enable_ booleans |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | — | all cost functions |
+| [`src/include/optimizer/cost.h`](../files/src/include/optimizer/cost.h.md) | 24 | default cost macros |
+| [`src/include/optimizer/cost.h`](../files/src/include/optimizer/cost.h.md) | — | DEFAULT_ macros |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/cost-scan-paths.md` —

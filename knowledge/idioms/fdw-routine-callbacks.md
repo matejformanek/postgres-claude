@@ -218,6 +218,23 @@ join path.
 - Callers in core:
   `grep -RIn 'GetFdwRoutine\|fdwroutine->IterateForeignScan' source/src/backend | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`contrib/postgres_fdw/postgres_fdw.c`](../files/contrib/postgres_fdw/postgres_fdw.c.md) | — | reference FDW |
+| [`src/include/foreign/fdwapi.h`](../files/src/include/foreign/fdwapi.h.md) | 208 | FdwRoutine struct |
+| [`src/include/foreign/fdwapi.h`](../files/src/include/foreign/fdwapi.h.md) | 213 | mandatory scan callbacks |
+| [`src/include/foreign/fdwapi.h`](../files/src/include/foreign/fdwapi.h.md) | 234 | modify callbacks (optional) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/fdw-iterate-scan.md` — IterateForeignScan

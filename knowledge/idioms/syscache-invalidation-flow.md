@@ -586,6 +586,31 @@ grep -nE "RelationCacheInitFilePreInvalidate|RelationCacheInitFilePostInvalidate
 grep -n "SHAREDINVAL" source/src/include/storage/sinval.h
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/ipc/sinvaladt.c`](../files/src/backend/storage/ipc/sinvaladt.c.md) | — | shared queue itself |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 1 | banner: "This is subtle stuff, so pay attention." The full deferral + commit-time-broadcast rationale |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 570 | RegisterInvalidation builders |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 822 | LocalExecuteInvalidationMessage (the consumer dispatch) |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 915 | InvalidateSystemCaches + AcceptInvalidationMessages |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 1011 | xactGetCommittedInvalidationMessages (collect at commit) |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 1134 | ProcessCommittedInvalidationMessages (recovery / hot standby) |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 1195 | AtEOXact_Inval (the actual broadcast) |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 1306 | AtEOSubXact_Inval (subxact roll-up vs roll-back) |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 1405 | CommandEndInvalidationMessages (CCI hook) |
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | 1432 | CacheInvalidateHeapTuple (write side; called from heapam) |
+| [`src/include/storage/sinval.h`](../files/src/include/storage/sinval.h.md) | — | SharedInvalidationMessage union + SHAREDINVAL_ID constants |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[syscache-catcache-internals]] — `SysCacheInvalidate` → `CatCacheInvalidate` target.

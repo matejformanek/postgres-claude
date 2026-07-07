@@ -215,6 +215,25 @@ match. The `unknownEqFalse` flag selects the SQL semantics.
 - Planner side:
   `grep -RIn 'SS_process_sublinks\|SS_finalize_plan' source/src/backend/optimizer | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/nodeSubplan.c`](../files/src/backend/executor/nodeSubplan.c.md) | 24 | interface routines header |
+| [`src/backend/executor/nodeSubplan.c`](../files/src/backend/executor/nodeSubplan.c.md) | 55 | ExecSubPlan dispatcher |
+| [`src/backend/executor/nodeSubplan.c`](../files/src/backend/executor/nodeSubplan.c.md) | — | runtime |
+| [`src/backend/optimizer/plan/subselect.c`](../files/src/backend/optimizer/plan/subselect.c.md) | — | planner side, classifies subqueries |
+| [`src/include/nodes/plannodes.h`](../files/src/include/nodes/plannodes.h.md) | 242 | Plan.initPlan + extParam commentary |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 1092 | full SubPlan struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/plannerinfo.md` —

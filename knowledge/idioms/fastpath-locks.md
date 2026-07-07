@@ -190,6 +190,21 @@ lock acquisition.
 - PGPROC fields:
   `grep -n 'fpLockBits\|fpRelId' source/src/include/storage/proc.h`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/lmgr/lock.c`](../files/src/backend/storage/lmgr/lock.c.md) | — | implementation [verified-by-code §"The fast-path lock mechanism" comment block] |
+| [`src/include/storage/proc.h`](../files/src/include/storage/proc.h.md) | — | PGPROC per-backend state |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `.claude/skills/locking/SKILL.md` — heavyweight-lock decision tree; this fast-path is one of the optimizations applied to relation locks.

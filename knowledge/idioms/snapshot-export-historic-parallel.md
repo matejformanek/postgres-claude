@@ -533,6 +533,22 @@ grep -n "appendStringInfo.*\"vxid\\|\"xmin\\|\"xmax\\|\"xcnt\\|\"sof\\|\"sxcnt\\
     source/src/backend/utils/time/snapmgr.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | — | caller of SerializeSnapshot for workers |
+| [`src/backend/replication/logical/snapbuild.c`](../files/src/backend/replication/logical/snapbuild.c.md) | — | builds historic snapshots from WAL |
+| [`src/backend/utils/time/snapmgr.c`](../files/src/backend/utils/time/snapmgr.c.md) | 1108 | Export/Import/Serialize/Restore + Historic |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[snapshot-static-and-current]] — the static slots that

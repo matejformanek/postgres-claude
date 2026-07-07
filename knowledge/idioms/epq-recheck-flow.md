@@ -266,6 +266,26 @@ out when every level either qualifies or NULLs.
 - ExecScanFetch dispatch:
   `grep -RIn 'ExecScanFetch' source/src/backend/executor | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2678 | EvalPlanQual top entry |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2944 | EvalPlanQualNext |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2960 | EvalPlanQualBegin reset path |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 2987 | paramExecTypes copy |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | 3011 | chgParam-driven rescan |
+| [`src/backend/executor/execMain.c`](../files/src/backend/executor/execMain.c.md) | — | EPQ machinery |
+| [`src/backend/executor/nodeModifyTable.c`](../files/src/backend/executor/nodeModifyTable.c.md) | — | caller |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/epq-state-init.md` — EPQState lifecycle.

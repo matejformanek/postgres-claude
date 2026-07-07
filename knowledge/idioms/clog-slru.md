@@ -338,6 +338,30 @@ grep -rn "TransactionIdGetStatus\|TransactionLogFetch" \
        source/src/backend/access/transam/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 1 | module banner explaining async-commit LSN handling |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 63 | CLOG_BITS_PER_XACT=2, CLOG_XACTS_PER_BYTE=4, CLOG_XACTS_PER_PAGE = BLCKSZ × 4 (32 768) |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 93 | CLOG_XACTS_PER_LSN_GROUP=32, GetLSNIndex mapping |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 191 | TransactionIdSetTreeStatus (top-level entry) |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 302 | TransactionIdSetPageStatus (group-update dispatcher) |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 449 | TransactionGroupUpdateXidStatus (CAS-queued follower/leader dance) |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 670 | TransactionIdSetStatusBit (the bit-write + group_lsn update) |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 743 | TransactionIdGetStatus (status + LSN read) |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 812 | SimpleLruRequest call: name=transaction, dir=pg_xact, nlsns=CLOG_LSNS_PER_PAGE |
+| [`src/backend/access/transam/clog.c`](../files/src/backend/access/transam/clog.c.md) | 985 | TruncateCLOG (drops segments after vacuum advances oldestXact) |
+| [`src/include/access/clog.h`](../files/src/include/access/clog.h.md) | 25 | XidStatus enum (IN_PROGRESS=0, COMMITTED=1, ABORTED=2, SUB_COMMITTED=3) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[slru-page-replacement]] — buffer cache + group-LSN WAL barrier on write.

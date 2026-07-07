@@ -238,6 +238,28 @@ present at it.
 - SharedTuplestore for spill:
   `grep -RIn 'sts_init\|sts_begin_write\|sts_puttuple' source/src/backend/utils/sort/sharedtuplestore.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/nodeHash.c`](../files/src/backend/executor/nodeHash.c.md) | 234 | MultiExecParallelHash |
+| [`src/backend/executor/nodeHash.c`](../files/src/backend/executor/nodeHash.c.md) | 266 | build-barrier phase switch |
+| [`src/backend/executor/nodeHash.c`](../files/src/backend/executor/nodeHash.c.md) | 471 | ExecHashTableCreate |
+| [`src/backend/executor/nodeHash.c`](../files/src/backend/executor/nodeHash.c.md) | 3182 | ExecParallelHashJoinSetUpBatches |
+| [`src/backend/executor/nodeHash.c`](../files/src/backend/executor/nodeHash.c.md) | — | full Hash module |
+| [`src/backend/executor/nodeHashjoin.c`](../files/src/backend/executor/nodeHashjoin.c.md) | 237 | parallel state hookup |
+| [`src/backend/executor/nodeHashjoin.c`](../files/src/backend/executor/nodeHashjoin.c.md) | 818 | ExecParallelHashJoin |
+| [`src/backend/executor/nodeHashjoin.c`](../files/src/backend/executor/nodeHashjoin.c.md) | — | join |
+| [`src/backend/utils/sort/sharedtuplestore.c`](../files/src/backend/utils/sort/sharedtuplestore.c.md) | — | spill store |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/parallel-gather-merge.md` — the Gather above.

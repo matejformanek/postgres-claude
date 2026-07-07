@@ -408,6 +408,31 @@ grep -n "FreezePageRelfrozenXid\|NoFreezePageRelfrozenXid\|freeze_required" \
        source/src/backend/access/heap/vacuumlazy.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | 7026 | heap_prepare_freeze_tuple (the planning function) |
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | 7306 | heap_pre_freeze_checks (CLOG sanity) |
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | 7359 | heap_freeze_prepared_tuples |
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | 7376 | heap_freeze_tuple (CLUSTER's single-tuple wrapper) |
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | 7845 | heap_tuple_should_freeze (no-freeze tracker maintenance) |
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | — | FreezeMultiXactId (the multixact-stripping engine; called from heap_prepare_freeze_tuple) |
+| [`src/include/access/heapam.h`](../files/src/include/access/heapam.h.md) | 149 | HEAP_FREEZE_CHECK_XMIN_COMMITTED / _XMAX_ABORTED flags |
+| [`src/include/access/heapam.h`](../files/src/include/access/heapam.h.md) | 152 | HeapTupleFreeze struct (the plan) |
+| [`src/include/access/heapam.h`](../files/src/include/access/heapam.h.md) | 191 | HeapPageFreeze (per-page tracker pair) |
+| [`src/include/access/heapam.h`](../files/src/include/access/heapam.h.md) | 523 | heap_execute_freeze_tuple inline |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | 204 | HEAP_XMIN_FROZEN macro |
+| [`src/include/access/transam.h`](../files/src/include/access/transam.h.md) | 31 | special XIDs (Invalid=0, Bootstrap=1, Frozen=2, FirstNormal=3) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[heap-tuple-visibility-mvcc]] — visibility consumes `HEAP_XMIN_FROZEN`.

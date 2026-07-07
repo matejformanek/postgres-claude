@@ -452,6 +452,22 @@ grep -n "numNoProgressCycles\|bestLeafSize" \
     source/src/backend/access/spgist/spgdoinsert.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/spgist/spgdoinsert.c`](../files/src/backend/access/spgist/spgdoinsert.c.md) | — | whole insert path |
+| [`src/include/access/spgist.h`](../files/src/include/access/spgist.h.md) | — | spgChooseFn opclass contract |
+| [`src/include/access/spgist_private.h`](../files/src/include/access/spgist_private.h.md) | — | spgChooseIn / spgChooseOut, opclass FmgrInfo lookups |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[spgist-tree-and-tuples]] — the structs (inner / leaf / node /

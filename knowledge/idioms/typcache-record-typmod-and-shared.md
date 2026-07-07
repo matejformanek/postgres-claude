@@ -523,6 +523,27 @@ grep -nE 'shared_record_typmod_registry_detach' \
     source/src/backend/utils/cache/typcache.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 161 | the four record-cache types (RecordCacheEntry, SharedRecordTypmodRegistry, SharedRecordTableKey,... |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 274 | module globals (RecordCacheArray, RecordCacheHash, NextRecordTypmod, tupledesc_id_counter) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 1817 | ensure_record_cache_typmod_slot_exists (the array grower) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 1846 | lookup_rowtype_tupdesc_internal (the search path) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 1940 | the four public lookup_rowtype_tupdesc variants |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2060 | assign_record_type_typmod and assign_record_type_identifier |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2192 | SharedRecordTypmodRegistry{Estimate,Init,Attach} |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2940 | shared-tupledesc helpers (share_tupledesc, find_or_make_matching_shared_tupledesc,... |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[typcache-entry-and-lookup]] — the typed-by-OID path. Named

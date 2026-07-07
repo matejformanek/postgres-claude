@@ -238,3 +238,18 @@ PostgreSQL is MVCC: reads never block writes, writes never block reads — inste
 - **Cleanup lock** — exclusive buffer content lock observed at refcount==1. `[from-README]` (`storage/buffer/README:83-107`).
 - **Group locking** — locks held by processes in the same parallel-query lock group don't conflict (except RELATION_EXTEND). `[from-README]` (`README:589-650`).
 - **DeadlockTimeout** — GUC, default 1000 ms, before a waiter runs the deadlock check. `[verified-by-code]` (`proc.c:62`).
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/README.tuplock`](../files/src/backend/access/heap/README.md) | — | Primary READMEs: source/src/backend/storage/lmgr/README (heavyweight lock manager),... |
+| [`src/backend/storage/lmgr/README.barrier`](../files/src/backend/storage/lmgr/README.md) | — | Primary READMEs: source/src/backend/storage/lmgr/README (heavyweight lock manager),... |
+| [`src/include/port/atomics.h`](../files/src/include/port/atomics.md) | — | Source paths: source/src/backend/storage/lmgr/,... |
+
+<!-- /callsites:auto -->

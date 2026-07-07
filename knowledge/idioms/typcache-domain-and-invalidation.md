@@ -599,6 +599,29 @@ grep -nE 'CacheRegister(Relcache|Syscache)Callback' \
 sed -n '1110,1260p' source/src/backend/utils/cache/typcache.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 127 | DomainConstraintCache struct (private) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 1078 | load_domaintype_info (the ancestor-walking constraint loader) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 1313 | dcs_cmp, decr_dcc_refcount, dccref_deletion_callback, prep_domain_constraints |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 1396 | InitDomainConstraintRef, UpdateDomainConstraintRef, DomainHasConstraints |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2383 | InvalidateCompositeTypeCacheEntry |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2437 | TypeCacheRelCallback (relcache) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2533 | TypeCacheTypCallback (pg_type syscache) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2590 | TypeCacheOpcCallback (pg_opclass syscache) |
+| [`src/backend/utils/cache/typcache.c`](../files/src/backend/utils/cache/typcache.c.md) | 2628 | TypeCacheConstrCallback (pg_constraint syscache) |
+| [`src/include/utils/typcache.h`](../files/src/include/utils/typcache.h.md) | 160 | DomainConstraintRef struct (caller-facing) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[typcache-entry-and-lookup]] — `TypeCacheEntry`, the `flags`

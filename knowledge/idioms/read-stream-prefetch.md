@@ -220,6 +220,22 @@ slow storage; minor improvement on fast storage.
 - The look-ahead logic:
   `grep -n 'distance\|max_pinned_buffers' source/src/backend/storage/aio/read_stream.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/aio/read_stream.c`](../files/src/backend/storage/aio/read_stream.c.md) | — | implementation |
+| [`src/include/storage/read_stream.h`](../files/src/include/storage/read_stream.h.md) | 85 | public API |
+| [`src/include/storage/read_stream.h`](../files/src/include/storage/read_stream.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/vacuum-skip-pages.md` — canonical

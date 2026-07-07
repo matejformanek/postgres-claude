@@ -413,6 +413,28 @@ grep -rn "InstrJitAgg\|JIT:\|jit_instrument" \
        source/src/backend/commands/explain.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/jit/jit.c`](../files/src/backend/jit/jit.c.md) | 1 | entire core; tiny + complete |
+| [`src/backend/jit/llvm/llvmjit.c`](../files/src/backend/jit/llvm/llvmjit.c.md) | 150 | llvm_create_context, callback registration |
+| [`src/backend/jit/llvm/llvmjit.c`](../files/src/backend/jit/llvm/llvmjit.c.md) | 317 | llvm_mutable_module, llvm_get_function (lazy emit) |
+| [`src/backend/jit/llvm/llvmjit.c`](../files/src/backend/jit/llvm/llvmjit.c.md) | 604 | llvm_optimize_module, llvm_compile_module |
+| [`src/backend/optimizer/plan/planner.c`](../files/src/backend/optimizer/plan/planner.c.md) | 703 | cost-gate logic |
+| [`src/include/jit/jit.h`](../files/src/include/jit/jit.h.md) | 19 | PGJIT_ flag bits |
+| [`src/include/jit/jit.h`](../files/src/include/jit/jit.h.md) | 27 | JitInstrumentation |
+| [`src/include/jit/jit.h`](../files/src/include/jit/jit.h.md) | 57 | JitContext + JitProviderCallbacks |
+| [`src/include/jit/llvmjit.h`](../files/src/include/jit/llvmjit.h.md) | 43 | LLVMJitContext extending JitContext |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[jit-expression-codegen]] — IR generation from `EEOP_*` ops in `llvmjit_expr.c`.

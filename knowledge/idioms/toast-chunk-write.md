@@ -244,6 +244,26 @@ rollback paths to use speculative deletes.
 - attstorage classes:
   `grep -n 'TYPSTORAGE_PLAIN\|TYPSTORAGE_EXTERNAL\|TYPSTORAGE_EXTENDED\|TYPSTORAGE_MAIN' source/src/include/catalog/pg_type.h | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/common/toast_internals.c`](../files/src/backend/access/common/toast_internals.c.md) | 119 | toast_save_datum |
+| [`src/backend/access/common/toast_internals.c`](../files/src/backend/access/common/toast_internals.c.md) | 283 | chunk-write loop |
+| [`src/backend/access/common/toast_internals.c`](../files/src/backend/access/common/toast_internals.c.md) | 376 | toast_delete_datum |
+| [`src/backend/access/common/toast_internals.c`](../files/src/backend/access/common/toast_internals.c.md) | — | full writer |
+| [`src/backend/access/table/toast_helper.c`](../files/src/backend/access/table/toast_helper.c.md) | — | compress / inline / externalize driver loop |
+| [`src/include/access/heaptoast.h`](../files/src/include/access/heaptoast.md) | 46 | TOAST_TUPLE_THRESHOLD / TARGET |
+| [`src/include/access/heaptoast.h`](../files/src/include/access/heaptoast.md) | 80 | EXTERN_TUPLES_PER_PAGE + TOAST_MAX_CHUNK_SIZE derivation |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/varatt-varlena.md` — the

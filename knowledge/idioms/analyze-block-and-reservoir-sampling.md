@@ -499,6 +499,22 @@ grep -n "block_sampling_read_stream_next\|read_stream_begin_relation" \
     source/src/backend/commands/analyze.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/commands/analyze.c`](../files/src/backend/commands/analyze.c.md) | — | acquire_sample_rows, do_analyze_rel |
+| [`src/backend/utils/misc/sampling.c`](../files/src/backend/utils/misc/sampling.c.md) | — | Algorithm S + Algorithm Z + Vitter's reservoir_get_next_S |
+| [`src/include/utils/sampling.h`](../files/src/include/utils/sampling.md) | — | BlockSamplerData, ReservoirStateData |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[analyze-mcv-histogram-correlation]] — what the sample rows are

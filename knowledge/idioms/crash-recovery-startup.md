@@ -175,6 +175,21 @@ without the original WAL.
 - Signal-file handling:
   `grep -n 'recovery.signal\|standby.signal' source/src/backend/access/transam/xlogrecovery.c`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | — | StartupXLOG entry point |
+| [`src/backend/access/transam/xlogrecovery.c`](../files/src/backend/access/transam/xlogrecovery.c.md) | — | implementation; ReadRecord, mode flags, recovery-target logic |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/xlog-region-replay.md` — what each rmgr's

@@ -198,6 +198,22 @@ ResultRelInfo when no explicit partition matches.
 - TupleDesc-conversion map:
   `grep -n 'convert_tuples_by_name' source/src/backend/access/common/tupconvert.c`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execPartition.c`](../files/src/backend/executor/execPartition.c.md) | — | implementation |
+| [`src/include/executor/execPartition.h`](../files/src/include/executor/execPartition.h.md) | 23 | public API |
+| [`src/include/executor/execPartition.h`](../files/src/include/executor/execPartition.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/subsystems/partitioning.md` — partitioning

@@ -708,6 +708,23 @@ grep -n "ParallelWorkerReportLastRecEnd\|last_xlog_end" \
     source/src/backend/access/transam/parallel.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/parallel.c`](../files/src/backend/access/transam/parallel.c.md) | 1300 | ParallelWorkerMain |
+| [`src/backend/storage/lmgr/proc.c`](../files/src/backend/storage/lmgr/proc.c.md) | — | BecomeLockGroupMember |
+| [`src/backend/utils/cache/relmapper.c`](../files/src/backend/utils/cache/relmapper.c.md) | — | Restore RelationMap |
+| [`src/backend/utils/misc/guc.c`](../files/src/backend/utils/misc/guc.c.md) | — | GUC serialize/restore |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[parallel-context-and-dsm]] — the leader-side serialization

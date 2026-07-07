@@ -428,6 +428,27 @@ grep -n "brin_form_tuple\|brin_deform_tuple\|brin_new_memtuple\|brin_form_placeh
 grep -A 20 "static const BrinOpcInfo" source/src/backend/access/brin/brin_*.c | head -40
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/brin/brin_bloom.c`](../files/src/backend/access/brin/brin_bloom.c.md) | — | bloom opclass (1 stored bloom filter per column) |
+| [`src/backend/access/brin/brin_inclusion.c`](../files/src/backend/access/brin/brin_inclusion.c.md) | — | inclusion (bounding-box) opclass |
+| [`src/backend/access/brin/brin_minmax.c`](../files/src/backend/access/brin/brin_minmax.c.md) | — | minmax opclass (2 stored datums per column) |
+| [`src/backend/access/brin/brin_tuple.c`](../files/src/backend/access/brin/brin_tuple.c.md) | 100 | brin_form_tuple (serialize) |
+| [`src/backend/access/brin/brin_tuple.c`](../files/src/backend/access/brin/brin_tuple.c.md) | 388 | brin_form_placeholder_tuple |
+| [`src/backend/access/brin/brin_tuple.c`](../files/src/backend/access/brin/brin_tuple.c.md) | 482 | brin_new_memtuple |
+| [`src/backend/access/brin/brin_tuple.c`](../files/src/backend/access/brin/brin_tuple.c.md) | 553 | brin_deform_tuple |
+| [`src/include/access/brin_tuple.h`](../files/src/include/access/brin_tuple.h.md) | 1 | full file; structs + macros |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[brin-revmap]] — the index that points at these tuples.

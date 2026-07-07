@@ -236,6 +236,27 @@ incompatible combinations.
 - Plan cache keys:
   `grep -n 'RI_PLAN_SETNULL\|RI_PLAN_SETDEFAULT' source/src/backend/utils/adt/ri_triggers.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1265 | RI_FKey_setnull_del |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1280 | RI_FKey_setnull_upd |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1295 | RI_FKey_setdefault_del |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1310 | RI_FKey_setdefault_upd |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1326 | ri_set (shared body) |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1394 | confdelsetcols subset handling |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 1483 | SET DEFAULT NO-ACTION recheck |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | — | full RI module |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/ri-fkey-check.md` — child-side check.

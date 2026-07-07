@@ -292,6 +292,28 @@ SELECT pg_get_viewdef('v');
 If either deparse path returns garbage or errors, `ruleutils.c` is
 missing an arm.
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| `src/backend/nodes/gen_node_support.pl` | — | gen_node_support.pl auto-regenerates _copy, _equal, _out, _read, _jumble from the struct definition — zero... |
+| [`src/backend/parser/parse_expr.c`](../files/src/backend/parser/parse_expr.c.md) | 139 | transformExprRecurse lowering ParamRef → Param |
+| [`src/backend/parser/parse_expr.c`](../files/src/backend/parser/parse_expr.c.md) | — | transformExprRecurse pattern |
+| [`src/include/nodes/parsenodes.h`](../files/src/include/nodes/parsenodes.h.md) | 321 | ParamRef, the canonical NodeTag-direct parse-tree node |
+| [`src/include/nodes/parsenodes.h`](../files/src/include/nodes/parsenodes.h.md) | — | parse-tree node home |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 357 | comment block explaining the ParamKind enum and the ParamRef → Param transform |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 391 | Param, the canonical Expr-flavored post-analysis node |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | 393 | Possibly pg_node_attr(custom_query_jumble) + a custom jumble function in queryjumblefuncs.c (the Param... |
+| [`src/include/nodes/primnodes.h`](../files/src/include/nodes/primnodes.h.md) | — | Expr node home |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/node-types-and-lists.md` — the underlying NodeTag

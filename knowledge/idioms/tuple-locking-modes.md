@@ -177,6 +177,22 @@ key-update path; otherwise no-key path.
 - The conflict-check function:
   `grep -n 'DoesMultiXactIdConflict\|HeapTupleSatisfiesUpdate' source/src/backend/access/heap/heapam.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | — | heap_lock_tuple |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | 195 | flag definitions + decoder inlines |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | — | flag definitions + decoder inlines |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/heaptuple-update-chain.md` — chain

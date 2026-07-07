@@ -251,6 +251,26 @@ write spikes but consume shared memory.
 - Page header writers:
   `grep -n 'xlp_magic\|XLP_LONG_HEADER\|XLogLongPageHeader' source/src/backend/access/transam/xlog.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 403 | XLogCtlInsert struct + WALInsertLocks pointer |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 457 | XLogCtlData struct head |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 575 | static XLogCtlData XLogCtl |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 1673 | GetXLogBuffer |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | 2025 | AdvanceXLInsertBuffer |
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | — | full module |
+| [`src/include/access/xlog.h`](../files/src/include/access/xlog.h.md) | — | public LSN ops |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/xloginsertlock-partitioning.md` —

@@ -189,6 +189,23 @@ If any of the three fails, the chain ends here.
 - The flag bits:
   `grep -n 'HEAP_HOT_UPDATED\|HEAP_ONLY_TUPLE\|HEAP_UPDATED' source/src/include/access/htup_details.h`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/heap/heapam.c`](../files/src/backend/access/heap/heapam.c.md) | — | heap_update, heap_get_latest_tid |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | 1483 | — |
+| [`src/backend/access/heap/pruneheap.c`](../files/src/backend/access/heap/pruneheap.c.md) | — | heap_prune_chain |
+| [`src/include/access/htup_details.h`](../files/src/include/access/htup_details.h.md) | — | flag definitions + chain-walking inlines |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/data-structures/heap-tuple-layout.md` — tuple

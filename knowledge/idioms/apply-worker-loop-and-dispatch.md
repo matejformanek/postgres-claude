@@ -506,6 +506,23 @@ grep -n "store_flush_position\|get_flush_position\|lsn_mapping" \
     source/src/backend/replication/logical/worker.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/replication/logical/launcher.c`](../files/src/backend/replication/logical/launcher.c.md) | — | ApplyLauncherMain, worker registration |
+| [`src/backend/replication/logical/proto.c`](../files/src/backend/replication/logical/proto.c.md) | — | message serialization |
+| [`src/backend/replication/logical/worker.c`](../files/src/backend/replication/logical/worker.c.md) | — | ApplyWorkerMain, LogicalRepApplyLoop, apply_dispatch |
+| [`src/include/replication/logicalproto.h`](../files/src/include/replication/logicalproto.h.md) | — | LogicalRepMsgType enum |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[apply-handlers-insert-update-delete]] — the row-event

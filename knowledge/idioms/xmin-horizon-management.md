@@ -169,6 +169,21 @@ bloat-causer. Fix it before re-VACUUM.
 - Replication-slot xmin pinning:
   `grep -n 'ReplicationSlotsComputeRequiredXmin' source/src/backend/replication/slot.c`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/storage/ipc/procarray.c`](../files/src/backend/storage/ipc/procarray.c.md) | — | implementation |
+| [`src/include/storage/procarray.h`](../files/src/include/storage/procarray.h.md) | — | GetOldestNonRemovableTransactionId |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/snapshot-acquisition.md` — snapshot acq

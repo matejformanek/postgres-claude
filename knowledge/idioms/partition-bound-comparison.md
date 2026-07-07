@@ -218,6 +218,24 @@ interpreted per strategy.
 - Overlap detection at ATTACH:
   `grep -n 'check_new_partition_bound\|partition_bounds_equal' source/src/backend/partitioning/partbounds.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/partitioning/partbounds.c`](../files/src/backend/partitioning/partbounds.c.md) | 2949 | partition_hash_bsearch call site |
+| [`src/backend/partitioning/partbounds.c`](../files/src/backend/partitioning/partbounds.c.md) | 3600 | partition_list_bsearch |
+| [`src/backend/partitioning/partbounds.c`](../files/src/backend/partitioning/partbounds.c.md) | 3646 | partition_range_bsearch |
+| [`src/backend/partitioning/partbounds.c`](../files/src/backend/partitioning/partbounds.c.md) | — | full module |
+| [`src/include/partitioning/partbounds.h`](../files/src/include/partitioning/partbounds.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/partition-tuple-routing.md` —

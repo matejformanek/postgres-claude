@@ -232,6 +232,28 @@ that loosen this set explicit GUCs.
 - Parallel-mode enforcement:
   `grep -RIn 'IsInParallelMode\|es_use_parallel_mode' source/src/backend | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/executor/execParallel.c`](../files/src/backend/executor/execParallel.c.md) | — | DSM setup |
+| [`src/backend/executor/nodeGather.c`](../files/src/backend/executor/nodeGather.c.md) | 54 | ExecInitGather |
+| [`src/backend/executor/nodeGather.c`](../files/src/backend/executor/nodeGather.c.md) | 138 | ExecGather |
+| [`src/backend/executor/nodeGather.c`](../files/src/backend/executor/nodeGather.c.md) | 152 | workers-on-first-pull initialization |
+| [`src/backend/executor/nodeGather.c`](../files/src/backend/executor/nodeGather.c.md) | 401 | ExecShutdownGatherWorkers |
+| [`src/backend/executor/nodeGather.c`](../files/src/backend/executor/nodeGather.c.md) | — | full module |
+| [`src/backend/executor/nodeGatherMerge.c`](../files/src/backend/executor/nodeGatherMerge.c.md) | 69 | ExecInitGatherMerge |
+| [`src/backend/executor/nodeGatherMerge.c`](../files/src/backend/executor/nodeGatherMerge.c.md) | 184 | ExecGatherMerge |
+| [`src/backend/executor/nodeGatherMerge.c`](../files/src/backend/executor/nodeGatherMerge.c.md) | — | sorted variant |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/parallel-hash-join.md` —

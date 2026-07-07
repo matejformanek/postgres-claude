@@ -426,6 +426,28 @@ grep -rn "scanPendingInsert\|GinScanOpaque.*pendingList" \
 grep -rn "gin_clean_pending_list\|gin_pending_list_limit" source/src/
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/gin/ginfast.c`](../files/src/backend/access/gin/ginfast.c.md) | 1 | banner |
+| [`src/backend/access/gin/ginfast.c`](../files/src/backend/access/gin/ginfast.c.md) | 41 | GIN_PAGE_FREESIZE |
+| [`src/backend/access/gin/ginfast.c`](../files/src/backend/access/gin/ginfast.c.md) | 59 | writeListPage, makeSublist |
+| [`src/backend/access/gin/ginfast.c`](../files/src/backend/access/gin/ginfast.c.md) | 218 | ginHeapTupleFastInsert (enqueue) |
+| [`src/backend/access/gin/ginfast.c`](../files/src/backend/access/gin/ginfast.c.md) | 482 | ginHeapTupleFastCollect (build the collector) |
+| [`src/backend/access/gin/ginfast.c`](../files/src/backend/access/gin/ginfast.c.md) | 554 | shiftList (drop drained pages from metapage chain) |
+| [`src/backend/access/gin/ginfast.c`](../files/src/backend/access/gin/ginfast.c.md) | 779 | ginInsertCleanup |
+| [`src/include/access/ginblock.h`](../files/src/include/access/ginblock.h.md) | 46 | GIN_LIST, GIN_LIST_FULLROW flags |
+| [`src/include/access/ginblock.h`](../files/src/include/access/ginblock.h.md) | 55 | GinMetaPageData (head/tail/tailFreeSize/counts) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[gin-tree-structure]] — what the cleanup eventually inserts into.

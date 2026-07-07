@@ -237,6 +237,26 @@ preventing concurrent FK column changes in the parent.
 - NULL handling:
   `grep -n 'ri_NullCheck\|RI_KEYS_\|FKCONSTR_MATCH' source/src/backend/utils/adt/ri_triggers.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 358 | RI_FKey_check |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 464 | fast-path dispatch |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 485 | pk_rel = table_open(..., RowShareLock) |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 500 | the SPI query string template |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 605 | RI_FKey_check_ins (PG_FUNCTION_ARGS wrapper) |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | 621 | RI_FKey_check_upd |
+| [`src/backend/utils/adt/ri_triggers.c`](../files/src/backend/utils/adt/ri_triggers.c.md) | — | full RI module |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/ri-fkey-cascade.md` — DELETE / UPDATE

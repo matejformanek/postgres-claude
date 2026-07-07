@@ -470,6 +470,24 @@ sed -n '20,60p' source/src/include/utils/memutils_memorychunk.h
 #   tail -f $PGDATA/log/postgresql-*.log
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/mmgr/mcxt.c`](../files/src/backend/utils/mmgr/mcxt.c.md) | 1 | context-type-independent operations: tree traversal, reset, delete, callbacks, stats |
+| [`src/include/nodes/memnodes.h`](../files/src/include/nodes/memnodes.h.md) | 1 | MemoryContextData, MemoryContextMethods, MemoryContextCounters |
+| [`src/include/utils/memutils_internal.h`](../files/src/include/utils/memutils_internal.h.md) | 1 | MemoryContextMethodID enum, MemoryContextCreate, MemoryContextAllocationFailure, MemoryContextSizeFailure |
+| [`src/include/utils/memutils_memorychunk.h`](../files/src/include/utils/memutils_memorychunk.h.md) | 1 | chunk header bit-layout (4 bits methodID + 1 external + 30 value + 30 block-offset) |
+| [`src/include/utils/palloc.h`](../files/src/include/utils/palloc.h.md) | 1 | public palloc / pfree / repalloc declarations, MemoryContextCallback |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[memory-context-allocset-internals]] — AllocSet (`MCTX_ASET_ID`),

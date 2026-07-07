@@ -237,6 +237,23 @@ Compile as a shared library; `CREATE PUBLICATION` then use
 - Invocation site:
   `grep -RIn 'startup_cb\|change_cb\|commit_cb' source/src/backend/replication/logical/logical.c | head -15`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/replication/logical/logical.c`](../files/src/backend/replication/logical/logical.c.md) | — | callback invocation |
+| [`src/backend/replication/pgoutput/pgoutput.c`](../files/src/backend/replication/pgoutput/pgoutput.c.md) | — | reference plugin |
+| [`src/include/replication/output_plugin.h`](../files/src/include/replication/output_plugin.h.md) | 36 | LogicalOutputPluginInit + _PG_output_plugin_init |
+| [`src/include/replication/output_plugin.h`](../files/src/include/replication/output_plugin.h.md) | 216 | OutputPluginCallbacks struct |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/logical-decoding-snapshot.md` — supplies

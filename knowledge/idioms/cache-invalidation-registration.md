@@ -160,6 +160,21 @@ inval.c itself).
 - The dispatch hub:
   `grep -n 'LocalExecuteInvalidationMessage' source/src/backend/utils/cache/inval.c`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/utils/cache/inval.c`](../files/src/backend/utils/cache/inval.c.md) | — | registration + dispatch |
+| [`src/include/utils/inval.h`](../files/src/include/utils/inval.h.md) | — | public API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/sinvaladt-broadcast.md` — the underlying

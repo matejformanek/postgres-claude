@@ -198,6 +198,23 @@ defined comparators or report input details.
 - security_level tracking:
   `grep -RIn 'security_level' source/src/backend/optimizer | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/optimizer/prep/prepjointree.c`](../files/src/backend/optimizer/prep/prepjointree.c.md) | — | pullup honors security_barrier |
+| [`src/backend/rewrite/rewriteHandler.c`](../files/src/backend/rewrite/rewriteHandler.c.md) | 1901 | security_barrier set on view-expanded RTE |
+| [`src/include/catalog/pg_proc.h`](../files/src/include/catalog/pg_proc.h.md) | — | proleakproof column |
+| [`src/include/nodes/parsenodes.h`](../files/src/include/nodes/parsenodes.h.md) | — | RTE flags |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/view-pushdown-via-rewriter.md` —

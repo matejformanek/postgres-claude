@@ -213,6 +213,23 @@ workers still running.
 - Recovery:
   `grep -n 'RecoverPreparedTransactions' source/src/backend/access/transam/twophase.c | head -5`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/twophase.c`](../files/src/backend/access/transam/twophase.c.md) | — | 2PC state-file machinery |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2558 | PrepareTransaction entry |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2574 | pre-prepare loop (mirrors pre-commit) |
+| [`src/backend/access/transam/xact.c`](../files/src/backend/access/transam/xact.c.md) | 2598 | CallXactCallbacks(XACT_EVENT_PRE_PREPARE) |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/commit-transaction-sequence.md` —

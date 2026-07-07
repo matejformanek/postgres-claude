@@ -180,6 +180,22 @@ the spread.
 - The checkpointer process:
   `grep -n 'CheckpointerMain\|HandleCheckpointerInterrupts' source/src/backend/postmaster/checkpointer.c | head -15`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/transam/xlog.c`](../files/src/backend/access/transam/xlog.c.md) | — | CreateCheckPoint, CheckPointGuts |
+| [`src/backend/postmaster/checkpointer.c`](../files/src/backend/postmaster/checkpointer.c.md) | — | process implementation |
+| [`src/include/access/xlog.h`](../files/src/include/access/xlog.h.md) | — | RequestCheckpoint API |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/crash-recovery-startup.md` — recovery

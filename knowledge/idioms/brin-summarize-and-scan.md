@@ -518,6 +518,26 @@ grep -n "brin_doinsert\|brin_doupdate\|brin_evacuate_page" \
        source/src/backend/access/brin/brin_pageops.c | head
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/brin/brin.c`](../files/src/backend/access/brin/brin.c.md) | 348 | brininsert |
+| [`src/backend/access/brin/brin.c`](../files/src/backend/access/brin/brin.c.md) | 572 | bringetbitmap (the scan) |
+| [`src/backend/access/brin/brin.c`](../files/src/backend/access/brin/brin.c.md) | 982 | brinbuildempty + brinbuild + brinbuildCallback |
+| [`src/backend/access/brin/brin.c`](../files/src/backend/access/brin/brin.c.md) | 1371 | brin_summarize_new_values / brin_summarize_range (SQL functions) |
+| [`src/backend/access/brin/brin.c`](../files/src/backend/access/brin/brin.c.md) | 1652 | brinsummarize + summarize_range |
+| [`src/backend/access/brin/brin_minmax.c`](../files/src/backend/access/brin/brin_minmax.c.md) | — | minmax opclass (read this for an opclass example) |
+| [`src/backend/access/brin/brin_pageops.c`](../files/src/backend/access/brin/brin_pageops.c.md) | — | brin_doinsert + brin_doupdate + brin_can_do_samepage_update |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[brin-revmap]] — revmap traversal and the bt_blkno cross-check.

@@ -243,6 +243,25 @@ pool pressure).
 - Worker count caps:
   `grep -n 'max_parallel_workers_per_gather\|max_parallel_workers' source/src/backend/utils/misc/guc_tables.c | head -10`
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 144 | max_parallel_workers_per_gather = 2 default |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 311 | cost_seqscan parallel adjustment |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 319 | "disk cost can't be amortized" comment |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 6618 | get_parallel_divisor |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | 6633 | leader_contribution formula |
+| [`src/backend/optimizer/path/costsize.c`](../files/src/backend/optimizer/path/costsize.c.md) | — | full module |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - `knowledge/idioms/cost-units-gucs.md` — base cost GUCs.

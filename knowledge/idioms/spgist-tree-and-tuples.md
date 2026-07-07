@@ -469,6 +469,23 @@ grep -n "elog(ERROR, \"unexpected SPGiST tuple state" \
     source/src/backend/access/spgist/*.c
 ```
 
+
+
+## Call sites
+<!-- callsites:auto -->
+
+*Auto-extracted from `source/<path>:<line>` cites in this doc's prose (bullets and free text).*
+*Refresh via `scripts/populate-idiom-callsites.py` — edits inside this block are overwritten.*
+
+| File | Line | Role |
+|---|---:|---|
+| [`src/backend/access/spgist/spgdoinsert.c`](../files/src/backend/access/spgist/spgdoinsert.c.md) | — | insert side using these tuples |
+| [`src/backend/access/spgist/spgscan.c`](../files/src/backend/access/spgist/spgscan.c.md) | — | scan side using these tuples |
+| [`src/include/access/spgist_private.h`](../files/src/include/access/spgist_private.h.md) | 47 | 55 |
+| [`src/include/access/spgist_private.h`](../files/src/include/access/spgist_private.h.md) | — | every struct in this doc |
+
+<!-- /callsites:auto -->
+
 ## Cross-references
 
 - [[spgist-insert-and-picksplit]] — how `spgdoinsert` consumes these
