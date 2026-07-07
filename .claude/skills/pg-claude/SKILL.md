@@ -106,6 +106,8 @@ Each fills a `gap:*` signal from `pg-user-question-harvester` — reach for thes
 | TOAST out-of-line + compressed varlena storage | `toast-storage` | storage strategies, 2 KB rule, pglz vs lz4, chunk_id wrap |
 | Shared buffer manager + BufferAccessStrategy rings | `buffer-manager` | pin/unpin discipline, clock-sweep, add-new-buffer-strategy |
 | SLRU (bank-locked LRU) infrastructure — CLOG/MultiXact/etc. | `slru-infrastructure` | new SLRU consumer, PG 17+ per-SLRU GUCs, bank-lock design |
+| Physical streaming replication + syncrep + hot standby | `physical-replication` | walsender/walreceiver state machine, synchronous_standby_names, hot_standby_feedback |
+| MVCC snapshots + visibility + isolation levels | `snapshot-management` | Register/Push snapshots, historic (logical decoding), pg_export_snapshot |
 
 ### Running / testing / debugging
 
