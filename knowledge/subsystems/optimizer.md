@@ -57,9 +57,9 @@ hangs off `make_rel_from_joinlist` as one of two join-search backends.
 ## 2. The pipeline (the ordering spec)
 
 ```
-planner / standard_planner                  planner.c:333, 351
+planner / standard_planner                  planner.c:328, 346
   setup PlannerGlobal
-  └─ subquery_planner (top-level Query)     planner.c:775
+  └─ subquery_planner (top-level Query)     planner.c:770
        preprocess block (see §8):
          eval_const_expressions
          preprocess_relation_rtes / pull_up_sublinks / pull_up_subqueries
@@ -71,7 +71,7 @@ planner / standard_planner                  planner.c:333, 351
          preprocess_aggrefs              prepagg.c:109
          SS_process_ctes                 subselect.c:886
          SS_process_sublinks (top-qual)  subselect.c:2209
-       └─ grouping_planner                planner.c:1775
+       └─ grouping_planner                planner.c:1704
             preprocess_minmax_aggregates  planagg.c:73
             ├─ query_planner (planmain.c:53)   ← canonical phase ordering
             │     setup_simple_rel_arrays
@@ -100,11 +100,11 @@ planner / standard_planner                  planner.c:333, 351
             │          make_rel_from_joinlist
             │               if ≥ geqo_threshold: geqo()
             │               else: standard_join_search (allpaths.c:3948)
-            ├─ apply_scanjoin_target_to_paths (planner.c:8213)
-            ├─ create_grouping_paths           (planner.c:4121)
-            ├─ create_window_paths             (planner.c:4867)
-            ├─ create_distinct_paths           (planner.c:5124)
-            ├─ create_ordered_paths            (planner.c:5642)
+            ├─ apply_scanjoin_target_to_paths (planner.c:8142)
+            ├─ create_grouping_paths           (planner.c:4050)
+            ├─ create_window_paths             (planner.c:4796)
+            ├─ create_distinct_paths           (planner.c:5053)
+            ├─ create_ordered_paths            (planner.c:5571)
             └─ create_limit_path
   └─ create_plan(best_path)                  createplan.c:339
   └─ SS_finalize_plan
@@ -112,7 +112,7 @@ planner / standard_planner                  planner.c:333, 351
   return PlannedStmt
 ```
 
-[from-code `planner.c:333,351,775,1775,4121,4867,5124,5642,8213`;
+[from-code `planner.c:328,346,770,1704,4050,4796,5053,5571,8142`;
 `planmain.c:53-305`; `allpaths.c:179,3843,3948`; via
 `knowledge/files/src/backend/optimizer/plan/planmain.c.md`,
 `knowledge/files/src/backend/optimizer/prep/prepjointree.c.md`]
@@ -123,7 +123,7 @@ before join removal", "delay this to the end"). Anyone adding a new pass must
 slot it into that list. [from-comment `planmain.c:53-305`; via
 `knowledge/files/src/backend/optimizer/plan/planmain.c.md`]
 
-The top-level `planner()` entry (`planner.c:333`) is a one-liner that
+The top-level `planner()` entry (`planner.c:328`) is a one-liner that
 dispatches through `planner_hook` if set, else into `standard_planner`. This
 is the extension hook every alternative planner (e.g., pg_hint_plan) replaces.
 

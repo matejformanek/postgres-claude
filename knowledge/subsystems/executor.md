@@ -107,7 +107,7 @@ typically sees nothing unless there is a `RETURNING` clause
 
 ### 2.3 `standard_ExecutorEnd` (`execMain.c:486`)
 
-`ExecEndPlan` (`execMain.c:1565`) walks the PlanState tree calling `ExecEndNode`,
+`ExecEndPlan` (`execMain.c:1602`) walks the PlanState tree calling `ExecEndNode`,
 then unregisters snapshots, then `FreeExecutorState` destroys the per-query
 context — which reclaims **every** PlanState, ExprState, ExprContext, slot, and
 scratch buffer in one stroke. `ExecEndNode`'s job is therefore *not* to free
