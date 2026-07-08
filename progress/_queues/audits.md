@@ -13,17 +13,11 @@ than the periodic 30-day refresh: process them first.
 
 ## Entries
 
-[pending] knowledge/architecture/replication.md verified=2026-06-14
-[pending] knowledge/subsystems/access-heap.md verified=2026-06-14
-[pending] knowledge/subsystems/access-transam.md verified=2026-06-14
-[pending] knowledge/subsystems/executor.md verified=2026-06-14 [drift-fixed: execExpr.c §3.1/§3.2 cites −20/−33 + phantom ExecInitExprWithContext removed; nodeModifyTable.c §9 cites −13]
 [pending] knowledge/subsystems/storage-ipc.md verified=2026-06-15
 [pending] knowledge/subsystems/storage-lmgr.md verified=2026-06-15
 [pending] knowledge/subsystems/utils-cache.md verified=2026-06-15
 [pending] knowledge/subsystems/utils-mmgr.md verified=2026-06-15
-[pending] knowledge/subsystems/storage-buffer.md verified=2026-06-15
 [pending] knowledge/subsystems/jit.md verified=2026-06-15
-[pending] knowledge/subsystems/optimizer.md verified=2026-06-15 [drift-fixed: subselect.c SS_process_ctes 883→886, SS_process_sublinks 2206→2209]
 [pending] knowledge/subsystems/partitioning.md verified=2026-06-15 [drift-fixed: PartitionRangeBound 50-71→65-71, partition_hbound_cmp 3770-3778→3580-3588]
 
 ## audit-clean rotation (2026-06-20) — anchor bdae2c20e88d, 12 docs re-verified, 0 drift
@@ -408,3 +402,9 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/backend/optimizer/util/clauses.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix qual pushdown past grouping with mismatched equivalence, 44fb59fc605e, Richard Guo)
 [pending] knowledge/files/src/backend/utils/cache/lsyscache.c.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix qual pushdown past grouping with mismatched equivalence, 44fb59fc605e, Richard Guo)
 [pending] knowledge/files/src/include/optimizer/clauses.h.md  reason=anchor-bump 2026-07-07:9d1188f29865..4c75cc786301 (Fix qual pushdown past grouping with mismatched equivalence, 44fb59fc605e, Richard Guo)
+[pending] knowledge/architecture/replication.md verified=2026-07-08 [clean: replication-slots section — slot.h enum 43-48/RS_INVAL 58-72/ReplicationSlotPersistentData 95-162/locking 164-180 + slot.c header 14-27/StandbySlotsHaveCaughtup 3109/WaitForStandbyConfirmation 3256/CanInvalidateIdleSlot 1860-1872 + walsender.c PhysicalWakeupLogicalWalSnd/NeedToWaitFor* 1823-1891 all hold @4c75cc78]
+[pending] knowledge/subsystems/access-heap.md verified=2026-07-08 [clean: data-structures section — htup_details.h HeapTupleHeaderData 153/visibility-bits 204-217/lock-upgrade 237-261/infomask2 291-296 + htup.h HeapTupleData 62/usage-modes 30-60 + hio.h BulkInsertStateData 29 all hold @4c75cc78]
+[pending] knowledge/subsystems/access-transam.md verified=2026-07-08 [clean: §5.1 XLogInsert walkthrough — xloginsert.c 482/491-497/522-535/621 + xlog.c XLogInsertRecord 784/WALINSERT class blocks 858-942/CRC-copy 950-973 all hold @4c75cc78]
+[pending] knowledge/subsystems/executor.md verified=2026-07-08 [drift-fixed: §2.3 ExecEndPlan execMain.c 1565→1602 (ExecPostprocessPlan now precedes it); §2 hook/dispatch cites 70-73/124/308/417/477/143/318/486/847 + execProcnode 142/488/543/753 all hold @4c75cc78]
+[pending] knowledge/subsystems/storage-buffer.md verified=2026-07-08 [clean: §5.1 ReadBuffer/BufferAlloc — bufmgr.c ReadBuffer 879/ReadBuffer_common 1276/StartReadBuffer 1637/BufferAlloc 2197/GetVictimBuffer 2548 + internal markers 2216-2220/2257/2319 all hold @4c75cc78]
+[pending] knowledge/subsystems/optimizer.md verified=2026-07-08 [drift-fixed: §2 planner.c call-graph cites +5/+71 stale — planner 333→328, standard_planner 351→346, subquery_planner 775→770, grouping_planner 1775→1704, create_grouping_paths 4121→4050, create_window_paths 4867→4796, create_distinct_paths 5124→5053, create_ordered_paths 5642→5571, apply_scanjoin_target_to_paths 8213→8142 @4c75cc78]

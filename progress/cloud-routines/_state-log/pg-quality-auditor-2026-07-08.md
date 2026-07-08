@@ -1,0 +1,1 @@
+**pg-quality-auditor** 2026-07-08 — AUDIT mode: 6 docs re-verified @4c75cc78 (replication/access-heap/access-transam/storage-buffer clean; executor drift-fixed 1 cite [ExecEndPlan 1565→1602]; optimizer drift-fixed 9 planner.c cites [+5/+71 stale from 44fb59fc qual-pushdown refactor]) (PR pending).
