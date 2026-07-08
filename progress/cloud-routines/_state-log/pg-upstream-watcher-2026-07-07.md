@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-07-07 — 16 master commits since anchor 4c75cc786301 (quiet cleanup day, 0 catversion; behavior fixes: COUNT window-run-condition wrong-results d007800f, GiST root-page killitems 9c9ddf10; volatile sweep b34fd845 across 8 backend files) · 8 buildfarm failures triaged, 0 regressions · anchor held (21 per-file corpus docs impacted) (PR #<pending>).
