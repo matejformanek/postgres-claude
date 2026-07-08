@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-08 — anchor 4c75cc786301 → d92e98340fcb; 33 commits; 56 docs queued for audit (55 per-file + contrib-pageinspect subsystem); 1 catversion bump 202607022→202607072 (PR #<n>).
