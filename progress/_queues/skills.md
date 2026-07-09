@@ -6,16 +6,16 @@ last-rerun date in this file is > 30 days old go back to `[pending]`.
 
 ## Entries
 
-[done:2026-06-09] locking last_passrate=100% reran=2026-06-09
+[done:2026-07-09] locking last_passrate=100% reran=2026-07-09 [4/4 cites re-verified @4c75cc786301: lockdefs.h:33-48 8 lockmodes, port/atomics.h:25-26 use-higher-level, buf_internals.h:33-86 64-bit state bit-layout, port/atomics.h:107-112 u64 spinlock fallback — all hold]
 [done:2026-06-09] memory-contexts last_passrate=100% reran=2026-06-09
 [done:2026-06-09] memory-keeping last_passrate=100% reran=2026-06-09
-[done:2026-06-09] parser-and-nodes last_passrate=100% reran=2026-06-09
+[done:2026-07-09] parser-and-nodes last_passrate=100% reran=2026-07-09 [cites re-verified @4c75cc786301: nodes.h:228 copyObject/typeof_unqual, copyfuncs.c:177/:185 copyObjectImpl+check_stack_depth, nodeFuncs.h:22-34 QTW_* + :155 expression_tree_walker macro, nodes.h:43/:124 pg_node_attr, analyze.c transformStmt@335/stmt_requires_parse_analysis@470/analyze_requires_snapshot@514 — all within ±1 line]
 [done:2026-06-09] patch-submission last_passrate=100% reran=2026-06-09
 [done:2026-06-09] pg-claude last_passrate=100% reran=2026-06-09
-[done:2026-06-09] replication-overview last_passrate=96.3% reran=2026-06-09
+[done:2026-07-09] replication-overview last_passrate=100% reran=2026-07-09 [cites re-verified @4c75cc786301: guc_tables.c:525 wal_level_options exact, effective_wal_level 649→650 off-by-1 (tolerated); slot.h:43 ReplicationSlotPersistency + :58 ReplicationSlotInvalidationCause; output_plugin.h:36 LogicalOutputPluginInit. NOTE: guc_tables.c refactored to 811 lines — GUC arrays moved to guc_tables.inc.c include; both cited symbols still resolve. Prior 96.3% eval-fail unrelated to cites]
 [done:2026-06-09] review-checklist last_passrate=100% reran=2026-06-09
 [done:2026-06-09] testing last_passrate=100% reran=2026-06-09
-[done:2026-06-09] wal-and-xlog last_passrate=100% reran=2026-06-09
+[done:2026-07-09] wal-and-xlog last_passrate=100% reran=2026-07-09 [11/11 cites re-verified @4c75cc786301: rmgr.c:97/:107 RegisterCustomRmgr, rmgr.h:35 RM_MIN_CUSTOM_ID=128, xlog_internal.h:351 RmgrData, xloginsert.h:28/:31 XLR_NORMAL_MAX_BLOCK_ID+flags, xlogutils.h:74 BLK_NEEDS_REDO, generic_xlog.h:23 MAX_GENERIC_XLOG_PAGES, twophase.c:12-19 NOTES, decode.c:116 rm_decode — all hold]
 [done:2026-07-03] access-method-apis last_passrate=100% reran=2026-07-03 [cites re-verified @b542d5566705: tableamapi.c 37 Assert(routine->), amapi.h callbacks, vacuum.h VACUUM_OPTION_NO_PARALLEL=0, genam.c:58-59 "kinda ugly"]
 [done:2026-06-06] build-and-run last_passrate=100% reran=2026-06-06
 [done:2026-06-06] catalog-conventions last_passrate=100% reran=2026-06-06
@@ -23,9 +23,9 @@ last-rerun date in this file is > 30 days old go back to `[pending]`.
 [done:2026-06-06] commit-message-style last_passrate=100% reran=2026-06-06
 [done:2026-06-06] debugging last_passrate=100% reran=2026-06-06
 [done:2026-06-06] error-handling last_passrate=100% reran=2026-06-06
-[done:2026-06-06] executor-and-planner last_passrate=100% reran=2026-06-06
-[done:2026-06-06] extension-development last_passrate=100% reran=2026-06-06
-[done:2026-06-06] fmgr-and-spi last_passrate=100% reran=2026-06-06
+[done:2026-07-09] executor-and-planner last_passrate=92% reran=2026-07-09 [DRIFT FIXED: grouping_planner cited planner.c:1775 now at 1704 (−71, from qual-pushdown refactor 44fb59fc) — corrected in ascii tree + Where-to-look range. Other cites hold @4c75cc786301 within ±5: planner@328/standard_planner@346/subquery_planner@770, set_rel_pathlist@520, standard_join_search@3952, add_path@459/create_seqscan_path@1026, create_plan@339, ExecutorStart@124, ExprContext@281, RelOptInfo@1009]
+[done:2026-07-09] extension-development last_passrate=100% reran=2026-07-09 [3/3 cites re-verified @4c75cc786301: extension.c:77 Extension_control_path GUC, fmgr.h:430 _PG_init decl, guc.h:358-421 DefineCustomBoolVariable@359..MarkGUCPrefixReserved@419 — all hold]
+[done:2026-07-09] fmgr-and-spi last_passrate=100% reran=2026-07-09 [31 cites re-verified @4c75cc786301: spi.c SPI_connect_ext@101/SPI_finish@182/AtEOSubXact_SPI@482/SPI_prepare@861/SPI_keepplan@977/SPI_copytuple@1048/SPI_cursor_open@1446/SPI_result_code_string@1973; fmgr.c DirectFunctionCall1Coll@794/OidFunctionCall0Coll@1403/InputFunctionCall@1531; funcapi.c@100/112; 11 fmgr.h + 4 funcapi.h + spi.h:82 headers — all hold]
 [done:2026-06-06] gucs-bgworker-parallel last_passrate=100% reran=2026-06-06 [LEGACY: this slug was split into gucs-config + bgworker-and-extensions + parallel-query; those three are now tracked as separate entries below. Retire this row on next full refill.]
 
 ## Refill 2026-07-06 (pg-quality-auditor SKILL mode)
