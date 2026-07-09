@@ -436,3 +436,37 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # Next runs: the >20★ topic space is DEEPLY saturated (118+4=122-doc corpus). Break saturation via holycorn (mruby-FDW,
 # distinct scripting-lang-in-FDW axis), the two dup backlog items if a themed run wants them, drop the floor to >10★,
 # and `topic:postgres`+(spatial|geo|astronomy|graph) name/desc combos. Tooling as above.
+
+# --- Refill (seeded 2026-07-09 cloud/pg-extension-anthropologist) ---
+# Queue had ZERO [pending] entries after the 2026-07-08 q3c/set_user/pg_plan_advsr/count_distinct drain (#558, →122 docs).
+# Re-ran the saturated topic sweeps (`topic:postgresql-extension stars:>10 pushed:>2025-01-01` 50 hits — ALL covered/known-skip;
+# `topic:postgres-extension stars:>40` 10 hits all covered; C/Rust name+desc stars:>60..>90 combos all covered) + holycorn
+# (from the standing next-runs note) which now returns 0 hits (repo gone/renamed → drop from backlog). BROKE saturation by
+# pivoting OFF the "type/index/aggregate" cluster to three DISTINCT tooling/infra axes genuinely absent from the 122-doc
+# corpus, each hooking a different core plugin surface: (1) block-level incremental-backup change-tracking via smgr write
+# interception (C, needs a patched-PG-core — the fork-adjacent backup axis, cf. orioledb), (2) a RUNTIME PL/pgSQL debugger
+# installing a PLpgSQL_plugin for step/breakpoint over a client socket (C — the dynamic foil to the static plpgsql_check),
+# (3) catalog→DDL reconstruction done ENTIRELY in SQL/PLpgSQL (the ruleutils pg_get_*def analog rebuilt outside the backend).
+# Tooling: DISCOVER via MCP search_repositories; git/trees API + get_file_contents both 403 for external repos (session
+# scoped to matejformanek/postgres-claude) → FETCH via raw.githubusercontent.com curl, source sets resolved from Makefile
+# OBJS/DATA + EXTENSION/EXTVERSION. Three genuinely-uncovered backend extensions PROCESSED this run (parallel sub-agent fanout):
+[done:placeholder] postgrespro/ptrack branch=master files=README.md,ptrack.c,ptrack.h,engine.c,datapagemap.c,ptrack.control,ptrack--2.1.sql,Makefile  # 56★ C, EXTENSION=ptrack v2.4 (OBJS=ptrack.o datapagemap.o engine.o). Block-level incremental backup engine: maintains a persistent per-block change-tracking bitmap (ptrack map) via smgr-write interception + a copy-on-checkpoint fork map, consumed by pg_probackup/pg_basebackup for incremental backups. The fork-adjacent backup axis — requires patching PG core (patches/ dir), cf. orioledb's patched-PG-core. → knowledge/ideologies/ptrack.md
+[done:placeholder] EnterpriseDB/pldebugger branch=master files=README-pldebugger.md,plugin_debugger.c,plpgsql_debugger.c,dbgcomm.c,dbgcomm.h,globalbp.h,pldbgapi.c,pldbgapi.control,pldbgapi--1.1.sql,Makefile  # 93★ C, EXTENSION=pldbgapi MODULE_big=plugin_debugger (OBJS=plpgsql_debugger.o plugin_debugger.o dbgcomm.o pldbgapi.o). Runtime PL/pgSQL step debugger: installs a PLpgSQL_plugin via the rendezvous var to intercept every statement/func entry, opens a TCP debugger-protocol socket (dbgcomm.c) to a client (pgAdmin), pauses backends at breakpoints. The DYNAMIC/runtime foil to plpgsql_check's static analysis (both use the PLpgSQL_plugin hook). → knowledge/ideologies/pldebugger.md
+[done:placeholder] lacanoid/pgddl branch=master files=README.md,ddlx.control,ddlx.sql,Makefile,META.json  # 153★ PLpgSQL, EXTENSION=ddlx v0.31 (superuser=false). Catalog→DDL reconstruction done ENTIRELY in SQL/PLpgSQL: ddlx_create() et al. rebuild CREATE statements by querying pg_catalog + pg_get_*def, the ruleutils analog reimplemented outside the C backend (no .so, no hooks). Introspection-in-SQL divergence sibling of pg_permissions/index_advisor. → knowledge/ideologies/pgddl.md
+
+# Queue drained as of 2026-07-09 (3 entries processed this run: ptrack, pldebugger, pgddl — three distinct tooling/infra
+# axes broke the >20★ topic saturation). knowledge/ideologies/ now holds 125 ext docs. [done:placeholder] markers rewritten
+# with the merge SHA by pg-evening-merger.
+# Refill rule / next runs: the >10★ topic space is now saturated against the 125-doc corpus (this run's sweep — topic
+# stars:>10 pushed:>2025-01-01 50 hits + topic:postgres-extension + C/Rust name+desc combos — surfaced only these 3
+# genuinely-uncovered backend extensions after pivoting off the type/index/aggregate cluster to tooling/infra axes: backup
+# change-tracking, runtime PL debugger, catalog→DDL-in-SQL). holycorn (2026-06/07 backlog mruby-FDW) now returns 0 hits →
+# dropped from backlog (repo gone/renamed). Two low-signal dup backlog items STILL [pending] for a themed run: is_jsonb_valid
+# (173★ C ≈pg_jsonschema), psql_bm25s (142★ PLpgSQL ≈pg_textsearch). Break further saturation by: (1) draining those two if
+# a themed run wants them; (2) dropping the floor to >5★ via MCP search_repositories (topic + `pg_ in:name` C/Rust/Zig/Go —
+# filter client drivers); (3) remaining tooling/infra axes (backup CLIs excluded as non-exts, but in-backend infra like
+# pldebugger/ptrack/pgsentinel-class monitoring is fair game); (4) `topic:postgres`+(debug|backup|monitor|catalog) name/desc.
+# Tooling: DISCOVER via MCP search_repositories; git/trees API + get_file_contents both 403 for external repos (session scoped
+# to matejformanek/postgres-claude) → FETCH via raw.githubusercontent.com curl, source sets from Makefile OBJS/DATA.
+# Known-skipped (don't re-add): see 2026-06-20..07-08 lists + holycorn (repo gone), pg_analytica (52★ vague analytics),
+# pg_ai_query (243★ NL→SQL thin AI bridge), pldebugger/ptrack/pgddl→NOW COVERED.
