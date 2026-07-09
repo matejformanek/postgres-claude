@@ -136,7 +136,7 @@ planner / standard_planner    planner.c:333 / 351
   └─ subquery_planner         planner.c:775         (recurses per subquery)
        ├─ pull_up_subqueries, preprocess_expression, … (prep/)
        ├─ deconstruct_jointree            (initsplan.c)
-       └─ grouping_planner                planner.c:1775
+       └─ grouping_planner                planner.c:1704
             ├─ query_planner              (planmain.c) — builds base RelOptInfos
             │     └─ make_one_rel
             │           ├─ set_base_rel_pathlists → set_rel_pathlist (allpaths.c:516)
@@ -327,7 +327,7 @@ shares the single `PlannerGlobal` (`glob`) so things like `paramExecTypes`,
   `PlanState`, `ScanState`.
 - `source/src/backend/optimizer/README` (1-200) — Paths, RelOptInfo, DP join
   search.
-- `source/src/backend/optimizer/plan/planner.c:333-855, 1775+` —
+- `source/src/backend/optimizer/plan/planner.c:333-855, 1704+` —
   `standard_planner`, `subquery_planner`, `grouping_planner`.
 - `source/src/backend/optimizer/path/allpaths.c:80-3950` —
   `set_rel_pathlist`, `make_rel_from_joinlist`, `standard_join_search`.
