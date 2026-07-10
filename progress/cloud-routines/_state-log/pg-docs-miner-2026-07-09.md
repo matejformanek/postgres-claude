@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-07-09 — 4 docs-distilled (259→263): §32 JIT chapter [jit-reason, jit-decision, jit-configuration, jit-extensibility]; jit.html root skipped (ToC-only). Load-bearing find: JitProviderCallbacks 3-callback pluggable-provider interface + $pkglibdir/bitcode inlining, code-verified @d92e98340fcb (PR #<n>).
