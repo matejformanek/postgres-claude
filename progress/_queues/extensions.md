@@ -470,3 +470,41 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # to matejformanek/postgres-claude) → FETCH via raw.githubusercontent.com curl, source sets from Makefile OBJS/DATA.
 # Known-skipped (don't re-add): see 2026-06-20..07-08 lists + holycorn (repo gone), pg_analytica (52★ vague analytics),
 # pg_ai_query (243★ NL→SQL thin AI bridge), pldebugger/ptrack/pgddl→NOW COVERED.
+
+# --- Refill (seeded 2026-07-10 cloud/pg-extension-anthropologist) ---
+# Queue had ZERO [pending] entries after the 2026-07-09 ptrack/pldebugger/pgddl drain (#567, →125 docs).
+# Global search is UNAVAILABLE this run: GitHub MCP token expired mid-run + the CCR proxy blocks api.github.com
+# (search + repos endpoints 403 "sessions are bound to their configured repositories"). raw.githubusercontent.com
+# curl still works (200) → DISCOVERY fell back to ecosystem knowledge + the standing backlog notes, verified
+# fetchable per-repo via raw README/Makefile probes; source sets resolved from Makefile OBJS/DATA. Picked a themed
+# OBSERVABILITY/FORENSICS cluster of 4 genuinely-uncovered, distinct-axis backend extensions (none in
+# knowledge/ideologies/): a pg_stat_statements successor (time-bucketed), kernel-resource accounting via
+# executor-hook chaining, wait-event sampling bgworker, and an MVCC-bypass forensic heap read. Processed via
+# parallel sub-agent fanout.
+[done:placeholder] percona/pg_stat_monitor branch=main files=README.md,src/pg_stat_monitor.c,src/pg_stat_monitor.h,src/hash_query.c,src/guc.c,pg_stat_monitor.control  # ~500★ C; pg_stat_statements successor — time-window BUCKETED aggregation + response-time histograms + per-bucket shmem hash. OBJS=src/{hash_query,guc,pg_stat_monitor}.o.
+[done:placeholder] powa-team/pg_stat_kcache branch=master files=README.rst,pg_stat_kcache.c,pg_stat_kcache.control,pg_stat_kcache--2.2.0.sql  # ~700★ C; kernel-side resource accounting via getrusage() bracketing ExecutorRun, hook-chained BEHIND pg_stat_statements (queryid coordination). README is .rst not .md. OBJS=pg_stat_kcache.o.
+[done:placeholder] postgrespro/pg_wait_sampling branch=master files=README.md,pg_wait_sampling.c,collector.c,pg_wait_sampling.h,pg_wait_sampling.control  # ~500★ C; wait-event history + profile via a shared_preload bgworker sampling every backend's PgBackendStatus wait_event into a shmem ring + hash. Sibling of pgsentinel (ASH) but wait-event-profile-shaped. OBJS=pg_wait_sampling.o collector.o.
+[done:placeholder] df7cb/pg_dirtyread branch=master files=README.md,pg_dirtyread.c,dirtyread_tupconvert.c,dirtyread_tupconvert.h,pg_dirtyread.control  # ~300★ C; MVCC-bypass forensic read — a SRF scans the heap with a snapshot that returns DEAD/deleted tuples (recover-after-DELETE), reconstructing dropped/system columns via a custom tuple converter. Distinct forensic axis. OBJS=pg_dirtyread.o dirtyread_tupconvert.o.
+
+# Queue drained as of 2026-07-10 (4 entries processed this run: pg_stat_monitor, pg_stat_kcache, pg_wait_sampling,
+# pg_dirtyread — a themed OBSERVABILITY/FORENSICS cluster, parallel sub-agent fanout). knowledge/ideologies/ now holds
+# 129 ext docs. [done:placeholder] markers rewritten with the merge SHA by pg-evening-merger. Spot-checked 2 cites live
+# against raw blobs (pg_dirtyread.c:115 heap_beginscan(...,SnapshotAny,...) ✓; collector.c:162/167 ProcArrayLock +
+# ProcGlobal->allProcs ✓). Manifest corrections logged in each doc's Sources footer: pg_stat_monitor src/pg_stat_monitor.h
+# 404 → structs live in src/hash_query.h; pg_stat_kcache doc is README.rst (not .md) + --2.2.0.sql stale vs control's
+# default_version 2.3.2; pg_wait_sampling has README.md (README.rst 404). Distinct-axis rationale: pgss-successor
+# (bucketed) / kernel-getrusage-accounting-via-executor-hook-chain / wait-event-sampling-bgworker / MVCC-bypass-heap-read.
+#
+# TOOLING NOTE FOR NEXT RUNS — global discovery was UNAVAILABLE this run: GitHub MCP token expired mid-session AND the CCR
+# proxy 403s api.github.com (both search AND repos endpoints: "sessions are bound to their configured repositories"). Only
+# raw.githubusercontent.com curl works (200) for external repos. So candidate DISCOVERY fell back to ecosystem knowledge +
+# the standing backlog, each verified fetchable via per-repo raw README/Makefile probes. If MCP is still expired next run,
+# discovery is limited to known-name probing — consider re-authing GitHub MCP or widening the repo scope for search.
+# Verified-fetchable, genuinely-uncovered, HIGH-signal candidates found this run but NOT processed (seed the next run):
+[pending] tensorchord/pgvecto.rs branch=main files=README.md,src/,Cargo.toml  # ~2000★ Rust; vector search with an ASYNC BACKGROUND index-building process + its own storage/mmap outside PG buffers — a 5th distinct shape in the vector cluster (pgvector type / pgvectorscale PG-native / lantern foreign-lib / zombodb remote-engine). LARGE → sequential full-input-budget run. Resolve src set from Cargo + crate layout.
+[pending] tensorchord/VectorChord branch=main files=README.md,src/,Cargo.toml  # ~2000★ Rust; pgvecto.rs successor (RaBitQ quantization + disk-based IVF). ≈pgvecto.rs — pick ONE of the two per run to avoid dup.
+[pending] percona/pg_stat_monitor→COVERED; consider MigOpsRepos/credcheck branch=master files=README.md,credcheck.c,credcheck.control  # ~200★ C; password/username policy via check_password_hook + ClientAuthentication_hook (auth-policy axis; some overlap with set_user/pg_tle passcheck but distinct — pure policy engine).
+[pending] microsoft/documentdb branch=main files=README.md,...  # ~2000★ C; BSON type + Mongo-compat operator library (the FerretDB backend). Distinct type+operator axis. Large multi-dir repo → resolve manifest carefully.
+[pending] CrunchyData/pg_parquet branch=main files=README.md,src/,Cargo.toml  # ~800★ Rust; extends COPY TO/FROM with a parquet format over object storage — COPY-format-extension axis (cf. copy-family skill). 
+# Two low-signal dup backlog items STILL [pending] from prior runs (fetchable-verified is_jsonb_valid 200): is_jsonb_valid
+# (173★ C ≈pg_jsonschema), psql_bm25s (142★ PLpgSQL ≈pg_textsearch) — drain only if a themed run wants them.
