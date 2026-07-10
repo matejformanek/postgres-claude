@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-07-09 — hackers 12 threads (hash-split bug, PG19 FK fast-path OOB, per-backend AIO stats, logical-rep conflict table) · CF59 +4 Committed, 2nd zero-intake drain day (Total 609) · planet 3 posts (thin feed, 3rd window). (PR #<pending>).
