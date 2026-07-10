@@ -114,24 +114,54 @@ src/include/common) — the Phase D data-leak surface continues here (checksum,
 manifest, compression, crypto, secret-scrub). All rows dated 2026-06-03, well
 past the 30-day staleness threshold.
 
-[pending] common.md md5_common.c:151,170 | secret-scrub/likely | seeded=2026-07-07
-[pending] common.md blkreftable.c:595-601,652-655 | trust-boundary/likely | seeded=2026-07-07
-[pending] common.md blkreftable.c:666-672 | dos/maybe | seeded=2026-07-07
-[pending] common.md blkreftable.c:907 | trust-boundary/likely | seeded=2026-07-07
-[pending] common.md parse_manifest.c:811-878 | trust-boundary/likely | seeded=2026-07-07
-[pending] common.md checksum_helper.h:20-27 | trust-boundary/maybe | seeded=2026-07-07
-[pending] common.md controldata_utils.c:209-252 | state-transition/maybe | seeded=2026-07-07
-[pending] common.md pg_lzcompress.c:255-256 | undocumented-invariant/maybe | seeded=2026-07-07
-[pending] common.md jsonapi.c:431-432,952-953,983-984 | dos/maybe | seeded=2026-07-07
-[pending] common.md jsonapi.c:1400-1407 | dos/nit | seeded=2026-07-07
-[pending] common.md archive.c:53-54 | trust-boundary/maybe | seeded=2026-07-07
-[pending] common.md file_utils.c:301-340 | correctness/maybe | seeded=2026-07-07
-[pending] common.md file_perm.c:37 | undocumented-invariant/maybe | seeded=2026-07-07
-[pending] common.md checksum_helper.c:96-134 | undocumented-invariant/nit | seeded=2026-07-07
-[pending] common.md checksum_helper.c:200-227 | undocumented-invariant/nit | seeded=2026-07-07
-[pending] common.md restricted_token.c:151 | trust-boundary/maybe | seeded=2026-07-07
-[pending] common.md compression.c,compression.h:17-20 | undocumented-invariant/likely | seeded=2026-07-07
-[pending] common.md compression.c:304-327 | trust-boundary/maybe | seeded=2026-07-07
-[pending] common.md compression.c:191,318,468 | correctness/nit | seeded=2026-07-07
-[pending] common.md cryptohash.c:78-83 | stale-todo/nit | seeded=2026-07-07
-[pending] common.md instr_time.c:411 | stale-todo/nit | seeded=2026-07-07
+[done:2026-07-10] common.md md5_common.c:151,170 | secret-scrub/likely | still-present@d92e98340fcb
+[done:2026-07-10] common.md blkreftable.c:595-601,652-655 | trust-boundary/likely | still-present@d92e98340fcb
+[done:2026-07-10] common.md blkreftable.c:666-672 | dos/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md blkreftable.c:907 | trust-boundary/likely | still-present@d92e98340fcb
+[done:2026-07-10] common.md parse_manifest.c:811-878 | trust-boundary/likely | still-present@d92e98340fcb
+[done:2026-07-10] common.md checksum_helper.h:20-27 | trust-boundary/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md controldata_utils.c:209-252 | state-transition/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md pg_lzcompress.c:255-256 | undocumented-invariant/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md jsonapi.c:431-432,952-953,983-984 | dos/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md jsonapi.c:1400-1407 | dos/nit | still-present@d92e98340fcb
+[done:2026-07-10] common.md archive.c:53-54 | trust-boundary/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md file_utils.c:301-340 | correctness/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md file_perm.c:37 | undocumented-invariant/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md checksum_helper.c:96-134 | undocumented-invariant/nit | still-present@d92e98340fcb
+[done:2026-07-10] common.md checksum_helper.c:200-227 | undocumented-invariant/nit | still-present@d92e98340fcb
+[done:2026-07-10] common.md restricted_token.c:151 | trust-boundary/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md compression.c,compression.h:17-20 | undocumented-invariant/likely | still-present@d92e98340fcb
+[done:2026-07-10] common.md compression.c:304-327 | trust-boundary/maybe | still-present@d92e98340fcb
+[done:2026-07-10] common.md compression.c:191,318,468 | correctness/nit | still-present@d92e98340fcb
+[done:2026-07-10] common.md cryptohash.c:78-83 | stale-todo/nit | still-present@d92e98340fcb
+[done:2026-07-10] common.md instr_time.c:411 | stale-todo/nit | still-present@d92e98340fcb
+
+## Refill 2026-07-10 (pg-quality-auditor) — psql register, 21 line-cited open rows
+
+common register fully drained this run (21 rows all still-present@d92e98340fcb,
+0 drift, 0 upstream fixes). Next security-relevant frontend register: `psql`
+(src/bin/psql) — the A4 secret-scrub + "psql as RCE primitive" clusters continue
+the Phase D data-leak surface (credential-to-disk/memory, server-byte trust,
+path/shell injection). All rows dated 2026-06, past the 30-day staleness threshold.
+
+[pending] psql.md input.c:148-167 | secret-scrub/likely | seeded=2026-07-10
+[pending] psql.md mainloop.c:431 | secret-scrub/likely | seeded=2026-07-10
+[pending] psql.md common.c:1158 | secret-scrub/likely | seeded=2026-07-10
+[pending] psql.md startup.c:249-302 | secret-scrub/likely | seeded=2026-07-10
+[pending] psql.md command.c:2604-2607 | secret-scrub/likely | seeded=2026-07-10
+[pending] psql.md settings.h:103 | info-disclosure/maybe | seeded=2026-07-10
+[pending] psql.md input.c:452 | path-traversal/maybe | seeded=2026-07-10
+[pending] psql.md describe.c:1917-2192 | info-disclosure/maybe | seeded=2026-07-10
+[pending] psql.md tab-complete.in.c:6305 | info-disclosure/maybe | seeded=2026-07-10
+[pending] psql.md common.c:741-755 | trust-boundary/nit | seeded=2026-07-10
+[pending] psql.md prompt.c:342-354 | info-disclosure/maybe | seeded=2026-07-10
+[pending] psql.md command.c:861-865 | trust-boundary/nit | seeded=2026-07-10
+[pending] psql.md variables.c:281 | injection/likely | seeded=2026-07-10
+[pending] psql.md common.c:862-920 | trust-boundary/nit | seeded=2026-07-10
+[pending] psql.md tab-complete.in.c:7041-7066 | trust-boundary/maybe | seeded=2026-07-10
+[pending] psql.md large_obj.c:151 | path-traversal/likely | seeded=2026-07-10
+[pending] psql.md large_obj.c:187 | path-traversal/likely | seeded=2026-07-10
+[pending] psql.md copy.c:293,312 | shell-injection/nit | seeded=2026-07-10
+[pending] psql.md command.c:4690-4694 | shell-injection/nit | seeded=2026-07-10
+[pending] psql.md prompt.c:317-339 | shell-injection/maybe | seeded=2026-07-10
+[pending] psql.md startup.c:830-835 | trust-boundary/nit | seeded=2026-07-10

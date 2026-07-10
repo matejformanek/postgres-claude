@@ -1,0 +1,1 @@
+**pg-quality-auditor** 2026-07-10 — ISSUE mode: drained `common` register's 21 line-cited rows @d92e98340fcb (all still-present, 0 drift), stamped `triaged 2026-07-10`; refilled issues.md with 21 `psql` P0-security rows (PR #<n>).
