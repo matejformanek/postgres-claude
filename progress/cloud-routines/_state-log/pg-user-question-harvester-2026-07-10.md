@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-10 — 30 internals threads harvested (07-08..07-10 tail, hackers-only — general thin, performance empty), 6 body-read, 4 gap tags (data-checksums, ddl-deparse/ruleutils, libpq-tls, pg_dump-parallel) (PR #<pending>).
