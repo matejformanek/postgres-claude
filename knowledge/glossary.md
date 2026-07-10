@@ -169,8 +169,23 @@ PostgreSQL's privilege representation: an `Acl` is a variable-length array of `A
 
 
 
+### ACL_ALL_RIGHTS_RELATION
+The bitmask enumerating every privilege applicable to a table/relation — SELECT/INSERT/UPDATE/DELETE/TRUNCATE/REFERENCES/TRIGGER plus MAINTAIN — used when expanding a NULL `relacl` to the owner's default full set. [verified-by-code] (`acl.h:160` — via `knowledge/docs-distilled/ddl-priv.md`).
+
+
+
+### ACL_MAINTAIN_CHR
+The single-character abbreviation `'m'` for the MAINTAIN privilege (VACUUM/ANALYZE/CLUSTER/REINDEX/REFRESH/LOCK) in the compact `aclitem` text form; MAINTAIN is the newest privilege bit. [verified-by-code] (`acl.h:151` — via `knowledge/docs-distilled/ddl-priv.md`).
+
+
+
 ### ACL_SELECT
 The privilege bit for `SELECT` within an `AclItem` privilege mask; the `ACL_*` family enumerates the grantable privileges that `pg_class_aclcheck` and friends test. [verified-by-code] (via `knowledge/files/contrib/pgrowlocks/pgrowlocks.c.md`).
+
+
+
+### AclItem
+The fixed struct `{ ai_grantee, ai_privs, ai_grantor }` that is one element of an `aclitem[]` array — one grantee's privilege bitmask plus the grantor who conferred it. [verified-by-code] (`acl.h:54` — via `knowledge/docs-distilled/ddl-priv.md`).
 
 
 
@@ -233,6 +248,11 @@ Adds join paths (`joinpath.c`) to a join `RelOptInfo` for one pair of input rels
 
 ### addforeignupdatetargets
 The FDW callback that adds the row-identity junk columns (e.g. a remote `ctid` or key) an `UPDATE` / `DELETE` needs to locate the target row on the remote side. [from-docs] (via `knowledge/docs-distilled/fdwhandler.md`).
+
+
+
+### admin_option
+The per-membership boolean in `pg_auth_members` (default false) granting the right to further grant that role membership to others — the ADMIN axis, independent of the INHERIT and SET axes. [verified-by-code] (`pg_auth_members.h:47` — via `knowledge/docs-distilled/role-membership.md`).
 
 
 
@@ -332,6 +352,21 @@ transition values, the `ExprContext`s used for transition/final evaluation, and
 (for hashed aggregation) the in-memory hash tables. `ExecAgg` drives it,
 switching between sorted and hashed grouping strategies. [verified-by-code] (via
 `knowledge/data-structures/exprcontext.md`).
+
+
+
+### ai_grantee
+The `AclItem` field naming the role that receives the privileges (a role OID; zero denotes PUBLIC). [verified-by-code] (`acl.h:56-57` — via `knowledge/docs-distilled/ddl-priv.md`).
+
+
+
+### ai_grantor
+The `AclItem` field naming the role that granted the privileges, retained so that revoking a grant option can cascade down that grantor's grant chain. [verified-by-code] (`acl.h:56-57` — via `knowledge/docs-distilled/ddl-priv.md`).
+
+
+
+### ai_privs
+The `AclItem` field holding the privilege bitmask — low bits are the granted privileges, high bits the matching WITH GRANT OPTION flags. [verified-by-code] (`acl.h:56-57` — via `knowledge/docs-distilled/ddl-priv.md`).
 
 
 
@@ -984,6 +1019,21 @@ and are therefore restricted to superusers / `pg_read_server_files` roles.
 
 
 
+### be_gssapi_write
+The backend GSSAPI transport send routine that wraps outbound bytes in per-message GSS security tokens, staging them through `PqGSSSendBuffer`. [verified-by-code] (`be-secure-gssapi.c:105` — via `knowledge/docs-distilled/gssapi-enc.md`).
+
+
+
+### be_tls_init
+Builds the process-wide OpenSSL server `SSL_CTX` at server start/reload — loading the cert chain and private key — from which each connection's TLS session is derived. [verified-by-code] (`be-secure-openssl.c` — via `knowledge/docs-distilled/ssl-tcp.md`).
+
+
+
+### be_tls_open_server
+Performs the per-connection server-side TLS handshake on top of the shared context built by `be_tls_init`; reached via `secure_open_server`'s SSL branch. [verified-by-code] (`be-secure-openssl.c` — via `knowledge/docs-distilled/ssl-tcp.md`).
+
+
+
 ### BecomeLockGroupMember
 The call a parallel worker makes during startup to join its leader's lock
 group, so the deadlock detector treats leader and workers as a single unit and
@@ -1391,6 +1441,11 @@ The fixed OID (10) of the bootstrap superuser role created by `initdb`; it is us
 
 
 
+### bootstrap_template1
+The initdb phase that replays the bootstrap BKI stream to build the initial catalog of `template1`, at which point the cluster's frozen checksum/locale/encoding invariants are written. [verified-by-code] (`initdb.c:1571` — via `knowledge/docs-distilled/creating-cluster.md`).
+
+
+
 ### BootstrapModeMain
 The entry point for bootstrap/check mode (`bootstrap.c`, `pg_noreturn`): `--boot` runs `BootstrapModeMain(argc, argv, false)` to build the initial catalogs during initdb, and `--check` runs it with `check_only=true`. [verified-by-code] (via `knowledge/subsystems/main.md`).
 
@@ -1484,6 +1539,21 @@ The B-tree opclass support-function slot number 1 — the 3-way comparison funct
 
 
 
+### BTP_HALF_DEAD
+The nbtree page flag marking a leaf partway through deletion (unlinked from its parent but not yet from the leaf level) — the intermediate state of the two-stage page-deletion protocol. [verified-by-code] (`nbtree.h` — via `knowledge/subsystems/access-nbtree.md`).
+
+
+
+### BTP_HAS_FULLXID
+The nbtree page flag (a recent addition) indicating a deleted page's special area stores a full 64-bit XID (`BTDeletedPageData`) instead of a 32-bit one, so page recycling survives XID wraparound. [verified-by-code] (`nbtree.h:76-85` — via `knowledge/subsystems/access-nbtree.md`).
+
+
+
+### BTP_INCOMPLETE_SPLIT
+The nbtree page flag marking a page whose split completed on the child but whose parent downlink insertion has not yet finished; a later inserter (or `_bt_finish_split`) must complete it, and it can persist across crashes. [verified-by-code] (`nbtree.h:76-85` — via `knowledge/subsystems/access-nbtree.md`).
+
+
+
 ### BTPageIsRecyclable
 The nbtree predicate testing whether a previously deleted index page is now safe to reuse — i.e. its deletion is old enough that no concurrent scan could still be following a stale pointer to it. [verified-by-code] (`nbtpage.c:874-1007` — via `knowledge/files/src/backend/access/nbtree/nbtpage.c.md`).
 
@@ -1491,6 +1561,16 @@ The nbtree predicate testing whether a previously deleted index page is now safe
 
 ### BTPageOpaqueData
 The nbtree per-page special-space struct (`nbtree.h`) holding sibling links (`btpo_prev`/`btpo_next`), level, and flag bits (leaf/root/deleted/incomplete-split); it is the header every btree page carries after its line pointers. [verified-by-code] (via `knowledge/subsystems/access-nbtree.md`).
+
+
+
+### btpo_flags
+The `BTP_*` flag-bits field in an nbtree page's special-space opaque data, recording page state (leaf/root/deleted/half-dead/incomplete-split). [verified-by-code] (`nbtree.h:76-85` — via `knowledge/subsystems/access-nbtree.md`).
+
+
+
+### btpo_level
+The nbtree page's tree-level field in its special-space opaque data — 0 marks a leaf, higher values are internal levels up toward the root. [verified-by-code] (`nbtree.h` — via `knowledge/subsystems/access-nbtree.md`).
 
 
 
@@ -2597,6 +2677,11 @@ flushing dirty buffers, writing a checkpoint WAL record, and updating
 
 
 
+### CreateDataDirLockFile
+Writes `postmaster.pid` (the `DIRECTORY_LOCK_FILE`) in `$PGDATA` with the postmaster PID and a shmem key so a second postmaster on the same data dir refuses to start; written in multiple steps, so a torn file is a known transient rather than corruption. [verified-by-code] (`miscinit.c:1465` — via `knowledge/docs-distilled/server-start.md`).
+
+
+
 ### CreateDestReceiver
 The factory that maps a `CommandDest` value to the matching `DestReceiver` implementation (client, tuplestore, SPI, COPY, …), producing the sink that query result rows are routed through. [verified-by-code] (`dest.c` — via `knowledge/subsystems/tcop.md`).
 
@@ -2792,6 +2877,11 @@ The execution-side node state for a custom-scan provider, embedded as the first 
 
 ### cvt_text_name
 The btree_gin coercion that truncates an oversize `text` to `NAMEDATALEN-1` via `pg_mbcliplen` when indexing as `name`, assuming the shortened result still sorts below the original — correct only under byte-comparison (C) collation, not ICU/libc orderings. [from-comment] (via `knowledge/files/contrib/btree_gin/btree_gin.md`).
+
+
+### data_checksums
+The initdb static bool, `true` by default since PG 18, that turns on cluster-wide page checksums at bootstrap; the state is permanent at initdb time and can only be toggled offline afterward via `pg_checksums`. [verified-by-code] (`initdb.c:167` — via `knowledge/docs-distilled/creating-cluster.md`).
+
 
 
 ### data_directory_mode
@@ -3096,6 +3186,11 @@ An fmgr convenience macro that calls a built-in C function by its C symbol
 with two `Datum` arguments, skipping catalog lookup; it errors if the callee
 returns NULL (use `FunctionCall2` when NULL is possible). [verified-by-code]
 (via `knowledge/files/contrib/intarray/_int_op.md`).
+
+
+
+### DIRECTORY_LOCK_FILE
+The macro naming the postmaster interlock file `postmaster.pid`; its presence and contents implement the single-postmaster-per-data-dir guard. [verified-by-code] (`miscinit.c:61` — via `knowledge/docs-distilled/server-start.md`).
 
 
 
@@ -5155,6 +5250,11 @@ GSSAPI (Generic Security Services API) — the standard interface PostgreSQL use
 
 
 
+### GSSENCRequest
+The pre-startup negotiation packet a client sends to request GSSAPI transport encryption on the ordinary port — the GSS twin of `SSLRequest`, identified by `NEGOTIATE_GSS_CODE`. [verified-by-code] (`pqcomm.h:129` — via `knowledge/docs-distilled/gssapi-enc.md`).
+
+
+
 ### GUC (Grand Unified Configuration)
 PostgreSQL's runtime configuration-variable system. Every setting (`work_mem`,
 `wal_level`, …) is a `config_generic` record with a bool/int/real/string/enum
@@ -5999,6 +6099,11 @@ The `pg_index` flag marking whether an index may be used to answer queries; a fa
 
 
 
+### inherit_option
+The per-membership boolean in `pg_auth_members` (default true) controlling whether the member passively holds the granted role's privileges — the INHERIT axis, evaluated by `has_privs_of_role`. [verified-by-code] (`pg_auth_members.h:50` — via `knowledge/docs-distilled/role-membership.md`).
+
+
+
 ### init_fn
 The shared-memory initialization callback in a registered shmem-startup slot; the shmem bootstrap walks the list of `{size_fn, init_fn}` entries (e.g. `TwoPhaseShmemInit`) after allocating the segment so each subsystem can lay out its region. [verified-by-code] (`twophase.c:196-199` — via `knowledge/files/src/backend/access/transam/twophase.c.md`).
 
@@ -6264,10 +6369,20 @@ Inter-Process Communication — the shared-memory-plus-signals mechanisms tying 
 
 
 
+### is_member_of_role
+The `acl.c` predicate answering "may this role SET ROLE to that role?" — the SET-identity axis, distinct from `has_privs_of_role`'s passive-privilege (INHERIT) axis. [verified-by-code] (`acl.c:5048` — via `knowledge/docs-distilled/role-membership.md`).
+
+
+
 ### IsA
 The node-tag test macro that checks a `Node *` carries a given `NodeTag`; it
 is the standard idiom for runtime dispatch over PostgreSQL's tagged node
 hierarchy. [verified-by-code] (via `knowledge/subsystems/foreign.md`).
+
+
+
+### IsAJsonbScalar
+The macro distinguishing a scalar `JsonbValue` (type tag < 0x10) from a composite one — the branch point for ops that behave differently per category. [verified-by-code] (`jsonb.h:299-301` — via `knowledge/data-structures/jsonbvalue.md`).
 
 
 
@@ -6387,6 +6502,51 @@ the executor. [verified-by-code] (via
 
 
 
+### jbvArray
+The `JsonbValue` composite type tag (0x10) for a fully-deserialized JSON array, whose `val.array.elems[]` holds child `JsonbValue`s; the `rawScalar` flag marks a top-level bare scalar wrapped as a one-element array. [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvBinary
+The `JsonbValue` type tag for a composite still in its on-disk packed `JsonbContainer` form — the lazy-deserialization handle that lets operators walk on-disk JSONB without fully expanding it. [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvBool
+The `JsonbValue` scalar type tag for a JSON boolean. [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvDatetime
+The virtual `JsonbValue` type tag (0x20) used by `jsonpath`/SQL-JSON date-time operations; it has no on-disk JSONB representation and is serialized to a string on output. [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvNull
+The `JsonbValue` scalar type tag (value 0x0) for a JSON null. [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvNumeric
+The `JsonbValue` scalar type tag for a JSON number, carrying a PG `Numeric` in `val.numeric`. [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvObject
+The `JsonbValue` composite type tag for a fully-deserialized JSON object, whose `val.object.pairs[]` holds `JsonbPair` key/value entries. [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvString
+The `JsonbValue` scalar type tag for a JSON string; its `val.string` is a `{ int len; char *val; }` (length-counted, not NUL-terminated). [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
+### jbvType
+The `jbvType` enum tag classifying a `JsonbValue` into scalar (0x0–0xF: `jbvNull`/`jbvString`/`jbvNumeric`/`jbvBool`), composite (0x10+: `jbvArray`/`jbvObject`/`jbvBinary`), or virtual (0x20+: `jbvDatetime`). [verified-by-code] (`jsonb.h:227-247` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
 ### jit_above_cost
 The estimated plan-cost threshold above which JIT compilation of a query's expressions is triggered; one of the `jit_*` GUCs in `jit.h`, checked at node init (e.g. hot VALUES scans) alongside `jit_inline_above_cost` / `jit_optimize_above_cost`. [verified-by-code] (via `knowledge/files/src/include/jit/jit.h.md`).
 
@@ -6461,6 +6621,11 @@ turns a JSON document into a relational rowset. Parse analysis in
 
 
 
+### JsonbContainer
+The on-disk packed representation of a composite JSONB array/object; a `jbvBinary` `JsonbValue` points at one via `val.binary.data` for lazy traversal. [verified-by-code] (`jsonb.h:255-297` — via `knowledge/data-structures/jsonbvalue.md`).
+
+
+
 ### JsonbIterator
 The stateful cursor used to walk a binary jsonb value one token at a time (object keys, array elements, scalars) without fully expanding it, driving comparison, containment, and text output. [verified-by-code] (`jsonb_util.c` — via `knowledge/files/src/backend/utils/adt/jsonb_util.c.md`).
 
@@ -6468,6 +6633,11 @@ The stateful cursor used to walk a binary jsonb value one token at a time (objec
 
 ### JsonbIteratorNext
 Advances a `JsonbIterator` to the next token, returning a `JsonbIteratorToken` (BEGIN/END of object or array, a key, or a value) and populating the caller's `JsonbValue`; recursion into nested containers is requested via its skipNested flag. [verified-by-code] (`jsonb_util.c` — via `knowledge/files/src/backend/utils/adt/jsonb_util.c.md`).
+
+
+
+### JsonbPair
+One key/value entry inside a deserialized `jbvObject` `JsonbValue` (`{ int nPairs; JsonbPair *pairs; }`), where both key and value are themselves `JsonbValue`s. [verified-by-code] (`jsonb.h:255-297` — via `knowledge/data-structures/jsonbvalue.md`).
 
 
 
@@ -7194,6 +7364,11 @@ Builds the list of `PathKey`s describing the ordering required by an ORDER BY / 
 
 
 
+### make_postgres
+The initdb phase that clones the freshly bootstrapped `template1` into the default `postgres` database. [verified-by-code] (`initdb.c:2094` — via `knowledge/docs-distilled/creating-cluster.md`).
+
+
+
 ### make_rel_from_joinlist
 The entry point (`allpaths.c`) into the join-order search: it takes the deconstructed join list and drives either the exhaustive dynamic-programming join search or, past `geqo_threshold`, the genetic optimizer. [verified-by-code] (via `knowledge/subsystems/optimizer.md`).
 
@@ -7205,6 +7380,11 @@ to the backing catalog and the unique index used as the lookup key, feeding the
 generated `cacheinfo[]` table that `InitCatalogCache` builds from.
 [verified-by-code] (`syscache.c:13` — via
 `knowledge/files/src/backend/utils/cache/syscache.c.md`).
+
+
+
+### make_template0
+The initdb phase that clones `template1` into the pristine `template0` — the untouched source for `CREATE DATABASE ... TEMPLATE template0`. [verified-by-code] (`initdb.c:2040` — via `knowledge/docs-distilled/creating-cluster.md`).
 
 
 
@@ -7896,6 +8076,16 @@ Copies a C string into a fixed-width `Name` (NAMEDATALEN) field, zero-padding th
 
 ### NBuffers
 The global giving the number of pages in the shared buffer pool — i.e. `shared_buffers` measured in 8 KB blocks. It bounds the `BufferDescriptors`/`BufferBlocks` arrays and many bulk-operation ring sizes. [inferred] (`buf_init.c:24` — via `knowledge/subsystems/storage-buffer.md`).
+
+
+
+### NEGOTIATE_GSS_CODE
+The magic protocol code `PG_PROTOCOL(1234,5680)` carried by a `GSSENCRequest`, telling the backend to negotiate GSSAPI encryption before the StartupMessage. [verified-by-code] (`pqcomm.h:129` — via `knowledge/docs-distilled/gssapi-enc.md`).
+
+
+
+### NEGOTIATE_SSL_CODE
+The magic protocol code `PG_PROTOCOL(1234,5679)` carried by an `SSLRequest`; the backend answers a single `'S'` (start TLS) or `'N'` (plaintext) byte before any StartupMessage. [verified-by-code] (`pqcomm.h:128` — via `knowledge/docs-distilled/ssl-tcp.md`).
 
 
 
@@ -8925,6 +9115,11 @@ A `pg_visibility` contrib probe returning the TIDs of tuples that are not all-vi
 
 
 
+### pg_checkpoint
+A predefined role whose members may run `CHECKPOINT` without being superuser — one of the `pg_*` capability roles that each replace a single hardcoded `superuser()` gate. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
+
+
+
 ### pg_checksum_page
 Computes the 16-bit data checksum of an 8 KB page from its contents and block number — the block number is folded in so a page written to the wrong place is detected — compared against the stored `pd_checksum` on read when checksums are enabled. [verified-by-code] (via `knowledge/files/contrib/pageinspect/pageinspect.md`).
 
@@ -9031,6 +9226,11 @@ The cluster-wide (`BKI_SHARED_RELATION`) system catalog with one row per databas
 
 
 
+### pg_database_owner
+A predefined, implicit, memberless role whose single effective member is the owner of the current database; it owns the `public` schema by default and is the mechanism behind PG 15+'s locked-down `public`. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
+
+
+
 ### pg_db_role_setting
 The system catalog backing `ALTER ROLE/DATABASE ... SET`, with one row per (database, role) pair holding the GUC settings applied at session start for that combination (either is zero for a role-wide or database-wide default). Session startup applies these before the connection is handed to the client. [inferred] (via `knowledge/files/src/include/catalog/pg_db_role_setting.h.md`).
 
@@ -9068,6 +9268,11 @@ A built-in set-returning function, callable only inside a `ddl_command_end` even
 
 ### PG_exception_stack
 The thread-global pointer to the innermost active `sigjmp_buf`; `PG_TRY` pushes a new setjmp target onto it, `PG_END_TRY` pops it, and `pg_re_throw`/`ereport(ERROR)` longjmps to it — the mechanism implementing PostgreSQL's TRY/CATCH-style error unwinding. [verified-by-code] (via `knowledge/idioms/error-handling.md`).
+
+
+
+### pg_execute_server_program
+A predefined role permitting `COPY ... PROGRAM` to run OS commands as the server user; effectively superuser-equivalent and flagged extreme-care by the docs. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
 
 
 
@@ -9226,6 +9431,11 @@ compression method and the codec behind `pglz_compress`/`pglz_decompress`. It is
 simple and dependency-free; `lz4`/`zstd` are the optional alternatives selected
 per-column via `SET STORAGE`/`default_toast_compression`. [verified-by-code]
 (via `knowledge/files/src/include/common/pg_lzcompress.h.md`).
+
+
+
+### pg_maintain
+A predefined role granting the MAINTAIN privilege (VACUUM/ANALYZE/CLUSTER/REINDEX/REFRESH/LOCK) on all relations cluster-wide. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
 
 
 
@@ -9414,6 +9624,21 @@ the top-level abort if none). [verified-by-code] (via
 
 
 
+### pg_read_all_data
+A predefined role equivalent to SELECT plus schema USAGE on everything, but still subject to row-level-security policies — RLS exemption is `BYPASSRLS`'s job, not this role's. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
+
+
+
+### pg_read_all_settings
+A predefined role letting members read all GUCs, including superuser-only ones, without holding full superuser. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
+
+
+
+### pg_read_all_stats
+A predefined role unlocking the full `pg_stat_*` monitoring surface; a component granted into the `pg_monitor` composite role. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
+
+
+
 ### pg_read_server_files
 A predefined (built-in) role granting its members the right to read arbitrary server-side files through SQL-reachable facilities (`COPY FROM`, file_fdw, `pg_read_file`, the basebackup file APIs). Several corpus issues note it as a broad capability whose grantees can reach data outside any single relation's ACLs. [verified-by-code] (via `knowledge/files/contrib/file_fdw/file_fdw.c.md`).
 
@@ -9499,6 +9724,16 @@ The encoding-conversion helper that converts a string from the server encoding t
 
 ### pg_shdepend
 The cluster-wide system catalog recording dependencies on *shared* objects (roles, tablespaces, databases) — e.g. that a role owns or has privileges on objects in some database. It is the only dependency catalog keyed by both `dbid` and the local object, so DROP ROLE/OWNED BY can find references across all databases. [verified-by-code] (via `knowledge/files/src/backend/catalog/pg_shdepend.c.md`).
+
+
+
+### pg_signal_autovacuum_worker
+A predefined role permitting cancel/terminate signals to autovacuum workers — the autovac parallel of `pg_signal_backend`. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
+
+
+
+### pg_signal_backend
+A predefined role permitting `pg_cancel_backend`/`pg_terminate_backend` against other roles' sessions, but deliberately not against superuser-owned backends. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
 
 
 
@@ -9687,8 +9922,18 @@ The `src/fe_utils/mbprint.c` companion to `pg_wcsformat`: it computes the longes
 
 
 
+### pg_write_all_data
+A predefined role equivalent to INSERT/UPDATE/DELETE on everything, still subject to row-level-security policies. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
+
+
+
 ### pg_write_barrier
 The macro emitting a store-store memory barrier so writes issued before it become visible to other CPUs before writes after it. Lock-free shared-memory producers (e.g. publishing a fully-initialized struct, then a pointer to it) pair it with `pg_read_barrier` on the consumer. [inferred] (`procarray.c:2215` — via `knowledge/subsystems/storage-ipc.md`).
+
+
+
+### pg_write_server_files
+A predefined role permitting server-side file writes (e.g. `COPY TO` a server path) that bypass database-level permission checks; effectively superuser-equivalent. [from-docs] (via `knowledge/docs-distilled/predefined-roles.md`).
 
 
 
@@ -10276,6 +10521,11 @@ used while parsing protocol messages and certain binary `recv` functions.
 
 
 
+### PQ_GSS_MAX_PACKET_SIZE
+The 16384-byte cap (including the uint32 length header) on each GSSAPI-wrapped packet; larger payloads are split, so the GSS wrap is a stream frame, not a per-query blob. [verified-by-code] (`be-secure-gssapi.c:54` — via `knowledge/docs-distilled/gssapi-enc.md`).
+
+
+
 ### pq_init
 The backend routine (`backend_startup.c`, called from `BackendInitialize`) that allocates the connection's `Port`, sets up the `FeBeWaitSet`, and initializes the frontend/backend protocol send/receive buffers for a freshly accepted client socket. [verified-by-code] (via `knowledge/subsystems/libpq-backend.md`).
 
@@ -10366,6 +10616,11 @@ Closes a libpq connection and frees the `PGconn` and all memory associated with 
 
 ### PQgetResult
 The libpq call that returns the next `PGresult` from an asynchronous command, returning NULL when the current command is fully consumed; looping until NULL is mandatory after `PQsendQuery`. It underlies the synchronous `PQexec` as well. [inferred] (via `knowledge/files/src/interfaces/libpq/fe-exec.c.md`).
+
+
+
+### PqGSSSendBuffer
+The backend staging buffer holding the encrypted GSSAPI bytes queued for write, sized against `PQ_GSS_MAX_PACKET_SIZE`. [verified-by-code] (`be-secure-gssapi.c:69` — via `knowledge/docs-distilled/gssapi-enc.md`).
 
 
 
@@ -11272,6 +11527,11 @@ The shared `pg_regress` test-driver framework function (declared in `pg_regress.
 
 
 
+### relacl
+The `pg_class` ACL column holding a table's `aclitem[]` grants; a NULL `relacl` means "default privileges apply" (owner holds all, plus PUBLIC's built-in defaults) rather than an empty ACL. [from-docs] (via `knowledge/docs-distilled/ddl-priv.md`).
+
+
+
 ### relation
 The internal name for any table-like object (table, index, sequence,
 materialized view, composite type) — anything with a `pg_class` row and a
@@ -11978,11 +12238,41 @@ The static dispatch table mapping each resource-manager id (RM_HEAP_ID, RM_XLOG_
 
 
 
+### rolbypassrls
+The `pg_authid` boolean column backing the BYPASSRLS attribute — exemption from row-level-security policies, grantable without full superuser and explicitly not grantable by CREATEROLE. [verified-by-code] (`pg_authid.h:37-43` — via `knowledge/docs-distilled/role-attributes.md`).
+
+
+
+### rolcanlogin
+The `pg_authid` boolean backing the LOGIN attribute — the only distinction between a "user" and a "group", since both are the same `pg_authid` row. [verified-by-code] (`pg_authid.h:37-43` — via `knowledge/docs-distilled/role-attributes.md`).
+
+
+
+### rolcreatedb
+The `pg_authid` boolean backing the CREATEDB attribute. [verified-by-code] (`pg_authid.h:37-43` — via `knowledge/docs-distilled/role-attributes.md`).
+
+
+
+### rolcreaterole
+The `pg_authid` boolean backing the CREATEROLE attribute; a CREATEROLE role auto-grants itself ADMIN on roles it creates but cannot create superusers or grant REPLICATION/BYPASSRLS. [verified-by-code] (`pg_authid.h:37-43` — via `knowledge/docs-distilled/role-attributes.md`).
+
+
+
 ### RollbackAndReleaseCurrentSubTransaction
 Aborts the current subtransaction and pops it, the C-level primitive behind PL
 exception blocks and `plpy.subtransaction()`/SPI subxact rollback.
 [verified-by-code] (`plpy_spi.c:447-539` — via
 `knowledge/files/src/pl/plpython/plpy_spi.md`).
+
+
+
+### rolreplication
+The `pg_authid` boolean backing the REPLICATION attribute — lets the role open a walsender replication connection; requires LOGIN. [verified-by-code] (`pg_authid.h:37-43` — via `knowledge/docs-distilled/role-attributes.md`).
+
+
+
+### rolsuper
+The `pg_authid` boolean backing the SUPERUSER attribute, commented "read this field via superuser() only!"; it bypasses every permission check except LOGIN. [verified-by-code] (`pg_authid.h:37-43` — via `knowledge/docs-distilled/role-attributes.md`).
 
 
 
@@ -12238,6 +12528,11 @@ code/data sections are allocated from memory it controls and can free when the
 
 
 
+### secure_open_server
+The backend dispatcher that, per connection, branches to the TLS (`be_tls_open_server`) or GSSAPI open path after the pre-startup `SSLRequest`/`GSSENCRequest` negotiation. [verified-by-code] (`be-secure.c:116` — via `knowledge/docs-distilled/ssl-tcp.md`).
+
+
+
 ### security_barrier
 A flag on a view (and the RTE it expands to) that forbids the planner from pushing user-supplied qualifiers below the view's own quals, preventing a cheap but leaky function from seeing rows the view was meant to hide. It is the mechanism behind security_barrier views and row-level security. [inferred] (via `knowledge/subsystems/optimizer.md`).
 
@@ -12349,6 +12644,11 @@ The SQL-callable function form of SET — `set_config(name, value, is_local)` �
 
 ### set_join_pathlist_hook
 The planner hook an extension sets to inject custom join paths — the join-level counterpart to `set_rel_pathlist_hook` for base relations. [from-docs] (via `knowledge/docs-distilled/custom-scan.md`).
+
+
+
+### set_option
+The per-membership boolean in `pg_auth_members` (default true) controlling whether the member may `SET ROLE` to the granted role — the SET axis, evaluated by `is_member_of_role`. [verified-by-code] (`pg_auth_members.h:53` — via `knowledge/docs-distilled/role-membership.md`).
 
 
 
@@ -13137,6 +13437,16 @@ Secure Sockets Layer — the historical name (now TLS) for PostgreSQL's encrypte
 
 ### ssl_in_use
 The flag on the backend's `Port` (`MyProcPort->ssl_in_use`) recording whether the current client connection is TLS-encrypted; sslinfo's introspection functions gate every result on it, returning NULL on a non-TLS connection. [verified-by-code] (`sslinfo.c:5` — via `knowledge/files/contrib/sslinfo/sslinfo.c.md`).
+
+
+
+### SSLok
+The backend variable set to `'S'` or `'N'` in response to an `SSLRequest`, telling the client whether to start TLS or continue in plaintext. [verified-by-code] (`backend_startup.c:582` — via `knowledge/docs-distilled/ssl-tcp.md`).
+
+
+
+### SSLRequest
+The pre-startup message a client sends (carrying `NEGOTIATE_SSL_CODE`) to request TLS on the ordinary port before sending its StartupMessage. [verified-by-code] (`pqcomm.h:128` — via `knowledge/docs-distilled/ssl-tcp.md`).
 
 
 
