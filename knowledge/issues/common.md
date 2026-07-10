@@ -43,7 +43,7 @@ one directory** to motivate a single shared helper.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | md5_common.c:151,170 | secret-scrub | likely | `pg_md5_encrypt` mallocs `passwd_len+salt_len+1`, copies plaintext password + salt, hashes, `free()` without `explicit_bzero` — the textbook unscrubbed cleartext leak | open | knowledge/files/src/common/md5_common.c.md |
+| 2026-06-03 | md5_common.c:151,170 | secret-scrub | likely | `pg_md5_encrypt` mallocs `passwd_len+salt_len+1`, copies plaintext password + salt, hashes, `free()` without `explicit_bzero` — the textbook unscrubbed cleartext leak | open · triaged 2026-07-10 | knowledge/files/src/common/md5_common.c.md |
 | 2026-06-03 | md5_common.c | secret-scrub | likely | `pg_md5_hash`'s stack `sum[16]` is the hash output and not zeroed before return | open | knowledge/files/src/common/md5_common.c.md |
 | 2026-06-03 | scram-common.c | secret-scrub | likely | `scram_SaltedPassword` PBKDF2 intermediate `Ui`/`Ui_prev` 32-byte stack buffers not `explicit_bzero`'d — most sensitive bytes in PG SCRAM | open | knowledge/files/src/common/scram-common.c.md |
 | 2026-06-03 | scram-common.c | secret-scrub | likely | `scram_build_secret` derivation arrays (`SaltedPassword`, `ClientKey`, `StoredKey`) not bzero'd | open | knowledge/files/src/common/scram-common.c.md |
@@ -95,12 +95,12 @@ analysis from A3 (`knowledge/issues/pg_dump.md` §Archive-format trust).
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | blkreftable.c:595-601,652-655 | trust-boundary | likely | BRT file authenticated by magic + trailing CRC-32C only; attacker rewriting body trivially recomputes CRC | open | knowledge/files/src/common/blkreftable.c.md |
-| 2026-06-03 | blkreftable.c:666-672 | dos | maybe | `nchunks` sanity check is `> MaxAllocSize / sizeof(uint16)`; hostile BRT with `nchunks = 2^28` allocates 1 GiB; no aggregate cross-entry cap | open | knowledge/files/src/common/blkreftable.c.md |
-| 2026-06-03 | blkreftable.c:907 | trust-boundary | likely | Hostile `limit_block = max` + empty modified-block bitmap silently drops blocks from the combined backup → **stale data**; opposite makes operator re-copy the whole relation | open | knowledge/files/src/common/blkreftable.c.md |
-| 2026-06-03 | parse_manifest.c:811-878 | trust-boundary | likely | Manifest SHA-256 is integrity not authenticity — attacker who rewrites manifest + per-file CRCs together evades all checks; per-file checksum defaults to CRC-32C | open | knowledge/files/src/common/parse_manifest.c.md |
-| 2026-06-03 | checksum_helper.h:20-27 | trust-boundary | maybe | CRC-32C explicitly disclaimed as crypto-grade in header comment; default per-file checksum on the manifest is still crc32c | open | knowledge/files/src/include/common/checksum_helper.h.md |
-| 2026-06-03 | controldata_utils.c:209-252 | state-transition | maybe | Partial-write window on `pg_control`: single 8 KiB `write()`, no shadow file, no rename-into-place; CRC-retry loop only handles racing writer, not torn-write-on-disk | open | knowledge/files/src/common/controldata_utils.c.md |
+| 2026-06-03 | blkreftable.c:595-601,652-655 | trust-boundary | likely | BRT file authenticated by magic + trailing CRC-32C only; attacker rewriting body trivially recomputes CRC | open · triaged 2026-07-10 | knowledge/files/src/common/blkreftable.c.md |
+| 2026-06-03 | blkreftable.c:666-672 | dos | maybe | `nchunks` sanity check is `> MaxAllocSize / sizeof(uint16)`; hostile BRT with `nchunks = 2^28` allocates 1 GiB; no aggregate cross-entry cap | open · triaged 2026-07-10 | knowledge/files/src/common/blkreftable.c.md |
+| 2026-06-03 | blkreftable.c:907 | trust-boundary | likely | Hostile `limit_block = max` + empty modified-block bitmap silently drops blocks from the combined backup → **stale data**; opposite makes operator re-copy the whole relation | open · triaged 2026-07-10 | knowledge/files/src/common/blkreftable.c.md |
+| 2026-06-03 | parse_manifest.c:811-878 | trust-boundary | likely | Manifest SHA-256 is integrity not authenticity — attacker who rewrites manifest + per-file CRCs together evades all checks; per-file checksum defaults to CRC-32C | open · triaged 2026-07-10 | knowledge/files/src/common/parse_manifest.c.md |
+| 2026-06-03 | checksum_helper.h:20-27 | trust-boundary | maybe | CRC-32C explicitly disclaimed as crypto-grade in header comment; default per-file checksum on the manifest is still crc32c | open · triaged 2026-07-10 | knowledge/files/src/include/common/checksum_helper.h.md |
+| 2026-06-03 | controldata_utils.c:209-252 | state-transition | maybe | Partial-write window on `pg_control`: single 8 KiB `write()`, no shadow file, no rename-into-place; CRC-retry loop only handles racing writer, not torn-write-on-disk | open · triaged 2026-07-10 | knowledge/files/src/common/controldata_utils.c.md |
 
 **Phase D pitch — backup chain integrity:**
 1. Make `crc32c` no longer the default for per-file checksums when
@@ -115,10 +115,10 @@ analysis from A3 (`knowledge/issues/pg_dump.md` §Archive-format trust).
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | pg_lzcompress.c:255-256 | undocumented-invariant | maybe | `pglz_compress` not thread-safe / async-signal-safe (process-global history table); single-threaded backend assumption | open | knowledge/files/src/common/pg_lzcompress.c.md |
+| 2026-06-03 | pg_lzcompress.c:255-256 | undocumented-invariant | maybe | `pglz_compress` not thread-safe / async-signal-safe (process-global history table); single-threaded backend assumption | open · triaged 2026-07-10 | knowledge/files/src/common/pg_lzcompress.c.md |
 | 2026-06-03 | pg_lzcompress.c | dos | maybe | No input/output ratio bound on decompression — bomb potential (mirror of A4 walmethods finding) | open | knowledge/files/src/common/pg_lzcompress.c.md |
-| 2026-06-03 | jsonapi.c:431-432,952-953,983-984 | dos | maybe | `JSON_TD_MAX_STACK = 6400` is the depth cap ONLY in the incremental parser; recursive-descent `pg_parse_json` relies on `check_stack_depth()` which is a **no-op in libpq frontend**; hostile JSON consumed via recursive path bounded only by OS stack | open | knowledge/files/src/common/jsonapi.c.md |
-| 2026-06-03 | jsonapi.c:1400-1407 | dos | nit | Stale TODO ("clients need some way to put a bound on stack growth") — unfixed across many releases | open | knowledge/files/src/common/jsonapi.c.md |
+| 2026-06-03 | jsonapi.c:431-432,952-953,983-984 | dos | maybe | `JSON_TD_MAX_STACK = 6400` is the depth cap ONLY in the incremental parser; recursive-descent `pg_parse_json` relies on `check_stack_depth()` which is a **no-op in libpq frontend**; hostile JSON consumed via recursive path bounded only by OS stack | open · triaged 2026-07-10 | knowledge/files/src/common/jsonapi.c.md |
+| 2026-06-03 | jsonapi.c:1400-1407 | dos | nit | Stale TODO ("clients need some way to put a bound on stack growth") — unfixed across many releases | open · triaged 2026-07-10 | knowledge/files/src/common/jsonapi.c.md |
 | 2026-06-03 | stringinfo.c | dos | maybe | `StringInfoData` length is `int`+`MaxAllocSize`-bound (1 GiB); attacker who can grow a single StringInfo (e.g. JSON parse) hits this ceiling silently | open | knowledge/files/src/common/stringinfo.c.md |
 | 2026-06-03 | unicode_norm.c | dos | maybe | `unicode_normalize` has no input-length cap and quadratic worst-case canonical reordering | open | knowledge/files/src/common/unicode_norm.c.md |
 | 2026-06-03 | wchar.c | dos | maybe | `pg_utf8_verifystr` backtracks at the end of the input on a partial trailing sequence | open | knowledge/files/src/common/wchar.c.md |
@@ -132,7 +132,7 @@ analysis from A3 (`knowledge/issues/pg_dump.md` §Archive-format trust).
 |---|---|---|---|---|---|---|
 | 2026-06-03 | percentrepl.c | injection | maybe | `replace_percent_placeholders` does NO shell escaping; output piped to `system(3)` by `archive_command`/`restore_command`; safety relies on undocumented "placeholder values are not attacker-controlled" invariant | open | knowledge/files/src/common/percentrepl.c.md |
 | 2026-06-03 | percentrepl.c | undocumented-invariant | nit | The "no attacker-controlled placeholder" contract is implicit | open | knowledge/files/src/common/percentrepl.c.md |
-| 2026-06-03 | archive.c:53-54 | trust-boundary | maybe | `restore_command` substitution does not shell-quote `%p`/`%f`/`%r`; admin must wrap with `"%p"` per upstream documentation | open | knowledge/files/src/common/archive.c.md |
+| 2026-06-03 | archive.c:53-54 | trust-boundary | maybe | `restore_command` substitution does not shell-quote `%p`/`%f`/`%r`; admin must wrap with `"%p"` per upstream documentation | open · triaged 2026-07-10 | knowledge/files/src/common/archive.c.md |
 | 2026-06-03 | archive.c | trust-boundary | maybe | Hostile filename in `archive_status/` (e.g. tablespace-rooted attack) could feed unusual bytes into `%p` | open | knowledge/files/src/common/archive.c.md |
 
 ### Crypto correctness / dispatch
@@ -157,11 +157,11 @@ analysis from A3 (`knowledge/issues/pg_dump.md` §Archive-format trust).
 | 2026-06-03 | int.h | correctness | likely | `pg_abs_s64(PG_INT64_MIN)` is the ONLY safe negation; bare `abs()`/`-x` across backend on user-controlled signed integers is UB landmine — grep audit is high-leverage Phase D follow-up | open | knowledge/files/src/include/common/int.h.md |
 | 2026-06-03 | int128.h | correctness | maybe | `int128_div_mod_int32` documented unsafe on portable path | open | knowledge/files/src/include/common/int128.h.md |
 | 2026-06-03 | int128.h | undocumented-invariant | maybe | Portable INT128 byte layout must match native; on-disk format implications | open | knowledge/files/src/include/common/int128.h.md |
-| 2026-06-03 | file_utils.c:301-340 | correctness | maybe | `sync_pgdata` walkdir treats per-file fsync errors as non-fatal in `pre_sync` (fatal in `fsync_fname`); silent fsync-coverage degradation = crash-safety gap | open | knowledge/files/src/common/file_utils.c.md |
-| 2026-06-03 | file_perm.c:37 | undocumented-invariant | maybe | `SetDataDirectoryCreatePerm` only checks GROUP bits, not absence of world bits; 0775 PGDATA picks GROUP triple silently | open | knowledge/files/src/common/file_perm.c.md |
-| 2026-06-03 | checksum_helper.c:96-134 | undocumented-invariant | nit | `pg_checksum_init` failure leaves `ctx->type` set; caller MUST not call update/final after init returns -1 | open | knowledge/files/src/common/checksum_helper.c.md |
-| 2026-06-03 | checksum_helper.c:200-227 | undocumented-invariant | nit | `pg_checksum_final` leaks `c_sha2` on -1 return path | open | knowledge/files/src/common/checksum_helper.c.md |
-| 2026-06-03 | restricted_token.c:151 | trust-boundary | maybe | Privilege-drop fail-open: failure to acquire restricted token lets process keep running with original privileges | open | knowledge/files/src/common/restricted_token.c.md |
+| 2026-06-03 | file_utils.c:301-340 | correctness | maybe | `sync_pgdata` walkdir treats per-file fsync errors as non-fatal in `pre_sync` (fatal in `fsync_fname`); silent fsync-coverage degradation = crash-safety gap | open · triaged 2026-07-10 | knowledge/files/src/common/file_utils.c.md |
+| 2026-06-03 | file_perm.c:37 | undocumented-invariant | maybe | `SetDataDirectoryCreatePerm` only checks GROUP bits, not absence of world bits; 0775 PGDATA picks GROUP triple silently | open · triaged 2026-07-10 | knowledge/files/src/common/file_perm.c.md |
+| 2026-06-03 | checksum_helper.c:96-134 | undocumented-invariant | nit | `pg_checksum_init` failure leaves `ctx->type` set; caller MUST not call update/final after init returns -1 | open · triaged 2026-07-10 | knowledge/files/src/common/checksum_helper.c.md |
+| 2026-06-03 | checksum_helper.c:200-227 | undocumented-invariant | nit | `pg_checksum_final` leaks `c_sha2` on -1 return path | open · triaged 2026-07-10 | knowledge/files/src/common/checksum_helper.c.md |
+| 2026-06-03 | restricted_token.c:151 | trust-boundary | maybe | Privilege-drop fail-open: failure to acquire restricted token lets process keep running with original privileges | open · triaged 2026-07-10 | knowledge/files/src/common/restricted_token.c.md |
 | 2026-06-03 | wchar.c | trust-boundary | maybe | `pg_encoding_mblen` reads ahead by up to 4 bytes on UTF-8 — bounds-implicit | open | knowledge/files/src/common/wchar.c.md |
 | 2026-06-03 | wchar.c | correctness | nit | `NONUTF8_INVALID_BYTE0/1` canary doc says one thing, code does another | open | knowledge/files/src/common/wchar.c.md |
 | 2026-06-03 | wchar.c | undocumented-invariant | nit | `pg_utf8_islegal` rejects length 5/6 implicitly | open | knowledge/files/src/common/wchar.c.md |
@@ -169,9 +169,9 @@ analysis from A3 (`knowledge/issues/pg_dump.md` §Archive-format trust).
 | 2026-06-03 | unicode_case.c | undocumented-invariant | nit | `full=false`'s title→upper swap is subtle | open | knowledge/files/src/common/unicode_case.c.md |
 | 2026-06-03 | encnames.c | undocumented-invariant | nit | `pg_encname_tbl[]` alphabetic sort is invariant for binary search | open | knowledge/files/src/common/encnames.c.md |
 | 2026-06-03 | encnames.c | correctness | nit | "Dirty" aliases (`unicode→UTF8`, `win→WIN1251`) are case-fold-only | open | knowledge/files/src/common/encnames.c.md |
-| 2026-06-03 | compression.c, compression.h:17-20 | undocumented-invariant | likely | `pg_compress_algorithm` enum ordinals are on-disk format; additions must append | open | knowledge/files/src/common/compression.c.md |
-| 2026-06-03 | compression.c:304-327 | trust-boundary | maybe | Parsed spec only safe after `validate_compress_specification`; callers that skip get unchecked input | open | knowledge/files/src/common/compression.c.md |
-| 2026-06-03 | compression.c:191,318,468 | correctness | nit | `strtol` on user CLI input → silent saturation; `errno` not consulted; truncation from `long`→`int` produces confusing error message | open | knowledge/files/src/common/compression.c.md |
+| 2026-06-03 | compression.c, compression.h:17-20 | undocumented-invariant | likely | `pg_compress_algorithm` enum ordinals are on-disk format; additions must append | open · triaged 2026-07-10 | knowledge/files/src/common/compression.c.md |
+| 2026-06-03 | compression.c:304-327 | trust-boundary | maybe | Parsed spec only safe after `validate_compress_specification`; callers that skip get unchecked input | open · triaged 2026-07-10 | knowledge/files/src/common/compression.c.md |
+| 2026-06-03 | compression.c:191,318,468 | correctness | nit | `strtol` on user CLI input → silent saturation; `errno` not consulted; truncation from `long`→`int` produces confusing error message | open · triaged 2026-07-10 | knowledge/files/src/common/compression.c.md |
 | 2026-06-03 | binaryheap.c | undocumented-invariant | nit | Comparator must be transitive; no runtime check | open | knowledge/files/src/common/binaryheap.c.md |
 | 2026-06-03 | binaryheap.c | correctness | nit | `binaryheap_first` immediately after build assumes heapified state | open | knowledge/files/src/common/binaryheap.c.md |
 | 2026-06-03 | instr_time.c | side-channel | nit | High-precision timings exposed to clients via `EXPLAIN ANALYZE` | open | knowledge/files/src/common/instr_time.c.md |
@@ -214,7 +214,7 @@ analysis from A3 (`knowledge/issues/pg_dump.md` §Archive-format trust).
 | 2026-06-03 | md5.c | stale-todo | nit | "needs every input byte to be little-endian" platform assumption | open | knowledge/files/src/common/md5.c.md |
 | 2026-06-03 | md5.c, sha1.c, sha2.c | dead-code | nit | Fallback impls exist only for FRONTEND-without-OpenSSL builds; eventual removal candidate | open | knowledge/files/src/common/md5.c.md |
 | 2026-06-03 | saslprep.c | stale-todo | nit | stringprep frozen at Unicode 3.2 per RFC 4013 — never advances | open | knowledge/files/src/common/saslprep.c.md |
-| 2026-06-03 | cryptohash.c:78-83 | stale-todo | nit | Comment admits union-based ctx is awkward | open | knowledge/files/src/common/cryptohash.c.md |
+| 2026-06-03 | cryptohash.c:78-83 | stale-todo | nit | Comment admits union-based ctx is awkward | open · triaged 2026-07-10 | knowledge/files/src/common/cryptohash.c.md |
 | 2026-06-03 | hashfn.c, hashfn.h | stale-todo | nit | `#define oid_hash uint32_hash /* Remove me eventually */` | open | knowledge/files/src/common/hashfn.c.md |
 | 2026-06-03 | hmac_openssl.c | dead-code | nit | `return NULL` after `ereport(ERROR)` in backend path | open | knowledge/files/src/common/hmac_openssl.c.md |
 | 2026-06-03 | d2s.c | dead-code | nit | Many MSVC-intrinsics paths in `d2s_intrinsics.h` unused on non-Windows | open | knowledge/files/src/common/d2s.c.md |
@@ -223,7 +223,7 @@ analysis from A3 (`knowledge/issues/pg_dump.md` §Archive-format trust).
 | 2026-06-03 | int.h | dead-code | nit | Neither-`HAVE__BUILTIN_OP_OVERFLOW`-nor-`__int128` fallback rarely exercised | open | knowledge/files/src/include/common/int.h.md |
 | 2026-06-03 | int128.h | dead-code | nit | Portable (non-HAVE_INT128) path rarely exercised | open | knowledge/files/src/include/common/int128.h.md |
 | 2026-06-03 | hashfn.c | undocumented-invariant | nit | "Must never throw elog(ERROR)" applies to dynahash callbacks | open | knowledge/files/src/common/hashfn.c.md |
-| 2026-06-03 | instr_time.c:411 | stale-todo | nit | "This won't return the right value on..." TODO | open | knowledge/files/src/common/instr_time.c.md |
+| 2026-06-03 | instr_time.c:411 | stale-todo | nit | "This won't return the right value on..." TODO | open · triaged 2026-07-10 | knowledge/files/src/common/instr_time.c.md |
 | 2026-06-03 | psprintf.c | stale-todo | nit | No format-string lint at build time | open | knowledge/files/src/common/psprintf.c.md |
 | 2026-06-03 | fe_memutils.c | stale-todo | nit | `MCXT_ALLOC_HUGE` flag defined but ignored in frontend | open | knowledge/files/src/common/fe_memutils.c.md |
 | 2026-06-03 | fe_memutils.h | stale-todo | nit | `MaxAllocSize` defined but not enforced in frontend | open | knowledge/files/src/include/common/fe_memutils.h.md |
