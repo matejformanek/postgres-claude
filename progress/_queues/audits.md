@@ -489,3 +489,15 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/include/storage/proc.h.md  reason=anchor-bump 2026-07-09:d92e98340fcb..c1702cb51363 (Refactor how some aux processes advertise their ProcNumber, 842169b6c110)
 [pending] knowledge/files/src/test/modules/injection_points/injection_points.c.md  reason=anchor-bump 2026-07-09:d92e98340fcb..c1702cb51363 (injection_points: Switch wait/wakeup to rely on atomics, 8daeaa9b642c)
 [pending] knowledge/files/src/test/modules/test_bitmapset/test_bitmapset.c.md  reason=anchor-bump 2026-07-09:d92e98340fcb..c1702cb51363 (Tidy up datatype usage in test_random_offset_operations(), b5d73d2dd73d (+1 more))
+
+## anchor-bump (2026-07-10) — c1702cb51363..54cd6fc83176 (12 commits)
+
+[pending] knowledge/files/src/backend/nodes/makefuncs.c.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (JSON_TABLE PLAN clause, 86ab7f4c721d)
+[pending] knowledge/files/src/backend/parser/gram.y.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (JSON_TABLE PLAN clause, 86ab7f4c721d)
+[pending] knowledge/files/src/backend/parser/parse_jsontable.c.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (JSON_TABLE PLAN clause, 86ab7f4c721d)
+[pending] knowledge/files/src/backend/statistics/attribute_stats.c.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (Reject incorrect range_bounds_histograms in stats import functions, df293aed46e3 (+1 more))
+[pending] knowledge/files/src/backend/statistics/relation_stats.c.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (postgres_fdw: Remove SPI from postgresImportForeignStatistics, 54cd6fc83176)
+[pending] knowledge/files/src/backend/utils/activity/wait_event.c.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (Remove WaitEventCustomCounterData, 8f7af125e037)
+[pending] knowledge/files/src/include/nodes/makefuncs.h.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (JSON_TABLE PLAN clause, 86ab7f4c721d)
+[pending] knowledge/files/src/include/statistics/stat_utils.h.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (Reject incorrect range_bounds_histograms in stats import functions, df293aed46e3)
+[pending] knowledge/files/src/include/statistics/statistics.h.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (postgres_fdw: Remove SPI from postgresImportForeignStatistics, 54cd6fc83176)
