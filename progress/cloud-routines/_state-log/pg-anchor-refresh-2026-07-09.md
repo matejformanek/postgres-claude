@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-09 — anchor `d92e98340fcb` → `c1702cb51363`; 18 commits; 19 docs queued for audit (9 already-pending skipped, optimizer + pg_dump subsystem thresholds noted, no catversion bump) (PR #TBD).
