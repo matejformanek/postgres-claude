@@ -1,7 +1,7 @@
 # bitmapset.c
 
-- **Source:** `source/src/backend/nodes/bitmapset.c` (~1100 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source:** `source/src/backend/nodes/bitmapset.c` (1574 lines)
+- **Last verified commit:** `c1702cb51363` (re-verified 2026-07-11 from `ef6a95c7c64`; top-of-file macro/comment cites all hold, `bms_offset_members` added lower in the file)
 - **Depth:** deep-read
 
 ## Purpose
@@ -16,7 +16,8 @@ attribute sets in `RangeTblEntry.selectedCols`, parameter ids, etc.
 ## Representation invariants
 
 - **Empty set ≡ NULL.** `bms_is_empty(a) == ((a) == NULL)`.
-  `bitmapset.h:118` `[verified-by-code]`
+  `bitmapset.h:119` `[verified-by-code]` (was `:118`; +1 after
+  `bms_offset_members` was added at `bitmapset.h:103` by `bb7ded1eebed`)
 - **Trailing zero words are forbidden** — every non-NULL Bitmapset has
   `words[nwords-1] != 0`. Operations that could leave a trailing-zero
   tail must trim it (or call `bms_copy_and_free` under
@@ -74,6 +75,13 @@ Set ops that **recycle** their left input (must reassign):
   `bms_del_members`, `bms_add_range`
 - `bms_join(a, b)` — like `bms_add_members(a, b)` but `b` is also
   freed (or its storage reused)
+
+Set ops returning a fresh set:
+- `bms_offset_members(a, offset)` — fresh set with every member shifted
+  up by `offset` (all members must be ≥ 0). Added by `bb7ded1eebed`
+  (2026-07); callers renumber relids/attnums in bulk
+  (`prepjointree.c`, `rewriteManip.c`, `extended_stats.c`).
+  `[verified-by-code @ c1702cb51363]`
 
 Iteration `bitmapset.h:131-133`:
 - `bms_next_member(a, prevbit)` / `bms_prev_member(a, prevbit)` —

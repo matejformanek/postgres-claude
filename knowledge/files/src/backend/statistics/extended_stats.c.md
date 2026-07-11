@@ -1,7 +1,7 @@
 # `src/backend/statistics/extended_stats.c`
 
-- **Last verified commit:** `ef6a95c7c64`
-- **Lines:** 2672
+- **Last verified commit:** `c1702cb51363` (re-pinned 2026-07-11 from `ef6a95c7c64`; `bms_offset_members` commit `bb7ded1eebed` and neighbours shifted the selectivity entry points by −6)
+- **Lines:** 2666
 - **Source:** `source/src/backend/statistics/extended_stats.c`
 
 ## Purpose
@@ -13,7 +13,7 @@ combining MCV + dependencies on top of per-column stats.
 
 ## Key entry points
 
-- `BuildRelationExtStatistics` (`extended_stats.c:111-`) — invoked from
+- `BuildRelationExtStatistics` (`extended_stats.c:112-`) — invoked from
   `commands/analyze.c` after per-column stats are computed; iterates each
   `pg_statistic_ext` row for the relation and builds the requested
   ndistinct / dependencies / MCV / expr stats from the same sampled rows
@@ -22,12 +22,12 @@ combining MCV + dependencies on top of per-column stats.
 - `ComputeExtStatisticsRows` — computes how many rows to sample
   (`statext_compute_stattarget`-driven from per-object STATISTICS targets,
   per-column targets, and `default_statistics_target`).
-- `statext_clauselist_selectivity` (`extended_stats.c:2030`) — planner
+- `statext_clauselist_selectivity` (`extended_stats.c:2024`) — planner
   entry. Two-step: MCV first, then functional dependencies on the
   remainder. For OR clauses, only MCV applies (dependencies are AND-only).
   Dependencies run last because they're coarser than MCV. [from-comment]
-  (`extended_stats.c:2041-2065`)
-- `statext_mcv_clauselist_selectivity` (`extended_stats.c:1743`) — greedy
+  (`extended_stats.c:2035-2059`)
+- `statext_mcv_clauselist_selectivity` (`extended_stats.c:1737`) — greedy
   per round: pick the best stats object (`choose_best_statistics`), apply
   it, mark those clauses in `estimatedclauses` bitmap, repeat.
 - `choose_best_statistics` (`extended_stats.c:1256`) — pick the object
@@ -38,7 +38,7 @@ combining MCV + dependencies on top of per-column stats.
 
 ## Clause-compatibility rules (the gatekeeper)
 
-`statext_is_compatible_clause_internal` (`extended_stats.c:1377`) accepts:
+`statext_is_compatible_clause_internal` (`extended_stats.c:1378`) accepts:
 - `Var op Const` or `Const op Var` with operator restriction-selectivity
   function in `{F_EQSEL, F_NEQSEL, F_SCALARLTSEL/LESEL/GTSEL/GESEL}`.
   Same set for `ScalarArrayOpExpr` (Var only on left). [verified-by-code]

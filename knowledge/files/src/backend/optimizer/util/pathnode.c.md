@@ -1,7 +1,7 @@
 # pathnode.c — add_path dominance + every Path constructor
 
-- **Source:** `source/src/backend/optimizer/util/pathnode.c` (4556 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source:** `source/src/backend/optimizer/util/pathnode.c` (4576 lines)
+- **Last verified commit:** `c1702cb51363` (re-pinned 2026-07-11 from `ef6a95c7c64`; `enable_groupagg` GUC commit `e01b23b84e43` shifted `create_agg_path` onward by +11)
 - **Depth:** deep-read
 
 ## 1. Purpose
@@ -169,13 +169,13 @@ parampathinfo` (when this is a base-rel appendrel) **or**
 | 2784 | `create_set_projection_path` — for tlists with SRFs |
 | 2854 | `create_incremental_sort_path` |
 | 2903 | `create_sort_path` |
-| 2947 | `create_group_path` |
-| 3004 | `create_unique_path` |
-| 3056 | `create_agg_path` |
-| 3138 | `create_groupingsets_path` |
-| 3301 | `create_minmaxagg_path` |
-| 3392 | `create_windowagg_path` |
-| 3465 | `create_setop_path` |
+| 2948 | `create_group_path` |
+| 3005 | `create_unique_path` |
+| 3067 | `create_agg_path` |
+| 3149 | `create_groupingsets_path` |
+| 3312 | `create_minmaxagg_path` |
+| 3403 | `create_windowagg_path` |
+| 3476 | `create_setop_path` |
 | 3584 | `create_recursiveunion_path` |
 | 3629 | `create_lockrows_path` |
 | 3691 | `create_modifytable_path` |
