@@ -106,6 +106,11 @@ The conventional entry-point symbol a loadable backend module exports; the backe
 
 
 
+### _PG_jit_provider_init
+The symbol a JIT provider shared library must export; after `dlopen` the core calls `load_external_function(path, "_PG_jit_provider_init", …)` and invokes it to populate a `JitProviderCallbacks` struct. Signature `void _PG_jit_provider_init(JitProviderCallbacks *cb)`. [verified-by-code] (`jit.c:112`, `jit.h:67` — via `knowledge/docs-distilled/jit-extensibility.md`).
+
+
+
 ### _PG_output_plugin_init
 The required entry-point symbol every logical-decoding output plugin exports; `logical.c` locates it by name after loading the plugin's shared library and calls it with an `OutputPluginCallbacks *` so the plugin can fill in its `startup` / `begin` / `change` / `commit` / ... callback vtable. [verified-by-code] (`logical.c:52` — via `knowledge/files/src/backend/replication/logical/logical.c.md`).
 
@@ -1164,6 +1169,11 @@ GUC (default 200 ms, the `BgWriterDelay` global) setting how long the background
 
 ### BgWriterStats
 The accumulator of background-writer activity counters (buffers cleaned, maxwritten-clean halts) that a backend flushes into the shared pgstat bgwriter entry, surfaced by `pg_stat_bgwriter`. [verified-by-code] (via `knowledge/data-structures/pgstat-counter.md`).
+
+
+
+### bitcode inlining
+The JIT mechanism that inlines the bodies of `C`/`internal` functions (and operators over them) into JIT'd expressions by loading their pre-built LLVM bitcode from `$pkglibdir/bitcode/$extension/` (with a summary index `$extension.index.bc`); PGXS builds and installs this bitcode automatically, and core PG's own bitcode lives at `$pkglibdir/bitcode/postgres`. [verified-by-code] (`llvmjit_inline.cpp:492,811-812` — via `knowledge/docs-distilled/jit-extensibility.md`).
 
 
 
@@ -4345,6 +4355,11 @@ A `src/common` helper that locates a sibling PostgreSQL executable in the same i
 
 
 
+### find_rendezvous_variable
+The fmgr shared-state lookup (`dfmgr.c`) that returns a stable, process-global pointer slot keyed by a string name, letting two independently-loaded modules find each other without link-time coupling; PL/pgSQL exposes its `PLpgSQL_plugin **` hook table through the `"PLpgSQL_plugin"` rendezvous name this way. [verified-by-code] (via `knowledge/files/src/backend/utils/fmgr/dfmgr.c.md`).
+
+
+
 ### find_variable
 The ECPG preprocessor's top-level resolver for a host-variable reference string: it dispatches to `find_simple`/`find_struct` to resolve field/struct access and `mmfatal`s if the variable was never declared. [verified-by-code] (`variable.c:234` — via `knowledge/files/src/interfaces/ecpg/preproc/variable.c.md`).
 
@@ -6555,6 +6570,26 @@ The estimated plan-cost threshold above which JIT compilation of a query's expre
 The provider-agnostic entry in `jit.c` that requests JIT compilation of an expression: it consults only `PGJIT_PERFORM | PGJIT_EXPR` (the optimization/inline flags matter only to the provider) before dispatching to the loaded JIT provider. [verified-by-code] (via `knowledge/files/src/backend/jit/jit.c.md`).
 
 
+### jit_debugging_support
+A developer JIT GUC (§20.17) that registers JIT-generated functions with a debugger (gdb/lldb) so they appear in backtraces; one of the debug-only knobs §32.3 defers to runtime-config-developer. [from-docs] (via `knowledge/docs-distilled/jit-configuration.md`).
+
+
+
+### jit_dump_bitcode
+A developer JIT GUC (§20.17) that writes the LLVM bitcode (`.bc`) of generated functions into the data directory for inspection. [from-docs] (via `knowledge/docs-distilled/jit-configuration.md`).
+
+
+
+### jit_enabled
+The C variable (`jit.c:33`, default `false`) that gates whether the JIT provider library is loaded at all; `provider_init()` early-outs when it is false, so a `--with-llvm` build running with `jit=off` never pays the LLVM `dlopen` cost. Distinct from the shipped `jit` GUC boot value (`on`), which is what actually lets a plan clearing `jit_above_cost` be JIT-compiled. [verified-by-code] (via `knowledge/docs-distilled/jit-decision.md`).
+
+
+
+### jit_expressions
+The developer GUC (§20.17) that independently toggles JIT expression compilation by clearing/setting the `PGJIT_EXPR` bit; the expression counterpart of `jit_tuple_deforming`. [verified-by-code] (`jit.h:23-24` — via `knowledge/docs-distilled/jit-configuration.md`).
+
+
+
 ### jit_inline_above_cost
 The plan-cost threshold above which the JIT provider inlines small functions into the generated code; one of the `jit_*` cost gates (`jit_above_cost`, `jit_inline_above_cost`, `jit_optimize_above_cost`) the executor compares against per query. [verified-by-code] (via `knowledge/files/src/include/jit/jit.h.md`).
 
@@ -6563,8 +6598,23 @@ The plan-cost threshold above which the JIT provider inlines small functions int
 The plan-cost threshold above which the JIT provider runs the optimizer over generated code; passed as part of the OR-bitmask of JIT flags the provider receives, alongside `jit_above_cost` and `jit_inline_above_cost`. [verified-by-code] (via `knowledge/files/src/include/jit/jit.h.md`).
 
 
+### jit_profiling_support
+A developer JIT GUC (§20.17) that emits profiling data (e.g. for `perf`) for JIT-generated functions. [from-docs] (via `knowledge/docs-distilled/jit-configuration.md`).
+
+
+
+### jit_provider
+The `PGC_POSTMASTER` GUC (default `"llvmjit"`) naming the shared library the server `dlopen`s as its JIT backend; because the choice is fixed at server start, swapping providers "without recompiling" still needs a restart. `jit.c` builds the path `<pkglibdir>/<jit_provider><DLSUFFIX>` and loads it lazily on the first query that needs JIT. [verified-by-code] (`jit.c:91` — via `knowledge/docs-distilled/jit-extensibility.md`).
+
+
+
 ### jit_release_context
 The generic JIT teardown entry (`jit_release_context` → provider `llvm_release_context` → `ResourceOwnerForgetJIT`); the resource-owner callback nulls the owner first so it isn't removed from an owner already dropping the context. [verified-by-code] (via `knowledge/files/src/backend/jit/llvm/llvmjit.c.md`).
+
+
+
+### jit_tuple_deforming
+The developer GUC (runtime-config-developer §20.17) that independently toggles JIT tuple deforming by clearing/setting the `PGJIT_DEFORM` bit; paired with `jit_expressions` so each half of JIT's contribution can be A/B-measured. [verified-by-code] (`jit.h:23-24` — via `knowledge/docs-distilled/jit-configuration.md`).
 
 
 
@@ -6589,6 +6639,21 @@ The function table a JIT provider library fills in (reset-after-error / compile-
 / release-context) and returns from `_PG_jit_provider_init`, decoupling the core
 from the LLVM implementation. [verified-by-code] (via
 `knowledge/idioms/jit-provider-and-context.md`).
+
+
+
+### JitProviderCompileExprCB
+The typedef for the JIT provider's `compile_expr` callback: takes an `ExprState *` and returns `bool`; the core operation of the provider vtable, dispatched from `jit_compile_expr` → `provider.compile_expr(state)`. [verified-by-code] (`jit.h:72`, `jit.c:152` — via `knowledge/docs-distilled/jit-extensibility.md`).
+
+
+
+### JitProviderReleaseContextCB
+The typedef for the JIT provider's `release_context` callback, which frees a `JitContext`; one of the three function pointers in `JitProviderCallbacks` (with `reset_after_error` and `compile_expr`). [verified-by-code] (`jit.h:70` — via `knowledge/docs-distilled/jit-extensibility.md`).
+
+
+
+### JitProviderResetAfterErrorCB
+The typedef for the JIT provider's `reset_after_error` callback, which recovers provider state after a `longjmp`; the first of the three `JitProviderCallbacks` pointers. [verified-by-code] (`jit.h:69` — via `knowledge/docs-distilled/jit-extensibility.md`).
 
 
 
@@ -10020,6 +10085,11 @@ The `fdw_private` struct postgres_fdw attaches to every base/join/upper `RelOptI
 
 
 
+### PGJIT_DEFORM
+The JIT compile-flag bit (`jit.h:19-24`) requesting that tuple deforming be JIT-compiled; a separate bit from `PGJIT_EXPR` (expressions), `PGJIT_INLINE` (inline small function bodies), and `PGJIT_OPT3` (LLVM `-O3`). The developer GUC `jit_tuple_deforming` toggles this bit 1:1. [verified-by-code] (via `knowledge/docs-distilled/jit-reason.md`).
+
+
+
 ### PGJIT_EXPR
 One of the JIT bit-flags (alongside `PGJIT_PERFORM`, `PGJIT_OPT3`, `PGJIT_INLINE`, `PGJIT_DEFORM`) chosen by the planner per query and passed as an OR-bitmask in `JitContext.flags`. It requests JIT compilation of expressions; a typical "compile, no inline, no -O3" combination is `PGJIT_PERFORM | PGJIT_EXPR | PGJIT_DEFORM`. [verified-by-code] (`jit.h` — via `knowledge/files/src/include/jit/jit.h.md`).
 
@@ -10027,6 +10097,11 @@ One of the JIT bit-flags (alongside `PGJIT_PERFORM`, `PGJIT_OPT3`, `PGJIT_INLINE
 
 ### PGJIT_INLINE
 One of the per-query JIT bit-flags (alongside `PGJIT_NONE`, `PGJIT_PERFORM`, `PGJIT_OPT3`, `PGJIT_EXPR`, `PGJIT_DEFORM`) chosen by the planner to request that the JIT provider inline the bodies of called functions into generated code. The inlining time it controls is one of the five `instr_time` counters tracked in `JitInstrumentation`. [verified-by-code] (`jit.h` — via `knowledge/files/src/include/jit/jit.h.md`).
+
+
+
+### PGJIT_NONE
+The zero-valued JIT compile flag (`jit.h:19-24`) meaning no JIT work is requested; the base of the `PGJIT_*` bit family (`PERFORM`/`EXPR`/`DEFORM`/`INLINE`/`OPT3`) that a plan's cost gates OR together to decide how much JIT a query earns. [verified-by-code] (via `knowledge/docs-distilled/jit-reason.md`).
 
 
 
@@ -10315,6 +10390,11 @@ is read-only and shareable; PlanState is per-execution. [inferred] (via
 The PL/pgSQL routine that initializes a `PLpgSQL_execstate` for a function/DO/CALL invocation, wiring in the shared simple-expression `EState` (`simple_eval_estate`) among other per-call execution context. [from-comment] (via `knowledge/files/src/pl/plpgsql/src/pl_exec.md`).
 
 
+### PLpgSQL_execstate
+The per-call runtime state of an executing PL/pgSQL function, set up by `plpgsql_exec_function` (`pl_exec.c:493`): the datum array, argument install, the `plpgsql_exec_error_callback` traceback frame, and fields like `cur_error` (the matched EXCEPTION's error, read by `GET STACKED DIAGNOSTICS` and bare `RAISE`). Passed to the `PLpgSQL_plugin` callbacks so instrumentation can inspect live execution. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_exec.md`).
+
+
+
 ### PLpgSQL_expr
 The PL/pgSQL node wrapping one SQL expression or query embedded in a function body; `plpgsql_parser_setup` wires the main parser's param hooks to it so `$n` references resolve to PL/pgSQL variables at parse-analyze time. [verified-by-code] (`pl_comp.c:25` — via `knowledge/files/src/pl/plpgsql/src/pl_comp.md`).
 
@@ -10327,6 +10407,11 @@ The PL/pgSQL routine that releases a compiled `PLpgSQL_function`'s memory — it
 
 ### PLpgSQL_function
 The compiled in-memory AST of a PL/pgSQL function produced by `pl_comp.c`: the namespace, the `datums[]` variable array, and the statement tree that `exec_stmt_*` walks; the language handler caches it and hands it to `plpgsql_exec_function`. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/pl_comp.md`).
+
+
+
+### PLpgSQL_plugin
+The PL/pgSQL instrumentation hook table (`plpgsql.h:1124`): a plugin (debugger/profiler such as pldebugger or plpgsql_check) sets the first five callbacks (`func_setup`/`func_beg`/`func_end`/`stmt_beg`/`stmt_end`) in its `_PG_init`, and PL/pgSQL fills in the next five (`error_callback`, `assign_expr`, `assign_value`, `eval_datum`, `cast_value`) so the plugin can reuse interpreter internals. Both sides find the table through the `"PLpgSQL_plugin"` rendezvous variable. [verified-by-code] (via `knowledge/files/src/pl/plpgsql/src/plpgsql.md`).
 
 
 
@@ -10911,6 +10996,11 @@ emitting one output row per result-set element (replacing the old
 One of the two sticky JIT load-state flags in `jit.c` (`provider_successfully_loaded` / `provider_failed_loading`); `provider_init` sets `failed = true` *before* attempting `load_external_function` so that an `ereport(ERROR)` during load doesn't trigger silent retry storms on later JIT requests. [verified-by-code] (via `knowledge/files/src/backend/jit/jit.c.md`).
 
 
+### provider_init
+The lazy, `jit_enabled`-gated routine in `jit.c` that `dlopen`s the `jit_provider` library and calls `_PG_jit_provider_init` on the first query that needs JIT; its `if (!jit_enabled)` early-out is why `jit=off` avoids the LLVM load entirely. [verified-by-code] (`jit.c:68,74` — via `knowledge/docs-distilled/jit-extensibility.md`).
+
+
+
 ### provolatile
 The `pg_proc` column classifying a function as IMMUTABLE (`i`), STABLE (`s`), or VOLATILE (`v`); the planner uses it to decide constant-folding, caching, and index usability. [from-comment] (via `knowledge/files/contrib/postgres_fdw/deparse.c.md`).
 
@@ -10947,6 +11037,16 @@ psql's internal helper for running a backslash-command's behind-the-scenes SQL (
 
 ### pstrdup
 Duplicates a NUL-terminated string into the current memory context via palloc; the context-aware `strdup` whose result is freed automatically at context reset (or on an ereport longjmp). [verified-by-code] (via `knowledge/files/contrib/sepgsql/selinux.c.md`).
+
+
+
+### ptrack map
+The fixed-size shared-memory map maintained by the external extension `postgrespro/ptrack` recording, per data block, the LSN at which it was last modified; fed by smgr write hooks patched into core (`mdwrite_hook`/`mdextend_hook`), persisted out-of-band at checkpoint, and queried by `ptrack_get_pagemapset` so incremental backups can skip WAL summarization. Engineered to over-approximate — false positives allowed, false negatives never. [verified-by-code] (external repo — via `knowledge/ideologies/ptrack.md`).
+
+
+
+### ptrack_get_pagemapset
+The SQL function the external extension `postgrespro/ptrack` exposes to return, per relation file, a bitmap of blocks changed since a given `start_lsn` — the read side of ptrack's block-level incremental backup, consumed in practice by `pg_probackup`. It reads the in-memory ptrack map with `pg_atomic_read_u64` and re-derives the file set itself rather than consulting `pg_class`. [verified-by-code] (external repo — via `knowledge/ideologies/ptrack.md`).
 
 
 
@@ -14548,6 +14648,11 @@ The `TupleTableSlot` field holding the on-disk row identity (`ItemPointerData`);
 
 ### tts_values
 The per-attribute `Datum` array of a `TupleTableSlot`; after `slot_getsomeattrs`/`slot_getallattrs` it holds the deformed column values for the slot's current tuple. Executor expression evaluation reads operands straight out of it. [inferred] (via `knowledge/files/src/backend/executor/execTuples.c.md`).
+
+
+
+### tuple deforming
+Turning an on-disk tuple into its in-memory `Datum` array (the null-bitmap checks and alignment math of `slot_deform_heap_tuple`); one of the two operations JIT accelerates (with expression evaluation), by generating straight-line code specific to a table's layout and the columns actually extracted. [verified-by-code] (via `knowledge/docs-distilled/jit-reason.md`).
 
 
 
