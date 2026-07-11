@@ -25,7 +25,7 @@ scans for INIT-state sequences and starts a single sequencesync worker
 
 A single sequencesync worker handles **all** sequences (unlike tablesync,
 which is per-rel). It batches up to `MAX_SEQUENCES_SYNC_PER_BATCH`
-(= 100, `:422`) per transaction so locks on sequence relations are
+(= 100, `:441`) per transaction so locks on sequence relations are
 released between batches. Per sequence: fetch the publisher value +
 page LSN (`REMOTE_SEQ_COL_COUNT = 11` cols, `:75` — including log_cnt,
 is_called, and the publisher's `has_sequence_privilege` flag added by
@@ -44,9 +44,9 @@ and a *publisher* variant. The publisher now returns its own
 SELECT-privilege flag as the 11th remote column; when the value column
 is NULL the subscriber distinguishes "publisher lacks privilege"
 (`COPYSEQ_PUBLISHER_INSUFFICIENT_PERM`) from a legitimately-skipped
-sequence (`COPYSEQ_SKIPPED`) by that flag (`:281-285`). Previously a
+sequence (`COPYSEQ_SKIPPED`) by that flag (`:302, 340`). Previously a
 publisher-side permission failure was misreported as a subscriber-side
-one. [verified-by-code, `:278-285`]
+one. [verified-by-code, `:296-340` @ `c1702cb51363`]
 
 ## Why not the launcher?
 

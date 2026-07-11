@@ -1,8 +1,19 @@
 # `contrib/spi/refint.c`
 
-- **Last verified commit:** `e18b0cb7344`
-- **Lines:** 538
-- **Source:** `source/contrib/spi/refint.c`
+> **⚠️ REMOVED UPSTREAM.** This file no longer exists in PostgreSQL
+> master. It was deleted by commit `5e90e0914cfa` ("Remove the refint
+> extension.") together with the rest of the `contrib/spi` tutorial
+> trigger examples for the referential-integrity demo. Verified 404 at
+> anchor `c1702cb51363` via
+> `raw.githubusercontent.com/postgres/postgres/c1702cb51363/contrib/spi/refint.c`
+> (2026-07-11, pg-quality-auditor anchor-bump audit). The notes below are
+> retained as **historical reference** for the SPI-in-trigger pattern the
+> file once demonstrated; every `source/contrib/spi/refint.c:<line>` cite
+> below is dead and must not be treated as live.
+
+- **Last verified commit:** `e18b0cb7344` (file removed by `5e90e0914cfa`; historical)
+- **Lines:** 538 (at removal)
+- **Source:** `source/contrib/spi/refint.c` — **removed upstream**
 
 Tutorial-example trigger functions that implement referential integrity
 ("RI") **using only SPI** instead of relying on the executor's built-in

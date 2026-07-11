@@ -1,7 +1,7 @@
 # bitmapset.h
 
-- **Source:** `source/src/include/nodes/bitmapset.h` (140 lines)
-- **Last verified commit:** `ef6a95c7c64`
+- **Source:** `source/src/include/nodes/bitmapset.h` (141 lines)
+- **Last verified commit:** `c1702cb51363` (re-verified 2026-07-11 from `ef6a95c7c64`; commit `bb7ded1eebed` added `bms_offset_members` at `:103`, shifting `bms_is_empty` 118→119 and later prototypes by +1)
 - **Depth:** deep-read
 
 ## Purpose
@@ -57,6 +57,11 @@ Construction / observation:
 
 Set ops that allocate fresh result:
 - `bms_union`, `bms_intersect`, `bms_difference`
+- `bms_offset_members(a, offset)` (`:103`) — return a fresh set with every
+  member shifted up by `offset` (all members must stay ≥ 0). Added by
+  commit `bb7ded1eebed` (2026-07); used by `prepjointree.c` /
+  `rewriteManip.c` / `extended_stats.c` to renumber relids/attnums in bulk.
+  [verified-by-code @ `c1702cb51363`]
 
 Set ops that **recycle** the left input (always reassign):
 - `bms_add_member`, `bms_del_member`
