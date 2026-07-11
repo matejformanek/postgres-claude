@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-10 — anchor c1702cb51363 → 54cd6fc83176; 12 commits; 9 docs queued for audit (16 already-pending skipped idempotently); catversion → 202607091 (JSON_TABLE PLAN) (PR #<n>).
