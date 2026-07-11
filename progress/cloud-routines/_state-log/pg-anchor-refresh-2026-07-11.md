@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-11 — anchor 54cd6fc83176 → eed6c0d33e09; 7 commits; 3 docs queued for audit (pruneheap.c, datachecksum_state.c, rewriteHandler.c; 5 more already pending, skipped) (PR #<n>).
