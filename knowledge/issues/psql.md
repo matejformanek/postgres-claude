@@ -33,13 +33,13 @@ credential-reading files). Same gap on the psql side.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | input.c:148-167 | secret-scrub | likely | `~/.psql_history` records `CREATE USER ... PASSWORD '...'` / `ALTER ROLE ... PASSWORD ...` verbatim; only filter is `HISTCONTROL=ignorespace`/`ignoredups` (no password-pattern filter) | open | knowledge/files/src/bin/psql/input.c.md |
-| 2026-06-03 | mainloop.c:431 | secret-scrub | likely | Every interactive input line goes to `pg_append_history` including PASSWORD literals; `\password` is the only meta-command that avoids it | open | knowledge/files/src/bin/psql/mainloop.c.md |
-| 2026-06-03 | common.c:1158 | secret-scrub | likely | `-L logfile` captures every query text including PASSWORD literals; `fopen(logfile, "a")` honors umask, NOT 0600 | open | knowledge/files/src/bin/psql/common.c.md |
-| 2026-06-03 | startup.c:249-302 | secret-scrub | likely | `main()` password buffer freed without `explicit_bzero` before process exit | open | knowledge/files/src/bin/psql/startup.c.md |
-| 2026-06-03 | command.c:2604-2607 | secret-scrub | likely | `\password` `pw1`/`pw2` buffers freed without `explicit_bzero` | open | knowledge/files/src/bin/psql/command.c.md |
-| 2026-06-03 | settings.h:103 | info-disclosure | maybe | `pset.db` indirectly holds cached libpq password material; `pset.dead_conn` retained after failure | open | knowledge/files/src/bin/psql/settings.h.md |
-| 2026-06-03 | input.c:452 | path-traversal | maybe | History file `open(O_CREAT)` does NOT use `O_NOFOLLOW`; `PSQL_HISTORY` through a writable dir is a redirection vector | open | knowledge/files/src/bin/psql/input.c.md |
+| 2026-06-03 | input.c:148-167 | secret-scrub | likely | `~/.psql_history` records `CREATE USER ... PASSWORD '...'` / `ALTER ROLE ... PASSWORD ...` verbatim; only filter is `HISTCONTROL=ignorespace`/`ignoredups` (no password-pattern filter) | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/input.c.md |
+| 2026-06-03 | mainloop.c:431 | secret-scrub | likely | Every interactive input line goes to `pg_append_history` including PASSWORD literals; `\password` is the only meta-command that avoids it | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/mainloop.c.md |
+| 2026-06-03 | common.c:1158 | secret-scrub | likely | `-L logfile` captures every query text including PASSWORD literals; `fopen(logfile, "a")` honors umask, NOT 0600 | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/common.c.md |
+| 2026-06-03 | startup.c:249-302 | secret-scrub | likely | `main()` password buffer freed without `explicit_bzero` before process exit | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/startup.c.md |
+| 2026-06-03 | command.c:2604-2607 | secret-scrub | likely | `\password` `pw1`/`pw2` buffers freed without `explicit_bzero` | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/command.c.md |
+| 2026-06-03 | settings.h:103 | info-disclosure | maybe | `pset.db` indirectly holds cached libpq password material; `pset.dead_conn` retained after failure | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/settings.h.md |
+| 2026-06-03 | input.c:452 | path-traversal | maybe | History file `open(O_CREAT)` does NOT use `O_NOFOLLOW`; `PSQL_HISTORY` through a writable dir is a redirection vector | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/input.c.md |
 
 **Phase D pitch — coordinated secret-scrub sweep:**
 1. Replace every psql `free(passwd)` with `explicit_bzero(passwd, len); free(passwd)`.
@@ -52,27 +52,27 @@ credential-reading files). Same gap on the psql side.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | describe.c:1917-2192 | info-disclosure | maybe | Server-supplied identifiers (relnames, role names) printed unquoted via `%s` in `printTable` titles — terminal-escape injection from hostile object owner | open | knowledge/files/src/bin/psql/describe.c.md |
-| 2026-06-03 | tab-complete.in.c:6305 | info-disclosure | maybe | `requote_identifier` output to readline raw; same terminal-injection vector from server identifiers | open | knowledge/files/src/bin/psql/tab-complete.in.c.md |
-| 2026-06-03 | common.c:741-755 | trust-boundary | nit | `PrintNotifications` writes LISTEN `notify->extra` verbatim to terminal — terminal-escape injection via NOTIFY payload | open | knowledge/files/src/bin/psql/common.c.md |
-| 2026-06-03 | prompt.c:342-354 | info-disclosure | maybe | PROMPT `%:var:` substitution forwards server-controlled error text (`LAST_ERROR_MESSAGE`, etc.) into terminal raw — terminal-escape injection vector | open | knowledge/files/src/bin/psql/prompt.c.md |
-| 2026-06-03 | command.c:861-865 | trust-boundary | nit | `\restrict <key>` prevents server-injected backslash commands during dump replay, but does NOT prevent malicious SQL the dump emits verbatim — defines the scope of the existing defense | open | knowledge/files/src/bin/psql/command.c.md |
-| 2026-06-03 | variables.c:281 | injection | likely | `\gset` populates psql variables from server result columns; bare `:var` interpolation is unsanitized — server→client SQL injection if user uses bare form | open | knowledge/files/src/bin/psql/variables.c.md |
-| 2026-06-03 | common.c:862-920 | trust-boundary | nit | `\gexec` runs server-returned text as SQL — documented "user is the trust boundary" feature; needs corpus-side documentation of the contract | open | knowledge/files/src/bin/psql/common.c.md |
-| 2026-06-03 | tab-complete.in.c:7041-7066 | trust-boundary | maybe | Tab-completion `PQexec` shares the user's open transaction; a catalog query error inside an explicit BEGIN silently aborts the user's transaction (#ifdef NOT_USED error path) — "successful" COMMIT becomes surprise ROLLBACK | open | knowledge/files/src/bin/psql/tab-complete.in.c.md |
+| 2026-06-03 | describe.c:1917-2192 | info-disclosure | maybe | Server-supplied identifiers (relnames, role names) printed unquoted via `%s` in `printTable` titles — terminal-escape injection from hostile object owner | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/describe.c.md |
+| 2026-06-03 | tab-complete.in.c:6291 | info-disclosure | maybe | `requote_identifier` output to readline raw; same terminal-injection vector from server identifiers | open · triaged 2026-07-12 · drifted-14 (was :6305; requote_identifier call site now 6291, def 6912) | knowledge/files/src/bin/psql/tab-complete.in.c.md |
+| 2026-06-03 | common.c:741-755 | trust-boundary | nit | `PrintNotifications` writes LISTEN `notify->extra` verbatim to terminal — terminal-escape injection via NOTIFY payload | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/common.c.md |
+| 2026-06-03 | prompt.c:342-354 | info-disclosure | maybe | PROMPT `%:var:` substitution forwards server-controlled error text (`LAST_ERROR_MESSAGE`, etc.) into terminal raw — terminal-escape injection vector | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/prompt.c.md |
+| 2026-06-03 | command.c:252-256 | trust-boundary | nit | `\restrict <key>` prevents server-injected backslash commands during dump replay, but does NOT prevent malicious SQL the dump emits verbatim — defines the scope of the existing defense | open · triaged 2026-07-12 · drifted (was :861-865=now \conninfo; \restrict guard now 252-256, impl 2784) | knowledge/files/src/bin/psql/command.c.md |
+| 2026-06-03 | variables.c:281 | injection | likely | `\gset` populates psql variables from server result columns; bare `:var` interpolation is unsanitized — server→client SQL injection if user uses bare form | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/variables.c.md |
+| 2026-06-03 | common.c:862-920 | trust-boundary | nit | `\gexec` runs server-returned text as SQL — documented "user is the trust boundary" feature; needs corpus-side documentation of the contract | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/common.c.md |
+| 2026-06-03 | tab-complete.in.c:7041-7066 | trust-boundary | maybe | Tab-completion `PQexec` shares the user's open transaction; a catalog query error inside an explicit BEGIN silently aborts the user's transaction (#ifdef NOT_USED error path) — "successful" COMMIT becomes surprise ROLLBACK | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/tab-complete.in.c.md |
 | 2026-06-03 | tab-complete.in.c | trust-boundary | nit | `exec_query` returns NULL on any error, so tab-complete fails-open silently — no operator visibility | open | knowledge/files/src/bin/psql/tab-complete.in.c.md |
 
 ### Path / shell injection (the "psql as RCE primitive" cluster)
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | large_obj.c:151 | path-traversal | likely | `\lo_export` accepts arbitrary client-side path under psql's UID; trivial write-any-file primitive in setuid/scripted contexts | open | knowledge/files/src/bin/psql/large_obj.c.md |
-| 2026-06-03 | large_obj.c:187 | path-traversal | likely | `\lo_import` accepts arbitrary client-side path for read; trivial read-any-file primitive in setuid/scripted contexts | open | knowledge/files/src/bin/psql/large_obj.c.md |
-| 2026-06-03 | copy.c:293,312 | shell-injection | nit | `\copy PROGRAM 'cmd'` → `popen(cmd, ...)` runs through `/bin/sh -c` with only quote-stripping — by-design; user typed it | open | knowledge/files/src/bin/psql/copy.c.md |
-| 2026-06-03 | command.c:4690-4694 | shell-injection | nit | `\e`/`\edit` editor invocation: filename single-quoted, `$EDITOR` unquoted (intentional to allow `EDITOR="pico -t"`); malicious `$EDITOR` is by-design RCE | open | knowledge/files/src/bin/psql/command.c.md |
+| 2026-06-03 | large_obj.c:151 | path-traversal | likely | `\lo_export` accepts arbitrary client-side path under psql's UID; trivial write-any-file primitive in setuid/scripted contexts | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/large_obj.c.md |
+| 2026-06-03 | large_obj.c:187 | path-traversal | likely | `\lo_import` accepts arbitrary client-side path for read; trivial read-any-file primitive in setuid/scripted contexts | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/large_obj.c.md |
+| 2026-06-03 | copy.c:293,312 | shell-injection | nit | `\copy PROGRAM 'cmd'` → `popen(cmd, ...)` runs through `/bin/sh -c` with only quote-stripping — by-design; user typed it | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/copy.c.md |
+| 2026-06-03 | command.c:4690-4694 | shell-injection | nit | `\e`/`\edit` editor invocation: filename single-quoted, `$EDITOR` unquoted (intentional to allow `EDITOR="pico -t"`); malicious `$EDITOR` is by-design RCE | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/command.c.md |
 | 2026-06-03 | command.c | shell-injection | nit | `\!` runs arbitrary user command via `system(3)` — by-design | open | knowledge/files/src/bin/psql/command.c.md |
-| 2026-06-03 | prompt.c:317-339 | shell-injection | maybe | PROMPT `%`backtick`%` substitution runs `popen` on EVERY prompt render — if `.psqlrc` is attacker-controlled (shared home, container, NFS), RCE as psql user; continuation prompts fire the command repeatedly | open | knowledge/files/src/bin/psql/prompt.c.md |
-| 2026-06-03 | startup.c:830-835 | trust-boundary | nit | `.psqlrc` lookup uses `access(file, R_OK)` with no ownership/mode check (cf. ssh's `.ssh/config` permission enforcement) | open | knowledge/files/src/bin/psql/startup.c.md |
+| 2026-06-03 | prompt.c:317-339 | shell-injection | maybe | PROMPT `%`backtick`%` substitution runs `popen` on EVERY prompt render — if `.psqlrc` is attacker-controlled (shared home, container, NFS), RCE as psql user; continuation prompts fire the command repeatedly | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/prompt.c.md |
+| 2026-06-03 | startup.c:830-835 | trust-boundary | nit | `.psqlrc` lookup uses `access(file, R_OK)` with no ownership/mode check (cf. ssh's `.ssh/config` permission enforcement) | open · triaged 2026-07-12 | knowledge/files/src/bin/psql/startup.c.md |
 
 ### Tab-completion specifics (the auto-firing query surface)
 
