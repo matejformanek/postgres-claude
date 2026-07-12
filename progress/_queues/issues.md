@@ -144,24 +144,52 @@ common register fully drained this run (21 rows all still-present@d92e98340fcb,
 the Phase D data-leak surface (credential-to-disk/memory, server-byte trust,
 path/shell injection). All rows dated 2026-06, past the 30-day staleness threshold.
 
-[pending] psql.md input.c:148-167 | secret-scrub/likely | seeded=2026-07-10
-[pending] psql.md mainloop.c:431 | secret-scrub/likely | seeded=2026-07-10
-[pending] psql.md common.c:1158 | secret-scrub/likely | seeded=2026-07-10
-[pending] psql.md startup.c:249-302 | secret-scrub/likely | seeded=2026-07-10
-[pending] psql.md command.c:2604-2607 | secret-scrub/likely | seeded=2026-07-10
-[pending] psql.md settings.h:103 | info-disclosure/maybe | seeded=2026-07-10
-[pending] psql.md input.c:452 | path-traversal/maybe | seeded=2026-07-10
-[pending] psql.md describe.c:1917-2192 | info-disclosure/maybe | seeded=2026-07-10
-[pending] psql.md tab-complete.in.c:6305 | info-disclosure/maybe | seeded=2026-07-10
-[pending] psql.md common.c:741-755 | trust-boundary/nit | seeded=2026-07-10
-[pending] psql.md prompt.c:342-354 | info-disclosure/maybe | seeded=2026-07-10
-[pending] psql.md command.c:861-865 | trust-boundary/nit | seeded=2026-07-10
-[pending] psql.md variables.c:281 | injection/likely | seeded=2026-07-10
-[pending] psql.md common.c:862-920 | trust-boundary/nit | seeded=2026-07-10
-[pending] psql.md tab-complete.in.c:7041-7066 | trust-boundary/maybe | seeded=2026-07-10
-[pending] psql.md large_obj.c:151 | path-traversal/likely | seeded=2026-07-10
-[pending] psql.md large_obj.c:187 | path-traversal/likely | seeded=2026-07-10
-[pending] psql.md copy.c:293,312 | shell-injection/nit | seeded=2026-07-10
-[pending] psql.md command.c:4690-4694 | shell-injection/nit | seeded=2026-07-10
-[pending] psql.md prompt.c:317-339 | shell-injection/maybe | seeded=2026-07-10
-[pending] psql.md startup.c:830-835 | trust-boundary/nit | seeded=2026-07-10
+[done:2026-07-12] psql.md input.c:148-167 | secret-scrub/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md mainloop.c:431 | secret-scrub/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md common.c:1158 | secret-scrub/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md startup.c:249-302 | secret-scrub/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md command.c:2604-2607 | secret-scrub/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md settings.h:103 | info-disclosure/maybe | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md input.c:452 | path-traversal/maybe | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md describe.c:1917-2192 | info-disclosure/maybe | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md tab-complete.in.c:6305 | info-disclosure/maybe | seeded=2026-07-10 | drifted-14@54cd6fc83176 (→:6291; def 6912; register+per-file tag re-anchored)
+[done:2026-07-12] psql.md common.c:741-755 | trust-boundary/nit | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md prompt.c:342-354 | info-disclosure/maybe | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md command.c:861-865 | trust-boundary/nit | seeded=2026-07-10 | drifted@54cd6fc83176 (→:252-256; :861-865 now \conninfo; guard 252-256/impl 2784; register re-anchored)
+[done:2026-07-12] psql.md variables.c:281 | injection/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md common.c:862-920 | trust-boundary/nit | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md tab-complete.in.c:7041-7066 | trust-boundary/maybe | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md large_obj.c:151 | path-traversal/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md large_obj.c:187 | path-traversal/likely | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md copy.c:293,312 | shell-injection/nit | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md command.c:4690-4694 | shell-injection/nit | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md prompt.c:317-339 | shell-injection/maybe | seeded=2026-07-10 | still-present@54cd6fc83176
+[done:2026-07-12] psql.md startup.c:830-835 | trust-boundary/nit | seeded=2026-07-10 | still-present@54cd6fc83176
+
+## Refill 2026-07-12 (pg-quality-auditor) — utils register, 18 line-cited open rows
+
+psql register fully drained this run (21 rows triaged @54cd6fc83176: 19 still-present,
+2 drifted+re-anchored — tab-complete.in.c:6305→6291 requote_identifier, command.c:861-865
+→252-256 \restrict guard). Next security-relevant backend register: `utils`
+(src/backend/utils/adt + fmgr) — the server-file-read (`genfile.c`), XXE (`xml.c`),
+privilege-default (`acl.c`), and binary-protocol DoS (`*recv`) clusters. Rows dated
+2026-06, past the 30-day staleness threshold.
+
+[pending] utils.md genfile.c:53-92 | trust-boundary/likely | seeded=2026-07-12
+[pending] utils.md genfile.c:65 | path-traversal/likely | seeded=2026-07-12
+[pending] utils.md xml.c:2046,1319 | xxe/likely | seeded=2026-07-12
+[pending] utils.md xml.c:2042 | stale-todo/nit | seeded=2026-07-12
+[pending] utils.md formatting.c:3907 | dos/likely | seeded=2026-07-12
+[pending] utils.md formatting.c:6236 | correctness/maybe | seeded=2026-07-12
+[pending] utils.md encode.c:282-306 | dos/likely | seeded=2026-07-12
+[pending] utils.md tsvector.c:461 | dos/maybe | seeded=2026-07-12
+[pending] utils.md tsquery.c:1240 | dos/maybe | seeded=2026-07-12
+[pending] utils.md multirangetypes.c:352 | dos/maybe | seeded=2026-07-12
+[pending] utils.md pg_dependencies.c (+ statext/mvdistinct.c:310, dependencies.c:557) | trust-boundary/maybe | seeded=2026-07-12
+[pending] utils.md ruleutils.c:5900-5965 | info-disclosure/maybe | seeded=2026-07-12
+[pending] utils.md name.c:57 vs :90 | wire-protocol/maybe | seeded=2026-07-12
+[pending] utils.md numutils.c:947 vs :983 | wire-protocol/maybe | seeded=2026-07-12
+[pending] utils.md expandeddatum.c:88-145 | undocumented-invariant/maybe | seeded=2026-07-12
+[pending] utils.md windowfuncs.c:559 | correctness/maybe | seeded=2026-07-12
+[pending] utils.md tsvector_op.c:926 | correctness/maybe | seeded=2026-07-12
+[pending] utils.md ri_triggers.c:288 | correctness/maybe | seeded=2026-07-12

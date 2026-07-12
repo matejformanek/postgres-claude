@@ -259,8 +259,8 @@ All three use the same escape pipeline. [verified-by-code, 2104-2123]
   arbitrary subset. No order-by clause, so the subset is
   server-implementation-dependent. Severity: nit (UX, not security).
 - **[ISSUE-info-disclosure: server-supplied identifiers used to
-  build the next completion-list display]** `tab-complete.in.c:6307,
-  requote_identifier:6928` — output is to readline, which renders to
+  build the next completion-list display]** `tab-complete.in.c:6291,
+  requote_identifier:6912` — output is to readline, which renders to
   the terminal. A relname with ANSI escapes would corrupt the
   completion display, similar to the `\d` title hazard. Severity:
   maybe (terminal-spoof class).
