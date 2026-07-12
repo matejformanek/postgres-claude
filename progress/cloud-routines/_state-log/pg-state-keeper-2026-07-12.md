@@ -1,0 +1,1 @@
+**pg-state-keeper** 2026-07-12 — morning briefing: 07-11→07-12 cycle clean (9/9 merged, 0 conflicts); roll-call OK 9 / SILENT 2 [pg-file-backfiller retired-but-rostered ~26th, pg-corpus-graph-refresh 0-PRs-ever 5th flag]; new infra flag api.github.com 403 → gitweb fallback ×2 (#584, #588); audits.md widened to 321 (PR pending).
