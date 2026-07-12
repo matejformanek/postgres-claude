@@ -502,3 +502,6 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/files/src/include/nodes/makefuncs.h.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (JSON_TABLE PLAN clause, 86ab7f4c721d)
 [pending] knowledge/files/src/include/statistics/stat_utils.h.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (Reject incorrect range_bounds_histograms in stats import functions, df293aed46e3)
 [pending] knowledge/files/src/include/statistics/statistics.h.md  reason=anchor-bump 2026-07-10:c1702cb51363..54cd6fc83176 (postgres_fdw: Remove SPI from postgresImportForeignStatistics, 54cd6fc83176)
+[pending] knowledge/files/src/backend/access/heap/pruneheap.c.md  reason=anchor-bump 2026-07-11:54cd6fc83176..eed6c0d33e09 (Update FSM after updating VM on-access, eed6c0d33e09)
+[pending] knowledge/files/src/backend/postmaster/datachecksum_state.c.md  reason=anchor-bump 2026-07-11:54cd6fc83176..eed6c0d33e09 (Fix data checksum processing for temp relations and dropped rels, 97a18c221b8a (+1 more: progress counter init e9810253f095))
+[pending] knowledge/files/src/backend/rewrite/rewriteHandler.c.md  reason=anchor-bump 2026-07-11:54cd6fc83176..eed6c0d33e09 (Forbid FOR PORTION OF on views with INSTEAD OF triggers, dfce19c2300a)
