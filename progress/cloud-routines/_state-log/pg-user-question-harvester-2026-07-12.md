@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-12 — 34 internals questions harvested from pgsql-hackers (Jul 10–12) + pgsql-general, tagged to 30 skills; 4 gap tags (hba-auth-config ×recurring, ddl-deparse-ruleutils ×recurring, datetime-timezone, unicode-normalization); heavy pgstat-framework day (×6) (PR pending).
