@@ -585,6 +585,13 @@ The mandatory `IndexAmRoutine` callback that inserts one new index entry for a f
 The index-AM callback that remembers the current scan position (one saved mark per scan) so a later `amrestrpos` can return to it — used by mergejoin to rescan the inner side. A new `ammarkpos` overwrites the previous mark. [from-docs] (via `knowledge/data-structures/indexamroutine.md`).
 
 
+### amopfamily
+The `pg_amop` column linking an operator-family membership row back to its `pg_opfamily`. A family groups related operator classes across types so cross-type operators become indexable. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
+
+
+### amopopr
+The `pg_amop` column identifying an operator that is a member of an operator family. Cross-data-type operators (e.g. comparing `int4` to `int8`) are members of the *family* via `pg_amop` rather than of any single operator class, which is what makes them index-usable. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
+
 
 ### amoptionalkey
 The `IndexAmRoutine` boolean declaring that the index's first key column may be absent from the query's WHERE clause, letting the planner do a full-index scan; false (as in hash) forces at least one equality key. [from-docs] (via `knowledge/data-structures/indexamroutine.md`).
@@ -1459,6 +1466,9 @@ The initdb phase that replays the bootstrap BKI stream to build the initial cata
 ### BootstrapModeMain
 The entry point for bootstrap/check mode (`bootstrap.c`, `pg_noreturn`): `--boot` runs `BootstrapModeMain(argc, argv, false)` to build the initial catalogs during initdb, and `--check` runs it with `check_only=true`. [verified-by-code] (via `knowledge/subsystems/main.md`).
 
+
+### bpchar_pattern_ops
+The blank-padded-`char` counterpart of `text_pattern_ops`: byte-by-byte comparison enabling `LIKE`/anchored-regex index support on `bpchar` columns outside the C locale. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
 
 
 ### BRIN
@@ -2637,6 +2647,9 @@ backed by transient `xip` arrays. [verified-by-code] (via
 The planner's sequential-scan cost estimator: disk cost = `seq_page_cost * baserel->pages`, plus per-output-row CPU (tlist) cost. It is the simplest of the `cost_*` functions in `costsize.c` and a good template for reading the cost model. [verified-by-code] (`costsize.c:270` — via `knowledge/files/src/backend/optimizer/path/costsize.c.md`).
 
 
+### covering index
+An index that stores extra payload columns via `INCLUDE` so it can satisfy an index-only scan for queries needing those columns, without making them part of the key. On a unique covering index the uniqueness constraint applies to the key columns only, not the payload. [from-docs §11.9] (via `knowledge/docs-distilled/indexes-index-only-scans.md`).
+
 
 ### cpu_tuple_cost
 The planner cost-model unit (cost.h / costsize.c) charged per tuple processed by the executor; it feeds the cpu_run_cost term of nearly every path's cost estimate. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/costsize.c.md`).
@@ -2997,6 +3010,9 @@ The event-trigger firing point that runs just after a DDL command completes (aft
 One of the `EventTriggerEvent` values (with `ddl_command_end`, `sql_drop`, `table_rewrite`, `login`) that `evtcache.c` maps to the ordered list of enabled event-trigger functions, rebuilt by a name-order scan of `pg_event_trigger`. Fires before a DDL command executes. [verified-by-code] (via `knowledge/subsystems/utils-cache.md`).
 
 
+### DeadFakeAttributeNumber
+A synthetic negative attribute number (`#define`d to `FirstLowInvalidHeapAttributeNumber`, one slot *below* the lowest real system attribute so it cannot collide) that pg_dirtyread uses for its invented `dead boolean` column; when requested, tuple-conversion computes it from the visibility horizon via `HeapTupleIsSurelyDead(tuple, oldest_xmin)`. Illustrates the pattern of squatting below `FirstLowInvalidHeapAttributeNumber` to add a virtual system column. [verified-by-code] (via `knowledge/ideologies/pg_dirtyread.md`).
+
 
 ### deadlock detector
 The lock-manager component that, on `deadlock_timeout` expiring while a backend
@@ -3273,6 +3289,9 @@ area, `dsa_allocate`s from it, and translates pointers with `dsa_get_address`.
 [verified-by-code] (`dsa.c:347-373` — via
 `knowledge/files/src/backend/utils/mmgr/dsa.c.md`).
 
+
+### dsa_create_in_place
+The dynamic-shared-area constructor that initializes a DSA inside a caller-provided shmem region (rather than allocating a fresh DSM segment), letting an extension back a variable-length arena — e.g. pg_stat_monitor's query-text store — out of space it reserved at `shmem_request` time. [verified-by-code `hash_query.c:103`] (via `knowledge/ideologies/pg_stat_monitor.md`).
 
 
 ### dsa_get_address
@@ -4199,6 +4218,9 @@ reset once per tuple. [verified-by-code] (`pl_exec.c:8771` — via
 `knowledge/files/src/pl/plpgsql/src/pl_exec.md`).
 
 
+### expression index
+(a.k.a. functional index) An index whose column is a computed expression such as `lower(col1)`, serving queries like `WHERE lower(col1) = 'value'`. The expression is stored so search never recomputes it, but each insert and non-HOT update must recompute it (the maintenance cost). The query must use the *same* expression form — the planner matches syntactically and will not rewrite equivalents — and the expression must be `IMMUTABLE`. [from-docs §11.7] (via `knowledge/docs-distilled/indexes-expressional.md`).
+
 
 ### expression_planner
 Plans a standalone `Expr` that is not part of a `Query`: it runs `fix_opfuncids` + `eval_const_expressions`, producing an executable expression tree for cases like DDL default evaluation. It is the cheapest of the expression-preparation entry points and assumes the input is SubLink-free. [verified-by-code] (`planner.c:7081` — via `knowledge/files/src/backend/optimizer/plan/planner.c.md`).
@@ -5045,6 +5067,9 @@ prepared transactions. [verified-by-code] (via
 `knowledge/idioms/xmin-horizon-management.md`).
 
 
+### GetOldestXmin
+The core function returning the oldest transaction id that any current or future snapshot in the cluster could still consider running — the removal horizon below which dead tuples are safe to reclaim. It is **not available during recovery**, so code needing it (e.g. pg_dirtyread's synthetic `dead` column) must hard-error on a standby. On modern PG it is increasingly replaced by the `GlobalVisState *` machinery (`GlobalVisTestFor`). [verified-by-code] (via `knowledge/ideologies/pg_dirtyread.md`; see also `knowledge/idioms/xmin-horizon-management.md`).
+
 
 ### GetPortalByName
 Looks up a named portal (cursor) in the per-backend portal hash table, returning the `Portal` used by FETCH/MOVE/CLOSE and by the extended-query protocol's named-portal execution. [verified-by-code] (`portalmem.c` — via `knowledge/files/src/backend/utils/mmgr/portalmem.c.md`).
@@ -5239,6 +5264,9 @@ The 32-bit TransactionId convenience wrapper over `GlobalVisCheckRemovableFullXi
 ### GlobalVisState
 The cached *visibility horizon* a backend carries (field `vistest` on the vacuum/prune state) describing which xids are definitely dead to all sessions. Pruning and HOT-cleanup test tuples against it instead of recomputing `RecentXmin`, so a single snapshot of the global horizon drives a whole page scan. [verified-by-code] (via `knowledge/idioms/vacuum-hot-prune.md`).
 
+
+### GlobalVisTestFor
+The modern visibility-horizon accessor (PG 14+) returning a `GlobalVisState *` for a relation — the lazily-updated, class-specific removal boundary used to test whether a tuple is surely dead — superseding the older scalar `GetOldestXmin` result for pruning/vacuum decisions. [verified-by-code] (via `knowledge/ideologies/pg_dirtyread.md`; see also `knowledge/idioms/xmin-horizon-management.md`).
 
 
 ### GRAPH_TABLE
@@ -5770,6 +5798,9 @@ logic read xmin exclusively through it so frozen tuples are handled uniformly.
 `knowledge/files/src/include/access/htup_details.h.md`).
 
 
+### HeapTupleIsSurelyDead
+The heap-visibility helper that reports whether a tuple is dead relative to a supplied oldest-xmin horizon (i.e. dead to *every* possible snapshot, hence reclaimable), as opposed to dead only to a particular snapshot. VACUUM-adjacent code and forensic tools (pg_dirtyread's `dead` column) use it to classify already-removed rows. [verified-by-code] (via `knowledge/ideologies/pg_dirtyread.md`).
+
 
 ### HeapTupleSatisfies
 The prefix of the MVCC visibility-oracle family in `heapam_visibility.c` (`HeapTupleSatisfiesMVCC`, `…Vacuum`, `…Dirty`, `…SelfUpdated`, `…HistoricMVCC`, …); every routine may also set hint bits and `MarkBufferDirtyHint` when it observes a transaction has committed or aborted. [from-comment] (via `knowledge/subsystems/access-heap.md`).
@@ -5935,6 +5966,9 @@ GUC terminating a session that sits idle inside an open transaction longer than 
 The typcache guard list tracking type-cache entries currently being (re)built, so that an invalidation arriving mid-build is not lost; it is allocated as the last step of `lookup_type_cache`'s OOM-resilient lazy init and finalized at end of (sub)transaction. [verified-by-code] (via `knowledge/idioms/typcache-entry-and-lookup.md`).
 
 
+### INCLUDE (covering-index payload)
+The `CREATE INDEX … INCLUDE (cols)` clause that adds non-key payload columns to an index: stored but never interpreted by the index machinery (they need not be of an indexable type), they enable index-only scans and, thanks to B-tree suffix truncation, keep internal pages small. A key+payload tuple exceeding the index type's maximum tuple size makes the *insertion fail*, so wide INCLUDE columns are a footgun. [from-docs §11.9] (via `knowledge/docs-distilled/indexes-index-only-scans.md`).
+
 
 ### INCOMPLETE_SPLIT
 A btree page flag recording that a page was split but its parent downlink has
@@ -5957,6 +5991,9 @@ sort key, sorting only within prefix-equal groups to reduce memory and start-up
 cost versus a full Sort. [verified-by-code] (via
 `knowledge/subsystems/executor.md`).
 
+
+### index-only scan (IOS)
+A scan that answers a query entirely from an index, skipping the heap, when every referenced column is stored in the index AND the per-page `VM_ALL_VISIBLE` bit is set. Because visibility (xmin/xmax) lives only in heap tuples, the visibility map is the side channel that makes skipping the heap safe; heavily-updated tables keep VM bits cleared and degrade IOS to ordinary index scans (VACUUM resets the bits). B-tree always supports it; GiST/SP-GiST only for some opclasses; GIN never. [from-docs §11.9] (via `knowledge/docs-distilled/indexes-index-only-scans.md`).
 
 
 ### INDEX_ALT_TID_MASK
@@ -6175,6 +6212,9 @@ performs authorization checks before the backend enters its command loop.
 `knowledge/architecture/query-lifecycle.md`).
 
 
+### InitPostgresCompat
+A version-shim wrapper (used by preload-time background workers such as pg_wait_sampling's collector) around `InitPostgres` that lets a worker become a full backend participating in `ProcSignal` — so `procsignal_sigusr1_handler` fires — *without* connecting to any database (`InitPostgresCompat(NULL, InvalidOid, …)`), i.e. with `BGWORKER_SHMEM_ACCESS` only and no `BGWORKER_BACKEND_DATABASE_CONNECTION`. [verified-by-code] (via `knowledge/ideologies/pg_wait_sampling.md`).
+
 
 ### InitProcess
 The startup routine that claims a PGPROC slot from the shared ProcArray for the current backend and initializes its latch, lock-wait, and semaphore state; it runs early in backend startup, before the process can take heavyweight locks. [verified-by-code] (via `knowledge/subsystems/tcop.md`).
@@ -6248,6 +6288,9 @@ Starts the per-node instrumentation timer wrapped around a plan node's `ExecProc
 ### Int32GetDatum
 Macro packing a 32-bit signed integer into a `Datum`; the `*GetDatum` counterpart of `DatumGetInt32`, used when handing an int to fmgr or a `PG_RETURN_INT32`. [verified-by-code] (via `knowledge/files/contrib/spi/moddatetime.c.md`).
 
+
+### int4_ops
+The default B-tree operator class for `int4`, bundling the comparison operators and support function an index uses for four-byte integers. An operator class is a per-(access-method, type) object; the default is chosen automatically from the column's type unless a non-default opclass is named at `CREATE INDEX`. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
 
 
 ### interleaved_parts
@@ -6655,6 +6698,9 @@ The typedef for the JIT provider's `release_context` callback, which frees a `Ji
 ### JitProviderResetAfterErrorCB
 The typedef for the JIT provider's `reset_after_error` callback, which recovers provider state after a `longjmp`; the first of the three `JitProviderCallbacks` pointers. [verified-by-code] (`jit.h:69` — via `knowledge/docs-distilled/jit-extensibility.md`).
 
+
+### Join Filter
+The `EXPLAIN` line for a join condition (from an outer join's `ON`) evaluated at a join node. Unlike a plain `Filter`, a row that fails a `Join Filter` under an outer join can still be emitted null-extended, rather than being removed unconditionally. [from-docs §14.1.2] (via `knowledge/docs-distilled/using-explain.md`).
 
 
 ### join_search_one_level
@@ -7233,6 +7279,9 @@ I/O support without repeated catalog scans. [verified-by-code] (via
 ### loread
 The server-side large-object read entry point invoked through the fastpath / SQL LO interface; given an LO descriptor from `lo_open(..., INV_READ)` (or `INV_WRITE`) it returns the next chunk of object data. [verified-by-code] (`inv_api.c:162` — via `knowledge/files/src/backend/storage/large_object/inv_api.c.md`).
 
+
+### lossy bitmap
+The degraded form a Bitmap Heap Scan's TID bitmap takes when it would exceed `work_mem`: it stores whole-page bits rather than individual tuple TIDs, so every tuple on a lossy page must be re-tested against the original qual (surfaced as `Recheck Cond` in `EXPLAIN`). [from-docs §11.5 / §14.1] (via `knowledge/docs-distilled/indexes-bitmap-scans.md`).
 
 
 ### LOWER_NODE
@@ -8444,6 +8493,9 @@ The global `ClusterInfo` struct in pg_upgrade describing the source installation
 The computed horizon xid below which no running transaction can still see a given table's dead tuples; vacuum and HOT pruning use it to decide what is removable. [from-comment] (via `knowledge/community/user-questions/2026-06-02.md`).
 
 
+### OldestXminType
+A compatibility macro (used by forks such as pg_dirtyread) that straddles the PG 14 visibility-API change, resolving to either a plain `TransactionId` (older API) or a `GlobalVisState *` (newer), so one code path can hold whichever horizon representation `GetOldestXmin` / `GlobalVisTestFor` yields on the build's major version. [verified-by-code `dirtyread_tupconvert.h:20-24`] (via `knowledge/ideologies/pg_dirtyread.md`).
+
 
 ### on_dsm_detach
 The API that registers a callback to run when a dynamic shared memory segment detaches (or the backend exits while attached); e.g. `pqmq.c` registers `pq_cleanup_redirect_to_shm_mq` so a parallel worker's protocol redirection is torn down when its DSM goes away. [verified-by-code] (via `knowledge/files/src/backend/libpq/pqmq.c.md`).
@@ -8463,6 +8515,13 @@ Registers a callback to run during normal backend shutdown after the shared-memo
 Out Of Memory — the condition where an allocation cannot be satisfied. In the backend, `palloc` failure raises an `ERROR` (longjmp) rather than returning NULL, so callers need not null-check; the OS OOM killer terminating the postmaster or a backend is a separate, harsher failure mode that crash recovery must handle. [verified-by-code] (via `knowledge/files/src/backend/utils/mmgr/mcxt.c.md`).
 
 
+### opcdefault
+The `pg_opclass` boolean column marking an operator class as the default for its data type, so `CREATE INDEX` selects it automatically unless a non-default opclass is named explicitly. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
+
+
+### opcintype
+The `pg_opclass` column giving the data type an operator class is for; together with `opcmethod` (the access method) it keys each class to a (AM, type) pair. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
+
 
 ### opclass (operator class)
 A catalog object (`pg_opclass`) binding a data type to an index access method
@@ -8471,6 +8530,9 @@ by naming the operators and support functions an index needs (e.g. btree's
 `CREATE INDEX` knows how to compare a column's values. [inferred] (via
 `knowledge/files/src/backend/access/index/amapi.c.md`).
 
+
+### opcmethod
+The `pg_opclass` column naming the index access method (btree, hash, gist, …) an operator class belongs to; an opclass is meaningful only for one AM. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
 
 
 ### OpenTransientFile
@@ -8865,6 +8927,9 @@ analysis. [verified-by-code] (`plpy_spi.c:105` — via
 ### partdesc
 `src/backend/partitioning/partdesc.c` — builds and caches the `PartitionDesc` for a partitioned table: the relcache-attached array of child OIDs plus the `PartitionBoundInfo` mapping bounds to partitions. It is rebuilt on relcache invalidation and underpins both planning-time pruning and tuple routing. [verified-by-code] (via `knowledge/files/src/backend/partitioning/partdesc.c.md`).
 
+
+### partial index
+An index built with a `WHERE` predicate so it indexes only the rows satisfying it — shrinking the index and enabling subset-scoped unique constraints (`CREATE UNIQUE INDEX … WHERE success`). It is usable only when the planner can prove at plan time (via `predicate_implied_by`) that the query's `WHERE` implies the index predicate; a guaranteed predicate need not be rechecked at runtime, which lets a partial index feed an index-only scan on a predicate-only column. [from-docs §11.8] (via `knowledge/docs-distilled/indexes-partial.md`).
 
 
 ### partial_pathlist
@@ -10196,6 +10261,13 @@ The `int64` typedef for a cumulative-statistics counter in the pgstat subsystem;
 The version stamp written at the head of the cumulative-statistics file (`pg_stat/`); the stats subsystem refuses to load a file whose id does not match the running server, discarding stale stats rather than misreading them. Changing the on-disk stats layout requires bumping it. [inferred] (`pgstat.h:221` — via `knowledge/files/src/include/pgstat.h.md`).
 
 
+### pgstat_get_wait_event
+The core function that decodes a backend's packed `wait_event_info` integer (read from `PGPROC` or exposed as `pg_stat_activity.wait_event`) into the human-readable wait-event name; its sibling `pgstat_get_wait_event_type` returns the category. Sampling extensions such as pg_wait_sampling reuse these to label the wait field they read straight out of each `PGPROC`. [from-comment] (via `knowledge/ideologies/pg_wait_sampling.md`).
+
+
+### pgstat_get_wait_event_type
+The core function returning the *category* of a packed `wait_event_info` value (LWLock, Lock, BufferPin, IO, IPC, Timeout, …); paired with `pgstat_get_wait_event` (which returns the specific event name) to render `pg_stat_activity.wait_event_type` and `wait_event`. [from-comment] (via `knowledge/ideologies/pg_wait_sampling.md`).
+
 
 ### PgStat_KindInfo
 The per-statistics-kind descriptor (a callback vtable plus size/flags) registered in the pgstat subsystem; it tells the cumulative-stats machinery how to size, fixed-or-variable, flush, and serialize entries of one stats kind, enabling pluggable custom stats. [verified-by-code] (via `knowledge/files/src/include/utils/pgstat_internal.md`).
@@ -10713,6 +10785,9 @@ The backend staging buffer holding the encrypted GSSAPI bytes queued for write, 
 The libpq entry point that submits a command without blocking for the result; paired with `PQgetResult` it drives asynchronous query processing and is the way to see every result of a multi-statement string (which `PQexec` collapses to the last). [verified-by-code] (`fe-exec.c:2427` — via `knowledge/files/src/interfaces/libpq/fe-exec.c.md`).
 
 
+### predicate_implied_by
+The planner's predicate-implication test (in `predtest.c`) that decides whether a partial index is usable: it must *prove* the query's `WHERE` clause mathematically implies the index predicate. Called as `predicate_implied_by(index->indpred, all_clauses, false)` from the index-path builder. The prover is deliberately weak — it handles simple inequality implication (`x<1` ⟹ `x<2`), otherwise requiring an exact structural match — and a parameterized clause like `x < ?` never implies a constant predicate. [verified-by-code `source/src/backend/optimizer/path/indxpath.c:1134`, prover entry `source/src/backend/optimizer/util/predtest.c:154` @c1702cb51363] (via `knowledge/docs-distilled/indexes-partial.md`).
+
 
 ### PredicateLockPage
 Takes an SSI predicate lock at page granularity, recording a read dependency so
@@ -10958,6 +11033,9 @@ The shared-memory mechanism for sending and handling inter-backend signals
 checks at `CHECK_FOR_INTERRUPTS`. [verified-by-code] (via
 `knowledge/subsystems/storage-ipc.md`).
 
+
+### procsignal_sigusr1_handler
+The `SIGUSR1` handler installed via `ProcSignal` that dispatches multiplexed inter-backend signals (catchup interrupts, barrier/recovery-conflict notifications, parallel-message wakeups). A process must have run `InitPostgres`/`ProcSignalInit` to receive them — which is why preload-time bgworkers that want signals still initialize as backends even without a database connection. [verified-by-code] (via `knowledge/files/src/backend/storage/ipc/procsignal.c.md`).
 
 
 ### ProcSignalBarrier
@@ -11408,6 +11486,9 @@ below it is still in progress — used as a cheap early-out in visibility checks
 before consulting the full snapshot. [verified-by-code] (via
 `knowledge/idioms/snapshot-static-and-current.md`).
 
+
+### Recheck Cond
+The `EXPLAIN` line on a Bitmap Heap Scan reporting the original index condition re-evaluated against each heap tuple — needed when the in-memory bitmap went *lossy* (stored whole-page bits instead of per-tuple TIDs because it would have exceeded `work_mem`). [from-docs §14.1] (via `knowledge/docs-distilled/using-explain.md`).
 
 
 ### recheckforeignscan
@@ -12437,6 +12518,17 @@ every entry in a query's range table. [verified-by-code] (via
 `knowledge/files/src/backend/parser/parse_relation.c.md`).
 
 
+### ru_inblock
+The `getrusage(2)` `struct rusage` field counting filesystem block *input* operations (physical reads). pg_stat_kcache brackets each executor run with `getrusage(RUSAGE_SELF, …)` and attributes the delta to the statement, scaling by `RUSAGE_BLOCK_SIZE` to report bytes read from storage. [verified-by-code] (via `knowledge/ideologies/pg_stat_kcache.md`).
+
+
+### ru_oublock
+The `getrusage(2)` `struct rusage` field counting filesystem block *output* operations (physical writes). pg_stat_kcache reports the per-statement delta scaled by `RUSAGE_BLOCK_SIZE` as bytes written to storage. [verified-by-code] (via `knowledge/ideologies/pg_stat_kcache.md`).
+
+
+### RUSAGE_BLOCK_SIZE
+The constant pg_stat_kcache multiplies the kernel's block-count `getrusage` fields (`ru_inblock` / `ru_oublock`) by, to report physical read/write volume in bytes rather than in kernel filesystem blocks. [verified-by-code `pg_stat_kcache.c:1340-1341`] (via `knowledge/ideologies/pg_stat_kcache.md`).
+
 
 ### s_lock
 The spinlock *slow path* in `storage/lmgr/s_lock.c` — `SpinLockAcquire` first tries an inline test-and-set (the `s_lock.h` hardware-TAS macros); only on contention does it fall back to `s_lock()`, which spins with exponential backoff and eventually `PANIC`s on a stuck-spinlock timeout. Spinlocks guard only a handful of instructions and must never block or `ereport`. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/s_lock.c.md`).
@@ -12871,6 +12963,9 @@ to enter/leave a `SECURITY_RESTRICTED_OPERATION` or local-userid-change region
 (also restored in parallel workers). [verified-by-code] (via
 `knowledge/idioms/parallel-state-propagation.md`).
 
+
+### SFRM_Materialize
+One of the two set-returning-function return modes (the other being value-per-call / `SRF_FIRSTCALL`): the function builds the *entire* result set into a `Tuplestore` up front and hands it back via the `ReturnSetInfo`, rather than emitting one row per call. Chosen by modern SRFs (often through the `SetSingleFuncCall` helper); many observability extensions use it while lighter ones keep the classic value-per-call idiom. [from-code] (via `knowledge/files/contrib/tablefunc/tablefunc.md`).
 
 
 ### shadow_pass
@@ -13927,6 +14022,9 @@ subtransaction is assigned an XID, building the chain
 The snapshot array of committed sub-transaction xids, parallel to the top-level `xip` array; consulted for visibility when a subxact's parent is still running. It is bounded, and overflow flips `suboverflowed`, after which visibility must fall back to `pg_subtrans`. [verified-by-code] (via `knowledge/data-structures/snapshot-lifecycle.md`).
 
 
+### suffix truncation
+The B-tree optimization that drops non-key (`INCLUDE`) columns — and trailing *key* columns once the remaining prefix already uniquely describes leaf tuples — from upper-tree pages, so `INCLUDE` payload does not bloat internal pages the way adding the column to the key would. [from-docs §11.9] (via `knowledge/docs-distilled/indexes-index-only-scans.md`; home `knowledge/files/src/backend/access/nbtree/nbtdedup.c.md`).
+
 
 ### summarize_range
 The BRIN routine (`brin.c`) that builds the summary tuple for one page range — scanning the range's heap tuples, folding them into the opclass union via `brin_form_tuple`, and installing the result over its placeholder. [verified-by-code] (via `knowledge/idioms/brin-summarize-and-scan.md`).
@@ -14220,6 +14318,13 @@ The lifecycle call that sets a registered background worker's terminate flag (se
 ### TerminateBufferIO
 The bufmgr I/O-coordination routine that ends an in-progress buffer read/write, clears `BM_IO_IN_PROGRESS`, updates validity/dirty flags, and wakes backends blocked in `WaitIO`; it is the close-out partner of `StartSharedBufferIO`. [verified-by-code] (`bufmgr.c:7148` — via `knowledge/files/src/backend/storage/buffer/bufmgr.c.md`).
 
+
+### text_ops
+The default B-tree operator class for `text`, which compares under the column's collation (locale-aware). Because collated comparison is not prefix-compatible with `LIKE` outside the C locale, a `text_ops` index cannot accelerate `LIKE` there — that is what `text_pattern_ops` exists for. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
+
+
+### text_pattern_ops
+The B-tree operator class that compares `text` values strictly byte-by-byte, bypassing locale collation, so the index can serve `LIKE` and anchored POSIX-regex prefix matches even when the database is **not** in the C locale (the default `text_ops` index cannot). A column may therefore need two indexes — one with `text_pattern_ops` for pattern matches and one with the default opclass for `<`/`>`/`ORDER BY` — since a single index carries one opclass. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
 
 
 ### text_to_cstring
@@ -14983,6 +15088,9 @@ The varlena macro that is true when a datum is a TOAST pointer stored out-of-lin
 The `Var` field giving the column number within the referenced relation (1-based); `varattno = 0` denotes a whole-row Var that yields the entire tuple as a composite value. [verified-by-code] (via `knowledge/data-structures/var-const-nodes.md`).
 
 
+### varchar_pattern_ops
+The `varchar` counterpart of `text_pattern_ops`: a byte-by-byte B-tree operator class that makes `LIKE`/anchored-prefix matching index-usable on `varchar` columns in a non-C locale. [from-docs §11.10] (via `knowledge/docs-distilled/indexes-opclass.md`).
+
 
 ### VARDATA_ANY
 The macro returning a pointer to a varlena's data payload while
@@ -15084,6 +15192,9 @@ Sets a heap page's all-visible (and optionally all-frozen) bits in the visibilit
 ### vl_len_
 The 4-byte varlena length header that begins every variable-length datum (`struct varlena`, and embedded in types like `cube` and `lquery`); it is set with `SET_VARSIZE` and read with `VARSIZE`, and the type's `typalign` governs how arrays of such varlenas are laid out. [verified-by-code] (`cubedata.h:18` — via `knowledge/files/contrib/cube/cubedata.h.md`).
 
+
+### VM_ALL_VISIBLE
+The visibility-map bit an index-only scan consults for each candidate heap page: set → the row is known all-visible and returned straight from the index; clear → the heap tuple must still be visited to test MVCC visibility, giving no win over a plain index scan. The runtime check is `VM_ALL_VISIBLE(scandesc->heapRelation, …)`. [verified-by-code `source/src/backend/executor/nodeIndexonlyscan.c:164` @c1702cb51363] (via `knowledge/docs-distilled/indexes-index-only-scans.md`).
 
 
 ### VXID
