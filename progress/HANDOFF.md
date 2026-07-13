@@ -125,6 +125,13 @@ None of these were flagged by harvester recently; they're nice-to-haves.
 
 ## Findings that need triage
 
+**Triage status as of 2026-07-13:** T4/T8/T9/T10 (the source-verifiable ones) were investigated inline; T1/T2/T3/T5/T6/T7 remain open as subjective or audit-heavy work items.
+
+- **T4** — real defect, extractor-level; anchored a manual "Definition sites" section into `spi.md` as a durable workaround. Root cause fix (extractor v3) deferred.
+- **T8** — real defect, skill claim was WRONG. Fixed in `wire-protocol/SKILL.md`: protocol 3.2 adds longer cancel keys (per commit `a460251f0a1`), NOT a `_pq_.report` ParameterStatus subscription mechanism (which doesn't exist in source).
+- **T9** — real defect, skill claim was WRONG. `pg_get_row_estimate_hints` API does not exist in source (`git grep` confirms zero matches). Removed the misleading out-of-scope reference from `extended-statistics/SKILL.md`.
+- **T10** — VERIFIED CORRECT. `read_stream` introduction commit `b5a9b18cd0b` dated 2024-04-03 is inside the PG 17 development cycle; AIO layer commit `02844012b30` dated 2025-03-17 is inside the PG 18 cycle. Skill's version bounds are accurate.
+
 These are things I noted while working but didn't stop to resolve. Some may not survive scrutiny — they should be debated before treating as canonical:
 
 **T1. Depth-2 threshold is arbitrary.** `--depth 2` uses "≥2 shared files" as the sibling-idiom cutoff. Picked because "1 hit is too noisy across 161 idioms". No empirical basis for 2 vs 3 vs 5. On `add-new-wal-record` it produces 1 hit (`heaptuple-update-chain`), which felt reasonable. But on other scenarios it may over-produce or miss real patterns. Needs validation via 3-5 real queries.

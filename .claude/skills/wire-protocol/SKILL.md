@@ -12,7 +12,7 @@ companion_skills:
 
 Every PG client-server exchange follows a strict wire protocol: length-prefixed typed messages over a socket. Understanding the message boundary + startup dance + simple-vs-extended dispatch is required for any code that touches network communication or extends the protocol.
 
-Since PG 18, there's also **protocol 3.2** with parameter status change extensions.
+Since PG 18, there's also **protocol 3.2** (`PG_PROTOCOL_LATEST` in `src/include/libpq/pqcomm.h:95`). Its main behavioural change is **longer cancel-request keys** (variable-length up to 256 bytes; 4 bytes in 3.0) — see commit `a460251f0a1` "Make cancel request keys longer". libpq exposes `min_protocol_version` / `max_protocol_version` connection options so clients can pin a specific version (commit `285613c60a7`). Version 3.2 does NOT introduce a client-driven ParameterStatus subscription mechanism — GUC change reporting is still gated by the server-side `GUC_REPORT` flag on individual variables (see `ReportChangedGUCOptions` in `src/backend/utils/misc/guc.c`) and is available in all 3.x protocol versions.
 
 ## The file map
 
@@ -83,7 +83,7 @@ Between Parse+Bind+Execute the backend is IN a "in the middle of an extended que
 5. Backend sends ParameterStatus for each GUC the client should know (server_version, client_encoding, etc.).
 6. Backend sends ReadyForQuery. Now in the query loop.
 
-If the client requests protocol 3.2 (PG 18+) it can subscribe to ParameterStatus updates for GUCs the server didn't originally advertise — see `_pq_.report` startup option.
+Which GUCs land in that initial ParameterStatus set is determined by the server-side `GUC_REPORT` flag on individual variables — see the ~15 lines in `src/backend/utils/misc/guc_tables.c` that set `GUC_REPORT` on `client_encoding`, `TimeZone`, `search_path`, `server_version`, etc. Later GUC changes to any `GUC_REPORT`-flagged variable trigger `ReportChangedGUCOptions` which emits a fresh ParameterStatus message to the client. There is no client-side subscription mechanism — the server decides. (Protocol 3.2 does NOT change this; earlier drafts of this skill claimed a `_pq_.report` startup option, which does not exist in the source. T8 triaged 2026-07-13.)
 
 ## The pq_beginmessage lifecycle (canonical patch pitfall)
 

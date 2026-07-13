@@ -148,4 +148,12 @@ python3 scripts/corpus-chain.py --file src/backend/statistics/extended_stats.c
 - **ANALYZE sampling mechanics** — that's `analyze.c` and `analyze-block-and-reservoir-sampling` idiom.
 - **`pg_stat_*` cumulative-statistics views** — completely different system. See `pgstat-framework` skill.
 - **PostgreSQL 17+ MERGE stat clause** — DDL only, not extended-stats internals.
-- **Row-count estimation via row estimates hints (PG 18+)** — the `pg_get_row_estimate_hints` API is a different mechanism.
+<!-- T9 triaged 2026-07-13: an earlier draft of this skill cited a
+"pg_get_row_estimate_hints (PG 18+)" API as an out-of-scope sibling.
+That API does not exist in the source — verified via
+`git grep pg_get_row_estimate_hints` returning zero matches on
+master.  The claim was a harvester hallucination, now removed.
+If a query-hint mechanism does land in a future PG version, it will
+likely be in the planner's cost/selectivity path, not in
+extended-stats. -->
+
