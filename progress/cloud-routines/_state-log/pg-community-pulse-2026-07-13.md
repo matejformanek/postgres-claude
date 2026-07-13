@@ -1,1 +1,1 @@
-**pg-community-pulse** 2026-07-13 — hackers 12 threads (+8 hon.), CF59 day-13 Monday delta (Total flat 613, Committed +4→156 resuming working-week baseline, NR −5→302, WoA 35→34 blip unwound; CF61 +5→48 largest intake yet), planet 6 posts + 1 note (PR #<pending>).
+**pg-community-pulse** 2026-07-13 — hackers 12 threads (+8 hon.), CF59 day-13 Monday delta (Total flat 613, Committed +4→156 resuming working-week baseline, NR −5→302, WoA 35→34 blip unwound; CF61 +5→48 largest intake yet), planet 6 posts + 1 note (PR #599).
