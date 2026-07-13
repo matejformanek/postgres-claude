@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-12 — anchor `eed6c0d33e09` → `1c4b1de88855`; 3 commits (all tree-wide mechanical: pg_always_inline rename + 2 loop-var sweeps); 40 docs queued for audit (60 stale of 109 impacted, 20 already-pending, 49 zero-drift not queued); catversion held 202607091 (PR #588).
