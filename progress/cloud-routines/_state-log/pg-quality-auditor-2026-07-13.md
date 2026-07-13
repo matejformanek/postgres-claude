@@ -1,1 +1,1 @@
-**pg-quality-auditor** 2026-07-13 — ISSUE mode: drained utils register 18 line-cited rows @eed6c0d33e09 (16 still-present, 2 re-anchored: tsvector_op.c:926→:376,380 add_pos clamp, ri_triggers.c:288→def:4010/decl:295); refilled issues.md from utils-adt (18 rows) (PR #TBD).
+**pg-quality-auditor** 2026-07-13 — ISSUE mode: drained utils register 18 line-cited rows @eed6c0d33e09 (16 still-present, 2 re-anchored: tsvector_op.c:926→:376,380 add_pos clamp, ri_triggers.c:288→def:4010/decl:295); refilled issues.md from utils-adt (18 rows) (PR #596).
