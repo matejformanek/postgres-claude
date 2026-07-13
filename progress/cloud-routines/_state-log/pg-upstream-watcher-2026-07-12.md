@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-07-12 — Quiet ~32h window: 0 new master commits (HEAD `1c4b1de88855` already covered 07-11; anchor `eed6c0d33e09` unchanged); buildfarm 0 non-flake (only chronic Windows animals drongo all-branch XversionUpgrade + unicorn pg_amcheckCheck). Currency records only. exit_reason: queue-empty (PR #593).
