@@ -125,8 +125,9 @@ None of these were flagged by harvester recently; they're nice-to-haves.
 
 ## Findings that need triage
 
-**Triage status as of 2026-07-13:** T4/T8/T9/T10 (the source-verifiable ones) were investigated inline; T1/T2/T3/T5/T6/T7 remain open as subjective or audit-heavy work items.
+**Triage status as of 2026-07-13:** T1/T4/T8/T9/T10 investigated inline; T2/T3/T5/T6/T7 remain open as subjective or audit-heavy work items.
 
+- **T1** — REVIEWED. Depth-2 threshold sampled across 5 scenarios (`add-new-wal-record`, `add-new-buffer-strategy`, `add-new-data-type`, `add-new-index-am`, `fix-memory-leak`). Each produced 0-1 sibling with 2-3 shared files; none noisy, none obviously missing real patterns. Threshold holds for the current corpus size (161 idioms). Revisit if idiom count grows past ~250.
 - **T4** — real defect, extractor-level; anchored a manual "Definition sites" section into `spi.md` as a durable workaround. Root cause fix (extractor v3) deferred.
 - **T8** — real defect, skill claim was WRONG. Fixed in `wire-protocol/SKILL.md`: protocol 3.2 adds longer cancel keys (per commit `a460251f0a1`), NOT a `_pq_.report` ParameterStatus subscription mechanism (which doesn't exist in source).
 - **T9** — real defect, skill claim was WRONG. `pg_get_row_estimate_hints` API does not exist in source (`git grep` confirms zero matches). Removed the misleading out-of-scope reference from `extended-statistics/SKILL.md`.
