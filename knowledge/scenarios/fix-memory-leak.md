@@ -158,6 +158,30 @@ already structures.
    ambiguous: a flat RSS may mean "leak fixed" OR "leak's code
    path never runs".
 
+   **Step 0.5 — Verify target-suite health at parent pin BEFORE
+   assuming R13 phase-end gate = target suite (F37).** If the
+   target commit touches a contrib module (postgres_fdw, dblink,
+   pg_stat_statements, etc.) OR a test suite that isn't in the
+   default `--suite regress` set, run that suite at parent pin
+   BLANK (no fix applied) and confirm it's green on the local
+   environment. If red — e.g. a pre-existing macOS + cassert +
+   MALLOC_PERTURB_ crash unrelated to the target code path —
+   plan the phase-end R13 gate around **core regress + isolation
+   + the RSS canary** instead of the target suite. Record the
+   suite's pre-existing failure explicitly in `baseline.md` so
+   the R4 phase-end check knows what to skip and why.
+
+   Reference: `planning/fdw_directmodify_leak/comparison.md` §F37
+   — the contrib/postgres_fdw regress suite crashed at parent pin
+   `d98cefe1143` on macOS regardless of the fix. Reverting the
+   fix reproduced the crash identically. The Phase 1 R13 gate
+   used regress + isolation + the 20 k-iteration RSS canary
+   instead of `--suite postgres_fdw`. Phase 2 (regress test row
+   additions) was skipped because a red baseline gives no way
+   to know if new rows pass. Without Step 0.5 the trilogy is
+   stuck debugging its own fix when the real failure is
+   environmental.
+
 2. **Phase 1 — Triage + target pick.** With the harness live,
    pick the bug to fix. If the user named one, validate it
    reproduces. If "find leaks" was the brief, rank candidates by

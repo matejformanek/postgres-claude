@@ -190,6 +190,109 @@ MemoryContextRegisterResetCallback(my_ctx, cb);
 Callbacks fire in reverse registration order; child-context callbacks fire
 before parent callbacks during a tree reset [from-readme] (`README:158-161`).
 
+### Idioms for callback-based ownership (F34+F35+F36)
+
+Three sub-idioms come out of the `fdw_directmodify_leak` calibration
+comparison against Tom Lane's `232d8caeaaa` (see
+`planning/fdw_directmodify_leak/comparison.md` §"Structural comparison").
+They apply whenever a reset callback is what makes a resource leak-safe
+across executor tear-down paths.
+
+**F34 — embed the `MemoryContextCallback` struct in the state struct.**
+Add `MemoryContextCallback foo_cb;` as a *field* of the surrounding
+`FooState` struct rather than palloc'ing it separately on the target
+context. The callback struct lives in the same palloc block as its
+state, no extra allocation and no separate ownership question.
+
+```c
+/* good — embedded */
+typedef struct PgFdwDirectModifyState
+{
+    ...
+    MemoryContextCallback result_cb;   /* ensures result gets freed */
+    PGresult   *result;
+    ...
+} PgFdwDirectModifyState;
+
+state->result_cb.func = ...;
+state->result_cb.arg  = ...;
+MemoryContextRegisterResetCallback(CurrentMemoryContext,
+                                   &state->result_cb);
+
+/* worse — separate palloc */
+MemoryContextCallback *cb = MemoryContextAlloc(target_cxt,
+                                               sizeof(*cb));
+cb->func = ...;
+cb->arg  = ...;
+MemoryContextRegisterResetCallback(target_cxt, cb);
+```
+
+Tom's `232d8caeaaa` does the embed. Our blind fix chose the separate
+palloc; both are correct, embed is cleaner.
+
+**F35 — cast well-known cleanup functions directly.** If the cleanup
+is *exactly* one call to a well-known library / libpq / OS routine
+(`PQclear`, `pfree`, `PQfinish`, `close`, `unlink`, `hash_destroy`,
+etc.), cast that function directly to `MemoryContextCallbackFunction`
+and use the resource handle as `arg`. Do NOT write a wrapper unless
+the cleanup needs additional bookkeeping the callback dispatcher can't
+provide.
+
+```c
+/* good — direct cast, PGresult value as arg */
+state->result_cb.func = (MemoryContextCallbackFunction) PQclear;
+state->result_cb.arg  = NULL;      /* PQclear(NULL) is a documented no-op */
+...
+state->result_cb.arg  = new_pgresult;    /* arm */
+...
+state->result_cb.arg  = NULL;      /* disarm on happy-path release */
+
+/* worse — wrapper + pointer-to-pointer indirection */
+static void my_pgresult_cb(void *arg)
+{
+    PGresult **resultp = (PGresult **) arg;
+    if (*resultp) { PQclear(*resultp); *resultp = NULL; }
+}
+state->result_cb.func = my_pgresult_cb;
+state->result_cb.arg  = &state->result;
+```
+
+The direct-cast idiom relies on the cleanup's well-known documented
+behavior for the NULL / disarmed case (`PQclear(NULL)` is a no-op,
+`pfree(NULL)` segfaults, etc.). Verify before adopting.
+
+**F36 — single owner via callback.** Once a callback owns a resource,
+every other release path in the code should either detach the resource
+first or delegate cleanup to the callback. Do NOT let two owners race
+for the free.
+
+```c
+/* good — single owner throughout */
+state->result_cb.arg = pgresult;     /* callback now owns it */
+
+if (bad_status)
+    /* Tell the reporter to NOT clear -- callback owns */
+    pgfdw_report_error(ERROR, pgresult, conn, false, sql);
+
+/* On happy path: disarm the callback, then release */
+state->result_cb.arg = NULL;
+PQclear(pgresult);
+state->result = NULL;
+
+/* worse — two-owner explicit handoff */
+/* Detach from callback's ownership before letting reporter clear */
+state->result = NULL;
+pgfdw_report_error(ERROR, pgresult, conn, true, sql);   /* clear=true */
+```
+
+The single-owner shape is what makes the callback approach conceptually
+clean (F34). If you find yourself doing two-owner handoff dances, you
+are probably not getting the full benefit of the callback abstraction.
+
+Tom's `232d8caeaaa` uses `clear=false` at the report site (single owner);
+our blind fix used `clear=true` with detach-then-clear (two-owner
+handoff). Both are correct; Tom's is the natural fit.
+
 ## Common mistakes (codebase-confirmed)
 
 1. **Allocating into a long-lived context when you meant a short-lived one.**

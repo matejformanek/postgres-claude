@@ -318,6 +318,37 @@ Length scales with the feature: ~400 lines for a small change,
      grep-pass would have shown 3 producer sites and one mixed
      copy-vs-borrow site, surfacing the wrong invariant at plan
      time rather than at R4 phase-end check time.
+   - **Callback-based approach detail (L7)**. If the recommended
+     approach uses a memory-context reset callback (approach C
+     under L6, or approach E when the invariant is a per-scan
+     resource release), the plan MUST name three
+     implementation-level design choices explicitly rather than
+     leaving them for Phase 3 discovery:
+     1. **Callback storage location** — embed
+        `MemoryContextCallback` as a *field* of the surrounding
+        state struct (F34 preferred) OR palloc separately on the
+        target context (only if the state struct is off-limits).
+        The embed choice removes a palloc site and the "who owns
+        the callback struct?" question.
+     2. **Callback function shape** — cast a well-known cleanup
+        function (`PQclear`, `pfree`, `PQfinish`, `close`,
+        `hash_destroy`, etc.) directly to
+        `MemoryContextCallbackFunction` (F35 preferred) OR write a
+        wrapper only if the cleanup needs bookkeeping the
+        dispatcher can't provide (pointer-to-pointer indirection,
+        conditional logic, multi-step release).
+     3. **Ownership semantics** — single-owner via callback (F36
+        preferred): once armed, the callback owns; every other
+        release path detaches (`cb.arg = NULL`) or delegates.
+        Two-owner explicit handoff is correct but heavier.
+     Anchored in `planning/fdw_directmodify_leak/comparison.md`
+     §F34+F35+F36 — L6 correctly flagged approach E on that run,
+     but the blind plan chose the heavier variant on all three
+     details, adding 25-30 LOC over Tom's actual fix without
+     changing the design category. Naming the three choices at
+     plan time closes that detail-vs-category gap. See
+     `knowledge/idioms/memory-contexts.md` §"Idioms for
+     callback-based ownership" for concrete before/after code.
 
 8. **Phased implementation** (the meat). Break into 3-8 phases (the
    old 3-6 range was tight for comprehensive features per R15).
