@@ -230,6 +230,25 @@ MemoryContextRegisterResetCallback(target_cxt, cb);
 Tom's `232d8caeaaa` does the embed. Our blind fix chose the separate
 palloc; both are correct, embed is cleaner.
 
+**F38 (F34 caveat) — public-header state structs use separate
+palloc.** F34's embed recommendation assumes the state struct is
+*file-local*. When the state struct is defined in a public header
+(e.g. `src/include/replication/pgoutput.h`'s `PGOutputData`), adding
+a `MemoryContextCallback` field is an ABI change for any consumer
+that mirrors the struct layout. In that case prefer separate
+`palloc0(sizeof(MemoryContextCallback))` on the current memory
+context — no header touch, no ABI break.
+
+Rule of thumb: `grep -R 'struct FooState' src/include/` — if the
+struct is in the include tree, use separate palloc; if it's file-local
+inside a `.c` under `src/backend/` or `contrib/`, embed.
+
+Sawada's `b46efe90482` (pgoutput UAF) uses separate palloc for
+exactly this reason — `PGOutputData` is in `pgoutput.h`. Our blind
+pgoutput_uaf fix embedded per raw F34 and inflated the header +
+diff (see `planning/pgoutput_uaf/comparison.md` §F38 for the
+before/after).
+
 **F35 — cast well-known cleanup functions directly.** If the cleanup
 is *exactly* one call to a well-known library / libpq / OS routine
 (`PQclear`, `pfree`, `PQfinish`, `close`, `unlink`, `hash_destroy`,
@@ -292,6 +311,69 @@ are probably not getting the full benefit of the callback abstraction.
 Tom's `232d8caeaaa` uses `clear=false` at the report site (single owner);
 our blind fix used `clear=true` with detach-then-clear (two-owner
 handoff). Both are correct; Tom's is the natural fit.
+
+**F39 (F36 refinement) — share the implementation with the
+pre-existing cleanup path.** When the reset callback is added as an
+error-path safety net for a resource that already has a
+pre-existing cleanup path (a shutdown function, a
+`SPI_finish`-style close, an `ExecEnd*` finalizer), the pre-existing
+path should be **refactored to call the same wrapper function** the
+callback registers. Single source of truth for the cleanup logic;
+no chance of the two paths drifting apart.
+
+```c
+/* good — pre-existing shutdown shares the callback body */
+static void
+pgoutput_memory_context_reset(void *arg)
+{
+    if (RelationSyncCache != NULL)
+    {
+        hash_destroy(RelationSyncCache);
+        RelationSyncCache = NULL;
+    }
+}
+
+static void
+pgoutput_shutdown(LogicalDecodingContext *ctx)
+{
+    /* Same cleanup as the reset callback; identical logic. */
+    pgoutput_memory_context_reset(NULL);
+}
+
+/* worse — two copies of the same cleanup logic */
+static void
+pgoutput_relsync_reset_callback(void *arg)
+{
+    if (RelationSyncCache != NULL)
+    {
+        hash_destroy(RelationSyncCache);
+        RelationSyncCache = NULL;
+    }
+}
+
+static void
+pgoutput_shutdown(LogicalDecodingContext *ctx)
+{
+    /* Duplicated body -- drift risk if one changes and the other doesn't. */
+    if (RelationSyncCache)
+    {
+        hash_destroy(RelationSyncCache);
+        RelationSyncCache = NULL;
+    }
+}
+```
+
+Sawada's `b46efe90482` (pgoutput UAF) refactors
+`pgoutput_shutdown` into a one-line call to
+`pgoutput_memory_context_reset(NULL)`. Our blind fix kept
+`pgoutput_shutdown` unchanged and duplicated the code inside the
+callback (belt-and-suspenders — safe but with drift risk). See
+`planning/pgoutput_uaf/comparison.md` §F39.
+
+The single-owner property (F36) is a runtime property (only one
+path fires per invocation). The share-the-implementation property
+(F39) is a code-quality property (only one body of code needs
+maintenance). Both matter.
 
 ## Common mistakes (codebase-confirmed)
 
