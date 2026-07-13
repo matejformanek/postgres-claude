@@ -123,6 +123,41 @@ already structures.
    **Phase-end check:** the canonical reproducer shows the
    expected signal magnitude on the canonical commit's parent.
 
+   **Step 0.4 — Verify reproducer plan shape before measuring
+   (F31).** Before running the reproducer as a leak canary,
+   `EXPLAIN (COSTS OFF)` the query and confirm the planner picks
+   the plan node the commit message names (e.g. `hashed SubPlan
+   1`, `Hash Semi Join`, `HashAggregate`, `Parallel Bitmap Heap
+   Scan`, `Merge Right Anti Join`, etc.). The planner is free to
+   pull up an `IN`-subquery into a semijoin, to promote a
+   sequential scan to a parallel one, or to demote a hash-agg to
+   a sort-agg based on `work_mem` and stats — any of which
+   silently exercises a code path different from the one the
+   leak lives in. If EXPLAIN shows a different shape than
+   expected, iterate the query until the target shape appears:
+
+   - Blocking pull-up: wrap the subquery in an `OR
+     (always-false-LHS)`, use a scalar context, add a `LIMIT`
+     that the planner can't push down, disable the specific
+     join path (`SET enable_hashjoin = off`), or reference an
+     outer column to force correlation.
+   - Forcing serial: `SET max_parallel_workers_per_gather = 0`
+     when leader-side RSS observability matters (per-worker RSS
+     is invisible to the leader's `ps -o rss=`).
+   - Forcing a specific agg / join / scan: `SET enable_<node> =
+     off` for the unwanted node type; pick sizes / stats such
+     that the cost model favors the target.
+
+   Cite the successful shape verbatim in `baseline.md` so a
+   later regression that changes planner defaults is caught by
+   a re-verify. Reference: `planning/nodesubplan_leak/baseline.md`
+   §"Notes on reproducer construction" — it took three EXPLAIN
+   iterations (Hash Semi Join → SubPlan-in-SELECT → hashed
+   SubPlan-under-OR) to land the shape Bug #19040's fix
+   actually addresses. Without Step 0.4 the Phase 0 signal is
+   ambiguous: a flat RSS may mean "leak fixed" OR "leak's code
+   path never runs".
+
 2. **Phase 1 — Triage + target pick.** With the harness live,
    pick the bug to fix. If the user named one, validate it
    reproduces. If "find leaks" was the brief, rank candidates by

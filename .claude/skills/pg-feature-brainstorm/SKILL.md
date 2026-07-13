@@ -263,7 +263,8 @@ Phase 2 work prematurely — stop and hand off.
      when the same change-class would plausibly recur in a future
      brainstorm. If it's truly one-off, just say "no scenario
      matches" without flagging.
-5. **Candidate approaches** (2-3, no more). For each:
+5. **Candidate approaches** (2-3, no more — but see the mandatory
+   **approach E** trigger below). For each:
    - One-paragraph description.
    - **Pros** (2-3 bullets).
    - **Cons / risks** (2-3 bullets).
@@ -314,6 +315,69 @@ Phase 2 work prematurely — stop and hand off.
      `[idioms: lexer-and-grammar, node-types]`.
      If any cited file doesn't exist, flag as a corpus gap to fix
      (don't fake it).
+
+   **Mandatory approach E — "restructure control flow to match
+   the new invariant"** (REQUIRED when the fix targets an
+   *existing function* and that function has **≥3 exit paths**
+   AND the fix introduces a common teardown / setup / invariant
+   step that would need to run at every exit). Enumerate it as a
+   named approach even when your first instinct is to keep the
+   existing shape and paper the invariant on top.
+
+   The classic form: replace N early-return sites with a single
+   `bool result = <default>` (or equivalent accumulator) plus one
+   final exit path, then place the invariant maintenance at that
+   single exit. One reset call instead of N. Similar re-shapings
+   apply for setup steps (goto-cleanup, single-init prologue), for
+   inverting an early-return chain into a `switch/if-else-if`
+   ladder, or for extracting the branchy body into a helper that
+   the caller wraps.
+
+   Reason to enumerate it explicitly: the blind trilogy
+   consistently under-refactors when the fix is "add a reset /
+   cleanup / invariant step". Two data points to date:
+
+   - `planning/jsonpath_leak/comparison.md` §L5 — Tom Lane
+     rewrote every `JsonValueList` caller to the "always copy on
+     Append + inline storage" shape; our fix kept mixed
+     copy/borrow semantics and needed a per-call MemoryContext to
+     absorb the ambiguity. Fewer lines net, cleaner API.
+   - `planning/nodesubplan_leak/comparison.md` §F32 — Tom
+     collapsed six early-return sites in `ExecHashSubPlan` into a
+     single `bool result` + one exit path, then placed the
+     `MemoryContextReset(node->hashtempcxt)` at that single exit
+     (net −16 executable lines). Our fix kept the six branches
+     and placed the reset at entry (net +11 executable lines).
+     Both correct; Tom's cleaner.
+
+   The pattern: when a fix requires an invariant that ties to
+   *every exit path*, the parent code's exit shape was chosen
+   for a world without that invariant. That world no longer
+   exists. Treating the exit shape as fixed is inheriting an
+   assumption the fix has just invalidated. Enumerating approach
+   E forces the brainstorm to notice.
+
+   For approach E, the required sub-bullets are the same as any
+   other candidate — pros, cons, scope, mechanism, coverage,
+   citations — plus one additional bullet:
+
+   - **Refactor shape**: name the target function, the current
+     number of exit paths, the proposed collapsed shape (single
+     `bool` accumulator? goto-cleanup? extracted helper?), and
+     any *behavioural* delta the refactor risks. If the answer
+     is "purely mechanical, no behavioural delta", say so
+     explicitly — that's the low-risk case reviewers will accept.
+     If the refactor DOES change observable behavior beyond the
+     invariant (e.g. changes which of two error messages fires
+     when both apply), flag it as a scope escalation the user
+     must approve.
+
+   If the trigger condition doesn't fire (function has <3 exit
+   paths, or the fix is a wholly new function), say "approach E
+   not applicable — target function has N exit paths" instead
+   of omitting the bullet entirely. That makes the check
+   auditable.
+
 6. **Recommended approach** (1 paragraph). Pick one. Say why. Name
    what would have to be true for the *other* approaches to win
    (so the user can flag if those conditions hold).
@@ -511,6 +575,33 @@ F16 calibration logged this approach as effective.)
    needed. See `planning/jsonpath_leak/comparison.md` §L5. The
    sub-question goes in EVERY approach's "Storage representation"
    field (per §5 of the output template).
+
+   **Adversarial-pass for control-flow shape when adding an
+   every-exit invariant (L6).** Before locking the approach list,
+   run one more adversarial question when the fix targets an
+   existing function: *"Does the target function have ≥3 exit
+   paths, AND does my fix introduce a step that must run at
+   every one? If yes, have I enumerated the 'collapse to single
+   exit + place the invariant there' option as approach E?"*
+   Default failure mode: when the parent code has 6 early-return
+   sites and my fix needs a cleanup call at each of them, the
+   easy path is to put the cleanup at function ENTRY (covers all
+   returns with 1 call) or ADD 6 explicit cleanup calls before
+   each return. Both work; neither considers "what if the 6
+   returns are the wrong shape given the new invariant?" This was
+   the nodesubplan_leak trilogy's miss: our approach put the
+   `MemoryContextReset` at entry; Tom Lane's actual fix
+   `abdeacdb0920` collapsed the six returns into a single
+   `bool result` + one exit path with the reset there (net −16
+   executable lines vs our +11). See
+   `planning/nodesubplan_leak/comparison.md` §F32. Same additive-
+   vs-restructure pattern the jsonpath_leak trilogy already
+   showed — L5 and L6 are two views of the same failure mode
+   (blind trilogy inherits parent shape without questioning).
+   The sub-question fires on the FUNCTION being modified (not on
+   any data structure); the approach E enumeration then goes in
+   §5 of the output template (per the "Mandatory approach E"
+   trigger).
 
 7. **Recommend.** Pick one. **Default to COMPREHENSIVE scope, not
    minimal MVP** (per R15 in pg-implement-discipline.md). If the
