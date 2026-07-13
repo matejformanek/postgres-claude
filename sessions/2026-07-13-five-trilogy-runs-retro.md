@@ -1,13 +1,13 @@
 # Five-run trilogy retro — 2026-07-13
 
 **Session shape:** one continuous interactive session, ~4 hours,
-five back-to-back blind-trilogy calibration runs against known-fixed
+six back-to-back blind-trilogy calibration runs against known-fixed
 historical PG memory-related bugs, plus 5 lesson graduations along
 the way. Every calibration is a data point on the planner-suite's
 ability to blindly reproduce upstream fixes and surface where it
 does/doesn't converge.
 
-## The five runs at a glance
+## The six runs at a glance
 
 | # | Target commit  | Subsystem              | Bug shape                    | Diff size (upstream) | Diff size (ours) | Blind trilogy verdict            |
 |---|----------------|------------------------|------------------------------|---------------------:|-----------------:|----------------------------------|
@@ -16,10 +16,20 @@ does/doesn't converge.
 | 3 | `abdeacdb0920` | executor/TupleHashTable| ownership-boundary API       |             +33/-43 |         +107/-1 | same 2 sites, additive vs restructure |
 | 4 | `232d8caeaaa`  | contrib/postgres_fdw   | PG_TRY-not-enough            |             +35/-27 |         +82/-25 | same category, heavier details    |
 | 5 | `b46efe90482`  | replication/pgoutput   | UAF on retry after error     |              +24/-5 |         +45/-0  | same category, 2 detail divergences |
+| 6 | `1681a70df3d` | access/gin (parallel)   | PortalContext accumulator    |              +12/-0 |         +17/-0  | same 2 O(N) sites + 1 O(1) uniform coverage |
 
-Total planning artifacts across the 5 runs: **~9 000 lines** of
+Total planning artifacts across the 6 runs: **~9 760 lines** of
 baseline / triage / brainstorm / plan / notes / comparison
-markdown, plus ~300 lines of executable C.
+markdown, plus ~320 lines of executable C.
+
+Run #6 was picked from THIS session's earlier "recommended next
+runs" list to validate the trilogy handles a non-callback,
+non-restructure fix without over-firing L6+L7. L6 approach-E
+correctly did NOT fire; L7 sub-block correctly did NOT fire; F30
+grep-pass still delivered its usual value. New F-finding F40
+(scaling vs one-shot leak sites — treat only O(N) sites unless
+O(1) sites carry correctness concerns) landed as a plan-template
+refinement.
 
 ## Lessons graduated during this session
 
@@ -50,6 +60,8 @@ files):
 | F37     | 4 fdw_directmodify | scenario#34 Phase 0 Step 0.5 target-suite health check |
 | F38     | 5 pgoutput_uaf  | F34 refinement — public-header caveat |
 | F39     | 5 pgoutput_uaf  | F36 refinement — share-the-implementation |
+| F40     | 6 gin_parallel_merge_leak | pg-feature-plan §7 sub-note — scaling vs one-shot leak sites |
+| F41     | 6 gin_parallel_merge_leak | notable but not codified (oldCtx declaration scope; follows F40) |
 
 ## Cross-cutting patterns
 
@@ -105,7 +117,7 @@ signal exists before assuming your fix works."
 
 ### Pattern 4 — F30 grep-pass pays off every run
 
-Every one of the 5 runs used the F30 grep-pass in plan §7 to
+Every one of the 6 runs used the F30 grep-pass in plan §7 to
 verify ownership claims. In runs #1 and #4, the grep pass
 identified specific sites the plan needed to acknowledge (jsonpath's
 mixed copy/borrow at line 1741; postgres_fdw's PG_TRY-inside-
@@ -154,17 +166,19 @@ Two systematic gaps still visible after 5 runs:
 Both gaps are further refinements of F34+F36; codified as F38+F39
 this session.
 
-## Branch inventory (all 5 runs' feature branches preserved)
+## Branch inventory (all 6 runs' feature branches preserved)
 
 - `feature_jsonpath_leak` HEAD `e92433395ff` (3 commits above `7724cb9935a`)
 - `feature_pgstat_progress_leak` HEAD `193187edd3a` (1 commit above `a450dd7ad4f`)
 - `feature_nodesubplan_leak` HEAD `d7cfd1daf94` (3 commits above `9016fa7e3bc`)
 - `feature_fdw_directmodify_leak` HEAD `fa4030506f2` (1 commit above `d98cefe1143`)
 - `feature_pgoutput_uaf` HEAD `00db6795dbd` (1 commit above `71540dcdcb2`)
+- `feature_gin_parallel_merge_leak` HEAD `4f17ba1aeae` (1 commit above `e83a8ae4472`)
 
-None pushed upstream. All 5 upstream fixes are already on master
+None pushed upstream. All 6 upstream fixes are already on master
 (`5a2043bf713`, `b20c952ce70`, `abdeacdb0920`, `232d8caeaaa`,
-`b46efe90482`). Branches exist as methodology-calibration artifacts.
+`b46efe90482`, `1681a70df3d68`). Branches exist as
+methodology-calibration artifacts.
 
 ## Skill & scenario deltas landed this session
 
@@ -175,6 +189,10 @@ Meta commits in `postgres-claude/` main:
 - `e190b8f8` — planning docs for fdw_directmodify_leak (run #4)
 - `eb838af6` — **L7 callback-detail sub-block landed** in pg-feature-plan SKILL.md + F34/F35/F36/F37 landed in memory-contexts idiom + scenario#34
 - `eb256e1a` — planning docs for pgoutput_uaf (run #5) + F38/F39 refinements
+- `34106ad9` — this consolidated retro (initially 5-run, updated to 6-run)
+- `379f743c` — planning docs for gin_parallel_merge_leak (run #6) + F40 codification
+- `fdbc1cde` — HANDOFF T4/T8/T9/T10 triage (three skill defects fixed, one verified correct)
+- `a71fdf13` — HANDOFF T1 depth-2 threshold empirically reviewed
 
 Every improvement to a skill or idiom is anchored to at least one
 `planning/*/comparison.md` §-section that motivates it. The
@@ -183,23 +201,29 @@ citation chain — skill → idiom → planning artifact → upstream fix
 
 ## Net assessment
 
-**The blind trilogy is a working methodology.** Five runs across
-five distinct subsystems (utils/adt, utils/activity, executor,
-contrib, replication) all produced semantically correct fixes
-matching the upstream fix's category. Two runs converged
-byte-identically (#2) or line-for-line semantically (#3 phase 2,
-#5 phase 1 approach), and the three that diverged surface
-codifiable lessons rather than one-off mistakes.
+**The blind trilogy is a working methodology.** Six runs across
+six distinct subsystems (utils/adt, utils/activity, executor,
+contrib, replication, access/gin) all produced semantically
+correct fixes matching the upstream fix's category. Two runs
+converged byte-identically (#2) or line-for-line semantically
+(#3 phase 2, #5 phase 1 approach), and the four that diverged
+surface codifiable lessons rather than one-off mistakes.
 
 Each new run either **exercises a codification landed in the
 previous run** (run #5 exercised L7 landed same day; run #4
 exercised L6 landed same day; run #3 predicted F32 that became L6)
-or **surfaces a refinement** (F38 refining F34; F39 refining F36).
+or **surfaces a refinement** (F38 refining F34; F39 refining F36;
+F40 refining the F30 grep-pass to include fire-count categorization).
+Run #6 in particular validated that the trilogy correctly
+IGNORES L6+L7 triggers on inappropriate targets — no false
+positives on the non-callback, non-restructure GIN fix.
 
 The methodology's remaining under-fits (systematic over-add of
-LOC, systematic under-refactor of pre-existing cleanup) are now
-well-characterised, with L5+L6+L7 spread across brainstorm and
-plan skills to address them at the right stage.
+LOC, systematic under-refactor of pre-existing cleanup, uniform
+coverage of scaling AND one-shot leak sites) are now
+well-characterised, with L5+L6+L7 + F30+F31+F34+F35+F36+F37+F38+F39+F40
+spread across brainstorm, plan, idioms, and scenario skills to
+address them at the right stage.
 
 **Recommended next runs (when time permits):**
 - A run that stresses F38 (public-header state struct + callback)
