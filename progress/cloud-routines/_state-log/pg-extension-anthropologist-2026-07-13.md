@@ -1,0 +1,1 @@
+**pg-extension-anthropologist** 2026-07-13 — 3 FDW-divergence ideologies (oracle_fdw OCI cross-header firewall, ogr_fdw GDAL-library-as-server + schema autodiscovery, pgrocks-fdw local-RocksDB-via-bgworker+POSIX-shmem inverting the FDW remote premise) → knowledge/ideologies/ now 139 docs (PR #<n>).
