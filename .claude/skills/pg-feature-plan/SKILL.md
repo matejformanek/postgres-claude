@@ -318,6 +318,24 @@ Length scales with the feature: ~400 lines for a small change,
      grep-pass would have shown 3 producer sites and one mixed
      copy-vs-borrow site, surfacing the wrong invariant at plan
      time rather than at R4 phase-end check time.
+
+     **F40 — categorize each leak site by fire-count class.** For
+     every site the grep-pass surfaces, tag it as **O(N) scaling**
+     (fires N times per operation, N in input size) or **O(1)
+     one-shot** (fires a bounded number of times per operation).
+     The plan should treat only the O(N) sites unless an O(1)
+     site carries an independent correctness concern (e.g. UAF
+     risk, invariant violation). Treating O(1) sites for
+     "uniform coverage" adds LOC without addressing genuine
+     leak-scaling. Anchored in
+     `planning/gin_parallel_merge_leak/comparison.md` §F40 —
+     Vinod's upstream fix `1681a70df3d68` covered only the 2 O(N)
+     `ginEntryInsert` sites inside the merge loop and skipped the
+     1 O(1) final-flush site; our blind fix covered all 3 for
+     uniformity and shipped +5 lines heavier without changing the
+     leak-scaling outcome. Format the categorization inline in the
+     plan §7 grep-pass table:
+     `| site | fire-count | leak-scaling | treat? |`
    - **Callback-based approach detail (L7)**. If the recommended
      approach uses a memory-context reset callback (approach C
      under L6, or approach E when the invariant is a per-scan
