@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-13 — anchor `1c4b1de88855` → `1863452a4bfe`; 2 commits (quiet ~1.5-day window); 0 docs queued for audit (1 impacted — describe.c.md — already `[pending]`, idempotent skip); catversion held 202607091 (PR #<n>).
