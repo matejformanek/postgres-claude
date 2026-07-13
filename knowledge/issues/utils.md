@@ -132,8 +132,8 @@ The function family pg_rewind (A6) extracts via libpq_source — the trust postu
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
 | 2026-06-03 | windowfuncs.c:559 | correctness | maybe | `leadlag_common` signed-integer overflow on `INT32_MIN` — `forward ? offset : -offset` with no guard. `lag(col, -2147483648)` triggers signed-integer UB; likely benign in practice (downstream treats as out-of-frame) but UB by C99 | open | knowledge/files/src/backend/utils/adt/windowfuncs.c.md |
-| 2026-06-03 | tsvector_op.c:926 | correctness | maybe | `tsvector_concat` silently clamps positions at `MAXENTRYPOS-1` instead of erroring — document-length tsvectors yield degenerate result with far positions collapsing | open | knowledge/files/src/backend/utils/adt/tsvector_op.c.md |
-| 2026-06-03 | ri_triggers.c:288 | correctness | maybe | `ri_CompareWithCast` trusts a cast operator for cross-type FK comparison — a buggy user-type cast could silently mis-compare | open | knowledge/files/src/backend/utils/adt/ri_triggers.c.md |
+| 2026-06-03 | tsvector_op.c:376,380 | correctness | maybe | `tsvector_concat` (def :899) silently clamps positions at `MAXENTRYPOS-1` instead of erroring — the actual clamp is in helper `add_pos()`: stop-when-full at `:376` (`WEP_GETPOS(dpos[*clen-1]) != MAXENTRYPOS-1`) + `LIMITPOS` at `:380`, called from concat at :995/:1025/:1029/:1077. Document-length tsvectors yield degenerate result with far positions collapsing | open · triaged 2026-07-13 | knowledge/files/src/backend/utils/adt/tsvector_op.c.md |
+| 2026-06-03 | ri_triggers.c:4010 (decl :295) | correctness | maybe | `ri_CompareWithCast` trusts a cast operator for cross-type FK comparison — a buggy user-type cast could silently mis-compare. Def at `:4010` (`FunctionCall3(&entry->cast_func_finfo,...)`); forward-decl `:295`. (Was cited `:288`, which is now `ri_NullCheck` — re-anchored; per-file doc already read `decl 295, def 4010`.) | open · triaged 2026-07-13 | knowledge/files/src/backend/utils/adt/ri_triggers.c.md |
 
 ### Cache invariants
 
@@ -408,3 +408,71 @@ findings:
 - The injection_point.c lock-free generation protocol is well-commented
   and looks correct; tagged nits are quality-of-impl only.
 
+
+---
+
+## ISSUE-mode triage 2026-07-13 (pg-quality-auditor) — 18 line-cited rows re-verified @eed6c0d33e09
+
+All 18 `[pending]` `utils` rows in `progress/_queues/issues.md` (seeded
+2026-07-12) re-fetched at anchor `eed6c0d33e09` via raw.githubusercontent.
+**16 still-present** (cite exact or ≤1-line drift, left as-is); **2
+re-anchored** (reproducer drifted — pattern intact elsewhere in the file).
+
+Still-present (cite verified exact unless noted):
+
+- `genfile.c:53-92` trust-boundary — `convert_and_check_filename` + the
+  `has_privs_of_role(...ROLE_PG_READ_SERVER_FILES)` bypass at `:66`; intact.
+- `genfile.c:65` path-traversal — `Log_directory` escape block (`:71-82`),
+  `!path_is_prefix_of_path(Log_directory, filename)`; intact.
+- `xml.c:2046,1319` xxe — `xmlSetExternalEntityLoader(xmlPgEntityLoader)` at
+  `:1319` exact; loader def at `:2046` (sig line) / `:2047` (name). No
+  `XML_PARSE_NONET` anywhere; `XML_PARSE_NOENT` set at `:1886`. Intact.
+- `xml.c:2042` stale-todo — "global XML catalog" comment now at `:2043-2044`
+  (≤2-line drift, within tolerance). Intact.
+- `formatting.c:3907` dos — `result = palloc(mul_size(fmt_len, DCH_MAX_ITEM_SIZ)+1)`
+  exact at `:3907`; no format-length cap. Intact.
+- `formatting.c:6236` correctness — `NUM_TOCHAR_prepare` silent
+  `PG_RETURN_TEXT_P(cstring_to_text(""))` exact at `:6236`. Intact.
+- `encode.c:282-306` dos — `hex_decode_safe_scalar` scalar loop, no
+  `CHECK_FOR_INTERRUPTS`; grep confirms none in the whole file. A SIMD
+  helper path (`hex_decode_simd_helper` :319 / `hex_decode_safe` :351) was
+  added but also lacks an interrupt check. Pattern intact.
+- `tsvector.c:461` dos — `if (nentries < 0 || nentries > (MaxAllocSize / sizeof(WordEntry)))`
+  exact at `:461`. Intact.
+- `tsquery.c:1240` dos — `if (size > (MaxAllocSize / sizeof(QueryItem)))`
+  exact at `:1240`. Intact.
+- `multirangetypes.c:352` dos — `ranges = palloc_array(RangeType *, range_count)`
+  exact at `:352`, pre-alloc from 4-byte wire count at `:350`. Intact.
+- `pg_dependencies.c (+ mvdistinct.c:310, dependencies.c:557)` trust-boundary —
+  `Assert((k >= 2) && (k <= STATS_MAX_DIMENSIONS))` exact at
+  `statistics/dependencies.c:557`; `Assert((item->nattributes >= 2) && ...)`
+  exact at `statistics/mvdistinct.c:310`. Assert-only validation (no runtime
+  hard check) intact.
+- `ruleutils.c:5900-5965` info-disclosure — `make_viewdef` (now `:5903`) emits
+  only `get_query_def(...)` + `;`; omits WITH CHECK OPTION / security_barrier /
+  security_invoker / ACL. Range still bounds the function. Intact.
+- `name.c:57 vs :90` wire-protocol — `namein` truncate at `:57-58`
+  (`pg_mbcliplen`); `namerecv` `ERRCODE_NAME_TOO_LONG` at `:90-92`. Both exact.
+- `numutils.c:947 vs :983` wire-protocol — `uint32in_subr` minus-sign
+  backwards-compat comment at `:947`; `uint64in_subr` def `:984` (register `:983`
+  = the `uint64` return-type line, ≤1-line drift) with no minus-sign path. Intact.
+- `expandeddatum.c:88-145` undocumented-invariant — `MakeExpandedObjectReadOnlyInternal`
+  `:95`, `TransferExpandedObject` `:118`, `DeleteExpandedObject` `:136`; range
+  bounds all three. Intact.
+- `windowfuncs.c:559` correctness — `(forward ? offset : -offset)` exact at
+  `:559`; `-offset` unary-negation UB on `INT32_MIN`, no guard. Intact.
+
+Re-anchored (drift-fixed this run, status stays `open`):
+
+- `tsvector_op.c:926 → :376,380` — cite pointed at the maxpos scan inside
+  `tsvector_concat`; the actual `MAXENTRYPOS-1` clamp is in helper `add_pos()`
+  (`:376` stop-when-full, `:380` `LIMITPOS`). Register row + per-file doc inline
+  tag re-anchored.
+- `ri_triggers.c:288 → :4010 (decl :295)` — `:288` is now `ri_NullCheck`;
+  `ri_CompareWithCast` def moved to `:4010`, forward-decl `:295`. Register row
+  re-anchored. Per-file doc already read `decl 295, def 4010` (register was
+  lagging the per-file doc, not vice-versa).
+
+Net: 0 upstream fixes (no `landed`), 2 re-anchors, 16 still-present. The
+`utils` line-cited pending register is now drained; `issues.md` refilled from
+the `catalog` register (next security-relevant backend register).

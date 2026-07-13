@@ -175,21 +175,50 @@ psql register fully drained this run (21 rows triaged @54cd6fc83176: 19 still-pr
 privilege-default (`acl.c`), and binary-protocol DoS (`*recv`) clusters. Rows dated
 2026-06, past the 30-day staleness threshold.
 
-[pending] utils.md genfile.c:53-92 | trust-boundary/likely | seeded=2026-07-12
-[pending] utils.md genfile.c:65 | path-traversal/likely | seeded=2026-07-12
-[pending] utils.md xml.c:2046,1319 | xxe/likely | seeded=2026-07-12
-[pending] utils.md xml.c:2042 | stale-todo/nit | seeded=2026-07-12
-[pending] utils.md formatting.c:3907 | dos/likely | seeded=2026-07-12
-[pending] utils.md formatting.c:6236 | correctness/maybe | seeded=2026-07-12
-[pending] utils.md encode.c:282-306 | dos/likely | seeded=2026-07-12
-[pending] utils.md tsvector.c:461 | dos/maybe | seeded=2026-07-12
-[pending] utils.md tsquery.c:1240 | dos/maybe | seeded=2026-07-12
-[pending] utils.md multirangetypes.c:352 | dos/maybe | seeded=2026-07-12
-[pending] utils.md pg_dependencies.c (+ statext/mvdistinct.c:310, dependencies.c:557) | trust-boundary/maybe | seeded=2026-07-12
-[pending] utils.md ruleutils.c:5900-5965 | info-disclosure/maybe | seeded=2026-07-12
-[pending] utils.md name.c:57 vs :90 | wire-protocol/maybe | seeded=2026-07-12
-[pending] utils.md numutils.c:947 vs :983 | wire-protocol/maybe | seeded=2026-07-12
-[pending] utils.md expandeddatum.c:88-145 | undocumented-invariant/maybe | seeded=2026-07-12
-[pending] utils.md windowfuncs.c:559 | correctness/maybe | seeded=2026-07-12
-[pending] utils.md tsvector_op.c:926 | correctness/maybe | seeded=2026-07-12
-[pending] utils.md ri_triggers.c:288 | correctness/maybe | seeded=2026-07-12
+[done:2026-07-13] utils.md genfile.c:53-92 | trust-boundary/likely | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md genfile.c:65 | path-traversal/likely | seeded=2026-07-12 | still-present@eed6c0d33e09 (Log_directory escape :71-82)
+[done:2026-07-13] utils.md xml.c:2046,1319 | xxe/likely | seeded=2026-07-12 | still-present@eed6c0d33e09 (loader :2046/setter :1319 exact; no XML_PARSE_NONET)
+[done:2026-07-13] utils.md xml.c:2042 | stale-todo/nit | seeded=2026-07-12 | still-present@eed6c0d33e09 (comment @:2043-2044, ≤2-line drift)
+[done:2026-07-13] utils.md formatting.c:3907 | dos/likely | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md formatting.c:6236 | correctness/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md encode.c:282-306 | dos/likely | seeded=2026-07-12 | still-present@eed6c0d33e09 (SIMD path added, also no CFI)
+[done:2026-07-13] utils.md tsvector.c:461 | dos/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md tsquery.c:1240 | dos/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md multirangetypes.c:352 | dos/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md pg_dependencies.c (+ statext/mvdistinct.c:310, dependencies.c:557) | trust-boundary/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09 (dependencies.c:557 + mvdistinct.c:310 Assert exact)
+[done:2026-07-13] utils.md ruleutils.c:5900-5965 | info-disclosure/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09 (make_viewdef @:5903)
+[done:2026-07-13] utils.md name.c:57 vs :90 | wire-protocol/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md numutils.c:947 vs :983 | wire-protocol/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09 (:983→def :984, ≤1-line)
+[done:2026-07-13] utils.md expandeddatum.c:88-145 | undocumented-invariant/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md windowfuncs.c:559 | correctness/maybe | seeded=2026-07-12 | still-present@eed6c0d33e09
+[done:2026-07-13] utils.md tsvector_op.c:926 | correctness/maybe | seeded=2026-07-12 | drifted@eed6c0d33e09 (→:376,380 add_pos clamp; :926 is maxpos scan; register+per-file doc re-anchored)
+[done:2026-07-13] utils.md ri_triggers.c:288 | correctness/maybe | seeded=2026-07-12 | drifted@eed6c0d33e09 (→def :4010 decl :295; :288 now ri_NullCheck; register re-anchored, per-file doc already correct)
+
+## Refill 2026-07-13 (pg-quality-auditor) — utils-adt register, 18 line-cited open rows
+
+utils register (utils.md) line-cited pending drained this run (18 rows triaged
+@eed6c0d33e09: 16 still-present, 2 re-anchored — tsvector_op.c:926→:376,380
+add_pos clamp, ri_triggers.c:288→def:4010/decl:295). Next in the recipe's
+register list: `utils-adt` (src/backend/utils/adt scalar/basic-types register,
+seeded by pg-file-backfiller) — finer per-function cites, rows dated
+2026-06-03/09/16, all past the 30-day staleness threshold. (Cross-check: its
+ri_triggers row independently reads :295,4010, confirming today's re-anchor.)
+
+[pending] utils-adt.md bool.c:44-92 | undocumented-invariant/nit | seeded=2026-07-13
+[pending] utils-adt.md name.c:338-342 | undocumented-invariant/nit | seeded=2026-07-13
+[pending] utils-adt.md enum.c:135-141 | undocumented-invariant/nit | seeded=2026-07-13
+[pending] utils-adt.md cash.c:191,407 | undocumented-invariant/nit | seeded=2026-07-13
+[pending] utils-adt.md cash.c:226,240-241 | stale-todo/nit | seeded=2026-07-13
+[pending] utils-adt.md pg_lsn.c:272 | undocumented-invariant/maybe | seeded=2026-07-13
+[pending] utils-adt.md uuid.c:550 | question/nit | seeded=2026-07-13
+[pending] utils-adt.md encode.c:644-658 | question/nit | seeded=2026-07-13
+[pending] utils-adt.md encode.c:174,412,834 | undocumented-invariant/maybe | seeded=2026-07-13
+[pending] utils-adt.md ascii.c:92 | undocumented-invariant/maybe | seeded=2026-07-13
+[pending] utils-adt.md ascii.c:187 | question/nit | seeded=2026-07-13
+[pending] utils-adt.md pg_locale_builtin.c:293-295 | info-disclosure/nit | seeded=2026-07-13
+[pending] utils-adt.md pg_locale_builtin.c:285-290 | correctness/nit | seeded=2026-07-13
+[pending] utils-adt.md ri_triggers.c:2185 | injection/nit | seeded=2026-07-13
+[pending] utils-adt.md ri_triggers.c:1004 | undocumented-invariant/nit | seeded=2026-07-13
+[pending] utils-adt.md ri_triggers.c:295,4010 | correctness/maybe | seeded=2026-07-13
+[pending] utils-adt.md xml.c:2042 | stale-todo/nit | seeded=2026-07-13
+[pending] utils-adt.md xml.c:4449-4451 | correctness/nit | seeded=2026-07-13
