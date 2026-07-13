@@ -236,7 +236,12 @@ def _first_heading(text: str) -> str:
 
 
 def resolve_keyword_anchors(keywords: str, scenarios, idioms):
-    """Return (scenario_hits, idiom_hits, source_file_hits) — string sets."""
+    """Return (scenario_hits, idiom_hits, source_file_hits) — string sets.
+
+    Hit if any keyword appears in the slug or the title of a scenario / idiom.
+    Scoring is done separately by past_features_for() for planning / session
+    hits, where the raw substring-match count IS the weight.
+    """
     words = [w.lower() for w in re.findall(r"\w+", keywords) if len(w) >= 3]
     if not words:
         return set(), set(), set()
@@ -249,6 +254,30 @@ def resolve_keyword_anchors(keywords: str, scenarios, idioms):
     id_hits = {slug for slug in idioms if hit_count(slug, idioms[slug]["title"]) > 0}
     # File hits: leave to targeted grep of source paths — coarse for now
     return sc_hits, id_hits, set()
+
+
+def score_keyword_relevance(slug: str, title: str, words: list[str]) -> int:
+    """Weight matches by structural location — slug > title > filename.
+
+    Returns a relevance score:
+      +5 per keyword appearing in slug (highest signal — slug names are
+                                        curated per-doc)
+      +2 per keyword appearing in title (medium — often a fuller phrasing)
+      +0 for tie-breaking; caller adds file-overlap weight separately
+
+    Anchored in HANDOFF T5 (2026-07-13 triage): coarse substring-match was
+    producing session hits with score 1 for tangential mentions.  Structural
+    weighting boosts curated matches (slug) over incidental ones (body).
+    """
+    slug_l = slug.lower()
+    title_l = title.lower() if title else ""
+    score = 0
+    for w in words:
+        if w in slug_l:
+            score += 5
+        if w in title_l:
+            score += 2
+    return score
 
 
 # ---------------------------------------------------------------------------
@@ -440,12 +469,26 @@ def past_features_for(files, keywords: list[str]) -> list[dict]:
                 continue
             text_lc = text.lower()
             score = sum(1 for kw in kw_lc if kw in text_lc)
+            # T5 (2026-07-13): weight filename-slug matches heavier than
+            # body matches, so a session whose filename mentions the
+            # keyword outranks one that mentions it once in prose.
+            stem_lc = f.stem.lower()
+            for kw in kw_lc:
+                if kw in stem_lc:
+                    score += 5
             if files:
                 sess_paths = _paths_in(text)
                 common = files & sess_paths
                 if common:
                     score += len(common)
-            if score:
+            # Drop session hits with only tangential mentions (single
+            # body match, no filename match, no file overlap).  Keeps
+            # the "Analogous past features" list focused on genuinely
+            # related sessions rather than every log that name-drops
+            # the keyword once.  Planning hits stay at score >= 1
+            # threshold since they're already curated by directory
+            # structure.
+            if score > 1 or score == 1 and any(kw in stem_lc for kw in kw_lc):
                 hits.append({"kind": "session", "slug": f.stem, "score": score, "evidence": []})
     hits.sort(key=lambda h: -h["score"])
     return hits[:10]
