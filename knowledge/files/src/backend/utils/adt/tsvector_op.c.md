@@ -60,7 +60,10 @@ very large vocabularies, but bounded by per-query memory context.
   `MAXENTRYPOS - 1` instead of erroring. Concatenating
   document-length tsvectors yields a degenerate result where all
   far positions collapse. Documented as expected behavior but is a
-  user footgun. (low)] — `tsvector_op.c:926+`
+  user footgun. (low)] — clamp is in helper `add_pos()`:
+  stop-when-full at `tsvector_op.c:376`, `LIMITPOS` at `:380`
+  (called from `tsvector_concat` def `:899` at `:995/:1025/:1029/:1077`;
+  the maxpos scan is at `:926`).
 - [ISSUE-dos: `ts_stat` builds an in-memory binary tree of
   `StatEntry` (`:46-52`) keyed by lexeme. No tree balancing — worst
   case is a skewed sorted-lexeme input that produces a linear
