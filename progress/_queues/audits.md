@@ -80,7 +80,7 @@ than the periodic 30-day refresh: process them first.
 ## anchor-bump (2026-06-17) — e5f94c4808fe..ab3023ad1e68 (10 commits)
 
 [in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/src/backend/parser/parse_func.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (null-treatment reject for non-window funcs 4e5920e6 + error-message typo ab3023ad; prior [done:d3dfc9b] re-anchors) — AUDIT 2026-06-19: clean, re-anchored to ab3023ad (no line cites; 5 entry points intact)
-[pending] knowledge/files/src/backend/replication/logical/reorderbuffer.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (free speculative-insertion change tuple, f50c329f)
+[in-progress:cloud/pg-quality-auditor/2026-07-14] knowledge/files/src/backend/replication/logical/reorderbuffer.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (free speculative-insertion change tuple, f50c329f) verified=2026-07-14 [drift-fixed: Commit :2882→:2880, ProcessTXN :2212→:2204, Prepare/2PC block −2, Lines 5643→5638]
 [pending] knowledge/files/src/backend/commands/repack.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (concurrent repack: reject leftover toast attribs, e2a8cabc)
 [pending] knowledge/files/src/backend/statistics/extended_stats_funcs.c.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (reject oversized MCV lists in pg_restore_extended_stats, f6e4ec0a)
 [in-progress:cloud/pg-quality-auditor/2026-06-19] knowledge/files/contrib/ltree/ltree.h.md  reason=anchor-bump 2026-06-17:e5f94c4808fe..ab3023ad1e68 (int32 overflow fix in ltree_compare, 3f328049) — AUDIT 2026-06-19: DRIFT fixed (new ltree_compare_distance decl @ltree.h:209 shifted decls +1; ltree_op.c cross-refs re-pinned)
@@ -147,11 +147,11 @@ than the periodic 30-day refresh: process them first.
 
 ## anchor-bump 2026-06-22: 031904048aa2..9a60f295bcb1 (2 commits, pg-anchor-refresh)
 
-[pending] knowledge/files/src/backend/optimizer/plan/analyzejoins.c.md  reason=anchor-bump 2026-06-22:031904048aa2..9a60f295bcb1 (Strip removed-relation references from PlaceHolderVars at join removal, 9a60f295bcb1)
+[in-progress:cloud/pg-quality-auditor/2026-07-14] knowledge/files/src/backend/optimizer/plan/analyzejoins.c.md  reason=anchor-bump 2026-06-22:031904048aa2..9a60f295bcb1 (Strip removed-relation references from PlaceHolderVars at join removal, 9a60f295bcb1) verified=2026-07-14 [drift-fixed: +99 lines, remove_useless_joins 92→95, semijoins 874→974, self-joins 2539→2639, sync-comment 1869→1968]
 
 ## anchor-bump 2026-06-23: 9a60f295bcb1..f0a4f280b4d3 (3 commits, pg-anchor-refresh)
 
-[pending] knowledge/files/src/backend/utils/resowner/resowner.c.md  reason=anchor-bump 2026-06-23:9a60f295bcb1..f0a4f280b4d3 (Fix unsafe order of operations in ResourceOwnerReleaseAll(), ef01ca6dbca5)
+[in-progress:cloud/pg-quality-auditor/2026-07-14] knowledge/files/src/backend/utils/resowner/resowner.c.md  reason=anchor-bump 2026-06-23:9a60f295bcb1..f0a4f280b4d3 (Fix unsafe order of operations in ResourceOwnerReleaseAll(), ef01ca6dbca5) verified=2026-07-14 [drift-fixed: post-338 symbols +10, Lines 1110→1120]
 
 ## anchor-bump 2026-06-24: f0a4f280b4d3..419ce13b7019 (8 commits, pg-anchor-refresh)
 
@@ -186,9 +186,9 @@ than the periodic 30-day refresh: process them first.
 
 ## anchor-bump 2026-06-28: 4abf411e2328..02f699c14163 (18 commits, pg-anchor-refresh)
 
-[pending] knowledge/files/contrib/pg_prewarm/autoprewarm.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (Fix out-of-bounds access in autoprewarm worker, dac36601fd77, Tomas Vondra)
-[pending] knowledge/files/src/backend/commands/copyfrom.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (Reject child partition FDWs in FOR PORTION OF, a40fdf658862, Peter Eisentraut)
-[pending] knowledge/files/src/backend/commands/copyto.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (COPY TO FORMAT JSON: respect column list order, effb923d9dec + pgindent fix 02f699c14163, Andrew Dunstan)
+[in-progress:cloud/pg-quality-auditor/2026-07-14] knowledge/files/contrib/pg_prewarm/autoprewarm.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (Fix out-of-bounds access in autoprewarm worker, dac36601fd77, Tomas Vondra) verified=2026-07-14 [drift-fixed: per-DB loop +10, start_worker 814→824, dump_now 846→856]
+[in-progress:cloud/pg-quality-auditor/2026-07-14] knowledge/files/src/backend/commands/copyfrom.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (Reject child partition FDWs in FOR PORTION OF, a40fdf658862, Peter Eisentraut) verified=2026-07-14 [clean: all 7 fn cites + defines hold, Lines 1996 exact]
+[in-progress:cloud/pg-quality-auditor/2026-07-14] knowledge/files/src/backend/commands/copyto.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (COPY TO FORMAT JSON: respect column list order, effb923d9dec + pgindent fix 02f699c14163, Andrew Dunstan) verified=2026-07-14 [drift-fixed: +4 lines, DoCopyTo 1259→1263, DestReceiver 1727→1731]
 [pending] knowledge/files/src/backend/commands/tablecmds.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (Prevent inherited CHECK constraints from being weakened, 0cd17fdd3c00, Andrew Dunstan + Take into account default_tablespace during MERGE/SPLIT PARTITION(S), cdae794af31b, Alexander Korotkov)
 [pending] knowledge/files/src/backend/executor/execMain.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (Reject child partition FDWs in FOR PORTION OF, a40fdf658862, Peter Eisentraut)
 [pending] knowledge/files/src/backend/executor/execPartition.c.md  reason=anchor-bump 2026-06-28:4abf411e2328..02f699c14163 (Reject child partition FDWs in FOR PORTION OF, a40fdf658862, Peter Eisentraut)
