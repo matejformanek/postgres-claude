@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-07-14 — Appendix-F contrib custom-type + index-opclass family: 9 docs (hstore, ltree, cube, seg, intarray, citext, isn + earthdistance, fuzzystrmatch), docs-distilled 291→300; code-verified @1863452a4bfe; found intarray docs bug (gist__intbig_ops siglen default is 252 not 16) (PR #TBD).
