@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-14 — anchor `1863452a4bfe` → `8f71f64deee6`; 6 commits (Peter Eisentraut ssize_t/const type-hygiene continuation + 1 Michael Paquier recovery TAP); 14 docs queued for audit (5 idempotent-skipped); catversion unchanged; no subsystem ≥5-impacted (PR #TBD).
