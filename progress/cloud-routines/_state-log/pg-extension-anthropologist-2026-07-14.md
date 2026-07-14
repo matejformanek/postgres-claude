@@ -1,0 +1,1 @@
+**pg-extension-anthropologist** 2026-07-14 — 2 new ideologies (sql_firewall = pg_stat_statements-fork query firewall; pg_bigm = bigram-index pg_trgm fork) + 1 enhanced (pgJQ house-format + embedded-DSL-VM framing) → 141 ext docs (PR #pending).

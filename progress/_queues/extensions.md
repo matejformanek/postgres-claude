@@ -561,3 +561,28 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 [done:1e59a08] vidardb/pgrocks-fdw branch=master files=README.md,Makefile,kv_fdw.control,src/kv_fdw.c,src/kv_fdw.h,src/kv_api.h,src/server/kv_storage.cc  # 131★ C/C++; FDW as a LOCAL embedded LSM-tree storage engine (RocksDB / VidarDB) — inverts the FDW "remote" premise entirely (client/server split, shmem+POSIX-mq comms to a storage process). First LSM-storage-via-FDW in the corpus; contrasts cstore_fdw raw-file + hydra columnar.
 # 3 entries processed 2026-07-13 (oracle_fdw, ogr_fdw, pgrocks-fdw — the FDW-divergence-triptych). knowledge/ideologies/ now holds 139 ext docs. [done:placeholder] markers rewritten with the merge SHA by pg-evening-merger.
 # STILL [pending] low-signal dups (unchanged): tensorchord/pgvecto.rs (archived VectorChord ancestor), is_jsonb_valid (173★ ≈pg_jsonschema), psql_bm25s (142★ ≈pg_textsearch). The >100★ topic/name space is now DEEPLY saturated. Next runs: drop the floor to >80, try language:Zig/Nim/Go + created:>2025 cohorts, remaining commercial-RDBMS FDWs (mysql_fdw/oracle_fdw done → EDB mysql_fdw 595★ next, clickhousedb_fdw ≈clickhouse_fdw dup), OR drain the dups. Known-skipped this run (don't re-add): pgsql-ogr-fdw DONE; standing skip list above (poolers/backup-CLIs/parser-libs/forked-distros/thin-AI/MCP-servers).
+
+# --- Refill + process (seeded + processed 2026-07-14 cloud/pg-extension-anthropologist) ---
+# Re-ran the saturated sweep via GitHub MCP search_repositories (topic:postgresql-extension >90 [52 hits],
+# fdw in:name postgres >150, security/firewall/anonymize/mask name/desc >150, gist/gin/opclass/index C >150 [25],
+# language:Zig >50 [1: pgzx DONE], language:Go >150 [0], pgrx Rust >250 created:>2024, scheduler/queue/compression C >200,
+# pg_bigm/pg_bestmatch/pg_analytica by name). Space DEEPLY saturated against knowledge/ideologies/ (139 docs) — nearly
+# every hit already covered or a standing known-skip. THEME this run: three DISTINCT-AXIS extensions the corpus lacked
+# (a query-firewall, an embedded-DSL VM, and a bigram index) — chosen for mechanism divergence, not star count.
+# NOTE: dalibo/postgresql_anonymizer (dynamic-masking, strong candidate) was DROPPED — its GitHub repo is a mirror of the
+# canonical GitLab repo and serves no README.md/anon.control/anon.c on any probed branch (main/master/stable-*/5.0.0);
+# not raw-fetchable. Left as a [pending] backlog candidate IF a future run can reach the GitLab raw host.
+[done:placeholder] uptimejp/sql_firewall branch=master files=sql_firewall.c,sql_firewall.control,sql_firewall--0.8.sql,Makefile  # 2026-07-14; 176★ C. Query FIREWALL = a near-verbatim FORK of contrib/pg_stat_statements repurposed as an ENFORCEMENT point: the pgss query-jumble/queryid becomes an allow/deny key against a learned per-(userid,queryid) allowlist. Sharpest divergence: enforcement is POST-execution — the block is ereport(ERROR) inside pgss_store at ExecutorEnd/post-ProcessUtility, so the statement already ran (SELECT rows already streamed) and the firewall leans on xact abort to undo. LRU eviction #ifdef NOT_USED'd out (full allowlist refuses to learn, not silently drops); ruleset is a node-local flat file, never WAL-logged/replicated; ABI-frozen ~PG 9.5 (LWLockAssign, old hook sigs). README/META/test paths all 404 (repo ships only the .c/.control/Makefile + --0.8.sql). → knowledge/ideologies/sql_firewall.md (360 lines, ~68 cites)
+[done:placeholder] pgbigm/pg_bigm branch=master files=README.md,bigm_gin.c,bigm_op.c,bigm.h,pg_bigm--1.2.sql,pg_bigm.control,docs/pg_bigm_en.md,Makefile  # 2026-07-14; 149★ C. A controlled FORK of core contrib/pg_trgm that drops the n-gram size 3→2 and REMOVES multibyte hashing — each bigram is stored as a variable-byte (1–8B) text key preserving whole multibyte chars verbatim, which keeps short + CJK/Japanese LIKE '%…%' index-eligible where trigram degrades. Stays inside core's GIN AM (GIN-only, LIKE-only) but layers: a recheck-skipping exactness proof for provably-exact single-bigram queries, a single-char pmatch partial-match path w/ bespoke first-char comparator, GUCs (enable_recheck/gin_key_limit/similarity_limit), and a GIN pending-list introspection fn core doesn't expose. MUST-contrast [[contrib-pg_trgm]]. → knowledge/ideologies/pg_bigm.md (402 lines, ~92 cites)
+# ENHANCED (not new): Florents-Tselai/pgJQ knowledge/ideologies/pgJQ.md — pgJQ was ALREADY covered from a prior session.
+# This run re-fetched (main; pgjq.c/pgjq.control/sql/pgjq--0.1.0.sql/Makefile/README.md/test/sql/basic.sql @2026-07-14),
+# converted all links from full-path [[knowledge/...]] to bare-basename house format, added the "embed a foreign query
+# DSL + its bytecode VM" cluster framing ([[plv8]]/[[pljava]]/[[pldotnet]]/[[pglite-fusion]] contrast), and added two
+# newly-verified divergences: per-call recompile with no fn_extra caching (pgjq.c:424,445,469) and the --argjson lossy
+# numeric path (pgjq.c:398-399), plus the @@-vs-jsonpath operator-spelling collision + stubbed err_cb (pgjq.c:452).
+# 385 lines, ~58 cites. (+170/-110 vs prior; no verified content removed — deletions are reflows.)
+# 2 NEW + 1 ENHANCED this run. knowledge/ideologies/ now holds 141 ext docs. [done:placeholder] rewritten with merge SHA by pg-evening-merger.
+# Refill rule: >90★ topic/name space is DEEPLY saturated. Next runs: postgresql_anonymizer via GitLab raw if reachable;
+# drop floor to >70 + try language:Nim/C++ created:>2025 cohorts; OR drain the 3 low-signal dups (pgvecto.rs archived,
+# is_jsonb_valid 173★, psql_bm25s 142★). Standing known-skip list above still applies (poolers/backup-CLIs/parser-libs/
+# forked-distros/thin-AI/MCP-servers/pg_top/pgx_ulid/pg_uuidv7/pg_embedding/pg_bigmr[tiny]/mysql_fdw[≈oracle_fdw dup]).
