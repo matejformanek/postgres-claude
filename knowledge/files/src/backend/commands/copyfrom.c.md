@@ -2,7 +2,7 @@
 
 - **Source path:** `source/src/backend/commands/copyfrom.c`
 - **Lines:** 1996
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `1863452a4bfe` (re-verified clean 2026-07-14 pg-quality-auditor; all cites hold despite a40fdf658862 FOR-PORTION-OF touch)
 - **Companion files:** `copyfromparse.c` (the parser), `copy.c` (options), `commands/trigger.c` (BEFORE INSERT/INSTEAD OF triggers), `executor/execPartition.c` (partition routing), `executor/nodeModifyTable.c` (some shared helpers).
 
 ## Purpose

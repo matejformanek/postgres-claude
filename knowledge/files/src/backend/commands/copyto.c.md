@@ -1,8 +1,8 @@
 # copyto.c
 
 - **Source path:** `source/src/backend/commands/copyto.c`
-- **Lines:** 1741
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 1745
+- **Last verified commit:** `1863452a4bfe` (re-anchored 2026-07-14 pg-quality-auditor; effb923d9dec "COPY TO FORMAT JSON: respect column list order" +4 lines before DoCopyTo)
 - **Companion files:** `copyfrom.c`, `copy.h`, `copyapi.h`, `libpq/pqformat.c` (for binary length-prefixed output and CopyOutResponse), `utils/json.c` (for `FORMAT JSON`).
 
 ## Purpose
@@ -12,17 +12,17 @@
 ## Public surface
 
 - `BeginCopyTo` (787) — open destination, set up `CopyToState`, look up per-column `typoutput`/`typsend`, write the format-specific header (binary signature, CSV header line if requested).
-- `DoCopyTo` (1259) — top-level loop for COPY rel/query TO; calls `CopyRelationTo` for a base relation (delegating to a seq scan) or runs the executor for a query.
-- `CopyRelationTo` (1350) — table-am scan emitting one row at a time via `CopyOneRowTo`.
-- `CopyOneRowTo` (1414) — serialise a single slot's columns by calling the format's `CopyToOneRow` callback.
-- `EndCopyTo` (1238), `EndCopy` (747), `ClosePipeToProgram` (722) — teardown; wait on a `COPY ... TO PROGRAM` child.
+- `DoCopyTo` (1263) — top-level loop for COPY rel/query TO; calls `CopyRelationTo` for a base relation (delegating to a seq scan) or runs the executor for a query.
+- `CopyRelationTo` (1354) — table-am scan emitting one row at a time via `CopyOneRowTo`.
+- `CopyOneRowTo` (1418) — serialise a single slot's columns by calling the format's `CopyToOneRow` callback.
+- `EndCopyTo` (1242), `EndCopy` (747), `ClosePipeToProgram` (722) — teardown; wait on a `COPY ... TO PROGRAM` child.
 - `CopyToGetRoutine` (201) — dispatcher returning text/CSV/binary/JSON `CopyToRoutine`.
 - Format implementations: `CopyToTextLikeOneRow` (301) + `CopyToTextOneRow` (282) + `CopyToCSVOneRow` (289); `CopyToBinaryOneRow` (489); `CopyToJsonOneRow` (359).
 - Low-level emitters: `CopySendData` (585), `CopySendString` (591), `CopySendChar` (597), `CopySendEndOfRow` (603) — these write to the destination's buffer.
 
 ## CopyDestReceiver — the EXPLAIN/COPY (query) plug
 
-`CreateCopyDestReceiver` (1727) returns a `DestReceiver` (the executor's output abstraction; see `tcop/dest.c`) whose `rStartup`/`receiveSlot`/`rShutdown`/`rDestroy` callbacks are `copy_dest_*` here. When you say `COPY (SELECT ...) TO ...`, the executor is started in the usual way with this DestReceiver as its sink, so each tuple flows out through `CopyOneRowTo`. This is also how PG 17+ `EXPLAIN (SERIALIZE)` reports the COPY-serialisation cost without sending bytes.
+`CreateCopyDestReceiver` (1731) returns a `DestReceiver` (the executor's output abstraction; see `tcop/dest.c`) whose `rStartup`/`receiveSlot`/`rShutdown`/`rDestroy` callbacks are `copy_dest_*` here. When you say `COPY (SELECT ...) TO ...`, the executor is started in the usual way with this DestReceiver as its sink, so each tuple flows out through `CopyOneRowTo`. This is also how PG 17+ `EXPLAIN (SERIALIZE)` reports the COPY-serialisation cost without sending bytes.
 
 ## Binary format
 

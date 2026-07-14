@@ -1,0 +1,1 @@
+**pg-quality-auditor** 2026-07-14 — AUDIT mode: 6 anchor-bump per-file docs re-verified @1863452a4bfe (5 drift-fixed: resowner +10, autoprewarm +10, copyto +4, analyzejoins +99, reorderbuffer −2..−8; 1 clean: copyfrom). (PR pending)

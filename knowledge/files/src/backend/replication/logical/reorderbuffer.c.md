@@ -1,7 +1,7 @@
 # `src/backend/replication/logical/reorderbuffer.c`
 
-- **Last verified commit:** `ef6a95c7c64`
-- **Lines:** 5643 (largest file in the subsystem)
+- **Last verified commit:** `1863452a4bfe` (re-anchored 2026-07-14 pg-quality-auditor; small net line removal in the 2200-3400 region since ef6a95c7c64)
+- **Lines:** 5638 (largest file in the subsystem)
 - **Source:** `source/src/backend/replication/logical/reorderbuffer.c`
 
 ## Purpose
@@ -45,15 +45,15 @@ smallest LSN in each substream. [from-comment] (`reorderbuffer.c:13-31`)
 - `ReorderBufferAssignChild` (`:1100`) — link sub-xact to its top-level.
 - `ReorderBufferCommitChild` (`:1220`) — finalize sub-on-top mapping at
   abort/commit time.
-- `ReorderBufferCommit` (`:2882`) → `ReorderBufferReplay` (`:2821`) →
-  `ReorderBufferProcessTXN` (`:2212`) — drive the iterator and call the
+- `ReorderBufferCommit` (`:2880`) → `ReorderBufferReplay` (`:2819`) →
+  `ReorderBufferProcessTXN` (`:2204`) — drive the iterator and call the
   output-plugin callbacks via `logical.c` wrappers.
 - `ReorderBufferIterTXNInit/Next/Finish` (`:1285`, `:1413`, `:1505`) —
   the k-way merge iterator over (possibly disk-spilled) sub-streams.
 - `ReorderBufferPrepare` / `FinishPrepared` / `Abort` / `Forget` /
-  `Invalidate` (`:2958`, `:2999`, `:3085`, `:3178`, `:3220`) — 2PC and
+  `Invalidate` (`:2956`, `:2997`, `:3083`, `:3176`, `:3218`) — 2PC and
   cleanup paths.
-- `ReorderBufferChangeMemoryUpdate` (`:3383`) — central accounting; also
+- `ReorderBufferChangeMemoryUpdate` (`:3380`) — central accounting; also
   updates the max-heap and triggers spill if over limit.
 - `ReorderBufferStreamCommit` (`:1984`) — emit a streamed in-progress
   txn's COMMIT.
