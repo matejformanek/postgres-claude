@@ -412,6 +412,11 @@ The opclass property (verified by `_bt_allequalimage`) asserting that, for every
 
 
 
+### ALLISTRUE
+The intarray GiST "all bits set" fast-path flag (`0x04`) on a bitmap-signature key: once a signature has saturated, the key is marked all-true and treated as matching everything, short-circuiting per-bit tests. [verified-by-code] (`_int.h:81` — via `knowledge/docs-distilled/intarray.md`).
+
+
+
 ### ALLOC_BLOCKHDRSZ
 The `MAXALIGN`ed size of an aset.c block header (`AllocBlockData`); allocset sizing subtracts it from `maxBlockSize` when deriving `allocChunkLimit`, and adds it (with `ALLOC_CHUNKHDRSZ`) into the keeper/first-block size so the initial block holds the context struct plus one chunk. [verified-by-code] (via `knowledge/idioms/memory-context-allocset-internals.md`).
 
@@ -2671,6 +2676,11 @@ resolution can dispatch on the exact failure. [verified-by-code]
 
 
 
+### connectby
+The tablefunc set-returning C function that walks a self-referential parent/child table into a hierarchical result (keyid, parent_keyid, level, optional branch/serial columns); it string-substitutes the caller's identifiers into generated SQL and detects cycles with a raw substring test (`strstr`) on the accumulated branch path, so the `branch_delim` must not occur inside any key value. [verified-by-code] (`tablefunc.c:63,1339` — via `knowledge/docs-distilled/tablefunc.md`).
+
+
+
 ### ConnectDatabase
 The shared frontend connect helper (`connectdb.c:39`, used by pg_dumpall and pg_restore in -d mode) wrapping `PQconnectdbParams` with connection-string parsing, optional password prompting/retry, a server-version check, and a forced secure `search_path` via `ALWAYS_SECURE_SEARCH_PATH_SQL`. It is distinct from the heavier `pg_backup_db.c` connection family inside pg_dump proper, which would drag in the full Archive machinery. [verified-by-code] (`connectdb.c:39` — via `knowledge/files/src/bin/pg_dump/connectdb.c.md`).
 
@@ -2872,6 +2882,11 @@ A set-returning function in the `contrib/tablefunc` module that pivots rows into
 
 
 
+### crosstab_hash
+The C entry point behind the two-argument `crosstab(source_sql, category_sql)` pivot in tablefunc; unlike the streaming single-argument `crosstab(text)`, it first loads the category list into a hash table (`load_categories_hash`) and then places each value in the column matching its category, so it tolerates gaps and unordered input. [verified-by-code] (`tablefunc.c:636` — via `knowledge/docs-distilled/tablefunc.md`).
+
+
+
 ### cryptohash
 The unified cryptographic-hash abstraction (`pg_cryptohash_create`/`_update`/
 `_final`) that dispatches to OpenSSL when built `--with-ssl`, or to in-tree
@@ -2916,8 +2931,28 @@ The executor plan node that reads from a tuplestore materialized by a non-recurs
 
 
 
+### cube_distance
+The cube function returning the distance between two cubes; it underlies the KNN-GiST metric operators `<->` (L2/Euclidean), `<#>` (L1/taxicab), and `<=>` (Chebyshev) that `gist_cube_ops` uses to answer `ORDER BY c <-> point LIMIT k` as an index scan. [from-docs] (via `knowledge/docs-distilled/cube.md`).
+
+
+
+### cube_enlarge
+The cube function `cube_enlarge(cube, r, n)` growing (or, for negative r, shrinking) a cube by radius r in the first n dimensions — the building block for bounding-box proximity filters. [from-docs] (via `knowledge/docs-distilled/cube.md`).
+
+
+
+### cube_ll_coord
+The cube accessor returning the lower-left coordinate of a given dimension (paired with `cube_ur_coord` for the upper-right); with `cube_dim` and `cube_is_point` they read out the normalized "lower-left to upper-right" box a cube stores. [from-docs] (via `knowledge/docs-distilled/cube.md`).
+
+
+
 ### CUBE_MAX_DIM
 The compile-time cap (`#define CUBE_MAX_DIM (100)`) on the number of dimensions allowed in a `cube`-type value, enforced at every cube constructor and in the cube parser. The bound keeps per-cube storage and GiST split costs bounded; the source comment calls 100 "pretty arbitrary, but don't make it so large that you risk overflow in sizing calculations." [verified-by-code] (`cubedata.h` — via `knowledge/files/contrib/cube/cubedata.h.md`).
+
+
+
+### cube_subset
+The cube function projecting/reordering a cube's dimensions onto a caller-supplied list of dimension indexes, producing a lower- or reordered-dimensional cube. [from-docs] (via `knowledge/docs-distilled/cube.md`).
 
 
 
@@ -3022,6 +3057,11 @@ The execution-side node state for a custom-scan provider, embedded as the first 
 
 ### cvt_text_name
 The btree_gin coercion that truncates an oversize `text` to `NAMEDATALEN-1` via `pg_mbcliplen` when indexing as `name`, assuming the shortened result still sorts below the original — correct only under byte-comparison (C) collation, not ICU/libc orderings. [from-comment] (via `knowledge/files/contrib/btree_gin/btree_gin.md`).
+
+
+
+### daitch_mokotoff
+The fuzzystrmatch phonetic function returning a `text[]` of 6-digit Daitch-Mokotoff Soundex codes (multiple entries when a name has several plausible pronunciations); it is the multibyte/UTF-8-safe phonetic option, unlike `soundex`/`metaphone`/`dmetaphone`, which the docs caution are effectively ASCII-only. [from-docs] (via `knowledge/docs-distilled/fuzzystrmatch.md`).
 
 
 
@@ -3326,6 +3366,11 @@ The built-in text-search stemming dictionary backed by the Snowball stemmer libr
 
 
 
+### DIM_MASK
+The cube `NDBOX.header` mask (`0x7fffffff`) isolating the dimension count from the is-point flag (`POINT_BIT`, bit 31); read via the `DIM(cube)` macro. [verified-by-code] (`cubedata.h:31` — via `knowledge/docs-distilled/cube.md`).
+
+
+
 ### DirectFunctionCall
 The fmgr family (`DirectFunctionCall1` … `DirectFunctionCall9`) that invokes a C function by direct pointer using the version-1 calling convention, bypassing any catalog lookup; it is limited to nine arguments. [verified-by-code] (`fmgr.h` — via `knowledge/files/src/include/fmgr.h.md`).
 
@@ -3370,6 +3415,11 @@ The anchor of an intrusive doubly-linked list (`ilist.h`): a single sentinel `dl
 
 ### dlist_node
 The two-pointer (`prev`,`next`) struct embedded inside a larger struct to make it a member of an intrusive doubly-linked list. Because the node lives inside the element, list membership needs no extra allocation; `dlist_container` recovers the enclosing struct from the node pointer. [inferred] (via `knowledge/data-structures/dlist-node.md`).
+
+
+
+### dmetaphone_alt
+The fuzzystrmatch Double Metaphone "alternate" code function, returning the secondary sounds-like encoding for a string (the primary being `dmetaphone`) with no output-length limit; ASCII-oriented, so poorly suited to multibyte encodings. [from-docs] (via `knowledge/docs-distilled/fuzzystrmatch.md`).
 
 
 
@@ -3493,6 +3543,26 @@ segment or finalizing a control file. [verified-by-code] (via
 
 ### dynamic_library_path
 The search path `expand_dynamic_library_name()` walks to resolve a loadable module's name to a `.so`; output-plugin loading also searches it, and any library on the path exporting the required symbol is loaded (no whitelist). [verified-by-code] (via `knowledge/files/src/backend/utils/fmgr/dfmgr.c.md`).
+
+
+
+### EAN13
+The canonical isn contrib product-number type; all eight isn types (`EAN13`, `ISBN13`, `ISMN13`, `ISSN13`, `ISBN`, `ISMN`, `ISSN`, `UPC`) share one physical representation — `typedef uint64 ean13` — and differ only in display and validation. A spare bit rides in the value as an "invalid check digit" flag, accepted only under the `isn.weak` GUC and printed with a trailing `!`. [verified-by-code] (`isn.h:24` — via `knowledge/docs-distilled/isn.md`).
+
+
+
+### earth
+The earthdistance domain over `cube` representing a point on the Earth's surface as a 3-D `(x,y,z)` coordinate (distance from the center); the domain carries the validity constraint, and the 3-D encoding avoids the pole/antimeridian singularities of the point-based path. [from-docs] (via `knowledge/docs-distilled/earthdistance.md`).
+
+
+
+### earth_box
+The earthdistance function returning a bounding `cube` around an `earth` point for a given radius, usable with cube's `@>` operator (hence a `gist_cube_ops` index) to pre-filter candidate locations; because the box is a superset, a secondary `earth_distance(...) < radius` recheck is required — the canonical "GiST bounding box + exact recheck" nearest-location pattern. [from-docs] (via `knowledge/docs-distilled/earthdistance.md`).
+
+
+
+### earth_distance
+The earthdistance function returning the great-circle distance between two `earth` points, in the units implied by the `earth()` radius constant; it is the exact recheck paired with an `earth_box` + `@>` GiST pre-filter. [from-docs] (via `knowledge/docs-distilled/earthdistance.md`).
 
 
 
@@ -4508,6 +4578,16 @@ Returns the `TupleDesc` describing a prepared statement's result columns, used t
 
 
 
+### FileFdwExecutionState
+file_fdw's per-scan state struct, whose defining member is a `CopyFromState cstate`: file_fdw is a thin skin over the COPY machinery, opening the file with `BeginCopyFrom(NULL, ...)` and iterating it as a read-only foreign table. [verified-by-code] (`file_fdw.c:119` — via `knowledge/docs-distilled/file-fdw.md`).
+
+
+
+### fileGetForeignRelSize
+The file_fdw `FdwRoutine` callback that stats the target file to cost the scan; because it reads the file size, `EXPLAIN` on a file_fdw table surfaces the file name/program and its size in bytes (suppressed by `COSTS OFF`). [verified-by-code] (`file_fdw.c:519` — via `knowledge/docs-distilled/file-fdw.md`).
+
+
+
 ### FileSet
 A named set of temporary files shared among cooperating backends (e.g. parallel hash join), built on the SharedFileSet machinery so any participant can open files created by another and the whole set is cleaned up together. [verified-by-code] (via `knowledge/files/src/backend/storage/file/fileset.c.md`).
 
@@ -4904,6 +4984,11 @@ and multiple functions via ROWS FROM. [verified-by-code] (via
 
 
 
+### G_INT_NUMRANGES_MAX
+The intarray compile-time ceiling on the `numranges` opclass parameter of `gist__int_ops`, computed as `(GISTMaxIndexKeySize - VARHDRSZ) / (2*sizeof(int32))`; it bounds how many integer ranges a range-list GiST key may hold. [verified-by-code] (`_int.h:7` — via `knowledge/docs-distilled/intarray.md`).
+
+
+
 ### Gather
 The executor node that collects tuples from parallel workers (and, for
 `GatherMerge`, preserves sort order) back into the leader's single stream,
@@ -4915,6 +5000,11 @@ it the plan runs in multiple worker backends; above it execution is serial.
 
 ### GatherMerge
 The parallel-query executor node that collects tuples from multiple worker backends while preserving their common sort order via a binary heap — the order-preserving counterpart to the plain Gather node. [verified-by-code] (via `knowledge/subsystems/executor.md`).
+
+
+
+### gbt_int4_sortsupport
+The btree_gist per-type sortsupport function for int4 (one of a per-type family, all including `utils/sortsupport.h`); providing sortsupport lets `CREATE INDEX` use GiST's fast presorted build instead of the older buffered build (selectable via the `buffering` storage parameter). [verified-by-code] (`btree_int4.c:26` — via `knowledge/docs-distilled/btree-gist.md`).
 
 
 
@@ -5334,6 +5424,11 @@ posting lists for the matched keys. [from-comment] (via
 
 
 
+### gin__int_ops
+The non-default intarray GIN operator class indexing `&&`, `@>`, `<@`, `@@`, and array equality for integer-array sets; being GIN it is exact, so it avoids the lossy recheck the signature-based `gist__intbig_ops` forces. [from-docs] (via `knowledge/docs-distilled/intarray.md`).
+
+
+
 ### GIN_DATA
 A GIN page-opaque flag marking a "data" (posting-tree) page, as distinct from entry-tree, leaf, pending-list, or meta pages. [verified-by-code] (via `knowledge/files/src/include/access/ginblock.h.md`).
 
@@ -5361,6 +5456,11 @@ The fixed block number (0) of a GIN index's metapage; fastupdate pending-list in
 
 ### GIN_SEARCH_MODE_ALL
 The GIN scan mode that forces a full scan of the entire index entry space rather than a targeted posting-list probe; a `BooleanSearchStrategy` query with no required value (e.g. intarray's `! 42`) selects it, turning an apparently O(log N) index lookup into O(N) work. [verified-by-code] (`_int_gin.c:32-40` — via `knowledge/files/contrib/intarray/_int_gin.md`).
+
+
+
+### gin_trgm_ops
+The pg_trgm GIN operator class that indexes trigram sets exactly (no `siglen` parameter, unlike the GiST `gist_trgm_ops`); it accelerates `LIKE`/`ILIKE`/`~`/`~*` and `%` similarity queries that are not left-anchored — something no B-tree can do. [from-docs] (via `knowledge/docs-distilled/pgtrgm.md`).
 
 
 
@@ -5427,6 +5527,51 @@ letting one structure serve R-tree, range, nearest-neighbour, and many other
 indexing schemes. Search descends subtrees whose predicate the `consistent`
 function cannot rule out. [from-comment] (via
 `knowledge/files/src/backend/access/gist/gistget.c.md`).
+
+
+
+### gist__int_ops
+The default intarray GiST operator class, approximating an integer-array set as an array of integer ranges (an RD-tree, exact-ish); its `numranges` parameter defaults to 100 (valid 1–253) with a computed compile-time ceiling `G_INT_NUMRANGES_MAX`. Contrast the lossy signature-based `gist__intbig_ops` for large sets. [verified-by-code] (`_int.h:7` — via `knowledge/docs-distilled/intarray.md`).
+
+
+
+### gist__intbig_ops
+The intarray GiST operator class for large sets, approximating the set as a lossy bitmap signature; its `siglen` default is `SIGLEN_DEFAULT = 63*4 = 252` bytes, registered via `add_local_int_reloption` (the current docs' "16 bytes" is an upstream doc bug — trust the code). [verified-by-code] (`_intbig_gist.c:578`, `_int.h:58` — via `knowledge/docs-distilled/intarray.md`).
+
+
+
+### gist__ltree_ops
+The ltree GiST signature operator class for `ltree[]` (array-of-ltree), distinct from the scalar `gist_ltree_ops`; its signature default is `LTREE_ASIGLEN_DEFAULT = 7*sizeof(int32) = 28` bytes and it indexes `ltree[] <@ ltree`, `ltree @> ltree[]`, `@`, `~`, `?`. [verified-by-code] (`ltree.h:183` — via `knowledge/docs-distilled/ltree.md`).
+
+
+
+### gist_cube_ops
+The cube KNN-GiST operator class supporting three index roles: boolean `WHERE` (`=`, `&&`, `@>`, `<@`), KNN `ORDER BY` by a metric (`<->`/`<#>`/`<=>`), and KNN `ORDER BY` by a coordinate (`~> k`); it is the corpus reference for the GiST `distance` support function that makes `ORDER BY c <-> point LIMIT k` an index scan. [from-docs] (via `knowledge/docs-distilled/cube.md`).
+
+
+
+### gist_hstore_ops
+The hstore GiST operator class approximating the key/value set as a lossy bitmap signature with a tunable `siglen` (default 16 bytes, range 1–2024); it indexes the containment/key-presence operators `@>`, `?`, `?&`, `?|`. [from-docs] (via `knowledge/docs-distilled/hstore.md`).
+
+
+
+### gist_ltree_ops
+The scalar ltree GiST signature operator class; its signature default is `LTREE_SIGLEN_DEFAULT = 2*sizeof(int32) = 8` bytes and it indexes `<`,`<=`,`=`,`>=`,`>`,`@>`,`<@`,`@`,`~`,`?`. Signature hashing uses the standard `HASHVAL`/`SETBIT` idiom shared with intarray and pg_trgm. [verified-by-code] (`ltree.h:181` — via `knowledge/docs-distilled/ltree.md`).
+
+
+
+### gist_seg_ops
+The seg GiST operator class: a classic R-tree-over-GiST boolean opclass (the 1-D analog of `gist_cube_ops`) supporting the full positional operator set `<<`, `>>`, `&<`, `&>`, `=`, `&&`, `@>`, `<@`. It is the minimal R-tree GiST template — consistent/union/penalty/picksplit over a 1-D interval. [from-docs] (via `knowledge/docs-distilled/seg.md`).
+
+
+
+### gist_translate_cmptype_btree
+The btree_gist helper that maps a compare-type to the access method's strategy number, realizing the cross-type strategy translation that lets scalar types gain a `<>` ("not equals") operator — the operator a native B-tree opclass lacks, and the reason `EXCLUDE USING gist (... WITH <>)` exclusion constraints work. [verified-by-code] (`btree_gist.c:18` — via `knowledge/docs-distilled/btree-gist.md`).
+
+
+
+### gist_trgm_ops
+The pg_trgm GiST operator class approximating a trigram set as a fixed-length bitmap signature with a per-index `siglen` (default `SIGLEN_DEFAULT = sizeof(int)*3 = 12` bytes); longer signatures mean fewer false positives but a larger index. [verified-by-code] (`trgm.h:68`, `trgm_gist.c` — via `knowledge/docs-distilled/pgtrgm.md`).
 
 
 
@@ -5670,6 +5815,11 @@ The hash-index metapage array recording the cumulative count of overflow-page "s
 
 ### hasho_prevblkno
 Hash-index page-special field holding the previous block number; on a *primary bucket* page it is overloaded to instead cache the bucket count as of that bucket's last split (a primary bucket's real prev-block is always Invalid), enabling stale-safe metapage caching. [from-README] (via `knowledge/idioms/hash-page-layout.md`).
+
+
+
+### HASHVAL
+The GiST-signature hashing macro shared by ltree, intarray, and pg_trgm: `HASHVAL(val, siglen) = (unsigned)val % SIGLENBIT(siglen)` selects the bit a value maps to, and the companion `HASH()` = `SETBIT(sign, HASHVAL(...))` sets it — the common lossy-bitmap-signature idiom. [verified-by-code] (`ltree.h:164` — via `knowledge/docs-distilled/ltree.md`).
 
 
 
@@ -6063,6 +6213,21 @@ The ltree GiST Hamming-distance function over signature bitmaps, used for penalt
 
 
 
+### HEntry
+The hstore on-disk entry word: a single `uint32` packing an is-first flag (`HENTRY_ISFIRST 0x80000000`), a NULL-value flag (`HENTRY_ISNULL 0x40000000`), and an end-offset into the string pool (`HENTRY_POSMASK 0x3FFFFFFF`). An hstore stores two HEntry per pair (key at index `2*i`, value at `2*i+1`); string length is the difference of adjacent end-offsets, so no explicit length is stored. [verified-by-code] (`hstore.h:12,17` — via `knowledge/docs-distilled/hstore.md`).
+
+
+
+### HENTRY_ISFIRST
+The hstore `HEntry` flag bit (`0x80000000`) marking the first entry of the packed array (whose implicit start offset is 0); the remaining `HENTRY_POSMASK` bits carry the running end-offset. [verified-by-code] (`hstore.h:17` — via `knowledge/docs-distilled/hstore.md`).
+
+
+
+### HENTRY_ISNULL
+The hstore `HEntry` flag bit (`0x40000000`) marking a NULL value; hstore keys may never be NULL, only values. [verified-by-code] (`hstore.h:17` — via `knowledge/docs-distilled/hstore.md`).
+
+
+
 ### HENTRY_POSMASK
 The hstore on-disk mask `0x3FFFFFFF` that reserves the top 2 bits of an `HEntry` for flags (e.g. `HENTRY_ISNULL`) and uses the low 30 bits for the end-position offset of a key/value within the string area. As invariant INV-1 it caps the hstore string area at ~1 GB; the compat re-encode loop applies `& HENTRY_POSMASK` with no overflow guard, so a `pos + keylen` overflow is silently truncated rather than rejected. [verified-by-code] (`hstore.h` — via `knowledge/files/contrib/hstore/hstore.h.md`).
 
@@ -6130,6 +6295,21 @@ GUC that makes a hot standby report its oldest xmin back to the primary so the p
 
 
 
+### HS_COUNT
+The hstore macro extracting the pair count from the header: `HS_COUNT(hsp) = size_ & 0x0FFFFFFF`, the high bits of `size_` carrying `HS_FLAG_NEWVERSION`. [verified-by-code] (`hstore.h:52` — via `knowledge/docs-distilled/hstore.md`).
+
+
+
+### HS_FLAG_NEWVERSION
+The hstore top-bit flag (`0x80000000`) of the `size_` count word signalling the post-9.0 on-disk format; older data is still readable "with a slight performance penalty" until rewritten (force it with `UPDATE t SET c = c || ''`). [verified-by-code] (`hstore.h:52` — via `knowledge/docs-distilled/hstore.md`).
+
+
+
+### HSE_LEN
+The hstore macro computing a key's or value's byte length as the difference between adjacent `HEntry` end-offsets; because lengths are derived this way, hstore entries carry only a running end-offset, never an explicit per-entry length. [verified-by-code] (`hstore.h` — via `knowledge/docs-distilled/hstore.md`).
+
+
+
 ### hstore_concat
 The hstore `||` operator implementation, merging two hstores with right-hand keys overriding left-hand duplicates — the canonical key-merge pattern reused by hstore's subscripting-assignment path. [from-comment] (via `knowledge/files/contrib/hstore/hstore_subs.c.md`).
 
@@ -6160,6 +6340,11 @@ The handle type for PostgreSQL's built-in dynamic hash table (`dynahash`), creat
 
 
 
+### icount
+The intarray function returning the number of elements in an integer array (its set cardinality). [from-docs] (via `knowledge/docs-distilled/intarray.md`).
+
+
+
 ### ICU
 International Components for Unicode — the optional collation provider PostgreSQL can use instead of the libc locale for sorting and case handling. `pg_locale_icu.c` wraps ICU collators and version strings so a database or per-column collation can pin deterministic, version-tracked Unicode ordering. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/pg_locale_icu.c.md`).
 
@@ -6175,6 +6360,11 @@ default database, which the client uses to set up streaming. [verified-by-code]
 
 ### idle_in_transaction_session_timeout
 GUC terminating a session that sits idle inside an open transaction longer than the limit, releasing the locks and xmin such a session pins; measured in ms and declared with the other timeout GUCs in `proc.h`. [verified-by-code] (via `knowledge/files/src/include/storage/proc.h.md`).
+
+
+
+### IGNORECASE
+The pg_trgm compile-time macro that lowercases trigrams, making trigram matching case-insensitive as a build-time contract rather than a runtime flag; the header warns that disabling it requires removing the `~*`/`~~*` operators from the opclasses. [verified-by-code] (`trgm.h:19` — via `knowledge/docs-distilled/pgtrgm.md`).
 
 
 
@@ -6544,6 +6734,11 @@ A global GUC controlling interval output formatting, defaulting to `INTSTYLE_POS
 
 
 
+### intset
+The intarray constructor turning a single integer into a one-element array, useful for building set-operator expressions. [from-docs] (via `knowledge/docs-distilled/intarray.md`).
+
+
+
 ### INV_READ
 The large-object open-mode flag (`0x00040000`, defined in `libpq/libpq-fs.h`) requesting that an LO be opened for reading; it pairs with `INV_WRITE` and the two can be ORed (`lo_creat(INV_READ | INV_WRITE)` is the canonical create-and-open pattern). `inv_open`/`lo_open` translate `INV_READ`/`INV_WRITE` to internal `IFS_RDLOCK`/`IFS_WRLOCK`, and the flags are part of the LO ABI. [verified-by-code] (`libpq-fs.h` — via `knowledge/files/src/include/libpq/libpq-fs.h.md`).
 
@@ -6675,6 +6870,16 @@ The `acl.c` predicate answering "may this role SET ROLE to that role?" — the S
 
 
 
+### IS_POINT
+The cube macro testing a cube's `POINT_BIT` header flag — true when the lower-left and upper-right corners coincide, in which case only one corner is stored. [verified-by-code] (`cubedata.h:31` — via `knowledge/docs-distilled/cube.md`).
+
+
+
+### is_valid
+The isn function testing the in-band "invalid check digit" flag of an ISN value; numbers admitted under `isn.weak` mode carry the flag and print with a trailing `!`, and `WHERE NOT is_valid(id)` finds them after a bulk load. [from-docs] (via `knowledge/docs-distilled/isn.md`).
+
+
+
 ### IsA
 The node-tag test macro that checks a `Node *` carries a given `NodeTag`; it
 is the standard idiom for runtime dispatch over PostgreSQL's tagged node
@@ -6689,6 +6894,16 @@ The macro distinguishing a scalar `JsonbValue` (type tag < 0x10) from a composit
 
 ### IsBinaryUpgrade
 A process-identity global flag indicating the backend is running in binary-upgrade mode (pg_upgrade), listed among miscadmin.h process-identity globals like `IsPostmasterEnvironment`, `IsUnderPostmaster`, and `ExitOnAnyError`. [verified-by-code] (`miscadmin.h` — via `knowledge/files/src/include/miscadmin.h.md`).
+
+
+
+### ISBN
+An isn contrib type displaying in the legacy 10-digit ISBN form when possible; like all isn types it is physically one `uint64` (bit-identical to the always-EAN13-form `ISBN13`) and differs only in presentation and validation. [from-docs] (via `knowledge/docs-distilled/isn.md`).
+
+
+
+### ISBN13
+The isn type that always displays a book number in 13-digit EAN13 form; it shares the single `uint64` isn representation with `ISBN`, which prefers the 10-digit legacy form. [from-docs] (via `knowledge/docs-distilled/isn.md`).
 
 
 
@@ -6717,6 +6932,11 @@ restricted to preserve worker/leader consistency. [verified-by-code] (via
 
 
 
+### ISMN
+The isn contrib type for International Standard Music Numbers, displaying in legacy short form when possible; one `uint64` physically, with an always-EAN13-form sibling `ISMN13`. [from-docs] (via `knowledge/docs-distilled/isn.md`).
+
+
+
 ### IsParallelWorker
 Tests whether the current process is a parallel worker (as opposed to the
 leader), gating worker-only setup such as joining the leader's lock group and
@@ -6732,6 +6952,11 @@ The canonical predicate gating query-jumble computation: end-of-parse-analysis c
 
 ### IsRelationExtensionLockHeld
 Reports whether the current backend holds a relation-extension lock; it is asserted at points that must not acquire another heavyweight lock while extending, since that could deadlock. [verified-by-code] (via `knowledge/files/src/backend/storage/lmgr/lock.c.md`).
+
+
+
+### ISSN
+The isn contrib type for International Standard Serial Numbers, displaying in legacy 8-digit form when possible; one `uint64` physically, with an always-EAN13-form sibling `ISSN13`. [from-docs] (via `knowledge/docs-distilled/isn.md`).
 
 
 
@@ -7117,6 +7342,11 @@ VACUUM's second-pass routine that converts `LP_DEAD` line pointers to `LP_UNUSED
 
 
 
+### lca
+The ltree "longest common ancestor" function, capped at 8 direct `ltree` arguments (or unbounded via the `ltree[]` overload); returns the deepest path that is an ancestor-or-equal of every input. [from-docs] (via `knowledge/docs-distilled/ltree.md`).
+
+
+
 ### lcons
 Prepends an element to the head of a `List` (the counterpart of `lappend`); used where newest-first ordering matters, such as inserting at the head of a cache bucket. [verified-by-code] (via `knowledge/files/contrib/sepgsql/uavc.c.md`).
 
@@ -7124,6 +7354,11 @@ Prepends an element to the head of a `List` (the counterpart of `lappend`); used
 
 ### leaf_consistent
 The SP-GiST opclass support function (`spgLeafConsistentIn` -> `spgLeafConsistentOut`) that applies the scan qual to an individual leaf datum, returning match/no-match and, for ordered (KNN) scans, filling the `distances[]` array. [verified-by-code] (via `knowledge/docs-distilled/spgist.md`).
+
+
+
+### levenshtein_less_equal
+The accelerated fuzzystrmatch edit-distance variant `levenshtein_less_equal(src, tgt [, ins,del,sub,] max_d)` that stops early once the distance is known to exceed `max_d`, returning some value `> max_d`; much cheaper than full `levenshtein` when you only need "is the distance <= k?". Both strings are capped at 255 characters. [from-docs] (via `knowledge/docs-distilled/fuzzystrmatch.md`).
 
 
 
@@ -7163,6 +7398,11 @@ Macro family (`list_make1` … `list_make5`) that builds a fixed-size `List` lit
 
 ### ListCell
 One element of PostgreSQL's List. Since the v13 rewrite a List is a flat array of ListCells, so foreach() indexes the array; a cell holds a pointer, int, or oid payload depending on the list's NodeTag. [verified-by-code] (via `knowledge/files/src/include/nodes/pg_list.h.md`).
+
+
+
+### ll_to_earth
+The earthdistance function mapping a (latitude, longitude) pair to a 3-D `earth` point — an `(x,y,z)` cube coordinate on the sphere's surface. The 3-D-on-sphere encoding is what lets the cube-based path dodge the pole and +/-180-degree-longitude singularities the point-based `<@>` path suffers. [from-docs] (via `knowledge/docs-distilled/earthdistance.md`).
 
 
 
@@ -7243,6 +7483,11 @@ The large-object API call that deletes an LO and all its `pg_largeobject` chunks
 
 ### lo_write
 The C-only server-side large-object write primitive (`be-fsstubs.c:181`) writing into an open LO descriptor; pg_dump and the libpq client buffer data (`LO_BUFSIZE` = 8192) before calling it. Client wrapper name is `lo_write`; the SQL function is `lowrite`. [verified-by-code] (via `knowledge/files/src/interfaces/libpq/fe-lobj.c.md`).
+
+
+
+### load_categories_hash
+The tablefunc helper that loads the `category_sql` result of a two-argument `crosstab(source_sql, category_sql)` into a hash table, so `crosstab_hash` can place each data value in the column matching its category (category-aware, gap-tolerant pivoting). [verified-by-code] (`tablefunc.c` — via `knowledge/docs-distilled/tablefunc.md`).
 
 
 
@@ -7610,6 +7855,16 @@ free for reuse; produced by page pruning and vacuum reclaiming dead tuples.
 
 
 
+### LPADDING
+The pg_trgm macro (=2) giving the number of leading spaces prepended when splitting a word into trigrams (with `RPADDING`=1 trailing space): `"cat"` → `" c"`, `" ca"`, `"cat"`, `"at "`. `trgm_regexp.c` effectively assumes these values, so they are not freely tunable. [verified-by-code] (`trgm.h:16` — via `knowledge/docs-distilled/pgtrgm.md`).
+
+
+
+### lquery
+One of ltree's three types: a path-matching query (richer than a plain glob) with `*{n,m}` label-count quantifiers and per-label modifiers `@` (case-insensitive), `*` (prefix), `%` (word-boundary), plus `|` (OR) and `!` (NOT) groups; an `ltree` matches an `lquery` via the `~` operator, GiST-accelerated by `gist_ltree_ops`. [from-docs] (via `knowledge/docs-distilled/ltree.md`).
+
+
+
 ### LSN (log sequence number)
 A byte position in the continuous WAL stream, represented by the 64-bit
 `XLogRecPtr` type. Every WAL record and every modified page records an LSN;
@@ -7621,6 +7876,11 @@ position". [verified-by-code] (`xlogdefs.h:28` — via
 
 ### ltq_regex
 The ltree `~` (ltree-matches-lquery) operator function; it always `PG_FREE_IF_COPY`s its detoasted args, which is why the wrapper `lt_q_regex` must be careful invoking it via `DirectFunctionCall2` to avoid double-freeing shared pointers. [from-comment] (via `knowledge/files/contrib/ltree/lquery_op.c.md`).
+
+
+
+### LTREE_ASIGLEN_DEFAULT
+The default GiST signature length for the `ltree[]` `gist__ltree_ops` opclass, `7*sizeof(int32) = 28` bytes — larger than the scalar `LTREE_SIGLEN_DEFAULT` because an array key summarizes many paths. [verified-by-code] (`ltree.h:183` — via `knowledge/docs-distilled/ltree.md`).
 
 
 
@@ -7639,8 +7899,28 @@ The polish-notation evaluator (`ltxtquery_op.c:20`) that walks an `ltxtquery` tr
 
 
 
+### LTREE_LABEL_MAX_CHARS
+The hard ltree limit of 1000 characters per path label; allowed label characters are locale-dependent (`A-Za-z0-9_-` in the C locale). [verified-by-code] (`ltree.h:18` — via `knowledge/docs-distilled/ltree.md`).
+
+
+
+### ltree_level
+The ltree per-label on-disk struct `{ uint16 len; char name[] }`; an `ltree` value is a varlena carrying a `uint16 numlevel` count followed by MAXALIGN'd `ltree_level` labels. Because `numlevel` is a `uint16`, a path holds at most `LTREE_MAX_LEVELS` = 65535 labels. [verified-by-code] (`ltree.h:37` — via `knowledge/docs-distilled/ltree.md`).
+
+
+
 ### LTREE_MAX_LEVELS
 The ltree limit `LTREE_MAX_LEVELS = PG_UINT16_MAX = 65535`, deriving from `ltree.numlevel` being a `uint16`. It is enforced at parse time (`ltree_io.c`), at concatenation (`ltree_concat` rejects `a.numlevel + b.numlevel > LTREE_MAX_LEVELS`), and on lquery low/high bounds; combined with `LTREE_LABEL_MAX_CHARS = 1000` it bounds a single legitimate input at roughly 65 MB. [verified-by-code] (`ltree.h` — via `knowledge/files/contrib/ltree/ltree.h.md`).
+
+
+
+### LTREE_SIGLEN_DEFAULT
+The default GiST signature length for the scalar `gist_ltree_ops` opclass, `2*sizeof(int32) = 8` bytes (max `GISTMaxIndexKeySize`); a lossy bitmap signature summarizing an ltree path. [verified-by-code] (`ltree.h:181` — via `knowledge/docs-distilled/ltree.md`).
+
+
+
+### ltxtquery
+ltree's full-text-style query type matching label words anywhere in a path (via the `@` operator), as opposed to `lquery`'s positional path matching. [from-docs] (via `knowledge/docs-distilled/ltree.md`).
 
 
 
@@ -7781,6 +8061,11 @@ generated `cacheinfo[]` table that `InitCatalogCache` builds from.
 
 ### make_template0
 The initdb phase that clones `template1` into the pristine `template0` — the untouched source for `CREATE DATABASE ... TEMPLATE template0`. [verified-by-code] (`initdb.c:2040` — via `knowledge/docs-distilled/creating-cluster.md`).
+
+
+
+### make_valid
+The isn function that clears the in-band "invalid check digit" flag on an ISN value (the inverse of the state `isn.weak` mode records). [from-docs] (via `knowledge/docs-distilled/isn.md`).
 
 
 
@@ -8499,6 +8784,11 @@ The global giving the number of pages in the shared buffer pool — i.e. `shared
 
 
 
+### NDBOX
+The cube on-disk struct `{ int32 vl_len_; unsigned int header; double x[FLEXIBLE_ARRAY_MEMBER] }`; the `header` word packs the dimension count (bits 0–7, `DIM_MASK`) and an is-point flag (bit 31, `POINT_BIT`). A point cube stores only one corner plus the flag, halving the `double` array. [verified-by-code] (`cubedata.h:8,31` — via `knowledge/docs-distilled/cube.md`).
+
+
+
 ### NeedNewOuter
 The nodeNestloop.c state bit (`nl_NeedNewOuter`): when true the top of the join loop pulls the next outer tuple; set at init and whenever the inner scan returns end-of-scan, and `ExecReScanNestLoop` re-marks it rather than rescanning the inner child directly. [verified-by-code] (`nodeNestloop.c:167,346` — via `knowledge/files/src/backend/executor/nodeNestloop.c.md`).
 
@@ -8639,6 +8929,11 @@ The soft-error flag passed to lookup helpers (e.g. composite-type resolution in 
 
 ### NoLock
 The lock-mode sentinel (value 0) meaning "take no heavyweight lock"; passed to relation_open / table_open when the caller already holds a suitable lock, so the open just builds the relcache entry without re-locking. [verified-by-code] (`relation.c:65` — via `knowledge/files/src/backend/access/common/relation.c.md`).
+
+
+
+### normal_rand
+The tablefunc set-returning function `normal_rand(int, float8, float8)` generating N normally-distributed `float8` values via the Box-Muller transform; a compact worked example of a C SRF returning `setof`. [verified-by-code] (`tablefunc.c:176` — via `knowledge/docs-distilled/tablefunc.md`).
 
 
 
@@ -10963,6 +11258,11 @@ Duplicates at most n bytes of a string into palloc'd memory and NUL-terminates t
 
 
 
+### POINT_BIT
+The cube `NDBOX.header` bit (`0x80000000`) marking a cube as a degenerate point (lower-left equals upper-right); the companion `DIM_MASK 0x7fffffff` holds the dimension count, both read via the `IS_POINT`/`DIM` macros. A point cube stores only one corner, halving its `double` array. [verified-by-code] (`cubedata.h:31` — via `knowledge/docs-distilled/cube.md`).
+
+
+
 ### PointerGetDatum
 The macro that packages a C pointer as a `Datum` for return or argument
 passing through fmgr — the encoding side of by-reference value passing (its
@@ -13056,6 +13356,11 @@ server signature. [verified-by-code] (`fe-auth-scram.c:792-797` — via
 
 
 
+### SampleScanGetSampleSize
+The `TsmRoutine` callback a TABLESAMPLE method supplies to estimate the number of blocks/tuples the sample will read (used for costing); one of the three callbacks (`SampleScanGetSampleSize`, `NextSampleBlock`, `NextSampleTuple`) that make up the minimal shape of a custom sampling method. [verified-by-code] (`tsm_system_rows.c:91` — via `knowledge/docs-distilled/tsm-system-rows.md`).
+
+
+
 ### SAOP
 ScalarArrayOpExpr — a “scalar array operation” expression of the form `expr op ANY (array)` / `op ALL (array)` (e.g. `x = ANY('{1,2,3}')`). Since PG17 nbtree executes a SAOP natively inside a single index scan via array-key preprocessing (`_bt_preprocess_array_keys`), advancing through the array elements in index order rather than relying on a BitmapOr of separate scans. [verified-by-code] (via `knowledge/files/src/backend/access/nbtree/nbtpreprocesskeys.c.md`).
 
@@ -13250,6 +13555,21 @@ code such as index expressions, triggers, and maintenance commands.
 
 
 
+### seg_center
+The seg function returning the midpoint of a `seg` interval (with `seg_lower`/`seg_upper` for the bounds); `seg` stores a pair of 32-bit `float`s, so values beyond ~7 significant digits truncate — a deliberately lower precision than cube's 64-bit `double`. [from-docs] (via `knowledge/docs-distilled/seg.md`).
+
+
+
+### seg_lower
+The seg function returning the lower bound of a `seg` interval (with `seg_upper` for the upper and `seg_center` for the midpoint). [from-docs] (via `knowledge/docs-distilled/seg.md`).
+
+
+
+### seg_upper
+The seg function returning the upper bound of a `seg` interval (paired with `seg_lower`/`seg_center`). [from-docs] (via `knowledge/docs-distilled/seg.md`).
+
+
+
 ### selinux_catalog
 The sepgsql translation table mapping PostgreSQL object classes and permissions to their SELinux security-class/permission bit positions; because the encoding is bit-position dependent, its ordering is contractual. [from-comment] (via `knowledge/files/contrib/sepgsql/sepgsql.h.md`).
 
@@ -13362,6 +13682,11 @@ The SQL-callable function form of SET — `set_config(name, value, is_local)` �
 
 ### set_join_pathlist_hook
 The planner hook an extension sets to inject custom join paths — the join-level counterpart to `set_rel_pathlist_hook` for base relations. [from-docs] (via `knowledge/docs-distilled/custom-scan.md`).
+
+
+
+### set_limit
+A deprecated pg_trgm shim that sets the `%` similarity threshold: `set_limit()` literally calls `SetConfigOption("pg_trgm.similarity_threshold", ...)` and returns the value — use `SET pg_trgm.similarity_threshold` instead. [verified-by-code] (`trgm_op.c:294` — via `knowledge/docs-distilled/pgtrgm.md`).
 
 
 
@@ -13644,6 +13969,11 @@ before the segment is created. [inferred] (via
 
 
 
+### show_limit
+The deprecated pg_trgm companion to `set_limit`, returning the current `pg_trgm.similarity_threshold` GUC value; superseded by reading the GUC directly. [verified-by-code] (`trgm_op.c` — via `knowledge/docs-distilled/pgtrgm.md`).
+
+
+
 ### shutdown_cb
 The archive-module shutdown callback (`ArchiveModuleCallbacks.shutdown_cb`) invoked when the archiver process exits, giving a WAL-archiving module a chance to release resources; a module that holds no persistent state (like `basic_archive`) may leave it `NULL`. [verified-by-code] (via `knowledge/files/contrib/basic_archive/basic_archive.c.md`).
 
@@ -13674,6 +14004,11 @@ The psql flag that, with `sigint_interrupt_jmp`, forms psql's only concurrency b
 
 
 
+### SIGLENBIT
+The GiST-signature macro giving the number of bits in a signature of a given byte length: `SIGLENBIT(siglen) = siglen*BITS_PER_BYTE`; it is the modulus in the `HASHVAL` bit-selection shared by intarray, ltree, and pg_trgm. [verified-by-code] (`_int.h` — via `knowledge/docs-distilled/intarray.md`).
+
+
+
 ### SIGTERM
 The signal used to request graceful termination — `SIGTERM` to the postmaster means smart shutdown, and to a backend means terminate-this-session. Handlers set a pending flag consumed at the next `CHECK_FOR_INTERRUPTS`/latch wait so shutdown happens at a safe point with cleanup callbacks run. [verified-by-code] (via `knowledge/files/src/backend/postmaster/bgwriter.c.md`).
 
@@ -13681,6 +14016,11 @@ The signal used to request graceful termination — `SIGTERM` to the postmaster 
 
 ### SIMD
 Single Instruction, Multiple Data — vectorized CPU instructions PostgreSQL uses in hot loops (e.g. byte scanning, JSON/encoding, hashing) via `pg_attribute_*` helpers and architecture-specific intrinsics, with a scalar fallback when the vector path is unavailable. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/encode.c.md`).
+
+
+
+### SimilarityStrategyNumber
+The first (=1) of pg_trgm's dense ten-strategy opclass map (`SimilarityStrategyNumber`, `DistanceStrategyNumber`, `LikeStrategyNumber`, `ILikeStrategyNumber`, `RegExpStrategyNumber`, ... through `EqualStrategyNumber`=11), well beyond the usual B-tree five — a good study of how an AM's `pg_amop` rows encode a rich operator surface for one type. [verified-by-code] (`trgm.h:36` — via `knowledge/docs-distilled/pgtrgm.md`).
 
 
 
@@ -14440,6 +14780,11 @@ A logical-replication streaming protocol message that ends a chunk of an in-prog
 
 ### stream_stop_cb
 Logical-decoding output-plugin callback marking the end of a streamed-transaction change block opened by `stream_start_cb`. [from-docs] (via `knowledge/docs-distilled/logicaldecoding-output-plugin.md`).
+
+
+
+### strict_word_similarity
+The pg_trgm function scoring the best-matching continuous extent of the second string while forcing the extent boundaries to coincide with word boundaries (so it never rewards a partial word), unlike `word_similarity`, which does not pad the extent edges; its operators `<<%`/`%>>` fire above `pg_trgm.strict_word_similarity_threshold` (default 0.5). [from-docs] (via `knowledge/docs-distilled/pgtrgm.md`).
 
 
 
@@ -15332,6 +15677,16 @@ The soft-failure table open: `try_relation_open` (lock-first, return NULL on a m
 
 
 
+### tsm_system_rows_handler
+The single C function that is the whole tsm_system_rows extension: it does `makeNode(TsmRoutine)` and fills the three sampling callbacks (`SampleScanGetSampleSize`, `NextSampleBlock`, `NextSampleTuple`) implementing `SYSTEM_ROWS(n)` — return exactly n rows, block-level (hence biased toward clustering), with no `REPEATABLE` support. [verified-by-code] (`tsm_system_rows.c:81` — via `knowledge/docs-distilled/tsm-system-rows.md`).
+
+
+
+### tsm_system_time_handler
+The tsm_system_time extension's handler: the same `TsmRoutine` skeleton as `tsm_system_rows_handler`, but its `NextSampleBlock` stops on a wall-clock budget — `SYSTEM_TIME(ms)` reads as many rows as it can in ~ms milliseconds. Block-level and nondeterministic in size, so likewise no `REPEATABLE`. [verified-by-code] (`tsm_system_time.c:82` — via `knowledge/docs-distilled/tsm-system-time.md`).
+
+
+
 ### TsmRoutine
 The callback struct returned by a tablesample method's `tsm_handler` function (`tsmapi.h:55`), driving `TABLESAMPLE` block/row selection; the built-in methods are `SYSTEM` (block-level) and `BERNOULLI` (row-level). [verified-by-code] (`tsmapi.h:55` — via `knowledge/docs-distilled/tablesample-method.md`).
 
@@ -15499,6 +15854,11 @@ PostgreSQL's Unicode normalization routine (NFC/NFD/NFKC/NFKD), validated by `no
 
 
 
+### uniq
+The intarray function removing *adjacent* duplicate elements from an integer array — so callers must `sort` first to fully deduplicate; a deliberately low-cost primitive rather than a full set-uniq. [from-docs] (via `knowledge/docs-distilled/intarray.md`).
+
+
+
 ### UnlockBufHdr
 Releases the per-buffer header spinlock taken to read/modify a `BufferDesc`'s
 state word; many state changes now use atomic ops, but the header lock still
@@ -15532,6 +15892,11 @@ Drops a snapshot's registration with its resource owner; when the last
 registration goes away the backend can lower its advertised xmin via
 `SnapshotResetXmin`. [verified-by-code] (via
 `knowledge/idioms/snapshot-active-stack-and-registered.md`).
+
+
+
+### UPC
+The isn contrib type for Universal Product Codes, stored as the EAN13 subset without the leading 0; physically one `uint64`, interchangeable with the other isn types at the bit level. [from-docs] (via `knowledge/docs-distilled/isn.md`).
 
 
 
@@ -16045,6 +16410,11 @@ A WaitEventSet / WaitLatch event bit requesting a wakeup when the process latch 
 
 ### WL_POSTMASTER_DEATH
 A `WaitEventSet` wakeup bit indicating the postmaster has died; backends include it (or the auto-exit variant) in every wait so they can shut down promptly when the parent is gone. [verified-by-code] (`waiteventset.c:20-33` — via `knowledge/files/src/backend/storage/ipc` latch/waiteventset docs).
+
+
+
+### word_similarity
+The pg_trgm function returning the similarity of the first string to the best-matching continuous extent of the second (unlike `%`/`similarity`, which compares whole strings); its operators `<%`/`%>` fire above `pg_trgm.word_similarity_threshold` (default 0.6). Contrast `strict_word_similarity`, which snaps the extent to word boundaries. [from-docs] (via `knowledge/docs-distilled/pgtrgm.md`).
 
 
 
