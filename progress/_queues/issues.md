@@ -204,21 +204,21 @@ seeded by pg-file-backfiller) — finer per-function cites, rows dated
 2026-06-03/09/16, all past the 30-day staleness threshold. (Cross-check: its
 ri_triggers row independently reads :295,4010, confirming today's re-anchor.)
 
-[pending] utils-adt.md bool.c:44-92 | undocumented-invariant/nit | seeded=2026-07-13
-[pending] utils-adt.md name.c:338-342 | undocumented-invariant/nit | seeded=2026-07-13
-[pending] utils-adt.md enum.c:135-141 | undocumented-invariant/nit | seeded=2026-07-13
-[pending] utils-adt.md cash.c:191,407 | undocumented-invariant/nit | seeded=2026-07-13
-[pending] utils-adt.md cash.c:226,240-241 | stale-todo/nit | seeded=2026-07-13
-[pending] utils-adt.md pg_lsn.c:272 | undocumented-invariant/maybe | seeded=2026-07-13
-[pending] utils-adt.md uuid.c:550 | question/nit | seeded=2026-07-13
-[pending] utils-adt.md encode.c:644-658 | question/nit | seeded=2026-07-13
-[pending] utils-adt.md encode.c:174,412,834 | undocumented-invariant/maybe | seeded=2026-07-13
-[pending] utils-adt.md ascii.c:92 | undocumented-invariant/maybe | seeded=2026-07-13
-[pending] utils-adt.md ascii.c:187 | question/nit | seeded=2026-07-13
-[pending] utils-adt.md pg_locale_builtin.c:293-295 | info-disclosure/nit | seeded=2026-07-13
-[pending] utils-adt.md pg_locale_builtin.c:285-290 | correctness/nit | seeded=2026-07-13
-[pending] utils-adt.md ri_triggers.c:2185 | injection/nit | seeded=2026-07-13
-[pending] utils-adt.md ri_triggers.c:1004 | undocumented-invariant/nit | seeded=2026-07-13
-[pending] utils-adt.md ri_triggers.c:295,4010 | correctness/maybe | seeded=2026-07-13
-[pending] utils-adt.md xml.c:2042 | stale-todo/nit | seeded=2026-07-13
-[pending] utils-adt.md xml.c:4449-4451 | correctness/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md bool.c:44-92 | undocumented-invariant/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md name.c:338-342 | undocumented-invariant/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md enum.c:135-141 | undocumented-invariant/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md cash.c:191,407 | undocumented-invariant/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md cash.c:226,240-241 | stale-todo/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md pg_lsn.c:272 | undocumented-invariant/maybe | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md uuid.c:550 | question/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md encode.c:644-658 | question/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md encode.c:174,412,834 | undocumented-invariant/maybe | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md ascii.c:92 | undocumented-invariant/maybe | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md ascii.c:187 | question/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md pg_locale_builtin.c:293-295 | info-disclosure/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md pg_locale_builtin.c:285-290 | correctness/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md ri_triggers.c:2185 | injection/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md ri_triggers.c:1004 | undocumented-invariant/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md ri_triggers.c:295,4010 | correctness/maybe | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md xml.c:2042 | stale-todo/nit | seeded=2026-07-13
+[done:2026-07-15] utils-adt.md xml.c:4449-4451 | correctness/nit | seeded=2026-07-13
