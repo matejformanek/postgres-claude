@@ -586,3 +586,31 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # drop floor to >70 + try language:Nim/C++ created:>2025 cohorts; OR drain the 3 low-signal dups (pgvecto.rs archived,
 # is_jsonb_valid 173★, psql_bm25s 142★). Standing known-skip list above still applies (poolers/backup-CLIs/parser-libs/
 # forked-distros/thin-AI/MCP-servers/pg_top/pgx_ulid/pg_uuidv7/pg_embedding/pg_bigmr[tiny]/mysql_fdw[≈oracle_fdw dup]).
+
+# --- Refill (seeded 2026-07-15 cloud/pg-extension-anthropologist) ---
+# Re-ran the saturated sweep via GitHub MCP search_repositories (topic:postgresql-extension stars:>70 pushed:>2025 [46
+# hits], pg_ in:name C >120 pushed:>2025-06 [54], postgresql extension name/desc C created:>2024-06 [1], topic:postgres-
+# extension >80 [7], postgres ext name/desc Rust >90 created:>2024-06 [3]). Space DEEPLY saturated vs knowledge/ideologies/
+# (141 docs) — nearly every C hit already covered or a standing known-skip. THEME this run: "export PG's internal event
+# streams to EXTERNAL observability/OLAP systems" (pg_turret logs→Kafka/HTTP, pg_stat_ch query-telemetry→ClickHouse) +
+# pgcalendar (pure-SQL recurrence domain modeling) as a distinct contrast axis. Processed via parallel sub-agent fanout.
+[done:placeholder] ClickHouse/pg_stat_ch branch=main files=README.md,pg_stat_ch.control,CMakeLists.txt,src/*.c,src/export/*.cc  # 119★ C/C++; per-query raw-event telemetry exporter to ClickHouse — the INVERSE of pg_stat_statements (raw events out, aggregation external). hooks(fg)→shmem MPSC ring→bgworker→vendored clickhouse-c/Arrow.
+[done:placeholder] lasect/pg_turret branch=main files=README.md,Cargo.toml,src/lib.rs,src/config.rs,src/log_capture/,src/metrics.rs  # 121★ Rust/pgrx; emit_log_hook log-pipeline interception → normalize to JSON → bgworker multi-adapter export (Kafka/HTTP/WebSocket/Sentry) w/ retry queue + gzip.
+[done:placeholder] h4kbas/pgcalendar branch=master files=README.md,pgcalendar.control,pgcalendar.sql,Makefile  # 141★ pure SQL/PLpgSQL; infinite-calendar recurrence engine (events/schedules/exceptions/projections). No .so (declares module_pathname it never uses). Domain-modeling-as-extension sibling of pgmq/pgque/temporal_tables.
+# 3 entries processed 2026-07-15 (pg_stat_ch, pg_turret, pgcalendar — the "export PG internal event streams to external
+# observability/OLAP" theme + a pure-SQL contrast). knowledge/ideologies/ now holds 144 ext docs. [done:placeholder]
+# markers above rewritten with the merge SHA by pg-evening-merger. Notable: pg_turret ships a REAL correctness bug —
+# emit_log_hook installed by bare assignment, never saving/calling the prior hook (src/log_capture.rs:774-778) → it
+# silently clobbers any other extension's log hook (flagged [verified-by-code] in pg_turret.md); pgcalendar declares a
+# vestigial module_pathname but ships no .so, and its versioned CREATE EXTENSION script (pgcalendar--1.0.1.sql) is 404 on
+# the repo (generated only at install/tarball time) → CREATE EXTENSION from a git checkout is broken.
+# Refill rule: the >70★ topic/name space is DEEPLY saturated vs the 144-doc corpus (this run's sweep — topic:postgresql-
+# extension >70 pushed:>2025 [46], pg_ in:name C >120 pushed:>2025-06 [54, all covered/known-skip], topic:postgres-
+# extension >80 [7], Rust name/desc >90 created:>2024-06 [3] — surfaced only these 3). Next runs: drop the floor to >50 +
+# probe language:Nim/Zig/C++/Go created:>2025 cohorts; postgresql_anonymizer via GitLab raw IF reachable (GitHub mirror
+# serves no raw files, still a [pending]-backlog candidate); the archived-ancestor pgvecto.rs (line 504) + is_jsonb_valid
+# (173★ ≈pg_jsonschema) + psql_bm25s (142★ ≈pg_textsearch) low-signal dups remain drainable if a themed run wants them.
+# Known-skipped (don't re-add): pg_uuidv7/pgx_ulid (≈uuidv47), pg_ai_query/pg_gpt (thin AI bridges), age-viewer (JS UI),
+# pgmq-js/pgmq-go (client libs), django-ltree/postgresql-for-doctrine (ORM libs), pg_statviz (Python client viz utility),
+# pg_hexedit (standalone hex-editor tool) + the full standing known-skip list above (forked distros / poolers / backup
+# CLIs / parser libs / pspg / deprecated).
