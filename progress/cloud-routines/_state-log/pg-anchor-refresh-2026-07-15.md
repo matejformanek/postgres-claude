@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-15 — anchor `8f71f64deee6` → `572c3b2ddf8c`; 12 commits (JSON_TABLE cleanup series + pgstat statsfile rework/revert + PHV/RLS fixes + _Generic modernization); 3 docs queued for audit (deparse.c, analyzejoins.c, relcache.c), 6 idempotent-skipped; 0 catversion (202607091 held) (PR #TBD).
