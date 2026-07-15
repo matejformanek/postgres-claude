@@ -1,1 +1,1 @@
-**pg-docs-miner** 2026-07-15 — Appendix-F SQL-callable-function contrib family: 6 docs [dict_int, unaccent, pgcrypto, sslinfo, uuid-ossp, dblink], docs-distilled 300→306, load-bearing claims code-verified @8f71f64deee6 (PR #<pending>).
+**pg-docs-miner** 2026-07-15 — Appendix-F SQL-callable-function contrib family: 6 docs [dict_int, unaccent, pgcrypto, sslinfo, uuid-ossp, dblink], docs-distilled 300→306, load-bearing claims code-verified @8f71f64deee6 (PR #616).
