@@ -49,13 +49,15 @@ collation; only ctype/casemap varies. (`pg_locale_builtin.c:275-298`
 ## Potential issues
 
 - [ISSUE-info-disclosure: `errmsg("invalid locale name \"%s\" for
-  builtin provider", collcollate)` (`:293-295`) echoes the user-
+  builtin provider", collcollate)` (`:336-339`, in
+  `get_collation_actual_version_builtin`) echoes the user-
   supplied locale name in the error. Acceptable; comes from DBA-
   controlled SQL. (low)]
 - [ISSUE-correctness: collation version is hardcoded "1" for all
-  three locales (`:285-290`). If Unicode tables in the build change
+  three locales (C / C.UTF-8 / PG_UNICODE_FAST, `return "1"` at
+  `:328`/`:330`/`:332`). If Unicode tables in the build change
   ctype semantics, the collversion does NOT bump — but the comment
-  at `:282-283` explicitly says collversion only tracks sort order,
+  at `:326-327` explicitly says collversion only tracks sort order,
   which is memcmp-stable. So ctype behavior changes silently after
   upgrade. (informational, by design)]
 

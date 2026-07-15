@@ -13,7 +13,7 @@ than the periodic 30-day refresh: process them first.
 
 ## Entries
 
-[pending] knowledge/subsystems/storage-ipc.md verified=2026-06-15
+[pending] knowledge/subsystems/storage-ipc.md verified=2026-07-15 [§4 audited @1863452a4bfe: 6 cites hold (shmem.c:224-272/:43-46/:872-892, procarray.c:76-105, sinvaladt.c:165-197/:137-163); 5 drift-fixed: procarray.c:2218→608-627 (ProcArrayRemove shift), dsm.c:30-44→80-97 (dsm_control_item/header), dsm.c:73-83→67-77 (dsm_segment), shm_mq.c:31-71→73-83, shm_toc.c:29-37→26-34]
 [pending] knowledge/subsystems/storage-lmgr.md verified=2026-06-15
 [pending] knowledge/subsystems/utils-cache.md verified=2026-06-15
 [pending] knowledge/subsystems/utils-mmgr.md verified=2026-06-15

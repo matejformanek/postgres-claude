@@ -196,7 +196,9 @@ Grouped by concern.
   active PGPROC indexes plus parallel arrays in `ProcGlobal` (`xids[]`,
   `subxidStates[]`, `statusFlags[]`); each PGPROC carries `pgxactoff`
   giving its current position. Ordering invariant: dense, can shift on
-  `ProcArrayRemove`. `[from-comment]` `procarray.c:2218`.
+  `ProcArrayRemove`. `[from-comment]` `procarray.c:608-627` (the
+  "Keep the PGPROC array sorted" `memmove` shift-down + the
+  "Adjust pgxactoff of following procs" readjust loop).
 - **`PGPROC`** — defined in `storage/proc.h`. Carries `xid`, `xmin`,
   subxid cache, `procLatch`, `delayChkptFlags`; pointed to by both
   ProcArray and ProcSignal slots. The PGPROC is the lock-holder identity
@@ -220,17 +222,19 @@ Grouped by concern.
   Per-process `MyLatch`; per-PGPROC `procLatch` for cross-backend wakeups.
 - **`WaitEventSet`** (`waiteventset.h`) — opaque; carries the OS fd
   (epoll/kqueue), the slot array, and on Linux a signalfd for SIGURG.
-- **`dsm_control_header` + `dsm_control_item`** (`dsm.c:30-44`) — refcount
+- **`dsm_control_header` + `dsm_control_item`** (`dsm.c:80-97`;
+  `dsm_control_item` 80-88, `dsm_control_header` 91-97) — refcount
   table for live DSM segments; lives in the postmaster-created control
   segment whose handle is stashed in `PGShmemHeader->dsm_control`.
-  `maxitems = 64 + 5*MaxBackends`.
-- **`dsm_segment`** (`dsm.c:73-83`) — per-backend descriptor; bound to a
+  `maxitems = PG_DYNSHMEM_FIXED_SLOTS (64) + PG_DYNSHMEM_SLOTS_PER_BACKEND
+  (5) * MaxBackends` (`dsm.c:53-54`, computed `:205-206`).
+- **`dsm_segment`** (`dsm.c:67-77`) — per-backend descriptor; bound to a
   `ResourceOwner` so segments auto-detach on transaction abort. `on_detach`
   slist holds cleanup callbacks (used by `shm_mq` detach, DSA detach…).
-- **`shm_mq`** (`shm_mq.c:31-71`) — ring with lock-free atomic cursors;
+- **`shm_mq`** (`shm_mq.c:73-83`) — ring with lock-free atomic cursors;
   `mq_receiver`/`mq_sender` PGPROC pointers; `mq_detached` flag flips
   monotonically.
-- **`shm_toc`** (`shm_toc.c:29-37`) — magic + spinlock + entry array
+- **`shm_toc`** (`shm_toc.c:26-34`) — magic + spinlock + entry array
   growing from start, allocations from the end.
 - **`ConditionVariable`** (`storage/condition_variable.h`, used here in
   `procsignal.c` `pss_barrierCV`, `barrier.c`, and the per-buffer I/O CVs
