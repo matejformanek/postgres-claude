@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-07-16 — glossary +67 (2837→2904): mined the 6 new docs-distilled contrib docs (dblink, dict_int, pgcrypto, sslinfo, unaccent, uuid-ossp); passes 1 & 3 verified steady-state no-ops.
