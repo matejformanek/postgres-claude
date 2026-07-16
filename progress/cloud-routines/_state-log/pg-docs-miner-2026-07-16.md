@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-07-16 — Final Appendix-F contrib sweep: 6 docs (tcn, lo, contrib-spi, basebackup-to-shell, sepgsql, xml2), docs-distilled 306→312; code-verified @572c3b2ddf8c; found contrib-spi docs-vs-master drift (refint removed on master, still documented in /docs/current + present on REL_17/18) (PR #TBD).
