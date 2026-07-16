@@ -1,0 +1,1 @@
+**pg-quality-auditor** 2026-07-16 — ISSUE mode: catalog register refill + triage, 29 symbol-cited rows @8f71f64deee6 (28 still-present, 1 claim-overstated [pg_control.h version-bump obligation IS documented :33+:95], 0 code-drift, 0 upstream-fixes). Clean run — catalog format-headers stable by design. ~39 catalog rows staged for next pass, then initdb/pg_dump (PR #<n>).
