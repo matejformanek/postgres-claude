@@ -222,3 +222,48 @@ ri_triggers row independently reads :295,4010, confirming today's re-anchor.)
 [done:2026-07-15] utils-adt.md ri_triggers.c:295,4010 | correctness/maybe | seeded=2026-07-13
 [done:2026-07-15] utils-adt.md xml.c:2042 | stale-todo/nit | seeded=2026-07-13
 [done:2026-07-15] utils-adt.md xml.c:4449-4451 | correctness/nit | seeded=2026-07-13
+
+## Refill 2026-07-16 (pg-quality-auditor) — catalog register, 29 symbol-cited open rows
+
+utils-adt register (utils-adt.md) line-cited pending drained on 2026-07-15. Next
+in the recipe's register list: `catalog` (src/include/catalog/ `pg_*.h` headers,
+seeded 2026-06-02 by the A1 catalog-headers sweep). These rows are **symbol/pattern
+cited** (header + field/macro name) rather than `file:line`, so drift = "the cited
+symbol / on-disk-char / struct-pun is still present in the header at the anchor."
+All 29 concretely-checkable rows triaged @8f71f64deee6: **28 still-present, 1
+claim-overstated** (pg_control.h version-bump obligation IS documented at :33 + :95
+— annotated in-register, downgrade to nit at next re-seed; no code drift). Zero
+upstream fixes, zero line-drift — catalog format-defining headers are stable by
+design. Remaining ~39 catalog rows (propgraph empty-comment cluster, publication,
+statistic_ext char-code, seclabel/shseclabel, auth_members, etc.) staged for the
+next catalog pass. After catalog fully drains: `initdb`, `pg_dump` per the recipe.
+
+[done:2026-07-16] catalog.md pg_statistic.h stavalues1..5 | leak/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (anyarray :121-125)
+[done:2026-07-16] catalog.md pg_statistic_ext_data.h stxdmcv+stxdexpr | leak/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (:43-44)
+[done:2026-07-16] catalog.md pg_authid.h rolpassword-no-TOAST | question/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (text :48, no DECLARE_TOAST)
+[done:2026-07-16] catalog.md pg_largeobject_metadata.h lomacl-no-TOAST | leak/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (aclitem[1] :40)
+[done:2026-07-16] catalog.md pg_parameter_acl.h parname-canon/text_ops | question/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (text_ops unique idx :57)
+[done:2026-07-16] catalog.md pg_user_mapping.h umoptions-secret | question/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (text[1] :41)
+[done:2026-07-16] catalog.md pg_replication_origin.h roident-uint16 | invariant/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (Oid :43, WAL-fit comment :39-40)
+[done:2026-07-16] catalog.md pg_control.h version-bump-obligation | invariant/confirmed | seeded=2026-06-02 | claim-overstated@8f71f64deee6 (obligation documented :33+:95; nit at re-seed)
+[done:2026-07-16] catalog.md pg_control.h rmgr-info-renumber | invariant/confirmed | seeded=2026-06-02 | still-present@8f71f64deee6 (no anti-renumber warning)
+[done:2026-07-16] catalog.md pg_class.h RELKIND/RELPERSISTENCE/REPLICA_IDENTITY chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:171+ no on-disk warning)
+[done:2026-07-16] catalog.md pg_attribute.h ATTRIBUTE_IDENTITY/GENERATED chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:133)
+[done:2026-07-16] catalog.md pg_type.h TYPTYPE/TYPCATEGORY/TYPALIGN/TYPSTORAGE chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:280+)
+[done:2026-07-16] catalog.md pg_proc.h PROKIND/PROVOLATILE/PROPARALLEL/PROARGMODE chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6
+[done:2026-07-16] catalog.md pg_operator.h oprkind l/b | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:46-47)
+[done:2026-07-16] catalog.md pg_am.h amtype i/t | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:65-66)
+[done:2026-07-16] catalog.md pg_collation.h collprovider_name-omits-DEFAULT | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (switch :84-88 omits 'd' :74)
+[done:2026-07-16] catalog.md pg_subscription.h substream/subtwophasestate/suborigin chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:65-123)
+[done:2026-07-16] catalog.md pg_subscription_rel.h SUBREL_STATE-IPC-mixing | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:66-76; IPC-only now flagged :75)
+[done:2026-07-16] catalog.md pg_trigger.h tgtype-bits-no-renumber-warning | undocumented-invariant/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (:96-103)
+[done:2026-07-16] catalog.md pg_trigger.h tgenabled-no-symbolic-names | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:47)
+[done:2026-07-16] catalog.md pg_attribute.h attlen/attbyval/attalign-mirror | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:58-102 prose only)
+[done:2026-07-16] catalog.md pg_proc.h proargtypes-struct-pun | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:97 no static-assert)
+[done:2026-07-16] catalog.md pg_index.h indkey-struct-pun | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:50-51)
+[done:2026-07-16] catalog.md pg_partitioned_table.h partattrs-struct-pun | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:42-46 rationale comment, no enforcement)
+[done:2026-07-16] catalog.md pg_foreign_table.h relkind='f'-invariant | undocumented-invariant/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (ftrelid :32, not schema-enforced)
+[done:2026-07-16] catalog.md pg_extension.h extconfig/extcondition-parallel-arrays | undocumented-invariant/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (:43-45)
+[done:2026-07-16] catalog.md pg_subscription.h subconninfo-ACL-doc-drift | doc-drift/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (header now reminds :39; ACL still in system_views.sql)
+[done:2026-07-16] catalog.md pg_subscription_rel.h state/LSN-coupling | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:37-45)
+[done:2026-07-16] catalog.md pg_control.h 512-byte-atomicity | undocumented-invariant/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (:252-257 says "one disk sector, 512" but not hw-defined framing)
