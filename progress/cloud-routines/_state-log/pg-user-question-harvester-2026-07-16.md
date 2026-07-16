@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-16 — 40 internals questions harvested (38 hackers / 2 general), 24 skills tagged, 3 gap tags/3 topics (role-membership-management, pg_dump-internals, vfd-cache); recipe 40-thread cap reached (PR #619).
