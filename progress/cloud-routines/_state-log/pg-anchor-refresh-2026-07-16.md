@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-16 — anchor 572c3b2ddf8c → 5174d157a038; 14 commits (headline: Melanie Plageman VM-clear WAL-logging corruption-fix series ed62d26); 42 docs queued for audit (8 behavioral heap/VM cluster + 34 mechanical-sweep type-hygiene), 32 idempotent-skipped; catversion held 202607091; access-heap subsystem ≥5-impacted, annotated in place (PR #<n>).
