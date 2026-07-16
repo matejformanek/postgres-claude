@@ -614,3 +614,27 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # pgmq-js/pgmq-go (client libs), django-ltree/postgresql-for-doctrine (ORM libs), pg_statviz (Python client viz utility),
 # pg_hexedit (standalone hex-editor tool) + the full standing known-skip list above (forked distros / poolers / backup
 # CLIs / parser libs / pspg / deprecated).
+
+# --- Refill + drain (seeded+processed 2026-07-16 cloud/pg-extension-anthropologist) ---
+# DISCOVERY CONSTRAINT this run: GitHub search is UNAVAILABLE in the cloud CCR session — the
+# session is bound to the single configured repo (matejformanek/postgres-claude), so both MCP
+# search_repositories (503) and curl to api.github.com/search (403 "sessions are bound to their
+# configured repositories") are blocked; the git/trees API is likewise 403 for external repos.
+# raw.githubusercontent.com fetch of arbitrary public repos DOES work. So discovery was done by
+# NAME (well-known uncovered ecosystem extensions), fetched + verified directly via raw. Next
+# runs: same constraint expected — refill from named-candidate memory + the standing backlog, not
+# from live search. THEME this run: "four distinct ways to bend a pluggable core extension point."
+[done:placeholder] postgrespro/rum branch=master files=README.md,rum.control,META.json,src/rum.h,src/rumget.c,src/rumutil.c,src/rumbtree.c,src/rum_ts_utils.c  # native GIN-successor INDEX AM: changes the posting-list unit from bare ItemPointerData to RumItem{iptr,addInfoIsNull,addInfo} (src/rum.h:171-176) attaching a per-entry Datum (tsvector positions / a scalar like timestamp) to every TID → sets amcanorderbyop=true (rumutil.c:119, the flag GIN never sets) → answers ORDER BY tsvector <=> tsquery FTS ranking + order-by-attached-column straight from the index. 368 lines, ~109 cites. stars [unverified] (API blocked); liveness proxy = 2025 copyright + control default_version 1.4. → knowledge/ideologies/rum.md
+[done:placeholder] plproxy/plproxy branch=master files=AUTHORS,README.md,plproxy.control,src/plproxy.h,src/function.c,src/execute.c,src/cluster.c,src/query.c,src/result.c,src/main.c  # PL-handler-as-RPC-router: hijacks the LANGUAGE plproxy call-handler slot (main.c:54,240 plproxy_call_handler) — function bodies run ZERO local code, instead compiling a CLUSTER/RUN ON/TARGET/SELECT DSL (function.c) into a hash-partition-routed poll()-driven async-libpq scatter-gather over a private connection pool (execute.c/cluster.c), re-marshaling remote result columns by name (result.c). Sharding/RPC years before FDW/Citus. 314 lines, ~86 cites. (manifest correction: README.md IS present @200; only README/README.rst are 404). → knowledge/ideologies/plproxy.md
+[done:placeholder] pgsql-io/multicorn2 branch=main files=README.md,multicorn.control,src/multicorn.c,src/multicorn.h,src/python.c,src/errors.c,python/multicorn/__init__.py  # Python-embedding FDW FRAMEWORK: Py_Initialize() once per backend (multicorn.c:160), one fixed FdwRoutine (handler multicorn.c:42,185) whose entire variance lives in a runtime-resolved duck-typed Python ForeignDataWrapper subclass named by the server `wrapper 'module.Class'` OPTION; every Datum marshaled to/from PyObject per value; quals/sort/limit pushed down as advisory Python objects (rechecked anyway); Python exceptions → ereport in errors.c (SQLSTATE lost, traceback kept). The maintained PG12-18 fork of the archived Kozea/Multicorn; direct Python analog of the Rust [[wrappers]]/[[pgrx]]. 310 lines, ~89 cites. → knowledge/ideologies/multicorn.md
+[done:placeholder] postgrespro/pg_variables branch=master files=README.md,pg_variables.control,pg_variables.h,pg_variables.c  # typed in-memory SESSION-STATE store: keeps all mutable session state in its OWN backend-local HTABs under a dedicated ModuleContext rooted in CacheMemoryContext (pg_variables.c:129,1802) — not catalog, not MVCC, not shared across backends, survives transaction boundaries — and hand-rolls transaction-scoped visibility (opt-in is_transactional flavor) via a dlist of TransState value snapshots driven by Register(Sub)XactCallback: a private MVCC above the storage engine (regular vars are simply never enrolled → survive ROLLBACK). Teardown implicit via CacheMemoryContext death [inferred: no on_proc_exit]. Directly relevant to this repo's own @x sesvars work. 220 lines, ~60 cites. → knowledge/ideologies/pg_variables.md
+# 4 entries processed 2026-07-16 (rum, plproxy, multicorn, pg_variables — the "bend a pluggable core extension point" theme:
+# index AM / PL handler / FDW framework / session-state memory). knowledge/ideologies/ now holds 148 ext docs.
+# [done:placeholder] markers above rewritten with the merge SHA by pg-evening-merger.
+# Refill rule: GitHub SEARCH is blocked in the cloud session (repo-bound); discover uncovered extensions by NAME from the PG
+# ecosystem + the standing backlog and fetch/verify via raw.githubusercontent.com. Named uncovered candidates left [pending]
+# for next runs: postgres-plr/plr (R procedural language — 6th PL after plv8/pljava/plpython[core]/pldotnet), theory/pgtap
+# (PL/pgSQL test framework), powa-team/powa-archivist (bgworker pg_stat_statements snapshot aggregator), postgrespro/jsquery
+# (jsonb query-language type + GIN opclass, jsonpath ancestor), ossc-db/pg_store_plans (normalized-plan store). Standing
+# low-signal dups STILL [pending]: tensorchord/pgvecto.rs (line 504, archived VectorChord ancestor), is_jsonb_valid (173 star ≈pg_jsonschema),
+# psql_bm25s (142 star ≈pg_textsearch). Standing known-skip list above still applies.
