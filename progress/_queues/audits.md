@@ -14,26 +14,26 @@ than the periodic 30-day refresh: process them first.
 ## Entries
 
 [pending] knowledge/subsystems/storage-ipc.md verified=2026-07-15 [§4 audited @1863452a4bfe: 6 cites hold (shmem.c:224-272/:43-46/:872-892, procarray.c:76-105, sinvaladt.c:165-197/:137-163); 5 drift-fixed: procarray.c:2218→608-627 (ProcArrayRemove shift), dsm.c:30-44→80-97 (dsm_control_item/header), dsm.c:73-83→67-77 (dsm_segment), shm_mq.c:31-71→73-83, shm_toc.c:29-37→26-34]
-[pending] knowledge/subsystems/storage-lmgr.md verified=2026-06-15
-[pending] knowledge/subsystems/utils-cache.md verified=2026-06-15
-[pending] knowledge/subsystems/utils-mmgr.md verified=2026-06-15
-[pending] knowledge/subsystems/jit.md verified=2026-06-15
-[pending] knowledge/subsystems/partitioning.md verified=2026-06-15 [drift-fixed: PartitionRangeBound 50-71→65-71, partition_hbound_cmp 3770-3778→3580-3588]
+[pending] knowledge/subsystems/storage-lmgr.md verified=2026-07-17 [clean @572c3b2d: lock.c LockConflicts[] 68-108 exact, CleanUpLock 1746, lwlock.h NUM_LOCK_PARTITIONS 86-87, lockdefs.h lock-modes 33-48 all hold]
+[pending] knowledge/subsystems/utils-cache.md verified=2026-07-17 [clean @572c3b2d: catcache.c CatCacheInvalidate 643/Reset* 816/822/852/CatCInProgress 52/TID-comment 633-638 exact; SearchCatCacheInternal/Miss region +2 (name 1425/1533) within tolerance]
+[pending] knowledge/subsystems/utils-mmgr.md verified=2026-07-17 [clean @572c3b2d: memnodes.h MemoryContextData 117-134/mcxt.c globals 161-176/AllocationFailure 1201/RegisterResetCallback 636; LOC 1946 exact]
+[pending] knowledge/subsystems/jit.md verified=2026-07-17 [clean @572c3b2d: jit.h JitContext 57-63/JitProviderCallbacks 74-79/llvmjit.h LLVMJitContext 43-71/jit.c provider-init 111-114 hold; jit.c 191 LOC]
+[pending] knowledge/subsystems/partitioning.md verified=2026-07-17 [clean @572c3b2d: partbounds.h PartitionBoundInfoData 79-96/partdesc.h PartitionDescData 29-64/partbounds.c PartitionRangeBound 65-71/partprune.c PartClauseInfo 63-72 + PartClauseMatchStatus 78-86 all exact]
 
 ## audit-clean rotation (2026-06-20) — anchor bdae2c20e88d, 12 docs re-verified, 0 drift
 
 [pending] knowledge/subsystems/headers-wave3.md verified=2026-06-20 [clean: libpq-be.h Port 128-241/ClientConnectionInfo 86-106/ClientSocket 248-252/FILE_DH2048 265/be_tls_* 287-339 all hold]
-[pending] knowledge/idioms/error-handling.md verified=2026-06-20 [clean: elog.h elevel-ladder 26-58/elog macro 242/errstart defaults 108-112/MAKE_SQLSTATE 69-74/pg_unreachable 133-140 all hold]
-[pending] knowledge/idioms/fmgr.md verified=2026-06-20 [clean: fmgr.h PGFunction 40/FmgrInfo 56-67/FunctionCallInfoBaseData 85-96/LOCAL_FCINFO 110-118/SizeForFunctionCallInfo 102-104 + fmgr.c fn_oid-last 159 all hold]
+[pending] knowledge/idioms/error-handling.md verified=2026-07-17 [clean @572c3b2d: elog.h elevel-ladder 26-58/elog macro 242 exact/errstart 108-112/MAKE_SQLSTATE 69-74/pg_unreachable 133-140 all hold]
+[pending] knowledge/idioms/fmgr.md verified=2026-07-17 [clean @572c3b2d: fmgr.h PGFunction 40/FmgrInfo 56-67/FunctionCallInfoBaseData 85-96/LOCAL_FCINFO 110-118 all exact]
 [pending] knowledge/idioms/spi.md verified=2026-06-20 [clean: spi.c SPI_connect 94-98/horrible-API 40-47/SPI_finish 183/SPI_prepare 861/SPI_palloc 1339/SPI_result_code_string 1973 all hold]
 [pending] knowledge/idioms/catalog-conventions.md verified=2026-06-20 [clean: genbki.h CATALOG/BKI 42-66/CATALOG_VARLEN 148-156/DECLARE_* 68-146 + catversion.h CATALOG_VERSION_NO 60 + transam.h FirstNormalObjectId 195-197 all hold]
 [pending] knowledge/idioms/bgworker-and-parallel.md verified=2026-06-20 [clean: bgworker.h BGWORKER_CLASS_PARALLEL 69-75/BgWorkerStartTime 84-89/exit-code 18-23 + bgworker.c lockless-slot 45-86 + parallel.h API 64-72 + parallel.c CreateParallelContext 174/PARALLEL_KEY_* 64-81 + worker_spi.c bgw_extra 151-171 all hold]
 [pending] knowledge/idioms/guc-variables.md verified=2026-06-20 [clean: guc_tables.h config_type 22-27 + guc.h GucContext 71-80/config_source 111-127/GUC_* flags 222-228/GUC_CUSTOM_PLACEHOLDER 223 + guc.c MarkGUCPrefixReserved 5186 all hold]
 [pending] knowledge/data-structures/heap-tuple-layout.md verified=2026-06-20 [clean: htup_details.h HeapTupleHeaderData 153/t_infomask 188-217/t_infomask2 288-298/284-353 + heapam_visibility.c 13-35 all hold]
 [pending] knowledge/data-structures/pgproc-fields.md verified=2026-06-20 [clean: proc.h fastpath-fields 329-335/FastPathLockSlotsPerBackend 101-104/lockGroup 304-306 + lock.c FastPathTransferRelationLocks 2869 all hold]
-[pending] knowledge/architecture/mvcc.md verified=2026-06-20 [clean: heapam_visibility.c summary 38-57/non-MVCC-NOTE 13-27/MVCC-NOTE 33-36/SetHintBits 101-125 + htup_details.h t_ctid 86-112/combo-CID 73-84/XMIN flags 204-206 all hold]
-[pending] knowledge/architecture/wal.md verified=2026-06-20 [clean: xlog.c header 14-25/GUCs 121-143/wal_level 138/wal_sync_method_options 178-191 + xlog.h wal_level enum 76-78/XLogIsNeeded 112 all hold]
-[pending] knowledge/architecture/query-lifecycle.md verified=2026-06-20 [clean: postgres.c PostgresMain 4274/pg_parse_query 616/pg_plan_query 899/exec_simple_query 1029/parse_analyze callsite 699/ReadCommand callsite 4788 + rewriteHandler.c QueryRewrite 4781 all hold]
+[pending] knowledge/architecture/mvcc.md verified=2026-07-17 [clean @572c3b2d: summary 38-57/MVCC-NOTE 33-36/hint-setting-rules comment 101-125 all hold; NOTE: §7 setting-rules comment is now SetHintBitsExt() (SetHintBits split into batch-capable Ext + wrapper @199, new BufferBeginSetHintBits/BufferSetHintBits16 machinery) — cite range + MarkBufferDirtyHint bullet still valid, no line/symbol drift]
+[pending] knowledge/architecture/wal.md verified=2026-07-17 [clean @572c3b2d: xlog.c wal_level 138 exact + xlog.h XLogIsNeeded 112 exact hold]
+[pending] knowledge/architecture/query-lifecycle.md verified=2026-07-17 [DRIFT-FIXED @572c3b2d: PostgresMain 4274→4364, ReadCommand callsite 4788→4878, 'Q'/msg-switch 4838-4856→4928-4946 (all +90), QueryRewrite 4781→4789/4772-4781→4779-4789 (+8); pg_parse_query 617/pg_plan_query 900/exec_simple_query 1030 left (+1, within tol)]
 
 ## anchor-bump (2026-06-14) — e18b0cb7344..da1eff08a5be (20 commits)
 
