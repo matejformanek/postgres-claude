@@ -140,6 +140,10 @@ abort callbacks, and discarding the transaction's memory — reached on any
 
 
 
+### absval
+dict_int tuning parameter (default false): when true a leading `+`/`-` sign is skipped before `maxlen` is applied, so the sign does not count toward the digit budget. [verified-by-code] (`source/contrib/dict_int/dict_int.c:90` — via `knowledge/docs-distilled/dict-int.md`).
+
+
 ### AcceptInvalidationMessages
 The routine that drains and applies pending shared-invalidation (sinval)
 messages, flushing stale relcache/catcache entries; it runs at every lock
@@ -802,6 +806,10 @@ the archiver invoke a loadable module instead of shelling out to
 ### ArchiveRecoveryRequested
 The startup-process flag set when a `recovery.signal` or `standby.signal` file is present, meaning the cluster must perform archive recovery (consulting `restore_command` for missing WAL); `ArchiveRecoveryRequested && !InArchiveRecovery` marks the late transition into archive recovery. [verified-by-code] (via `knowledge/idioms/crash-recovery-startup.md`).
 
+
+
+### armor
+pgcrypto function converting binary to a PGP ASCII-armor block (base64 + CRC); `dearmor` reverses it and `pgp_armor_headers` extracts its headers. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
 
 
 ### array_iterator
@@ -1893,6 +1901,10 @@ Constructs a `HeapTuple` from an array of C strings by running each column's typ
 
 
 
+### builtin_crypto_enabled
+pgcrypto enum GUC `pgcrypto.builtin_crypto_enabled` (`on`/`off`/`fips`, default `on`) gating the PG-builtin `crypt()`/`gen_salt()` path; `fips` disables the builtin path when OpenSSL is in FIPS mode. [verified-by-code] (`source/contrib/pgcrypto/pgcrypto.c:70,62` — via `knowledge/docs-distilled/pgcrypto.md`).
+
+
 ### bulk_write
 The smgr-level facility for populating a brand-new relation fork in bulk (CREATE INDEX, REINDEX, CLUSTER, table rewrites) while bypassing the shared buffer manager, avoiding buffer-lock and partition-lock contention. It buffers pages and writes them out in batches, WAL-logging as needed, then fsyncs the fork at the end. [verified-by-code] (via `knowledge/files/src/backend/storage/smgr/bulk_write.c.md`).
 
@@ -2887,6 +2899,10 @@ The C entry point behind the two-argument `crosstab(source_sql, category_sql)` p
 
 
 
+### crypt
+pgcrypto adaptive password-hash function: `crypt(password, salt)` is deliberately slow and the salt self-describes algorithm and cost, so verification just re-runs `crypt(candidate, stored_hash)` and compares. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
+
+
 ### cryptohash
 The unified cryptographic-hash abstraction (`pg_cryptohash_create`/`_update`/
 `_final`) that dispatches to OpenSSL when built `--with-ssl`, or to in-tree
@@ -3162,6 +3178,90 @@ The database OID component carried in shared-invalidation messages and standby W
 
 
 
+### dblink
+The synchronous dblink query function `dblink(sql)`: runs `sql` on a named or the single unnamed remote libpq connection and returns the rows as `SETOF record` (a column-definition list is required); dblink is the imperative, multi-connection alternative to the declarative `postgres_fdw`. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_build_sql_insert
+Synthesizes INSERT statement text from a local tuple plus key columns; part of the "replicate one row to a peer" helper set with `dblink_build_sql_update` and `dblink_build_sql_delete`. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_cancel_query
+Aborts an in-progress asynchronous dblink query on a connection. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_close
+Closes a remote cursor opened by `dblink_open`. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_connect
+Opens a session-lifetime libpq connection to another PostgreSQL database; `dblink_connect(connstr)` opens the single unnamed connection (a second call replaces it) while `dblink_connect(connname, connstr)` opens a named one, and `connstr` may be a libpq conninfo string or a foreign-server name. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_connect_u
+The unrestricted variant of `dblink_connect` that waives the "non-superuser must authenticate with a password" rule; it is superuser-only by default with `EXECUTE` revoked from `PUBLIC`, and grants must be given with care. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_disconnect
+Closes a dblink connection — a named one, or the unnamed connection — that otherwise persists until session end. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_error_message
+Returns the last libpq error message seen on a given dblink connection. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_exec
+The synchronous dblink command function: runs a non-SELECT statement on the remote and returns its command status string rather than a row set. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_fdw
+The foreign-data-wrapper whose servers plus user mappings dblink can name in place of a cleartext conninfo, so the remote password comes from the mapping; it supports the `use_scram_passthrough` option. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_fetch
+Fetches the next batch of rows from a remote cursor opened by `dblink_open`. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_get_connections
+Returns the names of all currently open dblink named connections. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_get_notify
+Drains LISTEN/NOTIFY notifications that arrived on a dblink connection. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_get_pkey
+Returns the primary-key column positions and names of a relation, feeding the `dblink_build_sql_*` DML synthesizers. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_get_result
+Blocks for and returns the row set of an async query previously started with `dblink_send_query` on a dblink connection. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_is_busy
+Polls whether an async query started by `dblink_send_query` is still running (returns 1 while busy, 0 once a result is ready). [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_open
+Opens a remote cursor to page a result set; the cursor lives only inside a transaction on the remote side, which dblink starts implicitly if none is active, with commit-visibility implications across the fetch calls. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### dblink_send_query
+Starts an asynchronous remote query on a dblink connection (one async query per connection at a time), to be polled with `dblink_is_busy` and collected with `dblink_get_result`. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### DblinkConnect
+Extension wait event surfacing a dblink connection being established in `pg_stat_activity` (siblings `DblinkGetConnect`, `DblinkGetResult`). [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### DblinkGetConnect
+Extension wait event for a dblink connection-not-found lookup in `pg_stat_activity`. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
+### DblinkGetResult
+Extension wait event for a dblink backend awaiting the remote row set in `pg_stat_activity`. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
 ### dbOid
 The database-OID field in WAL descriptions and relfilenode locators (`spcOid` / `dbOid` / `relNumber`), identifying which database a logged change belongs to; `InvalidOid` here denotes a shared (cluster-wide) relation. [verified-by-code] (`seqdesc.c:31` — via `knowledge/files/src/backend/access/rmgrdesc/seqdesc.c.md`).
 
@@ -3199,6 +3299,10 @@ The wait duration (default 1 s) after which a lock waiter triggers PostgreSQL's 
 ### DeadLockCheck
 The deadlock-detector entry (`deadlock.c:220`, called from `CheckDeadLock` in proc.c with all lock-partition LWLocks held) that walks the wait-for graph and returns a `DeadLockState`, optionally rearranging wait queues to break a soft deadlock. [verified-by-code] (`deadlock.c:220` — via `knowledge/files/src/backend/storage/lmgr/deadlock.c.md`).
 
+
+
+### dearmor
+pgcrypto function that decodes a PGP ASCII-armor block back to binary — the inverse of `armor`. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
 
 
 ### debug_discard_caches
@@ -3361,14 +3465,26 @@ The read side of TOAST: given an EXTERNAL (and possibly COMPRESSED) varlena poin
 
 
 
+### dict_int
+Contrib text-search dictionary template (~110 lines) that controls indexing of integer tokens so that many distinct large integers do not bloat a GIN/GiST full-text index; the minimal `init`+`lexize` example over the text-search dictionary interface. [from-docs] (via `knowledge/docs-distilled/dict-int.md`).
+
+
 ### dict_snowball
 The built-in text-search stemming dictionary backed by the Snowball stemmer library. Its C source is generated from per-language Snowball algorithm files plus a small PostgreSQL wrapper (`dict_snowball.c`) that adapts the stemmer to the `ispell`/dictionary template API used by `tsvector` processing. [verified-by-code] (via `knowledge/files/src/backend/snowball/README.md`).
 
 
 
+### digest
+pgcrypto function `digest(data, type)` returning the `bytea` hash of `data` under `md5`/`sha1`/`sha224`/`sha256`/`sha384`/`sha512` or any OpenSSL-registered digest; hex it with `encode()`. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
+
+
 ### DIM_MASK
 The cube `NDBOX.header` mask (`0x7fffffff`) isolating the dimension count from the is-point flag (`POINT_BIT`, bit 31); read via the `DIM(cube)` macro. [verified-by-code] (`cubedata.h:31` — via `knowledge/docs-distilled/cube.md`).
 
+
+
+### dintdict_init
+The dict_int `init` method that parses the `maxlen`/`rejectlong`/`absval` options (defaults 6/false/false) and validates `maxlen >= 1` with an errmsg. [verified-by-code] (`source/contrib/dict_int/dict_int.c:42-57` — via `knowledge/docs-distilled/dict-int.md`).
 
 
 ### DirectFunctionCall
@@ -4603,6 +4719,10 @@ The optional logical-decoding output-plugin callback that lets a plugin skip cha
 
 
 
+### filtering dictionary
+A text-search dictionary shape that rewrites a token's lexeme and hands it to the next dictionary in the mapping instead of terminating processing (unaccent is the reference), contrasting with a terminal dictionary that emits or stops a token (dict_int). [verified-by-code] (via `knowledge/docs-distilled/unaccent.md`).
+
+
 ### final_cost_hashjoin
 The second-phase hash-join cost estimate (`costsize.c`) — refines the `initial_cost_hashjoin` lower bound with batch count, bucket fill, and parallel-hash sharing once the specific inner/outer paths are known. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/costsize.c.md`).
 
@@ -4626,6 +4746,10 @@ The ECPG preprocessor's top-level resolver for a host-variable reference string:
 ### findoprnd
 intarray's `query_int` parser helper that wires up operands of a parsed query-int expression; it enforces `delta >= PG_INT16_MIN` and otherwise raises `ERRCODE_PROGRAM_LIMIT_EXCEEDED` ("query_int expression is too complex"). [verified-by-code] (`_int_bool.c:494-501` — via `knowledge/files/contrib/intarray` docs).
 
+
+
+### fips_mode
+pgcrypto function reporting whether OpenSSL is currently running in FIPS mode. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
 
 
 ### fireRIRrules
@@ -6724,6 +6848,10 @@ The default B-tree operator class for `int4`, bundling the comparison operators 
 
 
 
+### intdict_template
+The text-search dictionary template installed by `CREATE EXTENSION dict_int`, instantiated as the default `intdict` dictionary that callers tune via `ALTER TEXT SEARCH DICTIONARY`. [from-docs] (via `knowledge/docs-distilled/dict-int.md`).
+
+
 ### interleaved_parts
 A `PartitionBoundInfo` bitmapset (set only for a baserel, `partbounds.h:75-77`) marking list partitions whose bound values interleave, which disables certain pruning fast-paths. [verified-by-code] (via `knowledge/subsystems/partitioning.md`).
 
@@ -8221,6 +8349,10 @@ The upper bound on line pointers a heap page can hold, derived from the smallest
 ### MAXIMUM_ALIGNOF
 The widest fundamental alignment the platform requires (typically 8), used throughout the backend for MAXALIGN'd layout; defined in `c.h`. It intentionally excludes wider-than-8 types such as `int128`, which is why `int128` needs an explicit `pg_attribute_aligned(MAXIMUM_ALIGNOF)`, and it backs MAXALIGN'd helpers like `PGAlignedBlock`. [verified-by-code] (`c.h` — via `knowledge/files/src/include/c.h.md`).
 
+
+
+### maxlen
+dict_int tuning parameter (default 6): the maximum number of digits kept from an integer token; a longer token is truncated to its first `maxlen` digits by default. [verified-by-code] (`source/contrib/dict_int/dict_int.c:98,109` — via `knowledge/docs-distilled/dict-int.md`).
 
 
 ### maxMsgNum
@@ -10903,14 +11035,26 @@ The built-in logical-decoding output plugin that backs native publish/subscribe 
 
 
 
+### pgp_armor_headers
+pgcrypto set-returning function extracting the key/value headers from a PGP ASCII-armored block. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
+
+
 ### pgp_pub_decrypt
 The pgcrypto SQL function that decrypts an OpenPGP message with a public-key (asymmetric) secret key; its `keypkt` argument is attacker-influenceable, which the per-file issue register flags as a security concern. The symmetric counterpart is `pgp_sym_decrypt`. [from-comment] (via `knowledge/files/contrib/pgcrypto/pgp-pgsql.md`).
 
 
 
+### pgp_pub_encrypt
+pgcrypto public-key PGP encryption, paired with `pgp_pub_decrypt`; pgcrypto's PGP support has no signing, no master key, and no multiple subkeys. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
+
+
 ### pgp_sym_decrypt
 The pgcrypto SQL entry point that decrypts an OpenPGP symmetric-key (passphrase) message (`pgp_sym_encrypt` is its counterpart); the passphrase is turned into a session key through the S2K key-derivation path. [from-comment] (via `knowledge/files/contrib/pgcrypto/pgp-s2k.md`).
 
+
+
+### pgp_sym_encrypt
+pgcrypto symmetric (password-based) PGP encryption, paired with `pgp_sym_decrypt`; options tune `cipher-algo` (default aes128), `s2k-mode` (default 3 = salted+iterated), and more. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
 
 
 ### PGPROC
@@ -12389,6 +12533,10 @@ Snapshot refcount field: the number of `ResourceOwner` registrations (plus pairi
 
 
 
+### regdictionary
+The registered-type reference for a text-search dictionary, e.g. the optional first argument of the two-arg `unaccent(dictionary regdictionary, string text)` form. [from-docs] (via `knowledge/docs-distilled/unaccent.md`).
+
+
 ### regex_t
 The compiled-regular-expression object produced by `pg_regcomp` from the backend's bundled Spencer regex engine; `pg_regexec` runs it against input. Type code and `~`/`SIMILAR TO` operators cache it to avoid recompiling per row. [inferred] (via `knowledge/files/src/backend/regex/regcomp.c.md`).
 
@@ -12484,6 +12632,10 @@ The shared `pg_regress` test-driver framework function (declared in `pg_regress.
 ### ReInitializeDSM
 The parallel-executor callback phase (`ExecXxxReInitializeDSM`) that resets a node's already-allocated DSM shared state before a rescan of the parallel plan, so a re-run reuses the segment instead of re-estimating and re-allocating it. It sits between `InitializeDSM` (first setup) and `InitializeWorker` in the parallel-node protocol. [verified-by-code] (via `knowledge/files/src/backend/executor/nodeCustom.c.md`).
 
+
+
+### rejectlong
+dict_int tuning parameter (default false): when true an over-`maxlen` integer becomes a stop word (empty lexeme, neither indexed nor searchable) rather than being truncated to a prefix. [verified-by-code] (`source/contrib/dict_int/dict_int.c:100` — via `knowledge/docs-distilled/dict-int.md`).
 
 
 ### relacl
@@ -13821,6 +13973,14 @@ One of the two set-returning-function return modes (the other being value-per-ca
 
 
 
+### sha256crypt
+A pgcrypto `crypt()`/`gen_salt()` adaptive scheme (unlimited password length, up-to-32-bit salt, default 5000 iterations — which the docs warn is too low for modern hardware). [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
+
+
+### sha512crypt
+A pgcrypto `crypt()`/`gen_salt()` adaptive scheme like `sha256crypt` with a larger digest; default 5000 iterations, flagged by the docs as too low for modern hardware. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
+
+
 ### shadow_pass
 The stored authentication verifier for a role (the contents of
 `pg_authid.rolpassword`) — either an `md5…` hash or a `SCRAM-SHA-256$…`
@@ -14525,9 +14685,49 @@ Secure Sockets Layer — the historical name (now TLS) for PostgreSQL's encrypte
 
 
 
+### ssl_cipher
+sslinfo function returning the TLS cipher in use on the current connection. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:75` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_client_cert_present
+sslinfo function returning whether the client presented a certificate on the current connection. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:98` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_client_dn
+sslinfo function returning the full client-certificate subject DN, converted to the current database encoding (raw UTF-8 bytes under `SQL_ASCII`). [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:299` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_client_dn_field
+sslinfo function extracting one field (case-insensitive `CN`/`O`/`OU`/`C`/`emailAddress`/…) from the client-certificate subject DN, returning NULL for an absent field. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:236` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_client_serial
+sslinfo function returning the client certificate serial as `numeric` (serials exceed int64); a serial is unique only per issuer, so pair it with `ssl_issuer_dn()`. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:114` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_extension_info
+sslinfo set-returning function yielding one row per X.509 extension (name, value, critical flag) of the client certificate. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:352` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
 ### ssl_in_use
 The flag on the backend's `Port` (`MyProcPort->ssl_in_use`) recording whether the current client connection is TLS-encrypted; sslinfo's introspection functions gate every result on it, returning NULL on a non-TLS connection. [verified-by-code] (`sslinfo.c:5` — via `knowledge/files/contrib/sslinfo/sslinfo.c.md`).
 
+
+
+### ssl_is_used
+sslinfo function returning whether the current backend's connection uses TLS. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:44` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_issuer_dn
+sslinfo function returning the full client-certificate issuer DN. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:326` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_issuer_field
+sslinfo function extracting one named field from the client-certificate issuer DN. [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:271` — via `knowledge/docs-distilled/sslinfo.md`).
+
+
+### ssl_version
+sslinfo function returning the TLS protocol version of the current connection (NULL on a non-SSL connection). [verified-by-code] (`source/contrib/sslinfo/sslinfo.c:55` — via `knowledge/docs-distilled/sslinfo.md`).
 
 
 ### SSLok
@@ -15677,6 +15877,14 @@ The soft-failure table open: `try_relation_open` (lock-first, return NULL on a m
 
 
 
+### ts_lexize
+The SQL function (and dictionary-method contract) that runs a token through a text-search dictionary and returns its lexeme array, e.g. `ts_lexize('intdict','12345678')` → `{123456}`. [from-docs] (via `knowledge/docs-distilled/dict-int.md`).
+
+
+### TSLexeme
+The C struct array a text-search dictionary's lexize method returns: a terminal dictionary emits or stops a token, while a filtering dictionary builds a rewritten-lexeme-plus-terminator result. [verified-by-code] (`source/contrib/unaccent/unaccent.c:425` — via `knowledge/docs-distilled/unaccent.md`).
+
+
 ### tsm_system_rows_handler
 The single C function that is the whole tsm_system_rows extension: it does `makeNode(TsmRoutine)` and fills the three sampling callbacks (`SampleScanGetSampleSize`, `NextSampleBlock`, `NextSampleTuple`) implementing `SYSTEM_ROWS(n)` — return exactly n rows, block-level (hence biased toward clustering), with no `REPEATABLE` support. [verified-by-code] (`tsm_system_rows.c:81` — via `knowledge/docs-distilled/tsm-system-rows.md`).
 
@@ -15849,6 +16057,10 @@ The relcache invalidation callback (registered via `CacheRegisterRelcacheCallbac
 
 
 
+### unaccent
+Contrib accent-removing filtering text-search dictionary (and scalar `unaccent([dictionary regdictionary,] text)` function): strips diacritics (`Hôtel`→`Hotel`) and passes the rewritten lexeme to the next dictionary in the chain rather than terminating the token. [verified-by-code] (`source/contrib/unaccent/unaccent.c:425` — via `knowledge/docs-distilled/unaccent.md`).
+
+
 ### unicode_normalize
 PostgreSQL's Unicode normalization routine (NFC/NFD/NFKC/NFKD), validated by `norm_test` against the Unicode Consortium's official normalization test vectors; underlies SQL `normalize()` and `IS NORMALIZED`. [verified-by-code] (via `knowledge/files/src/common/unicode/norm_test.c.md`).
 
@@ -15940,6 +16152,10 @@ The build-time macro guarding optional LZ4 support across PostgreSQL. When undef
 
 
 
+### use_scram_passthrough
+A `dblink_fdw` / `postgres_fdw` option that lets the wrapper present SCRAM-hashed secrets to the remote instead of storing a plaintext password in the catalogs. [from-docs] (via `knowledge/docs-distilled/dblink.md`).
+
+
 ### user_opts
 The pg_upgrade `UserOpts` global capturing command-line-derived options (jobs, check mode, socket dir, etc.); one of the four driver-wide globals declared in `pg_upgrade.h`. [verified-by-code] (via `knowledge/files/src/bin/pg_upgrade/pg_upgrade.h.md`).
 
@@ -15973,6 +16189,54 @@ One of the two shared character-set conversion drivers in `conv.c` (with `LocalT
 ### UtilityTupleDescriptor
 Returns the result `TupleDesc` for a utility statement that produces rows (e.g. `EXPLAIN`, `FETCH`, `SHOW`), letting callers describe the result before the statement executes. [verified-by-code] (via `knowledge/files/src/include/tcop/utility.h.md`).
 
+
+
+### uuid_generate_v1
+uuid-ossp generator for a version-1 UUID embedding the host MAC address and a timestamp — the docs flag it as unsuitable where identity and time must stay secret. [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:116` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_generate_v1mc
+uuid-ossp version-1 UUID variant substituting a random multicast MAC to mitigate the MAC leak (the timestamp is still present). [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:117` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_generate_v3
+uuid-ossp deterministic version-3 UUID: MD5-hashes `name` within `namespace` with no random input, so the same inputs always yield the same UUID (docs recommend v5 over v3). [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:118` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_generate_v35_internal
+The shared uuid-ossp implementation behind v3 and v5, dispatched via the `UUID_MAKE_V3` / `UUID_MAKE_V5` mode flags. [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:235,528` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_generate_v4
+uuid-ossp random version-4 UUID; now redundant with core `gen_random_uuid()`, which needs no extension. [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:119` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_generate_v5
+uuid-ossp deterministic version-5 UUID: SHA-1-hashes `name` within `namespace`; recommended over v3 (SHA-1 > MD5). [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:120` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### UUID_MAKE_V3
+uuid-ossp mode flag selecting MD5/v3 hashing inside `uuid_generate_v35_internal` (sibling `UUID_MAKE_V5`). [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:528` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_nil
+uuid-ossp constant returning the all-zero UUID that never occurs naturally. [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:110` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_ns_dns
+uuid-ossp constant for the RFC 4122 DNS namespace UUID, used as the namespace input to v3/v5 generation. [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:111` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_ns_oid
+uuid-ossp constant for the RFC 4122 ISO-OID namespace UUID (ASN.1 OIDs, not PostgreSQL OIDs). [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:113` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_ns_url
+uuid-ossp constant for the RFC 4122 URL namespace UUID. [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:112` — via `knowledge/docs-distilled/uuid-ossp.md`).
+
+
+### uuid_ns_x500
+uuid-ossp constant for the RFC 4122 X.500 DN namespace UUID. [verified-by-code] (`source/contrib/uuid-ossp/uuid-ossp.c:114` — via `knowledge/docs-distilled/uuid-ossp.md`).
 
 
 ### VacAttrStats
@@ -16497,6 +16761,10 @@ updater (e.g. in tuple-lock and index-build conflict resolution).
 ### XactLogCommitRecord
 The xact.c routine that assembles the WAL commit record — carrying subxact xids, dropped-relation and invalidation data, and the replication origin — for a committing transaction; its abort sibling is `XactLogAbortRecord`. [verified-by-code] (`xact.c:5870` — via `knowledge/files/src/backend/access/transam/xact.c.md`).
 
+
+
+### xdes
+A pgcrypto `crypt()`/`gen_salt()` extended-DES scheme: 8-character max password, adaptive, default 725 iterations (must be odd, range 1–16777215). [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
 
 
 ### XidCacheRemoveRunningXids
