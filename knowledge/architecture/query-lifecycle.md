@@ -51,20 +51,20 @@ command-read loop.
 
 ## Step 3 — `PostgresMain` reads the next protocol message
 
-`PostgresMain` (`tcop/postgres.c:4274`) is the per-backend main loop. Each
+`PostgresMain` (`tcop/postgres.c:4364`) is the per-backend main loop. Each
 iteration:
 
 1. Resets per-message memory context.
 2. Sends `ReadyForQuery` if needed.
-3. Blocks on `ReadCommand(&input_message)` (`postgres.c:4788`).
+3. Blocks on `ReadCommand(&input_message)` (`postgres.c:4878`).
 4. Dispatches on the first byte:
-   - `'Q'` (PqMsg_Query) → `exec_simple_query` (`postgres.c:4840-4856`).
+   - `'Q'` (PqMsg_Query) → `exec_simple_query` (`postgres.c:4930-4946`).
    - `'P'`/`'B'`/`'E'` → extended-protocol path (`exec_parse_message`,
      `exec_bind_message`, `exec_execute_message`).
    - Others: `Close`, `Describe`, `Sync`, `Terminate`, `CopyData`, …
 
 For `SELECT 1` via `psql -c`, the message is `'Q'` with the literal SQL.
-[verified-by-code] `postgres.c:4838-4856`.
+[verified-by-code] `postgres.c:4928-4946`.
 
 ## Step 4 — `exec_simple_query` runs the whole 5→7 pipeline
 
@@ -109,12 +109,12 @@ resolved.
 For `SELECT 1`: a `Query` with empty `rtable`, a single target entry of type
 `int4`.
 
-### 4c. Rewrite — `QueryRewrite` (`rewrite/rewriteHandler.c:4781`)
+### 4c. Rewrite — `QueryRewrite` (`rewrite/rewriteHandler.c:4789`)
 
 Applies rules (`pg_rewrite`); view expansion is implemented as
 "ON SELECT DO INSTEAD". Returns `List<Query>` (a single rule can fire-and-also
 produce extra queries).
-[verified-by-code] `rewrite/rewriteHandler.c:4772-4781`.
+[verified-by-code] `rewrite/rewriteHandler.c:4779-4789`.
 
 For `SELECT 1`: no rules fire, one `Query` in, one out.
 
@@ -218,14 +218,14 @@ all three into `exec_simple_query`.
 - `tcop/postgres.c:616` — `pg_parse_query`.
 - `tcop/postgres.c:899` — `pg_plan_query`.
 - `tcop/postgres.c:1029` — `exec_simple_query`.
-- `tcop/postgres.c:4274` — `PostgresMain`.
-- `tcop/postgres.c:4788` — `ReadCommand` callsite (the loop's blocking read).
-- `tcop/postgres.c:4838-4856` — message-type switch, `'Q'` → `exec_simple_query`.
+- `tcop/postgres.c:4364` — `PostgresMain`.
+- `tcop/postgres.c:4878` — `ReadCommand` callsite (the loop's blocking read).
+- `tcop/postgres.c:4928-4946` — message-type switch, `'Q'` → `exec_simple_query`.
 - `tcop/backend_startup.c:486` — `ProcessStartupPacket`.
 - `utils/init/postinit.c:262` — `ClientAuthentication`.
 - `utils/init/postinit.c:716` — `InitPostgres`.
 - `postmaster/postmaster.c:1678` — `ServerLoop`.
 - `postmaster/postmaster.c:3576` — `BackendStartup`.
 - `postmaster/launch_backend.c:204` — `postmaster_child_launch` (the fork point).
-- `rewrite/rewriteHandler.c:4781` — `QueryRewrite`.
+- `rewrite/rewriteHandler.c:4789` — `QueryRewrite`.
 - `executor/execMain.c:7-26` — executor entry-point contract.
