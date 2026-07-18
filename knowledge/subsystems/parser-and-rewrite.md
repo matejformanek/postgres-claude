@@ -16,8 +16,12 @@ See `knowledge/personas/domain-ownership.md` for the cross-subsystem index, meth
 
 - **Paths:** `source/src/backend/parser/`, `source/src/backend/rewrite/`,
   `source/src/include/parser/`, `source/src/include/rewrite/`
-- **Verified against commit:** `4b0bf0788b066a4ca1d4f959566678e44ec93422`
-  (2026-06-01 refresh anchor — same content as `ef6a95c7c64` for these dirs)
+- **Verified against commit:** `5174d157a038`
+  (2026-07-18 pg-quality-auditor AUDIT re-anchor; prior anchor
+  `4b0bf0788b066a4ca1d4f959566678e44ec93422` / 2026-06-01. Spine cites
+  in analyze.c hold within ±1; rewriteHandler.c holds exact through
+  `RewriteQuery` and +8 from `QueryRewrite` onward; parsenodes.h struct
+  anchors drifted — see cites below.)
 - **Confidence:** verified=58, from-README=5, from-comment=24, inferred=4,
   unverified=3 (Open Questions §9)
 - **Primary README:** `source/src/backend/parser/README` (36 lines, lists every
@@ -110,7 +114,7 @@ spine.
 
 | Header | What it defines |
 |---|---|
-| `src/include/nodes/parsenodes.h` | `RawStmt` (`:2187`), `Query` (`:117`), `RangeTblEntry` (`:1137`), `CmdType`, `QuerySource` (`:34`), `TargetEntry`, `RangeTblFunction`, all the `*Stmt` raw nodes |
+| `src/include/nodes/parsenodes.h` | `RawStmt` (`:2228`), `Query` (`:120`), `RangeTblEntry` (`:1140`), `CmdType`, `QuerySource` (`:34`), `TargetEntry`, `RangeTblFunction`, all the `*Stmt` raw nodes |
 | `src/include/parser/parse_node.h` | `ParseState`, `ParseExprKind` enum (38 values) |
 | `src/include/parser/parser.h` | `RawParseMode` enum; `raw_parser` prototype |
 | `src/include/parser/parsetree.h` | `rt_fetch`-family inline helpers (the only file allowed to read positionally into `Query.rtable`) |
@@ -131,14 +135,14 @@ typedef struct RawStmt {
     ParseLoc   stmt_len;       /* length; 0 if to-end-of-string */
 } RawStmt;
 ```
-[verified-by-code] `parsenodes.h:2187`. One per semicolon-separated statement;
+[verified-by-code] `parsenodes.h:2228`. One per semicolon-separated statement;
 `raw_parser()` returns a `List<RawStmt>`. Only `parser.c` constructs these.
 
 ### `Query` — the analyzed parse tree
 
 The contract between parser and the rest of the backend (rewriter, plancache,
 planner, `pg_stat_statements`, parallel-worker serialization). Defined at
-`parsenodes.h:117`. The most load-bearing fields:
+`parsenodes.h:120`. The most load-bearing fields:
 
 - `commandType` (`CmdType`) — `CMD_SELECT` / `INSERT` / `UPDATE` / `DELETE` /
   `MERGE` / `UTILITY`. Drives the dispatcher in `rewriteHandler.c:RewriteQuery`
@@ -147,7 +151,7 @@ planner, `pg_stat_statements`, parallel-worker serialization). Defined at
   for parser output, `QSRC_INSTEAD_RULE` / `QSRC_QUAL_INSTEAD_RULE` /
   `QSRC_NON_INSTEAD_RULE` for queries produced by rewriting. `QueryRewrite`
   asserts the top-level input is `QSRC_ORIGINAL` [verified-by-code]
-  `rewriteHandler.c:4794-4795`.
+  `rewriteHandler.c:4802-4803`.
 - `canSetTag` — exactly one Query in the rewritten list should carry the
   command tag. The Step-3 adjustment in `QueryRewrite` enforces this; see §4.
 - `utilityStmt` — non-NULL iff `commandType == CMD_UTILITY`; holds the
@@ -169,7 +173,7 @@ planner, `pg_stat_statements`, parallel-worker serialization). Defined at
 
 ### `RangeTblEntry` — what's in the range table
 
-[verified-by-code] `parsenodes.h:1137`. Discriminated union via the
+[verified-by-code] `parsenodes.h:1140`. Discriminated union via the
 `RTEKind` enum:
 
 `RTE_RELATION` (table/MV/view/foreign-table/partitioned-table), `RTE_SUBQUERY`,
@@ -331,7 +335,7 @@ predicates to decide whether re-analysis / snapshot acquisition is needed.
 
 ### Stage 3 — rewrite (`QueryRewrite`)
 
-[verified-by-code] `rewriteHandler.c:4781-…`.
+[verified-by-code] `rewriteHandler.c:4789-…`.
 
 ```
 QueryRewrite(Query *parsetree)
@@ -405,7 +409,7 @@ load-bearing:
    the quals a second time. So `get_row_security_policies`
    (`rowsecurity.c`) runs after view expansion and after sublink recursion.
 
-#### Step 3 — `canSetTag` adjustment `rewriteHandler.c:4838-4867`
+#### Step 3 — `canSetTag` adjustment `rewriteHandler.c:4846-4877`
 
 If the original query survives the rewrite, it keeps `canSetTag`. Otherwise
 the *last* INSTEAD query whose command type matches the original's command
@@ -478,9 +482,9 @@ The same toolkit is reused outside the rewriter — `planner` calls
   lets state live in local variables. [from-comment]
   `parse_collate.c:5-12`.
 - INV-rewrite-1: **`QueryRewrite` input must be `QSRC_ORIGINAL` with
-  `canSetTag=true`.** Enforced by Assert at `rewriteHandler.c:4794-4795`.
+  `canSetTag=true`.** Enforced by Assert at `rewriteHandler.c:4802-4803`.
   Caller (typically `pg_rewrite_query` in tcop/plancache) guarantees this.
-  [verified-by-code] `rewriteHandler.c:4794-4795`.
+  [verified-by-code] `rewriteHandler.c:4802-4803`.
 - INV-rewrite-2: **DML rules fire before view expansion.** `RewriteQuery`
   handles non-SELECT events; SELECT/view expansion is in `fireRIRrules`.
   [from-comment] `rewriteHandler.c:4147-4149`.
@@ -748,9 +752,9 @@ implicitly via DML on subscriber-side replicas; nothing parser-specific.
 | `parser/parse_node.h:91-` | `ParseState` |
 | `parser/parse_collate.c:5-12` | Why collation is a separate pass |
 | `parser/parse_utilcmd.c:6-12` | Why DDL is deferred to ProcessUtility time |
-| `nodes/parsenodes.h:117` | `Query` |
-| `nodes/parsenodes.h:1137` | `RangeTblEntry` |
-| `nodes/parsenodes.h:2187` | `RawStmt` |
+| `nodes/parsenodes.h:120` | `Query` |
+| `nodes/parsenodes.h:1140` | `RangeTblEntry` |
+| `nodes/parsenodes.h:2228` | `RawStmt` |
 | `rewrite/rewriteHandler.c:103-146` | Why `AcquireRewriteLocks` exists |
 | `rewrite/rewriteHandler.c:148` | `AcquireRewriteLocks` entry |
 | `rewrite/rewriteHandler.c:823` | `rewriteTargetListIU` — DML targetlist fill-in |
@@ -764,7 +768,7 @@ implicitly via DML on subscriber-side replicas; nothing parser-specific.
 | `rewrite/rewriteHandler.c:4055-4066` | WITH-clause rewritten first |
 | `rewrite/rewriteHandler.c:4147-4149` | SELECTs not rewritten in `RewriteQuery` |
 | `rewrite/rewriteHandler.c:4533` | RETURNING only in unconditional INSTEAD |
-| `rewrite/rewriteHandler.c:4781-4870` | `QueryRewrite` + canSetTag fix |
+| `rewrite/rewriteHandler.c:4789-4878` | `QueryRewrite` + canSetTag fix |
 | `rewrite/rewriteDefine.c:52` | `InsertRule` — `pg_rewrite` insert + dep registration |
 | `rewrite/rewriteDefine.c:190,224` | `DefineRule` / `DefineQueryRewrite` |
 | `rewrite/rowsecurity.c:1-21` | RLS scope + composition rules |
