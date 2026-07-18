@@ -610,3 +610,12 @@ Window = 2 tree-wide mechanical sweeps + 1 macro rename: 1c4b1de8 (pg_attribute_
 [pending] knowledge/files/src/interfaces/libpq/fe-lobj.c.md  reason=anchor-bump 2026-07-16:572c3b2ddf8c..5174d157a038 (Clean up read() return type, ca326e903df4) [mechanical-sweep: type-hygiene read() return, +2/-2]
 [pending] knowledge/files/src/test/examples/testlo.c.md  reason=anchor-bump 2026-07-16:572c3b2ddf8c..5174d157a038 (Clean up read() return type, ca326e903df4) [mechanical-sweep: type-hygiene read() return, +3/-3]
 [pending] knowledge/files/src/test/examples/testlo64.c.md  reason=anchor-bump 2026-07-16:572c3b2ddf8c..5174d157a038 (Clean up read() return type, ca326e903df4) [mechanical-sweep: type-hygiene read() return, +2/-3]
+
+## anchor-bump rotation (2026-07-17) — anchor 5174d157a038..03480907e9ff, 19 commits, 6 new IMPACTED rows (7 idempotent-skipped)
+
+[pending] knowledge/files/src/backend/access/hash/hashpage.c.md  reason=anchor-bump 2026-07-17:5174d157a038..03480907e9ff (Use fake LSNs consistently in hash index AM, cea74f48d36b) [behavioral: hash-AM fake-LSN consistency, +6/-5]
+[pending] knowledge/files/src/backend/replication/logical/logicalctl.c.md  reason=anchor-bump 2026-07-17:5174d157a038..03480907e9ff (Correct logical decoding status at end of recovery with minimal WAL, c209931bd40c) [behavioral: logical-decoding status at recovery end, +9/-12]
+[pending] knowledge/files/src/backend/replication/logical/sequencesync.c.md  reason=anchor-bump 2026-07-17:5174d157a038..03480907e9ff (Handle concurrent sequence drops during synchronization, 55f518684895) [behavioral: concurrent sequence-drop handling in sync, +12/-3]
+[pending] knowledge/files/src/backend/utils/adt/pg_locale_icu.c.md  reason=anchor-bump 2026-07-17:5174d157a038..03480907e9ff (Require ICU 55 or later, 4854b2373c73) [behavioral: drop pre-ICU-55 compat code, +13/-72]
+[pending] knowledge/files/src/bin/pg_controldata/pg_controldata.c.md  reason=anchor-bump 2026-07-17:5174d157a038..03480907e9ff (pg_controldata: Show logical decoding status, 8108765f04b8) [behavioral: new logical-decoding-status output field, +2/-1]
+[pending] knowledge/files/src/pl/tcl/pltcl.c.md  reason=anchor-bump 2026-07-17:5174d157a038..03480907e9ff (Make PL/Tcl require Tcl 8.6 then Revert, b6d3ccf2f5f1+f4f77f557bb1) [net-noop: make-then-revert same window, net +/- near-zero — verify pltcl.c matches pre-window]
