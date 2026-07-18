@@ -2,7 +2,7 @@
 
 - **Source path:** `source/src/include/access/xlog_internal.h`
 - **Lines:** 407
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `5174d157a038`
 - **Companion files:** `xlog.c`, `xlogreader.c`, `xlogdefs.h`,
   `xlogrecord.h`. Front-end safe.
 
@@ -34,7 +34,7 @@ to allow stand-alone tools like pg_receivewal to deal with WAL files.
 ### `XLogPageHeaderData` (`xlog_internal.h:37-51`) [verified-by-code]
 
 ```
-uint16     xlp_magic     XLOG_PAGE_MAGIC = 0xD120
+uint16     xlp_magic     XLOG_PAGE_MAGIC = 0xD121
 uint16     xlp_info      flag bits
 TimeLineID xlp_tli       TLI of first record on page
 XLogRecPtr xlp_pageaddr  XLOG address of this page
@@ -81,7 +81,11 @@ uint32 xlp_xlog_blcksz; }`. First page of every segment has this.
 ## Key invariants
 
 1. **`XLOG_PAGE_MAGIC` is a WAL version indicator.** Change with any
-   record-format change. [from-comment] `xlog_internal.h:35`.
+   record-format change. Now `0xD121` (bumped from `0xD120` by the
+   VM-clear WAL-logging format change, commit `ed62d26cacac`, which added
+   VM block references to the heap DML records — a live example of the
+   "change with any record-format change" rule). [from-comment,
+   verified-by-code] `xlog_internal.h:35 @5174d157a038`.
 
 2. **Continuation records.** When a record spans pages, the next
    page sets `XLP_FIRST_IS_CONTRECORD` and `xlp_rem_len` carries the

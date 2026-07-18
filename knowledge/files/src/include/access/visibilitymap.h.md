@@ -2,7 +2,7 @@
 
 - **Source path:** `source/src/include/access/visibilitymap.h`
 - **Lines:** 43
-- **Last verified commit:** `ef6a95c7c64`
+- **Last verified commit:** `5174d157a038`
 - **Companion files:** `visibilitymap.c` (implementation, where the real comments live), `visibilitymapdefs.h` (the VISIBILITYMAP_ALL_VISIBLE / VISIBILITYMAP_ALL_FROZEN bit constants), `heapam.c`, `pruneheap.c`, `vacuumlazy.c` (consumers)
 
 ## Purpose
@@ -15,10 +15,10 @@ Public API for the per-relation visibility map (VM) fork. Two bits per heap page
 ## Public surface
 
 - `#define VM_ALL_VISIBLE(r, b, v)` / `VM_ALL_FROZEN(r, b, v)` — convenience wrappers around `visibilitymap_get_status` (visibilitymap.h:24-27).
-- `bool visibilitymap_clear(Relation rel, BlockNumber heapBlk, Buffer vmbuf, uint8 flags);` — clear specified bits; returns whether any bit actually changed.
+- `bool visibilitymap_clear(RelFileLocator rlocator, BlockNumber heapBlk, Buffer vmbuf, uint8 flags);` — clear specified bits; returns whether any bit actually changed. **Takes a `RelFileLocator`, not a `Relation`** — changed by commit `2340fb8f02b2` ("Make VM clear take a RelFileLocator and not fake relcache") so redo paths can clear VM bits without fabricating a relcache entry. [verified-by-code, visibilitymap.h:29-30 @5174d157a038]
 - `void visibilitymap_pin(Relation rel, BlockNumber heapBlk, Buffer *vmbuf);` — pin VM page that maps heapBlk; extends the fork if needed.
 - `bool visibilitymap_pin_ok(BlockNumber heapBlk, Buffer vmbuf);` — does the already-pinned `vmbuf` cover heapBlk?
-- `void visibilitymap_set(BlockNumber heapBlk, Buffer vmBuf, uint8 flags, const RelFileLocator rlocator);` — set bits. Crucially, **does not WAL-log itself** — the operation that made the page all-visible is responsible for WAL.
+- `void visibilitymap_set(BlockNumber heapBlk, Buffer vmBuf, uint8 flags, RelFileLocator rlocator);` — set bits. Crucially, **does not WAL-log itself** — the operation that made the page all-visible is responsible for WAL. (Note: the parameter is a plain `RelFileLocator`, not `const RelFileLocator`. [verified-by-code, visibilitymap.h:34-36 @5174d157a038]) 
 - `uint8 visibilitymap_get_status(Relation rel, BlockNumber heapBlk, Buffer *vmbuf);` — read both bits.
 - `void visibilitymap_count(Relation rel, BlockNumber *all_visible, BlockNumber *all_frozen);` — totals (used by pg_class stats).
 - `BlockNumber visibilitymap_prepare_truncate(Relation rel, BlockNumber nheapblocks);` — drop VM pages no longer needed when heap is truncated.
@@ -39,7 +39,7 @@ None — uses `Buffer`, `BlockNumber`, `Relation` from elsewhere; bit constants 
 
 - `visibilitymap_set` — implementation at `visibilitymap.c:255`. Asserts that the heap-page LSN ≥ the LSN of the VM update, to keep crash recovery consistent. [unverified — implementation detail not deep-read]
 - `visibilitymap_pin` — at `visibilitymap.c:204`. Extends the VM fork on demand.
-- `visibilitymap_clear` — at `visibilitymap.c:151`. Called by every heap modifier that breaks all-visibility.
+- `visibilitymap_clear` — at `visibilitymap.c:151`. Called by every heap modifier that breaks all-visibility. Now takes `RelFileLocator` (see Public surface) so redo/replay can call it directly. [verified-by-code, visibilitymap.h:29-30 @5174d157a038]
 
 ## Cross-references
 
@@ -50,7 +50,7 @@ None — uses `Buffer`, `BlockNumber`, `Relation` from elsewhere; bit constants 
 ## Open questions
 
 - The exact handshake between `visibilitymap_set` and the LSN check inside it. [unverified]
-- Why `visibilitymap_set` takes `RelFileLocator` rather than `Relation` — likely so it can be called from redo paths. [inferred]
+- Both `visibilitymap_set` and (as of `2340fb8f02b2`) `visibilitymap_clear` take `RelFileLocator` rather than `Relation` so they can be called from redo/replay paths without a relcache entry. [verified-by-code, visibilitymap.h:29-36 @5174d157a038]
 
 ## Confidence tag tally
 `[verified-by-code]=4 [from-comment]=6 [from-readme]=0 [inferred]=2 [unverified]=2`
