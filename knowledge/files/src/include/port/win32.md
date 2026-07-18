@@ -66,3 +66,7 @@ defines `PGDLLIMPORT` / `PGDLLEXPORT` for the Windows DLL model
   comment or the code is wrong; the code looks intentional ("pin to
   10") but the comment implies "raise floor to 10". Mismatch.
   (severity: low, but worth a hf(corpus) ping if a real bug)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

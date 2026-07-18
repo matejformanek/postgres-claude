@@ -63,3 +63,7 @@ This is **the** collation pathology section. Cross-link strongly to **A7 `pg_loc
 - [ISSUE-PATTERN-OPS-CONFUSION: `citext_pattern_cmp` does memcmp-on-lower, ignoring collation, while `citext_cmp` is collation-aware — two opclasses on same column give different orderings (Doc / Footgun)]
 - [ISSUE-REGEX-CASE: `~`/`!~` on citext lowercases ONLY the left side (in SQL wrappers) — `column ~ 'A'` always returns false on lowered storage (User-error / Doc)]
 - [ISSUE-NO-LENGTH-LIMIT: citext functions accept up to MaxAllocSize inputs; `str_tolower` allocates a fresh buffer (Info — same as text)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-citext.md](../../../subsystems/contrib-citext.md)

@@ -125,3 +125,7 @@ macros that route them to `pgwin32_recv`, `pgwin32_send`, `pgwin32_select`,
   `UNBLOCKED_SIGNAL_QUEUE()` macro consumed here.
 - `knowledge/files/src/include/port/win32_port.h.md` — the macros that
   redirect `recv`/`send`/`select`/etc. to these `pgwin32_*` wrappers.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

@@ -15,3 +15,7 @@ Declares entry points for `TidScan` — fetches a specific list of `ctid` values
 - State node: `TidScanState` in `nodes/execnodes.h`
 - Sibling (range): `executor/nodeTidrangescan.h`
 - `.c` impl: `source/src/backend/executor/nodeTidscan.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

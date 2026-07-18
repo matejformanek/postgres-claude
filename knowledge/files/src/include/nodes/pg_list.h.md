@@ -130,3 +130,5 @@ Three big buckets — full enumeration in
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/list-traversal-conventions.md](../../../../idioms/list-traversal-conventions.md)
+
+- [idioms/node-types-and-lists.md](../../../../idioms/node-types-and-lists.md)

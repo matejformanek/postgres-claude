@@ -76,3 +76,5 @@ None at header level.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/spinlock-discipline.md](../../../../idioms/spinlock-discipline.md)
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

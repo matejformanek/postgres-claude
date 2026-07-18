@@ -46,3 +46,7 @@ Linux-specific shim. Two definitions `[verified-by-code]`
   worth re-checking against current Linux 6.x semantics. Comment
   itself acknowledges: "someday that code might get upgraded".
   (severity: low; PG would still work, just suboptimal)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

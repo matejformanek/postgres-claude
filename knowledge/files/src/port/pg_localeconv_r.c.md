@@ -74,3 +74,7 @@ Four platform arms in `pg_localeconv_r`, picked by `#ifdef` cascade:
   output to drive `to_char`, money type, numeric formatting.
 - `source/src/include/port.h` — prototype.
 - `knowledge/idioms/` — thread-safety conventions in `libpgport`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

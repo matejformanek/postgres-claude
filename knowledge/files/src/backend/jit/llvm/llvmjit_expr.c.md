@@ -91,3 +91,5 @@ The big one. JIT-compiles a fully-formed `ExprState` step program (built by `exe
 <!-- backlinks:auto -->
 - [idioms/jit-expression-codegen.md](../../../../../idioms/jit-expression-codegen.md)
 - [idioms/jit-tuple-deform-and-inline.md](../../../../../idioms/jit-tuple-deform-and-inline.md)
+
+- [subsystems/jit.md](../../../../../subsystems/jit.md)

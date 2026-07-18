@@ -71,3 +71,7 @@ currently ready; `*done=true` signals end-of-stream (writer detached).
   leak session state across the worker/leader boundary (medium —
   same class as parallel-safety violations everywhere else)] —
   not visible in header; documented in `tqueue.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -95,3 +95,7 @@ Internal:
 - [ISSUE-correctness: `subpath` with `start = INT32_MIN` would compute `start = numlevel + INT32_MIN` (signed overflow, UB in C). On 2's-complement the underflow gives a large positive number, which `startpos < 0` doesn't catch (it became positive). But `startpos >= t->numlevel` at line 307 catches the unreachable index. (nit — relies on UB; should use saturating arithmetic)] — `source/contrib/ltree/ltree_op.c:356-357`.
 - [ISSUE-correctness: `subltree` allows `endpos > numlevel` and silently clips at lines 312-313 (`if (endpos > t->numlevel) endpos = t->numlevel;`). Inconsistent with `startpos >= numlevel → ERROR` at line 307. The asymmetry is intentional (slice-past-end is a common request) but surprising. (nit)] — `source/contrib/ltree/ltree_op.c:307-313`.
 - [ISSUE-deprecation: `ltreeparentsel` (line 675) is dead code per its own comment (lines 671-672): "This function is not used anymore, if the ltree extension has been updated to 1.2 or later." Kept for older-version compatibility. (nit — known deprecation)] — `source/contrib/ltree/ltree_op.c:671-675`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

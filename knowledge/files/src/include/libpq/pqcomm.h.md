@@ -89,3 +89,7 @@ in `libpq.h` [from-comment].
 - [Scenario — Add a new libpq protocol message](../../../../scenarios/add-new-protocol-message.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

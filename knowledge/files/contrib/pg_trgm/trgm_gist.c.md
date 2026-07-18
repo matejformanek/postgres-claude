@@ -125,3 +125,7 @@ internal node carries a bitmap formed by hashing trigrams into
   comments; memory accumulates in fn_mcxt.
 - [ISSUE-Style: triple switch on StrategyNumber (low)] — same as
   `trgm_gin.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_trgm.md](../../../subsystems/contrib-pg_trgm.md)

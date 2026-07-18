@@ -17,3 +17,7 @@ Declares executor entry points for the `BitmapIndexScan` plan node — produces 
 - State node: `BitmapIndexScanState` in `nodes/execnodes.h`
 - Consumer: `executor/nodeBitmapHeapscan.h`
 - Index AM bitmap path: `access/amapi.h` (`amgetbitmap`)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -73,3 +73,7 @@ a bloom opfamily is well-formed.
 ## Issues raised
 
 None — meta-validation routine, no execution path.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-bloom.md](../../../subsystems/contrib-bloom.md)

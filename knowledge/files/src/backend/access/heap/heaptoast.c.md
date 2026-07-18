@@ -153,3 +153,5 @@ MAIN-externalise) is the heart of `heap_toast_insert_or_update`.
 <!-- backlinks:auto -->
 - [idioms/toast-chunk-write.md](../../../../../idioms/toast-chunk-write.md)
 - [idioms/toast-storage-strategies.md](../../../../../idioms/toast-storage-strategies.md)
+
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

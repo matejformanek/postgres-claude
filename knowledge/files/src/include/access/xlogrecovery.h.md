@@ -103,3 +103,7 @@ None significant.
 
 - `[verified-by-code]`: 11
 - `[from-comment]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

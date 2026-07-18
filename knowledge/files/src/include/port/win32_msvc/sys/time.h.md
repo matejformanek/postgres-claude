@@ -42,3 +42,7 @@ declarations, no defines, no guard.
 - `knowledge/files/src/port/gettimeofday.c.md` — the actual Windows
   `gettimeofday` implementation.
 - `knowledge/subsystems/port-layer.md` — Windows portability strategy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

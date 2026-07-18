@@ -61,3 +61,7 @@ side effects.
 - `proc_exit_inprogress` — true during `proc_exit`; `ereport` checks
   this to decide whether to long-jump back to the main loop.
 - `shmem_exit_inprogress` — true during `shmem_exit` body.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

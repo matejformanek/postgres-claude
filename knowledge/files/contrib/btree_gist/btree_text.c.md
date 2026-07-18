@@ -100,3 +100,7 @@ Standard 7-function GiST set plus sortsupport, in two parallel groups:
   inconsistency is a minor maintainability footgun. A `pg_database_encoding_
   max_length()` is cheap enough that we could just call it every time and
   make tinfo const. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

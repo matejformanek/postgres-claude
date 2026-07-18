@@ -94,3 +94,7 @@ selection:
   implementation.
 - `knowledge/idioms/locking.md` — PGSemaphore's role in PG's six-layer
   lock taxonomy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

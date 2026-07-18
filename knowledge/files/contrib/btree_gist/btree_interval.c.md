@@ -44,3 +44,7 @@ Also exports `abs_interval(Interval *)` — used by time/timetz distance code.
   produce surprising ordering: `'1 month'` and `'30 days'` have distance 0
   via the scalar, but `interval_cmp` treats them as different. KNN
   semantics are intentionally lossy here, but worth noting. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

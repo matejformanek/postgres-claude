@@ -12,3 +12,5 @@ helpers, plus internal pieces of the upper-rel pipeline.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/contrib-pg_plan_advice.md](../../../../subsystems/contrib-pg_plan_advice.md)
+
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

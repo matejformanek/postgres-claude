@@ -135,3 +135,7 @@ and the broader Win32 port build on. `[verified-by-code]`
   Win32 infrastructure; installed alongside in backend startup.
 - `knowledge/files/src/port/kill.c.md` — the sender side of the pipe
   protocol.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

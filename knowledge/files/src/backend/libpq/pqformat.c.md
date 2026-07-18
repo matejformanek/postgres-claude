@@ -143,3 +143,7 @@ flow (no socket I/O — just StringInfo formatting). [from-comment, pqformat.c:1
 ## Tally
 
 `[verified-by-code]=12 [from-comment]=11 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

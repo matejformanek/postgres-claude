@@ -45,3 +45,6 @@ pure functions over the shared array, callable from recovery code in
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/xmin-horizon-management.md](../../../../idioms/xmin-horizon-management.md)
+
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

@@ -149,3 +149,6 @@ re-derived).
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+- [idioms/node-types-and-lists.md](../../../../../idioms/node-types-and-lists.md)
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

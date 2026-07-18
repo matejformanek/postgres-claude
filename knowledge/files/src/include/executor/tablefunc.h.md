@@ -28,3 +28,7 @@ Extensions could in principle register more.
 
 - [verified-by-code] callback list.
 - [from-comment] field documentation at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

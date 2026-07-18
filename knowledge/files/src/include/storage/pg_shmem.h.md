@@ -64,3 +64,7 @@ postmaster.
 ## Issues
 
 None at header level.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

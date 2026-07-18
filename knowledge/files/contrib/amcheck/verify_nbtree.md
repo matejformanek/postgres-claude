@@ -506,3 +506,7 @@ of every leaf tuple.
   ERRORs (`:3419-3424`) suggest REINDEX, but on a hot
   standby `REINDEX` is impossible. Hint message could be
   more nuanced. (nit)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-amcheck.md](../../../subsystems/contrib-amcheck.md)

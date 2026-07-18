@@ -15,3 +15,7 @@ Declares entry points for `ProjectSet` — evaluates a target list containing se
 - State node: `ProjectSetState` in `nodes/execnodes.h`
 - SRF protocol: `funcapi.h` (`SRF_*` macros, `ExprMultipleResult`)
 - `.c` impl: `source/src/backend/executor/nodeProjectSet.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

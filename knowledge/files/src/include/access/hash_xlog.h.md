@@ -43,3 +43,5 @@ XLOG_HASH_VACUUM_ONE_PAGE     0xC0
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/hash-overflow-pages.md](../../../../idioms/hash-overflow-pages.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

@@ -112,3 +112,5 @@ oldestOffset; }`.
 <!-- backlinks:auto -->
 - [data-structures/multixactid.md](../../../../data-structures/multixactid.md)
 - [idioms/multixact-slru.md](../../../../idioms/multixact-slru.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

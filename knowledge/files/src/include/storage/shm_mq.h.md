@@ -43,3 +43,7 @@ worker and the queue marks itself detached.
 
 Constant exposed for callers sizing their DSM. Smaller than a single
 useful message — you almost always want much more (8 KB+ typical).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

@@ -48,3 +48,5 @@ for parallel.
 <!-- backlinks:auto -->
 - [idioms/aggregate-grouping-sets.md](../../../../idioms/aggregate-grouping-sets.md)
 - [idioms/aggregate-hash-vs-sort.md](../../../../idioms/aggregate-hash-vs-sort.md)
+
+- [subsystems/executor.md](../../../../subsystems/executor.md)

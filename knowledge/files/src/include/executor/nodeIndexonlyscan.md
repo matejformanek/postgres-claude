@@ -16,3 +16,7 @@ Declares entry points for `IndexOnlyScan` — answers a query entirely from the 
 - Sibling: `executor/nodeIndexscan.h`
 - Visibility map: `access/visibilitymap.h`
 - `.c` impl: `source/src/backend/executor/nodeIndexonlyscan.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -128,3 +128,8 @@ caller, a mistaken hint becomes a correctness bug. `tableam.h:70`-`71`.
    — `tableam.h:930`-`931`, `:1354`-`1355`.
 5. **[ISSUE-resource: SO_HINT_REL_READ_ONLY is advisory only (low)]**
    — `tableam.h:70`-`71`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/tableam-index-fetch.md](../../../../idioms/tableam-index-fetch.md)
+- [idioms/tableam-vtable-lifecycle.md](../../../../idioms/tableam-vtable-lifecycle.md)

@@ -40,3 +40,7 @@ guard, no declarations.
 - `knowledge/subsystems/storage-fd.md` — where Windows file locking is
   actually wired up.
 - `knowledge/subsystems/port-layer.md` — Windows portability strategy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

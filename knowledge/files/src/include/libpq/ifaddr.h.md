@@ -28,3 +28,7 @@ ident-style host comparisons [from-comment].
 ## Tally
 
 `[verified-by-code]=4 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

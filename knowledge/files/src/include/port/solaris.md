@@ -32,3 +32,7 @@ Solaris/OpenIndiana shim `[verified-by-code]`
 ## Issues
 
 - (none; mechanical)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

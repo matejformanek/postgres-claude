@@ -83,3 +83,5 @@ recorded in ExprState->flags after first prep.
 - [idioms/expression-evaluator-flow.md](../../../../idioms/expression-evaluator-flow.md)
 - [idioms/exprevalstep-shape.md](../../../../idioms/exprevalstep-shape.md)
 - [idioms/jit-expression-codegen.md](../../../../idioms/jit-expression-codegen.md)
+
+- [subsystems/executor.md](../../../../subsystems/executor.md)

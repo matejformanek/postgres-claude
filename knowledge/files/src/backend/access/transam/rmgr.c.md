@@ -98,3 +98,5 @@ None.
 <!-- backlinks:auto -->
 - [architecture/wal.md](../../../../../architecture/wal.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

@@ -30,3 +30,7 @@ In `source/contrib/ltree/ltree.h`:
 ## Issues spotted
 
 - [ISSUE-organization: combining ~80 lines of GiST-only structure definitions into `ltree.h` (used by every operator file) means every `.c` file that just wants `ltree` / `lquery` types must also pull in `access/gist.h` indirectly (via the use of `GISTMaxIndexKeySize` at `ltree.h:237`). A split into `ltree_gist.h` would reduce header coupling, but would be on-disk-compatible. (nit — historical organization)] — `source/contrib/ltree/ltree.h:232-314`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

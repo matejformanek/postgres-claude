@@ -115,3 +115,7 @@ default-thread-pool stack-allocation collisions. `[verified-by-code]`
 - `knowledge/files/src/backend/postmaster/postmaster.c.md` —
   `pgwin32_ReserveSharedMemoryRegion` caller, runs around
   `CreateProcess`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

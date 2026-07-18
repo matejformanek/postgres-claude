@@ -21,3 +21,7 @@ its target batch's BufFile.
 ## Tags
 
 - [verified-by-code] full surface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -98,3 +98,7 @@ against concurrent `ATTACH PARTITION` / `DETACH CONCURRENTLY`.
 <!-- issues:auto:begin -->
 - [Issue register — `partitioning`](../../../../issues/partitioning.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/partitioning.md](../../../../subsystems/partitioning.md)

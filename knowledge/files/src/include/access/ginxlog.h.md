@@ -38,3 +38,7 @@ WAL record formats and `XLOG_GIN_*` info bytes for GIN. [from-comment, ginxlog.h
 Segment action constants: `GIN_SEGMENT_UNMODIFIED` (= 0), `GIN_SEGMENT_DELETE`, `GIN_SEGMENT_INSERT`, `GIN_SEGMENT_REPLACE`, `GIN_SEGMENT_ADDITEMS`.
 
 See `ginxlog.c.md` for replay semantics.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

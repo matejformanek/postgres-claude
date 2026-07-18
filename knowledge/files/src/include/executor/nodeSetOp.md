@@ -16,3 +16,7 @@ Declares entry points for `SetOp` — implements `INTERSECT`, `INTERSECT ALL`, `
 - State node: `SetOpState` in `nodes/execnodes.h`
 - `.c` impl: `source/src/backend/executor/nodeSetOp.c`
 - Related: `executor/nodeUnique.h` (UNION dedup)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

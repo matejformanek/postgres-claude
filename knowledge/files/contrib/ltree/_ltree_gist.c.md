@@ -81,3 +81,7 @@ Internal:
 - [ISSUE-API-shape: strategies 10-17 use bare integers (lines 522-537); no symbolic names. Parallel issue to `ltree_gist.c:666`. (nit)] — `source/contrib/ltree/_ltree_gist.c:522-537`.
 - [ISSUE-correctness: `_arrq_cons` (line 493-500) on `ltree[]` queries against `ltree[]` index entries iterates the query array and applies `gist_qe`. Each `gist_qe` is the conservative "all simple-match levels' bits are set" check. If the indexed `ltree[]` has a saturated signature (very likely under defaults), `_arrq_cons` returns true → recheck at leaf. So saturation collapses the filter to a full scan plus recheck cost. (likely — see signature saturation ISSUE above)] — `source/contrib/ltree/_ltree_gist.c:479-501`.
 - [ISSUE-correctness: line 80, `_ltree_compress` builds the signature with `ltree_gist_alloc(false, NULL, siglen, NULL, NULL)` — the result has `left=NULL, right=NULL`. Look at `ltree_gist_alloc` in `ltree_gist.c:42-80`: this branch (siglen != 0, left == NULL) leaves the result with siglen bytes of zeroed signature and the (non-ONENODE) flag. Then `hashing()` ORs bits into it. Correct, but the API is double-purpose: `ltree_gist_alloc` is used for both single-node and signature-only allocation. (nit — API surface duplicated)] — `source/contrib/ltree/_ltree_gist.c:71-78`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

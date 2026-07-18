@@ -20,3 +20,7 @@ Same envelope as `Gather` (A15 echo) — workers inherit the leader's authorizat
 - Sibling (unordered): `executor/nodeGather.h`
 - Parallel framework: `access/parallel.h`, `executor/execParallel.h`
 - `.c` impl: `source/src/backend/executor/nodeGatherMerge.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

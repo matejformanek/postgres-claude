@@ -70,3 +70,7 @@ references in some PL contexts.
 
 - `[ISSUE-DOC: header lists 2 funcs, zero context — first-time reader can't tell what an ENR is from this file alone (medium)] — source/src/include/parser/parse_enr.h:14-22`
 - `[ISSUE-TRUST: A8 echo — ENR vs real-table name collision precedence not commented; relies on parse_relation.c implementation (low)] — source/src/include/parser/parse_enr.h:19-20`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

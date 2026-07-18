@@ -30,3 +30,7 @@ Public-surface declarations for the ~130 convenience accessors that wrap `Search
 ## Confidence tag tally
 
 verified-by-code: 1 — from-comment: 2 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

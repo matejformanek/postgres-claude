@@ -146,3 +146,7 @@ the caller has no privileges to read at the SQL level.
 1. [ISSUE-defense-in-depth: show_data=true returns raw FPI page bytes — DELETE'd / pre-UPDATE tuples bypass RLS, column privs (likely)] — `source/contrib/pg_walinspect/pg_walinspect.c:377-409, 425-467`
 2. [ISSUE-defense-in-depth: pg_get_wal_record_info description text leaks transaction internals to pg_read_server_files holders (nit)] — `source/contrib/pg_walinspect/pg_walinspect.c:217-247`
 3. [ISSUE-correctness: per-block-ref inner loop has no CHECK_FOR_INTERRUPTS (bounded ~33 iters, nit) (nit)] — `source/contrib/pg_walinspect/pg_walinspect.c:284-416`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_walinspect.md](../../../subsystems/contrib-pg_walinspect.md)

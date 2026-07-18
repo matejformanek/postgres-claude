@@ -202,3 +202,7 @@ is fragile.
   it's static and the C function entry points already gate
   (nit)]** — `source/contrib/pageinspect/rawpage.c:214` has no
   recheck; OK because callers gate, but a future caller could forget.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

@@ -38,3 +38,7 @@ arch-specific or compiler-generic header has set `PG_HAVE_ATOMIC_U64_SUPPORT`.
 - [[knowledge/files/src/include/port/atomics.h.md]] — the umbrella header that pulls this in last.
 - [[knowledge/files/src/include/port/atomics/generic.h.md]] — keys on `PG_HAVE_ATOMIC_U64_SIMULATION`.
 - [[knowledge/issues/include-port.md]] — "u64 atomic fallback invisible at call sites".
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

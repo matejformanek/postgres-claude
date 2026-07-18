@@ -251,3 +251,7 @@ that. This is also called from `OAT_POST_ALTER` on indexes via
   labels are computed inside sepgsql_relation_post_create — two
   code paths that must stay in sync if a contributor changes one
   (likely)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

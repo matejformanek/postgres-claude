@@ -127,3 +127,5 @@ crash-recovery need).
 - [idioms/subtransaction-stack.md](../../../../../idioms/subtransaction-stack.md)
 - [idioms/subxact-subtrans-slru.md](../../../../../idioms/subxact-subtrans-slru.md)
 
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

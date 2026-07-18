@@ -115,3 +115,7 @@ NULL-checks inside `ExecScanExtended`. [verified-by-code §nodeSeqscan.c:108-213
 <!-- issues:auto:begin -->
 - [Issue register — `executor`](../../../../issues/executor.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

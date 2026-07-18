@@ -71,3 +71,7 @@ issuer-specific JWT verifier) implement to plug into HBA `oauth` lines.
 ## Tally
 
 `[verified-by-code]=4 [from-comment]=4 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

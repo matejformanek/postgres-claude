@@ -37,3 +37,7 @@ guard, no declarations.
 
 - `knowledge/subsystems/port-layer.md` — Windows portability strategy.
 - `src/include/pg_config_manual.h` — `MAXPGPATH` and similar limits.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

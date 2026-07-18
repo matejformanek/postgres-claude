@@ -48,3 +48,7 @@ when `ENABLE_GSS` is defined [from-comment].
 ## Tally
 
 `[verified-by-code]=2 [from-comment]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

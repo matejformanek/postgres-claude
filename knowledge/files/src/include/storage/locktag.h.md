@@ -100,3 +100,5 @@ zero-fills unused fields to ensure `memcmp` equality.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/locktag.md](../../../../data-structures/locktag.md)
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

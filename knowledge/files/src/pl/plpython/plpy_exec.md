@@ -135,3 +135,7 @@ One trust-relevant subtlety in `PLy_trigger_build_args`: the trigger dict expose
 - [ISSUE-audit-gap: plpython_return_error_callback uses PLy_current_execution_context which can elog(ERROR) (maybe)] — At `:735-743`, `plpython_return_error_callback` calls `PLy_current_execution_context()` which `elog(ERROR, ...)` if no plpython is executing. But this callback is registered while a plpython IS executing, so the path is unreachable in practice — except if a corrupted error_context_stack invokes the callback after the exec_ctx has been popped. The error_context_stack discipline is symmetric with PG_TRY so this is safe by construction; flagging as audit-gap for any future refactor that moves the pop earlier.
 
 - [ISSUE-correctness: `SPI_finish() != SPI_OK_FINISH` always elog(ERROR), but SPI_OK_FINISH is the only success code (nit)] — At `:190-191, :376-377, :463-464`, every SPI_finish is wrapped in `if (... != SPI_OK_FINISH) elog(ERROR, "SPI_finish failed")`. Fine, but `SPI_finish()` only returns `SPI_OK_FINISH` or `SPI_ERROR_UNCONNECTED`. The error message is identical for both, which loses a useful distinction (unconnected = caller bug; other = SPI internal). Trivial nit.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/fmgr.md](../../../../idioms/fmgr.md)

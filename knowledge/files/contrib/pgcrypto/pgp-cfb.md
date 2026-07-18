@@ -110,3 +110,7 @@ surface.
 - [ISSUE-documentation: "block #2 is 2 bytes long" without explanation of
   the OpenPGP quirk (nit)] — `source/contrib/pgcrypto/pgp-cfb.c:130`.
   See RFC 4880 §13.9 for the rationale.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

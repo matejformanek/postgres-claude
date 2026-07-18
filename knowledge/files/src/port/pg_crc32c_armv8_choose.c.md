@@ -67,3 +67,7 @@ vectorized CRC. The ARM equivalent of the choose-code embedded in
   embeds its choose code inline rather than splitting it out.
 - `knowledge/files/src/port/pg_popcount_aarch64.c.md` — sibling SIMD file
   using the same HWCAP_SVE probe pattern.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

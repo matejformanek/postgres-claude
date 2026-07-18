@@ -46,3 +46,7 @@ read_stream.h notes.
 ## Issues
 
 None.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

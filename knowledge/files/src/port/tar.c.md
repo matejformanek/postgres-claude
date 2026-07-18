@@ -62,3 +62,7 @@ construction. Constants like `TAR_OFFSET_*`, `TAR_BLOCK_SIZE`, and
   (A11 backup-stream trust boundary).
 - `knowledge/issues/pg_basebackup.md` — server-supplied tar field trust theme.
 - `knowledge/files/src/port/strlcpy.c.md` — used to fill fixed-width fields.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

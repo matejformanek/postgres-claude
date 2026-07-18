@@ -93,3 +93,7 @@ ereporting on huge numerics — defensive against pathological input.
   true` for numeric "to save space", the byte-prefix truncation would
   silently break numeric ordering. The convention is undocumented. (MED — a
   trap for future contributors)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

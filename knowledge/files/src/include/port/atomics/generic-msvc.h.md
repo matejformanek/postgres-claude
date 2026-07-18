@@ -49,3 +49,7 @@ primitives. Also wires `_ReadWriteBarrier()` as the compiler barrier and
 - [[knowledge/files/src/include/port/atomics/arch-x86.h.md]] — provides PAUSE for MSVC.
 - [[knowledge/files/src/include/port/atomics/generic.h.md]] — fills in flag ops + u32 derived ops.
 - [[knowledge/files/src/include/port/atomics.h.md]] — umbrella.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

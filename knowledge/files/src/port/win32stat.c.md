@@ -127,3 +127,7 @@ Internally also: `filetime_to_time` (`win32stat.c:24`), `fileattr_to_unixmode`
   sibling Windows file-system shims (open, readlink, symlink).
 - `source/src/include/port/win32_port.h` — macro routing `stat`,
   `lstat`, `fstat` → `_pg*64` variants on Windows.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

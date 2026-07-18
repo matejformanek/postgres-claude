@@ -30,3 +30,7 @@ Header comment includes worked check-digit examples. [verified-by-code]
 ## Potential issues
 
 - Stale table dated 2004 (see combined doc ISSUE-D2). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-isn.md](../../../subsystems/contrib-isn.md)

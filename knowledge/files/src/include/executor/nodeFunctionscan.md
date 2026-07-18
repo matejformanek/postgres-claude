@@ -19,3 +19,7 @@ User-function trust surface. `FROM function()` invokes any callable SRF, includi
 - SRF protocol: `funcapi.h` (`ReturnSetInfo`, `SRF_RETURN_NEXT`)
 - `.c` impl: `source/src/backend/executor/nodeFunctionscan.c`
 - Idiom doc: `knowledge/idioms/fmgr-and-spi.md` (SRF section)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

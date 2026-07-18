@@ -14,3 +14,7 @@ Declares entry points for `Limit` — implements `LIMIT n`, `OFFSET n`, `FETCH F
 - Plan node: `Limit` in `nodes/plannodes.h`
 - State node: `LimitState` in `nodes/execnodes.h`
 - `.c` impl: `source/src/backend/executor/nodeLimit.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -36,3 +36,5 @@ Three tiny initializers for `ScanKeyData`: filling out the struct with the right
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+- [idioms/fmgr.md](../../../../../idioms/fmgr.md)

@@ -91,3 +91,7 @@ it's a single load + a comparison. Used by:
 - **ISSUE-doc**: the header doesn't say WHERE the lazy init happens
   (the consumer of `x86_feature_available` triggers it); a comment
   pointing at `set_x86_features` would help. (severity: trivial)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

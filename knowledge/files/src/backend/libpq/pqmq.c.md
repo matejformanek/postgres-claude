@@ -115,3 +115,7 @@ vtable just like `pqcomm.c` does for sockets. [from-comment, pqmq.c:1-12]
 ## Tally
 
 `[verified-by-code]=11 [from-comment]=6 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

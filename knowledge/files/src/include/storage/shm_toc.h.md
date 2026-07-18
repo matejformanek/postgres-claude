@@ -26,3 +26,7 @@ Used by `access/parallel.c` to size the DSM segment correctly.
 
 `BUFFERALIGN` is applied to each chunk (cache-line padding for
 performance + atomicity of cache-line-sized fields).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

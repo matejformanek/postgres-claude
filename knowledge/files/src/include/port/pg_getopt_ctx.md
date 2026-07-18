@@ -72,3 +72,7 @@ harnesses, REPL-style frontends, certain bgworker arg parsing.
 ## Issues / unresolved
 
 - (none; small, internal-use header)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

@@ -33,3 +33,7 @@ XLOG_SPGIST_VACUUM_REDIRECT 0x80
 - `spgxlogVacuumRedirect` — `(nToPlaceholder, firstPlaceholder, snapshotConflictHorizon, isCatalogRel, newestRedirectXid)`.
 
 See `spgxlog.c.md` for replay semantics.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

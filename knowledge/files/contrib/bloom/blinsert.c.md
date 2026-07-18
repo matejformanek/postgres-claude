@@ -104,3 +104,7 @@ appends a single tuple, preferring pages listed in the metapage's
 - **ISSUE-D1 (low)** — relation extension under exclusive meta-page lock
   serializes inserters during extends. Author-acknowledged
   (XXX comment line 313).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-bloom.md](../../../subsystems/contrib-bloom.md)

@@ -116,3 +116,7 @@ sweep-A13 audit was thorough.
 <!-- issues:auto:begin -->
 - [Issue register — `intarray`](../../../issues/intarray.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

@@ -26,3 +26,7 @@ sockaddr types.
 - [[knowledge/files/src/include/port/win32/arpa/inet.h.md]] — same one-liner pattern.
 - [[knowledge/files/src/include/port/win32/sys/socket.h.md]] — does the heavy lifting.
 - [[knowledge/files/src/include/port/win32/netinet/tcp.h.md]] — sibling.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

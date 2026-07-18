@@ -70,3 +70,7 @@ PMULL arm is the ARM analog of the AVX-512 VPCLMULQDQ arm in
 - `knowledge/files/src/port/pg_crc32c_sse42.c.md` — x86 sibling with the
   analogous SSE4.2 + AVX-512 split.
 - `knowledge/files/src/port/pg_crc32c_sb8.c.md` — software fallback.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

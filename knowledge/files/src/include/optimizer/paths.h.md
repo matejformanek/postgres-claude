@@ -10,3 +10,7 @@ Notable GUC externs: `enable_geqo`, `enable_eager_aggregate`,
 `add_paths_to_joinrel`, `make_join_rel`, `join_search_one_level`,
 `generate_useful_gather_paths`, hook typedefs (`set_rel_pathlist_hook`,
 `set_join_pathlist_hook`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

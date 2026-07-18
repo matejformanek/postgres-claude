@@ -152,3 +152,5 @@ leader if any worker reported an error.
 - [idioms/parallel-worker-launch-wait-and-errors.md](../../../../../idioms/parallel-worker-launch-wait-and-errors.md)
 - [idioms/snapshot-export-historic-parallel.md](../../../../../idioms/snapshot-export-historic-parallel.md)
 
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

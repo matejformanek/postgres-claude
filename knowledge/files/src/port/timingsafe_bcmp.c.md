@@ -47,3 +47,7 @@ compiled into libpgport only where libc lacks it. `[verified-by-code]`
 
 - `knowledge/issues/pgcrypto.md` — non-constant-time comparison findings (A11).
 - `knowledge/files/src/port/pg_strong_random.c.md` — sibling crypto primitive.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

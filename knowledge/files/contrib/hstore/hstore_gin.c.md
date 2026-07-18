@@ -160,3 +160,7 @@ efficiency curiosity.
   NULL)" relies on gin_extract_hstore returning NULL for count==0, which
   it does because palloc is gated by `if (count) entries = palloc(...)`
   (hstore_gin.c:55-56). Subtle but correct (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore.md](../../../subsystems/contrib-hstore.md)

@@ -32,3 +32,7 @@ consistent,penalty,same,sortsupport}`
 ## Issues spotted
 
 None significant.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

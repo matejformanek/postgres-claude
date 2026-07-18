@@ -61,3 +61,7 @@ the OVERLAPPED-vs-pread API mismatch.
 - `source/src/include/port.h` — declares `pg_pread` prototype and
   routes calls.
 - `source/src/backend/storage/file/fd.c` — primary backend consumer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

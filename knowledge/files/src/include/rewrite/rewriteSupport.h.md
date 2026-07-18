@@ -30,3 +30,7 @@ extern Oid  get_rewrite_oid(Oid relid, const char *rulename,
 All three are catalog-level helpers shared by `rewriteDefine.c` /
 `rewriteRemove.c` and by some `commands/` paths that need to know whether
 a rule exists.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

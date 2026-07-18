@@ -139,3 +139,7 @@ wouldn't have to re-implement these pieces.
 ## Tally
 
 `[verified-by-code]=12 [from-comment]=5 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

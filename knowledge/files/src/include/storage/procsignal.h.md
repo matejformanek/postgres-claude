@@ -64,3 +64,8 @@ A backend can have *multiple* recovery conflict reasons pending. The
 single bit `PROCSIG_RECOVERY_CONFLICT` is signaled; the **set of
 reasons** is delivered separately via `PGPROC->pendingRecoveryConflicts`
 (an array, not transmitted in the signal flags). `[from-comment] :41-43`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

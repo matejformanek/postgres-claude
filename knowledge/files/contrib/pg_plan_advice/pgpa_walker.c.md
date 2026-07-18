@@ -145,3 +145,7 @@ exactly this advice?" oracle that drives `PGPA_FB_FAILED` feedback.
 <!-- issues:auto:begin -->
 - [Issue register — `pg_plan_advice`](../../../issues/pg_plan_advice.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_plan_advice.md](../../../subsystems/contrib-pg_plan_advice.md)

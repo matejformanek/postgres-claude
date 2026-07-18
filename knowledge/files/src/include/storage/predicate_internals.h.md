@@ -61,3 +61,7 @@ some pg_stat plumbing reach into these.
 ## Issues
 
 None directly at the header level.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

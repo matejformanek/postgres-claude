@@ -118,3 +118,7 @@ operates on a block of four registers"
   `pg_lfind` vs a tight C loop?" The win is real but only above
   ~16-32 elements and only when the compiler can't auto-vectorize
   (e.g. data-dependent branches inside the loop). (severity: doc-only)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

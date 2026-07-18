@@ -103,3 +103,7 @@ PG always routes `setlocale()` through `pgwin32_setlocale` on Windows
   consumer.
 - `source/src/include/port.h` — macro routing `setlocale` →
   `pgwin32_setlocale` on Windows.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

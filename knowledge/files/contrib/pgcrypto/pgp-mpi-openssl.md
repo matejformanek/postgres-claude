@@ -132,3 +132,7 @@ and Elgamal encrypt/decrypt. Marshals `PGP_MPI` ↔ `BIGNUM` via
   `PXE_PGP_MATH_FAILED`; no distinction between OOM and arithmetic
   error (nit)] —
   `source/contrib/pgcrypto/pgp-mpi-openssl.c:104,167,217,253`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

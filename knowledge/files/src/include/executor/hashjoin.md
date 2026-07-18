@@ -134,3 +134,7 @@ Three contexts [from-comment: lines 25-55]:
   `nodeHash.c` README)] — lines 279-307.
 - [ISSUE-PHASE-D: spill files inherit `sharedtuplestore.h` posture
   — column data on disk in clear (medium echo)] — line 358-360.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

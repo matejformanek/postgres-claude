@@ -141,3 +141,7 @@ Cross-link: `knowledge/subsystems/storage-buffer.md`.
 - [Scenario — Add a new BufferAccessStrategy ring](../../../../scenarios/add-new-buffer-strategy.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-buffer.md](../../../../subsystems/storage-buffer.md)

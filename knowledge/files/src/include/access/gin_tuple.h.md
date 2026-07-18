@@ -83,3 +83,7 @@ crash and rebuild restarts from scratch, so the surface is small.
 - **ISSUE-doc**: header doesn't cross-reference the posting-list /
   posting-tree pivot, leaving a new contributor unsure which on-disk
   shape this maps into.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

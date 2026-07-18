@@ -39,3 +39,5 @@ verified-by-code: 2 — from-comment: 1 — from-readme: 0 — inferred: 0 — u
 <!-- backlinks:auto -->
 - [idioms/cache-invalidation-registration.md](../../../../idioms/cache-invalidation-registration.md)
 - [idioms/sinvaladt-broadcast.md](../../../../idioms/sinvaladt-broadcast.md)
+
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

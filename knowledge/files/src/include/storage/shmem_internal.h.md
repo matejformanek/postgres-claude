@@ -81,3 +81,7 @@ machinery and `subsystemlist.h` reorg). [verified-by-code] [inferred]
 <!-- issues:auto:begin -->
 - [Issue register — `include-storage`](../../../../issues/include-storage.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

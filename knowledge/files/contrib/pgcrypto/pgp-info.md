@@ -91,3 +91,7 @@ wildcard. Backs SQL `pgp_key_id(bytea)`.
   packet seen but EOF reached); silently returns whatever key_id was
   parsed (nit)] —
   `source/contrib/pgcrypto/pgp-info.c:213-231`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

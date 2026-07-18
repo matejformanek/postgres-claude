@@ -140,3 +140,7 @@ Uses `pg_snprintf` for the rounds field; rejects on encoding error.
 - [ISSUE-defense-in-depth: two different base64 alphabets
   (`_crypt_itoa64` vs `BF_itoa64`) are easy to confuse (nit)] —
   duplicated alphabet tables, no shared helper.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

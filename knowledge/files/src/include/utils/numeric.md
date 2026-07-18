@@ -42,3 +42,7 @@ Opaque NUMERIC handle (`Numeric` = `struct NumericData *`), display-precision li
 
 - `[ISSUE-DOC: NumericData on-disk format undocumented at header (low)]` — Cross-link to `source/src/backend/utils/adt/numeric.c` header comment would help; CVE-2014-0064 lessons are invisible from the header.
 - `[ISSUE-INVARIANT: typmod vs implementation cap easy to confuse (medium)]` — `numeric.h:32-34` warning is informal text; an explicit `NUMERIC_IMPL_MAX_PRECISION` constant would prevent miscoding.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/numeric-type.md](../../../../data-structures/numeric-type.md)

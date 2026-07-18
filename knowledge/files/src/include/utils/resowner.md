@@ -147,3 +147,7 @@ can register/unregister hooks via
   matches the resource's external visibility (e.g. buffer-like
   resources must be BEFORE_LOCKS) — left to author discipline (low)]
   — lines 41-46.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/resourceowner.md](../../../../data-structures/resourceowner.md)

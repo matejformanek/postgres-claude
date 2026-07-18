@@ -28,3 +28,7 @@ sortsupport}` `source/contrib/btree_gist/btree_oid.c:18-26`. Plus `oid_dist`.
 ## Issues spotted
 
 None significant.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

@@ -103,3 +103,7 @@ to `autoprewarm.c` (auto-dump/load bgworker).
 2. [ISSUE-resource: no rate limit on block range; any SELECT user can force full-relation reads (maybe)] — `source/contrib/pg_prewarm/pg_prewarm.c:220-233`
 3. [ISSUE-nit: static file-scope blockbuffer fragile if function ever becomes re-entrant (nit)] — `source/contrib/pg_prewarm/pg_prewarm.c:45,230`
 4. [ISSUE-correctness: documented privOid swap race relies on IndexGetRelation being idempotent under AccessShareLock (maybe)] — `source/contrib/pg_prewarm/pg_prewarm.c:131-148`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_prewarm.md](../../../subsystems/contrib-pg_prewarm.md)

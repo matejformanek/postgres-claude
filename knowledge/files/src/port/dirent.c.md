@@ -79,3 +79,7 @@ WIN32` because the standalone dirent.h declaration covers it).
   scans in tablespace handling, WAL archive sweeping).
 - `source/src/include/port/win32_port.h` — `DIR` and `struct dirent`
   type declarations.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

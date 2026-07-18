@@ -107,3 +107,7 @@ The trust posture:
 - [ISSUE-DOC: header gives no entry point to "what is sent to a
   worker" — that lives in `ExecParallelInitializeDSM` in
   `execParallel.c` (medium)] — entire file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

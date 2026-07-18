@@ -89,3 +89,7 @@ compact each page in place and rebuild the `notFullPage` cursor.
 ## Issues raised
 
 None of substance — bloom's vacuum is simple and well-disciplined.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-bloom.md](../../../subsystems/contrib-bloom.md)

@@ -48,3 +48,7 @@ unbounded). `[verified-by-code]`
 - `knowledge/files/src/port/strlcat.c.md` — sibling bounded concatenation.
 - `knowledge/files/src/port/tar.c.md` — a representative `strlcpy` consumer
   (tar header field fills).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

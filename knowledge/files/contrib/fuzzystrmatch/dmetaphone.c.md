@@ -131,3 +131,7 @@ each compute both codes and throw one away. Header comment at line
   sites; rigorous review only.
 - [ISSUE-Phase-D: phonetic-coding side channel (low)] — same
   family as fuzzystrmatch.c soundex/metaphone.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-fuzzystrmatch.md](../../../subsystems/contrib-fuzzystrmatch.md)

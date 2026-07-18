@@ -185,3 +185,7 @@ plaintext flows through MBuf, and on cleanup the bytes are zeroed.
   — `mbuf.c:285`. The caller is expected to scrub on their own use.
 - [ISSUE-api-shape: `PushFilterOps.init`'s return value tri-state
   (size / 0 / error) is overloaded (nit)] — works but is awkward.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

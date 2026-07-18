@@ -144,3 +144,7 @@ Defense in depth.
 - **[ISSUE-defense-in-depth: GIST_PAGE_ID magic check at `:62-68`
   is good; suggests amcheck/pageinspect should adopt this pattern
   for AMs that lack a magic byte (nit, positive note)]**.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

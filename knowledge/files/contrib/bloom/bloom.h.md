@@ -100,3 +100,7 @@ intersection is.
 ## Issues raised
 
 None — header is descriptive.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-bloom.md](../../../subsystems/contrib-bloom.md)

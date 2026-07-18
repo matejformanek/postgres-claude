@@ -32,3 +32,7 @@ match AIX's older `pam_conv` signature `[verified-by-code]`
 ## Issues
 
 - (none; mechanical shim)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

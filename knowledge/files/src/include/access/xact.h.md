@@ -147,3 +147,5 @@ None significant.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/subtransaction-stack.md](../../../../idioms/subtransaction-stack.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

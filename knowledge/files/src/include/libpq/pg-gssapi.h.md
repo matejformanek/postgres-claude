@@ -41,3 +41,7 @@ plumbing [from-comment].
 ## Tally
 
 `[verified-by-code]=2 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

@@ -85,3 +85,7 @@ this file fakes it with a dedicated **timer thread** that calls
   `pg_queue_signal` and `pgwin32_signal_event` consumed here.
 - `knowledge/files/src/backend/utils/misc/timeout.c.md` — the consumer
   of `setitimer` (statement timeout etc.).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

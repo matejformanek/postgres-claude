@@ -198,3 +198,5 @@ Commented-out by default; uncomment for diagnostic builds:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/slru-page-replacement.md](../../../idioms/slru-page-replacement.md)
+
+- [idioms/fmgr.md](../../../idioms/fmgr.md)

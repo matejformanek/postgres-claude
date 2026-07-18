@@ -251,3 +251,7 @@ All called from `be-secure.c` via thin wrappers:
 ## Tally
 
 `[verified-by-code]=28 [from-comment]=12 [inferred]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

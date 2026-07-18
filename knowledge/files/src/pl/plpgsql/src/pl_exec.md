@@ -263,3 +263,9 @@ The file is mature, but several behaviors deserve attention from a security/audi
 - [ISSUE-correctness: error-context callbacks use `_(estate->err_text)` — gettext on a NULL-tolerant pointer; but err_text being NULL falls into the else branch (verified-by-code)] — `source/src/pl/plpgsql/src/pl_exec.c:1262`-`:1302`. Looks safe.
 - [ISSUE-correctness: paramFetch is no longer used during query execution (only planning/serialization), but the dummy-param branch (`ok = false`) trusts `expr->paramnos` to be correct (from-comment, verified-by-code)] — `source/src/pl/plpgsql/src/pl_exec.c:6422`-`:6430`. If `paramnos` is out-of-date relative to the plan, the planner could see wrong types.
 - [ISSUE-api-shape: exec_prepare_plan can throw after saving the plan in expr->plan; the comment at `:4188`-`:4203` warns "extra steps at the end are unsafe" because re-execution would skip them. Existing callers comply by putting only the prepare call inside the `if (expr->plan == NULL)` block.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/error-context-callbacks.md](../../../../../idioms/error-context-callbacks.md)
+- [idioms/parser-pipeline.md](../../../../../idioms/parser-pipeline.md)
+- [idioms/spi.md](../../../../../idioms/spi.md)

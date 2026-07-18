@@ -58,3 +58,5 @@ None — uses `Buffer`, `BlockNumber`, `Relation` from elsewhere; bit constants 
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/visibility-map-update.md](../../../../idioms/visibility-map-update.md)
+
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

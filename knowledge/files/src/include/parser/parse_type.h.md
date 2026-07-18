@@ -18,3 +18,7 @@ Prototypes for type-name resolution. Wrappers around syscache lookups in
 - `typeStringToTypeName` — parse a SQL type string (used by `regtype`).
 - `typeOrDomainTypeRelid` — composite/domain → underlying relation Oid.
 - A handful of pgtype helpers: `format_type_be`, `format_type_with_typemod_qualified`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

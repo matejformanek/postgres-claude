@@ -169,3 +169,7 @@ None.
 <!-- issues:auto:begin -->
 - [Issue register — `utils-adt`](../../../../../issues/utils-adt.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/fmgr.md](../../../../../idioms/fmgr.md)

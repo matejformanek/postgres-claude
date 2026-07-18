@@ -90,3 +90,7 @@ definitions; that's why there is **no include guard** (`:19`
 - [Scenario — Add a new utility statement](../../../../scenarios/add-new-utility-statement.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

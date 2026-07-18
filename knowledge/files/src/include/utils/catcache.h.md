@@ -41,3 +41,5 @@ verified-by-code: 1 — from-comment: 6 — from-readme: 0 — inferred: 0 — u
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/syscache-catcache-internals.md](../../../../idioms/syscache-catcache-internals.md)
+
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

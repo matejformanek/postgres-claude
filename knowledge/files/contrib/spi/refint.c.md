@@ -147,3 +147,7 @@ This is the **canonical PG demo** of how to call `SPI_connect`,
 <!-- issues:auto:begin -->
 - [Issue register — `spi`](../../../issues/spi.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/spi.md](../../../idioms/spi.md)

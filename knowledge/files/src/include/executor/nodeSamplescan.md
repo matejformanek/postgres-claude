@@ -20,3 +20,7 @@ Sampling-method extension surface (A14 echo). `tsm_system_rows` and `tsm_system_
 - `.c` impl: `source/src/backend/executor/nodeSamplescan.c`
 - Builtin methods: `access/tablesample/system.c`, `bernoulli.c`
 - Contrib: `contrib/tsm_system_rows/`, `contrib/tsm_system_time/`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

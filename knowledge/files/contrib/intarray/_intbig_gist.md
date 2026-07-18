@@ -65,3 +65,7 @@ This is **the** signature-collision concern in this slice. Full Phase D detail f
 - [ISSUE-ALLISTRUE: malicious 2016-distinct-value array creates ALLISTRUE leaf that defeats GiST pruning; no per-relation safeguard (Med)]
 - [ISSUE-UNREACHABLE: `<@` branch (lines 536-577) dead since intarray 1.4 (Cleanup)]
 - [ISSUE-DOC: no warning in opclass docs that `siglen=252` is insufficient against adversarial inserts (Doc)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

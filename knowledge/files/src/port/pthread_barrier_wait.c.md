@@ -62,3 +62,7 @@ before any may proceed.
   fallback prototypes.
 - `knowledge/files/src/port/pthread-win32.h.md` — *different* shim,
   Windows-only minimal pthread subset.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

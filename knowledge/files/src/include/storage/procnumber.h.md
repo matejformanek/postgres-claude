@@ -74,3 +74,7 @@ rename did NOT change.
   2^23 - 1`) hides a ceiling that wouldn't show until MaxBackends
   is pushed past 8M. Not currently a concern but worth noting.
   (Informational.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

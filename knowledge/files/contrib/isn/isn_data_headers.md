@@ -92,3 +92,7 @@ range), `source/contrib/isn/ISSN.h:1-30`.
   registration assignments have moved on.
 - **ISSUE-D3 (low)** — `check_table` runs only in assert builds; no
   startup integrity check in production.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-isn.md](../../../subsystems/contrib-isn.md)

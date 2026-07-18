@@ -69,3 +69,7 @@ SIGKILL: skips the pipe and calls `TerminateProcess`. Gated by `#ifdef WIN32`.
 - `source/src/include/port/win32_port.h` — `pgkill` prototype, `PG_SIGNAL_COUNT`.
 - `knowledge/files/src/port/pgstrsignal.c.md` — sibling signal-name shim
   used in log lines.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

@@ -133,3 +133,7 @@ current label AND attach to the new label.
   supports to take object name" (database.c:75) is a long-standing TODO
   — sepgsql_compute_create is called with the new database name as
   objname so this is already done; comment is stale (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

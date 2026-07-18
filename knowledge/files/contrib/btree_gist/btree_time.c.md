@@ -37,3 +37,7 @@ sortsupport}` plus `gbt_timetz_compress`, `gbt_timetz_consistent`,
   not for equality recheck. Phase D test target: insert `'10:00+02'` and
   `'09:00+01'`, see whether `EXCLUDE WITH =` rejects the second. (MED —
   documented divergence from btree, but easy to misuse)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

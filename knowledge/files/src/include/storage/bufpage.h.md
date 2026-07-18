@@ -54,3 +54,7 @@ hash opaque, etc.).
 ## Tag tally
 
 `[verified-by-code]` 2 / `[from-comment]` 4.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-buffer.md](../../../../subsystems/storage-buffer.md)

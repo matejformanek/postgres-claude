@@ -32,3 +32,7 @@ argument-name resolution during body parse), and `commands/proclang.c`.
 
 - [verified-by-code] type/function declarations.
 - [from-comment] header docstring at top.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

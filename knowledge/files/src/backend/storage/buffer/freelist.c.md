@@ -181,3 +181,7 @@ buffers are recycled in-place via the clock sweep. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `storage-buffer`](../../../../../issues/storage-buffer.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-buffer.md](../../../../../subsystems/storage-buffer.md)

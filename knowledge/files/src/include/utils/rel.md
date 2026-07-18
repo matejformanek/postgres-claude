@@ -165,3 +165,7 @@ call.
 - [ISSUE-DESIGN: `rd_toastoid` is documented as a "hack" — a
   release-mode mis-set would silently send toast pointers to the
   wrong OID (medium)] — lines 242-251.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/relcache-build.md](../../../../idioms/relcache-build.md)

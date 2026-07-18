@@ -62,3 +62,7 @@ Shared header and utility code for the `intarray` contrib module: declares `QUER
 - [ISSUE-API: `internal_size` overload of -1 as overflow sentinel (Low)]
 - [ISSUE-DOS: `|` / `&` (`_int_union`, `_int_inter`) over arbitrary user arrays will palloc up to `na+nb` ints with no preflight bound (Low — palloc throws)]
 - [ISSUE-OVERFLOW: `new_intArrayType` size arithmetic lacks explicit `if (num > MaxAllocSize/sizeof(int)) ereport` guard (Low)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

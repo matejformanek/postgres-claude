@@ -91,3 +91,7 @@ doesn't affect the snapshot.
   check; mis-identified input produces confusing-but-harmless
   output (nit; documented design choice)]** —
   `source/contrib/pageinspect/fsmfuncs.c:53`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

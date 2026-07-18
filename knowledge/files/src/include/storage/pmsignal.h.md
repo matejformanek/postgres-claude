@@ -64,3 +64,7 @@ This is the call backed by `WL_POSTMASTER_DEATH` / `WL_EXIT_ON_PM_DEATH`.
   `RegisterPostmasterChildActive`, `MarkPostmasterChildWalSender`,
   `IsPostmasterChildWalSender` — slot state-machine bookkeeping.
 - `PostmasterDeathSignalInit` — install the PR_SET_PDEATHSIG handler.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

@@ -21,3 +21,7 @@ API for target-list construction.
   UNKNOWN-typed outputs as TEXT.
 - `markTargetListOrigins` — fill `resorigtbl`/`resorigcol` for SELECT.
 - `FigureColname` / `FigureIndexColname` — output column name heuristics.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

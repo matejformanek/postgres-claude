@@ -166,3 +166,5 @@ Used by CREATE INDEX CONCURRENTLY and similar to enumerate `VirtualTransactionId
 - [data-structures/proclock.md](../../../../../data-structures/proclock.md)
 - [idioms/fastpath-locks.md](../../../../../idioms/fastpath-locks.md)
 
+
+- [idioms/parser-pipeline.md](../../../../../idioms/parser-pipeline.md)

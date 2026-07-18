@@ -44,3 +44,7 @@ what enables per-node attribution.
 
 - [verified-by-code] every struct + global.
 - [from-comment] monotonicity invariant at file head.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

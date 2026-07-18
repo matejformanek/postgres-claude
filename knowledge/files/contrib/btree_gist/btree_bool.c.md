@@ -31,3 +31,7 @@ default-initialised).
   on systems where bool is 1 byte). `Assert(indexsize >= 2*size)` in
   `gbt_num_compress` checks `2 >= 2*1 = 2` — exactly equal. Brittle if
   someone changed `sizeof(bool)`. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

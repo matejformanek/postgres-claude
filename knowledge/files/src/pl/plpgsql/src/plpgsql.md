@@ -152,3 +152,7 @@ Source pin: `e18b0cb7344`. File length: 1333 lines. [verified-by-code]
 - [ISSUE-documentation: header has no overall block comment explaining the parse tree → execstate model — readers must reverse-engineer from struct order (nit)] — `source/src/pl/plpgsql/src/plpgsql.h:1-30` — the only top comment is the standard copyright header. Given this is THE landmark file (1333 lines), a 20-line architectural overview at the top would pay back enormously. nit.
 - [ISSUE-api-shape: `PLpgSQL_execstate` mixes "func metadata cache" (e.g. `fn_rettype`, `retistuple`, `retisset` at `plpgsql.h:1021-1025`) with truly per-call state — the former duplicate fields already in `PLpgSQL_function`, presumably for cache-line locality, but the duplication isn't commented (nit)] — `source/src/pl/plpgsql/src/plpgsql.h:1019-1025` — `func` is already a member at `:1014`, so `estate->func->fn_rettype` is reachable. Probably an optimization or a remnant of a refactor; the absence of a comment makes it look accidental. nit.
 - [ISSUE-correctness: `PLpgSQL_function.cur_estate` is a raw mutable pointer with no documented save/restore contract in the header (the contract lives in `pl_handler.c:246-287` only) (nit)] — `source/src/pl/plpgsql/src/plpgsql.h:1005-1006` — a future caller that invokes `plpgsql_exec_function` directly without saving and restoring `cur_estate` would silently corrupt re-entrancy. A `/* Caller must save & restore around the call. */` comment in the struct would help. nit.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/spi.md](../../../../../idioms/spi.md)

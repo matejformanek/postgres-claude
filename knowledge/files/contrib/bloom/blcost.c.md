@@ -47,3 +47,7 @@ modeling is trivial: feed `numIndexTuples = index->tuples` and
 ## Issues raised
 
 None — minimal wrapper.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-bloom.md](../../../subsystems/contrib-bloom.md)

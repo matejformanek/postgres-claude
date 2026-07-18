@@ -123,3 +123,7 @@ that timing and error shape don't reveal user existence).
 ## Tally
 
 `[verified-by-code]=10 [from-comment]=3 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

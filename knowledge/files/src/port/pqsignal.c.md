@@ -88,3 +88,7 @@ The header comment at `pqsignal.c:14-42` is authoritative: classic SVR4
   function.
 - `source/src/include/libpq/pqsignal.h` — `pqsigfunc` typedef and
   `pg_signal_info` struct.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

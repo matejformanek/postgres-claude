@@ -56,3 +56,7 @@ init state machine. `[verified-by-code]`
   barrier shim, unrelated to this Windows-specific pthread subset.
 - `source/src/interfaces/libpq/pthread-win32.c` — the matching
   implementation file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

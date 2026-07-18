@@ -142,6 +142,7 @@ walsender.
 - [architecture/replication.md](../../../../architecture/replication.md)
 - [idioms/output-plugin-callbacks.md](../../../../idioms/output-plugin-callbacks.md)
 
+- [subsystems/replication.md](../../../../subsystems/replication.md)
 ## Appears in scenarios
 
 <!-- scenarios:auto:begin -->

@@ -17,3 +17,7 @@ Tiny header declaring the `AttributeOpts` varlena struct and the single accessor
 ## Confidence tag tally
 
 verified-by-code: 1 — from-comment: 1 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

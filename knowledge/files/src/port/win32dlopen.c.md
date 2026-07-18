@@ -70,3 +70,7 @@ Linux/macOS works unchanged on Windows. `[verified-by-code]`
   mapping; `set_dl_error` here uses `FormatMessage` directly rather
   than going through `_dosmaperr` because callers want the human
   string, not an errno code.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

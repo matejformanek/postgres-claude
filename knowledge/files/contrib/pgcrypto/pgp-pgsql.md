@@ -213,3 +213,7 @@ twelve SQL entry points.
   encoding for the armor headers; RFC 4880 does not mandate UTF-8;
   user-supplied headers could be in any encoding (maybe)] —
   `source/contrib/pgcrypto/pgp-pgsql.c:964-969`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

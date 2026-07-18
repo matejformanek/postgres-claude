@@ -117,6 +117,7 @@ uint32 xlp_xlog_blcksz; }`. First page of every segment has this.
 - [architecture/wal.md](../../../../architecture/wal.md)
 - [idioms/wal-page-format.md](../../../../idioms/wal-page-format.md)
 
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)
 ## Appears in scenarios
 
 <!-- scenarios:auto:begin -->

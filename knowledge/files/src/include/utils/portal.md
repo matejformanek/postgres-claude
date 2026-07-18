@@ -116,3 +116,7 @@ Holdable: `PortalCreateHoldStore`, `ThereAreNoReadyPortals`,
 - [ISSUE-API: no header-visible constant for the cursor option
   bitmask (`CURSOR_OPT_*`) — they live in `parsenodes.h` (low)] —
   line 147.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/cursor-and-portal.md](../../../../idioms/cursor-and-portal.md)

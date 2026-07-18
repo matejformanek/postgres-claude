@@ -15,3 +15,7 @@ Declares entry points for `SubqueryScan` — wraps a sub-`PlannedStmt` that appe
 - State node: `SubqueryScanState` in `nodes/execnodes.h`
 - `.c` impl: `source/src/backend/executor/nodeSubqueryscan.c`
 - Related: `executor/nodeSubplan.h` (uncorrelated/correlated sub-SELECTs as expressions)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

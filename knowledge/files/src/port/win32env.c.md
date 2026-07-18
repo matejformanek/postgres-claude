@@ -76,3 +76,7 @@ via `SetEnvironmentVariable`. `[from-comment]` `[verified-by-code]`
   `putenv`/`setenv`/`unsetenv` to these on Windows.
 - `knowledge/files/src/port/win32setlocale.c.md` — sibling "Windows
   libc surprise" wrapper file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

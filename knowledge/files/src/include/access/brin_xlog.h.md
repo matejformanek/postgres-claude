@@ -36,3 +36,5 @@ See `brin_xlog.c.md`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/brin-revmap.md](../../../../idioms/brin-revmap.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

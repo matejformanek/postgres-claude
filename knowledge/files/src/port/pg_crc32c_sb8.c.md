@@ -70,3 +70,7 @@ lines of constants. The runtime is ~100 lines of code at the top.
 - Kounavis & Berry, "Novel Table Lookup-Based Algorithms for High-Performance
   CRC Generation", IEEE TC 2008, doi:10.1109/TC.2008.85 (cited in file
   header).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

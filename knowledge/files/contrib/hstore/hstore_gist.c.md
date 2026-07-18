@@ -208,3 +208,7 @@ UB. Good. `[verified-by-code]`.
 - `[ISSUE-api-shape: ALLISTRUE flag's bit value 0x04 (not 0x01 or 0x02)
   is an unstated PG-historical artifact — likely once shared with other
   flag bits (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore.md](../../../subsystems/contrib-hstore.md)

@@ -63,3 +63,7 @@ filled in label / property bindings) and before planning.
 
 - `[ISSUE-TRUST: PG18 new — header doesn't document ACL/RLS propagation contract for graph-vs-constituent-tables (high)] — source/src/include/rewrite/rewriteGraphTable.h:19`
 - `[ISSUE-DOC: single prototype, zero context — bare header (medium)] — source/src/include/rewrite/rewriteGraphTable.h:1-22`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

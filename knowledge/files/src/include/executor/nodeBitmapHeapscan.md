@@ -19,3 +19,7 @@ The dual-track DSM init (regular state + instrumentation) is unusual versus most
 - State node: `BitmapHeapScanState` in `nodes/execnodes.h`
 - Producers: `executor/nodeBitmapIndexscan.h`, `executor/nodeBitmapAnd.h`, `executor/nodeBitmapOr.h`
 - TID bitmap impl: `nodes/tidbitmap.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

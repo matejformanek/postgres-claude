@@ -85,3 +85,7 @@ machinery is gone).
 - `[ISSUE-DOC: "RuleLock" name is misleading; historical fossil noted in comment but field naming still confuses new readers (low)] — source/src/include/rewrite/prs2lock.h:36-38`
 - `[ISSUE-TRUST: A14 echo — pg_rewrite.ev_action is a node-tree string deserialized by readfuncs; hostile catalog content surface (medium)] — source/src/include/rewrite/prs2lock.h:24-32`
 - `[ISSUE-TRUST: enabled='R' replica-mode rules fire during logical apply; can silently DROP rows or rewrite to side-effecting query (medium)] — source/src/include/rewrite/prs2lock.h:30`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

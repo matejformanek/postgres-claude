@@ -80,3 +80,7 @@ credential into a process-local MEMORY: ccache so later libpq calls
 ## Tally
 
 `[verified-by-code]=5 [from-comment]=4 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

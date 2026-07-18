@@ -164,3 +164,5 @@ LWLocks.").
 <!-- backlinks:auto -->
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
 - [idioms/heap-tuple-freeze.md](../../../../idioms/heap-tuple-freeze.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

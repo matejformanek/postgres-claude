@@ -74,3 +74,7 @@ or a foreign table by OID or by name. Backing catalogs are
 <!-- issues:auto:begin -->
 - [Issue register — `include-foreign`](../../../../issues/include-foreign.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/foreign.md](../../../../subsystems/foreign.md)

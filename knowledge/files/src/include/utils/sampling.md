@@ -41,3 +41,7 @@ Shared sampling algorithms used by ANALYZE, TABLESAMPLE, and (legacy) FDWs. Wrap
 
 - `[ISSUE-DRIFT: duplicated declarations between sampling.h and vacuum.h (low)]` — `sampling.h:58-59` admits this; without a build-time crosscheck, signature changes can drift.
 - `[ISSUE-DOC: pg_prng not security-grade (info)]` — worth a one-line warning to discourage reuse for security-sensitive code.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/analyze-block-and-reservoir-sampling.md](../../../../idioms/analyze-block-and-reservoir-sampling.md)

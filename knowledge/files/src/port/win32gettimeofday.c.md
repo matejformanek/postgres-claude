@@ -64,3 +64,7 @@ backend code does `gettimeofday(&tv, NULL)`.
 - `source/src/port/elapsed_time.c` (no longer present at this anchor)
   / the in-tree monotonic-time helpers — preferred for duration
   measurements.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

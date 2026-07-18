@@ -67,3 +67,7 @@ The header is internal to the extension — none of these symbols are SQL-callab
 
 - [ISSUE-api-shape: `PgFdwRelationInfo` has no version stamp; an extension subclassing/sharing this private struct (none exists today, but the header is installed in `pkg-include`) would silently break on PG upgrade. (nit)] — `source/contrib/postgres_fdw/postgres_fdw.h:30`.
 - [ISSUE-documentation: line 88 says `user` "only set in use_remote_estimate mode" but doesn't say what calling-code paths obey this contract. A grep of `postgres_fdw.c` shows every other place re-fetches via `GetUserMapping(...)` — but a reviewer adding a new use of `fpinfo->user` could easily NPE. (nit)] — `source/contrib/postgres_fdw/postgres_fdw.h:88`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-postgres_fdw.md](../../../subsystems/contrib-postgres_fdw.md)

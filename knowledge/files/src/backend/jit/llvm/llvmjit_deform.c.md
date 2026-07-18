@@ -80,3 +80,5 @@ JIT-compile a per-`TupleDesc`, per-slot-type heap-tuple deformer. The single exp
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/jit-tuple-deform-and-inline.md](../../../../../idioms/jit-tuple-deform-and-inline.md)
+
+- [subsystems/jit.md](../../../../../subsystems/jit.md)

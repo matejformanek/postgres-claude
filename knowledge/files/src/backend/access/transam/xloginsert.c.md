@@ -173,3 +173,5 @@ doesn't survive crash anyway).
 - [idioms/hint-bits-setbufferdirty.md](../../../../../idioms/hint-bits-setbufferdirty.md)
 - [idioms/wal-record-construction.md](../../../../../idioms/wal-record-construction.md)
 
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

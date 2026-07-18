@@ -16,3 +16,7 @@ No `ExecEnd*` decl — cleanup folds into per-row expression context reset.
 - Plan node: `ValuesScan` in `nodes/plannodes.h`
 - State node: `ValuesScanState` in `nodes/execnodes.h`
 - `.c` impl: `source/src/backend/executor/nodeValuesscan.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

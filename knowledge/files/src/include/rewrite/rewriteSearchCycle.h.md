@@ -16,3 +16,7 @@ Called only by `rewriteHandler.c:fireRIRrules` at `:2060`. The CTE comes
 in with `search_clause` / `cycle_clause` set; returns a CTE with those
 cleared and the equivalent extra columns/quals merged into the body
 Query.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

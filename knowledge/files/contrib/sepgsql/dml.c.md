@@ -240,3 +240,7 @@ Static helpers:
 - `[ISSUE-documentation: comment in dml.c:157-160 says "Hardwired
   Policies" — the sepgsql docs should highlight that they
   apply only in enforcing mode (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

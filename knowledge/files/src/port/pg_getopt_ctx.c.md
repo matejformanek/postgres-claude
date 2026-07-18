@@ -61,3 +61,7 @@ ctx. `[verified-by-code]` `[from-comment]`
 - `knowledge/files/src/port/getopt.c.md` — legacy wrapper around this.
 - `knowledge/files/src/port/getopt_long.c.md` — long-option BSD implementation.
 - `source/src/include/port/pg_getopt_ctx.h` — `pg_getopt_ctx` struct definition.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

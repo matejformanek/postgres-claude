@@ -79,3 +79,7 @@ existing executor fmgr/SQL function gates (`fmgr-and-spi`,
 ## Issues
 
 None.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

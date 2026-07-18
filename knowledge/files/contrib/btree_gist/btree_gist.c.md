@@ -85,3 +85,7 @@ ordered-operator infrastructure.
   no-op is the correct behavior for compressed leaf format `[v,v]`; a
   reader who doesn't read both `btree_utils_num.c` and the gist.c contract may
   worry they need to do something here. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

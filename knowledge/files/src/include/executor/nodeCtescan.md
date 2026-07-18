@@ -16,3 +16,7 @@ Declares entry points for `CteScan` — reads from a tuplestore materialized by 
 - Producer: `executor/nodeRecursiveunion.h` (recursive case)
 - `.c` impl: `source/src/backend/executor/nodeCtescan.c`
 - Tuplestore: `utils/tuplestore.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

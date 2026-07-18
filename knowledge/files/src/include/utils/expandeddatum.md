@@ -49,3 +49,7 @@ Defines the in-memory "expanded" representation of complex TOASTable types (arra
 
 - `[ISSUE-INVARIANT: in-place-modify exception safety is a hard contract (high)]` — header states it informally; most failing-half-way bugs in expanded objects come from violating this. A defensive copy-on-write pattern documented at header level would help.
 - `[ISSUE-DOC: short-header vs EOH_HEADER_MAGIC collision (medium)]` — flag explicit pattern for safe dispatch (e.g. "only call VARATT_IS_EXPANDED_HEADER on already-detoasted 4-byte datums").
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/varatt-varlena.md](../../../../data-structures/varatt-varlena.md)

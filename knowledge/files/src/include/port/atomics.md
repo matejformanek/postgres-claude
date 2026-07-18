@@ -176,3 +176,8 @@ its primitives.
   developer reading `pg_atomic_fetch_add_u64(...)` has no in-source
   signal that on platform X this is a spinlock. (severity: medium,
   doc-only)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/locking-overview.md](../../../../idioms/locking-overview.md)
+- [subsystems/port.md](../../../../subsystems/port.md)

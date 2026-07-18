@@ -20,3 +20,7 @@ External-data trust (A7 echo). The underlying `XMLTABLE` path runs libxml2 on us
 - Routing: `executor/tablefunc.h`
 - `.c` impl: `source/src/backend/executor/nodeTableFuncscan.c`
 - XML/JSON backends: `utils/adt/xml.c`, `common/jsonapi.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

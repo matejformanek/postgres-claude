@@ -51,3 +51,7 @@ hand. `[verified-by-code]`
 - `knowledge/files/src/port/qsort.c.md` — context-free sibling.
 - `source/src/backend/utils/sort/tuplesort.c` — primary consumer.
 - `source/src/include/lib/sort_template.h` — underlying template.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

@@ -117,3 +117,7 @@ All declared `extern`, defined in `btree_utils_num.c`:
 <!-- issues:auto:begin -->
 - [Issue register — `btree_gist`](../../../issues/btree_gist.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

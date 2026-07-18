@@ -98,3 +98,5 @@ Cross-link: `knowledge/subsystems/storage-lmgr.md`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/relation-extension-lock.md](../../../../idioms/relation-extension-lock.md)
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

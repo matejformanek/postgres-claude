@@ -58,3 +58,7 @@
 - [ISSUE-DOS: inserting >`2*num_ranges` elements into a `gist__int_ops`-indexed column hard-errors INSERT path; attacker can write-DoS by including a 201-element array (Low — explicit error)]
 - [ISSUE-COMPLEXITY: pickSplit O(maxoff²) over `inner_int_union/inter`; not a useful attack vector but a perf cliff if page fanout grows (Info)]
 - [ISSUE-UNREACHABLE: `<@` branch in `g_int_consistent:96-115` is documented as dead since intarray 1.4 — candidate for deletion (Cleanup)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

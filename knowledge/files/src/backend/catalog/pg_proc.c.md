@@ -24,3 +24,5 @@
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../subsystems/optimizer.md)
+
+- [idioms/fmgr.md](../../../../idioms/fmgr.md)

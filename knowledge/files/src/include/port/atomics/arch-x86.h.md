@@ -63,3 +63,7 @@ fallbacks — generally faster than `__sync_*`/`__atomic_*` on x86.
 - [[knowledge/files/src/include/port/atomics/generic-msvc.h.md]] — MSVC analog.
 - [[knowledge/files/src/include/port/atomics.h.md]] — umbrella.
 - [[knowledge/issues/include-port.md]] — barrier-asymmetry notes.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

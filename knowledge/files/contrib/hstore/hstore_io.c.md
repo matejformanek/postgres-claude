@@ -373,3 +373,7 @@ audits. Documented above as `[ISSUE-correctness]`.
   all pairs from the wire — a forged recv with 26M duplicate keys would
   ALL be read+palloc'd before dedup runs. Memory peak is 26M Pairs +
   26M tiny strings, not the final hstore size (maybe)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore.md](../../../subsystems/contrib-hstore.md)

@@ -221,6 +221,7 @@ the redo result, panic on mismatch. The masking is per-rmgr.
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [idioms/crash-recovery-startup.md](../../../../../idioms/crash-recovery-startup.md)
 
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)
 ## Appears in scenarios
 
 <!-- scenarios:auto:begin -->

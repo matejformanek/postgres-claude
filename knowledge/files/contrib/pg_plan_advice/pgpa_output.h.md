@@ -19,3 +19,7 @@ Single-function header — exports `pgpa_output_advice`. [verified-by-code]
 ## Potential issues
 
 (None.)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_plan_advice.md](../../../subsystems/contrib-pg_plan_advice.md)

@@ -15,3 +15,7 @@ Declares entry points for `Result` — emits a single row from constant or compi
 - Plan node: `Result` in `nodes/plannodes.h`
 - State node: `ResultState` in `nodes/execnodes.h`
 - `.c` impl: `source/src/backend/executor/nodeResult.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

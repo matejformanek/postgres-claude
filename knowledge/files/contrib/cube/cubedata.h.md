@@ -54,3 +54,7 @@ Macros: `POINT_BIT 0x80000000`, `DIM_MASK 0x7fffffff`, `IS_POINT`,
 ## Issues
 
 None beyond those filed against `cube.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-cube.md](../../../subsystems/contrib-cube.md)

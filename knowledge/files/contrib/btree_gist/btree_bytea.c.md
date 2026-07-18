@@ -77,3 +77,7 @@ opclass not advertising fetch support.
   effectively random — internal-node ranges overlap heavily and the GiST
   index degenerates. nbtree handles this much better via its sophisticated
   split logic. Operational, not bug. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

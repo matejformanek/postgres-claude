@@ -23,3 +23,5 @@ See `brin_tuple.c.md`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/brin-tuple-format.md](../../../../idioms/brin-tuple-format.md)
+
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

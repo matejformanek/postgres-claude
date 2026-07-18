@@ -219,3 +219,7 @@ checks `gbt_var_node_pf_match` so that truncated nodes can still match.
   any maximum. A degenerate but valid 1 GB text value would be detoasted
   into backend memory and copied into the index — same memory pressure as
   nbtree. No new attack surface, but worth noting for the inventory. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

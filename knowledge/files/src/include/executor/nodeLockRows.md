@@ -19,3 +19,7 @@ Logical replication / catalog-xmin interaction (A8 echo). `SELECT FOR KEY SHARE`
 - Row-lock impl: `access/heapam.h` (`heap_lock_tuple`), `access/tableam.h` (`tuple_lock`)
 - `.c` impl: `source/src/backend/executor/nodeLockRows.c`
 - Wait policy: `nodes/lockoptions.h` (LockClauseStrength, LockWaitPolicy)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

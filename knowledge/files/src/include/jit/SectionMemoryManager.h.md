@@ -90,3 +90,7 @@ shim declared in `llvmjit.h`.
   `LLVMOrcCreateRTDyldObjectLinkingLayerWithSafeSectionMemoryManager`.
 - `source/src/backend/jit/llvm/SectionMemoryManager.cpp` — definitions for
   the methods declared here.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/jit.md](../../../../subsystems/jit.md)

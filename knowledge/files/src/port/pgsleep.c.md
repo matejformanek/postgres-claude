@@ -54,3 +54,7 @@ the correct pattern instead. `[from-comment]` `[verified-by-code]`
 - `source/src/backend/port/win32/signal.c` — backend Win32 version of `pg_usleep`.
 - `source/src/backend/utils/init/miscinit.c` and `storage/lmgr/latch.c` —
   `WaitLatch` is the preferred sleep primitive in the backend.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

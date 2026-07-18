@@ -31,3 +31,7 @@ and a per-plan ResourceOwner.
 
 - [verified-by-code] struct definitions + magic number.
 - [from-comment] file header.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

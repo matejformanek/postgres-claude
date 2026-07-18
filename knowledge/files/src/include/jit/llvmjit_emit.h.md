@@ -95,3 +95,7 @@ under cpluspluscheck when LLVM is disabled. `[from-comment]`
   declarations these helpers consume.
 - `knowledge/files/src/include/jit/jit.h.md` — provider-agnostic side.
 - `source/src/backend/jit/llvm/llvmjit_expr.c` — primary consumer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/jit.md](../../../../subsystems/jit.md)

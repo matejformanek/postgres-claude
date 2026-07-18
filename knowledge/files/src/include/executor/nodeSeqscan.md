@@ -15,3 +15,7 @@ Declares entry points for `SeqScan` — the unqualified table-AM full-scan node.
 - State node: `SeqScanState` in `nodes/execnodes.h`
 - Table-AM: `access/tableam.h` (`table_beginscan` / `table_beginscan_parallel`)
 - `.c` impl: `source/src/backend/executor/nodeSeqscan.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

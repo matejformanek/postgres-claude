@@ -28,3 +28,7 @@ that's allowed to reach deeper. [from-comment:6-13]
 - [Scenario — Add a new cost-model constant (and optional GUC)](../../../../scenarios/add-new-cost-model-knob.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

@@ -155,3 +155,7 @@ section with CFB decryption + SHA-1 or 16-bit checksum integrity check.
   populated by `pgp_s2k_process` could survive on stack if not
   scrubbed before return. Stack scrub depends on subsequent
   function-call overwriting. Minor in practice.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

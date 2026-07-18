@@ -104,3 +104,7 @@ parser-implementing modules only.
 - `[ISSUE-TRUST: A11 echo — no GUC limits maximum query length / scanbuf size; large hostile string drives huge palloc (low — exists upstream as known DoS)] — source/src/include/parser/scanner.h:72-73`
 - `[ISSUE-DOC: comment block about token numbers (lines 46-57) is binding contract but easy to miss; new grammars built atop scanner can mis-align token codes (medium)] — source/src/include/parser/scanner.h:46-57`
 - `[ISSUE-CODE: backslash_quote-snapshot approach is correct but undocumented as a defense; reads as just an init copy (low)] — source/src/include/parser/scanner.h:81-87`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

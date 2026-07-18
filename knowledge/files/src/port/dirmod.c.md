@@ -89,3 +89,7 @@ ifdefs; on real Unix it compiles to nothing. `[verified-by-code]`
   tablespace links.
 - `knowledge/files/src/port/open.c.md` — sibling Windows shim.
 - `knowledge/files/src/port/dirent.c.md` — sibling opendir/readdir shim.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

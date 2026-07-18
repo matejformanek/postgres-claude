@@ -70,3 +70,7 @@ The function has two layers of escalation:
   numeric formatting on broken platforms" file.
 - `source/src/backend/utils/adt/float.c:float4in` — primary consumer
   (SQL `REAL` input).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

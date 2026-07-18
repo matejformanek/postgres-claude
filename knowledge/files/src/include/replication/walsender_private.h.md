@@ -132,3 +132,5 @@ concurrently re-parse `synchronous_standby_names`. [from-comment]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/walsender-state-machine.md](../../../../idioms/walsender-state-machine.md)
+
+- [subsystems/replication.md](../../../../subsystems/replication.md)

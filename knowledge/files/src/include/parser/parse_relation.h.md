@@ -35,3 +35,7 @@ because it exposes the full RTE-construction API.
 
 5. **Permission tracking**: `addRTEPermissionInfo`, `getRTEPermissionInfo`,
    `markVarForSelectPriv`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

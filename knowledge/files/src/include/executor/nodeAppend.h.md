@@ -14,3 +14,7 @@ execAsync for FDW async-capable children.
 ## Tags
 
 - [verified-by-code] complete surface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

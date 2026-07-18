@@ -52,3 +52,7 @@ The whole body is 14 lines (`win32link.c:17-31`):
   for `ERROR_NOT_SAME_DEVICE`, `ERROR_FILE_NOT_FOUND` etc.
 - `source/src/backend/access/transam/xlog.c` — WAL segment hard-link
   recycle path on Windows.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

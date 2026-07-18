@@ -108,3 +108,5 @@ later in the file).
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/xlogreaderstate.md](../../../../data-structures/xlogreaderstate.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

@@ -54,3 +54,7 @@ gate.
   macro at `llvmjit.h:144-146`.
 - `source/src/backend/jit/llvm/SectionMemoryManager.cpp` — the .cpp providing
   the backported class.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/jit.md](../../../../subsystems/jit.md)

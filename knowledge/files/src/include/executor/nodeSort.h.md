@@ -16,3 +16,7 @@ Sort supports Mark/Restore (used by MergeJoin's inner), so the planner's
 ## Tags
 
 - [verified-by-code] surface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

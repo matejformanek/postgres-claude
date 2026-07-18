@@ -49,3 +49,5 @@ Definition of the "rewrite rule" system catalog (`pg_rewrite`) — one row per C
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/view-pushdown-via-rewriter.md](../../../../idioms/view-pushdown-via-rewriter.md)
+
+- [idioms/node-types-and-lists.md](../../../../idioms/node-types-and-lists.md)

@@ -144,3 +144,7 @@ Same alphabet as MD5-crypt (NOT bcrypt's).
 - [ISSUE-defense-in-depth: `DISABLE_XDES` is defined-out
   (`px-crypt.h:97`) (nit)] — could be flipped on at build time to
   remove the extended-DES path. Default is on.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

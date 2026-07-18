@@ -97,3 +97,7 @@ nodes. Pre-rewrite, pre-analyze.
 - `[ISSUE-TRUST: A11 echo — header doesn't mention standard_conforming_strings interaction with backslash_quote; both are scan-time GUCs with cross-cluster trust implications (medium)] — source/src/include/parser/parser.h:47-57`
 - `[ISSUE-DOC: SystemFuncName/SystemTypeName comment "perhaps these should be elsewhere" — long-standing TODO (low)] — source/src/include/parser/parser.h:62`
 - `[ISSUE-CODE: no API for "parse with a specific encoding override" — encoding is implicit in client_encoding GUC; cross-encoding query execution can give surprising scan results (low)] — source/src/include/parser/parser.h:60`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

@@ -87,3 +87,7 @@ current process token via Win32 SID/`CheckTokenMembership` machinery.
   `pgwin32_is_admin` to refuse running as administrator.
 - `source/src/bin/pg_ctl/pg_ctl.c` — uses `pgwin32_is_service` to
   decide between interactive and service mode.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

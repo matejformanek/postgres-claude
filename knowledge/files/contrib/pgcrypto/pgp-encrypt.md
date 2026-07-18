@@ -135,3 +135,7 @@ plaintext through. Backs SQL `pgp_sym_encrypt` / `pgp_pub_encrypt`.
   propagated, but `pushf_free_all(pf)` at `out:` swallows further
   errors. Standard pattern. (nit)] —
   `source/contrib/pgcrypto/pgp-encrypt.c:700-702`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

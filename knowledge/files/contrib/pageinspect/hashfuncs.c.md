@@ -158,3 +158,7 @@ they cannot decode the new format. No silent miscompare.
   hardened pageinspect bytea-decoder; magic + version + special-size
   + page-type-mask layered checks. Pattern worth adopting in other
   per-AM files (nit)]** — `:69-143`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

@@ -103,3 +103,7 @@ within the module. Externs declared (file:line cites):
 - `[ISSUE-documentation: no comment in the header explains the
   SEPGSQL_MODE_INTERNAL semantic ("permissive but silent") — only
   selinux.c:608 explains it (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)
