@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-18 — harvested 36 internals questions (3 general / 1 perf / 32 hackers), 7 gap tags; recurring gap:repack (2 hits) argues for a scenario once REPACK lands (PR pending).
