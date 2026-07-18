@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-07-18 — Opened the server-application internals family (Part VI Reference §II) after contrib/Part-VII saturation: 6 docs (pgupgrade, app-pgcreatesubscriber, app-initdb, app-pg-ctl, pgarchivecleanup, app-postgres), docs-distilled 317→323, all load-bearing claims code-verified @03480907e9ff (PR #<pending>).
