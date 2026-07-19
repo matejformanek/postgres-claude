@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-19 — 45 internals questions harvested (39 pgsql-hackers/general + 6 GitHub extension issues), 8 gap tags / 8 distinct topics; strongest standing gap `gap:procarray` (2 hits + 07-18 #17). New 07-17→07-18 hackers batch that the 07-18 run (older July 1-2 batch) did not reach.
