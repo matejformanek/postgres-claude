@@ -83,3 +83,7 @@ All three are only compiled inside `#ifdef PG_HAVE_ATOMIC_U64_SIMULATION`
   routes between native and simulated implementations.
 - `knowledge/files/src/include/storage/spin.h.md` — the `SpinLockAcquire` /
   `SpinLockRelease` contract these fallbacks rely on.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

@@ -124,3 +124,7 @@ compression. Returns `PXE_PGP_UNSUPPORTED_COMPR` when built without
   decompression ratio exceeds a sane threshold; impossible to detect a
   bomb from server logs (likely)] —
   `source/contrib/pgcrypto/pgp-compress.c:278-310`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

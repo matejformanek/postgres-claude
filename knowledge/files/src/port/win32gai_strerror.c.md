@@ -48,3 +48,7 @@ string literals, which are inherently thread-safe.
   file satisfies.
 - `source/src/backend/libpq/auth.c`, `pg_hba.c`, libpq client code —
   consumers calling `gai_strerror` after a failed `getaddrinfo`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

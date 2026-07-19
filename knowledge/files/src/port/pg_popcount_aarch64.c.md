@@ -69,3 +69,7 @@ function definitions of `pg_popcount_optimized` (no indirect call overhead).
   `pg_number_of_ones` table.
 - `knowledge/files/src/port/pg_crc32c_armv8.c.md` — sibling ARM SIMD file
   using same HWCAP probe pattern.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

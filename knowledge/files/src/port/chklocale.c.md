@@ -57,3 +57,7 @@ The core mapping is a static table translating libc codeset names
   registry the result indexes into.
 - `knowledge/files/src/bin/initdb/initdb.c.md` — derives default encoding via
   this.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

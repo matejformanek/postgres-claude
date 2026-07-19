@@ -103,3 +103,9 @@ catalog-enforced.
    — `heaptoast.h:145`-`147`.
 3. **[ISSUE-correctness: TOAST_MAX_CHUNK_SIZE initdb-only enforcement (low)]**
    — `heaptoast.h:78`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/toast-chunk-write.md](../../../../idioms/toast-chunk-write.md)
+- [idioms/toast-storage-strategies.md](../../../../idioms/toast-storage-strategies.md)
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

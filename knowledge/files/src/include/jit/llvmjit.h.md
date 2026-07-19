@@ -92,3 +92,5 @@ backend and the C++ files implementing the provider.
 <!-- backlinks:auto -->
 - [idioms/jit-expression-codegen.md](../../../../idioms/jit-expression-codegen.md)
 - [idioms/jit-provider-and-context.md](../../../../idioms/jit-provider-and-context.md)
+
+- [subsystems/jit.md](../../../../subsystems/jit.md)

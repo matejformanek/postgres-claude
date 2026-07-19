@@ -67,3 +67,7 @@ first call so subsequent calls go straight to the chosen implementation.
 - `knowledge/files/src/port/pg_cpu_x86.c.md` — CPUID feature probe behind
   `x86_feature_available()`.
 - `knowledge/files/src/port/pg_popcount_aarch64.c.md` — Neon/SVE sibling.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

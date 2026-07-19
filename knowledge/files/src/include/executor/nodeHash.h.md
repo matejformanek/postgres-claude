@@ -51,3 +51,7 @@ all-NULL inner tuple template.
 ## Tags
 
 - [verified-by-code] full prototype list.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

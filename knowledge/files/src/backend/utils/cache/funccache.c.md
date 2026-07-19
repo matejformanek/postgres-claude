@@ -93,3 +93,7 @@ so a polymorphic function gets one entry per (oid, argtype-vector) shape.
 <!-- issues:auto:begin -->
 - [Issue register — `utils`](../../../../../issues/utils.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

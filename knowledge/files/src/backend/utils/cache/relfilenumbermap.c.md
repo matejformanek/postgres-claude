@@ -80,3 +80,7 @@ and needs to resolve them to logical relation OIDs. [from-comment, inferred]
 <!-- issues:auto:begin -->
 - [Issue register — `utils`](../../../../../issues/utils.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

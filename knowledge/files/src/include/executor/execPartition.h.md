@@ -37,3 +37,5 @@ by `nodeModifyTable.c`, `nodeAppend.c`, `nodeMergeAppend.c`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/partition-tuple-routing.md](../../../../idioms/partition-tuple-routing.md)
+
+- [subsystems/executor.md](../../../../subsystems/executor.md)

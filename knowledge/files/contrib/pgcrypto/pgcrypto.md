@@ -197,3 +197,7 @@ All entry points use `PG_FUNCTION_INFO_V1` and are wired into SQL via
 - [ISSUE-api-shape: IV length silently truncated (maybe)] —
   `pg_encrypt_iv` with longer IV than `iv_size` is silently clipped
   by `px.c:198-202`. Should probably ereport.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

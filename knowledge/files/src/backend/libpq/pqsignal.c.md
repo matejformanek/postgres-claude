@@ -63,3 +63,7 @@ defines the masks themselves. [from-comment, pqsignal.c:1-13]
 ## Tally
 
 `[verified-by-code]=4 [from-comment]=2 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

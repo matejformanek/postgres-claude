@@ -19,3 +19,7 @@ extern const char *ParseExprKindName(ParseExprKind);
 All per-node-kind transformers are `static` inside `parse_expr.c`. The
 public contract is just "give me a raw expression + a kind, get back a
 typed one."
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

@@ -126,3 +126,5 @@ NULL for joinrels. [from-comment]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/partition-bound-comparison.md](../../../../idioms/partition-bound-comparison.md)
+
+- [subsystems/partitioning.md](../../../../subsystems/partitioning.md)

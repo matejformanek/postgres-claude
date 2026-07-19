@@ -93,3 +93,7 @@ caller that is not the REPACK worker process. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `replication`](../../../../../issues/replication.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

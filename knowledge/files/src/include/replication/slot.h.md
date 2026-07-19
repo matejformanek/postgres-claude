@@ -161,6 +161,7 @@ the replication subsystem doc.
 - [architecture/replication.md](../../../../architecture/replication.md)
 - [idioms/replication-slot-advance.md](../../../../idioms/replication-slot-advance.md)
 
+- [subsystems/replication.md](../../../../subsystems/replication.md)
 ## Cross-references
 
 <!-- issues:auto:begin -->

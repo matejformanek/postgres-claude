@@ -81,3 +81,7 @@ Internal:
 - [ISSUE-correctness: line 422 `int low = atoi(ptr);` — `atoi` on `99999999999` silently overflows int; the parser then checks `low > LTREE_MAX_LEVELS` which catches the bad value, but `atoi` undefined-behavior on overflow per ISO C. In practice on glibc `atoi` saturates to INT_MIN/INT_MAX and the `low < 0` check at line 424 catches it. (nit)] — `source/contrib/ltree/ltree_io.c:422,440`.
 - [ISSUE-correctness: line 568 `pfree(GETVAR(curqlevel))` frees the per-level scratch nodeitem array. If `palloc0_array(nodeitem, numOR + 1)` at line 322/329 fails (OOM), `parse_lquery` leaks the previously-allocated `tmpql` and any earlier level-variant arrays. Not a security bug — backend memory context cleanup at transaction abort reclaims it. (nit)] — `source/contrib/ltree/ltree_io.c:568`.
 - [ISSUE-doc: line 60-62 — counting `|` characters for global `numOR` doesn't account for `|` appearing inside `{N,M}` ranges. Lucky for the parser, `|` is never valid inside `{}` (line 466-471 only accepts digits/`,`/`}`), so the over-count is exactly the true total. Worth a comment. (nit)] — `source/contrib/ltree/ltree_io.c:299-303`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

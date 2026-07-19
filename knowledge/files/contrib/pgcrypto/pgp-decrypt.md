@@ -217,3 +217,7 @@ packets after CFB decryption. Allowed inner tags: `LITERAL_DATA`,
 - [ISSUE-documentation: `disable_mdc = 1` set silently on tag-9 (line
   1149); no log/notice that user is on the EFAIL-prone path (maybe)] —
   `source/contrib/pgcrypto/pgp-decrypt.c:1149`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

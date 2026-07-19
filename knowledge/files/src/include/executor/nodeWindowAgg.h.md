@@ -13,3 +13,7 @@ Gather or other sort-providing nodes, not the reverse).
 ## Tags
 
 - [verified-by-code] full surface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

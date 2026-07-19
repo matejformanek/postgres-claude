@@ -67,3 +67,7 @@ surface; this header just enumerates the modes.
 ## Issues
 
 None.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

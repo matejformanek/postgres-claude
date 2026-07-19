@@ -105,3 +105,7 @@ sleep. `[verified-by-code]`
   dead-postmaster recycling pattern.
 - `knowledge/idioms/locking.md` — where PGSemaphore sits in the six-layer
   taxonomy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

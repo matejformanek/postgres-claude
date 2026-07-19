@@ -95,3 +95,7 @@ bytes, prepends cipher_algo byte and appends 16-bit checksum.
   Re-check.] — Re-read: line 52 returns `PXE_NO_RANDOM` with `pfree(buf)`
   at 54; line 64 returns with `px_memset+pfree`. Both paths OK. (nit, no
   issue)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

@@ -124,3 +124,7 @@ this file mapped. `[verified-by-code]`
 - `knowledge/files/src/backend/port/sysv_sema.c.md` — sister file that
   uses the same DataDir-inode key-seeding and dead-postmaster recycling
   patterns.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

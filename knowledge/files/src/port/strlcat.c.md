@@ -46,3 +46,7 @@ Returns `strlen(src) + MIN(siz, strlen(initial dst))`; truncation iff
 ## Cross-refs
 
 - `knowledge/files/src/port/strlcpy.c.md` — sibling bounded copy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

@@ -40,3 +40,5 @@ verified-by-code: 2 — from-comment: 5 — from-readme: 0 — inferred: 0 — u
 <!-- backlinks:auto -->
 - [idioms/typcache-domain-and-invalidation.md](../../../../idioms/typcache-domain-and-invalidation.md)
 - [idioms/typcache-entry-and-lookup.md](../../../../idioms/typcache-entry-and-lookup.md)
+
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

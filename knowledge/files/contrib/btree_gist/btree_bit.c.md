@@ -49,3 +49,7 @@ penalty,same,sortsupport}` plus `gbt_varbit_sortsupport`
   btree_gist. A future contributor who forgets to xfrm the query for
   non-leaf entries (line 158) would produce silently wrong results. (MED
   — design footgun, current code is correct)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

@@ -5,3 +5,7 @@
 `GetPlannerExtensionId(name)` + the three setters/getters for
 PlannerGlobal / PlannerInfo / RelOptInfo extension state, used by GEQO
 and by external planner extensions to cache per-rel data.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

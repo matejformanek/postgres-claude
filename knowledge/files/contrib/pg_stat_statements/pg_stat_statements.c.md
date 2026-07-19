@@ -364,3 +364,9 @@ coarse cross-user workload signal (nit)].
   being first to insert a (userid, dbid, queryid) tuple (nit)] — the
   jumble identity is the same for two literals-only-different queries; the
   first one wins.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/node-types-and-lists.md](../../../idioms/node-types-and-lists.md)
+- [idioms/parser-pipeline.md](../../../idioms/parser-pipeline.md)
+- [subsystems/contrib-pg_stat_statements.md](../../../subsystems/contrib-pg_stat_statements.md)

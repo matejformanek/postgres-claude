@@ -40,3 +40,5 @@ PostgreSQL subtransaction-log manager
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/subxact-subtrans-slru.md](../../../../idioms/subxact-subtrans-slru.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

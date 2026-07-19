@@ -91,3 +91,7 @@ Standard 7-function GiST set + sortsupport:
   `INETOID` to `convert_network_to_scalar` but the function dispatches on
   the data. A `cidr` column with a `gist_inet_ops` opclass thus passes
   `INETOID` as a lie. Works by accident. (LOW — cosmetic)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

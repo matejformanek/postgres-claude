@@ -70,3 +70,5 @@ event sets are more efficient than `WaitLatch` / `WaitLatchOrSocket`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/latch-waiteventset.md](../../../../data-structures/latch-waiteventset.md)
+
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

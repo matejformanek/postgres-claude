@@ -114,3 +114,7 @@ before comparison; on BE machines it's a no-op.
   type-check `StaticAssertStmt(__builtin_types_compatible_p(...))`
   would catch real footguns. Out of scope for portable C, but worth
   flagging. (severity: low)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

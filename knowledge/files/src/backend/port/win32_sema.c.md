@@ -91,3 +91,7 @@ implementation must integrate with PG's Win32 signal-emulation layer
 - `knowledge/files/src/backend/port/sysv_sema.c.md` /
   `knowledge/files/src/backend/port/posix_sema.c.md` — Unix counterparts.
 - `knowledge/idioms/locking.md` — PGSemaphore in the lock taxonomy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

@@ -82,3 +82,7 @@ signature, and adds matching TIDs to a `TIDBitmap`.
 
 None — scan path is straight-forward and the recheck flag closes the
 correctness gap.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-bloom.md](../../../subsystems/contrib-bloom.md)

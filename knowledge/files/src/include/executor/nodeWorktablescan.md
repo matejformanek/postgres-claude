@@ -17,3 +17,7 @@ No `ExecEnd*` — tuplestore is owned by the driving `RecursiveUnion`.
 - State node: `WorkTableScanState` in `nodes/execnodes.h`
 - Driver: `executor/nodeRecursiveunion.h`
 - `.c` impl: `source/src/backend/executor/nodeWorktablescan.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -71,3 +71,7 @@ Derived from the Patrick Powell "bombproof doprnt", heavily extended by PG.
   same `libpgport`.
 - `knowledge/idioms/error-handling.md` — `%m` is the backbone of `errmsg("…:
   %m")` patterns in `ereport`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

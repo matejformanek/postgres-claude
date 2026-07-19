@@ -142,3 +142,7 @@ temp, `!indisvalid`, unlogged-on-standby).
 - [ISSUE-documentation: behavior on hot-standby with `ShareLock` is implicit
   via `index_open` failing, not explicit in this file (nit)] —
   `verify_common.c:81`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-amcheck.md](../../../subsystems/contrib-amcheck.md)

@@ -16,3 +16,7 @@ Declares entry points for `NestLoop` — the canonical join operator. Drives the
 - Siblings: `executor/nodeHashjoin.h`, `executor/nodeMergejoin.h`
 - Common parameterized inner: `executor/nodeMemoize.h`
 - `.c` impl: `source/src/backend/executor/nodeNestloop.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

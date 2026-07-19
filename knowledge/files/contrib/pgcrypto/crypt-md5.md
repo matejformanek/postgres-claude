@@ -121,3 +121,7 @@ the 120-byte dstlen minimum is generously oversized.
   scrubbing.
 - [ISSUE-defense-in-depth: no warning emitted when `$1$` is used
   in 2026 (likely)] — Should at least NOTICE.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

@@ -28,3 +28,7 @@ None defined here; transitively exposes `getaddrinfo`, `getnameinfo`,
 ## Cross-refs
 - [[knowledge/files/src/include/port/win32/sys/socket.h.md]] — companion that handles winsock vs windows.h ordering.
 - [[knowledge/files/src/include/port/win32_port.h.md]]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

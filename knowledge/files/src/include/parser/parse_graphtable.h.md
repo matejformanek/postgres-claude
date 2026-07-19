@@ -61,3 +61,7 @@ rewriter that lowers `GRAPH_TABLE` to relational joins.
 
 - `[ISSUE-TRUST: PG18 new surface — property-ref resolution may bypass underlying-table ACL; needs verification (high)] — source/src/include/parser/parse_graphtable.h:20`
 - `[ISSUE-DOC: zero comments on what GraphPattern even is; first-time reader is lost (medium)] — source/src/include/parser/parse_graphtable.h:1-24`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

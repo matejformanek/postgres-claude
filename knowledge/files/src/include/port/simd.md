@@ -132,3 +132,7 @@ returns u64 and is awkward to combine with other masks.
   by design (gated to specialized files like `pg_popcount_avx512.c`).
   Documented but worth surfacing to "why isn't this faster on
   Skylake?" questions. (severity: doc-only)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

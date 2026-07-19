@@ -41,3 +41,5 @@ Public types for the heavyweight lock manager. Defines `LOCKTAG`, `LOCKMODE`, `L
 - [data-structures/locallock.md](../../../../data-structures/locallock.md)
 - [data-structures/lock-struct.md](../../../../data-structures/lock-struct.md)
 - [data-structures/proclock.md](../../../../data-structures/proclock.md)
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

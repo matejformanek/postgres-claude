@@ -139,3 +139,7 @@ incremental tree-based code generation.
   fan-out bound depends on the .pl-generated `letter_` table
   staying well-formed; no runtime assertion that recursion
   depth stays ≤ small constant.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-fuzzystrmatch.md](../../../subsystems/contrib-fuzzystrmatch.md)

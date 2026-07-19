@@ -114,3 +114,7 @@ working-set information leakage.
   (pg_buffercache_numa) is currently pg_monitor-gated; any new SQL
   function exposing pg_numa data must preserve that grant pattern.
   (severity: medium, audit lane)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

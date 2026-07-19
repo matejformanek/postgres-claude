@@ -20,3 +20,7 @@ Aggregate / window-function entry points.
 - `make_agg_arg` — helper for grammar wiring of agg argument lists.
 - `build_aggregate_*_expr` family — used by both planner and parser to
   construct the various aggregate node shapes (count, sum, array_agg).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

@@ -21,3 +21,7 @@ Parallel-execution security envelope (A15 echo). Workers inherit the leader's us
 - Parallel framework: `access/parallel.h`, `executor/execParallel.h`
 - Tuple queues: `executor/tqueue.h`
 - `.c` impl: `source/src/backend/executor/nodeGather.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

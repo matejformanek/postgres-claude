@@ -131,3 +131,7 @@ circuits if a prior provider denied — sepgsql then doesn't run its check.
   ereport_on_violation=false, a denied search produces no
   ereport — only the AVC audit record fires; if log_min_messages
   filters that, denial is invisible (likely)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

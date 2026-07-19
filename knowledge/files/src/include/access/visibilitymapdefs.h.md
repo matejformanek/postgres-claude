@@ -86,3 +86,7 @@ misconfig), `ALL_FROZEN` bits going stale is the visible symptom.
   `pg_visibility.c`.
 - **ISSUE-doc**: no formula here for "heap blocks per VM page" —
   has to be reconstructed from `visibilitymap.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

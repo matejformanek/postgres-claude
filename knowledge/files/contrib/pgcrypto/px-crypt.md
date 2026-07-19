@@ -169,3 +169,7 @@ tables are trivial. The RNG quality is irrelevant. [verified-by-code]
   (nit)] — `px-crypt.c:171-178` only validates rounds for algos
   with def_rounds. User calling `gen_salt('md5', 100000)` gets the
   same output as `gen_salt('md5', 0)`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

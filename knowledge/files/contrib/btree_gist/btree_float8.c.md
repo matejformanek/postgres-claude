@@ -51,3 +51,7 @@ Same as `btree_float4.c.md`:
   (HIGH)]
 - [ISSUE-CONSISTENCY: `gbt_float8key_cmp` vs `gbt_float8_ssup_cmp` use
   different comparator semantics for NaN. (MED)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

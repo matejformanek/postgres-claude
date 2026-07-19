@@ -28,3 +28,7 @@ constants.
 ## Cross-refs
 - [[knowledge/files/src/include/port/win32/netinet/in.h.md]] — sibling.
 - [[knowledge/files/src/include/port/win32/sys/socket.h.md]] — does the heavy lifting.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

@@ -57,3 +57,7 @@ Internal:
 - [ISSUE-correctness: line 35 `&`-operator: `if (ltree_execute(curitem + curitem->left, ...)) return ltree_execute(curitem + 1, ...)` — evaluates LEFT first, then RIGHT only if LEFT is true. So short-circuit is correct. `|` at line 42 evaluates LEFT first, returns true on left-true, else RIGHT. Standard. (verification only)] — `source/contrib/ltree/ltxtquery_op.c:33-46`.
 - [ISSUE-doc: line 56-79 `checkcondition_str` iterates ALL levels of `chkval->node`. The `@>` semantics aren't explicit — the operand `foo` matches the ltree `a.b.foo.c` because the third level matches. This is the documented "any-level" behavior, but a comment here would help. (nit)] — `source/contrib/ltree/ltxtquery_op.c:55-80`.
 - [ISSUE-correctness: `calcnot` parameter passing is via signature (`bool calcnot`), with no enum / no documentation here. Cross-references show two values used: `true` at line 95 (leaf) and `false` at `ltree_gist.c:588`. Reader must trace both call sites to understand. (nit — minor API ergonomics)] — `source/contrib/ltree/ltxtquery_op.c:20`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

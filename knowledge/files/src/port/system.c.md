@@ -71,3 +71,7 @@ Both functions follow the exact same pattern:
 - `knowledge/files/src/port/quotes.c.md` — `appendShellString` lives
   in port library and is the per-arg quoting helper referenced by the
   header comment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

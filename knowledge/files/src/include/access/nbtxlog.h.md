@@ -94,3 +94,5 @@ The on-disk format here is the canonical spec for what nbtree promises to crash-
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/access-nbtree.md](../../../../subsystems/access-nbtree.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

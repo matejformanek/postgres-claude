@@ -158,3 +158,7 @@ talks to `WaitEventSet`, so it also enforces the
 ## Tally
 
 `[verified-by-code]=14 [from-comment]=4 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

@@ -100,3 +100,7 @@ genuine infinity in the inputs.
   `float4_cmp_internal` even though `gbt_float4_ssup_cmp` does. The picksplit
   sort thus orders NaN entries inconsistently with sortsupport. (MED —
   could produce non-deterministic split decisions for NaN-bearing pages)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

@@ -93,3 +93,7 @@ This module is the **highest-value Phase D target** in this slice. It executes u
 - [ISSUE-READ-ONLY-SPI: `SPI_execute(sql, true, 0)` is read-only but does NOT prevent reads of sensitive catalogs (`pg_authid.rolpassword`, `pg_read_server_files`, etc.) — caller's privileges apply (Info — by design)]
 - [ISSUE-SERIAL-OVERFLOW: `connectby_text_serial`'s `serial` int wraps at `INT_MAX` (Trivial)]
 - [ISSUE-NORMAL-RAND-PRNG: `normal_rand` uses `pg_global_prng_state`; not crypto-safe and not stream-isolated per call (Info)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-tablefunc.md](../../../subsystems/contrib-tablefunc.md)

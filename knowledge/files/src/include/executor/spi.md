@@ -201,3 +201,7 @@ callers must know.
 - [ISSUE-DOC: privilege/search_path context inheritance is invisible
   from this header; SECURITY DEFINER + SPI is one of the most
   common PG security gotchas (medium)] — entire file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

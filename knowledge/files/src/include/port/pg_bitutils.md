@@ -147,3 +147,7 @@ The actual probe lives in `src/port/pg_popcount_*.c` (out of scope here).
   should NOT use `pg_popcount64`. (severity: medium, doc-only)
 - **ISSUE-trust**: function-pointer dispatch init order vs.
   `_PG_init` of preloaded extensions — undocumented. (severity: low)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

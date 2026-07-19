@@ -46,3 +46,7 @@ canonical signal masks every backend uses (`UnBlockSig`, `BlockSig`,
 ## Tally
 
 `[verified-by-code]=3 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

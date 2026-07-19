@@ -176,3 +176,7 @@ unless the cache hit suppresses the kernel call.
 - `[ISSUE-audit-gap: every function call hits sepgsql_proc_execute
   (via OAT_FUNCTION_EXECUTE); for high-frequency function workloads
   the AVC cache hit rate is critical to performance (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

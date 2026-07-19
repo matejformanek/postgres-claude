@@ -147,3 +147,7 @@ intermediate digest B.
   the salt + hash, less sensitive but still.
 - [ISSUE-correctness: typo `PGCRYPTO_SHA_UNKOWN` (missing N)
   (nit)] — `:59, 273, 604`. Cosmetic.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

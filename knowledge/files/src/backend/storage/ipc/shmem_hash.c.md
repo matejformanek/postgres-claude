@@ -107,3 +107,7 @@ with extensions. [verified-by-code] [from-comment]
 <!-- issues:auto:begin -->
 - [Issue register — `storage-ipc`](../../../../../issues/storage-ipc.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../../subsystems/storage-ipc.md)

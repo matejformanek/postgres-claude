@@ -60,3 +60,7 @@ become empty wrappers that report "NUMA not available". `[verified-by-code]`
   the `pg_buffercache_numa` view.
 - `source/src/include/port/pg_numa.h` — prototypes.
 - Linux `numa(3)`, `move_pages(2)` man pages.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

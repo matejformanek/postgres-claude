@@ -29,3 +29,5 @@ code that needs the lower-level interface.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/sinvaladt-broadcast.md](../../../../idioms/sinvaladt-broadcast.md)
+
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

@@ -99,3 +99,5 @@ file's own functions do no locking. [verified-by-code]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/buffertag.md](../../../../../data-structures/buffertag.md)
+
+- [subsystems/storage-buffer.md](../../../../../subsystems/storage-buffer.md)

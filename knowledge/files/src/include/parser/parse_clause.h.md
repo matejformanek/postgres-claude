@@ -15,3 +15,7 @@ WINDOW / FOR UPDATE / ON CONFLICT entry points.
 `transformGroupClause`, `transformSortClause`, `transformDistinctClause`,
 `transformDistinctOnClause`, `transformWindowDefinitions`,
 `transformOnConflictArbiter`, plus the locking-clause helpers.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

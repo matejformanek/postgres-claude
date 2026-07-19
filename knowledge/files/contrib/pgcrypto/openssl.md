@@ -246,3 +246,7 @@ run when OpenSSL is in FIPS strict mode.
   OpenSSL's EVP* family of functions" but the file also uses
   legacy `EVP_aes_128_cbc()` etc (nit)] — modern OpenSSL 3.0 prefers
   `EVP_CIPHER_fetch`. Migration target.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

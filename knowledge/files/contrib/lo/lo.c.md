@@ -101,3 +101,5 @@ zombies.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/contrib-lo.md](../../../subsystems/contrib-lo.md)
+
+- [idioms/spi.md](../../../idioms/spi.md)

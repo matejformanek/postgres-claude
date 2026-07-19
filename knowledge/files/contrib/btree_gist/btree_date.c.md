@@ -50,3 +50,7 @@ returns int32 and the macro expects scalar arithmetic.
   DateADT is itself int32 (max diff ~4 billion days), but `abs(INT_MIN)`
   is UB. If `date_mi` ever returns `INT_MIN`, the `abs()` is undefined.
   (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

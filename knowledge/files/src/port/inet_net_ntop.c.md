@@ -66,3 +66,7 @@ hygiene). `[verified-by-code]` `[from-comment]`
   `cidr_out` SQL functions).
 - `source/src/port/inet_aton.c` — sibling IPv4 text-to-binary.
 - `knowledge/files/src/port/inet_aton.c.md` — sibling doc.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

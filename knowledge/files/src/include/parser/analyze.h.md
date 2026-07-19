@@ -57,3 +57,7 @@ A few names that *look* like they belong in `analyze.c` (e.g.
 `applyLockingClause`, `transformReturningList`) actually live there
 because they need access to internal statics. The header is the integration
 point.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

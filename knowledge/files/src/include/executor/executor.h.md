@@ -63,3 +63,5 @@ provided by the corresponding node*.c files.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/epq-state-init.md](../../../../idioms/epq-state-init.md)
+
+- [subsystems/executor.md](../../../../subsystems/executor.md)

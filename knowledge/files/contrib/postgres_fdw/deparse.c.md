@@ -181,3 +181,7 @@ Lines 2783-2785. This is mandatory because the foreign table's local composite t
 - [ISSUE-correctness: PARAM_MULTIEXPR bailout (line 499) is correct but tied to a specific optimizer-stage detail (PARAM_MULTIEXPR not reduced to PARAM_EXEC until end-of-planning). A change in planning-stage ordering could break this defensively-defended invariant. (nit — defensive)] — `source/contrib/postgres_fdw/deparse.c:486-500`.
 - [ISSUE-audit-gap: no hook for "deparsed SQL" — extensions wishing to LOG every cross-cluster SQL sent for compliance have to monkey-patch. `pgaudit`-style logging would benefit from a `Deparse_hook`. (likely — defense-in-depth)] — entire file.
 - [ISSUE-documentation: line 1051 says "exprType(node) shippable" but exprType for List nodes returns InvalidOid, and is_shippable(InvalidOid, ...) returns... let's see: `is_builtin(InvalidOid)` → `0 < FirstGenbkiObjectId` → true → shippable. The `check_type = false` for T_List (line 935) prevents this path. Fragile coupling. (nit)] — `source/contrib/postgres_fdw/deparse.c:935,1050`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-postgres_fdw.md](../../../subsystems/contrib-postgres_fdw.md)

@@ -214,3 +214,7 @@ extra empty `/` slots between. Rejects unknown options with
   `goto err1` after a `pad:` parse failure, but the `cipher` was
   already populated. The `err1` block does `px_cipher_free(cx->cipher)`
   so this is actually fine. Verified.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

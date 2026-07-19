@@ -80,3 +80,7 @@ in `getopt.c`.)
 - `source/src/include/getopt_long.h` — `struct option` definition,
   `no_argument` / `required_argument` / `optional_argument` constants.
 - `source/src/bin/*/main.c` — every PG CLI tool's argv parsing path.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

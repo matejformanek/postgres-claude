@@ -76,3 +76,7 @@ and transparently get the leak-safe wrappers [from-comment].
 ## Tally
 
 `[verified-by-code]=5 [from-comment]=3`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

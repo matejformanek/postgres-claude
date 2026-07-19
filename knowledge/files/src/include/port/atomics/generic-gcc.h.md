@@ -58,3 +58,7 @@ core primitives (CAS, exchange, fetch-add/sub/and/or for both widths).
 - [[knowledge/files/src/include/port/atomics/generic.h.md]] — runs after, fills derived ops.
 - [[knowledge/files/src/include/port/atomics/generic-msvc.h.md]] — MSVC analog.
 - [[knowledge/issues/include-port.md]] — `__atomic_*` SEQ_CST overprescription.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

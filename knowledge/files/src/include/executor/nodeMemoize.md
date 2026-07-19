@@ -19,3 +19,7 @@ Hash-flood DoS (A11 echo). The cache is a `simplehash`-style table keyed by para
 - `.c` impl: `source/src/backend/executor/nodeMemoize.c`
 - Planner cost: `optimizer/path/costsize.c` (`cost_memoize_rescan`)
 - Hash impl: `lib/simplehash.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

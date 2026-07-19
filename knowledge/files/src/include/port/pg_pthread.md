@@ -74,3 +74,7 @@ everything.
 - **ISSUE-doc**: no warning that pthread APIs are safe for frontend
   tools but not for backend palloc/ereport context. (severity: low,
   doc-only)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

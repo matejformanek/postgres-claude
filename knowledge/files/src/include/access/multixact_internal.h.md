@@ -120,3 +120,5 @@ internal API has historical compat code. Worth a follow-up read.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/multixact-slru.md](../../../../idioms/multixact-slru.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

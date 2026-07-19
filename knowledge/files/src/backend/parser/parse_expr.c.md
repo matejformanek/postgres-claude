@@ -85,3 +85,5 @@ FROM` on rows.
 - [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)
 - [idioms/node-types.md](../../../../idioms/node-types.md)
 
+
+- [idioms/fmgr.md](../../../../idioms/fmgr.md)

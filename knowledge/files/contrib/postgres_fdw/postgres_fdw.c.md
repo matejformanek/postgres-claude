@@ -252,3 +252,6 @@ Cannot reuse. The cache is keyed by umid — different umids cannot share a PGco
 <!-- backlinks:auto -->
 - [idioms/fdw-iterate-scan.md](../../../idioms/fdw-iterate-scan.md)
 - [idioms/fdw-routine-callbacks.md](../../../idioms/fdw-routine-callbacks.md)
+
+- [idioms/fmgr.md](../../../idioms/fmgr.md)
+- [subsystems/contrib-postgres_fdw.md](../../../subsystems/contrib-postgres_fdw.md)

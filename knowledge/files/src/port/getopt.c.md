@@ -64,3 +64,7 @@ gated by `HAVE_INT_OPTERR`) and wraps a process-static `pg_getopt_ctx`.
 - `knowledge/files/src/port/getopt_long.c.md` — long-option variant
   (separate non-reentrant tree).
 - `source/src/include/pg_getopt.h` — public prototype.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

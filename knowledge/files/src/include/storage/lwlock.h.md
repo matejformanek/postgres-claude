@@ -72,3 +72,5 @@ Wait-event names in `src/backend/utils/activity/wait_event_names.txt` must stay 
 - [data-structures/lwlock-struct.md](../../../../data-structures/lwlock-struct.md)
 - [idioms/lwlock-rank-discipline.md](../../../../idioms/lwlock-rank-discipline.md)
 
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

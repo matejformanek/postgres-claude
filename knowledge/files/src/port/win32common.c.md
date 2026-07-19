@@ -54,3 +54,7 @@ return value, requiring `GetLastError()` to tell apart). `[from-comment]`
   `fseek` on non-disk handles.
 - `knowledge/files/src/port/win32stat.c.md` — uses this in
   `_pgfstat64` to dispatch on file type.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

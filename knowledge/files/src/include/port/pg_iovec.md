@@ -137,3 +137,7 @@ verify with src/port/pread.c]`
 - **ISSUE-observability**: `iovcnt == 1` becoming `pread`/`pwrite`
   syscall changes what tracing tools see; not documented at call
   sites. (severity: low, doc-only)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

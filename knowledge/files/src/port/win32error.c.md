@@ -78,3 +78,7 @@ includes mappings (notably `ERROR_DELETE_PENDING`) that MS doesn't.
 - `knowledge/files/src/port/win32ntdll.c.md` — `pg_RtlNtStatusToDosError`
   is the NT-status counterpart, feeding the same `_dosmaperr` table
   via the DOS-error code it returns.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

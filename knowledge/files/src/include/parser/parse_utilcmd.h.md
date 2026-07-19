@@ -24,3 +24,7 @@ see `parse_utilcmd.c`'s top comment for why).
 - `transformCreateStatsStmt` — CREATE STATISTICS expressions.
 - `expandTableLikeClause` — used by both CREATE TABLE and ALTER TABLE for
   LIKE handling.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

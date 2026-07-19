@@ -54,3 +54,6 @@ Two design documents that explain non-obvious heap-AM mechanisms:
 - [idioms/locking-overview.md](../../../../../idioms/locking-overview.md)
 - [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+- [data-structures/multixactid.md](../../../../../data-structures/multixactid.md)
+- [idioms/visibility-map-update.md](../../../../../idioms/visibility-map-update.md)

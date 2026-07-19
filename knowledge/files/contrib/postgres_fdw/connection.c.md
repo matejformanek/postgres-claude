@@ -177,3 +177,7 @@ When local query is canceled (`CHECK_FOR_INTERRUPTS` ereports), the `pgfdw_xact_
 - [ISSUE-correctness: `XACT_EVENT_PRE_PREPARE` errors unconditionally (line 1260). Comment says "later we might allow read-only cases" — read-only remote xacts could in principle be PREPAREd. Today, ANY operation on a postgres_fdw foreign table inside a 2PC-using local xact will fail. (documented limitation)] — `source/contrib/postgres_fdw/connection.c:1249-1262`.
 - [ISSUE-correctness: `pgfdw_xact_callback` walks the whole hash on every xact event even if no postgres_fdw query touched them. Mitigated by `xact_got_connection` flag (line 1181) — quick-exit. Good. (resolved)] — `source/contrib/postgres_fdw/connection.c:1181`.
 - [ISSUE-correctness: in `make_new_connection` line 433, `connect_pg_server` is called BEFORE the entry's `keep_connections / parallel_commit / parallel_abort` are read from the syscache (lines 420-430 happen first — actually OK). But re-reading lines 417-431: those are set from `server->options`. So if `keep_connections` is changed by ALTER SERVER, the change takes effect on NEXT connection only (via inval-driven disconnect). Comment at lines 413-414 documents this. (resolved)] — `source/contrib/postgres_fdw/connection.c:413-431`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-postgres_fdw.md](../../../subsystems/contrib-postgres_fdw.md)

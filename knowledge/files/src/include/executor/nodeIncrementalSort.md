@@ -15,3 +15,7 @@ Declares entry points for `IncrementalSort` — used when input is already sorte
 - Sibling (full sort): `executor/nodeSort.h`
 - `.c` impl: `source/src/backend/executor/nodeIncrementalSort.c`
 - Sort engine: `utils/tuplesort.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

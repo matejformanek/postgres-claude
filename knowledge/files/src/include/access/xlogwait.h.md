@@ -77,3 +77,7 @@ WaitLSNProcInfo procInfos[FLEX]; }`. Pointed-to by `waitLSNState`.
 
 - `[verified-by-code]`: 13
 - `[from-comment]`: 4
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

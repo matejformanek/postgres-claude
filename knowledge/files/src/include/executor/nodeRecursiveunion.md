@@ -15,3 +15,7 @@ Declares entry points for `RecursiveUnion` — drives the WITH RECURSIVE iterati
 - State node: `RecursiveUnionState` in `nodes/execnodes.h`
 - Iteration source: `executor/nodeWorktablescan.h`
 - `.c` impl: `source/src/backend/executor/nodeRecursiveunion.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

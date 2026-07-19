@@ -16,3 +16,7 @@ Operator-resolution surface.
 - `oprid` / `oprfuncid` shortcut helpers.
 - `OpernameGetOprid` / `LookupOperName` / `LookupOperNameTypeNames` —
   DDL-side lookups.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

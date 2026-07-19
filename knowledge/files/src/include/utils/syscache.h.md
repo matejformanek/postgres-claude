@@ -40,3 +40,5 @@ verified-by-code: 0 — from-comment: 3 — from-readme: 0 — inferred: 0 — u
 <!-- backlinks:auto -->
 - [idioms/catalog-conventions.md](../../../../idioms/catalog-conventions.md)
 - [idioms/syscache-catcache-internals.md](../../../../idioms/syscache-catcache-internals.md)
+
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

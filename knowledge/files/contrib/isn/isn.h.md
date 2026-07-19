@@ -54,3 +54,7 @@ lives in the high-order bits and `isn.c`'s `ean2isn` function.
 
 - **ISSUE-D1 (low)** — orphan `extern void initialize(void);`
   declaration.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-isn.md](../../../subsystems/contrib-isn.md)

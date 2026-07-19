@@ -53,3 +53,7 @@ is always callable. `[verified-by-code]`
   same alignment-then-eight-byte-loop shape.
 - `knowledge/files/src/port/pg_crc32c_armv8.c.md` — ARM sibling, near-identical
   structure (this file appears to be modelled on it).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

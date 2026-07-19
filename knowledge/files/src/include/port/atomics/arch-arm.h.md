@@ -36,3 +36,7 @@ the fast aligned-load path.
 - [[knowledge/files/src/include/port/atomics/arch-ppc.h.md]] — same pattern.
 - [[knowledge/files/src/include/port/atomics/fallback.h.md]] — kicks in for 32-bit ARM u64.
 - [[knowledge/files/src/include/port/atomics/generic-gcc.h.md]] — consumes `PG_DISABLE_64_BIT_ATOMICS`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

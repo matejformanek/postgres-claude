@@ -25,3 +25,7 @@ None — placeholder.
 ## Cross-refs
 - [[knowledge/files/src/include/port/win32/sys/socket.h.md]] — pulls in winsock2 which declares select.
 - [[knowledge/subsystems/]] — latch / WaitEventSet replaces direct select usage.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

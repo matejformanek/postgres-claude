@@ -45,3 +45,7 @@ macOS-specific shim. Three definitions `[verified-by-code]`
 
 - (none in the header itself; macOS fsync semantics are a known
   ecosystem-level documentation issue)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

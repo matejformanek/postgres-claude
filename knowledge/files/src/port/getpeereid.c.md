@@ -49,3 +49,7 @@ Four mutually-exclusive platform arms:
 - `knowledge/subsystems/libpq-backend.md` — where peer auth consumes this.
 - `knowledge/files/src/port/getaddrinfo.c.md` — N/A (deleted upstream at this
   anchor; was the IPv4/IPv6 name-resolution shim).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

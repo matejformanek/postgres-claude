@@ -231,3 +231,5 @@ Three families × N-argument variants × Coll suffix:
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/fmgrinfo.md](../../../data-structures/fmgrinfo.md)
+
+- [idioms/fmgr.md](../../../idioms/fmgr.md)

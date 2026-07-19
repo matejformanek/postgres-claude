@@ -20,3 +20,7 @@ extern bool query_contains_extern_params(Query *);
 The two `setup_*` functions install `ParamRef`-handling closures into
 `pstate->p_paramref_hook` / `p_coerce_param_hook`. PL/pgSQL uses the same
 hook surface with its own closures and does not include this header.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

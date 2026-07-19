@@ -25,3 +25,7 @@ None — placeholder.
 ## Cross-refs
 - [[knowledge/files/src/include/port/win32/grp.h.md]] — sibling.
 - [[knowledge/files/src/include/port/win32_port.h.md]]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

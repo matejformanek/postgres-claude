@@ -36,3 +36,7 @@ list partition_info.h" — the actual file in tree is `partdefs.h`.
 
 - No header guard violations or stale TODOs — file is intentionally
   minimal. None to report.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/partitioning.md](../../../../subsystems/partitioning.md)

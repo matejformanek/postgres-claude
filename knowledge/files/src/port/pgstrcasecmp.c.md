@@ -57,3 +57,7 @@ in `scansup.c`. `[from-comment]` `[verified-by-code]`
 - `source/src/backend/parser/scansup.c` — `downcase_truncate_identifier`.
 - `source/src/include/port.h` — prototypes.
 - `knowledge/idioms/` — identifier-folding invariant.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

@@ -388,3 +388,8 @@ must be defended explicitly.
 - [ISSUE-documentation: header at `:242-249` is the most honest crash
   disclosure in contrib/. Worth promoting to user-docs explicitly.
   (nit)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/fmgr.md](../../../idioms/fmgr.md)
+- [subsystems/contrib-amcheck.md](../../../subsystems/contrib-amcheck.md)

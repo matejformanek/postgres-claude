@@ -74,3 +74,7 @@ Internal:
 - [ISSUE-defense-in-depth: `ExtractExtensionList` calls `get_extension_oid(name, true)` (missingOk=true) — silently ignores unknown extension names except for a WARNING when `warnOnMissing=true` (validator path only). A typo in `extensions 'pg_trgm'` → `extensions 'pg_tgm'` is a WARNING at create time, silently treats nothing as shippable at planning time. Could surprise (worse: it could mask a downgrade where extension was removed locally). (nit)] — `source/contrib/postgres_fdw/option.c:469-481`.
 - [ISSUE-api-shape: `postgres_fdw.application_name` GUC has no `check_hook` (line 587), so any string is accepted at SET time and only failed (via libpq) at next connection. (nit)] — `source/contrib/postgres_fdw/option.c:583`.
 - [ISSUE-correctness: `MemoryContextStrdup(TopMemoryContext, lopt->keyword)` (line 351) but `non_libpq_options` is memcpy'd straight (line 371). The string pointers in `non_libpq_options[]` point at static C-string literals, which is fine, but the asymmetry would be a foot-gun if someone added a runtime-built keyword there. (nit)] — `source/contrib/postgres_fdw/option.c:351,371`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-postgres_fdw.md](../../../subsystems/contrib-postgres_fdw.md)

@@ -62,3 +62,7 @@ shared `gbt_num_*` / `gbt_var_*` helpers). [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `btree_gist`](../../../issues/btree_gist.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

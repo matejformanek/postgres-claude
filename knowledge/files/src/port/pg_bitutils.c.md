@@ -57,3 +57,7 @@ to the portable code here. `[verified-by-code]`
 - `knowledge/files/src/include/port/pg_bitutils.h.md` (if present) — the inline
   declarations and dispatch macros.
 - `knowledge/files/src/backend/utils/adt/bit.c.md` — a popcount consumer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

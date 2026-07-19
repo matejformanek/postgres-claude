@@ -63,3 +63,7 @@ from `inet_addr()`: returns 0 on FAILURE (rather than -1 / broadcast
 - `source/src/backend/utils/adt/network.c` — `inet_in` SQL function path.
 - `knowledge/files/src/port/inet_net_ntop.c.md` — sibling IPv4/IPv6 binary-to-text.
 - `source/src/include/port/pg_bswap.h` — `pg_hton32` byte-swap primitive.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

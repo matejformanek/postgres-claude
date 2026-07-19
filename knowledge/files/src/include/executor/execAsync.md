@@ -70,3 +70,7 @@ The protocol [from `execAsync.c`, sketched here]:
 - [ISSUE-PHASE-D-A11: async execution is the FDW path most prone to
   connection-cache reuse mishaps under role/UM changes; not
   documented at header (medium, A11 cluster echo)] — entire file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

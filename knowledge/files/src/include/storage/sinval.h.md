@@ -78,3 +78,5 @@ processing.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/syscache-invalidation-flow.md](../../../../idioms/syscache-invalidation-flow.md)
+
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

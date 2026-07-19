@@ -31,3 +31,7 @@ Public API of the coercion engine.
   callers that need to introspect what a coercion would do.
 - `IsBinaryCoercible`, `IsPreferredType` — type-system predicates used
   by overload resolution.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

@@ -63,3 +63,7 @@ and the legacy plaintext-verify path used when migrating passwords.
 ## Tally
 
 `[verified-by-code]=3 [from-comment]=1 [inferred]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

@@ -39,3 +39,7 @@ None — opaque integer.
 ## Issues
 
 None.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-buffer.md](../../../../subsystems/storage-buffer.md)

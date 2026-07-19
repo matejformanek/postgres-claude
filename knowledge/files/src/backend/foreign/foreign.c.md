@@ -135,3 +135,7 @@ function-pointer struct on the relcache entry).
 <!-- issues:auto:begin -->
 - [Issue register — `foreign`](../../../../issues/foreign.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/foreign.md](../../../../subsystems/foreign.md)

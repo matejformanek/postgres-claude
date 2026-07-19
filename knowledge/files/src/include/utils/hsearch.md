@@ -51,3 +51,7 @@ PostgreSQL's workhorse in-memory hash table (`dynahash.c`). Used by syscache, re
 
 - `[ISSUE-INVARIANT: hash_seq_term required (medium)]` — easy to forget; an `__attribute__((cleanup))` wrapper macro would help.
 - `[ISSUE-DOC: HASH_FIXED_SIZE in shared-mem context implicit (low)]` — shmem tables effectively need it; not enforced.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/dynahash-hashctl.md](../../../../data-structures/dynahash-hashctl.md)

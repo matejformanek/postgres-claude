@@ -79,3 +79,7 @@ defined(__i386__)` — on platforms where it doesn't compile, an empty
   `PG_SSE4_2`, `PG_AVX512_VL`, `PG_AVX512_VPCLMULQDQ`.
 - `source/src/include/port/pg_cpu.h` — `enum X86FeatureId`, `X86Features` decl.
 - `source/src/include/portability/instr_time.h` — TSC frequency consumer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

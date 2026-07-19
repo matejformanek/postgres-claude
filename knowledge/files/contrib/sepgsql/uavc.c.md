@@ -250,3 +250,7 @@ Audit firing logic at `uavc.c:397-409`:
   policy attribute, distinct from the `sepgsql.permissive` GUC and
   from `sepgsql_getenforce()` returning false; three concepts all
   named "permissive" (likely)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-sepgsql.md](../../../subsystems/contrib-sepgsql.md)

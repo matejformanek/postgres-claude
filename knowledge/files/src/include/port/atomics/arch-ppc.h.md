@@ -53,3 +53,7 @@ gcc's `__atomic_compare_exchange_n` emits.
 - [[knowledge/files/src/include/port/atomics/arch-arm.h.md]] — sibling.
 - [[knowledge/files/src/include/port/atomics/generic-gcc.h.md]] — picks up barrier definitions if not set here.
 - [[knowledge/files/src/include/port/atomics/fallback.h.md]] — kicks in on 32-bit PPC for u64.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

@@ -66,3 +66,7 @@ Also exposes:
 ## Issues
 
 None beyond those filed against `seg.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-seg.md](../../../subsystems/contrib-seg.md)

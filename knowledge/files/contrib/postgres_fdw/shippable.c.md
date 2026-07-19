@@ -54,3 +54,7 @@ Internal:
 - [ISSUE-correctness: text-search REGCONFIG / REGDICTIONARY get a special weakened rule at `deparse.c:439-448` ("for text search objects only, weaken the normal shippability criterion to allow all OIDs below FirstNormalObjectId"). This is `FirstNormalObjectId` (16384), looser than `is_builtin`'s `FirstGenbkiObjectId`. The two cutoffs being different for the same concept is a code-smell trap for future contributors. (nit)] — `source/contrib/postgres_fdw/deparse.c:439`, `shippable.c:155`.
 - [ISSUE-memory: cache grows monotonically per backend, never trimmed. A pathological workload that touches millions of distinct unshippable function OIDs (e.g. across many foreign servers) bloats the cache. No LRU. (nit)] — `source/contrib/postgres_fdw/shippable.c:100`.
 - [ISSUE-defense-in-depth: `is_builtin` returns true even for things like `information_schema` types if they happened to be below `FirstGenbkiObjectId`. Comment at line 144-150 explains why TYPES are tighter via the `deparse_type_name` check; functions/operators are NOT. So an information_schema function would be presumed shippable, which is probably fine but is asymmetric. (nit)] — `source/contrib/postgres_fdw/shippable.c:144`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-postgres_fdw.md](../../../subsystems/contrib-postgres_fdw.md)

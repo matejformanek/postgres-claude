@@ -113,3 +113,5 @@ This ordering is asymmetric: a FATAL inside a CRIT becomes PANIC; an ERROR with 
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [idioms/error-context-callbacks.md](../../../../../idioms/error-context-callbacks.md)
 
+
+- [idioms/fmgr.md](../../../../../idioms/fmgr.md)

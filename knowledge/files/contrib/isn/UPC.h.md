@@ -34,3 +34,7 @@ entirely in `isn.c::hyphenate()`. [verified-by-code]
 
 - UPC has no pretty-printing — minor user-facing inconsistency vs
   ISBN/EAN13 (see combined doc ISSUE-D1). [from-comment]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-isn.md](../../../subsystems/contrib-isn.md)

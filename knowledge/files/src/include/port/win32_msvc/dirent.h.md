@@ -50,3 +50,7 @@ lives in `src/port/dirent.c`, which wraps Win32 `FindFirstFile` /
 
 - `knowledge/files/src/port/dirent.c.md` — the implementation.
 - `knowledge/subsystems/port-layer.md` — Windows portability strategy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

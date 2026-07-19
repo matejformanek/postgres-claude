@@ -30,3 +30,7 @@ sortsupport}` `source/contrib/btree_gist/btree_int8.c:18-26`. Plus exported
 - [ISSUE-PERF: KNN `gbt_int8_dist` via `GET_FLOAT_DISTANCE` loses precision
   for bigints exceeding double's 53-bit mantissa. KNN ordering of two
   bigints differing only in low bits is non-deterministic. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

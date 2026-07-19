@@ -31,3 +31,7 @@ sortsupport}` `source/contrib/btree_gist/btree_cash.c:20-28`. Plus
 
 - [ISSUE-PERF: KNN distance precision loss for huge cash values
   (> 2^53 cents ≈ $90 quadrillion). Theoretical. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

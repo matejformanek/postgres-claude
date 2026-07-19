@@ -23,3 +23,7 @@ HIGH — this is the explicit extension surface. Every entry point dispatches vi
 - State node: `CustomScanState` in `nodes/execnodes.h`
 - `.c` impl: `source/src/backend/executor/nodeCustom.c`
 - Planner registration: `optimizer/planmain.h` / `RegisterCustomScanMethods`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

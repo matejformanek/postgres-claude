@@ -23,3 +23,7 @@ only; the input plan beneath ModifyTable can still be parallel via Gather).
 ## Tags
 
 - [verified-by-code] full surface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

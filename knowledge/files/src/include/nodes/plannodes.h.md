@@ -91,3 +91,6 @@ require a CATALOG_VERSION bump. `nodes/README:113-115` `[from-README]`
 - [idioms/aggregate-hash-vs-sort.md](../../../../idioms/aggregate-hash-vs-sort.md)
 - [idioms/epq-multi-table.md](../../../../idioms/epq-multi-table.md)
 - [idioms/subplan-and-initplan.md](../../../../idioms/subplan-and-initplan.md)
+
+- [idioms/node-types-and-lists.md](../../../../idioms/node-types-and-lists.md)
+- [idioms/parser-pipeline.md](../../../../idioms/parser-pipeline.md)

@@ -11,3 +11,7 @@ preprocess_minmax_aggregates (planagg.c), set_plan_references +
 SS_make_initplan_from_plan + the dependency-tracking entries (setrefs.c).
 
 Also the `query_pathkeys_callback` typedef used by query_planner.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

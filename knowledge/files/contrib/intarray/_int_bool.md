@@ -62,3 +62,7 @@ This is the **most attacker-reachable parser** in this slice. A `query_int` valu
 - [ISSUE-STACK: `makepol` recursion guard is `check_stack_depth()` only; depth bound depends on `max_stack_depth` GUC, not on a hard `query_int`-specific limit (Low — cross-link to A5)]
 - [ISSUE-ERRMSG: `STACKDEPTH=16` overflow message is "statement too complex"; user has no way to know it's an intarray-specific limit unrelated to the planner's "statement too complex" (Low)]
 - [ISSUE-DOC: `boolop` deliberately ignores the `calcnot=false` semantics on signature-tree leaf checks; the boundary between exact (`execconsistent`, `calcnot=true`) and lossy (`signconsistent`, `calcnot=false`) is subtle and undocumented inside execute() (Info)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

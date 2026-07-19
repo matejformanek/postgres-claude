@@ -104,3 +104,5 @@ the implementation in `predicate.c`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/predicate-locks.md](../../../../idioms/predicate-locks.md)
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

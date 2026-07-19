@@ -136,3 +136,5 @@ advances past the heap's min. Pops all waiters at LSNs ≤
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

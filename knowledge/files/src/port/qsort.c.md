@@ -54,3 +54,7 @@ header-based "template" mechanism that other sort variants reuse —
 - `knowledge/files/src/port/qsort_arg.c.md` — passthrough-argument
   cousin (not the same as glibc `qsort_r`; see that file's gotchas).
 - `source/src/include/lib/sort_template.h` — the underlying template.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

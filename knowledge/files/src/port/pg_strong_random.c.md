@@ -73,3 +73,7 @@ Three mutually-exclusive backends, selected by build config:
 <!-- issues:auto:begin -->
 - [Issue register — `port`](../../../issues/port.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

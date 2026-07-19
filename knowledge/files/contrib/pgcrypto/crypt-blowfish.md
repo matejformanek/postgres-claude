@@ -162,3 +162,7 @@ nonstandard bcrypt alphabet `"./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv
   is itself a permanent compat-bug that's now part of the wire
   format. (Documentation nit.)] — Cannot be fixed without breaking
   every stored bcrypt hash in the world. Working as intended.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

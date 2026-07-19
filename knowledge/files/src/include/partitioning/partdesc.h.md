@@ -79,3 +79,7 @@ and not cache-friendly. [from-comment]
 <!-- issues:auto:begin -->
 - [Issue register — `include-partitioning`](../../../../issues/include-partitioning.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/partitioning.md](../../../../subsystems/partitioning.md)

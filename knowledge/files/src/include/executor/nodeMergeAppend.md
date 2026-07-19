@@ -16,3 +16,7 @@ Declares entry points for `MergeAppend` — combines multiple sorted child subpl
 - Sibling (unordered): `executor/nodeAppend.h`
 - `.c` impl: `source/src/backend/executor/nodeMergeAppend.c`
 - Heap: `lib/binaryheap.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

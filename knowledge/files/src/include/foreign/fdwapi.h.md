@@ -191,3 +191,5 @@ safety contracts).
 - [idioms/fdw-iterate-scan.md](../../../../idioms/fdw-iterate-scan.md)
 - [idioms/fdw-routine-callbacks.md](../../../../idioms/fdw-routine-callbacks.md)
 - [subsystems/contrib-file_fdw.md](../../../../subsystems/contrib-file_fdw.md)
+
+- [subsystems/foreign.md](../../../../subsystems/foreign.md)

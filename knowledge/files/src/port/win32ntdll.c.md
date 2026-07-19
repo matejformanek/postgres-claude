@@ -77,3 +77,7 @@ them through `pg_*` global function pointers. `[verified-by-code]`
   `pg_NtFlushBuffersFileEx`.
 - `knowledge/files/src/port/win32stat.c.md` — consumer of
   `pg_RtlGetLastNtStatus` for `STATUS_DELETE_PENDING` discrimination.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

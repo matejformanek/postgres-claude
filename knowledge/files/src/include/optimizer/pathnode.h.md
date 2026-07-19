@@ -19,3 +19,7 @@ construction. [verified-by-code:20-26]
 - [Scenario — Add a new plan node](../../../../scenarios/add-new-plan-node.md)
 
 <!-- scenarios:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

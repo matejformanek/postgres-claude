@@ -95,3 +95,5 @@ Macro `InHotStandby = (standbyState >= STANDBY_SNAPSHOT_PENDING)`.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/xlog-region-replay.md](../../../../idioms/xlog-region-replay.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

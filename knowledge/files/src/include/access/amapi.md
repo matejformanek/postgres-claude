@@ -125,3 +125,7 @@ context yields use-after-free; no enforcement. `[inferred]`.
    — `amapi.h:233`-`326`.
 4. **[ISSUE-correctness: relies on handler returning server-lifetime pointer (low)]**
    — `amapi.h:230`-`231`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [data-structures/indexamroutine.md](../../../../data-structures/indexamroutine.md)

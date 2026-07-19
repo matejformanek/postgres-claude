@@ -110,3 +110,7 @@ historic EXEC_BACKEND testing on Unix). [verified-by-code §main.c:47-59, 243-27
 <!-- issues:auto:begin -->
 - [Issue register — `main`](../../../../issues/main.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/main.md](../../../../subsystems/main.md)

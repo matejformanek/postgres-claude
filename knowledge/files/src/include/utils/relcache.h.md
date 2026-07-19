@@ -41,3 +41,7 @@ Public surface of the relation descriptor cache. Declares the `Relation` typedef
 ## Confidence tag tally
 
 verified-by-code: 3 — from-comment: 2 — from-readme: 0 — inferred: 0 — unverified: 0
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

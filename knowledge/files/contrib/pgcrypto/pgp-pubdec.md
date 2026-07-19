@@ -120,3 +120,7 @@ session key into the `PGP_Context`.
 - [ISSUE-correctness: `any_key` (all-zero key ID) accepted as wildcard;
   fingerprinting surface but very minor (nit)] —
   `source/contrib/pgcrypto/pgp-pubdec.c:182-187`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

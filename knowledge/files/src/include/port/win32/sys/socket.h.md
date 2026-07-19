@@ -41,3 +41,7 @@ PG-internal replacement.
 - [[knowledge/files/src/include/port/win32/netinet/in.h.md]] — same one-liner pattern.
 - [[knowledge/files/src/include/port/win32_port.h.md]]
 - [[knowledge/issues/include-port.md]] — Windows include-order traps.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

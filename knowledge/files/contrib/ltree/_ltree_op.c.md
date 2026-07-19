@@ -75,3 +75,7 @@ Internal:
 - [ISSUE-cost: `array_iterator`'s `DirectFunctionCall2` (line 56) carries per-call FunctionCallInfoBaseData setup overhead. For an 85M-element array, that's 85M `DirectFunctionCall2` invocations. Comparable to any array-iteration pattern in PG, no specific bug. (verification only)] — `source/contrib/ltree/_ltree_op.c:54-66`.
 - [ISSUE-correctness: `_ltree_extract_isparent` (line 200) — comment is missing. The function returns NULL when no match (`PG_RETURN_NULL` at line 212), else palloc-copies the found element. The behavior is documented in the SQL extension but not at the C function. (nit)] — `source/contrib/ltree/_ltree_op.c:200-221`.
 - [ISSUE-API-shape: `_lca` and `lca` (`ltree_op.c:562`) are two different LCA entry points: `lca` is variadic (up to FUNC_MAX_ARGS scalar `ltree` args), `_lca` takes an `ltree[]`. Both ultimately call `lca_inner`. Consistent. (verification only)] — `source/contrib/ltree/_ltree_op.c:292-326`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

@@ -63,3 +63,7 @@ Both functions follow identical structure:
   is the type-classification helper used here.
 - `source/src/include/port.h` — macro indirection routing `fseeko` /
   `ftello` to the `_pg*64` symbols on MSVC.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

@@ -153,3 +153,7 @@ init. After the probe, every call is two loads + an indirect branch
   WAL, FNV-1a for data pages). New contributors regularly conflate.
   Header could include a "see also: src/include/storage/checksum.h"
   cross-ref. (severity: low, doc)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

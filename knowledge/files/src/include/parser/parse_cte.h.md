@@ -18,3 +18,7 @@ The second is the recursive-CTE result-type unifier between the
 non-recursive and recursive arms; called from
 `analyze.c:transformSetOperationStmt` when the SET op is the recursive
 union.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

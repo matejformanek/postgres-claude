@@ -65,3 +65,7 @@ primitives this file synthesizes when the preceding layer left them blank.
 - [[knowledge/files/src/include/port/atomics/generic-gcc.h.md]] — sibling, supplies primitives via gcc intrinsics.
 - [[knowledge/files/src/include/port/atomics/fallback.h.md]] — when 64-bit support is missing entirely.
 - [[knowledge/issues/include-port.md]] — `pg_atomic_read_membarrier_*` perf cost; barrier-asymmetry observations.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

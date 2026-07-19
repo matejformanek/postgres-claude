@@ -63,3 +63,7 @@ return value. The body itself:
 <!-- issues:auto:begin -->
 - [Issue register — `include-storage`](../../../../issues/include-storage.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

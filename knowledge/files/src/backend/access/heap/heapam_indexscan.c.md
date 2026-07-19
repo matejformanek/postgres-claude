@@ -102,3 +102,7 @@ executor nodes after the indexAM hands them a TID. [verified-by-code]
 <!-- issues:auto:begin -->
 - [Issue register — `access`](../../../../../issues/access.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../../subsystems/access-heap.md)

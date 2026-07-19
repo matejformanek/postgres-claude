@@ -49,3 +49,7 @@ a process died on a signal. `[verified-by-code]`
 - `source/src/backend/postmaster/postmaster.c` — child-exit reporting via
   `WTERMSIG` is a primary caller.
 - `knowledge/files/src/port/kill.c.md` — Win32 `pgkill` shim sibling.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

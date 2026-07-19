@@ -48,3 +48,7 @@ shmem.c:105-119`.
 
 Exposed via `PGDLLIMPORT` for extensions; not directly defined here.
 Used for huge-page alignment.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-ipc.md](../../../../subsystems/storage-ipc.md)

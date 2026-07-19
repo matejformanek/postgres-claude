@@ -161,3 +161,7 @@ present with value NULL" via subscripting (use `defined(hs, 'k')` or
   subscripting an hstore is just a text string (the value for the key)"
   but doesn't mention that null hstore values return SQL NULL not empty
   text — minor doc gap (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore.md](../../../subsystems/contrib-hstore.md)

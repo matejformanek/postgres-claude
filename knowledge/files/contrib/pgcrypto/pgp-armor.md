@@ -138,3 +138,7 @@ CRC24. Backs the SQL functions `armor`, `dearmor`, `pgp_armor_headers`.
   pointers dangle. Caller (pgp-pgsql.c) handles this correctly, but
   it's a footgun for direct C consumers (nit)] —
   `source/contrib/pgcrypto/pgp-armor.c:438-441`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

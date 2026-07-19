@@ -87,3 +87,7 @@ papers over:
   the Windows error story.
 - `knowledge/idioms/error-handling.md` — `ereport` consumers ultimately
   rely on `pg_strerror` for `%m` formatting.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

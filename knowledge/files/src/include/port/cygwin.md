@@ -36,3 +36,7 @@ Cygwin compatibility shim. Two responsibilities:
 ## Issues
 
 - (none)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

@@ -62,3 +62,7 @@ empty fields.
 - `knowledge/files/src/port/strerror.c.md` — sibling "always compiled
   on platforms that lack X" pattern.
 - BSD man page `strsep(3)` — authoritative semantics.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

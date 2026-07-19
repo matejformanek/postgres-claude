@@ -97,3 +97,7 @@ layout, strategy numbers, similarity macros, and the public
 - [ISSUE-Phase-D: siglen=1 reloption (low)] —
   source/contrib/pg_trgm/trgm_gist.c:970-973 — reloption range
   allows siglen=1, trivially-saturated signatures.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_trgm.md](../../../subsystems/contrib-pg_trgm.md)

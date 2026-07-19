@@ -70,3 +70,7 @@ consumption.
 
 - `[ISSUE-CODE: rt_fetch macro evaluates rangetable_index twice — side-effect-bearing argument (e.g. ++) would be a bug; not documented (low)] — source/src/include/parser/parsetree.h:31-32`
 - `[ISSUE-DOC: 1-based rt indexing not mentioned in header — institutional knowledge required (low)] — source/src/include/parser/parsetree.h:31-32`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

@@ -19,3 +19,7 @@ extern Oid  select_common_collation  (ParseState *, List *exprs, bool none_ok);
 per-statement transform in `analyze.c` after the rest of the analysis is
 complete. The other three are for callers that need finer-grained
 collation work (planner sometimes, DDL constraint expressions).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

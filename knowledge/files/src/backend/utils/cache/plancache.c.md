@@ -81,3 +81,5 @@ verified-by-code: 11 — from-comment: 8 — from-readme: 0 — inferred: 0 — 
 - [idioms/plan-cache.md](../../../../../idioms/plan-cache.md)
 - [idioms/prepared-statement-plancache.md](../../../../../idioms/prepared-statement-plancache.md)
 
+
+- [idioms/spi.md](../../../../../idioms/spi.md)

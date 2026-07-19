@@ -24,3 +24,7 @@ conversion map.
 ## Tags
 
 - [verified-by-code] full API surface.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

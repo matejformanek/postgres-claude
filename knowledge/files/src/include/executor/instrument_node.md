@@ -112,3 +112,7 @@ Each kind exposes a `Shared*Info {num_workers,
 - [ISSUE-API: adding a new instrumentation kind requires (a) a new
   struct here, (b) a `Shared*Info` container, (c) DSM TOC key, (d)
   EXPLAIN formatter — easy to miss one (low)] — entire file.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

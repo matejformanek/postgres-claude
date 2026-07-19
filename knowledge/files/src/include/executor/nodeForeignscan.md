@@ -26,3 +26,7 @@ HIGH — FDW trust boundary. `postgres_fdw` (A11 echo) opens libpq connections t
 - Async framework: `executor/execAsync.h` (`AsyncRequest`)
 - `.c` impl: `source/src/backend/executor/nodeForeignscan.c`
 - postgres_fdw connection cache: `contrib/postgres_fdw/connection.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -103,3 +103,5 @@ to break a header dep cycle with `proc.h`. [from-comment]
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/lwlock-struct.md](../../../../data-structures/lwlock-struct.md)
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

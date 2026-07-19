@@ -35,3 +35,7 @@ Dated "recompiled August 23, 2006". Included exclusively by `isn.c`.
 
 - Stale tables (see combined doc ISSUE-D2). [from-comment]
 - Silent fallback on unknown prefix (see combined doc ISSUE-D1).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-isn.md](../../../subsystems/contrib-isn.md)

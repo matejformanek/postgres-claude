@@ -27,3 +27,7 @@ None — header is a placeholder.
 ## Cross-refs
 - [[knowledge/files/src/include/port.h.md]] — the umbrella.
 - [[knowledge/files/src/include/port/win32_port.h.md]] — main Windows shim.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

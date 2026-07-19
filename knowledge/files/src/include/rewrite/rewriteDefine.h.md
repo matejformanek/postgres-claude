@@ -18,3 +18,7 @@ API of `rewriteDefine.c` — CREATE RULE + view-rule installation.
 - `EnableDisableRule` — used by `ALTER TABLE ... ENABLE/DISABLE RULE`.
 - Constants: `ViewSelectRuleName` (`"_RETURN"`) is in `rewriteSupport.h`,
   not here.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

@@ -15,3 +15,7 @@ Declares entry points for `Unique` — drops adjacent duplicate rows from a pres
 - State node: `UniqueState` in `nodes/execnodes.h`
 - `.c` impl: `source/src/backend/executor/nodeUnique.c`
 - Related (hash DISTINCT): `executor/nodeAgg.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

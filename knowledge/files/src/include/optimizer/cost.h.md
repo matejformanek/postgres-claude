@@ -28,3 +28,5 @@ these constants" — DEFAULTS are for postgresql.conf seeding only.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/cost-units-gucs.md](../../../../idioms/cost-units-gucs.md)
+
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

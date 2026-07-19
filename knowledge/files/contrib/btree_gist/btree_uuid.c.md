@@ -85,3 +85,7 @@ matters for correctness.
   `gbt_num_compress` switch — diverges from the framework. Future
   maintainers must remember that UUID has its own compress path. (LOW —
   documented by the explicit `PG_FUNCTION_INFO_V1`)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

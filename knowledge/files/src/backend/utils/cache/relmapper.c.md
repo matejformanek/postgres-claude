@@ -123,3 +123,5 @@ Internal I/O:
 <!-- backlinks:auto -->
 - [idioms/parallel-state-propagation.md](../../../../../idioms/parallel-state-propagation.md)
 - [idioms/relcache-build.md](../../../../../idioms/relcache-build.md)
+
+- [subsystems/utils-cache.md](../../../../../subsystems/utils-cache.md)

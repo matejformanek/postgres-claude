@@ -30,3 +30,7 @@ sortsupport}` plus `gbt_tstz_compress`, `gbt_tstz_consistent`,
 ## Issues spotted
 
 None significant for security/correctness; standard fixed-width pattern.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

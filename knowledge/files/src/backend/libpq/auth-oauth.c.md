@@ -177,3 +177,7 @@ is mandatory and there is no fallback (auth-oauth.c:765-769).
 ## Tally
 
 `[verified-by-code]=18 [from-comment]=8 [inferred]=1`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

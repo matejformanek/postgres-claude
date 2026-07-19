@@ -57,3 +57,7 @@ PostgreSQL commit timestamp manager
 ## Confidence tag tally
 
 - `[verified-by-code]`: 14
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

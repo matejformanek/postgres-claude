@@ -40,3 +40,7 @@ GIN opclass support for `int4[]`: `ginint4_queryextract` extracts indexable VAL 
 
 - [ISSUE-AMPLIFY: `! 42` style queries force full GIN scan; reachable via any app exposing `@@` query strings (Med)]
 - [ISSUE-CONTRACT: VAL-order coupling between `ginint4_queryextract` and `gin_bool_consistent` is comment-only, not enforced (Low)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

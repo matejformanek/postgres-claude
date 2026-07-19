@@ -110,3 +110,7 @@ packet and (on the encrypt side) the random salt/iter selection.
   returns `PXE_PGP_BAD_S2K_MODE` (nit)] —
   `source/contrib/pgcrypto/pgp-s2k.c:272-273`. OK, no issue. Verified
   the `default:` branch covers all unknown modes.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

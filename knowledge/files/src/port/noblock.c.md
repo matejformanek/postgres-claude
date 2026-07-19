@@ -50,3 +50,7 @@ ioctlsocket returns nonzero). `[verified-by-code]`
 - `source/src/interfaces/libpq/fe-connect.c` — frontend sets non-blocking
   before `connect()` for timeout support.
 - `source/src/include/port.h` — prototypes.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

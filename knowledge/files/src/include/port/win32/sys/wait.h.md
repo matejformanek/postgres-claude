@@ -26,3 +26,7 @@ None — placeholder.
 ## Cross-refs
 - [[knowledge/files/src/include/port.h.md]]
 - [[knowledge/files/src/include/port/win32_port.h.md]]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

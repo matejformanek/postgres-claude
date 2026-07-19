@@ -61,3 +61,5 @@ Defines `PGPROC` (the per-process shared-memory state) and `PROC_HDR` (the globa
 - [idioms/fastpath-locks.md](../../../../idioms/fastpath-locks.md)
 - [idioms/subxact-xidcache-and-pgproc.md](../../../../idioms/subxact-xidcache-and-pgproc.md)
 
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

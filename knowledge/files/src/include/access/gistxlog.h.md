@@ -27,3 +27,7 @@ WAL record formats for GiST. [from-comment, gistxlog.h:1-9]
 - `gistxlogPageDelete` — `deleteXid`, `downlinkOffset`.
 
 See `gistxlog.c.md` for replay semantics.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

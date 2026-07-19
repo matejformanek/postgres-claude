@@ -59,3 +59,7 @@ ltree's CRC-32 helper used to spread labels across GiST signature bits. **NOT cr
 - [ISSUE-cost: static `pg_locale_t locale = NULL` (line 27) — same per-backend-lifetime caching pattern as `lquery_op.c:84`. SET lc_collate within a session does not invalidate it. (nit — known PG pattern)] — `source/contrib/ltree/crc32.c:27-30`.
 - [ISSUE-doc: `UNICODE_CASEMAP_BUFSZ` (line 35) is the stack-buffer size for one codepoint's case-fold output. No bounds check on `pg_strfold` return — if case-folding produces > BUFSZ bytes, `pg_strfold` writes truncated. The comment at `lquery_op.c:99-103` notes that case-folding CAN grow the byte length (German ß → SS doubles). UNICODE_CASEMAP_BUFSZ is sized to accommodate the worst-case Unicode mapping (currently 18 bytes per codepoint per the Unicode 16.0 special-casing table). So OK, but worth a check that future Unicode versions don't exceed the constant. (nit — depends on PG core's Unicode tables)] — `source/contrib/ltree/crc32.c:35,40-41`.
 - [ISSUE-API-shape: `ltree_crc32_sz` is the only public function. The `crc32(buf)` macro in `crc32.h` is a convenience for null-terminated input. Both paths use the SAME traditional CRC32 polynomial. (verification only)] — `source/contrib/ltree/crc32.c:21,54`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

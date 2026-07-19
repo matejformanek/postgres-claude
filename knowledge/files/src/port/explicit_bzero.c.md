@@ -62,3 +62,7 @@ Five mutually-exclusive implementations, selected at compile time:
 - `knowledge/issues/common.md` — SecretBuf hosting-site proposal (A5).
 - `knowledge/files/src/port/pg_strong_random.c.md` — sibling crypto primitive.
 - `knowledge/files/src/port/timingsafe_bcmp.c.md` — sibling constant-time compare.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

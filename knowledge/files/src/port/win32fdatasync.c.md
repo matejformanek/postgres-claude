@@ -65,3 +65,7 @@ backend the data-only durability guarantee it expects.
 - `knowledge/subsystems/` — WAL `wal_sync_method` selection routes
   here for `fdatasync` and `fdatasync_writethrough` on Windows.
 - `source/src/backend/storage/file/fd.c` — `pg_fdatasync` caller.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

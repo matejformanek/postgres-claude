@@ -297,3 +297,7 @@ pg_user). `check_ident_usermap` (2626) supports regex-based
 ## Tally
 
 `[verified-by-code]=24 [from-comment]=14 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

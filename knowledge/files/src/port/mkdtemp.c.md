@@ -69,3 +69,7 @@ original.)
 - `source/src/bin/initdb/initdb.c` — caller (creating temporary working
   directories).
 - `knowledge/files/src/port/pgmkdirp.c.md` — sibling `mkdir -p` shim.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

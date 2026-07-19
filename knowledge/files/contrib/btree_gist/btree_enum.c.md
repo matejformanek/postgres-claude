@@ -54,3 +54,7 @@ consistent,penalty,same,sortsupport}`
   If anyone ever introduces a notion of "enum aliases" (multiple OIDs for
   the same logical value), this opclass becomes wrong. Defensive only.
   (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

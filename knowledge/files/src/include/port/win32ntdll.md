@@ -75,3 +75,7 @@ function-pointer typedefs and PGDLLIMPORT globals
   hardcoded; if Microsoft changes the flag value, silent breakage.
   Practical risk is zero (NT internals are very stable in practice).
   (severity: trivial)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../subsystems/port.md)

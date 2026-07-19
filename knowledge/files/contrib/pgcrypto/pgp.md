@@ -129,3 +129,7 @@ and `pgp.h` (326 lines).
 - [ISSUE-documentation: `PGP_Context.unsupported_compr` flag's purpose ("has
   bzip2 compression seen during parse") is only obvious from `pgp-decrypt.c`
   cross-reference (nit)] — `source/contrib/pgcrypto/pgp.h:158`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

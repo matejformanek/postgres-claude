@@ -42,3 +42,7 @@ ANSI/`char*` overload, not the `_wutime` wide-character variant.
 - `knowledge/files/src/include/port/win32_msvc/unistd.h.md` — sibling MSVC shim.
 - `knowledge/subsystems/port-layer.md` — overall portability strategy
   for Windows builds.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

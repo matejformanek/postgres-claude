@@ -129,3 +129,7 @@ during heavy maintenance.
 - **ISSUE-DoS**: stalled logical slot + heavy CLUSTER load fills
   disk with mapping files. No accounting/limit on mapping-file
   count.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-heap.md](../../../../subsystems/access-heap.md)

@@ -25,3 +25,7 @@ None defined here; transitively re-exposes the inet family from Winsock.
 ## Cross-refs
 - [[knowledge/files/src/include/port/win32/sys/socket.h.md]] — does the actual heavy lifting.
 - [[knowledge/files/src/include/port/win32/netinet/in.h.md]] — sibling, same one-liner.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../../subsystems/port.md)

@@ -77,3 +77,7 @@ Internal:
 - [ISSUE-API-shape: `ltxtq_send` (line 638) round-trips the query through `infix` (line 657) — i.e. send re-deparses to text. The text form may not be byte-identical to the original input (e.g. parens canonicalized, whitespace normalized). A client doing `SELECT q::text FROM tab` and `SELECT q FROM tab` via binary may see two different strings for the same query value. (nit)] — `source/contrib/ltree/ltxtquery_io.c:644-662`.
 - [ISSUE-correctness: line 351 `if (unlikely(delta > PG_INT16_MAX))` — checked once per binary operator. But ITEM.left is `int16` (signed); `delta` is always positive (operator points to LEFT operand at smaller index, but `delta = *pos - mypos` where `*pos > mypos`, so positive). The check is correct. The Assert at line 350 (`delta > 0`) backs this up. (verification only)] — `source/contrib/ltree/ltxtquery_io.c:348-355`.
 - [ISSUE-correctness: line 282-285 `ereturn(state->escontext, ERR, ...)`. The `pg_fallthrough` at line 280 (preceded by an `if (SOFT_ERROR_OCCURRED(state->escontext))` early-return) handles the case where a soft error was already raised in `gettoken_query`. Clean handling, but the fallthrough into `default:` for the `ERR` case after soft-error-already-set is subtle. (nit — defensible)] — `source/contrib/ltree/ltxtquery_io.c:277-285`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

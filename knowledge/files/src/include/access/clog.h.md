@@ -70,3 +70,5 @@ PostgreSQL transaction-commit-log manager
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/clog-slru.md](../../../../idioms/clog-slru.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

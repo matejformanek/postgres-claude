@@ -46,3 +46,7 @@ harmless because the values are mandated by POSIX.
 
 - `knowledge/files/src/include/port/win32_msvc/utime.h.md` — sibling MSVC shim.
 - `knowledge/subsystems/port-layer.md` — Windows portability strategy.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

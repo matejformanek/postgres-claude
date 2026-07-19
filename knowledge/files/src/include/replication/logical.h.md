@@ -108,3 +108,7 @@ Entry points:
 <!-- issues:auto:begin -->
 - [Issue register — `include-replication`](../../../../issues/include-replication.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/replication.md](../../../../subsystems/replication.md)

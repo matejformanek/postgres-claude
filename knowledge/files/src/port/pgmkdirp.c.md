@@ -81,3 +81,7 @@ tablespace creation, and anywhere PG must materialize a directory tree.
 
 - `knowledge/files/src/port/pgcheckdir.c.md` — sibling directory primitive.
 - `knowledge/files/src/port/path.c.md` — `canonicalize_path` run before this.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

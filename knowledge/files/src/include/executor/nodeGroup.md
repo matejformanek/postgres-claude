@@ -15,3 +15,7 @@ Declares entry points for `Group` — collapses runs of duplicate grouping keys 
 - State node: `GroupState` in `nodes/execnodes.h`
 - Sibling (aggregating): `executor/nodeAgg.h`
 - `.c` impl: `source/src/backend/executor/nodeGroup.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

@@ -223,3 +223,5 @@ for the trust posture.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/apply-worker-loop-and-dispatch.md](../../../../idioms/apply-worker-loop-and-dispatch.md)
+
+- [subsystems/replication.md](../../../../subsystems/replication.md)

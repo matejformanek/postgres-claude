@@ -19,3 +19,7 @@ Opaque `BufFile` typedef + API. See buffile.c for semantics.
 ## Tag tally
 
 `[verified-by-code]` 1.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/storage-buffer.md](../../../../subsystems/storage-buffer.md)

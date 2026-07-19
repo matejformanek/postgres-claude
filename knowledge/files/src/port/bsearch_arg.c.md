@@ -59,3 +59,7 @@ into `libpgport`. `[verified-by-code]`
 - `source/src/include/port.h` — prototype.
 - `source/src/port/qsort_arg.c` — analogous qsort variant (not in this
   file batch).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

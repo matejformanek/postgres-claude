@@ -7,3 +7,7 @@ Prototypes for `make_append_rel_info`, `adjust_appendrel_attrs*`,
 `get_translated_update_targetlist`, the ROWID_VAR machinery
 (`add_row_identity_var`, `add_row_identity_columns`,
 `distribute_row_identity_vars`).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/optimizer.md](../../../../subsystems/optimizer.md)

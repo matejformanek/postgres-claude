@@ -35,3 +35,7 @@ handles them. [from-comment file head]
 
 - [verified-by-code] all field names.
 - [from-comment] utility-statement caveat.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

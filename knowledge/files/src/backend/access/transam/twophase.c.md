@@ -261,3 +261,5 @@ Checkpoint / recovery surface:
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [idioms/prepare-transaction-2pc.md](../../../../../idioms/prepare-transaction-2pc.md)
 
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

@@ -216,3 +216,7 @@ violation.
 - [ISSUE-correctness: `ginReadTupleWithoutState` `palloc(0)` for
   uncompressed-with-nipd=0 — legal but inconsistent with caller's pfree
   pattern (nit)] — `verify_gin.c:115-117`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-amcheck.md](../../../subsystems/contrib-amcheck.md)

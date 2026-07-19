@@ -178,3 +178,7 @@ split for correctness; an unbalanced index just costs more page splits.
   assumption that the calling function takes a GISTENTRY at arg position 0.
   This couples the macro to its caller signature; if any per-type penalty
   function ever reorders its args this silently breaks. (LOW)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

@@ -192,3 +192,7 @@ affected (it's file-local), but the mirror helper in
 <!-- issues:auto:begin -->
 - [Issue register — `replication`](../../../../../issues/replication.md)
 <!-- issues:auto:end -->
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/replication.md](../../../../../subsystems/replication.md)

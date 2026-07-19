@@ -26,3 +26,7 @@ parallel instrumentation hooks.
 ## Tags
 
 - [verified-by-code] all prototypes.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

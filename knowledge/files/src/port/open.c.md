@@ -86,3 +86,7 @@ errors. Whole file is gated by `#ifdef WIN32`. `[verified-by-code]`
 - `knowledge/files/src/port/dirmod.c.md` — sibling Windows shim file.
 - `source/src/include/port/win32ntdll.h` — `pg_RtlGetLastNtStatus`,
   `initialize_ntdll`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

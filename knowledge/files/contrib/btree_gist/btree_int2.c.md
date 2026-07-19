@@ -33,3 +33,7 @@ sortsupport}` `source/contrib/btree_gist/btree_int2.c:18-27`. Plus exported
 ## Issues spotted
 
 None significant.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-btree_gist.md](../../../subsystems/contrib-btree_gist.md)

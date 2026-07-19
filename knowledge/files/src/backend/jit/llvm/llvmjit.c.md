@@ -83,3 +83,5 @@ Core of the loadable LLVM JIT provider. Owns the per-backend LLVM session: creat
 - [idioms/jit-expression-codegen.md](../../../../../idioms/jit-expression-codegen.md)
 - [idioms/jit-provider-and-context.md](../../../../../idioms/jit-provider-and-context.md)
 - [idioms/jit-tuple-deform-and-inline.md](../../../../../idioms/jit-tuple-deform-and-inline.md)
+
+- [subsystems/jit.md](../../../../../subsystems/jit.md)

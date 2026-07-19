@@ -103,3 +103,7 @@ read/write through Push/PullFilter, hash-update with bit-prefix, and the
 - [ISSUE-defense-in-depth: `pgp_mpi_cksum` non-constant-time loop over
   16-bit accumulator; minor since checksum entropy is only 16 bits
   (nit)] — `source/contrib/pgcrypto/pgp-mpi.c:132-142`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

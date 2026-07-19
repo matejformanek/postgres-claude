@@ -14,3 +14,7 @@ extern Query *transformMergeStmt(ParseState *, MergeStmt *);
 
 Called from `analyze.c:transformStmt` on `T_MergeStmt`. Everything else is
 internal to `parse_merge.c`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

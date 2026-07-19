@@ -223,3 +223,7 @@ that build mode (writes to /tmp without `mkstemp`). Documented as
 - [ISSUE-Resource: regex graph leak across rescans (low, already
   filed under trgm_gist.c)] — relevant here because this file
   creates the graphs.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pg_trgm.md](../../../subsystems/contrib-pg_trgm.md)

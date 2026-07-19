@@ -134,3 +134,5 @@ Exposes counters: `prefetch`, `hit`, `skip_init`, `skip_new`,
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

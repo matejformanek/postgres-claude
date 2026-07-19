@@ -359,3 +359,7 @@ hstore allocates `VARSIZE(hs)` — bounded.
   `*lowbound` (caller is trusted to pass 0..HS_COUNT(hs)). A misuse
   would walk off the entries[] array. Internal API; current call sites
   are correct (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore.md](../../../subsystems/contrib-hstore.md)

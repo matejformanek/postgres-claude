@@ -58,3 +58,5 @@ used across the auth code [from-comment].
 ## Synthesized by
 <!-- backlinks:auto -->
 - [subsystems/contrib-auth_delay.md](../../../../subsystems/contrib-auth_delay.md)
+
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

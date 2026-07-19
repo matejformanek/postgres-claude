@@ -42,3 +42,7 @@ declared elsewhere; these are the non-fmgr backdoors [from-comment].
 ## Tally
 
 `[verified-by-code]=1 [from-comment]=2`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

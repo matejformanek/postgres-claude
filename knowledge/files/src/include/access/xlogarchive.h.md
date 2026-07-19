@@ -42,3 +42,7 @@ xlogarchive.h
 
 - `[verified-by-code]`: 10
 - `[from-comment]`: 1
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

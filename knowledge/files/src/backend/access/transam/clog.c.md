@@ -181,3 +181,5 @@ the page) and `CLOG_TRUNCATE` (re-execute the truncation).
 - [subsystems/optimizer.md](../../../../../subsystems/optimizer.md)
 - [idioms/clog-slru.md](../../../../../idioms/clog-slru.md)
 
+
+- [subsystems/access-transam.md](../../../../../subsystems/access-transam.md)

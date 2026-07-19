@@ -83,3 +83,7 @@ catalog-facing identifier-normalization choices.
 - `[ISSUE-TRUST: A11/A13/A14 cluster — identifier truncation by BYTE not CHAR allows multibyte boundary collisions; catalog-level (medium)] — source/src/include/parser/scansup.h:17-23`
 - `[ISSUE-DOC: header has zero comments — invariants are folk knowledge (medium)] — source/src/include/parser/scansup.h:1-27`
 - `[ISSUE-TRUST: scanner_isspace defends a narrow attack but undocumented as a security choice; reads as a perf optimization (low)] — source/src/include/parser/scansup.h:25`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

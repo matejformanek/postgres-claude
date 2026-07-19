@@ -49,3 +49,7 @@ exists but is not empty" vs "appears to be a mount point"). `[verified-by-code]`
 
 - `knowledge/files/src/port/pgmkdirp.c.md` — sibling directory primitive.
 - `knowledge/files/src/bin/initdb/initdb.c.md` — principal consumer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

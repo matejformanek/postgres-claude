@@ -17,3 +17,7 @@ Declares the executor entry points for the `BitmapAnd` plan node, which intersec
 - Sibling combiner: `executor/nodeBitmapOr.h`
 - Consumer: `executor/nodeBitmapHeapscan.h`
 - Producers: `executor/nodeBitmapIndexscan.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

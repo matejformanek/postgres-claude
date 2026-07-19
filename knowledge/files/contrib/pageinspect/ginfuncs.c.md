@@ -131,3 +131,7 @@ this. Unlike btree which gates whole behaviors on
   `gin_leafpage_items` — the function does not see uncompressed
   pending entries that may exist for the index (nit, documented gap
   in coverage)]**.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

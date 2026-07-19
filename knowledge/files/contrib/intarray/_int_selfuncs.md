@@ -54,3 +54,7 @@ Selectivity functions for intarray operators: wrappers that redirect `@>`/`<@`/`
 - [ISSUE-STATS: attacker-controlled MCE entries in pg_statistic can mislead the planner into bad plans for `@@` (Low — affects all opclasses that read stats; not intarray-specific)]
 - [ISSUE-COUPLING: selectivity wrappers hardcode `OID_ARRAY_*_OP` substitution; semantic drift between intarray and core array operators would silently produce wrong estimates (Low)]
 - [ISSUE-DOC: the `nnumbers == nvalues + 3` magic number for intarray MCE layout is comment-only — easy to break with future ANALYZE changes (Low)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

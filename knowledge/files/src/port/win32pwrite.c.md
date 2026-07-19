@@ -54,3 +54,7 @@ write, temp-file output, etc.
 - `knowledge/files/src/port/win32pread.c.md` — sibling.
 - `knowledge/files/src/port/win32fdatasync.c.md` — durability call.
 - `source/src/backend/storage/file/fd.c` — primary backend consumer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

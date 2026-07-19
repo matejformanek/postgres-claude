@@ -35,3 +35,7 @@ Nothing in this file. See `crc32.c.md` for the full picture.
 
 - [ISSUE-API-shape: the `crc32(buf)` macro shadows any function/variable named `crc32` in callers' scope (line 10). Trivial in current usage but a footgun if someone adds a generic `crc32` helper to a shared header. (nit)] — `source/contrib/ltree/crc32.h:10`.
 - [ISSUE-doc: `ltree_crc32_sz` is declared without a header-side comment explaining the `LOWER_NODE` two-path behavior. A reader of just this header would not know that the CRC is case-fold-aware on most builds and byte-literal on MSVC. (nit)] — `source/contrib/ltree/crc32.h:6-7`.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-ltree.md](../../../subsystems/contrib-ltree.md)

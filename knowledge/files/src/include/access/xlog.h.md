@@ -124,3 +124,5 @@ exposed for `xlogrecovery.c` callbacks. Backup: `do_pg_backup_start`,
 <!-- backlinks:auto -->
 - [idioms/checkpoint-coordination.md](../../../../idioms/checkpoint-coordination.md)
 - [idioms/wal-buffer-state.md](../../../../idioms/wal-buffer-state.md)
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

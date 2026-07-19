@@ -24,3 +24,7 @@ Prototypes for function/operator resolution from `parse_func.c`.
   `LookupFuncWithArgs` — name-only / by-typename lookups used by DDL
   (`COMMENT ON FUNCTION ...`, `ALTER FUNCTION ...`).
 - `LookupAggWithArgs` / `LookupOperWithArgs` — same for aggs / ops.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

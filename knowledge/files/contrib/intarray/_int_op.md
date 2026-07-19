@@ -59,3 +59,8 @@ SQL-callable operator functions and array-helper functions for `int4[]`: `@>`/`<
 - [ISSUE-CONSISTENCY: `icount` does not `CHECKARRVALID`; counts NULL-bitmap entries without erroring (Low)]
 - [ISSUE-PERF: `_int_contains` re-sorts both sides on every call; high-cardinality joins on `@>` pay O(n log n) per row not amortised (Info)]
 - [ISSUE-USABILITY: `sort()` rejects "asc " (trailing space) with a generic "must be ASC or DESC" error (Trivial)]
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/fmgr.md](../../../idioms/fmgr.md)
+- [subsystems/contrib-intarray.md](../../../subsystems/contrib-intarray.md)

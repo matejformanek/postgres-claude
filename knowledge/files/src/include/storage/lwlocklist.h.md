@@ -100,3 +100,5 @@ For tranches the same applies (lines 93-99).
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/lwlock-rank-discipline.md](../../../../idioms/lwlock-rank-discipline.md)
+
+- [subsystems/storage-lmgr.md](../../../../subsystems/storage-lmgr.md)

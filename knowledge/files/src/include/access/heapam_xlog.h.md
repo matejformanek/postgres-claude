@@ -84,3 +84,5 @@ now-WAL-logged VM-bit clears. -->
 - [subsystems/access-heap.md](../../../../subsystems/access-heap.md)
 - [idioms/vacuum-hot-prune.md](../../../../idioms/vacuum-hot-prune.md)
 
+
+- [subsystems/access-transam.md](../../../../subsystems/access-transam.md)

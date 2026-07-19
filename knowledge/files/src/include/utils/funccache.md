@@ -40,3 +40,7 @@ Shared cache infrastructure used by PL/pgSQL and SQL-language functions to amort
 
 - `[ISSUE-INVARIANT: pad-byte-zero contract is by-comment-only (medium)]` — `funccache.h:59`. A `StaticAssertStmt` that `sizeof(CachedFunctionHashKey)` has no padding would catch field-reorder regressions.
 - `[ISSUE-DOC: callResultType lifetime (low)]` — tupdesc lifetime ownership not surfaced; whose context holds it?
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

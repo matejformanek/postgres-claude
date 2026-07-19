@@ -16,3 +16,7 @@ Declares executor entry points for the `BitmapOr` plan node, which unions (`OR`s
 - State node: `BitmapOrState` in `nodes/execnodes.h`
 - Sibling combiner: `executor/nodeBitmapAnd.h`
 - Consumer: `executor/nodeBitmapHeapscan.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

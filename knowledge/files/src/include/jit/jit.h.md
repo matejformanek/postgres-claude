@@ -86,3 +86,5 @@ the rest of the backend includes to *use* JIT; it knows nothing about LLVM.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [idioms/jit-provider-and-context.md](../../../../idioms/jit-provider-and-context.md)
+
+- [subsystems/jit.md](../../../../subsystems/jit.md)

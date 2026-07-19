@@ -109,3 +109,7 @@ the ipad/opad XOR'd state suffices. [verified-by-code `px-hmac.c:83-91`]
   Drift risk.
 - [ISSUE-security: `px_memset` LTO-elision risk applies (likely)] —
   see px.md.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pgcrypto.md](../../../subsystems/contrib-pgcrypto.md)

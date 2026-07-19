@@ -69,3 +69,7 @@ the best available variant on first call. `[verified-by-code]` `[from-comment]`
   `x86_feature_available()`.
 - `knowledge/files/src/port/pg_crc32c_armv8.c.md` — sibling ARM CRC32C
   implementation.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

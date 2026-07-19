@@ -147,3 +147,8 @@ Major responsibility groups:
   than POSIX signals. Affects pgbench/recovery-failover tests on
   Windows. Documented in `pgwin32_signal_event` (.c). (severity:
   doc-only, narrative)
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [idioms/portable-identifiers.md](../../../../idioms/portable-identifiers.md)
+- [subsystems/port.md](../../../../subsystems/port.md)

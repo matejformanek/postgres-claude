@@ -17,3 +17,7 @@ Declares entry points for `Material` — buffers all child tuples into a tuplest
 - `.c` impl: `source/src/backend/executor/nodeMaterial.c`
 - Tuplestore: `utils/tuplestore.h`
 - Consumer for mark/restore: `executor/nodeMergejoin.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

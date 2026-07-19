@@ -181,3 +181,7 @@ ALTER OPERATOR FAMILY runs concurrently — vanishingly rare.
   only versioning guard; older extension installs that don't get
   upgraded will hit the error path with a hint — but no
   forward-compat alternative (nit)]**.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-pageinspect.md](../../../subsystems/contrib-pageinspect.md)

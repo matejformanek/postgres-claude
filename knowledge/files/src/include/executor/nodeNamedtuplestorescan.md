@@ -18,3 +18,7 @@ No `ExecEnd*` decl — cleanup folds into the generic executor shutdown via the 
 - Registration: `commands/trigger.h` (transition tables)
 - `.c` impl: `source/src/backend/executor/nodeNamedtuplestorescan.c`
 - Tuplestore: `utils/tuplestore.h`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

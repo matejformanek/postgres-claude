@@ -62,3 +62,7 @@ nothing else (no `ru_maxrss`, no `ru_inblock`, no fault counts).
   `RUSAGE_SELF` macro definitions.
 - `source/src/backend/utils/misc/pg_rusage.c` — primary backend
   consumer.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../subsystems/port.md)

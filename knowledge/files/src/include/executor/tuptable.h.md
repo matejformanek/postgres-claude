@@ -54,3 +54,5 @@ allocate the right struct subtype.
 ## Synthesized by
 <!-- backlinks:auto -->
 - [data-structures/tupletableslot.md](../../../../data-structures/tupletableslot.md)
+
+- [subsystems/executor.md](../../../../subsystems/executor.md)

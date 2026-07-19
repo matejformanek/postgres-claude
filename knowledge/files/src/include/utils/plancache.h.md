@@ -46,3 +46,5 @@ verified-by-code: 1 — from-comment: 7 — from-readme: 0 — inferred: 0 — u
 <!-- backlinks:auto -->
 - [idioms/plan-cache.md](../../../../idioms/plan-cache.md)
 - [idioms/prepared-statement-plancache.md](../../../../idioms/prepared-statement-plancache.md)
+
+- [subsystems/utils-cache.md](../../../../subsystems/utils-cache.md)

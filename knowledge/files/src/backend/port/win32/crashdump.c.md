@@ -69,3 +69,7 @@ filter is installed. `[from-comment]`
   infrastructure file. Installed by the same Win32-startup path.
 - `knowledge/files/src/backend/main/main.c.md` — calls
   `pgwin32_install_crashdump_handler` early in backend init (Win32 only).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/port.md](../../../../../subsystems/port.md)

@@ -34,3 +34,7 @@ ISBN 0-393-04002-X / 978-0-393-04002-9 conversion. [verified-by-code]
 
 - Stale tables (see combined doc ISSUE-D2). [from-comment]
 - Silent fallback on unknown prefix (see combined doc ISSUE-D1).
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-isn.md](../../../subsystems/contrib-isn.md)

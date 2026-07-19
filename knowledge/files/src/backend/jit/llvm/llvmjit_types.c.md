@@ -79,3 +79,7 @@ The single most-misnamed file in the JIT — this is **not C code that runs**. I
 
 ## Confidence tag tally
 `[from-comment]=2 [verified-by-code]=6`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/jit.md](../../../../../subsystems/jit.md)

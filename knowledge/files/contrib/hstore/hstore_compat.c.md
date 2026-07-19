@@ -229,3 +229,7 @@ fine. `[verified-by-code]`.
   hstore.h:54 says "Some bits are left for future use" — a forgery that
   sets them won't be rejected (nit)]`
 - `[ISSUE-api-shape: hstore_version_diag is publicly SQL-registered (PG_FUNCTION_INFO_V1 + .control file SQL) but the file comment calls it "otherwise undocumented" (hstore_compat.c:81-82); user-visible behavior with no documentation (nit)]`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/contrib-hstore.md](../../../subsystems/contrib-hstore.md)

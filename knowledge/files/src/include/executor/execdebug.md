@@ -43,3 +43,7 @@ None.
   `elog`/log-line prefix. If someone builds with these defined in
   production by mistake, lines hit the postmaster's stdout (very
   low — defaults off)] — lines 4-6.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)

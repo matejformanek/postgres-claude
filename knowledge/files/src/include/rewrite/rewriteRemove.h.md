@@ -14,3 +14,7 @@ extern void RemoveRewriteRuleById(Oid ruleOid);
 
 The path used by `dependency.c` to drop a rule when a containing object's
 DROP cascades.
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/parser-and-rewrite.md](../../../../subsystems/parser-and-rewrite.md)

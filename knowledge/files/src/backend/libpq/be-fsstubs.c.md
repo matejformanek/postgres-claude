@@ -159,3 +159,7 @@ PG 8.0 — it lives in `libpq/` for purely historical reasons. [from-comment, be
 ## Tally
 
 `[verified-by-code]=18 [from-comment]=8 [inferred]=0`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/libpq-backend.md](../../../../subsystems/libpq-backend.md)

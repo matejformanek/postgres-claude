@@ -15,3 +15,7 @@ Declares entry points for `TidRangeScan` — answers queries of the form `WHERE 
 - State node: `TidRangeScanState` in `nodes/execnodes.h`
 - Sibling (point-list): `executor/nodeTidscan.h`
 - `.c` impl: `source/src/backend/executor/nodeTidrangescan.c`
+
+## Synthesized by
+<!-- backlinks:auto -->
+- [subsystems/executor.md](../../../../subsystems/executor.md)
