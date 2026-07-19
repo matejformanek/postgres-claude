@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-19 — anchor `dde9a87d4d02` → `d451ca6917e3`; 5 commits (no catversion change, stays 202607173); 2 docs queued for audit (nodeWindowAgg.c, prepjointree.c), 4 idempotent-skipped; no subsystem ≥5-impacted (PR #<pending>).
