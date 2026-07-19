@@ -1,1 +1,1 @@
-**pg-corpus-maintainer** 2026-07-19 — glossary +42 → 3000 (6 new server-application docs-distilled docs mined: initdb/pg_ctl/pg_createsubscriber/postgres/pg_archivecleanup/pg_upgrade); Pass 1 backlinks & Pass 3 issue-mirror verified steady-state no-ops (PR #<pending>).
+**pg-corpus-maintainer** 2026-07-19 — glossary +42 → 3000 (6 new server-application docs-distilled docs mined: initdb/pg_ctl/pg_createsubscriber/postgres/pg_archivecleanup/pg_upgrade); Pass 1 backlinks & Pass 3 issue-mirror verified steady-state no-ops (PR #650).
