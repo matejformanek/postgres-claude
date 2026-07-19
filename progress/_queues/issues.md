@@ -267,3 +267,66 @@ next catalog pass. After catalog fully drains: `initdb`, `pg_dump` per the recip
 [done:2026-07-16] catalog.md pg_subscription.h subconninfo-ACL-doc-drift | doc-drift/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (header now reminds :39; ACL still in system_views.sql)
 [done:2026-07-16] catalog.md pg_subscription_rel.h state/LSN-coupling | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@8f71f64deee6 (:37-45)
 [done:2026-07-16] catalog.md pg_control.h 512-byte-atomicity | undocumented-invariant/likely | seeded=2026-06-02 | still-present@8f71f64deee6 (:252-257 says "one disk sector, 512" but not hw-defined framing)
+
+## Refill 2026-07-19 (pg-quality-auditor) — catalog register DRAINED + initdb/pg_dump line-cited
+
+catalog register (catalog.md) remaining 32 symbol-cited `open` rows triaged
+@`03480907e9ff`: **all 32 still-present, 0 drift, 0 upstream fixes** (format-defining
+headers are stable by design). Plus the 1 promised follow-up: pg_control.h
+version-bump-obligation **severity downgraded confirmed→nit** (2026-07-16 flagged
+the claim as overstated; obligation IS documented at `pg_control.h:33`+`:95`,
+re-confirmed @`03480907e9ff`). **catalog register now fully drained** (all 68 rows
+triaged across 2026-07-16 [29] + 2026-07-19 [32+1 downgrade]). Side-note: the
+`BEGIN_CATALOG_STRUCT`/`END_CATALOG_STRUCT` wrapper macro now spans all catalog
+structs — confirmed NOT new this window (present at 07-16 anchor `8f71f64deee6`),
+background, no issue-row impact.
+
+Per the recipe register list, then advanced into `initdb` + `pg_dump` line-cited
+open rows past the 30-day staleness threshold (dated 2026-06-03). The 2026-06-22
+pg_dump.c/pg_dumpall.c/pg_restore.c rows are only 27 days old → NOT yet eligible,
+deferred to next cycle.
+
+[done:2026-07-19] catalog.md pg_partitioned_table.h partstrat-onstat + partattrs-pun | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (partstrat :35, partattrs :46)
+[done:2026-07-19] catalog.md pg_opclass.h opcdefault-uniqueness | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (opcdefault :74 BKI_DEFAULT(t))
+[done:2026-07-19] catalog.md pg_default_acl.h DEFACLOBJ chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (defaclobjtype :39, DEFACLOBJ_* :70+)
+[done:2026-07-19] catalog.md pg_init_privs.h InitPrivsType chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (enum :81, INITPRIVS_INITDB='i' :83)
+[done:2026-07-19] catalog.md pg_largeobject.h direct-bytea-bypass-TOAST | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (bytea data :39 "direct access; see inv_api.c" :38)
+[done:2026-07-19] catalog.md pg_seclabel.h label-opaque/provider | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (provider text :38)
+[done:2026-07-19] catalog.md pg_policy.h polcmd-ACL_*_CHR-cross-header | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (polcmd :37 "One of ACL_*_CHR")
+[done:2026-07-19] catalog.md pg_publication.h pubgencols-PUBLISH_GENCOLS chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (pubgencols :70, PUBLISH_GENCOLS_* :128+)
+[done:2026-07-19] catalog.md pg_statistic_ext.h stxkind chars | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (stxkind[1] :57)
+[done:2026-07-19] catalog.md pg_rewrite.h ev_type/ev_enabled cross-header | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (ev_type :39, ev_enabled :40)
+[done:2026-07-19] catalog.md pg_event_trigger.h evtenabled-reuses-pg_trigger | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (evtenabled :39)
+[done:2026-07-19] catalog.md pg_event_trigger.h evtevent-strings-on-disk | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (evtevent NameData :35)
+[done:2026-07-19] catalog.md pg_event_trigger.h ordering-unspecified | question/maybe | seeded=2026-06-02 | still-present@03480907e9ff
+[done:2026-07-19] catalog.md pg_auth_members.h grantor-row-identity | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (grantor :44; (roleid,member,grantor) uniq idx :66)
+[done:2026-07-19] catalog.md pg_foreign_data_wrapper.h handler/validator-sig-drift | doc-drift/maybe | seeded=2026-06-02 | still-present@03480907e9ff (fdwhandler :36, fdwvalidator :38, prototypes elsewhere)
+[done:2026-07-19] catalog.md pg_statistic.h STATISTIC_KIND-cross-project-contract | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (stavalues1..5 :121-125)
+[done:2026-07-19] catalog.md pg_statistic_ext_data.h serialized-format-undocumented | doc-drift/maybe | seeded=2026-06-02 | still-present@03480907e9ff (stxdndistinct/stxddependencies/stxdmcv :41-43, formats live in statistics/)
+[done:2026-07-19] catalog.md pg_seclabel.h no-Form_pg_seclabel-typedef | question/nit | seeded=2026-06-02 | still-present@03480907e9ff (grep Form_pg_seclabel → absent, anomaly holds)
+[done:2026-07-19] catalog.md pg_shseclabel.h PK-omits-objsubid | question/nit | seeded=2026-06-02 | still-present@03480907e9ff (no objsubid in header/PK, divergence from pg_seclabel holds)
+[done:2026-07-19] catalog.md pg_policy.h polroles-embedded-0-PUBLIC | question/maybe | seeded=2026-06-02 | still-present@03480907e9ff (polroles[1] BKI_LOOKUP_OPT(pg_authid) :42)
+[done:2026-07-19] catalog.md pg_parameter_acl.h paracl-empty-ACL-semantics | question/nit | seeded=2026-06-02 | still-present@03480907e9ff (paracl[1] BKI_DEFAULT(_null_) :41)
+[done:2026-07-19] catalog.md pg_propgraph_element.h minimal-header-comment | doc-drift/maybe | seeded=2026-06-02 | still-present@03480907e9ff (boilerplate-only comment, invariants in propgraphcmds.c)
+[done:2026-07-19] catalog.md pg_propgraph_element.h eqop-OID-arrays-lack-BKI_LOOKUP | undocumented-invariant/maybe | seeded=2026-06-02 | still-present@03480907e9ff (pgesrceqop[1] :70, pgedesteqop[1] :87, no BKI_LOOKUP)
+[done:2026-07-19] catalog.md pg_propgraph_element_label.h empty-header-comment | doc-drift/nit | seeded=2026-06-02 | still-present@03480907e9ff (generic Catalog.pm NOTES only, no substantive doc)
+[done:2026-07-19] catalog.md pg_propgraph_element_label.h no-by-oid-syscache | question/nit | seeded=2026-06-02 | still-present@03480907e9ff
+[done:2026-07-19] catalog.md pg_propgraph_label.h empty-header-comment | doc-drift/nit | seeded=2026-06-02 | still-present@03480907e9ff (generic NOTES only)
+[done:2026-07-19] catalog.md pg_propgraph_label_property.h empty-header-comment | doc-drift/nit | seeded=2026-06-02 | still-present@03480907e9ff
+[done:2026-07-19] catalog.md pg_propgraph_label_property.h serialized-expr-forces-catversion | undocumented-invariant/likely | seeded=2026-06-02 | still-present@03480907e9ff (plpexpr pg_node_tree :42, not stated in header)
+[done:2026-07-19] catalog.md pg_propgraph_property.h empty-header-comment | doc-drift/nit | seeded=2026-06-02 | still-present@03480907e9ff
+[done:2026-07-19] catalog.md pg_type.h CASHOID/LSNOID-ancient-aliases | stale-todo/nit | seeded=2026-06-02 | still-present@03480907e9ff (:343-347 "ancient random spellings")
+[done:2026-07-19] catalog.md pg_database.h DATCONNLIMIT_INVALID_DB=-2-overload | stale-todo/nit | seeded=2026-06-02 | still-present@03480907e9ff (:125 "isn't particularly clean", :128 =-2)
+[done:2026-07-19] catalog.md pg_authid.h rolsuper-via-superuser-only | question/nit | seeded=2026-06-02 | still-present@03480907e9ff (:37 "read this field via superuser() only!")
+[done:2026-07-19] catalog.md pg_control.h version-bump-obligation | invariant/nit(↓from confirmed) | seeded=2026-06-02 | claim-corrected@03480907e9ff (obligation documented :33+:95; severity downgraded, register updated)
+
+## Refill 2026-07-19 (pg-quality-auditor) — initdb register, 4 line-cited open rows
+
+[done:2026-07-19] initdb.md initdb.c:1732 (get_su_pwd) | secret-scrub/likely | seeded=2026-06-03 | still-present@03480907e9ff (assign :1732 exact; file-scope static :156; no free/memset/explicit_bzero anywhere — plaintext-in-memory pattern intact)
+[done:2026-07-19] initdb.md initdb.c:1706-1711 | trust-boundary/likely | seeded=2026-06-03 | still-present@03480907e9ff (comment "insist ... not world-readable" :1707, "skip the paranoia" :1709, fopen :1712 — range spot-on)
+[done:2026-07-19] initdb.md initdb.c:1706-1711 | stale-todo/maybe | seeded=2026-06-03 | still-present@03480907e9ff (same "paranoia for now" comment unresolved)
+[done:2026-07-19] initdb.md findtimezone.c:88 | undocumented-invariant/maybe | seeded=2026-06-03 | still-present@03480907e9ff (:88 cite = the single-timezone contract comment "we only support one loaded timezone at a time" :87-88; pg_load_tz def :91, `static pg_tz tz` :93 — per-file doc already anchors static @:93)
+
+## Refill 2026-07-19 (pg-quality-auditor) — pg_dump register, 1 line-cited open row eligible
+
+[done:2026-07-19] pg_dump.md connectdb.c:154 | correctness/likely | seeded=2026-06-03 | still-present@03480907e9ff (PQconnectdbParams(keywords,values,true) expand_dbname=true HARD-CODED at :154 exact; a dbname-discard guard was ADDED for connection_string [:75-98 discards "dbname" keyword from conn_opts] but the enumerated dbname/override_dbname function args [:138,:144] are still set as keyword "dbname" and remain subject to libpq expansion → hostile-datname redirect concern STILL stands)

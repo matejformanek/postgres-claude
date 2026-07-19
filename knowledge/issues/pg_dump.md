@@ -63,7 +63,7 @@ content.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | connectdb.c:154 | correctness | likely | Hard-coded `expand_dbname=true` combined with `datname` from server's `pg_database` table — if a hostile cluster has a DB named `host=evil port=1234 dbname=foo`, libpq's expansion could redirect the next per-DB connection | open | knowledge/files/src/bin/pg_dump/connectdb.c.md |
+| 2026-06-03 | connectdb.c:154 | correctness | likely | Hard-coded `expand_dbname=true` combined with `datname` from server's `pg_database` table — if a hostile cluster has a DB named `host=evil port=1234 dbname=foo`, libpq's expansion could redirect the next per-DB connection | open · triaged 2026-07-19 | knowledge/files/src/bin/pg_dump/connectdb.c.md |
 | 2026-06-03 | pg_dumpall.c | correctness | likely | No transaction snapshot for globals — race window between role/membership/GUC reads | open | knowledge/files/src/bin/pg_dump/pg_dumpall.c.md |
 | 2026-06-03 | pg_dumpall.c | correctness | likely | Shell-command assembly — pg_dump invocations via `system()`; depends on `appendShellString` correctness | open | knowledge/files/src/bin/pg_dump/pg_dumpall.c.md |
 | 2026-06-03 | pg_dumpall.c | undocumented-invariant | maybe | `pg_dump_bin` quoting | open | knowledge/files/src/bin/pg_dump/pg_dumpall.c.md |
