@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-18 — anchor `03480907e9ff` → `dde9a87d4d02`; 12 commits (catversion 202607171→202607173, GROUP BY ALL revert); 5 new audit rows + 1 subsystem (parser ≥5) queued / 11 idempotent-skipped (PR #TBD).
