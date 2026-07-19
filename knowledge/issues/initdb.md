@@ -26,7 +26,7 @@ memory for the whole initialization phase and is never zeroed.
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | initdb.c:1732 (get_su_pwd) | secret-scrub | likely | `superuser_password` (file-scope `static char *`) set once, never freed/zeroed; plaintext lives in process memory for the entire bootstrap + single-user phase | open | knowledge/files/src/bin/initdb/initdb.c.md |
+| 2026-06-03 | initdb.c:1732 (get_su_pwd) | secret-scrub | likely | `superuser_password` (file-scope `static char *`) set once, never freed/zeroed; plaintext lives in process memory for the entire bootstrap + single-user phase | open · triaged 2026-07-19 | knowledge/files/src/bin/initdb/initdb.c.md |
 | 2026-06-03 | initdb.c (escape_quotes copy) | secret-scrub | likely | E-string copy of `superuser_password` for SQL embedding also leaked into process memory until `exit(0)` | open | knowledge/files/src/bin/initdb/initdb.c.md |
 
 **Phase D pitch — coordinate with the libpq/psql/streamutil patch series:**
@@ -45,8 +45,8 @@ in a code comment and said "we'll skip the paranoia for now"** — that
 
 | Date | File:line | Type | Severity | Summary | Status | Linked doc |
 |---|---|---|---|---|---|---|
-| 2026-06-03 | initdb.c:1706-1711 | trust-boundary | likely | `--pwfile` reads bootstrap password with no permission check. Comment says: *"Ideally this should insist that the file not be world-readable. However... we'll skip the paranoia for now."* World-readable pwfile silently accepted | open | knowledge/files/src/bin/initdb/initdb.c.md |
-| 2026-06-03 | initdb.c:1706-1711 | stale-todo | maybe | "Paranoia for now" comment never resolved; the right fix is `stat(pwfile)` + reject world/group readable, matching ssh's `~/.ssh/config` discipline | open | knowledge/files/src/bin/initdb/initdb.c.md |
+| 2026-06-03 | initdb.c:1706-1711 | trust-boundary | likely | `--pwfile` reads bootstrap password with no permission check. Comment says: *"Ideally this should insist that the file not be world-readable. However... we'll skip the paranoia for now."* World-readable pwfile silently accepted | open · triaged 2026-07-19 | knowledge/files/src/bin/initdb/initdb.c.md |
+| 2026-06-03 | initdb.c:1706-1711 | stale-todo | maybe | "Paranoia for now" comment never resolved; the right fix is `stat(pwfile)` + reject world/group readable, matching ssh's `~/.ssh/config` discipline | open · triaged 2026-07-19 | knowledge/files/src/bin/initdb/initdb.c.md |
 
 **Phase D pitch — single-line patch:**
 `stat()` the pwfile; refuse with a hard error if mode has any bits set
@@ -76,7 +76,7 @@ are sloppy enough to flag.
 |---|---|---|---|---|---|---|
 | 2026-06-03 | findtimezone.c | path-traversal | nit | `pg_open_tzfile` uses bare `strcat` with no leading-`/` or `..` filter; safe only because callers strip leading slashes | open | knowledge/files/src/bin/initdb/findtimezone.c.md |
 | 2026-06-03 | findtimezone.c | dos | nit | `scan_available_timezones` has no recursion-depth limit — symlink loops in tzdir would hang; install-trusted tzdir means not exploitable | open | knowledge/files/src/bin/initdb/findtimezone.c.md |
-| 2026-06-03 | findtimezone.c:88 | undocumented-invariant | maybe | `pg_load_tz` returns pointer to file-scope static — second call invalidates first result; comment exists but contract is fragile | open | knowledge/files/src/bin/initdb/findtimezone.c.md |
+| 2026-06-03 | findtimezone.c:88 | undocumented-invariant | maybe | `pg_load_tz` returns pointer to file-scope static — second call invalidates first result; comment exists but contract is fragile | open · triaged 2026-07-19 | knowledge/files/src/bin/initdb/findtimezone.c.md |
 | 2026-06-03 | findtimezone.c | info-disclosure | nit | `DEBUG_IDENTIFY_TIMEZONE` writes every probed path to stderr — off by default | open | knowledge/files/src/bin/initdb/findtimezone.c.md |
 | 2026-06-03 | findtimezone.c | trust-boundary | nit | `$TZ` honored without validating zone is in our tzdir vs system tzdir; `validate_zone`→`pg_load_tz`→`tzload` accepts system TZ files when `SYSTEMTZDIR` is configured — depends on build-time choice | open | knowledge/files/src/bin/initdb/findtimezone.c.md |
 
