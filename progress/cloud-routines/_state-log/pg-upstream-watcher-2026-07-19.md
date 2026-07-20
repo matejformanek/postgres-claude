@@ -1,0 +1,1 @@
+**pg-upstream-watcher** 2026-07-19 — 6 upstream commits deep-treated (subscription REASSIGN OWNED fix, PHV/outer-join RTE_RESULT fix, restored `->`/`|` prefix ops, window-dedup cleanup, pg_plan_advice lexer, postgres_fdw stats), 8 buildfarm failures triaged (1 real: shelduck s390x `_Generic` build break). Anchor left at `dde9a87d` (corpus impact > 0).
