@@ -16,6 +16,31 @@ so future runs can detect what's already defined and append idempotently.
 <!-- glossary:auto -->
 
 
+### %r (restart-segment placeholder)
+The `archive_cleanup_command` / `restore_command` placeholder that the server substitutes with the oldest WAL segment name a standby still needs (its current restartpoint); pg_archivecleanup treats it as the threshold below which segments are deletable. [from-docs] (via `knowledge/docs-distilled/pgarchivecleanup.md`).
+
+
+
+### --binary-upgrade
+The `pg_dump` mode pg_upgrade uses for its schema-only dump of the old cluster: it emits directives that preserve relfilenumber, pg_class OID, and tablespace mapping so the new catalogs resolve to the old cluster's reused data files. [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
+
+
+
+### --set-char-signedness
+The PG 18 pg_upgrade option (`signed|unsigned`) that records the platform-dependent default `char` signedness, so a cluster physically migrated to a different-signedness platform reads its data correctly. [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
+
+
+
+### --wal-segsize
+The initdb-only WAL segment size (default 16 MB, a power of two 1–1024 MB): a one-shot decision baked into the cluster and passed to the bootstrap backend as `-X <bytes>`; it cannot be changed on an existing cluster. [verified-by-code] (`initdb.c:169,1636` — via `knowledge/docs-distilled/app-initdb.md`).
+
+
+
+### .partial WAL file
+A partially-filled WAL segment file (suffix `.partial`, typically the last segment of an old timeline at a promotion boundary). pg_archivecleanup parses off the suffix with `sscanf` and uses only the leading segment name as the ordering key. [verified-by-code] (`pg_archivecleanup.c:198` — via `knowledge/docs-distilled/pgarchivecleanup.md`).
+
+
+
 ### _bt_check_unique
 The nbtree routine (`nbtinsert.c`) that enforces a unique constraint at insert time by scanning for a live duplicate; it can wait on an in-progress inserter (`UNIQUE_CHECK_INSERT_INPROGRESS`) and is the sole implementation behind `amcanunique`. [verified-by-code] (via `knowledge/subsystems/access-nbtree.md`).
 
@@ -774,6 +799,11 @@ the main loop receiving and applying the publisher's change stream. [from-code]
 
 
 
+### archive_cleanup_command
+The recovery-configuration shell command a standby runs at each restartpoint to prune its transient replay-staging archive; the canonical value is `pg_archivecleanup <archivedir> %r`, where `%r` expands to the oldest WAL segment the standby still needs. [from-docs] (via `knowledge/docs-distilled/pgarchivecleanup.md`).
+
+
+
 ### archive_command
 The GUC holding a shell command the archiver runs to copy each completed WAL
 segment to long-term storage; it must return zero only on durable success, and
@@ -1012,6 +1042,11 @@ The bgworker.c entry that attaches a registered background worker to a specific 
 
 ### BackgroundWorkerUnblockSignals
 The call a background-worker main function must make first, before any other setup, because the worker starts with all signals blocked; it unblocks them so the worker can receive SIGTERM/SIGHUP. It is typically followed by `BackgroundWorkerInitializeConnection`. [verified-by-code] (`worker_spi.c` — via `knowledge/idioms/background-worker-startup.md`).
+
+
+
+### backup-history file
+A small `.backup` file written into the WAL stream/archive recording a base backup's start segment and metadata. pg_archivecleanup ignores these unless `-b`/`--clean-backup-history` is passed, and when handed a `.backup` name as its threshold it keeps that base backup's start segment and later. [verified-by-code] (`pg_archivecleanup.c:290` — via `knowledge/docs-distilled/pgarchivecleanup.md`).
 
 
 
@@ -1539,6 +1574,11 @@ Tests whether an integer is present in a `Bitmapset` — the "is this attribute/
 
 ### boot_val
 The compiled-in default of a GUC variable — the value in force before any config file, `ALTER SYSTEM`, or session `SET` is applied; every `DefineCustom*Variable` call must supply one. [inferred] (via `knowledge/scenarios/add-new-cost-model-knob.md`).
+
+
+
+### bootstrap mode
+The internal `postgres --boot` launch mode that initdb drives to build `template1` from the BKI script; it executes the bootstrap-only BKI commands rather than serving SQL and is not meant to be run by hand. [from-docs] (via `knowledge/docs-distilled/app-postgres.md`, `knowledge/docs-distilled/app-initdb.md`).
 
 
 
@@ -2716,6 +2756,11 @@ The shared frontend connect helper (`connectdb.c:39`, used by pg_dumpall and pg_
 
 ### ConnParams
 The frontend-tools struct of command-line connection parameters — dbname (which may itself be a full connstring), host, port, user, password-prompt tri-value, and `override_dbname` — shared by libpq-based utilities to open connections consistently. `override_dbname` replaces only the bare database name within a connstring, leaving the rest intact (how `vacuumdb -d "connstr" mydb` works); a parallel-slot pool shares one `ConnParams` so all its connections open identically. [verified-by-code] (`connect_utils.h:25` — via `knowledge/files/src/include/fe_utils/connect_utils.h.md`).
+
+
+
+### consistent_lsn
+The LSN captured from a just-created replication slot on the primary by pg_createsubscriber: it drives the standby's recovery to exactly that LSN, promotes, and advances each subscription's replication origin to it — so logical apply begins precisely where physical replay stopped, with zero gap and zero overlap. [verified-by-code] (`pg_createsubscriber.c:2674` — via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
 
 
 
@@ -6802,6 +6847,21 @@ The macro that fills a `BufferTag` from a relation locator, fork, and block numb
 
 
 
+### initdb
+The bootstrap utility (`src/bin/initdb/initdb.c`) that creates a fresh `PGDATA`: the directory skeleton, the shared cluster-wide catalogs in `global/`, and the three initial databases. It runs the backend in bootstrap mode (`postgres --boot`) to build `template1` from the BKI script, then makes `template0` and `postgres` by copying `template1`. Must run as the OS user that will own the server, never as root. [verified-by-code] (via `knowledge/docs-distilled/app-initdb.md`).
+
+
+
+### initdb --allow-group-access
+The initdb `-g` option that relaxes the default owner-only data-directory file mode to group-readable (ignored on Windows); the counterpart `-A`/`--auth` prepopulates `pg_hba.conf`, whose default `trust` the docs warn against for multi-user hosts. [from-docs] (via `knowledge/docs-distilled/app-initdb.md`).
+
+
+
+### initdb --sync-only
+The initdb `-S`/`--sync-only` mode that does nothing but fsync an existing data directory and exit (e.g. after flipping `fsync` off→on); its opposite `-N`/`--no-sync` skips durability entirely for tests, and `--no-sync-data-files` syncs `pg_wal/`+`pg_xact/` but not `base/`. [from-docs] (via `knowledge/docs-distilled/app-initdb.md`).
+
+
+
 ### initial_cost_nestloop
 The cheap first-phase nestloop cost estimate (`costsize.c`) computed before the inner path is fixed, giving `add_path` a lower bound to prune dominated joins; `final_cost_nestloop` then prices the chosen inner, using `has_indexed_join_quals` for inner-rescan cost. [verified-by-code] (via `knowledge/files/src/backend/optimizer/path/costsize.c.md`).
 
@@ -10041,6 +10101,16 @@ inverse is `pg_server_to_any`. [verified-by-code] (via
 
 
 
+### pg_archivecleanup
+The standalone utility (`src/bin/pg_archivecleanup/pg_archivecleanup.c`, also usable as `archive_cleanup_command`) that deletes every WAL segment in a directory logically preceding a given oldest-to-keep segment. Safe only when the archive is a transient staging area for a single standby. [verified-by-code] (via `knowledge/docs-distilled/pgarchivecleanup.md`).
+
+
+
+### pg_archivecleanup timeline-agnostic comparison
+pg_archivecleanup's deletion test is `strcmp(walfile + 8, threshold + 8) >= 0` — it skips the first 8 hex chars (the timeline ID) and compares only the 16-char log+segment portion, so a segment is kept iff its log/segment number is `>=` the threshold regardless of which timeline produced it. [verified-by-code] (`pg_archivecleanup.c:139` — via `knowledge/docs-distilled/pgarchivecleanup.md`).
+
+
+
 ### PG_ARGISNULL
 Macro a SQL-callable C function uses to test whether argument N was passed SQL NULL before touching it; mandatory for non-strict functions, since `PG_GETARG_*` on a NULL arg yields garbage. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/misc.c.md`).
 
@@ -10285,6 +10355,21 @@ pgcrypto / backend cryptohash context object holding the in-progress digest stat
 
 ### pg_cryptohash_free
 Frees a `pg_cryptohash_ctx` created by `pg_cryptohash_create`, releasing the underlying OpenSSL/built-in state; must be called even on the error path to avoid leaking the context. [verified-by-code] (via `knowledge/files/src/backend/utils/adt/cryptohashfuncs.c.md`).
+
+
+
+### pg_ctl
+The lifecycle wrapper over the `postgres` postmaster (`src/bin/pg_ctl/pg_ctl.c`): it launches the server detached, reads `postmaster.pid` to poll readiness/shutdown, and signals the running postmaster for stop/reload/promote/logrotate. Everything reduces to "launch the binary" or "send the right signal and watch the pidfile." [verified-by-code] (via `knowledge/docs-distilled/app-pg-ctl.md`).
+
+
+
+### pg_ctl shutdown modes (smart / fast / immediate)
+The three `-m` shutdown modes and their signals: smart → `SIGTERM` (wait for clients to disconnect), fast → `SIGINT` (the default; forcibly disconnect and roll back in-flight transactions but shut down cleanly), immediate → `SIGQUIT` (skip clean shutdown, force crash-recovery on next start). [verified-by-code] (`pg_ctl.c:2052,2057,2062` — via `knowledge/docs-distilled/app-pg-ctl.md`).
+
+
+
+### pg_ctl status exit codes
+The stable, scriptable exit-code contract of `pg_ctl status`: 0 = running, 3 = not running, 4 = data directory inaccessible — usable without parsing the text output. [from-docs] (via `knowledge/docs-distilled/app-pg-ctl.md`).
 
 
 
@@ -10785,12 +10870,22 @@ The system catalog of replication origins — named markers identifying where re
 
 
 
+### pg_replication_origin_advance
+The SQL function that forcibly sets a replication origin's recorded progress LSN; pg_createsubscriber calls it to advance each new subscription's origin to `consistent_lsn` so logical apply resumes exactly where physical replay ended. [verified-by-code] (via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
+
+
+
 ### pg_replslot
 The data-directory subdirectory holding one durable state file per replication
 slot (`state.dat`), persisting each slot's `restart_lsn`, `xmin`/`catalog_xmin`,
 and plugin name across restarts. The slot manager fsyncs these on checkpoint and
 on graceful shutdown. [verified-by-code] (via
 `knowledge/files/src/backend/replication/slot.c.md`).
+
+
+
+### pg_resetwal (system-identifier rewrite)
+The utility pg_createsubscriber runs on the target at the end of conversion to change the system identifier, deliberately severing the target from the primary's WAL files so it can never accidentally consume them (which also breaks any downstream standbys of the target). [from-docs] (via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
 
 
 
@@ -10990,6 +11085,11 @@ The system catalog with one row per data type (base, composite, domain, enum, ra
 
 
 
+### PG_UNICODE_FAST
+One of exactly three locales the builtin collation provider accepts (`C`, `C.UTF-8`, `PG_UNICODE_FAST`) via `--builtin-locale`; the builtin provider is PG-owned (no OS or ICU dependency), chosen at initdb time with `--locale-provider=builtin`. [from-docs] (via `knowledge/docs-distilled/app-initdb.md`).
+
+
+
 ### pg_unreachable
 A macro marking a code point the compiler should treat as never reached (after an exhaustive `switch` or a `noreturn` call); it expands to a compiler builtin in production and to `Assert(false)` under `--enable-cassert`. Omitting it after a full switch is a common style nit. [from-comment] (via `knowledge/files/contrib/pg_plan_advice/pgpa_walker.c.md`).
 
@@ -10997,6 +11097,21 @@ A macro marking a code point the compiler should treat as never reached (after a
 
 ### pg_upgrade
 The tool that performs an in-place major-version upgrade by dumping only the old cluster's schema, restoring it into the new cluster, then copying/linking/cloning the relation files and fixing the xid/multixact/oid counters — avoiding a full dump+reload of the data. Its `main()` is a linear pipeline with no dispatch table. [verified-by-code] (via `knowledge/files/src/bin/pg_upgrade/pg_upgrade.c.md`).
+
+
+
+### pg_upgrade --check
+The pg_upgrade mode that runs the full compatibility validation (binary bit-width via `pg_controldata`, the `reg*`-column scan, extension availability) without modifying either cluster — the old server may even stay running. Pass the same mode flag to get mode-specific validation. [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
+
+
+
+### pg_upgrade transfer modes (copy / link / clone / copy-file-range / swap)
+The five file-transfer strategies with sharply different safety profiles: `--copy` (default, 2× disk, old cluster stays usable), `--link` (hardlinks, 1× disk, old cluster unusable once the new one starts), `--clone` (reflink CoW on Btrfs/XFS/APFS, near-instant, old cluster untouched), `--copy-file-range` (Linux/FreeBSD block-sharing), and `--swap` (moves the data dirs — fastest for many relations but destructively modifies the old cluster). link/clone/swap require both data dirs on the same filesystem. [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
+
+
+
+### pg_upgrade_output.d
+The working directory pg_upgrade creates under the new data dir (`pg_upgrade_output.d/<ISO-timestamp>/`) holding schema dumps and logs; auto-removed on success, retained on failure for diagnosis (`-r`/`--retain` keeps it even on success). [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
 
 
 
@@ -11127,6 +11242,11 @@ The opaque libpq client-side connection-handle struct returned by `PQconnectdb`/
 
 
 
+### PGCTLTIMEOUT
+The environment variable giving the default `-w`/`--wait` timeout (in seconds) for pg_ctl start/stop/restart/promote/register; 60 s if unset. On timeout pg_ctl exits nonzero even though the backgrounded operation may still be proceeding. [verified-by-code] (`pg_ctl.c:70,77` — via `knowledge/docs-distilled/app-pg-ctl.md`).
+
+
+
 ### PGDATA
 The data directory — the filesystem root of a database cluster holding base/, global/, pg_wal/, the config files, and PG_VERSION. Also the environment variable / -D option naming it, consulted by initdb, the postmaster, and every standalone tool. [verified-by-code] (via `knowledge/files/src/bin/initdb/initdb.c.md`).
 
@@ -11207,6 +11327,11 @@ The pgcrypto SQL entry point that decrypts an OpenPGP symmetric-key (passphrase)
 
 ### pgp_sym_encrypt
 pgcrypto symmetric (password-based) PGP encryption, paired with `pgp_sym_decrypt`; options tune `cipher-algo` (default aes128), `s2k-mode` (default 3 = salted+iterated), and more. [from-docs] (via `knowledge/docs-distilled/pgcrypto.md`).
+
+
+### PGPORTNEW
+The environment variable / port (default 50432, not 5432) the new cluster runs on during pg_upgrade — the same "keep stray clients off the half-built server" convention pg_createsubscriber uses for its 50432 target port. [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
+
 
 
 ### PGPROC
@@ -11643,6 +11768,21 @@ The extension hook fired at the end of parse analysis, after a raw parse tree be
 
 
 
+### postgres -f (forbid planner method)
+The backend-global testing flag `-f {s|i|o|b|t|n|m|h}` that forbids a planner method — seqscan / indexscan / index-only / bitmap / tidscan / nestloop / mergejoin / hashjoin — the process-wide equivalent of the `enable_*` GUCs, used to force a plan shape in tests. [from-docs] (via `knowledge/docs-distilled/app-postgres.md`).
+
+
+
+### postgres -O (allow system-table structure changes)
+The recovery-only backend flag that lets DDL alter system-catalog structure (normally forbidden); used by initdb and disaster recovery, not normal operation. Its companion `-P` ignores corrupt system indexes on read. [from-docs] (via `knowledge/docs-distilled/app-postgres.md`).
+
+
+
+### postgres -P (ignore system indexes)
+The recovery-only backend flag that ignores system indexes when reading catalogs (still updating them on write) — the way in when a system index is corrupt. Paired with `-O` for catalog repair. [from-docs] (via `knowledge/docs-distilled/app-postgres.md`).
+
+
+
 ### postgres_fdw
 The contrib Foreign Data Wrapper for connecting to another PostgreSQL server. It pushes down `WHERE` clauses, joins, aggregates, and `RETURNING` where safe, manages a libpq connection cache, and is the reference implementation that exercises most of the FDW API. [verified-by-code] (via `knowledge/files/contrib/postgres_fdw/postgres_fdw.c.md`).
 
@@ -11670,6 +11810,16 @@ stays *out* of shared memory so a crashing backend can never corrupt the
 supervisor — a load-bearing invariant of the whole process model.
 [from-comment] (`postmaster.c:14-23` — via
 `knowledge/files/src/backend/postmaster/postmaster.c.md`).
+
+
+
+### postmaster.opts
+The file in the data directory recording the last server command line; `pg_ctl restart` reuses it verbatim unless `-o` is given (which replaces the saved set). This is why a one-off `-o` on start silently persists across a later plain `restart`. [from-docs] (via `knowledge/docs-distilled/app-pg-ctl.md`).
+
+
+
+### postmaster.pid
+The pidfile in the data directory that is pg_ctl's sole readiness/shutdown channel: on `start -w` pg_ctl polls it until it reports "ready to accept connections"; on `stop` it polls until the file is removed. There is no separate handshake. [from-docs] (via `knowledge/docs-distilled/app-pg-ctl.md`).
 
 
 
@@ -12119,6 +12269,11 @@ The executor node that evaluates set-returning functions in a target list,
 emitting one output row per result-set element (replacing the old
 `nodeResult`-with-SRF behavior). [verified-by-code] (via
 `knowledge/subsystems/executor.md`).
+
+
+
+### promote signal file
+The file pg_ctl drops in the data directory (rather than relying purely on `SIGUSR1`) to trigger a standby's end-of-recovery promotion; the running standby detects the file and promotes. [verified-by-code] (`pg_ctl.c:1234` — via `knowledge/docs-distilled/app-pg-ctl.md`).
 
 
 
@@ -12638,6 +12793,16 @@ GUC delaying replay on a standby by a fixed interval; it delays only COMMIT reco
 
 
 
+### recovery_target_action
+The recovery parameter controlling what happens once a `recovery_target_*` is reached (`pause` / `promote` / `shutdown`); pg_createsubscriber sets it to `promote` so the standby ends recovery and comes up read-write at the target LSN. [verified-by-code] (via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
+
+
+
+### recovery_target_lsn
+The recovery parameter naming the exact LSN at which to stop replay; pg_createsubscriber sets it to `consistent_lsn` (paired with `recovery_target_action = promote`) to hand a standby off from physical replay to logical apply with no gap. [verified-by-code] (via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
+
+
+
 ### RecoveryInProgress
 The cheap check that returns true while the server is still replaying WAL
 (crash or archive/standby recovery) and has not yet reached a consistent,
@@ -12676,6 +12841,11 @@ The FDW callback that re-fetches a foreign row by its row-identifier for EPQ
 rechecks under concurrent updates, the foreign-table analogue of re-reading a
 heap tuple. [verified-by-code] (via
 `knowledge/idioms/fdw-routine-callbacks.md`).
+
+
+
+### reg* type (pg_upgrade blocker)
+The OID-referencing pseudo-types that block pg_upgrade when a user column uses one whose referent isn't stable across the dump: `regcollation regconfig regdictionary regnamespace regoper regoperator regproc regprocedure`. `regclass`, `regrole`, and `regtype` are upgradable because their OIDs are stable/preserved. [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
 
 
 
@@ -14139,6 +14309,21 @@ The static snapmgr installer used by both ImportSnapshot and RestoreTransactionS
 
 
 
+### setup_publisher
+The pg_createsubscriber step that creates one `CREATE PUBLICATION … FOR ALL TABLES` plus one replication slot per database on the primary and returns `consistent_lsn`. [verified-by-code] (`pg_createsubscriber.c:1418` — via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
+
+
+
+### setup_recovery
+The pg_createsubscriber step that writes `recovery_target_lsn = '<consistent_lsn>'` and `recovery_target_action = promote` on the standby, then restarts it to catch up to that LSN and promote. [verified-by-code] (`pg_createsubscriber.c:1427` — via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
+
+
+
+### setup_subscriber
+The pg_createsubscriber step that creates a disabled subscription per database (reusing the existing slot, `copy_data = false`), advances each subscription's replication origin to `consistent_lsn` via `pg_replication_origin_advance`, then enables it. [verified-by-code] (`pg_createsubscriber.c:1843` — via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
+
+
+
 ### SetupHistoricSnapshot
 Installs a historic snapshot plus the tuplecid HTAB for logical decoding, so catalog visibility (HeapTupleSatisfiesHistoricMVCC) follows the reorder buffer's cmin/cmax resolution. [verified-by-code] (via `knowledge/files/src/backend/utils/time/snapmgr.c.md`).
 
@@ -14422,6 +14607,11 @@ The SLRU write primitive (`slru.c:781`) that flushes one buffer slot's page back
 
 ### SimpleLruZeroPage
 Zero-initialises a fresh SLRU page in a buffer slot and marks it dirty; called under the SLRU control lock when an SLRU (e.g. pg_subtrans or pg_multixact) is extended to a new page. [verified-by-code] (via `knowledge/files/src/backend/access/transam/slru.c.md`).
+
+
+
+### single-user mode
+The `postgres --single -D <datadir> [opts] <dbname>` launch mode: one interactive backend with no postmaster, no background processes, and no real IPC/locking; the session user is uid 1 with implicit superuser powers. Its three uses are initdb bootstrap, system-catalog repair, and disaster recovery — explicitly not for debugging a live server. By default a newline submits the query (with `-j`, a `;`+newline+empty-line does). [from-docs] (via `knowledge/docs-distilled/app-postgres.md`).
 
 
 
@@ -15450,6 +15640,11 @@ so they work even when an index is being rebuilt. [verified-by-code]
 
 
 
+### system identifier
+The unique 64-bit cluster identity stored in `pg_control` (and stamped into every WAL segment header) that ties a cluster to its own WAL; changing it via `pg_resetwal` — as pg_createsubscriber does — severs a cluster from a source's WAL stream so it cannot replay the wrong files. [from-docs] (via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
+
+
+
 ### system_identifier
 A 64-bit value generated at `initdb` (from timestamp and PID) stamped into `pg_control` and every WAL page; replication and tools like `pg_rewind` compare it to refuse mixing data from unrelated clusters. [verified-by-code] (`pg_rewind.c:743-790` — via `knowledge/files/src/bin/pg_rewind/pg_rewind.c.md`).
 
@@ -15625,6 +15820,16 @@ A composite bitmask in the type cache (`typcache.c:122-125`) covering all the op
 
 ### temp_buffers
 GUC sizing a backend's local buffer pool for temporary-table pages; `localbuf.c` derives a per-backend pin limit of `num_temp_buffers / 4` and rejects `SET temp_buffers` once local buffers have been allocated in the session. [verified-by-code] (via `knowledge/files/src/backend/storage/buffer/localbuf.c.md`).
+
+
+
+### template0
+The pristine, connection-frozen fallback database created by copying `template1` at initdb time, then given a fixed OID and set `ALLOW_CONNECTIONS = false` with `datcollversion = NULL`. It must never be modified: it exists so a corrupted `template1` can be rebuilt and so `CREATE DATABASE … TEMPLATE template0` can pick a different encoding/locale. [verified-by-code] (`initdb.c:2059,2068` — via `knowledge/docs-distilled/app-initdb.md`).
+
+
+
+### template1
+The default source database for `CREATE DATABASE` — the only one of the three initial databases actually built by the bootstrap backend from the BKI script; objects added to it propagate to future databases. `template0` and `postgres` are then made by copying it. [verified-by-code] (`initdb.c:2047` — via `knowledge/docs-distilled/app-initdb.md`).
 
 
 
@@ -16480,6 +16685,11 @@ The per-relation entry point inside `commands/vacuum.c` (`vacuum_rel`, line 2012
 
 ### VacuumCostBalance
 The accumulating cost counter the buffer manager increments on each VACUUM page hit/miss/dirty; when it exceeds `vacuum_cost_limit`, `vacuum_delay_point` sleeps for `vacuum_cost_delay`. Initialized among the VACUUM-costing globals. [verified-by-code] (via `knowledge/files/src/backend/commands/vacuum.c.md`).
+
+
+
+### vacuumdb --analyze-in-stages
+The post-pg_upgrade statistics rebuild the docs recommend: `vacuumdb --all --analyze-in-stages --missing-stats-only` then a full `--analyze-only` pass — needed because extended (`CREATE STATISTICS`), extension, and cumulative statistics are not carried over even though `pg_statistic` now is. [from-docs] (via `knowledge/docs-distilled/pgupgrade.md`).
 
 
 
