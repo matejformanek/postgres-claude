@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-20 — anchor `d451ca6917e3` → `0da71d90d623`; 3 commits; 0 new docs queued (1 IMPACTED `prepjointree.c` already [pending], enriched in place; 4 UNTRACKED; no catversion change, 202607173 held) (PR #<pending>).
