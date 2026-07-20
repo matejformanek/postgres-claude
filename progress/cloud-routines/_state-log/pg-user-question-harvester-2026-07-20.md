@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-20 — 14 questions harvested (07-18→07-20 frontier slice, 0 gap tags); heaviest skills access-method-apis ×4, logical-replication ×2, catalog-conventions ×2; flagged GH-Discussions step unreachable under current repo scope (PR #654).
