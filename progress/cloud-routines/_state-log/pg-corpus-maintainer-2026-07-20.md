@@ -1,0 +1,1 @@
+**pg-corpus-maintainer** 2026-07-20 — Pass 2 glossary +54 (3000→3054, GUC/executor/planner/storage/libpq/DDL concepts; rank-40–90 tier, pool thinning-flagged); Pass 1 backlinks & Pass 3 issue-mirror verified steady-state no-ops (PR #659).
