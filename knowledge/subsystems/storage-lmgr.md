@@ -98,15 +98,15 @@ Decrement LOCALLOCK first. Only when `nLocks` reaches zero do we touch shared st
 
 Phases match the top-of-file comment at `lwlock.c:60-75`. `HOLD_INTERRUPTS()` at `lwlock.c:1189`. (1) `LWLockAttemptLock` CAS; if free, return. (2) Else `LWLockQueueSelf` (proclist push under `LW_FLAG_LOCKED` wait-list mutex). (3) Retry CAS — handles the race where the holder released between our failed CAS and our queue-push. (4) `PGSemaphoreLock(MyProc->sem)`. On wake, loop back to phase 1. **The releaser does not hand the lock directly to a waiter; the waiter retries the CAS** — avoids forced process swap per acquisition (comment at `lwlock.c:1195-1206`). `[verified-by-code]` (via `lwlock.c.md` §5.2).
 
-### 5.5 `CheckDeadLock` + soft-edge rearrangement (`proc.c:1856-1939` + `deadlock.c:220-282`)
+### 5.5 `CheckDeadLock` + soft-edge rearrangement (`proc.c:1886-1970` + `deadlock.c:220-282`)
 
 Fires from `ProcSleep` after `deadlock_timeout` (default 1 s) when `got_deadlock_timeout` is set by `CheckDeadLockAlert` (the SIGALRM handler).
 
-1. Acquire **all 16** lock-partition LWLocks in exclusive mode, in partition-number order: `for (i = 0; i < NUM_LOCK_PARTITIONS; i++) LWLockAcquire(LockHashPartitionLockByIndex(i), LW_EXCLUSIVE)` at `proc.c:1871-1872`. `[verified-by-code]`.
+1. Acquire **all 16** lock-partition LWLocks in exclusive mode, in partition-number order: `for (i = 0; i < NUM_LOCK_PARTITIONS; i++) LWLockAcquire(LockHashPartitionLockByIndex(i), LW_EXCLUSIVE)` at `proc.c:1902-1903`. `[verified-by-code]`.
 2. Call `DeadLockCheck(MyProc)` → `DeadLockCheckRecurse`. WFG walk uses `FindLockCycleRecurse` (`deadlock.c:457-533`) + `FindLockCycleRecurseMember` (`deadlock.c:536-789`); group-leader collapsing means cycles are reported in leader space.
 3. Edge classification: *hard* (waiting on a granted conflicting lock) vs *soft* (queue-position conflict with someone ahead). Soft-only cycles attempt every reversal subset via `TestConfiguration` + `ExpandConstraints` + `TopoSort` (`deadlock.c:378-1052`); if one survives, apply by zeroing the wait queue and re-pushing.
 4. Outcomes: `DS_NO_DEADLOCK`, `DS_SOFT_DEADLOCK` (rearranged), `DS_HARD_DEADLOCK` (abort the start-point's txn), `DS_BLOCKED_BY_AUTOVACUUM` (caller sends cancel signal instead of aborting — the README:581-588 "abuse" hook).
-5. **Release partition LWLocks in reverse order** at `proc.c:1928-1933` — keeps multi-lock waiters atomically unblocked and avoids O(N²) wakeup behavior. `[from-comment]`.
+5. **Release partition LWLocks in reverse order** at `proc.c:1959-1967` — keeps multi-lock waiters atomically unblocked and avoids O(N²) wakeup behavior. `[from-comment]`.
 6. `DeadLockReport` runs *after* partition release, off a value-copied `deadlockDetails[]` (no shared-memory access — `DEADLOCK_INFO` is value-copied for this reason at `deadlock.c:64-77`).
 
 ### 5.6 Predicate-lock acquisition (`CreatePredicateLock`, `predicate.c:2382-2436`)
@@ -130,7 +130,7 @@ The full prescribed ordering covers levels 1-7 from the comment: `SerializableFi
 
 ### Canonical ordering citations (the four that have explicit text in the tree)
 
-1. **Heavyweight lock-partition LWLocks: partition-number order.** The deadlock detector iterates `i = 0 … NUM_LOCK_PARTITIONS-1` taking all 16 exclusive. Comment at `proc.c:1862-1869` is the authoritative statement: *"Acquire exclusive lock on the entire shared lock data structures. Must grab LWLocks in partition-number order to avoid LWLock deadlock. Note that the deadlock check interrupt had better not be enabled anywhere that this process itself holds lock partition locks, else this will wait forever."* `[from-comment]` (`proc.c:1862-1872` [via `knowledge/files/src/backend/storage/lmgr/proc.c.md` §4]) + `[from-README]` (`README:239-244` [via `knowledge/files/src/backend/storage/lmgr/README.md`]).
+1. **Heavyweight lock-partition LWLocks: partition-number order.** The deadlock detector iterates `i = 0 … NUM_LOCK_PARTITIONS-1` taking all 16 exclusive. Comment at `proc.c:1893-1897` is the authoritative statement: *"Acquire exclusive lock on the entire shared lock data structures. Must grab LWLocks in partition-number order to avoid LWLock deadlock. Note that the deadlock check interrupt had better not be enabled anywhere that this process itself holds lock partition locks, else this will wait forever."* `[from-comment]` (`proc.c:1887-1897` [via `knowledge/files/src/backend/storage/lmgr/proc.c.md` §4]) + `[from-README]` (`README:239-244` [via `knowledge/files/src/backend/storage/lmgr/README.md`]).
 
 2. **Predicate-lock LWLock 7-level chain.** *"Lightweight locks to manage access to the predicate locking shared memory objects must be taken in this order, and should be released in reverse order: (1) SerializableFinishedListLock, (2) SerializablePredicateListLock, (3) per-xact perXactPredicateListLock (parallel only), (4) PredicateLockHashPartitionLock(hashcode), (5) SerializableXactHashLock, (6) SerialControlLock, (7) SLRU per-bank locks."* `[from-comment]` (`predicate.c:84-141` [via `knowledge/files/src/backend/storage/lmgr/predicate.c.md` §4]) `[verified-by-code]` against `CreatePredicateLock` at `predicate.c:2392-2435`. **When citing predicate-lock ordering, prefer `predicate.c:84-141` over README-SSI** — the C-file comment is what the implementation obeys.
 
