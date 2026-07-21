@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-21 — 35 questions (34 hackers / 1 general), 5 gap tags (gap:tde, gap:matview, gap:amcheck, gap:role-management ×2, gap:referential-integrity); fresh 07-14→07-21 slice, thread-level dedup vs prior 3 days; GH-Discussions still unreachable under repo-scoped token (PR #<pending>).
