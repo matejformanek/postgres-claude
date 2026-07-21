@@ -1,0 +1,1 @@
+**pg-extension-anthropologist** 2026-07-20 — 4 ideology docs: postgresql_anonymizer (security-label masking DSL, unblocked via GitLab raw path), pg_failover_slots (PQcommMethods wire-vtable hijack for slot failover), mongo_fdw (schemaless-document FDW), hdfs_fdw (JVM-in-backend Hive/Spark FDW); knowledge/ideologies/ → 163 docs (PR #<pending>).
