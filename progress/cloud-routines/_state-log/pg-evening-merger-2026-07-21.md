@@ -1,0 +1,1 @@
+**pg-evening-merger** 2026-07-21 — drained 07-20→07-21 cycle: 9 cloud PRs merged (#656–#664), 9 Green / 0 yellow / 0 red / 1 auto-rebased (#664 vs #656 on audits.md). Queue markers flipped (extensions.md 4×→cc50640, docs.md 7×→de4f054); anchor on main 0da71d90d623.
