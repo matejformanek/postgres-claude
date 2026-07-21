@@ -2814,6 +2814,11 @@ The frontend-tools struct of command-line connection parameters — dbname (whic
 
 
 
+### ConnStatusType
+The libpq connection-status enum (`libpq-fe.h:90-117`) returned by `PQstatus`. At rest it is binary — `CONNECTION_OK` or `CONNECTION_BAD` — but the intermediate members (`CONNECTION_STARTED`, `CONNECTION_AWAITING_RESPONSE`, `CONNECTION_ALLOCATED`, …) are only meaningful during the async `PQconnectPoll` / `PQcancelPoll` handshakes. An OK status holds until `PQfinish` unless a communications failure flips it to BAD prematurely. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
 ### consistent_lsn
 The LSN captured from a just-created replication slot on the primary by pg_createsubscriber: it drives the standby's recovery to exactly that LSN, promotes, and advances each subscription's replication origin to it — so logical apply begins precisely where physical replay stopped, with zero gap and zero overlap. [verified-by-code] (`pg_createsubscriber.c:2674` — via `knowledge/docs-distilled/app-pgcreatesubscriber.md`).
 
@@ -3523,6 +3528,11 @@ The GUC setting the default ANALYZE sampling depth: it scales both the maximum n
 
 ### default_version
 The required key in an extension's `.control` file naming the version `CREATE EXTENSION` installs when no explicit `VERSION` is given; it must match an available `foo--<version>.sql` install script or `CREATE EXTENSION` fails. [verified-by-code] (`pg_prewarm.control` — via `knowledge/scenarios/add-new-extension.md`).
+
+
+
+### defaultNoticeProcessor
+libpq's built-in notice processor (`fe-connect.c:7978`) — literally `fprintf(stderr, "%s", message)` — used when the application installs no custom `PQnoticeProcessor`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-notice-processing.md`).
 
 
 
@@ -11437,8 +11447,23 @@ within a session (the most permissive level); the context constrains who may
 
 
 
+### PGcancel
+The read-only cancel object returned by the legacy `PQgetCancel(PGconn*)`. Because it is read-only and detached from the `PGconn`, `PQcancel` on it is the only signal-handler-safe and cross-thread-safe way to cancel a query; free it with `PQfreeCancel`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PGcancelConn
+The PG17 cancel-connection object returned by `PQcancelCreate(PGconn*)`. Dispatching through it (`PQcancelBlocking` or `PQcancelStart`/`PQcancelPoll`) opens a *separate* connection that inherits the original's `sslmode`/`gssencmode` encryption requirements; it does blocking I/O and is therefore **not** signal-safe, unlike the legacy `PGcancel`. Must be freed with `PQcancelFinish` even on failure. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
 ### PGconn
 The opaque libpq client-side connection-handle struct returned by `PQconnectdb`/`PQsetdbLogin`; it holds the socket, the connection parameters, the negotiated protocol and the most recent error message. Callers treat it as a black box and pass it to every `PQ*` call until `PQfinish` frees it. [inferred] (via `knowledge/files/src/interfaces/libpq/fe-connect.c.md`).
+
+
+
+### PGContextVisibility
+The libpq enum (`libpq-fe.h:170-172`) controlling whether the CONTEXT field of an error is shown: `PQSHOW_CONTEXT_NEVER`, `PQSHOW_CONTEXT_ERRORS` (default — errors only, not notices), `PQSHOW_CONTEXT_ALWAYS`. Verbosity overrides it: under `PQERRORS_TERSE` or `PQERRORS_SQLSTATE` the CONTEXT field is omitted regardless of this setting. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
 
 
 
@@ -11459,6 +11484,31 @@ The Windows-port marker macro placed on a function declaration to force its symb
 
 ### PGDLLIMPORT
 The symbol-visibility macro that must annotate every backend global variable an extension may reference, so the symbol is exported from the backend's import library on Windows; without it a global links fine on ELF platforms but fails to resolve in extensions on Windows. [verified-by-code] (via `knowledge/files/src/backend/catalog/objectaccess.c.md`).
+
+
+
+### PGEventId
+The libpq event-system enum (`libpq-events.h:29-34`) naming the six lifecycle hook points a registered `PGEventProc` fires on: `PGEVT_REGISTER`, `PGEVT_CONNRESET`, `PGEVT_CONNDESTROY`, `PGEVT_RESULTCREATE`, `PGEVT_RESULTCOPY`, `PGEVT_RESULTDESTROY`. [verified-by-code] (via `knowledge/docs-distilled/libpq-events.md`).
+
+
+
+### PGEventProc
+The libpq event-callback function type, `int (*PGEventProc)(PGEventId evtId, void *evtInfo, void *passThrough)` (`libpq-events.h:69`). A single proc registered on a `PGconn` fires across the connection's and every derived `PGresult`'s lifecycle; returning zero from `PGEVT_REGISTER` cancels the registration, and zero from `PGEVT_RESULTCREATE` drops the proc for that result's lifetime. Used by ODBC drivers and language bindings layered on libpq. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-events.md`).
+
+
+
+### PGEVT_CONNRESET
+The libpq event fired only after a *successful* `PQreset` / `PQresetPoll`, letting a registered `PGEventProc` re-establish connection-level instance data on the reused `PGconn`. [from-docs] (via `knowledge/docs-distilled/libpq-events.md`).
+
+
+
+### PGEVT_REGISTER
+The libpq event fired at `PQregisterEventProc` time — the ideal point to initialize per-callback instance data. If the event procedure returns zero here, the registration is canceled. [from-docs] (via `knowledge/docs-distilled/libpq-events.md`).
+
+
+
+### PGEVT_RESULTCREATE
+The libpq event fired after any result-producing call (including `PQgetResult`), where a callback attaches result instance data (not inherited from the `PGconn`). If it returns zero, that procedure is ignored for the remaining lifetime of the result. [from-docs] (via `knowledge/docs-distilled/libpq-events.md`).
 
 
 
@@ -11499,6 +11549,11 @@ A JIT bit-flag (`0x02`, `1<<1`) set by the planner when cost exceeds `jit_optimi
 
 ### PGJIT_PERFORM
 The master JIT bit-flag (`0x01`, `1<<0`) in `JitContext.flags`/`es_jit_flags`, set by the planner when a query's estimated cost exceeds `jit_above_cost` (default 100000) to request that any JIT be done at all. `jit_compile_expr` short-circuits to false if `!(es_jit_flags & PGJIT_PERFORM)`, and expression JIT requires `PGJIT_PERFORM | PGJIT_EXPR` both set. [verified-by-code] (`jit.md` — via `knowledge/subsystems/jit.md`).
+
+
+
+### PGnotify
+The libpq async-notification struct (`libpq-fe.h:241-248`): `char *relname` (channel name — historical, need not be a relation), `int be_pid` (PID of the *notifying* backend), `char *extra` (the `NOTIFY chan, 'payload'` string). The whole struct is freed once with `PQfreemem`; `relname`/`extra` are not separate allocations, and the private `next` link must not be touched. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-notify.md`).
 
 
 
@@ -11551,6 +11606,46 @@ The cap (64) on how many subtransaction XIDs a backend caches inline in its `PGP
 
 ### PGRES_COMMAND_OK
 One of the libpq `ExecStatusType` result-status values, indicating a command that returned no tuples completed successfully. In fe-protocol3.c it is the status built for `CommandComplete` ('C'), and for `ParseComplete`/`CloseComplete`/`NoData` when the corresponding prepare/close/describe request is in flight. [verified-by-code] (`fe-protocol3.c.md` — via `knowledge/files/src/interfaces/libpq/fe-protocol3.c.md`).
+
+
+
+### PGRES_COPY_BOTH
+The bidirectional COPY `PGresult` status used *solely* by the streaming-replication protocol; it is not reachable from a normal SQL `COPY`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
+### PGRES_COPY_IN
+The `PGresult` status (`libpq-fe.h`) that puts the connection into COPY-IN (client→server) state after a `COPY ... FROM STDIN`. While in this state ordinary SQL is locked out; feed rows with `PQputCopyData` and finish with `PQputCopyEnd`, then call `PQgetResult` to leave copy state. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
+### PGRES_COPY_OUT
+The `PGresult` status that puts the connection into COPY-OUT (server→client) state after a `COPY ... TO STDOUT`. Drain rows with `PQgetCopyData` until it returns -1, then call `PQgetResult` to obtain the final status and leave copy state. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
+### PGRES_FATAL_ERROR
+The `PGresult` status (`libpq-fe.h:142`) indicating a command failed. In single-row/chunked mode it can arrive *after* several `PGRES_SINGLE_TUPLE`/`PGRES_TUPLES_CHUNK` results, so the caller must be prepared to undo work done on already-returned rows. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-exec.md`).
+
+
+
+### PGRES_PIPELINE_ABORTED
+The `PGresult` status (`libpq-fe.h:146`) emitted in place of a normal result for the first error in a pipeline and for every result after it, until the next `PGRES_PIPELINE_SYNC`. The client must keep calling `PQgetResult` through the aborted stretch. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
+
+
+
+### PGRES_PIPELINE_SYNC
+The `PGresult` status (`libpq-fe.h:145`) reported exactly once for each `PQpipelineSync` / `PQsendPipelineSync` at its position in a pipeline; receiving it clears a `PQ_PIPELINE_ABORTED` state and marks the boundary at which error recovery resumes. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
+
+
+
+### PGRES_SINGLE_TUPLE
+The `PGresult` status (`libpq-fe.h:144`) carrying exactly one result row in single-row mode (`PQsetSingleRowMode`). After the last such object a zero-row `PGRES_TUPLES_OK` signals completion; you must still call `PQgetResult` until NULL. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-single-row-mode.md`).
+
+
+
+### PGRES_TUPLES_CHUNK
+The PG17 `PGresult` status (`libpq-fe.h:148`) carrying up to N rows per object in chunked mode (`PQsetChunkedRowsMode`); its presence is compile-time detectable via a feature-macro comment at `libpq-fe.h:51`. Like single-row mode, a terminal zero-row `PGRES_TUPLES_OK` ends the stream. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-single-row-mode.md`).
 
 
 
@@ -11653,6 +11748,11 @@ Sets the current backend's wait event (visible in `pg_stat_activity.wait_event`)
 
 
 
+### PGTransactionStatusType
+The libpq transaction-status enum (`libpq-fe.h:153-157`) returned by `PQtransactionStatus`: `PQTRANS_IDLE`, `PQTRANS_ACTIVE` (a query is sent and not yet completed — reported only then), `PQTRANS_INTRANS` (idle in a transaction block), `PQTRANS_INERROR` (failed transaction block, escapable only by `ROLLBACK`), `PQTRANS_UNKNOWN` (connection is bad). [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
 ### pgtypes_alloc
 The ECPG pgtypeslib allocator: `calloc(1L, size)` returning zero-filled memory, setting `errno = ENOMEM` and returning NULL on failure — the standard allocation entry for the date/time/numeric/interval helper library. [verified-by-code] (via `knowledge/files/src/interfaces/ecpg/pgtypeslib/common.c.md`).
 
@@ -11660,6 +11760,11 @@ The ECPG pgtypeslib allocator: `calloc(1L, size)` returning zero-filled memory, 
 
 ### pgtypes_fmt_replace
 An internal ECPG pgtypeslib helper that performs format-string substitution for date/time formatting, keyed by a `replace_type` switch over the `PGTYPES_TYPE_*` selector tags; it works through a `union un_fmt_comb` discriminated value. [verified-by-code] (`pgtypeslib_extern.h:12-24` — via `knowledge/files/src/interfaces/ecpg/pgtypeslib/pgtypeslib_extern.h.md`).
+
+
+
+### PGVerbosity
+The libpq error-verbosity enum (`libpq-fe.h:162-165`) set by `PQsetErrorVerbosity`: `PQERRORS_TERSE` (severity + primary text + position on one line), `PQERRORS_DEFAULT` (adds detail/hint/context), `PQERRORS_VERBOSE` (all fields), `PQERRORS_SQLSTATE` (severity + SQLSTATE only). The setting is captured at `PGresult` creation, so it never retroactively changes existing results. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
 
 
 
@@ -12109,13 +12214,58 @@ The backend libpq call that begins reading one incoming protocol message; it mus
 
 
 
+### PQbackendPID
+The libpq accessor (`libpq-fe.h:429`) returning the PID of the *server-side* backend process (not a local PID). It is the join key against `PGnotify.be_pid` for detecting self-notifications and is quoted in the out-of-band cancel request. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQbinaryTuples
+The libpq `PGresult` accessor returning 1 if the result's tuples are in binary format, 0 if text — reported on the COPY entry result and on query results. [from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
 ### PQcancel
 Sends a cancel request for the query currently running on a connection, using the secret cancel key captured at connect time over a fresh short-lived socket. The newer `PQcancelBlocking`/`PQcancelPoll` API supersedes it but the semantics are the same: interrupt, do not close. [inferred] (`fe-cancel.c:382` — via `knowledge/files/src/interfaces/libpq/fe-connect.c.md`).
 
 
 
+### PQcancelBlocking
+The PG17 libpq call (`fe-cancel.c:190`) that dispatches a cancel request on a `PGcancelConn` synchronously; it does blocking I/O and is not signal-safe. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PQcancelCreate
+The PG17 libpq call `PQcancelCreate(PGconn*)` (`fe-cancel.c:67`) that builds a `PGcancelConn` for the object-based cancel API; dispatching it opens a separate connection inheriting the original's encryption requirements. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PQcancelFinish
+The PG17 libpq call (`fe-cancel.c:353`) that frees a `PGcancelConn`; it must be called even on failure. `PQcancelReset` re-arms one for reuse without reallocating. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PQcancelPoll
+The PG17 libpq call (`fe-cancel.c:226`) that advances a non-blocking cancel, reusing the `PQconnectPoll` loop verbatim: treat the first call as `PGRES_POLLING_WRITING` and loop on `PQcancelSocket` until `PGRES_POLLING_OK`/`FAILED`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PQcancelReset
+The PG17 libpq call (`fe-cancel.c:337`) that re-arms a used `PGcancelConn` for another cancel without reallocating it, returning it to `CONNECTION_ALLOCATED`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PQcancelStart
+The PG17 libpq call (`fe-cancel.c:204`) that begins a non-blocking cancel dispatch on a `PGcancelConn`, driven to completion by `PQcancelPoll`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
 ### PQclear
 Frees a `PGresult` and all the tuple storage it owns. Every result handed back by libpq must be cleared exactly once; forgetting it is the classic libpq memory leak. [inferred] (via `knowledge/files/src/include/libpq/libpq-be-fe.h.md`).
+
+
+
+### PQclientEncoding
+The libpq accessor returning the connection's client encoding as an *encoding ID* (-1 on failure); convert to a symbolic name with `pg_encoding_to_char`. Its setter counterpart is `PQsetClientEncoding`. [from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
 
 
 
@@ -12129,13 +12279,53 @@ The libpq entry point that opens a connection from parallel `keywords[]`/`values
 
 
 
+### PQconnectionNeedsPassword
+The libpq post-failure probe that returns true when the connection required a password but none was available — the signal to prompt for one and retry. [from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQconnectionUsedGSSAPI
+The libpq probe reporting whether GSSAPI was used for authentication on the connection — the GSSAPI parallel to `PQconnectionUsedPassword`. [from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQconnectionUsedPassword
+The libpq post-connection probe that reports whether the server demanded a password; it is meaningful after either success or failure. Contrast `PQconnectionNeedsPassword`, a post-*failure* probe used to decide whether to prompt the user and retry. [from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
 ### PQconnectPoll
 Drives the non-blocking libpq connection state machine one step at a time, returning `PGRES_POLLING_READING`/`PGRES_POLLING_WRITING`/`PGRES_POLLING_OK` so an event-loop caller knows which socket condition to wait for next. It is the engine behind `PQconnectStart`-style asynchronous connects. [inferred] (via `knowledge/files/src/interfaces/libpq/fe-connect.c.md`).
 
 
 
+### PQconnectStartParams
+The libpq entry point that begins a non-blocking connection from a keyword/value parameter array; the application then drives `PQconnectPoll` to completion and must call `PQfinish` even if the attempt fails. [from-docs] (via `knowledge/docs-distilled/libpq-connect.md`).
+
+
+
+### PQconninfoFree
+The libpq recursive deallocator for the `PQconninfoOption*` arrays returned by `PQconndefaults` / `PQconninfoParse`; because those entries reference subsidiary strings, `PQfreemem` is insufficient. [from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
 ### PQconsumeInput
 The libpq call that drains all currently-available data from the server socket into libpq's input buffer without blocking; an async client loops on socket-readable, calls it, then `PQisBusy`/`PQgetResult` to make progress. [verified-by-code] (via `knowledge/files/src/test/examples/testlibpq2.c.md`).
+
+
+
+### PQencryptPassword
+The deprecated, connection-less, MD5-only predecessor of `PQencryptPasswordConn`; it cannot produce a SCRAM verifier. [from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQencryptPasswordConn
+The libpq function `PQencryptPasswordConn(conn, passwd, user, algorithm)` that encrypts a password before `ALTER USER ... PASSWORD` so cleartext never reaches the logs. `algorithm` may be `scram-sha-256` (v10+), `md5`, or **NULL to read the server's `password_encryption` GUC** — the NULL path can block and may fail on a busy/aborted connection. The malloc'd result is freed with `PQfreemem`. [from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQenterPipelineMode
+The libpq call (`fe-exec.c:3073`, PG14) that switches an idle connection into pipeline mode — it sends nothing, only changing libpq state (returns 1 on success, 0 if not idle). In pipeline mode only async extended-protocol sends are legal; `PQsendQuery`, `PQexec*`, and `COPY` are disallowed. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
 
 
 
@@ -12164,13 +12354,68 @@ The synchronous libpq entry point that submits a command string and blocks until
 
 
 
+### PQexecParams
+The libpq synchronous execution call that rides the *extended* query protocol (Parse/Bind/Execute), passing parameters out of band so data values need no escaping. It accepts at most one command — a protocol limitation that doubles as SQL-injection defense — and a single `resultFormat` (0 text / 1 binary) applied to all columns. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-exec.md`).
+
+
+
+### PQexecPrepared
+The libpq call that executes a previously `PQprepare`d statement by name over the extended protocol, supplying parameter values but **no** `paramTypes` (those are fixed at prepare time). [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-exec.md`).
+
+
+
+### PQexitPipelineMode
+The libpq call (`fe-exec.c:3104`) that leaves pipeline mode; it returns 0 (refusing to leave) if a statement is unfinished or results have not all been collected via `PQgetResult`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
+
+
+
 ### PQExpBuffer
 libpq's resizable string buffer — the frontend/client analogue of the backend's `StringInfo` — used to assemble queries, connection strings, and protocol messages in client-side code. [verified-by-code] (via `knowledge/files/src/interfaces/libpq` docs).
 
 
 
+### PQfformat
+The libpq `PGresult` accessor returning the format code (0 text / 1 binary) of a single column — the per-column companion to `PQbinaryTuples`. [from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
 ### PQfinish
 Closes a libpq connection and frees the `PGconn` and all memory associated with it. After it returns the handle is invalid and must not be reused; it is the mandatory teardown counterpart to `PQconnectdb`. [inferred] (via `knowledge/files/src/interfaces/libpq/fe-connect.c.md`).
+
+
+
+### PQflush
+The libpq call (`fe-exec.c:4036`, delegating to `pqFlush`) that pushes buffered output to the server, with three return values: 0 = queue emptied, -1 = error, 1 = could not send all data yet (nonblocking only — retry when the socket is writable). During a nonblocking flush you must also `PQconsumeInput` when read-ready, or the two ends deadlock. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQfreeCancel
+The libpq deallocator (`fe-cancel.c:502`) for the read-only `PGcancel` object returned by `PQgetCancel`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PQfreemem
+The libpq deallocator for memory libpq malloc'd on your behalf (`PQnotifies`, `PQescapeByteaConn`, `PQunescapeBytea`, `PQgetCopyData` buffers, `PQencryptPasswordConn` output, …). It matters most on Windows, where freeing a DLL-allocated block with the application's `free()` crosses heap boundaries and corrupts; on non-Windows it is plain `free()`. Conninfo arrays use `PQconninfoFree` instead. [from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQfullProtocolVersion
+The PG18 libpq accessor (`libpq-fe.h:425`) encoding the wire protocol as `major*10000 + minor`, so protocol 3.2 returns `30002` — needed now that the protocol carries a live minor version. A feature macro at `libpq-fe.h:61` advertises its presence. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQgetCancel
+The legacy libpq call returning a read-only `PGcancel` from a `PGconn`; it is the basis of the only signal-safe / cross-thread cancel path (`PQcancel` + `PQfreeCancel`). [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-cancel.md`).
+
+
+
+### PQgetCopyData
+The libpq COPY-OUT call (`fe-exec.c:2833`) returning a row's byte length (>0, always null-terminated), 0 (async only — no full row yet), -1 (COPY done), or -2 (error). The returned buffer must be freed with `PQfreemem`, and a trailing `PQgetResult` leaves copy state. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
+### PQgetCurrentTimeUSec
+The libpq accessor returning `pg_usec_time_t` microseconds since the Unix epoch, paired with `PQsocketPoll` for computing async connect/query timeouts. [from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
 
 
 
@@ -12184,8 +12429,248 @@ The backend staging buffer holding the encrypted GSSAPI bytes queued for write, 
 
 
 
+### PQinitOpenSSL
+The libpq call `PQinitOpenSSL(do_ssl, do_crypto)` that lets an application declare whether libpq should initialize the OpenSSL library and libcrypto locking callbacks — so a program that also uses OpenSSL directly can own that global init once and stop libpq from double-initializing. Call before any connection. [from-docs] (via `knowledge/docs-distilled/libpq-threading.md`).
+
+
+
+### PQinitSSL
+The older single-argument libpq init call `PQinitSSL(bool)` controlling whether libpq initializes the SSL library; superseded by the finer-grained `PQinitOpenSSL`. [from-docs] (via `knowledge/docs-distilled/libpq-threading.md`).
+
+
+
+### PQisBusy
+The libpq predicate (`fe-exec.c:2048`) returning 1 if `PQgetResult` would block. It never reads the socket itself, so the fixed loop order is `PQconsumeInput` → check `PQisBusy` → `PQgetResult`; skipping the consume step means the busy state never clears. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQisnonblocking
+The libpq predicate (`fe-exec.c:4019`) reporting whether the connection is in nonblocking send mode. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQisthreadsafe
+The libpq predicate reporting whether the library was built thread-safe; it returns 1 unconditionally as of PG17 (the `--disable-thread-safety` build option was removed), but new code that might link an ancient libpq should still call it. [from-docs] (via `knowledge/docs-distilled/libpq-threading.md`).
+
+
+
+### PQlibVersion
+The libpq accessor returning the *linked client library* version as `major*10000 + minor` (e.g. `170004` = 17.4), distinct from `PQserverVersion`; divide by 100 for a logical major. Gate on it for client-library features versus the server for server features, since they can differ. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQmakeEmptyPGresult
+The libpq function `PQmakeEmptyPGresult(conn, status)` (`fe-exec.c:160`) that allocates an empty `PGresult`; with a non-NULL `conn` it copies the current error message and the registered event procedures. It is the entry point for applications (proxies, FDWs, mocks) that fabricate results indistinguishable from real ones; free with `PQclear`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQnfields
+The libpq `PGresult` accessor returning the number of columns; on a COPY entry result it reports the column count of the copied relation. [from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
+### PQnoticeProcessor
+The second libpq notice layer: `void (*PQnoticeProcessor)(void *arg, const char *message)` (`libpq-fe.h:255`), receiving only preformatted text with a trailing newline. The default is literally `fprintf(stderr, "%s", message)` (`defaultNoticeProcessor`, `fe-connect.c:7978`). [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-notice-processing.md`).
+
+
+
+### PQnoticeReceiver
+The first of libpq's two notice-handling layers: `void (*PQnoticeReceiver)(void *arg, const PGresult *res)` (`libpq-fe.h:254`). It receives a `PGRES_NONFATAL_ERROR` result, so a custom receiver can pull individual fields (SQLSTATE, detail) via `PQresultErrorField`; the default receiver formats a string and passes it to the notice processor. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-notice-processing.md`).
+
+
+
+### PQnotifies
+The libpq call that returns the next buffered `PGnotify*` (or NULL) — it does **no** socket I/O, only draining a queue some other call (`PQexec`, `PQgetResult`, `PQconsumeInput`) already filled. Hence the rule: check it after every command, and for idle waiting use `select()` on `PQsocket` + `PQconsumeInput` rather than polling with empty queries. [from-docs] (via `knowledge/docs-distilled/libpq-notify.md`).
+
+
+
+### PQparameterStatus
+The libpq accessor that reads a *client-side cache* of GUCs the server auto-reports via `ParameterStatus` protocol messages (a fixed allow-list: `application_name`, `client_encoding`, `DateStyle`, `server_version`, `search_path` (v18+), `scram_iterations` (v16+), …). The returned `const` pointer aliases mutable `PGconn` storage and can be rewritten by a background `ParameterStatus`, so it is unwise to assume it stays valid across queries. [from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQpipelineStatus
+The libpq accessor returning the three-valued pipeline state (`libpq-fe.h:193-195`): `PQ_PIPELINE_OFF`, `PQ_PIPELINE_ON`, `PQ_PIPELINE_ABORTED`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
+
+
+
+### PQpipelineSync
+The libpq call (`fe-exec.c:3303`) that inserts a Sync point in a pipeline *and* flushes the send buffer, establishing an error-recovery boundary that yields a `PGRES_PIPELINE_SYNC` result. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
+
+
+
+### PQprepare
+The libpq call `PQprepare(conn, stmtName, query, nParams, paramTypes)` that creates a server-side prepared statement; an empty `stmtName` is the unnamed slot, which auto-replaces any existing unnamed statement, whereas a named collision is an error. `paramTypes[i] == 0` defers type inference to the server. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-exec.md`).
+
+
+
+### PQprotocolVersion
+The libpq accessor returning only the *major* wire-protocol version (3, or 0 if the connection is bad); before 14.0 it could also return 2. Use `PQfullProtocolVersion` when the minor version matters. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQputCopyData
+The libpq COPY-IN call (`fe-exec.c:2712`) that queues row bytes to the server, returning 1 (queued), 0 (buffers full — nonblocking only, retry when writable), or -1 (error). Buffer boundaries carry no semantic meaning, so rows may be split across calls arbitrarily. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
+### PQputCopyEnd
+The libpq call (`fe-exec.c:2766`) that ends a COPY-IN; a non-NULL `errormsg` forces the COPY to fail with that message (though the server may have already failed it for its own reasons). A trailing `PQgetResult` is still required to leave copy state. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-copy.md`).
+
+
+
+### PQregisterEventProc
+The libpq call `PQregisterEventProc(conn, proc, name, passThrough)` that installs a `PGEventProc` on a `PGconn`. A given proc can register only once per connection because its *address* is the lookup key for the associated instance data; the `passThrough` pointer is then immortal for the life of the `PGconn` and all derived `PGresult`s. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-events.md`).
+
+
+
+### PQregisterThreadLock
+The libpq hook for installing a cooperative lock around third-party libraries libpq shares that are not themselves thread-safe (notably Kerberos), so the application and libpq don't call them concurrently. [from-docs] (via `knowledge/docs-distilled/libpq-threading.md`).
+
+
+
+### PQreset
+The libpq call that closes and re-establishes a connection using the same parameters, recovering a `PGconn` whose `PQstatus` has gone `CONNECTION_BAD`. A successful reset fires the `PGEVT_CONNRESET` event on registered procs. [from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQresultAlloc
+The libpq call `PQresultAlloc(res, nBytes)` returning malloc-aligned memory tied to a `PGresult`'s lifetime — it is freed automatically when the result is passed to `PQclear`. [from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQresultMemorySize
+The libpq accessor reporting the total bytes a `PGresult` owns — useful for bounding memory when caching many results. [from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQsendDescribePortal
+The async libpq call that requests the row description of an open portal over the extended protocol; one of the pipeline-legal send functions. [from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQsendDescribePrepared
+The async libpq call that requests the parameter/row description of a prepared statement over the extended protocol; one of the pipeline-legal send functions. [from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQsendFlushRequest
+The libpq call (`fe-exec.c:3402`) that asks the server to flush its output buffer *without* creating a sync/error-recovery boundary; the request itself is not auto-flushed, so use `PQflush` if needed. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
+
+
+
+### PQsendPipelineSync
+The libpq call (`fe-exec.c:3313`) that inserts a pipeline Sync *without* flushing — the caller must `PQflush` — otherwise equivalent to `PQpipelineSync`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-pipeline-mode.md`).
+
+
+
+### PQsendPrepare
+The async counterpart of `PQprepare` (`fe-exec.c:1553`) that dispatches a prepare request over the extended protocol; one of the send functions permitted in pipeline mode. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
 ### PQsendQuery
 The libpq entry point that submits a command without blocking for the result; paired with `PQgetResult` it drives asynchronous query processing and is the way to see every result of a multi-statement string (which `PQexec` collapses to the last). [verified-by-code] (`fe-exec.c:2427` — via `knowledge/files/src/interfaces/libpq/fe-exec.c.md`).
+
+
+
+### PQsendQueryParams
+The async, extended-protocol counterpart of `PQexecParams` (`fe-exec.c:1509`): it dispatches a parameterized command without blocking, after which `PQsendQuery` and siblings are disallowed on that connection until `PQgetResult` returns NULL. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQsendQueryPrepared
+The async counterpart of `PQexecPrepared` that dispatches execution of a named prepared statement over the extended protocol; permitted in pipeline mode. [from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQserverVersion
+The libpq accessor returning the connected server's version as `major*10000 + minor` (e.g. `100001` = 10.1, pre-10 packs as `90105` = 9.1.5). For feature-compatibility checks the docs say divide by **100**, not 10000, to get a logical major. [from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQsetChunkedRowsMode
+The PG17 libpq call (`fe-exec.c:1982`) that delivers results in fixed-size chunks (`PGRES_TUPLES_CHUNK`, up to N rows each) instead of one row or the whole set; same activation window and per-query lifetime as `PQsetSingleRowMode`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-single-row-mode.md`).
+
+
+
+### PQsetClientEncoding
+The libpq call that sets the client encoding by name (returns 0 / -1); under the hood it issues `SET client_encoding`, which also refreshes the cached `PQparameterStatus("client_encoding")`. [from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
+
+
+
+### PQsetErrorVerbosity
+The libpq control function that sets the `PGVerbosity` level for subsequently-created `PGresult`s and returns the previous setting. Existing results keep the verbosity captured at their creation. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
+
+
+
+### PQsetnonblocking
+The libpq call (`fe-exec.c:3980`) that switches a connection to nonblocking *send* mode, so `PQsendQuery` / `PQputCopyData` buffer locally instead of blocking. It does not affect `PQgetResult`, which still blocks unless gated behind `PQisBusy`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-async.md`).
+
+
+
+### PQsetNoticeProcessor
+The libpq setter (`libpq-fe.h:472`) that installs a `PQnoticeProcessor` and returns the previous pointer; like the receiver setter it is copy-at-`PGresult`-creation and NULL-queryable. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-notice-processing.md`).
+
+
+
+### PQsetNoticeReceiver
+The libpq setter (`libpq-fe.h:469`) that installs a `PQnoticeReceiver` and returns the previous pointer (the save/restore-or-chain idiom); passing NULL just queries the current one. Hooks are copied into each `PGresult` at creation, so changes do not affect existing results. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-notice-processing.md`).
+
+
+
+### PQsetResultAttrs
+The libpq builder `PQsetResultAttrs(res, n, attDescs)` that defines the columns of a hand-built `PGresult` (fails if attributes already exist) — used together with `PQmakeEmptyPGresult` and `PQsetvalue`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQsetSingleRowMode
+The libpq call (`fe-exec.c:1965`) that switches the current query to row-at-a-time delivery (`PGRES_SINGLE_TUPLE` per result) so a huge result set doesn't buffer entirely client-side. It is legal only in the one-call window immediately after `PQsendQuery`, is effective for that query only, and self-resets afterward. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-single-row-mode.md`).
+
+
+
+### PQsetTraceFlags
+The libpq call (must follow `PQtrace`) taking `PQTRACE_SUPPRESS_TIMESTAMPS` (`1<<0`, `libpq-fe.h:495`) to drop the leading timestamp and `PQTRACE_REGRESS_MODE` (`1<<1`, `:497`) to redact volatile fields like OIDs — the latter exists so trace output can be diffed in regression tests. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
+
+
+
+### PQsetvalue
+The libpq builder `PQsetvalue(res, tup, field, value, len)` (`fe-exec.c:453`) that fills a cell of a fabricated `PGresult`, auto-growing the tuple array; `len == -1` or `value == NULL` sets SQL NULL, and the value is copied into the result's private storage. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-misc.md`).
+
+
+
+### PQsslAttribute
+The libpq accessor for SSL connection facts (`protocol`, `key_bits`, `cipher`, `compression`, `alpn`). Uniquely, `PQsslAttribute(NULL, "library")` works with no connection (v15+), returning the default SSL library name (e.g. `"OpenSSL"`) or NULL if built without SSL. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-ssl.md`).
+
+
+
+### PQsslAttributeNames
+The libpq accessor returning a NULL-terminated array of the SSL attribute names available for `PQsslAttribute` on the current connection. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-ssl.md`).
+
+
+
+### PQsslInUse
+The libpq boolean accessor reporting whether the connection is currently using SSL — the gate before querying `PQsslAttribute`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-ssl.md`).
+
+
+
+### PQstatus
+The libpq accessor returning a connection's `ConnStatusType` (`CONNECTION_OK` / `CONNECTION_BAD`). The status is not monotonic — a mid-session communications failure can flip OK to BAD — and recovery is via `PQreset`. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQtrace
+The libpq control function `PQtrace(conn, FILE*)` that dumps both directions of the wire protocol to a stream, one message per line: `timestamp direction length type contents`, with `F` = frontend→server and `B` = backend→client. Disable with `PQuntrace`; the formatter lives in its own `fe-trace.c`. [from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
+
+
+
+### PQtransactionStatus
+The libpq accessor returning the connection's current `PGTransactionStatusType`. It mirrors the backend transaction state machine, so `PQTRANS_INERROR` marks a failed transaction block and `PQTRANS_ACTIVE` appears only while a query is in flight. [verified-by-code][from-docs] (via `knowledge/docs-distilled/libpq-status.md`).
+
+
+
+### PQuntrace
+The libpq call that turns off protocol tracing previously enabled by `PQtrace`. [from-docs] (via `knowledge/docs-distilled/libpq-control.md`).
 
 
 
