@@ -268,7 +268,7 @@ Grouped by concern.
 
 The hottest read in PG (`procarray.c:2113`).
 
-1. **Take `ProcArrayLock` SHARED.** `procarray.c:2170`.
+1. **Take `ProcArrayLock` SHARED.** `procarray.c:2178`.
 2. **`GetSnapshotDataReuse`** (`procarray.c:2033-2078`): if
    `TransamVariables->xactCompletionCount` has not changed since this
    snapshot's `snapXactCompletionCount`, the running set is identical
@@ -282,7 +282,7 @@ The hottest read in PG (`procarray.c:2113`).
    `pgprocnos[0..numProcs)`, doing `xid =
    UINT32_ACCESS_ONCE(other_xids[pgxactoff])` per slot — single volatile
    read, the writer side (`GetNewTransactionId`) publishes with a
-   `pg_write_barrier` `[from-comment]` `procarray.c:2215, 2294` (the
+   `pg_write_barrier` `[from-comment]` `procarray.c:2223, 2302` (the
    write-side pairing in `transam/varsup.c` is referenced but not
    re-verified here, see §9).
 4. Skip own xid, `xid ≥ xmax`, `PROC_IN_LOGICAL_DECODING |
@@ -290,9 +290,9 @@ The hottest read in PG (`procarray.c:2113`).
    `memcpy`'d when not overflowed.
 5. Read `replication_slot_xmin` / `_catalog_xmin` while still under
    lock. Install `MyProc->xmin` (safe under SHARED because each backend
-   only writes its own slot). `procarray.c:2349-2353`.
+   only writes its own slot). `procarray.c:2357-2361`.
 6. Release `ProcArrayLock` — release acts as a full memory barrier
-   publishing `MyProc->xmin`. `procarray.c:2355`.
+   publishing `MyProc->xmin`. `procarray.c:2363`.
 7. Update `GlobalVis*Rels.definitely_needed` / `maybe_needed` *unlocked*
    from values gathered under the lock.
 
@@ -428,7 +428,7 @@ The locks specific to this directory, ordered roughly by visibility.
    EX by writers (`ProcArrayAdd`/`Remove`, `ProcArrayEndTransactionInternal`,
    `xactCompletionCount++`). Setting `MyProc->xmin` under SHARED is safe
    *because each backend only writes its own slot* `[from-comment]`
-   `procarray.c:2167-2168`.
+   `procarray.c:2175-2176`.
 2. **`XidGenLock`** — protects `nextXid`. Per `access/transam/README`,
    ordering is **`XidGenLock` first, then `ProcArrayLock`** when both
    needed. Stated in `transam/README` only; **not asserted in
@@ -485,7 +485,7 @@ The locks specific to this directory, ordered roughly by visibility.
   SHARED** — `procarray.c:768` (increment), `procarray.c:2049-2078`
   (read in `GetSnapshotDataReuse`). The release of the SHARED lock acts
   as a publishing barrier for `MyProc->xmin`.
-- **`pg_read_barrier()` at `procarray.c:2294`** pairs with a
+- **`pg_read_barrier()` at `procarray.c:2302`** pairs with a
   `pg_write_barrier()` in `GetNewTransactionId` (`access/transam/varsup.c`)
   — comment cross-references `transam/README`; write-side
   not re-verified `[unverified-here]`.
@@ -553,7 +553,7 @@ The locks specific to this directory, ordered roughly by visibility.
   one `shm_mq` per worker for tuple streaming plus a separate error
   queue. Workers `dsm_attach` to the leader's segment.
 - **`replication`** — `replication_slot_xmin` is read inside
-  `GetSnapshotData` under `ProcArrayLock` `procarray.c:2349-2350`.
+  `GetSnapshotData` under `ProcArrayLock` `procarray.c:2357-2358`.
   Walsender uses `procsignal` (`PROCSIG_WALSND_INIT_STOPPING`).
   `walreceiver` + `standby.c` feed `KnownAssignedXids`.
 - **`tcop/postgres.c`** — `procsignal_sigusr1_handler` lives there; it
@@ -583,7 +583,7 @@ The locks specific to this directory, ordered roughly by visibility.
 Carried forward from per-file docs and consolidated here.
 
 1. **Write-side barrier pairing in `GetNewTransactionId`** — the
-   `pg_read_barrier()` at `procarray.c:2294` is documented to pair with a
+   `pg_read_barrier()` at `procarray.c:2302` is documented to pair with a
    write barrier in `access/transam/varsup.c`. Not re-verified here.
    `[unverified-here]` (`…/procarray.c.md` Q1).
 2. **Heavyweight-partition vs `ProcArrayLock` vs `XidGenLock` ordering**
