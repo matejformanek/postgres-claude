@@ -1,0 +1,1 @@
+**pg-community-pulse** 2026-07-20 — hackers 12 threads (Monday rebound: read-stream backward combining, checkpointer write combining, VM/WAL invariant, RPR, sequencesync race, non-finite reltuples bug) · CF59 board thawed (Committed 164→168, NR 293→287, WoA 36→38, RfC flat 46, Total 613) · planet 4 (weekend feed floor) (PR #658).
