@@ -1,0 +1,1 @@
+**pg-docs-miner** 2026-07-20 — 7 libpq §34 interface-support leaves distilled (status/notify/control/notice-processing/misc/ssl/threading), continuing the 07-19 libpq family; docs-distilled 331→338; enums/structs code-verified @d451ca6917e3 (PR #660).
