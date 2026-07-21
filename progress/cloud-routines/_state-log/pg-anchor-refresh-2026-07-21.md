@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-21 — anchor `0da71d90d623` → `d774576f6f0`; 12 commits; 6 docs queued for audit (7 idempotent-skipped, 13 impacted total); catversion bumped this window (99e949f846e, value unfetched — cgit 429); no subsystem ≥5-impacted (PR #<n>).
