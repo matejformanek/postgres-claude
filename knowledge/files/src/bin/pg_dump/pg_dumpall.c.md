@@ -121,13 +121,14 @@ SQL. [from-comment, pg_dumpall.c:1-13]
     `--clean --create`; else `create_opts = ""` and emit a `\connect
     <dbname>` (1690-1700). Other DBs get `--create` (1702).
   - `runPgDump` per DB; any nonzero exit is fatal (1707-1709).
-- **`runPgDump`** (1729) — assembles the pg_dump command string:
+- **`runPgDump`** (1701) — assembles the pg_dump command string:
   `printfPQExpBuffer(&cmd, "\"%s\" %s %s", pg_dump_bin, pgdumpopts->data,
-  create_opts)` (1738-1739), then appends `-Fa` (undocumented
-  plain-append) when writing to a file or `-Fp` for stdout (1745-1748),
+  create_opts)` (1710-1711), then appends `-Fa` (undocumented
+  plain-append) when writing to a file or `-Fp` for stdout (1718-1720),
   then the `appendShellString`-quoted connection string with `dbname=`
-  (1754-1757), and `system()`s it (1763). Returns the exit code.
-  [verified-by-code, pg_dumpall.c:1729-1769]
+  (1730-1732), and `system()`s it (1735). Returns the exit code.
+  [verified-by-code, pg_dumpall.c:1701-1740 @`0da71d90d623`; re-anchored
+  2026-07-22 from 1729-1769, code shifted up ~28 lines]
 - **`buildShSecLabels`** (1783) — emits SECURITY LABEL rows for shared
   catalogs.
 - **`executeCommand`** (1802), **`dumpTimestamp`** (1826),
@@ -236,7 +237,9 @@ SQL. [from-comment, pg_dumpall.c:1-13]
   the option spread isn't). A pg_dump path containing double-quotes would
   break; vanishingly unlikely. Severity: nit.
 - **[ISSUE-question: undocumented `-Fa` plain-append mode]**
-  `pg_dumpall.c:1745-1746` — when writing to a file, `runPgDump` passes the
+  `pg_dumpall.c:1718` (re-anchored 2026-07-22 @`0da71d90d623` from
+  1745-1746; `runPgDump` def shifted 1729→1701, `-Fa` append 1745→1718)
+  — when writing to a file, `runPgDump` passes the
   "undocumented plain-append pg_dump format" `-Fa`. This is the internal
   hand-off that lets the child pg_dump append to the same text file
   pg_dumpall is writing. Not user-facing; worth a comment cross-ref to the

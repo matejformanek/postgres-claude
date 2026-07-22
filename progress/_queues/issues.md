@@ -330,3 +330,16 @@ deferred to next cycle.
 ## Refill 2026-07-19 (pg-quality-auditor) — pg_dump register, 1 line-cited open row eligible
 
 [done:2026-07-19] pg_dump.md connectdb.c:154 | correctness/likely | seeded=2026-06-03 | still-present@03480907e9ff (PQconnectdbParams(keywords,values,true) expand_dbname=true HARD-CODED at :154 exact; a dbname-discard guard was ADDED for connection_string [:75-98 discards "dbname" keyword from conn_opts] but the enumerated dbname/override_dbname function args [:138,:144] are still set as keyword "dbname" and remain subject to libpq expansion → hostile-datname redirect concern STILL stands)
+
+## Refill 2026-07-22 (pg-quality-auditor) — pg_dump register, 3 line-cited 2026-06-22 rows now eligible
+
+The 2026-06-22 pg_dump.c/pg_dumpall.c/pg_restore.c line-cited rows (deferred
+2026-07-19 as "only 27 days old → NOT yet eligible") crossed the 30-day
+staleness threshold today (exactly 30 days). All 3 triaged @`0da71d90d623`:
+**1 still-present exact, 2 reproducer-drifted + re-anchored** (register rows +
+per-file ISSUE tags patched). connectdb.c:154 skipped (triaged 2026-07-19, <30d).
+ISSUE queue now drained of eligible line-cited rows → rotated to AUDIT mode.
+
+[done:2026-07-22] pg_dump.md pg_dump.c:2495,2505,2514 | correctness/nit | seeded=2026-06-22 | drifted@0da71d90d623 (→:2469,2479,2488; `Dumping the contents of table` cluster shifted up ~26 lines as pg_dump.c shrank 21102→20835 LOC; raw-classname newline-spoof pattern intact; register+per-file tag re-anchored)
+[done:2026-07-22] pg_dump.md pg_dumpall.c:1745-1746 | question/nit | seeded=2026-06-22 | drifted@0da71d90d623 (→:1718; `runPgDump` def 1729→1701, `-Fa` append 1745→1718, code moved up ~28 lines; register+per-file ISSUE tag+runPgDump narrative block re-anchored)
+[done:2026-07-22] pg_dump.md pg_restore.c:440-445 | style/nit | seeded=2026-06-22 | still-present@0da71d90d623 (three-way dumpData/dumpSchema/dumpStatistics derived-flag block exact at :440-445; conflict checks above still :380-433; register annotated triaged)

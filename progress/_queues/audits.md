@@ -17,11 +17,11 @@ than the periodic 30-day refresh: process them first.
 
 [pending] knowledge/idioms/fmgr.md verified=2026-07-17 [clean @572c3b2d: fmgr.h PGFunction 40/FmgrInfo 56-67/FunctionCallInfoBaseData 85-96/LOCAL_FCINFO 110-118 all exact]
 [pending] knowledge/idioms/spi.md verified=2026-07-20 [clean @dde9a87d4d02: spi.c (3410 LOC ✓) SPI_connect :95/SPI_connect_ext :101/horrible-API :40-47/atomic-flag :143/SPI_finish :183/AtEOSubXact_SPI :483/SPI_prepare :861/SPI_keepplan :977/SPI_palloc :1339/SPI_cursor_open :1446/SPI_is_cursor_plan :1911/SPI_result_code_string :1973/SPI_register_relation :3303 + spi.h SPI_ERROR_* :68/SPI_OK_* :82 all hold exactly]
-[pending] knowledge/idioms/catalog-conventions.md verified=2026-06-20 [clean: genbki.h CATALOG/BKI 42-66/CATALOG_VARLEN 148-156/DECLARE_* 68-146 + catversion.h CATALOG_VERSION_NO 60 + transam.h FirstNormalObjectId 195-197 all hold]
-[pending] knowledge/idioms/bgworker-and-parallel.md verified=2026-06-20 [clean: bgworker.h BGWORKER_CLASS_PARALLEL 69-75/BgWorkerStartTime 84-89/exit-code 18-23 + bgworker.c lockless-slot 45-86 + parallel.h API 64-72 + parallel.c CreateParallelContext 174/PARALLEL_KEY_* 64-81 + worker_spi.c bgw_extra 151-171 all hold]
+[pending] knowledge/idioms/catalog-conventions.md verified=2026-07-22 [clean @0da71d90d623: genbki.h CATALOG :42/BKI_LOOKUP :64-65/CATALOG_VARLEN :156 (comment 148-155) + catversion.h CATALOG_VERSION_NO :60 (202607173) + transam.h FirstNormalObjectId :197 all hold]
+[pending] knowledge/idioms/bgworker-and-parallel.md verified=2026-07-22 [clean @0da71d90d623: bgworker.h BGWORKER_CLASS_PARALLEL :75/BgWorkerStartTime :89/exit-code comment :20-26 + parallel.h API CreateParallelContext :64 + parallel.c CreateParallelContext def :174/PARALLEL_KEY_* :67-76 + worker_spi.c bgw_extra :152 all hold]
 [pending] knowledge/idioms/guc-variables.md verified=2026-07-20 [clean @dde9a87d4d02: guc_tables.h config_type enum :23 + guc.h GucContext :71/config_source :111/GUC_CUSTOM_PLACEHOLDER :223 (exact) + guc.c MarkGUCPrefixReserved :5186 (exact) all hold]
 [pending] knowledge/data-structures/heap-tuple-layout.md verified=2026-07-20 [clean @dde9a87d4d02: htup_details.h HeapTupleHeaderData :153 (exact)/t_infomask HEAP_HASNULL :190/t_infomask2 HEAP_NATTS_MASK :291 + heapam_visibility.c non-MVCC NOTE :13 all hold]
-[pending] knowledge/data-structures/pgproc-fields.md verified=2026-06-20 [clean: proc.h fastpath-fields 329-335/FastPathLockSlotsPerBackend 101-104/lockGroup 304-306 + lock.c FastPathTransferRelationLocks 2869 all hold]
+[pending] knowledge/data-structures/pgproc-fields.md verified=2026-07-22 [clean @0da71d90d623: proc.h fpLockBits :331/fpRelId :332/FastPathLockSlotsPerBackend :103/lockGroupLeader :304/lockGroupMembers :305 + lock.c FastPathTransferRelationLocks def :2869 all hold]
 [pending] knowledge/architecture/mvcc.md verified=2026-07-17 [clean @572c3b2d: summary 38-57/MVCC-NOTE 33-36/hint-setting-rules comment 101-125 all hold; NOTE: §7 setting-rules comment is now SetHintBitsExt() (SetHintBits split into batch-capable Ext + wrapper @199, new BufferBeginSetHintBits/BufferSetHintBits16 machinery) — cite range + MarkBufferDirtyHint bullet still valid, no line/symbol drift]
 [pending] knowledge/architecture/wal.md verified=2026-07-17 [clean @572c3b2d: xlog.c wal_level 138 exact + xlog.h XLogIsNeeded 112 exact hold]
 [pending] knowledge/architecture/query-lifecycle.md verified=2026-07-17 [DRIFT-FIXED @572c3b2d: PostgresMain 4274→4364, ReadCommand callsite 4788→4878, 'Q'/msg-switch 4838-4856→4928-4946 (all +90), QueryRewrite 4781→4789/4772-4781→4779-4789 (+8); pg_parse_query 617/pg_plan_query 900/exec_simple_query 1030 left (+1, within tol)]
@@ -108,7 +108,7 @@ than the periodic 30-day refresh: process them first.
 [pending] knowledge/subsystems/port.md verified=2026-06-19
 [pending] knowledge/idioms/locking-overview.md verified=2026-06-19
 [pending] knowledge/idioms/memory-contexts.md verified=2026-06-19
-[pending] knowledge/data-structures/bufferdesc-state.md verified=2026-06-19
+[pending] knowledge/data-structures/bufferdesc-state.md verified=2026-07-22 [clean @0da71d90d623: §1-3 buf_internals.h all hold — BufferDesc struct :326-359/content-lock-in-state rationale :303-310/BufferDescPadded :387/BUF_*_BITS+StaticAssert :49-55/BUF_DEFINE_FLAG :102-103/BM_LOCK_VAL_* :79-86/MAX_BACKENDS_BITS assert :130-133/flag block BM_LOCKED..BM_LOCK_WAKE_IN_PROGRESS :106-127/BM_MAX_USAGE_COUNT :144; doc already reflects 64-bit pg_atomic_uint64 state + no-LWLock-content-lock redesign]
 
 ## anchor-bump 2026-06-19: bdae2c20e88d..dc5116780846 (11 commits, pg-anchor-refresh)
 
