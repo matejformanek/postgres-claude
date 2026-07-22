@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-22 — anchor `d774576f6f05` → `ccfd4b683867`; 11 commits (cosmetic/cleanup batch, no catversion change — holds 202607201); 7 new IMPACTED docs queued for audit (8 idempotent-skipped, 0 subsystems ≥5, max=commands with 3) (PR #<n>).
