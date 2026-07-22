@@ -1,0 +1,1 @@
+**pg-extension-anthropologist** 2026-07-22 — 4 ideology docs (plrust [centerpiece: natively-compiled trusted Rust PL], plprql [PRQL-transpiling PL], pg_idkit [polyglot ID zoo], holycorn [mruby-scripted FDW]); knowledge/ideologies/ now 171 docs (PR #<pending>).
