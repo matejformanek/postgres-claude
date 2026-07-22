@@ -439,9 +439,12 @@ restore. Watch list:
   excluded; the comment chain suggests yes but the code path
   hasn't been chased here. Severity: question.
 - **[ISSUE-correctness: identifiers in error messages]** Many
-  `pg_fatal` / `pg_log_warning` calls splice in raw `dbname`/
+  `pg_log_error` / `pg_log_warning` calls splice in raw `dbname`/
   `tablename` strings (`Dumping the contents of table \"%s\"` at
-  2495, 2505, 2514). If a relname contains `\n` it can spoof an
+  2469, 2479; `unexpected extra results during COPY of table \"%s\"`
+  at 2488; re-anchored 2026-07-22 @`0da71d90d623` from 2495/2505/2514,
+  code shifted up ~26 lines as pg_dump.c shrank 21102→20835 LOC;
+  pattern intact). If a relname contains `\n` it can spoof an
   additional log line. The relname is server-supplied, but a
   malicious owner can create relations with crafted names.
   Severity: nit (log-only, not SQL output).
