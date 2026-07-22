@@ -1,0 +1,1 @@
+**pg-user-question-harvester** 2026-07-22 — 36 questions harvested (3 general / 1 performance / 32 hackers, 7-day window 07-15→07-22, deduped vs 07-19/20/21) · 8 gap tags / 6 gap topics (gap:role-management ×2 [standing, promote to missing-skill], gap:partitioning ×2, gap:checkpointer, gap:tde-encryption, gap:temporal-tables, gap:ddl-deparse) (PR #<pending>).
