@@ -732,3 +732,30 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 #   via the /-/raw/ route; the two low-signal dups (is_jsonb_valid, psql_bm25s) if a themed run wants them.
 # Standing low-signal dups STILL [pending] (unchanged): tensorchord/pgvecto.rs (line 504 archived VectorChord ancestor),
 #   is_jsonb_valid (173★ ≈pg_jsonschema), psql_bm25s (142★ ≈pg_textsearch). Standing known-skip list above still applies.
+
+# --- Refill + drain (seeded+processed 2026-07-21 cloud/pg-extension-anthropologist) ---
+# TOOLING UPDATE: GitHub MCP search_repositories is WORKING AGAIN for external repos this run (verified:
+# `firebird_fdw postgresql` → ibarwick/firebird_fdw returned) — the 07-16..07-20 "search unavailable, discover by
+# name" constraint DID NOT hold tonight. raw.githubusercontent.com fetch of arbitrary repos still works (primary
+# fetch route; api.github.com/git/trees still not relied on). THEME this run: "four engines core Postgres has no
+# idiom for reaching — an in-backend ML training+inference runtime, and three foreign stores an FDW binds that are
+# not SQL-over-libpq: a KV store, MySQL, and Firebird." 4 distinct-axis candidates, all raw-fetchable (probed 200):
+[done:placeholder] postgresml/postgresml branch=master files=README.md,pgml-extension/Cargo.toml,pgml-extension/src/lib.rs,pgml-extension/src/bindings/mod.rs  # ~6000★ Rust/pgrx; in-backend ML platform — trains+serves XGBoost/LightGBM/sklearn/HF-transformers INSIDE the backend, hosts a Python interp via pgrx, model catalog in tables. Distinct from pg_onnx (ONNX inference only) + pg_vectorize (external-LLM orchestration). LARGE monorepo → resolve src set from Cargo/bindings layout.
+[done:placeholder] EnterpriseDB/mysql_fdw branch=master files=README.md,mysql_fdw.c,mysql_fdw.h,connection.c,mysql_query.c,deparse.c,mysql_fdw.control  # ~600★ C; FDW onto MySQL/MariaDB via libmysqlclient — foreign-RDBMS gap in the FDW cluster (sibling to mongo_fdw/tds_fdw/oracle_fdw). Prepared-stmt binary protocol, connection cache.
+[done:placeholder] nahanni/rw_redis_fdw branch=master files=README.md,redis_fdw.c,redis_fdw.control  # ~200★ C; read/WRITE FDW onto Redis — KV-store gap. Maps foreign tables onto Redis structure types (string/hash/list/set/zset), hiredis client. The read-write successor to the older read-only redis_fdw.
+[done:placeholder] ibarwick/firebird_fdw branch=master files=README.md,firebird_fdw.c,firebird_fdw.h,convert.c,connection.c,firebird_fdw.control  # 43★ C; FDW onto Firebird via the libfq wrapper over the Firebird isc client API — the actively-maintained (v1.4.2, 2026-05) foreign-RDBMS reference, distinct client library from mysql/oracle/tds.
+# 4 entries processed 2026-07-21 (postgresml, mysql_fdw, rw_redis_fdw, firebird_fdw — the "four engines core has no idiom
+# for reaching" theme; parallel sub-agent fanout). knowledge/ideologies/ now holds 167 ext docs. [done:placeholder]
+# markers above rewritten with the merge SHA by pg-evening-merger. Manifest/layout corrections logged in each doc's Sources
+# footer: firebird_fdw sources live under src/ (root .c 404 → src/firebird_fdw.c etc.); postgresml bindings are dir-modules
+# (bindings/sklearn/mod.rs, bindings/transformers/mod.rs — flat .rs 404); rw_redis_fdw is a single ~4940-line redis_fdw.c.
+# Spot-checked 3 cites live vs raw blobs: rw_redis_fdw 0×RegisterXactCallback (non-transactional writes ✓);
+# postgresml pgml.files INSERT @orm/model.rs:298 ✓; mysql_fdw dlopen RTLD_LAZY|RTLD_DEEPBIND @mysql_fdw.c:388 ✓.
+# TOOLING NOTE: GitHub MCP search_repositories WORKED for external repos this run (verified firebird_fdw lookup) — the
+# 07-16..07-20 "search unavailable, discover by name" cloud-session constraint did NOT hold tonight. Primary fetch still
+# raw.githubusercontent.com. Next-run ideas: remaining FDW-cluster gaps if any high-signal RDBMS/store left (redis_fdw
+# read-only original is now dup'd by rw_redis_fdw; check firebird sibling ib_fdw? / a Cassandra or CockroachDB FDW);
+# a 2nd in-backend-ML axis is now covered (postgresml) so pg_onnx/pg_vectorize/postgresml form the ML cluster — a
+# TensorFlow/PyTorch-native serving ext would be the next distinct ML shape. Standing low-signal dups STILL [pending]:
+# tensorchord/pgvecto.rs (line 504 archived VectorChord ancestor), is_jsonb_valid (173★ ≈pg_jsonschema), psql_bm25s
+# (142★ ≈pg_textsearch). Standing known-skip list above still applies.
