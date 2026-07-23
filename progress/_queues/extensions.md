@@ -759,3 +759,31 @@ Refill rule: when empty, run `gh search topics postgresql-extension --limit
 # TensorFlow/PyTorch-native serving ext would be the next distinct ML shape. Standing low-signal dups STILL [pending]:
 # tensorchord/pgvecto.rs (line 504 archived VectorChord ancestor), is_jsonb_valid (173★ ≈pg_jsonschema), psql_bm25s
 # (142★ ≈pg_textsearch). Standing known-skip list above still applies.
+
+# --- Refill + drain (seeded+processed 2026-07-22 cloud/pg-extension-anthropologist) ---
+# TOOLING: GitHub MCP search_repositories WORKS for external repos this run; api.github.com/git/trees
+# is 403 (GH_TOKEN scoped to matejformanek/postgres-claude only) so layouts resolved by raw.githubusercontent.com
+# path-probing (confirmed 200s logged in each doc's Sources footer). THEME this run: "the extension API bent
+# into shapes core has no idiom for — a natively-compiled TRUSTED PL, a PL whose surface language isn't SQL,
+# a foreign store whose per-row logic is a user-supplied script, and an ID-type zoo." 4 distinct-axis candidates.
+[done:placeholder] pgcentralfoundation/plrust branch=main files=README.md,plrust/src/lib.rs,plrust/src/user_crate/mod.rs,plrust/src/user_crate/build.rs,plrust/src/user_crate/verify.rs,plrust/src/user_crate/validate.rs,plrust/src/gucs.rs,plrust/src/plrust.rs,plrust/src/pgproc.rs,plrust/Cargo.toml  # 1397★ Rust; THE natively-compiled TRUSTED PL — compiles user fn bodies to a per-fn .so via a hardened plrustc + postgrestd sandbox. Architectural centerpiece this run.
+[done:placeholder] kaspermarstal/plprql branch=main files=README.md,plprql/src/lib.rs,plprql/src/fun.rs,plprql/src/plprql.rs,plprql/plprql.control  # 475★ Rust/pgrx; a PL whose SURFACE LANGUAGE is PRQL (not SQL) — compiles PRQL→SQL at call time then SPI-executes.
+[done:placeholder] VADOSWARE/pg_idkit branch=main files=README.md,src/lib.rs,Cargo.toml  # 423★ Rust/pgrx; polyglot ID-generator zoo (UUIDv6/v7, ULID, KSUID, nanoid, Timeflake, Sonyflake, ...) — distinct from single-format uuidv47/pg_hashids.
+[done:placeholder] franckverrot/holycorn branch=master files=README.md,holycorn.c,holycorn.control,Makefile  # 165★ C+mruby; FDW whose per-scan logic is USER-SUPPLIED mruby — embeds a Ruby VM in the scan loop (Ruby cousin of multicorn's Python).
+# 4 entries processed 2026-07-22 (plrust, plprql, pg_idkit, holycorn — the "extension API bent into shapes core has
+# no idiom for" theme; parallel sub-agent fanout). knowledge/ideologies/ now holds 171 ext docs. [done:placeholder]
+# markers above rewritten with the merge SHA by pg-evening-merger. Layout notes (api.github.com/git/trees 403 for
+# external repos this run — GH_TOKEN scoped to matejformanek/postgres-claude; layouts resolved by raw path-probing):
+#   plrust src under plrust/src/ (user_crate/ typestate FSM: crating→build→verify→loading→ready; plrustc + postgrestd
+#     submodules NOT fetched, their internals [inferred]); plprql src under plprql/src/ (validator is a no-op TODO,
+#     no inline/DO handler); pg_idkit flat one-file-per-scheme under src/ (no generators/ dir — 404); holycorn flat
+#     repo root (holycorn.c 576 lines; struct headers plan_state.h/execution_state.h/options.h not fetched; pre-PG12
+#     API drift — won't compile against modern PG, noted [inferred]).
+# Refill rule: GitHub MCP search_repositories WORKS for external repos this run; primary fetch raw.githubusercontent.com.
+# The >200★ topic/name space stays DEEPLY saturated (this run's uncovered finds came from PL-language + FDW + ID niche
+# queries, not topics). Next-run ideas: plrust's Rust-PL sibling plcuda/pl* gaps; remaining foreign-store FDWs (a
+# Cassandra/CockroachDB/InfluxDB FDW if >150★ + fetchable); the mruby/scripting-FDW axis is now covered (holycorn) so
+# a Lua/JS-scripted FDW would be the next distinct wrapper shape. Standing low-signal dups STILL [pending]:
+# tensorchord/pgvecto.rs (line 504 archived VectorChord ancestor), is_jsonb_valid (173★ ≈pg_jsonschema), psql_bm25s
+# (142★ ≈pg_textsearch). Standing known-skip list above still applies (forked distros / poolers / backup-CLIs /
+# parser-libs / thin-AI / client-binaries / v7-UUID dups pgx_ulid+pg_uuidv7).
