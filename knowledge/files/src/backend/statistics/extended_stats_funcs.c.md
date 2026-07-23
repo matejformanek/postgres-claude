@@ -1,7 +1,7 @@
 # `src/backend/statistics/extended_stats_funcs.c`
 
 - **Last verified commit:** `e18b0cb7344`
-- **Lines:** ~1836
+- **Lines:** ~1840
 - **Source:** `source/src/backend/statistics/extended_stats_funcs.c`
 
 SQL-callable family for direct manipulation of *extended* statistics
@@ -60,10 +60,12 @@ import because those are stored as Jsonb in `pg_statistic_ext_data`
   determined at CREATE STATISTICS time and recorded in `stxkind`;
   passing values for other kinds at restore is silently ignored
   (per `expand_stxkind` mask). [verified-by-code]
-- `argnum` enum (lines 45-58): `RELSCHEMA`, `RELNAME`,
-  `STATSCHEMA`, `STATNAME`, `INHERITED`, `NDISTINCT`,
-  `DEPENDENCIES`, `MOST_COMMON_VALS`, `MOST_COMMON_FREQS`,
-  `MOST_COMMON_BASE_FREQS`, `EXPRESSIONS`. [verified-by-code]
+- `extended_stats_argnum` enum (lines 46-60): `RELSCHEMA_ARG`,
+  `RELNAME_ARG`, `STATSCHEMA_ARG`, `STATNAME_ARG`, `INHERITED_ARG`,
+  `NDISTINCT_ARG`, `DEPENDENCIES_ARG`, `MOST_COMMON_VALS_ARG`,
+  `MOST_COMMON_FREQS_ARG`, `MOST_COMMON_BASE_FREQS_ARG`,
+  `EXPRESSIONS_ARG` (plus terminal `NUM_EXTENDED_STATS_ARGS`).
+  [verified-by-code]
 - MCV pairs are checked together (vals + freqs + base_freqs each
   required if MCV kind enabled). [from-comment]
 - Errors are split: not-found ERROR, type mismatch / bad array
@@ -75,9 +77,13 @@ import because those are stored as Jsonb in `pg_statistic_ext_data`
   pg_dump can emit `pg_restore_extended_stats(...)` calls with
   Jsonb literals. Inside the catalog, MCV is the binary `MCVList`
   representation. [from-comment]
-- `array_in_safe` (line ~966) wraps `array_in` with a soft-error
+- `array_in_safe` (line ~1044) wraps `array_in` with a soft-error
   context so a bad array element raises WARNING rather than ERROR.
   This is the soft-error idiom (escontext). [verified-by-code]
+- `import_mcv` rejects an MCV list with more than
+  `STATS_MCVLIST_MAX_ITEMS` items (WARNING + skip-this-kind via
+  `goto mcv_error`), guarding what `statext_mcv_deserialize` can
+  accept (lines 859-866, added by f6e4ec0a). [verified-by-code]
 
 ## Potential issues
 
