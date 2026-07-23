@@ -1,8 +1,8 @@
 # xlogreader.c
 
 - **Source path:** `source/src/backend/access/transam/xlogreader.c`
-- **Lines:** 2218
-- **Last verified commit:** `ef6a95c7c64`
+- **Lines:** 2220
+- **Last verified commit:** `d774576f6f05f65e3a944eb509ef0620ea6b107e`
 - **Companion files:** `source/src/include/access/xlogreader.h`,
   `xlogrecord.h`, `xloginsert.c` (producer of the format), front-end
   tools (`pg_waldump`, `pg_rewind`, `pg_basebackup`).
@@ -59,7 +59,7 @@ Decoding helpers (front-end safe):
 
 - `XLogReadRecordAlloc`, `XLogDecodeNextRecord`, `DecodeXLogRecord`,
   `DecodeXLogRecordRequiredSpace`, `ResetDecoder` —
-  `xlogreader.c:440-1701` [verified-by-code]
+  `xlogreader.c:440-1703` [verified-by-code]
 
 Validation:
 
@@ -71,10 +71,10 @@ Validation:
 Accessors over decoded record:
 
 - `XLogRecGetBlockTag` / `…BlockTagExtended` / `XLogRecGetBlockData`
-  — `xlogreader.c:2010, 2036, 2064` [verified-by-code]
-- `RestoreBlockImage(record, block_id, page)` — `xlogreader.c:2095`
+  — `xlogreader.c:2012, 2038, 2066` [verified-by-code]
+- `RestoreBlockImage(record, block_id, page)` — `xlogreader.c:2097`
   [verified-by-code]
-- `XLogRecGetFullXid(record)` — `xlogreader.c:2206` [verified-by-code]
+- `XLogRecGetFullXid(record)` — `xlogreader.c:2208` [verified-by-code]
 
 Error reporting:
 
@@ -115,11 +115,11 @@ Error reporting:
 5. **`DecodeXLogRecordRequiredSpace`** lets the caller size the
    decode buffer up front; oversized records bypass the static
    buffer via `XLogReadRecordAlloc(allow_oversized=true)`.
-   [verified-by-code] `xlogreader.c:1668, 440-…`.
+   [verified-by-code] `xlogreader.c:1670, 440-…`.
 
 6. **`RestoreBlockImage`** is the canonical FPI extractor: handles
    pglz/lz4/zstd decompression and the standard-page "hole"
-   restoration. [verified-by-code] `xlogreader.c:2095-…`.
+   restoration. [verified-by-code] `xlogreader.c:2097-…`.
 
 ## Functions of note
 
@@ -130,7 +130,7 @@ needed, calls `state->routine.page_read` (set by caller —
 `XLogPageRead` in backend, file-fetch in front-end). Returns
 `XLogRecord *` or NULL with `*errormsg` set.
 
-### `DecodeXLogRecord` — `xlogreader.c:1701-…` [verified-by-code]
+### `DecodeXLogRecord` — `xlogreader.c:1703-…` [verified-by-code]
 
 The big one: walks `XLogRecord` header → `XLogRecordBlockHeader`s →
 `XLogRecordDataHeader{Short,Long}` → block images (with optional
@@ -148,7 +148,12 @@ record-length fields. Used by `pg_rewind` and recovery initialization.
 
 Low-level read into the reader's segment file via the
 `page_read`/`segment_open` callbacks; emits structured errors via
-`WALReadError`.
+`WALReadError`. Backend-only (`#ifndef FRONTEND`) it times the
+`pg_pread` and reports WAL read I/O via
+`pgstat_count_io_op_time(IOOBJECT_WAL, IOCONTEXT_NORMAL, IOOP_READ,
+io_start, 1, readbytes)` — `xlogreader.c:1613`. Commit 3048e813
+corrected the arguments passed here (per-call I/O op count and byte
+count). [verified-by-code] `xlogreader.c:1613-…`.
 
 ## Cross-references
 
@@ -170,7 +175,7 @@ Low-level read into the reader's segment file via the
 
 ## Confidence tag tally
 
-- `[verified-by-code]`: 33
+- `[verified-by-code]`: 34
 - `[from-comment]`: 2
 - `[unverified]`: 2
 
