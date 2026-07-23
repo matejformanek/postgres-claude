@@ -651,3 +651,7 @@ Window = 2 tree-wide mechanical sweeps + 1 macro rename: 1c4b1de8 (pg_attribute_
 [pending] knowledge/files/src/backend/commands/copyto.c.md  reason=anchor-bump 2026-07-22:d774576f6f05..ccfd4b683867 (Message style fixes, c90c9678e533, Peter Eisentraut) [cosmetic: message-style — low drift risk; re-verify copyto.c cites]
 [pending] knowledge/files/src/backend/commands/extension.c.md  reason=anchor-bump 2026-07-22:d774576f6f05..ccfd4b683867 (Message style fixes, c90c9678e533, Peter Eisentraut) [cosmetic: message-style — low drift risk; re-verify extension.c cites]
 [pending] knowledge/files/contrib/passwordcheck/passwordcheck.c.md  reason=anchor-bump 2026-07-22:d774576f6f05..ccfd4b683867 (Message style fixes, c90c9678e533, Peter Eisentraut) [cosmetic: message-style — low drift risk; re-verify passwordcheck.c cites]
+
+## anchor-bump rotation (2026-07-23) — anchor ccfd4b683867..8767a10cb8c5, 1 commit, 1 new IMPACTED row (0 idempotent-skipped), 0 subsystems (max=postmaster with 1)
+
+[pending] knowledge/files/src/backend/postmaster/walsummarizer.c.md  reason=anchor-bump 2026-07-23:ccfd4b683867..8767a10cb8c5 (walsummarizer: Guard against WAL files whose tail ends are not valid., 8767a10cb8c5, Robert Haas) [behavioral: SummarizeWAL now passes switch_lsn (not the most-recently-measured end-of-WAL) as maximum_lsn on historic timelines — guards incremental-backup summarization against a corrupted archived WAL file past the timeline switch point; re-verify walsummarizer.c SummarizeWAL / summarization-loop cites hold]

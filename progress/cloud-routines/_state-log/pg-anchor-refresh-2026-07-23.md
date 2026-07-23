@@ -1,0 +1,1 @@
+**pg-anchor-refresh** 2026-07-23 — anchor ccfd4b683867 → 8767a10cb8c5; 1 commit (walsummarizer historic-timeline maximum_lsn guard, Robert Haas); 1 doc queued for audit (walsummarizer.c), 0 subsystems ≥5, no catversion change (holds 202607201) (PR #<pending>).
